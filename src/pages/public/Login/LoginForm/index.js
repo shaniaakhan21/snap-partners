@@ -56,7 +56,7 @@ const LoginForm = () => {
             await axios.post('/api/auth/login', {...values, "g-recaptcha-response": grecaptcha})
             dispatch(authenticate({ isAuth: true }))
         } catch (e) {
-            setErrorPass(e.response.data.message)
+            setErrorPass(e.response?.data?.message || 'Error Encountered Try Again Later')
         }
         setSpinner(false)
         return values

@@ -90,8 +90,7 @@ const RegisterForm = () => {
             setPasswordEnabled(true)
             formikPassword.setFieldValue("phoneNumber", phoneNumber)
         } catch (e) {
-            console.log(e)
-            setErrorPass(e.response.data.message)
+            setErrorPass(e.response?.data?.message || 'Error Encountered Try Again Later')
         }
         setSpinner(false)
         return values
@@ -113,8 +112,7 @@ const RegisterForm = () => {
             await axios.post('/api/auth/registerStep2', {phoneNumber, code, password, "g-recaptcha-response": grecaptcha})
             dispatch(authenticate({ isAuth: true }))
         } catch (e) {
-            console.log(e)
-            setErrorPass(e.response.data.message)
+            setErrorPass(e.response?.data?.message || 'Error Encountered Try Again Later')
         }
         setSpinner(false)
         return values
