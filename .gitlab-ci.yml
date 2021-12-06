@@ -1,0 +1,19 @@
+deploy:
+  only:
+    - master
+  tags:
+    - snap-runner-3
+  script:
+    - rm -rf /home/gitlab-runner/snap-website-deploy-temp
+    - cd /home/gitlab-runner
+    - git clone git@gitlab.worldce.info:snap/snap-website.git snap-website-deploy-temp
+    - cd /home/gitlab-runner/snap-website-deploy-temp
+    - git checkout master
+    - git pull
+    - (printenv | grep DEPLOY_FRONT_ | sed -e "s/^DEPLOY_FRONT_//"  ) > .env
+    - mkdir -p dist
+    - cp -R svg dist/svg
+    - npm install
+    - npm run-script build
+    - rm -rf /home/gitlab-runner/snap-website-deploy
+    - mv /home/gitlab-runner/snap-website-deploy-temp /home/gitlab-runner/snap-website-deploy
