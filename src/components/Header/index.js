@@ -55,7 +55,7 @@ const PublicHeader = () => {
                   </Link>
 
                   <Link to={"/register"} style={{ textDecoration: 'none', color: '#fff' }}>
-                    <Button className={`${classes.buttonRegister} ${classes.buttons}`} color="secondary" variant="contained" size={size.width < 620 ? 'small' : 'large'}>
+                    <Button className={`${classes.buttonRegister} ${classes.buttons}`} color="primary" variant="contained" size={size.width < 620 ? 'small' : 'large'}>
                       REGISTER
                     </Button>
                   </Link>

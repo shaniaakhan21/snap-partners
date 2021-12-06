@@ -51,7 +51,12 @@ const Login = () => {
                         <LoginForm />
                         <Button className={classes.containerForgotPassword}>
                             <Link to={"/register"} className={classes.linkPassword}>
-                                I DON'T HAVE A PASSWORD YET OR I FORGOT IT.
+                                I DON'T HAVE A PASSWORD.
+                            </Link>
+                        </Button>
+                        <Button className={classes.containerForgotPassword}>
+                            <Link to={"/register"} className={classes.linkPassword}>
+                                FORGOT PASSWORD.
                             </Link>
                         </Button>
                     </Grid>

@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core'
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: theme.palette.primary.secondary,
     height: 64
   },
   logo: {
@@ -40,21 +40,8 @@ export const useStyles = makeStyles((theme) => ({
   dropDown: {
     color: theme.palette.text.white
   },
-  flags: {
-    backgroundColor: '#01304E',
-    color: 'white'
-  },
-  flagsOuter: {
-    marginLeft: 20,
-    '& ul': {
-      maxHeight: 500
-    },
-    [theme.breakpoints.down('xs')]: {
-      width: 60
-    }
-  },
   buttonLogin: {
-    color: theme.palette.secondary.main
+    color: theme.palette.primary.main
   },
   buttonRegister: {
     [theme.breakpoints.down('xs')]: {

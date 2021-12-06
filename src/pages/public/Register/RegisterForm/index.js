@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {Grid, Button, InputAdornment, IconButton, CircularProgress,    useTheme, TextField} from '@material-ui/core'
 import {Visibility, VisibilityOff} from '@material-ui/icons'
 import {useFormik} from 'formik'
-import {useStyles} from '../loginStyles'
+import {useStyles} from '../registerStyles'
 import {useDispatch} from 'react-redux'
 import axios from 'axios'
 import MuiAlert from '@material-ui/lab/Alert'
@@ -198,7 +198,7 @@ const RegisterForm = () => {
 
 
                     <Grid direction="row" justifyContent="center" alignItems="center" container>
-                        <Button variant="contained" type="submit" disabled={spinner} className={classes.btnLoginStyle}>
+                        <Button variant="contained" color={"primary"} type="submit" disabled={spinner} className={classes.btnLoginStyle}>
                             Set Password
                             {spinner && (
                                 <CircularProgress color="primary" size={15} style={{marginLeft: 10}}/>
@@ -237,7 +237,7 @@ const RegisterForm = () => {
                 />
 
                 <Grid direction="row" justifyContent="center" alignItems="center" container>
-                    <Button variant="contained" type="submit" disabled={spinner} className={classes.btnLoginStyle}>
+                    <Button variant="contained" color={"primary"} type="submit" disabled={spinner} className={classes.btnLoginStyle}>
                         Register
                         {spinner && (
                             <CircularProgress color="primary" size={15} style={{marginLeft: 10}}/>

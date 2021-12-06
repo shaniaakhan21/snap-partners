@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     display: 'flex',
-    backgroundColor: 'lightblue'
+    backgroundColor: theme.palette.primary.light
   },
   drawer: {
     [theme.breakpoints.up('md')]: {
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3)
   },
   navbarBackground: {
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.main,
     padding: 15
   },
   navbarText: {

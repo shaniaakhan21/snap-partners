@@ -117,7 +117,7 @@ const LoginForm = () => {
                 />
 
                 <Grid direction="row" justifyContent="center" alignItems="center" container>
-                    <Button variant="contained" type="submit" disabled={spinner} className={classes.btnLoginStyle}>
+                    <Button variant="contained" color={"primary"} type="submit" disabled={spinner} className={classes.btnLoginStyle}>
                         Log in
                         {spinner && (
                             <CircularProgress color="primary" size={15} style={{marginLeft: 10}}/>

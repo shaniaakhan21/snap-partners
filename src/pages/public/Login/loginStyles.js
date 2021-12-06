@@ -2,10 +2,10 @@ import { makeStyles } from '@material-ui/core'
 
 export const useStyles = makeStyles((theme) => ({
   loginBackground: {
-    backgroundColor: theme.palette.secondary.resting
+    backgroundColor: theme.palette.primary.light
   },
   loginImage: {
-    width: '60%',
+    width: '53%',
     [theme.breakpoints.down('md')]: {
       display: 'none'
     },
@@ -29,6 +29,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   formContainer: {
     backgroundColor: '#fff',
+    paddingBottom: 50,
     paddingRight: 50,
     paddingLeft: 50,
     paddingTop: '20%'
@@ -42,35 +43,8 @@ export const useStyles = makeStyles((theme) => ({
     lineHeight: '42px',
     letterSpacing: '0.25',
     textAlign: 'left',
-    color: '#4AA9C7',
+    color: theme.palette.primary.main,
     marginBottom: 20
-  },
-  btnGoogle: {
-    border: '1px blue solid',
-    padding: 0,
-    marginTop: '4%',
-    fontFamily: 'Roboto, sans-serif',
-    fontSize: '15px',
-    width: '100%',
-    maxWidth: '630px',
-    fontStyle: 'normal',
-    fontWeight: '500px',
-    lineHeight: '26px',
-    letterSpacing: '0.46000000834465027px',
-    textAlign: 'left',
-
-    color: '#4AA9C7',
-    '&:hover': {
-      cursor: 'pointer',
-      border: '1px #4AA9C7 solid',
-      background: '#E5E5E5'
-    }
-  },
-  containerGoogle: {
-    marginTop: '4%'
-  },
-  imgGoogle: {
-    margin: '1% 5% 1% 0'
   },
   linkPassword: {
     textDecoration: 'none',
@@ -83,7 +57,7 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     letterSpacing: '0.4000000059604645px',
     textAlign: 'center',
-    color: '#4AA9C7'
+    color: theme.palette.primary.main
   },
   containerForgotPassword: {
     height: '24px',
@@ -92,17 +66,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   btnLoginStyle: {
     width: '100%',
-    fontFamily: 'Roboto, sans-serif',
-    fontSize: '14px',
-    fontStyle: 'normal',
-    boxShadow: '0px 1px 5px 0px #0000001F',
-    backgroundColor: '#4AA9C7',
-    color: '#fff',
-    '&:hover': {
-      backgroundColor: '#4AA9C7',
-      color: '#fff'
-    }
-
   },
   containerRegisterLink: {
     color: 'black',
@@ -111,21 +74,6 @@ export const useStyles = makeStyles((theme) => ({
     fontStyle: 'normal',
     justifyContent: 'center',
     marginTop: '5%'
-  },
-  registerTypog: {
-    styleName: 'typography/body1',
-    fontFamily: 'Roboto, sans-serif',
-    display: 'flex',
-    fontSize: '16px',
-    fontStyle: 'normal',
-    fontWeight: 400,
-    lineHeight: '24px',
-    letterSpacing: '0.15000000596046448px',
-    textAlign: 'left',
-    '&& a': {
-      marginLeft: '5px'
-    }
-
   },
   inputCode: {
     width: "100%",

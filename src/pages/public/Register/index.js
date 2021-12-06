@@ -3,7 +3,7 @@ import {Button, Grid, Snackbar, Typography} from '@material-ui/core'
 import MuiAlert from '@material-ui/lab/Alert'
 import {useDispatch, useSelector} from 'react-redux'
 import {useEffect} from 'react';
-import {useStyles} from './loginStyles'
+import {useStyles} from './registerStyles'
 import {Link, useHistory} from "react-router-dom";
 import RegisterForm from "./RegisterForm";
 
