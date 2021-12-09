@@ -12,8 +12,8 @@ const SideNav = () => {
     return [
         {
             icon: <GroupWorkIcon color="primary" />,
-            name: "Referrals",
-            link: "/referrals",
+            name: "Genealogy",
+            link: "/genealogy",
             side: true
         },
     ]

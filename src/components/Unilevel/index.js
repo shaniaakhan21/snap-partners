@@ -42,7 +42,7 @@ const Unilevel = () => {
                 <Grid className={classes.container} container>
                     <Grid container  className={classes.title} >
                         <Grid item xs={12} md={4} style={{marginBottom:20}}>
-                            <Typography variant="h4" color="primary">Unilevel</Typography>
+                            <Typography variant="h4" color="primary">Genealogy</Typography>
                         </Grid>
                     </Grid>
                     <Grid container  className={classes.title} >

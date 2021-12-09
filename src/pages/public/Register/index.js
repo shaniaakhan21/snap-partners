@@ -26,7 +26,7 @@ const Login = () => {
     const history = useHistory()
     useEffect(() => {
         if (isAuth) {
-            history.push("/referrals")
+            history.push("/genealogy")
         }
     }, [isAuth])
 

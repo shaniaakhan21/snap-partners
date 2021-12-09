@@ -1,5 +1,5 @@
-import Referrals from './Referrals'
+import Genealogy from './Genealogy'
 
 export {
-  Referrals,
+  Genealogy,
 };

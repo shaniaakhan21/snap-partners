@@ -1,10 +1,10 @@
 import React from 'react'
-import { Referrals } from '../../pages/private'
+import { Genealogy } from '../../pages/private'
 import { CommonComponents, PublicHeader, PrivateRoute} from '../../components'
 
 
 const PrivateRoutesArray = [
-    {"path":'/referrals' , component :<CommonComponents sidebar><Referrals /></CommonComponents>},
+    {"path":'/genealogy' , component :<CommonComponents sidebar><Genealogy /></CommonComponents>},
 ]
 
 const PrivateRoutes = () => {
