@@ -98,7 +98,7 @@ const RecursiveAccordion = ({openUser,user, master = false}) => {
                        <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
                            <Chip style={{marginLeft: 5, marginRight:5}} size="small"  label={`${user.name} [${user.id}]`}  />
                            <Chip style={{marginLeft: 5, marginRight:5}} size="small"  label={`Users : 0`} variant="outlined" />
-                           <Button onClick={(e) => {e.stopPropagation(); openUser(user.username)}} className={classes.Btn} color={"primary"}  size={"small"} variant="contained">View user</Button>
+                           <Button onClick={(e) => {e.stopPropagation(); openUser(user.id)}} className={classes.Btn} color={"primary"}  size={"small"} variant="contained">View user</Button>
                        </AccordionSummary>
                    </Accordion>
                )
@@ -109,7 +109,7 @@ const RecursiveAccordion = ({openUser,user, master = false}) => {
                    <AccordionSummary onClick={() => {getUsers(key)}}  expandIcon={<ExpandMoreIcon/>} aria-controls="panel1a-content" id="panel1a-header">
                        {master === true ? (<Typography>Level {level.level}</Typography>) :<Chip style={{marginLeft: 5, marginRight:5}} size="small"  label={`${user.name} [${user.id}]`}  />}
                        <Chip style={{marginLeft: 5, marginRight:5}} size="small"  label={`Users : ${level.usersLength}`} variant="outlined" />
-                       {master === false && <Button onClick={(e) => {e.stopPropagation(); openUser(user.username)}} className={classes.Btn} color={"primary"} size={"small"} variant="contained">View user</Button>}
+                       {master === false && <Button onClick={(e) => {e.stopPropagation(); openUser(user.id)}} className={classes.Btn} color={"primary"} size={"small"} variant="contained">View user</Button>}
                    </AccordionSummary>
                    <AccordionDetails>
                        {showLevels[key] && (
