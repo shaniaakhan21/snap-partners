@@ -22,8 +22,6 @@ const useStyles = makeStyles(theme => ({
 
 const RecursiveAccordion = ({openUser,user, master = false}) => {
 
-    console.log(user)
-
     const [levels, setlevels] = useState([]);
     const [volume, setVolume] = useState(0);
     const [volumePending, setvolumePending] = useState(0);

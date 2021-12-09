@@ -18,8 +18,8 @@ const useStyles = makeStyles(theme => ({
 
 const Unilevel = () => {
     const [ showModal, setshowModal ] = useState(false)
-    const [ username, setUsername ] = useState("")
-    const [ searchUsername, setsearchUsername ] = useState("")
+    const [ id, setId] = useState("")
+    const [ searchId, setsearchId ] = useState("")
 
 
     const { userId, phoneNumber } = useSelector((state) => state.user);
@@ -28,8 +28,8 @@ const Unilevel = () => {
         name : phoneNumber
     }
 
-    const openUser = async (username) => {
-        setUsername(username)
+    const openUser = async (id) => {
+        setId(id)
         setshowModal(true)
     }
 
@@ -37,7 +37,7 @@ const Unilevel = () => {
 
     return (
         <>
-            <ModalUninivelUser username={username} openUser={openUser} open={showModal} close={setshowModal}/>
+            <ModalUninivelUser id={id} openUser={openUser} open={showModal} close={setshowModal}/>
             <Card style={{width:"100%"}}>
                 <Grid className={classes.container} container>
                     <Grid container  className={classes.title} >
@@ -47,8 +47,8 @@ const Unilevel = () => {
                     </Grid>
                     <Grid container  className={classes.title} >
                         <Grid container item xs={12} md={8} justifyContent={"flex-start"} style={{marginBottom:20}}  >
-                            <TextField value={searchUsername} onChange={(e) =>{setsearchUsername(e.target.value)}} size={"small"} variant="outlined" placeholder="Search ID" InputProps={{startAdornment: <SearchIcon fontSize="small"/>}}/>
-                            <Button disabled={(searchUsername.length === 0)} onClick={() => {openUser(searchUsername)}} variant="contained" className={classes.Btn}>Search</Button>
+                            <TextField value={searchId} onChange={(e) =>{setsearchId(e.target.value)}} size={"small"} variant="outlined" placeholder="Search ID" InputProps={{startAdornment: <SearchIcon fontSize="small"/>}}/>
+                            <Button disabled={(searchId.length === 0)} onClick={() => {openUser(searchId)}} variant="contained" className={classes.Btn}>Search</Button>
                         </Grid>
                     </Grid>
                     <Grid item container>
