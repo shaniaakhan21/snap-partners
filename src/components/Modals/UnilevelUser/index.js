@@ -22,6 +22,7 @@ const ModalUninivelUser = ({id, close, open, openUser}) => {
 
     const [user, setUser] = useState({})
     const [userData, setUserData] = useState(null)
+    const [loading, setLoading] = useState(false)
     const [error, setError] = useState("")
 
     useEffect(async () => {
@@ -30,6 +31,7 @@ const ModalUninivelUser = ({id, close, open, openUser}) => {
                 setUser({})
                 setUserData(null)
                 setError("")
+                setLoading(true)
                 let response = await axios.get(`/api/unilevel/getAllLevelsById`, {params: {id: id, includeUsers: 1}})
                 setUser({id: response.data.results.userId})
                 let responseData = await axios.get(`/api/unilevel/getUserById`, {params: {id: id}})
@@ -37,6 +39,7 @@ const ModalUninivelUser = ({id, close, open, openUser}) => {
             } catch (e) {
                 setError(e.response.data?.message || "")
             }
+            setLoading(false)
         }
     }, [id]);
 
@@ -47,7 +50,7 @@ const ModalUninivelUser = ({id, close, open, openUser}) => {
                     Searching ID: {id}
                 </Typography>
             </Grid>
-            {userData === null && (
+            {loading && (
                 <CircularProgress color="primary" size={30} style={{marginLeft: 10}}/>
             )}
             {userData && (
