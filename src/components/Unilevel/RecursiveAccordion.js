@@ -22,6 +22,8 @@ const useStyles = makeStyles(theme => ({
 
 const RecursiveAccordion = ({openUser,user, master = false}) => {
 
+    console.log(user)
+
     const [levels, setlevels] = useState([]);
     const [volume, setVolume] = useState(0);
     const [volumePending, setvolumePending] = useState(0);
@@ -96,9 +98,9 @@ const RecursiveAccordion = ({openUser,user, master = false}) => {
                !loading && levels.length === 0 && (
                    <Accordion style={{width: "100%", border: "1px solid grey"}}>
                        <AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
-                           <Chip style={{marginLeft: 5, marginRight:5}} size="small"  label={`${user.username}`}  />
+                           <Chip style={{marginLeft: 5, marginRight:5}} size="small"  label={`${user.name} [${user.id}]`}  />
                            <Chip style={{marginLeft: 5, marginRight:5}} size="small"  label={`Users : 0`} variant="outlined" />
-                           <Button onClick={(e) => {e.stopPropagation(); openUser(user.username)}} className={classes.Btn} size={"small"} variant="contained">View user</Button>
+                           <Button onClick={(e) => {e.stopPropagation(); openUser(user.username)}} className={classes.Btn} color={"primary"}  size={"small"} variant="contained">View user</Button>
                        </AccordionSummary>
                    </Accordion>
                )
@@ -107,9 +109,9 @@ const RecursiveAccordion = ({openUser,user, master = false}) => {
                return (
                <Accordion  style={{width: "100%", border: "1px solid grey"}} key={key}>
                    <AccordionSummary onClick={() => {getUsers(key)}}  expandIcon={<ExpandMoreIcon/>} aria-controls="panel1a-content" id="panel1a-header">
-                       {master === true ? (<Typography>Level {level.level}</Typography>) :<Chip style={{marginLeft: 5, marginRight:5}} size="small"  label={`${user.username}`}  />}
+                       {master === true ? (<Typography>Level {level.level}</Typography>) :<Chip style={{marginLeft: 5, marginRight:5}} size="small"  label={`${user.name} [${user.id}]`}  />}
                        <Chip style={{marginLeft: 5, marginRight:5}} size="small"  label={`Users : ${level.usersLength}`} variant="outlined" />
-                       {master === false && <Button onClick={(e) => {e.stopPropagation(); openUser(user.username)}} className={classes.Btn} size={"small"} variant="contained">View user</Button>}
+                       {master === false && <Button onClick={(e) => {e.stopPropagation(); openUser(user.username)}} className={classes.Btn} color={"primary"} size={"small"} variant="contained">View user</Button>}
                    </AccordionSummary>
                    <AccordionDetails>
                        {showLevels[key] && (

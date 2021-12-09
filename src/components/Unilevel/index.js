@@ -25,7 +25,7 @@ const Unilevel = () => {
     const { userId, phoneNumber } = useSelector((state) => state.user);
     const user = {
         id : userId,
-        username : phoneNumber
+        name : phoneNumber
     }
 
     const openUser = async (username) => {
@@ -47,7 +47,7 @@ const Unilevel = () => {
                     </Grid>
                     <Grid container  className={classes.title} >
                         <Grid container item xs={12} md={8} justifyContent={"flex-start"} style={{marginBottom:20}}  >
-                            <TextField value={searchUsername} onChange={(e) =>{setsearchUsername(e.target.value)}} size={"small"} variant="outlined" placeholder="Search Username" InputProps={{startAdornment: <SearchIcon fontSize="small"/>}}/>
+                            <TextField value={searchUsername} onChange={(e) =>{setsearchUsername(e.target.value)}} size={"small"} variant="outlined" placeholder="Search ID" InputProps={{startAdornment: <SearchIcon fontSize="small"/>}}/>
                             <Button disabled={(searchUsername.length === 0)} onClick={() => {openUser(searchUsername)}} variant="contained" className={classes.Btn}>Search</Button>
                         </Grid>
                     </Grid>
