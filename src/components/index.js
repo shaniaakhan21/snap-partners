@@ -8,6 +8,8 @@ import FormikCheckField from './FormikCheckField'
 import BtnDropdown from './BtnDropdown'
 import GeneralModal from './GeneralModal'
 import Unilevel from './Unilevel'
+import Footer from './Footer'
+
 
 export {
   PublicHeader,
@@ -19,5 +21,6 @@ export {
   CommonComponents,
   GeneralModal,
   Unilevel,
+  Footer,
   FormikCheckField
 }
