@@ -38,7 +38,7 @@ const PublicHeader = () => {
       <Grid alignItems="center" className={classes.inter} container>
         <Grid item xs={6} sm={6}>
           <Grid direction="row" alignItems="center" container>
-            <Link to={"/login"}>
+            <Link to={"./"}>
               <img src={size.width > 620 ? logo : logoMobile} alt="SNAP" className={classes.logo} />
             </Link>
           </Grid>
@@ -49,16 +49,18 @@ const PublicHeader = () => {
             !isLogged &&
                 <>
                   <Link to={"/login"} style={{ textDecoration: 'none', color: '#fff' }}>
-                    <Button className={`${classes.buttons} ${classes.buttonLogin}`} size={size.width < 620 ? 'small' : 'large'}>
-                      LOGIN
+                    <Button className={`${classes.buttonRegister} ${classes.buttons}`} color="primary" variant="contained" size={size.width < 620 ? 'small' : 'large'}>
+                      Login
                     </Button>
                   </Link>
 
                   <Link to={"/register"} style={{ textDecoration: 'none', color: '#fff' }}>
-                    <Button className={`${classes.buttonRegister} ${classes.buttons}`} color="primary" variant="contained" size={size.width < 620 ? 'small' : 'large'}>
-                      REGISTER
+                    <Button className={`${classes.buttons} ${classes.buttonLogin}`} size={size.width < 620 ? 'small' : 'large'}>
+                      Sign Up
                     </Button>
                   </Link>
+
+                
 
                 </>
           }
