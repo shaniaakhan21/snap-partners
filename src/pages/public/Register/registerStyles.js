@@ -19,6 +19,8 @@ export const useStyles = makeStyles((theme) => ({
     border: '2px green solid'
   },
   imageContainer: {
+    backgroundImage: `url("/svg/Register/register.jpg")`, 
+    backgroundSize:`cover`,
     [theme.breakpoints.down('md')]: {
       display: 'none'
     },

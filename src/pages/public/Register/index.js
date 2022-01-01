@@ -40,7 +40,6 @@ const Login = () => {
             </Snackbar>
             <Grid item md={7} xs={12} className={classes.imageContainer} justifyContent="center" alignItems="stretch"
                    container>
-                <img src={registerImage} alt="Form" className={classes.loginImage}/>
             </Grid>
             <Grid item md={5} xs={12} container>
                 <Grid direction="row" justifyContent="space-around" className={classes.formContainer} alignItems="flex-start" container>
