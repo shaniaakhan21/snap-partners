@@ -7,7 +7,7 @@ import {useStyles} from './loginStyles'
 import {Link, useHistory} from "react-router-dom";
 import LoginForm from "./LoginForm";
 
-const loginImage = '/svg/Login/login.svg'
+const loginImage = '/svg/Login/login.jpg'
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />
@@ -38,9 +38,8 @@ const Login = () => {
                     Password has been changed. You will receive an email with the details
                 </Alert>
             </Snackbar>
-            <Grid item md={7} xs={12} className={classes.imageContainer} justifyContent="center" alignItems="stretch"
-                  style={{paddingTop: 150, paddingBottom: 150}} container>
-                <img src={loginImage} alt="Form" className={classes.loginImage}/>
+            <Grid item md={7} xs={12} className={classes.imageContainer} justifyContent="center"
+                   container>
             </Grid>
             <Grid item md={5} xs={12} container>
                 <Grid direction="row" justifyContent="space-around" className={classes.formContainer} alignItems="flex-start" container>

@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.light
   },
   loginImage: {
-    width: '53%',
+    width: '100%',
     [theme.breakpoints.down('md')]: {
       display: 'none'
     },
@@ -19,6 +19,8 @@ export const useStyles = makeStyles((theme) => ({
     border: '2px green solid'
   },
   imageContainer: {
+    backgroundImage: `url("/svg/Login/login.jpg")`, 
+    backgroundSize:`cover`,
     [theme.breakpoints.down('md')]: {
       display: 'none'
     },
