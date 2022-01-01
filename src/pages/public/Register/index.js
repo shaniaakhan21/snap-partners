@@ -7,7 +7,7 @@ import {useStyles} from './registerStyles'
 import {Link, useHistory} from "react-router-dom";
 import RegisterForm from "./RegisterForm";
 
-const registerImage = '/svg/Register/register.svg'
+const registerImage = '/svg/Register/register.jpg'
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />
@@ -39,7 +39,7 @@ const Login = () => {
                 </Alert>
             </Snackbar>
             <Grid item md={7} xs={12} className={classes.imageContainer} justifyContent="center" alignItems="stretch"
-                  style={{paddingTop: 150, paddingBottom: 150}} container>
+                   container>
                 <img src={registerImage} alt="Form" className={classes.loginImage}/>
             </Grid>
             <Grid item md={5} xs={12} container>

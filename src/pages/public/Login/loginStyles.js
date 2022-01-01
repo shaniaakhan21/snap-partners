@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.light
   },
   loginImage: {
-    width: '53%',
+    width: '100%',
     [theme.breakpoints.down('md')]: {
       display: 'none'
     },
