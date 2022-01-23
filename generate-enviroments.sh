@@ -26,13 +26,14 @@ server {
     error_log off;
     root /home/gitlab-runner/snap-website-$SUBDOMAIN/dist;
     # Any route containing a file extension (e.g. /devicesfile.js)
-    location ~ ^.+\..+$ {
-      try_files $uri =404;
+    location ~ ^.+\..+\$ {
+      try_files \$uri =404;
     }
     # Any route that doesn't have a file extension (e.g. /devices)
     location / {
-      try_files $uri $uri/ /index.html;
+      try_files \$uri \$uri/ /index.html;
     }
+
     location ~ ^/api/(.+) {
       #access_log  /var/log/nginx/cbx_front_postdata.log  postdata;
       rewrite ^/api(.*)\$ \$1 break;
