@@ -1,5 +1,19 @@
 #!/bin/bash
 
+
+SCRIPT=$(cat <<EOF
+$SCRIPT
+server {
+    listen [::]:443 ssl;
+    listen 443 ssl;
+    ssl_certificate /etc/letsencrypt/live/snap.devopsteam.info/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/snap.devopsteam.info/privkey.pem;
+    server_name _;
+    return      444;
+}
+EOF
+)
+
 set -e
 
 echo "Clean Enviroments..."
