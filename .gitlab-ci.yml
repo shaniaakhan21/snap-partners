@@ -1,4 +1,35 @@
+stages:
+  - generate-stage
+  - execute-stage
+  - deploy
+
+generate-stage:
+  stage: generate-stage
+  only:
+    - /^feature\/.*\/master$/
+  tags:
+    - snap-runner-3
+  script:
+    - chmod +x ./generate-enviroments.sh
+    - ./generate-enviroments.sh stage STAGE
+  artifacts:
+    paths:
+      - generated-gitlab-ci-stage.yml
+
+execute-stage:
+  stage: execute-stage
+  only:
+    - /^feature\/.*\/master$/
+  needs:
+    - generate-stage
+  trigger:
+    include:
+      - artifact: generated-gitlab-ci-stage.yml
+        job: generate-stage
+    strategy: depend
+
 deploy:
+  stage: deploy
   only:
     - master
   tags:
