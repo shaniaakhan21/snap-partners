@@ -2,6 +2,7 @@ stages:
   - generate-stage
   - execute-stage
   - deploy
+
 generate-stage:
   stage: generate-stage
   only:
@@ -28,6 +29,7 @@ execute-stage:
     strategy: depend
 
 deploy:
+  stage: deploy
   only:
     - master
   tags:
