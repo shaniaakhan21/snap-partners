@@ -22,3 +22,7 @@ When creating a merge request make sure the branch name is in the following form
 `feature/-------/master`
 
 This will create a 1 use enviroment to view the progress
+
+When creating a new MR please provide your environment link for review
+
+`https://gitlab.worldce.info/snap/snap-website/-/environments`
