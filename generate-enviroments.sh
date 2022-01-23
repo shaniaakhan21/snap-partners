@@ -36,7 +36,6 @@ server {
       proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
       proxy_set_header Host \$host;
       proxy_http_version 1.1;
-      proxy_pass http://localhost:4$PORT;
     }
     location ~ ^/api/(.+) {
       #access_log  /var/log/nginx/cbx_front_postdata.log  postdata;
@@ -74,13 +73,13 @@ $SUBDOMAIN.snap.devopsteam.info:
   only:
     - $NAME
   tags:
-    - nsur-runner-3
+    - snap-runner-3
   script:
-    - rm -rf /home/gitlab-runner/nsur-website-$SUBDOMAIN-temp
-    - mkdir /home/gitlab-runner/nsur-website-$SUBDOMAIN-temp
-    - cp -r * /home/gitlab-runner/nsur-website-$SUBDOMAIN-temp
+    - rm -rf /home/gitlab-runner/snap-website-$SUBDOMAIN-temp
+    - mkdir /home/gitlab-runner/snap-website-$SUBDOMAIN-temp
+    - cp -r * /home/gitlab-runner/snap-website-$SUBDOMAIN-temp
     # FRONT
-    - cd /home/gitlab-runner/nsur-website-$SUBDOMAIN-temp
+    - cd /home/gitlab-runner/snap-website-$SUBDOMAIN-temp
     - (printenv | grep STAGE_FRONT_ | grep -v STAGE_FRONT_PORT | sed -e "s/^STAGE_FRONT_//"  ) > .env
     - printf "PORT=4$PORT" >> .env
     - printf "\nREACT_APP_SUBDOMAIN=https://$SUBDOMAIN.snap.devopsteam.info" >> .env
@@ -88,27 +87,24 @@ $SUBDOMAIN.snap.devopsteam.info:
     - cp -R svg dist/svg
     - npm install
     - npm run-script build
-    - rm -rf /home/gitlab-runner/nsur-website-$SUBDOMAIN
-    - mv /home/gitlab-runner/nsur-website-$SUBDOMAIN-temp /home/gitlab-runner/nsur-website-$SUBDOMAIN
-    - forever stop server.js || exit_code=$?
-    - forever start server.js $SUBDOMAIN
+    - rm -rf /home/gitlab-runner/snap-website-$SUBDOMAIN
+    - mv /home/gitlab-runner/snap-website-$SUBDOMAIN-temp /home/gitlab-runner/snap-website-$SUBDOMAIN
     - sudo /usr/bin/systemctl restart nginx
   after_script:
-    - rm -rf /home/gitlab-runner/nsur-website-$SUBDOMAIN-temp
+    - rm -rf /home/gitlab-runner/snap-website-$SUBDOMAIN-temp
 
 $SUBDOMAIN.snap.devopsteam.info_stop:
   stage: deploy
   tags:
-    - nsur-runner-3
+    - snap-runner-3
   when: manual
   only:
     - $NAME
   variables:
     GIT_STRATEGY: none
   script:
-    - cd /home/gitlab-runner/nsur-website-$SUBDOMAIN
-    - forever stop server.js || exit_code=$?
-    - rm -rf /home/gitlab-runner/nsur-website-$SUBDOMAIN
+    - cd /home/gitlab-runner/snap-website-$SUBDOMAIN
+    - rm -rf /home/gitlab-runner/snap-website-$SUBDOMAIN
     - sudo /usr/bin/systemctl restart nginx
   environment:
     name: stage/$SUBDOMAIN
