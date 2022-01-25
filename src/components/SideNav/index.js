@@ -1,22 +1,33 @@
 import React from 'react'
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import RecordVoiceOverIcon from '@material-ui/icons/RecordVoiceOver';
-import GroupWorkIcon from '@material-ui/icons/GroupWork';
-import PostAddIcon from '@material-ui/icons/PostAdd';
-import ViewListIcon from '@material-ui/icons/ViewList';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import LockIcon from '@material-ui/icons/Lock';
-import RedeemIcon from '@material-ui/icons/Redeem';
+import { DashboardIcon, ReferralLinksIcon, MarketingIcon, GenealogyIcon } from '../icons'
 
 const SideNav = () => {
-    return [
-        {
-            icon: <GroupWorkIcon color="primary" />,
-            name: "Genealogy",
-            link: "/genealogy",
-            side: true
-        },
-    ]
+	return [
+		{
+			icon: <DashboardIcon />,
+			name: 'Dashboard',
+			link: '/dashboard',
+			side: true
+		},
+		{
+			icon: <ReferralLinksIcon />,
+			name: 'My Referral links',
+			link: '/referrals',
+			side: true
+		},
+		{
+			icon: <MarketingIcon />,
+			name: 'Marketing',
+			link: '/marketing',
+			side: true
+		},
+		{
+			icon: <GenealogyIcon />,
+			name: 'Genealogy',
+			link: '/genealogy',
+			side: true
+		}
+	]
 }
 
 export default SideNav

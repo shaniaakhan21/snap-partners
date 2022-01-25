@@ -1,0 +1,8 @@
+export { DashboardIcon } from './Dashboard'
+export { ReferralLinksIcon } from './ReferralLinks'
+export { MarketingIcon } from './Marketing'
+export { SearchIcon } from './Search'
+export { ArrowDownIcon } from './ArrowDown'
+export { NotificationIcon } from './Notification'
+export { GenealogyIcon } from './Genealogy'
+export { MoarOptionsVerticalIcon } from './MoarOptionsVertical'

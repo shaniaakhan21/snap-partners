@@ -1,6 +1,19 @@
 import { makeStyles } from '@material-ui/core'
 
-export const useStyles = makeStyles(theme => ({
+export const useStyles = makeStyles((theme) => ({
+	wrapper: {
+		[theme.breakpoints.up('sm')]: {
+			display: 'none'
+		},
+		position: 'absolute',
+		overflow: 'hidden',
+		top: 60,
+		left: 0,
+		zIndex: 20,
+		width: '100%',
+		height: 'calc(100vh - 60px)'
+	},
+
 	sidebarContainer: {
 		minWidth: '200px',
 		position: 'sticky',
@@ -32,7 +45,16 @@ export const useStyles = makeStyles(theme => ({
 		display: 'flex',
 		color: 'white',
 		padding: '20px 37px',
-		backgroundColor: '#19191914'
+		backgroundColor: '#19191914',
+		'&::before': {
+			content: '\' \'',
+			position: 'absolute',
+			left: '-28px',
+			transform: 'rotate(90deg)',
+			width: '63px',
+			height: '5px',
+			background: 'white'
+		}
 	},
 	sidebarLink: {
 		alignItems: 'center',
