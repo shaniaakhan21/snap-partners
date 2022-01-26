@@ -9,6 +9,16 @@ export const DrawerMobile = () => {
 	const classes = useStyles()
 	const { drawerDispatch } = React.useContext(DrawerContext)
 
+	const isCurrentlyPage = (routeLink) => {
+		return (
+			location.pathname === routeLink ||
+			location.pathname === `${routeLink}/customers` ||
+			location.pathname === `${routeLink}/drivers` ||
+			location.pathname === `${routeLink}/restaurants` ||
+			location.pathname === `${routeLink}/ibo`
+		)
+	}
+
 	return (
 		<div className={classes.wrapper}>
 			<div onClick={() => drawerDispatch(false)} style={{ zIndex: 5, backgroundColor: '#00000026', height: '100%', width: '100%', position: 'absolute' }}></div>
@@ -17,7 +27,7 @@ export const DrawerMobile = () => {
 				{
 					SideNav().map(item => {
 						return (
-							<li key={item.name} className={location.pathname === item.link ? classes.sidebarItem_currentRoute : classes.sidebarItem}>
+							<li key={item.name} className={isCurrentlyPage(item.link) ? classes.sidebarItem_currentRoute : classes.sidebarItem}>
 								<Link className={classes.sidebarLink} to={item.link}>
 									{item.icon}
 									<Typography variant="body1" style={{ marginLeft: 10 }}>{item.name}</Typography>

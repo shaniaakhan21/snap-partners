@@ -1,5 +1,5 @@
 import React from 'react'
-import { Genealogy, MarketingPage } from '../../pages/private'
+import { Genealogy, MarketingPage, CustomersPage, DriversPage, RestaurantsPage, IBOPage } from '../../pages/private'
 import { CommonComponents, PrivateRoute } from '../../components'
 import { BackOfficeLayout } from '../../layouts/private/BackOffice'
 import { DrawerProvider } from '../../contexts/Drawer'
@@ -7,10 +7,10 @@ import { DrawerProvider } from '../../contexts/Drawer'
 const PrivateRoutesArray = [
 	{ path: '/genealogy', component: <CommonComponents sidebar><Genealogy /></CommonComponents> },
 	{ path: '/marketing', component: <MarketingPage /> },
-	{ path: '/marketing/customers', component: <MarketingPage /> },
-	{ path: '/marketing/drivers', component: <MarketingPage /> },
-	{ path: '/marketing/restaurants', component: <MarketingPage /> },
-	{ path: '/marketing/ibo', component: <MarketingPage /> }
+	{ path: '/marketing/customers', component: <CustomersPage /> },
+	{ path: '/marketing/drivers', component: <DriversPage /> },
+	{ path: '/marketing/restaurants', component: <RestaurantsPage /> },
+	{ path: '/marketing/ibo', component: <IBOPage /> }
 ]
 
 const PrivateRoutes = () => {

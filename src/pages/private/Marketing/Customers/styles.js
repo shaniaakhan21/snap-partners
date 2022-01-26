@@ -7,6 +7,9 @@ export const useStyles = makeStyles((theme) => ({
 		marginRight: 'auto',
 		marginTop: 14
 	},
+	container_contentArticles: {
+		// overflowY: 'scroll'
+	},
 	container_cards: {
 		marginTop: 51,
 		display: 'flex',
@@ -18,21 +21,19 @@ export const useStyles = makeStyles((theme) => ({
 		flexWrap: 'wrap'
 	},
 	cards: {
-		maxWidth: 248,
-		height: 394,
+		maxWidth: 320,
+		height: '100%',
 		backgroundColor: 'white',
-		padding: '20px 0px',
+		padding: '20px 0px 0px 0px',
 		textAlign: 'left',
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
 		marginTop: 18,
 		position: 'relative',
-		borderRadius: '4px 4px 0px 0px',
+		borderRadius: 4,
 		marginRight: 10,
-		'&:last-child': {
-			marginRight: 0
-		},
+		marginLeft: 10,
 		[theme.breakpoints.down('xs')]: {
 			marginLeft: 0,
 			marginRight: 0
