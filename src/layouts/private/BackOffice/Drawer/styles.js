@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core'
 
 export const useStyles = makeStyles((theme) => ({
 	wrapper: {
-		[theme.breakpoints.up('sm')]: {
+		[theme.breakpoints.up('md')]: {
 			display: 'none'
 		},
 		position: 'absolute',

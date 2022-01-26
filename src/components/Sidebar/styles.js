@@ -32,7 +32,16 @@ export const useStyles = makeStyles(theme => ({
 		display: 'flex',
 		color: 'white',
 		padding: '20px 37px',
-		backgroundColor: '#19191914'
+		backgroundColor: '#19191914',
+		'&::before': {
+			content: '\' \'',
+			position: 'absolute',
+			left: '-28px',
+			transform: 'rotate(90deg)',
+			width: '63px',
+			height: '5px',
+			background: 'white'
+		}
 	},
 	sidebarLink: {
 		alignItems: 'center',
