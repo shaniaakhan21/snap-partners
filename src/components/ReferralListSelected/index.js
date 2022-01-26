@@ -5,11 +5,9 @@ import { useStyles } from './styles'
 export const ReferralListSelected = ({ id, newUsers, children }) => {
   const classes = useStyles()
 
-  // 960px es la medida cuando se convierte todo en desktop
-
   return (
     <div id={id} className={classes.container}>
-      <ReferralTabListItem id={id} isSelect newUsers={newUsers} />
+      <ReferralTabListItem id={id} isSelect newUsers={newUsers} noCursor />
 
       <hr className={classes.divisor} />
 

@@ -61,7 +61,6 @@ export const useStyles = makeStyles((theme) => ({
     height: '100%',
     padding: '0.5rem 0.5rem 0.5rem 1.25rem',
     textAlign: 'left',
-    cursor: 'pointer'
   },
   headerLevelText: {
     color: orangeColor

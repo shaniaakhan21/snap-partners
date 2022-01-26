@@ -12,11 +12,6 @@ const transparentColor = 'transparent'
 const greenColor = '#008000'
 
 export const useStyles = makeStyles((theme) => ({
-  inlineFlex: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
   item: {
     display: 'flex',
     alignItems: 'center',
@@ -30,36 +25,31 @@ export const useStyles = makeStyles((theme) => ({
   },
   name: {
     fontWeight: 'bold',
+    fontSize: '0.75rem',
     color: '#404040',
-    // width: 150,
+    width: '34%',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
-    width: '25%',
     textAlign: 'center'
-  },
-  numUsers: {
-    width: '25%',
-    textAlign: 'center'
-  },
-  idContainer: {
-    width: '25%',
   },
   textId: {
-    marginLeft: '0.25rem',
     color: orangeColor,
+    fontSize: '0.75rem',
+    width: '33%',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
+    textAlign: 'center'
   },
   button: {
+    width: '33%',
     backgroundColor: orangeColor,
     borderRadius: 26,
     fontWeight: 700,
+    fontSize: '0.75rem',
     borderWidth: 0,
+    padding: '0.5rem 0',
     color: whiteColor,
-    width: '25%',
-    padding: '0.75rem 0',
-    cursor: 'pointer'
   }
 }))

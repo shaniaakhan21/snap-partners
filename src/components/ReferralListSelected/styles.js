@@ -6,10 +6,10 @@ export const useStyles = makeStyles((theme) => ({
     backgroundColor: 'red',
     borderRadius: 2,
     backgroundColor: '#fff',
-    padding: '1rem 1rem 1rem 2rem',
-    display: 'none',
+    padding: '1rem',
     [theme.breakpoints.up('md')]: {
-      display: 'block'
+      display: 'block',
+      width: '70%',
     }
   },
   divisor: {

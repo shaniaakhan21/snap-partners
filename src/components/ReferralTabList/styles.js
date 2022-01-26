@@ -19,7 +19,7 @@ export const useStyles = makeStyles((theme) => ({
     // padding: '1rem 1rem 1rem 2rem',
     padding: '1rem 0',
     [theme.breakpoints.up('md')]: {
-      width: 300,
+      width: '30%',
       marginRight: '1rem'
     }
   },
