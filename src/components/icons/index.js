@@ -1,0 +1,5 @@
+export { CalendarIcon } from './Calendar'
+export { CopyIcon } from './Copy'
+export { ArrowRightIcon } from './ArrowRight'
+export { EyeIcon } from './Eye'
+export { AdjuntIcon } from './Adjunt'

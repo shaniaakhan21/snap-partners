@@ -14,9 +14,12 @@ const PublicRoutesArray = [
 
 const PublicRoutes = () => {
     const routes = []
-    for (const route of PublicRoutesArray){
-        routes.push(<Route exact path={route.path} component={() =>  <><PublicHeader/>{route.component}</>} />)
-    }
+    PublicRoutesArray.forEach((route, i) => {
+        routes.push(<Route key={i} exact path={route.path} component={() =>  <><PublicHeader/>{route.component}</>} />)
+    })
+    // for (const route of PublicRoutesArray){
+    //     routes.push(<Route exact path={route.path} component={() =>  <><PublicHeader/>{route.component}</>} />)
+    // }
     return routes
 }
 
