@@ -11,14 +11,14 @@ export const useStyles = makeStyles((theme) => ({
 		left: 0,
 		zIndex: 20,
 		width: '100%',
-		height: 'calc(100vh - 60px)'
+		height: '100%'
 	},
 
 	sidebarContainer: {
 		minWidth: '200px',
 		position: 'sticky',
 		top: 0,
-		height: '100vh',
+		height: '100%',
 		display: 'flex',
 		flexDirection: 'column',
 		listStyle: 'none',

@@ -11,9 +11,9 @@ export const DrawerMobile = () => {
 
 	return (
 		<div className={classes.wrapper}>
-			<div onClick={() => drawerDispatch(false)} style={{ zIndex: 5, backgroundColor: '#00000026', height: 'calc(100vh - 60px)', width: '100%', position: 'absolute' }}></div>
+			<div onClick={() => drawerDispatch(false)} style={{ zIndex: 5, backgroundColor: '#00000026', height: '100%', width: '100%', position: 'absolute' }}></div>
 
-			<aside style={{ zIndex: 10, width: 225, backgroundColor: '#DD4C37', height: 'calc(100vh - 60px)', position: 'absolute' }}>
+			<aside style={{ zIndex: 10, width: 225, backgroundColor: '#DD4C37', height: '100%', position: 'absolute' }}>
 				{
 					SideNav().map(item => {
 						return (

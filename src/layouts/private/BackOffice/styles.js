@@ -77,7 +77,7 @@ export const useStyles = makeStyles((theme) => ({
 		minWidth: '164px',
 		position: 'absolute',
 		top: 60,
-		height: '100vh',
+		height: '100%',
 		display: 'flex',
 		flexDirection: 'column',
 		listStyle: 'none',
@@ -91,6 +91,7 @@ export const useStyles = makeStyles((theme) => ({
 	content: {
 		gridArea: 'content',
 		padding: '18px 18px',
-		minHeight: 'calc(100vh - 64px)'
+		minHeight: '100%',
+		fontFamily: 'Arial'
 	}
 }))
