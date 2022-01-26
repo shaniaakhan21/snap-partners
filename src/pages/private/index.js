@@ -1,5 +1,2 @@
-import Genealogy from './Genealogy'
-
-export {
-  Genealogy,
-};
+export { MarketingPage } from './Marketing'
+export { Genealogy } from './Genealogy'
