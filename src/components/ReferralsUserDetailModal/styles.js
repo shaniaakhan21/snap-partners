@@ -41,13 +41,16 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold'
   },
   button: {
-    color: '#8C92A9',
+    color: blueColor,
     border: 'none',
     backgroundColor: 'transparent',
     cursor: 'pointer',
     transition: 'color 150ms ease-in',
     '&:hover': {
       color: blueColor
+    },
+    [theme.breakpoints.up('md')]: {
+      color: '#8C92A9',
     }
   },
   textId: {

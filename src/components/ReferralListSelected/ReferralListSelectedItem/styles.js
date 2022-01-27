@@ -53,8 +53,8 @@ export const useStyles = makeStyles((theme) => ({
     whiteSpace: 'nowrap',
   },
   button: {
-    backgroundColor: transparentColor,
-    color: orangeColor,
+    backgroundColor: orangeColor,
+    color: whiteColor,
     borderRadius: 26,
     fontWeight: 700,
     width: '25%',
@@ -65,8 +65,8 @@ export const useStyles = makeStyles((theme) => ({
     transitionDuration: '150ms',
     transitionTimingFunction: 'ease-in',
     '&:hover': {
-      backgroundColor: orangeColor,
-      color: whiteColor,
+      backgroundColor: transparentColor,
+      color: orangeColor,
     }
   }
 }))

@@ -96,8 +96,8 @@ export const useStyles = makeStyles(theme => {
       marginRight: '0.5rem'
     },
     link: {
-      color: whiteColor,
-      backgroundColor: orangeColor,
+      backgroundColor: transparentColor,
+      color: orangeColor,
       textDecoration: 'none',
       border: `1px solid ${orangeColor}`,
       borderRadius: 2,
@@ -114,10 +114,6 @@ export const useStyles = makeStyles(theme => {
         color: whiteColor,
         backgroundColor: orangeColor
       },
-      [theme.breakpoints.up('md')]: {
-        backgroundColor: transparentColor,
-        color: orangeColor,
-      }
     },
     linkText: {
       marginRight: '0.5rem',

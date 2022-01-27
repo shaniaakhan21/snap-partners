@@ -1,15 +1,11 @@
 import React, { useState } from 'react'
-import useWindowSize from '../../hooks/useWindowSize'
 import { ArrowRightIcon, CalendarIcon, CopyIcon } from '../icons'
 import { useStyles } from './styles'
 
 export const ReferralCards = ({ title, imgSrc, imgAlt, link, newUser = false, styles = {} }) => {
-  const { width: windowWidth } = useWindowSize()
   const [isLinkHover, setIsLinkHover] = useState(false)
 
   const classes = useStyles()
-
-  const iconArrowColor = windowWidth < 960 ? '#fff' : isLinkHover ? '#fff' : '#E35C49'
 
   const handleMouseEnter = () => {
     setIsLinkHover(true)
@@ -58,7 +54,7 @@ export const ReferralCards = ({ title, imgSrc, imgAlt, link, newUser = false, st
         onMouseLeave={handleMouseLeave}
       >
         <span className={classes.linkText}>Open My Referral Genealogy</span>
-        <ArrowRightIcon fill={iconArrowColor} />
+        <ArrowRightIcon fill={isLinkHover ? '#fff' : '#E35C49'} />
       </a>
     </div>
   )
