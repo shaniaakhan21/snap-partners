@@ -58,6 +58,8 @@ export const useStyles = makeStyles((theme) => ({
 		alignItems: 'center',
 		padding: '10px 18px',
 		width: '100%',
+		position: 'fixed',
+		zIndex: '99',
 		[theme.breakpoints.down('sm')]: {
 			display: 'flex'
 		}

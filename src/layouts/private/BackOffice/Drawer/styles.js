@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
 		[theme.breakpoints.up('md')]: {
 			display: 'none'
 		},
-		position: 'absolute',
+		position: 'fixed',
 		overflow: 'hidden',
 		top: 60,
 		left: 0,

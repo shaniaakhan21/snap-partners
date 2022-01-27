@@ -8,6 +8,16 @@ const Sidebar = () => {
 	const classes = useStyles()
 	const location = useLocation()
 
+	const isCurrentlyPage = (routeLink) => {
+		return (
+			location.pathname === routeLink ||
+			location.pathname === `${routeLink}/customers` ||
+			location.pathname === `${routeLink}/drivers` ||
+			location.pathname === `${routeLink}/restaurants` ||
+			location.pathname === `${routeLink}/ibo`
+		)
+	}
+
 	return (
 		<>
 			<ul className={classes.sidebarContainer}>
@@ -17,7 +27,7 @@ const Sidebar = () => {
 				{
 					SideNav().map(item => {
 						return (
-							<li key={item.name} className={location.pathname === item.link ? classes.sidebarItem_currentRoute : classes.sidebarItem}>
+							<li key={item.name} className={isCurrentlyPage(item.link) ? classes.sidebarItem_currentRoute : classes.sidebarItem}>
 								<Link className={classes.sidebarLink} to={item.link}>
 									{item.icon}
 									<Typography variant="body1" style={{ marginLeft: 10 }}>{item.name}</Typography>

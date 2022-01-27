@@ -3,6 +3,7 @@ import { Footer } from '../index'
 import PropTypes from 'prop-types'
 import { Helmet } from 'react-helmet'
 
+// REVISAR SI ESTE COMPONENTE ES NECESARIO
 const CommonComponents = ({ children, topNav = true, sidebar = false, footer = true }) => {
 	return (
 		<>

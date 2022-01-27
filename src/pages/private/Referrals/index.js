@@ -15,7 +15,7 @@ import referDriversCardSrc from '../../../../svg/referDriversCard.svg'
 import referMerchantsCardSrc from '../../../../svg/referMerchantsCard.svg'
 import { dataTest } from '../../../test/dataEmails'
 
-export default function Referrals() {
+export const Referrals = () => {
   const { width: windowWidth } = useWindowSize()
 
   const [tabOpen, setTabOpen] = useState('1')
