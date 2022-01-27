@@ -9,7 +9,7 @@ export const NavbarMobile = () => {
 	const { drawerDispatch } = React.useContext(DrawerContext)
 
 	return (
-		<header className={[classes.navbarMobile, 'epale'].join(' ')} >
+		<header className={classes.navbarMobile} >
 			<div style={{ marginTop: 4 }}>
 				<MoarOptionsVerticalIcon onClick={() => drawerDispatch(prevState => !prevState)} />
 			</div>
