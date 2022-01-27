@@ -10,6 +10,7 @@ const divisorColor = '#ECEEF3'
 const blueColor = '#139ECF'
 const transparentColor = 'transparent'
 const greenColor = '#008000'
+const blackColor = '#18203F'
 
 export const useStyles = makeStyles(theme => {
   return {
@@ -66,7 +67,8 @@ export const useStyles = makeStyles(theme => {
     },
     title: {
       margin: '1rem 0',
-      width: '100%'
+      width: '100%',
+      color: blackColor
     },
     image: {
       display: 'block',
@@ -81,10 +83,13 @@ export const useStyles = makeStyles(theme => {
       backgroundColor: transparentColor,
       border: 'none',
       cursor: 'pointer',
-      color: 'black',
+      color: blueColor,
       transition: 'color 150ms ease-in',
       '&:hover': {
         color: blueColor,
+      },
+      [theme.breakpoints.up('md')]: {
+        color: blackColor,
       }
     },
     buttonText: {
