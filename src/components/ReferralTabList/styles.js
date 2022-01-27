@@ -17,9 +17,9 @@ export const useStyles = makeStyles((theme) => ({
     position: 'relative',
     margin: 0,
     // padding: '1rem 1rem 1rem 2rem',
-    padding: '1rem 0',
+    padding: '0',
     [theme.breakpoints.up('md')]: {
-      width: '30%',
+      width: '34.5%',
       marginRight: '1rem'
     }
   },

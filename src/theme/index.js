@@ -10,7 +10,7 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: [
-      'Roboto',
+      'Red Hat Display',
       '"Segoe UI"',
       '-apple-system',
       'BlinkMacSystemFont',

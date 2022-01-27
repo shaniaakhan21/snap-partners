@@ -43,7 +43,7 @@ export const useStyles = makeStyles(theme => {
       borderRadius: 2,
       backgroundColor: whiteColor,
       boxShadow: `1px 0px 2px ${shadowColor}`,
-      width: 300,
+      width: '100%',
       padding: '1.5rem',
     },
     notificationSquare: {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { Helmet } from 'react-helmet';
 import { ReferralCards } from '../../../components/ReferralCards';
 import { ReferralListSelected } from '../../../components/ReferralListSelected';
@@ -65,21 +65,19 @@ export default function Referrals() {
         <title>Snap Delivered | Referrals</title>
       </Helmet>
 
-      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap' }}>
+      <div style={{ display: 'grid', alignItems: 'center', justifyContent: 'center', justifyItems: 'center', gap: '1rem', gridTemplateColumns: 'repeat(auto-fit, minmax(264px, 1fr))' }}>
         <ReferralCards
           title='Refer Customers'
           imgSrc={referCustomersCardSrc}
           imgAlt='Representative image of Refer Customer'
           link='Linkhereytocopywhenclick.com'
           newUser
-          styles={{ marginRight: '0.5rem' }}
         />
         <ReferralCards 
           title='Refer Drivers'
           imgSrc={referDriversCardSrc}
           imgAlt='Representative image of Refer Drivers'
           link='Linkhereytocopywhenclick.com'
-          styles={{ margin: '0 0.5rem' }}
         />
         <ReferralCards 
           title='Refer Customers'
@@ -87,21 +85,28 @@ export default function Referrals() {
           imgAlt='Representative image of Refer Merchant'
           link='Linkhereytocopywhenclick.com'
           newUser
-          styles={{ marginLeft: '0.5rem' }}
         />
       </div>
 
       <div style={{ display: 'flex', marginTop: '1rem', width: '100%' }}>
         <ReferralTabList>
           {emailNotificationsArray.map((emailNotify) => (
-            <ReferralTabListItem 
-              key={emailNotify.level}
-              isSelect={emailNotify.level === parseInt(tabOpen)}
-              id={emailNotify.level}
-              newUsers={emailNotify.newUsers}
-              numUsers={emailNotify.quantity}
-              onClick={windowWidth >= 960 ? handleClickTab : handleClickModalReferralListOpen}
-            />
+            <Fragment key={emailNotify.level}>
+              <ReferralTabListItem 
+                isSelect={emailNotify.level === parseInt(tabOpen)}
+                id={emailNotify.level}
+                newUsers={emailNotify.newUsers}
+                numUsers={emailNotify.quantity}
+                onClick={windowWidth >= 960 ? handleClickTab : handleClickModalReferralListOpen}
+              />
+              <ReferralTabListItem 
+                isSelect={emailNotify.level === parseInt(tabOpen)}
+                id={emailNotify.level}
+                newUsers={emailNotify.newUsers}
+                numUsers={emailNotify.quantity}
+                onClick={windowWidth >= 960 ? handleClickTab : handleClickModalReferralListOpen}
+              />
+            </Fragment>
           ))}
         </ReferralTabList>
 

@@ -1,11 +1,24 @@
 import { makeStyles } from '@material-ui/core'
 
-export const useStyles = makeStyles(theme => ({
+export const useStyles = makeStyles((theme) => ({
+	wrapper: {
+		[theme.breakpoints.up('md')]: {
+			display: 'none'
+		},
+		position: 'absolute',
+		overflow: 'hidden',
+		top: 60,
+		left: 0,
+		zIndex: 20,
+		width: '100%',
+		height: '100%'
+	},
+
 	sidebarContainer: {
 		minWidth: '200px',
 		position: 'sticky',
 		top: 0,
-		height: '100vh',
+		height: '100%',
 		display: 'flex',
 		flexDirection: 'column',
 		listStyle: 'none',
