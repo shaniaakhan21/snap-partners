@@ -4,6 +4,7 @@ import SideNav from '../../../../components/SideNav'
 import { useStyles } from './styles'
 import { Typography } from '@material-ui/core'
 import { Link } from 'react-router-dom'
+import { Overlay } from '../../../../components/Overlay'
 
 export const DrawerMobile = () => {
 	const classes = useStyles()
@@ -19,24 +20,30 @@ export const DrawerMobile = () => {
 		)
 	}
 
+	const handleClickOverlay = () => {
+		document.body.style.overflowY = 'auto'
+		drawerDispatch(false)
+	}
+
 	return (
 		<div className={classes.wrapper}>
-			<div onClick={() => drawerDispatch(false)} style={{ zIndex: 5, backgroundColor: '#00000026', height: '100%', width: '100%', position: 'absolute' }}></div>
-
-			<aside style={{ zIndex: 10, width: 225, backgroundColor: '#DD4C37', height: '100%', position: 'absolute' }}>
-				{
-					SideNav().map(item => {
-						return (
-							<li key={item.name} className={isCurrentlyPage(item.link) ? classes.sidebarItem_currentRoute : classes.sidebarItem}>
-								<Link className={classes.sidebarLink} to={item.link}>
-									{item.icon}
-									<Typography variant="body1" style={{ marginLeft: 10 }}>{item.name}</Typography>
-								</Link>
-							</li>
-						)
-					})
-				}
-			</aside>
+			{/* <div  style={{ zIndex: 5, backgroundColor: '#00000026', height: '100%', width: '100%', position: 'absolute' }} /> */}
+			<Overlay onClick={handleClickOverlay}>
+				<aside style={{ zIndex: 10, width: 225, left: 0, backgroundColor: '#DD4C37', height: '100%', position: 'absolute' }}>
+					{
+						SideNav().map(item => {
+							return (
+								<li key={item.name} className={isCurrentlyPage(item.link) ? classes.sidebarItem_currentRoute : classes.sidebarItem}>
+									<Link className={classes.sidebarLink} to={item.link}>
+										{item.icon}
+										<Typography variant="body1" style={{ marginLeft: 10 }}>{item.name}</Typography>
+									</Link>
+								</li>
+							)
+						})
+					}
+				</aside>
+			</Overlay>
 		</div>
 	)
 }

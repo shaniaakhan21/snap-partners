@@ -6,12 +6,17 @@ import { DrawerContext } from '../../../../contexts/Drawer'
 
 export const NavbarMobile = () => {
 	const classes = useStyles()
-	const { drawerDispatch } = React.useContext(DrawerContext)
+	const { drawer, drawerDispatch } = React.useContext(DrawerContext)
+
+	const handleClickButtonNavbar = () => {
+		document.body.style.overflowY = drawer ? 'auto' : 'hidden'
+		drawerDispatch(prevState => !prevState)
+	}
 
 	return (
-		<header className={[classes.navbarMobile, 'epale'].join(' ')} >
+		<header className={classes.navbarMobile} >
 			<div style={{ marginTop: 4 }}>
-				<MoarOptionsVerticalIcon onClick={() => drawerDispatch(prevState => !prevState)} />
+				<MoarOptionsVerticalIcon onClick={handleClickButtonNavbar} />
 			</div>
 
 			<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

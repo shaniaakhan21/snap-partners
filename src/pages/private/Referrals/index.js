@@ -91,22 +91,14 @@ export const Referrals = () => {
       <div style={{ display: 'flex', marginTop: '1rem', width: '100%' }}>
         <ReferralTabList>
           {emailNotificationsArray.map((emailNotify) => (
-            <Fragment key={emailNotify.level}>
               <ReferralTabListItem 
+                key={emailNotify.level}
                 isSelect={emailNotify.level === parseInt(tabOpen)}
                 id={emailNotify.level}
                 newUsers={emailNotify.newUsers}
                 numUsers={emailNotify.quantity}
                 onClick={windowWidth >= 960 ? handleClickTab : handleClickModalReferralListOpen}
               />
-              <ReferralTabListItem 
-                isSelect={emailNotify.level === parseInt(tabOpen)}
-                id={emailNotify.level}
-                newUsers={emailNotify.newUsers}
-                numUsers={emailNotify.quantity}
-                onClick={windowWidth >= 960 ? handleClickTab : handleClickModalReferralListOpen}
-              />
-            </Fragment>
           ))}
         </ReferralTabList>
 
