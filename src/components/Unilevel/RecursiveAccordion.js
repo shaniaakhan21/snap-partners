@@ -17,6 +17,13 @@ const useStyles = makeStyles(theme => ({
 		backgroundColor: theme.palette.primary.main,
 		color: theme.palette.text.white,
 		height: 22
+	},
+	wrappingViewOptions: {
+		'& > div': {
+			display: 'flex',
+			flexWrap: 'wrap',
+			alignItems: 'center'
+		}
 	}
 }))
 
@@ -94,10 +101,10 @@ const RecursiveAccordion = ({ openUser, user, master = false }) => {
 			{
 				!loading && levels.length === 0 && (
 					<Accordion style={{ width: '100%', border: '1px solid grey' }}>
-						<AccordionSummary aria-controls="panel1a-content" id="panel1a-header">
-							<Chip style={{ marginLeft: 5, marginRight: 5 }} size="small" label={`${user.name} [${user.id}]`} />
-							<Chip style={{ marginLeft: 5, marginRight: 5 }} size="small" label={'Users : 0'} variant="outlined" />
-							<Button onClick={(e) => { e.stopPropagation(); openUser(user.id) }} className={classes.Btn} color={'primary'} size={'small'} variant="contained">View user</Button>
+						<AccordionSummary className={classes.wrappingViewOptions} aria-controls="panel1a-content" id="panel1a-header">
+							<Chip style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} size="small" label={`${user.name} [${user.id}]`} />
+							<Chip style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} size="small" label={'Users : 0'} variant="outlined" />
+							<Button style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} onClick={(e) => { e.stopPropagation(); openUser(user.id) }} className={classes.Btn} color={'primary'} size={'small'} variant="contained">View user</Button>
 						</AccordionSummary>
 					</Accordion>
 				)
@@ -105,10 +112,10 @@ const RecursiveAccordion = ({ openUser, user, master = false }) => {
 			{mapper.map((level, key) => {
 				return (
 					<Accordion style={{ width: '100%', border: '1px solid grey' }} key={key}>
-						<AccordionSummary onClick={() => { getUsers(key) }} expandIcon={<ExpandMoreIcon/>} aria-controls="panel1a-content" id="panel1a-header">
-							{master === true ? (<Typography>Level {level.level}</Typography>) : <Chip style={{ marginLeft: 5, marginRight: 5 }} size="small" label={`${user.name} [${user.id}]`} />}
-							<Chip style={{ marginLeft: 5, marginRight: 5 }} size="small" label={`Users : ${level.usersLength}`} variant="outlined" />
-							{master === false && <Button onClick={(e) => { e.stopPropagation(); openUser(user.id) }} className={classes.Btn} color={'primary'} size={'small'} variant="contained">View user</Button>}
+						<AccordionSummary style={{ display: 'flex', flexWrap: 'wrap' }} onClick={() => { getUsers(key) }} expandIcon={<ExpandMoreIcon/>} aria-controls="panel1a-content" id="panel1a-header">
+							{master === true ? (<Typography style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }}>Level {level.level}</Typography>) : <Chip style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} size="small" label={`${user.name} [${user.id}]`} />}
+							<Chip style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} size="small" label={`Users : ${level.usersLength}`} variant="outlined" />
+							{master === false && <Button onClick={(e) => { e.stopPropagation(); openUser(user.id) }} className={classes.Btn} color={'primary'} size={'small'} variant="contained" style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }}>View user</Button>}
 						</AccordionSummary>
 						<AccordionDetails>
 							{showLevels[key] && (

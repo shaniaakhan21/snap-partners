@@ -92,8 +92,8 @@ export const useStyles = makeStyles((theme) => ({
 	},
 	content: {
 		gridArea: 'content',
+		minHeight: '100vh',
 		padding: '78px 18px 18px',
-		minHeight: '100%',
 		fontFamily: 'Arial',
 		[theme.breakpoints.up('md')]: {
 			padding: '18px',
