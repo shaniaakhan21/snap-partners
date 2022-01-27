@@ -1,5 +1,5 @@
 import React from 'react'
-import { DashboardIcon, ReferralLinksIcon, MarketingIcon, GenealogyIcon } from '../icons'
+import { DashboardIcon, ReferralLinksIcon, MarketingIcon, GenealogyIcon, CompensationPlanIcon } from '../icons'
 
 const SideNav = () => {
 	return [
@@ -28,7 +28,7 @@ const SideNav = () => {
 			side: true
 		},
 		{
-			icon: <GenealogyIcon />,
+			icon: <CompensationPlanIcon />,
 			name: 'Compensation Plan',
 			link: '/compensation-plan',
 			side: true
