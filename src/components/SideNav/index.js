@@ -26,6 +26,12 @@ const SideNav = () => {
 			name: 'Genealogy',
 			link: '/genealogy',
 			side: true
+		},
+		{
+			icon: <GenealogyIcon />,
+			name: 'Compensation Plan',
+			link: '/compensation-plan',
+			side: true
 		}
 	]
 }
