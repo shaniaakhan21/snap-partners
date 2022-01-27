@@ -74,19 +74,25 @@ export const useStyles = makeStyles(theme => {
     },
     divisor: {
       borderTop: `1px solid ${divisorColor}`,
-      margin: '1rem auto'
+      margin: '1rem auto',
+      width: '100%'
     },
     button: {
       backgroundColor: transparentColor,
       border: 'none',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      color: 'black',
+      transition: 'color 150ms ease-in',
+      '&:hover': {
+        color: blueColor,
+      }
     },
     buttonText: {
-      color: blueColor,
       marginRight: '0.5rem'
     },
     link: {
-      color: 'inherit',
+      color: whiteColor,
+      backgroundColor: orangeColor,
       textDecoration: 'none',
       border: `1px solid ${orangeColor}`,
       borderRadius: 2,
@@ -95,11 +101,21 @@ export const useStyles = makeStyles(theme => {
       padding: '0.5rem',
       display: 'flex',
       alignItems: 'center',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      transitionProperty: 'color, background-color',
+      transitionDuration: '150ms',
+      transitionTimingFunction: '150ms',
+      '&:hover': {
+        color: whiteColor,
+        backgroundColor: orangeColor
+      },
+      [theme.breakpoints.up('md')]: {
+        backgroundColor: transparentColor,
+        color: orangeColor,
+      }
     },
     linkText: {
       marginRight: '0.5rem',
-      color: orangeColor,
       fontWeight: 'bold',
       fontSize: '0.75rem'
     }

@@ -1,6 +1,7 @@
 import { makeStyles } from "@material-ui/core";
 
 const orangeColor = '#E35C49'
+const blueColor = '#139ECF'
 
 export const useStyles = makeStyles((theme) => ({
   flexCenter: {
@@ -39,9 +40,18 @@ export const useStyles = makeStyles((theme) => ({
     color: orangeColor,
     fontWeight: 'bold'
   },
+  button: {
+    color: '#8C92A9',
+    border: 'none',
+    backgroundColor: 'transparent',
+    cursor: 'pointer',
+    transition: 'color 150ms ease-in',
+    '&:hover': {
+      color: blueColor
+    }
+  },
   textId: {
     marginRight: '0.25rem',
-    color: '#8C92A9'
   },
   divisor: {
     borderTop: '1px solid #ECEEF3'
@@ -61,11 +71,11 @@ export const useStyles = makeStyles((theme) => ({
   },
   email: {
     marginLeft: '0.25rem',
-    color: '#139ECF'
+    color: blueColor
   },
   phone: {
     marginLeft: '0.25rem',
-    color: '#139ECF'
+    color: blueColor
   },
   textSponsored: {
     display: 'block',

@@ -53,13 +53,20 @@ export const useStyles = makeStyles((theme) => ({
     whiteSpace: 'nowrap',
   },
   button: {
-    backgroundColor: orangeColor,
+    backgroundColor: transparentColor,
+    color: orangeColor,
     borderRadius: 26,
     fontWeight: 700,
-    borderWidth: 0,
-    color: whiteColor,
     width: '25%',
     padding: '0.75rem 0',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    border: `1px solid ${orangeColor}`,
+    transitionProperty: 'color, background-color',
+    transitionDuration: '150ms',
+    transitionTimingFunction: 'ease-in',
+    '&:hover': {
+      backgroundColor: orangeColor,
+      color: whiteColor,
+    }
   }
 }))

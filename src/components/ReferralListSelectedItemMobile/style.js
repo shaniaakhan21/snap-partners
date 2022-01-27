@@ -51,5 +51,6 @@ export const useStyles = makeStyles((theme) => ({
     borderWidth: 0,
     padding: '0.5rem 0',
     color: whiteColor,
+    cursor: 'pointer'
   }
 }))

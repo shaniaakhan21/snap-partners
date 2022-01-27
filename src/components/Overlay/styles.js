@@ -10,6 +10,15 @@ export const useStyles = makeStyles((theme) => ({
     right: 0,
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    animation: '$fadeIn 150ms ease-in'
+  },
+  "@keyframes fadeIn": {
+    "0%": {
+      opacity: 0,
+    },
+    "100%": {
+      opacity: 1,
+    }
   }
 }))

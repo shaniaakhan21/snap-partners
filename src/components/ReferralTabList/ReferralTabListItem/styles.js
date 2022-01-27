@@ -56,11 +56,16 @@ export const useStyles = makeStyles((theme) => ({
   },
   button: {
     backgroundColor: 'transparent',
-    border: 'none',
+    border: '1px solid transparent',
+    borderRadius: 2,
     width: '100%',
     height: '100%',
     padding: '0.5rem 0.5rem 0.5rem 1.25rem',
     textAlign: 'left',
+    transition: 'border-color 150ms ease-in'
+  },
+  buttonHover: {
+    borderColor: orangeColor
   },
   headerLevelText: {
     color: orangeColor

@@ -1,9 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
+import useWindowSize from '../../hooks/useWindowSize'
 import { ArrowRightIcon, CalendarIcon, CopyIcon } from '../icons'
 import { useStyles } from './styles'
 
 export const ReferralCards = ({ title, imgSrc, imgAlt, link, newUser = false, styles = {} }) => {
+  const { width: windowWidth } = useWindowSize()
+  const [isLinkHover, setIsLinkHover] = useState(false)
+
   const classes = useStyles()
+
+  const iconArrowColor = windowWidth < 960 ? '#fff' : isLinkHover ? '#fff' : '#E35C49'
+
+  const handleMouseEnter = () => {
+    setIsLinkHover(true)
+  }
+  
+  const handleMouseLeave = () => {
+    setIsLinkHover(false)
+  }
 
   return (
     <div style={styles} className={[classes.card, classes.flexColCenter].join(' ')}>
@@ -32,14 +46,19 @@ export const ReferralCards = ({ title, imgSrc, imgAlt, link, newUser = false, st
 
       <hr className={classes.divisor} />
 
-      <button className={[classes.button, classes.inlineFlex].join(' ')}>
+      <button className={[classes.button, classes.inlineFlex].join(' ')} onClick={() => console.log('Copy link clicked')}>
         <span className={classes.buttonText}>{link}</span>
         <CopyIcon />
       </button>
 
-      <a href='#' className={[classes.link, classes.inlineFlex].join(' ')}>
+      <a 
+        href='#' 
+        className={[classes.link, classes.inlineFlex].join(' ')} 
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
         <span className={classes.linkText}>Open My Referral Genealogy</span>
-        <ArrowRightIcon />
+        <ArrowRightIcon fill={iconArrowColor} />
       </a>
     </div>
   )

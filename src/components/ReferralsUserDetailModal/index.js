@@ -20,10 +20,10 @@ export const ReferralsUserDetailModal = ({ userId, userName, userEmail, userPhon
 
       <div className={[classes.separation, classes.flexBetween].join(' ')}>
         <span className={classes.textTitleId}>USER ID</span>
-        <div className={classes.inlineFlexText}>
+        <button className={[classes.button, classes.inlineFlexText].join(' ')}>
           <span className={classes.textId}>{userId}</span>
           <CopyIcon />
-        </div>
+        </button>
       </div>
 
       <hr className={[classes.divisor, classes.separation].join(' ')} />
