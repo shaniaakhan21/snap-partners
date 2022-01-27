@@ -2,6 +2,7 @@ import { makeStyles } from "@material-ui/core";
 
 // COLORS to the migration
 const orangeColor = '#E35C49'
+const orangeColorHover = '#C54532'
 const redColor = '#FF4343'
 const whiteColor = '#fff'
 const shadowColor = 'rgba(195, 197, 202, 0.07)'
@@ -65,7 +66,7 @@ export const useStyles = makeStyles((theme) => ({
     transition: 'border-color 150ms ease-in'
   },
   buttonHover: {
-    borderColor: orangeColor
+    borderColor: orangeColor,
   },
   headerLevelText: {
     color: orangeColor

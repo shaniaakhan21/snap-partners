@@ -2,6 +2,8 @@ import { makeStyles } from "@material-ui/core";
 
 // COLORS to the migration
 const orangeColor = '#E35C49'
+const orangeColorButtonFilledBg = '#DD4C37'
+const borderRadiusButtonFilled = 26
 const redColor = '#FF4343'
 const whiteColor = '#fff'
 const shadowColor = 'rgba(195, 197, 202, 0.07)'
@@ -44,8 +46,10 @@ export const useStyles = makeStyles((theme) => ({
   },
   button: {
     width: '33%',
-    backgroundColor: orangeColor,
-    borderRadius: 26,
+    maxWidth: 120,
+    height: 39,
+    backgroundColor: orangeColorButtonFilledBg,
+    borderRadius: borderRadiusButtonFilled,
     fontWeight: 700,
     fontSize: '0.75rem',
     borderWidth: 0,

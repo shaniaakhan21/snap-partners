@@ -2,6 +2,9 @@ import { makeStyles } from '@material-ui/core'
 
 // COLORS to the migration
 const orangeColor = '#E35C49'
+const orangeColorButtonOutlinedBg = 'rgba(227, 92, 73, 0.08)'
+const orangeColorButtonOutlineBorder = '#DD4C37'
+const orangeColorButtonOulineBgHover = 'rgba(227, 92, 73, 0.24)'
 const redColor = '#FF4343'
 const whiteColor = '#fff'
 const shadowColor = 'rgba(195, 197, 202, 0.07)'
@@ -96,10 +99,10 @@ export const useStyles = makeStyles(theme => {
       marginRight: '0.5rem'
     },
     link: {
-      backgroundColor: transparentColor,
+      backgroundColor: orangeColorButtonOutlinedBg,
       color: orangeColor,
       textDecoration: 'none',
-      border: `1px solid ${orangeColor}`,
+      border: `2px solid ${orangeColorButtonOutlineBorder}`,
       borderRadius: 2,
       marginTop: '1rem',
       width: '100%',
@@ -107,12 +110,9 @@ export const useStyles = makeStyles(theme => {
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      transitionProperty: 'color, background-color',
-      transitionDuration: '150ms',
-      transitionTimingFunction: '150ms',
+      transition: 'background-color 150ms ease-in',
       '&:hover': {
-        color: whiteColor,
-        backgroundColor: orangeColor
+        backgroundColor: orangeColorButtonOulineBgHover
       },
     },
     linkText: {

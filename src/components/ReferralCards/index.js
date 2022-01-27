@@ -3,17 +3,7 @@ import { ArrowRightIcon, CalendarIcon, CopyIcon } from '../icons'
 import { useStyles } from './styles'
 
 export const ReferralCards = ({ title, imgSrc, imgAlt, link, newUser = false, styles = {} }) => {
-  const [isLinkHover, setIsLinkHover] = useState(false)
-
   const classes = useStyles()
-
-  const handleMouseEnter = () => {
-    setIsLinkHover(true)
-  }
-  
-  const handleMouseLeave = () => {
-    setIsLinkHover(false)
-  }
 
   return (
     <div style={styles} className={[classes.card, classes.flexColCenter].join(' ')}>
@@ -47,14 +37,9 @@ export const ReferralCards = ({ title, imgSrc, imgAlt, link, newUser = false, st
         <CopyIcon />
       </button>
 
-      <a 
-        href='#' 
-        className={[classes.link, classes.inlineFlex].join(' ')} 
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
+      <a href='#' className={[classes.link, classes.inlineFlex].join(' ')}>
         <span className={classes.linkText}>Open My Referral Genealogy</span>
-        <ArrowRightIcon fill={isLinkHover ? '#fff' : '#E35C49'} />
+        <ArrowRightIcon />
       </a>
     </div>
   )

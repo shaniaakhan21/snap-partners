@@ -2,6 +2,9 @@ import { makeStyles } from "@material-ui/core";
 
 // COLORS to the migration
 const orangeColor = '#E35C49'
+const orangeColorButtonFilledBg = '#DD4C37'
+const orangeColorButtonFilledBgHover = '#C54532'
+const borderRadiusButtonFilled = 26
 const redColor = '#FF4343'
 const whiteColor = '#fff'
 const shadowColor = 'rgba(195, 197, 202, 0.07)'
@@ -53,20 +56,19 @@ export const useStyles = makeStyles((theme) => ({
     whiteSpace: 'nowrap',
   },
   button: {
-    backgroundColor: orangeColor,
+    backgroundColor: orangeColorButtonFilledBg,
     color: whiteColor,
-    borderRadius: 26,
+    borderRadius: borderRadiusButtonFilled,
     fontWeight: 700,
+    maxWidth: 120,
+    height: 39,
     width: '25%',
     padding: '0.75rem 0',
     cursor: 'pointer',
     border: `1px solid ${orangeColor}`,
-    transitionProperty: 'color, background-color',
-    transitionDuration: '150ms',
-    transitionTimingFunction: 'ease-in',
+    transition: 'background-color 150ms ease-in',
     '&:hover': {
-      backgroundColor: transparentColor,
-      color: orangeColor,
+      backgroundColor: orangeColorButtonFilledBgHover,
     }
   }
 }))
