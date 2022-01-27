@@ -1,21 +1,29 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import { CancelIcon, CopyIcon, EmailIcon, PhoneIcon } from '../icons'
 import { useStyles } from './styles'
 
 export const ReferralsUserDetailModal = ({ userId, userName, userEmail, userPhone, onClick }) => {
   const classes = useStyles()
+  const buttonCancelRef = useRef()
 
   return (
     <div className={classes.container}>
-      <div className={[classes.buttonCancelContainer, classes.separation, classes.flexEnd].join(' ')}>
-        <button className={classes.buttonCancel} onClick={onClick}>
-          <CancelIcon id='cancel-button' width='24' height='24' />
+      {/* <div className={[classes.buttonCancelContainer, classes.separation, classes.flexEnd].join(' ')}>
+        <button 
+          className={classes.buttonCancel}
+          ref={buttonCancelRef}
+          onClick={(e) => onClick(e, [buttonCancelRef.current])}
+        >
+          <CancelIcon width='24' height='24' />
         </button>
-      </div>
+      </div> */}
 
-      <div className={[classes.separation, classes.flexEnd].join(' ')}>
-        <span className={classes.textTitleId}>USER ID <span className={classes.textId}>{userId}</span></span>
-        <CopyIcon />
+      <div className={[classes.separation, classes.flexBetween].join(' ')}>
+        <span className={classes.textTitleId}>USER ID</span>
+        <div className={classes.inlineFlexText}>
+          <span className={classes.textId}>{userId}</span>
+          <CopyIcon />
+        </div>
       </div>
 
       <hr className={[classes.divisor, classes.separation].join(' ')} />

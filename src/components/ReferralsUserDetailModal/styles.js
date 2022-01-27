@@ -36,11 +36,11 @@ export const useStyles = makeStyles((theme) => ({
     margin: 0
   },
   textTitleId: {
-    marginRight: '0.25rem',
     color: orangeColor,
     fontWeight: 'bold'
   },
   textId: {
+    marginRight: '0.25rem',
     color: '#8C92A9'
   },
   divisor: {
@@ -68,7 +68,8 @@ export const useStyles = makeStyles((theme) => ({
     color: '#139ECF'
   },
   textSponsored: {
-    marginTop: '1rem'
+    display: 'block',
+    marginTop: '2rem'
   },
   textSponsoredStrong: {
     display: 'inline-block',
