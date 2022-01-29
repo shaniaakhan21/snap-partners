@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core";
 // COLORS to the migration
 const orangeColor = '#E35C49'
 const orangeColorButtonFilledBg = '#DD4C37'
+const orangeColorButtonFilledBgHover = '#C54532'
 const borderRadiusButtonFilled = 26
 const redColor = '#FF4343'
 const whiteColor = '#fff'
@@ -15,15 +16,29 @@ const greenColor = '#008000'
 
 export const useStyles = makeStyles((theme) => ({
   item: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
     padding: 0,
     listStyle: 'none',
     marginBottom: '1rem',
     '&:last-child': { 
       marginBottom: 0
     },
+  },
+  buttonGeneral: {
+    backgroundColor: transparentColor,
+    border: 'none',
+    width: '100%',
+    height: 65,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    transition: 'background-color 150ms ease-in',
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: '#ECECEC'
+    },
+    [theme.breakpoints.up('md')]: {
+      padding: '0 0.5rem',
+    }
   },
   name: {
     fontWeight: 'bold',
@@ -44,7 +59,7 @@ export const useStyles = makeStyles((theme) => ({
     whiteSpace: 'nowrap',
     textAlign: 'center'
   },
-  button: {
+  buttonViewMore: {
     width: '33%',
     maxWidth: 120,
     height: 39,
@@ -53,8 +68,14 @@ export const useStyles = makeStyles((theme) => ({
     fontWeight: 700,
     fontSize: '0.75rem',
     borderWidth: 0,
-    padding: '0.5rem 0',
     color: whiteColor,
-    cursor: 'pointer'
+    cursor: 'pointer',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    transition: 'background-color 150ms ease-in',
+    '&:hover': {
+      backgroundColor: orangeColorButtonFilledBgHover,
+    }
   }
 }))

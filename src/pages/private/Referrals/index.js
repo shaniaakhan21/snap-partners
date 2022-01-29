@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Helmet } from 'react-helmet';
 import { ReferralCards } from '../../../components/ReferralCards';
 import { ReferralListSelected } from '../../../components/ReferralListSelected';
@@ -9,25 +9,50 @@ import { Overlay } from '../../../components/Overlay';
 import { ModalContainer } from '../../../components/ModalContainer';
 import { ReferralListSelectedItemMobile } from '../../../components/ReferralListSelectedItemMobile';
 import { ReferralsUserDetailModal } from '../../../components/ReferralsUserDetailModal';
+import { Searcher } from '../../../components/Searcher';
+import { SearchModalContext, TYPES } from '../../../contexts/SearchModal';
 import useWindowSize from '../../../hooks/useWindowSize';
 import referCustomersCardSrc from '../../../../svg/referCustomersCard.svg'
 import referDriversCardSrc from '../../../../svg/referDriversCard.svg'
 import referMerchantsCardSrc from '../../../../svg/referMerchantsCard.svg'
 import { dataTest } from '../../../test/dataEmails'
 
+const selectInfo = {
+  selectDefaultValue: 'name',
+  selectOptions: [
+    {
+      value: 'id',
+      text: 'ID',
+    },
+    {
+      value: 'name',
+      text: 'Fullname',
+    },
+    {
+      value: 'email',
+      text: 'Email',
+    },
+    {
+      value: 'phone',
+      text: 'Phone',
+    }
+  ]
+}
+
 export const Referrals = () => {
+  const { searchModalState, searchModalDispatch } = useContext(SearchModalContext)
   const { width: windowWidth } = useWindowSize()
 
   const [tabOpen, setTabOpen] = useState('1')
   const [userDetailIdOpen, setUserdetailIdOpen] = useState(0)
   const [modalReferralListlIsOpen, setModalReferralListIsOpen] = useState(false)
   const [modalReferralUserDetailIsOpen, setModalReferralUserDetailIsOpen] = useState(false)
-
-  const emailNotificationsArray = [...dataTest.emailNotifications]
-  const emailNotificationsUserData = { ...emailNotificationsArray.find((emailNotify) => emailNotify.level === parseInt(tabOpen)) } 
-  const userDetailOpenData = emailNotificationsUserData.usersData.users.find((user) => user.id === userDetailIdOpen)
-
-  const windowIsMobileSize = windowWidth < 960
+  const [data, setData] = useState({
+    emailNotificationsArray: null,
+    emailNotificationsUserData: null,
+    usersArray: null,
+    userDetailOpenData: null
+  })
 
   const handleClickTab = (id) => {
     setTabOpen(id)
@@ -58,6 +83,63 @@ export const Referrals = () => {
       setModalReferralUserDetailIsOpen(false)
     }
   }
+
+  const handleClickModalReferralSearchClose = (e, element) => {
+    if (element === e.target) {
+      document.body.style.overflowY = 'auto'
+      searchModalDispatch({ type: TYPES.SEARCH_MODAL_REFERRALS_UPDATE, payload: false })
+    }
+  }
+
+  // INIT DATA
+  useEffect(() => {
+    const emailNotificationsArray = [...dataTest.emailNotifications]
+    const emailNotificationsUserData = { ...emailNotificationsArray.find((emailNotification) => emailNotification.level === parseInt(tabOpen)) } 
+
+    const usersArray = []
+    emailNotificationsArray.forEach((emailNotification) => {
+      emailNotification.usersData.users.forEach((user) => {
+        usersArray.push(user)
+      })
+    })
+
+    setData((prevState) => ({
+      ...prevState,
+      emailNotificationsArray,
+      emailNotificationsUserData,
+      usersArray
+    }))
+  }, [])
+
+  // tabOpen State HandleChange
+  useEffect(() => {
+    if (!data.emailNotificationsArray) return
+
+    const emailNotificationsUserData = { ...data.emailNotificationsArray.find((emailNotification) => emailNotification.level === parseInt(tabOpen)) } 
+
+    setData((prevState) => ({
+      ...prevState,
+      emailNotificationsUserData,
+    }))
+  }, [tabOpen])
+
+  // userDetailOpen State HandleChange
+  useEffect(() => {
+    if (!data.emailNotificationsUserData) return
+
+    const userDetailOpenData = data.emailNotificationsUserData.usersData.users.find((user) => user.id === userDetailIdOpen.toString())
+
+    setData((prevState) => ({
+      ...prevState,
+      userDetailOpenData
+    }))
+  }, [userDetailIdOpen])
+
+  if (
+    !data.emailNotificationsArray || 
+    !data.emailNotificationsUserData || 
+    !data.usersArray
+  ) return <h1>Loading</h1>
 
   return (
     <>
@@ -90,26 +172,26 @@ export const Referrals = () => {
 
       <div style={{ display: 'flex', marginTop: '1rem', width: '100%' }}>
         <ReferralTabList>
-          {emailNotificationsArray.map((emailNotify) => (
+          {data.emailNotificationsArray.map((emailNotification) => (
               <ReferralTabListItem 
-                key={emailNotify.level}
-                isSelect={emailNotify.level === parseInt(tabOpen)}
-                id={emailNotify.level}
-                newUsers={emailNotify.newUsers}
-                numUsers={emailNotify.quantity}
+                key={emailNotification.level}
+                isSelect={emailNotification.level === parseInt(tabOpen)}
+                id={emailNotification.level}
+                newUsers={emailNotification.newUsers}
+                numUsers={emailNotification.quantity}
                 onClick={windowWidth >= 960 ? handleClickTab : handleClickModalReferralListOpen}
               />
           ))}
         </ReferralTabList>
 
         {/* List in desktop */}
-        {!windowIsMobileSize && (
-          <ReferralListSelected id={emailNotificationsUserData.level} newUsers={emailNotificationsUserData.newUsers}>
-            {emailNotificationsUserData.usersData.users.map((user) => (
+        {windowWidth >= 960 && (
+          <ReferralListSelected id={data.emailNotificationsUserData.level} newUsers={data.emailNotificationsUserData.newUsers}>
+            {data.emailNotificationsUserData.usersData.users.map((user) => (
               <ReferralListSelectedItem 
                 key={user.id}
-                numUsers={user.numUsers}
                 userId={user.id}
+                numUsers={user.numUsers}
                 userName={user.name}
                 onClick={handleClickModalReferralDetailOpen}
               />
@@ -118,18 +200,18 @@ export const Referrals = () => {
         )}
 
         {/* List with modal in mobile */}
-        {windowIsMobileSize && modalReferralListlIsOpen && (
+        {windowWidth < 960 && modalReferralListlIsOpen && (
           <Overlay onClick={handleClickModalReferralListClose}>
             <ModalContainer>
               <ReferralListSelected 
-                id={emailNotificationsUserData.level} 
-                newUsers={emailNotificationsUserData.newUsers}
+                id={data.emailNotificationsUserData.level} 
+                newUsers={data.emailNotificationsUserData.newUsers}
               >
-                {emailNotificationsUserData.usersData.users.map((user) => (
+                {data.emailNotificationsUserData.usersData.users.map((user) => (
                   <ReferralListSelectedItemMobile 
                     key={user.id}
-                    numUsers={user.numUsers}
                     userId={user.id}
+                    numUsers={user.numUsers}
                     userName={user.name}
                     onClick={handleClickModalReferralDetailOpen}
                   />
@@ -140,15 +222,27 @@ export const Referrals = () => {
         )}
 
         {/* Modal View More */}
-        {modalReferralUserDetailIsOpen && (
+        {modalReferralUserDetailIsOpen && data.userDetailOpenData && (
           <Overlay onClick={handleClickModalReferralDetailClose}>
             <ModalContainer>
               <ReferralsUserDetailModal
-                userId={userDetailOpenData.id}
-                userName={userDetailOpenData.name}
-                userEmail={userDetailOpenData.email}
-                userPhone={userDetailOpenData.phone}
+                userId={data.userDetailOpenData.id}
+                userName={data.userDetailOpenData.name}
+                userEmail={data.userDetailOpenData.email}
+                userPhone={data.userDetailOpenData.phone}
                 onClick={handleClickModalReferralDetailClose}
+              />
+            </ModalContainer>
+          </Overlay>
+        )}
+
+        {searchModalState.referralsIsOpen && data.usersArray && (
+          <Overlay onClick={handleClickModalReferralSearchClose}>
+            <ModalContainer>
+              <Searcher 
+                data={data.usersArray}
+                selectInfo={selectInfo}
+                searchPlaceholderMsg='Search user...'
               />
             </ModalContainer>
           </Overlay>

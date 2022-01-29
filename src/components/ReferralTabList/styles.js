@@ -14,10 +14,11 @@ const greenColor = '#008000'
 export const useStyles = makeStyles((theme) => ({
   container: {
     width: '100%',
+    height: 500,
     position: 'relative',
     margin: 0,
-    // padding: '1rem 1rem 1rem 2rem',
     padding: '0',
+    overflowY: 'auto',
     [theme.breakpoints.up('md')]: {
       width: '34.5%',
       marginRight: '1rem'

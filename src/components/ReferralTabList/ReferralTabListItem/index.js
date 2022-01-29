@@ -33,7 +33,7 @@ export const ReferralTabListItem = ({ isSelect = false, id, newUsers, numUsers, 
           <span className={classes.headerLevelText}>Level {id}</span>
           <div className={classes.flexCenter}>
             <EyeIcon />
-            <span className={classes.headerTotalText}>{isSelect ? 'See total income' : 'See income'}</span>
+            <span className={classes.headerTotalText}>See income</span>
           </div>
         </div>
 

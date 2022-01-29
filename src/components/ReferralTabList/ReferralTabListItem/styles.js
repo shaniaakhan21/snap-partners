@@ -42,14 +42,15 @@ export const useStyles = makeStyles((theme) => ({
     listStyle: 'none',
     position: 'relative',
     marginBottom: '1rem',
+    height: 103,
     '&:last-child': { 
       marginBottom: 0
     },
   },
   selectReference: {
     position: 'absolute',
-    top: '0.8rem',
-    left: '0.25rem',
+    top: '1.76rem',
+    left: '0.45rem',
     borderRadius: '100%',
     backgroundColor: orangeColor,
     width: 8,

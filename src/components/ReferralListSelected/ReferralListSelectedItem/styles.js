@@ -11,8 +11,8 @@ const shadowColor = 'rgba(195, 197, 202, 0.07)'
 const grayColor = '#8C92A9'
 const divisorColor = '#ECEEF3'
 const blueColor = '#139ECF'
-const transparentColor = 'transparent'
 const greenColor = '#008000'
+const transparentColor = 'transparent'
 
 export const useStyles = makeStyles((theme) => ({
   inlineFlex: {
@@ -21,9 +21,6 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center'
   },
   item: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'space-between',
     padding: 0,
     listStyle: 'none',
     marginBottom: '1rem',
@@ -31,18 +28,38 @@ export const useStyles = makeStyles((theme) => ({
       marginBottom: 0
     },
   },
+  buttonGeneral: {
+    backgroundColor: transparentColor,
+    border: 'none',
+    width: '100%',
+    height: 65,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    transition: 'background-color 150ms ease-in',
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: '#ECECEC'
+    },
+    [theme.breakpoints.up('md')]: {
+      padding: '0 0.5rem',
+    }
+  },
   name: {
-    fontWeight: 'bold',
     color: '#404040',
-    // width: 150,
+    fontWeight: 'bold',
+    width: '25%',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
-    width: '25%',
-    textAlign: 'center'
+    textAlign: 'left',
+    margin: '0 auto'
   },
   numUsers: {
     width: '25%',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
     textAlign: 'center'
   },
   idContainer: {
@@ -55,7 +72,7 @@ export const useStyles = makeStyles((theme) => ({
     textOverflow: 'ellipsis',
     whiteSpace: 'nowrap',
   },
-  button: {
+  buttonViewMore: {
     backgroundColor: orangeColorButtonFilledBg,
     color: whiteColor,
     borderRadius: borderRadiusButtonFilled,
@@ -63,9 +80,10 @@ export const useStyles = makeStyles((theme) => ({
     maxWidth: 120,
     height: 39,
     width: '25%',
-    padding: '0.75rem 0',
-    cursor: 'pointer',
     border: `1px solid ${orangeColor}`,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     transition: 'background-color 150ms ease-in',
     '&:hover': {
       backgroundColor: orangeColorButtonFilledBgHover,

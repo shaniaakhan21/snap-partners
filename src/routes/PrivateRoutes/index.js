@@ -12,6 +12,7 @@ import {
 import { PrivateRoute } from '../../components'
 import { BackOfficeLayout } from '../../layouts/private/BackOffice'
 import { DrawerProvider } from '../../contexts/Drawer'
+import { SearchModalProvider } from '../../contexts/SearchModal'
 
 const PrivateRoutesArray = [
 	{ path: '/genealogy', component: <Genealogy /> },
@@ -31,9 +32,11 @@ const PrivateRoutes = () => {
 		routes.push(
 			<PrivateRoute key={i} exact path={route.path} component={() =>
 				<DrawerProvider>
-					<BackOfficeLayout>
-						{route.component}
-					</BackOfficeLayout>
+					<SearchModalProvider>
+						<BackOfficeLayout>
+							{route.component}
+						</BackOfficeLayout>
+					</SearchModalProvider>
 				</DrawerProvider>
 			}/>
 	)})

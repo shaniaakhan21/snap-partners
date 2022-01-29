@@ -1,17 +1,39 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useStyles } from '../styles'
 import { SearchIcon, NotificationIcon } from '../../../../components/icons'
 import { ProfileDesktop } from './Profile'
+import { SearchModalContext, TYPES } from '../../../../contexts/SearchModal'
 
 export const NavbarDesktop = () => {
 	const classes = useStyles()
+
+	const { searchModalDispatch } = useContext(SearchModalContext)
+
+	const handleClickSearch = () => {
+		if (window.location.pathname.includes('referrals')) {
+			document.body.style.overflowY = 'hidden'
+			searchModalDispatch({ type: TYPES.SEARCH_MODAL_REFERRALS_UPDATE, payload: true })
+		}
+	}
 
 	return (
 		<header className={classes.navbar}>
 			<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 				<span className={classes.navbarTitle}>Dashboard</span>
 
-				<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: 16 }}>
+				<button 
+					style={{ 
+						marginLeft: 16, 
+						backgroundColor: 'transparent', 
+						border: 'none',
+						cursor: 'pointer'
+					}} 
+					onClick={handleClickSearch}
+				>
+					<SearchIcon />
+				</button>
+
+				{/* <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginLeft: 16 }}>
 					<SearchIcon />
 
 					<input
@@ -19,7 +41,7 @@ export const NavbarDesktop = () => {
 						type='text'
 						placeholder='Search'
 					/>
-				</div>
+				</div> */}
 			</div>
 
 			<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
