@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { useAuthStore } from 'lib/stores'
+import { fakeLogin } from 'lib/utils/fakeLogin'
 import { loginRulesConfig } from './formRules'
 
 import { Button } from 'components/common/Button'
@@ -27,12 +28,7 @@ export const LoginForm = () => {
     setLoading(true)
 
     setTimeout(async () => { // Simulate latency
-      const res = await fetch('/api/auth/signin', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(dataForm)
-      })
-      const { data, error } = await res.json()
+      const { data, error } = await fakeLogin()
 
       setLoading(false)
 

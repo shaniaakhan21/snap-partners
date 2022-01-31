@@ -42,8 +42,7 @@ deploy:
     - git checkout master
     - git pull
     - (printenv | grep DEPLOY_FRONT_ | sed -e "s/^DEPLOY_FRONT_//"  ) > .env
-    - mkdir -p dist
     - npm install
-    - npm run build
+    - npm run export
     - rm -rf /home/gitlab-runner/snap-website-deploy
     - mv /home/gitlab-runner/snap-website-deploy-temp /home/gitlab-runner/snap-website-deploy

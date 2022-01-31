@@ -8,6 +8,7 @@ import Link from 'next/link'
 import { useAuthStore } from 'lib/stores'
 import { toast } from 'react-toastify'
 import { Spinner } from 'components/common/loaders'
+import { fakeLogin } from 'lib/utils/fakeLogin'
 
 interface IDataForm {
   email: string
@@ -28,31 +29,23 @@ export const RegisterForm = () => {
 
   const onSubmit = async (dataForm: IDataForm) => {
     setLoading(true)
+    const { data, error } = await fakeLogin()
 
-    setTimeout(async () => { // Simulate latency
-      const res = await fetch('/api/auth/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(dataForm)
-      })
-      const { data, error } = await res.json()
+    setLoading(false)
 
-      setLoading(false)
+    if (error) {
+      return toast(error, { type: 'error' })
+    }
 
-      if (error) {
-        return toast(error, { type: 'error' })
-      }
-
-      toast('¡Sign In Successful!', { type: 'success' })
-      createAccout({
-        email: data.email,
-        name: data.name,
-        phone: data.phone,
-        accessToken: data.accessToken,
-        refreshToken: data.refreshToken
-      })
-      reset()
-    }, 2000)
+    toast('¡Sign In Successful!', { type: 'success' })
+    createAccout({
+      email: data.email,
+      name: data.name,
+      phone: data.phone,
+      accessToken: data.accessToken,
+      refreshToken: data.refreshToken
+    })
+    reset()
   }
 
   if (isLoading) {
