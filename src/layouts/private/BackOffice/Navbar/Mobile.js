@@ -1,6 +1,6 @@
 import React from 'react'
 import { ProfileMobile } from './Profile'
-import { SearchIcon, MoarOptionsVerticalIcon } from '../../../../components/icons'
+import { SearchIcon, MoreOptionsVerticalIcon } from '../../../../components/icons'
 import { DrawerContext } from '../../../../contexts/Drawer'
 import { SearchModalContext, TYPES } from '../../../../contexts/SearchModal'
 import { useStyles } from '../styles'
@@ -25,7 +25,7 @@ export const NavbarMobile = () => {
 	return (
 		<header className={classes.navbarMobile} >
 			<div style={{ marginTop: 4 }}>
-				<MoarOptionsVerticalIcon onClick={handleClickButtonNavbar} />
+				<MoreOptionsVerticalIcon onClick={handleClickButtonNavbar} />
 			</div>
 
 			<div style={{ width: '100%', display: 'flex', alignItems: 'center' }}>
