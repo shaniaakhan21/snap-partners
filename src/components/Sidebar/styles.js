@@ -10,13 +10,12 @@ export const useStyles = makeStyles(theme => ({
 		flexDirection: 'column',
 		listStyle: 'none',
 		backgroundColor: '#DD4C37',
+		overflowY: 'auto',
 		[theme.breakpoints.down('sm')]: {
 			display: 'none'
 		},
 		margin: 0,
-		paddingTop: '64px',
-		paddingRight: 0,
-		paddingLeft: 0
+		padding: '64px 0',
 	},
 	sidebarItem: {
 		alignItems: 'center',
