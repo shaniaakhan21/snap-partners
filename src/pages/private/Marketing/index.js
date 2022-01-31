@@ -50,7 +50,7 @@ export const MarketingPage = () => {
 			<div className={classes.container_cards}>
 				{
 					marketingDetails.map((detail, idx) => (
-						<div key={detail.title} className={classes.cards}>
+						<Link to={detail.to} style={{ cursor: 'pointer', textDecoration: 'none', color: 'black' }} key={detail.title} className={classes.cards}>
 							<div id='asd' style={{ backgroundColor: '#FF998B', height: 4, width: '100%', position: 'absolute', top: 0, left: 0, borderRadius: '4px 4px 0px 0px' }}></div>
 
 							<div style={{ paddingLeft: 24, paddingRight: 24, paddingBottom: 16, width: '100%' }}>
@@ -66,10 +66,10 @@ export const MarketingPage = () => {
 							</div>
 							<div style={{ width: '100%', height: 0.5, backgroundColor: '#eee' }}></div>
 							<br/>
-							<Link to={detail.to} style={{ color: 'white', textDecoration: 'none', backgroundColor: '#DD4C37', padding: '12px 18px', fontWeight: 700, borderRadius: '24px', border: 'none' }}>
-                SEE MORE
-							</Link>
-						</div>
+							<button style={{ color: 'white', textDecoration: 'none', cursor: 'pointer', backgroundColor: '#DD4C37', padding: '12px 18px', fontWeight: 700, borderRadius: '24px', border: 'none' }}>
+								SEE MORE
+							</button>
+						</Link>
 					))
 				}
 			</div>
