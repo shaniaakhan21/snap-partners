@@ -16,7 +16,6 @@ const CompensationPlanPage: Page = () => {
 
       <div className='w-full text-center'>
         <h4 className='font-black text-5xl'>Compensation Plan</h4>
-
         <div className='mt-10'>
           <PDFViewer />
         </div>
