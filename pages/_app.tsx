@@ -8,7 +8,6 @@ import { LoadingPage } from 'components/layout/LoadingPage'
 
 import 'styles/tailwind.css'
 import 'react-toastify/dist/ReactToastify.min.css'
-import '@react-pdf-viewer/core/lib/styles/index.css'
 
 const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({ Component, pageProps }: AppLayoutProps) => {
   const { isRouteChanging, loadingKey } = useLoadingPage()

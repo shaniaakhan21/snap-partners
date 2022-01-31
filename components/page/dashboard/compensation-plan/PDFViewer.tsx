@@ -1,14 +1,22 @@
-import { Viewer, Worker, SpecialZoomLevel } from '@react-pdf-viewer/core'
+// import { Viewer, Worker, SpecialZoomLevel } from '@react-pdf-viewer/core'
+
+// export const PDFViewer = () => {
+//   return (
+//     <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.12.313/build/pdf.worker.js">
+//       <div
+//         className='mx-auto w-full'
+//         style={{ height: '750px', maxWidth: 900 }}
+//       >
+//         <Viewer fileUrl="/plan.pdf" defaultScale={SpecialZoomLevel.PageFit} />
+//       </div>
+//     </Worker>
+//   )
+// }
 
 export const PDFViewer = () => {
   return (
-    <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.12.313/build/pdf.worker.js">
-      <div
-        className='mx-auto w-full'
-        style={{ height: '750px', maxWidth: 900 }}
-      >
-        <Viewer fileUrl="/plan.pdf" defaultScale={SpecialZoomLevel.PageFit} />
-      </div>
-    </Worker>
+    <div>
+      PDF
+    </div>
   )
 }
