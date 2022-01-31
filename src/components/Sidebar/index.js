@@ -19,25 +19,23 @@ const Sidebar = () => {
 	}
 
 	return (
-		<>
-			<ul className={classes.sidebarContainer}>
-				<div style={{ paddingLeft: 37 }}>
-					<h2 className={classes.sidebarTitle}>SnapDeliver</h2>
-				</div>
-				{
-					SideNav().map(item => {
-						return (
-							<li key={item.name} className={isCurrentlyPage(item.link) ? classes.sidebarItem_currentRoute : classes.sidebarItem}>
-								<Link className={classes.sidebarLink} to={item.link}>
-									{item.icon}
-									<Typography variant="body1" style={{ marginLeft: 10 }}>{item.name}</Typography>
-								</Link>
-							</li>
-						)
-					})
-				}
-			</ul>
-		</>
+		<ul className={classes.sidebarContainer}>
+			<div style={{ paddingLeft: 37 }}>
+				<h2 className={classes.sidebarTitle}>SnapDelivered</h2>
+			</div>
+			{
+				SideNav().map(item => {
+					return (
+						<li key={item.name} className={isCurrentlyPage(item.link) ? classes.sidebarItem_currentRoute : classes.sidebarItem}>
+							<Link className={classes.sidebarLink} to={item.link}>
+								{item.icon}
+								<Typography variant="body1" style={{ marginLeft: 10 }}>{item.name}</Typography>
+							</Link>
+						</li>
+					)
+				})
+			}
+		</ul>
 	)
 }
 

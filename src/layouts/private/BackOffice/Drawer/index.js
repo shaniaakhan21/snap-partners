@@ -29,7 +29,7 @@ export const DrawerMobile = () => {
 		<div className={classes.wrapper}>
 			{/* <div  style={{ zIndex: 5, backgroundColor: '#00000026', height: '100%', width: '100%', position: 'absolute' }} /> */}
 			<Overlay onClick={handleClickOverlay}>
-				<aside style={{ zIndex: 10, width: 225, left: 0, top: 60, backgroundColor: '#DD4C37', height: '100%', position: 'absolute' }}>
+				<aside style={{ zIndex: 10, width: 225, left: 0, top: 0, backgroundColor: '#DD4C37', height: '100%', position: 'absolute' }}>
 					{
 						SideNav().map(item => {
 							return (
