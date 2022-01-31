@@ -32,7 +32,7 @@ export const ReferralCards = ({ title, imgSrc, imgAlt, link, newUser = false, st
 
       <hr className={classes.divisor} />
 
-      <button className={[classes.button, classes.inlineFlex].join(' ')} onClick={() => console.log('Copy link clicked')}>
+      <button className={[classes.button, classes.inlineFlex].join(' ')} onClick={() => {}}>
         <span className={classes.buttonText}>{link}</span>
         <CopyIcon />
       </button>
