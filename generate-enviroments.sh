@@ -38,7 +38,7 @@ server {
     server_name $SUBDOMAIN.snap.devopsteam.info;
     access_log off;
     error_log off;
-    root /home/gitlab-runner/snap-website-$SUBDOMAIN/_static;
+    root /home/gitlab-runner/snap-website-$SUBDOMAIN/dist;
     # Any route containing a file extension (e.g. /devicesfile.js)
     location ~ ^.+\..+\$ {
       try_files \$uri =404;
@@ -94,9 +94,10 @@ $SUBDOMAIN.snap.devopsteam.info:
     - (printenv | grep STAGE_FRONT_ | grep -v STAGE_FRONT_PORT | sed -e "s/^STAGE_FRONT_//"  ) > .env
     - printf "PORT=4$PORT" >> .env
     - printf "\nREACT_APP_SUBDOMAIN=https://$SUBDOMAIN.snap.devopsteam.info" >> .env
-    - mkdir -p _static
+    - mkdir -p dist
+    - cp -R svg dist/svg
     - npm install
-    - npm run build
+    - npm run-script build
     - rm -rf /home/gitlab-runner/snap-website-$SUBDOMAIN
     - mv /home/gitlab-runner/snap-website-$SUBDOMAIN-temp /home/gitlab-runner/snap-website-$SUBDOMAIN
     - sudo /usr/bin/systemctl restart nginx
