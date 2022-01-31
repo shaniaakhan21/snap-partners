@@ -95,9 +95,8 @@ $SUBDOMAIN.snap.devopsteam.info:
     - printf "PORT=4$PORT" >> .env
     - printf "\nREACT_APP_SUBDOMAIN=https://$SUBDOMAIN.snap.devopsteam.info" >> .env
     - mkdir -p dist
-    - cp -R svg dist/svg
     - npm install
-    - npm run-script build
+    - npm run build
     - rm -rf /home/gitlab-runner/snap-website-$SUBDOMAIN
     - mv /home/gitlab-runner/snap-website-$SUBDOMAIN-temp /home/gitlab-runner/snap-website-$SUBDOMAIN
     - sudo /usr/bin/systemctl restart nginx
