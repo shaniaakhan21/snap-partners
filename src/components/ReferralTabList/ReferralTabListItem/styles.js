@@ -49,7 +49,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   selectReference: {
     position: 'absolute',
-    top: '1.76rem',
+    top: '1.5rem',
     left: '0.45rem',
     borderRadius: '100%',
     backgroundColor: orangeColor,
