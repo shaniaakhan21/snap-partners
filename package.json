@@ -50,6 +50,8 @@
     "react-router-dom": "^5.2.0",
     "react-share": "^4.4.0",
     "react-top-loading-bar": "^2.0.1",
+    "rechart": "^0.0.1",
+    "recharts": "^2.1.8",
     "spinner": "^0.2.4",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",

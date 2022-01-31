@@ -7,7 +7,8 @@ import {
 	DriversPage,
 	RestaurantsPage,
 	IBOPage,
-	CompensationPlanPage
+	CompensationPlanPage,
+	DashboardPage
 } from '../../pages/private'
 import { PrivateRoute } from '../../components'
 import { BackOfficeLayout } from '../../layouts/private/BackOffice'
@@ -15,6 +16,7 @@ import { DrawerProvider } from '../../contexts/Drawer'
 import { SearchModalProvider } from '../../contexts/SearchModal'
 
 const PrivateRoutesArray = [
+	{ path: '/dashboard', component: <DashboardPage /> },
 	{ path: '/genealogy', component: <Genealogy /> },
 	{ path: '/referrals', component :<Referrals /> },
 	{ path: '/marketing', component: <MarketingPage /> },
