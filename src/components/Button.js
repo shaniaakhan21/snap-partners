@@ -1,3 +1,5 @@
+import React from 'react'
+
 export const Button = ({
   children,
   onClick = () => console.log('onClick Default'),

@@ -5,17 +5,17 @@ import { StarIcon } from '../icons'
 export const TopRestaurantsAcquisition = ({ data }) => {
   const topRestaurantsAcquisition = [
     {
-      imageSrc: '/images/avatarAuth.png',
+      imageSrc: './svg/avatarAuth.png',
       position: '1rst',
       name: 'Cameron Williamson'
     },
     {
-      imageSrc: '/images/avatarAuth.png',
+      imageSrc: './svg/avatarAuth.png',
       position: '2nd',
       name: 'Cameron Williamson'
     },
     {
-      imageSrc: '/images/avatarAuth.png',
+      imageSrc: './svg/avatarAuth.png',
       position: '3rd',
       name: 'Cameron Williamson'
     }
