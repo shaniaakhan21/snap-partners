@@ -72,7 +72,6 @@ export const Drawer = () => {
   ])
 
   const isCurrentlyPage = (routeLink: string) => {
-    console.log(`${router.pathname} === ${routeLink}: ${router.pathname === routeLink}`)
     return (
       router.pathname === routeLink ||
       router.pathname === `${routeLink}/customers` ||
