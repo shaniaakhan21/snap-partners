@@ -3,10 +3,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "npm run build && next export -o dist",
+    "build": "next export -o dist",
     "start": "next start",
-    "lint": "next lint",
-    "export": "next export -o dist"
+    "lint": "next lint"
   },
   "dependencies": {
     "@tanem/react-nprogress": "4.0.5",
