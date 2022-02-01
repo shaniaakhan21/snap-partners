@@ -3,10 +3,9 @@ import { CheckIcon } from '../icons'
 
 export const Stepper = ({ data }) => {
   const steppers = [
-    { quantity: 1, label: 'PSMs left' },
-    { quantity: 1, label: 'Orders left' },
-    { quantity: 1, label: 'Legs @250 left' },
-    { quantity: 1, label: 'Legs @2500 left' }
+    { quantity: 0, label: 'PSMs left' },
+    { quantity: 0, label: 'Orders left' },
+    { quantity: 0, label: 'Legs left' },
   ]
 
   return (
@@ -31,9 +30,9 @@ export const Stepper = ({ data }) => {
         }
       </ul>
 
-      <div className='mt-6'>
+      {/* <div className='mt-6'>
         <span className='text-gray-400'>Last updated today 2:00pm</span>
-      </div>
+      </div> */}
     </div>
   )
 }

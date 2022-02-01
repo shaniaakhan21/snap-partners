@@ -10,7 +10,7 @@ export const PayRank = ({ data }) => {
 
       <div className='leading-5 text-gray-400 text-center md:text-left'>
         <span>Pay Rank</span> <br />
-        <span className='text-gray-800 font-bold text-2xl'>5428</span>
+        <span className='text-gray-800 font-bold text-2xl'>0</span>
       </div>
     </div>
   )

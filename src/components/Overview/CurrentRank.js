@@ -10,7 +10,7 @@ export const CurrentRank = ({ data }) => {
 
       <div className='leading-5 text-gray-400 text-center md:text-left'>
         <span>Current Rank</span> <br />
-        <span className='text-gray-800 font-bold text-2xl'>Director</span>
+        <span className='text-gray-800 font-bold text-2xl'>Empty</span>
       </div>
     </div>
   )

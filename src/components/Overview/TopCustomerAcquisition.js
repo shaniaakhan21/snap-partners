@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from '../Button'
+// import { Button } from '../Button'
 import { StarIcon } from '../icons'
 
 export const TopCustomerAcquisition = ({ data }) => {
@@ -30,12 +30,17 @@ export const TopCustomerAcquisition = ({ data }) => {
 
         <div>
           <span className='text-primary-500 text-xs'>TOP Customer Acquisition</span> <br />
-          <span className='text-gray-800 text-lg font-bold'>3 Last week</span>
+          <span className='text-gray-800 text-lg font-bold'>Last week</span>
         </div>
       </section>
 
       <ul className='border-t border-gray-300 w-full pt-2'>
-        {
+        <li className='w-full flex justify-start items-center py-2 gap-x-2'>
+          <div>
+            <span className='text-gray-400 font-bold'>Empty</span> <br />
+          </div>
+        </li>
+        {/* {
           topRestaurantsAcquisition.map((restaurant, idx) => (
             <li key={idx} className='w-full flex justify-start items-center py-2 gap-x-2'>
               <img src={restaurant.imageSrc} className='w-10 h-10' />
@@ -46,12 +51,12 @@ export const TopCustomerAcquisition = ({ data }) => {
               </div>
             </li>
           ))
-        }
+        } */}
       </ul>
 
-      <section className='text-center mt-4'>
+      {/* <section className='text-center mt-4'>
         <Button>BUTTON</Button>
-      </section>
+      </section> */}
     </div>
   )
 }
