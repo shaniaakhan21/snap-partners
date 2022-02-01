@@ -28,23 +28,23 @@ const DashboardOverViewPage: Page = () => {
   const data = [
     {
       name: '1a',
-      pv: 2400
+      pv: 0
     },
     {
       name: '6m',
-      pv: 1398
+      pv: 0
     },
     {
       name: '1m',
-      pv: 9800
+      pv: 0
     },
     {
       name: '1s',
-      pv: 3908
+      pv: 0
     },
     {
       name: '1d',
-      pv: 4800
+      pv: 0
     }
   ]
 
