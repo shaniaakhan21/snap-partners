@@ -10,7 +10,7 @@ export const PromotionTracker = ({ data }) => {
       </div>
 
       <div className='mt-2'>
-        <span className='text-gray-800 font-bold'>$563,486,50</span>
+        <span className='text-gray-800 font-bold'>$0</span>
       </div>
 
       <div className='w-full bg-white rounded-md flex flex-col sm:flex-row justify-start items-center p-3 mt-2 gap-3'>
@@ -21,7 +21,7 @@ export const PromotionTracker = ({ data }) => {
         <div className='leading-5 text-gray-400 text-center md:text-left'>
           <span>Promotion tracker</span> <br />
           <span className='font-semibold'>Next Rank</span> <br />
-          <span className='text-gray-800 font-semibold'>Director</span>
+          <span className='text-gray-800 font-semibold'>Empty</span>
         </div>
       </div>
     </div>
