@@ -15,7 +15,7 @@ const CompensationPlanPage: Page = () => {
       </Head>
 
       <div className='w-full text-center'>
-        <h4 className='font-black text-5xl'>Compensation Plan</h4>
+        <h4 className='font-black text-4xl md:text-5xl'>Compensation Plan</h4>
 
         <div className='mt-8'>
           <a
