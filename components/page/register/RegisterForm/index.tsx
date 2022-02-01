@@ -41,7 +41,7 @@ export const RegisterForm = () => {
     createAccout({
       email: data.email,
       name: data.name,
-      phone: data.phone,
+      phone: data.phone.number,
       accessToken: data.accessToken,
       refreshToken: data.refreshToken
     })
