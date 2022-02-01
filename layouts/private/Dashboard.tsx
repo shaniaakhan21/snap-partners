@@ -20,7 +20,9 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
       <Drawer />
 
       <main className='dashboardLayout__content'>
-        {children}
+        <div className='max-w-5xl mx-auto'>
+          {children}
+        </div>
       </main>
     </div>
   )

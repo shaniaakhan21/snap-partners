@@ -9,7 +9,8 @@ import {
   ReferralLinksIcon,
   MarketingIcon,
   GenealogyIcon,
-  CompensationPlanIcon
+  CompensationPlanIcon,
+  RelojTempIcon
 } from 'components/common/icons'
 
 export const Drawer = () => {
@@ -32,6 +33,27 @@ export const Drawer = () => {
       label: 'Marketing'
     },
     {
+      icon: <RelojTempIcon />,
+      to: '/dashboard/comingsoon',
+      label: 'Reports'
+    },
+    {
+      icon: <RelojTempIcon />,
+      to: '/dashboard/comingsoon',
+      label: 'Training'
+    },
+    {
+      icon: <RelojTempIcon />,
+      to: '/dashboard/comingsoon',
+      label: 'Tools'
+    },
+    {
+      icon: <RelojTempIcon />,
+      to: '/dashboard/comingsoon',
+      label: 'Recognition'
+    },
+
+    {
       icon: <GenealogyIcon />,
       to: '/dashboard/genealogy',
       label: 'Genealogy'
@@ -40,16 +62,24 @@ export const Drawer = () => {
       icon: <CompensationPlanIcon />,
       to: '/dashboard/compensation-plan',
       label: 'Compensation Plan'
+    },
+    {
+      icon: <RelojTempIcon />,
+      to: '/dashboard/comingsoon',
+      label: 'Profile'
     }
+
   ])
 
   const isCurrentlyPage = (routeLink: string) => {
+    console.log(`${router.pathname} === ${routeLink}: ${router.pathname === routeLink}`)
     return (
       router.pathname === routeLink ||
       router.pathname === `${routeLink}/customers` ||
       router.pathname === `${routeLink}/drivers` ||
       router.pathname === `${routeLink}/restaurants` ||
-      router.pathname === `${routeLink}/ibo`
+      router.pathname === `${routeLink}/ibo` ||
+      router.pathname === `${routeLink}/comingsoon`
     )
   }
 
@@ -65,7 +95,7 @@ export const Drawer = () => {
           {
             routes.map(route => (
               <li
-                className={`w-full relative ${isCurrentlyPage(route.to) && 'linkWrapper__activate'}`}
+                className={`w-full relative ${isCurrentlyPage(route.to) && 'linkWrapper__activate bg-[#19191914]'}`}
                 key={route.label}
               >
                 <Link href={route.to}>
