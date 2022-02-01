@@ -60,7 +60,7 @@ export const LoginForm = () => {
 
       <form className='max-w-xs mt-6' onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label htmlFor='email' className='font-bold text-gray-700'>EMAIL</label>
+          <label htmlFor='email' className='font-bold text-gray-700 text-sm uppercase'>Email</label>
           <input
             {...register('email', loginRulesConfig.email)}
             id='email'
@@ -74,7 +74,10 @@ export const LoginForm = () => {
         </div>
 
         <div>
-          <label htmlFor='password' className='font-bold text-gray-700'>PASSWORD</label>
+          <div className='w-full flex justify-between items-center text-sm'>
+            <label htmlFor='password' className='font-bold text-gray-700 uppercase'>Password</label>
+            <span className='text-textAcent-500 cursor-pointer'>Forgot Password?</span>
+          </div>
 
           <div className='relative'>
             <input
@@ -143,13 +146,13 @@ export const LoginForm = () => {
 
         <section className='mt-8'>
           <div className='w-full flex justify-center items-center space-x-2'>
-            <div className='w-full h-0.5 border-[0.5px]border-solid border-gray-300'></div>
+            <div className='w-full h-0.5 border-[0.5px] border-solid border-gray-200'></div>
 
             <div>
               <span>Or</span>
             </div>
 
-            <div className='w-full h-0.5 border-[0.5px] border-solid border-gray-300'></div>
+            <div className='w-full h-0.5 border-[0.5px] border-solid border-gray-200'></div>
           </div>
 
           <ul className='flex flex-col sm:flex-row justify-between items-center gap-x-2 gap-y-4 mt-8'>

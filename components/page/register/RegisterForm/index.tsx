@@ -59,7 +59,7 @@ export const RegisterForm = () => {
 
       <form className='max-w-xs mt-6' onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label htmlFor='email' className='font-bold text-gray-700 uppercase'>Email</label>
+          <label htmlFor='email' className='font-bold text-gray-700 uppercase text-sm'>Email</label>
           {errors.email && <p className='text-sm text-red-400'>{errors.email.message}</p>}
 
           <input
@@ -74,7 +74,7 @@ export const RegisterForm = () => {
         </div>
 
         <div>
-          <label htmlFor='confirmEmail' className='font-bold text-gray-700 uppercase'>Confirm Email</label>
+          <label htmlFor='confirmEmail' className='font-bold text-gray-700 uppercase text-sm'>Confirm Email</label>
           {errors.confirmPassword && <p className='text-sm text-red-400'>{errors.confirmPassword.message}</p>}
 
           <input
@@ -89,7 +89,7 @@ export const RegisterForm = () => {
         </div>
 
         <div>
-          <label htmlFor='name' className='font-bold text-gray-700 uppercase'>Name</label>
+          <label htmlFor='name' className='font-bold text-gray-700 uppercase text-sm'>Name</label>
           {errors.name && <p className='text-sm text-red-400'>{errors.name.message}</p>}
 
           <input
@@ -103,7 +103,7 @@ export const RegisterForm = () => {
         </div>
 
         <div>
-          <label htmlFor='phone' className='font-bold text-gray-700 uppercase'>Phone Number</label>
+          <label htmlFor='phone' className='font-bold text-gray-700 uppercase text-sm'>Phone Number</label>
           {errors.phone && <p className='text-sm text-red-400'>{errors.phone.message}</p>}
 
           <input
@@ -117,7 +117,7 @@ export const RegisterForm = () => {
         </div>
 
         <div>
-          <label htmlFor='password' className='font-bold text-gray-700 uppercase'>Password</label>
+          <label htmlFor='password' className='font-bold text-gray-700 uppercase text-sm'>Password</label>
           {errors.password && <p className='text-sm text-red-400'>{errors.password.message}</p>}
 
           <div className='relative'>
@@ -140,7 +140,7 @@ export const RegisterForm = () => {
         </div>
 
         <div>
-          <label htmlFor='confirmPassword' className='font-bold text-gray-700 uppercase'>Confirm Password</label>
+          <label htmlFor='confirmPassword' className='font-bold text-gray-700 uppercase text-sm'>Confirm Password</label>
           {errors.confirmEmail && <p className='text-sm text-red-400'>{errors.confirmEmail.message}</p>}
 
           <div className='relative'>
@@ -200,13 +200,13 @@ export const RegisterForm = () => {
 
         <section className='mt-8'>
           <div className='w-full flex justify-center items-center space-x-2'>
-            <div className='w-full h-0.5 border-[0.5px]border-solid border-gray-300'></div>
+            <div className='w-full h-0.5 border-[0.5px] border-solid border-gray-200'></div>
 
             <div>
               <span>Or</span>
             </div>
 
-            <div className='w-full h-0.5 border-[0.5px] border-solid border-gray-300'></div>
+            <div className='w-full h-0.5 border-[0.5px] border-solid border-gray-200'></div>
           </div>
 
           <ul className='w-full flex flex-wrap justify-between items-center gap-x-2 gap-y-4 mt-8'>
