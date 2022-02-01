@@ -44,6 +44,6 @@ deploy:
     - (printenv | grep DEPLOY_FRONT_ | sed -e "s/^DEPLOY_FRONT_//"  ) > .env
     - mkdir -p dist
     - npm install
-    - npm run-script build
+    - npm run build
     - rm -rf /home/gitlab-runner/snap-website-deploy
     - mv /home/gitlab-runner/snap-website-deploy-temp /home/gitlab-runner/snap-website-deploy
