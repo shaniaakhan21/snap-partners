@@ -1,9 +1,14 @@
 import Head from 'next/head'
+import dynamic from 'next/dynamic'
 
 import type { Page, ReactNode } from 'lib/types'
 import { config } from 'config'
 import DashboardLayout from 'layouts/private/Dashboard'
-import { PDFViewer } from 'components/page/dashboard/compensation-plan/PDFViewer'
+
+const PDFViewer = dynamic(async () => {
+  const { PDFViewer } = await import('components/page/dashboard/compensation-plan/PDFViewer')
+  return PDFViewer
+})
 
 const { PAGE_INFO: { SEO } } = config
 
