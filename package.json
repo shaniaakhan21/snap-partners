@@ -1,12 +1,12 @@
 {
-  "name": "snap-web-migration-nextjs",
+  "name": "snap-delivered",
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run build && next export -o dist",
     "start": "next start",
     "lint": "next lint",
-    "export": "npm run build && next export -o _static"
+    "export": "next export -o dist"
   },
   "dependencies": {
     "@tanem/react-nprogress": "4.0.5",

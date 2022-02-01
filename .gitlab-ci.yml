@@ -43,7 +43,6 @@ deploy:
     - git pull
     - (printenv | grep DEPLOY_FRONT_ | sed -e "s/^DEPLOY_FRONT_//"  ) > .env
     - mkdir -p dist
-    - cp -R svg dist/svg
     - npm install
     - npm run-script build
     - rm -rf /home/gitlab-runner/snap-website-deploy
