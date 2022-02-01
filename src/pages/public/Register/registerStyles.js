@@ -37,7 +37,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   loginTitle: {
     styleName: 'typography/h4',
-    fontFamily: 'Roboto, sans-serif',
+    fontFamily: 'Red Hat Display, Roboto, sans-serif',
     fontSize: '34px',
     fontStyle: 'normal',
     fontWeight: '400px',
@@ -50,7 +50,7 @@ export const useStyles = makeStyles((theme) => ({
   linkPassword: {
     textDecoration: 'none',
     // styleName: button;
-    fontFamily: 'Roboto, sans-serif',
+    fontFamily: 'Red Hat Display, Roboto, sans-serif',
     fontSize: '16px',
     fontStyle: 'normal',
     fontWeight: '500px',
@@ -70,7 +70,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   containerRegisterLink: {
     color: 'black',
-    fontFamily: 'Roboto, sans-serif',
+    fontFamily: 'Red Hat Display, Roboto, sans-serif',
     fontSize: '16px',
     fontStyle: 'normal',
     justifyContent: 'center',

@@ -19,7 +19,7 @@ module.exports = {
 		'react'
 	],
 	rules: {
-		indent: ['error', 'tab'],
+		indent: ['warning', 2],
 		'no-tabs': 0
 	}
 }

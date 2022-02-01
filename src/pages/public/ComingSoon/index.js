@@ -65,7 +65,7 @@ export default function Header(props) {
 
   const content = {
     'header': 'Snap Delivered Team Membership Portal',
-    'description': 'Manage your account all from one place. Track Sales, Orders, Analytics and Commissions. Sign up and get started tody!',
+    'description': 'Manage all your accounts from one place. Track Sales, Orders, Analytics and Commissions. Sign up and get started today!',
     'primary-action': 'Login',
     'secondary-action': 'Sign up for free',
     'video': ' ',

@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
 	Btn: {
 		backgroundColor: theme.palette.primary.main,
 		color: theme.palette.text.white
-	}
+	},
 }))
 
 const Table = (props) => {
