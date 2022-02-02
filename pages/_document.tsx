@@ -24,9 +24,9 @@ export default class MyDocument extends Document {
           <meta name='format-detection' content='telephone=no' />
           <meta name='mobile-web-app-capable' content='yes' />
           <meta name='msapplication-config' content='/static/icons/browserconfig.xml' />
-          <meta name='msapplication-TileColor' content='#1e478d' />
+          <meta name='msapplication-TileColor' content='#DD4C37' />
           <meta name='msapplication-tap-highlight' content='no' />
-          <meta name='theme-color' content='#1e478d' />
+          <meta name='theme-color' content='#DD4C37' />
 
           <link rel='apple-touch-icon' href='/static/icons/touch-icon-iphone.png' />
           <link rel='apple-touch-icon' sizes='152x152' href='/static/icons/touch-icon-ipad.png' />
@@ -36,7 +36,7 @@ export default class MyDocument extends Document {
           <link rel='icon' type='image/png' sizes='32x32' href='/static/icons/favicon-32x32.png' />
           <link rel='icon' type='image/png' sizes='16x16' href='/static/icons/favicon-16x16.png' />
           <link rel='manifest' href='/static/manifest.json' />
-          <link rel='mask-icon' href='/static/icons/safari-pinned-tab.svg' color='#1e478d' />
+          <link rel='mask-icon' href='/static/icons/safari-pinned-tab.svg' color='#DD4C37' />
           <link rel='shortcut icon' href='/static/icons/favicon.ico' />
 
           <meta name='twitter:image:alt' content={SEO.TITLE_PAGE} />
