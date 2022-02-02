@@ -1,6 +1,6 @@
 import { MoarOptionsVerticalIcon, SearchIcon } from 'components/common/icons'
 import { useAuthStore, useDrawerStore } from 'lib/stores'
-import { Account } from './Accout'
+import { Account } from './Account'
 
 export const Navbar = () => {
   const { auth, signOut } = useAuthStore()
