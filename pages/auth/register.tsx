@@ -4,9 +4,13 @@ import { config } from 'config'
 import type { Page } from 'lib/types'
 import { RegisterForm } from 'components/page/register/RegisterForm'
 import AuthPagesLayout from 'layouts/public/Auth'
+import { useRouter } from 'next/router'
+import { RegisterWithOutReferral } from 'components/page/register/RegisterWithReferral'
 const { PAGE_INFO: { SEO } } = config
 
 const RegisterPage: Page = () => {
+  const router = useRouter()
+
   return (
     <>
       <Head>
@@ -39,8 +43,17 @@ const RegisterPage: Page = () => {
             </div>
           </section>
 
-          <section className='w-full md:w-1/2 h-full md:min-h-screen bg-white px-4 py-10 flex justify-center items-center'>
-            <RegisterForm />
+          <section className='w-full md:w-1/2 h-screen md:min-h-screen bg-white px-4 py-10 flex justify-center items-center'>
+            {
+              !router.query.referral
+                ? <RegisterWithOutReferral />
+                : <RegisterForm
+                  referralUser={{
+                    referralLink: router.query.referral,
+                    identity: router.query.identity || 'Customer'
+                  }}
+                />
+            }
           </section>
         </div>
       </div>
