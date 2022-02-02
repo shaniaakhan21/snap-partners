@@ -1,6 +1,6 @@
-import { MoarOptionsVerticalIcon, NotificationIcon, SearchIcon } from 'components/common/icons'
+import { MoarOptionsVerticalIcon, SearchIcon } from 'components/common/icons'
 import { useAuthStore, useDrawerStore } from 'lib/stores'
-import { Profile } from './Profile'
+import { Account } from './Accout'
 
 export const Navbar = () => {
   const { auth, signOut } = useAuthStore()
@@ -15,7 +15,7 @@ export const Navbar = () => {
           </div>
 
           <div className='hidden lg:block'>
-            <span className='text-2xl font-bold'>Dashboard</span>
+            <span className='text-2xl font-bold text-gray-700'>Dashboard</span>
           </div>
 
           <div className='w-full flex justify-start items-center'>
@@ -31,23 +31,14 @@ export const Navbar = () => {
           </div>
         </section>
 
-        <section className='w-full h-full flex justify-end items-center gap-x-5'>
-          <div className='relative'>
-            <NotificationIcon classes='w-6 h-6' />
-            <div className='absolute -top-2 -right-4 h-5 w-5 bg-primary-500 rounded-full text-white flex justify-center items-center'>
-              <span>3</span>
-            </div>
-          </div>
-
-          {
-            auth && <Profile
-              name={auth.name}
-              email={auth.email}
-              signOut={signOut}
-              phone={auth.phone}
-            />
-          }
-        </section>
+        {
+          auth && <Account
+            name={auth.name}
+            email={auth.email}
+            signOut={signOut}
+            phone={auth.phone}
+          />
+        }
       </div>
     </header>
   )
