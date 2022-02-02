@@ -34,8 +34,8 @@ export const Account = ({ email, name, phone, signOut }) => {
         </div>
 
         <div className='ml-3 hidden sm:block leading-3'>
-          <span className='text-sm'>User name</span> <br />
-          <span className='whitespace-nowrap font-medium text-gray-700'>Cameron Williamson</span>
+          {/* <span className='text-sm'>User name</span> <br /> */}
+          {/* <span className='whitespace-nowrap font-medium text-gray-700'>Cameron Williamson</span> */}
         </div>
 
         <div className='hidden sm:block' ref={userMenuRef}>
@@ -51,7 +51,7 @@ export const Account = ({ email, name, phone, signOut }) => {
           <ul className='w-full h-full px-2 py-1'>
             <li>
               <button className='w-full h-full hover:bg-gray-100 px-5 py-1 rounded-sm hover:cursor-pointer font-semibold'>
-              Logout
+                Logout
               </button>
             </li>
           </ul>
