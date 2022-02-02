@@ -25,6 +25,7 @@
         "react/react-in-jsx-scope": "off",
         "react/prop-types": "off",
         "indent": ["warn", 2],
-        "no-unused-vars": "warn"
+        "no-unused-vars": "warn",
+        "react/display-name": "off"
     }
 }
