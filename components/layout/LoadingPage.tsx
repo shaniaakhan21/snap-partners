@@ -16,7 +16,7 @@ export const LoadingPage: FC<{ isRouteChanging: boolean }> = ({ isRouteChanging 
         }
 
         .bar {
-          background: #29d;
+          background: #e73d23;
           height: 8px;
           left: 0;
           margin-left: ${(-1 + progress) * 100}%;
@@ -27,22 +27,9 @@ export const LoadingPage: FC<{ isRouteChanging: boolean }> = ({ isRouteChanging 
           z-index: 1031;
           border-radius: 0 1px 1px 0;
         }
-
-        .spinner {
-          box-shadow: 0 0 10px #29d, 0 0 5px #29d;
-          display: block;
-          height: 100%;
-          opacity: 1;
-          position: absolute;
-          right: 0;
-          transform: rotate(3deg) translate(0px, -4px);
-          width: 100px;
-        }
       `}</style>
       <div className='container'>
-        <div className='bar'>
-          {/* <div className='spinner' /> */}
-        </div>
+        <div className='bar'></div>
       </div>
     </>
   )
