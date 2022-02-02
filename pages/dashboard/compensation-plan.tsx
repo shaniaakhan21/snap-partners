@@ -5,10 +5,13 @@ import type { Page, ReactNode } from 'lib/types'
 import { config } from 'config'
 import DashboardLayout from 'layouts/private/Dashboard'
 
-const PDFViewer = dynamic(async () => {
-  const { PDFViewer } = await import('components/page/dashboard/compensation-plan/PDFViewer')
-  return PDFViewer
-})
+const PDFViewer = dynamic(
+  () => import('../../components/page/dashboard/compensation-plan/PDFViewer'),
+  {
+    loading: () => <div>Loading PDF...</div>,
+    ssr: false
+  }
+)
 
 const { PAGE_INFO: { SEO } } = config
 
