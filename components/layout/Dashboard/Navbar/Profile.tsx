@@ -20,9 +20,9 @@ export const Profile = ({ email, name, phone, signOut }) => {
         className='ml-3'
       />
 
-      <div className='ml-3 hidden sm:block'>
-        <span>User name</span> <br />
-        <span className='whitespace-nowrap'>Cameron Williamson</span>
+      <div className='ml-3 hidden sm:block leading-3'>
+        <span className='text-sm'>User name</span> <br />
+        <span className='whitespace-nowrap font-medium text-gray-700'>Cameron Williamson</span>
       </div>
 
       <div ref={userMenuRef}>

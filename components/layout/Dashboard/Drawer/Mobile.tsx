@@ -16,7 +16,7 @@ export const DrawerMobile = ({ isCurrentlyPage }: { isCurrentlyPage: (route: str
         style={{ backdropFilter: 'blur(0.4rem)' }}
         onClick={closeDrawer}
       >
-        <aside className={`dashboardLayout__drawer absolute h-screen lg:hidden ${isOpen ? 'visible opacity-100' : 'invisible opacity-0'}`}>
+        <aside className={`dashboardLayout__drawer scroll-primary absolute h-screen lg:hidden ${isOpen ? 'visible opacity-100 block' : 'invisible opacity-0'}`}>
           <section className='mt-16 pl-10'>
             <h2 className='text-white font-bold text-2xl'>SnapDeliver</h2>
           </section>
