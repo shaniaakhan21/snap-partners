@@ -8,12 +8,12 @@ export const Drawer = () => {
 
   const handleIsCurrentlyPage = (routeLink: string) => { // Should be refactor
     return (
-      router.pathname === routeLink ||
-      router.pathname === `${routeLink}/customers` ||
-      router.pathname === `${routeLink}/drivers` ||
-      router.pathname === `${routeLink}/restaurants` ||
-      router.pathname === `${routeLink}/ibo` ||
-      router.pathname === `${routeLink}/comingsoon`
+      router.asPath === routeLink ||
+      router.asPath === `${routeLink}/customers` ||
+      router.asPath === `${routeLink}/drivers` ||
+      router.asPath === `${routeLink}/restaurants` ||
+      router.asPath === `${routeLink}/ibo` ||
+      router.asPath === `${routeLink}/comingsoon`
     )
   }
 

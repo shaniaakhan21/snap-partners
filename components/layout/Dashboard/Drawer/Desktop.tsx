@@ -4,7 +4,7 @@ import { drawerRoutes } from './routes'
 
 export const DrawerDesktop = ({ isCurrentlyPage }: { isCurrentlyPage: (route: string) => boolean }) => {
   return (
-    <aside className='dashboardLayout__drawer'>
+    <aside className='dashboardLayout__drawer scroll-primary'>
       <section className='mt-16 pl-10'>
         <h2 className='text-white font-bold text-2xl'>SnapDeliver</h2>
       </section>

@@ -19,7 +19,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
       <Navbar />
       <Drawer />
 
-      <main className='dashboardLayout__content'>
+      <main className='dashboardLayout__content scroll-primary'>
         <div className='max-w-5xl mx-auto'>
           {children}
         </div>
