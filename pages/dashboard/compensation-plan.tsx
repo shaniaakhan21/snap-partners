@@ -4,11 +4,17 @@ import dynamic from 'next/dynamic'
 import type { Page, ReactNode } from 'lib/types'
 import { config } from 'config'
 import DashboardLayout from 'layouts/private/Dashboard'
+import { Spinner } from 'components/common/loaders'
 
 const PDFViewer = dynamic(
   () => import('../../components/page/dashboard/compensation-plan/PDFViewer'),
   {
-    loading: () => <div>Loading PDF...</div>,
+    loading: () => (
+      <div className='flex flex-col justify-center items-center'>
+        <Spinner />
+        <span>Loading Compensation Plan...</span>
+      </div>
+    ),
     ssr: false
   }
 )

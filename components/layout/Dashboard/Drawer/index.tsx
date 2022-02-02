@@ -71,7 +71,7 @@ export const Drawer = () => {
 
   ])
 
-  const isCurrentlyPage = (routeLink: string) => {
+  const isCurrentlyPage = (routeLink: string) => { // Should be refactor
     return (
       router.pathname === routeLink ||
       router.pathname === `${routeLink}/customers` ||
