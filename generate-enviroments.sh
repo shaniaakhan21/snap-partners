@@ -51,7 +51,7 @@ server {
     location ~ ^/api/(.+) {
       #access_log  /var/log/nginx/cbx_front_postdata.log  postdata;
       rewrite ^/api(.*)\$ \$1 break;
-      proxy_pass http://localhost:8080;
+      proxy_pass http://localhost:9090;
     }
     location ~* \.(?:manifest|appcache|html?|xml|json)\$ {
       expires -1;
