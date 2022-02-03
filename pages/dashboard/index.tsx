@@ -1,7 +1,7 @@
 import Head from 'next/head'
 
 import type { Page, ReactNode } from 'lib/types'
-import { config } from 'config'
+import { PAGE_INFO } from 'config'
 
 import DashboardLayout from 'layouts/private/Dashboard'
 import {
@@ -22,7 +22,7 @@ import {
   TotalOrders
 } from 'components/page/dashboard/overview'
 
-const { PAGE_INFO: { SEO } } = config
+const { SEO } = PAGE_INFO
 
 const DashboardOverViewPage: Page = () => {
   const data = [

@@ -1,10 +1,10 @@
 import Head from 'next/head'
-import { config } from 'config'
+import { PAGE_INFO } from 'config'
 
 import type { Page } from 'lib/types'
 import { LoginForm } from 'components/page/login/LoginForm'
 import AuthPagesLayout from 'layouts/public/Auth'
-const { PAGE_INFO: { SEO } } = config
+const { SEO } = PAGE_INFO
 
 const LoginPage: Page = () => {
   return (
@@ -33,13 +33,13 @@ const LoginPage: Page = () => {
               </ul>
 
               <div className='absolute bottom-10 left-12 flex items-center gap-x-4'>
-                <img src='/images/logoAuth.png' />
+                <img src='/images/logo-dark.png' />
                 <span className='font-bold text-2xl'>SnapDelivered</span>
               </div>
             </div>
           </section>
 
-          <section className='w-full md:w-1/2 h-screen md:min-h-screen bg-white px-4 flex justify-center items-center'>
+          <section className='w-full md:w-1/2 h-full md:min-h-screen bg-white py-5 px-4 flex justify-center items-center'>
             <LoginForm />
           </section>
         </div>

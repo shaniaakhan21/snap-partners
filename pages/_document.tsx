@@ -1,7 +1,7 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import { config } from 'config'
+import { PAGE_INFO } from 'config'
 
-const { PAGE_INFO: { SEO, RRSS } } = config
+const { SEO, RRSS } = PAGE_INFO
 
 export default class MyDocument extends Document {
   render () {

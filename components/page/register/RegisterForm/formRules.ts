@@ -1,50 +1,6 @@
-interface IFormConfig {
-  email: {
-    required: { value: boolean; message: string }
-    pattern: { value: RegExp; message: string }
-  },
+import { IFormConfig } from './types'
 
-  confirmEmail: {
-    required: { value: boolean; message: string }
-    pattern: { value: RegExp; message: string }
-  },
-
-  name: {
-    required: { value: boolean, message: string },
-    maxLength: { value: number, message: string },
-    minLength: { value: number, message: string }
-    pattern: { value: RegExp; message: string }
-  },
-
-  phone: {
-    required: { value: boolean, message: string },
-    maxLength: { value: number, message: string },
-    minLength: { value: number, message: string },
-    pattern: { value: RegExp, message: string }
-  },
-
-  password: {
-    required: { value: boolean; message: string }
-    maxLength: { value: number; message: string }
-    minLength: { value: number; message: string }
-  },
-
-  confirmPassword: {
-    required: { value: boolean, message: string },
-    maxLength: { value: number, message: string },
-    minLength: { value: number, message: string },
-  },
-
-  rememberMe: {
-    required: { value: boolean, message?: string },
-  },
-
-  termsAndConditions: {
-    required: { value: boolean, message: string },
-  }
-}
-
-export const loginRulesConfig: IFormConfig = {
+export const registerRulesConfig: IFormConfig = {
   email: {
     required: { value: true, message: 'Email Required *' },
     pattern: {
@@ -52,6 +8,22 @@ export const loginRulesConfig: IFormConfig = {
         /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
       message: 'Enter a valid email *'
     }
+  },
+
+  confirmEmail: {
+    required: { value: true, message: 'Email Required *' },
+    pattern: {
+      value:
+        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+      message: 'Enter a valid email *'
+    }
+  },
+
+  name: {
+    required: { value: true, message: 'Name Required *' },
+    maxLength: { value: 50, message: 'Max 50 Characters *' },
+    minLength: { value: 3, message: 'Min 3 Characters *' },
+    pattern: { value: /^[a-zA-ZÀ-ÿ0-9 ()-.]*$/, message: 'Name not allow *' }
   },
 
   phone: {
@@ -61,15 +33,6 @@ export const loginRulesConfig: IFormConfig = {
     pattern: { value: /^[0-9]*$/i, message: 'Only Numbers *' }
   },
 
-  confirmEmail: {
-    required: { value: true, message: 'Email Required *' },
-    pattern: {
-      value:
-        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-      message: 'Enter a valid email *'
-    }
-  },
-
   password: {
     required: { value: true, message: 'Password Required *' },
     maxLength: { value: 50, message: 'Max 50 Characters *' },
@@ -82,11 +45,9 @@ export const loginRulesConfig: IFormConfig = {
     minLength: { value: 3, message: 'Min 3 Characters *' }
   },
 
-  name: {
-    required: { value: true, message: 'Name Required *' },
+  referralCode: {
     maxLength: { value: 50, message: 'Max 50 Characters *' },
-    minLength: { value: 3, message: 'Min 3 Characters *' },
-    pattern: { value: /^[a-zA-ZÀ-ÿ0-9 ()-.]*$/, message: 'Name not allow *' }
+    pattern: { value: /^[a-zA-ZÀ-ÿ0-9 ()-.]*$/, message: 'Referral Code not allow *' }
   },
 
   rememberMe: {

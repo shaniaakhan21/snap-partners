@@ -1,12 +1,13 @@
 import Head from 'next/head'
-import { config } from 'config'
+import { PAGE_INFO } from 'config'
 
 import type { Page } from 'lib/types'
 import { RegisterForm } from 'components/page/register/RegisterForm'
 import AuthPagesLayout from 'layouts/public/Auth'
 import { useRouter } from 'next/router'
 import { RegisterWithOutReferral } from 'components/page/register/RegisterWithReferral'
-const { PAGE_INFO: { SEO } } = config
+
+const { SEO } = PAGE_INFO
 
 const RegisterPage: Page = () => {
   const router = useRouter()
@@ -37,7 +38,7 @@ const RegisterPage: Page = () => {
               </ul>
 
               <div className='absolute bottom-10 left-12 flex items-center gap-x-4'>
-                <img src='/images/logoAuth.png' />
+                <img src='/images/logo-dark.png' />
                 <span className='font-bold text-2xl'>SnapDelivered</span>
               </div>
             </div>
@@ -45,12 +46,12 @@ const RegisterPage: Page = () => {
 
           <section className='w-full md:w-1/2 h-full md:min-h-screen bg-white px-4 py-10 flex justify-center items-center'>
             {
-              !router.query.referral
+              (!router.query.referralCode || !router.query.identity)
                 ? <RegisterWithOutReferral />
                 : <RegisterForm
                   referralUser={{
-                    referralLink: router.query.referral,
-                    identity: router.query.identity || 'Customer'
+                    referralCode: router.query.referralCode,
+                    identity: router.query.identity
                   }}
                 />
             }

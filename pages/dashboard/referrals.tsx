@@ -1,10 +1,10 @@
 import Head from 'next/head'
 
 import type { Page, ReactNode } from 'lib/types'
-import { config } from 'config'
+import { PAGE_INFO } from 'config'
 import DashboardLayout from 'layouts/private/Dashboard'
 
-const { PAGE_INFO: { SEO } } = config
+const { SEO } = PAGE_INFO
 
 const ReferralsPage: Page = () => {
   return (

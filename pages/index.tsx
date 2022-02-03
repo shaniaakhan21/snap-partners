@@ -4,9 +4,9 @@ import { useRouter } from 'next/router'
 
 import type { Page as PageNext } from 'lib/types'
 import { useAuthStore } from 'lib/stores'
-import { config } from 'config'
+import { PAGE_INFO } from 'config'
 
-const { PAGE_INFO: { SEO } } = config
+const { SEO } = PAGE_INFO
 
 const HomePage: PageNext = () => {
   const { auth } = useAuthStore()

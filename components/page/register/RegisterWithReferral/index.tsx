@@ -4,7 +4,7 @@ import { Identify } from './Identify'
 
 export const RegisterWithOutReferral = () => {
   const [referralUser, setReferralUser] = useState({
-    referralLink: null,
+    referralCode: null,
     identity: null
   })
 

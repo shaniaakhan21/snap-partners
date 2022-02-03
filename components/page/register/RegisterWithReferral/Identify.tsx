@@ -6,8 +6,8 @@ export const Identify = ({ handlerIdentify }: { handlerIdentify: (identidy: stri
   const { current: identities } = useRef([
     {
       icon: <IBOIcon classes='w-14 h-14' />,
-      label: 'I’m Partner',
-      key: 'PARTNER'
+      label: 'I’m Customer',
+      key: 'CUSTOMER'
     },
     {
       icon: <RestaurantsIcon classes='w-14 h-14' />,

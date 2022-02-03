@@ -5,7 +5,8 @@ import { drawerRoutes } from './routes'
 export const DrawerDesktop = ({ isCurrentlyPage }: { isCurrentlyPage: (route: string) => boolean }) => {
   return (
     <aside className='dashboardLayout__drawer scroll-primary'>
-      <section className='mt-16 pl-10'>
+      <section className='mt-16 pl-10 flex justify-start items-center gap-x-2'>
+        <img src='/images/logo-dark.png' className='w-7' />
         <h2 className='text-white font-bold text-2xl'>SnapDeliver</h2>
       </section>
 

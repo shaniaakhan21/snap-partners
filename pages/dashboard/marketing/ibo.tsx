@@ -3,13 +3,13 @@ import { useRef } from 'react'
 
 import type { Page, ReactNode } from 'lib/types'
 import { marketingArticles } from 'lib/utils/dataTest'
-import { config } from 'config'
+import { PAGE_INFO } from 'config'
 
 import DashboardLayout from 'layouts/private/Dashboard'
 import { ListArticles } from 'components/page/marketing/Details/ListArtcles'
 import { Article } from 'components/page/marketing/Details/Article'
 
-const { PAGE_INFO: { SEO } } = config
+const { SEO } = PAGE_INFO
 
 const IBOPage: Page = () => {
   const { current: articles } = useRef(marketingArticles)

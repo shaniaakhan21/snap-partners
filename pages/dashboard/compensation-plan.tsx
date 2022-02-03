@@ -2,9 +2,11 @@ import Head from 'next/head'
 import dynamic from 'next/dynamic'
 
 import type { Page, ReactNode } from 'lib/types'
-import { config } from 'config'
 import DashboardLayout from 'layouts/private/Dashboard'
 import { Spinner } from 'components/common/loaders'
+import { PAGE_INFO } from 'config'
+
+const { SEO } = PAGE_INFO
 
 const PDFViewer = dynamic(
   () => import('../../components/page/dashboard/compensation-plan/PDFViewer'),
@@ -18,8 +20,6 @@ const PDFViewer = dynamic(
     ssr: false
   }
 )
-
-const { PAGE_INFO: { SEO } } = config
 
 const CompensationPlanPage: Page = () => {
   return (
