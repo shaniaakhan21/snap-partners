@@ -1,9 +1,7 @@
 import { useRef } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-
 import { useDrawerStore } from 'lib/stores'
-
 import {
   DashboardIcon,
   ReferralLinksIcon,
@@ -58,7 +56,7 @@ export const Drawer = () => {
       {/* Drawer Desktop */}
       <aside className='dashboardLayout__drawer hidden lg:block lg:z-40'>
         <section className='mt-16 pl-10'>
-          <h2 className='text-white font-bold text-2xl'>SnapDeliver</h2>
+          <h2 className='text-white font-bold text-2xl'>SnapDelivered</h2>
         </section>
 
         <ul className='mt-10 text-white'>

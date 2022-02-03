@@ -1,10 +1,16 @@
 import { MoarOptionsVerticalIcon, NotificationIcon, SearchIcon } from 'components/common/icons'
 import { useAuthStore, useDrawerStore } from 'lib/stores'
+import { useSearchModalStore } from 'lib/stores/SearchModal'
 import { Profile } from './Profile'
 
 export const Navbar = () => {
   const { auth, signOut } = useAuthStore()
   const { toggleDrawer } = useDrawerStore()
+  const { referralsIsOpen, setReferralIsOpen } = useSearchModalStore()
+
+  const handleClickButtonSearch = () => {
+    setReferralIsOpen(!referralsIsOpen)
+  }
 
   return (
     <header className='dashboardLayout__navbar h-16'>
@@ -18,7 +24,7 @@ export const Navbar = () => {
             <span className='text-2xl font-bold'>Dashboard</span>
           </div>
 
-          <div className='w-full flex justify-start items-center'>
+          {/* <div className='w-full flex justify-start items-center'>
             <SearchIcon classes='w-5 h-5' />
 
             <input
@@ -28,6 +34,12 @@ export const Navbar = () => {
               placeholder='Search'
               className='py-1 px-2 w-28'
             />
+          </div> */}
+
+          <div className='w-full flex justify-start items-center'>
+            <button onClick={handleClickButtonSearch}>
+              <SearchIcon classes='w-5 h-5' />
+            </button>
           </div>
         </section>
 

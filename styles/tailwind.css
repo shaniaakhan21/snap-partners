@@ -2,5 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import './utils/layouts.css';
-@import './utils/pseudo-elements.css';
+@import "./utils/layouts.css";
+@import "./utils/pseudo-elements.css";
+@import "./utils/input-clear.css";
