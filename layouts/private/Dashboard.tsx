@@ -19,8 +19,10 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
       <Navbar />
       <Drawer />
 
-      <main className='dashboardLayout__content'>
-        {children}
+      <main className='dashboardLayout__content scroll-primary'>
+        <div className='mx-auto' style={{ maxWidth: 1024 }}> {/* the `max-w-5xl` class of tailwind, dont work here D: */}
+          {children}
+        </div>
       </main>
     </div>
   )

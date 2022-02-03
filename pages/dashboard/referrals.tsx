@@ -15,10 +15,10 @@ import { ReferralsUserDetailModal } from 'components/page/referrals/UserDetailMo
 import { Searcher } from 'components/common/Search'
 import { useSearchModalStore } from 'lib/stores/SearchModal'
 import { dataTest } from 'lib/utils/dataEmails'
-import { config } from 'config'
+import { PAGE_INFO } from 'config'
 import type { Page, ReactNode } from 'lib/types'
 
-const { PAGE_INFO: { SEO } } = config
+const { SEO } = PAGE_INFO
 
 const selectInfo = {
   selectDefaultValue: 'name',

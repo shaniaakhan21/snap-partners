@@ -4,9 +4,9 @@ import { useRouter } from 'next/router'
 
 import type { Page as PageNext } from 'lib/types'
 import { useAuthStore } from 'lib/stores'
-import { config } from 'config'
+import { PAGE_INFO } from 'config'
 
-const { PAGE_INFO: { SEO } } = config
+const { SEO } = PAGE_INFO
 
 const HomePage: PageNext = () => {
   const { auth } = useAuthStore()
@@ -22,10 +22,8 @@ const HomePage: PageNext = () => {
         <title>{SEO.TITLE_PAGE}</title>
       </Head>
 
-      <div className='w-full min-h-screen lg:overflow-hidden'>
-        <div className='flex justify-center items-center'>
-          <div className='text-3xl font-black text-primary-500'>Snap Delivered</div>
-        </div>
+      <div className='w-full h-screen flex justify-center items-center'>
+        <div className='text-4xl font-black text-primary-500'>Snap Delivered</div>
       </div>
     </>
   )

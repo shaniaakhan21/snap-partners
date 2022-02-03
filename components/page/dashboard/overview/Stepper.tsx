@@ -2,10 +2,9 @@ import { CheckIcon } from 'components/common/icons'
 
 export const Stepper = ({ data }: { data: any }) => {
   const steppers = [
-    { quantity: 1, label: 'PSMs left' },
-    { quantity: 1, label: 'Orders left' },
-    { quantity: 1, label: 'Legs @250 left' },
-    { quantity: 1, label: 'Legs @2500 left' }
+    { quantity: 0, label: 'PSMs left' },
+    { quantity: 0, label: 'Orders left' },
+    { quantity: 0, label: 'Legs left' }
   ]
 
   return (

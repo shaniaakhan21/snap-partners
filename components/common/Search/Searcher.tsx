@@ -48,7 +48,7 @@ export const Searcher = ({
   }
 
   return (
-    <>
+    <div className='text-xs sm:text-sm lg:text-base'>
       <header className='flex items-center border-b border-gray-300 pb-2'>
         <SearchIcon classes='w-8 h-8' />
         <form className='w-full flex items-center h-10 ml-1'>
@@ -106,6 +106,6 @@ export const Searcher = ({
           </p>
         )}
       </div>
-    </>
+    </div>
   )
 }

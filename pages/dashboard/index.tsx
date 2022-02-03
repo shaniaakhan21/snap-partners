@@ -1,7 +1,7 @@
 import Head from 'next/head'
 
 import type { Page, ReactNode } from 'lib/types'
-import { config } from 'config'
+import { PAGE_INFO } from 'config'
 
 import DashboardLayout from 'layouts/private/Dashboard'
 import {
@@ -22,29 +22,29 @@ import {
   TotalOrders
 } from 'components/page/dashboard/overview'
 
-const { PAGE_INFO: { SEO } } = config
+const { SEO } = PAGE_INFO
 
 const DashboardOverViewPage: Page = () => {
   const data = [
     {
       name: '1a',
-      pv: 2400
+      pv: 0
     },
     {
       name: '6m',
-      pv: 1398
+      pv: 0
     },
     {
       name: '1m',
-      pv: 9800
+      pv: 0
     },
     {
       name: '1s',
-      pv: 3908
+      pv: 0
     },
     {
       name: '1d',
-      pv: 4800
+      pv: 0
     }
   ]
 
@@ -54,7 +54,7 @@ const DashboardOverViewPage: Page = () => {
         <title>{SEO.TITLE_PAGE} - Overview</title>
       </Head>
 
-      <div className='grid grid-cols-1 sm:grid-cols-4 max-w-6xl mx-auto w-full h-fit gap-4'>
+      <div className='grid grid-cols-1 sm:grid-cols-4 w-full h-fit gap-4'>
         <Graphics data={data} />
         <PromotionTracker data={{}} />
       </div>

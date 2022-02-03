@@ -1,24 +1,8 @@
-import { Button } from 'components/common/Button'
+// import { Button } from 'components/common/Button'
 import { StarIcon } from 'components/common/icons'
 
 export const TopOrderLine = ({ data }: { data: any }) => {
-  const topRestaurantsAcquisition = [
-    {
-      imageSrc: '/images/avatarAuth.png',
-      position: '1rst',
-      name: 'Cameron Williamson'
-    },
-    {
-      imageSrc: '/images/avatarAuth.png',
-      position: '2nd',
-      name: 'Cameron Williamson'
-    },
-    {
-      imageSrc: '/images/avatarAuth.png',
-      position: '3rd',
-      name: 'Cameron Williamson'
-    }
-  ]
+  const topRestaurantsAcquisition = []
 
   return (
     <div className='overviewLayout__topOrderline h-full p-4 bg-white rounded-md'>
@@ -35,22 +19,30 @@ export const TopOrderLine = ({ data }: { data: any }) => {
 
       <ul className='border-t border-gray-300 w-full pt-2'>
         {
-          topRestaurantsAcquisition.map((restaurant, idx) => (
-            <li key={idx} className='w-full flex justify-start items-center py-2 gap-x-2'>
-              <img src={restaurant.imageSrc} className='w-10 h-10' />
+          topRestaurantsAcquisition.length === 0
+            ? (
+              <li className='w-full flex justify-start items-center py-2 gap-x-2'>
+                <div>
+                  <span className='text-gray-400 font-bold'>Empty</span>
+                </div>
+              </li>
+            )
+            : topRestaurantsAcquisition.map((restaurant, idx) => (
+              <li key={idx} className='w-full flex justify-start items-center py-2 gap-x-2'>
+                <img src={restaurant.imageSrc} className='w-10 h-10' />
 
-              <div>
-                <span className='text-gray-400'>{restaurant.position}</span> <br />
-                <span className='text-gray-800 font-bold'>{restaurant.name}</span>
-              </div>
-            </li>
-          ))
+                <div>
+                  <span className='text-gray-400'>{restaurant.position}</span> <br />
+                  <span className='text-gray-800 font-bold'>{restaurant.name}</span>
+                </div>
+              </li>
+            ))
         }
       </ul>
 
-      <section className='text-center mt-4'>
+      {/* <section className='text-center mt-4'>
         <Button>BUTTON</Button>
-      </section>
+      </section> */}
     </div>
   )
 }

@@ -21,12 +21,12 @@
 }
 
 .dashboardLayout__drawer {
-  @apply sticky top-0 left-0 bg-primary-500 z-20 w-[225px] lg:w-full;
+  @apply sticky top-0 left-0 bg-primary-500 z-20 w-[225px] lg:w-full overflow-y-scroll hidden lg:block lg:z-40;
   grid-area: drawer;
 }
 
 .dashboardLayout__content {
-  @apply px-4 py-6 font-body overflow-scroll;
+  @apply px-4 py-6 font-body overflow-y-scroll;
   grid-area: content;
   background-color: #ECECEC;
 }
