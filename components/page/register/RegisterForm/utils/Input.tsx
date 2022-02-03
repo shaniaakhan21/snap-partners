@@ -13,10 +13,10 @@ interface IInputFormProps {
   register: UseFormRegister<IDataForm>,
   errors: any,
   rulesForm: FieldErrors,
-  defaultValue?: string | number | null
+  defaultValue?: string | string[] | number | null
 }
 
-export const InputForm = ({ id, name, label, autoComplete, type, classes, placeholder, register, registerId, errors, rulesForm }: IInputFormProps) => {
+export const InputForm = ({ id, name, label, autoComplete, type, classes, placeholder, defaultValue, register, registerId, errors, rulesForm }: IInputFormProps) => {
   return (
     <div>
       <label htmlFor={id} className='font-bold text-gray-700 uppercase text-sm'>{label}</label>
@@ -30,6 +30,7 @@ export const InputForm = ({ id, name, label, autoComplete, type, classes, placeh
         autoComplete={autoComplete}
         className={`w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out ${classes}`}
         placeholder={placeholder}
+        defaultValue={defaultValue}
       />
     </div>
   )

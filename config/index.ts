@@ -1,3 +1,3 @@
 export { HTTP } from './http'
-export { IDENTITIES } from './identities'
+export { ROLES } from './roles'
 export { PAGE_INFO } from './pageInfo'

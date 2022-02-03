@@ -2,7 +2,7 @@ import { IBOIcon, DriverIcon, RestaurantsIcon, ArrowRightIcon } from 'components
 import Link from 'next/link'
 import { useRef } from 'react'
 
-export const Identify = ({ handlerIdentify }: { handlerIdentify: (identidy: string) => void }) => {
+export const Identify = ({ handlerIdentify }: { handlerIdentify: (role: string) => void }) => {
   const { current: identities } = useRef([
     {
       icon: <IBOIcon classes='w-14 h-14' />,

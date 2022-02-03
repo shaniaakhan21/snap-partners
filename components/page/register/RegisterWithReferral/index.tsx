@@ -1,27 +1,23 @@
 import { useState } from 'react'
-import { RegisterForm } from '../RegisterForm'
 import { Identify } from './Identify'
+import { RegisterCustomerForm, RegisterRestaurantForm, RegisterDriverForm } from '../RegisterForm'
 
 export const RegisterWithOutReferral = () => {
   const [referralUser, setReferralUser] = useState({
     referralCode: null,
-    identity: null
+    role: null
   })
 
   const handlerIdentify = (identityKey: string) => {
     setReferralUser(prevState => ({
       ...prevState,
-      identity: identityKey
+      role: identityKey
     }))
   }
 
-  return (
-    <>
-      {
-        !referralUser.identity
-          ? <Identify handlerIdentify={handlerIdentify} />
-          : <RegisterForm referralUser={referralUser} />
-      }
-    </>
-  )
+  if (!referralUser.role) return <Identify handlerIdentify={handlerIdentify} />
+  if (referralUser.role === 'CUSTOMER') return <RegisterCustomerForm />
+  if (referralUser.role === 'RESTAURANT') return <RegisterRestaurantForm />
+  if (referralUser.role === 'DRIVER') return <RegisterDriverForm />
+  return <Identify handlerIdentify={handlerIdentify} />
 }

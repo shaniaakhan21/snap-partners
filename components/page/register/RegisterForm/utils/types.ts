@@ -12,7 +12,7 @@ export interface IDataForm {
 
 export interface IRegisterFromProps {
   referralCode: string | string[]
-  identity: string | string[] | null
+  role: string | null
 }
 
 export type registerFormIds = 'referralCode' | 'email' | 'name' | 'phone' | 'confirmEmail' | 'password' | 'confirmPassword' | 'rememberMe' | 'termsAndConditions'

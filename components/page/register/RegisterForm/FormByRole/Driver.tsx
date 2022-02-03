@@ -3,18 +3,18 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 import { Button } from 'components/common/Button'
-import { registerRulesConfig } from './formRules'
+import { registerRulesConfig } from '../utils/formRules'
 import { useAuthStore } from 'lib/stores'
 import { toast } from 'react-toastify'
 import { Spinner } from 'components/common/loaders'
 import { fakeLogin } from 'lib/utils/fakeLogin'
-import { InputForm } from './Input'
-import { IDataForm, IRegisterFromProps } from './types'
-import { RegisterPassword } from './RegisterPassword'
-import { TermsAndConditions } from './TermsAndConditions'
-import { RRSSAuth } from './RRSSAuth'
+import { InputForm } from '../utils/Input'
+import { IDataForm, IRegisterFromProps } from '../utils/types'
+import { RegisterPassword } from '../utils/RegisterPassword'
+import { TermsAndConditions } from '../utils/TermsAndConditions'
+import { RRSSAuth } from '../utils/RRSSAuth'
 
-export const RegisterForm = ({ referralUser }: { referralUser?: IRegisterFromProps }) => {
+export const RegisterDriverForm = ({ referralUser }: { referralUser: IRegisterFromProps }) => {
   const { createAccout } = useAuthStore()
   const [isLoading, setLoading] = useState(false)
   const { handleSubmit, register, reset, formState: { errors } } = useForm<IDataForm>()
@@ -48,7 +48,7 @@ export const RegisterForm = ({ referralUser }: { referralUser?: IRegisterFromPro
   return (
     <div>
       <span className='font-bold text-4xl text-[#18203F]'>Sign up!</span>
-      <p>As {referralUser?.identity}</p>
+      <p>As {referralUser?.role}</p>
       <p className='text-gray-500'>Welcome! register to continue.</p>
 
       <form className='max-w-xs mt-6' onSubmit={handleSubmit(onSubmit)}>
