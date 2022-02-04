@@ -35,7 +35,7 @@ SignUpPage.getLayout = (page) => (
   </>
 )
 
-export const getStaticProps: GetStaticProps = (ctx) => {
+export const getStaticProps: GetStaticProps = async (ctx) => {
   return {
     props: {
       params: ctx.params
