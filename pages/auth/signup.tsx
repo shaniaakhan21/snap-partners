@@ -1,6 +1,7 @@
 import Head from 'next/head'
+import { GetStaticProps } from 'next'
 
-import type { Page } from 'lib/types'
+// import type { Page } from 'lib/types'
 import { useHandlerReferralLink } from 'lib/hooks/useHandlerReferralLink'
 import { AuthPagesLayout } from 'layouts/public/Auth'
 import { PAGE_INFO } from 'config'
@@ -10,10 +11,11 @@ import { SelectRoleToSignUp } from 'components/page/signup/SelectRoleToSignUp'
 
 const { SEO } = PAGE_INFO
 
-const SignUpPage: Page = () => {
+const SignUpPage = ({ params }) => {
   const { referralCode: code, referralRole: role } = useHandlerReferralLink()
 
   console.log('SignUpPage review referralCode', code)
+  console.log('SignUpPage getStaticProps params', params)
 
   if (role === 'CUSTOMER') return <SignUpCustomerForm referralLink={{ code, role }} />
   if (role === 'DRIVER') return <SignUpDriverForm referralLink={{ code, role }} />
@@ -32,5 +34,13 @@ SignUpPage.getLayout = (page) => (
     </AuthPagesLayout>
   </>
 )
+
+export const getStaticProps: GetStaticProps = (ctx) => {
+  return {
+    props: {
+      params: ctx.params
+    }
+  }
+}
 
 export default SignUpPage
