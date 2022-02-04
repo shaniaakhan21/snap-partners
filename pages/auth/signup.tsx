@@ -13,6 +13,8 @@ const { SEO } = PAGE_INFO
 const SignUpPage: Page = () => {
   const { referralCode: code, referralRole: role } = useHandlerReferralLink()
 
+  console.log('SignUpPage review referralCode', code)
+
   if (role === 'CUSTOMER') return <SignUpCustomerForm referralLink={{ code, role }} />
   if (role === 'DRIVER') return <SignUpDriverForm referralLink={{ code, role }} />
 
