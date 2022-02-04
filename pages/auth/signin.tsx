@@ -3,7 +3,7 @@ import { PAGE_INFO } from 'config'
 
 import type { Page } from 'lib/types'
 
-import { LoginForm } from 'components/page/signin/SignInForm'
+import { SignInForm } from 'components/page/signin/SignInForm'
 
 const { SEO } = PAGE_INFO
 
@@ -41,7 +41,7 @@ const SignInPage: Page = () => {
           </section>
 
           <section className='w-full md:w-1/2 h-full md:min-h-screen bg-white px-4 py-10 flex justify-center items-center'>
-            <LoginForm/>
+            <SignInForm/>
           </section>
         </div>
       </div>

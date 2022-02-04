@@ -11,7 +11,7 @@ interface IFormConfig {
   }
 }
 
-export const signinRulesConfig: IFormConfig = {
+export const signInRulesConfig: IFormConfig = {
   password: {
     required: { value: true, message: 'Password Required *' },
     maxLength: { value: 50, message: 'Max 50 Characters *' },
