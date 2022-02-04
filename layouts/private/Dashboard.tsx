@@ -1,18 +1,18 @@
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+// import { useRouter } from 'next/router'
+// import { useEffect } from 'react'
 
-import { useAuthStore } from 'lib/stores'
+// import { useAuthStore } from 'lib/stores'
 import type { NextPage, ReactNode } from 'lib/types'
 
 import { Drawer, Navbar } from 'components/layout/Dashboard'
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
-  const router = useRouter()
-  const { auth } = useAuthStore()
+  // const router = useRouter()
+  // const { auth } = useAuthStore()
 
-  useEffect(() => {
-    !auth && router.push('/auth/signin')
-  }, [auth])
+  // useEffect(() => {
+  //   !auth && router.push('/auth/signin')
+  // }, [auth])
 
   return (
     <div className='dashboardLayout'>

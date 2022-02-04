@@ -1,20 +1,20 @@
 import Head from 'next/head'
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
+// import { useEffect } from 'react'
+// import { useRouter } from 'next/router'
 
 import type { Page as PageNext } from 'lib/types'
-import { useAuthStore } from 'lib/stores'
+// import { useAuthStore } from 'lib/stores'
 import { PAGE_INFO } from 'config'
 
 const { SEO } = PAGE_INFO
 
 const HomePage: PageNext = () => {
-  const { auth } = useAuthStore()
-  const router = useRouter()
+  // const { auth } = useAuthStore()
+  // const router = useRouter()
 
-  useEffect(() => {
-    !auth && router.push('/auth/signin')
-  }, [auth])
+  // useEffect(() => {
+  //   !auth && router.push('/auth/signin')
+  // }, [auth])
 
   return (
     <>
