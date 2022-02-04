@@ -1,19 +1,19 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-
-import { Button } from 'components/common/Button'
-import { registerRulesConfig } from './utils/formRules'
-import { useAuthStore } from 'lib/stores'
 import { toast } from 'react-toastify'
-import { Spinner } from 'components/common/loaders'
+
+import { useAuthStore } from 'lib/stores'
+import { IReferralLink } from 'lib/types'
 import { fakeLogin } from 'lib/utils/fakeLogin'
+import { Button } from 'components/common/Button'
+import { Spinner } from 'components/common/loaders'
 import { InputForm } from './utils/Input'
 import { IDataForm } from './utils/types'
+import { RRSSAuth } from './utils/RRSSAuth'
+import { registerRulesConfig } from './utils/formRules'
 import { RegisterPassword } from './utils/RegisterPassword'
 import { TermsAndConditions } from './utils/TermsAndConditions'
-import { RRSSAuth } from './utils/RRSSAuth'
-import { IReferralLink } from 'lib/types'
 
 export const SignUpCustomerForm = ({ referralLink }: { referralLink: IReferralLink }) => {
   const { createAccout } = useAuthStore()
