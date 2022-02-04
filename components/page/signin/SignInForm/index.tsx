@@ -2,11 +2,9 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
-// import ReCAPTCHA from 'react-google-recaptcha'
 
 import { useAuthStore } from 'lib/stores'
 import { fakeLogin } from 'lib/utils/fakeLogin'
-// import { useReCaptcha } from 'lib/hooks/useReCaptcha'
 
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
@@ -20,13 +18,10 @@ import { RememberAndPolicy } from './utils/RememberAndPolicy'
 export const SignInForm = () => {
   const { signIn } = useAuthStore()
   const [isLoading, setLoading] = useState(false)
-  // const { captchaRef, isValid, onChangeCaptcha } = useReCaptcha()
   const { handleSubmit, register, reset, formState: { errors } } = useForm<IDataForm>()
 
   const onSubmit = async (dataForm: IDataForm) => {
     setLoading(true)
-
-    // console.log('SignInForm recaptcha isValid', isValid)
 
     setTimeout(async () => { // Simulate latency
       const { data, error } = await fakeLogin()
@@ -81,14 +76,6 @@ export const SignInForm = () => {
         <RememberAndPolicy
           register={register}
         />
-
-        {/* <section className='mt-4'>
-          <ReCAPTCHA
-            ref={captchaRef}
-            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_V2}
-            onChange={onChangeCaptcha}
-          />
-        </section> */}
 
         <section className='mt-4 text-center sm:text-left'>
           <Button type='submit' classes='w-full mr-1 text-sm bg-primary-500'>
