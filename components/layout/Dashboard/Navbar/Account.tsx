@@ -50,7 +50,7 @@ export const Account = ({ email, name, phone, signOut }) => {
         >
           <ul className='w-full h-full px-2 py-1'>
             <li>
-              <button className='w-full h-full hover:bg-gray-100 px-5 py-1 rounded-sm hover:cursor-pointer font-semibold'>
+              <button onClick={signOut} className='w-full h-full hover:bg-gray-100 px-5 py-1 rounded-sm hover:cursor-pointer font-semibold'>
                 Logout
               </button>
             </li>

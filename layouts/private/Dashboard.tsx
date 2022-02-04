@@ -11,7 +11,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const { auth } = useAuthStore()
 
   useEffect(() => {
-    !auth && router.push('/auth/login')
+    !auth && router.push('/auth/signin')
   }, [auth])
 
   return (

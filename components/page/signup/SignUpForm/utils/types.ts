@@ -10,9 +10,9 @@ export interface IDataForm {
   termsAndConditions: boolean
 }
 
-export interface IRegisterFromProps {
-  referralCode: string | string[]
-  role: string | null
+export interface IRegisterFormProps {
+  code?: string
+  role: string
 }
 
 export type registerFormIds = 'referralCode' | 'email' | 'name' | 'phone' | 'confirmEmail' | 'password' | 'confirmPassword' | 'rememberMe' | 'termsAndConditions'

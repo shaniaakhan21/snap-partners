@@ -9,12 +9,13 @@ import { toast } from 'react-toastify'
 import { Spinner } from 'components/common/loaders'
 import { fakeLogin } from 'lib/utils/fakeLogin'
 import { InputForm } from '../utils/Input'
-import { IDataForm, IRegisterFromProps } from '../utils/types'
+import { IDataForm } from '../utils/types'
 import { RegisterPassword } from '../utils/RegisterPassword'
 import { TermsAndConditions } from '../utils/TermsAndConditions'
 import { RRSSAuth } from '../utils/RRSSAuth'
+import { IReferralLink } from 'lib/types'
 
-export const RegisterCustomerForm = ({ referralUser }: { referralUser: IRegisterFromProps }) => {
+export const SignUpDriverForm = ({ referralLink }: { referralLink: IReferralLink }) => {
   const { createAccout } = useAuthStore()
   const [isLoading, setLoading] = useState(false)
   const { handleSubmit, register, reset, formState: { errors } } = useForm<IDataForm>()
@@ -30,7 +31,7 @@ export const RegisterCustomerForm = ({ referralUser }: { referralUser: IRegister
     }
 
     toast('¡Sign In Successful!', { type: 'success' })
-    console.log('registerForm onSubmit referralUser', referralUser)
+    console.log('SignUpDriverForm onSubmit referralLink', referralLink)
     createAccout({
       email: data.email,
       name: data.name,
@@ -48,7 +49,7 @@ export const RegisterCustomerForm = ({ referralUser }: { referralUser: IRegister
   return (
     <div>
       <span className='font-bold text-4xl text-[#18203F]'>Sign up!</span>
-      <p>As {referralUser?.role}</p>
+      <p>As {referralLink?.role}</p>
       <p className='text-gray-500'>Welcome! register to continue.</p>
 
       <form className='max-w-xs mt-6' onSubmit={handleSubmit(onSubmit)}>
@@ -69,7 +70,7 @@ export const RegisterCustomerForm = ({ referralUser }: { referralUser: IRegister
           id='confirmEmail'
           name='confirmEmail'
           type='email'
-          label='confirmEmail'
+          label='Confirm Email'
           registerId='confirmEmail'
           placeholder='Confirm Email'
           autoComplete='email'
@@ -116,7 +117,7 @@ export const RegisterCustomerForm = ({ referralUser }: { referralUser: IRegister
           label='Referral Code'
           registerId='referralCode'
           placeholder='Referral Code'
-          defaultValue={referralUser.role}
+          defaultValue={referralLink.code}
           errors={errors.referralCode}
           register={register}
           rulesForm={registerRulesConfig.referralCode}
@@ -137,8 +138,8 @@ export const RegisterCustomerForm = ({ referralUser }: { referralUser: IRegister
 
           <p>
             <span className='font-semibold'>Already have an accout?</span>
-            <Link href='/auth/login'>
-              <a className='text-textAcent-500'> Register.</a>
+            <Link href='/auth/signin'>
+              <a className='text-textAcent-500'> Log In.</a>
             </Link>
           </p>
         </section>

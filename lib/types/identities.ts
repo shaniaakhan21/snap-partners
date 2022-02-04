@@ -1,5 +1,0 @@
-export interface IRoles {
-  CUSTOMER: 'CUSTOMER',
-  RESTAURANT: 'RESTAURANT',
-  DRIVER: 'DRIVER'
-}

@@ -138,7 +138,7 @@ export const LoginForm = () => {
 
           <p>
             <span className='font-semibold'>Don’t have an account?</span>
-            <Link href='/auth/register'>
+            <Link href='/auth/signup'>
               <a className='text-textAcent-500'> Sign Up.</a>
             </Link>
           </p>

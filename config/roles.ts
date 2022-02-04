@@ -1,6 +1,6 @@
-import { IRoles } from 'lib/types/identities'
+import { IRolesConfig } from 'lib/types/roles'
 
-export const ROLES: IRoles = {
+export const ROLES: IRolesConfig = {
   CUSTOMER: 'CUSTOMER',
   RESTAURANT: 'RESTAURANT',
   DRIVER: 'DRIVER'

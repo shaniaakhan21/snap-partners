@@ -1,9 +1,8 @@
 import { useAuthStore } from 'lib/stores'
-import type { NextPage, ReactNode } from 'lib/types'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-const AuthPagesLayout = ({ children }: { children: ReactNode }) => {
+export const AuthPagesLayout = ({ children }) => {
   const router = useRouter()
   const { auth } = useAuthStore()
 
@@ -45,6 +44,3 @@ const AuthPagesLayout = ({ children }: { children: ReactNode }) => {
     </div>
   )
 }
-
-export const getLayout = (page: NextPage) => <AuthPagesLayout>{page}</AuthPagesLayout>
-export default AuthPagesLayout

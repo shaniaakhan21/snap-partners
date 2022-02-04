@@ -13,7 +13,7 @@ const HomePage: PageNext = () => {
   const router = useRouter()
 
   useEffect(() => {
-    !auth && router.push('/auth/login')
+    !auth && router.push('/auth/signin')
   }, [auth])
 
   return (

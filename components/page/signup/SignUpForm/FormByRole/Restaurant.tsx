@@ -9,12 +9,13 @@ import { toast } from 'react-toastify'
 import { Spinner } from 'components/common/loaders'
 import { fakeLogin } from 'lib/utils/fakeLogin'
 import { InputForm } from '../utils/Input'
-import { IDataForm, IRegisterFromProps } from '../utils/types'
+import { IDataForm } from '../utils/types'
 import { RegisterPassword } from '../utils/RegisterPassword'
 import { TermsAndConditions } from '../utils/TermsAndConditions'
 import { RRSSAuth } from '../utils/RRSSAuth'
+import { IReferralLink } from 'lib/types'
 
-export const RegisterDriverForm = ({ referralUser }: { referralUser: IRegisterFromProps }) => {
+export const SignUpRestaurantForm = ({ referralLink }: { referralLink: IReferralLink }) => {
   const { createAccout } = useAuthStore()
   const [isLoading, setLoading] = useState(false)
   const { handleSubmit, register, reset, formState: { errors } } = useForm<IDataForm>()
@@ -30,7 +31,7 @@ export const RegisterDriverForm = ({ referralUser }: { referralUser: IRegisterFr
     }
 
     toast('¡Sign In Successful!', { type: 'success' })
-    console.log('registerForm onSubmit referralUser', referralUser)
+    console.log('SignUpRestaurantForm onSubmit referralLink', referralLink)
     createAccout({
       email: data.email,
       name: data.name,
@@ -48,7 +49,7 @@ export const RegisterDriverForm = ({ referralUser }: { referralUser: IRegisterFr
   return (
     <div>
       <span className='font-bold text-4xl text-[#18203F]'>Sign up!</span>
-      <p>As {referralUser?.role}</p>
+      <p>As {referralLink?.role}</p>
       <p className='text-gray-500'>Welcome! register to continue.</p>
 
       <form className='max-w-xs mt-6' onSubmit={handleSubmit(onSubmit)}>
@@ -69,7 +70,7 @@ export const RegisterDriverForm = ({ referralUser }: { referralUser: IRegisterFr
           id='confirmEmail'
           name='confirmEmail'
           type='email'
-          label='confirmEmail'
+          label='Confirm Email'
           registerId='confirmEmail'
           placeholder='Confirm Email'
           autoComplete='email'
@@ -82,9 +83,9 @@ export const RegisterDriverForm = ({ referralUser }: { referralUser: IRegisterFr
           id='name'
           name='name'
           type='text'
-          label='Name'
+          label='Restaurant Name'
           registerId='name'
-          placeholder='Enter Name'
+          placeholder='Enter Restaurant Name'
           errors={errors.name}
           register={register}
           rulesForm={registerRulesConfig.name}
@@ -94,9 +95,9 @@ export const RegisterDriverForm = ({ referralUser }: { referralUser: IRegisterFr
           id='phone'
           name='phone'
           type='tel'
-          label='Phone Number'
+          label='Restaurant Phone Number'
           registerId='phone'
-          placeholder='+34 0000 0000 '
+          placeholder='ex +34 0000 0000'
           errors={errors.phone}
           register={register}
           rulesForm={registerRulesConfig.phone}
@@ -136,8 +137,8 @@ export const RegisterDriverForm = ({ referralUser }: { referralUser: IRegisterFr
 
           <p>
             <span className='font-semibold'>Already have an accout?</span>
-            <Link href='/auth/login'>
-              <a className='text-textAcent-500'> Register.</a>
+            <Link href='/auth/signin'>
+              <a className='text-textAcent-500'> Log In.</a>
             </Link>
           </p>
         </section>
