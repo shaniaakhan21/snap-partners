@@ -20,3 +20,7 @@ export type Page<P = {}> = NextPage<P> & {
   getLayout?: (page: ReactNode) => ReactNode
   layout?: ComponentType
 }
+
+declare global {
+  interface Window { dataLayer?: object[]; }
+}
