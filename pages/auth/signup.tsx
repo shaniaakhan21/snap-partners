@@ -16,7 +16,7 @@ const SignUpPage: Page = () => {
   if (role === 'CUSTOMER') return <SignUpCustomerForm referralLink={{ code, role }} />
   if (role === 'DRIVER') return <SignUpDriverForm referralLink={{ code, role }} />
 
-  return <SelectRoleToSignUp referralLink={{ code, role }} />
+  return <SelectRoleToSignUp />
 }
 
 SignUpPage.getLayout = (page) => (
