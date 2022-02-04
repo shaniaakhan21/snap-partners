@@ -1,25 +1,35 @@
 import Head from 'next/head'
-import { GetStaticProps } from 'next'
 
-// import type { Page } from 'lib/types'
-import { useHandlerReferralLink } from 'lib/hooks/useHandlerReferralLink'
+import type { Page } from 'lib/types'
 import { AuthPagesLayout } from 'layouts/public/Auth'
 import { PAGE_INFO } from 'config'
 
-// import { SignUpCustomerForm, SignUpDriverForm } from 'components/page/signup/SignUpForm'
+import { SignUpCustomerForm, SignUpDriverForm } from 'components/page/signup/SignUpForm'
 import { SelectRoleToSignUp } from 'components/page/signup/SelectRoleToSignUp'
+import { useRouter } from 'next/router'
 
 const { SEO } = PAGE_INFO
 
-const SignUpPage = ({ ctx }) => {
-  const { referralCode: code, referralRole: role } = useHandlerReferralLink()
+const SignUpPage: Page = () => {
+  const router = useRouter()
 
-  console.log('SignUpPage referral code and role', code, role)
-  console.log('SignUpPage referral code and role', code, role)
-  console.log('SignUpPage getStaticProps ctx', ctx)
-
-  // if (role === 'CUSTOMER') return <SignUpCustomerForm referralLink={{ code, role }} />
-  // if (role === 'DRIVER') return <SignUpDriverForm referralLink={{ code, role }} />
+  if (router.query.referralRole === 'CUSTOMER') {
+    return (
+      <SignUpCustomerForm
+        referralLink={{
+          code: router.query.referralCode as string,
+          role: router.query.referralRole as 'CUSTOMER' | 'DRIVER'
+        }}
+      />)
+  }
+  if (router.query.referralRole === 'DRIVER') {
+    return <SignUpDriverForm
+      referralLink={{
+        code: router.query.referralCode as string,
+        role: router.query.referralRole as 'CUSTOMER' | 'DRIVER'
+      }}
+    />
+  }
 
   return <SelectRoleToSignUp />
 }
@@ -35,18 +45,5 @@ SignUpPage.getLayout = (page) => (
     </AuthPagesLayout>
   </>
 )
-
-export const getStaticProps: GetStaticProps = async ({ defaultLocale, locale, locales, params, preview, previewData }) => {
-  return {
-    props: {
-      defaultLocale: defaultLocale || null,
-      locale: locale || null,
-      locales: locales || null,
-      params: params || null,
-      preview: preview || null,
-      previewData: previewData || null
-    }
-  }
-}
 
 export default SignUpPage
