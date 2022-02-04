@@ -2,11 +2,12 @@ import { useAuthStore } from 'lib/stores'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
-export const AuthPagesLayout = ({ children }) => {
+export const AuthPagesLayout = ({ children }) => { // Use in SignIn Page
   const router = useRouter()
   const { auth } = useAuthStore()
 
   useEffect(() => {
+    console.log('epale auth', auth)
     auth && router.push('/dashboard')
   }, [auth])
 

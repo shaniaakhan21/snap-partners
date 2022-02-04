@@ -1,13 +1,22 @@
+import { useRouter } from 'next/router'
+import { useEffect } from 'react'
 import Head from 'next/head'
+
+import { useAuthStore } from 'lib/stores'
+import type { Page } from 'lib/types'
 import { PAGE_INFO } from 'config'
 
-import type { Page } from 'lib/types'
-
 import { SignInForm } from 'components/page/signin/SignInForm'
-
 const { SEO } = PAGE_INFO
 
 const SignInPage: Page = () => {
+  const router = useRouter()
+  const { auth } = useAuthStore()
+
+  useEffect(() => {
+    auth && router.push('/dashboard')
+  }, [auth])
+
   return (
     <>
       <Head>
