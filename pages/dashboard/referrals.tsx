@@ -17,6 +17,7 @@ import { useSearchModalStore } from 'lib/stores/SearchModal'
 import { dataTest } from 'lib/utils/dataEmails'
 import { PAGE_INFO } from 'config'
 import type { Page, ReactNode } from 'lib/types'
+import { Spinner } from 'components/common/loaders'
 
 const { SEO } = PAGE_INFO
 
@@ -41,6 +42,12 @@ const selectInfo = {
     }
   ]
 }
+
+const headComponent = (
+  <Head>
+    <title>{SEO.TITLE_PAGE} - Referrals</title>
+  </Head>
+)
 
 const ReferralsPage: Page = () => {
   const { referralsIsOpen, setReferralIsOpen } = useSearchModalStore()
@@ -142,13 +149,21 @@ const ReferralsPage: Page = () => {
     !data.emailNotificationsArray ||
     !data.emailNotificationsUserData ||
     !data.usersArray
-  ) return <h1>Loading</h1>
+  ) {
+    return (
+      <>
+        {headComponent}
+
+        <div className='w-full h-full flex items-center justify-center'>
+          <Spinner />
+        </div>
+      </>
+    )
+  }
 
   return (
     <>
-      <Head>
-        <title>{SEO.TITLE_PAGE} - Referrals</title>
-      </Head>
+      {headComponent}
 
       <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-center justify-center justify-items-center gap-4'>
         <ReferralCards

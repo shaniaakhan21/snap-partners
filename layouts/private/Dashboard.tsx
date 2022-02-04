@@ -20,7 +20,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
       <Drawer />
 
       <main className='dashboardLayout__content scroll-primary'>
-        <div className='mx-auto' style={{ maxWidth: 1024 }}> {/* the `max-w-5xl` class of tailwind, dont work here D: */}
+        <div className='mx-auto h-full' style={{ maxWidth: 1024 }}> {/* the `max-w-5xl` class of tailwind, dont work here D: */}
           {children}
         </div>
       </main>
