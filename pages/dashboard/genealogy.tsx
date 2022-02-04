@@ -14,7 +14,7 @@ const GenealogyPage: Page = () => {
       </Head>
 
       <div className='grid place-content-center text-center font-black text-5xl'>
-      Genealogy
+        Genealogy
       </div>
     </>
   )

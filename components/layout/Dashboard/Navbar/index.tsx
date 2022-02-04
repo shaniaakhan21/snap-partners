@@ -1,14 +1,25 @@
+import { useRouter } from 'next/router'
 import { MoarOptionsVerticalIcon, SearchIcon } from 'components/common/icons'
 import { Account } from './Account'
 import { useAuthStore, useDrawerStore, useSearchModalStore } from 'lib/stores'
+
+const pathnamesToSearch = {
+  dashboard: '/dashboard',
+  referrals: '/dashboard/referrals',
+  marketing: '/dashboard/marketing',
+  genealogy: '/dashboard/genealogy'
+}
 
 export const Navbar = () => {
   const { auth, signOut } = useAuthStore()
   const { toggleDrawer } = useDrawerStore()
   const { referralsIsOpen, setReferralIsOpen } = useSearchModalStore()
+  const router = useRouter()
 
   const handleClickButtonSearch = () => {
-    setReferralIsOpen(!referralsIsOpen)
+    if (router.pathname.includes(pathnamesToSearch.referrals)) {
+      setReferralIsOpen(!referralsIsOpen)
+    }
   }
 
   return (
