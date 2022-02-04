@@ -36,10 +36,15 @@ SignUpPage.getLayout = (page) => (
   </>
 )
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getStaticProps: GetStaticProps = async ({ defaultLocale, locale, locales, params, preview, previewData }) => {
   return {
     props: {
-      ctx: ctx || null
+      defaultLocale: defaultLocale || null,
+      locale: locale || null,
+      locales: locales || null,
+      params: params || null,
+      preview: preview || null,
+      previewData: previewData || null
     }
   }
 }
