@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { GetStaticProps } from 'next'
+// import { GetStaticProps } from 'next'
 
 // import type { Page } from 'lib/types'
 import { useHandlerReferralLink } from 'lib/hooks/useHandlerReferralLink'
@@ -11,11 +11,11 @@ import { SelectRoleToSignUp } from 'components/page/signup/SelectRoleToSignUp'
 
 const { SEO } = PAGE_INFO
 
-const SignUpPage = ({ params }) => {
+const SignUpPage = ({ query }) => {
   const { referralCode: code, referralRole: role } = useHandlerReferralLink()
 
   console.log('SignUpPage review referralCode', code)
-  console.log('SignUpPage getStaticProps params', params)
+  console.log('SignUpPage getInitialProps query', query)
 
   if (role === 'CUSTOMER') return <SignUpCustomerForm referralLink={{ code, role }} />
   if (role === 'DRIVER') return <SignUpDriverForm referralLink={{ code, role }} />
@@ -35,11 +35,9 @@ SignUpPage.getLayout = (page) => (
   </>
 )
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
+SignUpPage.getInitialProps = async ({ query }) => {
   return {
-    props: {
-      params: ctx.params
-    }
+    query: query || null
   }
 }
 
