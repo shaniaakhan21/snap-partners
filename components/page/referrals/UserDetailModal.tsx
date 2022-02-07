@@ -25,7 +25,7 @@ export const ReferralsUserDetailModal = ({ id, name, email, phone, onClick }: IP
 
       <div className='mb-4 flex items-center justify-between'>
         <span className='text-primary-500 font-bold'>USER ID</span>
-        <button onClick={() => copy(id)} className='text-blue-600 flex items-center transition-colors hover:text-blue-600 lg:text-textHint'>
+        <button onClick={() => copy(id, 'ID')} className='text-blue-600 flex items-center transition-colors hover:text-blue-600 lg:text-textHint'>
           <span className='mr-1'>{id}</span>
           <CopyIcon classes="w-5 h-5" />
         </button>
