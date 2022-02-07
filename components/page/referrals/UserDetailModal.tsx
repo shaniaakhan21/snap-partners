@@ -4,7 +4,7 @@ import { IUserData } from 'lib/types/user'
 import { MouseEvent } from 'react'
 
 interface IProps extends IUserData {
-  onClick?: (e: MouseEvent<HTMLButtonElement>, elements: []) => void
+  onClick?: (e: MouseEvent, element: HTMLElement) => void
 }
 
 export const ReferralsUserDetailModal = ({ id, name, email, phone, onClick }: IProps) => {
