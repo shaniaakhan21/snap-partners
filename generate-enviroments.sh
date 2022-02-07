@@ -45,13 +45,22 @@ server {
     }
     # Any route that doesn't have a file extension (e.g. /devices)
     location / {
-      try_files \$uri \$uri/ /index.html;
+      proxy_set_header Upgrade \$http_upgrade;
+      proxy_set_header Connection "upgrade";
+      proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+      proxy_set_header Host \$host;
+      proxy_http_version 1.1;
+      proxy_pass http://localhost:4$PORT;
     }
 
     location ~ ^/api/(.+) {
       #access_log  /var/log/nginx/cbx_front_postdata.log  postdata;
       rewrite ^/api(.*)\$ \$1 break;
-      proxy_pass http://localhost:8080;
+      proxy_set_header Upgrade \$http_upgrade;
+      proxy_set_header Connection "upgrade";
+      proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+      proxy_set_header Host \$host;
+      proxy_pass http://localhost:9090;
     }
     location ~* \.(?:manifest|appcache|html?|xml|json)\$ {
       expires -1;
