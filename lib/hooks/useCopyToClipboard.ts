@@ -1,31 +1,28 @@
-import { createRef, useEffect } from 'react'
+import { useState } from 'react'
 
-export const useCopyToClipboard = (textToCopy: string, onSuccess: () => void, onError: () => void) => {
-  const { current: clickRef } = createRef<HTMLElement>()
+type CopiedValue = string | null
+type CopyFn = (text: string) => Promise<boolean> // Return success
 
-  const copyHandler = () => {
-    if (!navigator.clipboard) {
-      return
+export const useCopyToClipboard = () => {
+  const [copiedText, setCopiedText] = useState<CopiedValue>(null)
+
+  const copy: CopyFn = async text => {
+    if (!navigator?.clipboard) {
+      console.warn('Clipboard not supported')
+      return false
     }
 
-    navigator.clipboard.writeText(textToCopy)
-      .then(() => {
-        onSuccess && onSuccess()
-      })
-      .catch(() => {
-        onError && onError()
-      })
+    // Try to save to clipboard then save it in the state if worked
+    try {
+      await navigator.clipboard.writeText(text)
+      setCopiedText(text)
+      return true
+    } catch (error) {
+      console.warn('Copy failed', error)
+      setCopiedText(null)
+      return false
+    }
   }
 
-  useEffect(() => {
-    if (clickRef) {
-      clickRef.addEventListener('click', copyHandler)
-    }
-
-    return () => {
-      clickRef?.removeEventListener('click', copyHandler)
-    }
-  }, [clickRef])
-
-  return clickRef
+  return { copiedText, copy }
 }
