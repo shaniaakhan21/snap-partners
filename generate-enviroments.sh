@@ -107,6 +107,7 @@ $SUBDOMAIN.snap.devopsteam.info:
     - rm -rf /home/gitlab-runner/snap-website-$SUBDOMAIN
     - mv /home/gitlab-runner/snap-website-$SUBDOMAIN-temp /home/gitlab-runner/snap-website-$SUBDOMAIN
     - cd /home/gitlab-runner/snap-website-$SUBDOMAIN
+    - pm2 delete "next-$SUBDOMAIN" || exit_code=$?
     - PORT=4$PORT pm2 start npm --name "next-$SUBDOMAIN" -- start
     - sudo /usr/bin/systemctl restart nginx
   after_script:
@@ -123,7 +124,7 @@ $SUBDOMAIN.snap.devopsteam.info_stop:
     GIT_STRATEGY: none
   script:
     - cd /home/gitlab-runner/snap-website-$SUBDOMAIN
-    - pm2 stop "next-$SUBDOMAIN"
+    - pm2 delete "next-$SUBDOMAIN" || exit_code=$?
     - rm -rf /home/gitlab-runner/snap-website-$SUBDOMAIN
     - sudo /usr/bin/systemctl restart nginx
   environment:
