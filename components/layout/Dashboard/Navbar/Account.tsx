@@ -26,7 +26,7 @@ export const Account = ({ email, name, phone, signOut }) => {
       <div className='flex justify-start items-center relative select-none'>
         <div className='relative'>
           <img
-            src='/images/avatarAuth.png'
+            src='/images/avatar.png'
             className='ml-3'
           />
 
