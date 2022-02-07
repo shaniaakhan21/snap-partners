@@ -103,6 +103,7 @@ $SUBDOMAIN.snap.devopsteam.info:
     - (printenv | grep STAGE_FRONT_ | grep -v STAGE_FRONT_PORT | sed -e "s/^STAGE_FRONT_//"  ) > .env
     - printf "\nREACT_APP_SUBDOMAIN=https://$SUBDOMAIN.snap.devopsteam.info" >> .env
     - npm install
+    - npm run build
     - rm -rf /home/gitlab-runner/snap-website-$SUBDOMAIN
     - mv /home/gitlab-runner/snap-website-$SUBDOMAIN-temp /home/gitlab-runner/snap-website-$SUBDOMAIN
     - cd /home/gitlab-runner/snap-website-$SUBDOMAIN
