@@ -1,4 +1,5 @@
 import { CopyIcon, EmailIcon, PhoneIcon } from 'components/common/icons'
+import { useCopyToClipboard } from 'lib/hooks/useCopyToClipboard'
 import { IUserData } from 'lib/types/user'
 import { MouseEvent } from 'react'
 
@@ -7,6 +8,7 @@ interface IProps extends IUserData {
 }
 
 export const ReferralsUserDetailModal = ({ id, name, email, phone, onClick }: IProps) => {
+  const { copy } = useCopyToClipboard()
   // const buttonCancelRef = useRef()
 
   return (
@@ -23,7 +25,7 @@ export const ReferralsUserDetailModal = ({ id, name, email, phone, onClick }: IP
 
       <div className='mb-4 flex items-center justify-between'>
         <span className='text-primary-500 font-bold'>USER ID</span>
-        <button className='text-blue-600 flex items-center transition-colors hover:text-blue-600 lg:text-textHint'>
+        <button onClick={() => copy(id, 'ID')} className='text-blue-600 flex items-center transition-colors hover:text-blue-600 lg:text-textHint'>
           <span className='mr-1'>{id}</span>
           <CopyIcon classes="w-5 h-5" />
         </button>

@@ -1,35 +1,20 @@
 import Head from 'next/head'
 
 import type { Page } from 'lib/types'
+import { useHandlerReferralLink } from 'lib/hooks/useHandlerReferralLink'
 import { AuthPagesLayout } from 'layouts/public/Auth'
 import { PAGE_INFO } from 'config'
 
 import { SignUpCustomerForm, SignUpDriverForm } from 'components/page/signup/SignUpForm'
 import { SelectRoleToSignUp } from 'components/page/signup/SelectRoleToSignUp'
-import { useRouter } from 'next/router'
 
 const { SEO } = PAGE_INFO
 
 const SignUpPage: Page = () => {
-  const router = useRouter()
+  const { referralCode: code, referralRole: role } = useHandlerReferralLink()
 
-  if (router.query.referralRole === 'CUSTOMER') {
-    return (
-      <SignUpCustomerForm
-        referralLink={{
-          code: router.query.referralCode as string,
-          role: router.query.referralRole as 'CUSTOMER' | 'DRIVER'
-        }}
-      />)
-  }
-  if (router.query.referralRole === 'DRIVER') {
-    return <SignUpDriverForm
-      referralLink={{
-        code: router.query.referralCode as string,
-        role: router.query.referralRole as 'CUSTOMER' | 'DRIVER'
-      }}
-    />
-  }
+  if (role === 'CUSTOMER') return <SignUpCustomerForm referralLink={{ code, role }} />
+  if (role === 'DRIVER') return <SignUpDriverForm referralLink={{ code, role }} />
 
   return <SelectRoleToSignUp />
 }

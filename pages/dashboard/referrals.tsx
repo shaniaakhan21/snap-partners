@@ -45,12 +45,6 @@ const selectInfo = {
   ]
 }
 
-const headComponent = (
-  <Head>
-    <title>{SEO.TITLE_PAGE} - Referrals</title>
-  </Head>
-)
-
 const ReferralsPage: Page = () => {
   const { referralsIsOpen, closeReferral } = useSearchModalStore()
   const { width: windowWidth } = useWindowSize()
@@ -86,8 +80,6 @@ const ReferralsPage: Page = () => {
   ) {
     return (
       <>
-        {headComponent}
-
         <div className='w-full h-full flex items-center justify-center'>
           <Spinner />
         </div>
@@ -97,8 +89,6 @@ const ReferralsPage: Page = () => {
 
   return (
     <>
-      {headComponent}
-
       <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-center justify-center justify-items-center gap-4'>
         <ReferralCards
           title='Refer Customers'
@@ -213,6 +203,10 @@ const ReferralsPage: Page = () => {
 
 ReferralsPage.getLayout = (page: ReactNode) => (
   <DashboardLayout>
+    <Head>
+      <title>{SEO.TITLE_PAGE} - Referrals</title>
+    </Head>
+
     {page}
   </DashboardLayout>
 )

@@ -1,31 +1,29 @@
-import { createRef, useEffect } from 'react'
+import { useState } from 'react'
+import { toast } from 'react-toastify'
 
-export const useCopyToClipboard = (textToCopy: string, onSuccess: () => void, onError: () => void) => {
-  const { current: clickRef } = createRef<HTMLElement>()
+type CopiedValue = string | null
+type CopyFn = (textToCopy: string, textAlias?: string) => Promise<boolean>
 
-  const copyHandler = () => {
-    if (!navigator.clipboard) {
-      return
+export const useCopyToClipboard = () => {
+  const [copiedText, setCopiedText] = useState<CopiedValue>(null)
+
+  const copy: CopyFn = async (textToCopy, textAlias) => {
+    if (!navigator?.clipboard) {
+      toast('Clipboard not supported', { type: 'warning' })
+      return false
     }
 
-    navigator.clipboard.writeText(textToCopy)
-      .then(() => {
-        onSuccess && onSuccess()
-      })
-      .catch(() => {
-        onError && onError()
-      })
+    try {
+      await navigator.clipboard.writeText(textToCopy)
+      setCopiedText(textToCopy)
+      toast(`${textAlias} Copied` || 'Copied Value', { type: 'success' })
+      return true
+    } catch (err) {
+      toast(`Copy failed ${err}`, { type: 'error' })
+      setCopiedText(null)
+      return false
+    }
   }
 
-  useEffect(() => {
-    if (clickRef) {
-      clickRef.addEventListener('click', copyHandler)
-    }
-
-    return () => {
-      clickRef?.removeEventListener('click', copyHandler)
-    }
-  }, [clickRef])
-
-  return clickRef
+  return { copiedText, copy }
 }

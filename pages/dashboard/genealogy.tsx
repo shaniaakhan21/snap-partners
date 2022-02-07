@@ -3,6 +3,7 @@ import Head from 'next/head'
 import type { Page, ReactNode } from 'lib/types'
 import { PAGE_INFO } from 'config'
 import DashboardLayout from 'layouts/private/Dashboard'
+import { GenealogyTable } from 'components/page/dashboard/genealogy'
 
 const { SEO } = PAGE_INFO
 
@@ -13,9 +14,7 @@ const GenealogyPage: Page = () => {
         <title>{SEO.TITLE_PAGE} - Genealogy</title>
       </Head>
 
-      <div className='grid place-content-center text-center font-black text-5xl'>
-        Genealogy
-      </div>
+      <GenealogyTable />
     </>
   )
 }
