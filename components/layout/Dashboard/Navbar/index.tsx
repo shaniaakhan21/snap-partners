@@ -3,24 +3,11 @@ import { MoarOptionsVerticalIcon, SearchIcon } from 'components/common/icons'
 import { Account } from './Account'
 import { useAuthStore, useDrawerStore, useSearchModalStore } from 'lib/stores'
 
-const pathnamesToSearch = {
-  dashboard: '/dashboard',
-  referrals: '/dashboard/referrals',
-  marketing: '/dashboard/marketing',
-  genealogy: '/dashboard/genealogy'
-}
-
 export const Navbar = () => {
   const { auth, signOut } = useAuthStore()
   const { toggleDrawer } = useDrawerStore()
-  const { referralsIsOpen, setReferralIsOpen } = useSearchModalStore()
+  const { toggleReferral } = useSearchModalStore()
   const router = useRouter()
-
-  const handleClickButtonSearch = () => {
-    if (router.pathname.includes(pathnamesToSearch.referrals)) {
-      setReferralIsOpen(!referralsIsOpen)
-    }
-  }
 
   return (
     <header className='dashboardLayout__navbar h-16'>
@@ -47,7 +34,7 @@ export const Navbar = () => {
           </div> */}
 
           <div className='w-full flex justify-start items-center'>
-            <button onClick={handleClickButtonSearch}>
+            <button onClick={() => toggleReferral(router.pathname)}>
               <SearchIcon classes='w-5 h-5' />
             </button>
           </div>
