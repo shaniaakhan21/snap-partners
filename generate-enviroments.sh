@@ -101,13 +101,13 @@ $SUBDOMAIN.snap.devopsteam.info:
     # FRONT
     - cd /home/gitlab-runner/snap-website-$SUBDOMAIN-temp
     - (printenv | grep STAGE_FRONT_ | grep -v STAGE_FRONT_PORT | sed -e "s/^STAGE_FRONT_//"  ) > .env
-    - printf "PORT=4$PORT" >> .env
     - printf "\nREACT_APP_SUBDOMAIN=https://$SUBDOMAIN.snap.devopsteam.info" >> .env
-    - mkdir -p dist
     - npm install
     - npm run build
     - rm -rf /home/gitlab-runner/snap-website-$SUBDOMAIN
     - mv /home/gitlab-runner/snap-website-$SUBDOMAIN-temp /home/gitlab-runner/snap-website-$SUBDOMAIN
+    - cd /home/gitlab-runner/snap-website-$SUBDOMAIN
+    - PORT=4$PORT pm2 start npm --name "next-$SUBDOMAIN" -- start
     - sudo /usr/bin/systemctl restart nginx
   after_script:
     - rm -rf /home/gitlab-runner/snap-website-$SUBDOMAIN-temp
@@ -123,6 +123,7 @@ $SUBDOMAIN.snap.devopsteam.info_stop:
     GIT_STRATEGY: none
   script:
     - cd /home/gitlab-runner/snap-website-$SUBDOMAIN
+    - pm2 stop "next-$SUBDOMAIN"
     - rm -rf /home/gitlab-runner/snap-website-$SUBDOMAIN
     - sudo /usr/bin/systemctl restart nginx
   environment:
