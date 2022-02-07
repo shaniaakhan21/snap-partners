@@ -62,7 +62,7 @@ export const GenealogyTable = () => {
         )
       }
 
-      <div className='bg-white border border-solid border-gray-300 p-3 rounded-md'>
+      <div className='bg-white border border-solid border-gray-300 p-4 rounded-md'>
         <div>
           <span className='font-bold text-primary-500 text-3xl'>Genealogy</span>
           <br />
@@ -75,7 +75,7 @@ export const GenealogyTable = () => {
             searchByPhone={searchByPhone}
           />
 
-          <div className='overflow-scroll scroll-primary h-[60vh] mt-4 '> {/* the height table should be better */}
+          <div className='overflow-scroll scroll-primary h-[55vh] mt-4 '> {/* the height table should be better */}
             <table className='min-w-full divide-y divide-gray-200'>
               <thead className='bg-gray-50'>
                 <tr>

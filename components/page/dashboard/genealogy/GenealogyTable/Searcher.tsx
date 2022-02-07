@@ -30,13 +30,13 @@ export const Searcher = ({ searchById, searchByName, searchByPhone, resetSearche
       />
 
       <div className='flex flex-col'>
-        <label htmlFor='filter' className='font-bold'>Filter</label>
+        <label htmlFor='filter' className='font-bold text-sm'>Filter</label>
 
         <select
           id='filter'
           name='filter'
           {...register('filter')}
-          className='px-2 py-2.5 border border-gray-300 rounded'
+          className='px-2 py-2 border border-gray-300 rounded'
           placeholder='Filter'
         >
           <option value='id'>ID</option>
