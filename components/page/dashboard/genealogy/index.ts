@@ -1,0 +1,1 @@
+export { GenealogyTable } from './GenealogyTable'
