@@ -18,28 +18,28 @@ const MarketingPage: Page = () => {
       title: 'Customer',
       subtitle: 'Subtitle text here',
       description: 'Select an image and share the link in the different social networks to get new Customers!',
-      to: '/dashboard/marketing/customers'
+      to: '/marketing/customers'
     },
     {
       icon: <DriverIcon />,
       title: 'Driver',
       subtitle: 'Subtitle text here',
       description: 'Select an image and share the link in the different social networks to get new Drivers On Board',
-      to: '/dashboard/marketing/drivers'
+      to: '/marketing/drivers'
     },
     {
       icon: <RestaurantsIcon />,
       title: 'Restaurants',
       subtitle: 'Subtitle text here',
       description: 'Select an image and share the link in the different social networks to get new Restaurant Partners',
-      to: '/dashboard/marketing/restaurants'
+      to: '/marketing/restaurants'
     },
     {
       icon: <IBOIcon />,
       title: 'IBO',
       subtitle: 'Subtitle text here',
       description: 'Select an image and share the link in the different social networks to get new Business partners',
-      to: '/dashboard/marketing/ibo'
+      to: '/marketing/ibo'
     }
   ])
 

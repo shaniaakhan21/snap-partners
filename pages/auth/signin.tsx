@@ -14,7 +14,7 @@ const SignInPage: Page = () => {
   const { auth } = useAuthStore()
 
   useEffect(() => {
-    auth && router.push('/dashboard')
+    auth && router.push('/overview')
   }, [auth])
 
   return (

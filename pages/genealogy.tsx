@@ -3,7 +3,7 @@ import Head from 'next/head'
 import type { Page, ReactNode } from 'lib/types'
 import { PAGE_INFO } from 'config'
 import DashboardLayout from 'layouts/private/Dashboard'
-import { GenealogyTable } from 'components/page/dashboard/genealogy'
+import { GenealogyTable } from 'components/page/genealogy'
 
 const { SEO } = PAGE_INFO
 

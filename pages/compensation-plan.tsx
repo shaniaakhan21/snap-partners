@@ -9,7 +9,7 @@ import { PAGE_INFO } from 'config'
 const { SEO } = PAGE_INFO
 
 const PDFViewer = dynamic(
-  () => import('../../components/page/dashboard/compensation-plan/PDFViewer'),
+  () => import('../components/page/compensation-plan/PDFViewer'),
   {
     loading: () => (
       <div className='flex flex-col justify-center items-center'>

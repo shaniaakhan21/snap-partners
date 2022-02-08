@@ -20,7 +20,7 @@ import {
   TopRestaurantsAcquisition,
   TotalEarnings,
   TotalOrders
-} from 'components/page/dashboard/overview'
+} from 'components/page/overview'
 
 const { SEO } = PAGE_INFO
 

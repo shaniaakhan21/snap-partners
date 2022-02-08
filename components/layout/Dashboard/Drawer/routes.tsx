@@ -10,53 +10,53 @@ import {
 export const drawerRoutes = [
   {
     icon: <DashboardIcon />,
-    to: '/dashboard',
-    label: 'Dashboard'
+    to: '/overview',
+    label: 'Overview'
   },
   {
     icon: <ReferralLinksIcon />,
-    to: '/dashboard/referrals',
+    to: '/referrals',
     label: 'My Referrals links'
   },
   {
     icon: <MarketingIcon />,
-    to: '/dashboard/marketing',
+    to: '/marketing',
     label: 'Marketing'
   },
   {
     icon: <RelojTempIcon />,
-    to: '/dashboard/comingsoon',
+    to: '/comingsoon',
     label: 'Reports'
   },
   {
     icon: <RelojTempIcon />,
-    to: '/dashboard/comingsoon',
+    to: '/comingsoon',
     label: 'Training'
   },
   {
     icon: <RelojTempIcon />,
-    to: '/dashboard/comingsoon',
+    to: '/comingsoon',
     label: 'Tools'
   },
   {
     icon: <RelojTempIcon />,
-    to: '/dashboard/comingsoon',
+    to: '/comingsoon',
     label: 'Recognition'
   },
 
   {
     icon: <GenealogyIcon />,
-    to: '/dashboard/genealogy',
+    to: '/genealogy',
     label: 'Genealogy'
   },
   {
     icon: <CompensationPlanIcon />,
-    to: '/dashboard/compensation-plan',
+    to: '/compensation-plan',
     label: 'Compensation Plan'
   },
   {
     icon: <RelojTempIcon />,
-    to: '/dashboard/comingsoon',
+    to: '/comingsoon',
     label: 'Profile'
   }
 ]

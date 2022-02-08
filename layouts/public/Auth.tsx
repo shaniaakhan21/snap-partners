@@ -7,8 +7,7 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
   const { auth } = useAuthStore()
 
   useEffect(() => {
-    console.log('epale auth', auth)
-    auth && router.push('/dashboard')
+    auth && router.push('/overview')
   }, [auth])
 
   return (

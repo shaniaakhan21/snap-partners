@@ -1,26 +1,26 @@
 export const dashboardPathnames = {
   dashboard: {
-    pathname: '/dashboard',
+    pathname: '/overview',
     title: 'Overview'
   },
   referrals: {
-    pathname: '/dashboard/referrals',
+    pathname: '/referrals',
     title: 'My Referrals Link'
   },
   marketing: {
-    pathname: '/dashboard/marketing',
+    pathname: '/marketing',
     title: 'Marketing Tools'
   },
   genealogy: {
-    pathname: '/dashboard/genealogy',
+    pathname: '/genealogy',
     title: 'Genealogy'
   },
   compensationPlan: {
-    pathname: '/dashboard/compensation-plan',
+    pathname: '/compensation-plan',
     title: 'Compensation Plan'
   },
   comingsoon: {
-    pathname: '/dashboard/comingsoon',
+    pathname: '/comingsoon',
     title: 'Coming Soon'
   }
 }
