@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { useRef } from 'react'
 
 import type { Page, ReactNode } from 'lib/types'
-import { marketingArticles } from 'lib/utils/dataTest'
+import { marketingArticlesRest } from 'lib/utils/dataTest'
 import { PAGE_INFO } from 'config'
 
 import DashboardLayout from 'layouts/private/Dashboard'
@@ -12,7 +12,7 @@ import { Article } from 'components/page/marketing/Details/Article'
 const { SEO } = PAGE_INFO
 
 const RestaurantsPage: Page = () => {
-  const { current: articles } = useRef(marketingArticles)
+  const { current: articles } = useRef(marketingArticlesRest)
 
   return (
     <>
