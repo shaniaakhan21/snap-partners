@@ -1,13 +1,13 @@
-import { useRouter } from 'next/router'
 import { MoarOptionsVerticalIcon, SearchIcon } from 'components/common/icons'
 import { Account } from './Account'
 import { useAuthStore, useDrawerStore, useSearchModalStore } from 'lib/stores'
+import { useDashboardGetPathname } from 'lib/hooks/useDashboardGetPathnameData'
 
 export const Navbar = () => {
+  const { title, pathname } = useDashboardGetPathname()
   const { auth, signOut } = useAuthStore()
   const { toggleDrawer } = useDrawerStore()
   const { toggleReferral } = useSearchModalStore()
-  const router = useRouter()
 
   return (
     <header className='dashboardLayout__navbar h-16'>
@@ -18,7 +18,7 @@ export const Navbar = () => {
           </div>
 
           <div className='hidden lg:block'>
-            <span className='text-2xl font-bold text-gray-700'>Dashboard</span>
+            <span className='text-2xl font-bold text-gray-700 whitespace-nowrap'>{title}</span>
           </div>
 
           {/* <div className='w-full flex justify-start items-center'>
@@ -34,7 +34,7 @@ export const Navbar = () => {
           </div> */}
 
           <div className='w-full flex justify-start items-center'>
-            <button onClick={() => toggleReferral(router.pathname)}>
+            <button onClick={() => toggleReferral(pathname)}>
               <SearchIcon classes='w-5 h-5' />
             </button>
           </div>

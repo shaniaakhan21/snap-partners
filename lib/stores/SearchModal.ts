@@ -1,12 +1,6 @@
 import { MouseEvent } from 'react'
 import createAtom from 'zustand'
-
-const pathnamesToSearch = {
-  dashboard: '/dashboard',
-  referrals: '/dashboard/referrals',
-  marketing: '/dashboard/marketing',
-  genealogy: '/dashboard/genealogy'
-}
+import { dashboardPathnames } from 'lib/utils/dashboardPathnames'
 
 interface ISearchModalAtom {
   referralsIsOpen: boolean
@@ -19,7 +13,7 @@ export const useSearchModalStore = createAtom<ISearchModalAtom>(set => ({
   referralsIsOpen: false,
 
   toggleReferral: (pathname: string) => {
-    if (pathname.includes(pathnamesToSearch.referrals)) {
+    if (dashboardPathnames.referrals.pathname === pathname) {
       set(prevState => ({ referralsIsOpen: !prevState.referralsIsOpen }))
     }
   },
