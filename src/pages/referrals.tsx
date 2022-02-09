@@ -69,9 +69,7 @@ const ReferralsPage: Page = () => {
     usersArray
   } = useReferralsData(dataTest, tabOpen, userDetailIdOpen)
 
-  const handleClickTab = (id: string) => {
-    setTabOpen(id)
-  }
+  const handleClickTab = (id: string) => setTabOpen(id)
 
   if (
     !emailNotificationsArray ||
