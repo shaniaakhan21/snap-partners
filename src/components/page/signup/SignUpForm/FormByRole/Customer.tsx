@@ -43,7 +43,11 @@ export const SignUpCustomerForm = ({ referralLink }: { referralLink: IReferralLi
   }
 
   if (isLoading) {
-    return (<Spinner />)
+    return (
+      <div className='flex items-center justify-center w-screen h-screen md:w-full'>
+        <Spinner classes='w-20 h-20 md:w-10 md:h-10' />
+      </div>
+    )
   }
 
   return (

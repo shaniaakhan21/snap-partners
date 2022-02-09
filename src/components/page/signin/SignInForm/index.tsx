@@ -45,7 +45,7 @@ export const SignInForm = () => {
   }
 
   if (isLoading) {
-    return (<Spinner />)
+    return <Spinner classes='w-20 h-20 md:w-10 md:h-10' />
   }
 
   return (
