@@ -117,7 +117,7 @@ To get a local copy up and running follow these simple example steps.
    ```sh
    npm install
    ```
-3.  Create ```.env``` file - check: [Next Environment Variables](https://nextjs.org/docs/basic-features/environment-variables)
+3.  Create ```.env``` file - check: [Next.js Environment Variables](https://nextjs.org/docs/basic-features/environment-variables)
     ```
     NEXT_PUBLIC_RECAPTCHA_V2=6Lc2koEdAAAAAIdNcMY0V1E9IPGT3AxX-vlRUDtQ
     NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID=GTM-NNQS9S8
@@ -130,7 +130,7 @@ To get a local copy up and running follow these simple example steps.
 
 ### Pages directory
 
-Check https://nextjs.org/docs/routing/introduction
+Check: [Next.js Routing](https://nextjs.org/docs/routing/introduction)
 
 * ```/pages/auth/*.tsx``` - Routes to authentications `public routes`
 * ```/pages/**/*.tsx``` - Client backoffice routes `private routes`
@@ -233,7 +233,7 @@ Check https://nextjs.org/docs/routing/introduction
 <!-- TESTS -->
 ## ⚡ Tests
 
-#### ☕ Comming Soon...
+```☕ Comming Soon...```
 
 
 
