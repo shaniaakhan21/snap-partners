@@ -117,12 +117,12 @@ To get a local copy up and running follow these simple example steps.
    ```sh
    npm install
    ```
-4.  Create ```.env``` file
+3.  Create ```.env``` file - check: [Next Environment Variables](https://nextjs.org/docs/basic-features/environment-variables)
     ```
     NEXT_PUBLIC_RECAPTCHA_V2=6Lc2koEdAAAAAIdNcMY0V1E9IPGT3AxX-vlRUDtQ
     NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID=GTM-NNQS9S8
     ```
-5. Run ```npm run dev``` to run localhost project
+4. Run ```npm run dev``` to run localhost project
 
 
 <!-- PROJECT STRUCTURE -->
