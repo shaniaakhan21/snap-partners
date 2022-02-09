@@ -5,7 +5,7 @@ export default function PDFViewer () {
     <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.12.313/build/pdf.worker.js">
       <div
         className='mx-auto w-full'
-        style={{ height: '750px', maxWidth: 900 }}
+        style={{ height: '750px', maxWidth: 1280 }}
       >
         <Viewer fileUrl="/static/plan.pdf" defaultScale={SpecialZoomLevel.PageFit} />
       </div>

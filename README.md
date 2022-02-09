@@ -22,23 +22,41 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About The Project</a>
+      <a href="#-about-the-project">About The Project</a>
       <ul>
         <li><a href="#built-with">Built With</a></li>
         <li><a href="#utilities-libraries">Utilities Libraries</a></li>
+        <li><a href="#tests-config-in-construction">Tests Config</a></li>
         <li><a href="#eslint-config">Eslint Config</a></li>
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#-getting-started">Getting Started</a>
       <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+      </ul>
+      <a href="#-installation">Installation</a>
+    </li>
+    <li>
+      <a href="#-project-structure">Project Structure</a>
+      <ul>
+        <li><a href="#pages-directory">Pages Directory</a></li>
+        <li><a href="#layouts-directory">Layouts Directory</a></li>
+        <li><a href="#components-directory">Components Directory</a></li>
+        <li><a href="#lib-directory">Lib Directory</a></li>
+        <li><a href="#styles-directory">Styles Directory</a></li>
+        <li><a href="#config-directory">Config Directory</a></li>
       </ul>
     </li>
-    <li><a href="#project-structure">Project Structure</a></li>
-    <li><a href="#contributing-in-a-new-feature">Contributing</a></li>
-    <li><a href="#important">Important</a></li>
+    <li><a href="#-tests">Tests</a></li>
+    <li>
+      <a href="#-contributing-in-a-new-feature">Contributing</a>
+      <ul>
+        <li><a href="#branch">Branch</a></li>
+        <li><a href="#steps">Steps</a></li>
+      </ul>
+    </li>
+    <li><a href="#-important">Important</a></li>
   </ol>
 </details>
 
@@ -99,12 +117,12 @@ To get a local copy up and running follow these simple example steps.
    ```sh
    npm install
    ```
-4.  Create ```.env``` file
+3.  Create ```.env``` file - check: [Next Environment Variables](https://nextjs.org/docs/basic-features/environment-variables)
     ```
-    USE_REMOTE_API=TRUE
-    REACT_APP_RECAPTCHA_V2_PUBLIC=6Lc2koEdAAAAAIdNcMY0V1E9IPGT3AxX-vlRUDtQ
+    NEXT_PUBLIC_RECAPTCHA_V2=6Lc2koEdAAAAAIdNcMY0V1E9IPGT3AxX-vlRUDtQ
+    NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID=GTM-NNQS9S8
     ```
-5. Run ```npm run dev``` to run localhost project
+4. Run ```npm run dev``` to run localhost project
 
 
 <!-- PROJECT STRUCTURE -->
