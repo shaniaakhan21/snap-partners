@@ -66,6 +66,12 @@
 * [React Google Recaptcha](https://www.npmjs.com/package/react-google-recaptcha) - Google Recaptcha with React `at the moment it is not being applied`
 * [@tanem/react-nprogress](https://www.npmjs.com/package/@tanem/react-nprogress) - Progress bars to routing in React
 
+### Tests config - ⚠  In construction
+
+* [Jest](https://jestjs.io/) - Javascript testing framework
+* [Testing Library](https://nextjs.org/docs/basic-features/eslint) - Testing utilities
+* [Enzyme](https://enzymejs.github.io/enzyme/) - Testing utilities for React
+* [@wojtekmaj/enzyme-adapter-react-17](https://www.npmjs.com/package/@wojtekmaj/enzyme-adapter-react-17) - Adapter for React 17 for Enzyme
 
 ### Eslint config
 
