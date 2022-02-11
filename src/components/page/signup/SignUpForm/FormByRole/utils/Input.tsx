@@ -1,22 +1,24 @@
+import { HTMLInputTypeAttribute } from 'react'
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
 import { IDataForm, registerFormIds } from './types'
 
 interface IInputFormProps {
-  id: string,
-  name: string,
-  label: string,
+  id?: string,
+  name?: string,
+  label?: string,
   autoComplete?: string,
-  type: string,
+  type?: HTMLInputTypeAttribute,
   classes?: string,
   placeholder?: string,
-  registerId: registerFormIds
-  register: UseFormRegister<IDataForm>,
-  errors: any,
-  rulesForm: FieldErrors,
+  registerId?: registerFormIds
+  register?: UseFormRegister<IDataForm>,
+  errors?: any,
+  rulesForm?: FieldErrors,
   defaultValue?: string | string[] | number | null
+  control?: any
 }
 
-export const InputForm = ({ id, name, label, autoComplete, type, classes, placeholder, defaultValue, register, registerId, errors, rulesForm }: IInputFormProps) => {
+export const InputForm = ({ id, name, label, autoComplete, type, classes, placeholder, defaultValue, register, registerId, errors, rulesForm, control }: IInputFormProps) => {
   return (
     <div>
       <label htmlFor={id} className='font-bold text-gray-700 uppercase text-sm'>{label}</label>

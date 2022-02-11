@@ -8,6 +8,8 @@ export interface IDataForm {
   referralCode?: string | null
   rememberMe: boolean
   termsAndConditions: boolean
+  phoneExt: string
+  phoneNumber: string
 }
 
 export interface IRegisterFormProps {
@@ -15,7 +17,7 @@ export interface IRegisterFormProps {
   role: string
 }
 
-export type registerFormIds = 'referralCode' | 'email' | 'name' | 'phone' | 'confirmEmail' | 'password' | 'confirmPassword' | 'rememberMe' | 'termsAndConditions'
+export type registerFormIds = 'referralCode' | 'email' | 'name' | 'phoneExt' | 'phoneNumber' | 'confirmEmail' | 'password' | 'confirmPassword' | 'rememberMe' | 'termsAndConditions'
 
 export interface IFormConfig {
   email: {
@@ -35,7 +37,13 @@ export interface IFormConfig {
     pattern: { value: RegExp; message: string }
   },
 
-  phone: {
+  phoneExt: {
+    required: { value: boolean, message: string },
+    maxLength: { value: number, message: string },
+    pattern: { value: RegExp, message: string }
+  },
+
+  phoneNumber: {
     required: { value: boolean, message: string },
     maxLength: { value: number, message: string },
     minLength: { value: number, message: string },

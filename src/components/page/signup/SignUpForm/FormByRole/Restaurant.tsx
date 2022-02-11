@@ -1,49 +1,69 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-
-import { Button } from 'components/common/Button'
-import { registerRulesConfig } from './utils/formRules'
-import { useAuthStore } from 'lib/stores'
 import { toast } from 'react-toastify'
+
+import { useAuthStore } from 'lib/stores'
+import { IReferralLink } from 'lib/types'
+import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
-import { fakeLogin } from 'lib/utils/fakeLogin'
 import { InputForm } from './utils/Input'
+import { InputPhone } from './utils/InputPhone'
 import { IDataForm } from './utils/types'
+import { RRSSAuth } from './utils/RRSSAuth'
+import { registerRulesConfig } from './utils/formRules'
 import { RegisterPassword } from './utils/RegisterPassword'
 import { TermsAndConditions } from './utils/TermsAndConditions'
-import { RRSSAuth } from './utils/RRSSAuth'
-import { IReferralLink } from 'lib/types'
 
 export const SignUpRestaurantForm = ({ referralLink }: { referralLink: IReferralLink }) => {
-  const { createAccout } = useAuthStore()
+  const { handleSubmit, register, reset, formState: { errors }, setError } = useForm<IDataForm>()
   const [isLoading, setLoading] = useState(false)
-  const { handleSubmit, register, reset, formState: { errors } } = useForm<IDataForm>()
+  const { createAccout } = useAuthStore()
 
   const onSubmit = async (dataForm: IDataForm) => {
     setLoading(true)
-    const { data, error } = await fakeLogin()
+
+    if (dataForm.confirmEmail !== dataForm.email) {
+      setLoading(false)
+      setError('confirmEmail', { message: 'The email does not match' })
+
+      if (dataForm.confirmPassword !== dataForm.password) {
+        return setError('confirmPassword', { message: 'The password does not match' })
+      }
+
+      return
+    }
+
+    if (dataForm.confirmPassword !== dataForm.password) {
+      setError('confirmPassword', { message: 'The password does not match' })
+      setLoading(false)
+
+      if (dataForm.confirmEmail !== dataForm.email) {
+        return setError('confirmEmail', { message: 'The email does not match' })
+      }
+
+      return
+    }
 
     setLoading(false)
 
-    if (error) {
-      return toast(error, { type: 'error' })
-    }
-
     toast('¡Sign In Successful!', { type: 'success' })
-    console.log('SignUpRestaurantForm onSubmit referralLink', referralLink)
     createAccout({
-      email: data.email,
-      name: data.name,
-      phone: data.phone.number,
-      accessToken: data.accessToken,
-      refreshToken: data.refreshToken
+      email: dataForm.email,
+      name: dataForm.name,
+      phone: `${dataForm.phoneExt + dataForm.phoneNumber}`,
+      accessToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c',
+      refreshToken: 'eesre6-d5av2y-asd6w0'
     })
     reset()
   }
 
   if (isLoading) {
-    return (<Spinner />)
+    return (
+      <div className='flex items-center justify-center w-screen h-screen md:w-full'>
+        <Spinner classes='w-20 h-20 md:w-10 md:h-10' />
+      </div>
+    )
   }
 
   return (
@@ -83,24 +103,17 @@ export const SignUpRestaurantForm = ({ referralLink }: { referralLink: IReferral
           id='name'
           name='name'
           type='text'
-          label='Restaurant Name'
+          label='Name'
           registerId='name'
-          placeholder='Enter Restaurant Name'
+          placeholder='Enter Name'
           errors={errors.name}
           register={register}
           rulesForm={registerRulesConfig.name}
         />
 
-        <InputForm
-          id='phone'
-          name='phone'
-          type='tel'
-          label='Restaurant Phone Number'
-          registerId='phone'
-          placeholder='ex +34 0000 0000'
-          errors={errors.phone}
+        <InputPhone
           register={register}
-          rulesForm={registerRulesConfig.phone}
+          errors={errors}
         />
 
         <RegisterPassword
@@ -117,6 +130,7 @@ export const SignUpRestaurantForm = ({ referralLink }: { referralLink: IReferral
           label='Referral Code'
           registerId='referralCode'
           placeholder='Referral Code'
+          defaultValue={referralLink.code}
           errors={errors.referralCode}
           register={register}
           rulesForm={registerRulesConfig.referralCode}
@@ -130,7 +144,7 @@ export const SignUpRestaurantForm = ({ referralLink }: { referralLink: IReferral
 
         <section className='mt-4'>
           <Button type='submit' classes='w-full mr-1 text-sm bg-primary-500'>
-            Log In
+            Sign Up
           </Button>
 
           <br /><br />
@@ -138,7 +152,7 @@ export const SignUpRestaurantForm = ({ referralLink }: { referralLink: IReferral
           <p>
             <span className='font-semibold'>Already have an accout?</span>
             <Link href='/auth/signin'>
-              <a className='text-textAcent-500'> Log In.</a>
+              <a className='text-textAcent-500'> Sign In.</a>
             </Link>
           </p>
         </section>

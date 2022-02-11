@@ -26,10 +26,16 @@ export const registerRulesConfig: IFormConfig = {
     pattern: { value: /^[a-zA-ZÀ-ÿ0-9 ()-.]*$/, message: 'Name not allow *' }
   },
 
-  phone: {
-    required: { value: true, message: 'Phone Required *' },
-    maxLength: { value: 15, message: 'Max 15 Numbers *' },
-    minLength: { value: 10, message: 'Min 10 Numbers *' },
+  phoneExt: {
+    required: { value: true, message: 'Phone extension required *' },
+    maxLength: { value: 4, message: 'Max 4 Numbers *' },
+    pattern: { value: /^[0-9]*$/i, message: 'Only Numbers *' }
+  },
+
+  phoneNumber: {
+    required: { value: true, message: 'Phone number required *' },
+    maxLength: { value: 20, message: 'Max 20 Numbers *' },
+    minLength: { value: 8, message: 'Min 18 Numbers *' },
     pattern: { value: /^[0-9]*$/i, message: 'Only Numbers *' }
   },
 

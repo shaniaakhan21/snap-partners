@@ -24,7 +24,7 @@ export const SignInForm = () => {
     setLoading(true)
 
     setTimeout(async () => { // Simulate latency
-      const { data, error } = await fakeLogin()
+      const { data, error } = await fakeLogin(dataForm.email, dataForm.password)
 
       setLoading(false)
 
