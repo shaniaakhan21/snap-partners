@@ -1,16 +1,29 @@
-export interface IDataForm {
+export interface IUserToSignUp {
   email: string
-  confirmEmail: string
   name: string
   phone: string
   password: string
-  confirmPassword: string
   referralCode?: string | null
+}
+
+export interface IDataForm extends IUserToSignUp {
+  confirmEmail: string
+  confirmPassword: string
   rememberMe: boolean
   termsAndConditions: boolean
   phoneExt: string
   phoneNumber: string
 }
+
+type TUserStepsToSignUp = 'STEP_1' | 'STEP_2' | 'FINISH'
+
+export interface IUserTrack {
+  step: TUserStepsToSignUp
+  userInfo: IUserToSignUp
+}
+
+export type IHandleUserInfo = (userToSignUp: IUserToSignUp) => void
+export type IHandleStep = (step: TUserStepsToSignUp) => void
 
 export interface IRegisterFormProps {
   code?: string
