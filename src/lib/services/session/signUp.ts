@@ -1,5 +1,3 @@
-import { API } from 'config/api'
-
 interface ISignUpDataBodyStep1 {
   phoneNumber: string
 }
@@ -32,7 +30,7 @@ interface ISignUpDataResponse {
 }
 
 export const signUpStep1 = async (dataBody: ISignUpDataBodyStep1) => {
-  const res = await fetch(`${API.BASE_URL}/api/authentication/signUpStepOne`, {
+  const res = await fetch('/api/authentication/signUpStepOne', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -59,7 +57,7 @@ export const signUpStep1 = async (dataBody: ISignUpDataBodyStep1) => {
 }
 
 export const signUpStep2 = async (dataBody: ISignUpDataBodyStep2) => {
-  const res = await fetch(`${API.BASE_URL}/api/authentication/signUpStepTwo`, {
+  const res = await fetch('/api/authentication/signUpStepTwo', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
