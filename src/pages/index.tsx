@@ -5,15 +5,40 @@ import { Spinner } from 'components/common/loaders'
 import type { Page as PageNext } from 'lib/types'
 import { useAuthStore } from 'lib/stores'
 import { PAGE_INFO } from 'config/pageInfo'
+import { getLocalStorage } from 'lib/utils/localStorage'
+import { decodeAccessToken } from 'lib/utils/decodedAccessToken'
 
 const { SEO } = PAGE_INFO
 
 const HomePage: PageNext = () => {
-  const { auth } = useAuthStore()
+  const { auth, setAuth } = useAuthStore()
   const router = useRouter()
 
   useEffect(() => {
-    !auth && router.push('/auth/signin')
+    if (auth) {
+      router.push('/overview')
+      return
+    }
+
+    const token = getLocalStorage('accessToken')
+
+    if (!token) {
+      router.push('/auth/signin')
+    }
+
+    const data = decodeAccessToken(token)
+    setAuth({
+      email: data.email,
+      name: data.email,
+      phone: data.phoneNumber,
+      accessToken: data.token,
+      iat: data.iat,
+      lastname: data.lastname,
+      roles: data.roles,
+      id: data.userId,
+      username: data.username
+    })
+    router.push('/overview')
   }, [auth])
 
   if (!auth) {

@@ -1,3 +1,5 @@
+import { setLocalStorage } from 'lib/utils/localStorage'
+import { decodeAccessToken } from 'lib/utils/decodedAccessToken'
 import { API } from 'config/api'
 
 interface ILoginDataBody {
@@ -14,27 +16,60 @@ interface ILoginDataResponse {
   error: string | null
 }
 
-export const login = async (data: ILoginDataBody) => {
+// type ILoginReturn = Promise<{
+//   data: null;
+//   error: {
+//       message: string;
+//       status: number;
+//   };
+// } | {
+//   data: {
+//       token: string;
+//       email: string;
+//       iat: number;
+//       lastname: string;
+//       name: string;
+//       phoneNumber: string;
+//       roles: string;
+//       userId: number;
+//       username: string;
+
+//       iss?: string;
+//       sub?: string;
+//       aud?: string | string[];
+//       exp?: number;
+//       nbf?: number;
+//       jti?: string;
+//   };
+//   error: null;
+// }>
+
+export const login = async (dataBody: ILoginDataBody) => {
   const res = await fetch(`${API.BASE_URL}/api/authentication/login`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(dataBody)
   })
 
-  if (!res?.ok) {
+  const data: ILoginDataResponse = await res.json()
+
+  if (!res.ok) {
     return {
       data: null,
       error: {
-        message: 'Error Login',
+        message: data.error,
         status: res.status
       }
     }
   }
 
-  const dataObj: ILoginDataResponse = await res.json()
+  const token = data.data.token
+  setLocalStorage('accessToken', token)
 
   return {
-    data: dataObj,
+    data: decodeAccessToken(token),
     error: null
   }
 }

@@ -1,50 +1,40 @@
-import { setLocalStorage, removeLocalStorage } from 'lib/utils/localStorage'
 import createAtom from 'zustand'
-
-type IAuth = {
-  email: string
-  name: string
-  phone: string
-  accessToken: string
-  refreshToken: string
-}
+import { setLocalStorage, removeLocalStorage } from 'lib/utils/localStorage'
 
 type TSignInProps = {
   email: string
   name: string
   phone: string
   accessToken: string
-  refreshToken: string
+  iat: number
+  lastname: string
+  roles: {
+    admin: boolean
+    customer: boolean
+    driver: boolean
+    merchant: boolean
+  }
+  id: number,
+  username: string
 }
 
 interface IAuthAtom {
-  auth: IAuth | null
-  signIn: ({ email, name, phone, accessToken, refreshToken }: TSignInProps) => void
-  signOut: () => void
-  createAccout: ({ email, name, phone, accessToken, refreshToken }: TSignInProps) => void
+  auth: TSignInProps | null
+  setAuth: ({ email, name, phone, accessToken, iat, lastname, roles, id, username }: TSignInProps) => void
+  removeAuth: () => void
 }
 
 export const useAuthStore = createAtom<IAuthAtom>(set => ({
   auth: null,
 
-  signIn: ({ email, name, phone, accessToken, refreshToken }) => {
-    setLocalStorage('accessToken', accessToken)
-    setLocalStorage('refreshToken', refreshToken)
-
+  setAuth: ({ email, name, phone, accessToken, iat, lastname, roles, id, username }) => {
     set({
-      auth: { email, name, phone, accessToken, refreshToken }
+      auth: { email, name, phone, accessToken, iat, lastname, roles, id, username }
     })
   },
 
-  signOut: () => {
+  removeAuth: () => {
     removeLocalStorage('accessToken')
-    removeLocalStorage('refreshToken')
     set({ auth: null })
-  },
-
-  createAccout: ({ email, name, phone, accessToken, refreshToken }) => {
-    set({
-      auth: { email, name, phone, accessToken, refreshToken }
-    })
   }
 }))
