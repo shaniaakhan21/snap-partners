@@ -1,21 +1,7 @@
-import { Button } from 'components/common/Button'
-import { useAuthStore } from 'lib/stores'
 import Link from 'next/link'
 import { IHandleStep, IUserTrack } from '../types'
 
 export const UpgradeToManager = ({ userTrack, handleStep }: { userTrack: IUserTrack, handleStep: IHandleStep }) => {
-  const { createAccout } = useAuthStore()
-
-  const finishSignUpProcess = () => {
-    createAccout({
-      name: userTrack.userInfo.name,
-      email: userTrack.userInfo.email,
-      phone: userTrack.userInfo.phone,
-      accessToken: 'ACCESS_TOKEN_FAKE',
-      refreshToken: 'REFRESH_TOKEN_FAKE'
-    })
-  }
-
   return (
     <div className='flex flex-col items-center text-center'>
       <figure>
@@ -35,9 +21,11 @@ export const UpgradeToManager = ({ userTrack, handleStep }: { userTrack: IUserTr
       </ul>
 
       <div className='w-full mt-10'>
-        <Button classes='w-full uppercase' onClick={finishSignUpProcess}>
-          Continue
-        </Button>
+        <Link href='/auth/signin'>
+          <a className='px-4 block w-full py-2 disabled:opacity-50 disabled:cursor-not-allowed bg-black-primary text-white bg-primary-500 rounded-full font-semibold focus:outline-none focus:ring focus:ring-primary-300 focus:opacity-90 hover:opacity-90'>
+            Continue
+          </a>
+        </Link>
 
         <p className='mt-2'>
           Do it later in{' '}
