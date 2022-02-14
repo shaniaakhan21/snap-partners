@@ -1,4 +1,4 @@
-import { API } from 'config/api'
+// import { API } from 'config/api'
 
 interface ILoginDataBody {
   username: string
@@ -15,7 +15,7 @@ interface ILoginDataResponse {
 }
 
 export const login = async (data: ILoginDataBody) => {
-  const res = await fetch('http://snap150.snap.devopsteam.info:9090/api/authentication/login', {
+  const res = await fetch('http://snap150.snap.devopsteam.info/api/authentication/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
