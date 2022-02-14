@@ -5,7 +5,7 @@ import { useDashboardGetPathname } from 'lib/hooks/useDashboardGetPathnameData'
 
 export const Navbar = () => {
   const { title, pathname } = useDashboardGetPathname()
-  const { auth, signOut } = useAuthStore()
+  const { auth, removeAuth } = useAuthStore()
   const { toggleDrawer } = useDrawerStore()
   const { toggleReferral } = useSearchModalStore()
 
@@ -44,7 +44,7 @@ export const Navbar = () => {
           auth && <Account
             name={auth.name}
             email={auth.email}
-            signOut={signOut}
+            signOut={removeAuth}
             phone={auth.phone}
           />
         }
