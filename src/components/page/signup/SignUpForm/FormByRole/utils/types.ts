@@ -1,6 +1,8 @@
 export interface IUserToSignUp {
   email: string
+  username: string
   name: string
+  lastname: string
   phone: string
   password: string
   referralCode?: string | null
@@ -13,6 +15,23 @@ export interface IDataForm extends IUserToSignUp {
   termsAndConditions: boolean
   phoneExt: string
   phoneNumber: string
+
+  //   "name": "CustomerName",
+  //   "lastname": "CustomerLastName",
+  // "email": "customer@snapdelivery.com",
+  //   "username": "customer1",
+  // "password": "123456",
+  // "phoneNumber": "+584242565184",
+  //   "idImage": null,
+  //   "insuranceImage": null,
+  // "roles": {
+  //       "admin": false,
+  //       "customer": true,
+  //       "driver": false,
+  //       "merchant": false
+  //   },
+  //   "code": "555207",
+  //   "sponsorReferralCode":null
 }
 
 export interface IUserStepsToSignUp {
@@ -38,7 +57,7 @@ export interface IRegisterFormProps {
   role: string
 }
 
-export type registerFormIds = 'referralCode' | 'email' | 'name' | 'phoneExt' | 'phoneNumber' | 'confirmEmail' | 'password' | 'confirmPassword' | 'rememberMe' | 'termsAndConditions'
+export type registerFormIds = 'referralCode' | 'email' | 'username' | 'name' | 'lastname' | 'phoneExt' | 'phoneNumber' | 'confirmEmail' | 'password' | 'confirmPassword' | 'rememberMe' | 'termsAndConditions'
 
 export interface IFormConfig {
   email: {
@@ -52,6 +71,20 @@ export interface IFormConfig {
   },
 
   name: {
+    required: { value: boolean, message: string },
+    maxLength: { value: number, message: string },
+    minLength: { value: number, message: string }
+    pattern: { value: RegExp; message: string }
+  },
+
+  lastname: {
+    required: { value: boolean, message: string },
+    maxLength: { value: number, message: string },
+    minLength: { value: number, message: string }
+    pattern: { value: RegExp; message: string }
+  },
+
+  username: {
     required: { value: boolean, message: string },
     maxLength: { value: number, message: string },
     minLength: { value: number, message: string }

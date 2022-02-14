@@ -10,7 +10,7 @@ const normalizeUser = (user) => {
 }
 
 export const getUsers = async (usersPage = 1) => {
-  const res = await fetch(`${API.BASE_URL}/users?page${usersPage}`)
+  const res = await fetch(`${API.BASE_URL_FAKE}/users?page${usersPage}`)
   // eslint-disable-next-line camelcase
   const { page, per_page, total, total_pages, data } = await res.json()
   const users = data.map(user => normalizeUser(user))
@@ -25,7 +25,7 @@ export const getUsers = async (usersPage = 1) => {
 }
 
 export const getUserById = async (userId = 1) => {
-  const res = await fetch(`${API.BASE_URL}/users/${userId}`)
+  const res = await fetch(`${API.BASE_URL_FAKE}/users/${userId}`)
   // eslint-disable-next-line camelcase
   const { avatar, email, first_name, id, last_name } = await res.json()
 

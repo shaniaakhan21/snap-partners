@@ -3,8 +3,8 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
+import { API } from 'config/api'
 import { useAuthStore } from 'lib/stores'
-import { fakeLogin } from 'lib/utils/fakeLogin'
 
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
@@ -20,28 +20,30 @@ export const SignInForm = () => {
   const [isLoading, setLoading] = useState(false)
   const { handleSubmit, register, reset, formState: { errors } } = useForm<IDataForm>()
 
-  const onSubmit = async (dataForm: IDataForm) => {
+  const onSubmit = async ({ username, password }: IDataForm) => {
     setLoading(true)
 
-    setTimeout(async () => { // Simulate latency
-      const { data, error } = await fakeLogin(dataForm.email, dataForm.password)
+    const res = await fetch(`${API.BASE_URL}/api/authentication/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password })
+    }).finally(() => setLoading(false))
 
-      setLoading(false)
+    if (!res.ok) {
+      return toast(`Credentials Error ${res.status}`, { type: 'error' })
+    }
 
-      if (error) {
-        return toast(error, { type: 'error' })
-      }
+    const { data } = await res.json()
 
-      toast('¡Sign In Successful!', { type: 'success' })
-      signIn({
-        email: data.email,
-        name: data.name,
-        phone: data.phone.number,
-        accessToken: data.accessToken,
-        refreshToken: data.refreshToken
-      })
-      reset()
-    }, 1500)
+    toast('¡Sign In Successful!', { type: 'success' })
+    signIn({
+      email: 'user@test.com',
+      name: 'user test',
+      phone: '+15555555555',
+      accessToken: data.token,
+      refreshToken: 'refreshToken'
+    })
+    reset()
   }
 
   if (isLoading) {
@@ -56,16 +58,16 @@ export const SignInForm = () => {
 
       <form className='max-w-xs mt-6' onSubmit={handleSubmit(onSubmit)}>
         <InputForm
-          id='email'
-          name='email'
-          type='email'
-          label='Email'
-          registerId='email'
-          placeholder='Enter Email'
-          autoComplete='email'
-          errors={errors.email}
+          id='username'
+          name='username'
+          type='text'
+          label='Username'
+          registerId='username'
+          placeholder='Enter Username'
+          autoComplete='username'
+          errors={errors.username}
           register={register}
-          rulesForm={signInRulesConfig.email}
+          rulesForm={signInRulesConfig.username}
         />
 
         <RegisterPassword

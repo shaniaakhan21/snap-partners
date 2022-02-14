@@ -14,6 +14,8 @@ import { IReferralLink } from 'lib/types'
 import { IHandleStep, IHandleUserInfo, IDataForm } from '../types'
 import { STEPS } from '.'
 import { BulletPagination } from './BulletPagination'
+import { API } from 'config/api'
+import { toast } from 'react-toastify'
 
 interface IStepOpeProps {
   referralLink: IReferralLink,
@@ -50,18 +52,30 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       return
     }
 
-    setTimeout(() => {
-      setLoading(false)
-      handleUserInfo({
-        email: dataForm.email,
-        name: dataForm.name,
-        password: dataForm.password,
-        phone: dataForm.phone,
-        referralCode: dataForm.referralCode
-      })
-      handleStep(STEPS.VERIFY_CODE)
-      reset()
-    }, 2000)
+    console.log(dataForm)
+
+    const res = await fetch(`${API.BASE_URL}/api/authentication/signUpStepOne`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phoneNumber: `+${dataForm.phoneExt}${dataForm.phoneNumber}` })
+    }).finally(() => setLoading(false))
+
+    if (!res.ok) {
+      return toast(`Registration of Phone Error ${res.status}`, { type: 'error' })
+    }
+
+    handleUserInfo({
+      email: dataForm.email,
+      username: dataForm.username,
+      name: dataForm.name,
+      lastname: dataForm.lastname,
+      password: dataForm.password,
+      phone: `+${dataForm.phoneExt}${dataForm.phoneNumber}`,
+      referralCode: dataForm.referralCode
+    })
+
+    handleStep(STEPS.VERIFY_CODE)
+    reset()
   }
 
   if (isLoading) {
@@ -106,6 +120,18 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
         />
 
         <InputForm
+          id='username'
+          name='username'
+          type='text'
+          label='Username'
+          registerId='username'
+          placeholder='Enter Username'
+          errors={errors.username}
+          register={register}
+          rulesForm={registerRulesConfig.username}
+        />
+
+        <InputForm
           id='name'
           name='name'
           type='text'
@@ -115,6 +141,18 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           errors={errors.name}
           register={register}
           rulesForm={registerRulesConfig.name}
+        />
+
+        <InputForm
+          id='lastname'
+          name='lastname'
+          type='text'
+          label='Lastname'
+          registerId='lastname'
+          placeholder='Enter Lastname'
+          errors={errors.lastname}
+          register={register}
+          rulesForm={registerRulesConfig.lastname}
         />
 
         <InputPhone

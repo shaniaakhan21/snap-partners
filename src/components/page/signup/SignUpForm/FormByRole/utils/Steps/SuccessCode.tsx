@@ -15,10 +15,6 @@ export const SuccessCode = ({ userTrack, handleStep }: { userTrack: IUserTrack, 
       <span className='text-xl text-primary-500'>Welcome!</span>
       <span className='text-4xl text-primary-500 font-bold'>{userTrack.userInfo.name}</span>
 
-      <div className='mt-4'>
-        <BulletPagination stepToActivate='SUCCESS_CODE' />
-      </div>
-
       <Button onClick={() => handleStep(STEPS.UPGRADE_TO_MANAGER)} classes='w-full mt-10'>CONTINUE</Button>
 
       <div className='flex flex-wrap justify-center items-center mt-8 gap-x-4 gap-y-4'>

@@ -4,16 +4,17 @@ import { toast } from 'react-toastify'
 import ReactCodeInput from 'react-verification-code-input'
 
 import { STEPS } from '.'
-import { IHandleStep } from '../types'
-import { fakeVerifyCode } from '../fakeVerifyCode'
+import { IHandleStep, IUserTrack } from '../types'
 import { Spinner } from 'components/common/loaders'
 import { BulletPagination } from './BulletPagination'
+import { API } from 'config/api'
+import { IReferralLink } from 'lib/types'
 
 interface IDataFormVerifyCode {
   code: string
 }
 
-export const VerifyCode = ({ handleStep }: { handleStep: IHandleStep }) => {
+export const VerifyCode = ({ userTrack, handleStep, referralLink }: { userTrack: IUserTrack, handleStep: IHandleStep, referralLink: IReferralLink }) => {
   const { handleSubmit } = useForm<IDataFormVerifyCode>()
   const [isVerifyingCode, setIsVerifyingCode] = useState(false)
 
@@ -21,13 +22,35 @@ export const VerifyCode = ({ handleStep }: { handleStep: IHandleStep }) => {
     setIsVerifyingCode(true)
     console.log(code)
 
-    fakeVerifyCode(code)
-      .then(() => {
-        handleStep(STEPS.SUCCESS_CODE)
-        toast('Code Verified', { type: 'success' })
+    const res = await fetch(`${API.BASE_URL}/api/authentication/signUpStepTwo`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: userTrack.userInfo.name,
+        lastname: userTrack.userInfo.lastname,
+        email: userTrack.userInfo.email,
+        username: userTrack.userInfo.username,
+        password: userTrack.userInfo.password,
+        phoneNumber: userTrack.userInfo.phone,
+        idImage: null,
+        insuranceImage: null,
+        roles: {
+          admin: referralLink.role === 'ADMIN',
+          customer: referralLink.role === 'CUSTOMER',
+          driver: referralLink.role === 'DRIVER',
+          merchant: referralLink.role === 'RESTAURANT'
+        },
+        code,
+        sponsorReferralCode: referralLink.code || null
       })
-      .catch(() => toast('Incorrect Code', { type: 'error' }))
-      .finally(() => setIsVerifyingCode(false))
+    }).finally(() => setIsVerifyingCode(false))
+
+    if (!res.ok) {
+      return toast(`Registration of Phone Error ${res.status}`, { type: 'error' })
+    }
+
+    toast('Code Verified', { type: 'success' })
+    handleStep(STEPS.SUCCESS_CODE)
   }
 
   if (isVerifyingCode) {
