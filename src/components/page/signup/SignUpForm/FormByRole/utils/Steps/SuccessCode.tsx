@@ -2,7 +2,6 @@ import { Button } from 'components/common/Button'
 import { AppleStore, CheckSuccess, GooglePlay } from 'components/common/icons'
 import { STEPS } from '.'
 import { IHandleStep, IUserTrack } from '../types'
-import { BulletPagination } from './BulletPagination'
 
 export const SuccessCode = ({ userTrack, handleStep }: { userTrack: IUserTrack, handleStep: IHandleStep }) => {
   return (
