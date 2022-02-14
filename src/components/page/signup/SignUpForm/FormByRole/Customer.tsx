@@ -1,8 +1,7 @@
-import { IReferralLink } from 'lib/types'
 import { useState } from 'react'
-import { StepOne } from './utils/Steps/StepOne'
-import { StepFinish } from './utils/Steps/StepFinish'
-import { StepTwo } from './utils/Steps/StepTwo'
+
+import { IReferralLink } from 'lib/types'
+import { STEPS, RegisterBasicInfo, VerifyCode, SuccessCode, UpgradeToManager } from './utils/Steps'
 import { IHandleStep, IUserTrack, IHandleUserInfo } from './utils/types'
 
 export const SignUpCustomerForm = ({ referralLink }: { referralLink: IReferralLink }) => {
@@ -25,8 +24,8 @@ export const SignUpCustomerForm = ({ referralLink }: { referralLink: IReferralLi
   return (
     <div>
       {
-        userTrack.step === 'STEP_1' && (
-          <StepOne
+        userTrack.step === STEPS.REGISTER_BASIC_INFO && (
+          <RegisterBasicInfo
             handleUserInfo={handleUserInfo}
             handleStep={handleStep}
             referralLink={referralLink}
@@ -35,16 +34,28 @@ export const SignUpCustomerForm = ({ referralLink }: { referralLink: IReferralLi
       }
 
       {
-        userTrack.step === 'STEP_2' && (
-          <StepTwo
+        userTrack.step === STEPS.VERIFY_CODE && (
+          <VerifyCode
             handleStep={handleStep}
           />
         )
       }
 
       {
-        userTrack.step === 'FINISH' && (
-          <StepFinish />
+        userTrack.step === STEPS.SUCCESS_CODE && (
+          <SuccessCode
+            handleStep={handleStep}
+            userTrack={userTrack}
+          />
+        )
+      }
+
+      {
+        userTrack.step === STEPS.UPGRADE_TO_MANAGER && (
+          <UpgradeToManager
+            handleStep={handleStep}
+            userTrack={userTrack}
+          />
         )
       }
     </div>

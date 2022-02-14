@@ -15,15 +15,23 @@ export interface IDataForm extends IUserToSignUp {
   phoneNumber: string
 }
 
-type TUserStepsToSignUp = 'STEP_1' | 'STEP_2' | 'FINISH'
+export interface IUserStepsToSignUp {
+  REGISTER_BASIC_INFO: 'STEP_1'
+  VERIFY_CODE: 'STEP_2'
+  SUCCESS_CODE: 'STEP_3'
+  UPGRADE_TO_MANAGER: 'STEP_4'
+}
+
+export type TStepsKey = 'REGISTER_BASIC_INFO' | 'VERIFY_CODE' | 'SUCCESS_CODE' | 'UPGRADE_TO_MANAGER'
+export type TSteps = IUserStepsToSignUp['REGISTER_BASIC_INFO'] | IUserStepsToSignUp['VERIFY_CODE'] | IUserStepsToSignUp['SUCCESS_CODE'] | IUserStepsToSignUp['UPGRADE_TO_MANAGER']
 
 export interface IUserTrack {
-  step: TUserStepsToSignUp
+  step: TSteps
   userInfo: IUserToSignUp
 }
 
 export type IHandleUserInfo = (userToSignUp: IUserToSignUp) => void
-export type IHandleStep = (step: TUserStepsToSignUp) => void
+export type IHandleStep = (step: TSteps) => void
 
 export interface IRegisterFormProps {
   code?: string

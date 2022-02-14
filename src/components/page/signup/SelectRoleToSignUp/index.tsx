@@ -11,7 +11,7 @@ export const SelectRoleToSignUp = () => {
       icon: <IBOIcon classes='w-14 h-14' />,
       label: 'I’m Customer',
       key: ROLES.CUSTOMER,
-      link: `/auth/signup?referralRole=${ROLES.CUSTOMER}`
+      link: `/auth/signup?role=${ROLES.CUSTOMER}`
     },
     {
       icon: <RestaurantsIcon classes='w-14 h-14' />,
@@ -23,7 +23,7 @@ export const SelectRoleToSignUp = () => {
       icon: <DriverIcon classes='w-14 h-14' />,
       label: 'I’m a Driver',
       key: ROLES.DRIVER,
-      link: `/auth/signup?referralRole=${ROLES.DRIVER}`
+      link: `/auth/signup?role=${ROLES.DRIVER}`
     }
   ])
 

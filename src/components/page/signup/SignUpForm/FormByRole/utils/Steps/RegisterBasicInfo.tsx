@@ -12,6 +12,8 @@ import { RegisterPassword } from '../RegisterPassword'
 import { TermsAndConditions } from '../TermsAndConditions'
 import { IReferralLink } from 'lib/types'
 import { IHandleStep, IHandleUserInfo, IDataForm } from '../types'
+import { STEPS } from '.'
+import { BulletPagination } from './BulletPagination'
 
 interface IStepOpeProps {
   referralLink: IReferralLink,
@@ -19,7 +21,7 @@ interface IStepOpeProps {
   handleUserInfo: IHandleUserInfo
 }
 
-export const StepOne = ({ referralLink, handleStep, handleUserInfo }: IStepOpeProps) => {
+export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: IStepOpeProps) => {
   const { handleSubmit, register, reset, formState: { errors }, setError } = useForm<IDataForm>()
   const [isLoading, setLoading] = useState(false)
 
@@ -48,21 +50,23 @@ export const StepOne = ({ referralLink, handleStep, handleUserInfo }: IStepOpePr
       return
     }
 
-    setLoading(false)
-    handleUserInfo({
-      email: dataForm.email,
-      name: dataForm.name,
-      password: dataForm.password,
-      phone: dataForm.phone,
-      referralCode: dataForm.referralCode
-    })
-    handleStep('STEP_2')
-    reset()
+    setTimeout(() => {
+      setLoading(false)
+      handleUserInfo({
+        email: dataForm.email,
+        name: dataForm.name,
+        password: dataForm.password,
+        phone: dataForm.phone,
+        referralCode: dataForm.referralCode
+      })
+      handleStep(STEPS.VERIFY_CODE)
+      reset()
+    }, 2000)
   }
 
   if (isLoading) {
     return (
-      <div className='flex items-center justify-center w-screen h-screen md:w-full'>
+      <div className='flex items-center justify-center w-screen h-[85vh] md:w-full'>
         <Spinner classes='w-20 h-20 md:w-10 md:h-10' />
       </div>
     )
@@ -145,7 +149,9 @@ export const StepOne = ({ referralLink, handleStep, handleUserInfo }: IStepOpePr
         />
 
         <section className='mt-4'>
-          <Button type='submit' classes='w-full mr-1 text-sm bg-primary-500'>
+          <BulletPagination stepToActivate='REGISTER_BASIC_INFO' />
+
+          <Button type='submit' classes='w-full mt-4 text-sm bg-primary-500'>
             Sign Up
           </Button>
 
@@ -154,7 +160,7 @@ export const StepOne = ({ referralLink, handleStep, handleUserInfo }: IStepOpePr
           <p>
             <span className='font-semibold'>Already have an accout?</span>
             <Link href='/auth/signin'>
-              <a className='text-textAcent-500'> Sign In.</a>
+              <a className='text-textAcent-500 focus:underline'> Sign In.</a>
             </Link>
           </p>
         </section>

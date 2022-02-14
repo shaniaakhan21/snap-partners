@@ -12,7 +12,7 @@ import { ROLES } from 'config/roles'
 const { SEO } = PAGE_INFO
 
 const SignUpPage: Page = () => {
-  const { referralCode: code, referralRole: role } = useHandlerReferralLink()
+  const { referralCode: code, role } = useHandlerReferralLink()
 
   if (role === ROLES.CUSTOMER) return <SignUpCustomerForm referralLink={{ code, role }} />
   if (role === ROLES.DRIVER) return <SignUpDriverForm referralLink={{ code, role }} />
