@@ -9,7 +9,7 @@ export default function Page500 () {
       <div className='w-full h-screen flex flex-col justify-center items-center z-30'>
         <img src='/images/logo-white.png' className='w-28 h-28' />
         <span className='text-9xl font-black mt-5'>500</span>
-        <p className='font-semibold text-4xl mt-3'>Internal Server Error</p>
+        <p className='font-semibold text-4xl mt-3 text-center'>Internal Server Error</p>
         <p className='font-light text-xl mt-2 text-center'>Opps, try again later</p>
         <Link href='/overview'>
           <a className='block w-44 rounded-full px-4 py-2 bg-textAcent-500 text-center uppercase font-bold mt-4'>Go Back Home</a>
