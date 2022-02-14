@@ -46,6 +46,7 @@ export const Navbar = () => {
             email={auth.email}
             signOut={removeAuth}
             phone={auth.phone}
+            photoUrl={null}
           />
         }
       </div>

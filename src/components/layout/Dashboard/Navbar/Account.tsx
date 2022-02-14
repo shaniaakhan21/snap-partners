@@ -1,8 +1,8 @@
-import { ArrowDownIcon, NotificationIcon } from 'components/common/icons'
+import { ArrowDownIcon, GenealogyIcon, NotificationIcon } from 'components/common/icons'
 import { useClickOutsideElement } from 'lib/hooks/useClickOutsideElement'
 import { useState, useRef, useEffect } from 'react'
 
-export const Account = ({ email, name, phone, signOut }) => {
+export const Account = ({ email, name, phone, photoUrl, signOut }) => {
   const userMenuRef = useRef(null)
   const [showMenu, setShowMenu] = useState(false)
   const clickOutsideUserMenu = useClickOutsideElement(userMenuRef)
@@ -25,10 +25,21 @@ export const Account = ({ email, name, phone, signOut }) => {
 
       <div className='flex justify-start items-center relative select-none'>
         <div className='relative'>
-          <img
-            src='/images/avatar.png'
-            className='ml-3'
-          />
+          {
+            photoUrl
+              ? (
+                <img
+                  src={photoUrl}
+                  className='ml-3 w-12 h-12 rounded-3xl'
+                />
+              )
+
+              : (
+                <div className='w-12 h-12 rounded-3xl flex items-center justify-center bg-gray-200'>
+                  <GenealogyIcon />
+                </div>
+              )
+          }
 
           <div className='sm:hidden absolute -top-1 -right-2 h-3.5 w-3.5 bg-[#FF4343] rounded-full text-white flex justify-center items-center' />
         </div>
