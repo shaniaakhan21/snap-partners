@@ -7,7 +7,7 @@ import { STEPS } from '.'
 import { IHandleStep, IUserTrack } from '../types'
 import { Spinner } from 'components/common/loaders'
 import { BulletPagination } from './BulletPagination'
-import { API } from 'config/api'
+import { signUpStep2 } from 'lib/services/session/signUp'
 import { IReferralLink } from 'lib/types'
 
 interface IDataFormVerifyCode {
@@ -20,36 +20,34 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink }: { userTrack:
 
   const onSubmit = async (code) => {
     setIsVerifyingCode(true)
-    console.log(code)
 
-    const res = await fetch(`${API.BASE_URL}/api/authentication/signUpStepTwo`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: userTrack.userInfo.name,
-        lastname: userTrack.userInfo.lastname,
-        email: userTrack.userInfo.email,
-        username: userTrack.userInfo.username,
-        password: userTrack.userInfo.password,
-        phoneNumber: userTrack.userInfo.phone,
-        idImage: null,
-        insuranceImage: null,
-        roles: {
-          admin: referralLink.role === 'ADMIN',
-          customer: referralLink.role === 'CUSTOMER',
-          driver: referralLink.role === 'DRIVER',
-          merchant: referralLink.role === 'RESTAURANT'
-        },
-        code,
-        sponsorReferralCode: referralLink.code || null
-      })
-    }).finally(() => setIsVerifyingCode(false))
+    const { error } = await signUpStep2({
+      name: userTrack.userInfo.name,
+      lastname: userTrack.userInfo.lastname,
+      email: userTrack.userInfo.email,
+      username: userTrack.userInfo.username,
+      password: userTrack.userInfo.password,
+      phoneNumber: userTrack.userInfo.phone,
+      idImage: null,
+      insuranceImage: null,
+      roles: {
+        admin: referralLink.role === 'ADMIN',
+        customer: referralLink.role === 'CUSTOMER',
+        driver: referralLink.role === 'DRIVER',
+        merchant: referralLink.role === 'RESTAURANT'
+      },
+      code,
+      sponsorReferralCode: referralLink.code || null
+    })
 
-    if (!res.ok) {
-      return toast(`Registration of Phone Error ${res.status}`, { type: 'error' })
+    if (error) {
+      toast(error.message, { type: 'error' })
+      setIsVerifyingCode(false)
+      return
     }
 
     toast('Code Verified', { type: 'success' })
+    setIsVerifyingCode(false)
     handleStep(STEPS.SUCCESS_CODE)
   }
 

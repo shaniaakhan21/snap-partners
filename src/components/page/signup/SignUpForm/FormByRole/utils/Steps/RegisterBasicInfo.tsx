@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-
+import { toast } from 'react-toastify'
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
 import { InputForm } from '../Input'
@@ -14,8 +14,7 @@ import { IReferralLink } from 'lib/types'
 import { IHandleStep, IHandleUserInfo, IDataForm } from '../types'
 import { STEPS } from '.'
 import { BulletPagination } from './BulletPagination'
-import { API } from 'config/api'
-import { toast } from 'react-toastify'
+import { signUpStep1 } from 'lib/services/session/signUp'
 
 interface IStepOpeProps {
   referralLink: IReferralLink,
@@ -52,16 +51,14 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       return
     }
 
-    console.log(dataForm)
+    const phoneNumber = `+${dataForm.phoneExt}${dataForm.phoneNumber}`
 
-    const res = await fetch(`${API.BASE_URL}/api/authentication/signUpStepOne`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ phoneNumber: `+${dataForm.phoneExt}${dataForm.phoneNumber}` })
-    }).finally(() => setLoading(false))
+    const { error } = await signUpStep1({ phoneNumber })
 
-    if (!res.ok) {
-      return toast(`Registration of Phone Error ${res.status}`, { type: 'error' })
+    if (error) {
+      toast('error', { type: 'error' })
+      setLoading(false)
+      return
     }
 
     handleUserInfo({
@@ -70,9 +67,10 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       name: dataForm.name,
       lastname: dataForm.lastname,
       password: dataForm.password,
-      phone: `+${dataForm.phoneExt}${dataForm.phoneNumber}`,
+      phone: phoneNumber,
       referralCode: dataForm.referralCode
     })
+    setLoading(false)
 
     handleStep(STEPS.VERIFY_CODE)
     reset()

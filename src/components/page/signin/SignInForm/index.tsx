@@ -2,10 +2,6 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
-
-import { API } from 'config/api'
-import { useAuthStore } from 'lib/stores'
-
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
 import { InputForm } from './utils/Input'
@@ -14,6 +10,8 @@ import { RRSSAuth } from './utils/RRSSAuth'
 import { signInRulesConfig } from './utils/formRules'
 import { RegisterPassword } from './utils/RegisterPassword'
 import { RememberAndPolicy } from './utils/RememberAndPolicy'
+import { useAuthStore } from 'lib/stores'
+import { login } from 'lib/services/session/login'
 
 export const SignInForm = () => {
   const { signIn } = useAuthStore()
@@ -23,19 +21,19 @@ export const SignInForm = () => {
   const onSubmit = async ({ username, password }: IDataForm) => {
     setLoading(true)
 
-    const res = await fetch(`${API.BASE_URL}/api/authentication/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password })
-    }).finally(() => setLoading(false))
+    const { data, error } = await login({
+      username,
+      password
+    })
 
-    if (!res.ok) {
-      return toast(`Credentials Error ${res.status}`, { type: 'error' })
+    if (error) {
+      toast(error.message, { type: 'error' })
+      setLoading(false)
+      return
     }
 
-    const { data } = await res.json()
-
     toast('¡Sign In Successful!', { type: 'success' })
+    setLoading(false)
     signIn({
       email: 'user@test.com',
       name: 'user test',
