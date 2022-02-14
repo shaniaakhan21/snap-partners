@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
 import { useAuthStore } from 'lib/stores'
-import { fakeLogin } from 'lib/utils/fakeLogin'
+// import { fakeLogin } from 'lib/utils/fakeLogin'
 
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
@@ -14,6 +14,7 @@ import { RRSSAuth } from './utils/RRSSAuth'
 import { signInRulesConfig } from './utils/formRules'
 import { RegisterPassword } from './utils/RegisterPassword'
 import { RememberAndPolicy } from './utils/RememberAndPolicy'
+import { login } from 'lib/services/session/login'
 
 export const SignInForm = () => {
   const { signIn } = useAuthStore()
@@ -23,25 +24,39 @@ export const SignInForm = () => {
   const onSubmit = async (dataForm: IDataForm) => {
     setLoading(true)
 
-    setTimeout(async () => { // Simulate latency
-      const { data, error } = await fakeLogin()
+    const { data: { x }, error } = await login({
+      username: 'admin1',
+      password: '12345678'
+    })
 
-      setLoading(false)
+    if (error) {
+      return toast(error, { type: 'error' })
+    }
 
-      if (error) {
-        return toast(error, { type: 'error' })
-      }
+    const data = {
+      email: 'test@gmail.com',
+      name: 'test',
+      phone: {
+        number: '1234567'
+      },
+      accessToken: '123128312982321',
+      refreshToken: '1232141241'
+    }
 
-      toast('¡Sign In Successful!', { type: 'success' })
-      signIn({
-        email: data.email,
-        name: data.name,
-        phone: data.phone.number,
-        accessToken: data.accessToken,
-        refreshToken: data.refreshToken
-      })
-      reset()
-    }, 1500)
+    toast('¡Sign In Successful!', { type: 'success' })
+
+    console.log('DATA:', x)
+    console.log('ERROR:', error)
+
+    signIn({
+      email: data.email,
+      name: data.name,
+      phone: data.phone.number,
+      accessToken: data.accessToken,
+      refreshToken: data.refreshToken
+    })
+
+    reset()
   }
 
   if (isLoading) {
