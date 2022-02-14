@@ -10,3 +10,9 @@
   height: 5px;
   background: white;
 }
+
+/* SignUp - Upgrade To Manager - List Benefits */
+
+.custom__bulletList li::marker {
+  @apply text-primary-500;
+}

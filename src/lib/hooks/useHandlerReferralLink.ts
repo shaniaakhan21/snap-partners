@@ -14,10 +14,10 @@ export const useHandlerReferralLink = () => {
   }
 
   const handlerIdentifyRole = () => {
-    if (typeof router.query.referralRole === 'string') {
-      if (router.query.referralRole.toUpperCase() === ROLES.CUSTOMER) return ROLES.CUSTOMER
-      if (router.query.referralRole.toUpperCase() === ROLES.DRIVER) return ROLES.DRIVER
-      if (router.query.referralRole.toUpperCase() === ROLES.RESTAURANT) return ROLES.RESTAURANT
+    if (typeof router.query.role === 'string') {
+      if (router.query.role.toUpperCase() === ROLES.CUSTOMER) return ROLES.CUSTOMER
+      if (router.query.role.toUpperCase() === ROLES.DRIVER) return ROLES.DRIVER
+      if (router.query.role.toUpperCase() === ROLES.RESTAURANT) return ROLES.RESTAURANT
       else return null
     } else return null
   }
@@ -34,10 +34,10 @@ export const useHandlerReferralLink = () => {
       ...prevState,
       role: handlerIdentifyRole()
     }))
-  }, [router.query.referralRole])
+  }, [router.query.role])
 
   return {
     referralCode: referralLink.code,
-    referralRole: referralLink.role
+    role: referralLink.role
   }
 }

@@ -1,9 +1,0 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@import "./utils/layouts.css";
-@import "./utils/pseudo-elements.css";
-@import "./utils/input-clear.css";
-@import "./utils/custom-scroll.css";
-@import "./utils/alerts.css";

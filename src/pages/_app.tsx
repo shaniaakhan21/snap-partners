@@ -11,6 +11,7 @@ import { useLoadingPage } from 'lib/hooks/useLoadingPage'
 import { swrConfigValue } from 'lib/utils/swrConfig'
 import 'styles/tailwind.css'
 import 'react-toastify/dist/ReactToastify.min.css'
+import 'react-phone-input-2/lib/style.css'
 
 const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({ Component, pageProps }: AppLayoutProps) => {
   const router = useRouter()
