@@ -24,6 +24,7 @@ const HomePage: PageNext = () => {
 
     if (!token) {
       router.push('/auth/signin')
+      return
     }
 
     const data = decodeAccessToken(token)

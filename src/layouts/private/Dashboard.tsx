@@ -18,6 +18,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
 
     if (!token) {
       router.push('/auth/signin')
+      return
     }
 
     const data = decodeAccessToken(token)

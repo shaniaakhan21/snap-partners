@@ -1,5 +1,6 @@
 import { setLocalStorage } from 'lib/utils/localStorage'
 import { decodeAccessToken } from 'lib/utils/decodedAccessToken'
+import { API } from 'config/api'
 
 interface ILoginDataBody {
   username: string
@@ -44,7 +45,7 @@ interface ILoginDataResponse {
 // }>
 
 export const login = async (dataBody: ILoginDataBody) => {
-  const res = await fetch('/api/authentication/login', {
+  const res = await fetch(`${API.BASE_URL}/api/authentication/login`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
