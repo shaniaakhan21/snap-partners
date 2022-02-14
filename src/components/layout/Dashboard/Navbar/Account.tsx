@@ -30,12 +30,12 @@ export const Account = ({ email, name, phone, photoUrl, signOut }) => {
               ? (
                 <img
                   src={photoUrl}
-                  className='ml-3 w-12 h-12 rounded-3xl'
+                  className='ml-3 w-10 h-10 rounded-3xl'
                 />
               )
 
               : (
-                <div className='w-12 h-12 rounded-3xl flex items-center justify-center bg-gray-200'>
+                <div className='w-10 h-10 rounded-3xl flex items-center justify-center bg-gray-200'>
                   <GenealogyIcon />
                 </div>
               )

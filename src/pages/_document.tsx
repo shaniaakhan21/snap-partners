@@ -17,7 +17,7 @@ export default class MyDocument extends Document {
           <meta name='copyright' content={SEO.AUTHOR} />
           <meta name='robots' content='index' />
           <meta name='robots' content='follow' />
-          <meta http-equiv='Content-Security-Policy' content='upgrade-insecure-requests' />
+          <meta httpEquiv='Content-Security-Policy' content='upgrade-insecure-requests' />
 
           <meta name='application-name' content={SEO.TITLE_PAGE} />
           <meta name='apple-mobile-web-app-capable' content='yes' />
