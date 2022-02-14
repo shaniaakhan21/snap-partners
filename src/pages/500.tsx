@@ -4,7 +4,7 @@ export default function Page500 () {
   return (
     <div className='w-full h-screen bg-[#FFAA00] text-white flex flex-col justify-center items-center px-4 relative'>
       <div className='bg-textAcent-500 absolute top-0 left-0 w-full h-screen -z-10'></div>
-      <img src='/images/errorAsset.png' className='absolute bottom-0 right-0 z-20 w-40 sm:w-96' />
+      <img src='/images/errorAsset.png' className='absolute bottom-0 left-0 z-20 w-40 sm:w-96' style={{ transform: 'rotateY(180deg)' }} />
 
       <div className='w-full h-screen flex flex-col justify-center items-center z-30'>
         <img src='/images/logo-white.png' className='w-28 h-28' />
