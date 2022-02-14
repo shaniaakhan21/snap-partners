@@ -15,10 +15,13 @@ interface ILoginDataResponse {
 }
 
 export const login = async (data: ILoginDataBody) => {
-  const res = await fetch(`${API.BASE_URL}/api/authentication/login`, {
+  const res = await fetch('http://snap150.snap.devopsteam.info:9090/api/authentication/login', {
     method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
   })
+
+  console.log(res)
 
   const dataObj: ILoginDataResponse = await res.json()
 
