@@ -4,30 +4,51 @@ import { toast } from 'react-toastify'
 import ReactCodeInput from 'react-verification-code-input'
 
 import { STEPS } from '.'
-import { IHandleStep } from '../types'
-import { fakeVerifyCode } from '../fakeVerifyCode'
+import { IHandleStep, IUserTrack } from '../types'
 import { Spinner } from 'components/common/loaders'
 import { BulletPagination } from './BulletPagination'
+import { signUpStep2 } from 'lib/services/session/signUp'
+import { IReferralLink } from 'lib/types'
 
 interface IDataFormVerifyCode {
   code: string
 }
 
-export const VerifyCode = ({ handleStep }: { handleStep: IHandleStep }) => {
+export const VerifyCode = ({ userTrack, handleStep, referralLink }: { userTrack: IUserTrack, handleStep: IHandleStep, referralLink: IReferralLink }) => {
   const { handleSubmit } = useForm<IDataFormVerifyCode>()
   const [isVerifyingCode, setIsVerifyingCode] = useState(false)
 
   const onSubmit = async (code) => {
     setIsVerifyingCode(true)
-    console.log(code)
 
-    fakeVerifyCode(code)
-      .then(() => {
-        handleStep(STEPS.SUCCESS_CODE)
-        toast('Code Verified', { type: 'success' })
-      })
-      .catch(() => toast('Incorrect Code', { type: 'error' }))
-      .finally(() => setIsVerifyingCode(false))
+    const { error } = await signUpStep2({
+      name: userTrack.userInfo.name,
+      lastname: userTrack.userInfo.lastname,
+      email: userTrack.userInfo.email,
+      username: userTrack.userInfo.username,
+      password: userTrack.userInfo.password,
+      phoneNumber: userTrack.userInfo.phone,
+      idImage: null,
+      insuranceImage: null,
+      roles: {
+        admin: referralLink.role === 'ADMIN',
+        customer: referralLink.role === 'CUSTOMER',
+        driver: referralLink.role === 'DRIVER',
+        merchant: referralLink.role === 'RESTAURANT'
+      },
+      code,
+      sponsorReferralCode: referralLink.code || null
+    })
+
+    if (error) {
+      toast(error.message, { type: 'error' })
+      setIsVerifyingCode(false)
+      return
+    }
+
+    toast('Code Verified', { type: 'success' })
+    setIsVerifyingCode(false)
+    handleStep(STEPS.SUCCESS_CODE)
   }
 
   if (isVerifyingCode) {

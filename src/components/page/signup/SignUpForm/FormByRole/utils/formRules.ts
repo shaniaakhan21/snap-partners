@@ -26,6 +26,20 @@ export const registerRulesConfig: IFormConfig = {
     pattern: { value: /^[a-zA-ZÀ-ÿ0-9 ()-.]*$/, message: 'Name not allow *' }
   },
 
+  lastname: {
+    required: { value: true, message: 'Lastname Required *' },
+    maxLength: { value: 50, message: 'Max 50 Characters *' },
+    minLength: { value: 3, message: 'Min 3 Characters *' },
+    pattern: { value: /^[a-zA-ZÀ-ÿ0-9 ()-.]*$/, message: 'Lastname not allow *' }
+  },
+
+  username: {
+    required: { value: true, message: 'Username Required *' },
+    maxLength: { value: 50, message: 'Max 50 Characters *' },
+    minLength: { value: 3, message: 'Min 3 Characters *' },
+    pattern: { value: /^[a-zA-ZÀ-ÿ0-9 ()-.]*$/, message: 'Username not allow *' }
+  },
+
   phoneExt: {
     required: { value: true, message: 'Phone extension required *' },
     maxLength: { value: 4, message: 'Max 4 Numbers *' },

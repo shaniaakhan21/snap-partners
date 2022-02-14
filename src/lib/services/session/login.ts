@@ -23,8 +23,6 @@ export const login = async (data: ILoginDataBody) => {
     body: JSON.stringify(data)
   })
 
-  console.log(res)
-
   const dataObj: ILoginDataResponse = await res.json()
 
   if (!res.ok) {

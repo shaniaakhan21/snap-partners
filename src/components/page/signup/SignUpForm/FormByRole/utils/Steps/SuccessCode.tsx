@@ -2,7 +2,6 @@ import { Button } from 'components/common/Button'
 import { AppleStore, CheckSuccess, GooglePlay } from 'components/common/icons'
 import { STEPS } from '.'
 import { IHandleStep, IUserTrack } from '../types'
-import { BulletPagination } from './BulletPagination'
 
 export const SuccessCode = ({ userTrack, handleStep }: { userTrack: IUserTrack, handleStep: IHandleStep }) => {
   return (
@@ -14,10 +13,6 @@ export const SuccessCode = ({ userTrack, handleStep }: { userTrack: IUserTrack, 
       <CheckSuccess classes='my-10' />
       <span className='text-xl text-primary-500'>Welcome!</span>
       <span className='text-4xl text-primary-500 font-bold'>{userTrack.userInfo.name}</span>
-
-      <div className='mt-4'>
-        <BulletPagination stepToActivate='SUCCESS_CODE' />
-      </div>
 
       <Button onClick={() => handleStep(STEPS.UPGRADE_TO_MANAGER)} classes='w-full mt-10'>CONTINUE</Button>
 

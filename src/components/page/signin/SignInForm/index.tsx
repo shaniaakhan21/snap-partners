@@ -2,10 +2,6 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
-
-import { useAuthStore } from 'lib/stores'
-// import { fakeLogin } from 'lib/utils/fakeLogin'
-
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
 import { InputForm } from './utils/Input'
@@ -14,6 +10,7 @@ import { RRSSAuth } from './utils/RRSSAuth'
 import { signInRulesConfig } from './utils/formRules'
 import { RegisterPassword } from './utils/RegisterPassword'
 import { RememberAndPolicy } from './utils/RememberAndPolicy'
+import { useAuthStore } from 'lib/stores'
 import { login } from 'lib/services/session/login'
 
 export const SignInForm = () => {
@@ -21,42 +18,29 @@ export const SignInForm = () => {
   const [isLoading, setLoading] = useState(false)
   const { handleSubmit, register, reset, formState: { errors } } = useForm<IDataForm>()
 
-  const onSubmit = async (dataForm: IDataForm) => {
+  const onSubmit = async ({ username, password }: IDataForm) => {
     setLoading(true)
 
-    // ESTO HAY QUE CAMBIARLO
-    const { data: { x }, error } = await login({
-      username: 'admin1',
-      password: '12345678'
+    const { data, error } = await login({
+      username,
+      password
     })
 
     if (error) {
-      return toast(error, { type: 'error' })
-    }
-
-    const data = {
-      email: 'test@gmail.com',
-      name: 'test',
-      phone: {
-        number: '1234567'
-      },
-      accessToken: '123128312982321',
-      refreshToken: '1232141241'
+      toast(error.message, { type: 'error' })
+      setLoading(false)
+      return
     }
 
     toast('¡Sign In Successful!', { type: 'success' })
-
-    console.log('DATA:', x)
-    console.log('ERROR:', error)
-
+    setLoading(false)
     signIn({
-      email: data.email,
-      name: data.name,
-      phone: data.phone.number,
-      accessToken: data.accessToken,
-      refreshToken: data.refreshToken
+      email: 'user@test.com',
+      name: 'user test',
+      phone: '+15555555555',
+      accessToken: data.token,
+      refreshToken: 'refreshToken'
     })
-
     reset()
   }
 
@@ -72,16 +56,16 @@ export const SignInForm = () => {
 
       <form className='max-w-xs mt-6' onSubmit={handleSubmit(onSubmit)}>
         <InputForm
-          id='email'
-          name='email'
-          type='email'
-          label='Email'
-          registerId='email'
-          placeholder='Enter Email'
-          autoComplete='email'
-          errors={errors.email}
+          id='username'
+          name='username'
+          type='text'
+          label='Username'
+          registerId='username'
+          placeholder='Enter Username'
+          autoComplete='username'
+          errors={errors.username}
           register={register}
-          rulesForm={signInRulesConfig.email}
+          rulesForm={signInRulesConfig.username}
         />
 
         <RegisterPassword

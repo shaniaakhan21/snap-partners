@@ -1,7 +1,7 @@
 import { Button } from 'components/common/Button'
 import { useAuthStore } from 'lib/stores'
+import Link from 'next/link'
 import { IHandleStep, IUserTrack } from '../types'
-import { BulletPagination } from './BulletPagination'
 
 export const UpgradeToManager = ({ userTrack, handleStep }: { userTrack: IUserTrack, handleStep: IHandleStep }) => {
   const { createAccout } = useAuthStore()
@@ -34,10 +34,6 @@ export const UpgradeToManager = ({ userTrack, handleStep }: { userTrack: IUserTr
         <li>Benefit number three</li>
       </ul>
 
-      <div className='mt-4'>
-        <BulletPagination stepToActivate='UPGRADE_TO_MANAGER' />
-      </div>
-
       <div className='w-full mt-10'>
         <Button classes='w-full uppercase' onClick={finishSignUpProcess}>
           Continue
@@ -45,9 +41,9 @@ export const UpgradeToManager = ({ userTrack, handleStep }: { userTrack: IUserTr
 
         <p className='mt-2'>
           Do it later in{' '}
-          <button className='text-primary-500 cursor-pointer focus:underline' onClick={finishSignUpProcess}>
-            Account settings
-          </button>
+          <Link href='/auth/signin'>
+            <a className='text-primary-500 cursor-pointer focus:underline'>Account settings</a>
+          </Link>
         </p>
       </div>
     </div>

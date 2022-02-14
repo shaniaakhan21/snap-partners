@@ -1,12 +1,15 @@
 import { API } from 'config/api'
 
-interface ISignUpDataBody {
+interface ISignUpDataBodyStep1 {
+  phoneNumber: string
+}
+
+interface ISignUpDataBodyStep2 extends ISignUpDataBodyStep1 {
   name: string
   lastname: string
   email: string
   username: string
   password: string
-  phoneNumber: string
   idImage: string | null
   insuranceImage: string | null
   roles: {
@@ -23,52 +26,61 @@ interface ISignUpDataResponse {
   timestamp: number
   data: {
     success: true
-  }
+    token: string
+  } | null
+  error: string | null
 }
 
-export const sigIn = async (data: ISignUpDataBody) => {
-  const resStep1 = await fetch(`${API.BASE_URL}/auth/signUpStepOne`, {
+export const signUpStep1 = async (dataBody: ISignUpDataBodyStep1) => {
+  const res = await fetch(`${API.BASE_URL}/api/authentication/signUpStepOne`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ phoneNumber: data.phoneNumber })
+    body: JSON.stringify({ phoneNumber: dataBody.phoneNumber })
   })
 
-  const dataStep1: ISignUpDataResponse = await resStep1.json()
+  const data: ISignUpDataResponse = await res.json()
 
-  if (!resStep1.ok) {
+  if (!res.ok) {
     return {
       data: null,
       error: {
-        message: dataStep1,
-        status: resStep1.status
-      }
-    }
-  }
-
-  const resStep2 = await fetch(`${API.BASE_URL}/auth/signUpStepTwo`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
-  })
-
-  const dataStep2: ISignUpDataResponse = await resStep2.json()
-
-  if (!resStep2.ok) {
-    return {
-      data: null,
-      error: {
-        message: dataStep2,
-        status: resStep2.status
+        message: data.error,
+        status: res.status
       }
     }
   }
 
   return {
-    data: dataStep2,
+    data,
+    error: null
+  }
+}
+
+export const signUpStep2 = async (dataBody: ISignUpDataBodyStep2) => {
+  const res = await fetch(`${API.BASE_URL}/api/authentication/signUpStepTwo`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(dataBody)
+  })
+
+  const data: ISignUpDataResponse = await res.json()
+
+  if (!res.ok) {
+    return {
+      data: null,
+      error: {
+        message: data.error,
+        status: res.status
+      }
+    }
+  }
+
+  return {
+    data,
     error: null
   }
 }
