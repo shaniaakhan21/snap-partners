@@ -15,25 +15,23 @@ interface ILoginDataResponse {
 }
 
 export const login = async (data: ILoginDataBody) => {
-  const res = await fetch('http://snap150.snap.devopsteam.info/api/authentication/login', {
+  const res = await fetch('https://dev.snap.devopsteam.info/api/authentication/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
   })
 
-  console.log(res)
-
-  const dataObj: ILoginDataResponse = await res.json()
-
-  if (!res.ok) {
+  if (!res?.ok) {
     return {
       data: null,
       error: {
-        message: dataObj.error,
+        message: 'Error Login',
         status: res.status
       }
     }
   }
+
+  const dataObj: ILoginDataResponse = await res.json()
 
   return {
     data: dataObj,
