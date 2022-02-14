@@ -14,7 +14,7 @@ import { useAuthStore } from 'lib/stores'
 import { login } from 'lib/services/session/login'
 
 export const SignInForm = () => {
-  const { signIn } = useAuthStore()
+  const { setAuth } = useAuthStore()
   const [isLoading, setLoading] = useState(false)
   const { handleSubmit, register, reset, formState: { errors } } = useForm<IDataForm>()
 
@@ -34,12 +34,16 @@ export const SignInForm = () => {
 
     toast('¡Sign In Successful!', { type: 'success' })
     setLoading(false)
-    signIn({
-      email: 'user@test.com',
-      name: 'user test',
-      phone: '+15555555555',
+    setAuth({
+      email: data.email,
+      name: data.email,
+      phone: data.phoneNumber,
       accessToken: data.token,
-      refreshToken: 'refreshToken'
+      iat: data.iat,
+      lastname: data.lastname,
+      roles: data.roles,
+      id: data.userId,
+      username: data.username
     })
     reset()
   }
