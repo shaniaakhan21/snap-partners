@@ -1,6 +1,5 @@
 import { setLocalStorage } from 'lib/utils/localStorage'
 import { decodeAccessToken } from 'lib/utils/decodedAccessToken'
-import { API } from 'config/api'
 
 interface ILoginDataBody {
   username: string
