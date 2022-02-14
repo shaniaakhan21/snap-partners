@@ -15,7 +15,12 @@ export const RegisterPassword = ({ register, errors }: IInputFormProps) => {
   return (
     <div>
       <div className='w-full flex justify-between items-center text-sm'>
-        <label htmlFor='password' className='font-bold text-gray-700 uppercase'>Password</label>
+        <div>
+          <label htmlFor='password' className='font-bold text-gray-700 uppercase'>Password</label>
+          {errors.password && (
+            <p className='text-sm text-red-400'>{errors.password.message}</p>
+          )}
+        </div>
         <span className='text-textAcent-500 cursor-pointer'>Forgot Password?</span>
       </div>
 
@@ -35,9 +40,6 @@ export const RegisterPassword = ({ register, errors }: IInputFormProps) => {
         >
           {showPassword ? <EyeHiddenIcon /> : <EyeVisibleIcon />}
         </div>
-        {errors.password && (
-          <p className='text-sm text-red-400'>{errors.password.message}</p>
-        )}
       </div>
     </div>
   )
