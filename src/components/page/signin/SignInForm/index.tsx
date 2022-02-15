@@ -43,7 +43,8 @@ export const SignInForm = () => {
       lastname: data.lastname,
       roles: data.roles,
       id: data.userId,
-      username: data.username
+      username: data.username,
+      referralCode: data.referralCode
     })
     reset()
   }

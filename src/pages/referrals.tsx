@@ -20,6 +20,8 @@ import { useSearchModalStore } from 'lib/stores/SearchModal'
 import { dataTest } from 'lib/utils/dataEmails'
 import { PAGE_INFO } from 'config/pageInfo'
 import type { Page, ReactNode } from 'lib/types'
+import { useAuthStore } from 'lib/stores'
+import { ROLES } from 'config/roles'
 
 const { SEO } = PAGE_INFO
 
@@ -46,6 +48,7 @@ const selectInfo = {
 }
 
 const ReferralsPage: Page = () => {
+  const { auth } = useAuthStore()
   const { referralsIsOpen, closeReferral } = useSearchModalStore()
   const { width: windowWidth } = useWindowSize()
   const {
@@ -91,20 +94,20 @@ const ReferralsPage: Page = () => {
         <ReferralCards
           title='Refer Customers'
           ilustration={<CustomerIcon />}
-          link='Linkhereytocopywhenclick.com'
+          link={`${auth.referralLink}&role=${ROLES.CUSTOMER}` || 'With Out Link'}
           newUser
           classes='col-span-1'
         />
         <ReferralCards
           title='Driver Customers'
           ilustration={<DriverIcon />}
-          link='Linkhereytocopywhenclick.com'
+          link={`${auth.referralLink}&role=${ROLES.DRIVER}` || 'With Out Link'}
           classes='col-span-1'
         />
         <ReferralCards
           title='Merchant Customers'
           ilustration={<MerchantIcon />}
-          link='Linkhereytocopywhenclick.com'
+          link={`${auth.referralLink}&role=${ROLES.RESTAURANT}` || 'With Out Link'}
           newUser
           classes='col-span-1'
         />

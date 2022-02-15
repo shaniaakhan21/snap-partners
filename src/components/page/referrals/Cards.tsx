@@ -47,7 +47,7 @@ export const ReferralCards = ({ title, ilustration, link, newUser = false, class
         className='text-blue-600 lg:text-black inline-flex items-center justify-center transition-colors hover:text-blue-600'
       >
         <span className='text-sm mr-2'>{link}</span>
-        <CopyIcon classes='w-4 h-4' />
+        <CopyIcon classes='w-8 h-8' />
       </button>
 
       <Link href='#'>
