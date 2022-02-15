@@ -1,5 +1,5 @@
 import createAtom from 'zustand'
-import { setLocalStorage, removeLocalStorage } from 'lib/utils/localStorage'
+import { removeLocalStorage } from 'lib/utils/localStorage'
 
 type TSignInProps = {
   email: string
