@@ -8,8 +8,8 @@ export default function Page404 () {
 
       <div className='w-full h-screen flex flex-col justify-center items-center z-30'>
         <img src='/images/logo-white.png' className='w-28 h-28' />
-        <span className='text-7xl font-black mt-5'>404</span>
-        <p className='font-semibold text-3xl mt-3'>Page Not Found</p>
+        <span className='text-9xl font-black mt-5'>404</span>
+        <p className='font-semibold text-4xl mt-3 text-center'>Page Not Found</p>
         <p className='font-light text-xl mt-2 text-center'>The page you’re looking for does not seem to exist</p>
         <Link href='/overview'>
           <a className='block w-44 rounded-full px-4 py-2 bg-[#FFAA00] text-center uppercase font-bold mt-4'>Go Back Home</a>
