@@ -195,8 +195,8 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
 
           <p>
             <span className='font-semibold'>Already have an accout?</span>
-            <Link href='/auth/signin'>
-              <a className='text-textAcent-500 focus:underline'> Sign In.</a>
+            <Link href='/auth/login'>
+              <a className='text-textAcent-500 focus:underline'> Login.</a>
             </Link>
           </p>
         </section>

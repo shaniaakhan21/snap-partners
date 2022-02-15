@@ -1,4 +1,4 @@
-import jwtDecode, { JwtPayload } from 'jwt-decode'
+import jwtDecode from 'jwt-decode'
 
 // interface IDecodedToken extends JwtPayload {
 //   email: string

@@ -13,7 +13,7 @@ import { RememberAndPolicy } from './utils/RememberAndPolicy'
 import { useAuthStore } from 'lib/stores'
 import { login } from 'lib/services/session/login'
 
-export const SignInForm = () => {
+export const LoginForm = () => {
   const { setAuth } = useAuthStore()
   const [isLoading, setLoading] = useState(false)
   const { handleSubmit, register, reset, formState: { errors } } = useForm<IDataForm>()
@@ -32,7 +32,7 @@ export const SignInForm = () => {
       return
     }
 
-    toast('¡Sign In Successful!', { type: 'success' })
+    toast('Login Successful!', { type: 'success' })
     setLoading(false)
     setAuth({
       email: data.email,
@@ -55,8 +55,8 @@ export const SignInForm = () => {
   return (
     <div>
       <span className='sm:hidden font-bold text-4xl text-[#18203F]'>SnapDelivered</span>
-      <span className='hidden sm:block font-bold text-4xl text-[#18203F]'>Log In</span>
-      <p className='text-gray-500'>Welcome! Log in to continue.</p>
+      <span className='hidden sm:block font-bold text-4xl text-[#18203F]'>Login</span>
+      <p className='text-gray-500'>Welcome! Login to continue.</p>
 
       <form className='max-w-xs mt-6' onSubmit={handleSubmit(onSubmit)}>
         <InputForm
@@ -83,7 +83,7 @@ export const SignInForm = () => {
 
         <section className='mt-4 text-center sm:text-left'>
           <Button type='submit' classes='w-full mr-1 text-sm bg-primary-500'>
-            Sign In
+            Login
           </Button>
 
           <br /><br />

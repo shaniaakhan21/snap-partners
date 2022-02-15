@@ -1,15 +1,14 @@
-import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 import Head from 'next/head'
-
+import { LoginForm } from 'components/page/login/LoginForm'
 import { useAuthStore } from 'lib/stores'
-import type { Page } from 'lib/types'
 import { PAGE_INFO } from 'config/pageInfo'
+import type { Page } from 'lib/types'
 
-import { SignInForm } from 'components/page/signin/SignInForm'
 const { SEO } = PAGE_INFO
 
-const SignInPage: Page = () => {
+const LoginPage: Page = () => {
   const router = useRouter()
   const { auth } = useAuthStore()
 
@@ -20,7 +19,7 @@ const SignInPage: Page = () => {
   return (
     <>
       <Head>
-        <title>{SEO.TITLE_PAGE} - Sign In</title>
+        <title>{SEO.TITLE_PAGE} - Login</title>
       </Head>
 
       <div className='w-full'>
@@ -50,7 +49,7 @@ const SignInPage: Page = () => {
           </section>
 
           <section className='w-full md:w-1/2 min-h-screen bg-white px-4 py-10 flex justify-center items-center'>
-            <SignInForm/>
+            <LoginForm/>
           </section>
         </div>
       </div>
@@ -58,4 +57,4 @@ const SignInPage: Page = () => {
   )
 }
 
-export default SignInPage
+export default LoginPage

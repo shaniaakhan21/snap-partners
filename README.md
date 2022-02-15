@@ -16,7 +16,6 @@
   </p>
 </div>
 
-
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
@@ -60,41 +59,41 @@
   </ol>
 </details>
 
-
 <!-- ABOUT THE PROJECT -->
+
 ## 📄 About The Project
 
 [![Project Screenshot][product-screenshot]](http://dev.snap.devopsteam.info/)
 
 ### Built with
 
-* [Typescript](https://www.typescriptlang.org/) - JavaScript With Syntax For Types
-* [React](https://reactjs.org/) - Library for building user interfaces
-* [Next](https://nextjs.org/) - Framework of React.js
-* [Tailwind](https://tailwindcss.com/) - Styles
+- [Typescript](https://www.typescriptlang.org/) - JavaScript With Syntax For Types
+- [React](https://reactjs.org/) - Library for building user interfaces
+- [Next](https://nextjs.org/) - Framework of React.js
+- [Tailwind](https://tailwindcss.com/) - Styles
 
 ### Utilities libraries
 
-* [Zustand](https://zustand-demo.pmnd.rs/) - Global State
-* [React Hook Form](https://react-hook-form.com/) - Forms with React
-* [React Toastify](https://fkhadra.github.io/react-toastify/introduction/) - Alerts/Notifications with React
-* [Recharts](https://recharts.org/) - Charts with React
-* [React PDF Viewer](https://react-pdf-viewer.dev/) - PDF Viewer with React (is required **pdfjs-dist**)
-* [pdfjs-dist](https://www.npmjs.com/package/pdfjs-dist) - **React PDF Viewer** uses the APIs provided by **pdfjs-dist**
-* [React Google Recaptcha](https://www.npmjs.com/package/react-google-recaptcha) - Google Recaptcha with React `at the moment it is not being applied`
-* [@tanem/react-nprogress](https://www.npmjs.com/package/@tanem/react-nprogress) - Progress bars to routing in React
+- [Zustand](https://zustand-demo.pmnd.rs/) - Global State
+- [React Hook Form](https://react-hook-form.com/) - Forms with React
+- [React Toastify](https://fkhadra.github.io/react-toastify/introduction/) - Alerts/Notifications with React
+- [Recharts](https://recharts.org/) - Charts with React
+- [React PDF Viewer](https://react-pdf-viewer.dev/) - PDF Viewer with React (is required **pdfjs-dist**)
+- [pdfjs-dist](https://www.npmjs.com/package/pdfjs-dist) - **React PDF Viewer** uses the APIs provided by **pdfjs-dist**
+- [React Google Recaptcha](https://www.npmjs.com/package/react-google-recaptcha) - Google Recaptcha with React `at the moment it is not being applied`
+- [@tanem/react-nprogress](https://www.npmjs.com/package/@tanem/react-nprogress) - Progress bars to routing in React
 
-### Tests config - ⚠  In construction
+### Tests config - ⚠ In construction
 
-* [Jest](https://jestjs.io/) - Javascript testing framework
-* [Testing Library](https://nextjs.org/docs/basic-features/eslint) - Testing utilities
-* [Enzyme](https://enzymejs.github.io/enzyme/) - Testing utilities for React
-* [@wojtekmaj/enzyme-adapter-react-17](https://www.npmjs.com/package/@wojtekmaj/enzyme-adapter-react-17) - Adapter for React 17 for Enzyme
+- [Jest](https://jestjs.io/) - Javascript testing framework
+- [Testing Library](https://nextjs.org/docs/basic-features/eslint) - Testing utilities
+- [Enzyme](https://enzymejs.github.io/enzyme/) - Testing utilities for React
+- [@wojtekmaj/enzyme-adapter-react-17](https://www.npmjs.com/package/@wojtekmaj/enzyme-adapter-react-17) - Adapter for React 17 for Enzyme
 
 ### Eslint config
 
-* [Next Eslint](https://nextjs.org/docs/basic-features/eslint) - Next.js default config eslint
-* [Standard.js](https://standardjs.com/rules) - Standard configuration from eslint
+- [Next Eslint](https://nextjs.org/docs/basic-features/eslint) - Next.js default config eslint
+- [Standard.js](https://standardjs.com/rules) - Standard configuration from eslint
 
 ## 👨‍💻 👩‍💻 Getting Started
 
@@ -102,14 +101,14 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-* npm (we use npm as main **package manager**)
-    ```sh
-    npm install npm@latest -g
-    ```
+- npm (we use npm as main **package manager**)
+  ```sh
+  npm install npm@latest -g
+  ```
 
 ## 🔽 Installation
 
-1. Clone the repo - example with ```HTTPS```
+1. Clone the repo - example with `HTTPS`
    ```sh
    git clone https://gitlab.worldce.info/snap/snap-website.git
    ```
@@ -117,23 +116,23 @@ To get a local copy up and running follow these simple example steps.
    ```sh
    npm install
    ```
-3.  Create ```.env``` file - check: [Next.js Environment Variables](https://nextjs.org/docs/basic-features/environment-variables)
-    ```
-    NEXT_PUBLIC_RECAPTCHA_V2=6Lc2koEdAAAAAIdNcMY0V1E9IPGT3AxX-vlRUDtQ
-    NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID=GTM-NNQS9S8
-    ```
-4. Run ```npm run dev``` to run localhost project
-
+3. Create `.env` file - check: [Next.js Environment Variables](https://nextjs.org/docs/basic-features/environment-variables)
+   ```
+   NEXT_PUBLIC_RECAPTCHA_V2=6Lc2koEdAAAAAIdNcMY0V1E9IPGT3AxX-vlRUDtQ
+   NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID=GTM-NNQS9S8
+   ```
+4. Run `npm run dev` to run localhost project
 
 <!-- PROJECT STRUCTURE -->
+
 ## 📂 Project Structure
 
 ### Pages directory
 
 Check: [Next.js Routing](https://nextjs.org/docs/routing/introduction)
 
-* ```/pages/auth/*.tsx``` - Routes to authentications `public routes`
-* ```/pages/**/*.tsx``` - Client backoffice routes `private routes`
+- `/pages/auth/*.tsx` - Routes to authentications `public routes`
+- `/pages/**/*.tsx` - Client backoffice routes `private routes`
 
 ```
 |/src
@@ -142,7 +141,7 @@ Check: [Next.js Routing](https://nextjs.org/docs/routing/introduction)
 |
 |---- /auth
 |------ /signup.tsx
-|------ /signin.tsx
+|------ /login.tsx
 |
 |---- /marketing
 |------ /*.tsx
@@ -150,8 +149,8 @@ Check: [Next.js Routing](https://nextjs.org/docs/routing/introduction)
 
 ### Layouts directory
 
-* ```/layouts/public/*.tsx``` - Layouts for the public pages
-* ```/layouts/private/*.tsx``` - Layouts for the private pages
+- `/layouts/public/*.tsx` - Layouts for the public pages
+- `/layouts/private/*.tsx` - Layouts for the private pages
 
 ```
 |/src
@@ -165,9 +164,9 @@ Check: [Next.js Routing](https://nextjs.org/docs/routing/introduction)
 
 ### Components directory
 
-* ```/components/common/**.tsx``` - Components reused multiple times in the website such as a ```Button```
-* ```/components/layout/**.tsx``` - Components used for the layout of the backoffice such as the ```Navbar``` and the ```Drawer```
-* ```/components/page/**.tsx``` - Components used in specific pages such as the ```SignUpForm``` in the ```/pages/signup```
+- `/components/common/**.tsx` - Components reused multiple times in the website such as a `Button`
+- `/components/layout/**.tsx` - Components used for the layout of the backoffice such as the `Navbar` and the `Drawer`
+- `/components/page/**.tsx` - Components used in specific pages such as the `SignUpForm` in the `/pages/signup`
 
 ```
 |/src
@@ -182,14 +181,13 @@ Check: [Next.js Routing](https://nextjs.org/docs/routing/introduction)
 |------ /*.tsx
 ```
 
-
 ### Lib directory
 
-* ```/lib/hooks/**.ts``` - Custom hooks of React
-* ```/lib/services/**.ts``` - For the connections, initializations and service management
-* ```/lib/stores/**.ts``` - Global states with [Zustand](https://zustand-demo.pmnd.rs/)
-* ```/lib/types/**.ts``` - Types, interfaces and models of typescript
-* ```/lib/utils/**.ts``` - Utilities for the project
+- `/lib/hooks/**.ts` - Custom hooks of React
+- `/lib/services/**.ts` - For the connections, initializations and service management
+- `/lib/stores/**.ts` - Global states with [Zustand](https://zustand-demo.pmnd.rs/)
+- `/lib/types/**.ts` - Types, interfaces and models of typescript
+- `/lib/utils/**.ts` - Utilities for the project
 
 ```
 |/src
@@ -203,8 +201,8 @@ Check: [Next.js Routing](https://nextjs.org/docs/routing/introduction)
 
 ### Styles directory
 
-* ```/styles/utils/**.css``` - Custom class css with tailwindcss or pure CSS
-* ```/styles/tailwind.css``` - Main tailwindcss inject
+- `/styles/utils/**.css` - Custom class css with tailwindcss or pure CSS
+- `/styles/tailwind.css` - Main tailwindcss inject
 
 ```
 |/src
@@ -215,10 +213,10 @@ Check: [Next.js Routing](https://nextjs.org/docs/routing/introduction)
 
 ### Config directory
 
-* ```/config/api.ts``` - Config API's
-* ```/config/http.ts``` - Methods HTTP and custom status code naming
-* ```/config/pageInfo.ts``` - Info and SEO of the Website
-* ```/config/roles.ts``` - Config user roles
+- `/config/api.ts` - Config API's
+- `/config/http.ts` - Methods HTTP and custom status code naming
+- `/config/pageInfo.ts` - Info and SEO of the Website
+- `/config/roles.ts` - Config user roles
 
 ```
 |/src
@@ -229,21 +227,20 @@ Check: [Next.js Routing](https://nextjs.org/docs/routing/introduction)
 |---- /roles.ts
 ```
 
-
 <!-- TESTS -->
+
 ## ⚡ Tests
 
-```☕ Comming Soon...```
-
-
+`☕ Comming Soon...`
 
 <!-- CONTRIBUTING -->
+
 ## 🤝 Contributing in a new feature
 
 ### Branch
 
-* ```feature/dev/master``` - Main branch to develop
-* ```master``` - Main branch to production
+- `feature/dev/master` - Main branch to develop
+- `master` - Main branch to production
 
 ### Steps
 
@@ -253,12 +250,12 @@ Check: [Next.js Routing](https://nextjs.org/docs/routing/introduction)
 4. Push the new branch (`git push origin feature/-------/master`) This will create a 1 use enviroment to view the progress
 5. Open a `Merge Request` into `feature/dev/master` - when creating a new MR please provide your environment link for review `https://gitlab.worldce.info/snap/snap-website/-/environments`
 
-
 <!-- MARKDOWN LINKS & IMAGES -->
+
 [product-screenshot]: doc/project-capture.png
 
-
 <!-- WARNINGS -->
+
 ## 🛑 IMPORTANT
 
-Do not touch the ```.gitlab-ci.yml``` and ```generate-enviroments.sh```, under any circumstances, updating these settings can have critical consequences for the project.
+Do not touch the `.gitlab-ci.yml` and `generate-enviroments.sh`, under any circumstances, updating these settings can have critical consequences for the project.
