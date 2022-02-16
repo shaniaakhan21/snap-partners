@@ -17,7 +17,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
     const token = getLocalStorage('accessToken')
 
     if (!token) {
-      router.push('/auth/signin')
+      router.push('/auth/login')
       return
     }
 

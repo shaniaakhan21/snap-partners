@@ -23,7 +23,7 @@ const HomePage: PageNext = () => {
     const token = getLocalStorage('accessToken')
 
     if (!token) {
-      router.push('/auth/signin')
+      router.push('/auth/login')
       return
     }
 

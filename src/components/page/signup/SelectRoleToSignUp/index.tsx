@@ -75,8 +75,8 @@ export const SelectRoleToSignUp = () => {
 
       <p>
         <span className='font-bold text-gray-800'>Already have an account?</span>
-        <Link href='/auth/signin'>
-          <a className='text-textAcent-500'> Sign In.</a>
+        <Link href='/auth/login'>
+          <a className='text-textAcent-500'> Login.</a>
         </Link>
       </p>
     </div>
