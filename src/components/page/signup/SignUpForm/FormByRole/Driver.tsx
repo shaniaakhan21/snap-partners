@@ -55,6 +55,7 @@ export const SignUpDriverForm = ({ referralLink }: { referralLink: IReferralLink
       {
         userTrack.step === STEPS.UPGRADE_TO_MANAGER && (
           <UpgradeToManager
+            referralLink={referralLink}
             handleStep={handleStep}
             userTrack={userTrack}
           />

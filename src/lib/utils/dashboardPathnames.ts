@@ -22,5 +22,9 @@ export const dashboardPathnames = {
   comingsoon: {
     pathname: '/comingsoon',
     title: 'Coming Soon'
+  },
+  accountSettings: {
+    pathname: '/account',
+    title: 'Account Settings'
   }
 }
