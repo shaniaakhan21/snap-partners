@@ -7,16 +7,6 @@
     "content";
 }
 
-@media screen(lg) {
-  .dashboardLayout {
-    grid-template-columns: 260px 1fr;
-    grid-template-rows: 64px 1fr;
-    grid-template-areas:
-      "drawer navbar"
-      "drawer content";
-  }
-}
-
 .dashboardLayout__navbar {
   @apply w-full bg-white z-30;
   grid-area: navbar;
@@ -28,13 +18,26 @@
 }
 
 .dashboardLayout__content {
-  @apply px-5 pt-5 pb-10 font-body overflow-y-auto;
+  @apply px-5 pt-5 pb-16 font-body overflow-y-auto;
   grid-area: content;
   background-color: #ececec;
 }
 
-/* Grid Dashboard Overview */
+@media screen(lg) {
+  .dashboardLayout {
+    grid-template-columns: 260px 1fr;
+    grid-template-rows: 64px 1fr;
+    grid-template-areas:
+      "drawer navbar"
+      "drawer content";
+  }
 
+  .dashboardLayout__content {
+    @apply pb-5;
+  }
+}
+
+/* Grid Dashboard Overview */
 .overviewLayout {
   @apply max-w-7xl mx-auto;
   display: grid;
