@@ -31,7 +31,8 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
       lastname: data.lastname,
       roles: data.roles,
       id: data.userId,
-      username: data.username
+      username: data.username,
+      referralCode: data.referralCode
     })
   }, [auth])
 

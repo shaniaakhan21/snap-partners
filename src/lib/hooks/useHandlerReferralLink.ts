@@ -9,7 +9,7 @@ export const useHandlerReferralLink = () => {
 
   const handlerIdentifyCode = () => {
     if (typeof router.query.referralCode === 'string') {
-      return router.query.referralCode.toLowerCase().trim()
+      return router.query.referralCode
     } else return null
   }
 

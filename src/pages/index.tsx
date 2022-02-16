@@ -37,7 +37,8 @@ const HomePage: PageNext = () => {
       lastname: data.lastname,
       roles: data.roles,
       id: data.userId,
-      username: data.username
+      username: data.username,
+      referralCode: data.referralCode
     })
     router.push('/overview')
   }, [auth])
