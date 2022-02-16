@@ -9,7 +9,7 @@ export const DrawerMobile = ({ isCurrentlyPage }: { isCurrentlyPage: (route: str
   return (
     <div
       style={{ transition: 'all 200ms ease-in-out' }}
-      className={`top-16 left-0 w-full h-full z-20 overflow-hidden fixed lg:hidden ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
+      className={`left-0 w-full h-full z-20 overflow-hidden fixed lg:hidden ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
     >
       <div
         className='inset-0 fixed flex justify-center items-center'
@@ -17,8 +17,8 @@ export const DrawerMobile = ({ isCurrentlyPage }: { isCurrentlyPage: (route: str
         onClick={closeDrawer}
       >
         <aside className={`dashboardLayout__drawer scroll-primary absolute h-screen lg:hidden ${isOpen ? 'visible opacity-100 block' : 'invisible opacity-0'}`}>
-          <section className='mt-16 pl-10'>
-            <h2 className='text-white font-bold text-2xl'>SnapDeliver</h2>
+          <section className='mt-32 pl-10'>
+            <h2 className='text-white font-bold text-2xl'>SnapDelivered</h2>
           </section>
 
           <ul className='mt-10 text-white'>

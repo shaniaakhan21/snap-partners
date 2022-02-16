@@ -106,8 +106,8 @@ const AccountPage: PageNext = () => {
         </ul>
       </div>
 
-      <div className='flex items-center justify-center mt-11 h-20'>
-        <div className='w-1/2 h-full flex items-center bg-white rounded-lg px-4 mr-4'>
+      <div className='flex flex-col md:flex-row items-center justify-center mt-11'>
+        <div className='w-full md:w-1/2 h-20 flex items-center bg-white rounded-lg px-4 mr-0 md:mr-4 mb-4 md:mb-0'>
           <div className='bg-warning-300 rounded-lg w-12 h-12 flex items-center justify-center mr-4'>
             <TrendingUpIcon />
           </div>
@@ -120,7 +120,7 @@ const AccountPage: PageNext = () => {
 
         <button
           onClick={handleClickUpgradeToManager}
-          className='w-1/2 h-full bg-textAcent-500 text-white rounded-lg shadow-md flex flex-col justify-center px-4'
+          className='w-full md:w-1/2 h-20 bg-textAcent-500 text-white rounded-lg shadow-md flex flex-col justify-center px-4'
         >
           <span className='text-sm'>Best Plan</span>
           <h6 className='text-lg font-semibold'>Upgrade to manager</h6>
@@ -131,7 +131,7 @@ const AccountPage: PageNext = () => {
         className='block text-primary-500 mx-auto mt-11 font-bold text-lg'
         onClick={removeAuth}
       >
-        Sign out
+        Logout
       </button>
 
       <span className='block text-center mt-11 text-gray-600'>
