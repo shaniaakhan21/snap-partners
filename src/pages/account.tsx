@@ -1,16 +1,22 @@
 import Head from 'next/head'
-
-import type { Page as PageNext, ReactNode } from 'lib/types'
-import { useAuthStore } from 'lib/stores'
 import DashboardLayout from 'layouts/private/Dashboard'
+import { EditIcon, GenealogyIcon, TrendingUpIcon } from 'components/common/icons'
+import { useAuthStore } from 'lib/stores'
 import { PAGE_INFO } from 'config/pageInfo'
-
-import { EditIcon, GenealogyIcon } from 'components/common/icons'
+import type { Page as PageNext, ReactNode } from 'lib/types'
+import Link from 'next/link'
 
 const { SEO } = PAGE_INFO
 
 const AccountPage: PageNext = () => {
-  const { auth } = useAuthStore()
+  const { auth, removeAuth } = useAuthStore()
+
+  const handleClickUpgradeToManager = () => {
+    window.open(
+      `https://store.snapdelivered.com/product/manager-upgrade?userId=${auth.id}`,
+      'noopener'
+    )
+  }
 
   return (
     <>
@@ -99,6 +105,42 @@ const AccountPage: PageNext = () => {
           </li>
         </ul>
       </div>
+
+      <div className='flex items-center justify-center mt-11 h-20'>
+        <div className='w-1/2 h-full flex items-center bg-white rounded px-4 mr-4'>
+          <div className='bg-warning-300 w-12 h-12 flex items-center justify-center mr-4'>
+            <TrendingUpIcon />
+          </div>
+
+          <div>
+            <span className='block text-gray-400 text-sm'>Rank</span>
+            <span className='text-lg font-semibold'>Director</span>
+          </div>
+        </div>
+
+        <button
+          onClick={handleClickUpgradeToManager}
+          className='w-1/2 h-full bg-textAcent-500 text-white rounded shadow-md flex flex-col justify-center px-4'
+        >
+          <span className='text-sm'>Best Plan</span>
+          <h6 className='text-lg font-semibold'>Upgrade to manager</h6>
+        </button>
+      </div>
+
+      <button
+        className='block text-primary-500 mx-auto mt-11 font-bold text-lg'
+        onClick={removeAuth}
+      >
+        Sign out
+      </button>
+
+      <span className='block text-center mt-11 text-gray-600'>
+        Need Help?{' '}
+        <Link href='#'>
+          {/* We must to apply an emailTo here */}
+          <a className='text-textAcent-500 font-medium'>Send us an email</a>
+        </Link>
+      </span>
     </>
   )
 }
