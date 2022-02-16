@@ -21,7 +21,7 @@ export const DrawerMobile = ({ isCurrentlyPage }: { isCurrentlyPage: (route: str
             <h2 className='text-white font-bold text-2xl'>SnapDelivered</h2>
           </section>
 
-          <ul className='mt-10 text-white'>
+          <ul className='my-10 text-white'>
             {
               drawerRoutes.map(route => (
                 <li

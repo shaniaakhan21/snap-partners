@@ -28,7 +28,7 @@
 }
 
 .dashboardLayout__content {
-  @apply px-4 py-6 font-body overflow-y-auto;
+  @apply px-5 pt-5 pb-10 font-body overflow-y-auto;
   grid-area: content;
   background-color: #ececec;
 }
