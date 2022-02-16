@@ -44,10 +44,10 @@ export const ReferralCards = ({ title, ilustration, link, newUser = false, class
 
       <button
         onClick={() => copy(link, 'Referral link')}
-        className='text-blue-600 lg:text-black inline-flex items-center justify-center transition-colors hover:text-blue-600'
+        className='lg:text-black inline-flex items-center justify-center transition-colors hover:text-blue-600'
       >
-        <span className='text-sm mr-2'>{link}</span>
-        <CopyIcon classes='w-8 h-8' />
+        <span className='text-sm mr-2 text-blue-600'>Copy Referral Link</span>
+        <CopyIcon classes='w-5 h-5' />
       </button>
 
       <Link href='#'>
