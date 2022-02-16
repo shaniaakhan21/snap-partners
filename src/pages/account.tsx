@@ -2,14 +2,15 @@ import Head from 'next/head'
 import DashboardLayout from 'layouts/private/Dashboard'
 import { AccountNoImage } from 'components/common/AccountNoImage'
 import { TrendingUpIcon } from 'components/common/icons'
+import { useAuthStore } from 'lib/stores'
 import { PAGE_INFO } from 'config/pageInfo'
 import type { Page as PageNext, ReactNode } from 'lib/types'
-import { useAuthStore } from 'lib/stores'
+import Link from 'next/link'
 
 const { SEO } = PAGE_INFO
 
 const AccountPage: PageNext = () => {
-  const { auth } = useAuthStore()
+  const { auth, removeAuth } = useAuthStore()
 
   const handleClickUpgradeToManager = () => {
     window.open(
@@ -48,6 +49,21 @@ const AccountPage: PageNext = () => {
           <h6 className='text-lg font-semibold'>Upgrade to manager</h6>
         </button>
       </div>
+
+      <button
+        className='block text-primary-500 mx-auto mt-11 font-bold text-lg'
+        onClick={removeAuth}
+      >
+        Sign out
+      </button>
+
+      <span className='block text-center mt-11 text-gray-600'>
+        Need Help?{' '}
+        <Link href='#'>
+          {/* We must to apply an emailTo here */}
+          <a className='text-textAcent-500 font-medium'>Send us an email</a>
+        </Link>
+      </span>
     </>
   )
 }
