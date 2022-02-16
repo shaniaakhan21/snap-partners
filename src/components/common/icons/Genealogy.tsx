@@ -1,8 +1,8 @@
 import { IIconsBasicProps } from 'lib/types'
 
-export const GenealogyIcon = ({ classes = '', onClick }: IIconsBasicProps) => {
+export const GenealogyIcon = ({ classes = 'w-7 h-7', onClick }: IIconsBasicProps) => {
   return (
-    <svg onClick={onClick} className={`w-7 h-7 fill-[#585858] hover:fill-[#6b6666] ${classes}`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg onClick={onClick} className={`${classes}`} width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path fillRule="evenodd" clipRule="evenodd" d="M13.6667 7.83333C13.6667 6.91417 12.9192 6.16667 12 6.16667C11.0809 6.16667 10.3334 6.91417 10.3334 7.83333C10.3334 8.7525 11.0809 9.5 12 9.5C12.9192 9.5 13.6667 8.7525 13.6667 7.83333ZM15.3334 7.83333C15.3334 9.67167 13.8384 11.1667 12 11.1667C10.1617 11.1667 8.66669 9.67167 8.66669 7.83333C8.66669 5.995 10.1617 4.5 12 4.5C13.8384 4.5 15.3334 5.995 15.3334 7.83333ZM6.16669 18.6667C6.16669 15.45 8.78419 12.8333 12 12.8333C15.2159 12.8333 17.8334 15.45 17.8334 18.6667C17.8334 19.1267 17.4609 19.5 17 19.5C16.5392 19.5 16.1667 19.1267 16.1667 18.6667C16.1667 16.3692 14.2975 14.5 12 14.5C9.70252 14.5 7.83335 16.3692 7.83335 18.6667C7.83335 19.1267 7.46085 19.5 7.00002 19.5C6.53919 19.5 6.16669 19.1267 6.16669 18.6667Z" fill="white"/>
     </svg>
   )
