@@ -40,7 +40,7 @@ const AccountPage: PageNext = () => {
       </div>
 
       <div className='mt-11'>
-        <ul className='bg-white w-full h-full rounded-xl'>
+        <ul className='bg-white w-full h-full rounded-lg'>
           <li className='px-4 py-3 border-y-2 border-y-gray-200 flex justify-between items-center'>
             <div>
               <label htmlFor='email' className='text-sm'>Email</label>
@@ -107,8 +107,8 @@ const AccountPage: PageNext = () => {
       </div>
 
       <div className='flex items-center justify-center mt-11 h-20'>
-        <div className='w-1/2 h-full flex items-center bg-white rounded px-4 mr-4'>
-          <div className='bg-warning-300 w-12 h-12 flex items-center justify-center mr-4'>
+        <div className='w-1/2 h-full flex items-center bg-white rounded-lg px-4 mr-4'>
+          <div className='bg-warning-300 rounded-lg w-12 h-12 flex items-center justify-center mr-4'>
             <TrendingUpIcon />
           </div>
 
@@ -120,7 +120,7 @@ const AccountPage: PageNext = () => {
 
         <button
           onClick={handleClickUpgradeToManager}
-          className='w-1/2 h-full bg-textAcent-500 text-white rounded shadow-md flex flex-col justify-center px-4'
+          className='w-1/2 h-full bg-textAcent-500 text-white rounded-lg shadow-md flex flex-col justify-center px-4'
         >
           <span className='text-sm'>Best Plan</span>
           <h6 className='text-lg font-semibold'>Upgrade to manager</h6>
