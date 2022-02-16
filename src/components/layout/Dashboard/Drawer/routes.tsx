@@ -4,7 +4,8 @@ import {
   MarketingIcon,
   GenealogyIcon,
   CompensationPlanIcon,
-  RelojTempIcon
+  RelojTempIcon,
+  AccountIcon
 } from 'components/common/icons'
 
 export const drawerRoutes = [
@@ -58,5 +59,10 @@ export const drawerRoutes = [
     icon: <RelojTempIcon />,
     to: '/comingsoon',
     label: 'Profile'
+  },
+  {
+    icon: <AccountIcon />,
+    to: '/account',
+    label: 'Upgrade Manager'
   }
 ]

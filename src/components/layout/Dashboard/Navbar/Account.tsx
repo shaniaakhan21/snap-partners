@@ -1,3 +1,4 @@
+import { AccountNoImage } from 'components/common/AccountNoImage'
 import { ArrowDownIcon, GenealogyIcon, NotificationIcon } from 'components/common/icons'
 import { useClickOutsideElement } from 'lib/hooks/useClickOutsideElement'
 import { useState, useRef, useEffect } from 'react'
@@ -33,11 +34,8 @@ export const Account = ({ email, name, phone, photoUrl, signOut }) => {
                   className='ml-3 w-10 h-10 rounded-3xl'
                 />
               )
-
               : (
-                <div className='w-10 h-10 rounded-3xl flex items-center justify-center bg-gray-200'>
-                  <GenealogyIcon />
-                </div>
+                <AccountNoImage />
               )
           }
 
