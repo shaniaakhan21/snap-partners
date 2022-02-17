@@ -35,10 +35,10 @@ const LoginPage: Page = () => {
               </div>
 
               <ul className='list-disc pl-6 mt-20 text-xl space-y-4'>
-                <li>Get notified on updates</li>
-                <li>Update documents faster</li>
-                <li>Be synced</li>
-                <li>Keep the track of changes</li>
+                <li>Get notified about company updates</li>
+                <li>Access to company training</li>
+                <li>Get synced</li>
+                <li>Track your team</li>
               </ul>
 
               <div className='absolute bottom-10 left-12 flex items-center gap-x-4'>

@@ -5,7 +5,7 @@ import { STEPS, RegisterBasicInfo, VerifyCode, SuccessCode, UpgradeToManager } f
 import { IHandleStep, IUserTrack, IHandleUserInfo } from './utils/types'
 
 export const SignUpDriverForm = ({ referralLink }: { referralLink: IReferralLink }) => {
-  const [userTrack, setUserTrack] = useState<IUserTrack>({ step: 'STEP_1', userInfo: null })
+  const [userTrack, setUserTrack] = useState<IUserTrack>({ step: 'STEP_3', userInfo: null })
 
   const handleStep: IHandleStep = (step) => {
     setUserTrack(prevState => ({
