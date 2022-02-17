@@ -12,7 +12,7 @@ export const SuccessCode = ({ userTrack, handleStep }: { userTrack: IUserTrack, 
       <span className='text-4xl font-bold text-primary-500'>Register Done!</span>
       <CheckSuccess classes='my-10' />
       <span className='text-xl text-primary-500'>Welcome!</span>
-      {/* <span className='text-4xl text-primary-500 font-bold'>{userTrack.userInfo.name}</span> */}
+      <span className='text-4xl text-primary-500 font-bold'>{userTrack.userInfo.name}</span>
 
       <Button onClick={() => handleStep(STEPS.UPGRADE_TO_MANAGER)} classes='w-full mt-10'>CONTINUE</Button>
       <br/>
