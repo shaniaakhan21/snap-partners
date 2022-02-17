@@ -1,0 +1,11 @@
+.referral-list--height {
+  @apply max-h-[544px];
+}
+
+@media (min-width: 1024px) and (min-height: 989px) {
+  .referral-list--height {
+    @apply max-h-[calc(100vh-64px-20px-325px-16px-20px)];
+  }
+}
+
+/* 989px is the elements height in the dashboard content */

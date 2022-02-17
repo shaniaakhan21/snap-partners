@@ -7,7 +7,7 @@ interface IProps {
 
 export const ReferralTabList = ({ classes = '', children }: IProps) => {
   return (
-    <ul style={{ height: 500 }} className={`w-full relative overflow-y-auto scroll-primary ${classes}`}>
+    <ul className={`w-full referral-list--height relative overflow-y-auto scroll-primary ${classes}`}>
       {children}
     </ul>
   )
