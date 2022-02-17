@@ -2,17 +2,9 @@
   @apply grid w-full h-full min-h-screen fixed;
   grid-template-columns: 1fr;
   grid-template-rows: 64px 1fr;
-  grid-template-areas:  "navbar"
-                        "content";
-}
-
-@media screen(lg) {
-  .dashboardLayout {
-    grid-template-columns: 240px 1fr;
-    grid-template-rows: 64px 1fr;
-    grid-template-areas:  "drawer navbar"
-                          "drawer content";
-  }
+  grid-template-areas:
+    "navbar"
+    "content";
 }
 
 .dashboardLayout__navbar {
@@ -21,24 +13,38 @@
 }
 
 .dashboardLayout__drawer {
-  @apply sticky top-0 left-0 bg-primary-500 z-20 w-[225px] lg:w-full overflow-y-scroll hidden lg:block lg:z-40;
+  @apply sticky top-0 left-0 h-full bg-primary-500 z-20 w-[260px] lg:w-full overflow-y-auto hidden lg:block lg:z-40;
   grid-area: drawer;
 }
 
 .dashboardLayout__content {
-  @apply px-4 py-6 font-body overflow-y-scroll;
+  @apply px-5 pt-5 pb-20 font-body overflow-y-auto;
   grid-area: content;
-  background-color: #ECECEC;
+  background-color: #ececec;
+}
+
+@media screen(lg) {
+  .dashboardLayout {
+    grid-template-columns: 260px 1fr;
+    grid-template-rows: 64px 1fr;
+    grid-template-areas:
+      "drawer navbar"
+      "drawer content";
+  }
+
+  .dashboardLayout__content {
+    @apply pb-5;
+  }
 }
 
 /* Grid Dashboard Overview */
-
 .overviewLayout {
   @apply max-w-7xl mx-auto;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(auto-fill, 1fr);
-  grid-template-areas: "promotionTracker"
+  grid-template-areas:
+    "promotionTracker"
     "graphics"
     "steps"
     "totalEarnings"
