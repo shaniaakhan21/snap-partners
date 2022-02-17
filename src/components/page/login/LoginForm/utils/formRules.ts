@@ -22,6 +22,6 @@ export const signInRulesConfig: IFormConfig = {
   username: {
     maxLength: { value: 50, message: 'Max 50 Characters *' },
     minLength: { value: 3, message: 'Min 3 Characters *' },
-    pattern: { value: /^[a-zA-ZÀ-ÿ0-9 ()-.]*$/, message: 'Username not allow *' }
+    pattern: { value: /^[a-zA-Z0-9!@#$%\\^&*)(+=._-]*$/, message: 'Username not allow *' }
   }
 }
