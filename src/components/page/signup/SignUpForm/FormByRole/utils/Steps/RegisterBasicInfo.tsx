@@ -102,6 +102,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           errors={errors.email}
           register={register}
           rulesForm={registerRulesConfig.email}
+          isRequired
         />
 
         <InputForm
@@ -115,6 +116,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           errors={errors.confirmEmail}
           register={register}
           rulesForm={registerRulesConfig.confirmEmail}
+          isRequired
         />
 
         <InputForm
@@ -127,6 +129,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           errors={errors.username}
           register={register}
           rulesForm={registerRulesConfig.username}
+          isRequired
         />
 
         <InputForm
@@ -139,21 +142,24 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           errors={errors.name}
           register={register}
           rulesForm={registerRulesConfig.name}
+          isRequired
         />
 
         <InputForm
           id='lastname'
           name='lastname'
           type='text'
-          label='Lastname'
+          label='Last Name'
           registerId='lastname'
           placeholder='Enter Lastname'
           errors={errors.lastname}
           register={register}
           rulesForm={registerRulesConfig.lastname}
+          isRequired
         />
 
         <InputPhone
+          isRequired
           register={register}
           errors={errors}
         />
@@ -176,6 +182,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           errors={errors.referralCode}
           register={register}
           rulesForm={registerRulesConfig.referralCode}
+          isRequired={false}
         />
 
         <TermsAndConditions

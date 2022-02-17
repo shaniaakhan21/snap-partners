@@ -5,10 +5,11 @@ interface IInputFormProps {
   register?: UseFormRegister<IDataForm>
   errors?: any
   rulesForm?: FieldErrors
-  classes?: string,
+  classes?: string
+  isRequired: boolean
 }
 
-export const InputPhone = ({ errors, register, classes }: IInputFormProps) => {
+export const InputPhone = ({ errors, register, classes, isRequired }: IInputFormProps) => {
   const handleOnlyNumbers = (event) => {
     if (!/[0-9]/.test(event.key)) {
       event.preventDefault()
@@ -18,8 +19,10 @@ export const InputPhone = ({ errors, register, classes }: IInputFormProps) => {
   return (
     <div className='flex flex-col justify-start items-start gap-x-2 my-2'>
       <div className='flex gap-x-2 justify-start items-center w-full'>
-        <label htmlFor='phone' className='font-bold text-gray-700 uppercase text-sm'>Phone</label>
-        <span className='text-gray-700'>(Is required verify)</span>
+        <label htmlFor='phone' className='font-bold text-gray-700 uppercase text-sm'>
+          Phone {isRequired && <span className='text-red-500'>*</span>}
+        </label>
+        <span className='text-xs text-gray-600 font-normal'>(Verified with SMS code)</span>
       </div>
 
       {(errors.phoneNumber || errors.phoneExt) && (

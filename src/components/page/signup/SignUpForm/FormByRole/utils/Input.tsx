@@ -16,12 +16,20 @@ interface IInputFormProps {
   rulesForm?: FieldErrors,
   defaultValue?: string | string[] | number | null
   control?: any
+  isRequired: boolean
 }
 
-export const InputForm = ({ id, name, label, autoComplete, type, classes, placeholder, defaultValue, register, registerId, errors, rulesForm, control }: IInputFormProps) => {
+export const InputForm = ({ id, name, label, autoComplete, type, classes, placeholder, defaultValue, register, registerId, errors, rulesForm, control, isRequired }: IInputFormProps) => {
   return (
     <div>
-      <label htmlFor={id} className='font-bold text-gray-700 uppercase text-sm'>{label}</label>
+      <label htmlFor={id} className='font-bold text-gray-700 uppercase text-sm'>
+        {label} {' '}
+        {
+          isRequired
+            ? <span className='text-red-500'>*</span>
+            : <span className='text-xs text-gray-600 capitalize font-normal'>(Is Optional)</span>
+        }
+      </label>
       {errors && <p className='text-sm text-red-400'>{errors.message}</p>}
 
       <input
