@@ -35,14 +35,7 @@ export const getUserMe = async (authorizations: IAuthorizations): Promise<IQuery
 
   const data = await res.json()
 
-  console.log('data:', data)
-
   if (!res.ok) {
-    console.log({
-      status: res.status,
-      message: data.error
-    })
-
     return {
       data: null,
       error: {
