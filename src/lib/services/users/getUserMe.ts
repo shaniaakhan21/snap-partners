@@ -20,7 +20,7 @@ interface IQueryUserMeReturn extends IQueryErrorReturn {
     },
     isManager: boolean,
     referralCode: string | null,
-    sponsorId: number | null
+    sponsorId: number | null,
     idImage: string | null,
     insuranceImage: string | null,
   } | null
@@ -34,6 +34,8 @@ export const getUserMe = async (authorizations: IAuthorizations): Promise<IQuery
   })
 
   const data = await res.json()
+
+  console.log('data:', data)
 
   if (!res.ok) {
     console.log({
@@ -51,7 +53,10 @@ export const getUserMe = async (authorizations: IAuthorizations): Promise<IQuery
   }
 
   return {
-    data: data.data,
+    data: {
+      ...data.data,
+      sponsorId: data.data.sponsorId ?? null
+    },
     error: null
   }
 }

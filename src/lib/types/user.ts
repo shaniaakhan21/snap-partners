@@ -1,3 +1,4 @@
+// IUserData is test interface to test/dataEmails
 export interface IUserData {
   id: string
   name: string
