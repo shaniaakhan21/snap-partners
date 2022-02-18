@@ -1,6 +1,6 @@
 export const GTM_ID = {
-  PRE: process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID_PRE,
-  PRO: process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID_PRO
+  PRE: 'GTM-PRJVWRJ',
+  PRO: 'GTM-NNQS9S8'
 }
 
 export const pageview = (url) => {
