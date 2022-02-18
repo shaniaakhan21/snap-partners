@@ -1,4 +1,5 @@
 import { API } from 'config/api'
+import { IQueryErrorReturn } from 'lib/types/query'
 
 interface ISignUpDataBodyStep1 {
   phoneNumber: string
@@ -22,16 +23,7 @@ interface ISignUpDataBodyStep2 extends ISignUpDataBodyStep1 {
   sponsorReferralCode: string | null
 }
 
-interface ISignUpDataResponse {
-  timestamp: number
-  data: {
-    success: true
-    token: string
-  } | null
-  error: string | null
-}
-
-export const signUpStep1 = async (dataBody: ISignUpDataBodyStep1) => {
+export const signUpStep1 = async (dataBody: ISignUpDataBodyStep1): Promise<IQueryErrorReturn> => {
   const res = await fetch(`${API.BASE_URL}/api/authentication/signUpStepOne`, {
     method: 'POST',
     headers: {
@@ -40,25 +32,21 @@ export const signUpStep1 = async (dataBody: ISignUpDataBodyStep1) => {
     body: JSON.stringify({ phoneNumber: dataBody.phoneNumber })
   })
 
-  const data: ISignUpDataResponse = await res.json()
+  const data = await res.json()
 
   if (!res.ok) {
     return {
-      data: null,
       error: {
-        message: data.error,
-        status: res.status
+        status: res.status,
+        message: data.error
       }
     }
   }
 
-  return {
-    data,
-    error: null
-  }
+  return { error: null }
 }
 
-export const signUpStep2 = async (dataBody: ISignUpDataBodyStep2) => {
+export const signUpStep2 = async (dataBody: ISignUpDataBodyStep2): Promise<IQueryErrorReturn> => {
   const res = await fetch(`${API.BASE_URL}/api/authentication/signUpStepTwo`, {
     method: 'POST',
     headers: {
@@ -67,20 +55,16 @@ export const signUpStep2 = async (dataBody: ISignUpDataBodyStep2) => {
     body: JSON.stringify(dataBody)
   })
 
-  const data: ISignUpDataResponse = await res.json()
+  const data = await res.json()
 
   if (!res.ok) {
     return {
-      data: null,
       error: {
-        message: data.error,
-        status: res.status
+        status: res.status,
+        message: data.error
       }
     }
   }
 
-  return {
-    data,
-    error: null
-  }
+  return { error: null }
 }

@@ -12,6 +12,7 @@ import { RegisterPassword } from './utils/RegisterPassword'
 import { RememberAndPolicy } from './utils/RememberAndPolicy'
 import { useAuthStore } from 'lib/stores'
 import { login } from 'lib/services/session/login'
+import { getUserMe } from 'lib/services/users/getUserMe'
 
 export const LoginForm = () => {
   const { setAuth } = useAuthStore()
@@ -21,13 +22,21 @@ export const LoginForm = () => {
   const onSubmit = async ({ username, password }: IDataForm) => {
     setLoading(true)
 
-    const { data, error } = await login({
+    const { data: dataLogin, error: errorLogin } = await login({
       username,
       password
     })
 
-    if (error) {
-      toast(error.message, { type: 'error' })
+    if (errorLogin) {
+      toast('ERROR -> login', { type: 'error' })
+      setLoading(false)
+      return
+    }
+
+    const { data: dataUser, error: errorUser } = await getUserMe({ token: dataLogin.token })
+
+    if (errorUser) {
+      toast('ERROR -> get user me', { type: 'error' })
       setLoading(false)
       return
     }
@@ -35,16 +44,19 @@ export const LoginForm = () => {
     toast('Login Successful!', { type: 'success' })
     setLoading(false)
     setAuth({
-      email: data.email,
-      name: data.email,
-      phone: data.phoneNumber,
-      accessToken: data.token,
-      iat: data.iat,
-      lastname: data.lastname,
-      roles: data.roles,
-      id: data.userId,
-      username: data.username,
-      referralCode: data.referralCode
+      email: dataUser.email,
+      name: dataUser.email,
+      phone: dataUser.phoneNumber,
+      accessToken: dataLogin.token,
+      lastname: dataUser.lastname,
+      roles: dataUser.roles,
+      id: dataLogin.userId,
+      username: dataUser.username,
+      referralCode: dataUser.referralCode,
+      idImage: dataUser.idImage,
+      insuranceImage: dataUser.insuranceImage,
+      isManager: dataUser.isManager,
+      sponsorId: dataUser.sponsorId
     })
     reset()
   }
