@@ -14,7 +14,7 @@ export const registerRulesConfig: IFormConfig = {
     required: { value: true, message: 'Email Required *' },
     pattern: {
       value:
-        /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+        /^\S[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
       message: 'Enter a valid email *'
     }
   },
@@ -23,21 +23,21 @@ export const registerRulesConfig: IFormConfig = {
     required: { value: true, message: 'Name Required *' },
     maxLength: { value: 50, message: 'Max 50 Characters *' },
     minLength: { value: 3, message: 'Min 3 Characters *' },
-    pattern: { value: /^[a-zA-ZÀ-ÿ0-9 ()-.]*$/, message: 'Name not allow *' }
+    pattern: { value: /^[a-zA-Z]*$/, message: 'Name not allow *' }
   },
 
   lastname: {
     required: { value: true, message: 'Lastname Required *' },
     maxLength: { value: 50, message: 'Max 50 Characters *' },
     minLength: { value: 3, message: 'Min 3 Characters *' },
-    pattern: { value: /^[a-zA-ZÀ-ÿ0-9 ()-.]*$/, message: 'Lastname not allow *' }
+    pattern: { value: /^[a-zA-Z0-9!@#$%\\^&*)(+=._-]*$/, message: 'Lastname not allow *' }
   },
 
   username: {
     required: { value: true, message: 'Username Required *' },
     maxLength: { value: 50, message: 'Max 50 Characters *' },
     minLength: { value: 3, message: 'Min 3 Characters *' },
-    pattern: { value: /^[a-zA-ZÀ-ÿ0-9 ()-.]*$/, message: 'Username not allow *' }
+    pattern: { value: /^[a-zA-Z0-9!@#$%\\^&*)(+=._-]*$/, message: 'Username not allow *' }
   },
 
   phoneExt: {
@@ -67,7 +67,7 @@ export const registerRulesConfig: IFormConfig = {
 
   referralCode: {
     maxLength: { value: 50, message: 'Max 50 Characters *' },
-    pattern: { value: /^[a-zA-ZÀ-ÿ0-9 ()-.]*$/, message: 'Referral Code not allow *' }
+    pattern: { value: /^[a-zA-Z0-9!@#$%\\^&*)(+=._-]*$/, message: 'Referral Code not allow *' }
   },
 
   rememberMe: {

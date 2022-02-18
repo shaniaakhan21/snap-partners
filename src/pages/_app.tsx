@@ -44,7 +44,7 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
             new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-            })(window,document,'script','dataLayer', '${GTM_ID}');
+            })(window,document,'script','dataLayer', '${typeof document !== 'undefined' && document.location.hostname === 'dev.snap.devopsteam.info' ? GTM_ID.PRE : GTM_ID.PRO}');
           `
         }}
       />
