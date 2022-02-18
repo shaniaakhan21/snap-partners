@@ -4,36 +4,53 @@ import { Drawer, Navbar } from 'components/layout/Dashboard'
 import { Spinner } from 'components/common/loaders'
 import { useAuthStore } from 'lib/stores'
 import { getLocalStorage } from 'lib/utils/localStorage'
-import type { NextPage, ReactNode } from 'lib/types'
 import { decodeAccessToken } from 'lib/utils/decodedAccessToken'
+import type { NextPage, ReactNode } from 'lib/types'
+import { getUserMe } from 'lib/services/users/getUserMe'
+import { toast } from 'react-toastify'
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const router = useRouter()
   const { auth, setAuth } = useAuthStore()
 
   useEffect(() => {
-    if (auth) return
+    (async () => {
+      if (auth) return
 
-    const token = getLocalStorage('accessToken')
+      const token = getLocalStorage('accessToken')
 
-    if (!token) {
-      router.push('/auth/login')
-      return
-    }
+      if (!token) {
+        router.push('/auth/login')
+        return
+      }
 
-    const data = decodeAccessToken(token)
-    setAuth({
-      email: data.email,
-      name: data.email,
-      phone: data.phoneNumber,
-      accessToken: data.token,
-      iat: data.iat,
-      lastname: data.lastname,
-      roles: data.roles,
-      id: data.userId,
-      username: data.username,
-      referralCode: data.referralCode
-    })
+      const { userId } = decodeAccessToken(token)
+
+      const { data, error } = await getUserMe({ token })
+
+      if (error) {
+        toast('ERROR -> The session could not be recovered', { type: 'error' })
+        router.push('/auth/login')
+        return
+      }
+
+      toast('Session recovered!', { type: 'success' })
+      setAuth({
+        email: data.email,
+        name: data.email,
+        phone: data.phoneNumber,
+        accessToken: token,
+        lastname: data.lastname,
+        roles: data.roles,
+        id: userId,
+        username: data.username,
+        referralCode: data.referralCode,
+        idImage: data.idImage,
+        insuranceImage: data.insuranceImage,
+        isManager: data.isManager,
+        sponsorId: data.sponsorId
+      })
+    })()
   }, [auth])
 
   if (!auth) {

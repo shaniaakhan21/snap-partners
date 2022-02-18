@@ -1,50 +1,21 @@
 import { setLocalStorage } from 'lib/utils/localStorage'
-import { decodeAccessToken } from 'lib/utils/decodedAccessToken'
 import { API } from 'config/api'
+import { IQueryErrorReturn } from 'lib/types/query'
+import { decodeAccessToken } from 'lib/utils/decodedAccessToken'
 
 interface ILoginDataBody {
   username: string
   password: string
 }
 
-interface ILoginDataResponse {
-  timestamp: number
+interface IQueryLoginReturn extends IQueryErrorReturn {
   data: {
-    success: true
-    token: string
+    token: string,
+    userId: number
   } | null
-  error: string | null
 }
 
-// type ILoginReturn = Promise<{
-//   data: null;
-//   error: {
-//       message: string;
-//       status: number;
-//   };
-// } | {
-//   data: {
-//       token: string;
-//       email: string;
-//       iat: number;
-//       lastname: string;
-//       name: string;
-//       phoneNumber: string;
-//       roles: string;
-//       userId: number;
-//       username: string;
-
-//       iss?: string;
-//       sub?: string;
-//       aud?: string | string[];
-//       exp?: number;
-//       nbf?: number;
-//       jti?: string;
-//   };
-//   error: null;
-// }>
-
-export const login = async (dataBody: ILoginDataBody) => {
+export const login = async (dataBody: ILoginDataBody): Promise<IQueryLoginReturn> => {
   const res = await fetch(`${API.BASE_URL}/api/authentication/login`, {
     method: 'POST',
     headers: {
@@ -53,23 +24,27 @@ export const login = async (dataBody: ILoginDataBody) => {
     body: JSON.stringify(dataBody)
   })
 
-  const data: ILoginDataResponse = await res.json()
+  const data = await res.json()
 
   if (!res.ok) {
     return {
       data: null,
       error: {
-        message: data.error,
-        status: res.status
+        status: res.status,
+        message: data.error
       }
     }
   }
 
   const token = data.data.token
   setLocalStorage('accessToken', token)
+  const { userId } = decodeAccessToken(token)
 
   return {
-    data: decodeAccessToken(token),
+    data: {
+      ...data.data,
+      userId
+    },
     error: null
   }
 }

@@ -1,28 +1,22 @@
-import jwtDecode from 'jwt-decode'
+import jwtDecode, { JwtPayload } from 'jwt-decode'
 
-// interface IDecodedToken extends JwtPayload {
-//   email: string
-//   iat: number
-//   lastname: string
-//   name: string
-//   phoneNumber: string
-//   roles: string | {
-//     admin: boolean
-//     customer: boolean
-//     driver: boolean
-//     merchant: boolean
-//   }
-//   userId: number
-//   username: string
-// }
-
-export const decodeAccessToken = (token: string) => {
-  const decodedToken = jwtDecode<any>(token)
-  const roles = decodedToken.roles
-  decodedToken.roles = typeof roles === 'string' ? JSON.parse(roles) : roles
-
-  return {
-    ...decodedToken,
-    token
+interface IDecodedToken extends JwtPayload {
+  userId: number
+  roles: {
+    admin: boolean
+    customer: boolean
+    driver: boolean
+    merchant: boolean
   }
+  iat: number
+}
+
+interface IDecodedTokenReturn {
+  userId: number
+}
+
+export const decodeAccessToken = (token: string): IDecodedTokenReturn => {
+  const decodedToken = jwtDecode<IDecodedToken>(token)
+
+  return { userId: decodedToken.userId }
 }

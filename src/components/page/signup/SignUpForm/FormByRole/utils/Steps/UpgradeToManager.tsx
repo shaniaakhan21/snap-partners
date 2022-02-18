@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
+import { Button } from 'components/common/Button'
+import { Spinner } from 'components/common/loaders'
 import { useAuthStore } from 'lib/stores'
 import { login } from 'lib/services/session/login'
-import { Button } from 'components/common/Button'
+import { getUserMe } from 'lib/services/users/getUserMe'
 import { IHandleStep, IUserTrack } from '../types'
-import { Spinner } from 'components/common/loaders'
 import { IReferralLink } from 'lib/types'
 
 export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { userTrack: IUserTrack, handleStep: IHandleStep, referralLink: IReferralLink }) => {
@@ -16,11 +17,19 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
   const handleClickLogin = async () => {
     setIsLoading(true)
 
-    const { data, error } = await login({ username: userTrack.userInfo.username, password: userTrack.userInfo.password })
+    const { data: dataLogin, error: errorLogin } = await login({ username: userTrack.userInfo.username, password: userTrack.userInfo.password })
 
-    if (error) {
-      toast('An error ocurred while trying to login, please try to login manually', { type: 'error' })
+    if (errorLogin) {
+      toast('ERROR -> login | An error ocurred while trying to login, please try to login manually', { type: 'error' })
       router.push('/auth/login')
+      setIsLoading(false)
+      return
+    }
+
+    const { data: dataUser, error: errorUser } = await getUserMe({ token: dataLogin.token })
+
+    if (errorUser) {
+      toast('ERROR -> get user me', { type: 'error' })
       setIsLoading(false)
       return
     }
@@ -28,21 +37,24 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
     toast('Login Successful!', { type: 'success' })
     setIsLoading(false)
     setAuth({
-      email: data.email,
-      name: data.email,
-      phone: data.phoneNumber,
-      accessToken: data.token,
-      iat: data.iat,
-      lastname: data.lastname,
-      roles: data.roles,
-      id: data.userId,
-      username: data.username,
-      referralCode: referralLink.code
+      email: dataUser.email,
+      name: dataUser.email,
+      phone: dataUser.phoneNumber,
+      accessToken: dataLogin.token,
+      lastname: dataUser.lastname,
+      roles: dataUser.roles,
+      id: dataLogin.userId,
+      username: dataUser.username,
+      referralCode: dataUser.referralCode,
+      idImage: dataUser.idImage,
+      insuranceImage: dataUser.insuranceImage,
+      isManager: dataUser.isManager,
+      sponsorId: dataUser.sponsorId
     })
     // When change auth state, directly the app push the user to /overview path
     // This logic is on AuthPageLayout useEffect
 
-    return data.userId
+    return dataLogin.userId
   }
 
   const handleUpagradeToManage = async () => {
