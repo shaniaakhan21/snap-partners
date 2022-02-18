@@ -102,6 +102,7 @@ To get a local copy up and running follow these simple example steps.
 ### Prerequisites
 
 - npm (we use npm as main **package manager**)
+
   ```sh
   npm install npm@latest -g
   ```
@@ -109,18 +110,26 @@ To get a local copy up and running follow these simple example steps.
 ## 🔽 Installation
 
 1. Clone the repo - example with `HTTPS`
+
    ```sh
    git clone https://gitlab.worldce.info/snap/snap-website.git
    ```
+
 2. Install NPM packages
+
    ```sh
    npm install
    ```
+
 3. Create `.env` file - check: [Next.js Environment Variables](https://nextjs.org/docs/basic-features/environment-variables)
+
    ```
-   NEXT_PUBLIC_RECAPTCHA_V2=6Lc2koEdAAAAAIdNcMY0V1E9IPGT3AxX-vlRUDtQ
-   NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID=GTM-NNQS9S8
+    NEXT_PUBLIC_RECAPTCHA_V2=6Lc2koEdAAAAAIdNcMY0V1E9IPGT3AxX-vlRUDtQ
+    NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID_PRO=GTM-NNQS9S8
+    NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID_PRE=GTM-PRJVWRJ
+    JWT_KEY=backoffice-platform!!@snap!!.com--secret
    ```
+
 4. Run `npm run dev` to run localhost project
 
 <!-- PROJECT STRUCTURE -->
