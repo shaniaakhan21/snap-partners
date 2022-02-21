@@ -1,13 +1,16 @@
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
-import { Drawer, Navbar } from 'components/layout/Dashboard'
-import { Spinner } from 'components/common/loaders'
+import { toast } from 'react-toastify'
+
+import type { NextPage, ReactNode } from 'lib/types'
 import { useAuthStore } from 'lib/stores'
 import { getLocalStorage } from 'lib/utils/localStorage'
 import { decodeAccessToken } from 'lib/utils/decodedAccessToken'
-import type { NextPage, ReactNode } from 'lib/types'
 import { getUserMe } from 'lib/services/users/getUserMe'
-import { toast } from 'react-toastify'
+
+import { Drawer, Navbar } from 'components/layout/Dashboard'
+import { Footer } from 'components/layout/Footer'
+import { Spinner } from 'components/common/loaders'
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const router = useRouter()
@@ -67,9 +70,11 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
       <Drawer />
 
       <main className='dashboardLayout__content scroll-primary'>
-        <div className='mx-auto h-fit' style={{ maxWidth: 1280 }}> {/* the `max-w-7xl` class of tailwind, dont work here D: */}
+        <div className='mx-auto min-h-[89vh]  h-fit px-5 pt-5 pb-20' style={{ maxWidth: 1280 }}> {/* the `max-w-7xl` class of tailwind, dont work here D: */}
           {children}
         </div>
+
+        <Footer />
       </main>
     </div>
   )
