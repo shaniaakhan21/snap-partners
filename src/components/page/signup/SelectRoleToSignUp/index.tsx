@@ -14,22 +14,22 @@ export const SelectRoleToSignUp = () => {
       link: `/auth/signup?role=${ROLES.CUSTOMER}`
     },
     {
-      icon: <RestaurantsIcon classes='w-14 h-14' />,
-      label: 'I have a Restaurant',
-      key: ROLES.RESTAURANT,
-      link: 'https://opportunity.snapdelivered.com/restaurants.php'
-    },
-    {
       icon: <DriverIcon classes='w-14 h-14' />,
       label: 'I’m a Driver',
       key: ROLES.DRIVER,
       link: `/auth/signup?role=${ROLES.DRIVER}`
+    },
+    {
+      icon: <RestaurantsIcon classes='w-14 h-14' />,
+      label: 'I have a Restaurant',
+      key: ROLES.RESTAURANT,
+      link: 'https://opportunity.snapdelivered.com/restaurants.php'
     }
   ])
 
   return (
     <div className='text-center'>
-      <span className='text-3xl text-gray-800 font-bold'>Tell us what’s your situation</span>
+      <span className='text-3xl text-gray-800 font-bold'>order - eat - repeat</span>
 
       <ul className='flex flex-col justify-center items-center my-4 gap-y-4'>
         {
