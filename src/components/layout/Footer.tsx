@@ -24,7 +24,7 @@ export const Footer = () => {
         <ul className='grid place-content-center grid-flow-row md:grid-rows-2 grid-cols-1 md:grid-cols-3 2xl:flex 2xl:justify-start 2xl:items-start 2xl:gap-x-4 text-gray-800 gap-y-2 2xl:mr-3'>
           {
             footerLinks.map(footerLink => (
-              <li>
+              <li key={footerLink.label}>
                 <Link href={footerLink.to}>
                   <a>{footerLink.label}</a>
                 </Link>
@@ -36,8 +36,8 @@ export const Footer = () => {
         <section className='flex flex-col sm:flex-row justify-between items-center 2xl:gap-x-4 2xl:mr-3'>
           <ul className='flex justify-center items-center my-4 gap-x-4'>
             {
-              socialLinks.map(socialLink => (
-                <li className='bg-white rounded-full p-2 cursor-pointer'>
+              socialLinks.map((socialLink, index) => (
+                <li key={index} className='bg-white rounded-full p-2 cursor-pointer'>
                   {socialLink.icon}
                 </li>
               ))
