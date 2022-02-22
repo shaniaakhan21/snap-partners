@@ -75,8 +75,8 @@ export const dashboardPathnames: { [key: string]: IDashboardPatname } = drawerRo
   const pathname = item.to
   const pathnameWithoutSlash = pathname.substring(1)
 
-  const removeSeparator = (str: string) => {
-    const newStr = str.split('-').reduce((str, element, index) => {
+  const removeSeparator = (str: string, separatorChard: string) => {
+    const newStr = str.split(separatorChard).reduce((str, element, index) => {
       const currentElement = index === 0
         ? element
         : `${element.charAt(0).toLocaleUpperCase()}${element.substring(1)}`
@@ -84,14 +84,15 @@ export const dashboardPathnames: { [key: string]: IDashboardPatname } = drawerRo
       return `${str}${currentElement}`
     }, '')
 
-    if (newStr.includes('-')) {
-      removeSeparator(newStr)
+    if (newStr.includes(separatorChard)) {
+      removeSeparator(newStr, separatorChard)
     }
 
     return newStr
   }
 
-  const key = pathnameWithoutSlash.includes('-') ? removeSeparator(pathnameWithoutSlash) : pathnameWithoutSlash
+  const pathnameWithoutMinor = pathnameWithoutSlash.includes('-') ? removeSeparator(pathnameWithoutSlash, '-') : pathnameWithoutSlash
+  const key = pathnameWithoutMinor.includes('_') ? removeSeparator(pathnameWithoutMinor, '_') : pathnameWithoutSlash
 
   return {
     ...obj,
