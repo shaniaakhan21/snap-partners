@@ -17,12 +17,12 @@ export const drawerRoutes = [
   {
     icon: <ReferralLinksIcon />,
     to: '/referrals',
-    label: 'My Referrals links'
+    label: 'My Referrals Link'
   },
   {
     icon: <MarketingIcon />,
     to: '/marketing',
-    label: 'Marketing'
+    label: 'Marketing Tools'
   },
   {
     icon: <RelojTempIcon />,
@@ -44,7 +44,6 @@ export const drawerRoutes = [
     to: '/comingsoon',
     label: 'Recognition'
   },
-
   {
     icon: <GenealogyIcon />,
     to: '/genealogy',
@@ -66,3 +65,39 @@ export const drawerRoutes = [
     label: 'Upgrade Manager'
   }
 ]
+
+interface IDashboardPatname {
+  pathname: string,
+  title: string
+}
+
+export const dashboardPathnames: { [key: string]: IDashboardPatname } = drawerRoutes.reduce((obj, item) => {
+  const pathname = item.to
+  const pathnameWithoutSlash = pathname.substring(1)
+
+  const removeSeparator = (str: string) => {
+    const newStr = str.split('-').reduce((str, element, index) => {
+      const currentElement = index === 0
+        ? element
+        : `${element.charAt(0).toLocaleUpperCase()}${element.substring(1)}`
+
+      return `${str}${currentElement}`
+    }, '')
+
+    if (newStr.includes('-')) {
+      removeSeparator(newStr)
+    }
+
+    return newStr
+  }
+
+  const key = pathnameWithoutSlash.includes('-') ? removeSeparator(pathnameWithoutSlash) : pathnameWithoutSlash
+
+  return {
+    ...obj,
+    [key]: {
+      pathname: item.to,
+      title: item.label
+    }
+  }
+}, {})

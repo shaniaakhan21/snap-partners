@@ -1,11 +1,20 @@
+import { drawerRoutes } from 'components/layout/Dashboard/Drawer/routes'
 import { useRouter } from 'next/router'
-import { dashboardPathnames } from 'lib/utils/dashboardPathnames'
 
-export const useDashboardGetPathname = () => {
+interface IDashboardGetPathnameReturn {
+  pathname: string,
+  title: string
+}
+
+export const useDashboardGetPathname = (): IDashboardGetPathnameReturn | null => {
   const router = useRouter()
 
-  const pathnamesArray = Object.values(dashboardPathnames)
-  const pathnameData = pathnamesArray.find(pathnameData => router.pathname.includes(pathnameData.pathname))
+  const pathnameData = drawerRoutes.find(pathnameData => router.pathname.includes(pathnameData.to))
 
   return pathnameData
+    ? {
+      pathname: pathnameData.to,
+      title: pathnameData.label
+    }
+    : null
 }
