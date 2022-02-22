@@ -1,5 +1,5 @@
 import { Button } from 'components/common/Button'
-import { AppleStore, CheckSuccess, GooglePlay } from 'components/common/icons'
+import { AppleStore, CheckSuccess, GooglePlayBanner } from 'components/common/icons'
 import { STEPS } from '.'
 import { IHandleStep, IUserTrack } from '../types'
 
@@ -20,7 +20,7 @@ export const SuccessCode = ({ userTrack, handleStep }: { userTrack: IUserTrack, 
       <a href='https://snapdelivered.com/' className='text-xl text-primary-500 text-center'>snapdelivered.com </a>
       <br/>
       <div className='flex flex-wrap justify-center items-center mt-8 gap-x-4 gap-y-4'>
-        <GooglePlay />
+        <GooglePlayBanner />
         <AppleStore />
       </div>
     </div>
