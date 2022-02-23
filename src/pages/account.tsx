@@ -11,12 +11,12 @@ const { SEO } = PAGE_INFO
 const AccountPage: PageNext = () => {
   const { auth, removeAuth } = useAuthStore()
 
-  const handleClickUpgradeToManager = () => {
-    window.open(
-      `https://store.snapdelivered.com/product/manager-upgrade?userId=${auth.id}`,
-      'noopener'
-    )
-  }
+  // const handleClickUpgradeToManager = () => {
+  //   window.open(
+  //     `https://store.snapdelivered.com/product/manager-upgrade?userId=${auth.id}`,
+  //     'noopener'
+  //   )
+  // }
 
   return (
     <>
@@ -173,8 +173,8 @@ const AccountPage: PageNext = () => {
         </ul>
       </div>
 
-      <div className='flex flex-col md:flex-row items-center justify-center mt-11'>
-        {/* <div className='w-full md:w-1/2 h-20 flex items-center bg-white rounded-lg px-4 mr-0 md:mr-4 mb-4 md:mb-0'>
+      {/* <div className='flex flex-col md:flex-row items-center justify-center mt-11'>
+        <div className='w-full md:w-1/2 h-20 flex items-center bg-white rounded-lg px-4 mr-0 md:mr-4 mb-4 md:mb-0'>
           <div className='bg-warning-300 rounded-lg w-12 h-12 flex items-center justify-center mr-4'>
             <TrendingUpIcon />
           </div>
@@ -183,16 +183,15 @@ const AccountPage: PageNext = () => {
             <span className='block text-gray-400 text-sm'>Rank</span>
             <span className='text-lg font-semibold'>Director</span>
           </div>
-        </div> */}
+        </div>
 
         <button
           onClick={handleClickUpgradeToManager}
           className='w-full md:w-1/2 h-20 bg-textAcent-500 text-white rounded-lg shadow-md flex flex-col justify-center px-4'
         >
-          <span className='text-sm'>Best Plan</span>
           <h6 className='text-lg font-semibold'>Upgrade to manager</h6>
         </button>
-      </div>
+      </div> */}
 
       <button
         className='block text-primary-500 mx-auto mt-11 font-bold text-lg'
