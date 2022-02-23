@@ -29,7 +29,7 @@ export const SelectRoleToSignUp = () => {
 
   return (
     <div className='text-center'>
-      <span className='text-3xl text-gray-800 font-bold'>order - eat - repeat</span>
+      <span className='text-3xl text-gray-800 font-bold'>Welcome To Snap Delivered</span>
 
       <ul className='flex flex-col justify-center items-center my-4 gap-y-4'>
         {

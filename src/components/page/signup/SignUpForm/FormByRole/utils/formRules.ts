@@ -30,7 +30,7 @@ export const registerRulesConfig: IFormConfig = {
     required: { value: true, message: 'Lastname Required *' },
     maxLength: { value: 50, message: 'Max 50 Characters *' },
     minLength: { value: 3, message: 'Min 3 Characters *' },
-    pattern: { value: /^[a-zA-Z0-9!@#$%\\^&*)(+=._-]*$/, message: 'Lastname not allow *' }
+    pattern: { value: /^[a-zA-Z0-9!@#$%\\^&*)(+=._-]*$/, message: 'Last Name not allow *' }
   },
 
   username: {
