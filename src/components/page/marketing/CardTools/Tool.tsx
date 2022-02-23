@@ -3,7 +3,7 @@ import Link from 'next/link'
 export const MarketingTool = ({ title, subtitle, icon, description, to }) => {
   return (
     <Link href={to} key={title}>
-      <a className='relative h-[420px] flex flex-col max-w-[248px] w-full rounded-t-sm bg-white m-0 text-left mt-5'>
+      <a className='relative h-[426px] flex flex-col max-w-[248px] w-full rounded-t-sm bg-white m-0 text-left mt-5'>
         <li>
           <div className='absolute w-full h-1 bg-primary-300 top-0 left-0 rounded-t-[4px]'></div>
 
