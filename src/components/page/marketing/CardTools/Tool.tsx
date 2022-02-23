@@ -3,12 +3,17 @@ import Link from 'next/link'
 export const MarketingTool = ({ title, subtitle, icon, description, to }) => {
   return (
     <Link href={to} key={title}>
-      <a className='relative h-[394px] flex flex-col max-w-[248px] w-full rounded-t-sm bg-white m-0 text-left mt-5'>
+      <a className='relative h-[420px] flex flex-col max-w-[248px] w-full rounded-t-sm bg-white m-0 text-left mt-5'>
         <li>
           <div className='absolute w-full h-1 bg-primary-300 top-0 left-0 rounded-t-[4px]'></div>
 
           <section className='px-6 pb-4 pt-5'>
-            <span className='font-bold text-xl'>{title}</span>
+            <div className='text-center w-full'>
+              <span className='font-bold text-xl '>
+                {title} <br /> Marketing
+              </span>
+
+            </div>
             <p>{subtitle}</p>
           </section>
 
