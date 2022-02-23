@@ -5,7 +5,8 @@ import {
   GenealogyIcon,
   CompensationPlanIcon,
   RelojTempIcon,
-  AccountIcon
+  AccountIcon,
+  TrainingIcon
 } from 'components/common/icons'
 
 export const drawerRoutes = [
@@ -30,7 +31,7 @@ export const drawerRoutes = [
     label: 'Reports'
   },
   {
-    icon: <RelojTempIcon />,
+    icon: <TrainingIcon />,
     to: '/comingsoon',
     label: 'Training'
   },
@@ -55,14 +56,31 @@ export const drawerRoutes = [
     label: 'Compensation Plan'
   },
   {
-    icon: <RelojTempIcon />,
-    to: '/comingsoon',
+    icon: <AccountIcon />,
+    to: '/account',
     label: 'Profile'
   },
   {
-    icon: <AccountIcon />,
-    to: '/account',
-    label: 'Upgrade Manager'
+    icon: <RelojTempIcon />,
+    to: '/upgrade-to-manager',
+    label: 'Upgrade To Manager'
+  }
+]
+
+export const globalRoutes = [
+  ...drawerRoutes.map(route => {
+    const routeNormalized = { ...route }
+    delete routeNormalized.icon
+
+    return routeNormalized
+  }),
+  {
+    to: '/legal/privacy-policy',
+    label: 'Privacy Policy'
+  },
+  {
+    to: '/legal/terms-of-use',
+    label: 'Terms Of Use'
   }
 ]
 
