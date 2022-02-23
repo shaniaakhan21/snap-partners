@@ -45,7 +45,7 @@ export const Footer = () => {
           </ul>
 
           <div>
-            <span className='text-gray-800'>© 2022 Snap Delivered. All rights reserved.</span>
+            <span className='text-gray-800 text-xs'>© 2022 Snap Delivered. All rights reserved.</span>
           </div>
         </section>
       </div>
