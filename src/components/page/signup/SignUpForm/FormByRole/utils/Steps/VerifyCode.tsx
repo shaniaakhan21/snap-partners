@@ -41,7 +41,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink }: { userTrack:
     })
 
     if (error) {
-      toast(error.message, { type: 'error' })
+      toast(error.info, { type: 'error' })
       setIsVerifyingCode(false)
       return
     }

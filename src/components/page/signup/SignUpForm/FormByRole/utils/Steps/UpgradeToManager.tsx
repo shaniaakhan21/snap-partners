@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
-import { useAuthStore } from 'lib/stores'
+import { useAuthStore, useNewWindowOpenedStore } from 'lib/stores'
 import { login } from 'lib/services/session/login'
 import { getUserMe } from 'lib/services/users/getUserMe'
 import { IHandleStep, IUserTrack } from '../types'
@@ -12,6 +12,7 @@ import { IReferralLink } from 'lib/types'
 export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { userTrack: IUserTrack, handleStep: IHandleStep, referralLink: IReferralLink }) => {
   const router = useRouter()
   const { setAuth } = useAuthStore()
+  const { setNewWindow } = useNewWindowOpenedStore()
   const [isLoading, setIsLoading] = useState(false)
 
   const handleClickLogin = async () => {
@@ -60,10 +61,13 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
   const handleUpagradeToManage = async () => {
     const userId = await handleClickLogin()
 
-    window.open(
+    const windowOpened = window.open(
       `https://store.snapdelivered.com/product/manager-upgrade?userId=${userId}`,
-      'noopener'
+      'windowUpgradeToManager'
     )
+
+    setNewWindow(windowOpened)
+    // When a newWindow is sent, in DashboardLayout we have an effect to handle upgrade to manager.
   }
 
   if (isLoading) {

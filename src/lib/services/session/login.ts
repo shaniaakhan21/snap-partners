@@ -31,7 +31,7 @@ export const login = async (dataBody: ILoginDataBody): Promise<IQueryLoginReturn
       data: null,
       error: {
         status: res.status,
-        message: data.error
+        info: data.error
       }
     }
   }

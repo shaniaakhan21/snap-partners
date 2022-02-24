@@ -38,7 +38,7 @@ export const signUpStep1 = async (dataBody: ISignUpDataBodyStep1): Promise<IQuer
     return {
       error: {
         status: res.status,
-        message: data.error
+        info: data.error
       }
     }
   }
@@ -61,7 +61,7 @@ export const signUpStep2 = async (dataBody: ISignUpDataBodyStep2): Promise<IQuer
     return {
       error: {
         status: res.status,
-        message: data.error
+        info: data.error
       }
     }
   }
