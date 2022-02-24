@@ -9,3 +9,11 @@ export const pageview = (url) => {
     page: url
   })
 }
+
+export const navbarPress = (label:string) => {
+  window.dataLayer.push({
+    category: 'sidebar',
+    action: 'click',
+    label
+  })
+}
