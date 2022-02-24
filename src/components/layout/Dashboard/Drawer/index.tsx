@@ -14,7 +14,7 @@ export const Drawer = () => {
       router.asPath === `${routeLink}/restaurants` ||
       router.asPath === `${routeLink}/ibo` ||
       router.asPath === `${routeLink}/comingsoon` ||
-      router.asPath === `${routeLink}/account`
+      router.asPath === `${routeLink}/profile`
     )
   }
 

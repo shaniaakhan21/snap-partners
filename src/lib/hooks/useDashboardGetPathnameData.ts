@@ -1,4 +1,4 @@
-import { drawerRoutes } from 'components/layout/Dashboard/Drawer/routes'
+import { globalRoutes } from 'components/layout/Dashboard/Drawer/routes'
 import { useRouter } from 'next/router'
 
 interface IDashboardGetPathnameReturn {
@@ -9,7 +9,7 @@ interface IDashboardGetPathnameReturn {
 export const useDashboardGetPathname = (): IDashboardGetPathnameReturn | null => {
   const router = useRouter()
 
-  const pathnameData = drawerRoutes.find(pathnameData => router.pathname.includes(pathnameData.to))
+  const pathnameData = globalRoutes.find(pathnameData => router.pathname.includes(pathnameData.to))
 
   return pathnameData
     ? {

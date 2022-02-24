@@ -91,9 +91,9 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
       </div>
 
       <ul className='mt-5 list-disc custom__bulletList text-left self-start text-gray-400 px-5'>
-        <li>Benefit number one</li>
-        <li>Benefit number two</li>
-        <li>Benefit number three</li>
+        <li>Earn beyond just the personal referrals.</li>
+        <li>Managers earn 10% on all Level 1 referrals</li>
+        <li>Multiply your profits!</li>
       </ul>
 
       <div className='w-full mt-10'>
@@ -103,7 +103,7 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
 
         <p className='mt-2'>
           Do it later in{' '}
-          <button onClick={handleClickLogin} className='text-primary-500 cursor-pointer focus:underline'>Account settings</button>
+          <button onClick={handleClickLogin} className='text-primary-500 cursor-pointer focus:underline'>Profile</button>
         </p>
       </div>
     </div>

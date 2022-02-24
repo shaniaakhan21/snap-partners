@@ -2,7 +2,7 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContaine
 
 export const Graphics = ({ data }: { data: any }) => {
   return (
-    <div className=' col-span-1 row-span-1 sm:col-start-3 sm:col-span-3 md:col-start-2 flex justify-center items-center'>
+    <div className=' col-span-1 row-span-1 md:col-span-3 md:col-start-2 flex justify-center items-center'>
       <ResponsiveContainer height={200} className='w-full'>
         <BarChart
           width={60}

@@ -31,7 +31,6 @@ const LoginPage: Page = () => {
               <div className='mt-24'>
                 <h1 className='text-5xl font-bold'>Snap Delivered</h1>
                 <br />
-                <span className='text-4xl font-bold'>Sample Text about <br /> the app</span>
               </div>
 
               <ul className='list-disc pl-6 mt-20 text-xl space-y-4'>
