@@ -5,7 +5,6 @@ import { PAGE_INFO } from 'config/pageInfo'
 
 import DashboardLayout from 'layouts/private/Dashboard'
 import {
-  CurrentRank,
   EstimatedCommissions,
   Graphics,
   MyOrders,
