@@ -54,7 +54,7 @@ const DashboardOverViewPage: Page = () => {
         <title>{SEO.TITLE_PAGE} - Overview</title>
       </Head>
 
-      <div className='grid grid-cols-1 sm:grid-cols-4 w-full h-fit gap-4'>
+      <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-full h-fit gap-4'>
         <Graphics data={data} />
         <PromotionTracker data={{}} />
       </div>
@@ -66,7 +66,6 @@ const DashboardOverViewPage: Page = () => {
         <EstimatedCommissions data={{}} />
         <MyOrders data={{}} />
         <PayRank data={{}} />
-        <CurrentRank data={{}} />
       </OverViewGrid>
 
       <TopEntitiesGrid>

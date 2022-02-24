@@ -1,18 +1,19 @@
 import { TrendingUpIcon } from 'components/common/icons'
+import { CurrentRank } from '.'
 
 export const PromotionTracker = ({ data }: { data: any }) => {
   return (
-    <div className='flex flex-col justify-center items-start col-span-2 row-span-1 sm:col-start-1 sm:row-start-1 md:col-span-1 text-sm'>
+    <div className='flex flex-col justify-end items-start col-span-2 row-span-1 md:col-start-1 md:row-start-1 md:col-span-1 text-sm'>
       <div className='flex justify-start items-center gap-x-3 text-xs'>
         <button className='text-gray-400 font-bold whitespace-nowrap uppercase hover:text-gray-800'>Earnings</button>
         <button className='text-gray-800 font-bold whitespace-nowrap uppercase hover:text-gray-800'>This month</button>
-      </div>
-
-      <div className='mt-2'>
         <span className='text-gray-800 font-bold'>$0</span>
       </div>
 
-      <div className='w-full bg-white rounded-md flex flex-col sm:flex-row justify-start items-center p-3 mt-2 gap-3'>
+      <br />
+      <CurrentRank data={{}} />
+
+      <div className='w-full bg-white flex flex-col sm:flex-row justify-start items-center p-3 gap-3'>
         <div className='h-14 w-14 rounded-md bg-[#FFE59E] flex justify-center items-center'>
           <TrendingUpIcon classes='w-10 h-10' />
         </div>
