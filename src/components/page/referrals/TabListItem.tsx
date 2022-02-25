@@ -1,4 +1,4 @@
-import { EyeVisibleIcon } from 'components/common/icons'
+// import { EyeVisibleIcon } from 'components/common/icons'
 
 interface IProps {
   isSelect?: boolean
@@ -20,15 +20,15 @@ export const ReferralTabListItem = ({ isSelect = false, id, newUsers, numUsers, 
       >
         <div className='flex items-center justify-between'>
           <span className='text-textAcent-500'>Level {id}</span>
-          <div className='flex items-center justify-center'>
+          {/* <div className='flex items-center justify-center'>
             <EyeVisibleIcon classes='w-5 h-5 fill-[#777777]' />
             <span className='text-textAcent-500 ml-1'>See income</span>
-          </div>
+          </div> */}
         </div>
 
         <span className='block my-1'>{numUsers} Users</span>
 
-        <span className={`block ${newUsers > 0 ? 'text-success-500' : ''}`}>{newUsers} New Users</span>
+        {/* <span className={`block ${newUsers > 0 ? 'text-success-500' : ''}`}>{newUsers} New Users</span> */}
       </button>
     </li>
   )
