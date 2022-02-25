@@ -16,7 +16,7 @@ import { useReferralsData } from 'lib/hooks/useReferralsData'
 import { useState } from 'react'
 import { useModal } from 'lib/hooks/useModal'
 import { useWindowSize } from 'lib/hooks/useWindowSize'
-import { useSearchModalStore } from 'lib/stores'
+import { useAuthStore, useSearchModalStore } from 'lib/stores'
 import { ReferralListSelectedItem } from 'components/page/referrals/ListSelectedItem'
 import { Spinner } from 'components/common/loaders'
 
@@ -45,6 +45,7 @@ const selectInfo = {
 }
 
 const GenealogyPage: Page = () => {
+  const { auth } = useAuthStore()
   const { referralsIsOpen, closeReferral } = useSearchModalStore()
   const { width: windowWidth } = useWindowSize()
   const {
@@ -57,7 +58,6 @@ const GenealogyPage: Page = () => {
     fnOpenModal: fnOpenModalReferralUserDetail,
     fnCloseModal: fnCloseModalReferralUserDetail
   } = useModal(false)
-
   const [tabOpen, setTabOpen] = useState('1')
   const [userDetailIdOpen, setUserdetailIdOpen] = useState(0)
 
@@ -66,7 +66,7 @@ const GenealogyPage: Page = () => {
     emailNotificationsUserData,
     userDetailOpenData,
     usersArray
-  } = useReferralsData(dataTest, tabOpen, userDetailIdOpen)
+  } = useReferralsData(auth, dataTest, tabOpen, userDetailIdOpen)
 
   const handleClickTab = (id: string) => setTabOpen(id)
 
@@ -93,8 +93,6 @@ const GenealogyPage: Page = () => {
       <div className='grid grid-cols-1 lg:grid-cols-3 justify-center justify-items-center gap-4 mt-4'>
         <ReferralTabList classes='col-span-1'>
           {[
-            ...emailNotificationsArray,
-            ...emailNotificationsArray,
             ...emailNotificationsArray
           ].map((emailNotification) => (
             <ReferralTabListItem
@@ -117,9 +115,6 @@ const GenealogyPage: Page = () => {
             classes='col-span-2'
           >
             {[
-              ...emailNotificationsUserData.usersData.users,
-              ...emailNotificationsUserData.usersData.users,
-              ...emailNotificationsUserData.usersData.users,
               ...emailNotificationsUserData.usersData.users
             ].map((user) => (
               <ReferralListSelectedItem
