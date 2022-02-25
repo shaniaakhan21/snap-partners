@@ -68,7 +68,7 @@ export const useReferralsData = (userAuth: IAuth, dataTest: IDataEmailsTest, tab
 
   useEffect(() => {
     (async () => {
-      const res = await fetch(`${API.BASE_URL}/api/unilevel/getAllLevels?userId=${userAuth.id}&includeUsers=0&name=${userAuth.username}`, {
+      const res = await fetch(`${API.BASE_URL}/api/unilevel/getAllLevels?userId=${userAuth.id}&includeUsers=1&name=${userAuth.username}`, {
         headers: {
           Authorization: `Bearer ${userAuth.accessToken}`
         }

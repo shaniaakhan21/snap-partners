@@ -157,6 +157,7 @@ const GenealogyPage: Page = () => {
         <Overlay onClick={fnCloseModalReferralUserDetail}>
           <ModalContainer>
             <ReferralsUserDetailModal
+              referralUsers={[]}
               id={userDetailOpenData.id}
               name={userDetailOpenData.name}
               email={userDetailOpenData.email}

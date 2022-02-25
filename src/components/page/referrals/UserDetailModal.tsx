@@ -5,6 +5,7 @@ import { MouseEvent } from 'react'
 
 interface IProps extends IUserData {
   onClick?: (e: MouseEvent, element: HTMLElement) => void
+  referralUsers: any[]
 }
 
 export const ReferralsUserDetailModal = ({ id, name, email, phone, onClick }: IProps) => {
