@@ -12,6 +12,7 @@ import { timeout } from 'lib/utils/timeout'
 import { Drawer, Navbar } from 'components/layout/Dashboard'
 import { Footer } from 'components/layout/Footer'
 import { Spinner } from 'components/common/loaders'
+import { handleFetchError } from 'lib/utils/handleFetchError'
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const router = useRouter()
@@ -34,7 +35,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
       const { data, error } = await getUserMe({ token })
 
       if (error) {
-        toast('ERROR -> The session could not be recovered', { type: 'warning' })
+        handleFetchError(error.status, error.info)
         router.push('/auth/login')
         return
       }
@@ -66,7 +67,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         const { data, error } = await getUserMe({ token: auth.accessToken })
 
         if (error) {
-          toast('ERROR -> Error requesting user rank', { type: 'warning' })
+          handleFetchError(error.status, error.info)
         }
 
         if (!newWindow || newWindow.closed) {

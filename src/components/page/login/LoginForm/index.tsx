@@ -13,6 +13,7 @@ import { RememberAndPolicy } from './utils/RememberAndPolicy'
 import { useAuthStore } from 'lib/stores'
 import { login } from 'lib/services/session/login'
 import { getUserMe } from 'lib/services/users/getUserMe'
+import { handleFetchError } from 'lib/utils/handleFetchError'
 
 export const LoginForm = () => {
   const { setAuth } = useAuthStore()
@@ -28,7 +29,7 @@ export const LoginForm = () => {
     })
 
     if (errorLogin) {
-      toast('ERROR -> login', { type: 'error' })
+      handleFetchError(errorLogin.status, errorLogin.info)
       setLoading(false)
       return
     }
@@ -36,7 +37,7 @@ export const LoginForm = () => {
     const { data: dataUser, error: errorUser } = await getUserMe({ token: dataLogin.token })
 
     if (errorUser) {
-      toast('ERROR -> get user me', { type: 'error' })
+      handleFetchError(errorUser.status, errorUser.info)
       setLoading(false)
       return
     }

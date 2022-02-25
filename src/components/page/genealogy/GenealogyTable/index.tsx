@@ -51,6 +51,7 @@ export const GenealogyTable = () => {
           <Overlay onClick={closeModal}>
             <ModalContainer>
               <ReferralsUserDetailModal
+                referralUsers={[]}
                 id={userSelected.id}
                 name={userSelected.name}
                 email={userSelected.email}

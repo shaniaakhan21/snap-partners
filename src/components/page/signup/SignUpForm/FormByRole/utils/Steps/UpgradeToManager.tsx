@@ -8,6 +8,7 @@ import { login } from 'lib/services/session/login'
 import { getUserMe } from 'lib/services/users/getUserMe'
 import { IHandleStep, IUserTrack } from '../types'
 import { IReferralLink } from 'lib/types'
+import { handleFetchError } from 'lib/utils/handleFetchError'
 
 export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { userTrack: IUserTrack, handleStep: IHandleStep, referralLink: IReferralLink }) => {
   const router = useRouter()
@@ -21,7 +22,7 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
     const { data: dataLogin, error: errorLogin } = await login({ username: userTrack.userInfo.username, password: userTrack.userInfo.password })
 
     if (errorLogin) {
-      toast('ERROR -> login | An error ocurred while trying to login, please try to login manually', { type: 'error' })
+      handleFetchError(errorLogin.status, errorLogin.info)
       router.push('/auth/login')
       setIsLoading(false)
       return
@@ -30,7 +31,7 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
     const { data: dataUser, error: errorUser } = await getUserMe({ token: dataLogin.token })
 
     if (errorUser) {
-      toast('ERROR -> get user me', { type: 'error' })
+      handleFetchError(errorUser.status, errorUser.info)
       setIsLoading(false)
       return
     }

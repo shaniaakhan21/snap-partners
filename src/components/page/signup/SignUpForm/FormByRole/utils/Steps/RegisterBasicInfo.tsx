@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { toast } from 'react-toastify'
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
 import { InputForm } from '../Input'
@@ -15,6 +14,7 @@ import { IHandleStep, IHandleUserInfo, IDataForm } from '../types'
 import { STEPS } from '.'
 import { BulletPagination } from './BulletPagination'
 import { signUpStep1 } from 'lib/services/session/signUp'
+import { handleFetchError } from 'lib/utils/handleFetchError'
 
 interface IStepOpeProps {
   referralLink: IReferralLink,
@@ -56,7 +56,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
     const { error } = await signUpStep1({ phoneNumber })
 
     if (error) {
-      toast('error', { type: 'error' })
+      handleFetchError(error.status, error.info)
       setLoading(false)
       return
     }
