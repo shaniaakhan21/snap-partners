@@ -19,20 +19,20 @@ const ReferralsPage: Page = () => {
         <ReferralCards
           title='Refer Customers'
           ilustration={<CustomerIcon />}
-          link={`https://dev.snap.devopsteam.info/auth/signup${auth.referralLink}&role=${ROLES.CUSTOMER}` || 'With Out Link'}
+          link={`${auth.referralLink}&role=${ROLES.CUSTOMER}` || 'With Out Link'}
           newUser
           classes='col-span-1'
         />
         <ReferralCards
           title='Driver Customers'
           ilustration={<DriverIcon />}
-          link={`https://dev.snap.devopsteam.info/auth/signup${auth.referralLink}&role=${ROLES.DRIVER}` || 'With Out Link'}
+          link={`${auth.referralLink}&role=${ROLES.DRIVER}` || 'With Out Link'}
           classes='col-span-1'
         />
         <ReferralCards
           title='Merchant Customers'
           ilustration={<MerchantIcon />}
-          link={`https://dev.snap.devopsteam.info/auth/signup${auth.referralLink}&role=${ROLES.RESTAURANT}` || 'With Out Link'}
+          link={`${auth.referralLink}&role=${ROLES.RESTAURANT}` || 'With Out Link'}
           newUser
           classes='col-span-1'
         />
