@@ -1,3 +1,4 @@
+import { navbarPress } from 'lib/utils/gtm'
 import Link from 'next/link'
 
 import { drawerRoutes } from './routes'
@@ -18,7 +19,7 @@ export const DrawerDesktop = ({ isCurrentlyPage }: { isCurrentlyPage: (route: st
               key={route.label}
             >
               <Link href={route.to}>
-                <a className='w-full flex justify-start items-center gap-x-2 py-4 hover:bg-[#19191914] pl-10'>
+                <a className='w-full flex justify-start items-center gap-x-2 py-4 hover:bg-[#19191914] pl-10' onClick={() => navbarPress(route.label)}>
                   <div>{route.icon}</div>
                   <div>{route.label}</div>
                 </a>

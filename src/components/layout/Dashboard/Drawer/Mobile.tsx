@@ -2,6 +2,7 @@ import Link from 'next/link'
 
 import { useDrawerStore } from 'lib/stores'
 import { drawerRoutes } from './routes'
+import { navbarPress } from 'lib/utils/gtm'
 
 export const DrawerMobile = ({ isCurrentlyPage }: { isCurrentlyPage: (route: string) => boolean }) => {
   const { isOpen, closeDrawer } = useDrawerStore()
@@ -29,7 +30,7 @@ export const DrawerMobile = ({ isCurrentlyPage }: { isCurrentlyPage: (route: str
                   key={route.label}
                 >
                   <Link href={route.to}>
-                    <a className='w-full flex justify-start items-center gap-x-2 py-4 hover:bg-[#19191914] pl-10'>
+                    <a className='w-full flex justify-start items-center gap-x-2 py-4 hover:bg-[#19191914] pl-10' onClick={() => navbarPress(route.label)}>
                       <div>{route.icon}</div>
                       <div>{route.label}</div>
                     </a>
