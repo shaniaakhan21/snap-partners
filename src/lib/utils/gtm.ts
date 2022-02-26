@@ -9,3 +9,13 @@ export const pageview = (url) => {
     page: url
   })
 }
+
+export const referralCard = (label: string, copyReferral: string, openMyGeneaology: string) => {
+  window.dataLayer.push({
+    category: 'ReferralCard',
+    action: 'click',
+    label,
+    copyReferral,
+    openMyGeneaology
+  })
+}
