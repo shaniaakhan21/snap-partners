@@ -19,3 +19,11 @@ export const referralCard = (label: string, copyReferral: string, openMyGeneaolo
     openMyGeneaology
   })
 }
+
+export const navbarPress = (label:string) => {
+  window.dataLayer.push({
+    category: 'sidebar',
+    action: 'click',
+    label
+  })
+}

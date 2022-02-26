@@ -40,7 +40,7 @@ export const getUserMe = async (authorizations: IAuthorizations): Promise<IQuery
       data: null,
       error: {
         status: res.status,
-        message: data.error
+        info: data.error
       }
     }
   }

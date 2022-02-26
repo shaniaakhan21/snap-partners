@@ -9,6 +9,7 @@ import { Spinner } from 'components/common/loaders'
 import { BulletPagination } from './BulletPagination'
 import { signUpStep2 } from 'lib/services/session/signUp'
 import { IReferralLink } from 'lib/types'
+import { handleFetchError } from 'lib/utils/handleFetchError'
 
 interface IDataFormVerifyCode {
   code: string
@@ -41,7 +42,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink }: { userTrack:
     })
 
     if (error) {
-      toast(error.message, { type: 'error' })
+      handleFetchError(error.status, error.info)
       setIsVerifyingCode(false)
       return
     }

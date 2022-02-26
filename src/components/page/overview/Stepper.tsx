@@ -8,7 +8,7 @@ export const Stepper = ({ data }: { data: any }) => {
   ]
 
   return (
-    <div className='bg-white rounded-md col-span-2 md:col-span-1 row-span-2 md:col-start-1 p-4'>
+    <div className='bg-white rounded-b-md col-span-2 md:col-span-1 row-span-2 md:col-start-1 p-4'>
       <ul className='flex flex-col justify-center items-start gap-y-6'>
         <li className='flex justify-start items-center gap-x-2'>
           <div className='w-6 h-6 bg-primary-500 rounded-md flex justify-center items-center'>

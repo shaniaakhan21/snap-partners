@@ -22,7 +22,7 @@ interface ISignInProps {
   insuranceImage: string | null,
 }
 
-interface IAuth extends ISignInProps {
+export interface IAuth extends ISignInProps {
   referralLink: string
 }
 

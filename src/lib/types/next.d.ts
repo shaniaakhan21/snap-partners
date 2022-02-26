@@ -22,5 +22,12 @@ export type Page<P = {}> = NextPage<P> & {
 }
 
 declare global {
-  interface Window { dataLayer?: object[]; }
+  interface Window {
+    dataLayer?: object[];
+ }
+
+ interface Error {
+   info?: string
+   status?: number
+ }
 }

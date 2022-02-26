@@ -1,27 +1,20 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import DashboardLayout from 'layouts/private/Dashboard'
 import { EditIcon, GenealogyIcon } from 'components/common/icons'
 import { useAuthStore } from 'lib/stores'
 import { PAGE_INFO } from 'config/pageInfo'
 import type { Page as PageNext, ReactNode } from 'lib/types'
-import Link from 'next/link'
 
 const { SEO } = PAGE_INFO
 
-const AccountPage: PageNext = () => {
+const ProfilePage: PageNext = () => {
   const { auth, removeAuth } = useAuthStore()
-
-  // const handleClickUpgradeToManager = () => {
-  //   window.open(
-  //     `https://store.snapdelivered.com/product/manager-upgrade?userId=${auth.id}`,
-  //     'noopener'
-  //   )
-  // }
 
   return (
     <>
       <Head>
-        <title>{SEO.TITLE_PAGE} - Account Settings</title>
+        <title>{SEO.TITLE_PAGE} - Profile</title>
       </Head>
 
       <div className='flex justify-start items-center gap-x-5 select-none'>
@@ -211,10 +204,10 @@ const AccountPage: PageNext = () => {
   )
 }
 
-AccountPage.getLayout = (page: ReactNode) => (
+ProfilePage.getLayout = (page: ReactNode) => (
   <DashboardLayout>
     {page}
   </DashboardLayout>
 )
 
-export default AccountPage
+export default ProfilePage

@@ -1,3 +1,5 @@
+import { API } from 'config/api'
+import { IAuth } from 'lib/stores/Auth'
 import { IUserData } from 'lib/types'
 import { useEffect, useState } from 'react'
 
@@ -12,7 +14,7 @@ interface IDataEmailsTest {
   }[]
 }
 
-export const useReferralsData = (dataTest: IDataEmailsTest, tabOpen: string, userDetailIdOpen: number) => {
+export const useReferralsData = (userAuth: IAuth, dataTest: IDataEmailsTest, tabOpen: string, userDetailIdOpen: number) => {
   const [data, setData] = useState({
     emailNotificationsArray: null,
     emailNotificationsUserData: null,
@@ -63,6 +65,19 @@ export const useReferralsData = (dataTest: IDataEmailsTest, tabOpen: string, use
       userDetailOpenData
     }))
   }, [userDetailIdOpen])
+
+  useEffect(() => {
+    (async () => {
+      const res = await fetch(`${API.BASE_URL}/api/unilevel/getAllLevels?userId=${userAuth.id}&includeUsers=1&name=${userAuth.username}`, {
+        headers: {
+          Authorization: `Bearer ${userAuth.accessToken}`
+        }
+      })
+      const data = await res.json()
+
+      console.log(data)
+    })()
+  }, [])
 
   return data
 }

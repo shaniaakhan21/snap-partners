@@ -2,7 +2,7 @@ import { ArrowHeadRightIcon } from 'components/common/icons'
 
 export const CurrentRank = ({ data }: { data: any }) => {
   return (
-    <div className=' bg-white rounded-md col-span-1 row-span-1 md:col-span-1 md:col-start-4 lg:col-span-1 flex flex-col md:flex-row justify-center items-center gap-3 p-3'>
+    <div className=' bg-white w-full rounded-t-md col-span-1 row-span-1 md:col-span-1 md:col-start-4 lg:col-span-1 flex flex-col md:flex-row justify-start items-center gap-3 p-3'>
       <div className='h-12 w-12 rounded-md bg-[#FFE59E] flex justify-center items-center'>
         <ArrowHeadRightIcon classes='w-7 h-7' />
       </div>

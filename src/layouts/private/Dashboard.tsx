@@ -1,20 +1,23 @@
-import { useRouter } from 'next/router'
 import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 
 import type { NextPage, ReactNode } from 'lib/types'
-import { useAuthStore } from 'lib/stores'
+import { useAuthStore, useNewWindowOpenedStore } from 'lib/stores'
 import { getLocalStorage } from 'lib/utils/localStorage'
 import { decodeAccessToken } from 'lib/utils/decodedAccessToken'
 import { getUserMe } from 'lib/services/users/getUserMe'
+import { timeout } from 'lib/utils/timeout'
 
 import { Drawer, Navbar } from 'components/layout/Dashboard'
 import { Footer } from 'components/layout/Footer'
 import { Spinner } from 'components/common/loaders'
+import { handleFetchError } from 'lib/utils/handleFetchError'
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const router = useRouter()
   const { auth, setAuth } = useAuthStore()
+  const { newWindow, closeNewWindow } = useNewWindowOpenedStore()
 
   useEffect(() => {
     (async () => {
@@ -32,7 +35,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
       const { data, error } = await getUserMe({ token })
 
       if (error) {
-        toast('ERROR -> The session could not be recovered', { type: 'error' })
+        handleFetchError(error.status, error.info)
         router.push('/auth/login')
         return
       }
@@ -55,6 +58,40 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
       })
     })()
   }, [auth])
+
+  useEffect(() => {
+    (async () => {
+      if (!auth || !auth?.accessToken || newWindow?.closed) return
+
+      const fnRecursiveIsManager = async (): Promise<boolean> => {
+        const { data, error } = await getUserMe({ token: auth.accessToken })
+
+        if (error) {
+          handleFetchError(error.status, error.info)
+        }
+
+        if (!newWindow || newWindow.closed) {
+          if (data?.isManager) {
+            return data.isManager
+          }
+
+          closeNewWindow()
+          return auth.isManager
+        }
+
+        if (!data.isManager) {
+          await timeout(5000)
+          return await fnRecursiveIsManager()
+        }
+      }
+
+      const isManager = await fnRecursiveIsManager()
+
+      if (auth.isManager === isManager) return
+
+      setAuth({ ...auth, isManager })
+    })()
+  }, [newWindow])
 
   if (!auth) {
     return (

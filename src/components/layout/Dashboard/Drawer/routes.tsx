@@ -57,7 +57,7 @@ export const drawerRoutes = [
   },
   {
     icon: <AccountIcon />,
-    to: '/account',
+    to: '/profile',
     label: 'Profile'
   },
   {

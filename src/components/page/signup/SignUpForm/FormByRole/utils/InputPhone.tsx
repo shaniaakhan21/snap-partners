@@ -31,7 +31,7 @@ export const InputPhone = ({ errors, register, classes, isRequired }: IInputForm
         </p>
       )}
 
-      <div className='flex justify-start items-center gap-x-2'>
+      <div className='w-full flex justify-start items-center gap-x-2'>
         <div className='relative'>
           <input
             {...register('phoneExt', { required: { value: true, message: 'Phone extension & phone number is required *' } })}

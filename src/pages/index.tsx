@@ -9,6 +9,7 @@ import { getLocalStorage } from 'lib/utils/localStorage'
 import { decodeAccessToken } from 'lib/utils/decodedAccessToken'
 import { toast } from 'react-toastify'
 import { getUserMe } from 'lib/services/users/getUserMe'
+import { handleFetchError } from 'lib/utils/handleFetchError'
 
 const { SEO } = PAGE_INFO
 
@@ -35,7 +36,7 @@ const HomePage: PageNext = () => {
       const { data, error } = await getUserMe({ token })
 
       if (error) {
-        toast('ERROR -> The session could not be recovered', { type: 'error' })
+        handleFetchError(error.status, error.info)
         router.push('/auth/login')
         return
       }

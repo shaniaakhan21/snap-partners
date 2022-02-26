@@ -38,7 +38,7 @@ export const ReferralCards = ({ title, ilustration, link, newUser = false, class
             </div>
 
             <div className='inline-flex items-center'>
-              <span className='text-textAcent-500 font-bold text-xs mr-2'>NEW USER!</span>
+              {/* <span className='text-textAcent-500 font-bold text-xs mr-2'>NEW USER!</span> */}
               <span className='text-textHint font-bold text-xs mr-2'>17.08.20</span>
               <CalendarIcon classes='w-4 h-4' />
             </div>

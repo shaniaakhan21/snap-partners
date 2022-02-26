@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import DashboardLayout from 'layouts/private/Dashboard'
-import { useAuthStore } from 'lib/stores'
+import { useAuthStore, useNewWindowOpenedStore } from 'lib/stores'
 import { PAGE_INFO } from 'config/pageInfo'
 import type { Page as PageNext, ReactNode } from 'lib/types'
 import Link from 'next/link'
@@ -9,12 +9,16 @@ const { SEO } = PAGE_INFO
 
 const UpgradeToManagerPage: PageNext = () => {
   const { auth } = useAuthStore()
+  const { setNewWindow } = useNewWindowOpenedStore()
 
   const handleClickUpgradeToManager = () => {
-    window.open(
+    const windowOpened = window.open(
       `https://store.snapdelivered.com/product/manager-upgrade?userId=${auth.id}`,
-      'noopener'
+      'windowUpgradeToManager'
     )
+
+    setNewWindow(windowOpened)
+    // When a newWindow is sent, in DashboardLayout we have an effect to handle upgrade to manager.
   }
 
   return (
