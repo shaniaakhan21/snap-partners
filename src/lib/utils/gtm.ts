@@ -17,3 +17,22 @@ export const navbarPress = (label:string) => {
     label
   })
 }
+
+export const marketingCard = (userType: string) => {
+  window.dataLayer.push({
+    category: 'MarketingCard',
+    action: 'click',
+    label: userType,
+    step: 1
+  })
+}
+
+export const marketingSharingCard = (name: string, socialMediaClicked: string) => {
+  window.dataLayer.push({
+    category: 'MarketingSharingCard',
+    action: 'click',
+    label: name,
+    step: 2,
+    shareType: socialMediaClicked
+  })
+}
