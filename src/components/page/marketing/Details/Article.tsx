@@ -1,4 +1,5 @@
 import { FacebookIcon, GoogleIcon, LinkedinIcon, ShareIcon, ShareRRSSIcon, TwitterIcon } from 'components/common/icons'
+import { marketingSharingCard } from 'lib/utils/gtm'
 
 interface IArticleProps {
   id: string
@@ -11,6 +12,9 @@ interface IArticleProps {
 }
 
 export const Article = ({ id, imageSrc, title, subtitle, description, hashtags, linkToShare }: IArticleProps) => {
+  const trackShare = (shareType: string) => {
+    marketingSharingCard(title, shareType)
+  }
   return (
     <li key={id} className='bg-white max-w-xs w-full rounded-[4px]'>
       <section className='flex justify-start items-center px-5 py-4 w-full'>
@@ -45,37 +49,37 @@ export const Article = ({ id, imageSrc, title, subtitle, description, hashtags, 
 
       <ul className='w-full border-t border-gray-400 px-5 py-4 flex justify-between items-center'>
         <li>
-          <a href='#' target='_blank' rel='noopener noreferrer'>
+          <a href='#' target='_blank' rel='noopener noreferrer' onClick={() => trackShare("rsss")}>
             <ShareRRSSIcon />
           </a>
         </li>
 
         <li>
-          <a href='#' target='_blank' rel='noopener noreferrer'>
+          <a href='#' target='_blank' rel='noopener noreferrer' onClick={() => trackShare("Google")}>
             <GoogleIcon />
           </a>
         </li>
 
         <li>
-          <a href='#' target='_blank' rel='noopener noreferrer'>
+          <a href='#' target='_blank' rel='noopener noreferrer' onClick={() => trackShare("Telegram")}>
             <ShareIcon />
           </a>
         </li>
 
         <li>
-          <a href='#' target='_blank' rel='noopener noreferrer'>
+          <a href='#' target='_blank' rel='noopener noreferrer' onClick={() => trackShare("Facebook")}>
             <FacebookIcon />
           </a>
         </li>
 
         <li>
-          <a href='#' target='_blank' rel='noopener noreferrer'>
+          <a href='#' target='_blank' rel='noopener noreferrer' onClick={() => trackShare("LinkedIn")}>
             <LinkedinIcon />
           </a>
         </li>
 
         <li>
-          <a href='#' target='_blank' rel='noopener noreferrer'>
+          <a href='#' target='_blank' rel='noopener noreferrer' onClick={() => trackShare("Twitter")}>
             <TwitterIcon />
           </a>
         </li>
