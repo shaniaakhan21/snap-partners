@@ -12,6 +12,7 @@ export const pageview = (url) => {
 
 export const referralCard = (label: string, copyReferral: string, openMyGeneaology: string) => {
   window.dataLayer.push({
+    event: 'ReferralCard',
     category: 'ReferralCard',
     action: 'click',
     label,
@@ -22,6 +23,7 @@ export const referralCard = (label: string, copyReferral: string, openMyGeneaolo
 
 export const navbarPress = (label:string) => {
   window.dataLayer.push({
+    event: 'sidebar',
     category: 'sidebar',
     action: 'click',
     label
@@ -30,6 +32,7 @@ export const navbarPress = (label:string) => {
 
 export const downloadCompensationPlan = (fileName: string) => {
   window.dataLayer.push({
+    event: 'Download Compensation Plan',
     category: 'Download Compensation Plan',
     action: 'click',
     label: fileName
@@ -38,6 +41,7 @@ export const downloadCompensationPlan = (fileName: string) => {
 
 export const compensationPlanPageChange = (currentPage: number) => {
   window.dataLayer.push({
+    event: 'View Compensation Plan',
     category: 'View Compensation Plan',
     action: 'slide',
     page: currentPage
@@ -46,6 +50,7 @@ export const compensationPlanPageChange = (currentPage: number) => {
 
 export const marketingCard = (userType: string) => {
   window.dataLayer.push({
+    event: 'MarketingCard',
     category: 'MarketingCard',
     action: 'click',
     label: userType,
@@ -55,6 +60,7 @@ export const marketingCard = (userType: string) => {
 
 export const marketingSharingCard = (name: string, socialMediaClicked: string) => {
   window.dataLayer.push({
+    event: 'MarketingSharingCard',
     category: 'MarketingSharingCard',
     action: 'click',
     label: name,
