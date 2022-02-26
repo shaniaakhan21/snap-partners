@@ -1,6 +1,8 @@
 import { ArrowRightIcon, CalendarIcon, CopyIcon } from 'components/common/icons'
 import { useCopyToClipboard } from 'lib/hooks/useCopyToClipboard'
+import { referralCard } from 'lib/utils/gtm'
 import Link from 'next/link'
+import { useMemo } from 'react'
 
 interface IProps {
   title: string
@@ -12,6 +14,17 @@ interface IProps {
 
 export const ReferralCards = ({ title, ilustration, link, newUser = false, classes = '' }: IProps) => {
   const { copy } = useCopyToClipboard()
+
+  const userType: string = useMemo(() => {
+    // find card userType
+    const idx = link.indexOf('role=')
+    return link.substring(idx + 5)
+  }, [link])
+
+  const onClick = () => {
+    referralCard(title, `copy for ${userType}`, '')
+    copy(link, 'Referral link')
+  }
 
   return (
     <div className={`w-full p-6 bg-white flex flex-col items-center justify-center rounded-sm shadow ${classes}`}>
@@ -43,7 +56,7 @@ export const ReferralCards = ({ title, ilustration, link, newUser = false, class
       <hr className='w-full my-4 mx-auto border-t border-gray-300' />
 
       <button
-        onClick={() => copy(link, 'Referral link')}
+        onClick={() => onClick()}
         className='lg:text-black inline-flex items-center justify-center transition-colors hover:text-blue-600'
       >
         <span className='text-sm mr-2 text-blue-600'>Copy Referral Link</span>
@@ -51,7 +64,7 @@ export const ReferralCards = ({ title, ilustration, link, newUser = false, class
       </button>
 
       <Link href='#'>
-        <a className='w-full p-1 bg-transparentPrimary-8% hover:bg-transparentPrimary-24% text-primary-500 border-2 border-primary-500 rounded-sm mt-4 transition-colors inline-flex items-center justify-center'>
+        <a className='w-full p-1 bg-transparentPrimary-8% hover:bg-transparentPrimary-24% text-primary-500 border-2 border-primary-500 rounded-sm mt-4 transition-colors inline-flex items-center justify-center' onClick={() => referralCard(title, '', `genealogy - ${userType}`)}>
           <span className='font-bold mr-2 text-xs'>Open My Referral Genealogy</span>
           <ArrowRightIcon classes='w-4 h-4' />
         </a>
