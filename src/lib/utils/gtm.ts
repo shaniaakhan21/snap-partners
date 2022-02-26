@@ -17,3 +17,19 @@ export const navbarPress = (label:string) => {
     label
   })
 }
+
+export const downloadCompensationPlan = (fileName: string) => {
+  window.dataLayer.push({
+    category: 'Download Compensation Plan',
+    action: 'click',
+    label: fileName
+  })
+}
+
+export const compensationPlanPageChange = (currentPage: number) => {
+  window.dataLayer.push({
+    category: 'View Compensation Plan',
+    action: 'slide',
+    page: currentPage
+  })
+}
