@@ -24,7 +24,7 @@ export const TermsAndConditions = ({ register, errors, rulesForm }: IInputFormPr
 
         <label htmlFor='termsAndConditions' className='ml-2 text-xs'>
         Agree to {' '}
-          <Link href='/auth/signup'>
+          <Link href='/legal/terms-of-use'>
             <a className='text-textAcent-500 font-semibold focus:underline'>Terms and Conditions</a>
           </Link>
         </label>
