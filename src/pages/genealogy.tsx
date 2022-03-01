@@ -1,9 +1,8 @@
+import { useState } from 'react'
 import Head from 'next/head'
-
 import type { Page, ReactNode } from 'lib/types'
 import { PAGE_INFO } from 'config/pageInfo'
 import DashboardLayout from 'layouts/private/Dashboard'
-import { dataTest } from 'lib/utils/dataEmails'
 import { Overlay } from 'components/common/Overlay'
 import { ModalContainer } from 'components/common/ModalContainer'
 import { Searcher } from 'components/common/Search'
@@ -13,7 +12,6 @@ import { ReferralsUserDetailModal } from 'components/page/referrals/UserDetailMo
 import { ReferralTabListItem } from 'components/page/referrals/TabListItem'
 import { ReferralTabList } from 'components/page/referrals/TabList'
 import { useReferralsData } from 'lib/hooks/useReferralsData'
-import { useState } from 'react'
 import { useModal } from 'lib/hooks/useModal'
 import { useWindowSize } from 'lib/hooks/useWindowSize'
 import { useAuthStore, useSearchModalStore } from 'lib/stores'
@@ -69,7 +67,14 @@ const GenealogyPage: Page = () => {
     levelSelectedUsers
   } = useReferralsData(auth, tabOpen, userDetailIdOpen)
 
+  console.log('LEVELS:', levels)
+  console.log('LEVELS SELECTED:', levelSelected)
+  console.log('LEVEL SELECTED USER DATA:', levelSelectedUserData)
+  console.log('LEVEL SELECTED USERS:', levelSelectedUsers)
+
   const handleClickTab = (id: string) => setTabOpen(id)
+
+  if (levels?.length === 0) return <h1 className='text-center text-5xl'>Empty</h1>
 
   if (
     !levels ||
@@ -77,11 +82,9 @@ const GenealogyPage: Page = () => {
     !levelSelectedUsers
   ) {
     return (
-      <>
-        <div className='w-full h-full flex items-center justify-center'>
-          <Spinner />
-        </div>
-      </>
+      <div className='w-full h-screen flex items-center justify-center'>
+        <Spinner />
+      </div>
     )
   }
 
