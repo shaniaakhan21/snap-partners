@@ -5,7 +5,7 @@ import { RecursiveAccordion } from './RecursiveAccordion'
 import { ModalUninivelUser } from './Modals/UniLevelUser'
 import SearchIcon from '@material-ui/icons/Search'
 import axios from 'axios'
-// import { useAuthStore } from 'lib/stores'
+import { useAuthStore } from 'lib/stores'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -43,10 +43,10 @@ const Table = (props) => {
 }
 
 export const Unilevel = () => {
-  // const { auth } = useAuthStore()
+  const { auth } = useAuthStore()
   const user = {
-    id: '1',
-    name: 'admin1'
+    id: auth.id,
+    name: auth.name
   }
 
   const [showModal, setshowModal] = useState(false)
