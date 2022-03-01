@@ -19,6 +19,7 @@ import { useWindowSize } from 'lib/hooks/useWindowSize'
 import { useAuthStore, useSearchModalStore } from 'lib/stores'
 import { ReferralListSelectedItem } from 'components/page/referrals/ListSelectedItem'
 import { Spinner } from 'components/common/loaders'
+import { ILevelUser } from 'lib/types/genealogy'
 
 const { SEO } = PAGE_INFO
 
@@ -46,7 +47,7 @@ const selectInfo = {
 
 const GenealogyPage: Page = () => {
   const { auth } = useAuthStore()
-  const { referralsIsOpen, closeReferral } = useSearchModalStore()
+  const { genealogySearchIsOpen, closeGenealogySearch } = useSearchModalStore()
   const { width: windowWidth } = useWindowSize()
   const {
     isOpen: modalReferralListlIsOpen,
@@ -62,18 +63,18 @@ const GenealogyPage: Page = () => {
   const [userDetailIdOpen, setUserdetailIdOpen] = useState(0)
 
   const {
-    emailNotificationsArray,
-    emailNotificationsUserData,
-    userDetailOpenData,
-    usersArray
-  } = useReferralsData(auth, dataTest, tabOpen, userDetailIdOpen)
+    levels,
+    levelSelected,
+    levelSelectedUserData,
+    levelSelectedUsers
+  } = useReferralsData(auth, tabOpen, userDetailIdOpen)
 
   const handleClickTab = (id: string) => setTabOpen(id)
 
   if (
-    !emailNotificationsArray ||
-    !emailNotificationsUserData ||
-    !usersArray
+    !levels ||
+    !levelSelected ||
+    !levelSelectedUsers
   ) {
     return (
       <>
@@ -86,21 +87,15 @@ const GenealogyPage: Page = () => {
 
   return (
     <>
-      <Head>
-        <title>{SEO.TITLE_PAGE} - Genealogy</title>
-      </Head>
-
       <div className='grid grid-cols-1 lg:grid-cols-3 justify-center justify-items-center gap-4 mt-4'>
         <ReferralTabList classes='col-span-1'>
-          {[
-            ...emailNotificationsArray
-          ].map((emailNotification) => (
+          {levels.map((level) => (
             <ReferralTabListItem
-              key={emailNotification.level}
-              isSelect={emailNotification.level === parseInt(tabOpen)}
-              id={emailNotification.level}
-              newUsers={emailNotification.newUsers}
-              numUsers={emailNotification.quantity}
+              key={level.level}
+              isSelect={level.level === parseInt(tabOpen)}
+              id={level.level.toString()}
+              newUsers={0}
+              numUsers={level.usersLength}
               onClick={windowWidth >= 1024 ? handleClickTab : (id) => fnOpenModalReferralList(() => handleClickTab(id))}
             />
           ))}
@@ -109,20 +104,18 @@ const GenealogyPage: Page = () => {
         {/* List in desktop */}
         {windowWidth >= 1024 && (
           <ReferralListSelected
-            id={emailNotificationsUserData.level}
-            newUsers={emailNotificationsUserData.newUsers}
-            numUsers={emailNotificationsUserData.quantity}
+            id={levelSelected.level.toString()}
+            newUsers={0}
+            numUsers={levelSelected.usersLength}
             classes='col-span-2'
           >
-            {[
-              ...emailNotificationsUserData.usersData.users
-            ].map((user) => (
+            {levelSelected.users.map((user: ILevelUser) => (
               <ReferralListSelectedItem
                 key={user.id}
                 userId={user.id}
-                numUsers={user.numUsers}
+                numUsers={0}
                 userName={user.name}
-                onClick={(id) => fnOpenModalReferralUserDetail(() => setUserdetailIdOpen(id))}
+                onClick={(id: number) => fnOpenModalReferralUserDetail(() => setUserdetailIdOpen(id))}
               />
             ))}
           </ReferralListSelected>
@@ -134,17 +127,17 @@ const GenealogyPage: Page = () => {
         <Overlay onClick={fnCloseModalReferralList}>
           <ModalContainer>
             <ReferralListSelected
-              id={emailNotificationsUserData.level}
-              newUsers={emailNotificationsUserData.newUsers}
-              numUsers={emailNotificationsUserData.quantity}
+              id={levelSelected.level.toString()}
+              newUsers={0}
+              numUsers={levelSelected.usersLength}
             >
-              {[...emailNotificationsUserData.usersData.users, ...emailNotificationsUserData.usersData.users].map((user) => (
+              {levelSelected.users.map((user: ILevelUser) => (
                 <ReferralListSelectedItemMobile
                   key={user.id}
                   userId={user.id}
-                  numUsers={user.numUsers}
+                  numUsers={levelSelected.usersLength}
                   userName={user.name}
-                  onClick={(id) => fnOpenModalReferralUserDetail(() => setUserdetailIdOpen(id))}
+                  onClick={(id: number) => fnOpenModalReferralUserDetail(() => setUserdetailIdOpen(id))}
                 />
               ))}
             </ReferralListSelected>
@@ -153,26 +146,26 @@ const GenealogyPage: Page = () => {
       )}
 
       {/* Modal View More */}
-      {modalReferralUserDetailIsOpen && userDetailOpenData && (
+      {modalReferralUserDetailIsOpen && levelSelectedUserData && (
         <Overlay onClick={fnCloseModalReferralUserDetail}>
           <ModalContainer>
             <ReferralsUserDetailModal
               referralUsers={[]}
-              id={userDetailOpenData.id}
-              name={userDetailOpenData.name}
-              email={userDetailOpenData.email}
-              phone={userDetailOpenData.phone}
+              id={levelSelectedUserData.id.toString()}
+              name={levelSelectedUserData.name}
+              email={levelSelectedUserData.email}
+              phone={levelSelectedUserData.phoneNumber}
               onClick={fnCloseModalReferralUserDetail}
             />
           </ModalContainer>
         </Overlay>
       )}
 
-      {referralsIsOpen && usersArray && (
-        <Overlay onClick={closeReferral}>
+      {genealogySearchIsOpen && levelSelectedUsers && (
+        <Overlay onClick={closeGenealogySearch}>
           <ModalContainer>
             <Searcher
-              data={usersArray}
+              data={levelSelectedUsers}
               selectInfo={selectInfo}
               searchPlaceholderMsg='Search user...'
             />
@@ -184,9 +177,15 @@ const GenealogyPage: Page = () => {
 }
 
 GenealogyPage.getLayout = (page: ReactNode) => (
-  <DashboardLayout>
-    {page}
-  </DashboardLayout>
+  <>
+    <Head>
+      <title>{SEO.TITLE_PAGE} - Genealogy</title>
+    </Head>
+
+    <DashboardLayout>
+      {page}
+    </DashboardLayout>
+  </>
 )
 
 export default GenealogyPage

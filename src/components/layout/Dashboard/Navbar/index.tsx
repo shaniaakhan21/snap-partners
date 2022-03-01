@@ -7,7 +7,7 @@ export const Navbar = () => {
   const { title, pathname } = useDashboardGetPathname()
   const { auth, removeAuth } = useAuthStore()
   const { toggleDrawer } = useDrawerStore()
-  const { toggleReferral } = useSearchModalStore()
+  const { toggleGenealogySearch } = useSearchModalStore()
 
   return (
     <header className='dashboardLayout__navbar h-16'>
@@ -34,7 +34,7 @@ export const Navbar = () => {
           </div> */}
 
           <div className='w-full flex justify-start items-center'>
-            <button onClick={() => toggleReferral(pathname)}>
+            <button onClick={() => toggleGenealogySearch(pathname)}>
               <SearchIcon classes='w-5 h-5' />
             </button>
           </div>
