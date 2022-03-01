@@ -77,7 +77,6 @@ export const Unilevel = () => {
           Authorization: `Bearer ${auth.accessToken}`
         }
       })
-      console.log('res:', response)
       setDataRows(response.data.results)
     } catch (e) {
 

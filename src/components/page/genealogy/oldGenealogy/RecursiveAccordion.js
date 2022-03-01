@@ -51,6 +51,7 @@ export const RecursiveAccordion = ({ openUser, user, master = false }) => {
             Authorization: `Bearer ${auth.accessToken}`
           }
         })
+        console.log('response:', response)
         setlevels(response.data.results.levels)
         setvolumePending(response.data.results.volumePending)
         setVolume(response.data.results.volume)
