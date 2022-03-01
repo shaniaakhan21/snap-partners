@@ -73,6 +73,7 @@ export const LoginForm = () => {
 
       <form className='max-w-xs mt-2' onSubmit={handleSubmit(onSubmit)}>
         <DynamicInput
+          reset={reset}
           errors={errors}
           register={register}
         />

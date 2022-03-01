@@ -2,7 +2,7 @@ import { useState } from 'react'
 // import { InputForm } from './utils/Input'
 // import { InputPhone } from './utils/InputPhone'
 
-export const InputSelected = ({ register, errors, typeInput }: { register: any, errors: any, typeInput: 'phone' | 'email' | 'username' }) => {
+const InputSelected = ({ register, errors, typeInput }: { register: any, errors: any, typeInput: 'phone' | 'email' | 'username' }) => {
   const handleOnlyNumbers = (event) => {
     if (!/[0-9]/.test(event.key)) {
       event.preventDefault()
@@ -103,7 +103,7 @@ export const InputSelected = ({ register, errors, typeInput }: { register: any, 
       <div className='w-full flex justify-start items-center gap-x-2'>
         <input
           {...register('credentialProvider', { required: { value: true, message: 'Phone number is required *' } })}
-          id='credentialProvider'
+          id='reset'
           name='credentialProvider'
           type='tel'
           className='w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
@@ -116,7 +116,7 @@ export const InputSelected = ({ register, errors, typeInput }: { register: any, 
   )
 }
 
-export const DynamicInput = ({ register, errors }: { register: any, errors: any }) => {
+export const DynamicInput = ({ register, errors, reset }: { register: any, errors: any, reset: any }) => {
   const [typeInput, setTypeInput] = useState<'phone' | 'email' | 'username'>('phone')
 
   return (
@@ -124,21 +124,21 @@ export const DynamicInput = ({ register, errors }: { register: any, errors: any 
       <div className='w-full flex justify-between items-center'>
         <button
           type='button'
-          onClick={() => setTypeInput('phone')}
+          onClick={() => { setTypeInput('phone'); reset({ credentialProvider: '' }) }}
           className={`${typeInput === 'phone' && 'bg-primary-500 rounded-md text-white'} px-4 py-1 font-semibold select-none`}
         >
           Phone
         </button>
         <button
           type='button'
-          onClick={() => setTypeInput('email')}
+          onClick={() => { setTypeInput('email'); reset({ credentialProvider: '' }) }}
           className={`${typeInput === 'email' && 'bg-primary-500 rounded-md text-white'} px-4 py-1 font-semibold select-none`}
         >
           Email
         </button>
         <button
           type='button'
-          onClick={() => setTypeInput('username')}
+          onClick={() => { setTypeInput('username'); reset({ credentialProvider: '' }) }}
           className={`${typeInput === 'username' && 'bg-primary-500 rounded-md text-white'} px-4 py-1 font-semibold select-none`}
         >
           Username
