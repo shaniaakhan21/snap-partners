@@ -4,7 +4,9 @@ import { IQueryErrorReturn } from 'lib/types/query'
 import { decodeAccessToken } from 'lib/utils/decodedAccessToken'
 
 interface ILoginDataBody {
-  username: string
+  username?: string
+  email?: string
+  phoneNumber?: string
   password: string
 }
 

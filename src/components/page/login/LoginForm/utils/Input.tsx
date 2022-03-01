@@ -10,7 +10,7 @@ interface IInputFormProps {
   classes?: string,
   placeholder?: string,
   registerId: registerFormIds
-  register: UseFormRegister<IDataForm>
+  register: any
   errors: any,
   rulesForm: FieldErrors,
   defaultValue?: string | string[] | number | null

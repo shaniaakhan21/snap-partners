@@ -10,7 +10,7 @@ export interface IRegisterFormProps {
   role: string
 }
 
-export type registerFormIds = 'credentialProvider' | 'password' | 'rememberMe'
+export type registerFormIds = 'phone' | 'email' | 'username' | 'password' | 'rememberMe'
 // | 'privacyPolicy'
 
 export interface IFormConfig {

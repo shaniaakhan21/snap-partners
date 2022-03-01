@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { signInRulesConfig } from './formRules'
 
 interface IInputFormProps {
-  register: UseFormRegister<IDataForm>,
+  register: any,
   errors: any,
 }
 
