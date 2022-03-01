@@ -14,9 +14,16 @@
     "test:ci": "jest --ci"
   },
   "dependencies": {
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/data-grid": "^4.0.0-alpha.37",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.60",
+    "@material-ui/x-license": "^4.0.0-alpha.37",
     "@react-pdf-viewer/core": "3.1.0",
     "@tanem/react-nprogress": "4.0.5",
+    "axios": "^0.26.0",
     "jwt-decode": "^3.1.2",
+    "material-ui-phone-number": "^3.0.0",
     "next": "^12.1.0",
     "pdfjs-dist": "2.12.313",
     "react": "17.0.2",
