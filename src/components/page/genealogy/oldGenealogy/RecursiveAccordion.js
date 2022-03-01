@@ -75,7 +75,7 @@ export const RecursiveAccordion = ({ openUser, user, master = false }) => {
             params: {
               userId: user.id,
               includeUsers: 1,
-              name: auth.name
+              name: user.name
             },
             headers: {
               Authorization: `Bearer ${auth.accessToken}`
