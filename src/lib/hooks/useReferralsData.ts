@@ -1,83 +1,81 @@
-import { API } from 'config/api'
-import { IAuth } from 'lib/stores/Auth'
-import { IUserData } from 'lib/types'
 import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
+import { IAuth } from 'lib/stores/Auth'
+import { getAllLevels } from 'lib/services/genealogy/getAllLevels'
+import { ILevel, ILevelUser, IUserSelectedLevels } from 'lib/types/genealogy'
 
-interface IDataEmailsTest {
-  emailNotifications: {
-    level: number
-    newUsers: number
-    quantity: number
-    usersData: {
-      users: IUserData[]
-    }
-  }[]
-}
-
-export const useReferralsData = (userAuth: IAuth, dataTest: IDataEmailsTest, tabOpen: string, userDetailIdOpen: number) => {
-  const [data, setData] = useState({
-    emailNotificationsArray: null,
-    emailNotificationsUserData: null,
-    usersArray: null,
-    userDetailOpenData: null
-  })
+export const useReferralsData = (userAuth: IAuth, tabOpen: string, userDetailIdOpen: number) => {
+  const [levels, setLevels] = useState<ILevel[] | null>(null)
+  const [levelSelected, setLevelSelected] = useState<ILevel | null>(null)
+  const [levelSelectedUsers, setLevelSelectedUsers] = useState<ILevelUser[] | null>(null)
+  const [levelSelectedUserData, setLevelSelectedUserData] = useState<IUserSelectedLevels | null>(null)
 
   // INIT DATA
   useEffect(() => {
-    const emailNotificationsArray = [...dataTest.emailNotifications]
-    const emailNotificationsUserData = { ...emailNotificationsArray.find((emailNotification) => emailNotification.level === parseInt(tabOpen)) }
+    (async () => {
+      const { data, error } = await getAllLevels(
+        userAuth.accessToken,
+        { userId: userAuth.id, username: userAuth.username }
+      )
 
-    const usersArray = []
-    emailNotificationsArray.forEach((emailNotification) => {
-      emailNotification.usersData.users.forEach((user) => {
-        usersArray.push(user)
-      })
-    })
+      if (error) {
+        toast('ERROR -> trying to fetch the levels', { type: 'error' })
+        return
+      }
 
-    setData((prevState) => ({
-      ...prevState,
-      emailNotificationsArray,
-      emailNotificationsUserData,
-      usersArray
-    }))
+      const levels = [...data.levels]
+      const levelSelected = levels.length > 0
+        ? { ...levels.find(({ level }) => level === parseInt(tabOpen)) }
+        : null
+      const levelSelectedUsers = levelSelected ? [...levelSelected.users] : null
+
+      setLevels(levels)
+      setLevelSelected(levelSelected)
+      setLevelSelectedUsers(levelSelectedUsers)
+    })()
   }, [])
 
   // tabOpen State HandleChange
   useEffect(() => {
-    if (!data.emailNotificationsArray) return
+    if (!levels) return
 
-    const emailNotificationsUserData = { ...data.emailNotificationsArray.find((emailNotification) => emailNotification.level === parseInt(tabOpen)) }
+    const levelSelected = { ...levels.find(({ level }) => level === parseInt(tabOpen)) }
 
-    setData((prevState) => ({
-      ...prevState,
-      emailNotificationsUserData
-    }))
+    setLevelSelected(levelSelected)
   }, [tabOpen])
 
   // userDetailOpen State HandleChange
   useEffect(() => {
-    if (!data.emailNotificationsUserData) return
+    if (!levelSelected) return
 
-    const userDetailOpenData = data.emailNotificationsUserData.usersData.users.find((user) => user.id === userDetailIdOpen.toString())
+    (async () => {
+      const levelSelectedUserData = levelSelected.users.find((user: ILevelUser) => user.id === userDetailIdOpen) ?? null
 
-    setData((prevState) => ({
-      ...prevState,
-      userDetailOpenData
-    }))
+      if (!levelSelectedUserData) {
+        toast('This user does not exist.', { type: 'error' })
+        return
+      }
+
+      const { data, error } = await getAllLevels(
+        userAuth.accessToken,
+        { userId: levelSelectedUserData.id, username: levelSelectedUserData.name }
+      )
+
+      console.log('data:', data)
+
+      if (error) {
+        toast('ERROR -> trying to fetch the levels.', { type: 'error' })
+        return
+      }
+
+      setLevelSelectedUserData({ ...levelSelectedUserData, levels: data.levels })
+    })()
   }, [userDetailIdOpen])
 
-  useEffect(() => {
-    (async () => {
-      const res = await fetch(`${API.BASE_URL}/api/unilevel/getAllLevels?userId=${userAuth.id}&includeUsers=1&name=${userAuth.username}`, {
-        headers: {
-          Authorization: `Bearer ${userAuth.accessToken}`
-        }
-      })
-      const data = await res.json()
-
-      console.log(data)
-    })()
-  }, [])
-
-  return data
+  return {
+    levels,
+    levelSelected,
+    levelSelectedUsers,
+    levelSelectedUserData
+  }
 }
