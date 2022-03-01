@@ -49,37 +49,37 @@ export const Article = ({ id, imageSrc, title, subtitle, description, hashtags, 
 
       <ul className='w-full border-t border-gray-400 px-5 py-4 flex justify-between items-center'>
         <li>
-          <a href='#' target='_blank' rel='noopener noreferrer' onClick={() => trackShare("rsss")}>
+          <a href='#' target='_blank' rel='noopener noreferrer' onClick={() => trackShare('rsss')}>
             <ShareRRSSIcon />
           </a>
         </li>
 
         <li>
-          <a href='#' target='_blank' rel='noopener noreferrer' onClick={() => trackShare("Google")}>
+          <a href='#' target='_blank' rel='noopener noreferrer' onClick={() => trackShare('Google')}>
             <GoogleIcon />
           </a>
         </li>
 
         <li>
-          <a href='#' target='_blank' rel='noopener noreferrer' onClick={() => trackShare("Telegram")}>
+          <a href='#' target='_blank' rel='noopener noreferrer' onClick={() => trackShare('Telegram')}>
             <ShareIcon />
           </a>
         </li>
 
         <li>
-          <a href='#' target='_blank' rel='noopener noreferrer' onClick={() => trackShare("Facebook")}>
+          <a href='#' target='_blank' rel='noopener noreferrer' onClick={() => trackShare('Facebook')}>
             <FacebookIcon />
           </a>
         </li>
 
         <li>
-          <a href='#' target='_blank' rel='noopener noreferrer' onClick={() => trackShare("LinkedIn")}>
+          <a href='#' target='_blank' rel='noopener noreferrer' onClick={() => trackShare('LinkedIn')}>
             <LinkedinIcon />
           </a>
         </li>
 
         <li>
-          <a href='#' target='_blank' rel='noopener noreferrer' onClick={() => trackShare("Twitter")}>
+          <a href='#' target='_blank' rel='noopener noreferrer' onClick={() => trackShare('Twitter')}>
             <TwitterIcon />
           </a>
         </li>

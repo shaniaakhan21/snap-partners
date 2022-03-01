@@ -1,8 +1,8 @@
 export interface IDataForm {
-  username: string
+  credentialProvider: string
   password: string
   rememberMe: boolean
-  privacyPolicy: boolean
+  // privacyPolicy: boolean
 }
 
 export interface IRegisterFormProps {
@@ -10,7 +10,8 @@ export interface IRegisterFormProps {
   role: string
 }
 
-export type registerFormIds = 'username' | 'password' | 'rememberMe' | 'privacyPolicy'
+export type registerFormIds = 'credentialProvider' | 'password' | 'rememberMe'
+// | 'privacyPolicy'
 
 export interface IFormConfig {
   email: {

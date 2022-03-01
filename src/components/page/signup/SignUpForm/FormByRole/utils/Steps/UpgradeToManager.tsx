@@ -19,7 +19,7 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
   const handleClickLogin = async () => {
     setIsLoading(true)
 
-    const { data: dataLogin, error: errorLogin } = await login({ username: userTrack.userInfo.username, password: userTrack.userInfo.password })
+    const { data: dataLogin, error: errorLogin } = await login({ credentialProvider: userTrack.userInfo.username, password: userTrack.userInfo.password })
 
     if (errorLogin) {
       handleFetchError(errorLogin.status, errorLogin.info)

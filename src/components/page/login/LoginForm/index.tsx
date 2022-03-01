@@ -4,27 +4,26 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
-import { InputForm } from './utils/Input'
 import { IDataForm } from './utils/types'
 import { RRSSAuth } from './utils/RRSSAuth'
-import { signInRulesConfig } from './utils/formRules'
 import { RegisterPassword } from './utils/RegisterPassword'
 import { RememberAndPolicy } from './utils/RememberAndPolicy'
 import { useAuthStore } from 'lib/stores'
 import { login } from 'lib/services/session/login'
 import { getUserMe } from 'lib/services/users/getUserMe'
 import { handleFetchError } from 'lib/utils/handleFetchError'
+import { DynamicInput } from './DynamicInput'
 
 export const LoginForm = () => {
   const { setAuth } = useAuthStore()
   const [isLoading, setLoading] = useState(false)
   const { handleSubmit, register, reset, formState: { errors } } = useForm<IDataForm>()
 
-  const onSubmit = async ({ username, password }: IDataForm) => {
+  const onSubmit = async ({ credentialProvider, password }: IDataForm) => {
     setLoading(true)
 
     const { data: dataLogin, error: errorLogin } = await login({
-      username,
+      credentialProvider,
       password
     })
 
@@ -72,18 +71,10 @@ export const LoginForm = () => {
       <span className='hidden sm:block font-bold text-4xl text-[#18203F]'>Login</span>
       <p className='text-gray-500'>Welcome! Login to continue.</p>
 
-      <form className='max-w-xs mt-6' onSubmit={handleSubmit(onSubmit)}>
-        <InputForm
-          id='username'
-          name='username'
-          type='text'
-          label='Username'
-          registerId='username'
-          placeholder='Enter Username'
-          autoComplete='username'
-          errors={errors.username}
+      <form className='max-w-xs mt-2' onSubmit={handleSubmit(onSubmit)}>
+        <DynamicInput
+          errors={errors}
           register={register}
-          rulesForm={signInRulesConfig.username}
         />
 
         <RegisterPassword

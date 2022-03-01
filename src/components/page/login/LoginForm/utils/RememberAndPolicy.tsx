@@ -22,7 +22,7 @@ export const RememberAndPolicy = ({ register }: IInputFormProps) => {
         <label htmlFor='rememberMe' className='ml-2 text-xs'>Remember me</label>
       </div>
 
-      <div className='flex items-center justify-start'>
+      {/* <div className='flex items-center justify-start'>
         <input
           {...register('privacyPolicy')}
           id='privacyPolicy'
@@ -33,7 +33,7 @@ export const RememberAndPolicy = ({ register }: IInputFormProps) => {
         />
 
         <label htmlFor='privacyPolicy' className='ml-2 text-xs'>I agree to the Trems of Service and Privacy Policy</label>
-      </div>
+      </div> */}
     </section>
 
   )
