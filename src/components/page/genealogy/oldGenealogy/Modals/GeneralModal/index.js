@@ -17,7 +17,7 @@ function getModalStyle () {
   }
 }
 
-const GeneralModal = ({ children, open, onClose, showClose }) => {
+export const GeneralModal = ({ children, open, onClose, showClose }) => {
   const classes = useStyles()
   return (
     <Modal
@@ -44,5 +44,3 @@ GeneralModal.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired
 }
-
-export default GeneralModal

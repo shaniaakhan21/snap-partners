@@ -12,6 +12,8 @@ import { swrConfigValue } from 'lib/utils/swrConfig'
 import 'styles/tailwind.css'
 import 'react-toastify/dist/ReactToastify.min.css'
 import 'react-phone-input-2/lib/style.css'
+import { ThemeProvider } from '@material-ui/core/styles'
+import { theme } from 'materialTheme'
 
 const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({ Component, pageProps }: AppLayoutProps) => {
   const router = useRouter()
@@ -52,7 +54,9 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
       <LoadingPage isRouteChanging={isRouteChanging} key={loadingKey} />
 
       <SWRConfig value={swrConfigValue}>
-        {getLayout(<Component {...pageProps} />)}
+        <ThemeProvider theme={theme}>
+          {getLayout(<Component {...pageProps} />)}
+        </ThemeProvider>
       </SWRConfig>
 
       <ToastContainer

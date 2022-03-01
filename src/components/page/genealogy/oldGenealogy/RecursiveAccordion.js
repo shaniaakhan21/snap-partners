@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const RecursiveAccordion = ({ openUser, user, master = false }) => {
+export const RecursiveAccordion = ({ openUser, user, master = false }) => {
   const [levels, setlevels] = useState([])
   const [volume, setVolume] = useState(0)
   const [volumePending, setvolumePending] = useState(0)
@@ -148,5 +148,3 @@ const RecursiveAccordion = ({ openUser, user, master = false }) => {
     </>
   )
 }
-
-export default RecursiveAccordion

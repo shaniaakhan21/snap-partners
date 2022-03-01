@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { GeneralModal } from './GeneralModal'
+import { GeneralModal } from './GeneralModal/index'
 import {
   Grid,
   Typography,
@@ -9,37 +9,37 @@ import {
 } from '@material-ui/core'
 
 import Alert from '@material-ui/lab/Alert'
-import RecursiveAccordion from '../RecursiveAccordion'
+import { RecursiveAccordion } from '../RecursiveAccordion'
 import axios from 'axios'
 
 import PersonIcon from '@material-ui/icons/Person'
 import EmailIcon from '@material-ui/icons/Email'
 import PhoneIcon from '@material-ui/icons/Phone'
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
+import MoneyOffIcon from '@material-ui/icons/MoneyOff'
 
-const ModalUninivelUser = ({ id, close, open, openUser }) => {
+export const ModalUninivelUser = ({ id, close, open, openUser }) => {
   const [user, setUser] = useState({})
   const [userData, setUserData] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
 
-  useEffect(() => {
-    (async () => {
-      if (String(id).length > 0 && open) {
-        try {
-          setUser({})
-          setUserData(null)
-          setError('')
-          setLoading(true)
-          const response = await axios.get('/api/unilevel/getAllLevelsById', { params: { id: id, includeUsers: 1 } })
-          setUser({ name: response.data.results.name, id: response.data.results.userId })
-          const responseData = await axios.get('/api/unilevel/getUserById', { params: { id: id } })
-          setUserData(responseData.data.results)
-        } catch (e) {
-          setError(e.response.data?.message || '')
-        }
-        setLoading(false)
+  useEffect(async () => {
+    if (String(id).length > 0 && open) {
+      try {
+        setUser({})
+        setUserData(null)
+        setError('')
+        setLoading(true)
+        const response = await axios.get('/api/unilevel/getAllLevelsById', { params: { id: id, includeUsers: 1 } })
+        setUser({ name: response.data.results.name, id: response.data.results.userId })
+        const responseData = await axios.get('/api/unilevel/getUserById', { params: { id: id } })
+        setUserData(responseData.data.results)
+      } catch (e) {
+        setError(e.response.data?.message || '')
       }
-    })()
+      setLoading(false)
+    }
   }, [id])
 
   return (
@@ -88,5 +88,3 @@ const ModalUninivelUser = ({ id, close, open, openUser }) => {
     </GeneralModal>
   )
 }
-
-export default ModalUninivelUser

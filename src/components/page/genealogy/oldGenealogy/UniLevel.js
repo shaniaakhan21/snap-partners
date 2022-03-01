@@ -1,8 +1,8 @@
 import { useState, useMemo } from 'react'
 import { Card, Grid, Typography, makeStyles, TextField, Button } from '@material-ui/core'
 import { DataGrid } from '@material-ui/data-grid'
-import RecursiveAccordion from './RecursiveAccordion'
-import ModalUninivelUser from './Modals/UniLevelUser'
+import { RecursiveAccordion } from './RecursiveAccordion'
+import { ModalUninivelUser } from './Modals/UniLevelUser'
 import SearchIcon from '@material-ui/icons/Search'
 import axios from 'axios'
 // import { useAuthStore } from 'lib/stores'
@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     padding: 20
   },
   Btn: {
-    backgroundColor: theme.palette.primary.main,
+    backgroundColor: '#DD4C37',
     color: '#fff'
   }
 }))
@@ -42,10 +42,10 @@ const Table = (props) => {
   )
 }
 
-const Unilevel = () => {
+export const Unilevel = () => {
   // const { auth } = useAuthStore()
   const user = {
-    id: 1,
+    id: '1',
     name: 'admin1'
   }
 
@@ -120,5 +120,3 @@ const Unilevel = () => {
     </>
   )
 }
-
-export default Unilevel
