@@ -20,10 +20,12 @@ import {
   TotalEarnings,
   TotalOrders
 } from 'components/page/overview'
+import { useAuthStore } from 'lib/stores'
 
 const { SEO } = PAGE_INFO
 
 const DashboardOverViewPage: Page = () => {
+  const { auth } = useAuthStore()
   const data = [
     {
       name: '1a',
@@ -55,7 +57,7 @@ const DashboardOverViewPage: Page = () => {
 
       <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-full h-fit gap-4'>
         <Graphics data={data} />
-        <PromotionTracker data={{}} />
+        <PromotionTracker userAuth={auth} />
       </div>
 
       <OverViewGrid>
