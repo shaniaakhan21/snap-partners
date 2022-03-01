@@ -23,7 +23,7 @@ export const LoginForm = () => {
     setLoading(true)
 
     const { data: dataLogin, error: errorLogin } = await login({
-      credentialProvider,
+      username: credentialProvider,
       password
     })
 
