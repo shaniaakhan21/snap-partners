@@ -46,7 +46,7 @@ export const RecursiveAccordion = ({ openUser, user, master = false }) => {
     (async function () {
       try {
         const response = await axios.get('/api/unilevel/getAllLevels', {
-          params: { userId: user.id, includeUsers: master ? 1 : 0 },
+          params: { userId: user.id, includeUsers: master ? 1 : 0, name: auth.name },
           headers: {
             Authorization: `Bearer ${auth.accessToken}`
           }
@@ -74,7 +74,8 @@ export const RecursiveAccordion = ({ openUser, user, master = false }) => {
           response = await axios.get('/api/unilevel/getAllLevels', {
             params: {
               userId: user.id,
-              includeUsers: 1
+              includeUsers: 1,
+              name: auth.name
             },
             headers: {
               Authorization: `Bearer ${auth.accessToken}`

@@ -72,7 +72,7 @@ export const Unilevel = () => {
   const search = async () => {
     try {
       const response = await axios.get('/api/unilevel/getUsersBySearch', {
-        params: { search: searchId },
+        params: { search: searchId, name: auth.name },
         headers: {
           Authorization: `Bearer ${auth.accessToken}`
         }
