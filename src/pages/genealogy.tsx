@@ -3,6 +3,7 @@ import Head from 'next/head'
 import type { Page, ReactNode } from 'lib/types'
 import { PAGE_INFO } from 'config/pageInfo'
 import DashboardLayout from 'layouts/private/Dashboard'
+import Unilevel from 'components/page/genealogy/oldGenealogy/UniLevel'
 // import { Overlay } from 'components/common/Overlay'
 // import { ModalContainer } from 'components/common/ModalContainer'
 // import { Searcher } from 'components/common/Search'
@@ -181,8 +182,9 @@ const { SEO } = PAGE_INFO
 
 const GenealogyPage: Page = () => {
   return (
-    <h1>GENEALOGY</h1>
+    <Unilevel />
   )
+  // TODO: CHANGE THIS!!!
 }
 
 GenealogyPage.getLayout = (page: ReactNode) => (
