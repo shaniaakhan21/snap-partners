@@ -17,8 +17,10 @@ import EmailIcon from '@material-ui/icons/Email'
 import PhoneIcon from '@material-ui/icons/Phone'
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
 import MoneyOffIcon from '@material-ui/icons/MoneyOff'
+import { useAuthStore } from 'lib/stores'
 
 export const ModalUninivelUser = ({ id, close, open, openUser }) => {
+  const { auth } = useAuthStore()
   const [user, setUser] = useState({})
   const [userData, setUserData] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -31,9 +33,19 @@ export const ModalUninivelUser = ({ id, close, open, openUser }) => {
         setUserData(null)
         setError('')
         setLoading(true)
-        const response = await axios.get('/api/unilevel/getAllLevelsById', { params: { id: id, includeUsers: 1 } })
+        const response = await axios.get('/api/unilevel/getAllLevelsById', {
+          params: { id: id, includeUsers: 1 },
+          headers: {
+            Authorization: `Bearer ${auth.accessToken}`
+          }
+        })
         setUser({ name: response.data.results.name, id: response.data.results.userId })
-        const responseData = await axios.get('/api/unilevel/getUserById', { params: { id: id } })
+        const responseData = await axios.get('/api/unilevel/getUserById', {
+          params: { id: id },
+          headers: {
+            Authorization: `Bearer ${auth.accessToken}`
+          }
+        })
         setUserData(responseData.data.results)
       } catch (e) {
         setError(e.response.data?.message || '')

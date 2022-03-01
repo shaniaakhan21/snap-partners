@@ -11,6 +11,7 @@ import {
 } from '@material-ui/core'
 import axios from 'axios'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
+import { useAuthStore } from 'lib/stores'
 
 const useStyles = makeStyles(theme => ({
   Btn: {
@@ -28,6 +29,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export const RecursiveAccordion = ({ openUser, user, master = false }) => {
+  const { auth } = useAuthStore()
   const [levels, setlevels] = useState([])
   const [volume, setVolume] = useState(0)
   const [volumePending, setvolumePending] = useState(0)
@@ -43,7 +45,12 @@ export const RecursiveAccordion = ({ openUser, user, master = false }) => {
   useEffect(() => {
     (async function () {
       try {
-        const response = await axios.get('/api/unilevel/getAllLevels', { params: { userId: user.id, includeUsers: master ? 1 : 0 } })
+        const response = await axios.get('/api/unilevel/getAllLevels', {
+          params: { userId: user.id, includeUsers: master ? 1 : 0 },
+          headers: {
+            Authorization: `Bearer ${auth.accessToken}`
+          }
+        })
         setlevels(response.data.results.levels)
         setvolumePending(response.data.results.volumePending)
         setVolume(response.data.results.volume)
@@ -68,6 +75,9 @@ export const RecursiveAccordion = ({ openUser, user, master = false }) => {
             params: {
               userId: user.id,
               includeUsers: 1
+            },
+            headers: {
+              Authorization: `Bearer ${auth.accessToken}`
             }
           })
         }
