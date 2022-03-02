@@ -22,7 +22,7 @@ export const PromotionTracker = ({ userAuth }: { userAuth: IAuth }) => {
         <div className='leading-5 text-gray-400 text-center md:text-left'>
           <span>Promotion tracker</span> <br />
           <span className='font-semibold'>Next Rank</span> <br />
-          <span className='text-gray-800 font-semibold'>{userAuth.isManager ? 'Level  2' : 'Manager'}</span>
+          <span className='text-gray-800 font-semibold'>{userAuth.isManager ? 'Supervisor' : 'Manager'}</span>
         </div>
       </div>
     </div>

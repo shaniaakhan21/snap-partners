@@ -48,7 +48,7 @@ const UpgradeToManagerPage: PageNext = () => {
         <div className='w-full bg-transparent sm:bg-gray-300 rounded-lg max-w-4xl mx-auto mt-20 p-5'>
           <div className='w-full flex flex-col sm:flex-row justify-center items-center gap-x-20'>
             <figure>
-              <img src='/images/logo-full-232px.png' className='w-60' />
+              <img src='/images/logo.svg' className='w-60' />
             </figure>
 
             <section>
