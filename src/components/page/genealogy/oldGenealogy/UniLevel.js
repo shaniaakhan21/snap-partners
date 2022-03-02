@@ -73,7 +73,7 @@ export const Unilevel = () => {
 
   const search = async () => {
     try {
-      const response = await axios.get('https://dev.snap.devopsteam.info/api/users/getUsersBySearch', {
+      const response = await axios.get('https://dev.snap.devopsteam.info/api/user/getUsersBySearch', {
         params: { search: searchId },
         headers: {
           Authorization: `Bearer ${auth.accessToken}`
