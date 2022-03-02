@@ -284,8 +284,6 @@ export const RegisterRestaurantBasicInfo = ({ referralLink }: { referralLink: IR
         />
 
         <section className='mt-4'>
-          <BulletPagination stepToActivate='REGISTER_BASIC_INFO' />
-
           <Button type='submit' classes='w-full mt-4 text-sm bg-primary-500'>
             Sign Up
           </Button>
