@@ -1,8 +1,10 @@
+import { useRef } from 'react'
 import { IBOIcon, DriverIcon, RestaurantsIcon, ArrowRightIcon } from 'components/common/icons'
+import { MobileAppsLink } from 'components/common/mobileApps/MobileAppsLink'
 import { ROLES } from 'config/roles'
+import { mobileAppsLinks } from 'lib/utils/mobileAppLinks'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { useRef } from 'react'
 
 export const SelectRoleToSignUp = () => {
   const router = useRouter()
@@ -79,6 +81,30 @@ export const SelectRoleToSignUp = () => {
           <a className='text-textAcent-500'> Login.</a>
         </Link>
       </p>
+      <br />
+
+      <div className='max-w-sm mx-auto'>
+        <span className='text-xl text-gray-500 text-center'>You can download some of our apps below or visit our website at </span>
+        <Link href='https://snapdelivered.com/'>
+          <a target='_blank' className='text-xl text-primary-500 text-center'>snapdelivered.com</a>
+        </Link>
+      </div>
+
+      <MobileAppsLink
+        appStoreHref={mobileAppsLinks.customer.appStore}
+        playStoreHref={mobileAppsLinks.customer.playStore}
+        title={mobileAppsLinks.customer.title}
+      />
+      <MobileAppsLink
+        appStoreHref={mobileAppsLinks.driver.appStore}
+        playStoreHref={mobileAppsLinks.driver.playStore}
+        title={mobileAppsLinks.driver.title}
+      />
+      <MobileAppsLink
+        appStoreHref={mobileAppsLinks.restaurant.appStore}
+        playStoreHref={mobileAppsLinks.restaurant.playStore}
+        title={mobileAppsLinks.restaurant.title}
+      />
     </div>
   )
 }
