@@ -185,6 +185,10 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           isRequired={false}
         />
 
+        {/* {referralLink.role === 'DRIVER' && (
+          <InputForm />
+        )} */}
+
         <TermsAndConditions
           errors={errors.termsAndConditions}
           register={register}
