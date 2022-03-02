@@ -51,9 +51,9 @@ export const RecursiveAccordion = ({ openUser, user, master = false }) => {
             Authorization: `Bearer ${auth.accessToken}`
           }
         })
-        setlevels(response.data.results.levels)
-        setvolumePending(response.data.results.volumePending)
-        setVolume(response.data.results.volume)
+        setlevels(response.data.data.levels)
+        setvolumePending(response.data.data.volumePending)
+        setVolume(response.data.data.volume)
         setLoading(false)
         setCached(response)
       } catch (e) {
@@ -83,9 +83,9 @@ export const RecursiveAccordion = ({ openUser, user, master = false }) => {
           })
         }
         const newLevels = [...levels]
-        newLevels[key] = response.data.results.levels[key]
-        setvolumePending(response.data.results.volumePending)
-        setVolume(response.data.results.volume)
+        newLevels[key] = response.data.data.levels[key]
+        setvolumePending(response.data.data.volumePending)
+        setVolume(response.data.data.volume)
         setlevels(newLevels)
         showSpinner(false)
         setCached(response)
