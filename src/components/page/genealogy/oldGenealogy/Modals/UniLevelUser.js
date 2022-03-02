@@ -72,7 +72,7 @@ export const ModalUninivelUser = ({ id, name, close, open, openUser }) => {
             </ListItemIcon>
             <ListItemText primary={`Sponsor: ${userData['sponsor.id'] !== null ? `${userData['sponsor.name']} [${userData['sponsor.id']}]` : 'No Sponsor'}`} />
             {(userData['sponsor.id'] !== null) && (
-              <Button onClick={(e) => { e.stopPropagation(); openUser(userData['sponsor.id']) }} size={'small'} variant="contained">View Sponsor</Button>
+              <Button onClick={(e) => { e.stopPropagation(); openUser(userData['sponsor.id'], userData['sponsor.name']) }} size={'small'} variant="contained">View Sponsor</Button>
             )}
           </ListItem>
           <ListItem>
