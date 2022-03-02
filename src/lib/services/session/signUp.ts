@@ -23,21 +23,30 @@ interface ISignUpDataBodyStep2 extends ISignUpDataBodyStep1 {
   sponsorReferralCode: string | null
 }
 
-interface ISignUpDataBodyRestaurant {
-  'city' : string
-  'street_name': string,
-  'state': string
-  'country_code': string
-  'delivery_fees': number
-  'deliverykm': number
-  'email': string
-  'maxdeliverytime': number
-  'mobile_no' : string
-  'name': string
-  'password': string
-  'pincode': string
-  'save_on_snap': boolean
-}
+// interface ISignUpDataBodyRestaurant {
+//   'city' : string
+//   'street_name': string,
+//   'state': string
+//   'country_code': string
+//   'email': string
+//   'mobile_no' : string
+//   'name': string
+//   'password': string
+//   'save_on_snap': boolean
+
+//   lastname: string
+//   username: string
+//   idImage: string | null
+//   insuranceImage: string | null
+//   roles: {
+//     admin: boolean
+//     customer: boolean
+//     driver: boolean
+//     merchant: boolean
+//   },
+//   code: number
+//   sponsorReferralCode: string | null
+// }
 
 export const signUpStep1 = async (dataBody: ISignUpDataBodyStep1): Promise<IQueryErrorReturn> => {
   const res = await fetch(`${API.BASE_URL}/api/authentication/signUpStepOne`, {
@@ -85,8 +94,8 @@ export const signUpStep2 = async (dataBody: ISignUpDataBodyStep2): Promise<IQuer
   return { error: null }
 }
 
-export const signUpRestaurant = async (dataBody: ISignUpDataBodyRestaurant): Promise<IQueryErrorReturn> => {
-  const res = await fetch('http://ec2-3-13-46-32.us-east-2.compute.amazonaws.com:3000/restaurent/registerRestaurant', {
+export const signUpRestaurant = async (dataBody: any): Promise<IQueryErrorReturn> => {
+  const res = await fetch(`${API.BASE_URL}/api/authentication/signUpStepTwo`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
