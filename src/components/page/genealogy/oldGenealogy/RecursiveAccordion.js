@@ -45,7 +45,7 @@ export const RecursiveAccordion = ({ openUser, user, master = false }) => {
   useEffect(() => {
     (async function () {
       try {
-        const response = await axios.get('/api/unilevel/getAllLevels', {
+        const response = await axios.get('https://dev.snap.devopsteam.info/api/unilevel/getAllLevels', {
           params: { userId: user.id, includeUsers: master ? 1 : 0, name: user.name },
           headers: {
             Authorization: `Bearer ${auth.accessToken}`
@@ -71,7 +71,7 @@ export const RecursiveAccordion = ({ openUser, user, master = false }) => {
         showSpinner(true)
         let response = cached
         if (cached === undefined || !master) {
-          response = await axios.get('/api/unilevel/getAllLevels', {
+          response = await axios.get('https://dev.snap.devopsteam.info/api/unilevel/getAllLevels', {
             params: {
               userId: user.id,
               includeUsers: 1,
@@ -115,7 +115,7 @@ export const RecursiveAccordion = ({ openUser, user, master = false }) => {
             <AccordionSummary className={classes.wrappingViewOptions} aria-controls="panel1a-content" id="panel1a-header">
               <Chip style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} size="small" label={`${user.name} [${user.id}]`} />
               <Chip style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} size="small" label={'Users : 0'} variant="outlined" />
-              <Button style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} onClick={(e) => { e.stopPropagation(); openUser(user.id) }} className={classes.Btn} color={'primary'} size={'small'} variant="contained">View user</Button>
+              <Button style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} onClick={(e) => { e.stopPropagation(); openUser(user.id, user.name) }} className={classes.Btn} color={'primary'} size={'small'} variant="contained">View user</Button>
             </AccordionSummary>
           </Accordion>
         )
@@ -126,7 +126,7 @@ export const RecursiveAccordion = ({ openUser, user, master = false }) => {
             <AccordionSummary style={{ display: 'flex', flexWrap: 'wrap' }} onClick={() => { getUsers(key) }} expandIcon={<ExpandMoreIcon/>} aria-controls="panel1a-content" id="panel1a-header">
               {master === true ? (<Typography style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }}>Level {level.level}</Typography>) : <Chip style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} size="small" label={`${user.name} [${user.id}]`} />}
               <Chip style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} size="small" label={`Users : ${level.usersLength}`} variant="outlined" />
-              {master === false && <Button onClick={(e) => { e.stopPropagation(); openUser(user.id) }} className={classes.Btn} color={'primary'} size={'small'} variant="contained" style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }}>View user</Button>}
+              {master === false && <Button onClick={(e) => { e.stopPropagation(); openUser(user.id, user.name) }} className={classes.Btn} color={'primary'} size={'small'} variant="contained" style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }}>View user</Button>}
             </AccordionSummary>
             <AccordionDetails>
               {showLevels[key] && (

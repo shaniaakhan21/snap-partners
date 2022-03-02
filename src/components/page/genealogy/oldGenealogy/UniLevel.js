@@ -51,6 +51,7 @@ export const Unilevel = () => {
 
   const [showModal, setshowModal] = useState(false)
   const [id, setId] = useState('')
+  const [name, setName] = useState('')
   const [searchId, setsearchId] = useState('')
   const [pageSize, setPageSize] = useState(5)
   const [rows, setDataRows] = useState([])
@@ -62,8 +63,9 @@ export const Unilevel = () => {
     }
   ])
 
-  const openUser = async (id) => {
+  const openUser = async (id, name) => {
     setId(id)
+    setName(name)
     setshowModal(true)
   }
 
@@ -71,8 +73,8 @@ export const Unilevel = () => {
 
   const search = async () => {
     try {
-      const response = await axios.get('/api/unilevel/getUsersBySearch', {
-        params: { search: searchId, name: auth.name },
+      const response = await axios.get('https://dev.snap.devopsteam.info/api/users/getUsersBySearch', {
+        params: { search: searchId },
         headers: {
           Authorization: `Bearer ${auth.accessToken}`
         }
@@ -93,14 +95,14 @@ export const Unilevel = () => {
       flex: 1,
       minWidth: 170,
       renderCell: (item) => {
-        return <Button onClick={() => { openUser(item.id) }} variant="contained" color={'primary'} size={'small'}>View User</Button>
+        return <Button onClick={() => { openUser(item.id, item.name) }} variant="contained" color={'primary'} size={'small'}>View User</Button>
       }
     }
   ]
 
   return (
     <>
-      <ModalUninivelUser id={id} openUser={openUser} open={showModal} close={setshowModal}/>
+      <ModalUninivelUser id={id} name={name} openUser={openUser} open={showModal} close={setshowModal}/>
       <Card style={{ width: '100%' }}>
         <Grid className={classes.container} container>
           <Grid container className={classes.title} >

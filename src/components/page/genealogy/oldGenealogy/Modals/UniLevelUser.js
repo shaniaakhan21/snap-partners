@@ -19,7 +19,7 @@ import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
 import MoneyOffIcon from '@material-ui/icons/MoneyOff'
 import { useAuthStore } from 'lib/stores'
 
-export const ModalUninivelUser = ({ id, close, open, openUser }) => {
+export const ModalUninivelUser = ({ id, name, close, open, openUser }) => {
   const { auth } = useAuthStore()
   const [user, setUser] = useState({})
   const [userData, setUserData] = useState(null)
@@ -33,14 +33,14 @@ export const ModalUninivelUser = ({ id, close, open, openUser }) => {
         setUserData(null)
         setError('')
         setLoading(true)
-        const response = await axios.get('/api/unilevel/getAllLevelsById', {
-          params: { id: id, includeUsers: 1 },
+        const response = await axios.get(' https://dev.snap.devopsteam.info/api/unilevel/getAllLevels', {
+          params: { userId: id, includeUsers: 1, name: name },
           headers: {
             Authorization: `Bearer ${auth.accessToken}`
           }
         })
         setUser({ name: response.data.data.name, id: response.data.data.userId })
-        const responseData = await axios.get('/api/unilevel/getUserById', {
+        const responseData = await axios.get(' https://dev.snap.devopsteam.info/api/user/getUserById', {
           params: { id: id },
           headers: {
             Authorization: `Bearer ${auth.accessToken}`
