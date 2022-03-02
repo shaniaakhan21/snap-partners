@@ -1,5 +1,5 @@
-import { FieldErrors, UseFormRegister } from 'react-hook-form'
-import { IDataForm, registerFormIds } from './types'
+import { FieldErrors } from 'react-hook-form'
+import { registerFormIds } from './types'
 
 interface IInputFormProps {
   id: string,

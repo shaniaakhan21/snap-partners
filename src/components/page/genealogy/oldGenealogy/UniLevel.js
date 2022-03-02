@@ -53,15 +53,7 @@ export const Unilevel = () => {
   const [id, setId] = useState('')
   const [name, setName] = useState('')
   const [searchId, setsearchId] = useState('')
-  const [pageSize, setPageSize] = useState(5)
   const [rows, setDataRows] = useState([])
-
-  const [sortModel, setSortModel] = useState([
-    {
-      field: 'id',
-      sort: 'desc'
-    }
-  ])
 
   const openUser = async (id, name) => {
     console.log('name', name)

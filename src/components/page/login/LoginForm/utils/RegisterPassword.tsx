@@ -1,5 +1,3 @@
-import { UseFormRegister } from 'react-hook-form'
-import { IDataForm } from './types'
 import { EyeHiddenIcon, EyeVisibleIcon } from 'components/common/icons'
 import { useState } from 'react'
 import { signInRulesConfig } from './formRules'

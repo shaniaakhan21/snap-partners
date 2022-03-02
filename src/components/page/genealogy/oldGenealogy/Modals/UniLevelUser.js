@@ -15,8 +15,6 @@ import axios from 'axios'
 import PersonIcon from '@material-ui/icons/Person'
 import EmailIcon from '@material-ui/icons/Email'
 import PhoneIcon from '@material-ui/icons/Phone'
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
-import MoneyOffIcon from '@material-ui/icons/MoneyOff'
 import { useAuthStore } from 'lib/stores'
 
 export const ModalUninivelUser = ({ id, name, close, open, openUser }) => {

@@ -31,8 +31,8 @@ const useStyles = makeStyles(theme => ({
 export const RecursiveAccordion = ({ openUser, user, master = false }) => {
   const { auth } = useAuthStore()
   const [levels, setlevels] = useState([])
-  const [volume, setVolume] = useState(0)
-  const [volumePending, setvolumePending] = useState(0)
+  const [, setVolume] = useState(0)
+  const [, setvolumePending] = useState(0)
   const [spinner, showSpinner] = useState(false)
   const [loading, setLoading] = useState(true)
 

@@ -1,6 +1,3 @@
-import { UseFormRegister } from 'react-hook-form'
-import { IDataForm } from './types'
-
 interface IInputFormProps {
   register: any
 }
