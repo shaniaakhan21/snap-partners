@@ -4,7 +4,7 @@ import { FieldErrors, UseFormRegister } from 'react-hook-form'
 import { IDataForm } from './types'
 
 interface IInputFormProps {
-  register: UseFormRegister<IDataForm>,
+  register: UseFormRegister<any>,
   errors: any,
   rulesForm: FieldErrors
 }
