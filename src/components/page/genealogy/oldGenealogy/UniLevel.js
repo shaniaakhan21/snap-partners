@@ -64,6 +64,7 @@ export const Unilevel = () => {
   ])
 
   const openUser = async (id, name) => {
+    console.log('name', name)
     setId(id)
     setName(name)
     setshowModal(true)
@@ -95,7 +96,7 @@ export const Unilevel = () => {
       flex: 1,
       minWidth: 170,
       renderCell: (item) => {
-        return <Button onClick={() => { openUser(item.id, item.name) }} variant="contained" color={'primary'} size={'small'}>View User</Button>
+        return <Button onClick={() => { openUser(item.id, item.row.name) }} variant="contained" color={'primary'} size={'small'}>View User</Button>
       }
     }
   ]
