@@ -104,7 +104,6 @@ export const RegisterRestaurantBasicInfo = ({ referralLink }: { referralLink: IR
   return (
     <div>
       <span className='font-bold text-4xl text-[#18203F]'>Sign up!</span>
-      <p>As {referralLink?.role}</p>
       <p className='text-gray-500'>Welcome! register to continue.</p>
 
       <form className='max-w-xs mt-6' onSubmit={handleSubmit(onSubmit)}>

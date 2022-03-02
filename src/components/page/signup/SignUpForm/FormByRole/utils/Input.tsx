@@ -1,7 +1,5 @@
 import { HTMLInputTypeAttribute } from 'react'
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
-import { dataFormSignUpRestaurant } from './Steps/RegisterRestaurantBasicInfo'
-import { IDataForm, registerFormRestaurantIds } from './types'
 
 interface IInputFormProps {
   id?: string,
