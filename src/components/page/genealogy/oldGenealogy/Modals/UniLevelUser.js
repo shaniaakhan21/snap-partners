@@ -39,16 +39,16 @@ export const ModalUninivelUser = ({ id, close, open, openUser }) => {
             Authorization: `Bearer ${auth.accessToken}`
           }
         })
-        setUser({ name: response.data.results.name, id: response.data.results.userId })
+        setUser({ name: response.data.data.name, id: response.data.data.userId })
         const responseData = await axios.get('/api/unilevel/getUserById', {
           params: { id: id },
           headers: {
             Authorization: `Bearer ${auth.accessToken}`
           }
         })
-        setUserData(responseData.data.results)
+        setUserData(responseData.data.data)
       } catch (e) {
-        setError(e.response.data?.message || '')
+        setError(e.response.data?.error || '')
       }
       setLoading(false)
     }
