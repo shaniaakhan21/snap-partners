@@ -6,6 +6,8 @@ export interface IUserToSignUp {
   phone: string
   password: string
   referralCode?: string | null
+  idImage?: any
+  insuranceImage?: any
 }
 
 export interface IDataForm extends IUserToSignUp {
