@@ -1,3 +1,5 @@
+import { TRoles } from 'lib/types'
+
 export const GTM_ID = {
   PRE: 'GTM-PRJVWRJ',
   PRO: 'GTM-NNQS9S8'
@@ -66,5 +68,18 @@ export const marketingSharingCard = (name: string, socialMediaClicked: string) =
     label: name,
     step: 2,
     shareType: socialMediaClicked
+  })
+}
+
+export const signUp = (userType: TRoles, step: number, app?: 'android' | 'ios', upgradeToManager?: 'yes' | 'no', accountSettings?: 'yes' | 'no') => {
+  window.dataLayer.push({
+    event: 'signup',
+    category: 'signupProcess',
+    action: 'click',
+    label: userType,
+    step,
+    ...(step === 3 ? { appDownloaded: app } : {}),
+    ...(step === 4 ? { upgradeToManager } : {}),
+    ...(step === 4 ? { accountSettings } : {})
   })
 }

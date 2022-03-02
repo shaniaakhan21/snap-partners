@@ -1,5 +1,6 @@
 import { IBOIcon, DriverIcon, RestaurantsIcon, ArrowRightIcon } from 'components/common/icons'
 import { ROLES } from 'config/roles'
+import { signUp } from 'lib/utils/gtm'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useRef } from 'react'
@@ -26,6 +27,11 @@ export const SelectRoleToSignUp = () => {
       link: 'https://opportunity.snapdelivered.com/restaurants.php'
     }
   ])
+
+  const onRoleClick = (role) => {
+    signUp(role.key, 1)
+    router.push(role.link)
+  }
 
   return (
     <div className='text-center'>
@@ -57,7 +63,7 @@ export const SelectRoleToSignUp = () => {
             return (
               <li key={role.key} className='max-w-xs w-full bg-gray-200 hover:bg-gray-300 rounded-md'>
                 <button
-                  onClick={() => router.push(role.link)}
+                  onClick={() => onRoleClick(role)}
                   className='w-full py-4 px-5 flex justify-between items-center gap-x-8'
                 >
                   {role.icon}

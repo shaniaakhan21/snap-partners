@@ -5,10 +5,15 @@ import { STEPS } from '.'
 import { mobileAppsLinks } from 'lib/utils/mobileAppLinks'
 import { IHandleStep, IUserTrack } from '../types'
 import { IReferralLink } from 'lib/types'
+import { signUp } from 'lib/utils/gtm'
+import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 
 export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack: IUserTrack, handleStep: IHandleStep, referralLink: IReferralLink }) => {
   const { playStore: linkPlayStore, appStore: linkAppStore } = mobileAppsLinks[referralLink.role.toLocaleLowerCase()]
-
+  const role = useRoleFromUrl()
+  const trackStore = (store: 'android' | 'ios') => {
+    signUp(role, 3, store)
+  }
   return (
     <div className='flex flex-col justify-center items-center'>
       <span className='text-3xl font-bold'>SnapDelivered</span>
@@ -26,13 +31,13 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
       <br/>
       <div className='flex flex-wrap justify-center items-center mt-8 gap-x-4 gap-y-4'>
         <Link href={linkPlayStore}>
-          <a target='_blank'>
+          <a target='_blank' onClick={() => trackStore('android')}>
             <GooglePlayBanner />
           </a>
         </Link>
 
         <Link href={linkAppStore}>
-          <a target='_blank'>
+          <a target='_blank' onClick={() => trackStore('ios')}>
             <AppleStore />
           </a>
         </Link>
