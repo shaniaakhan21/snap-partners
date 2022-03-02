@@ -6,9 +6,10 @@ interface IInputFormProps {
   rulesForm?: FieldErrors
   classes?: string
   isRequired: boolean
+  withVerifyCode: boolean
 }
 
-export const InputPhone = ({ errors, register, classes, isRequired }: IInputFormProps) => {
+export const InputPhone = ({ errors, register, classes, isRequired, withVerifyCode }: IInputFormProps) => {
   const handleOnlyNumbers = (event) => {
     if (!/[0-9]/.test(event.key)) {
       event.preventDefault()
@@ -21,7 +22,9 @@ export const InputPhone = ({ errors, register, classes, isRequired }: IInputForm
         <label htmlFor='phone' className='font-bold text-gray-700 uppercase text-sm'>
           Phone {isRequired && <span className='text-red-500'>*</span>}
         </label>
-        <span className='text-xs text-gray-600 font-normal'>(Verified with SMS code)</span>
+        {
+          withVerifyCode && <span className='text-xs text-gray-600 font-normal'>(Verified with SMS code)</span>
+        }
       </div>
 
       {(errors.phoneNumber || errors.phoneExt) && (

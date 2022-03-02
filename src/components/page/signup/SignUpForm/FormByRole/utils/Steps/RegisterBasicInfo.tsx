@@ -161,6 +161,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           isRequired
           register={register}
           errors={errors}
+          withVerifyCode
         />
 
         <RegisterPassword

@@ -152,6 +152,7 @@ export const RegisterRestaurantBasicInfo = ({ referralLink }: { referralLink: IR
           isRequired
           register={register}
           errors={errors}
+          withVerifyCode={false}
         />
 
         <RegisterPassword
