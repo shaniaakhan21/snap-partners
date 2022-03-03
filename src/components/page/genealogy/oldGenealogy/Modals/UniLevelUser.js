@@ -31,14 +31,14 @@ export const ModalUninivelUser = ({ id, name, close, open, openUser }) => {
         setUserData(null)
         setError('')
         setLoading(true)
-        const response = await axios.get(' https://snapdeliveredteam.com/api/unilevel/getAllLevels', {
+        const response = await axios.get('/api/unilevel/getAllLevels', {
           params: { userId: id, includeUsers: 1, name: name },
           headers: {
             Authorization: `Bearer ${auth.accessToken}`
           }
         })
         setUser({ name: response.data.data.name, id: response.data.data.userId })
-        const responseData = await axios.get(' https://snapdeliveredteam.com/api/user/getUserById', {
+        const responseData = await axios.get('/api/user/getUserById', {
           params: { id: id },
           headers: {
             Authorization: `Bearer ${auth.accessToken}`
