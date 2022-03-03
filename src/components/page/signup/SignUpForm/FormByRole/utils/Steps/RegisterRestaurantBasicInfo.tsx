@@ -28,6 +28,7 @@ export interface dataFormSignUpRestaurant {
   username: string
   confirmEmail: string
   confirmPassword: string
+  referralCode?: string | null
   termsAndConditions: boolean
   phoneExt: string
   phoneNumber: string
