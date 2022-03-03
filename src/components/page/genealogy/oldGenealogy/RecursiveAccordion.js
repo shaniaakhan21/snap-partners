@@ -12,6 +12,7 @@ import {
 import axios from 'axios'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { useAuthStore } from 'lib/stores'
+import { API } from 'config/api'
 
 const useStyles = makeStyles(theme => ({
   Btn: {
@@ -45,7 +46,7 @@ export const RecursiveAccordion = ({ openUser, user, master = false }) => {
   useEffect(() => {
     (async function () {
       try {
-        const response = await axios.get('/api/unilevel/getAllLevels', {
+        const response = await axios.get(`${API.BASE_URL}/api/unilevel/getAllLevels`, {
           params: { userId: user.id, includeUsers: master ? 1 : 0, name: user.name },
           headers: {
             Authorization: `Bearer ${auth.accessToken}`
@@ -71,7 +72,7 @@ export const RecursiveAccordion = ({ openUser, user, master = false }) => {
         showSpinner(true)
         let response = cached
         if (cached === undefined || !master) {
-          response = await axios.get('/api/unilevel/getAllLevels', {
+          response = await axios.get(`${API.BASE_URL}/api/unilevel/getAllLevels`, {
             params: {
               userId: user.id,
               includeUsers: 1,

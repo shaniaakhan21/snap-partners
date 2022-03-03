@@ -6,6 +6,7 @@ import { ModalUninivelUser } from './Modals/UniLevelUser'
 import SearchIcon from '@material-ui/icons/Search'
 import axios from 'axios'
 import { useAuthStore } from 'lib/stores'
+import { API } from 'config/api'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -66,7 +67,7 @@ export const Unilevel = () => {
 
   const search = async () => {
     try {
-      const response = await axios.get('/api/user/getUsersBySearch', {
+      const response = await axios.get(`${API.BASE_URL}/api/user/getUsersBySearch`, {
         params: { search: searchId },
         headers: {
           Authorization: `Bearer ${auth.accessToken}`
