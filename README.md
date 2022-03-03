@@ -1,7 +1,7 @@
 <br/>
 <div align="center">
-  <a href='https://dev.snap.devopsteam.info'>
-    <img src="https://dev.snap.devopsteam.info/images/logo.svg" alt='Logo' width='150' />
+  <a href='https://snapdeliveredteam.com'>
+    <img src="https://snapdeliveredteam.com/images/logo.svg" alt='Logo' width='150' />
   </a>
 
 <h3 align="center">Snap Delivered</h3>

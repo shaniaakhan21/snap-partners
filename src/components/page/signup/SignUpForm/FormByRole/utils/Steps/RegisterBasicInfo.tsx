@@ -20,7 +20,7 @@ import { InputFile } from '../InputFile'
 interface IStepOpeProps {
   referralLink: IReferralLink,
   handleStep: IHandleStep,
-  handleUserInfo: IHandleUserInfo
+  handleUserInfo: any
 }
 
 export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: IStepOpeProps) => {
@@ -70,8 +70,14 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       password: dataForm.password,
       phone: phoneNumber,
       referralCode: dataForm.referralCode,
-      idImage: dataForm.idImage[0] ?? null,
-      insuranceImage: dataForm.insuranceImage[0] ?? null
+      idImage: dataForm?.idImage ? dataForm.idImage[0] : null,
+      insuranceImage: dataForm?.insuranceImage ? dataForm.insuranceImage[0] : null,
+      roles: {
+        admin: referralLink.role === 'ADMIN',
+        customer: referralLink.role === 'CUSTOMER',
+        driver: referralLink.role === 'DRIVER',
+        merchant: referralLink.role === 'RESTAURANT'
+      }
     })
     setLoading(false)
 

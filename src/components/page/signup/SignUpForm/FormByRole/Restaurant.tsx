@@ -1,6 +1,6 @@
 import { IReferralLink } from 'lib/types'
 import { useState } from 'react'
-import { STEPS, SuccessCode, UpgradeToManager } from './utils/Steps'
+import { STEPS, SuccessCode, UpgradeToManager, VerifyCode } from './utils/Steps'
 import { RegisterRestaurantBasicInfo } from './utils/Steps/RegisterRestaurantBasicInfo'
 import { VerifyCodeToRestaurants } from './utils/Steps/VerifyCodeToRestaurants'
 import { IHandleStep, IHandleUserInfo } from './utils/types'
@@ -37,7 +37,7 @@ export const SignUpRestaurantForm = ({ referralLink }: { referralLink: IReferral
 
       {
         userTrack.step === STEPS.VERIFY_CODE && (
-          <VerifyCodeToRestaurants
+          <VerifyCode
             referralLink={referralLink}
             userTrack={userTrack}
             handleStep={handleStep}
