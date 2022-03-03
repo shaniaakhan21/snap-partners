@@ -49,4 +49,4 @@ deploy:
     - mv /home/gitlab-runner/snap-website-deploy-temp /home/gitlab-runner/snap-website-deploy
     - cd /home/gitlab-runner/snap-website-deploy
     - pm2 delete "next-production" || exit_code=$?
-    - PORT=8080 pm2 start npm --name "next-production" -- start
+    - PORT=9090 pm2 start npm --name "next-production" -- start
