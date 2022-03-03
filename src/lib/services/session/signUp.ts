@@ -71,23 +71,38 @@ export const signUpStep1 = async (dataBody: ISignUpDataBodyStep1): Promise<IQuer
   return { error: null }
 }
 
-export const signUpStep2 = async (dataBody: ISignUpDataBodyStep2): Promise<IQueryErrorReturn> => {
-  const formData = new FormData()
+export const signUpStep2 = async (isJsonFetch: boolean = true, dataBody: ISignUpDataBodyStep2): Promise<IQueryErrorReturn> => {
+  let res: Response
 
-  const entries = Object.entries(dataBody)
+  if (isJsonFetch) {
+    res = await fetch(`${API.BASE_URL}/api/authentication/signUpStepTwo`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(dataBody)
+    })
+  } else {
+    const formData = new FormData()
 
-  entries.forEach(([key, value]) => {
-    if (key === 'roles') {
-      formData.append(key, JSON.stringify(value))
-      return
-    }
-    formData.append(key, value)
-  })
+    const entries = Object.entries(dataBody)
 
-  const res = await fetch(`${API.BASE_URL}/api/authentication/signUpStepTwo`, {
-    method: 'POST',
-    body: formData
-  })
+    entries.forEach(([key, value]) => {
+      if (key === 'roles') {
+        formData.append(key, JSON.stringify(value))
+        return
+      }
+      if (key === 'idImage' || key === 'insuranceImage') {
+        if (!value) return
+      }
+      formData.append(key, value)
+    })
+
+    res = await fetch(`${API.BASE_URL}/api/authentication/signUpStepTwo`, {
+      method: 'POST',
+      body: formData
+    })
+  }
 
   const data = await res.json()
 

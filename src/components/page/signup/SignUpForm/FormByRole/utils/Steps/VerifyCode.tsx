@@ -7,7 +7,7 @@ import { STEPS } from '.'
 import { IHandleStep, IUserTrack } from '../types'
 import { Spinner } from 'components/common/loaders'
 import { BulletPagination } from './BulletPagination'
-import { signUpStep2 } from 'lib/services/session/signUp'
+import { signUpRestaurant, signUpStep2 } from 'lib/services/session/signUp'
 import { IReferralLink } from 'lib/types'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 
@@ -15,31 +15,71 @@ interface IDataFormVerifyCode {
   code: string
 }
 
-export const VerifyCode = ({ userTrack, handleStep, referralLink }: { userTrack: IUserTrack, handleStep: IHandleStep, referralLink: IReferralLink }) => {
+export const VerifyCode = ({ userTrack, handleStep, referralLink }: { userTrack: any, handleStep: IHandleStep, referralLink: IReferralLink }) => {
   const { handleSubmit } = useForm<IDataFormVerifyCode>()
   const [isVerifyingCode, setIsVerifyingCode] = useState(false)
 
   const onSubmit = async (code) => {
     setIsVerifyingCode(true)
 
-    const { error } = await signUpStep2({
-      name: userTrack.userInfo.name,
-      lastname: userTrack.userInfo.lastname,
-      email: userTrack.userInfo.email,
-      username: userTrack.userInfo.username,
-      password: userTrack.userInfo.password,
-      phoneNumber: userTrack.userInfo.phone,
-      idImage: userTrack.userInfo.idImage ?? null,
-      insuranceImage: userTrack.userInfo.insuranceImage ?? null,
-      roles: {
-        admin: referralLink.role === 'ADMIN',
-        customer: referralLink.role === 'CUSTOMER',
-        driver: referralLink.role === 'DRIVER',
-        merchant: referralLink.role === 'RESTAURANT'
-      },
-      code,
-      sponsorReferralCode: referralLink.code ?? null
-    })
+    const validateRole = userTrack.userInfo.roles.driver || userTrack.userInfo.roles.customer
+      ? {
+        data: {
+          name: userTrack.userInfo.name,
+          lastname: userTrack.userInfo.lastname,
+          email: userTrack.userInfo.email,
+          username: userTrack.userInfo.username,
+          password: userTrack.userInfo.password,
+          phoneNumber: userTrack.userInfo.phone,
+          idImage: userTrack.userInfo.idImage ?? null,
+          insuranceImage: userTrack.userInfo.insuranceImage ?? null,
+          roles: {
+            admin: userTrack.userInfo.roles.admin,
+            customer: userTrack.userInfo.roles.customer,
+            driver: userTrack.userInfo.roles.driver,
+            merchant: userTrack.userInfo.roles.merchant
+          },
+          code,
+          sponsorReferralCode: referralLink.code ?? null
+        }
+      }
+      : {
+        data: {
+          name: userTrack.userInfo.name,
+          lastname: userTrack.userInfo.lastname,
+          email: userTrack.userInfo.email,
+          username: userTrack.userInfo.username,
+          password: userTrack.userInfo.password,
+          phoneNumber: userTrack.userInfo.phoneNumber,
+          idImage: userTrack.userInfo.idImage,
+          insuranceImage: userTrack.userInfo.insuranceImage,
+          roles: {
+            admin: userTrack.userInfo.roles.admin,
+            customer: userTrack.userInfo.roles.customer,
+            driver: userTrack.userInfo.roles.driver,
+            merchant: userTrack.userInfo.roles.merchant
+          },
+          code: code,
+          sponsorReferralCode: userTrack.userInfo.sponsorReferralCode,
+          merchant: {
+            city: userTrack.userInfo.merchant.city,
+            street_name: userTrack.userInfo.merchant.street_name,
+            delivery_fees: userTrack.userInfo.merchant.delivery_fees,
+            deliverykm: userTrack.userInfo.merchant.deliverykm,
+            maxdeliverytime: userTrack.userInfo.merchant.maxdeliverytime,
+            pincode: userTrack.userInfo.merchant.pincode,
+            state: userTrack.userInfo.merchant.state,
+            country_code: userTrack.userInfo.merchant.country_code,
+            email: userTrack.userInfo.merchant.email,
+            mobile_no: userTrack.userInfo.merchant.mobile_no,
+            name: userTrack.userInfo.merchant.name,
+            password: userTrack.userInfo.merchant.password,
+            save_on_snap: userTrack.userInfo.merchant.save_on_snap
+          }
+        }
+      }
+
+    const { error } = await signUpStep2(!userTrack.userInfo.roles.driver, validateRole.data)
 
     if (error) {
       handleFetchError(error.status, error.info)
