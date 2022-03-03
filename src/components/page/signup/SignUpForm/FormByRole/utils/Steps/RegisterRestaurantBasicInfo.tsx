@@ -25,6 +25,7 @@ export interface dataFormSignUpRestaurant {
   'password': string
   'save_on_snap': boolean
 
+  username: string
   confirmEmail: string
   confirmPassword: string
   termsAndConditions: boolean
@@ -72,12 +73,12 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
     const { error } = await signUpStep1({ phoneNumber: `+${phoneNumber}` })
 
     const dataToSend = {
-      name: null,
+      name: dataForm.name,
       lastname: null,
       email: dataForm.email,
-      username: null,
+      username: dataForm.username,
       password: dataForm.password,
-      phoneNumber,
+      phoneNumber: `+${phoneNumber}`,
       idImage: null,
       insuranceImage: null,
       roles: {
@@ -132,6 +133,19 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
       <p className='text-gray-500'>Welcome! register to continue.</p>
 
       <form className='max-w-xs mt-6' onSubmit={handleSubmit(onSubmit)}>
+        <InputForm
+          id='username'
+          name='username'
+          type='text'
+          label='Username'
+          registerId='username'
+          placeholder='Enter Username'
+          errors={errors.username}
+          register={register}
+          rulesForm={registerRestaurantRulesConfig.username}
+          isRequired
+        />
+
         <InputForm
           id='email'
           name='email'

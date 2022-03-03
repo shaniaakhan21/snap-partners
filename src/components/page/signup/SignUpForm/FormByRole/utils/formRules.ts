@@ -80,6 +80,13 @@ export const registerRulesConfig: IFormConfig = {
 }
 
 export const registerRestaurantRulesConfig = {
+  username: {
+    required: { value: true, message: 'Username Required *' },
+    maxLength: { value: 50, message: 'Max 50 Characters *' },
+    minLength: { value: 3, message: 'Min 3 Characters *' },
+    pattern: { value: /^[a-zA-Z0-9!@#$%\\^&*)(+=._-]*$/, message: 'Username not allow *' }
+  },
+
   email: {
     required: { value: true, message: 'Email Required *' },
     pattern: {
