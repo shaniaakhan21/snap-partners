@@ -79,7 +79,7 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
         sponsorId,
         idImage,
         insuranceImage,
-        referralLink: referralCode ? `https://dev.snap.devopsteam.info/auth/signup?referralCode=${referralCode}` : null
+        referralLink: referralCode ? `https://snapdeliveredteam.com/auth/signup?referralCode=${referralCode}` : null
       }
     })
   },

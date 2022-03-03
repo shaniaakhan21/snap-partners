@@ -45,7 +45,7 @@ export const RecursiveAccordion = ({ openUser, user, master = false }) => {
   useEffect(() => {
     (async function () {
       try {
-        const response = await axios.get('https://dev.snap.devopsteam.info/api/unilevel/getAllLevels', {
+        const response = await axios.get('/api/unilevel/getAllLevels', {
           params: { userId: user.id, includeUsers: master ? 1 : 0, name: user.name },
           headers: {
             Authorization: `Bearer ${auth.accessToken}`
@@ -71,7 +71,7 @@ export const RecursiveAccordion = ({ openUser, user, master = false }) => {
         showSpinner(true)
         let response = cached
         if (cached === undefined || !master) {
-          response = await axios.get('https://dev.snap.devopsteam.info/api/unilevel/getAllLevels', {
+          response = await axios.get('/api/unilevel/getAllLevels', {
             params: {
               userId: user.id,
               includeUsers: 1,
