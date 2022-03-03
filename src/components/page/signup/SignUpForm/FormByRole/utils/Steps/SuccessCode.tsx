@@ -3,11 +3,11 @@ import { Button } from 'components/common/Button'
 import { CheckSuccess } from 'components/common/icons'
 import { STEPS } from '.'
 import { mobileAppsLinks } from 'lib/utils/mobileAppLinks'
-import { IHandleStep, IUserTrack } from '../types'
+import { IHandleStep } from '../types'
 import { IReferralLink } from 'lib/types'
 import { MobileAppsLink } from 'components/common/mobileApps/MobileAppsLink'
 
-export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack: IUserTrack, handleStep: IHandleStep, referralLink: IReferralLink }) => {
+export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack: any, handleStep: IHandleStep, referralLink: IReferralLink }) => {
   const {
     playStore: linkPlayStore,
     appStore: linkAppStore,
@@ -22,7 +22,7 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
       <span className='text-4xl font-bold text-primary-500'>Register Done!</span>
       <CheckSuccess classes='my-10' />
       <span className='text-xl text-primary-500'>Welcome!</span>
-      <span className='text-4xl text-primary-500 font-bold'>{userTrack.userInfo.name}</span>
+      <span className='text-4xl text-primary-500 font-bold'>{userTrack.userInfo.name ? userTrack.userInfo.name : userTrack.userInfo.merchant.name }</span>
 
       <Button onClick={() => handleStep(STEPS.UPGRADE_TO_MANAGER)} classes='w-full mt-10'>CONTINUE</Button>
       <br/>

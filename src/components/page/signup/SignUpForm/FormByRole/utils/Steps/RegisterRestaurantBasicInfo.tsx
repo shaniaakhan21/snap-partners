@@ -7,25 +7,25 @@ import { InputPhone } from '../InputPhone'
 import { registerRestaurantRulesConfig } from '../formRules'
 import { RegisterPassword } from '../RegisterPassword'
 import { TermsAndConditions } from '../TermsAndConditions'
-import { signUpRestaurant } from 'lib/services/session/signUp'
+import { signUpStep1 } from 'lib/services/session/signUp'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { IReferralLink } from 'lib/types'
+import { IHandleStep } from '../types'
+import { STEPS } from '.'
+import { BulletPagination } from './BulletPagination'
 
 export interface dataFormSignUpRestaurant {
   'city' : string
   'street_name': string,
   'state': string
   'country_code': string
-  'delivery_fees': number
-  'deliverykm': number
   'email': string
-  'maxdeliverytime': number
   'mobile_no' : string
   'name': string
   'password': string
-  'pincode': string
   'save_on_snap': boolean
 
+  username: string
   confirmEmail: string
   confirmPassword: string
   termsAndConditions: boolean
@@ -33,7 +33,13 @@ export interface dataFormSignUpRestaurant {
   phoneNumber: string
 }
 
-export const RegisterRestaurantBasicInfo = ({ referralLink }: { referralLink: IReferralLink }) => {
+interface IRegisterRestaurantBasicInfoProps {
+  referralLink: IReferralLink,
+  handleStep: IHandleStep,
+  handleUserInfo: any
+}
+
+export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, handleStep }: IRegisterRestaurantBasicInfoProps) => {
   const { handleSubmit, register, reset, formState: { errors }, setError } = useForm<dataFormSignUpRestaurant>()
   const [isLoading, setLoading] = useState(false)
 
@@ -64,23 +70,41 @@ export const RegisterRestaurantBasicInfo = ({ referralLink }: { referralLink: IR
 
     const phoneNumber = `${dataForm.phoneExt}${dataForm.phoneNumber}`
 
-    const dataToSend = {
-      city: dataForm.city,
-      street_name: dataForm.street_name,
-      state: dataForm.state,
-      country_code: dataForm.country_code,
-      delivery_fees: Number(dataForm.delivery_fees),
-      deliverykm: Number(dataForm.deliverykm),
-      email: dataForm.email,
-      maxdeliverytime: Number(dataForm.maxdeliverytime),
-      mobile_no: phoneNumber,
-      name: dataForm.name,
-      password: dataForm.password,
-      pincode: dataForm.pincode,
-      save_on_snap: true
-    }
+    const { error } = await signUpStep1({ phoneNumber: `+${phoneNumber}` })
 
-    const { error } = await signUpRestaurant(dataToSend)
+    const dataToSend = {
+      name: dataForm.name,
+      lastname: null,
+      email: dataForm.email,
+      username: dataForm.username,
+      password: dataForm.password,
+      phoneNumber: `+${phoneNumber}`,
+      idImage: null,
+      insuranceImage: null,
+      roles: {
+        admin: false,
+        customer: false,
+        driver: false,
+        merchant: true
+      },
+      code: null,
+      sponsorReferralCode: null,
+      merchant: {
+        city: dataForm.city,
+        street_name: dataForm.street_name,
+        state: dataForm.state,
+        country_code: dataForm.country_code,
+        delivery_fees: 0.01,
+        deliverykm: 0.01,
+        email: dataForm.email,
+        maxdeliverytime: 0.01,
+        mobile_no: phoneNumber,
+        name: dataForm.name,
+        password: dataForm.password,
+        pincode: '1234',
+        save_on_snap: true
+      }
+    }
 
     if (error) {
       handleFetchError(error.status, error.info)
@@ -88,7 +112,10 @@ export const RegisterRestaurantBasicInfo = ({ referralLink }: { referralLink: IR
       return
     }
 
+    handleUserInfo({ ...dataToSend })
     setLoading(false)
+
+    handleStep(STEPS.VERIFY_CODE)
     reset()
   }
 
@@ -106,6 +133,19 @@ export const RegisterRestaurantBasicInfo = ({ referralLink }: { referralLink: IR
       <p className='text-gray-500'>Welcome! register to continue.</p>
 
       <form className='max-w-xs mt-6' onSubmit={handleSubmit(onSubmit)}>
+        <InputForm
+          id='username'
+          name='username'
+          type='text'
+          label='Username'
+          registerId='username'
+          placeholder='Enter Username'
+          errors={errors.username}
+          register={register}
+          rulesForm={registerRestaurantRulesConfig.username}
+          isRequired
+        />
+
         <InputForm
           id='email'
           name='email'
@@ -217,65 +257,6 @@ export const RegisterRestaurantBasicInfo = ({ referralLink }: { referralLink: IR
           isRequired
         />
 
-        <InputForm
-          id='delivery_fees'
-          name='delivery_fees'
-          type='number'
-          label='Delivery Fees'
-          registerId='delivery_fees'
-          placeholder='Enter Delivery Fees'
-          autoComplete='delivery_fees'
-          errors={errors.delivery_fees}
-          register={register}
-          rulesForm={registerRestaurantRulesConfig.delivery_fees}
-          isRequired
-          isNumberFloat
-        />
-
-        <InputForm
-          id='deliverykm'
-          name='deliverykm'
-          type='number'
-          label='Delivery(km)'
-          registerId='deliverykm'
-          placeholder='Enter Delivery(km)'
-          autoComplete='deliverykm'
-          errors={errors.deliverykm}
-          register={register}
-          rulesForm={registerRestaurantRulesConfig.deliverykm}
-          isRequired
-          isNumberFloat
-        />
-
-        <InputForm
-          id='maxdeliverytime'
-          name='maxdeliverytime'
-          type='number'
-          label='Max Delivery Time'
-          registerId='maxdeliverytime'
-          placeholder='Enter Max Delivery Time'
-          autoComplete='maxdeliverytime'
-          errors={errors.maxdeliverytime}
-          register={register}
-          rulesForm={registerRestaurantRulesConfig.maxdeliverytime}
-          isRequired
-          isNumberFloat
-        />
-
-        <InputForm
-          id='pincode'
-          name='pincode'
-          type='text'
-          label='Pin Code'
-          registerId='pincode'
-          placeholder='Enter Pin Code'
-          autoComplete='pincode'
-          errors={errors.pincode}
-          register={register}
-          rulesForm={registerRestaurantRulesConfig.pincode}
-          isRequired
-        />
-
         <TermsAndConditions
           errors={errors.termsAndConditions}
           register={register}
@@ -283,6 +264,10 @@ export const RegisterRestaurantBasicInfo = ({ referralLink }: { referralLink: IR
         />
 
         <section className='mt-4'>
+          <BulletPagination stepToActivate='REGISTER_BASIC_INFO' />
+
+          <br /><br />
+
           <Button type='submit' classes='w-full mt-4 text-sm bg-primary-500'>
             Sign Up
           </Button>
