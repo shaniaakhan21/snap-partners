@@ -67,13 +67,17 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
       return
     }
 
-    const phoneNumber = `+${dataForm.phoneExt}${dataForm.phoneNumber}`
+    const phoneNumber = `${dataForm.phoneExt}${dataForm.phoneNumber}`
 
-    const { error } = await signUpStep1({ phoneNumber })
+    const { error } = await signUpStep1({ phoneNumber: `+${phoneNumber}` })
 
     const dataToSend = {
+      name: null,
       lastname: null,
+      email: dataForm.email,
       username: null,
+      password: dataForm.password,
+      phoneNumber,
       idImage: null,
       insuranceImage: null,
       roles: {
@@ -84,24 +88,19 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
       },
       code: null,
       sponsorReferralCode: null,
-      name: null,
-      email: null,
-      password: null,
-      phoneNumber,
-
       merchant: {
         city: dataForm.city,
         street_name: dataForm.street_name,
-        delivery_fees: 0,
-        deliverykm: 0,
-        maxdeliverytime: 0,
-        pincode: '1234',
         state: dataForm.state,
         country_code: dataForm.country_code,
+        delivery_fees: 0.01,
+        deliverykm: 0.01,
         email: dataForm.email,
+        maxdeliverytime: 0.01,
         mobile_no: phoneNumber,
         name: dataForm.name,
         password: dataForm.password,
+        pincode: '1234',
         save_on_snap: true
       }
     }

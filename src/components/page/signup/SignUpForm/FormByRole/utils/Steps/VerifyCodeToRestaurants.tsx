@@ -23,22 +23,22 @@ export const VerifyCodeToRestaurants = ({ userTrack, handleStep, referralLink }:
     setIsVerifyingCode(true)
 
     const { error } = await signUpRestaurant({
-      lastname: null,
-      username: null,
-      idImage: null,
-      insuranceImage: null,
+      name: userTrack.userInfo.name,
+      lastname: userTrack.userInfo.lastname,
+      email: userTrack.userInfo.email,
+      username: userTrack.userInfo.username,
+      password: userTrack.userInfo.password,
+      phoneNumber: userTrack.userInfo.phoneNumber,
+      idImage: userTrack.userInfo.idImage,
+      insuranceImage: userTrack.userInfo.insuranceImage,
       roles: {
-        admin: false,
-        customer: false,
-        driver: false,
-        merchant: true
+        admin: userTrack.userInfo.roles.admin,
+        customer: userTrack.userInfo.roles.customer,
+        driver: userTrack.userInfo.roles.driver,
+        merchant: userTrack.userInfo.roles.merchant
       },
       code: code,
-      sponsorReferralCode: null,
-      name: null,
-      email: null,
-      password: null,
-      phoneNumber: userTrack.userInfo.phoneNumber,
+      sponsorReferralCode: userTrack.userInfo.sponsorReferralCode,
       merchant: {
         city: userTrack.userInfo.merchant.city,
         street_name: userTrack.userInfo.merchant.street_name,
