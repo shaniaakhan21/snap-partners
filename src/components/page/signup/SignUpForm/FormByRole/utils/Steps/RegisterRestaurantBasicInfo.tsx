@@ -28,6 +28,7 @@ export interface dataFormSignUpRestaurant {
   username: string
   confirmEmail: string
   confirmPassword: string
+  referralCode?: string | null
   termsAndConditions: boolean
   phoneExt: string
   phoneNumber: string
@@ -88,7 +89,6 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
         merchant: true
       },
       code: null,
-      sponsorReferralCode: null,
       merchant: {
         city: dataForm.city,
         street_name: dataForm.street_name,
@@ -255,6 +255,20 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
           register={register}
           rulesForm={registerRestaurantRulesConfig.country_code}
           isRequired
+        />
+
+        <InputForm
+            id='referralCode'
+            name='referralCode'
+            type='text'
+            label='Referral Code'
+            registerId='referralCode'
+            placeholder='Referral Code'
+            defaultValue={referralLink.code}
+            errors={errors.referralCode}
+            register={register}
+            rulesForm={registerRestaurantRulesConfig.referralCode}
+            isRequired={false}
         />
 
         <TermsAndConditions

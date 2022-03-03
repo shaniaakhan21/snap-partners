@@ -72,12 +72,21 @@ export const signUpStep1 = async (dataBody: ISignUpDataBodyStep1): Promise<IQuer
 }
 
 export const signUpStep2 = async (dataBody: ISignUpDataBodyStep2): Promise<IQueryErrorReturn> => {
+  const formData = new FormData()
+
+  const entries = Object.entries(dataBody)
+
+  entries.forEach(([key, value]) => {
+    if (key === 'roles') {
+      formData.append(key, JSON.stringify(value))
+      return
+    }
+    formData.append(key, value)
+  })
+
   const res = await fetch(`${API.BASE_URL}/api/authentication/signUpStepTwo`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(dataBody)
+    body: formData
   })
 
   const data = await res.json()

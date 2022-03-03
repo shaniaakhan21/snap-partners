@@ -15,6 +15,7 @@ import { STEPS } from '.'
 import { BulletPagination } from './BulletPagination'
 import { signUpStep1 } from 'lib/services/session/signUp'
 import { handleFetchError } from 'lib/utils/handleFetchError'
+import { InputFile } from '../InputFile'
 
 interface IStepOpeProps {
   referralLink: IReferralLink,
@@ -68,7 +69,9 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       lastname: dataForm.lastname,
       password: dataForm.password,
       phone: phoneNumber,
-      referralCode: dataForm.referralCode
+      referralCode: dataForm.referralCode,
+      idImage: dataForm.idImage[0] ?? null,
+      insuranceImage: dataForm.insuranceImage[0] ?? null
     })
     setLoading(false)
 
@@ -185,9 +188,26 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           isRequired={false}
         />
 
-        {/* {referralLink.role === 'DRIVER' && (
-          <InputForm />
-        )} */}
+        {referralLink.role === 'DRIVER' && (
+          <>
+            <InputFile
+              register={register}
+              registerId='idImage'
+              isRequired
+              errors={errors.idImage}
+              rulesForm={registerRulesConfig.idImage}
+              label='ID image'
+            />
+            <InputFile
+              register={register}
+              registerId='insuranceImage'
+              isRequired
+              errors={errors.insuranceImage}
+              rulesForm={registerRulesConfig.insuranceImage}
+              label='Insurance image'
+            />
+          </>
+        )}
 
         <TermsAndConditions
           errors={errors.termsAndConditions}

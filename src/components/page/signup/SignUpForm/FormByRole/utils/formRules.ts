@@ -1,6 +1,6 @@
-import { IFormConfig } from './types'
+// import { IFormConfig } from './types'
 
-export const registerRulesConfig: IFormConfig = {
+export const registerRulesConfig = {
   email: {
     required: { value: true, message: 'Email Required *' },
     pattern: {
@@ -68,6 +68,14 @@ export const registerRulesConfig: IFormConfig = {
   referralCode: {
     maxLength: { value: 50, message: 'Max 50 Characters *' },
     pattern: { value: /^[a-zA-Z0-9!@#$%\\^&*)(+=._-]*$/, message: 'Referral Code not allow *' }
+  },
+
+  idImage: {
+    required: { value: true, message: 'ID Image Required *' }
+  },
+
+  insuranceImage: {
+    required: { value: true, message: 'Insurance Image Required *' }
   },
 
   rememberMe: {
@@ -183,6 +191,11 @@ export const registerRestaurantRulesConfig = {
     required: {
       value: true, message: 'Pin Code Required *'
     }
+  },
+
+  referralCode: {
+    maxLength: { value: 50, message: 'Max 50 Characters *' },
+    pattern: { value: /^[a-zA-Z0-9!@#$%\\^&*)(+=._-]*$/, message: 'Referral Code not allow *' }
   },
 
   termsAndConditions: {
