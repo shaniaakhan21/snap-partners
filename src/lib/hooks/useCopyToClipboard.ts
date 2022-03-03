@@ -8,20 +8,20 @@ export const useCopyToClipboard = () => {
   const [copiedText, setCopiedText] = useState<CopiedValue>(null)
 
   const copy: CopyFn = async (textToCopy, textAlias) => {
-    if (navigator.clipboard && window.isSecureContext) {
-      try {
-        await navigator.clipboard.writeText(textToCopy)
-        setCopiedText(textToCopy)
-        toast(`${textAlias} Copied` || 'Copied Value', { type: 'success' })
-        return true
-      } catch (err) {
-        toast(`Copy failed ${err} --- NAVIGATOR`, { type: 'error' })
-        setCopiedText(null)
-        return false
-      }
-    }
+    // if (navigator.clipboard && window.isSecureContext) {
+    //   try {
+    //     await navigator.clipboard.writeText(textToCopy)
+    //     setCopiedText(textToCopy)
+    //     toast(`${textAlias} Copied` || 'Copied Value', { type: 'success' })
+    //     return true
+    //   } catch (err) {
+    //     toast(`Copy failed ${err}`, { type: 'error' })
+    //     setCopiedText(null)
+    //     return false
+    //   }
+    // }
 
-    console.info('Clipboard not supported')
+    // console.info('Clipboard not supported')
 
     // make a textarea out of viewport
     const textArea = document.createElement('textarea')
@@ -42,11 +42,11 @@ export const useCopyToClipboard = () => {
         return true
       }
 
-      toast('Copy failed --- UNSUCCESSFUL', { type: 'error' })
+      toast('Copy failed', { type: 'error' })
       setCopiedText(null)
       return false
     } catch (err) {
-      toast(`Copy failed ${err} --- LEGACY`, { type: 'error' })
+      toast(`Copy failed ${err}`, { type: 'error' })
       setCopiedText(null)
       return false
     }
