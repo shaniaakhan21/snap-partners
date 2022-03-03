@@ -193,6 +193,11 @@ export const registerRestaurantRulesConfig = {
     }
   },
 
+  referralCode: {
+    maxLength: { value: 50, message: 'Max 50 Characters *' },
+    pattern: { value: /^[a-zA-Z0-9!@#$%\\^&*)(+=._-]*$/, message: 'Referral Code not allow *' }
+  },
+
   termsAndConditions: {
     required: { value: true, message: 'Terms And Conditions Required *' }
   }
