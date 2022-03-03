@@ -29,8 +29,8 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink }: { userTrack:
       username: userTrack.userInfo.username,
       password: userTrack.userInfo.password,
       phoneNumber: userTrack.userInfo.phone,
-      idImage: null,
-      insuranceImage: null,
+      idImage: userTrack.userInfo.idImage ?? null,
+      insuranceImage: userTrack.userInfo.insuranceImage ?? null,
       roles: {
         admin: referralLink.role === 'ADMIN',
         customer: referralLink.role === 'CUSTOMER',
@@ -38,7 +38,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink }: { userTrack:
         merchant: referralLink.role === 'RESTAURANT'
       },
       code,
-      sponsorReferralCode: referralLink.code || null
+      sponsorReferralCode: referralLink.code ?? null
     })
 
     if (error) {

@@ -9,8 +9,6 @@ interface IProps {
 }
 
 export const InputFile = ({ id, registerId, rulesForm, register, isRequired, label, errors }: IProps) => {
-  console.log('ERRORS:', errors)
-
   return (
     <div>
       <label htmlFor={id} className='font-bold text-gray-700 uppercase text-sm'>
