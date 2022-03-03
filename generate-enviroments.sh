@@ -40,31 +40,26 @@ server {
     error_log off;
     root /home/gitlab-runner/snap-website-$SUBDOMAIN/dist;
     # Any route containing a file extension (e.g. /devicesfile.js)
-    location ~ ^.+\..+\$ {
-      try_files \$uri =404;
+    location _next/ {
+      alias /home/gitlab-runner/nsur-website-$SUBDOMAIN/.next/;
+      expires 30d;
+      access_log on;
     }
-    # Any route that doesn't have a file extension (e.g. /devices)
     location / {
-      try_files \$uri \$uri/ /index.html;
+      proxy_set_header Upgrade \$http_upgrade;
+      proxy_set_header Connection "upgrade";
+      proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+      proxy_set_header Host \$host;
+      proxy_http_version 1.1;
+      proxy_pass http://localhost:4$PORT;
     }
-
     location ~ ^/api/(.+) {
-      #access_log  /var/log/nginx/cbx_front_postdata.log  postdata;
       rewrite ^/api(.*)\$ \$1 break;
       proxy_set_header Upgrade \$http_upgrade;
       proxy_set_header Connection "upgrade";
       proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
       proxy_set_header Host \$host;
       proxy_pass http://localhost:9090;
-    }
-    location ~* \.(?:manifest|appcache|html?|xml|json)\$ {
-      expires -1;
-    }
-    location ~* \.(?:css|js)\$ {
-      try_files \$uri =404;
-      expires 1y;
-      access_log off;
-      add_header Cache-Control "public";
     }
     listen [::]:443 ssl;
     listen 443 ssl;
@@ -96,14 +91,14 @@ $SUBDOMAIN.snap.devopsteam.info:
     # FRONT
     - cd /home/gitlab-runner/snap-website-$SUBDOMAIN-temp
     - (printenv | grep STAGE_FRONT_ | grep -v STAGE_FRONT_PORT | sed -e "s/^STAGE_FRONT_//"  ) > .env
-    - printf "PORT=4$PORT" >> .env
     - printf "\nREACT_APP_SUBDOMAIN=https://$SUBDOMAIN.snap.devopsteam.info" >> .env
-    - mkdir -p dist
-    - cp -R svg dist/svg
     - npm install
-    - npm run-script build
+    - npm run build
     - rm -rf /home/gitlab-runner/snap-website-$SUBDOMAIN
     - mv /home/gitlab-runner/snap-website-$SUBDOMAIN-temp /home/gitlab-runner/snap-website-$SUBDOMAIN
+    - cd /home/gitlab-runner/snap-website-$SUBDOMAIN
+    - pm2 delete "next-$SUBDOMAIN" || exit_code=$?
+    - PORT=4$PORT pm2 start npm --name "next-$SUBDOMAIN" -- start
     - sudo /usr/bin/systemctl restart nginx
   after_script:
     - rm -rf /home/gitlab-runner/snap-website-$SUBDOMAIN-temp
@@ -119,6 +114,7 @@ $SUBDOMAIN.snap.devopsteam.info_stop:
     GIT_STRATEGY: none
   script:
     - cd /home/gitlab-runner/snap-website-$SUBDOMAIN
+    - pm2 delete "next-$SUBDOMAIN" || exit_code=$?
     - rm -rf /home/gitlab-runner/snap-website-$SUBDOMAIN
     - sudo /usr/bin/systemctl restart nginx
   environment:
