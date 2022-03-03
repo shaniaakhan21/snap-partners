@@ -15,7 +15,7 @@ export const useCopyToClipboard = () => {
         toast(`${textAlias} Copied` || 'Copied Value', { type: 'success' })
         return true
       } catch (err) {
-        toast(`Copy failed ${err}`, { type: 'error' })
+        toast(`Copy failed ${err} --- NAVIGATOR`, { type: 'error' })
         setCopiedText(null)
         return false
       }
@@ -42,11 +42,11 @@ export const useCopyToClipboard = () => {
         return true
       }
 
-      toast('Copy failed', { type: 'error' })
+      toast('Copy failed --- UNSUCCESSFUL', { type: 'error' })
       setCopiedText(null)
       return false
     } catch (err) {
-      toast(`Copy failed ${err}`, { type: 'error' })
+      toast(`Copy failed ${err} --- LEGACY`, { type: 'error' })
       setCopiedText(null)
       return false
     }
