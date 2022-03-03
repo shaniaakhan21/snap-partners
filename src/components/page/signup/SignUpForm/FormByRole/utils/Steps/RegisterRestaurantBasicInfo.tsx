@@ -103,7 +103,8 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
         password: dataForm.password,
         pincode: '1234',
         save_on_snap: true
-      }
+      },
+      sponsorReferralCode: dataForm.referralCode || null
     }
 
     if (error) {
