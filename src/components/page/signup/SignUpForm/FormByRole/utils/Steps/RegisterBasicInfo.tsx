@@ -23,6 +23,8 @@ interface IStepOpeProps {
   handleUserInfo: any
 }
 
+const maxFileSizeInMb = 5
+
 export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: IStepOpeProps) => {
   const { handleSubmit, register, reset, formState: { errors }, setError } = useForm<IDataForm>()
   const [isLoading, setLoading] = useState(false)
@@ -49,6 +51,18 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
         return setError('confirmEmail', { message: 'The email does not match' })
       }
 
+      return
+    }
+
+    if (dataForm.idImage[0].size > (maxFileSizeInMb * 1000000)) {
+      setError('idImage', { message: `The maximum file size in ID Image is ${maxFileSizeInMb}mb, please upload a file with a maximum file size of ${maxFileSizeInMb}mb` })
+      setLoading(false)
+      return
+    }
+
+    if (dataForm.insuranceImage[0].size > (maxFileSizeInMb * 1000000)) {
+      setError('insuranceImage', { message: `The maximum file size in Insurance Image is ${maxFileSizeInMb}mb, please upload a file with a maximum file size of ${maxFileSizeInMb}mb` })
+      setLoading(false)
       return
     }
 
