@@ -44,7 +44,7 @@ const HomePage: PageNext = () => {
       toast('Session recovered!', { type: 'success' })
       setAuth({
         email: data.email,
-        name: data.email,
+        name: data.name,
         phone: data.phoneNumber,
         accessToken: token,
         lastname: data.lastname,
