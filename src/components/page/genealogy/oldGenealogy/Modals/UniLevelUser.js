@@ -16,6 +16,7 @@ import PersonIcon from '@material-ui/icons/Person'
 import EmailIcon from '@material-ui/icons/Email'
 import PhoneIcon from '@material-ui/icons/Phone'
 import { useAuthStore } from 'lib/stores'
+import { API } from 'config/api'
 
 export const ModalUninivelUser = ({ id, name, close, open, openUser }) => {
   const { auth } = useAuthStore()
@@ -31,14 +32,14 @@ export const ModalUninivelUser = ({ id, name, close, open, openUser }) => {
         setUserData(null)
         setError('')
         setLoading(true)
-        const response = await axios.get('/api/unilevel/getAllLevels', {
+        const response = await axios.get(`${API.BASE_URL}/api/unilevel/getAllLevels`, {
           params: { userId: id, includeUsers: 1, name: name },
           headers: {
             Authorization: `Bearer ${auth.accessToken}`
           }
         })
         setUser({ name: response.data.data.name, id: response.data.data.userId })
-        const responseData = await axios.get('/api/user/getUserById', {
+        const responseData = await axios.get(`${API.BASE_URL}/api/user/getUserById`, {
           params: { id: id },
           headers: {
             Authorization: `Bearer ${auth.accessToken}`

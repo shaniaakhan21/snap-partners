@@ -22,7 +22,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink }: { userTrack:
   const onSubmit = async (code) => {
     setIsVerifyingCode(true)
 
-    const validateRole = userTrack.userInfo.roles.driver || userTrack.userInfo.roles.customer
+    const validateRole = userTrack.userInfo.roles.driver || userTrack.userInfo.roles.customer || userTrack.userInfo.roles.admin
       ? {
         data: {
           name: userTrack.userInfo.name,
@@ -31,8 +31,8 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink }: { userTrack:
           username: userTrack.userInfo.username,
           password: userTrack.userInfo.password,
           phoneNumber: userTrack.userInfo.phone,
-          idImage: userTrack.userInfo.idImage ?? null,
-          insuranceImage: userTrack.userInfo.insuranceImage ?? null,
+          idImage: userTrack.userInfo.idImage,
+          insuranceImage: userTrack.userInfo.insuranceImage,
           roles: {
             admin: userTrack.userInfo.roles.admin,
             customer: userTrack.userInfo.roles.customer,
@@ -40,13 +40,13 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink }: { userTrack:
             merchant: userTrack.userInfo.roles.merchant
           },
           code,
-          sponsorReferralCode: referralLink.code ?? null
+          sponsorReferralCode: userTrack.userInfo.sponsorReferralCode
         }
       }
       : {
         data: {
           name: userTrack.userInfo.name,
-          lastname: userTrack.userInfo.lastname,
+          lastname: 'Merchant', // TODO: THIS WILL BE CHANGE
           email: userTrack.userInfo.email,
           username: userTrack.userInfo.username,
           password: userTrack.userInfo.password,
