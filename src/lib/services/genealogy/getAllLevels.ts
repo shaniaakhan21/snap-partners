@@ -14,7 +14,7 @@ export const getAllLevels = async (
   token: string,
   userData: { username: string, userId: number }
 ): Promise<IQueryReturn> => {
-  const res = await fetch(`${API.BASE_URL}/api/unilevel/getAllLevels?userId=${userData.userId}&includeUsers=1&name=${userData.username}`, {
+  const res = await fetch(`${API.BASE_URL}/api/unilevel/getAllLevels?userId=${userData.userId}&includeUsers=1&name=x`, {
     headers: {
       Authorization: `Bearer ${token}`
     }

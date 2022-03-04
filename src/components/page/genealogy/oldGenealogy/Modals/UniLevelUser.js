@@ -33,7 +33,7 @@ export const ModalUninivelUser = ({ id, name, close, open, openUser }) => {
         setError('')
         setLoading(true)
         const response = await axios.get(`${API.BASE_URL}/api/unilevel/getAllLevels`, {
-          params: { userId: id, includeUsers: 1, name: name },
+          params: { userId: id, includeUsers: 1, name: 'x' },
           headers: {
             Authorization: `Bearer ${auth.accessToken}`
           }
