@@ -36,7 +36,7 @@ const MarketingPage: Page = () => {
     },
     {
       icon: <IBOIcon />,
-      title: 'Restaurant',
+      title: 'IBO',
       subtitle: 'Subtitle text here',
       description: 'Select an image and share the link in the different social networks to get new Business partners',
       to: '/marketing/ibo'
