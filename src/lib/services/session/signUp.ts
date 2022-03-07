@@ -71,7 +71,7 @@ export const signUpStep1 = async (dataBody: ISignUpDataBodyStep1): Promise<IQuer
   return { error: null }
 }
 
-export const signUpStep2 = async (isJsonFetch: boolean = true, dataBody: ISignUpDataBodyStep2): Promise<IQueryErrorReturn> => {
+export const signUpStep2 = async (dataBody: ISignUpDataBodyStep2, isJsonFetch: boolean = true): Promise<IQueryErrorReturn> => {
   let res: Response
 
   if (isJsonFetch) {
