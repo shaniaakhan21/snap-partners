@@ -15,7 +15,7 @@ import { STEPS } from '.'
 import { BulletPagination } from './BulletPagination'
 import { signUpStep1 } from 'lib/services/session/signUp'
 import { handleFetchError } from 'lib/utils/handleFetchError'
-import { InputFile } from '../InputFile'
+// import { InputFile } from '../InputFile'
 
 interface IStepOpeProps {
   referralLink: IReferralLink,
@@ -54,13 +54,13 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       return
     }
 
-    if (dataForm.idImage[0].size > (maxFileSizeInMb * 1000000)) {
+    if (dataForm.idImage && dataForm.idImage[0].size > (maxFileSizeInMb * 1000000)) {
       setError('idImage', { message: `The maximum file size in ID Image is ${maxFileSizeInMb}mb, please upload a file with a maximum file size of ${maxFileSizeInMb}mb` })
       setLoading(false)
       return
     }
 
-    if (dataForm.insuranceImage[0].size > (maxFileSizeInMb * 1000000)) {
+    if (dataForm.insuranceImage && dataForm.insuranceImage[0].size > (maxFileSizeInMb * 1000000)) {
       setError('insuranceImage', { message: `The maximum file size in Insurance Image is ${maxFileSizeInMb}mb, please upload a file with a maximum file size of ${maxFileSizeInMb}mb` })
       setLoading(false)
       return
@@ -208,7 +208,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           isRequired={false}
         />
 
-        {referralLink.role === 'DRIVER' && (
+        {/* {referralLink.role === 'DRIVER' && (
           <>
             <InputFile
               register={register}
@@ -227,7 +227,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
               label='Insurance image'
             />
           </>
-        )}
+        )} */}
 
         <TermsAndConditions
           errors={errors.termsAndConditions}
