@@ -1,4 +1,3 @@
-import { API } from 'config/api'
 import { IQueryErrorReturn } from 'lib/types/query'
 
 interface ISignUpDataBodyStep1 {
@@ -49,7 +48,7 @@ interface ISignUpDataBodyStep2 extends ISignUpDataBodyStep1 {
 // }
 
 export const signUpStep1 = async (dataBody: ISignUpDataBodyStep1): Promise<IQueryErrorReturn> => {
-  const res = await fetch(`${API.BASE_URL}/api/authentication/signUpStepOne`, {
+  const res = await fetch('/api/authentication/signUpStepOne', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -71,11 +70,11 @@ export const signUpStep1 = async (dataBody: ISignUpDataBodyStep1): Promise<IQuer
   return { error: null }
 }
 
-export const signUpStep2 = async (isJsonFetch: boolean = true, dataBody: ISignUpDataBodyStep2): Promise<IQueryErrorReturn> => {
+export const signUpStep2 = async (dataBody: ISignUpDataBodyStep2, isJsonFetch: boolean = true): Promise<IQueryErrorReturn> => {
   let res: Response
 
   if (isJsonFetch) {
-    res = await fetch(`${API.BASE_URL}/api/authentication/signUpStepTwo`, {
+    res = await fetch('/api/authentication/signUpStepTwo', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -98,7 +97,7 @@ export const signUpStep2 = async (isJsonFetch: boolean = true, dataBody: ISignUp
       formData.append(key, value)
     })
 
-    res = await fetch(`${API.BASE_URL}/api/authentication/signUpStepTwo`, {
+    res = await fetch('/api/authentication/signUpStepTwo', {
       method: 'POST',
       body: formData
     })
@@ -119,7 +118,7 @@ export const signUpStep2 = async (isJsonFetch: boolean = true, dataBody: ISignUp
 }
 
 export const signUpRestaurant = async (dataBody: any): Promise<IQueryErrorReturn> => {
-  const res = await fetch(`${API.BASE_URL}/api/authentication/signUpStepTwo`, {
+  const res = await fetch('/api/authentication/signUpStepTwo', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
