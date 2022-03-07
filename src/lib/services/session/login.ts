@@ -1,5 +1,4 @@
 import { setLocalStorage } from 'lib/utils/localStorage'
-import { API } from 'config/api'
 import { IQueryErrorReturn } from 'lib/types/query'
 import { decodeAccessToken } from 'lib/utils/decodedAccessToken'
 
@@ -18,7 +17,7 @@ interface IQueryLoginReturn extends IQueryErrorReturn {
 }
 
 export const login = async (dataBody: ILoginDataBody): Promise<IQueryLoginReturn> => {
-  const res = await fetch(`${API.BASE_URL}/api/authentication/login`, {
+  const res = await fetch('/api/authentication/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

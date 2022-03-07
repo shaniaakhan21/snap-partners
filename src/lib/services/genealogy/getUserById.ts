@@ -1,4 +1,3 @@
-import { API } from 'config/api'
 import { IQueryErrorReturn } from 'lib/types/query'
 
 interface IQueryReturn extends IQueryErrorReturn {
@@ -12,7 +11,7 @@ interface IQueryReturn extends IQueryErrorReturn {
 // ? This interface will be change.
 
 export const getUserById = async (id: number | string, token: string): Promise<IQueryReturn> => {
-  const res = await fetch(`${API.BASE_URL}/api/user/getUserById?id=${id}`, {
+  const res = await fetch(`/api/user/getUserById?id=${id}`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
