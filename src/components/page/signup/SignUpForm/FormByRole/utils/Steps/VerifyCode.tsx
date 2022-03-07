@@ -79,7 +79,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink }: { userTrack:
         }
       }
 
-    const { error } = await signUpStep2(!userTrack.userInfo.roles.driver, validateRole.data)
+    const { error } = await signUpStep2(validateRole.data)
 
     if (error) {
       handleFetchError(error.status, error.info)
