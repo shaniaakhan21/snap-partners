@@ -259,17 +259,17 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
         />
 
         <InputForm
-            id='referralCode'
-            name='referralCode'
-            type='text'
-            label='Referral Code'
-            registerId='referralCode'
-            placeholder='Referral Code'
-            defaultValue={referralLink.code}
-            errors={errors.referralCode}
-            register={register}
-            rulesForm={registerRestaurantRulesConfig.referralCode}
-            isRequired={false}
+          id='referralCode'
+          name='referralCode'
+          type='text'
+          label='Referral Code'
+          registerId='referralCode'
+          placeholder='Referral Code'
+          defaultValue={referralLink.code}
+          errors={errors.referralCode}
+          register={register}
+          rulesForm={registerRestaurantRulesConfig.referralCode}
+          isRequired={false}
         />
 
         <TermsAndConditions

@@ -84,8 +84,8 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       password: dataForm.password,
       phone: phoneNumber,
       sponsorReferralCode: dataForm.referralCode || null,
-      idImage: dataForm?.idImage ? dataForm.idImage[0] : null,
-      insuranceImage: dataForm?.insuranceImage ? dataForm.insuranceImage[0] : null,
+      idImage: null,
+      insuranceImage: null,
       roles: {
         admin: referralLink.role === 'ADMIN',
         customer: referralLink.role === 'CUSTOMER',
