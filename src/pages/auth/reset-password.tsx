@@ -10,7 +10,7 @@ const ResetPasswordPage = ({ token }) => {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ query }: GetServerSidePropsContext) => {
-  const token = query?.token
+  const { token } = query
 
   if (!token) {
     return {
