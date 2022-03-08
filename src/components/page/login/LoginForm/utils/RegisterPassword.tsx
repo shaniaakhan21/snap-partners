@@ -1,8 +1,8 @@
+import { useState } from 'react'
 import { EyeHiddenIcon, EyeVisibleIcon } from 'components/common/icons'
 import { ModalContainer } from 'components/common/ModalContainer'
 import { Overlay } from 'components/common/Overlay'
 import { useModal } from 'lib/hooks/useModal'
-import { MouseEvent, useState } from 'react'
 import { signInRulesConfig } from './formRules'
 import { ModalForgotPassword } from './ModalForgotPassword'
 
