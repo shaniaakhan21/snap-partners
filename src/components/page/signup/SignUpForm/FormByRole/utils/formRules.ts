@@ -115,9 +115,8 @@ export const registerRestaurantRulesConfig = {
 
   name: {
     required: { value: true, message: 'Name Required *' },
-    maxLength: { value: 50, message: 'Max 50 Characters *' },
-    minLength: { value: 3, message: 'Min 3 Characters *' },
-    pattern: { value: /^[a-zA-Z]*$/, message: 'Name not allow *' }
+    maxLength: { value: 80, message: 'Max 80 Characters *' },
+    minLength: { value: 3, message: 'Min 3 Characters *' }
   },
 
   phoneExt: {

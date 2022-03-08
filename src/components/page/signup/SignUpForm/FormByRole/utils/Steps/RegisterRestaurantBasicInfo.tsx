@@ -30,7 +30,7 @@ export interface dataFormSignUpRestaurant {
   confirmPassword: string
   referralCode?: string | null
   termsAndConditions: boolean
-  phoneExt: string
+  // phoneExt: string
   phoneNumber: string
 }
 
@@ -41,7 +41,7 @@ interface IRegisterRestaurantBasicInfoProps {
 }
 
 export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, handleStep }: IRegisterRestaurantBasicInfoProps) => {
-  const { handleSubmit, register, reset, formState: { errors }, setError } = useForm<dataFormSignUpRestaurant>()
+  const { handleSubmit, register, reset, formState: { errors }, setError, control } = useForm<dataFormSignUpRestaurant>()
   const [isLoading, setLoading] = useState(false)
 
   const onSubmit = async (dataForm: dataFormSignUpRestaurant) => {
@@ -69,9 +69,9 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
       return
     }
 
-    const phoneNumber = `${dataForm.phoneExt}${dataForm.phoneNumber}`
+    const phoneNumber = `+${dataForm.phoneNumber}`
 
-    const { error } = await signUpStep1({ phoneNumber: `+${phoneNumber}` })
+    const { error } = await signUpStep1({ phoneNumber })
 
     const dataToSend = {
       name: dataForm.name,
@@ -79,7 +79,7 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
       email: dataForm.email,
       username: dataForm.username,
       password: dataForm.password,
-      phoneNumber: `+${phoneNumber}`,
+      phoneNumber,
       idImage: null,
       insuranceImage: null,
       roles: {
@@ -179,9 +179,9 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
           id='name'
           name='name'
           type='text'
-          label='Name'
+          label='Restaurant Name'
           registerId='name'
-          placeholder='Enter Name'
+          placeholder='Enter Restaurant Name'
           errors={errors.name}
           register={register}
           rulesForm={registerRestaurantRulesConfig.name}
@@ -189,10 +189,12 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
         />
 
         <InputPhone
+          label='Restaurant Phone number'
           isRequired
           register={register}
           errors={errors}
           withVerifyCode={false}
+          control={control}
         />
 
         <RegisterPassword
@@ -241,20 +243,6 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
           errors={errors.state}
           register={register}
           rulesForm={registerRestaurantRulesConfig.state}
-          isRequired
-        />
-
-        <InputForm
-          id='country_code'
-          name='country_code'
-          type='text'
-          label='Country Code'
-          registerId='country_code'
-          placeholder='Enter Country Code'
-          autoComplete='country_code'
-          errors={errors.country_code}
-          register={register}
-          rulesForm={registerRestaurantRulesConfig.country_code}
           isRequired
         />
 

@@ -10,7 +10,7 @@ import { registerRulesConfig } from '../formRules'
 import { RegisterPassword } from '../RegisterPassword'
 import { TermsAndConditions } from '../TermsAndConditions'
 import { IReferralLink } from 'lib/types'
-import { IHandleStep, IHandleUserInfo, IDataForm } from '../types'
+import { IHandleStep, IDataForm } from '../types'
 import { STEPS } from '.'
 import { BulletPagination } from './BulletPagination'
 import { signUpStep1 } from 'lib/services/session/signUp'
@@ -26,7 +26,7 @@ interface IStepOpeProps {
 const maxFileSizeInMb = 5
 
 export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: IStepOpeProps) => {
-  const { handleSubmit, register, reset, formState: { errors }, setError } = useForm<IDataForm>()
+  const { handleSubmit, register, reset, formState: { errors }, setError, control } = useForm<IDataForm>()
   const [isLoading, setLoading] = useState(false)
 
   const onSubmit = async (dataForm: IDataForm) => {
@@ -66,7 +66,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       return
     }
 
-    const phoneNumber = `+${dataForm.phoneExt}${dataForm.phoneNumber}`
+    const phoneNumber = `+${dataForm.phoneNumber}`
 
     const { error } = await signUpStep1({ phoneNumber })
 
@@ -181,10 +181,12 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
         />
 
         <InputPhone
+          label={referralLink.role ? `${referralLink.role} Phone` : 'Phone'}
           isRequired
           register={register}
           errors={errors}
           withVerifyCode
+          control={control}
         />
 
         <RegisterPassword

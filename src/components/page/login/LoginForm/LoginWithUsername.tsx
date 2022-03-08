@@ -10,13 +10,13 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { InputForm } from './utils/Input'
 import { RegisterPassword } from './utils/RegisterPassword'
-import { RememberAndPolicy } from './utils/RememberAndPolicy'
+// import { RememberAndPolicy } from './utils/RememberAndPolicy'
 import { RRSSAuth } from './utils/RRSSAuth'
 
 export interface IDataForm {
   username: string
   password: string
-  rememberMe: boolean
+  // rememberMe: boolean
 }
 
 export const LoginWithUsername = () => {
@@ -102,9 +102,9 @@ export const LoginWithUsername = () => {
           register={register}
         />
 
-        <RememberAndPolicy
+        {/* <RememberAndPolicy
           register={register}
-        />
+        /> */}
 
         <section className='mt-4 text-center sm:text-left'>
           <Button type='submit' classes='w-full mr-1 text-sm bg-primary-500'>
