@@ -17,12 +17,15 @@ import { signUpStep1 } from 'lib/services/session/signUp'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 import { signUp } from 'lib/utils/gtm'
+// import { InputFile } from '../InputFile'
 
 interface IStepOpeProps {
   referralLink: IReferralLink,
   handleStep: IHandleStep,
-  handleUserInfo: IHandleUserInfo
+  handleUserInfo: any
 }
+
+const maxFileSizeInMb = 5
 
 export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: IStepOpeProps) => {
   const role = useRoleFromUrl()
@@ -54,6 +57,18 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       return
     }
 
+    if (dataForm.idImage && dataForm.idImage[0].size > (maxFileSizeInMb * 1000000)) {
+      setError('idImage', { message: `The maximum file size in ID Image is ${maxFileSizeInMb}mb, please upload a file with a maximum file size of ${maxFileSizeInMb}mb` })
+      setLoading(false)
+      return
+    }
+
+    if (dataForm.insuranceImage && dataForm.insuranceImage[0].size > (maxFileSizeInMb * 1000000)) {
+      setError('insuranceImage', { message: `The maximum file size in Insurance Image is ${maxFileSizeInMb}mb, please upload a file with a maximum file size of ${maxFileSizeInMb}mb` })
+      setLoading(false)
+      return
+    }
+
     const phoneNumber = `+${dataForm.phoneExt}${dataForm.phoneNumber}`
 
     const { error } = await signUpStep1({ phoneNumber })
@@ -71,7 +86,15 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       lastname: dataForm.lastname,
       password: dataForm.password,
       phone: phoneNumber,
-      referralCode: dataForm.referralCode
+      sponsorReferralCode: dataForm.referralCode || null,
+      idImage: null,
+      insuranceImage: null,
+      roles: {
+        admin: referralLink.role === 'ADMIN',
+        customer: referralLink.role === 'CUSTOMER',
+        driver: referralLink.role === 'DRIVER',
+        merchant: referralLink.role === 'RESTAURANT'
+      }
     })
     setLoading(false)
 
@@ -91,7 +114,6 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
   return (
     <div>
       <span className='font-bold text-4xl text-[#18203F]'>Sign up!</span>
-      <p>As {referralLink?.role}</p>
       <p className='text-gray-500'>Welcome! register to continue.</p>
 
       <form className='max-w-xs mt-6' onSubmit={handleSubmit(onSubmit)}>
@@ -166,6 +188,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           isRequired
           register={register}
           errors={errors}
+          withVerifyCode
         />
 
         <RegisterPassword
@@ -188,6 +211,27 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           rulesForm={registerRulesConfig.referralCode}
           isRequired={false}
         />
+
+        {/* {referralLink.role === 'DRIVER' && (
+          <>
+            <InputFile
+              register={register}
+              registerId='idImage'
+              isRequired
+              errors={errors.idImage}
+              rulesForm={registerRulesConfig.idImage}
+              label='ID image'
+            />
+            <InputFile
+              register={register}
+              registerId='insuranceImage'
+              isRequired
+              errors={errors.insuranceImage}
+              rulesForm={registerRulesConfig.insuranceImage}
+              label='Insurance image'
+            />
+          </>
+        )} */}
 
         <TermsAndConditions
           errors={errors.termsAndConditions}

@@ -47,3 +47,6 @@ deploy:
     - npm run build
     - rm -rf /home/gitlab-runner/snap-website-deploy
     - mv /home/gitlab-runner/snap-website-deploy-temp /home/gitlab-runner/snap-website-deploy
+    - cd /home/gitlab-runner/snap-website-deploy
+    - pm2 delete "next-production" || exit_code=$?
+    - PORT=7070 pm2 start npm --name "next-production" -- start

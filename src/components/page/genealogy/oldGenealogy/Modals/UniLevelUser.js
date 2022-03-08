@@ -15,9 +15,8 @@ import axios from 'axios'
 import PersonIcon from '@material-ui/icons/Person'
 import EmailIcon from '@material-ui/icons/Email'
 import PhoneIcon from '@material-ui/icons/Phone'
-import AttachMoneyIcon from '@material-ui/icons/AttachMoney'
-import MoneyOffIcon from '@material-ui/icons/MoneyOff'
 import { useAuthStore } from 'lib/stores'
+import { API } from 'config/api'
 
 export const ModalUninivelUser = ({ id, name, close, open, openUser }) => {
   const { auth } = useAuthStore()
@@ -33,14 +32,14 @@ export const ModalUninivelUser = ({ id, name, close, open, openUser }) => {
         setUserData(null)
         setError('')
         setLoading(true)
-        const response = await axios.get(' https://dev.snap.devopsteam.info/api/unilevel/getAllLevels', {
-          params: { userId: id, includeUsers: 1, name: name },
+        const response = await axios.get(`${API.BASE_URL}/api/unilevel/getAllLevels`, {
+          params: { userId: id, includeUsers: 1, name: 'x' },
           headers: {
             Authorization: `Bearer ${auth.accessToken}`
           }
         })
         setUser({ name: response.data.data.name, id: response.data.data.userId })
-        const responseData = await axios.get(' https://dev.snap.devopsteam.info/api/user/getUserById', {
+        const responseData = await axios.get(`${API.BASE_URL}/api/user/getUserById`, {
           params: { id: id },
           headers: {
             Authorization: `Bearer ${auth.accessToken}`

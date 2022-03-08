@@ -1,4 +1,3 @@
-import { API } from 'config/api'
 import { IQueryErrorReturn } from 'lib/types/query'
 
 interface IAuthorizations {
@@ -27,7 +26,7 @@ interface IQueryUserMeReturn extends IQueryErrorReturn {
 }
 
 export const getUserMe = async (authorizations: IAuthorizations): Promise<IQueryUserMeReturn> => {
-  const res = await fetch(`${API.BASE_URL}/api/user/me`, {
+  const res = await fetch('/api/user/me', {
     headers: {
       Authorization: `Bearer ${authorizations.token}`
     }

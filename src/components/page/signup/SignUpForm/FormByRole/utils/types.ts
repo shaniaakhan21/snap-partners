@@ -6,6 +6,8 @@ export interface IUserToSignUp {
   phone: string
   password: string
   referralCode?: string | null
+  idImage?: any
+  insuranceImage?: any
 }
 
 export interface IDataForm extends IUserToSignUp {
@@ -58,6 +60,7 @@ export interface IRegisterFormProps {
 }
 
 export type registerFormIds = 'referralCode' | 'email' | 'username' | 'name' | 'lastname' | 'phoneExt' | 'phoneNumber' | 'confirmEmail' | 'password' | 'confirmPassword' | 'rememberMe' | 'termsAndConditions'
+export type registerFormRestaurantIds = | 'phoneExt' | 'phoneNumber' | 'email' | 'confirmEmail' | 'city' | 'street_name' | 'state' | 'country_code' | 'delivery_fees' | 'deliverykm' | 'email' | 'maxdeliverytime' | 'mobile_no' | 'name' | 'password' | 'pincode' | 'save_on_snap'
 
 export interface IFormConfig {
   email: {

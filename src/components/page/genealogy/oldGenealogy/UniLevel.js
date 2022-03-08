@@ -6,6 +6,7 @@ import { ModalUninivelUser } from './Modals/UniLevelUser'
 import SearchIcon from '@material-ui/icons/Search'
 import axios from 'axios'
 import { useAuthStore } from 'lib/stores'
+import { API } from 'config/api'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -53,15 +54,7 @@ export const Unilevel = () => {
   const [id, setId] = useState('')
   const [name, setName] = useState('')
   const [searchId, setsearchId] = useState('')
-  const [pageSize, setPageSize] = useState(5)
   const [rows, setDataRows] = useState([])
-
-  const [sortModel, setSortModel] = useState([
-    {
-      field: 'id',
-      sort: 'desc'
-    }
-  ])
 
   const openUser = async (id, name) => {
     console.log('name', name)
@@ -74,7 +67,7 @@ export const Unilevel = () => {
 
   const search = async () => {
     try {
-      const response = await axios.get('https://dev.snap.devopsteam.info/api/user/getUsersBySearch', {
+      const response = await axios.get(`${API.BASE_URL}/api/user/getUsersBySearch`, {
         params: { search: searchId },
         headers: {
           Authorization: `Bearer ${auth.accessToken}`

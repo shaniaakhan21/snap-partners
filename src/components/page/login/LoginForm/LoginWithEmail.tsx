@@ -52,7 +52,7 @@ export const LoginWithEmail = () => {
     setLoading(false)
     setAuth({
       email: dataUser.email,
-      name: dataUser.email,
+      name: dataUser.name,
       phone: dataUser.phoneNumber,
       accessToken: dataLogin.token,
       lastname: dataUser.lastname,

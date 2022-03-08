@@ -12,6 +12,7 @@ import {
 import axios from 'axios'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { useAuthStore } from 'lib/stores'
+import { API } from 'config/api'
 
 const useStyles = makeStyles(theme => ({
   Btn: {
@@ -31,8 +32,8 @@ const useStyles = makeStyles(theme => ({
 export const RecursiveAccordion = ({ openUser, user, master = false }) => {
   const { auth } = useAuthStore()
   const [levels, setlevels] = useState([])
-  const [volume, setVolume] = useState(0)
-  const [volumePending, setvolumePending] = useState(0)
+  const [, setVolume] = useState(0)
+  const [, setvolumePending] = useState(0)
   const [spinner, showSpinner] = useState(false)
   const [loading, setLoading] = useState(true)
 
@@ -45,8 +46,8 @@ export const RecursiveAccordion = ({ openUser, user, master = false }) => {
   useEffect(() => {
     (async function () {
       try {
-        const response = await axios.get('https://dev.snap.devopsteam.info/api/unilevel/getAllLevels', {
-          params: { userId: user.id, includeUsers: master ? 1 : 0, name: user.name },
+        const response = await axios.get(`${API.BASE_URL}/api/unilevel/getAllLevels`, {
+          params: { userId: user.id, includeUsers: master ? 1 : 0, name: 'x' },
           headers: {
             Authorization: `Bearer ${auth.accessToken}`
           }
@@ -71,11 +72,11 @@ export const RecursiveAccordion = ({ openUser, user, master = false }) => {
         showSpinner(true)
         let response = cached
         if (cached === undefined || !master) {
-          response = await axios.get('https://dev.snap.devopsteam.info/api/unilevel/getAllLevels', {
+          response = await axios.get(`${API.BASE_URL}/api/unilevel/getAllLevels`, {
             params: {
               userId: user.id,
               includeUsers: 1,
-              name: user.name
+              name: 'x'
             },
             headers: {
               Authorization: `Bearer ${auth.accessToken}`

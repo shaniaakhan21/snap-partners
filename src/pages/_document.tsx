@@ -74,7 +74,11 @@ export default class MyDocument extends Document {
         <body>
           <noscript>
             <iframe
-              src={`https://www.googletagmanager.com/ns.html?id=${typeof document !== 'undefined' && document.location.hostname === 'dev.snap.devopsteam.info' ? GTM_ID.PRE : GTM_ID.PRO}`}
+              src={`https://www.googletagmanager.com/ns.html?id=${
+                typeof document !== 'undefined' && document.location.hostname === 'snapdeliveredteam.com'
+                  ? GTM_ID.PRO
+                  : GTM_ID.PRE
+              }`}
               height="0"
               width="0"
               style={{ display: 'none', visibility: 'hidden' }}

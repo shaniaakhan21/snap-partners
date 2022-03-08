@@ -53,7 +53,7 @@ export const LoginWithPhone = () => {
     setLoading(false)
     setAuth({
       email: dataUser.email,
-      name: dataUser.email,
+      name: dataUser.name,
       phone: dataUser.phoneNumber,
       accessToken: dataLogin.token,
       lastname: dataUser.lastname,
@@ -110,6 +110,7 @@ export const LoginWithPhone = () => {
               maxLength={4}
               onKeyPress={handleOnlyNumbers}
               defaultValue='1'
+              autoComplete='off'
             />
 
             <div className='absolute top-3.5 left-2 text-xl font-bold text-gray-600'>+</div>
@@ -124,6 +125,7 @@ export const LoginWithPhone = () => {
             placeholder='555 555 5555'
             maxLength={12}
             onKeyPress={handleOnlyNumbers}
+            autoComplete='off'
           />
         </div>
 

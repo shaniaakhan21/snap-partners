@@ -18,7 +18,7 @@ export const MarketingTool = ({ title, subtitle, icon, description, to }) => {
               </span>
 
             </div>
-            <p>{subtitle}</p>
+            {/* <p>{subtitle}</p> */}
           </section>
 
           <section className='px-6 flex flex-col justify-center items-center border-t-2 border-solid pt-2 pb-4'>
