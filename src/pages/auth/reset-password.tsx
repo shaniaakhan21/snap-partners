@@ -1,4 +1,8 @@
+import Head from 'next/head'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { PAGE_INFO } from 'config/pageInfo'
+
+const { SEO } = PAGE_INFO
 
 const ResetPasswordPage = ({ token }) => {
   return (
@@ -22,5 +26,11 @@ export const getServerSideProps: GetServerSideProps = async ({ query }: GetServe
     props: { token }
   }
 }
+
+ResetPasswordPage.getLayout = (page) => (
+  <Head>
+    <title>{SEO.TITLE_PAGE} - Reset Password</title>
+  </Head>
+)
 
 export default ResetPasswordPage

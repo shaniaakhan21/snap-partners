@@ -9,6 +9,7 @@ import { resetPassword } from 'lib/services/session/resetPassword'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { useState } from 'react'
 import { timeout } from 'lib/utils/timeout'
+import { Spinner } from 'components/common/loaders'
 
 const ruleEmail = {
   required: { value: true, message: 'Email Required *' },
@@ -26,20 +27,30 @@ interface IForm {
 export const ModalForgotPassword = () => {
   const { handleSubmit, register, reset, formState: { errors } } = useForm<IForm>()
   const [emailSent, setEmailSent] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const onSubmit = async (dataForm: IForm) => {
+    setIsLoading(true)
     // const { error } = await resetPassword(dataForm.email)
 
     // if (error) {
     //   handleFetchError(error.status, error.info)
+    //   setIsLoading(false)
     //   return
     // }
 
     await timeout(3000)
-    reset()
     setEmailSent(true)
-    // await timeout(3000)
-    // setEmailSent(false)
+    setIsLoading(false)
+    reset()
+  }
+
+  if (isLoading) {
+    return (
+      <div className='flex items-center justify-center md:p-8'>
+        <Spinner />
+      </div>
+    )
   }
 
   return (
