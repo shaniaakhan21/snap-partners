@@ -5,7 +5,7 @@ import failedImgSrc from '../../../../../../public/images/errorAsset.png'
 import successImgSrc from '../../../../../../public/images/dougNormal.png'
 import { Button } from 'components/common/Button'
 import { InputForm } from 'components/page/signup/SignUpForm/FormByRole/utils/Input'
-import { resetPassword } from 'lib/services/session/resetPassword'
+import { resetPasswordStepOne } from 'lib/services/session/resetPassword'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { useState } from 'react'
 import { timeout } from 'lib/utils/timeout'
@@ -31,7 +31,7 @@ export const ModalForgotPassword = () => {
 
   const onSubmit = async (dataForm: IForm) => {
     setIsLoading(true)
-    // const { error } = await resetPassword(dataForm.email)
+    // const { error } = await resetPasswordStepOne(dataForm.email)
 
     // if (error) {
     //   handleFetchError(error.status, error.info)
@@ -114,7 +114,7 @@ export const ModalForgotPassword = () => {
           />
           <br />
           <Button classes='w-24 mt-4 text-sm bg-primary-500' onClick={handleSubmit(onSubmit)}>
-          Send
+            Send
           </Button>
         </>
       )}
