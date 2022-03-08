@@ -45,6 +45,7 @@ export const InputPhone = ({ errors, register, classes, isRequired, withVerifyCo
             maxLength={4}
             onKeyPress={handleOnlyNumbers}
             defaultValue='1'
+            autoComplete='off'
           />
 
           <div className='absolute top-3.5 left-2 text-xl font-bold text-gray-600'>+</div>
@@ -59,6 +60,7 @@ export const InputPhone = ({ errors, register, classes, isRequired, withVerifyCo
           placeholder='555 555 5555'
           maxLength={12}
           onKeyPress={handleOnlyNumbers}
+          autoComplete='off'
         />
       </div>
     </div>

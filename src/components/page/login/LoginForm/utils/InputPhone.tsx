@@ -37,6 +37,7 @@ export const InputPhone = ({ errors, register, classes }: IInputFormProps) => {
           placeholder='555 555 5555'
           maxLength={12}
           onKeyPress={handleOnlyNumbers}
+          autoComplete='off'
         />
       </div>
     </div>

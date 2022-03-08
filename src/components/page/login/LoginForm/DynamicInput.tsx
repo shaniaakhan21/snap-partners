@@ -32,6 +32,7 @@ const InputSelected = ({ register, errors, typeInput }: { register: any, errors:
             placeholder='+15555555555'
             maxLength={12}
             onKeyPress={handleOnlyNumbers}
+            autoComplete='off'
           />
         </div>
       </div>
@@ -110,6 +111,7 @@ const InputSelected = ({ register, errors, typeInput }: { register: any, errors:
           placeholder='+15555555555'
           maxLength={12}
           onKeyPress={handleOnlyNumbers}
+          autoComplete='off'
         />
       </div>
     </div>
