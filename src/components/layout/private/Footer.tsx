@@ -4,10 +4,10 @@ import { useRef } from 'react'
 
 export const FooterPrivate = () => {
   const { current: footerLinks } = useRef([
-    { to: '#', label: 'About us' },
+    { to: 'https://opportunity.snapdelivered.com/#about', label: 'About us' },
     { to: 'https://store.snapdelivered.com/', label: 'Merch Store' },
-    { to: '#', label: 'Opportunities with Snap Delivered' },
-    { to: '#', label: 'Support' },
+    { to: 'https://opportunity.snapdelivered.com/#contact', label: 'Opportunities with Snap Delivered' },
+    { to: 'https://opportunity.snapdelivered.com/#contact', label: 'Support' },
     { to: '/legal/privacy-policy', label: 'Privacy policy' },
     { to: '/legal/terms-of-use', label: 'Terms of Use' }
   ])

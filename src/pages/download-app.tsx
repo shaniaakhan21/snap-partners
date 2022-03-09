@@ -138,7 +138,7 @@ const DownloadAppPage: PageNext = () => {
         </header>
 
         <div className='mt-12 md:mt-40 w-full'>
-          <span className='text-3xl font-bold text-gray-800'>
+          <span className='text-3xl 2xl:text-4xl font-bold text-gray-800'>
             Download our apps for {device === 'ANDROID' ? 'Android' : 'iOs' }
           </span>
 
@@ -148,7 +148,7 @@ const DownloadAppPage: PageNext = () => {
                 ? androidApps.map(androidApp => (
                   <li>
                     <article>
-                      <h6 className='text-2xl font-bold text-primary-500'>{androidApp.title}</h6>
+                      <h6 className='text-2xl 2xl:text-3xl font-bold text-primary-500'>{androidApp.title}</h6>
                       <span className='text-xl font-semibold text-gray-700'>{androidApp.subtitle}</span> <br />
                       <p className='text-gray-700'>{androidApp.description}</p>
 
@@ -166,7 +166,7 @@ const DownloadAppPage: PageNext = () => {
                 : appleApps.map(appleApp => (
                   <li>
                     <article>
-                      <h6 className='text-2xl font-bold text-primary-500'>{appleApp.title}</h6>
+                      <h6 className='text-2xl 2xl:text-3xl font-bold text-primary-500'>{appleApp.title}</h6>
                       <span className='text-xl font-semibold text-gray-700'>{appleApp.subtitle}</span> <br />
                       <p className='text-gray-700'>{appleApp.description}</p>
 

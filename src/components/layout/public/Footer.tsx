@@ -6,24 +6,24 @@ import { useRef } from 'react'
 
 export const FooterPublic = () => {
   const { current: socialLinks } = useRef([
-    { to: 'https://www.facebook.com/groups/287356752558523', icon: <FooterFacebook /> },
+    { to: 'https://www.facebook.com/snapdelivered', icon: <FooterFacebook /> },
     { to: 'https://www.youtube.com/channel/UC7zzJ0gaX5QrE8lPqG_Lr1w', icon: <FooterYoutube /> }
   ])
 
   const { current: joinUsLinks } = useRef([
-    { to: '#about', label: 'About us' },
+    { to: 'https://opportunity.snapdelivered.com/#about', label: 'About us' },
     { to: `/auth/signup?role=${ROLES.DRIVER}`, label: 'Become a Driver' },
     { to: `/auth/signup?role=${ROLES.RESTAURANT}`, label: 'Become a Restaurant Partner' },
     { to: `/auth/signup?role=${ROLES.CUSTOMER}`, label: 'Become a Customer' },
-    { to: '#carrers', label: 'Carrers' },
+    { to: 'https://opportunity.snapdelivered.com/#contact', label: 'Carrers' },
     { to: 'https://store.snapdelivered.com/', label: 'Merch Store' }
   ])
 
-  const { current: helpLinks } = useRef([
-    { to: '#faqs', label: 'FAQs' },
-    { to: '#training', label: 'Training Videos' },
-    { to: '#fms', label: 'File Management System' }
-  ])
+  // const { current: helpLinks } = useRef([
+  //   { to: '#faqs', label: 'FAQs' },
+  //   { to: '#training', label: 'Training Videos' },
+  //   { to: '#fms', label: 'File Management System' }
+  // ])
 
   const { current: Apps } = useRef([
     { to: '/download-app?device=APPLE', icon: <FooterApple /> },
@@ -32,8 +32,8 @@ export const FooterPublic = () => {
 
   const { current: legalLinks } = useRef([
     { to: '/legal/privacy-policy', label: 'Privacy Policy' },
-    { to: '/legal/terms-of-use', label: 'Terms & Conditions' },
-    { to: '#cookies', label: 'Cookies Policy' }
+    { to: '/legal/terms-of-use', label: 'Terms & Conditions' }
+    // { to: '#cookies', label: 'Cookies Policy' }
   ])
 
   return (
@@ -82,7 +82,7 @@ export const FooterPublic = () => {
             </ul>
           </section>
 
-          <section className='text-left lg:text-right'>
+          {/* <section className='text-left lg:text-right'>
             <span className='text-2xl font-semibold'>Let us help you</span>
 
             <ul className='mt-2 text-gray-300'>
@@ -96,7 +96,7 @@ export const FooterPublic = () => {
                 ))
               }
             </ul>
-          </section>
+          </section> */}
 
           <section className='text-left lg:text-right'>
             <span className='text-2xl font-semibold'>Download our app </span>
