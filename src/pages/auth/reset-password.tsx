@@ -72,7 +72,7 @@ const ResetPasswordPage = ({ token }) => {
 
   return (
     <form
-      className="max-w-md mx-auto w-full h-screen flex flex-col items-center justify-center"
+      className='max-w-md mx-auto w-full h-screen flex flex-col items-center justify-center px-4'
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className='flex flex-col justify-center items-center'>
