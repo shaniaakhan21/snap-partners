@@ -50,8 +50,15 @@ export const FooterPublic = () => {
           <ul className='flex justify-start items-center gap-x-4 mt-6'>
             {
               socialLinks.map(socialLink => (
-                <li key={socialLink.to} className='flex justify-center items-center h-14 w-14 rounded-full bg-[#19191929] cursor-pointer'>
-                  {socialLink.icon}
+                <li key={socialLink.to}>
+                  <a
+                    href={socialLink.to}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='flex justify-center items-center h-14 w-14 rounded-full bg-[#19191929] cursor-pointer hover:bg-primary-300 hover:bg-opacity-20'
+                  >
+                    {socialLink.icon}
+                  </a>
                 </li>
               ))
             }
@@ -97,9 +104,11 @@ export const FooterPublic = () => {
             <ul className='mt-2 text-gray-300 flex justfiy-start lg:justify-end items-start gap-x-4'>
               {
                 Apps.map(app => (
-                  <li key={app.to} className='mt-2 flex justify-center items-center h-14 w-14 rounded-full bg-[#19191929] cursor-pointer'>
-                    <Link href={app.to}>
-                      <a>{app.icon}</a>
+                  <li>
+                    <Link key={app.to} href={app.to}>
+                      <a className='mt-2 flex justify-center items-center h-14 w-14 rounded-full bg-[#19191929] cursor-pointer hover:bg-primary-300 hover:bg-opacity-20'>
+                        {app.icon}
+                      </a>
                     </Link>
                   </li>
                 ))
@@ -109,22 +118,26 @@ export const FooterPublic = () => {
         </div>
       </div>
 
-      <div className='w-full border-t-2 border-t-[#585858] px-4 lg:px-14 pb-8 pt-7 flex flex-col-reverse gap-y-4 lg:flex-row justify-between items-start'>
-        <section>
-          <span>© 2022 Snap Delivered. All rights reserved.</span>
-        </section>
+      <div className='w-full px-4 lg:px-14 pb-8 pt-7'>
+        <div className='w-full border-t-2 border-t-[#585858]' />
 
-        <ul className='text-gray-300 flex flex-col lg:flex-row justify-end items-start gap-y-2 gap-x-6'>
-          {
-            legalLinks.map(legalLink => (
-              <li>
-                <Link href={legalLink.to}>
-                  <a className='hover:text-primary-500'>{legalLink.label}</a>
-                </Link>
-              </li>
-            ))
-          }
-        </ul>
+        <div className='flex flex-col-reverse gap-y-4 lg:flex-row justify-between items-start mt-4'>
+          <section>
+            <span>© 2022 Snap Delivered. All rights reserved.</span>
+          </section>
+
+          <ul className='text-gray-300 flex flex-col lg:flex-row justify-end items-start gap-y-2 gap-x-6'>
+            {
+              legalLinks.map(legalLink => (
+                <li>
+                  <Link href={legalLink.to}>
+                    <a className='hover:text-primary-500'>{legalLink.label}</a>
+                  </Link>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
       </div>
     </footer>
   )
