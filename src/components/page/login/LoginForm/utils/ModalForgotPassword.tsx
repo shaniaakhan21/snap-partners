@@ -8,7 +8,6 @@ import { InputForm } from 'components/page/signup/SignUpForm/FormByRole/utils/In
 import { resetPasswordStepOne } from 'lib/services/session/resetPassword'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { useState } from 'react'
-import { timeout } from 'lib/utils/timeout'
 import { Spinner } from 'components/common/loaders'
 
 const ruleEmail = {
@@ -31,15 +30,14 @@ export const ModalForgotPassword = () => {
 
   const onSubmit = async (dataForm: IForm) => {
     setIsLoading(true)
-    // const { error } = await resetPasswordStepOne(dataForm.email)
+    const { error } = await resetPasswordStepOne(dataForm.email)
 
-    // if (error) {
-    //   handleFetchError(error.status, error.info)
-    //   setIsLoading(false)
-    //   return
-    // }
+    if (error) {
+      handleFetchError(error.status, error.info)
+      setIsLoading(false)
+      return
+    }
 
-    await timeout(1500)
     setEmailSent(true)
     setIsLoading(false)
     reset()
