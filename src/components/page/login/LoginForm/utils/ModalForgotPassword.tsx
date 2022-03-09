@@ -8,7 +8,6 @@ import { InputForm } from 'components/page/signup/SignUpForm/FormByRole/utils/In
 import { resetPasswordStepOne } from 'lib/services/session/resetPassword'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { useState } from 'react'
-import { timeout } from 'lib/utils/timeout'
 import { Spinner } from 'components/common/loaders'
 
 const ruleEmail = {
