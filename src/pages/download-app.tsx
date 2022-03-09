@@ -146,7 +146,7 @@ const DownloadAppPage: PageNext = () => {
             {
               device === 'ANDROID'
                 ? androidApps.map(androidApp => (
-                  <li>
+                  <li key={androidApp.link}>
                     <article>
                       <h6 className='text-2xl 2xl:text-3xl font-bold text-primary-500'>{androidApp.title}</h6>
                       <span className='text-xl font-semibold text-gray-700'>{androidApp.subtitle}</span> <br />
@@ -164,7 +164,7 @@ const DownloadAppPage: PageNext = () => {
                   </li>
                 ))
                 : appleApps.map(appleApp => (
-                  <li>
+                  <li key={appleApp.link}>
                     <article>
                       <h6 className='text-2xl 2xl:text-3xl font-bold text-primary-500'>{appleApp.title}</h6>
                       <span className='text-xl font-semibold text-gray-700'>{appleApp.subtitle}</span> <br />

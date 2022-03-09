@@ -104,7 +104,7 @@ export const FooterPublic = () => {
             <ul className='mt-2 text-gray-300 flex justfiy-start lg:justify-end items-start gap-x-4'>
               {
                 Apps.map(app => (
-                  <li>
+                  <li key={app.to}>
                     <Link key={app.to} href={app.to}>
                       <a className='mt-2 flex justify-center items-center h-14 w-14 rounded-full bg-[#19191929] cursor-pointer hover:bg-primary-300 hover:bg-opacity-20'>
                         {app.icon}
@@ -129,7 +129,7 @@ export const FooterPublic = () => {
           <ul className='text-gray-300 flex flex-col lg:flex-row justify-end items-start gap-y-2 gap-x-6'>
             {
               legalLinks.map(legalLink => (
-                <li>
+                <li key={legalLink.to}>
                   <Link href={legalLink.to}>
                     <a className='hover:text-primary-500'>{legalLink.label}</a>
                   </Link>
