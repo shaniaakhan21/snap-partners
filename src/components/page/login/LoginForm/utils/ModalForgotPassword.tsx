@@ -39,7 +39,7 @@ export const ModalForgotPassword = () => {
     //   return
     // }
 
-    await timeout(3000)
+    await timeout(1500)
     setEmailSent(true)
     setIsLoading(false)
     reset()

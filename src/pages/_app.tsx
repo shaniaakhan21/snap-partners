@@ -14,10 +14,14 @@ import 'react-toastify/dist/ReactToastify.min.css'
 import 'react-phone-input-2/lib/style.css'
 import { ThemeProvider } from '@material-ui/core/styles'
 import { theme } from 'materialTheme'
+import { useModalStore } from 'lib/stores/Modal'
+import { Overlay } from 'components/common/Overlay'
+import { ModalContainer } from 'components/common/ModalContainer'
 
 const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({ Component, pageProps }: AppLayoutProps) => {
   const router = useRouter()
   const { isRouteChanging, loadingKey } = useLoadingPage()
+  const { isOpen, modalChildren, closeModal } = useModalStore()
   const getLayout = Component.getLayout || ((page: ReactNode) => page)
 
   useEffect(() => {
@@ -68,6 +72,14 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
         closeOnClick
         pauseOnHover
       />
+
+      {isOpen && (
+        <Overlay onClick={closeModal}>
+          <ModalContainer>
+            {modalChildren}
+          </ModalContainer>
+        </Overlay>
+      )}
     </>
   )
 }
