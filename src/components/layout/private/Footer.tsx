@@ -13,9 +13,9 @@ export const FooterPrivate = () => {
   ])
 
   const { current: socialLinks } = useRef([
-    { to: '#', icon: <AppleIcon classes='w-6 h-6' /> },
-    { to: '#', icon: <GooglePlayIcon classes='w-6 h-6' /> },
-    { to: '#', icon: <YoutubeIcon classes='w-6 h-6' /> }
+    { to: '/download-app?device=APPLE', icon: <AppleIcon classes='w-6 h-6' /> },
+    { to: '/download-app?device=ANDROID', icon: <GooglePlayIcon classes='w-6 h-6' /> },
+    { to: 'https://www.youtube.com/channel/UC7zzJ0gaX5QrE8lPqG_Lr1w', icon: <YoutubeIcon classes='w-6 h-6' /> }
   ])
 
   return (
