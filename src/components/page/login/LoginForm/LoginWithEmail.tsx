@@ -10,13 +10,10 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { InputForm } from './utils/Input'
 import { RegisterPassword } from './utils/RegisterPassword'
-import { RememberAndPolicy } from './utils/RememberAndPolicy'
-import { RRSSAuth } from './utils/RRSSAuth'
-
 export interface IDataForm {
   email: string
   password: string
-  rememberMe: boolean
+  // rememberMe: boolean
 }
 
 export const LoginWithEmail = () => {
@@ -78,7 +75,7 @@ export const LoginWithEmail = () => {
 
   return (
     <div className='flex flex-col justify-start items-start gap-x-2 my-2'>
-      <form className='max-w-xs mt-2' onSubmit={handleSubmit(onSubmit)}>
+      <form className='w-full mt-2' onSubmit={handleSubmit(onSubmit)}>
         <InputForm
           id='email'
           name='email'
@@ -104,9 +101,9 @@ export const LoginWithEmail = () => {
           register={register}
         />
 
-        <RememberAndPolicy
+        {/* <RememberAndPolicy
           register={register}
-        />
+        /> */}
 
         <section className='mt-4 text-center sm:text-left'>
           <Button type='submit' classes='w-full mr-1 text-sm bg-primary-500'>
@@ -122,8 +119,6 @@ export const LoginWithEmail = () => {
             </Link>
           </p>
         </section>
-
-        <RRSSAuth />
       </form>
     </div>
   )

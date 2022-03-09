@@ -72,18 +72,28 @@ const ResetPasswordPage = ({ token }) => {
 
   return (
     <form
-      className="w-screen h-screen flex flex-col items-center justify-center"
+      className='max-w-md mx-auto w-full h-screen flex flex-col items-center justify-center px-4'
       onSubmit={handleSubmit(onSubmit)}
     >
-      <RegisterPassword
-        errors={errors}
-        register={register}
-        rulesPasswordForm={rules.password}
-        rulesConfirmPasswordForm={rules.confirmPassword}
-      />
-      <Button type='submit' classes='w-24 mt-4 text-sm bg-primary-500'>
-        Send
-      </Button>
+      <div className='flex flex-col justify-center items-center'>
+        <img src='/images/logo-red.png' />
+
+        <span className='mt-5 text-3xl font-bold'>Snap Delivered</span>
+        <span className='mt-5 text-xl font-bold'>Create New Password</span> <br />
+        <p>New Password must be different from previous password</p>
+      </div>
+
+      <section className='mt-4 w-full'>
+        <RegisterPassword
+          errors={errors}
+          register={register}
+          rulesPasswordForm={rules.password}
+          rulesConfirmPasswordForm={rules.confirmPassword}
+        />
+        <Button type='submit' classes='w-full mt-4 text-sm bg-primary-500 uppercase'>
+          Save New password
+        </Button>
+      </section>
     </form>
   )
 }

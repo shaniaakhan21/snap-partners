@@ -2,20 +2,20 @@ import { AppleIcon, GooglePlayIcon, YoutubeIcon } from 'components/common/icons'
 import Link from 'next/link'
 import { useRef } from 'react'
 
-export const Footer = () => {
+export const FooterPrivate = () => {
   const { current: footerLinks } = useRef([
-    { to: '#', label: 'About us' },
-    { to: '#', label: 'Merch Store' },
-    { to: '#', label: 'Opportunities with Snap Delivered' },
-    { to: '#', label: 'Support' },
+    { to: 'https://opportunity.snapdelivered.com/#about', label: 'About us' },
+    { to: 'https://store.snapdelivered.com/', label: 'Merch Store' },
+    { to: 'https://opportunity.snapdelivered.com/#contact', label: 'Opportunities with Snap Delivered' },
+    { to: 'https://opportunity.snapdelivered.com/#contact', label: 'Support' },
     { to: '/legal/privacy-policy', label: 'Privacy policy' },
     { to: '/legal/terms-of-use', label: 'Terms of Use' }
   ])
 
   const { current: socialLinks } = useRef([
-    { to: '#', icon: <AppleIcon classes='w-6 h-6' /> },
-    { to: '#', icon: <GooglePlayIcon classes='w-6 h-6' /> },
-    { to: '#', icon: <YoutubeIcon classes='w-6 h-6' /> }
+    { to: '/download-app?device=APPLE', icon: <AppleIcon classes='w-6 h-6' /> },
+    { to: '/download-app?device=ANDROID', icon: <GooglePlayIcon classes='w-6 h-6' /> },
+    { to: 'https://www.youtube.com/channel/UC7zzJ0gaX5QrE8lPqG_Lr1w', icon: <YoutubeIcon classes='w-6 h-6' /> }
   ])
 
   return (

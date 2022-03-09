@@ -13,6 +13,7 @@ import { IReferralLink } from 'lib/types'
 import { IHandleStep } from '../types'
 import { STEPS } from '.'
 import { BulletPagination } from './BulletPagination'
+import Link from 'next/link'
 
 export interface dataFormSignUpRestaurant {
   'city' : string
@@ -30,7 +31,7 @@ export interface dataFormSignUpRestaurant {
   confirmPassword: string
   referralCode?: string | null
   termsAndConditions: boolean
-  phoneExt: string
+  // phoneExt: string
   phoneNumber: string
 }
 
@@ -41,7 +42,7 @@ interface IRegisterRestaurantBasicInfoProps {
 }
 
 export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, handleStep }: IRegisterRestaurantBasicInfoProps) => {
-  const { handleSubmit, register, reset, formState: { errors }, setError } = useForm<dataFormSignUpRestaurant>()
+  const { handleSubmit, register, reset, formState: { errors }, setError, control } = useForm<dataFormSignUpRestaurant>()
   const [isLoading, setLoading] = useState(false)
 
   const onSubmit = async (dataForm: dataFormSignUpRestaurant) => {
@@ -69,9 +70,9 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
       return
     }
 
-    const phoneNumber = `${dataForm.phoneExt}${dataForm.phoneNumber}`
+    const phoneNumber = `+${dataForm.phoneNumber}`
 
-    const { error } = await signUpStep1({ phoneNumber: `+${phoneNumber}` })
+    const { error } = await signUpStep1({ phoneNumber })
 
     const dataToSend = {
       name: dataForm.name,
@@ -79,7 +80,7 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
       email: dataForm.email,
       username: dataForm.username,
       password: dataForm.password,
-      phoneNumber: `+${phoneNumber}`,
+      phoneNumber,
       idImage: null,
       insuranceImage: null,
       roles: {
@@ -129,11 +130,11 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
   }
 
   return (
-    <div>
+    <div className='max-w-md mx-auto w-full'>
       <span className='font-bold text-4xl text-[#18203F]'>Sign up!</span>
       <p className='text-gray-500'>Welcome! register to continue.</p>
 
-      <form className='max-w-xs mt-6' onSubmit={handleSubmit(onSubmit)}>
+      <form className='mt-6' onSubmit={handleSubmit(onSubmit)}>
         <InputForm
           id='username'
           name='username'
@@ -179,9 +180,9 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
           id='name'
           name='name'
           type='text'
-          label='Name'
+          label='Restaurant Name'
           registerId='name'
-          placeholder='Enter Name'
+          placeholder='Enter Restaurant Name'
           errors={errors.name}
           register={register}
           rulesForm={registerRestaurantRulesConfig.name}
@@ -189,10 +190,12 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
         />
 
         <InputPhone
+          label='Restaurant Phone number'
           isRequired
           register={register}
           errors={errors}
           withVerifyCode={false}
+          control={control}
         />
 
         <RegisterPassword
@@ -245,20 +248,6 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
         />
 
         <InputForm
-          id='country_code'
-          name='country_code'
-          type='text'
-          label='Country Code'
-          registerId='country_code'
-          placeholder='Enter Country Code'
-          autoComplete='country_code'
-          errors={errors.country_code}
-          register={register}
-          rulesForm={registerRestaurantRulesConfig.country_code}
-          isRequired
-        />
-
-        <InputForm
           id='referralCode'
           name='referralCode'
           type='text'
@@ -281,11 +270,17 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
         <section className='mt-4'>
           <BulletPagination stepToActivate='REGISTER_BASIC_INFO' />
 
-          <br /><br />
-
           <Button type='submit' classes='w-full mt-4 text-sm bg-primary-500'>
             Sign Up
           </Button>
+
+          <p className='mt-4'>
+            <span className='font-semibold'>Already have an account?</span>
+
+            <Link href='/auth/login'>
+              <a className='text-textAcent-500 focus:underline'> Login.</a>
+            </Link>
+          </p>
         </section>
       </form>
     </div>

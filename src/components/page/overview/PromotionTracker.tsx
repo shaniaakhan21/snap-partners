@@ -12,7 +12,17 @@ export const PromotionTracker = ({ userAuth }: { userAuth: IAuth }) => {
       </div>
 
       <br />
-      <CurrentRank rank={userAuth.isManager ? 'Manager' : 'Free Account'} />
+      <CurrentRank rank={
+        userAuth.roles.customer
+          ? 'Customer'
+          : userAuth.roles.driver
+            ? 'Driver'
+            : userAuth.roles.merchant
+              ? 'Restaurant'
+              : userAuth.roles.admin
+                ? 'Admin'
+                : 'Empty'
+      } />
 
       <div className='w-full bg-white flex flex-col sm:flex-row justify-start items-center p-3 gap-3'>
         <div className='h-14 w-14 rounded-md bg-[#FFE59E] flex justify-center items-center'>
