@@ -5,7 +5,7 @@ import { useRef } from 'react'
 export const FooterPrivate = () => {
   const { current: footerLinks } = useRef([
     { to: '#', label: 'About us' },
-    { to: '#', label: 'Merch Store' },
+    { to: 'https://store.snapdelivered.com/', label: 'Merch Store' },
     { to: '#', label: 'Opportunities with Snap Delivered' },
     { to: '#', label: 'Support' },
     { to: '/legal/privacy-policy', label: 'Privacy policy' },
