@@ -31,15 +31,14 @@ export const ModalForgotPassword = () => {
 
   const onSubmit = async (dataForm: IForm) => {
     setIsLoading(true)
-    // const { error } = await resetPasswordStepOne(dataForm.email)
+    const { error } = await resetPasswordStepOne(dataForm.email)
 
-    // if (error) {
-    //   handleFetchError(error.status, error.info)
-    //   setIsLoading(false)
-    //   return
-    // }
+    if (error) {
+      handleFetchError(error.status, error.info)
+      setIsLoading(false)
+      return
+    }
 
-    await timeout(1500)
     setEmailSent(true)
     setIsLoading(false)
     reset()
