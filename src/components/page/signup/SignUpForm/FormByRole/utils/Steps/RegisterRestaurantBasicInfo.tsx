@@ -7,7 +7,7 @@ import { InputPhone } from '../InputPhone'
 import { registerRestaurantRulesConfig } from '../formRules'
 import { RegisterPassword } from '../RegisterPassword'
 import { TermsAndConditions } from '../TermsAndConditions'
-import { signUpStep1 } from 'lib/services/session/signUp'
+import { signUpStep2 } from 'lib/services/session/signUp'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { IReferralLink } from 'lib/types'
 import { IHandleStep } from '../types'
@@ -25,6 +25,7 @@ export interface dataFormSignUpRestaurant {
   'name': string
   'password': string
   'save_on_snap': boolean
+  ownerName: string
 
   username: string
   confirmEmail: string
@@ -72,8 +73,6 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
 
     const phoneNumber = `+${dataForm.phoneNumber}`
 
-    const { error } = await signUpStep1({ phoneNumber })
-
     const dataToSend = {
       name: dataForm.name,
       lastname: null,
@@ -90,6 +89,7 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
         merchant: true
       },
       code: null,
+      ownerName: dataForm.ownerName,
       merchant: {
         city: dataForm.city,
         street_name: dataForm.street_name,
@@ -108,17 +108,19 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
       sponsorReferralCode: dataForm.referralCode || null
     }
 
+    handleUserInfo(dataToSend)
+
+    const { error } = await signUpStep2(dataToSend)
+
     if (error) {
       handleFetchError(error.status, error.info)
       setLoading(false)
       return
     }
 
-    handleUserInfo({ ...dataToSend })
-    setLoading(false)
-
-    handleStep(STEPS.VERIFY_CODE)
     reset()
+    setLoading(false)
+    handleStep(STEPS.SUCCESS_CODE)
   }
 
   if (isLoading) {
@@ -186,6 +188,19 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
           errors={errors.name}
           register={register}
           rulesForm={registerRestaurantRulesConfig.name}
+          isRequired
+        />
+
+        <InputForm
+          id='ownerName'
+          name='ownerName'
+          type='text'
+          label='Restaurant Owner Name'
+          registerId='ownerName'
+          placeholder='Enter Restaurant Owner Name'
+          errors={errors.ownerName}
+          register={register}
+          rulesForm={registerRestaurantRulesConfig.ownerName}
           isRequired
         />
 

@@ -95,6 +95,13 @@ export const registerRestaurantRulesConfig = {
     pattern: { value: /^[a-zA-Z0-9!@#$%\\^&*)(+=._-]*$/, message: 'Username not allow *' }
   },
 
+  ownerName: {
+    required: { value: true, message: 'Restaurant Owner Name Required *' },
+    maxLength: { value: 80, message: 'Max 80 Characters *' },
+    minLength: { value: 3, message: 'Min 3 Characters *' },
+    pattern: { value: /^[a-zA-Z\s]*$/, message: 'Restaurant Owner Name not allow *' }
+  },
+
   email: {
     required: { value: true, message: 'Email Required *' },
     pattern: {
