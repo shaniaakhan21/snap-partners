@@ -5,6 +5,7 @@ import { DriverIcon, GenealogyIcon, RestaurantsIcon } from 'components/common/ic
 import { useAuthStore } from 'lib/stores'
 import { PAGE_INFO } from 'config/pageInfo'
 import type { Page as PageNext, ReactNode } from 'lib/types'
+import { ROLES } from 'config/roles'
 
 const { SEO } = PAGE_INFO
 
@@ -28,7 +29,12 @@ const ProfilePage: PageNext = () => {
 
         <div>
           <span className='text-2xl font-bold text-gray-800'>{auth.username}</span>
-          <span className='block text-center px-4 py-1 rounded-full border-2 border-amber-400'>Free Account</span>
+          <span className='block text-center px-4 py-1 rounded-full border-2 border-amber-400 font-bold'>
+            {auth.roles.admin && 'Admin'}
+            {auth.roles.customer && 'Customer'}
+            {auth.roles.driver && 'Driver'}
+            {auth.roles.merchant && 'Restaurant'}
+          </span>
         </div>
       </div>
 
@@ -187,36 +193,40 @@ const ProfilePage: PageNext = () => {
         </button>
       </div> */}
 
-      <div className='w-full mt-10'>
-        <span className='text-3xl font-bold'>Extend your posibilities</span> <br />
-        <span className='text-lg font-semibold'>Your can be a driver at the same time as a costumber or a restaurant</span>
+      {
+        (!auth.roles.customer || !auth.roles.driver || !auth.roles.merchant) && (
+          <div className='w-full mt-10'>
+            <span className='text-3xl font-bold'>Extend your posibilities</span> <br />
+            <span className='text-lg font-semibold'>Your can be a driver at the same time as a costumber or a restaurant</span>
 
-        <div className='w-full flex flex-col md:flex-row justify-between items-start gap-y-10 gap-x-10 mt-10'>
-          <button className='bg-white rounded-md p-4 w-full'>
-            <div className='flex flex-col md:flex-row justify-center items-center'>
-              <span className='text-2xl font-bold text-gray-800 mr-10'>Become a Driver</span>
-              <DriverIcon classes='w-24' />
+            <div className='w-full flex flex-col md:flex-row justify-between items-start gap-y-10 gap-x-10 mt-10'>
+              {
+                (auth.roles.customer || auth.roles.merchant) &&
+                  <Link href={`/auth/signup?role=${ROLES.DRIVER}`}>
+                    <a className='bg-white hover:bg-primary-300 hover:bg-opacity-30 rounded-md p-4 w-full'>
+                      <div className='flex flex-col md:flex-row justify-center items-center'>
+                        <span className='text-2xl font-bold text-gray-800 mr-10'>Become a Driver</span>
+                        <DriverIcon classes='w-24' />
+                      </div>
+                    </a>
+                  </Link>
+              }
+
+              {
+                (auth.roles.customer || auth.roles.driver) &&
+                <Link href={`/auth/signup?role=${ROLES.RESTAURANT}`}>
+                  <a className='bg-white hover:bg-primary-300 hover:bg-opacity-30 rounded-md p-4 w-full'>
+                    <div className='flex flex-col md:flex-row justify-center items-center'>
+                      <span className='text-2xl font-bold text-gray-800 mr-10'>Become a Restaurant</span>
+                      <RestaurantsIcon />
+                    </div>
+                  </a>
+                </Link>
+              }
             </div>
-
-            {/* <div className='mt-6'>
-              <span className='text-gray-700 font-bold text-lg'>Text here to describe features</span>
-              <p>Fullfil and Manage orders and </p>
-            </div> */}
-          </button>
-
-          <button className='bg-white rounded-md p-4 w-full'>
-            <div className='flex flex-col md:flex-row justify-center items-center'>
-              <span className='text-2xl font-bold text-gray-800 mr-10'>Become a Restaurant</span>
-              <RestaurantsIcon />
-            </div>
-
-            {/* <div className='mt-6'>
-              <span className='text-gray-700 font-bold text-lg'>Text here to describe features</span>
-              <p>Fullfil and Manage orders and </p>
-            </div> */}
-          </button>
-        </div>
-      </div>
+          </div>
+        )
+      }
 
       <button
         className='block text-primary-500 mx-auto mt-11 font-bold text-lg'
