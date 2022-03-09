@@ -47,14 +47,14 @@ export const ModalForgotPassword = () => {
 
   if (isLoading) {
     return (
-      <div className='flex items-center justify-center md:p-8'>
+      <div className='min-h-[564px] flex items-center justify-center md:p-8'>
         <Spinner />
       </div>
     )
   }
 
   return (
-    <div className="w-full flex flex-col items-center md:p-8">
+    <div className="w-full min-h-[564px] flex flex-col items-center justify-center md:p-8">
       <h3 className='text-3xl font-semibold text-gray-700'>Forgot Password?</h3>
       <br />
       <div className='w-28'>
@@ -113,7 +113,10 @@ export const ModalForgotPassword = () => {
             isRequired
           />
           <br />
-          <Button classes='w-24 mt-4 text-sm bg-primary-500' onClick={handleSubmit(onSubmit)}>
+          <Button
+            classes='w-full mt-4 text-sm bg-primary-500'
+            onClick={handleSubmit(onSubmit)}
+          >
             Send
           </Button>
         </>
