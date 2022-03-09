@@ -5,6 +5,7 @@ import { LoginForm } from 'components/page/login/LoginForm'
 import { useAuthStore } from 'lib/stores'
 import { PAGE_INFO } from 'config/pageInfo'
 import type { Page } from 'lib/types'
+import { FooterPublic } from 'components/layout/public/Footer'
 
 const { SEO } = PAGE_INFO
 
@@ -53,6 +54,8 @@ const LoginPage: Page = () => {
           </section>
         </div>
       </div>
+
+      <FooterPublic />
     </>
   )
 }

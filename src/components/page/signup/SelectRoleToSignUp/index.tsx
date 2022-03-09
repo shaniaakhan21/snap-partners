@@ -30,14 +30,15 @@ export const SelectRoleToSignUp = () => {
   ])
 
   return (
-    <div className='text-center'>
+    <div className='text-center h-[85vh] flex flex-col justify-center items-center w-full'>
       <span className='text-3xl text-gray-800 font-bold'>Welcome To Snap Delivered</span>
+      <p className='text-gray-600 font-semibold'>Please choose how you want to register, other rolls <br className='hidden sm:block' /> can be added once you log in </p>
 
-      <ul className='flex flex-col justify-center items-center my-4 gap-y-4'>
+      <ul className='flex flex-col justify-center items-center my-4 gap-y-4 w-full'>
         {
           roles.map(role => {
             return (
-              <li key={role.key} className='max-w-xs w-full bg-gray-200 hover:bg-gray-300 rounded-md'>
+              <li key={role.key} className='max-w-md w-full bg-gray-200 hover:bg-gray-300 rounded-md'>
                 <button
                   onClick={() => router.push(role.link)}
                   className='w-full py-4 px-5 flex justify-between items-center gap-x-8'
@@ -54,6 +55,10 @@ export const SelectRoleToSignUp = () => {
           })
         }
       </ul>
+
+      <br />
+      <p className='text-gray-700 font-semibold'>OR</p>
+      <br />
 
       <p>
         <span className='font-bold text-gray-800'>Already have an account?</span>

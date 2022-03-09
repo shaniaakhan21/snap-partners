@@ -106,7 +106,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
   }
 
   return (
-    <div className='max-w-lg mx-auto w-full'>
+    <div className='max-w-md mx-auto w-full'>
       <span className='font-bold text-4xl text-[#18203F]'>Sign up!</span>
       <p className='text-gray-500'>Welcome! register to continue.</p>
 
@@ -242,7 +242,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             Sign Up
           </Button>
 
-          <p>
+          <p className='mt-4'>
             <span className='font-semibold'>Already have an account?</span>
             <Link href='/auth/login'>
               <a className='text-textAcent-500 focus:underline'> Login.</a>

@@ -13,6 +13,7 @@ import { IReferralLink } from 'lib/types'
 import { IHandleStep } from '../types'
 import { STEPS } from '.'
 import { BulletPagination } from './BulletPagination'
+import Link from 'next/link'
 
 export interface dataFormSignUpRestaurant {
   'city' : string
@@ -129,7 +130,7 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
   }
 
   return (
-    <div className='max-w-lg mx-auto w-full'>
+    <div className='max-w-md mx-auto w-full'>
       <span className='font-bold text-4xl text-[#18203F]'>Sign up!</span>
       <p className='text-gray-500'>Welcome! register to continue.</p>
 
@@ -272,6 +273,14 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
           <Button type='submit' classes='w-full mt-4 text-sm bg-primary-500'>
             Sign Up
           </Button>
+
+          <p className='mt-4'>
+            <span className='font-semibold'>Already have an account?</span>
+
+            <Link href='/auth/login'>
+              <a className='text-textAcent-500 focus:underline'> Login.</a>
+            </Link>
+          </p>
         </section>
       </form>
     </div>

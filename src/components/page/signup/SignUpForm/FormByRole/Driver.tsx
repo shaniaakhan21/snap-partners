@@ -22,7 +22,7 @@ export const SignUpDriverForm = ({ referralLink }: { referralLink: IReferralLink
   }
 
   return (
-    <div>
+    <div className='w-full'>
       {
         userTrack.step === STEPS.REGISTER_BASIC_INFO && (
           <RegisterBasicInfo
