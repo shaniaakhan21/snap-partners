@@ -10,8 +10,6 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { InputPhone } from './utils/InputPhone'
 import { RegisterPassword } from './utils/RegisterPassword'
-// import { RememberAndPolicy } from './utils/RememberAndPolicy'
-import { RRSSAuth } from './utils/RRSSAuth'
 
 export interface IDataForm {
   phoneExt: string
@@ -79,8 +77,8 @@ export const LoginWithPhone = () => {
   }
 
   return (
-    <div className='flex flex-col justify-start items-start gap-x-2 mb-2 mt-3'>
-      <form className='max-w-xs mt-2' onSubmit={handleSubmit(onSubmit)}>
+    <div className='flex flex-col justify-start items-start gap-x-2 mb-2 mt-3 w-full'>
+      <form className='mt-2 w-full' onSubmit={handleSubmit(onSubmit)}>
         <div className='flex gap-x-2 justify-start items-center w-full'>
           <label htmlFor='phone' className='font-bold text-gray-700 uppercase text-sm'>
             Phone
@@ -123,8 +121,6 @@ export const LoginWithPhone = () => {
             </Link>
           </p>
         </section>
-
-        <RRSSAuth />
       </form>
     </div>
   )

@@ -129,11 +129,11 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
   }
 
   return (
-    <div>
+    <div className='max-w-lg mx-auto w-full'>
       <span className='font-bold text-4xl text-[#18203F]'>Sign up!</span>
       <p className='text-gray-500'>Welcome! register to continue.</p>
 
-      <form className='max-w-xs mt-6' onSubmit={handleSubmit(onSubmit)}>
+      <form className='mt-6' onSubmit={handleSubmit(onSubmit)}>
         <InputForm
           id='username'
           name='username'
@@ -268,8 +268,6 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
 
         <section className='mt-4'>
           <BulletPagination stepToActivate='REGISTER_BASIC_INFO' />
-
-          <br /><br />
 
           <Button type='submit' classes='w-full mt-4 text-sm bg-primary-500'>
             Sign Up

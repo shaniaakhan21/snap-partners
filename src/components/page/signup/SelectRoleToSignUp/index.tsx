@@ -61,9 +61,8 @@ export const SelectRoleToSignUp = () => {
           <a className='text-textAcent-500'> Login.</a>
         </Link>
       </p>
-      <br />
 
-      <div className='max-w-sm mx-auto'>
+      {/* <div className='max-w-sm mx-auto'>
         <span className='text-xl text-gray-500 text-center'>You can download some of our apps below or visit our website at </span>
         <Link href='https://snapdelivered.com/'>
           <a target='_blank' className='text-xl text-primary-500 text-center'>snapdelivered.com</a>
@@ -84,7 +83,7 @@ export const SelectRoleToSignUp = () => {
         appStoreHref={mobileAppsLinks.restaurant.appStore}
         playStoreHref={mobileAppsLinks.restaurant.playStore}
         title={mobileAppsLinks.restaurant.title}
-      />
+      /> */}
     </div>
   )
 }

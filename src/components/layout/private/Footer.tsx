@@ -2,7 +2,7 @@ import { AppleIcon, GooglePlayIcon, YoutubeIcon } from 'components/common/icons'
 import Link from 'next/link'
 import { useRef } from 'react'
 
-export const Footer = () => {
+export const FooterPrivate = () => {
   const { current: footerLinks } = useRef([
     { to: '#', label: 'About us' },
     { to: '#', label: 'Merch Store' },

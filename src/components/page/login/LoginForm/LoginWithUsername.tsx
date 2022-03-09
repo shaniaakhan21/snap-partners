@@ -10,8 +10,6 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { InputForm } from './utils/Input'
 import { RegisterPassword } from './utils/RegisterPassword'
-// import { RememberAndPolicy } from './utils/RememberAndPolicy'
-import { RRSSAuth } from './utils/RRSSAuth'
 
 export interface IDataForm {
   username: string
@@ -78,7 +76,7 @@ export const LoginWithUsername = () => {
 
   return (
     <div className='flex flex-col justify-start items-start gap-x-2 my-2'>
-      <form className='max-w-xs mt-2' onSubmit={handleSubmit(onSubmit)}>
+      <form className='w-full mt-2' onSubmit={handleSubmit(onSubmit)}>
         <InputForm
           id='username'
           name='username'
@@ -120,8 +118,6 @@ export const LoginWithUsername = () => {
             </Link>
           </p>
         </section>
-
-        <RRSSAuth />
       </form>
     </div>
   )

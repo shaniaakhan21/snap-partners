@@ -5,7 +5,6 @@ import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
 import { InputForm } from '../Input'
 import { InputPhone } from '../InputPhone'
-import { RRSSAuth } from '../RRSSAuth'
 import { registerRulesConfig } from '../formRules'
 import { RegisterPassword } from '../RegisterPassword'
 import { TermsAndConditions } from '../TermsAndConditions'
@@ -15,7 +14,6 @@ import { STEPS } from '.'
 import { BulletPagination } from './BulletPagination'
 import { signUpStep1 } from 'lib/services/session/signUp'
 import { handleFetchError } from 'lib/utils/handleFetchError'
-// import { InputFile } from '../InputFile'
 
 interface IStepOpeProps {
   referralLink: IReferralLink,
@@ -108,11 +106,11 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
   }
 
   return (
-    <div>
+    <div className='max-w-lg mx-auto w-full'>
       <span className='font-bold text-4xl text-[#18203F]'>Sign up!</span>
       <p className='text-gray-500'>Welcome! register to continue.</p>
 
-      <form className='max-w-xs mt-6' onSubmit={handleSubmit(onSubmit)}>
+      <form className='mt-6 w-full' onSubmit={handleSubmit(onSubmit)}>
         <InputForm
           id='email'
           name='email'
@@ -244,17 +242,13 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             Sign Up
           </Button>
 
-          <br /><br />
-
           <p>
-            <span className='font-semibold'>Already have an accout?</span>
+            <span className='font-semibold'>Already have an account?</span>
             <Link href='/auth/login'>
               <a className='text-textAcent-500 focus:underline'> Login.</a>
             </Link>
           </p>
         </section>
-
-        <RRSSAuth />
       </form>
     </div>
   )
