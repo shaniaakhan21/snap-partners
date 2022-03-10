@@ -1,11 +1,15 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import DashboardLayout from 'layouts/private/Dashboard'
-import { DriverIcon, GenealogyIcon, RestaurantsIcon } from 'components/common/icons'
+import {
+  // DriverIcon
+  GenealogyIcon
+  // RestaurantsIcon
+} from 'components/common/icons'
 import { useAuthStore } from 'lib/stores'
 import { PAGE_INFO } from 'config/pageInfo'
 import type { Page as PageNext, ReactNode } from 'lib/types'
-import { ROLES } from 'config/roles'
+// import { ROLES } from 'config/roles'
 
 const { SEO } = PAGE_INFO
 
@@ -193,7 +197,7 @@ const ProfilePage: PageNext = () => {
         </button>
       </div> */}
 
-      {
+      {/* {
         (!auth.roles.customer || !auth.roles.driver || !auth.roles.merchant) && (
           <div className='w-full mt-10'>
             <span className='text-3xl font-bold'>Extend your posibilities</span> <br />
@@ -226,7 +230,7 @@ const ProfilePage: PageNext = () => {
             </div>
           </div>
         )
-      }
+      } */}
 
       <button
         className='block text-primary-500 mx-auto mt-11 font-bold text-lg'
