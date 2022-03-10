@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button } from 'components/common/Button'
@@ -13,8 +14,8 @@ import { IReferralLink } from 'lib/types'
 import { IHandleStep } from '../types'
 import { STEPS } from '.'
 import { BulletPagination } from './BulletPagination'
-import Link from 'next/link'
-
+import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
+import { signUp } from 'lib/utils/gtm'
 export interface dataFormSignUpRestaurant {
   'city' : string
   'street_name': string,
@@ -45,6 +46,7 @@ interface IRegisterRestaurantBasicInfoProps {
 export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, handleStep }: IRegisterRestaurantBasicInfoProps) => {
   const { handleSubmit, register, reset, formState: { errors }, setError, control } = useForm<dataFormSignUpRestaurant>()
   const [isLoading, setLoading] = useState(false)
+  const role = useRoleFromUrl()
 
   const onSubmit = async (dataForm: dataFormSignUpRestaurant) => {
     setLoading(true)
@@ -119,6 +121,7 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
     }
 
     reset()
+    signUp(role, 2)
     setLoading(false)
     handleStep(STEPS.SUCCESS_CODE)
   }
