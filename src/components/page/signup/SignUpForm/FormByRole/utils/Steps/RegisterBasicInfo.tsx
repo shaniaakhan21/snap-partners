@@ -14,6 +14,8 @@ import { STEPS } from '.'
 import { BulletPagination } from './BulletPagination'
 import { signUpStep1 } from 'lib/services/session/signUp'
 import { handleFetchError } from 'lib/utils/handleFetchError'
+import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
+import { signUp } from 'lib/utils/gtm'
 
 interface IStepOpeProps {
   referralLink: IReferralLink,
@@ -26,6 +28,7 @@ const maxFileSizeInMb = 5
 export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: IStepOpeProps) => {
   const { handleSubmit, register, reset, formState: { errors }, setError, control } = useForm<IDataForm>()
   const [isLoading, setLoading] = useState(false)
+  const role = useRoleFromUrl()
 
   const onSubmit = async (dataForm: IDataForm) => {
     setLoading(true)
@@ -91,8 +94,9 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
         merchant: referralLink.role === 'RESTAURANT'
       }
     })
-    setLoading(false)
 
+    setLoading(false)
+    signUp(role, 2)
     handleStep(STEPS.VERIFY_CODE)
     reset()
   }

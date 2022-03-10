@@ -9,9 +9,12 @@ import { getUserMe } from 'lib/services/users/getUserMe'
 import { IHandleStep, IUserTrack } from '../types'
 import { IReferralLink } from 'lib/types'
 import { handleFetchError } from 'lib/utils/handleFetchError'
+import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
+import { signUp } from 'lib/utils/gtm'
 
 export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { userTrack: IUserTrack, handleStep: IHandleStep, referralLink: IReferralLink }) => {
   const router = useRouter()
+  const role = useRoleFromUrl()
   const { setAuth } = useAuthStore()
   const { setNewWindow } = useNewWindowOpenedStore()
   const [isLoading, setIsLoading] = useState(false)
@@ -67,8 +70,14 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
       'windowUpgradeToManager'
     )
 
+    signUp(role, 4, undefined, 'yes', 'no')
     setNewWindow(windowOpened)
     // When a newWindow is sent, in DashboardLayout we have an effect to handle upgrade to manager.
+  }
+
+  const handleSkip = () => {
+    handleClickLogin()
+    signUp(role, 4, undefined, 'no', 'yes')
   }
 
   if (isLoading) {
@@ -104,7 +113,7 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
 
         <p className='mt-2'>
           Do it later in{' '}
-          <button onClick={handleClickLogin} className='text-primary-500 cursor-pointer focus:underline'>Profile</button>
+          <button onClick={handleSkip} className='text-primary-500 cursor-pointer focus:underline'>Profile</button>
         </p>
       </div>
     </div>

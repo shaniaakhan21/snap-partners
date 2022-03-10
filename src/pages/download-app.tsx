@@ -1,7 +1,9 @@
 import Link from 'next/link'
 import Head from 'next/head'
 
+import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 import type { Page as PageNext } from 'lib/types'
+import { signUp } from 'lib/utils/gtm'
 import { PAGE_INFO } from 'config/pageInfo'
 
 import { FooterPublic } from 'components/layout/public/Footer'
@@ -15,6 +17,7 @@ const { SEO } = PAGE_INFO
 const DownloadAppPage: PageNext = () => {
   const [device, setDevice] = useState<'APPLE' | 'ANDROID'>(null)
   const [isLoading, setIsLoading] = useState(true)
+  const role = useRoleFromUrl()
   const router = useRouter()
 
   const { current: androidApps } = useRef([
@@ -65,6 +68,10 @@ const DownloadAppPage: PageNext = () => {
       if (router.query.device === 'ANDROID') return 'ANDROID'
       else return null
     } else return null
+  }
+
+  const trackStore = (store: 'android' | 'ios') => {
+    signUp(role, 3, store)
   }
 
   useEffect(() => {
@@ -154,6 +161,7 @@ const DownloadAppPage: PageNext = () => {
 
                       <a
                         href={androidApp.link}
+                        onClick={() => trackStore('android')}
                         target='_blank'
                         rel='noopener noreferrer'
                         className='block w-fit mt-4'
@@ -172,6 +180,7 @@ const DownloadAppPage: PageNext = () => {
 
                       <a
                         href={appleApp.link}
+                        onClick={() => trackStore('ios')}
                         target='_blank'
                         rel='noopener noreferrer'
                         className='block w-fit mt-4'
