@@ -7,7 +7,7 @@ export const LoginForm = () => {
   const [typeInput, setTypeInput] = useState<'phone' | 'email' | 'username'>('phone')
 
   return (
-    <div>
+    <div className='max-w-md mx-auto w-full'>
       <span className='sm:hidden font-bold text-4xl text-[#18203F]'>SnapDelivered</span>
       <span className='hidden sm:block font-bold text-4xl text-[#18203F]'>Login</span>
       <p className='text-gray-500'>Welcome! Login to continue.</p>

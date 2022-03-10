@@ -2,7 +2,6 @@ import { IReferralLink } from 'lib/types'
 import { useState } from 'react'
 import { STEPS, SuccessCode, UpgradeToManager, VerifyCode } from './utils/Steps'
 import { RegisterRestaurantBasicInfo } from './utils/Steps/RegisterRestaurantBasicInfo'
-import { VerifyCodeToRestaurants } from './utils/Steps/VerifyCodeToRestaurants'
 import { IHandleStep, IHandleUserInfo } from './utils/types'
 
 export const SignUpRestaurantForm = ({ referralLink }: { referralLink: IReferralLink }) => {
@@ -23,7 +22,7 @@ export const SignUpRestaurantForm = ({ referralLink }: { referralLink: IReferral
   }
 
   return (
-    <div>
+    <div className='w-full'>
 
       {
         userTrack.step === STEPS.REGISTER_BASIC_INFO && (

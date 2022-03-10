@@ -13,14 +13,14 @@ export const MobileAppsLink = ({ playStoreHref, appStoreHref, title }: IProps) =
       {title && <h6 className='mb-2 text-primary-500 text-xl'>{title}</h6>}
 
       <div className='flex flex-wrap justify-center gap-x-4 gap-y-4'>
-        <Link href={playStoreHref}>
-          <a target='_blank'>
+        <Link href='/download-app?device=ANDROID'>
+          <a>
             <GooglePlayBanner />
           </a>
         </Link>
 
-        <Link href={appStoreHref}>
-          <a target='_blank'>
+        <Link href='/download-app?device=APPLE'>
+          <a>
             <AppleStore />
           </a>
         </Link>

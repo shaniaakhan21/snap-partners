@@ -22,7 +22,7 @@ export const SignUpCustomerForm = ({ referralLink }: { referralLink: IReferralLi
   }
 
   return (
-    <div>
+    <div className='w-full'>
       {
         userTrack.step === STEPS.REGISTER_BASIC_INFO && (
           <RegisterBasicInfo

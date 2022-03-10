@@ -5,17 +5,17 @@ import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
 import { InputForm } from '../Input'
 import { InputPhone } from '../InputPhone'
-import { RRSSAuth } from '../RRSSAuth'
 import { registerRulesConfig } from '../formRules'
 import { RegisterPassword } from '../RegisterPassword'
 import { TermsAndConditions } from '../TermsAndConditions'
 import { IReferralLink } from 'lib/types'
-import { IHandleStep, IHandleUserInfo, IDataForm } from '../types'
+import { IHandleStep, IDataForm } from '../types'
 import { STEPS } from '.'
 import { BulletPagination } from './BulletPagination'
 import { signUpStep1 } from 'lib/services/session/signUp'
 import { handleFetchError } from 'lib/utils/handleFetchError'
-// import { InputFile } from '../InputFile'
+import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
+import { signUp } from 'lib/utils/gtm'
 
 interface IStepOpeProps {
   referralLink: IReferralLink,
@@ -26,8 +26,9 @@ interface IStepOpeProps {
 const maxFileSizeInMb = 5
 
 export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: IStepOpeProps) => {
-  const { handleSubmit, register, reset, formState: { errors }, setError } = useForm<IDataForm>()
+  const { handleSubmit, register, reset, formState: { errors }, setError, control } = useForm<IDataForm>()
   const [isLoading, setLoading] = useState(false)
+  const role = useRoleFromUrl()
 
   const onSubmit = async (dataForm: IDataForm) => {
     setLoading(true)
@@ -66,7 +67,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       return
     }
 
-    const phoneNumber = `+${dataForm.phoneExt}${dataForm.phoneNumber}`
+    const phoneNumber = `+${dataForm.phoneNumber}`
 
     const { error } = await signUpStep1({ phoneNumber })
 
@@ -93,8 +94,9 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
         merchant: referralLink.role === 'RESTAURANT'
       }
     })
-    setLoading(false)
 
+    setLoading(false)
+    signUp(role, 2)
     handleStep(STEPS.VERIFY_CODE)
     reset()
   }
@@ -108,11 +110,11 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
   }
 
   return (
-    <div>
+    <div className='max-w-md mx-auto w-full'>
       <span className='font-bold text-4xl text-[#18203F]'>Sign up!</span>
       <p className='text-gray-500'>Welcome! register to continue.</p>
 
-      <form className='max-w-xs mt-6' onSubmit={handleSubmit(onSubmit)}>
+      <form className='mt-6 w-full' onSubmit={handleSubmit(onSubmit)}>
         <InputForm
           id='email'
           name='email'
@@ -158,7 +160,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           id='name'
           name='name'
           type='text'
-          label='Name'
+          label={referralLink.role ? `${referralLink.role} Name` : 'Name'}
           registerId='name'
           placeholder='Enter Name'
           errors={errors.name}
@@ -181,10 +183,12 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
         />
 
         <InputPhone
+          label={referralLink.role ? `${referralLink.role} Phone` : 'Phone'}
           isRequired
           register={register}
           errors={errors}
           withVerifyCode
+          control={control}
         />
 
         <RegisterPassword
@@ -242,17 +246,13 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             Sign Up
           </Button>
 
-          <br /><br />
-
-          <p>
-            <span className='font-semibold'>Already have an accout?</span>
+          <p className='mt-4'>
+            <span className='font-semibold'>Already have an account?</span>
             <Link href='/auth/login'>
               <a className='text-textAcent-500 focus:underline'> Login.</a>
             </Link>
           </p>
         </section>
-
-        <RRSSAuth />
       </form>
     </div>
   )
