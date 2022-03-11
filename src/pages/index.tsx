@@ -37,7 +37,6 @@ const HomePage: PageNext = () => {
 
         if (error) {
           handleFetchError(error.status, error.info)
-          router.push('/auth/login')
           return
         }
 
