@@ -24,8 +24,6 @@ export const LoginWithEmail = () => {
   const onSubmit = async (dataForm: IDataForm) => {
     setLoading(true)
 
-    setLoading(true)
-
     const { data: dataLogin, error: errorLogin } = await login({
       email: dataForm.email,
       password: dataForm.password
