@@ -63,12 +63,12 @@ export const ReferralCards = ({ title, ilustration, link, newUser = false, class
         <CopyIcon classes='w-5 h-5' />
       </button>
 
-      <Link href='#'>
+      {/* <Link href='#'>
         <a className='w-full p-1 bg-transparentPrimary-8% hover:bg-transparentPrimary-24% text-primary-500 border-2 border-primary-500 rounded-sm mt-4 transition-colors inline-flex items-center justify-center' onClick={() => referralCard(title, '', `genealogy - ${userType}`)}>
           <span className='font-bold mr-2 text-xs'>Open My Referral Genealogy</span>
           <ArrowRightIcon classes='w-4 h-4' />
         </a>
-      </Link>
+      </Link> */}
     </div>
   )
 }
