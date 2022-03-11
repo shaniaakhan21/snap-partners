@@ -8,7 +8,7 @@ import { InputPhone } from '../InputPhone'
 import { registerRestaurantRulesConfig } from '../formRules'
 import { RegisterPassword } from '../RegisterPassword'
 import { TermsAndConditions } from '../TermsAndConditions'
-import { signUpStep1 } from 'lib/services/session/signUp'
+import { signUpStep2 } from 'lib/services/session/signUp'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { IReferralLink } from 'lib/types'
 import { IHandleStep } from '../types'
@@ -27,7 +27,7 @@ export interface dataFormSignUpRestaurant {
   'name': string
   'password': string
   'save_on_snap': boolean
-  // ownerName: string
+  ownerName: string
 
   username: string
   confirmEmail: string
@@ -75,7 +75,6 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
     }
 
     const phoneNumber = `+${dataForm.phoneNumber}`
-    const { error } = await signUpStep1({ phoneNumber })
 
     const dataToSend = {
       name: dataForm.name,
@@ -93,7 +92,7 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
         merchant: true
       },
       code: null,
-      // ownerName: dataForm.ownerName,
+      ownerName: dataForm.ownerName,
       merchant: {
         city: dataForm.city,
         street_name: dataForm.street_name,
@@ -114,7 +113,7 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
 
     handleUserInfo(dataToSend)
 
-    // const { error } = await signUpStep2(dataToSend)
+    const { error } = await signUpStep2(dataToSend)
 
     if (error) {
       handleFetchError(error.status, error.info)
@@ -196,7 +195,7 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
           isRequired
         />
 
-        {/* <InputForm
+        <InputForm
           id='ownerName'
           name='ownerName'
           type='text'
@@ -207,7 +206,7 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
           register={register}
           rulesForm={registerRestaurantRulesConfig.ownerName}
           isRequired
-        /> */}
+        />
 
         <InputPhone
           label='Restaurant Phone number'
