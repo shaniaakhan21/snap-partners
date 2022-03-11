@@ -1,7 +1,6 @@
-import { ArrowRightIcon, CalendarIcon, CopyIcon } from 'components/common/icons'
+import { CalendarIcon, CopyIcon } from 'components/common/icons'
 import { useCopyToClipboard } from 'lib/hooks/useCopyToClipboard'
 import { referralCard } from 'lib/utils/gtm'
-import Link from 'next/link'
 import { useMemo } from 'react'
 
 interface IProps {
