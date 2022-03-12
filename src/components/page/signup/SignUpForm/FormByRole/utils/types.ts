@@ -15,7 +15,6 @@ export interface IDataForm extends IUserToSignUp {
   confirmPassword: string
   rememberMe: boolean
   termsAndConditions: boolean
-  phoneExt: string
   phoneNumber: string
 
   //   "name": "CustomerName",

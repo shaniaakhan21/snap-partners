@@ -10,7 +10,7 @@ import { getUserMe } from 'lib/services/users/getUserMe'
 import { timeout } from 'lib/utils/timeout'
 
 import { Drawer, Navbar } from 'components/layout/Dashboard'
-import { Footer } from 'components/layout/Footer'
+import { FooterPrivate } from 'components/layout/private/Footer'
 import { Spinner } from 'components/common/loaders'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 
@@ -111,7 +111,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           {children}
         </div>
 
-        <Footer />
+        <FooterPrivate />
       </main>
     </div>
   )

@@ -14,7 +14,7 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
     title: appTitle
   } = mobileAppsLinks[referralLink.role.toLocaleLowerCase()]
   return (
-    <div className='flex flex-col justify-center items-center'>
+    <div className='flex flex-col justify-center items-center max-w-xl mx-auto'>
       <span className='text-3xl font-bold'>SnapDelivered</span>
       <br />
       <br />

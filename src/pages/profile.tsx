@@ -1,10 +1,15 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import DashboardLayout from 'layouts/private/Dashboard'
-import { EditIcon, GenealogyIcon } from 'components/common/icons'
+import {
+  // DriverIcon
+  GenealogyIcon
+  // RestaurantsIcon
+} from 'components/common/icons'
 import { useAuthStore } from 'lib/stores'
 import { PAGE_INFO } from 'config/pageInfo'
 import type { Page as PageNext, ReactNode } from 'lib/types'
+// import { ROLES } from 'config/roles'
 
 const { SEO } = PAGE_INFO
 
@@ -21,14 +26,19 @@ const ProfilePage: PageNext = () => {
         <div className='w-20 h-20 bg-gray-500 rounded-full flex justify-center items-center relative'>
           <GenealogyIcon classes='w-20 h-20' />
 
-          <button className='absolute top-0 right-0 px-1 py-1 bg-white rounded-full flex justify-center items-center border border-red'>
+          {/* <button className='absolute top-0 right-0 px-1 py-1 bg-white rounded-full flex justify-center items-center border border-red'>
             <EditIcon classes='w-5 h-5' />
-          </button>
+          </button> */}
         </div>
 
         <div>
           <span className='text-2xl font-bold text-gray-800'>{auth.username}</span>
-          <span className='block text-center px-4 py-1 rounded-full border-2 border-amber-400'>Free Account</span>
+          <span className='block text-center px-4 py-1 rounded-full border-2 border-amber-400 font-bold'>
+            {auth.roles.admin && 'Admin'}
+            {auth.roles.customer && 'Customer'}
+            {auth.roles.driver && 'Driver'}
+            {auth.roles.merchant && 'Restaurant'}
+          </span>
         </div>
       </div>
 
@@ -90,6 +100,7 @@ const ProfilePage: PageNext = () => {
                   value={auth.phone}
                   disabled={true}
                   className='w-full bg-transparent text-lg truncate'
+                  autoComplete='off'
                 />
               </div>
 
@@ -143,7 +154,7 @@ const ProfilePage: PageNext = () => {
             </div>
           </li>
 
-          <li className='rounded-xl bg-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center'>
+          {/* <li className='rounded-xl bg-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center'>
             <div>
               <label htmlFor='bankAccount' className='text-sm'>Bank Account</label>
               <br />
@@ -162,7 +173,7 @@ const ProfilePage: PageNext = () => {
                 Edit
               </button>
             </div>
-          </li>
+          </li> */}
         </ul>
       </div>
 
@@ -185,6 +196,41 @@ const ProfilePage: PageNext = () => {
           <h6 className='text-lg font-semibold'>Upgrade to manager</h6>
         </button>
       </div> */}
+
+      {/* {
+        (!auth.roles.customer || !auth.roles.driver || !auth.roles.merchant) && (
+          <div className='w-full mt-10'>
+            <span className='text-3xl font-bold'>Extend your posibilities</span> <br />
+            <span className='text-lg font-semibold'>Your can be a driver at the same time as a costumber or a restaurant</span>
+
+            <div className='w-full flex flex-col md:flex-row justify-between items-start gap-y-10 gap-x-10 mt-10'>
+              {
+                (auth.roles.customer || auth.roles.merchant) &&
+                  <Link href={`/auth/signup?role=${ROLES.DRIVER}`}>
+                    <a className='bg-white hover:bg-primary-300 hover:bg-opacity-30 rounded-md p-4 w-full'>
+                      <div className='flex flex-col md:flex-row justify-center items-center'>
+                        <span className='text-2xl font-bold text-gray-800 mr-10'>Become a Driver</span>
+                        <DriverIcon classes='w-24' />
+                      </div>
+                    </a>
+                  </Link>
+              }
+
+              {
+                (auth.roles.customer || auth.roles.driver) &&
+                <Link href={`/auth/signup?role=${ROLES.RESTAURANT}`}>
+                  <a className='bg-white hover:bg-primary-300 hover:bg-opacity-30 rounded-md p-4 w-full'>
+                    <div className='flex flex-col md:flex-row justify-center items-center'>
+                      <span className='text-2xl font-bold text-gray-800 mr-10'>Become a Restaurant</span>
+                      <RestaurantsIcon />
+                    </div>
+                  </a>
+                </Link>
+              }
+            </div>
+          </div>
+        )
+      } */}
 
       <button
         className='block text-primary-500 mx-auto mt-11 font-bold text-lg'

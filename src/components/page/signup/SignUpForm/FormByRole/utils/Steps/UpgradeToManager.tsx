@@ -74,17 +74,17 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
     // When a newWindow is sent, in DashboardLayout we have an effect to handle upgrade to manager.
   }
 
+  const handleSkip = () => {
+    handleClickLogin()
+    signUp(role, 4, undefined, 'no', 'yes')
+  }
+
   if (isLoading) {
     return (
       <div className='flex justify-center items-center h-[85vh]'>
         <Spinner classes='w-20 h-20 md:w-10 md:h-10' />
       </div>
     )
-  }
-
-  const handleSkip = () => {
-    handleClickLogin()
-    signUp(role, 4, undefined, 'no', 'yes')
   }
 
   return (

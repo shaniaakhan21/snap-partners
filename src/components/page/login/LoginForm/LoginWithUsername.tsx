@@ -10,13 +10,11 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { InputForm } from './utils/Input'
 import { RegisterPassword } from './utils/RegisterPassword'
-import { RememberAndPolicy } from './utils/RememberAndPolicy'
-import { RRSSAuth } from './utils/RRSSAuth'
 
 export interface IDataForm {
   username: string
   password: string
-  rememberMe: boolean
+  // rememberMe: boolean
 }
 
 export const LoginWithUsername = () => {
@@ -25,8 +23,6 @@ export const LoginWithUsername = () => {
   const { handleSubmit, register, reset, formState: { errors } } = useForm<IDataForm>()
 
   const onSubmit = async (dataForm: IDataForm) => {
-    setLoading(true)
-
     setLoading(true)
 
     const { data: dataLogin, error: errorLogin } = await login({
@@ -78,7 +74,7 @@ export const LoginWithUsername = () => {
 
   return (
     <div className='flex flex-col justify-start items-start gap-x-2 my-2'>
-      <form className='max-w-xs mt-2' onSubmit={handleSubmit(onSubmit)}>
+      <form className='w-full mt-2' onSubmit={handleSubmit(onSubmit)}>
         <InputForm
           id='username'
           name='username'
@@ -102,9 +98,9 @@ export const LoginWithUsername = () => {
           register={register}
         />
 
-        <RememberAndPolicy
+        {/* <RememberAndPolicy
           register={register}
-        />
+        /> */}
 
         <section className='mt-4 text-center sm:text-left'>
           <Button type='submit' classes='w-full mr-1 text-sm bg-primary-500'>
@@ -120,8 +116,6 @@ export const LoginWithUsername = () => {
             </Link>
           </p>
         </section>
-
-        <RRSSAuth />
       </form>
     </div>
   )

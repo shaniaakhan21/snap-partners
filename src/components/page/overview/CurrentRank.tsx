@@ -8,7 +8,7 @@ export const CurrentRank = ({ rank }: { rank: string }) => {
       </div>
 
       <div className='leading-5 text-gray-400 text-center md:text-left'>
-        <span>Current Rank</span> <br />
+        <span>Rank</span> <br />
         <span className='text-gray-800 font-bold text-2xl'>{rank}</span>
       </div>
     </div>

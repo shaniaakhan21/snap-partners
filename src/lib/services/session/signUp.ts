@@ -12,6 +12,7 @@ interface ISignUpDataBodyStep2 extends ISignUpDataBodyStep1 {
   password: string
   idImage: string | null
   insuranceImage: string | null
+  ownerName?: string
   roles: {
     admin: boolean
     customer: boolean
@@ -22,32 +23,42 @@ interface ISignUpDataBodyStep2 extends ISignUpDataBodyStep1 {
   sponsorReferralCode: string | null
 }
 
-// interface ISignUpDataBodyRestaurant {
-//   'city' : string
-//   'street_name': string,
-//   'state': string
-//   'country_code': string
-//   'email': string
-//   'mobile_no' : string
-//   'name': string
-//   'password': string
-//   'save_on_snap': boolean
+interface ISignUpDataBodyRestaurant {
+  name: string
+  lastname: string
+  email: string
+  username: string
+  password: string
+  phoneNumber,
+  idImage: null,
+  insuranceImage: null,
+  roles: {
+    admin: false,
+    customer: false,
+    driver: false,
+    merchant: true
+  },
+  code: null,
+  ownerName: string
+  merchant: {
+    city: string
+    'street_name': string
+    state: string
+    'country_code': string
+    'delivery_fees': 0.01
+    deliverykm: 0.01
+    email: string
+    maxdeliverytime: 0.01
+    'mobile_no': string
+    name: string
+    password: string
+    pincode: '1234',
+    'save_on_snap': true
+  },
+  sponsorReferralCode: string | null
+}
 
-//   lastname: string
-//   username: string
-//   idImage: string | null
-//   insuranceImage: string | null
-//   roles: {
-//     admin: boolean
-//     customer: boolean
-//     driver: boolean
-//     merchant: boolean
-//   },
-//   code: number
-//   sponsorReferralCode: string | null
-// }
-
-export const signUpStep1 = async (dataBody: ISignUpDataBodyStep1): Promise<IQueryErrorReturn> => {
+export const signUpStep1 = async (dataBody: ISignUpDataBodyStep1 | ISignUpDataBodyRestaurant): Promise<IQueryErrorReturn> => {
   const res = await fetch('/api/authentication/signUpStepOne', {
     method: 'POST',
     headers: {
