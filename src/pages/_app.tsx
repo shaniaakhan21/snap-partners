@@ -4,11 +4,9 @@ import { AppContext, AppInitialProps, AppLayoutProps } from 'next/app'
 import Script from 'next/script'
 import { useRouter } from 'next/router'
 import { ToastContainer } from 'react-toastify'
-import { SWRConfig } from 'swr'
 import { LoadingPage } from 'components/layout/LoadingPage'
 import { GTM_ID, pageview } from 'lib/utils/gtm'
 import { useLoadingPage } from 'lib/hooks/useLoadingPage'
-import { swrConfigValue } from 'lib/utils/swrConfig'
 import 'styles/tailwind.css'
 import 'react-toastify/dist/ReactToastify.min.css'
 import 'react-phone-input-2/lib/style.css'
@@ -57,11 +55,9 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
 
       <LoadingPage isRouteChanging={isRouteChanging} key={loadingKey} />
 
-      <SWRConfig value={swrConfigValue}>
-        <ThemeProvider theme={theme}>
-          {getLayout(<Component {...pageProps} />)}
-        </ThemeProvider>
-      </SWRConfig>
+      <ThemeProvider theme={theme}>
+        {getLayout(<Component {...pageProps} />)}
+      </ThemeProvider>
 
       <ToastContainer
         position='top-right'
