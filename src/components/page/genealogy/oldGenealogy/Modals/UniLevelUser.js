@@ -5,7 +5,7 @@ import {
   Typography,
   ListItem,
   ListItemIcon,
-  ListItemText, Button, CircularProgress
+  ListItemText, CircularProgress
 } from '@material-ui/core'
 
 import Alert from '@material-ui/lab/Alert'

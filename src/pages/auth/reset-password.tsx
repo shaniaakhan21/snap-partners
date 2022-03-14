@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import { PAGE_INFO } from 'config/pageInfo'
-import { resetPasswordStepTwo } from 'lib/services/session/resetPassword'
+import { APP_INFO } from 'config/appInfo'
+import { resetPasswordStepTwo } from 'lib/services/auth/resetPassword'
 import { useForm } from 'react-hook-form'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { useState } from 'react'
@@ -11,7 +11,7 @@ import { RegisterPassword } from 'components/page/signup/SignUpForm/FormByRole/u
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
 
-const { SEO } = PAGE_INFO
+const { SEO } = APP_INFO
 
 interface IForm {
   password: string,

@@ -7,15 +7,15 @@ import { useEffect } from 'react'
 import { useAuthStore } from 'lib/stores'
 import { getLocalStorage } from 'lib/utils/localStorage'
 import { decodeAccessToken } from 'lib/utils/decodedAccessToken'
-import { getUserMe } from 'lib/services/users/getUserMe'
+import { getUserMe } from 'lib/services/user/getUserMe'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import type { Page as PageNext } from 'lib/types'
-import { PAGE_INFO } from 'config/pageInfo'
+import { APP_INFO } from 'config/appInfo'
 
 import { HomeIllustration } from 'components/common/illustrations'
 import { FooterPublic } from 'components/layout/public/Footer'
 
-const { SEO } = PAGE_INFO
+const { SEO } = APP_INFO
 
 const HomePage: PageNext = () => {
   const { auth, setAuth } = useAuthStore()

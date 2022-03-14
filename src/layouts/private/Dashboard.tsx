@@ -6,7 +6,7 @@ import type { NextPage, ReactNode } from 'lib/types'
 import { useAuthStore, useNewWindowOpenedStore } from 'lib/stores'
 import { getLocalStorage } from 'lib/utils/localStorage'
 import { decodeAccessToken } from 'lib/utils/decodedAccessToken'
-import { getUserMe } from 'lib/services/users/getUserMe'
+import { getUserMe } from 'lib/services/user/getUserMe'
 import { timeout } from 'lib/utils/timeout'
 
 import { Drawer, Navbar } from 'components/layout/Dashboard'

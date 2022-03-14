@@ -3,13 +3,13 @@ import { useRef } from 'react'
 
 import type { Page, ReactNode } from 'lib/types'
 import { marketingArticlesRest } from 'lib/utils/dataTest'
-import { PAGE_INFO } from 'config/pageInfo'
+import { APP_INFO } from 'config/appInfo'
 
 import DashboardLayout from 'layouts/private/Dashboard'
 import { ListArticles } from 'components/page/marketing/Details/ListArtcles'
 import { Article } from 'components/page/marketing/Details/Article'
 
-const { SEO } = PAGE_INFO
+const { SEO } = APP_INFO
 
 const RestaurantsPage: Page = () => {
   const { current: articles } = useRef(marketingArticlesRest)

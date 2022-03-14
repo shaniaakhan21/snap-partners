@@ -1,5 +1,8 @@
 import createAtom from 'zustand'
 import { removeLocalStorage } from 'lib/utils/localStorage'
+import { APP_INFO } from 'config/appInfo'
+
+const { SEO } = APP_INFO
 
 interface ISignInProps {
   accessToken: string
@@ -79,7 +82,7 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
         sponsorId,
         idImage,
         insuranceImage,
-        referralLink: referralCode ? `https://snapdeliveredteam.com/auth/signup?referralCode=${referralCode}` : null
+        referralLink: referralCode ? `${SEO.URL_PAGE}/auth/signup?referralCode=${referralCode}` : null
       }
     })
   },

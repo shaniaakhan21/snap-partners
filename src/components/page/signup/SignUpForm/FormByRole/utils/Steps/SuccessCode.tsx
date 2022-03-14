@@ -1,19 +1,17 @@
 import Link from 'next/link'
+
+import { STEPS } from '.'
+import { IReferralLink } from 'lib/types'
+import { APP_INFO } from 'config/appInfo'
+import { IHandleStep } from '../types'
+
 import { Button } from 'components/common/Button'
 import { CheckSuccess } from 'components/common/icons'
-import { STEPS } from '.'
-import { mobileAppsLinks } from 'lib/utils/mobileAppLinks'
-import { IHandleStep } from '../types'
-import { IReferralLink } from 'lib/types'
 import { MobileAppsLink } from 'components/common/mobileApps/MobileAppsLink'
 
-export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack: any, handleStep: IHandleStep, referralLink: IReferralLink }) => {
-  const {
-    playStore: linkPlayStore,
-    appStore: linkAppStore,
-    title: appTitle
-  } = mobileAppsLinks[referralLink.role.toLocaleLowerCase()]
+const { SEO } = APP_INFO
 
+export const SuccessCode = ({ userTrack, handleStep }: { userTrack: any, handleStep: IHandleStep, referralLinks?: IReferralLink }) => {
   return (
     <div className='flex flex-col justify-center items-center max-w-xl mx-auto'>
       <span className='text-3xl font-bold'>SnapDelivered</span>
@@ -26,12 +24,12 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
 
       <Button onClick={() => handleStep(STEPS.UPGRADE_TO_MANAGER)} classes='w-full mt-10'>CONTINUE</Button>
       <br/>
-      <span className='text-xl text-gray-500 text-center'>Please download the {appTitle} app below or visit our website at </span>
-      <Link href='https://snapdelivered.com/'>
-        <a target='_blank' className='text-xl text-primary-500 text-center'>snapdelivered.com</a>
+      <span className='text-xl text-gray-500 text-center'>Please download the app below or visit our website at </span>
+      <Link href={SEO.URL_PAGE}>
+        <a target='_blank' className='text-xl text-primary-500 text-center'>{SEO.URL_PAGE.substring(8)}</a>
       </Link>
       <br/>
-      <MobileAppsLink appStoreHref={linkAppStore} playStoreHref={linkPlayStore} />
+      <MobileAppsLink />
     </div>
   )
 }

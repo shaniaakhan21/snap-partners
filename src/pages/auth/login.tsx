@@ -1,12 +1,12 @@
 import Head from 'next/head'
 
 import type { Page } from 'lib/types'
-import { PAGE_INFO } from 'config/pageInfo'
+import { APP_INFO } from 'config/appInfo'
 
 import { AuthPagesLayout } from 'layouts/public/Auth'
 import { LoginForm } from 'components/page/login/LoginForm'
 
-const { SEO } = PAGE_INFO
+const { SEO } = APP_INFO
 
 const LoginPage: Page = () => <LoginForm/>
 

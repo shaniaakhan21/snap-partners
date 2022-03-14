@@ -1,7 +1,7 @@
 // import { useState } from 'react'
 import Head from 'next/head'
 import type { Page, ReactNode } from 'lib/types'
-import { PAGE_INFO } from 'config/pageInfo'
+import { APP_INFO } from 'config/appInfo'
 import DashboardLayout from 'layouts/private/Dashboard'
 import { Unilevel } from 'components/page/genealogy/oldGenealogy/UniLevel'
 // import { Overlay } from 'components/common/Overlay'
@@ -20,7 +20,7 @@ import { Unilevel } from 'components/page/genealogy/oldGenealogy/UniLevel'
 // import { Spinner } from 'components/common/loaders'
 // import { ILevelUser } from 'lib/types/genealogy'
 
-const { SEO } = PAGE_INFO
+const { SEO } = APP_INFO
 
 // const selectInfo = {
 //   selectDefaultValue: 'name',

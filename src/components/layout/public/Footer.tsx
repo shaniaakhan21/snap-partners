@@ -1,13 +1,16 @@
 import { FooterApple, FooterFacebook, FooterYoutube } from 'components/common/icons'
 import { FooterAndroid } from 'components/common/icons/FooterAndroid'
+import { APP_INFO } from 'config/appInfo'
 import { ROLES } from 'config/roles'
 import Link from 'next/link'
 import { useRef } from 'react'
 
+const { RRSS, LEGAL } = APP_INFO
+
 export const FooterPublic = () => {
   const { current: socialLinks } = useRef([
-    { to: 'https://www.facebook.com/snapdelivered', icon: <FooterFacebook /> },
-    { to: 'https://www.youtube.com/channel/UC7zzJ0gaX5QrE8lPqG_Lr1w', icon: <FooterYoutube /> }
+    { to: RRSS.FACEBOOK.link, icon: <FooterFacebook /> },
+    { to: RRSS.YOUTUBE.link, icon: <FooterYoutube /> }
   ])
 
   const { current: joinUsLinks } = useRef([
@@ -31,8 +34,8 @@ export const FooterPublic = () => {
   ])
 
   const { current: legalLinks } = useRef([
-    { to: '/legal/privacy-policy', label: 'Privacy Policy' },
-    { to: '/legal/terms-of-use', label: 'Terms & Conditions' }
+    { to: LEGAL.PRIVACY_POLICY.to, label: LEGAL.PRIVACY_POLICY.label },
+    { to: LEGAL.TERMS_OF_USE.to, label: LEGAL.TERMS_OF_USE.label }
     // { to: '#cookies', label: 'Cookies Policy' }
   ])
 
