@@ -14,7 +14,7 @@ import 'react-toastify/dist/ReactToastify.min.css'
 import 'react-phone-input-2/lib/style.css'
 import { ThemeProvider } from '@material-ui/core/styles'
 import { theme } from 'materialTheme'
-import { useModalStore } from 'lib/stores/Modal'
+import { useModalStore } from 'lib/stores'
 import { Overlay } from 'components/common/Overlay'
 import { ModalContainer } from 'components/common/ModalContainer'
 

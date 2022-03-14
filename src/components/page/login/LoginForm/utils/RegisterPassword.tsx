@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { EyeHiddenIcon, EyeVisibleIcon } from 'components/common/icons'
 import { signInRulesConfig } from './formRules'
 import { ModalForgotPassword } from './ModalForgotPassword'
-import { useModalStore, MODALS_ID } from 'lib/stores/Modal'
+import { useModalStore, MODALS_ID } from 'lib/stores'
 
 interface IInputFormProps {
   register: any,
