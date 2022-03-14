@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from 'react'
+import { Fragment, ReactNode, useEffect } from 'react'
 import type { NextComponentType } from 'next'
 import { AppContext, AppInitialProps, AppLayoutProps } from 'next/app'
 import Script from 'next/script'
@@ -21,8 +21,12 @@ import { ModalContainer } from 'components/common/ModalContainer'
 const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({ Component, pageProps }: AppLayoutProps) => {
   const router = useRouter()
   const { isRouteChanging, loadingKey } = useLoadingPage()
-  const { isOpen, modalChildren, closeModal } = useModalStore()
+  const { initModals, modalsData, closeModal } = useModalStore()
   const getLayout = Component.getLayout || ((page: ReactNode) => page)
+
+  useEffect(() => {
+    initModals(2)
+  }, [])
 
   useEffect(() => {
     router.events.on('routeChangeComplete', pageview)
@@ -73,13 +77,17 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
         pauseOnHover
       />
 
-      {isOpen && (
-        <Overlay onClick={closeModal}>
-          <ModalContainer>
-            {modalChildren}
-          </ModalContainer>
-        </Overlay>
-      )}
+      {modalsData?.map(modal => (
+        <Fragment key={modal.id}>
+          {modal.isOpen && (
+            <Overlay onClick={(e, element) => closeModal(e, element, modal.id)}>
+              <ModalContainer>
+                {modal.modalChildren}
+              </ModalContainer>
+            </Overlay>
+          )}
+        </Fragment>
+      ))}
     </>
   )
 }
