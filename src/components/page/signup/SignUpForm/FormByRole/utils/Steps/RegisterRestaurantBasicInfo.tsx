@@ -124,7 +124,7 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
     reset()
     signUp(role, 2)
     setLoading(false)
-    handleStep(STEPS.VERIFY_CODE)
+    handleStep(STEPS.SUCCESS_CODE)
   }
 
   if (isLoading) {
