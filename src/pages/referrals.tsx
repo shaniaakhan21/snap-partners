@@ -24,7 +24,7 @@ const ReferralsPage: Page = () => {
           classes='col-span-1'
         />
         <ReferralCards
-          title='Driver Customers'
+          title='Driver'
           ilustration={<DriverIcon />}
           link={`${auth.referralLink}&role=${ROLES.DRIVER}` || 'With Out Link'}
           classes='col-span-1'

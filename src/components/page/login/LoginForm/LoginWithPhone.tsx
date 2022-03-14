@@ -27,8 +27,6 @@ export const LoginWithPhone = () => {
     setLoading(true)
     const phoneNumber = `+${dataForm.phoneNumber}`
 
-    setLoading(true)
-
     const { data: dataLogin, error: errorLogin } = await login({
       phoneNumber,
       password: dataForm.password

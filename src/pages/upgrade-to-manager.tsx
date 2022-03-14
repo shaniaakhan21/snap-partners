@@ -53,7 +53,7 @@ const UpgradeToManagerPage: PageNext = () => {
 
             <section>
               <div className='text-right mt-10 sm:mt-0'>
-                <h6 className='text-2xl font-bold text-gray-800'>RewarD POINTS!</h6>
+                <h6 className='text-2xl font-bold text-gray-800'>Reward POINTS!</h6>
 
                 <div className='text-lg mt-4 font-semibold text-gray-800'>
                   <p>Every $1.00 Earned = 1 Point</p>

@@ -241,9 +241,9 @@ const ProfilePage: PageNext = () => {
 
       <span className='block text-center mt-11 text-gray-600'>
         Need Help?{' '}
-        <Link href='#'>
+        <Link href='https://opportunity.snapdelivered.com/#contact'>
           {/* We must to apply an emailTo here */}
-          <a className='text-textAcent-500 font-medium'>Send us an email</a>
+          <a target='_blank' className='text-textAcent-500 font-medium'>Send us an email</a>
         </Link>
       </span>
     </>

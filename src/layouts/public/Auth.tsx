@@ -21,7 +21,7 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
             <div className='absolute w-full h-full top-0 right-0 z-10 px-4 pb-8 md:px-12'>
               <div className='mt-24 max-w-2xl'>
                 <h1 className='text-5xl font-bold 2xl:text-7xl'>Snap Delivered</h1>
-                <p className='text-2xl font-bold mt-1'>Order-Eat-Repeat</p>
+                <p className='text-3xl font-bold mt-1'>Order-Eat-Repeat</p>
                 <br />
               </div>
 

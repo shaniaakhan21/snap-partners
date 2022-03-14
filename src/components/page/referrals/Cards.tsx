@@ -1,7 +1,6 @@
-import { ArrowRightIcon, CalendarIcon, CopyIcon } from 'components/common/icons'
+import { CalendarIcon, CopyIcon } from 'components/common/icons'
 import { useCopyToClipboard } from 'lib/hooks/useCopyToClipboard'
 import { referralCard } from 'lib/utils/gtm'
-import Link from 'next/link'
 import { useMemo } from 'react'
 
 interface IProps {
@@ -49,7 +48,7 @@ export const ReferralCards = ({ title, ilustration, link, newUser = false, class
         )}
       {/* el div con height imita la altura del anterior componente, si se modifica dicha altura, también se debe modificar el valor */}
 
-      <h3 className='w-full my-4'>{title}</h3>
+      <h3 className='w-full my-4 text-lg font-semibold'>{title}</h3>
 
       {ilustration}
 
