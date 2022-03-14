@@ -21,12 +21,8 @@ import { ModalContainer } from 'components/common/ModalContainer'
 const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({ Component, pageProps }: AppLayoutProps) => {
   const router = useRouter()
   const { isRouteChanging, loadingKey } = useLoadingPage()
-  const { initModals, modalsData, closeModal } = useModalStore()
+  const { modalsData, closeModal } = useModalStore()
   const getLayout = Component.getLayout || ((page: ReactNode) => page)
-
-  useEffect(() => {
-    initModals(2)
-  }, [])
 
   useEffect(() => {
     router.events.on('routeChangeComplete', pageview)

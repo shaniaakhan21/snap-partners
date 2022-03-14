@@ -1,77 +1,65 @@
 import { MouseEvent, ReactNode } from 'react'
 import createAtom from 'zustand'
 
-interface IModal {
-  id: number
+interface IModalWithoutId {
   isOpen: boolean
   modalChildren?: ReactNode
 }
 
+interface IModal extends IModalWithoutId {
+  id: string
+}
+
 interface IModalAtom {
   modalsData: IModal[] | null
-  initModals: (numberOfModals: number) => void // * Only use this method to indicate quantity of modals. It is used in _app page
-  openModal: (id: number, modalChildren: ReactNode, callbackOnOpen?: () => void) => void
-  closeModal: (e: MouseEvent<HTMLElement>, elementRef: HTMLElement, id: number, callbackOnClose?: () => void) => void
+  openModal: (id: string, callbackOnOpen?: () => void) => void
+  closeModal: (e: MouseEvent<HTMLElement>, elementRef: HTMLElement, id: string, callbackOnClose?: () => void) => void
   addModal: (modal: IModal) => void
-  removeModal: (id: number) => void
+  updateModal: (id: string, modal: IModalWithoutId) => void
+  removeModal: (id: string) => void
   clearAllModals: () => void
+}
+
+export const MODALS_ID = {
+  MODAL_FORGOT_PASSWORD_ID: 'FORGOT_PASSWORD'
 }
 
 export const useModalStore = createAtom<IModalAtom>(set => ({
   modalsData: null,
-  initModals: (numberOfModals: number) => set({
-    modalsData: new Array(numberOfModals).fill(null).map((_, index) => ({
-      id: index,
-      isOpen: false,
-      modalChildren: null
-    }))
-  }),
-  openModal: (id: number, modalChildren: ReactNode, callbackOnOpen?: () => void) => {
+  openModal: (id: string, callbackOnOpen?: () => void) => {
     if (callbackOnOpen) callbackOnOpen()
-    document.body.style.overflowY = 'hidden'
 
     set(prevState => {
-      const modal = prevState.modalsData.find(modal => id === modal.id)
-
-      if (!modal) return prevState
-
+      const modal = prevState.modalsData?.find(modal => id === modal.id)
+      if (!modal) return
+      document.body.style.overflowY = 'hidden'
       modal.isOpen = true
-      modal.modalChildren = modalChildren
-
-      return {
-        modalsData: {
-          ...prevState.modalsData,
-          modal
-        }
-      }
     })
   },
-  closeModal: (e: MouseEvent<HTMLElement>, elementRef: HTMLElement, id: number, callbackOnClose?: () => void) => {
+  closeModal: (e: MouseEvent<HTMLElement>, elementRef: HTMLElement, id: string, callbackOnClose?: () => void) => {
     if (callbackOnClose) callbackOnClose()
     if (elementRef === e.target) {
       document.body.style.overflowY = 'auto'
 
       set(prevState => {
-        const modal = prevState.modalsData.find(modal => id === modal.id)
-
+        const modal = prevState.modalsData?.find(modal => id === modal.id)
         if (!modal) return prevState
-
         modal.isOpen = false
-        modal.modalChildren = null
-
-        return {
-          modalsData: {
-            ...prevState.modalsData,
-            modal
-          }
-        }
       })
     }
   },
-  addModal: (modal: IModal) => set(prevState => ({
-    modalsData: [...prevState.modalsData, modal]
+  addModal: (newModal: IModal) => set(prevState => ({
+    modalsData: prevState.modalsData ? [...prevState.modalsData, newModal] : [newModal]
   })),
-  removeModal: (id: number) => set(prevState => {
+  updateModal: (id: string, modalNewData: IModalWithoutId) => {
+    set(prevState => {
+      const modalToUpdate = prevState.modalsData.find(modal => id === modal.id)
+      if (!modalToUpdate) return
+      modalToUpdate.isOpen = modalNewData.isOpen
+      modalToUpdate.modalChildren = modalNewData.modalChildren
+    })
+  },
+  removeModal: (id: string) => set(prevState => {
     const modalsCopy = [...prevState.modalsData]
     const modalIndexToRemove = modalsCopy.findIndex(modal => id === modal.id)
 
@@ -79,9 +67,7 @@ export const useModalStore = createAtom<IModalAtom>(set => ({
 
     modalsCopy.splice(modalIndexToRemove)
 
-    return {
-      modalsData: modalsCopy
-    }
+    return { modalsData: modalsCopy }
   }),
   clearAllModals: () => set({ modalsData: null })
 }))
