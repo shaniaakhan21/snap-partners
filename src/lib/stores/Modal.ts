@@ -32,6 +32,7 @@ export const useModalStore = createAtom<IModalAtom>(set => ({
     set(prevState => {
       const modal = prevState.modalsData?.find(modal => id === modal.id)
       if (!modal) return
+
       document.body.style.overflowY = 'hidden'
       modal.isOpen = true
     })
@@ -44,21 +45,26 @@ export const useModalStore = createAtom<IModalAtom>(set => ({
       set(prevState => {
         const modal = prevState.modalsData?.find(modal => id === modal.id)
         if (!modal) return prevState
+
         modal.isOpen = false
       })
     }
   },
-  addModal: (newModal: IModal) => set(prevState => ({
-    modalsData: prevState.modalsData ? [...prevState.modalsData, newModal] : [newModal]
-  })),
-  updateModal: (id: string, modalNewData: IModalWithoutId) => {
-    set(prevState => {
-      const modalToUpdate = prevState.modalsData.find(modal => id === modal.id)
-      if (!modalToUpdate) return
-      modalToUpdate.isOpen = modalNewData.isOpen
-      modalToUpdate.modalChildren = modalNewData.modalChildren
-    })
-  },
+  addModal: (newModal: IModal) => set(prevState => {
+    const modalFound = prevState.modalsData?.find(modal => newModal.id === modal.id)
+    if (modalFound) return
+
+    return {
+      modalsData: prevState.modalsData ? [...prevState.modalsData, newModal] : [newModal]
+    }
+  }),
+  updateModal: (id: string, modalNewData: IModalWithoutId) => set(prevState => {
+    const modalToUpdate = prevState.modalsData.find(modal => id === modal.id)
+    if (!modalToUpdate) return
+
+    modalToUpdate.isOpen = modalNewData.isOpen
+    modalToUpdate.modalChildren = modalNewData.modalChildren
+  }),
   removeModal: (id: string) => set(prevState => {
     const modalsCopy = [...prevState.modalsData]
     const modalIndexToRemove = modalsCopy.findIndex(modal => id === modal.id)
