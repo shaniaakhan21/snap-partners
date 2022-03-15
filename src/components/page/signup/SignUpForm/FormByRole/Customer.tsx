@@ -46,7 +46,6 @@ export const SignUpCustomerForm = ({ referralLink }: { referralLink: IReferralLi
       {
         userTrack.step === STEPS.SUCCESS_CODE && (
           <SuccessCode
-            referralLink={referralLink}
             handleStep={handleStep}
             userTrack={userTrack}
           />

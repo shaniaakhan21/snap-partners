@@ -1,11 +1,11 @@
 import Head from 'next/head'
 import DashboardLayout from 'layouts/private/Dashboard'
 import { useAuthStore, useNewWindowOpenedStore } from 'lib/stores'
-import { PAGE_INFO } from 'config/pageInfo'
+import { APP_INFO } from 'config/appInfo'
 import type { Page as PageNext, ReactNode } from 'lib/types'
 import Link from 'next/link'
 
-const { SEO } = PAGE_INFO
+const { SEO } = APP_INFO
 
 const UpgradeToManagerPage: PageNext = () => {
   const { auth } = useAuthStore()

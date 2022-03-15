@@ -7,7 +7,7 @@ import { STEPS } from '.'
 import { IHandleStep } from '../types'
 import { Spinner } from 'components/common/loaders'
 import { BulletPagination } from './BulletPagination'
-import { signUpStep2 } from 'lib/services/session/signUp'
+import { signUpStep2 } from 'lib/services/auth/signUp'
 import { IReferralLink } from 'lib/types'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 

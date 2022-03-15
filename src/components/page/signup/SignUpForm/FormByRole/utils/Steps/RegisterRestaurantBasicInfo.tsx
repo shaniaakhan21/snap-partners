@@ -8,12 +8,11 @@ import { InputPhone } from '../InputPhone'
 import { registerRestaurantRulesConfig } from '../formRules'
 import { RegisterPassword } from '../RegisterPassword'
 import { TermsAndConditions } from '../TermsAndConditions'
-import { signUpStep2 } from 'lib/services/session/signUp'
+import { signUpStep2 } from 'lib/services/auth/signUp'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { IReferralLink } from 'lib/types'
 import { IHandleStep } from '../types'
 import { STEPS } from '.'
-import { BulletPagination } from './BulletPagination'
 import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 import { signUp } from 'lib/utils/gtm'
 
@@ -124,7 +123,7 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
     reset()
     signUp(role, 2)
     setLoading(false)
-    handleStep(STEPS.VERIFY_CODE)
+    handleStep(STEPS.SUCCESS_CODE)
   }
 
   if (isLoading) {
@@ -287,8 +286,6 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
         />
 
         <section className='mt-4'>
-          <BulletPagination stepToActivate='REGISTER_BASIC_INFO' />
-
           <Button type='submit' classes='w-full mt-4 text-sm bg-primary-500'>
             Sign Up
           </Button>

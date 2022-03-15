@@ -125,9 +125,6 @@ To get a local copy up and running follow these simple example steps.
 
    ```
     NEXT_PUBLIC_RECAPTCHA_V2=6Lc2koEdAAAAAIdNcMY0V1E9IPGT3AxX-vlRUDtQ
-    NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID_PRO=GTM-NNQS9S8
-    NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID_PRE=GTM-PRJVWRJ
-    JWT_KEY=backoffice-platform!!@snap!!.com--secret
    ```
 
 4. Run `npm run dev` to run localhost project
@@ -224,7 +221,7 @@ Check: [Next.js Routing](https://nextjs.org/docs/routing/introduction)
 
 - `/config/api.ts` - Config API's
 - `/config/http.ts` - Methods HTTP and custom status code naming
-- `/config/pageInfo.ts` - Info and SEO of the Website
+- `/config/appInfo.ts` - Info and SEO of the Website
 - `/config/roles.ts` - Config user roles
 
 ```
@@ -232,7 +229,7 @@ Check: [Next.js Routing](https://nextjs.org/docs/routing/introduction)
 |-- /config
 |---- /api.ts
 |---- /http.ts
-|---- /pageInfo.ts
+|---- /appInfo.ts
 |---- /roles.ts
 ```
 

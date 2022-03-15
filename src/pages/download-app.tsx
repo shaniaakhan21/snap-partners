@@ -4,7 +4,7 @@ import Head from 'next/head'
 import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 import type { Page as PageNext } from 'lib/types'
 import { signUp } from 'lib/utils/gtm'
-import { PAGE_INFO } from 'config/pageInfo'
+import { APP_INFO } from 'config/appInfo'
 
 import { FooterPublic } from 'components/layout/public/Footer'
 import { useEffect, useRef, useState } from 'react'
@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 import { Spinner } from 'components/common/loaders'
 import { AppleStore, GooglePlayBanner } from 'components/common/icons'
 
-const { SEO } = PAGE_INFO
+const { SEO, APPS } = APP_INFO
 
 const DownloadAppPage: PageNext = () => {
   const [device, setDevice] = useState<'APPLE' | 'ANDROID'>(null)
@@ -21,45 +21,15 @@ const DownloadAppPage: PageNext = () => {
   const router = useRouter()
 
   const { current: androidApps } = useRef([
-    {
-      title: 'Driver app',
-      subtitle: 'Snap Operations Specialist app',
-      description: 'Fullfil and Manage orders and',
-      link: 'https://play.google.com/store/apps/details?id=com.snapdelivered.driverapp'
-    },
-    {
-      title: 'Costumer app',
-      subtitle: 'User app',
-      description: 'Order food and get it SNAP',
-      link: 'https://play.google.com/store/apps/details?id=com.snapdelivered.userapp'
-    },
-    {
-      title: 'Restaurant app',
-      subtitle: 'Snap Merchant Control app',
-      description: 'Manager orders and payments',
-      link: 'https://play.google.com/store/apps/details?id=com.snapdelivered.restaurantapp'
-    }
+    { ...APPS.ANDROID_STORE.CUSTOMER_APP },
+    { ...APPS.ANDROID_STORE.DRIVER_APP },
+    { ...APPS.ANDROID_STORE.RESTAURANT_APP }
   ])
 
   const { current: appleApps } = useRef([
-    {
-      title: 'Driver app',
-      subtitle: 'Snap Operations Specialist app',
-      description: 'Fullfil and Manage orders and',
-      link: 'https://apps.apple.com/us/app/snap-operations-specialist/id1478862279'
-    },
-    {
-      title: 'Costumer app',
-      subtitle: 'User app',
-      description: 'Order food and get it SNAP',
-      link: 'https://apps.apple.com/us/app/snap-user/id1478863057'
-    },
-    {
-      title: 'Restaurant app',
-      subtitle: 'Snap Merchant Control app',
-      description: 'Manager orders and payments',
-      link: 'https://apps.apple.com/ve/app/snap-merchant-control/id1478737288'
-    }
+    { ...APPS.APPLE_STORE.CUSTOMER_APP },
+    { ...APPS.APPLE_STORE.DRIVER_APP },
+    { ...APPS.APPLE_STORE.RESTAURANT_APP }
   ])
 
   const handlerDevice = () => {

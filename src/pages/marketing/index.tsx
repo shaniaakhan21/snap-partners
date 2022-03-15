@@ -2,14 +2,14 @@ import Head from 'next/head'
 import { useRef } from 'react'
 
 import type { Page, ReactNode } from 'lib/types'
-import { PAGE_INFO } from 'config/pageInfo'
+import { APP_INFO } from 'config/appInfo'
 
 import DashboardLayout from 'layouts/private/Dashboard'
 import { CustomerIcon, DriverIcon, IBOIcon, RestaurantsIcon } from 'components/common/icons'
 import { MarketingTool } from 'components/page/marketing/CardTools/Tool'
 import { ListMarketingTools } from 'components/page/marketing/CardTools/ListTools'
 
-const { SEO } = PAGE_INFO
+const { SEO } = APP_INFO
 
 const MarketingPage: Page = () => {
   const { current: marketingDetails } = useRef([

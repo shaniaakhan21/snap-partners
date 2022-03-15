@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { ROLES } from 'config/roles'
-import { PAGE_INFO } from 'config/pageInfo'
+import { APP_INFO } from 'config/appInfo'
 import { useAuthStore } from 'lib/stores'
 import type { Page, ReactNode } from 'lib/types'
 
@@ -8,7 +8,7 @@ import DashboardLayout from 'layouts/private/Dashboard'
 import { ReferralCards } from 'components/page/referrals/Cards'
 import { CustomerIcon, DriverIcon, MerchantIcon } from 'components/common/icons'
 
-const { SEO } = PAGE_INFO
+const { SEO } = APP_INFO
 
 const ReferralsPage: Page = () => {
   const { auth } = useAuthStore()
