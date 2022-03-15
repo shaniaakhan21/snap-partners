@@ -1,8 +1,17 @@
+import { IAuth } from 'lib/stores/Auth'
 import { TRoles } from 'lib/types'
 
 export const GTM_ID = {
   PRE: 'GTM-PRJVWRJ',
   PRO: 'GTM-NNQS9S8'
+}
+
+export const userInfo = (info?: Partial<IAuth>) => {
+  window.dataLayer.push({
+    event: 'userInfo',
+    ...info,
+    lastVisit: new Date().toDateString()
+  })
 }
 
 export const pageview = (url) => {
