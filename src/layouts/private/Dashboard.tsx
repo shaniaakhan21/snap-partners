@@ -13,6 +13,7 @@ import { Drawer, Navbar } from 'components/layout/Dashboard'
 import { FooterPrivate } from 'components/layout/private/Footer'
 import { Spinner } from 'components/common/loaders'
 import { handleFetchError } from 'lib/utils/handleFetchError'
+import { userInfo } from 'lib/utils/gtm'
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const router = useRouter()
@@ -20,7 +21,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const { newWindow, closeNewWindow } = useNewWindowOpenedStore()
 
   useEffect(() => {
-    (async () => {
+    (async () => {      
       if (auth) return
 
       const token = getLocalStorage('accessToken')
@@ -57,6 +58,14 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         sponsorId: data.sponsorId
       })
     })()
+    
+    // add user info into GTM dataLayer
+    if(auth){
+      const { id, username, name, lastname, email, phone, roles, isManager } = auth;
+      userInfo({ id, username, name, lastname, email, phone, roles, isManager })
+    } else{
+      userInfo()
+    }
   }, [auth])
 
   useEffect(() => {
