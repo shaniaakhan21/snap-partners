@@ -69,7 +69,6 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
       `https://store.snapdelivered.com/product/manager-upgrade?userId=${userId}`,
       'windowUpgradeToManager'
     )
-
     signUp(role, 4, undefined, 'yes', 'no')
     setNewWindow(windowOpened)
     // When a newWindow is sent, in DashboardLayout we have an effect to handle upgrade to manager.

@@ -14,6 +14,7 @@ import { APP_INFO } from 'config/appInfo'
 
 import { HomeIllustration } from 'components/common/illustrations'
 import { FooterPublic } from 'components/layout/public/Footer'
+import { userInfo } from 'lib/utils/gtm'
 
 const { SEO } = APP_INFO
 
@@ -59,6 +60,13 @@ const HomePage: PageNext = () => {
         router.push('/overview')
       }
     })()
+    // add user info into GTM dataLayer
+    if(auth){
+      const { id, username, name, lastname, email, phone, roles, isManager } = auth;
+      userInfo({ id, username, name, lastname, email, phone, roles, isManager })
+    } else{
+      userInfo()
+    }
   }, [auth])
 
   return (
