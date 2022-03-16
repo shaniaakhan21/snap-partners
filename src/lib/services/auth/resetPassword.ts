@@ -1,4 +1,4 @@
-import { IQueryErrorReturn } from 'lib/types/query'
+import { IQueryErrorReturn } from 'lib/types/http/query'
 
 export const resetPasswordStepOne = async (email: string): Promise<IQueryErrorReturn> => {
   const res = await fetch('/api/authentication/resetPasswordStepOne', {

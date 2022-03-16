@@ -1,5 +1,5 @@
 import { setLocalStorage } from 'lib/utils/localStorage'
-import { IQueryErrorReturn } from 'lib/types/query'
+import { IQueryErrorReturn } from 'lib/types/http/query'
 import { decodeAccessToken } from 'lib/utils/decodedAccessToken'
 
 interface ILoginDataBody {

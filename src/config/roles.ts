@@ -1,4 +1,4 @@
-import { IROLES } from 'lib/types/user/roles'
+import { IROLES } from 'lib/types/user'
 
 export const ROLES: IROLES = {
   CUSTOMER: 'CUSTOMER',

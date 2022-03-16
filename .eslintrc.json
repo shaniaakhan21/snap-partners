@@ -29,6 +29,9 @@
         "no-multiple-empty-lines": "warn",
         "eol-last": "warn",
         "react/display-name": "off",
-        "@next/next/no-img-element": "off"
+        "@next/next/no-img-element": "off",
+        "space-before-blocks": "warn",
+        "semi":"warn",
+        "keyword-spacing": "warn"
     }
 }

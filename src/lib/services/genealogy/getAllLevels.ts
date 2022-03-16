@@ -1,4 +1,4 @@
-import { IQueryErrorReturn } from 'lib/types/query'
+import { IQueryErrorReturn } from 'lib/types/http/query'
 import { ILevel } from 'lib/types/genealogy'
 
 interface IQueryReturn extends IQueryErrorReturn {

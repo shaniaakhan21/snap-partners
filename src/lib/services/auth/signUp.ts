@@ -1,4 +1,4 @@
-import { IQueryErrorReturn } from 'lib/types/query'
+import { IQueryErrorReturn } from 'lib/types/http/query'
 
 interface ISignUpDataBodyStep1 {
   phoneNumber: string

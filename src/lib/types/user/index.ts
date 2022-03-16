@@ -1,4 +1,7 @@
 // IUserData is test interface to test/dataEmails
+export type { IRANKS, TRANK } from './ranks'
+export type { IROLES, TROLE } from './roles'
+export type { IReferralLink } from './referralLink'
 export interface IUserData {
   id: string
   name: string

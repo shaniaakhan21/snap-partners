@@ -61,10 +61,10 @@ const HomePage: PageNext = () => {
       }
     })()
     // add user info into GTM dataLayer
-    if(auth){
-      const { id, username, name, lastname, email, phone, roles, isManager } = auth;
+    if (auth) {
+      const { id, username, name, lastname, email, phone, roles, isManager } = auth
       userInfo({ id, username, name, lastname, email, phone, roles, isManager })
-    } else{
+    } else {
       userInfo()
     }
   }, [auth])
