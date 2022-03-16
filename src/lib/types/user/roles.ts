@@ -1,0 +1,12 @@
+export interface IROLES {
+  CUSTOMER: 'CUSTOMER',
+  RESTAURANT: 'RESTAURANT',
+  DRIVER: 'DRIVER',
+  ADMIN: 'ADMIN'
+}
+
+export type TROLE =
+  IROLES['CUSTOMER'] |
+  IROLES['RESTAURANT'] |
+  IROLES['DRIVER'] |
+  IROLES['ADMIN']

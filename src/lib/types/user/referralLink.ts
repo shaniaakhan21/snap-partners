@@ -1,6 +1,6 @@
-import { TRoles } from '.'
+import { TROLE } from '..'
 
 export interface IReferralLink {
   code?: string
-  role: TRoles
+  role: TROLE
 }

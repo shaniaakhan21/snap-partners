@@ -1,5 +1,5 @@
 
-import { TRoles } from 'lib/types'
+import { TROLE } from 'lib/types'
 
 export const GTM_ID = {
   PRE: 'GTM-PRJVWRJ',
@@ -72,7 +72,7 @@ export const marketingSharingCard = (name: string, socialMediaClicked: string) =
   })
 }
 
-export const signUp = (userType: TRoles, step: number, app?: 'android' | 'ios', upgradeToManager?: 'yes' | 'no', accountSettings?: 'yes' | 'no') => {
+export const signUp = (userType: TROLE, step: number, app?: 'android' | 'ios', upgradeToManager?: 'yes' | 'no', accountSettings?: 'yes' | 'no') => {
   window.dataLayer.push({
     event: 'signup',
     category: 'signupProcess',
