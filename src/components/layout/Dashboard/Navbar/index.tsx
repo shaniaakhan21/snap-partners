@@ -1,13 +1,16 @@
-import { MoarOptionsVerticalIcon, SearchIcon } from 'components/common/icons'
+// import { MoarOptionsVerticalIcon, SearchIcon } from 'components/common/icons'
+import { MoarOptionsVerticalIcon } from 'components/common/icons'
 import { Account } from './Account'
-import { useAuthStore, useDrawerStore, useSearchModalStore } from 'lib/stores'
+// import { useAuthStore, useDrawerStore, useSearchModalStore } from 'lib/stores'
+import { useAuthStore, useDrawerStore } from 'lib/stores'
 import { useDashboardGetPathname } from 'lib/hooks/useDashboardGetPathnameData'
 
 export const Navbar = () => {
-  const { title, pathname } = useDashboardGetPathname()
+  // const { title, pathname } = useDashboardGetPathname()
+  const { title } = useDashboardGetPathname()
   const { auth, removeAuth } = useAuthStore()
   const { toggleDrawer } = useDrawerStore()
-  const { toggleGenealogySearch } = useSearchModalStore()
+  // const { toggleGenealogySearch } = useSearchModalStore()
 
   return (
     <header className='dashboardLayout__navbar h-16'>
@@ -33,11 +36,11 @@ export const Navbar = () => {
             />
           </div> */}
 
-          <div className='w-full flex justify-start items-center'>
+          {/* <div className='w-full flex justify-start items-center'>
             <button onClick={() => toggleGenealogySearch(pathname)}>
               <SearchIcon classes='w-5 h-5' />
             </button>
-          </div>
+          </div> */}
         </section>
 
         {

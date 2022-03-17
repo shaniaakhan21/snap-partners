@@ -13,9 +13,15 @@ interface IProps extends IUserData {
   sponsor?: string
   rank?: string
   authIsAdmin: boolean
+  roles: {
+    admin: boolean,
+    customer: boolean,
+    driver: boolean,
+    merchant: boolean
+  }
 }
 
-export const ReferralsUserDetailModal = ({ id, name, email, phone, sponsor, rank, onClick, authIsAdmin }: IProps) => {
+export const ReferralsUserDetailModal = ({ id, name, email, phone, sponsor, rank, onClick, authIsAdmin, roles }: IProps) => {
   // const { handleSubmit, register } = useForm<{ rankToUpdate: TRANK }>()
   const { copy } = useCopyToClipboard()
   // const buttonCancelRef = useRef()
@@ -39,7 +45,12 @@ export const ReferralsUserDetailModal = ({ id, name, email, phone, sponsor, rank
         </button>
       </div> */}
 
-      <div className='mb-4 flex items-center justify-end'>
+      <div className='mb-4 flex items-center justify-between'>
+        <ul className='text-gray-800 font-bold'>
+          {roles.customer && <li>Customer</li>}
+          {roles.driver && <li>Driver</li>}
+          {roles.merchant && <li>Merchant</li>}
+        </ul>
         {/* {
           authIsAdmin && (
             <form onSubmit={handleSubmit(onSubmit)}>
