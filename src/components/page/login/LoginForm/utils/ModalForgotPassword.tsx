@@ -41,7 +41,6 @@ export const ModalForgotPassword = () => {
   const {
     handleSubmit: handleSubmitPhone,
     register: registerPhone,
-    formState: { errors: errorPhone },
     reset: resetPhone,
     control
   } = useForm<{ phoneNumber: string }>()
