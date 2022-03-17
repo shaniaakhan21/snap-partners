@@ -7,19 +7,53 @@ import { STEPS } from '.'
 import { IHandleStep } from '../types'
 import { Spinner } from 'components/common/loaders'
 import { BulletPagination } from './BulletPagination'
-import { signUpRestaurant } from 'lib/services/auth/signUp'
+import { signUpRestaurant, signUpStep1 } from 'lib/services/auth/signUp'
 import { IReferralLink } from 'lib/types'
 import { handleFetchError } from 'lib/utils/handleFetchError'
+import { Button } from 'components/common/Button'
+import { InputPhone } from '../InputPhone'
 
 interface IDataFormVerifyCode {
   code: string
 }
 
-export const VerifyCodeToRestaurants = ({ userTrack, handleStep, referralLink }: { userTrack: any, handleStep: IHandleStep, referralLink: IReferralLink }) => {
-  const { handleSubmit } = useForm<IDataFormVerifyCode>()
+export const VerifyCodeToRestaurants = ({ userTrack, handleStep, referralLink, handleUserInfo }: { userTrack: any, handleStep: IHandleStep, referralLink: IReferralLink, handleUserInfo: any }) => {
   const [isVerifyingCode, setIsVerifyingCode] = useState(false)
+  const [isPhoneEditable, setIsPhoneEditable] = useState(false)
+  const { handleSubmit: handleSubmitVerifyCode } = useForm<IDataFormVerifyCode>()
+  const { handleSubmit: handleSubmitPhone, register: registerPhone, formState: { errors }, control } = useForm<{ phoneNumber: string }>()
 
-  const onSubmit = async (code) => {
+  const sendSMSCode = async () => {
+    setIsVerifyingCode(true)
+
+    const { error } = await signUpStep1({ phoneNumber: userTrack.userInfo.phone })
+
+    if (error) {
+      handleFetchError(error.status, error.info)
+      setIsVerifyingCode(false)
+    }
+
+    setIsVerifyingCode(false)
+    toast('Submitted Code', { type: 'success' })
+  }
+
+  const onSubmitUpdatePhone = async ({ phoneNumber }) => {
+    setIsVerifyingCode(true)
+
+    const { error } = await signUpStep1({ phoneNumber })
+
+    if (error) {
+      handleFetchError(error.status, error.info)
+      setIsVerifyingCode(false)
+    }
+
+    handleUserInfo({ ...userTrack.userInfo, phone: `+${phoneNumber}` })
+    setIsVerifyingCode(false)
+    setIsPhoneEditable(false)
+    toast('Submitted Code', { type: 'success' })
+  }
+
+  const onSubmitVerifyCode = async (code) => {
     setIsVerifyingCode(true)
 
     const { error } = await signUpRestaurant({
@@ -75,21 +109,78 @@ export const VerifyCodeToRestaurants = ({ userTrack, handleStep, referralLink }:
     )
   }
 
+  if (isPhoneEditable) {
+    return (
+      <div className='flex justify-center items-center h-[85vh]'>
+        <form className='max-w-sm mt-6 text-center' onSubmit={handleSubmitPhone(onSubmitUpdatePhone)}>
+          <span className='text-4xl font-bold'>Verify Phone</span>
+          <p className='text-gray-500 mt-3'>
+          Code is Sent to <span className='font-bold text-black'>{userTrack.userInfo.phone}</span>
+          </p>
+
+          <div className='mt-4'>
+            <div className='text-left'>
+              <InputPhone
+                label='Phone'
+                isRequired
+                register={registerPhone}
+                errors={errors}
+                withVerifyCode={false}
+                control={control}
+              />
+
+              <Button type='submit' classes='w-full text-sm bg-primary-500'>
+                  Update Phone
+              </Button>
+            </div>
+          </div>
+
+          <div className='mt-20'>
+            <BulletPagination stepToActivate='VERIFY_CODE' />
+          </div>
+        </form>
+      </div>
+    )
+  }
+
   return (
     <div className='flex justify-center items-center h-[85vh]'>
-      <form className='max-w-sm mt-6 text-center' onSubmit={handleSubmit(onSubmit)}>
-        <span className='text-4xl font-bold'>Verify Code</span>
+      <form className='max-w-sm mt-6 text-center' onSubmit={handleSubmitVerifyCode(onSubmitVerifyCode)}>
+        <span className='text-4xl font-bold'>Verify Phone</span>
+        <p className='text-gray-500 mt-3'>
+          Code is Sent to <span className='font-bold text-black'>{userTrack.userInfo.phone}</span>
+        </p>
+
+        <button
+          type='button'
+          onClick={() => setIsPhoneEditable(true)}
+          className='text-primary-500 font-medium'
+        >
+              Change Number
+        </button>
 
         <div className='mt-4'>
           <ReactCodeInput
             fields={6}
             className='custom__reactCodeInput'
             disabled={isVerifyingCode}
-            onComplete={onSubmit}
+            onComplete={onSubmitVerifyCode}
           />
         </div>
 
         <div className='mt-4'>
+          <p className='font-bold'>
+            Didn’t recieve the code? {' '}
+            <button
+              type='button'
+              onClick={sendSMSCode}
+              className='text-primary-500 font-medium'
+            > Send Again
+            </button>
+          </p>
+        </div>
+
+        <div className='mt-20'>
           <BulletPagination stepToActivate='VERIFY_CODE' />
         </div>
       </form>
