@@ -12,7 +12,7 @@ import { IReferralLink } from 'lib/types'
 import { IHandleStep, IDataForm } from '../types'
 import { STEPS } from '.'
 import { BulletPagination } from './BulletPagination'
-import { signUpStep1 } from 'lib/services/session/signUp'
+import { signUpStep1 } from 'lib/services/auth/signUp'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 import { signUp } from 'lib/utils/gtm'
@@ -160,7 +160,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           id='name'
           name='name'
           type='text'
-          label={referralLink.role ? `${referralLink.role} Name` : 'Name'}
+          label={referralLink.role ? `${referralLink.role} First Name` : 'First Name'}
           registerId='name'
           placeholder='Enter Name'
           errors={errors.name}

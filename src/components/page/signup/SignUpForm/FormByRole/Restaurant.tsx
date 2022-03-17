@@ -37,6 +37,7 @@ export const SignUpRestaurantForm = ({ referralLink }: { referralLink: IReferral
       {
         userTrack.step === STEPS.VERIFY_CODE && (
           <VerifyCode
+            handleUserInfo={handleUserInfo}
             referralLink={referralLink}
             userTrack={userTrack}
             handleStep={handleStep}
@@ -47,7 +48,6 @@ export const SignUpRestaurantForm = ({ referralLink }: { referralLink: IReferral
       {
         userTrack.step === STEPS.SUCCESS_CODE && (
           <SuccessCode
-            referralLink={referralLink}
             handleStep={handleStep}
             userTrack={userTrack}
           />

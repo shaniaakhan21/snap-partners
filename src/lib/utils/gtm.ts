@@ -1,9 +1,17 @@
-
-import { TRoles } from 'lib/types'
+import { IAuth } from 'lib/stores/Auth'
+import { TROLE } from 'lib/types'
 
 export const GTM_ID = {
   PRE: 'GTM-PRJVWRJ',
   PRO: 'GTM-NNQS9S8'
+}
+
+export const userInfo = (info?: Partial<IAuth>) => {
+  window.dataLayer.push({
+    event: 'userInfo',
+    ...info,
+    lastVisit: new Date().toDateString()
+  })
 }
 
 export const pageview = (url) => {
@@ -72,7 +80,7 @@ export const marketingSharingCard = (name: string, socialMediaClicked: string) =
   })
 }
 
-export const signUp = (userType: TRoles, step: number, app?: 'android' | 'ios', upgradeToManager?: 'yes' | 'no', accountSettings?: 'yes' | 'no') => {
+export const signUp = (userType: TROLE, step: number, app?: 'android' | 'ios', upgradeToManager?: 'yes' | 'no', accountSettings?: 'yes' | 'no') => {
   window.dataLayer.push({
     event: 'signup',
     category: 'signupProcess',

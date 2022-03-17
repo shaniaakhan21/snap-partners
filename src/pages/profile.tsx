@@ -7,11 +7,11 @@ import {
   // RestaurantsIcon
 } from 'components/common/icons'
 import { useAuthStore } from 'lib/stores'
-import { PAGE_INFO } from 'config/pageInfo'
+import { APP_INFO } from 'config/appInfo'
 import type { Page as PageNext, ReactNode } from 'lib/types'
 // import { ROLES } from 'config/roles'
 
-const { SEO } = PAGE_INFO
+const { SEO } = APP_INFO
 
 const ProfilePage: PageNext = () => {
   const { auth, removeAuth } = useAuthStore()
@@ -97,7 +97,7 @@ const ProfilePage: PageNext = () => {
                   id='phone'
                   name='phone'
                   type='tel'
-                  value={auth.phone}
+                  value={auth.phoneNumber}
                   disabled={true}
                   className='w-full bg-transparent text-lg truncate'
                   autoComplete='off'

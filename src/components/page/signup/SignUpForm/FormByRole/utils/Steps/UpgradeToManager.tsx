@@ -4,8 +4,8 @@ import { toast } from 'react-toastify'
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
 import { useAuthStore, useNewWindowOpenedStore } from 'lib/stores'
-import { login } from 'lib/services/session/login'
-import { getUserMe } from 'lib/services/users/getUserMe'
+import { login } from 'lib/services/auth/login'
+import { getUserMe } from 'lib/services/user/getUserMe'
 import { IHandleStep, IUserTrack } from '../types'
 import { IReferralLink } from 'lib/types'
 import { handleFetchError } from 'lib/utils/handleFetchError'
@@ -31,7 +31,7 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
       return
     }
 
-    const { data: dataUser, error: errorUser } = await getUserMe({ token: dataLogin.token })
+    const { data, error: errorUser } = await getUserMe({ token: dataLogin.token })
 
     if (errorUser) {
       handleFetchError(errorUser.status, errorUser.info)
@@ -42,19 +42,22 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
     toast('Login Successful!', { type: 'success' })
     setIsLoading(false)
     setAuth({
-      email: dataUser.email,
-      name: dataUser.name,
-      phone: dataUser.phoneNumber,
+      email: data.email,
+      name: data.name,
+      phoneNumber: data.phoneNumber,
       accessToken: dataLogin.token,
-      lastname: dataUser.lastname,
-      roles: dataUser.roles,
+      lastname: data.lastname,
+      roles: data.roles,
       id: dataLogin.userId,
-      username: dataUser.username,
-      referralCode: dataUser.referralCode,
-      idImage: dataUser.idImage,
-      insuranceImage: dataUser.insuranceImage,
-      isManager: dataUser.isManager,
-      sponsorId: dataUser.sponsorId
+      username: data.username,
+      referralCode: data.referralCode,
+      idImage: data.idImage,
+      insuranceImage: data.insuranceImage,
+      isManager: data.ranks?.type === 'manager',
+      createdAt: data.createdAt,
+      ownerName: data.ownerName,
+      ranks: data.ranks,
+      updatedAt: data.updatedAt
     })
     // When change auth state, directly the app push the user to /overview path
     // This logic is on AuthPageLayout useEffect
@@ -69,7 +72,6 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
       `https://store.snapdelivered.com/product/manager-upgrade?userId=${userId}`,
       'windowUpgradeToManager'
     )
-
     signUp(role, 4, undefined, 'yes', 'no')
     setNewWindow(windowOpened)
     // When a newWindow is sent, in DashboardLayout we have an effect to handle upgrade to manager.

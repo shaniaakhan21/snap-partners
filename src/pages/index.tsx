@@ -6,16 +6,17 @@ import { useEffect } from 'react'
 
 import { useAuthStore } from 'lib/stores'
 import { getLocalStorage } from 'lib/utils/localStorage'
-import { decodeAccessToken } from 'lib/utils/decodedAccessToken'
-import { getUserMe } from 'lib/services/users/getUserMe'
+// import { decodeAccessToken } from 'lib/utils/decodedAccessToken'
+import { getUserMe } from 'lib/services/user/getUserMe'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import type { Page as PageNext } from 'lib/types'
-import { PAGE_INFO } from 'config/pageInfo'
+import { APP_INFO } from 'config/appInfo'
 
 import { HomeIllustration } from 'components/common/illustrations'
 import { FooterPublic } from 'components/layout/public/Footer'
+import { userInfo } from 'lib/utils/gtm'
 
-const { SEO } = PAGE_INFO
+const { SEO } = APP_INFO
 
 const HomePage: PageNext = () => {
   const { auth, setAuth } = useAuthStore()
@@ -31,7 +32,7 @@ const HomePage: PageNext = () => {
       const token = getLocalStorage('accessToken')
 
       if (token) {
-        const { userId } = decodeAccessToken(token)
+        // const { userId } = decodeAccessToken(token)
 
         const { data, error } = await getUserMe({ token })
 
@@ -44,21 +45,68 @@ const HomePage: PageNext = () => {
         setAuth({
           email: data.email,
           name: data.name,
-          phone: data.phoneNumber,
+          phoneNumber: data.phoneNumber,
           accessToken: token,
           lastname: data.lastname,
           roles: data.roles,
-          id: userId,
+          id: data.id,
           username: data.username,
           referralCode: data.referralCode,
           idImage: data.idImage,
           insuranceImage: data.insuranceImage,
-          isManager: data.isManager,
-          sponsorId: data.sponsorId
+          isManager: data.ranks?.type === 'manager',
+          createdAt: data.createdAt,
+          ownerName: data.ownerName,
+          ranks: data.ranks,
+          updatedAt: data.updatedAt
         })
         router.push('/overview')
       }
     })()
+    // add user info into GTM dataLayer
+    if (auth) {
+      const {
+        id,
+        username,
+        name,
+        lastname,
+        email,
+        phoneNumber,
+        roles,
+        isManager,
+        accessToken,
+        createdAt,
+        idImage,
+        insuranceImage,
+        ownerName,
+        ranks,
+        referralCode,
+        updatedAt,
+        referralLink
+      } = auth
+
+      userInfo({
+        id,
+        username,
+        name,
+        lastname,
+        email,
+        phoneNumber,
+        roles,
+        isManager,
+        createdAt,
+        accessToken,
+        idImage,
+        insuranceImage,
+        ownerName,
+        ranks,
+        referralCode,
+        updatedAt,
+        referralLink
+      })
+    } else {
+      userInfo()
+    }
   }, [auth])
 
   return (

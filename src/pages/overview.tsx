@@ -1,7 +1,7 @@
 import Head from 'next/head'
 
 import type { Page, ReactNode } from 'lib/types'
-import { PAGE_INFO } from 'config/pageInfo'
+import { APP_INFO } from 'config/appInfo'
 
 import DashboardLayout from 'layouts/private/Dashboard'
 import {
@@ -22,10 +22,11 @@ import {
 } from 'components/page/overview'
 import { useAuthStore } from 'lib/stores'
 
-const { SEO } = PAGE_INFO
+const { SEO } = APP_INFO
 
 const DashboardOverViewPage: Page = () => {
   const { auth } = useAuthStore()
+
   const data = [
     {
       name: '1a',

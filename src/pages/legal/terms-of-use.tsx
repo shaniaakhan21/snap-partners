@@ -1,9 +1,9 @@
 import { ReactNode } from 'react'
 import DashboardLayout from 'layouts/private/Dashboard'
 import Head from 'next/head'
-import { PAGE_INFO } from 'config/pageInfo'
+import { APP_INFO } from 'config/appInfo'
 import { Page } from 'lib/types'
-const { SEO } = PAGE_INFO
+const { SEO } = APP_INFO
 
 const TermsOfUsePage: Page = () => {
   return (

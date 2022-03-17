@@ -1,27 +1,25 @@
-import { ReactNode, useEffect } from 'react'
+import { Fragment, ReactNode, useEffect } from 'react'
 import type { NextComponentType } from 'next'
 import { AppContext, AppInitialProps, AppLayoutProps } from 'next/app'
 import Script from 'next/script'
 import { useRouter } from 'next/router'
 import { ToastContainer } from 'react-toastify'
-import { SWRConfig } from 'swr'
 import { LoadingPage } from 'components/layout/LoadingPage'
 import { GTM_ID, pageview } from 'lib/utils/gtm'
 import { useLoadingPage } from 'lib/hooks/useLoadingPage'
-import { swrConfigValue } from 'lib/utils/swrConfig'
 import 'styles/tailwind.css'
 import 'react-toastify/dist/ReactToastify.min.css'
 import 'react-phone-input-2/lib/style.css'
 import { ThemeProvider } from '@material-ui/core/styles'
 import { theme } from 'materialTheme'
-import { useModalStore } from 'lib/stores/Modal'
+import { useModalStore } from 'lib/stores'
 import { Overlay } from 'components/common/Overlay'
 import { ModalContainer } from 'components/common/ModalContainer'
 
 const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({ Component, pageProps }: AppLayoutProps) => {
   const router = useRouter()
   const { isRouteChanging, loadingKey } = useLoadingPage()
-  const { isOpen, modalChildren, closeModal } = useModalStore()
+  const { modalsData, closeModal } = useModalStore()
   const getLayout = Component.getLayout || ((page: ReactNode) => page)
 
   useEffect(() => {
@@ -57,11 +55,9 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
 
       <LoadingPage isRouteChanging={isRouteChanging} key={loadingKey} />
 
-      <SWRConfig value={swrConfigValue}>
-        <ThemeProvider theme={theme}>
-          {getLayout(<Component {...pageProps} />)}
-        </ThemeProvider>
-      </SWRConfig>
+      <ThemeProvider theme={theme}>
+        {getLayout(<Component {...pageProps} />)}
+      </ThemeProvider>
 
       <ToastContainer
         position='top-right'
@@ -73,13 +69,17 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
         pauseOnHover
       />
 
-      {isOpen && (
-        <Overlay onClick={closeModal}>
-          <ModalContainer>
-            {modalChildren}
-          </ModalContainer>
-        </Overlay>
-      )}
+      {modalsData?.map(modal => (
+        <Fragment key={modal.id}>
+          {modal.isOpen && (
+            <Overlay onClick={(e, element) => closeModal(e, element, modal.id)}>
+              <ModalContainer>
+                {modal.modalChildren}
+              </ModalContainer>
+            </Overlay>
+          )}
+        </Fragment>
+      ))}
     </>
   )
 }

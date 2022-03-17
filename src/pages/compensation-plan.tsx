@@ -4,10 +4,10 @@ import dynamic from 'next/dynamic'
 import type { Page, ReactNode } from 'lib/types'
 import DashboardLayout from 'layouts/private/Dashboard'
 import { Spinner } from 'components/common/loaders'
-import { PAGE_INFO } from 'config/pageInfo'
+import { APP_INFO } from 'config/appInfo'
 import { downloadCompensationPlan } from 'lib/utils/gtm'
 
-const { SEO } = PAGE_INFO
+const { SEO } = APP_INFO
 
 const PDFViewer = dynamic(
   () => import('../components/page/compensation-plan/PDFViewer'),

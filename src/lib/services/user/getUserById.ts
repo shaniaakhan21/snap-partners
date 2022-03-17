@@ -1,14 +1,9 @@
-import { IQueryErrorReturn } from 'lib/types/query'
+import { IUserById } from 'lib/types'
+import { IQueryErrorReturn } from 'lib/types/http/query'
 
 interface IQueryReturn extends IQueryErrorReturn {
-  data: {
-    id: 1,
-    email: string,
-    phoneNumber: string,
-    sponsorId: number | null,
-  } | null
+  data: IUserById | null
 }
-// ? This interface will be change.
 
 export const getUserById = async (id: number | string, token: string): Promise<IQueryReturn> => {
   const res = await fetch(`/api/user/getUserById?id=${id}`, {
