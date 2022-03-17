@@ -1,32 +1,13 @@
 import createAtom from 'zustand'
 import { removeLocalStorage } from 'lib/utils/localStorage'
 import { APP_INFO } from 'config/appInfo'
+import { IUserSession } from 'lib/types'
 
 const { SEO } = APP_INFO
 
-interface ISignInProps {
+export interface IAuth extends IUserSession {
+  referralLink?: string
   accessToken: string
-  id: number,
-  username: string
-  email: string
-  name: string
-  lastname: string
-  phone: string
-  roles: {
-    admin: boolean
-    customer: boolean
-    driver: boolean
-    merchant: boolean
-  }
-  isManager: boolean
-  referralCode: string | null
-  sponsorId: number | null
-  idImage: string | null,
-  insuranceImage: string | null,
-}
-
-export interface IAuth extends ISignInProps {
-  referralLink: string
 }
 
 interface IAuthAtom {
@@ -38,14 +19,17 @@ interface IAuthAtom {
     email,
     name,
     lastname,
-    phone,
+    phoneNumber,
     roles,
     isManager,
     referralCode,
-    sponsorId,
     idImage,
-    insuranceImage
-  }: ISignInProps) => void
+    insuranceImage,
+    createdAt,
+    ownerName,
+    ranks,
+    updatedAt
+  }: IAuth) => void
   removeAuth: () => void
 }
 
@@ -59,13 +43,16 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
     email,
     name,
     lastname,
-    phone,
+    phoneNumber,
     roles,
     isManager,
     referralCode,
-    sponsorId,
     idImage,
-    insuranceImage
+    insuranceImage,
+    createdAt,
+    ownerName,
+    ranks,
+    updatedAt
   }) => {
     set({
       auth: {
@@ -75,13 +62,16 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
         email,
         name,
         lastname,
-        phone,
+        phoneNumber,
         roles,
         isManager,
         referralCode,
-        sponsorId,
         idImage,
         insuranceImage,
+        createdAt,
+        ownerName,
+        ranks,
+        updatedAt,
         referralLink: referralCode ? `${SEO.URL_PAGE}/auth/signup?referralCode=${referralCode}` : null
       }
     })

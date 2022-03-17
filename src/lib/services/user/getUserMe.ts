@@ -1,4 +1,5 @@
 import { IQueryErrorReturn } from 'lib/types/http/query'
+import { TRANK } from 'lib/types/user/ranks'
 
 interface IAuthorizations {
   token: string
@@ -6,23 +7,33 @@ interface IAuthorizations {
 
 interface IQueryUserMeReturn extends IQueryErrorReturn {
   data: {
-    username: string,
-    email: string,
-    name: string,
-    lastname: string,
-    phoneNumber: string | null,
+    createdAt: string
+    id: number
+    name: string
+    lastname: string
+    email: string
+    username: string
+    phoneNumber: string
+    referralCode: string
+    idImage: string
+    insuranceImage: string
     roles: {
-        admin: boolean,
-        customer: boolean,
-        driver: boolean,
-        merchant: boolean
+      admin: boolean
+      customer: boolean
+      driver: boolean
+      merchant: boolean
     },
-    isManager: boolean,
-    referralCode: string | null,
-    sponsorId: number | null,
-    idImage: string | null,
-    insuranceImage: string | null,
-  } | null
+    isManager: boolean
+    ownerName: string
+    updatedAt: string
+    ranks: {
+      type: TRANK
+      earns: string
+      percentage: string
+      updatedAt: string
+    }
+  }
+ | null
 }
 
 export const getUserMe = async (authorizations: IAuthorizations): Promise<IQueryUserMeReturn> => {
@@ -46,8 +57,8 @@ export const getUserMe = async (authorizations: IAuthorizations): Promise<IQuery
 
   return {
     data: {
-      ...data.data,
-      sponsorId: data.data.sponsorId ?? null
+      ...data.data.user,
+      sponsorId: data.data.user.sponsorId ?? null
     },
     error: null
   }

@@ -40,7 +40,7 @@ export const VerifyCodeToRestaurants = ({ userTrack, handleStep, referralLink, h
   const onSubmitUpdatePhone = async ({ phoneNumber }) => {
     setIsVerifyingCode(true)
 
-    const { error } = await signUpStep1({ phoneNumber })
+    const { error } = await signUpStep1({ phoneNumber: `+${phoneNumber}` })
 
     if (error) {
       handleFetchError(error.status, error.info)

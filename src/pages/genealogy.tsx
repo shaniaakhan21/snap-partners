@@ -159,6 +159,9 @@ const GenealogyPage: Page = () => {
               email={levelSelectedUserData.email}
               phone={levelSelectedUserData.phoneNumber}
               onClick={fnCloseModalReferralUserDetail}
+              authIsAdmin={auth.roles.admin}
+              rank='Epale'
+              sponsor='sponsorName + sponsorLastname'
             />
           </ModalContainer>
         </Overlay>

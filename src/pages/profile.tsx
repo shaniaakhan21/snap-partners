@@ -97,7 +97,7 @@ const ProfilePage: PageNext = () => {
                   id='phone'
                   name='phone'
                   type='tel'
-                  value={auth.phone}
+                  value={auth.phoneNumber}
                   disabled={true}
                   className='w-full bg-transparent text-lg truncate'
                   autoComplete='off'

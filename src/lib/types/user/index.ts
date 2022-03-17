@@ -1,7 +1,10 @@
 // IUserData is test interface to test/dataEmails
-export type { IRANKS, TRANK } from './ranks'
+// import { IRANKS } from './ranks'
+
+import type { TRANK } from './ranks'
 export type { IROLES, TROLE } from './roles'
 export type { IReferralLink } from './referralLink'
+
 export interface IUserData {
   id: string
   name: string
@@ -10,21 +13,30 @@ export interface IUserData {
   phone: string
 }
 
-export interface IUser {
-  id: number,
-  lastname: string,
-  email: string,
-  username: string,
-  password: string,
-  phoneNumber: string,
-  name: string,
-  sponsorId: number,
+export interface IUserSession {
+  createdAt: string
+  id: number
+  name: string
+  lastname: string
+  email: string
+  username: string
+  phoneNumber: string
+  referralCode: string
+  idImage: string
+  insuranceImage: string
   roles: {
-    customer: boolean,
-    driver: boolean,
+    admin: boolean
+    customer: boolean
+    driver: boolean
     merchant: boolean
   },
-  referralCode: string,
-  idImage: string,
-  insuranceImage: string,
+  isManager: boolean
+  ownerName: string
+  updatedAt: string
+  ranks: {
+    type: TRANK
+    earns: string
+    percentage: string
+    updatedAt: string
+  } | null
 }

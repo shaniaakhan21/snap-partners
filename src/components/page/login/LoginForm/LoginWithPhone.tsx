@@ -38,7 +38,7 @@ export const LoginWithPhone = () => {
       return
     }
 
-    const { data: dataUser, error: errorUser } = await getUserMe({ token: dataLogin.token })
+    const { data, error: errorUser } = await getUserMe({ token: dataLogin.token })
 
     if (errorUser) {
       handleFetchError(errorUser.status, errorUser.info)
@@ -49,19 +49,22 @@ export const LoginWithPhone = () => {
     toast('Login Successful!', { type: 'success' })
     setLoading(false)
     setAuth({
-      email: dataUser.email,
-      name: dataUser.name,
-      phone: dataUser.phoneNumber,
+      email: data.email,
+      name: data.name,
+      phoneNumber: data.phoneNumber,
       accessToken: dataLogin.token,
-      lastname: dataUser.lastname,
-      roles: dataUser.roles,
+      lastname: data.lastname,
+      roles: data.roles,
       id: dataLogin.userId,
-      username: dataUser.username,
-      referralCode: dataUser.referralCode,
-      idImage: dataUser.idImage,
-      insuranceImage: dataUser.insuranceImage,
-      isManager: dataUser.isManager,
-      sponsorId: dataUser.sponsorId
+      username: data.username,
+      referralCode: data.referralCode,
+      idImage: data.idImage,
+      insuranceImage: data.insuranceImage,
+      isManager: data.ranks?.type === 'manager',
+      createdAt: data.createdAt,
+      ownerName: data.ownerName,
+      ranks: data.ranks,
+      updatedAt: data.updatedAt
     })
     reset()
   }

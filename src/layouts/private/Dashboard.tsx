@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import type { NextPage, ReactNode } from 'lib/types'
 import { useAuthStore, useNewWindowOpenedStore } from 'lib/stores'
 import { getLocalStorage } from 'lib/utils/localStorage'
-import { decodeAccessToken } from 'lib/utils/decodedAccessToken'
+// import { decodeAccessToken } from 'lib/utils/decodedAccessToken'
 import { getUserMe } from 'lib/services/user/getUserMe'
 import { timeout } from 'lib/utils/timeout'
 
@@ -21,7 +21,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const { newWindow, closeNewWindow } = useNewWindowOpenedStore()
 
   useEffect(() => {
-    (async () => {      
+    (async () => {
       if (auth) return
 
       const token = getLocalStorage('accessToken')
@@ -31,7 +31,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         return
       }
 
-      const { userId } = decodeAccessToken(token)
+      // const { userId } = decodeAccessToken(token)
 
       const { data, error } = await getUserMe({ token })
 
@@ -45,25 +45,65 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
       setAuth({
         email: data.email,
         name: data.name,
-        phone: data.phoneNumber,
+        phoneNumber: data.phoneNumber,
         accessToken: token,
         lastname: data.lastname,
         roles: data.roles,
-        id: userId,
+        id: data.id,
         username: data.username,
         referralCode: data.referralCode,
         idImage: data.idImage,
         insuranceImage: data.insuranceImage,
-        isManager: data.isManager,
-        sponsorId: data.sponsorId
+        isManager: data.ranks?.type === 'manager',
+        createdAt: data.createdAt,
+        ownerName: data.ownerName,
+        ranks: data.ranks,
+        updatedAt: data.updatedAt
       })
     })()
-    
+
     // add user info into GTM dataLayer
-    if(auth){
-      const { id, username, name, lastname, email, phone, roles, isManager } = auth;
-      userInfo({ id, username, name, lastname, email, phone, roles, isManager })
-    } else{
+    if (auth) {
+      const {
+        id,
+        username,
+        name,
+        lastname,
+        email,
+        phoneNumber,
+        roles,
+        isManager,
+        accessToken,
+        createdAt,
+        idImage,
+        insuranceImage,
+        ownerName,
+        ranks,
+        referralCode,
+        updatedAt,
+        referralLink
+      } = auth
+
+      userInfo({
+        id,
+        username,
+        name,
+        lastname,
+        email,
+        phoneNumber,
+        roles,
+        isManager,
+        createdAt,
+        accessToken,
+        idImage,
+        insuranceImage,
+        ownerName,
+        ranks,
+        referralCode,
+        updatedAt,
+        referralLink
+      })
+    } else {
       userInfo()
     }
   }, [auth])
@@ -73,22 +113,22 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
       if (!auth || !auth?.accessToken || newWindow?.closed) return
 
       const fnRecursiveIsManager = async (): Promise<boolean> => {
-        const { data, error } = await getUserMe({ token: auth.accessToken })
+        const { data: user, error } = await getUserMe({ token: auth.accessToken })
 
         if (error) {
           handleFetchError(error.status, error.info)
         }
 
         if (!newWindow || newWindow.closed) {
-          if (data?.isManager) {
-            return data.isManager
+          if (user?.isManager) {
+            return user.isManager
           }
 
           closeNewWindow()
           return auth.isManager
         }
 
-        if (!data.isManager) {
+        if (!user.isManager) {
           await timeout(5000)
           return await fnRecursiveIsManager()
         }

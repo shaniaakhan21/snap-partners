@@ -26,6 +26,7 @@ const { SEO } = APP_INFO
 
 const DashboardOverViewPage: Page = () => {
   const { auth } = useAuthStore()
+
   const data = [
     {
       name: '1a',
