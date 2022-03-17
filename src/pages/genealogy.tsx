@@ -73,6 +73,7 @@ const GenealogyPage: Page = () => {
     levelSelected,
     levelSelectedUserData,
     levelSelectedUsers
+    // fetchingUserData
   } = useReferralsData(auth, tabOpen, userDetailIdOpen)
   // } = useReferralsData(auth, tabOpen, userDetailIdOpen, page)
 
@@ -181,6 +182,7 @@ const GenealogyPage: Page = () => {
               authIsAdmin={auth.roles.admin}
               rank={levelSelectedUserData.ranks.type}
               sponsor={levelSelectedUserData.sponsor}
+              roles={levelSelectedUserData.roles}
             />
           </ModalContainer>
         </Overlay>

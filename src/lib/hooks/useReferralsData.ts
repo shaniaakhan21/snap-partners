@@ -29,6 +29,7 @@ export const useReferralsData = (userAuth: IAuth, tabOpen: string, userDetailIdO
   const [levelSelected, setLevelSelected] = useState<ILevel | null>(null)
   const [levelSelectedUsers, setLevelSelectedUsers] = useState<ILevelUser[] | null>(null)
   const [levelSelectedUserData, setLevelSelectedUserData] = useState<IUserById | null>(null)
+  // const [fetchingUserData, setFetchingUserData] = useState(false)
 
   // INIT DATA
   useEffect(() => {
@@ -102,15 +103,16 @@ export const useReferralsData = (userAuth: IAuth, tabOpen: string, userDetailIdO
       //   { userId: levelSelectedUserData.id, username: levelSelectedUserData.name }
       // )
 
+      // setFetchingUserData(true)
       const { data, error } = await getUserById(levelSelectedUserData.id, userAuth.accessToken)
-
-      console.log('data:', data)
 
       if (error) {
         handleFetchError(error.status, error.info)
+        // setFetchingUserData(false)
         return
       }
 
+      // setFetchingUserData(false)
       setLevelSelectedUserData(data)
     })()
   }, [userDetailIdOpen])
@@ -120,5 +122,6 @@ export const useReferralsData = (userAuth: IAuth, tabOpen: string, userDetailIdO
     levelSelected,
     levelSelectedUsers,
     levelSelectedUserData
+    // fetchingUserData
   }
 }
