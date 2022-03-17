@@ -263,6 +263,9 @@ export const ModalForgotPassword = () => {
       </p>
 
       <br />
+      <p className='font-semibold'>Get a verification code via</p>
+
+      <br />
 
       <div className='w-full flex justify-center items-center'>
         <Button
