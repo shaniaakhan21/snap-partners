@@ -12,7 +12,7 @@ interface IProps {
 export const ReferralTabListItem = ({ isSelect = false, id, newUsers, numUsers, noCursor = false, onClick = () => {} }: IProps) => {
   return (
     <li className={`bg-white rounded-sm relative mb-4 h-24 list-none last:mb-0 ${noCursor ? '' : 'shadow'}`}>
-      {isSelect && <div className='absolute top-5 left-2 rounded-full bg-primary-500 w-2 h-2' />}
+      {isSelect && <div style={{ top: '30px' }} className='absolute left-2 rounded-full bg-primary-500 w-2 h-2' />}
       <button
         style={{ cursor: noCursor ? 'auto' : 'pointer' }}
         className={`border border-transparent rounded-sm w-full h-full py-2 pl-5 pr-2 text-sm text-left ${noCursor ? '' : 'transition-colors hover:border-primary-500'}`}
