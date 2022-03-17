@@ -13,8 +13,7 @@ export interface IUserData {
   phone: string
 }
 
-export interface IUserSession {
-  createdAt: string
+export interface IUserCommonData {
   id: number
   name: string
   lastname: string
@@ -22,15 +21,13 @@ export interface IUserSession {
   username: string
   phoneNumber: string
   referralCode: string
-  idImage: string
-  insuranceImage: string
   roles: {
     admin: boolean
     customer: boolean
     driver: boolean
     merchant: boolean
   },
-  isManager: boolean
+  isManager: boolean // ?
   ownerName: string
   updatedAt: string
   ranks: {
@@ -39,4 +36,14 @@ export interface IUserSession {
     percentage: string
     updatedAt: string
   } | null
+}
+
+export interface IUserById extends IUserCommonData {
+  sponsor: string | null
+}
+
+export interface IUserMe extends IUserCommonData {
+  createdAt: string
+  idImage: string
+  insuranceImage: string
 }

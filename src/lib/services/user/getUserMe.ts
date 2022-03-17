@@ -56,10 +56,7 @@ export const getUserMe = async (authorizations: IAuthorizations): Promise<IQuery
   }
 
   return {
-    data: {
-      ...data.data.user,
-      sponsorId: data.data.user.sponsorId ?? null
-    },
+    data: { ...data.data.user },
     error: null
   }
 }

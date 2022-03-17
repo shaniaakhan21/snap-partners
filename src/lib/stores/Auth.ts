@@ -1,11 +1,11 @@
 import createAtom from 'zustand'
 import { removeLocalStorage } from 'lib/utils/localStorage'
 import { APP_INFO } from 'config/appInfo'
-import { IUserSession } from 'lib/types'
+import { IUserMe } from 'lib/types'
 
 const { SEO } = APP_INFO
 
-export interface IAuth extends IUserSession {
+export interface IAuth extends IUserMe {
   referralLink?: string
   accessToken: string
 }

@@ -1,3 +1,4 @@
+// import { Fragment, useEffect, useRef, useState } from 'react'
 import { useState } from 'react'
 import Head from 'next/head'
 import type { Page, ReactNode } from 'lib/types'
@@ -5,7 +6,7 @@ import { APP_INFO } from 'config/appInfo'
 import DashboardLayout from 'layouts/private/Dashboard'
 import { Overlay } from 'components/common/Overlay'
 import { ModalContainer } from 'components/common/ModalContainer'
-import { Searcher } from 'components/common/Search'
+// import { Searcher } from 'components/common/Search'
 import { ReferralListSelectedItemMobile } from 'components/page/referrals/ListSelectedItemMobile'
 import { ReferralListSelected } from 'components/page/referrals/ListSelected'
 import { ReferralsUserDetailModal } from 'components/page/referrals/UserDetailModal'
@@ -14,38 +15,40 @@ import { ReferralTabList } from 'components/page/referrals/TabList'
 import { useReferralsData } from 'lib/hooks/useReferralsData'
 import { useModal } from 'lib/hooks/useModal'
 import { useWindowSize } from 'lib/hooks/useWindowSize'
-import { useAuthStore, useSearchModalStore } from 'lib/stores'
+// import { useAuthStore, useSearchModalStore } from 'lib/stores'
+import { useAuthStore } from 'lib/stores'
 import { ReferralListSelectedItem } from 'components/page/referrals/ListSelectedItem'
 import { Spinner } from 'components/common/loaders'
 import { ILevelUser } from 'lib/types/genealogy'
+// import { useNearScreen } from 'lib/hooks/useNearScreen'
 
 const { SEO } = APP_INFO
 
-const selectInfo = {
-  selectDefaultValue: 'name',
-  selectOptions: [
-    {
-      value: 'id',
-      text: 'ID'
-    },
-    {
-      value: 'name',
-      text: 'Fullname'
-    },
-    {
-      value: 'email',
-      text: 'Email'
-    },
-    {
-      value: 'phone',
-      text: 'Phone'
-    }
-  ]
-}
+// const selectInfo = {
+//   selectDefaultValue: 'name',
+//   selectOptions: [
+//     {
+//       value: 'id',
+//       text: 'ID'
+//     },
+//     {
+//       value: 'name',
+//       text: 'Fullname'
+//     },
+//     {
+//       value: 'email',
+//       text: 'Email'
+//     },
+//     {
+//       value: 'phone',
+//       text: 'Phone'
+//     }
+//   ]
+// }
 
 const GenealogyPage: Page = () => {
   const { auth } = useAuthStore()
-  const { genealogySearchIsOpen, closeGenealogySearch } = useSearchModalStore()
+  // const { genealogySearchIsOpen, closeGenealogySearch } = useSearchModalStore()
   const { width: windowWidth } = useWindowSize()
   const {
     isOpen: modalReferralListlIsOpen,
@@ -57,8 +60,13 @@ const GenealogyPage: Page = () => {
     fnOpenModal: fnOpenModalReferralUserDetail,
     fnCloseModal: fnCloseModalReferralUserDetail
   } = useModal(false)
+
+  // const refVisor = useRef(null)
+  // const isNearScreen = useNearScreen(refVisor.current)
+
   const [tabOpen, setTabOpen] = useState('1')
   const [userDetailIdOpen, setUserdetailIdOpen] = useState(0)
+  // const [page, setPage] = useState(1)
 
   const {
     levels,
@@ -66,13 +74,23 @@ const GenealogyPage: Page = () => {
     levelSelectedUserData,
     levelSelectedUsers
   } = useReferralsData(auth, tabOpen, userDetailIdOpen)
+  // } = useReferralsData(auth, tabOpen, userDetailIdOpen, page)
 
-  console.log('LEVELS:', levels)
-  console.log('LEVELS SELECTED:', levelSelected)
-  console.log('LEVEL SELECTED USER DATA:', levelSelectedUserData)
-  console.log('LEVEL SELECTED USERS:', levelSelectedUsers)
+  // console.log('LEVELS:', levels)
+  // console.log('LEVELS SELECTED:', levelSelected)
+  // console.log('LEVEL SELECTED USER DATA:', levelSelectedUserData)
+  // console.log('LEVEL SELECTED USERS:', levelSelectedUsers)
+  // console.log('----------------------------------')
 
   const handleClickTab = (id: string) => setTabOpen(id)
+
+  // useEffect(() => {
+  //   console.log('NEAR SCREEN', isNearScreen)
+  //   if (isNearScreen) {
+  //     // setPage(prevState => prevState + 1)
+  //     setPage(page + 1)
+  //   }
+  // }, [isNearScreen])
 
   if (levels?.length === 0) return <h1 className='text-center text-5xl'>Empty</h1>
 
@@ -102,6 +120,7 @@ const GenealogyPage: Page = () => {
               onClick={windowWidth >= 1024 ? handleClickTab : (id) => fnOpenModalReferralList(() => handleClickTab(id))}
             />
           ))}
+          {/* <div id='visor' ref={refVisor} /> */}
         </ReferralTabList>
 
         {/* List in desktop */}
@@ -160,14 +179,14 @@ const GenealogyPage: Page = () => {
               phone={levelSelectedUserData.phoneNumber}
               onClick={fnCloseModalReferralUserDetail}
               authIsAdmin={auth.roles.admin}
-              rank='Epale'
-              sponsor='sponsorName + sponsorLastname'
+              rank={levelSelectedUserData.ranks.type}
+              sponsor={levelSelectedUserData.sponsor}
             />
           </ModalContainer>
         </Overlay>
       )}
 
-      {genealogySearchIsOpen && levelSelectedUsers && (
+      {/* {genealogySearchIsOpen && levelSelectedUsers && (
         <Overlay onClick={closeGenealogySearch}>
           <ModalContainer>
             <Searcher
@@ -177,7 +196,7 @@ const GenealogyPage: Page = () => {
             />
           </ModalContainer>
         </Overlay>
-      )}
+      )} */}
     </>
   )
 }
