@@ -15,6 +15,7 @@ import ReactCodeInput from 'react-verification-code-input'
 import { RegisterPassword } from 'components/page/signup/SignUpForm/FormByRole/utils/RegisterPassword'
 import { registerRulesConfig } from 'components/page/signup/SignUpForm/FormByRole/utils/formRules'
 import { signUpStep1 } from 'lib/services/auth/signUp'
+import { MODALS_ID, useModalStore } from 'lib/stores'
 
 const ruleEmail = {
   required: { value: true, message: 'Email Required *' },
@@ -36,6 +37,7 @@ export const ModalForgotPassword = () => {
   const [phoneSent, setPhoneSent] = useState(false)
   const [phone, setPhone] = useState<string>('')
   const [code, setCode] = useState<string>('')
+  const { removeModal } = useModalStore()
 
   const { handleSubmit, register, reset, formState: { errors } } = useForm()
   const {
@@ -85,7 +87,8 @@ export const ModalForgotPassword = () => {
 
     reset()
     setIsLoading(false)
-    toast('Submitted Code', { type: 'success' })
+    removeModal(MODALS_ID.MODAL_FORGOT_PASSWORD_ID)
+    toast('Password Updated Correctly', { type: 'success' })
   }
 
   const onSubmitEmail = async (dataForm: IForm) => {
