@@ -39,7 +39,11 @@ export interface IUserCommonData {
 }
 
 export interface IUserById extends IUserCommonData {
-  sponsor: string | null
+  sponsor: {
+    id: number
+    lastname: string | null
+    name: string
+  }
 }
 
 export interface IUserMe extends IUserCommonData {

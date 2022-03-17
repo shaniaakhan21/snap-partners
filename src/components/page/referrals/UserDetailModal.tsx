@@ -10,7 +10,11 @@ import { CopyIcon, EmailIcon, PhoneIcon } from 'components/common/icons'
 interface IProps extends IUserData {
   onClick?: (e: MouseEvent, element: HTMLElement) => void
   referralUsers: any[]
-  sponsor?: string
+  sponsor?: {
+    id: number
+    lastname: string
+    name: string
+  }
   rank?: string
   authIsAdmin: boolean
   roles: {
@@ -93,7 +97,15 @@ export const ReferralsUserDetailModal = ({ id, name, email, phone, sponsor, rank
 
       <div className='flex justify-between items-start'>
         <p className='mb-4 block text-primary-500 font-bold'>{name.toUpperCase()}</p>
-        <p className='mb-4 block text-gray-800 font-bold'>{rank === 'referralPartner' ? 'Referral Partner' : rank}</p>
+        <p className='mb-4 block text-gray-800 font-bold'>
+          {
+            rank
+              ? rank === 'referralPartner'
+                ? 'Referral Partner'
+                : rank
+              : 'Refferal Partner'
+          }
+        </p>
       </div>
 
       <div className='mb-8 flex flex-col sm:flex-row justify-center sm:items-center sm:justify-between'>
@@ -112,7 +124,9 @@ export const ReferralsUserDetailModal = ({ id, name, email, phone, sponsor, rank
         sponsor && (
           <p className='inline-block'>
             Sponsored by {' '}
-            <span className='inline-block text-primary-500'>{sponsor}</span>
+            <span className='inline-block text-primary-500'>
+              {`${sponsor.name} ${sponsor.lastname ? sponsor.lastname : ''}`}
+            </span>
           </p>
         )
       }

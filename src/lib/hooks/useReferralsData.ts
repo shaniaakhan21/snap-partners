@@ -113,6 +113,7 @@ export const useReferralsData = (userAuth: IAuth, tabOpen: string, userDetailIdO
       }
 
       // setFetchingUserData(false)
+      console.log(data)
       setLevelSelectedUserData(data)
     })()
   }, [userDetailIdOpen])

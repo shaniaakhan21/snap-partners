@@ -179,11 +179,23 @@ const GenealogyPage: Page = () => {
               email={levelSelectedUserData.email}
               phone={levelSelectedUserData.phoneNumber}
               onClick={fnCloseModalReferralUserDetail}
+              authIsAdmin={true}
+              rank={levelSelectedUserData.ranks?.type}
+              sponsor={levelSelectedUserData?.sponsor}
+              roles={{ admin: false, customer: true, driver: false, merchant: false }}
+            />
+            {/* <ReferralsUserDetailModal
+              referralUsers={[]}
+              id={levelSelectedUserData.id.toString()}
+              name={levelSelectedUserData.name}
+              email={levelSelectedUserData.email}
+              phone={levelSelectedUserData.phoneNumber}
+              onClick={fnCloseModalReferralUserDetail}
               authIsAdmin={auth.roles.admin}
               rank={levelSelectedUserData.ranks.type}
               sponsor={levelSelectedUserData.sponsor}
               roles={levelSelectedUserData.roles}
-            />
+            /> */}
           </ModalContainer>
         </Overlay>
       )}
