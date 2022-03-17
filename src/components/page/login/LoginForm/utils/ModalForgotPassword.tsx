@@ -37,7 +37,7 @@ export const ModalForgotPassword = () => {
   const [phoneSent, setPhoneSent] = useState(false)
   const [phone, setPhone] = useState<string>('')
   const [code, setCode] = useState<string>('')
-  const { removeModal } = useModalStore()
+  const { closeModalManually } = useModalStore()
 
   const { handleSubmit, register, reset, formState: { errors } } = useForm()
   const {
@@ -87,7 +87,7 @@ export const ModalForgotPassword = () => {
 
     reset()
     setIsLoading(false)
-    removeModal(MODALS_ID.MODAL_FORGOT_PASSWORD_ID)
+    closeModalManually(MODALS_ID.MODAL_FORGOT_PASSWORD_ID)
     toast('Password Updated Correctly', { type: 'success' })
   }
 

@@ -14,6 +14,7 @@ interface IModalAtom {
   modalsData: IModal[] | null
   openModal: (id: string, callbackOnOpen?: () => void) => void
   closeModal: (e: MouseEvent<HTMLElement>, elementRef: HTMLElement, id: string, callbackOnClose?: () => void) => void
+  closeModalManually: (id: string) => void
   addModal: (modal: IModal) => void
   updateModal: (id: string, modal: IModalWithoutId) => void
   removeModal: (id: string) => void
@@ -50,6 +51,11 @@ export const useModalStore = createAtom<IModalAtom>(set => ({
       })
     }
   },
+  closeModalManually: (id: string) => set(prevState => {
+    const modal = prevState.modalsData?.find(modal => id === modal.id)
+    if (!modal) return
+    modal.isOpen = false
+  }),
   addModal: (newModal: IModal) => set(prevState => {
     const modalFound = prevState.modalsData?.find(modal => newModal.id === modal.id)
     if (modalFound) return
