@@ -1,3 +1,4 @@
+import { useAuthStore } from 'lib/stores'
 import { useRouter } from 'next/router'
 
 import { DrawerDesktop } from './Desktop'
@@ -5,6 +6,7 @@ import { DrawerMobile } from './Mobile'
 
 export const Drawer = () => {
   const router = useRouter()
+  const { auth } = useAuthStore()
 
   const handleIsCurrentlyPage = (routeLink: string) => { // Should be refactor
     return (
@@ -20,8 +22,8 @@ export const Drawer = () => {
 
   return (
     <>
-      <DrawerDesktop isCurrentlyPage={handleIsCurrentlyPage} />
-      <DrawerMobile isCurrentlyPage={handleIsCurrentlyPage} />
+      <DrawerDesktop isCurrentlyPage={handleIsCurrentlyPage} isManager={auth.isManager} />
+      <DrawerMobile isCurrentlyPage={handleIsCurrentlyPage} isManager={auth.isManager} />
     </>
   )
 }

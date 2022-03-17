@@ -3,8 +3,9 @@ import Link from 'next/link'
 import { useDrawerStore } from 'lib/stores'
 import { drawerRoutes } from './routes'
 import { navbarPress } from 'lib/utils/gtm'
+import { Fragment } from 'react'
 
-export const DrawerMobile = ({ isCurrentlyPage }: { isCurrentlyPage: (route: string) => boolean }) => {
+export const DrawerMobile = ({ isCurrentlyPage, isManager }: { isCurrentlyPage: (route: string) => boolean, isManager: boolean }) => {
   const { isOpen, closeDrawer } = useDrawerStore()
 
   return (
@@ -24,19 +25,23 @@ export const DrawerMobile = ({ isCurrentlyPage }: { isCurrentlyPage: (route: str
 
           <ul className='mt-10 mb-20 text-white'>
             {
-              drawerRoutes.map(route => (
-                <li
-                  className={`w-full relative ${isCurrentlyPage(route.to) && 'linkWrapper__activate bg-[#19191914]'}`}
-                  key={route.label}
-                >
-                  <Link href={route.to}>
-                    <a className='w-full flex justify-start items-center gap-x-2 py-4 hover:bg-[#19191914] pl-10' onClick={() => navbarPress(route.label)}>
-                      <div>{route.icon}</div>
-                      <div>{route.label}</div>
-                    </a>
-                  </Link>
-                </li>
-              ))
+              drawerRoutes.map(route => {
+                if (isManager && route.to === '/upgrade-to-manager') return <Fragment />
+
+                return (
+                  <li
+                    className={`w-full relative ${isCurrentlyPage(route.to) && 'linkWrapper__activate bg-[#19191914]'}`}
+                    key={route.label}
+                  >
+                    <Link href={route.to}>
+                      <a className='w-full flex justify-start items-center gap-x-2 py-4 hover:bg-[#19191914] pl-10' onClick={() => navbarPress(route.label)}>
+                        <div>{route.icon}</div>
+                        <div>{route.label}</div>
+                      </a>
+                    </Link>
+                  </li>
+                )
+              })
             }
           </ul>
         </aside>
