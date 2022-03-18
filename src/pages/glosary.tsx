@@ -139,10 +139,10 @@ const GlosaryPage: Page = () => {
       <div className='mt-20 w-full'>
         <p className='font-bold text-3xl'>Terms of our business</p>
 
-        <div className='mt-4'>
+        <div className='mt-10'>
           <span className='text-2xl font-bold'>Apps</span>
 
-          <ul className='w-full flex justify-between items-start mt-4 text-gray-800'>
+          <ul className='w-full flex flex-col md:flex-row justify-between items-start mt-4 text-gray-800 gap-y-6'>
             {
               glosaryInfo.apps.map(app => (
                 <li key={app.title}>
@@ -156,10 +156,10 @@ const GlosaryPage: Page = () => {
             }
           </ul>
 
-          <div className='mt-32'>
+          <div className='mt-16 md:mt-32'>
             <span className='text-2xl font-bold'>Roles</span>
 
-            <ul className='w-full flex justify-between items-start text-gray-800 mt-4'>
+            <ul className='w-full flex flex-col md:flex-row justify-between items-start text-gray-800 mt-4 gap-y-6'>
               {
                 glosaryInfo.roles.map(role => (
                   <li key={role.title}>
