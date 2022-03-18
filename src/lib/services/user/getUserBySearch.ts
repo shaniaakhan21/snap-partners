@@ -23,7 +23,6 @@ export const getUserBySearch = async (search, token: string): Promise<IQueryRetu
       }
     }
   }
-  console.log('data no formateada:', data.data.users)
 
   return {
     data: [...data.data.users],

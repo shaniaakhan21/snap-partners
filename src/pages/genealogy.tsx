@@ -166,7 +166,7 @@ const GenealogyPage: Page = () => {
 
         <br />
 
-        <ul className={`${usersSearched ? 'bg-white' : ''} p-4`}>
+        <ul className={`${usersSearched && !searchIsLoading ? 'bg-white' : ''} p-4`}>
           {searchIsLoading && (
             <div className='flex items-center justify-center'>
               <Spinner />
