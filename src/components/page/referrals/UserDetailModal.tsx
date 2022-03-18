@@ -45,7 +45,7 @@ export const ReferralsUserDetailModal = ({ id, name, email, phone, sponsor, rank
           }
         </div>
 
-        <div className={`flex ${auth.roles.admin ? 'flex-col items-end sm:flex-row sm:items-center justify-end' : 'items-center justify-end'}`}>
+        <div className={`flex mt-0 sm:mt-8 ${auth.roles.admin ? 'flex-col items-end sm:flex-row sm:items-center justify-end' : 'items-center justify-end'}`}>
           <span className='text-primary-500 font-bold'>USER ID</span>
 
           <button
