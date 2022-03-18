@@ -3,10 +3,11 @@ import { MouseEvent } from 'react'
 import { useCopyToClipboard } from 'lib/hooks/useCopyToClipboard'
 import { IUserData } from 'lib/types/user'
 
-import { CopyIcon, EmailIcon, PhoneIcon } from 'components/common/icons'
+import { CopyIcon, EmailIcon, InfoIcon, PhoneIcon } from 'components/common/icons'
 import { TRANK } from 'lib/types/user/ranks'
 import { UpdateUserRank } from './UpdateUserRank'
 import { IAuth } from 'lib/stores/Auth'
+import Link from 'next/link'
 
 interface IProps extends IUserData {
   onClick?: (e: MouseEvent, element: HTMLElement) => void
@@ -98,20 +99,28 @@ export const ReferralsUserDetailModal = ({ id, name, email, phone, sponsor, rank
         </div>
       </div>
 
-      {
-        sponsor
-          ? (
-            <p className='inline-block'>
-            Sponsored by {' '}
-              <span className='inline-block text-primary-500'>
-                {`${sponsor.name} ${sponsor.lastname ? sponsor.lastname : ''}`}
-              </span>
-            </p>
-          )
-          : (
-            <p className='inline-block'>No Sponsored</p>
-          )
-      }
+      <div className='flex justify-between items-center'>
+        {
+          sponsor
+            ? (
+              <p className='inline-block'>
+              Sponsored by {' '}
+                <span className='inline-block text-primary-500'>
+                  {`${sponsor.name} ${sponsor.lastname ? sponsor.lastname : ''}`}
+                </span>
+              </p>
+            )
+            : (
+              <p className='inline-block'>No Sponsored</p>
+            )
+        }
+
+        <Link href='/glosary'>
+          <a>
+            <InfoIcon />
+          </a>
+        </Link>
+      </div>
     </div>
   )
 }
