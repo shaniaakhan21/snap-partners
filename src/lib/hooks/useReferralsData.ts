@@ -99,8 +99,6 @@ export const useReferralsData = (userAuth: IAuth, tabOpen: string, userDetailIdO
         return
       }
 
-      console.log('levelselectd id:', levelSelectedUserData.id)
-
       // setFetchingUserData(true)
       const { data, error } = await getUserById(userDetailIdOpen, userAuth.accessToken)
 
@@ -116,11 +114,9 @@ export const useReferralsData = (userAuth: IAuth, tabOpen: string, userDetailIdO
   }, [userDetailIdOpen])
 
   useEffect(() => {
-    console.log('USER DETAIL ID SEARCH:', userDetailIdSearch)
     if (!userDetailIdSearch) return
 
     (async () => {
-      console.log('exec')
       const { data, error } = await getUserById(userDetailIdSearch, userAuth.accessToken)
 
       if (error) {
