@@ -27,6 +27,7 @@ export const PromotionTracker = ({ userAuth }: { userAuth: IAuth }) => {
               <span className='text-gray-800 font-semibold'>
                 {userAuth.ranks?.type === 'referralPartner' && 'Manager'}
                 {userAuth.ranks?.type === 'manager' && 'Supervisor'}
+                {userAuth.ranks?.type === 'supervisor' && 'Director'}
                 {userAuth.ranks?.type === 'director' && 'Executive'}
               </span>
             </div>
