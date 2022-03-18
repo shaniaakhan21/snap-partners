@@ -21,7 +21,7 @@ export const ReferralCards = ({ title, ilustration, link, newUser = false, class
   }, [link])
 
   const onClick = () => {
-    referralCard(title, `copy for ${userType}`, '')
+    referralCard(userType, `copy for ${userType}`, '')
     copy(link, 'Referral link')
   }
 
