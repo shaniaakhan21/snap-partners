@@ -98,7 +98,7 @@ const GlosaryPage: Page = () => {
   })
 
   return (
-    <div className='w-full overflow-hidden h-full max-w-4xl mx-auto py-10 px-4'>
+    <div className='w-full h-full max-w-4xl mx-auto py-10 px-4'>
       <header className='w-full flex justify-between items-center'>
         <section className='flex justify-start items-center'>
           <img
@@ -179,7 +179,9 @@ const GlosaryPage: Page = () => {
             </ul>
           </div>
 
-          <div className='mt-32'>
+          <div className='mt-16 md:mt-32'>
+            <span className='text-2xl font-bold'>Ranks</span>
+
             <ul className='flex flex-col justify-start items-center gap-y-32'>
               {
                 glosaryInfo.ranks.map(rank => (
