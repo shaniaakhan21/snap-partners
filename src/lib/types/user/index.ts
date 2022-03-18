@@ -46,6 +46,13 @@ export interface IUserById extends IUserCommonData {
   }
 }
 
+export interface IUserBySearch {
+  id: number
+  name: string
+  phoneNumber: string
+  sponsorId: string | null
+}
+
 export interface IUserMe extends IUserCommonData {
   createdAt: string
   idImage: string

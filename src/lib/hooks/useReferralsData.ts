@@ -24,11 +24,12 @@ const fnGetAllLevels = async (id: number, token: string) => {
 }
 
 // export const useReferralsData = (userAuth: IAuth, tabOpen: string, userDetailIdOpen: number, page: number) => {
-export const useReferralsData = (userAuth: IAuth, tabOpen: string, userDetailIdOpen: number) => {
+export const useReferralsData = (userAuth: IAuth, tabOpen: string, userDetailIdOpen: number, userDetailIdSearch) => {
   const [levels, setLevels] = useState<ILevel[] | null>(null)
   const [levelSelected, setLevelSelected] = useState<ILevel | null>(null)
   const [levelSelectedUsers, setLevelSelectedUsers] = useState<ILevelUser[] | null>(null)
   const [levelSelectedUserData, setLevelSelectedUserData] = useState<IUserById | null>(null)
+  const [userSearchData, setUserSearchData] = useState<IUserById | null>(null)
   // const [fetchingUserData, setFetchingUserData] = useState(false)
 
   // INIT DATA
@@ -98,13 +99,10 @@ export const useReferralsData = (userAuth: IAuth, tabOpen: string, userDetailIdO
         return
       }
 
-      // const { data, error } = await getAllLevels(
-      //   userAuth.accessToken,
-      //   { userId: levelSelectedUserData.id, username: levelSelectedUserData.name }
-      // )
+      console.log('levelselectd id:', levelSelectedUserData.id)
 
       // setFetchingUserData(true)
-      const { data, error } = await getUserById(levelSelectedUserData.id, userAuth.accessToken)
+      const { data, error } = await getUserById(userDetailIdOpen, userAuth.accessToken)
 
       if (error) {
         handleFetchError(error.status, error.info)
@@ -113,16 +111,35 @@ export const useReferralsData = (userAuth: IAuth, tabOpen: string, userDetailIdO
       }
 
       // setFetchingUserData(false)
-      console.log(data)
       setLevelSelectedUserData(data)
     })()
   }, [userDetailIdOpen])
+
+  useEffect(() => {
+    console.log('USER DETAIL ID SEARCH:', userDetailIdSearch)
+    if (!userDetailIdSearch) return
+
+    (async () => {
+      console.log('exec')
+      const { data, error } = await getUserById(userDetailIdSearch, userAuth.accessToken)
+
+      if (error) {
+        handleFetchError(error.status, error.info)
+        // setFetchingUserData(false)
+        return
+      }
+
+      // setFetchingUserData(false)
+      setUserSearchData(data)
+    })()
+  }, [userDetailIdSearch])
 
   return {
     levels,
     levelSelected,
     levelSelectedUsers,
-    levelSelectedUserData
+    levelSelectedUserData,
+    userSearchData
     // fetchingUserData
   }
 }
