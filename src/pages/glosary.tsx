@@ -159,7 +159,7 @@ const GlosaryPage: Page = () => {
           <div className='mt-16 md:mt-32'>
             <span className='text-2xl font-bold'>Roles</span>
 
-            <ul className='w-full flex flex-col md:flex-row justify-between items-start text-gray-800 mt-4 gap-y-6'>
+            <ul className='w-full flex flex-col md:flex-row justify-between items-start md:items-end text-gray-800 mt-4 gap-y-6'>
               {
                 glosaryInfo.roles.map(role => (
                   <li key={role.title}>
@@ -170,7 +170,7 @@ const GlosaryPage: Page = () => {
                       </section>
 
                       <section className='mt-4'>
-                        <span className='font-semibold text-lg'>{role.subtitle}</span>
+                        <span className='font-semibold text-xl'>{role.subtitle}</span>
                       </section>
                     </article>
                   </li>
