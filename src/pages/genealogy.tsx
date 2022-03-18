@@ -1,7 +1,7 @@
 // import { Fragment, useEffect, useRef, useState } from 'react'
 import { useState } from 'react'
 import Head from 'next/head'
-import type { Page, ReactNode } from 'lib/types'
+import type { IUserBySearch, Page, ReactNode } from 'lib/types'
 import { APP_INFO } from 'config/appInfo'
 import DashboardLayout from 'layouts/private/Dashboard'
 import { Overlay } from 'components/common/Overlay'
@@ -21,6 +21,8 @@ import { ReferralListSelectedItem } from 'components/page/referrals/ListSelected
 import { Spinner } from 'components/common/loaders'
 import { ILevelUser } from 'lib/types/genealogy'
 import { useForm } from 'react-hook-form'
+import { getUserBySearch } from 'lib/services/user/getUserBySearch'
+import { handleFetchError } from 'lib/utils/handleFetchError'
 // import { useNearScreen } from 'lib/hooks/useNearScreen'
 
 const { SEO } = APP_INFO
@@ -69,6 +71,8 @@ const GenealogyPage: Page = () => {
   const [tabOpen, setTabOpen] = useState('1')
   const [userDetailIdOpen, setUserdetailIdOpen] = useState(0)
   // const [page, setPage] = useState(1)
+  const [usersSearched, setUsersSearched] = useState<IUserBySearch[] | [] | null>(null)
+  const [userSearchIsFetching, setUserSearchIsFetching] = useState(false)
 
   const {
     levels,
@@ -87,7 +91,19 @@ const GenealogyPage: Page = () => {
 
   const handleClickTab = (id: string) => setTabOpen(id)
 
-  const handleSubmit = () => {}
+  const handleSubmit = async (dataForm) => {
+    setUserSearchIsFetching(true)
+    const { data, error } = await getUserBySearch(dataForm.search, auth.accessToken)
+
+    if (error) {
+      handleFetchError(error.status, error.info)
+      setUserSearchIsFetching(false)
+      return
+    }
+
+    setUsersSearched(data)
+    setUserSearchIsFetching(false)
+  }
 
   // useEffect(() => {
   //   console.log('NEAR SCREEN', isNearScreen)
@@ -118,6 +134,27 @@ const GenealogyPage: Page = () => {
           <input />
           <button>Search</button>
         </form>
+
+        <ul>
+          {userSearchIsFetching && <Spinner />}
+          {usersSearched && !userSearchIsFetching && (
+            usersSearched.length >= 0
+              ? (
+                usersSearched.map(user => (
+                  <ReferralListSelectedItem
+                    key={user.id}
+                    userId={user.id}
+                    numUsers={0}
+                    userName={user.name}
+                    onClick={(id: number) => fnOpenModalReferralUserDetail(() => setUserdetailIdOpen(id))}
+                  />
+                ))
+              )
+              : (
+                <p>NOT FOUND</p>
+              )
+          )}
+        </ul>
       </div>
       <div className='grid grid-cols-1 lg:grid-cols-3 justify-center justify-items-center gap-4 mt-4'>
         <ReferralTabList classes='col-span-1'>
