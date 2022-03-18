@@ -20,6 +20,7 @@ import { useAuthStore } from 'lib/stores'
 import { ReferralListSelectedItem } from 'components/page/referrals/ListSelectedItem'
 import { Spinner } from 'components/common/loaders'
 import { ILevelUser } from 'lib/types/genealogy'
+import { useForm } from 'react-hook-form'
 // import { useNearScreen } from 'lib/hooks/useNearScreen'
 
 const { SEO } = APP_INFO
@@ -47,6 +48,7 @@ const { SEO } = APP_INFO
 // }
 
 const GenealogyPage: Page = () => {
+  const {} = useForm()
   const { auth } = useAuthStore()
   // const { genealogySearchIsOpen, closeGenealogySearch } = useSearchModalStore()
   const { width: windowWidth } = useWindowSize()
@@ -85,6 +87,8 @@ const GenealogyPage: Page = () => {
 
   const handleClickTab = (id: string) => setTabOpen(id)
 
+  const handleSubmit = () => {}
+
   // useEffect(() => {
   //   console.log('NEAR SCREEN', isNearScreen)
   //   if (isNearScreen) {
@@ -97,8 +101,8 @@ const GenealogyPage: Page = () => {
 
   if (
     !levels ||
-  !levelSelected ||
-  !levelSelectedUsers
+    !levelSelected ||
+    !levelSelectedUsers
   ) {
     return (
       <div className='w-full h-screen flex items-center justify-center'>
@@ -109,6 +113,12 @@ const GenealogyPage: Page = () => {
 
   return (
     <>
+      <div>
+        <form onSubmit={handleSubmit}>
+          <input />
+          <button>Search</button>
+        </form>
+      </div>
       <div className='grid grid-cols-1 lg:grid-cols-3 justify-center justify-items-center gap-4 mt-4'>
         <ReferralTabList classes='col-span-1'>
           {levels.map((level) => (
