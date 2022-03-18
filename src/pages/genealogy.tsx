@@ -47,8 +47,13 @@ const { SEO } = APP_INFO
 //   ]
 // }
 
+interface IDataFormSearch {
+  search: string
+}
+
 const GenealogyPage: Page = () => {
-  const {} = useForm()
+  const { handleSubmit, register } = useForm<IDataFormSearch>()
+  const [searchIsLoading, setSearchIsLoading] = useState(false)
   const { auth } = useAuthStore()
   // const { genealogySearchIsOpen, closeGenealogySearch } = useSearchModalStore()
   const { width: windowWidth } = useWindowSize()
@@ -87,7 +92,11 @@ const GenealogyPage: Page = () => {
 
   const handleClickTab = (id: string) => setTabOpen(id)
 
-  const handleSubmit = () => {}
+  const onSubmit = async ({ search }: IDataFormSearch) => {
+    setSearchIsLoading(true)
+    console.log(search)
+    setSearchIsLoading(false)
+  }
 
   // useEffect(() => {
   //   console.log('NEAR SCREEN', isNearScreen)
@@ -113,12 +122,24 @@ const GenealogyPage: Page = () => {
 
   return (
     <>
-      <div>
-        <form onSubmit={handleSubmit}>
-          <input />
-          <button>Search</button>
+      <div className='w-full flex justify-start items-center'>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <input
+            type='text'
+            className='rounded-md border-2 border-gray-500 px-4 py-2 mr-4'
+            placeholder='ID / NAME / PHONE'
+            {...register('search')}
+          />
+
+          <button
+            disabled={searchIsLoading}
+            className='bg-primary-500 text-white font-semibold rounded-md px-4 py-2'
+          >
+            Search
+          </button>
         </form>
       </div>
+
       <div className='grid grid-cols-1 lg:grid-cols-3 justify-center justify-items-center gap-4 mt-4'>
         <ReferralTabList classes='col-span-1'>
           {levels.map((level) => (
