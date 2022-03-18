@@ -257,12 +257,12 @@ const GenealogyPage: Page = () => {
           <ModalContainer>
             <ReferralsUserDetailModal
               referralUsers={[]}
-              id={levelSelectedUserData.id.toString()}
+              id={levelSelectedUserData.id}
               name={levelSelectedUserData.name}
               email={levelSelectedUserData.email}
               phone={levelSelectedUserData.phoneNumber}
               onClick={fnCloseModalReferralUserDetail}
-              authIsAdmin={auth?.roles?.admin}
+              auth={auth}
               rank={levelSelectedUserData.ranks?.type}
               sponsor={levelSelectedUserData?.sponsor}
               roles={levelSelectedUserData?.roles}
@@ -277,12 +277,12 @@ const GenealogyPage: Page = () => {
           <ModalContainer>
             <ReferralsUserDetailModal
               referralUsers={[]}
-              id={userSearchData.id.toString()}
+              id={userSearchData.id}
               name={userSearchData.name}
               email={userSearchData.email}
               phone={userSearchData.phoneNumber}
               onClick={fnCloseModalReferralSearch}
-              authIsAdmin={auth?.roles?.admin}
+              auth={auth}
               rank={userSearchData.ranks?.type}
               sponsor={userSearchData?.sponsor}
               roles={userSearchData?.roles}
