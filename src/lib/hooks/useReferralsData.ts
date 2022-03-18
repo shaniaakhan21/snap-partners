@@ -105,7 +105,6 @@ export const useReferralsData = (
     if (!userDetailIdSearch) return
 
     (async () => {
-      console.log(fetchUserDataSearchIsLoading)
       setFetchUserDataSearchIsLoading(true)
       const { data, error } = await fnGetUserById(userDetailIdSearch, userAuth.accessToken)
       setFetchUserDataSearchIsLoading(false)

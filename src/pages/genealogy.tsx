@@ -121,7 +121,6 @@ const GenealogyPage: Page = () => {
   }
 
   useEffect(() => {
-    console.log('NEAR SCREEN:', isNearScreen)
     // if (isNearScreen) {
     //   setLevelPage(prevState => prevState + 1)
     // }
