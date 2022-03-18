@@ -126,14 +126,14 @@ const GenealogyPage: Page = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <input
             type='text'
-            className='rounded-md border-2 border-gray-500 px-4 py-2 mr-4'
+            className='rounded-md border-2 border-gray-500 px-4 py-2 mr-4 focus:outline-none focus:ring focus:ring-primary-500'
             placeholder='ID / NAME / PHONE'
             {...register('search')}
           />
 
           <button
             disabled={searchIsLoading}
-            className='bg-primary-500 text-white font-semibold rounded-md px-4 py-2'
+            className='bg-primary-500 border-primary-500 text-white font-semibold rounded-md px-4 py-2 hover:bg-opacity-80 focus:outline-none focus:ring focus:ring-primary-500'
           >
             Search
           </button>
