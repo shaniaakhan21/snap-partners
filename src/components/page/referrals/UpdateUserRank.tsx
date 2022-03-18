@@ -7,16 +7,17 @@ import { toast } from 'react-toastify'
 
 export const UpdateUserRank = ({ id, rank, authToken }: { id: number, rank: TRANK, authToken: string }) => {
   const { handleSubmit, register } = useForm<{ rankToUpdate: TRANK }>()
-  const [rankIsChanged, setIsRankChanged] = useState(false)
+  const [disableUpdateRank, setDisableUpdateRank] = useState(true)
   const [, setIsLoading] = useState(false)
 
   const onSubmit = async ({ rankToUpdate }: { rankToUpdate: TRANK }) => {
     setIsLoading(true)
-    setIsRankChanged(true)
+    setDisableUpdateRank(true)
 
     if (!rankToUpdate) {
       toast('Rank no aviable', { type: 'error' })
       setIsLoading(false)
+      setDisableUpdateRank(true)
     }
 
     console.log('UserDetailModal - rankToUpdate => /api/rank/update', {
@@ -28,11 +29,12 @@ export const UpdateUserRank = ({ id, rank, authToken }: { id: number, rank: TRAN
 
     if (error) {
       handleFetchError(error.status, error.info)
+      setDisableUpdateRank(false)
       setIsLoading(false)
       toast('Error to update rank user', { type: 'error' })
     }
 
-    setIsRankChanged(false)
+    setDisableUpdateRank(true)
     setIsLoading(false)
     toast('User Rank Updated', { type: 'success' })
   }
@@ -53,7 +55,7 @@ export const UpdateUserRank = ({ id, rank, authToken }: { id: number, rank: TRAN
           className='cursor-pointer relative block xs:mr-2 pl-2 pr-10 py-0 xs:py-1 my-2 bg-[rgba(255,255,255,.13)] rounded-md border border-solid border-black outline-none appearance-none leading-8'
           placeholder='User Rank'
           {...register('rankToUpdate')}
-          onChange={() => setIsRankChanged(true)}
+          onChange={() => setDisableUpdateRank(false)}
         >
           {
             rank === 'referralPartner' && (
@@ -117,7 +119,7 @@ export const UpdateUserRank = ({ id, rank, authToken }: { id: number, rank: TRAN
         </select>
 
         <button
-          disabled={!rankIsChanged}
+          disabled={disableUpdateRank}
           className='disabled:bg-gray-400 disabled:hover:opacity-100 select-none px-4 py-2 xs:py-2.5 bg-primary-500 rounded-md hover:opacity-90 text-white font-semibold focus:outline-none focus:ring focus:ring-primary-300'
         >
           Update
