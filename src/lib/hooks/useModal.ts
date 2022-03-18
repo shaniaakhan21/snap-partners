@@ -4,6 +4,7 @@ export const useModal = (initState: boolean) => {
   const [isOpen, setIsOpen] = useState(initState)
 
   const fnOpenModal = (callbackOnOpen?: () => void) => {
+    console.log('modal exec')
     if (callbackOnOpen) callbackOnOpen()
     document.body.style.overflowY = 'hidden'
     setIsOpen(true)

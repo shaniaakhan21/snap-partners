@@ -26,7 +26,7 @@ export const ReferralTabListItem = ({ isSelect = false, id, newUsers, numUsers, 
           </div> */}
         </div>
 
-        {/* <span className='block my-1'>{numUsers} Users</span> */}
+        <span className='block my-1'>{numUsers} Users</span>
 
         {/* <span className={`block ${newUsers > 0 ? 'text-success-500' : ''}`}>{newUsers} New Users</span> */}
       </button>

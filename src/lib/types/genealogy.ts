@@ -6,15 +6,6 @@ export interface ILevelUser {
   sponsorId: number | null
 }
 
-// * ILEVELUSER Y IUSERBYSEARCH SON IGUALES
-
-// export interface IUserBySearch {
-//   id: number
-//   name: string
-//   phoneNumber: string
-//   sponsorId: string | null
-// }
-
 export interface ILevel {
   level: number,
   usersLength: number,
