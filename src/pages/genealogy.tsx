@@ -62,7 +62,8 @@ const GenealogyPage: Page = () => {
   const {
     isOpen: modalReferralUserDetailIsOpen,
     fnOpenModal: fnOpenModalReferralUserDetail,
-    fnCloseModal: fnCloseModalReferralUserDetail
+    fnCloseModal: fnCloseModalReferralUserDetail,
+    fnCloseModalManually: fnCloseModalManuallyUserDetail
   } = useModal(false)
   const {
     isOpen: modalReferralUserSearchIsOpen,
@@ -266,11 +267,12 @@ const GenealogyPage: Page = () => {
                 name={levelSelectedUserData.name}
                 email={levelSelectedUserData.email}
                 phone={levelSelectedUserData.phoneNumber}
-                onClick={fnCloseModalReferralUserDetail}
+                onClick={fnCloseModalManuallyUserDetail}
                 auth={auth}
                 rank={levelSelectedUserData.ranks?.type}
                 sponsor={levelSelectedUserData?.sponsor}
                 roles={levelSelectedUserData?.roles}
+                closeModalManually={fnCloseModalManuallyUserDetail}
               />
             )}
           </ModalContainer>
@@ -298,6 +300,7 @@ const GenealogyPage: Page = () => {
                 rank={userSearchData.ranks?.type}
                 sponsor={userSearchData?.sponsor}
                 roles={userSearchData?.roles}
+                closeModalManually={fnCloseModalManuallyUserDetail}
               />
             )}
           </ModalContainer>

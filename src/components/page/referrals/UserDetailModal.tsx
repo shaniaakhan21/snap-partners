@@ -11,6 +11,7 @@ import Link from 'next/link'
 
 interface IProps extends IUserData {
   onClick?: (e: MouseEvent, element: HTMLElement) => void
+  closeModalManually?: () => void
   referralUsers: any[]
   sponsor?: {
     id: number
@@ -27,7 +28,7 @@ interface IProps extends IUserData {
   }
 }
 
-export const ReferralsUserDetailModal = ({ id, name, email, phone, sponsor, rank, onClick, auth, roles }: IProps) => {
+export const ReferralsUserDetailModal = ({ id, name, email, phone, sponsor, rank, onClick, auth, roles, closeModalManually }: IProps) => {
   const { copy } = useCopyToClipboard()
 
   return (
@@ -116,7 +117,7 @@ export const ReferralsUserDetailModal = ({ id, name, email, phone, sponsor, rank
         }
 
         <Link href='/glosary'>
-          <a>
+          <a onClick={closeModalManually}>
             <InfoIcon />
           </a>
         </Link>

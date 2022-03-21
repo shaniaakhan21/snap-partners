@@ -3,13 +3,17 @@ import Head from 'next/head'
 import type { Page } from 'lib/types'
 import { APP_INFO } from 'config/appInfo'
 import Link from 'next/link'
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { useAuthStore } from 'lib/stores'
+import { getUserMe } from 'lib/services/user/getUserMe'
+import { getLocalStorage } from 'lib/utils/localStorage'
+import { handleFetchError } from 'lib/utils/handleFetchError'
+import { toast } from 'react-toastify'
 
 const { SEO } = APP_INFO
 
 const GlosaryPage: Page = () => {
-  const { auth } = useAuthStore()
+  const { auth, setAuth } = useAuthStore()
 
   const { current: glosaryInfo } = useRef({
     apps: [
@@ -96,6 +100,43 @@ const GlosaryPage: Page = () => {
       }
     ]
   })
+
+  useEffect(() => {
+    (async () => {
+      if (auth) return
+
+      const token = getLocalStorage('accessToken')
+
+      if (token) {
+        const { data, error } = await getUserMe({ token })
+
+        if (error) {
+          handleFetchError(error.status, error.info)
+          return
+        }
+
+        toast('Session recovered!', { type: 'success' })
+        setAuth({
+          email: data.email,
+          name: data.name,
+          phoneNumber: data.phoneNumber,
+          accessToken: token,
+          lastname: data.lastname,
+          roles: data.roles,
+          id: data.id,
+          username: data.username,
+          referralCode: data.referralCode,
+          idImage: data.idImage,
+          insuranceImage: data.insuranceImage,
+          isManager: data.ranks?.type === 'manager',
+          createdAt: data.createdAt,
+          ownerName: data.ownerName,
+          ranks: data.ranks,
+          updatedAt: data.updatedAt
+        })
+      }
+    })()
+  }, [])
 
   return (
     <div className='w-full h-full max-w-4xl mx-auto py-10 px-4'>
