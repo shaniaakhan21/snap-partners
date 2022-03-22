@@ -85,6 +85,10 @@ export const globalRoutes = [
   {
     to: '/become-role',
     label: 'Become Role'
+  },
+  {
+    to: '/my-wallet',
+    label: 'My Wallet'
   }
 ]
 
