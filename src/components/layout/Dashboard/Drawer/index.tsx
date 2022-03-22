@@ -22,8 +22,8 @@ export const Drawer = () => {
 
   return (
     <>
-      <DrawerDesktop isCurrentlyPage={handleIsCurrentlyPage} isManager={auth.isManager} />
-      <DrawerMobile isCurrentlyPage={handleIsCurrentlyPage} isManager={auth.isManager} />
+      <DrawerDesktop isCurrentlyPage={handleIsCurrentlyPage} isManager={auth.isManager} isAdmin={auth.roles.admin} />
+      <DrawerMobile isCurrentlyPage={handleIsCurrentlyPage} isManager={auth.isManager} isAdmin={auth.roles.admin} />
     </>
   )
 }

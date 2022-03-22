@@ -5,7 +5,7 @@ import { drawerRoutes } from './routes'
 import { navbarPress } from 'lib/utils/gtm'
 import { Fragment } from 'react'
 
-export const DrawerMobile = ({ isCurrentlyPage, isManager }: { isCurrentlyPage: (route: string) => boolean, isManager: boolean }) => {
+export const DrawerMobile = ({ isCurrentlyPage, isManager, isAdmin }: { isCurrentlyPage: (route: string) => boolean, isManager: boolean, isAdmin: boolean }) => {
   const { isOpen, closeDrawer } = useDrawerStore()
 
   return (
@@ -26,7 +26,7 @@ export const DrawerMobile = ({ isCurrentlyPage, isManager }: { isCurrentlyPage: 
           <ul className='mt-10 mb-20 text-white'>
             {
               drawerRoutes.map(route => {
-                if (isManager && route.to === '/upgrade-to-manager') return <Fragment />
+                if ((isAdmin || isManager) && route.to === '/upgrade-to-manager') return <Fragment />
 
                 return (
                   <li

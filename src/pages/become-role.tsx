@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
