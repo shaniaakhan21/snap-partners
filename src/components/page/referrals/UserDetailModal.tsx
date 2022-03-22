@@ -64,7 +64,7 @@ export const ReferralsUserDetailModal = ({ id, name, email, phone, sponsor, rank
       <div className='w-full'>
         <div className='flex justify-between items-start'>
           <p className='mb-4 block text-primary-500 font-bold'>{name.toUpperCase()}</p>
-          <ul className='text-gray-800 font-bold flex justify-end gap-x-2'>
+          <ul className='flex justify-end gap-x-2'>
             {(rank === 'referralPartner' && roles.customer) && <li><img src='/static/badges/FreeMemberCustomer.png' /> </li>}
             {(rank === 'referralPartner' && roles.driver) && <li><img src='/static/badges/FreeMemberDriver.png' /> </li>}
             {(rank === 'referralPartner' && roles.merchant) && <li><img src='/static/badges/FreeMemberMerchant.png' /> </li>}

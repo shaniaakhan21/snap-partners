@@ -18,6 +18,7 @@ interface IInputFormProps {
   isRequired: boolean
   onKeyPress?: (event: any) => void
   isNumberFloat?: boolean
+  disabled?: boolean
 }
 
 export const InputForm = ({
@@ -36,7 +37,8 @@ export const InputForm = ({
   control,
   isRequired,
   onKeyPress,
-  isNumberFloat
+  isNumberFloat,
+  disabled
 }: IInputFormProps) => {
   return (
     <div>
@@ -61,6 +63,7 @@ export const InputForm = ({
         defaultValue={defaultValue}
         onKeyPress={onKeyPress}
         step={isNumberFloat ? '0.01' : 'any'}
+        disabled={disabled}
       />
     </div>
   )
