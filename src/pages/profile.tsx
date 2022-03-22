@@ -46,12 +46,31 @@ const ProfilePage: PageNext = () => {
 
         <div>
           <span className='text-2xl font-bold text-gray-800'>{auth.username}</span>
-          <span className='block text-center px-4 py-1 rounded-full border-2 border-amber-400 font-bold'>
-            {auth.roles.admin && 'Admin'}
-            {auth.roles.customer && 'Customer'}
-            {auth.roles.driver && 'Driver'}
-            {auth.roles.merchant && 'Restaurant'}
-          </span>
+          <ul className='flex justify-start items-center gap-x-2 mt-1'>
+            {(auth.ranks.type === 'referralPartner' && auth.roles.customer) && <li><img src='/static/badges/FreeMemberCustomer.png' /> </li>}
+            {(auth.ranks.type === 'referralPartner' && auth.roles.driver) && <li><img src='/static/badges/FreeMemberDriver.png' /> </li>}
+            {(auth.ranks.type === 'referralPartner' && auth.roles.merchant) && <li><img src='/static/badges/FreeMemberRestaurant.png' /> </li>}
+
+            {(auth.ranks.type === 'manager' && auth.roles.customer) && <li><img src='/static/badges/ManagerCustomer.png' /> </li>}
+            {(auth.ranks.type === 'manager' && auth.roles.driver) && <li><img src='/static/badges/ManagerDriver.png' /> </li>}
+            {(auth.ranks.type === 'manager' && auth.roles.merchant) && <li><img src='/static/badges/ManagerRestaurant.png' /> </li>}
+
+            {(auth.ranks.type === 'supervisor' && auth.roles.customer) && <li><img src='/static/badges/SupervisorCustomer.png' /> </li>}
+            {(auth.ranks.type === 'supervisor' && auth.roles.driver) && <li><img src='/static/badges/SupervisorDriver.png' /> </li>}
+            {(auth.ranks.type === 'supervisor' && auth.roles.merchant) && <li><img src='/static/badges/SupervisorRestaurant.png' /> </li>}
+
+            {(auth.ranks.type === 'director' && auth.roles.customer) && <li><img src='/static/badges/DirectorCustomer.png' /> </li>}
+            {(auth.ranks.type === 'director' && auth.roles.driver) && <li><img src='/static/badges/DirectorDriver.png' /> </li>}
+            {(auth.ranks.type === 'director' && auth.roles.merchant) && <li><img src='/static/badges/DirectorRestaurant.png' /> </li>}
+
+            {(auth.ranks.type === 'executive' && auth.roles.customer) && <li><img src='/static/badges/ExecutiveCustomer.png' /> </li>}
+            {(auth.ranks.type === 'executive' && auth.roles.driver) && <li><img src='/static/badges/ExecutiveDriver.png' /> </li>}
+            {(auth.ranks.type === 'executive' && auth.roles.merchant) && <li><img src='/static/badges/ExecutiveRestaurant.png' /> </li>}
+
+            <li>
+              <span className='font-bold text-xl capitalize'>{auth.ranks.type}</span>
+            </li>
+          </ul>
         </div>
       </div>
 
