@@ -42,10 +42,10 @@ export const Account = ({ email, name, phone, photoUrl, signOut }) => {
           <div className='sm:hidden absolute -top-1 -right-2 h-3.5 w-3.5 bg-[#FF4343] rounded-full text-white flex justify-center items-center' />
         </div>
 
-        <div className='ml-3 hidden sm:block leading-3'>
-          {/* <span className='text-sm'>User name</span> <br /> */}
-          {/* <span className='whitespace-nowrap font-medium text-gray-700'>Cameron Williamson</span> */}
-        </div>
+        {/* <div className='ml-3 hidden sm:block leading-3'> */}
+        {/* <span className='text-sm'>User name</span> <br /> */}
+        {/* <span className='whitespace-nowrap font-medium text-gray-700'>Cameron Williamson</span> */}
+        {/* </div> */}
 
         <div className='hidden sm:block' ref={userMenuRef}>
           <ArrowDownIcon classes='cursor-pointer' onClick={handleShowOptions} />

@@ -13,6 +13,7 @@ import DashboardLayout from 'layouts/private/Dashboard'
 import { useAuthStore } from 'lib/stores'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { updateUserRole } from 'lib/services/user/updateUserRole'
+import { Button } from 'components/common/Button'
 
 const { SEO } = APP_INFO
 
@@ -21,11 +22,11 @@ const BecomeRolePage = ({ role }: { role: 'CUSTOMER' | 'DRIVER' | 'RESTAURANT' }
   const { auth, setAuth } = useAuthStore()
   const router = useRouter()
 
-  useEffect(() => {
-    const validateRole = role ? auth.roles[role.toLowerCase()] : null
+  // useEffect(() => {
+  //   const validateRole = role ? auth.roles[role.toLowerCase()] : null
 
-    validateRole && router.push('/overview')
-  }, [])
+  //   validateRole && router.push('/overview')
+  // }, [])
 
   const onSubmit = async (dataForm) => {
     const { error } = await updateUserRole(dataForm, auth.accessToken)
@@ -36,8 +37,10 @@ const BecomeRolePage = ({ role }: { role: 'CUSTOMER' | 'DRIVER' | 'RESTAURANT' }
     }
 
     setAuth({
-      ...auth
-      // ... dataForm
+      ...auth,
+      ranks: { ...auth.ranks },
+      roles: { ...auth.roles },
+      ...dataForm
     })
 
     toast(`You are now a ${role}!`, { type: 'success' })
@@ -48,9 +51,10 @@ const BecomeRolePage = ({ role }: { role: 'CUSTOMER' | 'DRIVER' | 'RESTAURANT' }
   if (role === 'CUSTOMER' || role === 'DRIVER') {
     return (
       <form onSubmit={handleSubmit(onSubmit)} className='max-w-xl mx-auto'>
-        <h5 className='font-bold text-xl text-primary-500'>
+        <h5 className='font-bold text-2xl text-primary-500'>
           Become a {role === 'CUSTOMER' ? 'Customer' : 'Driver' }
         </h5>
+        <br />
 
         <label htmlFor='email' className='font-bold text-gray-700 uppercase text-sm'>Email</label>
         <input
@@ -106,13 +110,18 @@ const BecomeRolePage = ({ role }: { role: 'CUSTOMER' | 'DRIVER' | 'RESTAURANT' }
           disabled
           className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
         />
+
+        <Button classes='w-full mt-4'>
+          Become a <span className='capitalize'>{role.toLocaleLowerCase()}</span>
+        </Button>
       </form>
     )
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='max-w-xl mx-auto'>
-      <h5 className='font-bold text-xl text-primary-500'>Become a Restaurant</h5>
+      <h5 className='font-bold text-2xl text-primary-500'>Become a Restaurant</h5>
+      <br />
 
       <label htmlFor='email' className='font-bold text-gray-700 uppercase text-sm'>Email</label>
       <input
@@ -169,7 +178,7 @@ const BecomeRolePage = ({ role }: { role: 'CUSTOMER' | 'DRIVER' | 'RESTAURANT' }
         className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
       />
 
-      <label htmlFor='ownerName' className='font-bold text-gray-700 uppercase text-sm'>Restaurant Owner Name</label>
+      <label htmlFor='ownerName' className='font-bold text-gray-700 uppercase text-sm'>Restaurant Owner Name <span className='text-red-500'>*</span></label>
       <input
         id='ownerName'
         name='ownerName'
@@ -179,7 +188,7 @@ const BecomeRolePage = ({ role }: { role: 'CUSTOMER' | 'DRIVER' | 'RESTAURANT' }
         className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
       />
 
-      <label htmlFor='city' className='font-bold text-gray-700 uppercase text-sm'>City</label>
+      <label htmlFor='city' className='font-bold text-gray-700 uppercase text-sm'>City <span className='text-red-500'>*</span></label>
       <input
         id='city'
         name='city'
@@ -188,7 +197,7 @@ const BecomeRolePage = ({ role }: { role: 'CUSTOMER' | 'DRIVER' | 'RESTAURANT' }
         className='w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
       />
 
-      <label htmlFor='streetName' className='font-bold text-gray-700 uppercase text-sm'>Street Name</label>
+      <label htmlFor='streetName' className='font-bold text-gray-700 uppercase text-sm'>Street Name <span className='text-red-500'>*</span></label>
       <input
         id='streetName'
         name='streetName'
@@ -197,7 +206,7 @@ const BecomeRolePage = ({ role }: { role: 'CUSTOMER' | 'DRIVER' | 'RESTAURANT' }
         className='w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
       />
 
-      <label htmlFor='state' className='font-bold text-gray-700 uppercase text-sm'>State</label>
+      <label htmlFor='state' className='font-bold text-gray-700 uppercase text-sm'>State <span className='text-red-500'>*</span></label>
       <input
         id='state'
         name='state'
@@ -205,6 +214,10 @@ const BecomeRolePage = ({ role }: { role: 'CUSTOMER' | 'DRIVER' | 'RESTAURANT' }
         placeholder='Enter State'
         className='w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
       />
+
+      <Button classes='w-full mt-4'>
+        Become a Restaurant
+      </Button>
     </form>
   )
 }
