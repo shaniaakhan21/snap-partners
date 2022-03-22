@@ -43,8 +43,8 @@ export const APP_INFO = {
         link: 'https://apps.apple.com/us/app/snap-user/id1478863057'
       },
 
-      RESTAURANT_APP: {
-        title: 'Restaurant app',
+      MERCHANT_APP: {
+        title: 'Merchant app',
         subtitle: 'Snap Merchant Control app',
         description: 'Manager orders and payments',
         link: 'https://apps.apple.com/ve/app/snap-merchant-control/id1478737288'
@@ -66,8 +66,8 @@ export const APP_INFO = {
         link: 'https://play.google.com/store/apps/details?id=com.snapdelivered.userapp'
       },
 
-      RESTAURANT_APP: {
-        title: 'Restaurant app',
+      MERCHANT_APP: {
+        title: 'Merchant app',
         subtitle: 'Snap Merchant Control app',
         description: 'Manager orders and payments',
         link: 'https://play.google.com/store/apps/details?id=com.snapdelivered.restaurantapp'

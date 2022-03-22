@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
@@ -19,6 +20,12 @@ const BecomeRolePage = ({ role }: { role: 'CUSTOMER' | 'DRIVER' | 'RESTAURANT' }
   const { handleSubmit, reset, register } = useForm()
   const { auth, setAuth } = useAuthStore()
   const router = useRouter()
+
+  useEffect(() => {
+    const validateRole = role ? auth.roles[role.toLowerCase()] : null
+
+    validateRole && router.push('/overview')
+  }, [])
 
   const onSubmit = async (dataForm) => {
     const { error } = await updateUserRole(dataForm, auth.accessToken)

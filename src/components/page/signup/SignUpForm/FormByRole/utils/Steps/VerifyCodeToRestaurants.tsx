@@ -7,7 +7,7 @@ import { STEPS } from '.'
 import { IHandleStep } from '../types'
 import { Spinner } from 'components/common/loaders'
 import { BulletPagination } from './BulletPagination'
-import { signUpRestaurant, signUpStep1 } from 'lib/services/auth/signUp'
+import { signUpMerchant, signUpStep1 } from 'lib/services/auth/signUp'
 import { IReferralLink } from 'lib/types'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { Button } from 'components/common/Button'
@@ -17,7 +17,7 @@ interface IDataFormVerifyCode {
   code: string
 }
 
-export const VerifyCodeToRestaurants = ({ userTrack, handleStep, referralLink, handleUserInfo }: { userTrack: any, handleStep: IHandleStep, referralLink: IReferralLink, handleUserInfo: any }) => {
+export const VerifyCodeToMerchants = ({ userTrack, handleStep, referralLink, handleUserInfo }: { userTrack: any, handleStep: IHandleStep, referralLink: IReferralLink, handleUserInfo: any }) => {
   const [isVerifyingCode, setIsVerifyingCode] = useState(false)
   const [isPhoneEditable, setIsPhoneEditable] = useState(false)
   const { handleSubmit: handleSubmitVerifyCode } = useForm<IDataFormVerifyCode>()
@@ -56,7 +56,7 @@ export const VerifyCodeToRestaurants = ({ userTrack, handleStep, referralLink, h
   const onSubmitVerifyCode = async (code) => {
     setIsVerifyingCode(true)
 
-    const { error } = await signUpRestaurant({
+    const { error } = await signUpMerchant({
       name: userTrack.userInfo.name,
       lastname: userTrack.userInfo.lastname,
       email: userTrack.userInfo.email,

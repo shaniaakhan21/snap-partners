@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { IBOIcon, DriverIcon, RestaurantsIcon, ArrowRightIcon } from 'components/common/icons'
+import { IBOIcon, DriverIcon, MerchantsIcon, ArrowRightIcon } from 'components/common/icons'
 import { ROLES } from 'config/roles'
 import { signUp } from 'lib/utils/gtm'
 import Link from 'next/link'
@@ -21,10 +21,10 @@ export const SelectRoleToSignUp = () => {
       link: `/auth/signup?role=${ROLES.DRIVER}`
     },
     {
-      icon: <RestaurantsIcon classes='w-14 h-14' />,
-      label: 'I have a Restaurant',
-      key: ROLES.RESTAURANT,
-      link: `/auth/signup?role=${ROLES.RESTAURANT}`
+      icon: <MerchantsIcon classes='w-14 h-14' />,
+      label: 'I have a Merchant',
+      key: ROLES.MERCHANT,
+      link: `/auth/signup?role=${ROLES.MERCHANT}`
     }
   ])
 

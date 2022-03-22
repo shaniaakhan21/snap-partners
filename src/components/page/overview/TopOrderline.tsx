@@ -2,7 +2,7 @@
 import { StarIcon } from 'components/common/icons'
 
 export const TopOrderLine = ({ data }: { data: any }) => {
-  const topRestaurantsAcquisition = []
+  const topMerchantsAcquisition = []
 
   return (
     <div className='overviewLayout__topOrderline h-full p-4 bg-white rounded-md'>
@@ -12,14 +12,14 @@ export const TopOrderLine = ({ data }: { data: any }) => {
         </div>
 
         <div>
-          <span className='text-primary-500 text-xs'>TOP Restaurants Acquisition</span> <br />
+          <span className='text-primary-500 text-xs'>TOP Merchants Acquisition</span> <br />
           <span className='text-gray-800 text-lg font-bold'>152 Last week</span>
         </div>
       </section>
 
       <ul className='border-t border-gray-300 w-full pt-2'>
         {
-          topRestaurantsAcquisition.length === 0
+          topMerchantsAcquisition.length === 0
             ? (
               <li className='w-full flex justify-start items-center py-2 gap-x-2'>
                 <div>
@@ -27,13 +27,13 @@ export const TopOrderLine = ({ data }: { data: any }) => {
                 </div>
               </li>
             )
-            : topRestaurantsAcquisition.map((restaurant, idx) => (
+            : topMerchantsAcquisition.map((merchant, idx) => (
               <li key={idx} className='w-full flex justify-start items-center py-2 gap-x-2'>
-                <img src={restaurant.imageSrc} className='w-10 h-10' />
+                <img src={merchant.imageSrc} className='w-10 h-10' />
 
                 <div>
-                  <span className='text-gray-400'>{restaurant.position}</span> <br />
-                  <span className='text-gray-800 font-bold'>{restaurant.name}</span>
+                  <span className='text-gray-400'>{merchant.position}</span> <br />
+                  <span className='text-gray-800 font-bold'>{merchant.name}</span>
                 </div>
               </li>
             ))

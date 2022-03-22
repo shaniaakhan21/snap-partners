@@ -5,7 +5,8 @@ import {
   CustomerIcon,
   DriverIcon,
   GenealogyIcon,
-  RestaurantsIcon,
+  MerchantsIcon,
+  MerchantIcon,
   TrendingUpIcon
 } from 'components/common/icons'
 import { useAuthStore, useNewWindowOpenedStore } from 'lib/stores'
@@ -213,7 +214,7 @@ const ProfilePage: PageNext = () => {
         (!auth.roles.customer || !auth.roles.driver || !auth.roles.merchant) && (!auth.roles.admin) && (
           <div className='w-full mt-10'>
             <span className='text-3xl font-bold'>Extend your posibilities</span> <br />
-            <span className='text-lg font-semibold'>Your can be a driver at the same time as a costumber or a restaurant</span>
+            <span className='text-lg font-semibold'>Your can be a driver at the same time as a costumber or a merchant</span>
 
             <div className='w-full flex flex-col md:flex-row justify-between items-start gap-y-10 gap-x-10 mt-10'>
               {
@@ -240,11 +241,12 @@ const ProfilePage: PageNext = () => {
               }
               {
                 (auth.roles.customer || auth.roles.driver) &&
-                <Link href={`/become-role?role=${ROLES.RESTAURANT}`}>
+                <Link href={`/auth/signup?role=${ROLES.MERCHANT}`}>
                   <a className='bg-white hover:bg-primary-300 hover:bg-opacity-30 rounded-md p-4 w-full'>
                     <div className='flex flex-col md:flex-row justify-center items-center'>
                       <span className='text-2xl font-bold text-gray-800 mr-10'>Become a Restaurant</span>
-                      <RestaurantsIcon />
+                      <MerchantsIcon />
+                      <MerchantIcon />
                     </div>
                   </a>
                 </Link>
