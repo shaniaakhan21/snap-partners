@@ -81,6 +81,10 @@ export const globalRoutes = [
   {
     to: '/legal/terms-of-use',
     label: 'Terms Of Use'
+  },
+  {
+    to: '/become-role',
+    label: 'Become Role'
   }
 ]
 
