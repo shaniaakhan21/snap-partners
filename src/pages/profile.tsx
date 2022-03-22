@@ -2,19 +2,32 @@ import Head from 'next/head'
 import Link from 'next/link'
 import DashboardLayout from 'layouts/private/Dashboard'
 import {
-  // DriverIcon
-  GenealogyIcon
-  // RestaurantsIcon
+  CustomerIcon,
+  DriverIcon,
+  GenealogyIcon,
+  RestaurantsIcon,
+  TrendingUpIcon
 } from 'components/common/icons'
-import { useAuthStore } from 'lib/stores'
+import { useAuthStore, useNewWindowOpenedStore } from 'lib/stores'
 import { APP_INFO } from 'config/appInfo'
 import type { Page as PageNext, ReactNode } from 'lib/types'
-// import { ROLES } from 'config/roles'
+import { ROLES } from 'config/roles'
 
 const { SEO } = APP_INFO
 
 const ProfilePage: PageNext = () => {
   const { auth, removeAuth } = useAuthStore()
+  const { setNewWindow } = useNewWindowOpenedStore()
+
+  const handleClickUpgradeToManager = () => {
+    const windowOpened = window.open(
+      `https://store.snapdelivered.com/product/manager-upgrade?userId=${auth.id}`,
+      'windowUpgradeToManager'
+    )
+
+    setNewWindow(windowOpened)
+    // When a newWindow is sent, in DashboardLayout we have an effect to handle upgrade to manager.
+  }
 
   return (
     <>
@@ -60,7 +73,7 @@ const ProfilePage: PageNext = () => {
               </div>
 
               <div>
-                <button className='bg-gray-300 rounded-full px-4 py-1 text-white font-bold uppercase'>
+                <button disabled className='bg-gray-300 rounded-full px-4 py-1 text-white font-bold uppercase'>
                   Edit
                 </button>
               </div>
@@ -81,7 +94,7 @@ const ProfilePage: PageNext = () => {
               </div>
 
               <div>
-                <button className='bg-gray-300 rounded-full px-4 py-1 text-white font-bold uppercase'>
+                <button disabled className='bg-gray-300 rounded-full px-4 py-1 text-white font-bold uppercase'>
                   Edit
                 </button>
               </div>
@@ -105,7 +118,7 @@ const ProfilePage: PageNext = () => {
               </div>
 
               <div>
-                <button className='bg-gray-300 rounded-full px-4 py-1 text-white font-bold uppercase'>
+                <button disabled className='bg-gray-300 rounded-full px-4 py-1 text-white font-bold uppercase'>
                   Edit
                 </button>
               </div>
@@ -126,7 +139,7 @@ const ProfilePage: PageNext = () => {
               </div>
 
               <div>
-                <button className='bg-gray-300 rounded-full px-4 py-1 text-white font-bold uppercase'>
+                <button disabled className='bg-gray-300 rounded-full px-4 py-1 text-white font-bold uppercase'>
                 Edit
                 </button>
               </div>
@@ -148,36 +161,16 @@ const ProfilePage: PageNext = () => {
             </div>
 
             <div>
-              <button className='bg-gray-300 rounded-full px-4 py-1 text-white font-bold uppercase'>
+              <button disabled className='bg-gray-300 rounded-full px-4 py-1 text-white font-bold uppercase'>
                 Edit
               </button>
             </div>
           </li>
 
-          {/* <li className='rounded-xl bg-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center'>
-            <div>
-              <label htmlFor='bankAccount' className='text-sm'>Bank Account</label>
-              <br />
-              <input
-                id='bankAccount'
-                name='bankAccount'
-                type='text'
-                value=''
-                disabled={true}
-                className='w-full bg-transparent text-lg truncate'
-              />
-            </div>
-
-            <div>
-              <button className='bg-gray-300 rounded-full px-4 py-1 text-white font-bold uppercase'>
-                Edit
-              </button>
-            </div>
-          </li> */}
         </ul>
       </div>
 
-      {/* <div className='flex flex-col md:flex-row items-center justify-center mt-11'>
+      <div className='flex flex-col md:flex-row items-center justify-center mt-11'>
         <div className='w-full md:w-1/2 h-20 flex items-center bg-white rounded-lg px-4 mr-0 md:mr-4 mb-4 md:mb-0'>
           <div className='bg-warning-300 rounded-lg w-12 h-12 flex items-center justify-center mr-4'>
             <TrendingUpIcon />
@@ -185,7 +178,7 @@ const ProfilePage: PageNext = () => {
 
           <div>
             <span className='block text-gray-400 text-sm'>Rank</span>
-            <span className='text-lg font-semibold'>Director</span>
+            <span className='text-lg font-semibold capitalize'>{auth.ranks?.type}</span>
           </div>
         </div>
 
@@ -195,18 +188,29 @@ const ProfilePage: PageNext = () => {
         >
           <h6 className='text-lg font-semibold'>Upgrade to manager</h6>
         </button>
-      </div> */}
+      </div>
 
-      {/* {
-        (!auth.roles.customer || !auth.roles.driver || !auth.roles.merchant) && (
+      {
+        (!auth.roles.customer || !auth.roles.driver || !auth.roles.merchant) && (!auth.roles.admin) && (
           <div className='w-full mt-10'>
             <span className='text-3xl font-bold'>Extend your posibilities</span> <br />
             <span className='text-lg font-semibold'>Your can be a driver at the same time as a costumber or a restaurant</span>
 
             <div className='w-full flex flex-col md:flex-row justify-between items-start gap-y-10 gap-x-10 mt-10'>
               {
+                (auth.roles.merchant || auth.roles.driver) &&
+                <Link href={`/become-role?role=${ROLES.CUSTOMER}`}>
+                  <a className='bg-white hover:bg-primary-300 hover:bg-opacity-30 rounded-md p-4 w-full'>
+                    <div className='flex flex-col md:flex-row justify-center items-center'>
+                      <span className='text-2xl font-bold text-gray-800 mr-10'>Become a Customer</span>
+                      <CustomerIcon classes='w-24' />
+                    </div>
+                  </a>
+                </Link>
+              }
+              {
                 (auth.roles.customer || auth.roles.merchant) &&
-                  <Link href={`/auth/signup?role=${ROLES.DRIVER}`}>
+                  <Link href={`/become-role?role=${ROLES.DRIVER}`}>
                     <a className='bg-white hover:bg-primary-300 hover:bg-opacity-30 rounded-md p-4 w-full'>
                       <div className='flex flex-col md:flex-row justify-center items-center'>
                         <span className='text-2xl font-bold text-gray-800 mr-10'>Become a Driver</span>
@@ -215,10 +219,9 @@ const ProfilePage: PageNext = () => {
                     </a>
                   </Link>
               }
-
               {
                 (auth.roles.customer || auth.roles.driver) &&
-                <Link href={`/auth/signup?role=${ROLES.RESTAURANT}`}>
+                <Link href={`/become-role?role=${ROLES.RESTAURANT}`}>
                   <a className='bg-white hover:bg-primary-300 hover:bg-opacity-30 rounded-md p-4 w-full'>
                     <div className='flex flex-col md:flex-row justify-center items-center'>
                       <span className='text-2xl font-bold text-gray-800 mr-10'>Become a Restaurant</span>
@@ -230,7 +233,7 @@ const ProfilePage: PageNext = () => {
             </div>
           </div>
         )
-      } */}
+      }
 
       <button
         className='block text-primary-500 mx-auto mt-11 font-bold text-lg'
