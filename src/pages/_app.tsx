@@ -10,8 +10,6 @@ import { useLoadingPage } from 'lib/hooks/useLoadingPage'
 import 'styles/tailwind.css'
 import 'react-toastify/dist/ReactToastify.min.css'
 import 'react-phone-input-2/lib/style.css'
-import { ThemeProvider } from '@material-ui/core/styles'
-import { theme } from 'materialTheme'
 import { useModalStore } from 'lib/stores'
 import { Overlay } from 'components/common/Overlay'
 import { ModalContainer } from 'components/common/ModalContainer'
@@ -55,9 +53,7 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
 
       <LoadingPage isRouteChanging={isRouteChanging} key={loadingKey} />
 
-      <ThemeProvider theme={theme}>
-        {getLayout(<Component {...pageProps} />)}
-      </ThemeProvider>
+      {getLayout(<Component {...pageProps} />)}
 
       <ToastContainer
         position='top-right'

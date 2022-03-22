@@ -23,7 +23,7 @@ interface ISignUpDataBodyStep2 extends ISignUpDataBodyStep1 {
   sponsorReferralCode: string | null
 }
 
-interface ISignUpDataBodyRestaurant {
+interface ISignUpDataBodyMerchant {
   name: string
   lastname: string
   email: string
@@ -58,7 +58,7 @@ interface ISignUpDataBodyRestaurant {
   sponsorReferralCode: string | null
 }
 
-export const signUpStep1 = async (dataBody: ISignUpDataBodyStep1 | ISignUpDataBodyRestaurant): Promise<IQueryErrorReturn> => {
+export const signUpStep1 = async (dataBody: ISignUpDataBodyStep1 | ISignUpDataBodyMerchant): Promise<IQueryErrorReturn> => {
   const res = await fetch('/api/authentication/signUpStepOne', {
     method: 'POST',
     headers: {
@@ -128,7 +128,7 @@ export const signUpStep2 = async (dataBody: ISignUpDataBodyStep2, isJsonFetch: b
   return { error: null }
 }
 
-export const signUpRestaurant = async (dataBody: any): Promise<IQueryErrorReturn> => {
+export const signUpMerchant = async (dataBody: any): Promise<IQueryErrorReturn> => {
   const res = await fetch('/api/authentication/signUpStepTwo', {
     method: 'POST',
     headers: {

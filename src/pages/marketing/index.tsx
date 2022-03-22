@@ -5,7 +5,7 @@ import type { Page, ReactNode } from 'lib/types'
 import { APP_INFO } from 'config/appInfo'
 
 import DashboardLayout from 'layouts/private/Dashboard'
-import { CustomerIcon, DriverIcon, IBOIcon, RestaurantsIcon } from 'components/common/icons'
+import { CustomerIcon, DriverIcon, IBOIcon, MerchantsIcon } from 'components/common/icons'
 import { MarketingTool } from 'components/page/marketing/CardTools/Tool'
 import { ListMarketingTools } from 'components/page/marketing/CardTools/ListTools'
 
@@ -28,11 +28,11 @@ const MarketingPage: Page = () => {
       to: '/marketing/drivers'
     },
     {
-      icon: <RestaurantsIcon />,
-      title: 'Restaurant',
+      icon: <MerchantsIcon />,
+      title: 'Merchant',
       subtitle: 'Subtitle text here',
-      description: 'Select an image and share the link in the different social networks to get new Restaurant Partners',
-      to: '/marketing/restaurants'
+      description: 'Select an image and share the link in the different social networks to get new Merchant Partners',
+      to: '/marketing/merchants'
     },
     {
       icon: <IBOIcon />,

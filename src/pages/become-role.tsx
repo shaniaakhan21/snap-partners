@@ -6,6 +6,7 @@ import { APP_INFO } from 'config/appInfo'
 import { ROLES } from 'config/roles'
 
 import DashboardLayout from 'layouts/private/Dashboard'
+// import { useEffect } from 'react'
 // import { useAuthStore } from 'lib/stores'
 // import { handleFetchError } from 'lib/utils/handleFetchError'
 // import { toast } from 'react-toastify'
@@ -17,6 +18,12 @@ const { SEO } = APP_INFO
 const BecomeRolePage = ({ role }: { role: string }) => {
   //   const router = useRouter()
   // const { auth, setAuth } = useAuthStore()
+
+  // useEffect(() => {
+  //   const validateRole = role ? auth.roles[role.toLowerCase()] : null
+
+  //   validateRole && router.push('/overview')
+  // }, [])
 
   // const onSubmit = async (dataForm) => {
   //   const { error } = await updateUserRole(dataForm, auth.accessToken)

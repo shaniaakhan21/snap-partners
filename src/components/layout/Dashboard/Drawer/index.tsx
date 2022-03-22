@@ -13,7 +13,7 @@ export const Drawer = () => {
       router.asPath === routeLink ||
       router.asPath === `${routeLink}/customers` ||
       router.asPath === `${routeLink}/drivers` ||
-      router.asPath === `${routeLink}/restaurants` ||
+      router.asPath === `${routeLink}/merchants` ||
       router.asPath === `${routeLink}/ibo` ||
       router.asPath === `${routeLink}/comingsoon` ||
       router.asPath === `${routeLink}/profile`

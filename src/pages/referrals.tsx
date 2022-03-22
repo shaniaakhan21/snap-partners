@@ -32,7 +32,7 @@ const ReferralsPage: Page = () => {
         <ReferralCards
           title='Merchant Customers'
           ilustration={<MerchantIcon />}
-          link={`${auth.referralLink}&role=${ROLES.RESTAURANT}` || 'With Out Link'}
+          link={`${auth.referralLink}&role=${ROLES.MERCHANT}` || 'With Out Link'}
           newUser
           classes='col-span-1'
         />

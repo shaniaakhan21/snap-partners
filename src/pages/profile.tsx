@@ -37,7 +37,7 @@ const ProfilePage: PageNext = () => {
             {auth.roles.admin && 'Admin'}
             {auth.roles.customer && 'Customer'}
             {auth.roles.driver && 'Driver'}
-            {auth.roles.merchant && 'Restaurant'}
+            {auth.roles.merchant && 'Merchant'}
           </span>
         </div>
       </div>
@@ -201,7 +201,7 @@ const ProfilePage: PageNext = () => {
         (!auth.roles.customer || !auth.roles.driver || !auth.roles.merchant) && (
           <div className='w-full mt-10'>
             <span className='text-3xl font-bold'>Extend your posibilities</span> <br />
-            <span className='text-lg font-semibold'>Your can be a driver at the same time as a costumber or a restaurant</span>
+            <span className='text-lg font-semibold'>Your can be a driver at the same time as a costumber or a merchant</span>
 
             <div className='w-full flex flex-col md:flex-row justify-between items-start gap-y-10 gap-x-10 mt-10'>
               {
@@ -218,7 +218,7 @@ const ProfilePage: PageNext = () => {
 
               {
                 (auth.roles.customer || auth.roles.driver) &&
-                <Link href={`/auth/signup?role=${ROLES.RESTAURANT}`}>
+                <Link href={`/auth/signup?role=${ROLES.MERCHANT}`}>
                   <a className='bg-white hover:bg-primary-300 hover:bg-opacity-30 rounded-md p-4 w-full'>
                     <div className='flex flex-col md:flex-row justify-center items-center'>
                       <span className='text-2xl font-bold text-gray-800 mr-10'>Become a Restaurant</span>

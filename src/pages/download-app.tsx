@@ -23,13 +23,13 @@ const DownloadAppPage: PageNext = () => {
   const { current: androidApps } = useRef([
     { ...APPS.ANDROID_STORE.CUSTOMER_APP },
     { ...APPS.ANDROID_STORE.DRIVER_APP },
-    { ...APPS.ANDROID_STORE.RESTAURANT_APP }
+    { ...APPS.ANDROID_STORE.MERCHANT_APP }
   ])
 
   const { current: appleApps } = useRef([
     { ...APPS.APPLE_STORE.CUSTOMER_APP },
     { ...APPS.APPLE_STORE.DRIVER_APP },
-    { ...APPS.APPLE_STORE.RESTAURANT_APP }
+    { ...APPS.APPLE_STORE.MERCHANT_APP }
   ])
 
   const handlerDevice = () => {
