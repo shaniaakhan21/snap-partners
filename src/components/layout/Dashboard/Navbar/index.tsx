@@ -27,7 +27,7 @@ export const Navbar = () => {
               onClick={() => router.back()}
               className='mr-2'
             >
-              <ArrowLeftIcon classes='mt-1 w-7 h-7' />
+              <ArrowLeftIcon classes='mt-1 w-7 h-7' isHovered />
             </button>
 
             <span className='text-2xl font-bold text-gray-700 whitespace-nowrap'>{title}</span>
