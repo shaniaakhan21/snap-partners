@@ -91,7 +91,7 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
   }
 
   return (
-    <div className='flex flex-col items-center text-center'>
+    <div className='flex flex-col items-center text-center max-w-xl mx-auto'>
       <figure>
         <img src='/images/logo-full.png' className='w-28 h-28' />
       </figure>
