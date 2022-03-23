@@ -16,7 +16,8 @@ export const Drawer = () => {
       router.asPath === `${routeLink}/merchants` ||
       router.asPath === `${routeLink}/ibo` ||
       router.asPath === `${routeLink}/comingsoon` ||
-      router.asPath === `${routeLink}/profile`
+      router.asPath === `${routeLink}/profile` ||
+      router.asPath === `${routeLink}/my-wallet`
     )
   }
 

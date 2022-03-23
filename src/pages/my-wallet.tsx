@@ -34,10 +34,10 @@ const MyWalletPage: Page = () => {
 
   return (
     <div className='max-w-3xl w-full mx-auto'>
-      <div className='relative w-full overflow-x-auto sm:rounded-lg'>
+      <div className='relative w-full sm:rounded-lg overflow-x-auto'>
         {
           isLoading
-            ? <div className='w-full flex justify-center items-center'><Spinner /></div>
+            ? <div className='w-full h-full flex justify-center items-center'><Spinner /></div>
             : transactions.length === 0
               ? <div className='w-full flex justify-center items-center text-2xl font-bold'>Empty</div>
               : <table className='w-full text-sm text-left'>
