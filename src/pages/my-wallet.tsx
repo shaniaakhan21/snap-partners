@@ -9,6 +9,7 @@ import DashboardLayout from 'layouts/private/Dashboard'
 import { useAuthStore } from 'lib/stores'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { Spinner } from 'components/common/loaders'
+import { EmptyData } from 'components/common/EmptyData'
 
 const { SEO } = APP_INFO
 
@@ -37,35 +38,50 @@ const MyWalletPage: Page = () => {
       <div className={`relative w-full sm:rounded-lg ${!isLoading && 'overflow-x-auto'}`}> {/* Can be better */}
         {
           isLoading
-            ? <div className='w-full h-full flex justify-center items-center'><Spinner /></div>
+            ? (
+              <div className='w-full h-full flex justify-center items-center'>
+                <Spinner />
+              </div>
+            )
+
             : transactions.length === 0
-              ? <div className='w-full flex justify-center items-center text-2xl font-bold'>Empty</div>
-              : <table className='w-full text-sm text-left'>
-                <thead className='text-xs text-gray-800 uppercase'>
-                  <tr>
-                    <th scope='col' className='px-6 py-3 text-left'>Transaction ID</th>
-                    <th scope='col' className='px-6 py-3'>Full Name</th>
-                    <th scope='col' className='px-6 py-3'>Description</th>
-                    <th scope='col' className='px-6 py-3'>Amount</th>
-                    <th scope='col' className='px-6 py-3 text-right'>Date</th>
-                  </tr>
+              ? (
+                <div className='flex justify-center items-center h-[70vh]'>
+                  <EmptyData
+                    label='No transactions found'
+                    description='Please change the date , ID or try different Keyword'
+                  />
+                </div>
+              )
 
-                </thead>
+              : (
+                <table className='w-full text-sm text-left'>
+                  <thead className='text-xs text-gray-800 uppercase'>
+                    <tr>
+                      <th scope='col' className='px-6 py-3 text-left'>Transaction ID</th>
+                      <th scope='col' className='px-6 py-3'>Full Name</th>
+                      <th scope='col' className='px-6 py-3'>Description</th>
+                      <th scope='col' className='px-6 py-3'>Amount</th>
+                      <th scope='col' className='px-6 py-3 text-right'>Date</th>
+                    </tr>
 
-                <tbody>
-                  {
-                    transactions.map(transaction => (
-                      <tr className='bg-white border-b text-gray-700'>
-                        <td className='px-6 py-4 text-center'>{transaction.id}</td>
-                        <td className='px-6 py-4'>{transaction.user.name} {transaction.user.lastname && transaction.user.lastname}</td>
-                        <td className='px-6 py-4'>{transaction.description}</td>
-                        <td className='px-6 py-4'>${transaction.amount}</td>
-                        <td className='px-6 py-4 text-right'>{transaction.createdAt}</td>
-                      </tr>
-                    ))
-                  }
-                </tbody>
-              </table>
+                  </thead>
+
+                  <tbody>
+                    {
+                      transactions.map(transaction => (
+                        <tr className='bg-white border-b text-gray-700'>
+                          <td className='px-6 py-4 text-center'>{transaction.id}</td>
+                          <td className='px-6 py-4'>{transaction.user.name} {transaction.user.lastname && transaction.user.lastname}</td>
+                          <td className='px-6 py-4'>{transaction.description}</td>
+                          <td className='px-6 py-4'>${transaction.amount}</td>
+                          <td className='px-6 py-4 text-right'>{transaction.createdAt}</td>
+                        </tr>
+                      ))
+                    }
+                  </tbody>
+                </table>
+              )
         }
 
       </div>

@@ -12,7 +12,7 @@ export const PromotionTracker = ({ userAuth }: { userAuth: IAuth }) => {
       </div>
 
       <br />
-      <CurrentRank rank={userAuth.ranks?.type} />
+      <CurrentRank rank={userAuth.ranks?.type} roles={userAuth.roles} />
 
       {
         (userAuth.ranks && userAuth.ranks?.type !== 'executive') && (
