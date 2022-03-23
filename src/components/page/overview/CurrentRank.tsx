@@ -1,7 +1,7 @@
 import { ArrowHeadRightIcon } from 'components/common/icons'
 import { TRANK } from 'lib/types/user/ranks'
 
-export const CurrentRank = ({ rank }: { rank: TRANK }) => {
+export const CurrentRank = ({ rank, roles }: { rank: TRANK, roles: any }) => {
   return (
     <div className=' bg-white w-full rounded-t-md col-span-1 row-span-1 md:col-span-1 md:col-start-4 lg:col-span-1 flex flex-col md:flex-row justify-start items-center gap-3 p-3'>
       <div className='h-12 w-12 rounded-md bg-[#FFE59E] flex justify-center items-center'>
