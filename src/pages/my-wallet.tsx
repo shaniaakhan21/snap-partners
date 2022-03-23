@@ -13,9 +13,27 @@ import { EmptyData } from 'components/common/EmptyData'
 
 const { SEO } = APP_INFO
 
+interface ITransaction {
+  createdAt: string
+  id: number
+  state: number
+  type: number
+  description: string
+  amount: number
+  userId: number
+  updatedAt: string
+  user: {
+      id: number,
+      name: string,
+      lastname: string
+  }
+  date: string
+  time: string
+}
+
 const MyWalletPage: Page = () => {
   const { auth } = useAuthStore()
-  const [transactions, setTransactions] = useState([])
+  const [transactions, setTransactions] = useState<ITransaction[]>([])
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
@@ -28,13 +46,13 @@ const MyWalletPage: Page = () => {
         setIsLoading(false)
       }
 
-      setTransactions(data)
+      setTransactions([...data])
       setIsLoading(false)
     })()
   }, [])
 
   return (
-    <div className='max-w-3xl w-full mx-auto'>
+    <div className='max-w-4xl w-full mx-auto'>
       <div className={`relative w-full sm:rounded-lg ${!isLoading && 'overflow-x-auto'}`}> {/* Can be better */}
         {
           isLoading
@@ -59,10 +77,12 @@ const MyWalletPage: Page = () => {
                   <thead className='text-xs text-gray-800 uppercase'>
                     <tr>
                       <th scope='col' className='px-6 py-3 text-left'>Transaction ID</th>
-                      <th scope='col' className='px-6 py-3'>Full Name</th>
+                      <th scope='col' className='px-6 py-3'>Name</th>
                       <th scope='col' className='px-6 py-3'>Description</th>
                       <th scope='col' className='px-6 py-3'>Amount</th>
+                      <th scope='col' className='px-6 py-3 text-center'>State</th>
                       <th scope='col' className='px-6 py-3 text-right'>Date</th>
+                      <th scope='col' className='px-6 py-3 text-right'>Time</th>
                     </tr>
 
                   </thead>
@@ -71,11 +91,13 @@ const MyWalletPage: Page = () => {
                     {
                       transactions.map(transaction => (
                         <tr className='bg-white border-b text-gray-700'>
-                          <td className='px-6 py-4 text-center'>{transaction.id}</td>
+                          <td className='px-6 py-4 text-center text-red-500'>{transaction.id}</td>
                           <td className='px-6 py-4'>{transaction.user.name} {transaction.user.lastname && transaction.user.lastname}</td>
                           <td className='px-6 py-4'>{transaction.description}</td>
-                          <td className='px-6 py-4'>${transaction.amount}</td>
-                          <td className='px-6 py-4 text-right'>{transaction.createdAt}</td>
+                          <td className='px-6 py-4 font-bold'>${transaction.amount}</td>
+                          <td className={`px-6 py-4 font-bold text-center ${transaction.state ? 'bg-success-200' : 'bg-primary-300'}`}>{transaction.state ? 'APPROVED' : 'DENIED'}</td>
+                          <td className='px-6 py-4 text-right'>{transaction.date}</td>
+                          <td className='px-6 py-4 text-right'>{transaction.time}</td>
                         </tr>
                       ))
                     }

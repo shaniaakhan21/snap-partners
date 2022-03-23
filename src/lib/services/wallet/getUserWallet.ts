@@ -2,19 +2,21 @@ import { IQueryErrorReturn } from 'lib/types/http/query'
 
 interface IQueryReturn extends IQueryErrorReturn {
   data : {
-    createdAt: string
-    id: number
-    state: number
-    type: number
-    description: string
-    amount: number
-    userId: number
-    updatedAt: string
-    user: {
-        id: number,
-        name: string,
-        lastname: string
-    }
+      createdAt: string
+      id: number
+      state: number
+      type: number
+      description: string
+      amount: number
+      userId: number
+      updatedAt: string
+      user: {
+          id: number,
+          name: string,
+          lastname: string
+      }
+      date: string
+      time: string
   }[] | null
 }
 
@@ -37,8 +39,18 @@ export const getWallet = async (token: string, userId: number, page: number): Pr
     }
   }
 
+  const walletDataNormalized = data.data.map(walletDataItem => {
+    const dateAndTimeArr = walletDataItem.createdAt.split(' ')
+
+    return {
+      ...walletDataItem,
+      date: dateAndTimeArr[0],
+      time: dateAndTimeArr[1]
+    }
+  })
+
   return {
-    data: data.data,
+    data: walletDataNormalized,
     error: null
   }
 }
