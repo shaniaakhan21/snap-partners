@@ -34,7 +34,7 @@ const MyWalletPage: Page = () => {
 
   return (
     <div className='max-w-3xl w-full mx-auto'>
-      <div className='relative w-full sm:rounded-lg overflow-x-auto'>
+      <div className={`relative w-full sm:rounded-lg ${!isLoading && 'overflow-x-auto'}`}> {/* Can be better */}
         {
           isLoading
             ? <div className='w-full h-full flex justify-center items-center'><Spinner /></div>
