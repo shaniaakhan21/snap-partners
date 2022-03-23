@@ -22,6 +22,9 @@ import { getUserBySearch } from 'lib/services/user/getUserBySearch'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { useNearScreen } from 'lib/hooks/useNearScreen'
 import { EmptyData } from 'components/common/EmptyData'
+import { ReferralCards } from 'components/page/referrals/Cards'
+import { CustomerIcon, DriverIcon, MerchantIcon } from 'components/common/icons'
+import { ROLES } from 'config/roles'
 
 const { SEO } = APP_INFO
 
@@ -130,8 +133,31 @@ const GenealogyPage: Page = () => {
 
   if (levels?.length === 0) {
     return (
-      <div className='flex justify-center items-center h-[70vh]'>
+      <div className='flex flex-col justify-center items-center min-h-[80vh]'>
         <EmptyData label='You have no referrals yet' />
+
+        <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-center justify-center justify-items-center gap-4 mt-8'>
+          <ReferralCards
+            title='Refer Customers'
+            ilustration={<CustomerIcon />}
+            link={`${auth.referralLink}&role=${ROLES.CUSTOMER}` || 'With Out Link'}
+            newUser
+            classes='col-span-1'
+          />
+          <ReferralCards
+            title='Driver'
+            ilustration={<DriverIcon />}
+            link={`${auth.referralLink}&role=${ROLES.DRIVER}` || 'With Out Link'}
+            classes='col-span-1'
+          />
+          <ReferralCards
+            title='Merchant Customers'
+            ilustration={<MerchantIcon />}
+            link={`${auth.referralLink}&role=${ROLES.MERCHANT}` || 'With Out Link'}
+            newUser
+            classes='col-span-1'
+          />
+        </div>
       </div>
     )
   }
