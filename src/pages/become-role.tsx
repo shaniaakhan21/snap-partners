@@ -14,8 +14,6 @@ import { useAuthStore } from 'lib/stores'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { updateUserRole } from 'lib/services/user/updateUserRole'
 import { Button } from 'components/common/Button'
-import { InputFile } from 'components/page/signup/SignUpForm/FormByRole/utils/InputFile'
-import { DownloadIcon } from 'components/common/icons'
 
 const { SEO } = APP_INFO
 
