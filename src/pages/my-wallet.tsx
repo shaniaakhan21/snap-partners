@@ -1,43 +1,73 @@
 import Head from 'next/head'
+import { useEffect, useState } from 'react'
 
 import type { Page, ReactNode } from 'lib/types'
 import { APP_INFO } from 'config/appInfo'
+import { getWallet } from 'lib/services/wallet/getUserWallet'
 
 import DashboardLayout from 'layouts/private/Dashboard'
+import { useAuthStore } from 'lib/stores'
+import { handleFetchError } from 'lib/utils/handleFetchError'
+import { Spinner } from 'components/common/loaders'
+
 const { SEO } = APP_INFO
 
 const MyWalletPage: Page = () => {
-  return (
-    <div className='max-w-xl mx-auto'>
-      <h5 className='text-2xl font-bold'>My Wallet</h5>
+  const { auth } = useAuthStore()
+  const [transactions, setTransactions] = useState([])
+  const [isLoading, setIsLoading] = useState(false)
 
-      <div>
-        <table className='table-auto'>
-          <thead>
-            <tr>
-              <th>Song</th>
-              <th>Artist</th>
-              <th>Year</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>The Sliding Mr. Bones (Next Stop, Pottersville)</td>
-              <td>Malcolm Lockyer</td>
-              <td>1961</td>
-            </tr>
-            <tr>
-              <td>Witchy Woman</td>
-              <td>The Eagles</td>
-              <td>1972</td>
-            </tr>
-            <tr>
-              <td>Shining Star</td>
-              <td>Earth, Wind, and Fire</td>
-              <td>1975</td>
-            </tr>
-          </tbody>
-        </table>
+  useEffect(() => {
+    (async () => {
+      setIsLoading(true)
+      const { data, error } = await getWallet(auth.accessToken, auth.id, 1)
+
+      if (error) {
+        handleFetchError(error.status, error.info)
+        setIsLoading(false)
+      }
+
+      setTransactions(data)
+      setIsLoading(false)
+    })()
+  }, [])
+
+  return (
+    <div className='max-w-3xl w-full mx-auto'>
+      <div className='relative w-full overflow-x-auto sm:rounded-lg'>
+        {
+          isLoading
+            ? <div className='w-full flex justify-center items-center'><Spinner /></div>
+            : transactions.length === 0
+              ? <div className='w-full flex justify-center items-center text-2xl font-bold'>Empty</div>
+              : <table className='w-full text-sm text-left'>
+                <thead className='text-xs text-gray-800 uppercase'>
+                  <tr>
+                    <th scope='col' className='px-6 py-3 text-left'>Transaction ID</th>
+                    <th scope='col' className='px-6 py-3'>Full Name</th>
+                    <th scope='col' className='px-6 py-3'>Description</th>
+                    <th scope='col' className='px-6 py-3'>Amount</th>
+                    <th scope='col' className='px-6 py-3 text-right'>Date</th>
+                  </tr>
+
+                </thead>
+
+                <tbody>
+                  {
+                    transactions.map(transaction => (
+                      <tr className='bg-white border-b text-gray-700'>
+                        <td className='px-6 py-4 text-center'>{transaction.id}</td>
+                        <td className='px-6 py-4'>{transaction.user.name} {transaction.user.lastname && transaction.user.lastname}</td>
+                        <td className='px-6 py-4'>{transaction.description}</td>
+                        <td className='px-6 py-4'>${transaction.amount}</td>
+                        <td className='px-6 py-4 text-right'>{transaction.createdAt}</td>
+                      </tr>
+                    ))
+                  }
+                </tbody>
+              </table>
+        }
+
       </div>
     </div>
   )

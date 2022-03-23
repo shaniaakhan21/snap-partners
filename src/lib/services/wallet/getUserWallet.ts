@@ -19,7 +19,7 @@ interface IQueryReturn extends IQueryErrorReturn {
 }
 
 export const getWallet = async (token: string, userId: number, page: number): Promise<IQueryReturn> => {
-  const res = await fetch(`/api/wallet/${userId}?limit=3?page=${page}`, {
+  const res = await fetch(`/api/wallet/${userId}?limit=99999&page=${page}`, {
     headers: {
       Authorization: `Bearer ${token}`
     }
