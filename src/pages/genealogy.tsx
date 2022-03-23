@@ -21,6 +21,7 @@ import { useForm } from 'react-hook-form'
 import { getUserBySearch } from 'lib/services/user/getUserBySearch'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { useNearScreen } from 'lib/hooks/useNearScreen'
+import { EmptyData } from 'components/common/EmptyData'
 
 const { SEO } = APP_INFO
 
@@ -127,7 +128,13 @@ const GenealogyPage: Page = () => {
     // }
   }, [isNearScreen])
 
-  if (levels?.length === 0) return <h1 className='text-center text-5xl'>Empty</h1>
+  if (levels?.length === 0) {
+    return (
+      <div className='flex justify-center items-center h-[70vh]'>
+        <EmptyData label='You have no referrals yet' />
+      </div>
+    )
+  }
 
   if (
     !levels ||
