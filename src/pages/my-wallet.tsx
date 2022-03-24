@@ -67,7 +67,7 @@ const MyWalletPage: Page = () => {
                 <div className='flex justify-center items-center h-[70vh]'>
                   <EmptyData
                     label='No transactions found'
-                    description='Please change the date , ID or try different Keyword'
+                    // description='Please change the date , ID or try different Keyword'
                   />
                 </div>
               )
