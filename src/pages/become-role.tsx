@@ -12,6 +12,7 @@ import DashboardLayout from 'layouts/private/Dashboard'
 import { FormBecomeMerchant } from 'components/page/become-role/FormBecomeMerchant'
 import { FormBecomeDriver } from 'components/page/become-role/FormBecomeDriver'
 import { FormBecomeCustomer } from 'components/page/become-role/FormBecomeCustomer'
+import { toast } from 'react-toastify'
 
 const { SEO } = APP_INFO
 
@@ -21,6 +22,8 @@ const BecomeRolePage = ({ role }: { role: 'CUSTOMER' | 'DRIVER' | 'RESTAURANT' }
 
   useEffect(() => {
     const validateRole = role ? auth.roles[role.toLowerCase()] : null
+
+    validateRole && toast(`You are already a ${role.toLowerCase()}`, { type: 'warning' })
     validateRole && router.push('/overview')
   }, [])
 
