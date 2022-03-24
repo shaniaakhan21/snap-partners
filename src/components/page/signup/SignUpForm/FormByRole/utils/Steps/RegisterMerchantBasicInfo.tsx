@@ -77,7 +77,7 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
 
     const dataToSend = {
       name: dataForm.name,
-      lastname: null,
+      lastname: 'Merchant',
       email: dataForm.email,
       username: dataForm.username,
       password: dataForm.password,

@@ -2,13 +2,14 @@ import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { useForm } from 'react-hook-form'
 
-// import { handleFetchError } from 'lib/utils/handleFetchError'
-// import { updateUserRole } from 'lib/services/user/updateUserRole'
+import { handleFetchError } from 'lib/utils/handleFetchError'
+import { updateUserRole } from 'lib/services/user/updateUserRole'
 import { becomeMerchantRulesConfig } from './formRules'
 
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
 import { TermsAndConditions } from 'components/page/signup/SignUpForm/FormByRole/utils/TermsAndConditions'
+import { IAuth } from 'lib/stores/Auth'
 
 interface IDataFormBecomeMerchant {
   email: string
@@ -23,7 +24,7 @@ interface IDataFormBecomeMerchant {
   termsAndConditions: boolean
 }
 
-export const FormBecomeMerchant = ({ userAuth, userSetAuth }) => {
+export const FormBecomeMerchant = ({ userAuth, userSetAuth }: { userAuth: IAuth, userSetAuth: any }) => {
   const { handleSubmit, reset, register, formState: { errors } } = useForm<IDataFormBecomeMerchant>()
   const [loading, setLoading] = useState(false)
 
@@ -32,12 +33,64 @@ export const FormBecomeMerchant = ({ userAuth, userSetAuth }) => {
 
     console.log(dataForm)
 
-    // const { error } = await updateUserRole(dataForm, auth.accessToken)
-
-    // if (error) {
-    //   handleFetchError(error.status, error.info)
-    //   return
+    // interface IDataBody {
+    //   name: string
+    //   lastname: string
+    //   email: string
+    //   username: string
+    //   phoneNumber: string
+    //   roles: {
+    //     admin: boolean
+    //     customer: boolean
+    //     driver: boolean
+    //     merchant: boolean
+    //   },
+    //   idImage: string
+    //   insuranceImage: string
+    //   merchant: IMerchant
+    //   ownerName: string
+    //   becomeToRole: string
     // }
+
+    const dataToSend = {
+      name: dataForm.name,
+      lastname: 'Merchant',
+      email: dataForm.email,
+      username: dataForm.username,
+      phoneNumber: dataForm.phoneNumber,
+      roles: {
+        admin: userAuth.roles.admin,
+        customer: userAuth.roles.customer,
+        driver: userAuth.roles.driver,
+        merchant: userAuth.roles.merchant
+      },
+      idImage: null,
+      insuranceImage: null,
+      merchant: {
+        city: dataForm.city,
+        street_name: dataForm.streetName,
+        state: dataForm.state,
+        country_code: null,
+        delivery_fees: 0.01,
+        deliverykm: 0.01,
+        email: dataForm.email,
+        maxdeliverytime: 0.01,
+        mobile_no: dataForm.phoneNumber,
+        name: dataForm.name,
+        password: userAuth.password,
+        pincode: '1234',
+        save_on_snap: true
+      },
+      ownerName: dataForm.ownerName,
+      becomeToRole: 'merchant'
+    }
+
+    const { error } = await updateUserRole(dataToSend, auth.accessToken)
+
+    if (error) {
+      handleFetchError(error.status, error.info)
+      return
+    }
 
     // userSetAuth({
     //   ...auth,
