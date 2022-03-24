@@ -20,7 +20,7 @@ interface IDataFormBecomeDriver {
   phoneNumber: string
   idImage: FileList
   driverLicense: FileList
-  carInsurance: FileList
+  insuranceImage: FileList
   termsAndConditions: boolean
 }
 
@@ -38,13 +38,13 @@ export const FormBecomeDriver = ({ userAuth, userSetAuth }) => {
     }
 
     if (dataForm.driverLicense && dataForm.driverLicense[0].size > (maxFileSizeInMb * 1000000)) {
-      setError('carInsurance', { message: `The maximum file size in Driver License is ${maxFileSizeInMb}mb, please upload a file with a maximum file size of ${maxFileSizeInMb}mb` })
+      setError('insuranceImage', { message: `The maximum file size in Driver License is ${maxFileSizeInMb}mb, please upload a file with a maximum file size of ${maxFileSizeInMb}mb` })
       setLoading(false)
       return
     }
 
-    if (dataForm.carInsurance && dataForm.carInsurance[0].size > (maxFileSizeInMb * 1000000)) {
-      setError('carInsurance', { message: `The maximum file size in Car Insurance is ${maxFileSizeInMb}mb, please upload a file with a maximum file size of ${maxFileSizeInMb}mb` })
+    if (dataForm.insuranceImage && dataForm.insuranceImage[0].size > (maxFileSizeInMb * 1000000)) {
+      setError('insuranceImage', { message: `The maximum file size in Car Insurance is ${maxFileSizeInMb}mb, please upload a file with a maximum file size of ${maxFileSizeInMb}mb` })
       setLoading(false)
       return
     }
@@ -200,7 +200,7 @@ export const FormBecomeDriver = ({ userAuth, userSetAuth }) => {
         file:hover:cursor-pointer'
         />
 
-        <label htmlFor='driverLicense' className='font-bold text-gray-700 uppercase text-sm'>Driver License <span className='text-red-500'>*</span></label>
+        {/* <label htmlFor='driverLicense' className='font-bold text-gray-700 uppercase text-sm'>Driver License <span className='text-red-500'>*</span></label>
         {errors.driverLicense && <p className='text-sm text-red-400'>{errors.driverLicense.message}</p>}
         <span className='block text-gray-800 text-sm'>Format JPG, JPEG, PNG, WEBP and PDF Max 5mb</span>
         <input
@@ -216,17 +216,17 @@ export const FormBecomeDriver = ({ userAuth, userSetAuth }) => {
         file:bg-gray-500 file:text-white
         file:w-1/2 hover:file:opacity-90
         file:hover:cursor-pointer'
-        />
+        /> */}
 
-        <label htmlFor='carInsurance' className='font-bold text-gray-700 uppercase text-sm'>Insurance Image <span className='text-red-500'>*</span></label>
-        {errors.carInsurance && <p className='text-sm text-red-400'>{errors.carInsurance.message}</p>}
+        <label htmlFor='insuranceImage' className='font-bold text-gray-700 uppercase text-sm'>Insurance Image <span className='text-red-500'>*</span></label>
+        {errors.insuranceImage && <p className='text-sm text-red-400'>{errors.insuranceImage.message}</p>}
         <span className='block text-gray-800 text-sm'>Format JPG, JPEG, PNG, WEBP and PDF Max 5mb</span>
         <input
-          id='carInsurance'
-          name='carInsurance'
+          id='insuranceImage'
+          name='insuranceImage'
           type='file'
           accept='.jpg, .jpeg, .png, .webp, .pdf'
-          {...register('carInsurance', becomeDriverRulesConfig.carInsurance)}
+          {...register('insuranceImage', becomeDriverRulesConfig.insuranceImage)}
           className='block w-full my-2 text-sm text-slate-500 cursor-pointer
         file:mr-4 file:py-2 file:px-2
         file:rounded-full file:border-0

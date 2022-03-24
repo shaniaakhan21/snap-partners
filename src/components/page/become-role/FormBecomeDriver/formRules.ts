@@ -44,7 +44,7 @@ export const becomeDriverRulesConfig = {
     required: { value: true, message: 'Driver License required *' }
   },
 
-  carInsurance: {
+  insuranceImage: {
     required: { value: true, message: 'Insurance required *' }
   },
 

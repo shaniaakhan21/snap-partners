@@ -6,15 +6,10 @@ interface IMerchant {
   street_name: string
   state: string
   country_code: string
-  delivery_fees: 0.01
-  deliverykm: 0.01
   email: string
-  maxdeliverytime: 0.01
   mobile_no: string
   name: string
   password: string
-  pincode: '33458'
-  save_on_snap: true
 }
 
 interface IDataBody {
@@ -33,17 +28,29 @@ interface IDataBody {
   insuranceImage: string
   merchant: IMerchant
   ownerName: string
-  becomeToRole: 'customer' | 'driver' | 'merchant'
+  becomeToRole: string
 }
 
 export const updateUserRole = async (dataBody: IDataBody, token: string): Promise<IQueryErrorReturn> => {
+  const formData = new FormData()
+
+  const entries = Object.entries(dataBody)
+
+  entries.forEach(([key, value]) => {
+    if (key === 'roles' || key === 'merchant') {
+      formData.append(key, JSON.stringify(value))
+      return
+    }
+    if (key === 'idImage' || key === 'insuranceImage') {
+      if (!value) return
+    }
+    formData.append(key, value)
+  })
+
   const res = await fetch('/api/user/role', {
     method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`
-    },
-    body: JSON.stringify(dataBody)
+    headers: { Authorization: `Bearer ${token}` },
+    body: formData
   })
 
   const data = await res.json()

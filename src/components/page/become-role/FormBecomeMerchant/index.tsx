@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 import { useForm } from 'react-hook-form'
 
@@ -25,32 +26,12 @@ interface IDataFormBecomeMerchant {
 }
 
 export const FormBecomeMerchant = ({ userAuth, userSetAuth }: { userAuth: IAuth, userSetAuth: any }) => {
+  const router = useRouter()
   const { handleSubmit, reset, register, formState: { errors } } = useForm<IDataFormBecomeMerchant>()
   const [loading, setLoading] = useState(false)
 
   const onSubmit = async (dataForm:IDataFormBecomeMerchant) => {
     setLoading(true)
-
-    console.log(dataForm)
-
-    // interface IDataBody {
-    //   name: string
-    //   lastname: string
-    //   email: string
-    //   username: string
-    //   phoneNumber: string
-    //   roles: {
-    //     admin: boolean
-    //     customer: boolean
-    //     driver: boolean
-    //     merchant: boolean
-    //   },
-    //   idImage: string
-    //   insuranceImage: string
-    //   merchant: IMerchant
-    //   ownerName: string
-    //   becomeToRole: string
-    // }
 
     const dataToSend = {
       name: dataForm.name,
@@ -85,29 +66,32 @@ export const FormBecomeMerchant = ({ userAuth, userSetAuth }: { userAuth: IAuth,
       becomeToRole: 'merchant'
     }
 
-    const { error } = await updateUserRole(dataToSend, auth.accessToken)
+    const { error } = await updateUserRole(dataToSend, userAuth.accessToken)
 
     if (error) {
       handleFetchError(error.status, error.info)
       return
     }
 
-    // userSetAuth({
-    //   ...auth,
-    //   ranks: { ...auth.ranks },
-    //   roles: { ...auth.roles },
-    //   ...dataForm
-    // })
+    userSetAuth({
+      ...userAuth,
+      ranks: { ...userAuth.ranks },
+      roles: {
+        ...userAuth.roles,
+        merchant: true
+      },
+      merchant: { ...dataToSend.merchant }
+    })
 
     reset()
     setLoading(false)
     toast('You are now a Restaurant', { type: 'success' })
-    // router.push('/overview')
+    router.push('/overview')
   }
 
   if (loading) {
     return (
-      <div className='w-full flex justify-center items-center'>
+      <div className='w-full h-screen flex justify-center items-center'>
         <Spinner />
       </div>
     )

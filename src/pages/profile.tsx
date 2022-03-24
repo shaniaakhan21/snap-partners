@@ -241,7 +241,7 @@ const ProfilePage: PageNext = () => {
               }
               {
                 (auth.roles.customer || auth.roles.driver) &&
-                <Link href={`/auth/signup?role=${ROLES.MERCHANT}`}>
+                <Link href={`/become-role?role=${ROLES.MERCHANT}`}>
                   <a className='bg-white hover:bg-primary-300 hover:bg-opacity-30 rounded-md p-4 w-full'>
                     <div className='flex flex-col md:flex-row justify-center items-center'>
                       <span className='text-2xl font-bold text-gray-800 mr-10'>Become a Restaurant</span>
