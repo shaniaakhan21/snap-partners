@@ -11,6 +11,9 @@ import { handleFetchError } from 'lib/utils/handleFetchError'
 import { Spinner } from 'components/common/loaders'
 import { EmptyData } from 'components/common/EmptyData'
 
+import ReactDataGrid from '@inovua/reactdatagrid-community'
+import '@inovua/reactdatagrid-community/index.css'
+
 const { SEO } = APP_INFO
 
 interface ITransaction {
@@ -30,6 +33,37 @@ interface ITransaction {
   date: string
   time: string
 }
+
+const columns = [
+  { name: 'id', header: 'Transaction ID', defaultFlex: 1 },
+  { name: 'description', header: 'Description', defaultFlex: 1 },
+  {
+    name: 'user',
+    header: 'Name',
+    render: ({ value }) => {
+      return `${value.name} ${value.lastname}`
+    },
+    defaultFlex: 1
+  },
+  { name: 'amount', header: 'Amount', defaultFlex: 1, type: 'number' },
+  {
+    name: 'state',
+    header: 'State',
+    render: ({ value }) => {
+      return value ? '✔ APPROVED' : '❌ DENIED'
+    },
+    defaultFlex: 1
+  },
+  { name: 'date', header: 'Date', defaultFlex: 1 },
+  { name: 'time', header: 'Time', defaultFlex: 1 }
+]
+
+const gridStyle = { minHeight: 550 }
+
+const filterValue = [
+  { name: 'description', operator: 'startsWith', type: 'string', value: '' },
+  { name: 'amount', operator: 'startsWith', type: 'string', value: '' }
+]
 
 const MyWalletPage: Page = () => {
   const { auth } = useAuthStore()
@@ -73,36 +107,16 @@ const MyWalletPage: Page = () => {
               )
 
               : (
-                <table className='w-full text-sm text-left'>
-                  <thead className='text-xs text-gray-800 uppercase'>
-                    <tr>
-                      <th scope='col' className='px-6 py-3 text-left'>Transaction ID</th>
-                      <th scope='col' className='px-6 py-3'>Name</th>
-                      <th scope='col' className='px-6 py-3'>Description</th>
-                      <th scope='col' className='px-6 py-3'>Amount</th>
-                      <th scope='col' className='px-6 py-3 text-center'>State</th>
-                      <th scope='col' className='px-6 py-3 text-right'>Date</th>
-                      <th scope='col' className='px-6 py-3 text-right'>Time</th>
-                    </tr>
-
-                  </thead>
-
-                  <tbody>
-                    {
-                      transactions.map(transaction => (
-                        <tr className='bg-white border-b text-gray-700'>
-                          <td className='px-6 py-4 text-center text-red-500'>{transaction.id}</td>
-                          <td className='px-6 py-4'>{transaction.user.name} {transaction.user.lastname && transaction.user.lastname}</td>
-                          <td className='px-6 py-4'>{transaction.description}</td>
-                          <td className='px-6 py-4 font-bold'>${transaction.amount}</td>
-                          <td className={`px-6 py-4 font-bold text-center ${transaction.state ? 'bg-success-200' : 'bg-primary-300'}`}>{transaction.state ? 'APPROVED' : 'DENIED'}</td>
-                          <td className='px-6 py-4 text-right'>{transaction.date}</td>
-                          <td className='px-6 py-4 text-right'>{transaction.time}</td>
-                        </tr>
-                      ))
-                    }
-                  </tbody>
-                </table>
+                <ReactDataGrid
+                  idProperty="id"
+                  columns={columns}
+                  dataSource={transactions}
+                  sortable={true}
+                  defaultFilterValue={filterValue}
+                  style={gridStyle}
+                  defaultLimit={10}
+                  pagination
+                />
               )
         }
 
