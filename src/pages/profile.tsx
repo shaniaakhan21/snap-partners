@@ -233,7 +233,7 @@ const ProfilePage: PageNext = () => {
                 </Link>
               }
               {
-                ((auth.roles.customer || auth.roles.merchant) && !auth.roles.driver) &&
+                (auth.roles.customer && (!auth.roles.driver || !auth.roles.merchant)) &&
                   <Link href={`/become-role?role=${ROLES.DRIVER}`}>
                     <a className='bg-white hover:bg-primary-300 hover:bg-opacity-30 rounded-md p-4 w-full'>
                       <div className='flex flex-col md:flex-row justify-center items-center'>
