@@ -79,8 +79,7 @@ export const FormBecomeMerchant = ({ userAuth, userSetAuth }: { userAuth: IAuth,
       roles: {
         ...userAuth.roles,
         merchant: true
-      },
-      merchant: { ...dataToSend.merchant }
+      }
     })
 
     reset()

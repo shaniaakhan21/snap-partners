@@ -1,14 +1,16 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 import { useForm } from 'react-hook-form'
 
-// import { handleFetchError } from 'lib/utils/handleFetchError'
-// import { updateUserRole } from 'lib/services/user/updateUserRole'
+import { handleFetchError } from 'lib/utils/handleFetchError'
+import { updateUserRole } from 'lib/services/user/updateUserRole'
 import { becomeDriverRulesConfig } from './formRules'
 
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
 import { TermsAndConditions } from 'components/page/signup/SignUpForm/FormByRole/utils/TermsAndConditions'
+import { IAuth } from 'lib/stores/Auth'
 
 const maxFileSizeInMb = 5
 
@@ -24,7 +26,8 @@ interface IDataFormBecomeDriver {
   termsAndConditions: boolean
 }
 
-export const FormBecomeDriver = ({ userAuth, userSetAuth }) => {
+export const FormBecomeDriver = ({ userAuth, userSetAuth }: { userAuth: IAuth, userSetAuth: any }) => {
+  const router = useRouter()
   const { handleSubmit, reset, register, formState: { errors }, setError } = useForm<IDataFormBecomeDriver>()
   const [loading, setLoading] = useState(false)
 
@@ -49,31 +52,64 @@ export const FormBecomeDriver = ({ userAuth, userSetAuth }) => {
       return
     }
 
-    console.log(dataForm)
+    const dataToSend = {
+      name: dataForm.name,
+      lastname: dataForm.lastname ?? null,
+      email: dataForm.email,
+      username: dataForm.username,
+      phoneNumber: dataForm.phoneNumber,
+      roles: {
+        admin: userAuth.roles.admin,
+        customer: userAuth.roles.customer,
+        driver: userAuth.roles.driver,
+        merchant: userAuth.roles.merchant
+      },
+      idImage: dataForm.idImage[0],
+      insuranceImage: dataForm.insuranceImage[0],
+      merchant: {
+        city: null,
+        street_name: null,
+        state: null,
+        country_code: null,
+        delivery_fees: 0.01,
+        deliverykm: 0.01,
+        email: null,
+        maxdeliverytime: 0.01,
+        mobile_no: null,
+        name: null,
+        password: userAuth.password,
+        pincode: '1234',
+        save_on_snap: true
+      },
+      ownerName: null,
+      becomeToRole: 'driver'
+    }
 
-    // const { error } = await updateUserRole(dataForm, auth.accessToken)
+    const { error } = await updateUserRole(dataToSend, userAuth.accessToken)
 
-    // if (error) {
-    //   handleFetchError(error.status, error.info)
-    //   return
-    // }
+    if (error) {
+      handleFetchError(error.status, error.info)
+      return
+    }
 
-    // userSetAuth({
-    //   ...auth,
-    //   ranks: { ...auth.ranks },
-    //   roles: { ...auth.roles },
-    //   ...dataForm
-    // })
+    userSetAuth({
+      ...userAuth,
+      ranks: { ...userAuth.ranks },
+      roles: {
+        ...userAuth.roles,
+        driver: true
+      }
+    })
 
     reset()
     setLoading(false)
-    toast('You are now a Restaurant', { type: 'success' })
-    // router.push('/overview')
+    toast('You are now a Driver', { type: 'success' })
+    router.push('/overview')
   }
 
   if (loading) {
     return (
-      <div className='w-full flex justify-center items-center'>
+      <div className='w-full h-screen flex justify-center items-center'>
         <Spinner />
       </div>
     )

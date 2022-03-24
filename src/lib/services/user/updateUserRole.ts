@@ -24,8 +24,8 @@ interface IDataBody {
     driver: boolean
     merchant: boolean
   },
-  idImage: string
-  insuranceImage: string
+  idImage: File | null
+  insuranceImage: File | null
   merchant: IMerchant
   ownerName: string
   becomeToRole: string

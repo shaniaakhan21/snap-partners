@@ -1,9 +1,10 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 import { useForm } from 'react-hook-form'
 
-// import { handleFetchError } from 'lib/utils/handleFetchError'
-// import { updateUserRole } from 'lib/services/user/updateUserRole'
+import { handleFetchError } from 'lib/utils/handleFetchError'
+import { updateUserRole } from 'lib/services/user/updateUserRole'
 import { becomeCustomerRulesConfig } from './formRules'
 
 import { Button } from 'components/common/Button'
@@ -20,32 +21,66 @@ interface IDataFormBecomeCustomer {
 }
 
 export const FormBecomeCustomer = ({ userAuth, userSetAuth }) => {
+  const router = useRouter()
   const { handleSubmit, reset, register, formState: { errors } } = useForm<IDataFormBecomeCustomer>()
   const [loading, setLoading] = useState(false)
 
   const onSubmit = async (dataForm: IDataFormBecomeCustomer) => {
     setLoading(true)
 
-    console.log(dataForm)
+    const dataToSend = {
+      name: dataForm.name,
+      lastname: dataForm.lastname ?? null,
+      email: dataForm.email,
+      username: dataForm.username,
+      phoneNumber: dataForm.phoneNumber,
+      roles: {
+        admin: userAuth.roles.admin,
+        customer: userAuth.roles.customer,
+        driver: userAuth.roles.driver,
+        merchant: userAuth.roles.merchant
+      },
+      idImage: null,
+      insuranceImage: null,
+      merchant: {
+        city: null,
+        street_name: null,
+        state: null,
+        country_code: null,
+        delivery_fees: 0.01,
+        deliverykm: 0.01,
+        email: null,
+        maxdeliverytime: 0.01,
+        mobile_no: null,
+        name: null,
+        password: userAuth.password,
+        pincode: '1234',
+        save_on_snap: true
+      },
+      ownerName: null,
+      becomeToRole: 'customer'
+    }
 
-    // const { error } = await updateUserRole(dataForm, auth.accessToken)
+    const { error } = await updateUserRole(dataToSend, userAuth.accessToken)
 
-    // if (error) {
-    //   handleFetchError(error.status, error.info)
-    //   return
-    // }
+    if (error) {
+      handleFetchError(error.status, error.info)
+      return
+    }
 
-    // userSetAuth({
-    //   ...auth,
-    //   ranks: { ...auth.ranks },
-    //   roles: { ...auth.roles },
-    //   ...dataForm
-    // })
+    userSetAuth({
+      ...userAuth,
+      ranks: { ...userAuth.ranks },
+      roles: {
+        ...userAuth.roles,
+        customer: true
+      }
+    })
 
     reset()
     setLoading(false)
-    toast('You are now a Restaurant', { type: 'success' })
-    // router.push('/overview')
+    toast('You are now a Customer', { type: 'success' })
+    router.push('/overview')
   }
 
   if (loading) {
@@ -68,7 +103,6 @@ export const FormBecomeCustomer = ({ userAuth, userSetAuth }) => {
         name='email'
         type='text'
         defaultValue={userAuth.email}
-        value={userAuth.email}
         {...register('email', becomeCustomerRulesConfig.email)}
         readOnly
         className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
@@ -81,7 +115,6 @@ export const FormBecomeCustomer = ({ userAuth, userSetAuth }) => {
         name='username'
         type='text'
         defaultValue={userAuth.username}
-        value={userAuth.username}
         {...register('username', becomeCustomerRulesConfig.username)}
         readOnly
         className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
@@ -94,7 +127,6 @@ export const FormBecomeCustomer = ({ userAuth, userSetAuth }) => {
         name='name'
         type='text'
         defaultValue={userAuth.name}
-        value={userAuth.name}
         {...register('name', becomeCustomerRulesConfig.name)}
         readOnly
         className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
@@ -110,7 +142,6 @@ export const FormBecomeCustomer = ({ userAuth, userSetAuth }) => {
               name='lastname'
               type='text'
               defaultValue={userAuth.lastname}
-              value={userAuth.lastname}
               {...register('lastname', becomeCustomerRulesConfig.lastname)}
               readOnly
               className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
@@ -126,7 +157,6 @@ export const FormBecomeCustomer = ({ userAuth, userSetAuth }) => {
         name='phoneNumber'
         type='text'
         defaultValue={userAuth.phoneNumber}
-        value={userAuth.phoneNumber}
         {...register('phoneNumber', becomeCustomerRulesConfig.phoneNumber)}
         readOnly
         className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
