@@ -133,28 +133,29 @@ const GenealogyPage: Page = () => {
 
   if (levels?.length === 0) {
     return (
-      <div className='flex flex-col justify-center items-center min-h-[80vh]'>
+      <div className='w-full flex flex-col justify-center items-center min-h-[80vh]'>
         <EmptyData label='You have no referrals yet' />
 
-        <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-center justify-center justify-items-center gap-4 mt-8'>
+        <div className='w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-center justify-center justify-items-center gap-4 mt-8'>
           <ReferralCards
             title='Refer Customers'
             ilustration={<CustomerIcon />}
             link={`${auth.referralLink}&role=${ROLES.CUSTOMER}` || 'With Out Link'}
-            newUser
+            newUser={false}
             classes='col-span-1'
           />
           <ReferralCards
             title='Driver'
             ilustration={<DriverIcon />}
             link={`${auth.referralLink}&role=${ROLES.DRIVER}` || 'With Out Link'}
+            newUser={false}
             classes='col-span-1'
           />
           <ReferralCards
             title='Merchant Customers'
             ilustration={<MerchantIcon />}
             link={`${auth.referralLink}&role=${ROLES.MERCHANT}` || 'With Out Link'}
-            newUser
+            newUser={false}
             classes='col-span-1'
           />
         </div>

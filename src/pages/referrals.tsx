@@ -20,20 +20,21 @@ const ReferralsPage: Page = () => {
           title='Refer Customers'
           ilustration={<CustomerIcon />}
           link={`${auth.referralLink}&role=${ROLES.CUSTOMER}` || 'With Out Link'}
-          newUser
+          newUser={false}
           classes='col-span-1'
         />
         <ReferralCards
           title='Driver'
           ilustration={<DriverIcon />}
           link={`${auth.referralLink}&role=${ROLES.DRIVER}` || 'With Out Link'}
+          newUser={false}
           classes='col-span-1'
         />
         <ReferralCards
           title='Merchant Customers'
           ilustration={<MerchantIcon />}
           link={`${auth.referralLink}&role=${ROLES.MERCHANT}` || 'With Out Link'}
-          newUser
+          newUser={false}
           classes='col-span-1'
         />
       </div>
