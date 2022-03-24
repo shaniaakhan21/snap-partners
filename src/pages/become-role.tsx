@@ -13,6 +13,7 @@ import { FormBecomeMerchant } from 'components/page/become-role/FormBecomeMercha
 import { FormBecomeDriver } from 'components/page/become-role/FormBecomeDriver'
 import { FormBecomeCustomer } from 'components/page/become-role/FormBecomeCustomer'
 import { toast } from 'react-toastify'
+import { Spinner } from 'components/common/loaders'
 
 const { SEO } = APP_INFO
 
@@ -27,15 +28,23 @@ const BecomeRolePage = ({ role }: { role: 'CUSTOMER' | 'DRIVER' | 'RESTAURANT' }
     validateRole && router.push('/overview')
   }, [])
 
-  if (role.toLocaleUpperCase() === 'CUSTOMER') {
+  if (role.toLocaleUpperCase() === 'CUSTOMER' && !auth.roles.customer) {
     return (<FormBecomeCustomer userAuth={auth} userSetAuth={setAuth} />)
   }
 
-  if (role.toLocaleUpperCase() === 'DRIVER') {
+  if (role.toLocaleUpperCase() === 'DRIVER' && (!auth.roles.merchant && !auth.roles.driver)) {
     return (<FormBecomeDriver userAuth={auth} userSetAuth={setAuth} />)
   }
 
-  return (<FormBecomeMerchant userAuth={auth} userSetAuth={setAuth} />)
+  if (role.toLocaleUpperCase() === 'MERCHANT' && !auth.roles.merchant) {
+    return (<FormBecomeMerchant userAuth={auth} userSetAuth={setAuth} />)
+  }
+
+  return (
+    <div className='h-screen w-full flex justify-center items-center'>
+      <Spinner classes='w-20' />
+    </div>
+  )
 }
 
 BecomeRolePage.getLayout = (page: ReactNode) => (

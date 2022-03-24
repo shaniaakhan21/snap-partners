@@ -217,8 +217,14 @@ const ProfilePage: PageNext = () => {
       {
         (!auth.roles?.customer || !auth.roles?.driver || !auth.roles?.merchant) && (!auth.roles?.admin) && (
           <div className='w-full mt-10'>
-            <span className='text-3xl font-bold'>Extend your posibilities</span> <br />
-            <span className='text-lg font-semibold'>Your can be a driver at the same time as a costumber or a merchant</span>
+            {
+              (auth.roles.merchant && auth.roles.driver) && (
+                <>
+                  <span className='text-3xl font-bold'>Extend your posibilities</span> <br />
+                  <span className='text-lg font-semibold'>Your can be a driver at the same time as a costumber or a merchant</span>
+                </>
+              )
+            }
 
             <div className='w-full flex flex-col md:flex-row justify-between items-start gap-y-10 gap-x-10 mt-10'>
               {
@@ -233,7 +239,7 @@ const ProfilePage: PageNext = () => {
                 </Link>
               }
               {
-                (auth.roles.customer && (!auth.roles.driver || !auth.roles.merchant)) &&
+                (auth.roles.customer && (!auth.roles.driver && !auth.roles.merchant)) &&
                   <Link href={`/become-role?role=${ROLES.DRIVER}`}>
                     <a className='bg-white hover:bg-primary-300 hover:bg-opacity-30 rounded-md p-4 w-full'>
                       <div className='flex flex-col md:flex-row justify-center items-center'>
