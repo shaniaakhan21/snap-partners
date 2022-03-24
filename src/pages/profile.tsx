@@ -245,7 +245,6 @@ const ProfilePage: PageNext = () => {
                   <a className='bg-white hover:bg-primary-300 hover:bg-opacity-30 rounded-md p-4 w-full'>
                     <div className='flex flex-col md:flex-row justify-center items-center'>
                       <span className='text-2xl font-bold text-gray-800 mr-10'>Become a Restaurant</span>
-                      <MerchantsIcon />
                       <MerchantIcon />
                     </div>
                   </a>
