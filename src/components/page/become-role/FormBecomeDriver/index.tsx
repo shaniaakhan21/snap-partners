@@ -191,12 +191,13 @@ export const FormBecomeDriver = ({ userAuth, userSetAuth }) => {
           type='file'
           accept='.jpg, .jpeg, .png, .webp, .pdf'
           {...register('idImage', becomeDriverRulesConfig.idImage)}
-          className='block w-1/2 my-2 text-sm text-slate-500 cursor-pointer
+          className='block w-full my-2 text-sm text-slate-500 cursor-pointer
         file:mr-4 file:py-2 file:px-2
         file:rounded-full file:border-0
         file:text-xs file:font-bold file:uppercase
         file:bg-gray-500 file:text-white
-        file:w-1/2 hover:file:opacity-90'
+        file:w-1/2 hover:file:opacity-90
+        file:hover:cursor-pointer'
         />
 
         <label htmlFor='driverLicense' className='font-bold text-gray-700 uppercase text-sm'>Driver License <span className='text-red-500'>*</span></label>
@@ -208,12 +209,13 @@ export const FormBecomeDriver = ({ userAuth, userSetAuth }) => {
           type='file'
           accept='.jpg, .jpeg, .png, .webp, .pdf'
           {...register('driverLicense', becomeDriverRulesConfig.driverLicense)}
-          className='block w-1/2 my-2 text-sm text-slate-500 cursor-pointer
+          className='block w-full my-2 text-sm text-slate-500 cursor-pointer
         file:mr-4 file:py-2 file:px-2
         file:rounded-full file:border-0
         file:text-xs file:font-bold file:uppercase
         file:bg-gray-500 file:text-white
-        file:w-1/2 hover:file:opacity-90'
+        file:w-1/2 hover:file:opacity-90
+        file:hover:cursor-pointer'
         />
 
         <label htmlFor='carInsurance' className='font-bold text-gray-700 uppercase text-sm'>Insurance Image <span className='text-red-500'>*</span></label>
@@ -225,12 +227,13 @@ export const FormBecomeDriver = ({ userAuth, userSetAuth }) => {
           type='file'
           accept='.jpg, .jpeg, .png, .webp, .pdf'
           {...register('carInsurance', becomeDriverRulesConfig.carInsurance)}
-          className='block w-1/2 my-2 text-sm text-slate-500 cursor-pointer
+          className='block w-full my-2 text-sm text-slate-500 cursor-pointer
         file:mr-4 file:py-2 file:px-2
         file:rounded-full file:border-0
         file:text-xs file:font-bold file:uppercase
         file:bg-gray-500 file:text-white
-        file:w-1/2 hover:file:opacity-90'
+        file:w-1/2 hover:file:opacity-90
+        file:hover:cursor-pointer'
         />
 
         <TermsAndConditions
