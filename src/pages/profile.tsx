@@ -218,7 +218,7 @@ const ProfilePage: PageNext = () => {
 
             <div className='w-full flex flex-col md:flex-row justify-between items-start gap-y-10 gap-x-10 mt-10'>
               {
-                (auth.roles.merchant || auth.roles.driver) &&
+                ((auth.roles.merchant || auth.roles.driver) && !auth.roles.customer) &&
                 <Link href={`/become-role?role=${ROLES.CUSTOMER}`}>
                   <a className='bg-white hover:bg-primary-300 hover:bg-opacity-30 rounded-md p-4 w-full'>
                     <div className='flex flex-col md:flex-row justify-center items-center'>
@@ -229,7 +229,7 @@ const ProfilePage: PageNext = () => {
                 </Link>
               }
               {
-                (auth.roles.customer || auth.roles.merchant) &&
+                ((auth.roles.customer || auth.roles.merchant) && !auth.roles.driver) &&
                   <Link href={`/become-role?role=${ROLES.DRIVER}`}>
                     <a className='bg-white hover:bg-primary-300 hover:bg-opacity-30 rounded-md p-4 w-full'>
                       <div className='flex flex-col md:flex-row justify-center items-center'>
@@ -240,7 +240,7 @@ const ProfilePage: PageNext = () => {
                   </Link>
               }
               {
-                (auth.roles.customer || auth.roles.driver) &&
+                ((auth.roles.customer || auth.roles.driver) && !auth.roles.merchant) &&
                 <Link href={`/become-role?role=${ROLES.MERCHANT}`}>
                   <a className='bg-white hover:bg-primary-300 hover:bg-opacity-30 rounded-md p-4 w-full'>
                     <div className='flex flex-col md:flex-row justify-center items-center'>
