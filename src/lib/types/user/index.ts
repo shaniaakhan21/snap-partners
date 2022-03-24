@@ -57,4 +57,5 @@ export interface IUserMe extends IUserCommonData {
   createdAt: string
   idImage: string
   insuranceImage: string
+  password: string
 }
