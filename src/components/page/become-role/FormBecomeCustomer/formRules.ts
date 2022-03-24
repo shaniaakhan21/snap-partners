@@ -34,6 +34,9 @@ export const becomeCustomerRulesConfig = {
     maxLength: { value: 20, message: 'Max 20 Numbers *' },
     minLength: { value: 8, message: 'Min 18 Numbers *' },
     pattern: { value: /^[0-9+]*$/i, message: 'Only Numbers *' }
-  }
+  },
 
+  termsAndConditions: {
+    required: { value: true, message: 'Terms And Conditions Required *' }
+  }
 }

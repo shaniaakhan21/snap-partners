@@ -58,5 +58,9 @@ export const becomeMerchantRulesConfig = {
     required: { value: true, message: 'State Required *' },
     maxLength: { value: 100, message: 'Max 100 Characters *' },
     minLength: { value: 3, message: 'Min 3 Characters *' }
+  },
+
+  termsAndConditions: {
+    required: { value: true, message: 'Terms And Conditions Required *' }
   }
 }

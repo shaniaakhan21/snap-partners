@@ -8,6 +8,7 @@ import { becomeCustomerRulesConfig } from './formRules'
 
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
+import { TermsAndConditions } from 'components/page/signup/SignUpForm/FormByRole/utils/TermsAndConditions'
 
 interface IDataFormBecomeCustomer {
   email: string
@@ -15,6 +16,7 @@ interface IDataFormBecomeCustomer {
   name: string
   lastname: string
   phoneNumber: string
+  termsAndConditions: boolean
 }
 
 export const FormBecomeCustomer = ({ userAuth, userSetAuth }) => {
@@ -140,12 +142,17 @@ export const FormBecomeCustomer = ({ userAuth, userSetAuth }) => {
               name='lastname'
               type='text'
               {...register('lastname', becomeCustomerRulesConfig.lastname)}
-              readOnly
               className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
             />
           </>
         )
       }
+
+      <TermsAndConditions
+        errors={errors.termsAndConditions}
+        register={register}
+        rulesForm={becomeCustomerRulesConfig.termsAndConditions}
+      />
 
       <Button type='submit' classes='w-full mt-4'>
         Become a Customer

@@ -46,5 +46,9 @@ export const becomeDriverRulesConfig = {
 
   carInsurance: {
     required: { value: true, message: 'Insurance required *' }
+  },
+
+  termsAndConditions: {
+    required: { value: true, message: 'Terms And Conditions Required *' }
   }
 }

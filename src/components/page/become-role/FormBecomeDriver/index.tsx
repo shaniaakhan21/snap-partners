@@ -8,6 +8,7 @@ import { becomeDriverRulesConfig } from './formRules'
 
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
+import { TermsAndConditions } from 'components/page/signup/SignUpForm/FormByRole/utils/TermsAndConditions'
 
 const maxFileSizeInMb = 5
 
@@ -20,6 +21,7 @@ interface IDataFormBecomeDriver {
   idImage: FileList
   driverLicense: FileList
   carInsurance: FileList
+  termsAndConditions: boolean
 }
 
 export const FormBecomeDriver = ({ userAuth, userSetAuth }) => {
@@ -78,148 +80,169 @@ export const FormBecomeDriver = ({ userAuth, userSetAuth }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className='max-w-xl mx-auto'>
-      <h5 className='font-bold text-2xl text-primary-500'>
-        Become a Driver
-      </h5>
+    <form onSubmit={handleSubmit(onSubmit)} className='max-w-4xl mx-auto'>
+      <section className='w-full max-w-3xl mx-auto flex flex-col md:flex-row justify-center items-center bg-white rounded-md py-4 px-6 gap-4'>
+        <h5 className='font-bold text-2xl'>
+          Become a Driver
+        </h5>
+
+        <img src='/images/headBecomeDriver.png' />
+
+        <p>Earn competitive income as a Snap Delivered driver, work when you want, how you want, and where you want.</p>
+      </section>
+
       <br />
 
-      <label htmlFor='email' className='font-bold text-gray-700 uppercase text-sm'>Email</label>
-      {errors.email && <p className='text-sm text-red-400'>{errors.email.message}</p>}
-      <input
-        id='email'
-        name='email'
-        type='text'
-        defaultValue={userAuth.email}
-        {...register('email', becomeDriverRulesConfig.email)}
-        readOnly
-        className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
-      />
+      <section className='max-w-xl mx-auto'>
+        <div className='text-center'>
+          <p className='font-semibold text-lg'>In order to add this roll to your account we need some extra data</p>
+        </div>
 
-      <label htmlFor='username' className='font-bold text-gray-700 uppercase text-sm'>Username</label>
-      {errors.username && <p className='text-sm text-red-400'>{errors.username.message}</p>}
-      <input
-        id='username'
-        name='username'
-        type='text'
-        defaultValue={userAuth.username}
-        {...register('username', becomeDriverRulesConfig.username)}
-        readOnly
-        className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
-      />
+        <br />
 
-      <label htmlFor='name' className='font-bold text-gray-700 uppercase text-sm'>First Name</label>
-      {errors.name && <p className='text-sm text-red-400'>{errors.name.message}</p>}
-      <input
-        id='name'
-        name='name'
-        type='text'
-        defaultValue={userAuth.name}
-        {...register('name', becomeDriverRulesConfig.name)}
-        readOnly
-        className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
-      />
+        <label htmlFor='email' className='font-bold text-gray-700 uppercase text-sm'>Email</label>
+        {errors.email && <p className='text-sm text-red-400'>{errors.email.message}</p>}
+        <input
+          id='email'
+          name='email'
+          type='text'
+          defaultValue={userAuth.email}
+          {...register('email', becomeDriverRulesConfig.email)}
+          readOnly
+          className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
+        />
 
-      {
-        userAuth.lastname && (
-          <>
-            <label htmlFor='name' className='font-bold text-gray-700 uppercase text-sm'>Last Name</label>
-            {errors.lastname && <p className='text-sm text-red-400'>{errors.lastname.message}</p>}
-            <input
-              id='lastname'
-              name='lastname'
-              type='text'
-              defaultValue={userAuth.lastname}
-              {...register('lastname', becomeDriverRulesConfig.lastname)}
-              readOnly
-              className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
-            />
-          </>
-        )
-      }
+        <label htmlFor='username' className='font-bold text-gray-700 uppercase text-sm'>Username</label>
+        {errors.username && <p className='text-sm text-red-400'>{errors.username.message}</p>}
+        <input
+          id='username'
+          name='username'
+          type='text'
+          defaultValue={userAuth.username}
+          {...register('username', becomeDriverRulesConfig.username)}
+          readOnly
+          className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
+        />
 
-      <label htmlFor='phoneNumber' className='font-bold text-gray-700 uppercase text-sm'>Phone Number</label>
-      {errors.phoneNumber && <p className='text-sm text-red-400'>{errors.phoneNumber.message}</p>}
-      <input
-        id='phoneNumber'
-        name='phoneNumber'
-        type='text'
-        defaultValue={userAuth.phoneNumber}
-        {...register('phoneNumber', becomeDriverRulesConfig.phoneNumber)}
-        readOnly
-        className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
-      />
+        <label htmlFor='name' className='font-bold text-gray-700 uppercase text-sm'>First Name</label>
+        {errors.name && <p className='text-sm text-red-400'>{errors.name.message}</p>}
+        <input
+          id='name'
+          name='name'
+          type='text'
+          defaultValue={userAuth.name}
+          {...register('name', becomeDriverRulesConfig.name)}
+          readOnly
+          className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
+        />
 
-      {
-        !userAuth.lastname && (
-          <>
-            <label htmlFor='name' className='font-bold text-gray-700 uppercase text-sm'>Last Name <span className='text-red-500'>*</span></label>
-            {errors.lastname && <p className='text-sm text-red-400'>{errors.lastname.message}</p>}
-            <input
-              id='lastname'
-              name='lastname'
-              type='text'
-              {...register('lastname', becomeDriverRulesConfig.lastname)}
-              className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
-            />
-          </>
-        )
-      }
+        {
+          userAuth.lastname && (
+            <>
+              <label htmlFor='name' className='font-bold text-gray-700 uppercase text-sm'>Last Name</label>
+              {errors.lastname && <p className='text-sm text-red-400'>{errors.lastname.message}</p>}
+              <input
+                id='lastname'
+                name='lastname'
+                type='text'
+                defaultValue={userAuth.lastname}
+                {...register('lastname', becomeDriverRulesConfig.lastname)}
+                readOnly
+                className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
+              />
+            </>
+          )
+        }
 
-      <label htmlFor='idImage' className='font-bold text-gray-700 uppercase text-sm'>ID <span className='text-red-500'>*</span></label>
-      {errors.idImage && <p className='text-sm text-red-400'>{errors.idImage.message}</p>}
-      <span className='block text-gray-800 text-sm'>Format JPG, JPEG, PNG, WEBP and PDF Max 5mb</span>
-      <input
-        id='idImage'
-        name='idImage'
-        type='file'
-        accept='.jpg, .jpeg, .png, .webp, .pdf'
-        {...register('idImage', becomeDriverRulesConfig.idImage)}
-        className='block w-1/2 my-2 text-sm text-slate-500 cursor-pointer
-      file:mr-4 file:py-2 file:px-2
-      file:rounded-full file:border-0
-      file:text-xs file:font-bold file:uppercase
-      file:bg-gray-500 file:text-white
-      file:w-1/2 hover:file:opacity-90'
-      />
+        <label htmlFor='phoneNumber' className='font-bold text-gray-700 uppercase text-sm'>Phone Number</label>
+        {errors.phoneNumber && <p className='text-sm text-red-400'>{errors.phoneNumber.message}</p>}
+        <input
+          id='phoneNumber'
+          name='phoneNumber'
+          type='text'
+          defaultValue={userAuth.phoneNumber}
+          {...register('phoneNumber', becomeDriverRulesConfig.phoneNumber)}
+          readOnly
+          className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
+        />
 
-      <label htmlFor='driverLicense' className='font-bold text-gray-700 uppercase text-sm'>Driver License <span className='text-red-500'>*</span></label>
-      {errors.driverLicense && <p className='text-sm text-red-400'>{errors.driverLicense.message}</p>}
-      <span className='block text-gray-800 text-sm'>Format JPG, JPEG, PNG, WEBP and PDF Max 5mb</span>
-      <input
-        id='driverLicense'
-        name='driverLicense'
-        type='file'
-        accept='.jpg, .jpeg, .png, .webp, .pdf'
-        {...register('driverLicense', becomeDriverRulesConfig.driverLicense)}
-        className='block w-1/2 my-2 text-sm text-slate-500 cursor-pointer
-      file:mr-4 file:py-2 file:px-2
-      file:rounded-full file:border-0
-      file:text-xs file:font-bold file:uppercase
-      file:bg-gray-500 file:text-white
-      file:w-1/2 hover:file:opacity-90'
-      />
+        {
+          !userAuth.lastname && (
+            <>
+              <label htmlFor='name' className='font-bold text-gray-700 uppercase text-sm'>Last Name <span className='text-red-500'>*</span></label>
+              {errors.lastname && <p className='text-sm text-red-400'>{errors.lastname.message}</p>}
+              <input
+                id='lastname'
+                name='lastname'
+                type='text'
+                {...register('lastname', becomeDriverRulesConfig.lastname)}
+                className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
+              />
+            </>
+          )
+        }
 
-      <label htmlFor='carInsurance' className='font-bold text-gray-700 uppercase text-sm'>Insurance Image <span className='text-red-500'>*</span></label>
-      {errors.carInsurance && <p className='text-sm text-red-400'>{errors.carInsurance.message}</p>}
-      <span className='block text-gray-800 text-sm'>Format JPG, JPEG, PNG, WEBP and PDF Max 5mb</span>
-      <input
-        id='carInsurance'
-        name='carInsurance'
-        type='file'
-        accept='.jpg, .jpeg, .png, .webp, .pdf'
-        {...register('carInsurance', becomeDriverRulesConfig.carInsurance)}
-        className='block w-1/2 my-2 text-sm text-slate-500 cursor-pointer
-      file:mr-4 file:py-2 file:px-2
-      file:rounded-full file:border-0
-      file:text-xs file:font-bold file:uppercase
-      file:bg-gray-500 file:text-white
-      file:w-1/2 hover:file:opacity-90'
-      />
+        <label htmlFor='idImage' className='font-bold text-gray-700 uppercase text-sm'>ID <span className='text-red-500'>*</span></label>
+        {errors.idImage && <p className='text-sm text-red-400'>{errors.idImage.message}</p>}
+        <span className='block text-gray-800 text-sm'>Format JPG, JPEG, PNG, WEBP and PDF Max 5mb</span>
+        <input
+          id='idImage'
+          name='idImage'
+          type='file'
+          accept='.jpg, .jpeg, .png, .webp, .pdf'
+          {...register('idImage', becomeDriverRulesConfig.idImage)}
+          className='block w-1/2 my-2 text-sm text-slate-500 cursor-pointer
+        file:mr-4 file:py-2 file:px-2
+        file:rounded-full file:border-0
+        file:text-xs file:font-bold file:uppercase
+        file:bg-gray-500 file:text-white
+        file:w-1/2 hover:file:opacity-90'
+        />
 
-      <Button type='submit' classes='w-full mt-4'>
-        Become a Driver
-      </Button>
+        <label htmlFor='driverLicense' className='font-bold text-gray-700 uppercase text-sm'>Driver License <span className='text-red-500'>*</span></label>
+        {errors.driverLicense && <p className='text-sm text-red-400'>{errors.driverLicense.message}</p>}
+        <span className='block text-gray-800 text-sm'>Format JPG, JPEG, PNG, WEBP and PDF Max 5mb</span>
+        <input
+          id='driverLicense'
+          name='driverLicense'
+          type='file'
+          accept='.jpg, .jpeg, .png, .webp, .pdf'
+          {...register('driverLicense', becomeDriverRulesConfig.driverLicense)}
+          className='block w-1/2 my-2 text-sm text-slate-500 cursor-pointer
+        file:mr-4 file:py-2 file:px-2
+        file:rounded-full file:border-0
+        file:text-xs file:font-bold file:uppercase
+        file:bg-gray-500 file:text-white
+        file:w-1/2 hover:file:opacity-90'
+        />
+
+        <label htmlFor='carInsurance' className='font-bold text-gray-700 uppercase text-sm'>Insurance Image <span className='text-red-500'>*</span></label>
+        {errors.carInsurance && <p className='text-sm text-red-400'>{errors.carInsurance.message}</p>}
+        <span className='block text-gray-800 text-sm'>Format JPG, JPEG, PNG, WEBP and PDF Max 5mb</span>
+        <input
+          id='carInsurance'
+          name='carInsurance'
+          type='file'
+          accept='.jpg, .jpeg, .png, .webp, .pdf'
+          {...register('carInsurance', becomeDriverRulesConfig.carInsurance)}
+          className='block w-1/2 my-2 text-sm text-slate-500 cursor-pointer
+        file:mr-4 file:py-2 file:px-2
+        file:rounded-full file:border-0
+        file:text-xs file:font-bold file:uppercase
+        file:bg-gray-500 file:text-white
+        file:w-1/2 hover:file:opacity-90'
+        />
+
+        <TermsAndConditions
+          errors={errors.termsAndConditions}
+          register={register}
+          rulesForm={becomeDriverRulesConfig.termsAndConditions}
+        />
+
+        <Button type='submit' classes='w-full mt-4'>
+          Become a Driver
+        </Button>
+      </section>
     </form>
   )
 }
