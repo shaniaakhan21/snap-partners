@@ -44,6 +44,7 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
     setAuth({
       email: data.email,
       name: data.name,
+      password: data.password,
       phoneNumber: data.phoneNumber,
       accessToken: dataLogin.token,
       lastname: data.lastname,
