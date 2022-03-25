@@ -53,11 +53,11 @@ export const FormBecomeDriver = ({ userAuth, userSetAuth }: { userAuth: IAuth, u
     }
 
     const dataToSend = {
-      name: dataForm.name,
-      lastname: dataForm.lastname ?? null,
-      email: dataForm.email,
-      username: dataForm.username,
-      phoneNumber: dataForm.phoneNumber,
+      name: userAuth.name,
+      lastname: userAuth.lastname ?? null,
+      email: userAuth.email,
+      username: userAuth.username,
+      phoneNumber: userAuth.phoneNumber,
       roles: {
         admin: userAuth.roles.admin,
         customer: userAuth.roles.customer,
@@ -135,88 +135,6 @@ export const FormBecomeDriver = ({ userAuth, userSetAuth }: { userAuth: IAuth, u
         </div>
 
         <br />
-
-        <label htmlFor='email' className='font-bold text-gray-700 uppercase text-sm'>Email</label>
-        {errors.email && <p className='text-sm text-red-400'>{errors.email.message}</p>}
-        <input
-          id='email'
-          name='email'
-          type='text'
-          defaultValue={userAuth.email}
-          {...register('email', becomeDriverRulesConfig.email)}
-          readOnly
-          className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
-        />
-
-        <label htmlFor='username' className='font-bold text-gray-700 uppercase text-sm'>Username</label>
-        {errors.username && <p className='text-sm text-red-400'>{errors.username.message}</p>}
-        <input
-          id='username'
-          name='username'
-          type='text'
-          defaultValue={userAuth.username}
-          {...register('username', becomeDriverRulesConfig.username)}
-          readOnly
-          className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
-        />
-
-        <label htmlFor='name' className='font-bold text-gray-700 uppercase text-sm'>First Name</label>
-        {errors.name && <p className='text-sm text-red-400'>{errors.name.message}</p>}
-        <input
-          id='name'
-          name='name'
-          type='text'
-          defaultValue={userAuth.name}
-          {...register('name', becomeDriverRulesConfig.name)}
-          readOnly
-          className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
-        />
-
-        {
-          userAuth.lastname && (
-            <>
-              <label htmlFor='name' className='font-bold text-gray-700 uppercase text-sm'>Last Name</label>
-              {errors.lastname && <p className='text-sm text-red-400'>{errors.lastname.message}</p>}
-              <input
-                id='lastname'
-                name='lastname'
-                type='text'
-                defaultValue={userAuth.lastname}
-                {...register('lastname', becomeDriverRulesConfig.lastname)}
-                readOnly
-                className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
-              />
-            </>
-          )
-        }
-
-        <label htmlFor='phoneNumber' className='font-bold text-gray-700 uppercase text-sm'>Phone Number</label>
-        {errors.phoneNumber && <p className='text-sm text-red-400'>{errors.phoneNumber.message}</p>}
-        <input
-          id='phoneNumber'
-          name='phoneNumber'
-          type='text'
-          defaultValue={userAuth.phoneNumber}
-          {...register('phoneNumber', becomeDriverRulesConfig.phoneNumber)}
-          readOnly
-          className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
-        />
-
-        {
-          !userAuth.lastname && (
-            <>
-              <label htmlFor='name' className='font-bold text-gray-700 uppercase text-sm'>Last Name <span className='text-red-500'>*</span></label>
-              {errors.lastname && <p className='text-sm text-red-400'>{errors.lastname.message}</p>}
-              <input
-                id='lastname'
-                name='lastname'
-                type='text'
-                {...register('lastname', becomeDriverRulesConfig.lastname)}
-                className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
-              />
-            </>
-          )
-        }
 
         <label htmlFor='idImage' className='font-bold text-gray-700 uppercase text-sm'>ID <span className='text-red-500'>*</span></label>
         {errors.idImage && <p className='text-sm text-red-400'>{errors.idImage.message}</p>}
