@@ -34,11 +34,11 @@ export const FormBecomeMerchant = ({ userAuth, userSetAuth }: { userAuth: IAuth,
     setLoading(true)
 
     const dataToSend = {
-      name: dataForm.name,
+      name: userAuth.name,
       lastname: 'Merchant',
-      email: dataForm.email,
-      username: dataForm.username,
-      phoneNumber: dataForm.phoneNumber,
+      email: userAuth.email,
+      username: userAuth.username,
+      phoneNumber: userAuth.phoneNumber,
       roles: {
         admin: userAuth.roles.admin,
         customer: userAuth.roles.customer,
@@ -54,10 +54,10 @@ export const FormBecomeMerchant = ({ userAuth, userSetAuth }: { userAuth: IAuth,
         country_code: null,
         delivery_fees: 0.01,
         deliverykm: 0.01,
-        email: dataForm.email,
+        email: userAuth.email,
         maxdeliverytime: 0.01,
-        mobile_no: dataForm.phoneNumber,
-        name: dataForm.name,
+        mobile_no: userAuth.phoneNumber,
+        name: userAuth.name,
         password: userAuth.password,
         pincode: '1234',
         save_on_snap: true
@@ -116,89 +116,6 @@ export const FormBecomeMerchant = ({ userAuth, userSetAuth }: { userAuth: IAuth,
         </div>
 
         <br />
-
-        <label htmlFor='email' className='font-bold text-gray-700 uppercase text-sm'>Email</label>
-        {errors.email && <p className='text-sm text-red-400'>{errors.email.message}</p>}
-        <input
-          id='email'
-          name='email'
-          type='text'
-          defaultValue={userAuth.email}
-          {...register('email', becomeMerchantRulesConfig.email)}
-          readOnly
-          className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
-        />
-
-        <label htmlFor='username' className='font-bold text-gray-700 uppercase text-sm'>Username</label>
-        {errors.username && <p className='text-sm text-red-400'>{errors.username.message}</p>}
-        <input
-          id='username'
-          name='username'
-          type='text'
-          defaultValue={userAuth.username}
-          {...register('username', becomeMerchantRulesConfig.username)}
-          readOnly
-          className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
-        />
-
-        <label htmlFor='name' className='font-bold text-gray-700 uppercase text-sm'>Restaurant Name</label>
-        {errors.name && <p className='text-sm text-red-400'>{errors.name.message}</p>}
-        <input
-          id='name'
-          name='name'
-          type='text'
-          defaultValue={userAuth.name}
-          {...register('name', becomeMerchantRulesConfig.name)}
-          readOnly
-          className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
-        />
-
-        {
-          userAuth.lastname && (
-            <>
-              <label htmlFor='name' className='font-bold text-gray-700 uppercase text-sm'>Last Name</label>
-              {errors.lastname && <p className='text-sm text-red-400'>{errors.lastname.message}</p>}
-              <input
-                id='lastname'
-                name='lastname'
-                type='text'
-                defaultValue={userAuth.lastname}
-                {...register('lastname', becomeMerchantRulesConfig.lastname)}
-                readOnly
-                className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
-              />
-            </>
-          )
-        }
-
-        <label htmlFor='phoneNumber' className='font-bold text-gray-700 uppercase text-sm'>Phone Number</label>
-        {errors.phoneNumber && <p className='text-sm text-red-400'>{errors.phoneNumber.message}</p>}
-        <input
-          id='phoneNumber'
-          name='phoneNumber'
-          type='text'
-          defaultValue={userAuth.phoneNumber}
-          {...register('phoneNumber', becomeMerchantRulesConfig.phoneNumber)}
-          readOnly
-          className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
-        />
-
-        {
-          !userAuth.lastname && (
-            <>
-              <label htmlFor='name' className='font-bold text-gray-700 uppercase text-sm'>Last Name <span className='text-red-500'>*</span></label>
-              {errors.lastname && <p className='text-sm text-red-400'>{errors.lastname.message}</p>}
-              <input
-                id='lastname'
-                name='lastname'
-                type='text'
-                {...register('lastname', becomeMerchantRulesConfig.lastname)}
-                placeholder='Enter Last Name'
-                className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
-              />
-            </>
-          )
-        }
 
         <label htmlFor='ownerName' className='font-bold text-gray-700 uppercase text-sm'>Restaurant Owner Name <span className='text-red-500'>*</span></label>
         {errors.ownerName && <p className='text-sm text-red-400'>{errors.ownerName.message}</p>}
