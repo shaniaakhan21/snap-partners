@@ -1,12 +1,10 @@
-// import { Fragment, useEffect, useRef, useState } from 'react'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Head from 'next/head'
 import type { IUserBySearch, Page, ReactNode } from 'lib/types'
 import { APP_INFO } from 'config/appInfo'
 import DashboardLayout from 'layouts/private/Dashboard'
 import { Overlay } from 'components/common/Overlay'
 import { ModalContainer } from 'components/common/ModalContainer'
-// import { Searcher } from 'components/common/Search'
 import { ReferralListSelectedItemMobile } from 'components/page/referrals/ListSelectedItemMobile'
 import { ReferralListSelected } from 'components/page/referrals/ListSelected'
 import { ReferralsUserDetailModal } from 'components/page/referrals/UserDetailModal'
@@ -15,7 +13,6 @@ import { ReferralTabList } from 'components/page/referrals/TabList'
 import { useReferralsData } from 'lib/hooks/useReferralsData'
 import { useModal } from 'lib/hooks/useModal'
 import { useWindowSize } from 'lib/hooks/useWindowSize'
-// import { useAuthStore, useSearchModalStore } from 'lib/stores'
 import { useAuthStore } from 'lib/stores'
 import { ReferralListSelectedItem } from 'components/page/referrals/ListSelectedItem'
 import { Spinner } from 'components/common/loaders'
@@ -23,7 +20,11 @@ import { ILevelUser } from 'lib/types/genealogy'
 import { useForm } from 'react-hook-form'
 import { getUserBySearch } from 'lib/services/user/getUserBySearch'
 import { handleFetchError } from 'lib/utils/handleFetchError'
-// import { useNearScreen } from 'lib/hooks/useNearScreen'
+import { useNearScreen } from 'lib/hooks/useNearScreen'
+import { EmptyData } from 'components/common/EmptyData'
+import { ReferralCards } from 'components/page/referrals/Cards'
+import { CustomerIcon, DriverIcon, MerchantIcon } from 'components/common/icons'
+import { ROLES } from 'config/roles'
 
 const { SEO } = APP_INFO
 
@@ -56,7 +57,6 @@ interface IDataFormSearch {
 const GenealogyPage: Page = () => {
   const { handleSubmit, register } = useForm<IDataFormSearch>()
   const { auth } = useAuthStore()
-  // const { genealogySearchIsOpen, closeGenealogySearch } = useSearchModalStore()
   const { width: windowWidth } = useWindowSize()
   const {
     isOpen: modalReferralListlIsOpen,
@@ -66,7 +66,8 @@ const GenealogyPage: Page = () => {
   const {
     isOpen: modalReferralUserDetailIsOpen,
     fnOpenModal: fnOpenModalReferralUserDetail,
-    fnCloseModal: fnCloseModalReferralUserDetail
+    fnCloseModal: fnCloseModalReferralUserDetail,
+    fnCloseModalManually: fnCloseModalManuallyUserDetail
   } = useModal(false)
   const {
     isOpen: modalReferralUserSearchIsOpen,
@@ -74,12 +75,13 @@ const GenealogyPage: Page = () => {
     fnCloseModal: fnCloseModalReferralSearch
   } = useModal(false)
 
-  // const refVisor = useRef(null)
-  // const isNearScreen = useNearScreen(refVisor.current)
+  const refVisor = useRef(null)
+  const isNearScreen = useNearScreen(refVisor.current)
 
   const [tabOpen, setTabOpen] = useState('1')
   const [userDetailIdOpen, setUserdetailIdOpen] = useState(0)
-  // const [page, setPage] = useState(1)
+  // const [levelPage, setLevelPage] = useState(1)
+  const [levelPage] = useState(1)
   const [usersSearched, setUsersSearched] = useState<IUserBySearch[] | [] | null>(null)
   const [searchIsLoading, setSearchIsLoading] = useState(false)
   const [userDetailIdSearch, setUserDetailIdSearch] = useState<number | null>(null)
@@ -89,9 +91,11 @@ const GenealogyPage: Page = () => {
     levelSelected,
     levelSelectedUserData,
     levelSelectedUsers,
-    userSearchData
-    // fetchingUserData
-  } = useReferralsData(auth, tabOpen, userDetailIdOpen, userDetailIdSearch)
+    userSearchData,
+    fetchLevelIsLoading,
+    fetchUserDataLevelIsLoading,
+    fetchUserDataSearchIsLoading
+  } = useReferralsData(auth, tabOpen, userDetailIdOpen, userDetailIdSearch, levelPage)
   // } = useReferralsData(auth, tabOpen, userDetailIdOpen, page)
 
   // console.log('LEVELS:', levels)
@@ -121,15 +125,43 @@ const GenealogyPage: Page = () => {
     setSearchIsLoading(false)
   }
 
-  // useEffect(() => {
-  //   console.log('NEAR SCREEN', isNearScreen)
-  //   if (isNearScreen) {
-  //     // setPage(prevState => prevState + 1)
-  //     setPage(page + 1)
-  //   }
-  // }, [isNearScreen])
+  useEffect(() => {
+    // if (isNearScreen) {
+    //   setLevelPage(prevState => prevState + 1)
+    // }
+  }, [isNearScreen])
 
-  if (levels?.length === 0) return <h1 className='text-center text-5xl'>Empty</h1>
+  if (levels?.length === 0) {
+    return (
+      <div className='w-full flex flex-col justify-center items-center min-h-[80vh]'>
+        <EmptyData label='You have no referrals yet' />
+
+        <div className='w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-center justify-center justify-items-center gap-4 mt-8'>
+          <ReferralCards
+            title='Refer Customers'
+            ilustration={<CustomerIcon />}
+            link={`${auth.referralLink}&role=${ROLES.CUSTOMER}` || 'With Out Link'}
+            newUser={false}
+            classes='col-span-1'
+          />
+          <ReferralCards
+            title='Driver'
+            ilustration={<DriverIcon />}
+            link={`${auth.referralLink}&role=${ROLES.DRIVER}` || 'With Out Link'}
+            newUser={false}
+            classes='col-span-1'
+          />
+          <ReferralCards
+            title='Merchant Customers'
+            ilustration={<MerchantIcon />}
+            link={`${auth.referralLink}&role=${ROLES.MERCHANT}` || 'With Out Link'}
+            newUser={false}
+            classes='col-span-1'
+          />
+        </div>
+      </div>
+    )
+  }
 
   if (
     !levels ||
@@ -166,7 +198,7 @@ const GenealogyPage: Page = () => {
 
         <br />
 
-        <ul className={`${usersSearched && !searchIsLoading ? 'bg-white' : ''} p-4`}>
+        <ul className={`${usersSearched && !searchIsLoading ? 'bg-white' : ''} p-4 max-h-[40vh] overflow-auto scroll-primary`}>
           {searchIsLoading && (
             <div className='flex items-center justify-center'>
               <Spinner />
@@ -204,7 +236,9 @@ const GenealogyPage: Page = () => {
               onClick={windowWidth >= 1024 ? handleClickTab : (id) => fnOpenModalReferralList(() => handleClickTab(id))}
             />
           ))}
-          {/* <div id='visor' ref={refVisor} /> */}
+          <div id='visor' ref={refVisor} className='flex items-center justify-center'>
+            {fetchLevelIsLoading && <Spinner />}
+          </div>
         </ReferralTabList>
 
         {/* List in desktop */}
@@ -252,56 +286,60 @@ const GenealogyPage: Page = () => {
       )}
 
       {/* Modal View More Level */}
-      {modalReferralUserDetailIsOpen && levelSelectedUserData && (
+      {modalReferralUserDetailIsOpen && (
         <Overlay onClick={fnCloseModalReferralUserDetail}>
           <ModalContainer>
-            <ReferralsUserDetailModal
-              referralUsers={[]}
-              id={levelSelectedUserData.id.toString()}
-              name={levelSelectedUserData.name}
-              email={levelSelectedUserData.email}
-              phone={levelSelectedUserData.phoneNumber}
-              onClick={fnCloseModalReferralUserDetail}
-              authIsAdmin={auth?.roles?.admin}
-              rank={levelSelectedUserData.ranks?.type}
-              sponsor={levelSelectedUserData?.sponsor}
-              roles={levelSelectedUserData?.roles}
-            />
+            {fetchUserDataLevelIsLoading && (
+              <div className='flex items-center justify-center h-[calc(201px-1rem)]'>
+                <Spinner />
+              </div>
+            )}
+            {!fetchUserDataLevelIsLoading && levelSelectedUserData && (
+              <ReferralsUserDetailModal
+                referralUsers={[]}
+                id={levelSelectedUserData.id}
+                name={levelSelectedUserData.name}
+                email={levelSelectedUserData.email}
+                phone={levelSelectedUserData.phoneNumber}
+                onClick={fnCloseModalManuallyUserDetail}
+                auth={auth}
+                rank={levelSelectedUserData.ranks?.type}
+                sponsor={levelSelectedUserData?.sponsor}
+                roles={levelSelectedUserData?.roles}
+                closeModalManually={fnCloseModalManuallyUserDetail}
+              />
+            )}
           </ModalContainer>
         </Overlay>
       )}
 
       {/* Modal View More Search */}
-      {modalReferralUserSearchIsOpen && userSearchData && (
+      {modalReferralUserSearchIsOpen && (
         <Overlay onClick={fnCloseModalReferralSearch}>
           <ModalContainer>
-            <ReferralsUserDetailModal
-              referralUsers={[]}
-              id={userSearchData.id.toString()}
-              name={userSearchData.name}
-              email={userSearchData.email}
-              phone={userSearchData.phoneNumber}
-              onClick={fnCloseModalReferralSearch}
-              authIsAdmin={auth?.roles?.admin}
-              rank={userSearchData.ranks?.type}
-              sponsor={userSearchData?.sponsor}
-              roles={userSearchData?.roles}
-            />
+            {fetchUserDataSearchIsLoading && (
+              <div className='flex items-center justify-center h-[calc(201px-1rem)]'>
+                <Spinner />
+              </div>
+            )}
+            {!fetchUserDataSearchIsLoading && userSearchData && (
+              <ReferralsUserDetailModal
+                referralUsers={[]}
+                id={userSearchData.id}
+                name={userSearchData.name}
+                email={userSearchData.email}
+                phone={userSearchData.phoneNumber}
+                onClick={fnCloseModalReferralSearch}
+                auth={auth}
+                rank={userSearchData.ranks?.type}
+                sponsor={userSearchData?.sponsor}
+                roles={userSearchData?.roles}
+                closeModalManually={fnCloseModalManuallyUserDetail}
+              />
+            )}
           </ModalContainer>
         </Overlay>
       )}
-
-      {/* {genealogySearchIsOpen && levelSelectedUsers && (
-        <Overlay onClick={closeGenealogySearch}>
-          <ModalContainer>
-            <Searcher
-              data={levelSelectedUsers}
-              selectInfo={selectInfo}
-              searchPlaceholderMsg='Search user...'
-            />
-          </ModalContainer>
-        </Overlay>
-      )} */}
     </>
   )
 }

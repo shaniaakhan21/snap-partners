@@ -2,7 +2,7 @@ import { IROLES } from 'lib/types/user'
 
 export const ROLES: IROLES = {
   CUSTOMER: 'CUSTOMER',
-  RESTAURANT: 'RESTAURANT',
+  MERCHANT: 'MERCHANT',
   DRIVER: 'DRIVER',
   ADMIN: 'ADMIN'
 }

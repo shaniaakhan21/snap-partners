@@ -5,7 +5,7 @@ import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
 import { InputForm } from '../Input'
 import { InputPhone } from '../InputPhone'
-import { registerRestaurantRulesConfig } from '../formRules'
+import { registerMerchantRulesConfig } from '../formRules'
 import { RegisterPassword } from '../RegisterPassword'
 import { TermsAndConditions } from '../TermsAndConditions'
 import { signUpStep2 } from 'lib/services/auth/signUp'
@@ -16,7 +16,7 @@ import { STEPS } from '.'
 import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 import { signUp } from 'lib/utils/gtm'
 
-export interface dataFormSignUpRestaurant {
+export interface dataFormSignUpMerchant {
   'city' : string
   'street_name': string,
   'state': string
@@ -37,18 +37,18 @@ export interface dataFormSignUpRestaurant {
   phoneNumber: string
 }
 
-interface IRegisterRestaurantBasicInfoProps {
+interface IRegisterMerchantBasicInfoProps {
   referralLink: IReferralLink,
   handleStep: IHandleStep,
   handleUserInfo: any
 }
 
-export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, handleStep }: IRegisterRestaurantBasicInfoProps) => {
-  const { handleSubmit, register, reset, formState: { errors }, setError, control } = useForm<dataFormSignUpRestaurant>()
+export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handleStep }: IRegisterMerchantBasicInfoProps) => {
+  const { handleSubmit, register, reset, formState: { errors }, setError, control } = useForm<dataFormSignUpMerchant>()
   const [isLoading, setLoading] = useState(false)
   const role = useRoleFromUrl()
 
-  const onSubmit = async (dataForm: dataFormSignUpRestaurant) => {
+  const onSubmit = async (dataForm: dataFormSignUpMerchant) => {
     setLoading(true)
 
     if (dataForm.confirmEmail !== dataForm.email) {
@@ -77,7 +77,7 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
 
     const dataToSend = {
       name: dataForm.name,
-      lastname: null,
+      lastname: 'Merchant',
       email: dataForm.email,
       username: dataForm.username,
       password: dataForm.password,
@@ -149,7 +149,7 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
           placeholder='Enter Username'
           errors={errors.username}
           register={register}
-          rulesForm={registerRestaurantRulesConfig.username}
+          rulesForm={registerMerchantRulesConfig.username}
           isRequired
         />
 
@@ -163,7 +163,7 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
           autoComplete='email'
           errors={errors.email}
           register={register}
-          rulesForm={registerRestaurantRulesConfig.email}
+          rulesForm={registerMerchantRulesConfig.email}
           isRequired
         />
 
@@ -177,7 +177,7 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
           autoComplete='email'
           errors={errors.confirmEmail}
           register={register}
-          rulesForm={registerRestaurantRulesConfig.confirmEmail}
+          rulesForm={registerMerchantRulesConfig.confirmEmail}
           isRequired
         />
 
@@ -185,12 +185,12 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
           id='name'
           name='name'
           type='text'
-          label='Restaurant Name'
+          label='Merchant Name'
           registerId='name'
-          placeholder='Enter Restaurant Name'
+          placeholder='Enter Merchant Name'
           errors={errors.name}
           register={register}
-          rulesForm={registerRestaurantRulesConfig.name}
+          rulesForm={registerMerchantRulesConfig.name}
           isRequired
         />
 
@@ -198,17 +198,17 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
           id='ownerName'
           name='ownerName'
           type='text'
-          label='Restaurant Owner Name'
+          label='Merchant Owner Name'
           registerId='ownerName'
-          placeholder='Enter Restaurant Owner Name'
+          placeholder='Enter Merchant Owner Name'
           errors={errors.ownerName}
           register={register}
-          rulesForm={registerRestaurantRulesConfig.ownerName}
+          rulesForm={registerMerchantRulesConfig.ownerName}
           isRequired
         />
 
         <InputPhone
-          label='Restaurant Phone number'
+          label='Merchant Phone number'
           isRequired
           register={register}
           errors={errors}
@@ -219,8 +219,8 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
         <RegisterPassword
           errors={errors}
           register={register}
-          rulesPasswordForm={registerRestaurantRulesConfig.password}
-          rulesConfirmPasswordForm={registerRestaurantRulesConfig.confirmPassword}
+          rulesPasswordForm={registerMerchantRulesConfig.password}
+          rulesConfirmPasswordForm={registerMerchantRulesConfig.confirmPassword}
         />
 
         <InputForm
@@ -233,7 +233,7 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
           autoComplete='city'
           errors={errors.city}
           register={register}
-          rulesForm={registerRestaurantRulesConfig.city}
+          rulesForm={registerMerchantRulesConfig.city}
           isRequired
         />
 
@@ -247,7 +247,7 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
           autoComplete='street'
           errors={errors.street_name}
           register={register}
-          rulesForm={registerRestaurantRulesConfig.street_name}
+          rulesForm={registerMerchantRulesConfig.street_name}
           isRequired
         />
 
@@ -261,7 +261,7 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
           autoComplete='state'
           errors={errors.state}
           register={register}
-          rulesForm={registerRestaurantRulesConfig.state}
+          rulesForm={registerMerchantRulesConfig.state}
           isRequired
         />
 
@@ -275,14 +275,14 @@ export const RegisterRestaurantBasicInfo = ({ referralLink, handleUserInfo, hand
           defaultValue={referralLink.code}
           errors={errors.referralCode}
           register={register}
-          rulesForm={registerRestaurantRulesConfig.referralCode}
+          rulesForm={registerMerchantRulesConfig.referralCode}
           isRequired={false}
         />
 
         <TermsAndConditions
           errors={errors.termsAndConditions}
           register={register}
-          rulesForm={registerRestaurantRulesConfig.termsAndConditions}
+          rulesForm={registerMerchantRulesConfig.termsAndConditions}
         />
 
         <section className='mt-4'>

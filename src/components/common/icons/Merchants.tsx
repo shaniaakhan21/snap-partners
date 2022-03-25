@@ -1,6 +1,6 @@
 import { IIconsBasicProps } from 'lib/types'
 
-export const RestaurantsIcon = ({ classes = '', onClick }: IIconsBasicProps) => {
+export const MerchantsIcon = ({ classes = '', onClick }: IIconsBasicProps) => {
   return (
     <svg onClick={onClick} className={`fill-[#585858] hover:fill-[#6b6666] ${classes}`} width="74" height="97" viewBox="0 0 74 97" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M59.9636 50.7848C59.8363 51.2378 57.1295 71.8874 57.1295 71.8874L54.6775 74.7917L54.0087 79.268L59.1038 89.8193H21.432C21.432 89.8193 20.8269 84.2505 20.8906 82.7584C20.9543 81.2663 21.846 75.8042 21.846 75.8042L21.7504 70.2621L20.3174 46.0687L33.087 42.6315C40.7933 41.5124 52.1618 46.3618 52.1618 46.3618L59.9636 50.7848Z" fill="#E35C49"/>

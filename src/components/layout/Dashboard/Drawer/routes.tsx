@@ -6,7 +6,8 @@ import {
   CompensationPlanIcon,
   RelojTempIcon,
   AccountIcon,
-  TrainingIcon
+  TrainingIcon,
+  CreditCardIcon
 } from 'components/common/icons'
 
 export const drawerRoutes = [
@@ -64,6 +65,11 @@ export const drawerRoutes = [
     icon: <RelojTempIcon />,
     to: '/upgrade-to-manager',
     label: 'Upgrade To Manager'
+  },
+  {
+    icon: <CreditCardIcon />,
+    to: '/my-wallet',
+    label: 'My Wallet'
   }
 ]
 
@@ -81,6 +87,14 @@ export const globalRoutes = [
   {
     to: '/legal/terms-of-use',
     label: 'Terms Of Use'
+  },
+  {
+    to: '/become-role',
+    label: 'Become Role'
+  },
+  {
+    to: '/my-wallet',
+    label: 'My Wallet'
   }
 ]
 

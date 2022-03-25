@@ -7,16 +7,16 @@ import { getUserById } from 'lib/services/user/getUserById'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { IUserById } from 'lib/types'
 
-// const fnGetAllLevels = async (id: number, token: string, page: number) => {
-//   const { data, error } = await getAllLevels(id, token, page)
+const fnGetAllLevels = async (id: number, token: string, page: number) => {
+  const { data, error } = await getAllLevels(id, token, page)
 
-//   if (error) handleFetchError(error.status, error.info)
+  if (error) handleFetchError(error.status, error.info)
 
-//   return { data, error }
-// }
+  return { data, error }
+}
 
-const fnGetAllLevels = async (id: number, token: string) => {
-  const { data, error } = await getAllLevels(id, token)
+const fnGetUserById = async (id: number, token: string) => {
+  const { data, error } = await getUserById(id, token)
 
   if (error) handleFetchError(error.status, error.info)
 
@@ -24,59 +24,52 @@ const fnGetAllLevels = async (id: number, token: string) => {
 }
 
 // export const useReferralsData = (userAuth: IAuth, tabOpen: string, userDetailIdOpen: number, page: number) => {
-export const useReferralsData = (userAuth: IAuth, tabOpen: string, userDetailIdOpen: number, userDetailIdSearch) => {
+export const useReferralsData = (
+  userAuth: IAuth,
+  tabOpen: string,
+  userDetailIdOpen: number,
+  userDetailIdSearch,
+  levelPage: number
+) => {
   const [levels, setLevels] = useState<ILevel[] | null>(null)
   const [levelSelected, setLevelSelected] = useState<ILevel | null>(null)
   const [levelSelectedUsers, setLevelSelectedUsers] = useState<ILevelUser[] | null>(null)
   const [levelSelectedUserData, setLevelSelectedUserData] = useState<IUserById | null>(null)
   const [userSearchData, setUserSearchData] = useState<IUserById | null>(null)
-  // const [fetchingUserData, setFetchingUserData] = useState(false)
 
-  // INIT DATA
+  // Loaders
+  // const [fetchLevelIsLoading, setFetchLevelIsLoading] = useState(false)
+  const [fetchLevelIsLoading] = useState(false)
+  const [fetchUserDataLevelIsLoading, setFetchUserDataLevelIsLoading] = useState(false)
+  const [fetchUserDataSearchIsLoading, setFetchUserDataSearchIsLoading] = useState(false)
+
+  // Init Data and Level Page Changed
   useEffect(() => {
     (async () => {
-      // const { data, error } = await fnGetAllLevels(
-      //   userAuth.id,
-      //   userAuth.accessToken,
-      //   page
-      // )
+      // setFetchLevelIsLoading(true)
       const { data, error } = await fnGetAllLevels(
         userAuth.id,
-        userAuth.accessToken
+        userAuth.accessToken,
+        levelPage
       )
-
+      // setFetchLevelIsLoading(false)
       if (error) return
 
-      const levels = [...data.levels]
-      const levelSelected = levels.length > 0
-        ? { ...levels.find(({ level }) => level === parseInt(tabOpen)) }
-        : null
-      const levelSelectedUsers = levelSelected ? [...levelSelected.users] : null
+      const newLevels = levels ? [...levels, ...data.levels] : [...data.levels]
+      setLevels(newLevels)
 
-      setLevels(levels)
-      setLevelSelected(levelSelected)
-      setLevelSelectedUsers(levelSelectedUsers)
+      // ONLY TO INIT DATA
+      if (levelPage === 1) {
+        const levelSelected = newLevels?.length > 0
+          ? { ...newLevels.find(({ level }) => level === parseInt(tabOpen)) }
+          : null
+        const levelSelectedUsers = levelSelected ? [...levelSelected.users] : null
+
+        setLevelSelected(levelSelected)
+        setLevelSelectedUsers(levelSelectedUsers)
+      }
     })()
-  }, [])
-
-  // Page Changed
-  // useEffect(() => {
-  //   console.log('PAGE:', page)
-  //   if (page === 1) return // No init data
-
-  //   (async () => {
-  //     const { data, error } = await fnGetAllLevels(
-  //       userAuth.id,
-  //       userAuth.accessToken,
-  //       page
-  //     )
-
-  //     if (error) return
-
-  //     const newLevels = levels ? [...levels, ...data.levels] : [...data.levels]
-  //     setLevels(newLevels)
-  //   })()
-  // }, [page])
+  }, [levelPage])
 
   // tabOpen State HandleChange
   useEffect(() => {
@@ -99,16 +92,11 @@ export const useReferralsData = (userAuth: IAuth, tabOpen: string, userDetailIdO
         return
       }
 
-      // setFetchingUserData(true)
-      const { data, error } = await getUserById(userDetailIdOpen, userAuth.accessToken)
+      setFetchUserDataLevelIsLoading(true)
+      const { data, error } = await fnGetUserById(userDetailIdOpen, userAuth.accessToken)
+      setFetchUserDataLevelIsLoading(false)
+      if (error) return
 
-      if (error) {
-        handleFetchError(error.status, error.info)
-        // setFetchingUserData(false)
-        return
-      }
-
-      // setFetchingUserData(false)
       setLevelSelectedUserData(data)
     })()
   }, [userDetailIdOpen])
@@ -117,15 +105,11 @@ export const useReferralsData = (userAuth: IAuth, tabOpen: string, userDetailIdO
     if (!userDetailIdSearch) return
 
     (async () => {
-      const { data, error } = await getUserById(userDetailIdSearch, userAuth.accessToken)
+      setFetchUserDataSearchIsLoading(true)
+      const { data, error } = await fnGetUserById(userDetailIdSearch, userAuth.accessToken)
+      setFetchUserDataSearchIsLoading(false)
+      if (error) return
 
-      if (error) {
-        handleFetchError(error.status, error.info)
-        // setFetchingUserData(false)
-        return
-      }
-
-      // setFetchingUserData(false)
       setUserSearchData(data)
     })()
   }, [userDetailIdSearch])
@@ -135,7 +119,9 @@ export const useReferralsData = (userAuth: IAuth, tabOpen: string, userDetailIdO
     levelSelected,
     levelSelectedUsers,
     levelSelectedUserData,
-    userSearchData
-    // fetchingUserData
+    userSearchData,
+    fetchLevelIsLoading,
+    fetchUserDataLevelIsLoading,
+    fetchUserDataSearchIsLoading
   }
 }

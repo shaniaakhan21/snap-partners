@@ -17,5 +17,10 @@ export const useModal = (initState: boolean) => {
     }
   }
 
-  return { isOpen, fnOpenModal, fnCloseModal }
+  const fnCloseModalManually = () => {
+    document.body.style.overflowY = 'auto'
+    setIsOpen(false)
+  }
+
+  return { isOpen, fnOpenModal, fnCloseModal, fnCloseModalManually }
 }

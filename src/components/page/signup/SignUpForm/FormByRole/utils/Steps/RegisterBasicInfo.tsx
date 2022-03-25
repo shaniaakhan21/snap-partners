@@ -91,7 +91,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
         admin: referralLink.role === 'ADMIN',
         customer: referralLink.role === 'CUSTOMER',
         driver: referralLink.role === 'DRIVER',
-        merchant: referralLink.role === 'RESTAURANT'
+        merchant: referralLink.role === 'MERCHANT'
       }
     })
 
@@ -111,7 +111,9 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
 
   return (
     <div className='max-w-md mx-auto w-full'>
-      <span className='font-bold text-4xl text-[#18203F]'>Sign up!</span>
+      <p className='font-bold text-4xl text-[#18203F]'>Sign up as a{' '}
+        <span className='text-primary-500'>{referralLink.role === 'CUSTOMER' ? 'Customer' : 'Driver' }</span>
+      </p>
       <p className='text-gray-500'>Welcome! register to continue.</p>
 
       <form className='mt-6 w-full' onSubmit={handleSubmit(onSubmit)}>

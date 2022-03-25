@@ -4,7 +4,7 @@ import { Fragment } from 'react'
 
 import { drawerRoutes } from './routes'
 
-export const DrawerDesktop = ({ isCurrentlyPage, isManager }: { isCurrentlyPage: (route: string) => boolean, isManager: boolean }) => {
+export const DrawerDesktop = ({ isCurrentlyPage, isManager, isAdmin }: { isCurrentlyPage: (route: string) => boolean, isManager: boolean, isAdmin: boolean }) => {
   return (
     <aside className='dashboardLayout__drawer scroll-primary'>
       <section className='mt-16 pl-10 flex justify-start items-center gap-x-2'>
@@ -15,7 +15,7 @@ export const DrawerDesktop = ({ isCurrentlyPage, isManager }: { isCurrentlyPage:
       <ul className='my-10 text-white'>
         {
           drawerRoutes.map(route => {
-            if (isManager && route.to === '/upgrade-to-manager') return <Fragment />
+            if ((isAdmin || isManager) && route.to === '/upgrade-to-manager') return <Fragment />
 
             return (
               <li

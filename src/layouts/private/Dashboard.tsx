@@ -45,6 +45,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
       setAuth({
         email: data.email,
         name: data.name,
+        password: data.password,
         phoneNumber: data.phoneNumber,
         accessToken: token,
         lastname: data.lastname,

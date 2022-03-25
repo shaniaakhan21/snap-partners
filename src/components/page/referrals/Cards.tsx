@@ -21,7 +21,7 @@ export const ReferralCards = ({ title, ilustration, link, newUser = false, class
   }, [link])
 
   const onClick = () => {
-    referralCard(title, `copy for ${userType}`, '')
+    referralCard(userType, `copy for ${userType}`, '')
     copy(link, 'Referral link')
   }
 
@@ -48,7 +48,7 @@ export const ReferralCards = ({ title, ilustration, link, newUser = false, class
         )}
       {/* el div con height imita la altura del anterior componente, si se modifica dicha altura, también se debe modificar el valor */}
 
-      <h3 className='w-full my-4 text-lg font-semibold'>{title}</h3>
+      <h3 className={`w-full text-lg font-semibold ${newUser ? 'my-4' : 'mb-4'}`}>{title}</h3>
 
       {ilustration}
 

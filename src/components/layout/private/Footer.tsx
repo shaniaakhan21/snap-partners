@@ -37,8 +37,10 @@ export const FooterPrivate = () => {
           <ul className='flex justify-center items-center my-4 gap-x-4'>
             {
               socialLinks.map((socialLink, index) => (
-                <li key={index} className='bg-white rounded-full p-2 cursor-pointer'>
-                  {socialLink.icon}
+                <li key={index} className='bg-white rounded-full p-2 cursor-pointer hover:bg-primary-300 hover:bg-opacity-30'>
+                  <Link href={socialLink.to}>
+                    <a>{socialLink.icon}</a>
+                  </Link>
                 </li>
               ))
             }

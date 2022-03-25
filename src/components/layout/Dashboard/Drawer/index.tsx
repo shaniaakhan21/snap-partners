@@ -13,17 +13,18 @@ export const Drawer = () => {
       router.asPath === routeLink ||
       router.asPath === `${routeLink}/customers` ||
       router.asPath === `${routeLink}/drivers` ||
-      router.asPath === `${routeLink}/restaurants` ||
+      router.asPath === `${routeLink}/merchants` ||
       router.asPath === `${routeLink}/ibo` ||
       router.asPath === `${routeLink}/comingsoon` ||
-      router.asPath === `${routeLink}/profile`
+      router.asPath === `${routeLink}/profile` ||
+      router.asPath === `${routeLink}/my-wallet`
     )
   }
 
   return (
     <>
-      <DrawerDesktop isCurrentlyPage={handleIsCurrentlyPage} isManager={auth.isManager} />
-      <DrawerMobile isCurrentlyPage={handleIsCurrentlyPage} isManager={auth.isManager} />
+      <DrawerDesktop isCurrentlyPage={handleIsCurrentlyPage} isManager={auth.isManager} isAdmin={auth.roles.admin} />
+      <DrawerMobile isCurrentlyPage={handleIsCurrentlyPage} isManager={auth.isManager} isAdmin={auth.roles.admin} />
     </>
   )
 }

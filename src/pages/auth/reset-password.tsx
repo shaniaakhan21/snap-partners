@@ -32,7 +32,7 @@ const rules = {
   }
 }
 
-const ResetPasswordPage = ({ token }) => {
+const ResetPasswordPage = ({ token }: { token: string }) => {
   const router = useRouter()
 
   const { handleSubmit, register, reset, formState: { errors }, setError } = useForm<IForm>()

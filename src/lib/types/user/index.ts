@@ -6,7 +6,7 @@ export type { IROLES, TROLE } from './roles'
 export type { IReferralLink } from './referralLink'
 
 export interface IUserData {
-  id: string
+  id: number
   name: string
   numUsers?: number
   email: string
@@ -57,4 +57,5 @@ export interface IUserMe extends IUserCommonData {
   createdAt: string
   idImage: string
   insuranceImage: string
+  password: string
 }

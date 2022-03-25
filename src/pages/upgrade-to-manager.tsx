@@ -59,7 +59,7 @@ const UpgradeToManagerPage: PageNext = () => {
                   <p>Every $1.00 Earned = 1 Point</p>
                   <p>Customer = 1 Point</p>
                   <p>Driver = 1 Point</p>
-                  <p>Restaurant = 1 Point</p>
+                  <p>Merchant = 1 Point</p>
                 </div>
               </div>
               <br />
@@ -75,7 +75,7 @@ const UpgradeToManagerPage: PageNext = () => {
               <br />
 
               <p>
-                Points for Restaurants are release after the <br /> Restaurant Fulfills their first Order
+                Points for Merchants are release after the <br /> Merchant Fulfills their first Order
               </p>
               <br />
             </section>
