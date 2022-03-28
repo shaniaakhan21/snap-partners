@@ -25,6 +25,7 @@ import { EmptyData } from 'components/common/EmptyData'
 import { ReferralCards } from 'components/page/referrals/Cards'
 import { CustomerIcon, DriverIcon, MerchantIcon } from 'components/common/icons'
 import { ROLES } from 'config/roles'
+import { getAllLevels } from 'lib/services/genealogy/getAllLevels'
 
 const { SEO } = APP_INFO
 
@@ -115,6 +116,7 @@ const GenealogyPage: Page = () => {
       return
     }
 
+    console.log('data:', data)
     setUsersSearched(data)
     setSearchIsLoading(false)
   }
@@ -295,7 +297,7 @@ const GenealogyPage: Page = () => {
                 name={levelSelectedUserData.name}
                 email={levelSelectedUserData.email}
                 phone={levelSelectedUserData.phoneNumber}
-                onClick={(id: number) => fnOpenModalReferralUserDetail(() => setUserdetailIdOpen(id))}
+                openNewUserInfo={(id: number) => fnOpenModalReferralUserDetail(() => setUserdetailIdOpen(id))}
                 levels={levelSelectedUserData.levels}
                 auth={auth}
                 rank={levelSelectedUserData.ranks?.type}
@@ -324,6 +326,8 @@ const GenealogyPage: Page = () => {
                 name={userSearchData.name}
                 email={userSearchData.email}
                 phone={userSearchData.phoneNumber}
+                openNewUserInfo={(id: number) => fnOpenModalReferralSearch(() => setUserDetailIdSearch(id))}
+                levels={userSearchData.levels}
                 onClick={fnCloseModalReferralSearch}
                 auth={auth}
                 rank={userSearchData.ranks?.type}

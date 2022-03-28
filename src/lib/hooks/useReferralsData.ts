@@ -39,7 +39,7 @@ export const useReferralsData = (
   const [levelSelected, setLevelSelected] = useState<ILevel | null>(null)
   const [levelSelectedUsers, setLevelSelectedUsers] = useState<ILevelUser[] | null>(null)
   const [levelSelectedUserData, setLevelSelectedUserData] = useState<IUserByIdWithLevels | null>(null)
-  const [userSearchData, setUserSearchData] = useState<IUserById | null>(null)
+  const [userSearchData, setUserSearchData] = useState<IUserByIdWithLevels | null>(null)
 
   // Loaders
   // const [fetchLevelIsLoading, setFetchLevelIsLoading] = useState(false)
@@ -89,14 +89,6 @@ export const useReferralsData = (
     if (!levelSelected) return
 
     (async () => {
-      // const levelSelectedUserData = levelSelected.users.find((user: ILevelUser) => user.id === userDetailIdOpen) ?? null
-
-      // if (!levelSelectedUserData) {
-      //   toast('This user does not exist.', { type: 'error' })
-      //   return
-      // }
-      // THIS IS CONTROLLED FOR THE BACKEND.
-
       setFetchUserDataLevelIsLoading(true)
       const { data: dataUserInfo, error: errorUserInfo } = await fnGetUserById(userDetailIdOpen, userAuth.accessToken)
 
@@ -113,11 +105,6 @@ export const useReferralsData = (
         ...dataUserInfo,
         levels: dataUserLevels.levels
       })
-
-      console.log({
-        ...dataUserInfo,
-        levels: dataUserLevels.levels
-      })
     })()
   }, [userDetailIdOpen])
 
@@ -126,11 +113,21 @@ export const useReferralsData = (
 
     (async () => {
       setFetchUserDataSearchIsLoading(true)
-      const { data, error } = await fnGetUserById(userDetailIdSearch, userAuth.accessToken)
-      setFetchUserDataSearchIsLoading(false)
-      if (error) return
+      const { data: dataUserInfo, error: errorUserInfo } = await fnGetUserById(userDetailIdSearch, userAuth.accessToken)
 
-      setUserSearchData(data)
+      if (errorUserInfo) {
+        setFetchUserDataSearchIsLoading(false)
+        return
+      }
+
+      const { data: dataUserLevels, error: errorUserLevels } = await fnGetAllLevels(userDetailIdSearch, userAuth.accessToken, levelPage)
+      setFetchUserDataSearchIsLoading(false)
+      if (errorUserLevels) return
+
+      setUserSearchData({
+        ...dataUserInfo,
+        levels: dataUserLevels.levels
+      })
     })()
   }, [userDetailIdSearch])
 
