@@ -31,7 +31,7 @@ const ReferralsPage: Page = () => {
           classes='col-span-1'
         />
         <ReferralCards
-          title='Merchant Customers'
+          title='Restaurant Customers'
           ilustration={<MerchantIcon />}
           link={`${auth.referralLink}&role=${ROLES.MERCHANT}` || 'With Out Link'}
           newUser={false}

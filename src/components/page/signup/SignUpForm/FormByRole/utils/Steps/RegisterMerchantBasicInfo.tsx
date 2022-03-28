@@ -185,9 +185,9 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
           id='name'
           name='name'
           type='text'
-          label='Merchant Name'
+          label='Restaurant Name'
           registerId='name'
-          placeholder='Enter Merchant Name'
+          placeholder='Enter Restaurant Name'
           errors={errors.name}
           register={register}
           rulesForm={registerMerchantRulesConfig.name}
@@ -198,9 +198,9 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
           id='ownerName'
           name='ownerName'
           type='text'
-          label='Merchant Owner Name'
+          label='Restaurant Owner Name'
           registerId='ownerName'
-          placeholder='Enter Merchant Owner Name'
+          placeholder='Enter Restaurant Owner Name'
           errors={errors.ownerName}
           register={register}
           rulesForm={registerMerchantRulesConfig.ownerName}
@@ -208,7 +208,7 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
         />
 
         <InputPhone
-          label='Merchant Phone number'
+          label='Restaurant Phone number'
           isRequired
           register={register}
           errors={errors}

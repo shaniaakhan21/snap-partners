@@ -22,7 +22,7 @@ export const SelectRoleToSignUp = () => {
     },
     {
       icon: <MerchantsIcon classes='w-14 h-14' />,
-      label: 'I have a Merchant',
+      label: 'I have a Restaurant',
       key: ROLES.MERCHANT,
       link: `/auth/signup?role=${ROLES.MERCHANT}`
     }

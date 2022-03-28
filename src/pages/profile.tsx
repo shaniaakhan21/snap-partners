@@ -221,7 +221,7 @@ const ProfilePage: PageNext = () => {
               (auth.roles.merchant && auth.roles.driver) && (
                 <>
                   <span className='text-3xl font-bold'>Extend your posibilities</span> <br />
-                  <span className='text-lg font-semibold'>Your can be a driver at the same time as a costumber or a merchant</span>
+                  <span className='text-lg font-semibold'>Your can be a driver at the same time as a costumber or a restaurant</span>
                 </>
               )
             }
