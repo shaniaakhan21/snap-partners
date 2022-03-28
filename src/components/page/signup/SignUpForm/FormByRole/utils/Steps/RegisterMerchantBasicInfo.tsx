@@ -136,7 +136,9 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
 
   return (
     <div className='max-w-md mx-auto w-full'>
-      <span className='font-bold text-4xl text-[#18203F]'>Sign up!</span>
+      <p className='font-bold text-4xl text-[#18203F]'>Sign up as a{' '}
+        <span className='text-primary-500'>Restaurant</span>
+      </p>
       <p className='text-gray-500'>Welcome! register to continue.</p>
 
       <form className='mt-6' onSubmit={handleSubmit(onSubmit)}>
