@@ -1,18 +1,22 @@
-import { Fragment, ReactNode, useEffect } from 'react'
-import type { NextComponentType } from 'next'
 import { AppContext, AppInitialProps, AppLayoutProps } from 'next/app'
-import Script from 'next/script'
-import { useRouter } from 'next/router'
+import { Fragment, ReactNode, useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
-import { LoadingPage } from 'components/layout/LoadingPage'
-import { GTM_ID, pageview } from 'lib/utils/gtm'
+import type { NextComponentType } from 'next'
+import { useRouter } from 'next/router'
+import Script from 'next/script'
+
 import { useLoadingPage } from 'lib/hooks/useLoadingPage'
-import 'styles/tailwind.css'
+import { GTM_ID, pageview } from 'lib/utils/gtm'
+import { useModalStore } from 'lib/stores'
+
+import { ModalContainer } from 'components/common/ModalContainer'
+import { LoadingPage } from 'components/layout/LoadingPage'
+import { Overlay } from 'components/common/Overlay'
+
 import 'react-toastify/dist/ReactToastify.min.css'
 import 'react-phone-input-2/lib/style.css'
-import { useModalStore } from 'lib/stores'
-import { Overlay } from 'components/common/Overlay'
-import { ModalContainer } from 'components/common/ModalContainer'
+import 'tippy.js/dist/tippy.css'
+import 'styles/tailwind.css'
 
 const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({ Component, pageProps }: AppLayoutProps) => {
   const router = useRouter()

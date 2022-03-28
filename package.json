@@ -22,6 +22,7 @@
     "@material-ui/x-license": "^4.0.0-alpha.37",
     "@react-pdf-viewer/core": "3.1.0",
     "@tanem/react-nprogress": "4.0.5",
+    "@tippyjs/react": "^4.2.6",
     "axios": "^0.26.0",
     "jwt-decode": "^3.1.2",
     "material-ui-phone-number": "^3.0.0",
