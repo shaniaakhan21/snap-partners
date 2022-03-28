@@ -200,7 +200,7 @@ const ProfilePage: PageNext = () => {
 
               <div>
                 <span className='block text-gray-400 text-sm'>Rank</span>
-                <span className='text-lg font-semibold capitalize'>{auth.ranks?.type}</span>
+                <span className='text-lg font-semibold capitalize'>{auth.ranks?.type === 'referralPartner' ? 'Referral Partner' : auth.ranks?.type}</span>
               </div>
             </div>
 
