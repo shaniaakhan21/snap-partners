@@ -68,7 +68,7 @@ const ProfilePage: PageNext = () => {
             {(auth.ranks?.type === 'executive' && auth.roles.merchant) && <li><img src='/static/badges/ExecutiveMerchant.png' /> </li>}
 
             <li>
-              <span className='font-bold text-xl capitalize'>{auth.ranks?.type}</span>
+              <span className='font-bold text-xl capitalize'>{auth.ranks?.type === 'referralPartner' ? 'Referral Partner' : auth.ranks?.type}</span>
             </li>
           </ul>
         </div>
