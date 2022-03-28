@@ -8,9 +8,11 @@ import { TRANK } from 'lib/types/user/ranks'
 import { UpdateUserRank } from './UpdateUserRank'
 import { IAuth } from 'lib/stores/Auth'
 import Link from 'next/link'
+import { ILevel, ILevelUser } from 'lib/types/genealogy'
 
 interface IProps extends IUserData {
   onClick?: (e: MouseEvent, element: HTMLElement) => void
+  openNewUserInfo: (id: number) => void
   closeModalManually?: () => void
   referralUsers: any[]
   sponsor?: {
@@ -20,6 +22,7 @@ interface IProps extends IUserData {
   }
   rank?: TRANK
   auth: IAuth
+  levels: ILevel[]
   roles: {
     admin: boolean,
     customer: boolean,
@@ -28,22 +31,20 @@ interface IProps extends IUserData {
   }
 }
 
-export const ReferralsUserDetailModal = ({ id, name, email, phone, sponsor, rank, onClick, auth, roles, closeModalManually }: IProps) => {
+export const ReferralsUserDetailModal = ({ id, name, email, phone, sponsor, rank, onClick, openNewUserInfo, levels, auth, roles, closeModalManually }: IProps) => {
   const { copy } = useCopyToClipboard()
 
   return (
     <div className='p-1 text-xs sm:text-sm lg:text-base'>
       <div className='mb-4 flex items-center justify-between'>
         <div>
-          {
-            auth.roles.admin && (
-              <UpdateUserRank
-                id={id}
-                rank={rank}
-                authToken={auth.accessToken}
-              />
-            )
-          }
+          {auth.roles.admin && (
+            <UpdateUserRank
+              id={id}
+              rank={rank}
+              authToken={auth.accessToken}
+            />
+          )}
         </div>
 
         <div className={`flex mt-0 sm:mt-8 ${auth.roles.admin ? 'flex-col items-end sm:flex-row sm:items-center justify-end' : 'items-center justify-end'}`}>
@@ -122,6 +123,21 @@ export const ReferralsUserDetailModal = ({ id, name, email, phone, sponsor, rank
           </a>
         </Link>
       </div>
+
+      <ul className='flex flex-col items-center justify-center'>
+        <button onClick={() => openNewUserInfo(1)}>CLICK ME</button>
+        {levels.length === 0 && <h1>Compa aquí no hay nada...</h1>}
+        {levels && levels.length > 0 && levels.map(level => level.users.map((user: ILevelUser) => (
+          <li>
+            <button onClick={() => openNewUserInfo(user.id)}>
+              {/* KEVIN HERE */}
+              <h1 className='text-2xl'>{level.level}</h1>
+              <h1 className='text-2xl'>{user.name}</h1>
+              <h1 className='text-2xl'>{user.id}</h1>
+            </button>
+          </li>
+        )))}
+      </ul>
     </div>
   )
 }

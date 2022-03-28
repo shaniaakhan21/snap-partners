@@ -25,6 +25,7 @@ import { EmptyData } from 'components/common/EmptyData'
 import { ReferralCards } from 'components/page/referrals/Cards'
 import { CustomerIcon, DriverIcon, MerchantIcon } from 'components/common/icons'
 import { ROLES } from 'config/roles'
+import { getAllLevels } from 'lib/services/genealogy/getAllLevels'
 
 const { SEO } = APP_INFO
 
@@ -98,12 +99,6 @@ const GenealogyPage: Page = () => {
   } = useReferralsData(auth, tabOpen, userDetailIdOpen, userDetailIdSearch, levelPage)
   // } = useReferralsData(auth, tabOpen, userDetailIdOpen, page)
 
-  // console.log('LEVELS:', levels)
-  // console.log('LEVELS SELECTED:', levelSelected)
-  // console.log('LEVEL SELECTED USER DATA:', levelSelectedUserData)
-  // console.log('LEVEL SELECTED USERS:', levelSelectedUsers)
-  // console.log('----------------------------------')
-
   const handleClickTab = (id: string) => setTabOpen(id)
 
   const onSubmit = async ({ search }: IDataFormSearch) => {
@@ -121,6 +116,7 @@ const GenealogyPage: Page = () => {
       return
     }
 
+    console.log('data:', data)
     setUsersSearched(data)
     setSearchIsLoading(false)
   }
@@ -301,7 +297,8 @@ const GenealogyPage: Page = () => {
                 name={levelSelectedUserData.name}
                 email={levelSelectedUserData.email}
                 phone={levelSelectedUserData.phoneNumber}
-                onClick={fnCloseModalManuallyUserDetail}
+                openNewUserInfo={(id: number) => fnOpenModalReferralUserDetail(() => setUserdetailIdOpen(id))}
+                levels={levelSelectedUserData.levels}
                 auth={auth}
                 rank={levelSelectedUserData.ranks?.type}
                 sponsor={levelSelectedUserData?.sponsor}
@@ -329,6 +326,8 @@ const GenealogyPage: Page = () => {
                 name={userSearchData.name}
                 email={userSearchData.email}
                 phone={userSearchData.phoneNumber}
+                openNewUserInfo={(id: number) => fnOpenModalReferralSearch(() => setUserDetailIdSearch(id))}
+                levels={userSearchData.levels}
                 onClick={fnCloseModalReferralSearch}
                 auth={auth}
                 rank={userSearchData.ranks?.type}
