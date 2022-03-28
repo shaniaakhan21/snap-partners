@@ -1,14 +1,15 @@
 import { MouseEvent } from 'react'
+import Link from 'next/link'
 
 import { useCopyToClipboard } from 'lib/hooks/useCopyToClipboard'
+import { ILevel, ILevelUser } from 'lib/types/genealogy'
+import { TRANK } from 'lib/types/user/ranks'
 import { IUserData } from 'lib/types/user'
+import { IAuth } from 'lib/stores/Auth'
 
 import { CopyIcon, EmailIcon, InfoIcon, PhoneIcon } from 'components/common/icons'
-import { TRANK } from 'lib/types/user/ranks'
+import { EmptyData } from 'components/common/EmptyData'
 import { UpdateUserRank } from './UpdateUserRank'
-import { IAuth } from 'lib/stores/Auth'
-import Link from 'next/link'
-import { ILevel, ILevelUser } from 'lib/types/genealogy'
 
 interface IProps extends IUserData {
   onClick?: (e: MouseEvent, element: HTMLElement) => void
@@ -124,19 +125,39 @@ export const ReferralsUserDetailModal = ({ id, name, email, phone, sponsor, rank
         </Link>
       </div>
 
-      <ul className='flex flex-col items-center justify-center'>
-        <button onClick={() => openNewUserInfo(1)}>CLICK ME</button>
-        {levels.length === 0 && <h1>Compa aquí no hay nada...</h1>}
-        {levels && levels.length > 0 && levels.map(level => level.users.map((user: ILevelUser) => (
-          <li>
-            <button onClick={() => openNewUserInfo(user.id)}>
-              {/* KEVIN HERE */}
-              <h1 className='text-2xl'>{level.level}</h1>
-              <h1 className='text-2xl'>{user.name}</h1>
-              <h1 className='text-2xl'>{user.id}</h1>
-            </button>
-          </li>
-        )))}
+      <hr className='my-4 bordet-t border-gray-300' />
+
+      <ul className='flex flex-col items-center justify-center mt-4'>
+        {
+          levels.length === 0 && <EmptyData label='No referrals yet' imgClasses='w-32 h-32' />
+        }
+        {
+          levels && levels.length > 0 &&
+            levels.map(level => level.users.map((user: ILevelUser) => (
+              <li className='w-full mb-4 last:mb-0'>
+                <button
+                  className='w-full h-16 text-xs sm:text-sm flex gap-x-2 items-center justify-between transition-colors hover:bg-gray-200 md:px-2'
+                  onClick={() => openNewUserInfo(user.id)}
+                >
+                  <div className='relative w-16 h-12 border-4 border-solid border-black mr-2'>
+                    <div className='font-bold text-lg tracking-tighter absolute inset-1 mt-0.5'>L {String(level.level)}</div>
+                  </div>
+
+                  <span className='font-bold text-gray-800 w-2/6 text-left truncate uppercase'>{user.name}</span>
+                  <span className='font-bold text-gray-800 w-2/6 text-left truncate uppercase'>{user.phoneNumber}</span>
+
+                  <span className='text-primary-500 w-1/6 text-center truncate'>ID: {user.id}</span>
+
+                  <span
+                    style={{ maxWidth: 120 }}
+                    className='w-2/6 h-10 bg-primary-500 rounded-3xl font-bold text-white cursor-pointer flex items-center justify-center transition-colors hover:bg-hoverPrimary'
+                  >
+                    VIEW MORE
+                  </span>
+                </button>
+              </li>
+            )))
+        }
       </ul>
     </div>
   )
