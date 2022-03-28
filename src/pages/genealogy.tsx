@@ -25,7 +25,6 @@ import { EmptyData } from 'components/common/EmptyData'
 import { ReferralCards } from 'components/page/referrals/Cards'
 import { CustomerIcon, DriverIcon, MerchantIcon } from 'components/common/icons'
 import { ROLES } from 'config/roles'
-import { getAllLevels } from 'lib/services/genealogy/getAllLevels'
 
 const { SEO } = APP_INFO
 
@@ -116,7 +115,6 @@ const GenealogyPage: Page = () => {
       return
     }
 
-    console.log('data:', data)
     setUsersSearched(data)
     setSearchIsLoading(false)
   }
