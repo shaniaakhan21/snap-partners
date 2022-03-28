@@ -98,12 +98,6 @@ const GenealogyPage: Page = () => {
   } = useReferralsData(auth, tabOpen, userDetailIdOpen, userDetailIdSearch, levelPage)
   // } = useReferralsData(auth, tabOpen, userDetailIdOpen, page)
 
-  // console.log('LEVELS:', levels)
-  // console.log('LEVELS SELECTED:', levelSelected)
-  // console.log('LEVEL SELECTED USER DATA:', levelSelectedUserData)
-  // console.log('LEVEL SELECTED USERS:', levelSelectedUsers)
-  // console.log('----------------------------------')
-
   const handleClickTab = (id: string) => setTabOpen(id)
 
   const onSubmit = async ({ search }: IDataFormSearch) => {
@@ -301,7 +295,8 @@ const GenealogyPage: Page = () => {
                 name={levelSelectedUserData.name}
                 email={levelSelectedUserData.email}
                 phone={levelSelectedUserData.phoneNumber}
-                onClick={fnCloseModalManuallyUserDetail}
+                onClick={(id: number) => fnOpenModalReferralUserDetail(() => setUserdetailIdOpen(id))}
+                levels={levelSelectedUserData.levels}
                 auth={auth}
                 rank={levelSelectedUserData.ranks?.type}
                 sponsor={levelSelectedUserData?.sponsor}

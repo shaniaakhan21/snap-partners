@@ -8,9 +8,10 @@ import { TRANK } from 'lib/types/user/ranks'
 import { UpdateUserRank } from './UpdateUserRank'
 import { IAuth } from 'lib/stores/Auth'
 import Link from 'next/link'
+import { ILevel } from 'lib/types/genealogy'
 
 interface IProps extends IUserData {
-  onClick?: (e: MouseEvent, element: HTMLElement) => void
+  onClick?: (id: number) => void
   closeModalManually?: () => void
   referralUsers: any[]
   sponsor?: {
@@ -20,6 +21,7 @@ interface IProps extends IUserData {
   }
   rank?: TRANK
   auth: IAuth
+  levels: ILevel[]
   roles: {
     admin: boolean,
     customer: boolean,
@@ -28,7 +30,7 @@ interface IProps extends IUserData {
   }
 }
 
-export const ReferralsUserDetailModal = ({ id, name, email, phone, sponsor, rank, onClick, auth, roles, closeModalManually }: IProps) => {
+export const ReferralsUserDetailModal = ({ id, name, email, phone, sponsor, rank, onClick, levels, auth, roles, closeModalManually }: IProps) => {
   const { copy } = useCopyToClipboard()
 
   return (
@@ -122,6 +124,18 @@ export const ReferralsUserDetailModal = ({ id, name, email, phone, sponsor, rank
           </a>
         </Link>
       </div>
+
+      {/* KEVIN HERE */}
+      <ul className='flex items-center justify-center'>
+        {levels.length === 0 && <h1>Compa aquí no hay nada...</h1>}
+        {levels && levels.length > 0 && levels.map(level => (
+          <li>
+            <button onClick={() => onClick}>
+              {JSON.stringify(level)}
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }

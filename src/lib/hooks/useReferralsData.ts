@@ -1,11 +1,15 @@
 import { useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
+// import { toast } from 'react-toastify'
 import { IAuth } from 'lib/stores/Auth'
 import { getAllLevels } from 'lib/services/genealogy/getAllLevels'
 import { ILevel, ILevelUser } from 'lib/types/genealogy'
 import { getUserById } from 'lib/services/user/getUserById'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { IUserById } from 'lib/types'
+
+interface IUserByIdWithLevels extends IUserById {
+  levels: ILevel[]
+}
 
 const fnGetAllLevels = async (id: number, token: string, page: number) => {
   const { data, error } = await getAllLevels(id, token, page)
@@ -34,7 +38,7 @@ export const useReferralsData = (
   const [levels, setLevels] = useState<ILevel[] | null>(null)
   const [levelSelected, setLevelSelected] = useState<ILevel | null>(null)
   const [levelSelectedUsers, setLevelSelectedUsers] = useState<ILevelUser[] | null>(null)
-  const [levelSelectedUserData, setLevelSelectedUserData] = useState<IUserById | null>(null)
+  const [levelSelectedUserData, setLevelSelectedUserData] = useState<IUserByIdWithLevels | null>(null)
   const [userSearchData, setUserSearchData] = useState<IUserById | null>(null)
 
   // Loaders
@@ -85,19 +89,35 @@ export const useReferralsData = (
     if (!levelSelected) return
 
     (async () => {
-      const levelSelectedUserData = levelSelected.users.find((user: ILevelUser) => user.id === userDetailIdOpen) ?? null
+      // const levelSelectedUserData = levelSelected.users.find((user: ILevelUser) => user.id === userDetailIdOpen) ?? null
 
-      if (!levelSelectedUserData) {
-        toast('This user does not exist.', { type: 'error' })
+      // if (!levelSelectedUserData) {
+      //   toast('This user does not exist.', { type: 'error' })
+      //   return
+      // }
+      // THIS IS CONTROLLED FOR THE BACKEND.
+
+      setFetchUserDataLevelIsLoading(true)
+      const { data: dataUserInfo, error: errorUserInfo } = await fnGetUserById(userDetailIdOpen, userAuth.accessToken)
+
+      if (errorUserInfo) {
+        setFetchUserDataLevelIsLoading(false)
         return
       }
 
-      setFetchUserDataLevelIsLoading(true)
-      const { data, error } = await fnGetUserById(userDetailIdOpen, userAuth.accessToken)
+      const { data: dataUserLevels, error: errorUserLevels } = await fnGetAllLevels(userDetailIdOpen, userAuth.accessToken, levelPage)
       setFetchUserDataLevelIsLoading(false)
-      if (error) return
+      if (errorUserLevels) return
 
-      setLevelSelectedUserData(data)
+      setLevelSelectedUserData({
+        ...dataUserInfo,
+        levels: dataUserLevels.levels
+      })
+
+      console.log({
+        ...dataUserInfo,
+        levels: dataUserLevels.levels
+      })
     })()
   }, [userDetailIdOpen])
 
