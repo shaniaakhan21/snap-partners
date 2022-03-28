@@ -184,7 +184,7 @@ const GenealogyPage: Page = () => {
 
           <button
             disabled={searchIsLoading}
-            className='bg-primary-500 border-primary-500 text-white font-semibold rounded-md px-4 py-2 hover:bg-opacity-80 focus:outline-none focus:ring focus:ring-primary-500 mt-2 sm:mt-0'
+            className={`${searchIsLoading ? 'bg-gray-600 border-gray-600' : 'bg-primary-500 border-primary-500'} text-white font-semibold rounded-md px-4 py-2 hover:bg-opacity-80 focus:outline-none focus:ring focus:ring-primary-500 mt-2 sm:mt-0`}
           >
             Search
           </button>
