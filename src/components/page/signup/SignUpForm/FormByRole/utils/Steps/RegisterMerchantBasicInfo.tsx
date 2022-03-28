@@ -279,6 +279,7 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
           register={register}
           rulesForm={registerMerchantRulesConfig.referralCode}
           isRequired={false}
+          readOnly={Boolean(referralLink.code)}
         />
 
         <TermsAndConditions
