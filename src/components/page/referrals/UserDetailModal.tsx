@@ -79,7 +79,7 @@ export const ReferralsUserDetailModal = ({ id, name, email, phone, sponsor, rank
           <span className='ml-1 text-blue-600'>{email}</span>
         </div>
 
-        <div className='inline-flex items-center'>
+        <div className='items-center hidden sm:inline-flex'>
           <PhoneIcon classes='w-5 h-5' />
           <span className='ml-1 text-blue-600'>{phone}</span>
         </div>
@@ -122,12 +122,12 @@ export const ReferralsUserDetailModal = ({ id, name, email, phone, sponsor, rank
                   className='w-full h-16 text-xs sm:text-sm flex gap-x-2 items-center justify-between transition-colors hover:bg-gray-200 md:px-2'
                   onClick={() => openNewUserInfo(user.id)}
                 >
-                  <div className='relative w-16 h-12 border-4 border-solid border-black mr-2'>
-                    <div className='font-bold text-lg tracking-tighter absolute inset-1 mt-0.5'>L {String(level.level)}</div>
+                  <div className='relative w-12 h-9 sm:w-16 sm:h-12 border-4 border-solid border-black mr-2'>
+                    <div className='font-bold text-lg absolute inset-0.5 sm:inset-1 sm:mt-0.5' style={{ letterSpacing: '-0.10em' }}>L {String(level.level)}</div>
                   </div>
 
                   <span className='font-bold text-gray-800 w-2/6 text-left truncate uppercase'>{user.name}</span>
-                  <span className='font-bold text-gray-800 w-2/6 text-left truncate uppercase'>{user.phoneNumber}</span>
+                  <span className='hidden sm:inline-block font-bold text-gray-800 w-2/6 text-left truncate uppercase'>{user.phoneNumber}</span>
 
                   <span className='text-primary-500 w-1/6 text-center truncate'>ID: {user.id}</span>
 
