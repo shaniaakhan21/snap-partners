@@ -12,6 +12,7 @@ import { useAuthStore, useNewWindowOpenedStore } from 'lib/stores'
 import { APP_INFO } from 'config/appInfo'
 import type { Page as PageNext, ReactNode } from 'lib/types'
 import { ROLES } from 'config/roles'
+import { UserBadges } from 'components/common/UserBadges'
 
 const { SEO } = APP_INFO
 
@@ -47,25 +48,7 @@ const ProfilePage: PageNext = () => {
         <div>
           <span className='text-2xl font-bold text-gray-800'>{auth.username}</span>
           <ul className='flex justify-start items-center gap-x-2 mt-1'>
-            {(auth.ranks?.type === 'referralPartner' && auth.roles.customer) && <li><img src='/static/badges/FreeMemberCustomer.png' /> </li>}
-            {(auth.ranks?.type === 'referralPartner' && auth.roles.driver) && <li><img src='/static/badges/FreeMemberDriver.png' /> </li>}
-            {(auth.ranks?.type === 'referralPartner' && auth.roles.merchant) && <li><img src='/static/badges/FreeMemberMerchant.png' /> </li>}
-
-            {(auth.ranks?.type === 'manager' && auth.roles.customer) && <li><img src='/static/badges/ManagerCustomer.png' /> </li>}
-            {(auth.ranks?.type === 'manager' && auth.roles.driver) && <li><img src='/static/badges/ManagerDriver.png' /> </li>}
-            {(auth.ranks?.type === 'manager' && auth.roles.merchant) && <li><img src='/static/badges/ManagerMerchant.png' /> </li>}
-
-            {(auth.ranks?.type === 'supervisor' && auth.roles.customer) && <li><img src='/static/badges/SupervisorCustomer.png' /> </li>}
-            {(auth.ranks?.type === 'supervisor' && auth.roles.driver) && <li><img src='/static/badges/SupervisorDriver.png' /> </li>}
-            {(auth.ranks?.type === 'supervisor' && auth.roles.merchant) && <li><img src='/static/badges/SupervisorMerchant.png' /> </li>}
-
-            {(auth.ranks?.type === 'director' && auth.roles.customer) && <li><img src='/static/badges/DirectorCustomer.png' /> </li>}
-            {(auth.ranks?.type === 'director' && auth.roles.driver) && <li><img src='/static/badges/DirectorDriver.png' /> </li>}
-            {(auth.ranks?.type === 'director' && auth.roles.merchant) && <li><img src='/static/badges/DirectorMerchant.png' /> </li>}
-
-            {(auth.ranks?.type === 'executive' && auth.roles.customer) && <li><img src='/static/badges/ExecutiveCustomer.png' /> </li>}
-            {(auth.ranks?.type === 'executive' && auth.roles.driver) && <li><img src='/static/badges/ExecutiveDriver.png' /> </li>}
-            {(auth.ranks?.type === 'executive' && auth.roles.merchant) && <li><img src='/static/badges/ExecutiveMerchant.png' /> </li>}
+            <UserBadges userRank={auth.ranks?.type} userRoles={auth.roles} />
 
             <li>
               <span className='font-bold text-xl capitalize'>{auth.ranks?.type === 'referralPartner' ? 'Referral Partner' : auth.ranks?.type}</span>

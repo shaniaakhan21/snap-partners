@@ -10,6 +10,7 @@ import { IAuth } from 'lib/stores/Auth'
 import { CopyIcon, EmailIcon, InfoIcon, PhoneIcon } from 'components/common/icons'
 import { EmptyData } from 'components/common/EmptyData'
 import { UpdateUserRank } from './UpdateUserRank'
+import { UserBadges } from 'components/common/UserBadges'
 
 interface IProps extends IUserData {
   onClick?: (e: MouseEvent, element: HTMLElement) => void
@@ -67,25 +68,7 @@ export const ReferralsUserDetailModal = ({ id, name, email, phone, sponsor, rank
         <div className='flex justify-between items-start'>
           <p className='mb-4 block text-primary-500 font-bold'>{name.toUpperCase()}</p>
           <ul className='flex justify-end gap-x-2'>
-            {(rank === 'referralPartner' && roles.customer) && <li><img src='/static/badges/FreeMemberCustomer.png' /> </li>}
-            {(rank === 'referralPartner' && roles.driver) && <li><img src='/static/badges/FreeMemberDriver.png' /> </li>}
-            {(rank === 'referralPartner' && roles.merchant) && <li><img src='/static/badges/FreeMemberMerchant.png' /> </li>}
-
-            {(rank === 'manager' && roles.customer) && <li><img src='/static/badges/ManagerCustomer.png' /> </li>}
-            {(rank === 'manager' && roles.driver) && <li><img src='/static/badges/ManagerDriver.png' /> </li>}
-            {(rank === 'manager' && roles.merchant) && <li><img src='/static/badges/ManagerMerchant.png' /> </li>}
-
-            {(rank === 'supervisor' && roles.customer) && <li><img src='/static/badges/SupervisorCustomer.png' /> </li>}
-            {(rank === 'supervisor' && roles.driver) && <li><img src='/static/badges/SupervisorDriver.png' /> </li>}
-            {(rank === 'supervisor' && roles.merchant) && <li><img src='/static/badges/SupervisorMerchant.png' /> </li>}
-
-            {(rank === 'director' && roles.customer) && <li><img src='/static/badges/DirectorCustomer.png' /> </li>}
-            {(rank === 'director' && roles.driver) && <li><img src='/static/badges/DirectorDriver.png' /> </li>}
-            {(rank === 'director' && roles.merchant) && <li><img src='/static/badges/DirectorMerchant.png' /> </li>}
-
-            {(rank === 'executive' && roles.customer) && <li><img src='/static/badges/ExecutiveCustomer.png' /> </li>}
-            {(rank === 'executive' && roles.driver) && <li><img src='/static/badges/ExecutiveDriver.png' /> </li>}
-            {(rank === 'executive' && roles.merchant) && <li><img src='/static/badges/ExecutiveMerchant.png' /> </li>}
+            <UserBadges userRank={rank} userRoles={roles} />
           </ul>
         </div>
       </div>
