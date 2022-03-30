@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import { useRouter } from 'next/router'
-import { toast } from 'react-toastify'
 import { useForm } from 'react-hook-form'
 
 import { handleFetchError } from 'lib/utils/handleFetchError'
@@ -10,6 +8,7 @@ import { becomeCustomerRulesConfig } from './formRules'
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
 import { TermsAndConditions } from 'components/page/signup/SignUpForm/FormByRole/utils/TermsAndConditions'
+import { SuccessBecomeRole } from '../SuccessBecomeRole'
 
 interface IDataFormBecomeCustomer {
   email: string
@@ -21,9 +20,9 @@ interface IDataFormBecomeCustomer {
 }
 
 export const FormBecomeCustomer = ({ userAuth, userSetAuth }) => {
-  const router = useRouter()
   const { handleSubmit, reset, register, formState: { errors } } = useForm<IDataFormBecomeCustomer>()
   const [loading, setLoading] = useState(false)
+  const [successRole, setSuccessRole] = useState(false)
 
   const onSubmit = async (dataForm: IDataFormBecomeCustomer) => {
     setLoading(true)
@@ -79,14 +78,21 @@ export const FormBecomeCustomer = ({ userAuth, userSetAuth }) => {
 
     reset()
     setLoading(false)
-    toast('You are now a Customer', { type: 'success' })
-    router.push('/overview')
+    setSuccessRole(true)
   }
 
   if (loading) {
     return (
       <div className='w-full flex justify-center items-center'>
         <Spinner />
+      </div>
+    )
+  }
+
+  if (successRole) {
+    return (
+      <div className='w-full h-85vh flex justify-center items-center'>
+        <SuccessBecomeRole roleBecomed='CUSTOMER' />
       </div>
     )
   }

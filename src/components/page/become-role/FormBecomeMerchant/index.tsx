@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import { useRouter } from 'next/router'
-import { toast } from 'react-toastify'
 import { useForm } from 'react-hook-form'
 
 import { handleFetchError } from 'lib/utils/handleFetchError'
@@ -9,6 +7,7 @@ import { becomeMerchantRulesConfig } from './formRules'
 
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
+import { SuccessBecomeRole } from '../SuccessBecomeRole'
 import { TermsAndConditions } from 'components/page/signup/SignUpForm/FormByRole/utils/TermsAndConditions'
 import { IAuth } from 'lib/stores/Auth'
 
@@ -26,9 +25,9 @@ interface IDataFormBecomeMerchant {
 }
 
 export const FormBecomeMerchant = ({ userAuth, userSetAuth }: { userAuth: IAuth, userSetAuth: any }) => {
-  const router = useRouter()
   const { handleSubmit, reset, register, formState: { errors } } = useForm<IDataFormBecomeMerchant>()
   const [loading, setLoading] = useState(false)
+  const [successRole, setSuccessRole] = useState(false)
 
   const onSubmit = async (dataForm:IDataFormBecomeMerchant) => {
     setLoading(true)
@@ -84,14 +83,21 @@ export const FormBecomeMerchant = ({ userAuth, userSetAuth }: { userAuth: IAuth,
 
     reset()
     setLoading(false)
-    toast('You are now a Restaurant', { type: 'success' })
-    router.push('/overview')
+    setSuccessRole(true)
   }
 
   if (loading) {
     return (
       <div className='w-full h-screen flex justify-center items-center'>
         <Spinner />
+      </div>
+    )
+  }
+
+  if (successRole) {
+    return (
+      <div className='w-full h-85vh flex justify-center items-center'>
+        <SuccessBecomeRole roleBecomed='MERCHANT' />
       </div>
     )
   }
