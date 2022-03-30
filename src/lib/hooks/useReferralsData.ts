@@ -65,7 +65,7 @@ export const useReferralsData = (
       // ONLY TO INIT DATA
       if (levelPage === 1) {
         const levelSelected = newLevels?.length > 0
-          ? { ...newLevels.find(({ level }) => level === parseInt(tabOpen)) }
+          ? { ...newLevels[0] }
           : null
         const levelSelectedUsers = levelSelected ? [...levelSelected.users] : null
 
