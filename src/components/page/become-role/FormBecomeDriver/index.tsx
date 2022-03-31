@@ -1,16 +1,15 @@
 import { useState } from 'react'
-import { useRouter } from 'next/router'
-import { toast } from 'react-toastify'
 import { useForm } from 'react-hook-form'
 
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { updateUserRole } from 'lib/services/user/updateUserRole'
 import { becomeDriverRulesConfig } from './formRules'
+import { IAuth } from 'lib/stores/Auth'
 
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
+import { SuccessBecomeRole } from '../SuccessBecomeRole'
 import { TermsAndConditions } from 'components/page/signup/SignUpForm/FormByRole/utils/TermsAndConditions'
-import { IAuth } from 'lib/stores/Auth'
 
 const maxFileSizeInMb = 5
 
@@ -27,9 +26,9 @@ interface IDataFormBecomeDriver {
 }
 
 export const FormBecomeDriver = ({ userAuth, userSetAuth }: { userAuth: IAuth, userSetAuth: any }) => {
-  const router = useRouter()
   const { handleSubmit, reset, register, formState: { errors }, setError } = useForm<IDataFormBecomeDriver>()
   const [loading, setLoading] = useState(false)
+  const [successRole, setSuccessRole] = useState(false)
 
   const onSubmit = async (dataForm: IDataFormBecomeDriver) => {
     setLoading(true)
@@ -103,14 +102,21 @@ export const FormBecomeDriver = ({ userAuth, userSetAuth }: { userAuth: IAuth, u
 
     reset()
     setLoading(false)
-    toast('You are now a Driver', { type: 'success' })
-    router.push('/overview')
+    setSuccessRole(true)
   }
 
   if (loading) {
     return (
       <div className='w-full h-screen flex justify-center items-center'>
         <Spinner />
+      </div>
+    )
+  }
+
+  if (successRole) {
+    return (
+      <div className='w-full h-85vh flex justify-center items-center'>
+        <SuccessBecomeRole roleBecomed='DRIVER' />
       </div>
     )
   }

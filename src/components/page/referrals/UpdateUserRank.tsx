@@ -20,10 +20,10 @@ export const UpdateUserRank = ({ id, rank, authToken }: { id: number, rank: TRAN
       setDisableUpdateRank(true)
     }
 
-    console.log('UserDetailModal - rankToUpdate => /api/rank/update', {
-      userId: id,
-      rank: rankToUpdate
-    })
+    // console.log('UserDetailModal - rankToUpdate => /api/rank/update', {
+    //   userId: id,
+    //   rank: rankToUpdate
+    // })
 
     const { error } = await updateUserRank(id, rankToUpdate, authToken)
 
@@ -60,7 +60,7 @@ export const UpdateUserRank = ({ id, rank, authToken }: { id: number, rank: TRAN
           {
             rank === 'referralPartner' && (
               <>
-                <option value='' disabled selected>Select Rank</option>
+                <option disabled selected>Select Rank</option>
                 <option className='text-black' value='manager'>Manager</option>
                 <option className='text-black' value='supervisor'>Supervisor</option>
                 <option className='text-black' value='director'>Director</option>
@@ -72,7 +72,7 @@ export const UpdateUserRank = ({ id, rank, authToken }: { id: number, rank: TRAN
           {
             rank === 'manager' && (
               <>
-                <option value='' disabled selected>Select Rank</option>
+                <option disabled selected>Select Rank</option>
                 <option className='text-black' value='referralPartner'>Referral Partner</option>
                 <option className='text-black' value='supervisor'>Supervisor</option>
                 <option className='text-black' value='director'>Director</option>
@@ -84,7 +84,7 @@ export const UpdateUserRank = ({ id, rank, authToken }: { id: number, rank: TRAN
           {
             rank === 'supervisor' && (
               <>
-                <option value='' disabled selected>Select Rank</option>
+                <option disabled selected>Select Rank</option>
                 <option className='text-black' value='referralPartner'>Referral Partner</option>
                 <option className='text-black' value='manager'>Manager</option>
                 <option className='text-black' value='director'>Director</option>
@@ -96,7 +96,7 @@ export const UpdateUserRank = ({ id, rank, authToken }: { id: number, rank: TRAN
           {
             rank === 'director' && (
               <>
-                <option value='' disabled selected>Select Rank</option>
+                <option disabled selected>Select Rank</option>
                 <option className='text-black' value='referralPartner'>Referral Partner</option>
                 <option className='text-black' value='manager'>Manager</option>
                 <option className='text-black' value='supervisor'>Supervisor</option>
@@ -108,7 +108,7 @@ export const UpdateUserRank = ({ id, rank, authToken }: { id: number, rank: TRAN
           {
             rank === 'executive' && (
               <>
-                <option value='' disabled selected>Select Rank</option>
+                <option disabled selected>Select Rank</option>
                 <option className='text-black' value='referralPartner'>Referral Partner</option>
                 <option className='text-black' value='manager'>Manager</option>
                 <option className='text-black' value='supervisor'>Supervisor</option>

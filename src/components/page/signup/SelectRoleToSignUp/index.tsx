@@ -10,7 +10,7 @@ export const SelectRoleToSignUp = () => {
   const { current: roles } = useRef([
     {
       icon: <IBOIcon classes='w-14 h-14' />,
-      label: 'I’m Customer',
+      label: 'I’m a Customer',
       key: ROLES.CUSTOMER,
       link: `/auth/signup?role=${ROLES.CUSTOMER}`
     },
@@ -22,7 +22,7 @@ export const SelectRoleToSignUp = () => {
     },
     {
       icon: <MerchantsIcon classes='w-14 h-14' />,
-      label: 'I have a Merchant',
+      label: 'I’m a Merchant',
       key: ROLES.MERCHANT,
       link: `/auth/signup?role=${ROLES.MERCHANT}`
     }

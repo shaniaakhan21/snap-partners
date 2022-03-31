@@ -27,6 +27,58 @@ export const APP_INFO = {
     }
   },
 
+  USER_BADGES: {
+    referralPartner: {
+      key: 'referralPartner',
+      label: 'Referral Partner',
+      ROLES: {
+        CUSTOMER: '/static/badges/FreeMemberCustomer.png',
+        DRIVER: '/static/badges/FreeMemberDriver.png',
+        MERCHANT: '/static/badges/FreeMemberMerchant.png'
+      }
+    },
+
+    manager: {
+      key: 'manager',
+      label: 'Manager',
+      ROLES: {
+        CUSTOMER: '/static/badges/ManagerCustomer.png',
+        DRIVER: '/static/badges/ManagerDriver.png',
+        MERCHANT: '/static/badges/ManagerMerchant.png'
+      }
+    },
+
+    supervisor: {
+      key: 'supervisor',
+      label: 'Supervisor',
+      ROLES: {
+        CUSTOMER: '/static/badges/SupervisorCustomer.png',
+        DRIVER: '/static/badges/SupervisorDriver.png',
+        MERCHANT: '/static/badges/SupervisorMerchant.png'
+      }
+    },
+
+    director: {
+      key: 'director',
+      label: 'Director',
+      ROLES: {
+        CUSTOMER: '/static/badges/DirectorCustomer.png',
+        DRIVER: '/static/badges/DirectorDriver.png',
+        MERCHANT: '/static/badges/DirectorMerchant.png'
+      }
+    },
+
+    executive: {
+      key: 'executive',
+      label: 'Executive',
+      ROLES: {
+        CUSTOMER: '/static/badges/ExecutiveCustomer.png',
+        DRIVER: '/static/badges/ExecutiveDriver.png',
+        MERCHANT: '/static/badges/ExecutiveMerchant.png'
+      }
+    }
+  },
+
   APPS: {
     APPLE_STORE: {
       DRIVER_APP: {

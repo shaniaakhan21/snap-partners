@@ -66,8 +66,7 @@ export const registerRulesConfig = {
   },
 
   referralCode: {
-    maxLength: { value: 50, message: 'Max 50 Characters *' },
-    pattern: { value: /^[a-zA-Z0-9!@#$%\\^&*)(+=._-]*$/, message: 'Referral Code not allow *' }
+    maxLength: { value: 100, message: 'Max 100 Characters *' }
   },
 
   idImage: {
@@ -200,8 +199,7 @@ export const registerMerchantRulesConfig = {
   },
 
   referralCode: {
-    maxLength: { value: 50, message: 'Max 50 Characters *' },
-    pattern: { value: /^[a-zA-Z0-9!@#$%\\^&*)(+=._-]*$/, message: 'Referral Code not allow *' }
+    maxLength: { value: 50, message: 'Max 50 Characters *' }
   },
 
   termsAndConditions: {

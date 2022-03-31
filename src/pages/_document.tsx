@@ -32,13 +32,13 @@ export default class MyDocument extends Document {
 
           {/* <link rel='apple-touch-icon' href='/static/icons/touch-icon-iphone.png' />
           <link rel='apple-touch-icon' sizes='152x152' href='/static/icons/touch-icon-ipad.png' />
-          <link rel='apple-touch-icon' sizes='180x180' href='/static/icons/touch-icon-iphone-retina.png' />
-          <link rel='apple-touch-icon' sizes='167x167' href='/static/icons/touch-icon-ipad-retina.png' />
+        <link rel='apple-touch-icon' sizes='167x167' href='/static/icons/touch-icon-ipad-retina.png' /> */}
+          <link rel='apple-touch-icon' sizes='180x180' href='/static/apple-touch-icon.png' />
 
-          <link rel='icon' type='image/png' sizes='32x32' href='/static/icons/favicon-32x32.png' />
-          <link rel='icon' type='image/png' sizes='16x16' href='/static/icons/favicon-16x16.png' />
-          <link rel='manifest' href='/static/manifest.json' />
-          <link rel='mask-icon' href='/static/icons/safari-pinned-tab.svg' color='#DD4C37' /> */}
+          <link rel='icon' type='image/png' sizes='32x32' href='/static/favicon-32x32.png' />
+          <link rel='icon' type='image/png' sizes='16x16' href='/static/favicon-16x16.png' />
+          <link rel='manifest' href='/static/site.webmanifest' />
+          {/* <link rel='mask-icon' href='/static/icons/safari-pinned-tab.svg' color='#DD4C37' /> */}
           <link rel='shortcut icon' href='/static/favicon.ico' />
 
           <meta name='twitter:image:alt' content={SEO.TITLE_PAGE} />

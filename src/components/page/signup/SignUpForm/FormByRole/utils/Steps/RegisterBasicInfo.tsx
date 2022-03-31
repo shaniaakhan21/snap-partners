@@ -212,6 +212,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           register={register}
           rulesForm={registerRulesConfig.referralCode}
           isRequired={false}
+          readOnly={Boolean(referralLink.code)}
         />
 
         {/* {referralLink.role === 'DRIVER' && (

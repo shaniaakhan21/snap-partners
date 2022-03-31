@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import { useRouter } from 'next/router'
-import { toast } from 'react-toastify'
 import { useForm } from 'react-hook-form'
 
 import { handleFetchError } from 'lib/utils/handleFetchError'
@@ -9,6 +7,7 @@ import { becomeMerchantRulesConfig } from './formRules'
 
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
+import { SuccessBecomeRole } from '../SuccessBecomeRole'
 import { TermsAndConditions } from 'components/page/signup/SignUpForm/FormByRole/utils/TermsAndConditions'
 import { IAuth } from 'lib/stores/Auth'
 
@@ -26,9 +25,9 @@ interface IDataFormBecomeMerchant {
 }
 
 export const FormBecomeMerchant = ({ userAuth, userSetAuth }: { userAuth: IAuth, userSetAuth: any }) => {
-  const router = useRouter()
   const { handleSubmit, reset, register, formState: { errors } } = useForm<IDataFormBecomeMerchant>()
   const [loading, setLoading] = useState(false)
+  const [successRole, setSuccessRole] = useState(false)
 
   const onSubmit = async (dataForm:IDataFormBecomeMerchant) => {
     setLoading(true)
@@ -84,8 +83,7 @@ export const FormBecomeMerchant = ({ userAuth, userSetAuth }: { userAuth: IAuth,
 
     reset()
     setLoading(false)
-    toast('You are now a Restaurant', { type: 'success' })
-    router.push('/overview')
+    setSuccessRole(true)
   }
 
   if (loading) {
@@ -96,11 +94,19 @@ export const FormBecomeMerchant = ({ userAuth, userSetAuth }: { userAuth: IAuth,
     )
   }
 
+  if (successRole) {
+    return (
+      <div className='w-full h-85vh flex justify-center items-center'>
+        <SuccessBecomeRole roleBecomed='MERCHANT' />
+      </div>
+    )
+  }
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className='max-w-4xl mx-auto'>
       <section className='w-full max-w-3xl mx-auto flex flex-col md:flex-row justify-center items-center bg-white rounded-md py-4 px-6 gap-4'>
         <h5 className='font-bold text-2xl'>
-          Become a Restaurant
+          Become a Merchant
         </h5>
 
         <img src='/images/headBecomeMerchant.png' />
@@ -117,14 +123,14 @@ export const FormBecomeMerchant = ({ userAuth, userSetAuth }: { userAuth: IAuth,
 
         <br />
 
-        <label htmlFor='ownerName' className='font-bold text-gray-700 uppercase text-sm'>Restaurant Owner Name <span className='text-red-500'>*</span></label>
+        <label htmlFor='ownerName' className='font-bold text-gray-700 uppercase text-sm'>Merchant Owner Name <span className='text-red-500'>*</span></label>
         {errors.ownerName && <p className='text-sm text-red-400'>{errors.ownerName.message}</p>}
         <input
           id='ownerName'
           name='ownerName'
           type='text'
           {...register('ownerName', becomeMerchantRulesConfig.ownerName)}
-          placeholder='Enter Restaurant Owner Name'
+          placeholder='Enter Merchant Owner Name'
           className='select-none w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
         />
 
@@ -168,7 +174,7 @@ export const FormBecomeMerchant = ({ userAuth, userSetAuth }: { userAuth: IAuth,
         />
 
         <Button type='submit' classes='w-full mt-4'>
-        Become a Restaurant
+        Become a Merchant
         </Button>
       </section>
     </form>

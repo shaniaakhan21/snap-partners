@@ -17,11 +17,11 @@ const RestaurantsPage: Page = () => {
   return (
     <>
       <Head>
-        <title>{SEO.TITLE_PAGE} - Marketing Restaurants</title>
+        <title>{SEO.TITLE_PAGE} - Marketing Merchants</title>
       </Head>
 
       <div className='text-center'>
-        <span className='text-3xl font-bold'>Restaurants</span> <br /><br />
+        <span className='text-3xl font-bold'>Merchants</span> <br /><br />
         <span className='font-bold text-2xl text-primary-500'>Building your Business with a Few Clicks</span>
 
         <div className='mt-6'>

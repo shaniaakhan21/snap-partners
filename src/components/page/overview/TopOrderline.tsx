@@ -12,7 +12,7 @@ export const TopOrderLine = ({ data }: { data: any }) => {
         </div>
 
         <div>
-          <span className='text-primary-500 text-xs'>TOP Merchants Acquisition</span> <br />
+          <span className='text-primary-500 text-xs'>TOP Restaurants Acquisition</span> <br />
           <span className='text-gray-800 text-lg font-bold'>152 Last week</span>
         </div>
       </section>
