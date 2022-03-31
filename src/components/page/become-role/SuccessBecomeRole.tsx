@@ -24,7 +24,7 @@ export const SuccessBecomeRole = ({ roleBecomed }: { roleBecomed: 'CUSTOMER' | '
 
     },
     MERCHANT: {
-      CTA_DESCRIPTION: 'Now that you have decided to become a Restaurant make sure to download our restaurant app and get started earning',
+      CTA_DESCRIPTION: 'Now that you have decided to become a Merchant make sure to download our restaurant app and get started earning',
       IMG: '/images/headBecomeMerchant.png',
       APP_TO_DOWNLOAD: {
         TITLE: 'Snap Merchant Control app',
@@ -37,7 +37,7 @@ export const SuccessBecomeRole = ({ roleBecomed }: { roleBecomed: 'CUSTOMER' | '
   return (
     <div className='max-w-sm w-full h-full mx-auto flex flex-col items-center justify-center'>
       <div className='text-center'>
-        <span className='font-bold text-xl'>Congrats, you’re a {roleBecomed === 'MERCHANT' ? 'restaurant' : roleBecomed.toLowerCase()} too!</span>
+        <span className='font-bold text-xl'>Congrats, you’re a {roleBecomed.toLowerCase()} too!</span>
       </div>
 
       <div className='mt-2'>

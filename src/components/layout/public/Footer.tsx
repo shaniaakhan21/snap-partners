@@ -16,7 +16,7 @@ export const FooterPublic = () => {
   const { current: joinUsLinks } = useRef([
     { to: 'https://opportunity.snapdelivered.com/#about', label: 'About us' },
     { to: `/auth/signup?role=${ROLES.DRIVER}`, label: 'Become a Driver' },
-    { to: `/auth/signup?role=${ROLES.MERCHANT}`, label: 'Become a Restaurant Partner' },
+    { to: `/auth/signup?role=${ROLES.MERCHANT}`, label: 'Become a Merchant Partner' },
     { to: `/auth/signup?role=${ROLES.CUSTOMER}`, label: 'Become a Customer' },
     { to: 'https://opportunity.snapdelivered.com/#contact', label: 'Carrers' },
     { to: 'https://store.snapdelivered.com/', label: 'Merch Store' }

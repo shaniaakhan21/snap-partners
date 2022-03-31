@@ -137,7 +137,7 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
   return (
     <div className='max-w-md mx-auto w-full'>
       <p className='font-bold text-4xl text-[#18203F]'>Sign up as a{' '}
-        <span className='text-primary-500'>Restaurant</span>
+        <span className='text-primary-500'>Merchant</span>
       </p>
       <p className='text-gray-500'>Welcome! register to continue.</p>
 
@@ -187,9 +187,9 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
           id='name'
           name='name'
           type='text'
-          label='Restaurant Name'
+          label='Merchant Name'
           registerId='name'
-          placeholder='Enter Restaurant Name'
+          placeholder='Enter Merchant Name'
           errors={errors.name}
           register={register}
           rulesForm={registerMerchantRulesConfig.name}
@@ -200,9 +200,9 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
           id='ownerName'
           name='ownerName'
           type='text'
-          label='Restaurant Owner Name'
+          label='Merchant Owner Name'
           registerId='ownerName'
-          placeholder='Enter Restaurant Owner Name'
+          placeholder='Enter Merchant Owner Name'
           errors={errors.ownerName}
           register={register}
           rulesForm={registerMerchantRulesConfig.ownerName}
@@ -210,7 +210,7 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
         />
 
         <InputPhone
-          label='Restaurant Phone number'
+          label='Merchant Phone number'
           isRequired
           register={register}
           errors={errors}

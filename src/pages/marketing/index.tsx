@@ -29,7 +29,7 @@ const MarketingPage: Page = () => {
     },
     {
       icon: <MerchantsIcon />,
-      title: 'Restaurant',
+      title: 'Merchant',
       subtitle: 'Subtitle text here',
       description: 'Select an image and share the link in the different social networks to get new Merchant Partners',
       to: '/marketing/merchants'

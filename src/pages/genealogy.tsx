@@ -140,7 +140,7 @@ const GenealogyPage: Page = () => {
             classes='col-span-1'
           />
           <ReferralCards
-            title='Restaurant Customers'
+            title='Merchant Customers'
             ilustration={<MerchantIcon />}
             link={`${auth.referralLink}&role=${ROLES.MERCHANT}` || 'With Out Link'}
             newUser={false}

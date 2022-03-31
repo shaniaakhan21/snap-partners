@@ -37,7 +37,7 @@ export const becomeMerchantRulesConfig = {
   },
 
   ownerName: {
-    required: { value: true, message: 'Restaurant Owner Name Required *' },
+    required: { value: true, message: 'Merchant Owner Name Required *' },
     maxLength: { value: 100, message: 'Max 100 Characters *' },
     minLength: { value: 3, message: 'Min 3 Characters *' }
   },
