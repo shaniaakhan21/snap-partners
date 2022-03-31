@@ -1,4 +1,6 @@
 import { AppContext, AppInitialProps, AppLayoutProps } from 'next/app'
+
+import { ThemeProvider } from '@material-ui/core/styles'
 import { Fragment, ReactNode, useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
 import type { NextComponentType } from 'next'
@@ -12,6 +14,7 @@ import { useModalStore } from 'lib/stores'
 import { ModalContainer } from 'components/common/ModalContainer'
 import { LoadingPage } from 'components/layout/LoadingPage'
 import { Overlay } from 'components/common/Overlay'
+import { theme } from '../materialTheme'
 
 import 'react-toastify/dist/ReactToastify.min.css'
 import 'react-phone-input-2/lib/style.css'
@@ -57,7 +60,9 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
 
       <LoadingPage isRouteChanging={isRouteChanging} key={loadingKey} />
 
-      {getLayout(<Component {...pageProps} />)}
+      <ThemeProvider theme={theme}>
+        {getLayout(<Component {...pageProps} />)}
+      </ThemeProvider>
 
       <ToastContainer
         position='top-right'
