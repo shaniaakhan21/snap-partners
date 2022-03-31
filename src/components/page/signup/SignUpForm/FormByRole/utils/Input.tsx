@@ -47,9 +47,8 @@ export const InputForm = ({
       <label htmlFor={id} className='font-bold text-gray-700 uppercase text-sm'>
         {label} {' '}
         {
-          isRequired
-            ? <span className='text-red-500'>*</span>
-            : <span className='text-xs text-gray-600 capitalize font-normal'>(Is Optional)</span>
+          isRequired && <span className='text-red-500'>*</span>
+          // : <span className='text-xs text-gray-600 capitalize font-normal'>(Is Optional)</span>
         }
       </label>
       {errors && <p className='text-sm text-red-400'>{errors.message}</p>}
