@@ -20,10 +20,10 @@ export const UpdateUserRank = ({ id, rank, authToken }: { id: number, rank: TRAN
       setDisableUpdateRank(true)
     }
 
-    console.log('UserDetailModal - rankToUpdate => /api/rank/update', {
-      userId: id,
-      rank: rankToUpdate
-    })
+    // console.log('UserDetailModal - rankToUpdate => /api/rank/update', {
+    //   userId: id,
+    //   rank: rankToUpdate
+    // })
 
     const { error } = await updateUserRank(id, rankToUpdate, authToken)
 

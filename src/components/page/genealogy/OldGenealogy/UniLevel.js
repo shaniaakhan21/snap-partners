@@ -58,7 +58,6 @@ export const Unilevel = () => {
   const [rows, setDataRows] = useState([])
 
   const openUser = async (id, name) => {
-    console.log('name', name)
     setId(id)
     setName(name)
     setshowModal(true)
