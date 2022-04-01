@@ -6,6 +6,7 @@ interface IArticleToCreate {
   subtitle: string
   caption: string
   hashtags: string // if we have more than one hashtag, we must separate with ; example: 'test;test;test'
+  type: 'customer' | 'driver' | 'merchant' | 'ibo'
 }
 
 export const createArticle = async (articleToCreate: IArticleToCreate, token: string): Promise<IQueryErrorReturn> => {
