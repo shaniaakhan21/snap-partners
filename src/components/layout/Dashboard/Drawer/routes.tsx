@@ -33,7 +33,7 @@ export const drawerRoutes = [
   },
   {
     icon: <TrainingIcon />,
-    to: '/comingsoon',
+    to: '/training',
     label: 'Training'
   },
   {
