@@ -80,13 +80,13 @@ export const Article = ({ linkToShare, id, imageId, title, subtitle, caption, ha
         </li>
 
         <li>
-          <FacebookShareButton url={linkToShare} onClick={() => trackShare('Facebook')}>
+          <FacebookShareButton hashtag={hashtags.join(' ')} url={linkToShare} onClick={() => trackShare('Facebook')}>
             <FacebookIcon borderRadius={999} size={28} />
           </FacebookShareButton>
         </li>
 
         <li>
-          <TwitterShareButton url={linkToShare} onClick={() => trackShare('Twitter')}>
+          <TwitterShareButton hashtags={hashtags} url={linkToShare} onClick={() => trackShare('Twitter')}>
             <TwitterIcon borderRadius={999} size={28} />
           </TwitterShareButton>
         </li>
