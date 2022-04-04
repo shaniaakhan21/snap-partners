@@ -7,15 +7,15 @@ interface IProps {
 
 export const TrainingVideoElement = ({ title, subtitle, caption, url }: IProps) => (
   <li className='max-w-xs w-full h-min bg-white rounded-t-lg overflow-hidden'>
-    <div className='w-full h-40'>
+    <div className='w-full '>
       <iframe
         src={url}
         title={`Snap Video - ${title}`}
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
-        // data-ready="true"
-        className='relative w-full h-full'
+        // data-ready='true'
+        className='w-full h-full aspect-video'
       />
     </div>
 
@@ -28,9 +28,7 @@ export const TrainingVideoElement = ({ title, subtitle, caption, url }: IProps) 
       <hr className='my-4 border-gray-300' />
 
       <div className='px-6 pb-4'>
-        <p>
-          {caption}
-        </p>
+        <p>{caption}</p>
       </div>
     </div>
   </li>

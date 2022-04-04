@@ -9,3 +9,5 @@ export interface IMarketingArticle {
   type: string
   updatedAt: string
 }
+
+export type TMarketingType = 'customer' | 'driver' | 'merchant' | 'ibo'
