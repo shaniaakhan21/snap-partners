@@ -107,7 +107,7 @@ const DriversPage: Page = () => {
         {
           articles.map(article => (
             <Article
-              linkToShare={`${auth.referralLink}&MarketingId=${article.id}`}
+              linkToShare={`${auth.referralLink}&marketingId=${article.id}`}
               createdAt={article.createdAt}
               updatedAt={article.updatedAt}
               type={article.type}
