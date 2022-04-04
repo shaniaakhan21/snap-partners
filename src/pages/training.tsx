@@ -25,12 +25,12 @@ const TrainingPage: Page = () => (
     <br />
 
     <TrainingVideoList>
-      <TrainingVideoElement src="https://www.youtube.com/embed/kpwTpNRFR1I" />
-      <TrainingVideoElement src="https://www.youtube.com/embed/kpwTpNRFR1I" />
-      <TrainingVideoElement src="https://www.youtube.com/embed/kpwTpNRFR1I" />
-      <TrainingVideoElement src="https://www.youtube.com/embed/kpwTpNRFR1I" />
-      <TrainingVideoElement src="https://www.youtube.com/embed/kpwTpNRFR1I" />
-      <TrainingVideoElement src="https://www.youtube.com/embed/kpwTpNRFR1I" />
+      <TrainingVideoElement src="https://player.vimeo.com/video/637569915?h=1ad208d002&title=0&byline=0&portrait=0&playsinline=0&autopause=0&app_id=122963" />
+      <TrainingVideoElement src="https://player.vimeo.com/video/637569915?h=1ad208d002&title=0&byline=0&portrait=0&playsinline=0&autopause=0&app_id=122963" />
+      <TrainingVideoElement src="https://player.vimeo.com/video/637569915?h=1ad208d002&title=0&byline=0&portrait=0&playsinline=0&autopause=0&app_id=122963" />
+      <TrainingVideoElement src="https://player.vimeo.com/video/637569915?h=1ad208d002&title=0&byline=0&portrait=0&playsinline=0&autopause=0&app_id=122963" />
+      <TrainingVideoElement src="https://player.vimeo.com/video/637569915?h=1ad208d002&title=0&byline=0&portrait=0&playsinline=0&autopause=0&app_id=122963" />
+      <TrainingVideoElement src="https://player.vimeo.com/video/637569915?h=1ad208d002&title=0&byline=0&portrait=0&playsinline=0&autopause=0&app_id=122963" />
     </TrainingVideoList>
   </>
 )

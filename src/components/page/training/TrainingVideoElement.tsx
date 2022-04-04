@@ -1,14 +1,14 @@
 export const TrainingVideoElement = ({ src }: { src: string }) => (
   <li className='max-w-xs w-full h-min bg-white rounded-t-lg overflow-hidden'>
-    <div className='w-full h-40'>
+    <div className='w-full '>
       <iframe
         src={src}
-        title="Snap Video"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        title='Snap Video'
+        frameBorder='0'
+        allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
         allowFullScreen
-        // data-ready="true"
-        className='relative w-full h-full'
+        // data-ready='true'
+        className='w-full h-full aspect-video'
       />
     </div>
 
@@ -22,7 +22,7 @@ export const TrainingVideoElement = ({ src }: { src: string }) => (
 
       <div className='px-6 pb-4'>
         <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta voluptates consectetur officia illo quas, vitae reiciendis aut, cupiditate distinctio cum facere repellendus quia eum quos optio? Eveniet corrupti doloribus quaerat? Quos explicabo consequatur hic, dicta esse quaerat corporis earum in molestias sunt eveniet eos asperiores eaque voluptate quisquam sapiente odio vitae architecto. Sapiente quis voluptatem nemo atque quisquam totam aperiam.
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dicta voluptates consectetur officia illo quas, vitae reiciendis aut, cupiditate distinctio cum facere repellendus quia eum quos.
         </p>
       </div>
     </div>
