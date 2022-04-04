@@ -1,25 +1,37 @@
-import { FacebookIcon, GoogleIcon, LinkedinIcon, ShareIcon, ShareRRSSIcon, TwitterIcon } from 'components/common/icons'
 import { marketingSharingCard } from 'lib/utils/gtm'
+import { ShareRRSSIcon } from 'components/common/icons'
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  TwitterShareButton,
+  TwitterIcon,
+  // EmailIcon,
+  // EmailShareButton,
+  RedditShareButton,
+  RedditIcon,
+  TelegramShareButton,
+  WhatsappShareButton,
+  WhatsappIcon,
+  TelegramIcon
+} from 'react-share'
+import { IMarketingArticle } from 'lib/types/marketing'
+import { useCopyToClipboard } from 'lib/hooks/useCopyToClipboard'
 
-interface IArticleProps {
-  id: string
-  imageSrc: string
-  title: string
-  subtitle: string
-  description: string
-  hashtags: string[]
-  linkToShare: string
+interface IArticleProps extends IMarketingArticle {
   isAuthAdmin: boolean
+  linkToShare: string
 }
 
-export const Article = ({ id, imageSrc, title, subtitle, description, hashtags, linkToShare, isAuthAdmin }: IArticleProps) => {
+export const Article = ({ linkToShare, id, imageId, title, subtitle, caption, hashtags, isAuthAdmin }: IArticleProps) => {
+  const { copy } = useCopyToClipboard()
+
   const trackShare = (shareType: string) => {
     marketingSharingCard(title, shareType)
   }
 
   return (
     <li key={id} className='bg-white max-w-sm w-full rounded-[4px]'>
-      <section className='flex justify-between items-center px-5 py-4 w-full'>
+      {/* <section className='flex justify-between items-center px-5 py-4 w-full'>
         <div className='flex items-center justify-start'>
           <div className='w-5 h-5 rounded-full bg-[#19191929] border border-solid border-gray-500 mr-2'></div>
           <span>Select art</span>
@@ -33,69 +45,75 @@ export const Article = ({ id, imageSrc, title, subtitle, description, hashtags, 
             </div>
           )
         }
-      </section>
+      </section> */}
 
-      <section className='w-full border-t-4 border-primary-500'>
-        <img src={imageSrc} />
-      </section>
+      {/* <section className='w-full border-t-4 border-primary-500'> */}
+      <img src={imageId} className='rounded-t-[4px]' />
+      {/* </section> */}
 
       <section className='w-full border-t border-gray-400 px-5 py-3'>
         <span className='font-bold text-lg'>{title}</span> <br />
-        {/* <span className='text-sm'>{subtitle}</span> */}
+        <span className='text-sm'>{subtitle}</span>
       </section>
 
       <section className='w-full border-t border-gray-400 px-5 py-3'>
-        <p>{description}</p>
+        <p>{caption}</p>
       </section>
 
       <ul className='w-full border-t border-gray-400 px-5 py-3 flex text-sm'>
         {
           hashtags.map(hashtag => (
             <li key={hashtag} className='mr-1.5'>
-              <a href={linkToShare} target='_blank' rel='noopener noreferrer'>
-                {hashtag}
-              </a>
+              <span className='text-blue-500 select-none'>
+                #{hashtag}
+              </span>
             </li>
           ))
         }
       </ul>
 
-      <ul className='w-full border-t border-gray-400 px-5 py-4 flex justify-between items-center'>
+      <ul className='w-full border-t border-gray-400 px-5 py-4 flex justify-between items-start -mb-2'>
         <li>
-          <a href='#' target='_blank' rel='noopener noreferrer' onClick={() => trackShare('rsss')}>
+          <button onClick={() => { trackShare('copyLink'); copy(linkToShare, 'Copy Link') }}>
             <ShareRRSSIcon />
-          </a>
+          </button>
         </li>
 
         <li>
-          <a href='#' target='_blank' rel='noopener noreferrer' onClick={() => trackShare('Google')}>
-            <GoogleIcon />
-          </a>
+          <FacebookShareButton url={linkToShare} onClick={() => trackShare('Facebook')}>
+            <FacebookIcon borderRadius={999} size={28} />
+          </FacebookShareButton>
         </li>
 
         <li>
-          <a href='#' target='_blank' rel='noopener noreferrer' onClick={() => trackShare('Telegram')}>
-            <ShareIcon />
-          </a>
+          <TwitterShareButton url={linkToShare} onClick={() => trackShare('Twitter')}>
+            <TwitterIcon borderRadius={999} size={28} />
+          </TwitterShareButton>
         </li>
 
         <li>
-          <a href='#' target='_blank' rel='noopener noreferrer' onClick={() => trackShare('Facebook')}>
-            <FacebookIcon />
-          </a>
+          <WhatsappShareButton url={linkToShare} onClick={() => trackShare('Whatsapp')}>
+            <WhatsappIcon borderRadius={999} size={28} />
+          </WhatsappShareButton>
         </li>
 
         <li>
-          <a href='#' target='_blank' rel='noopener noreferrer' onClick={() => trackShare('LinkedIn')}>
-            <LinkedinIcon />
-          </a>
+          <TelegramShareButton url={linkToShare} onClick={() => trackShare('Telegram')}>
+            <TelegramIcon borderRadius={999} size={28} />
+          </TelegramShareButton>
         </li>
 
         <li>
-          <a href='#' target='_blank' rel='noopener noreferrer' onClick={() => trackShare('Twitter')}>
-            <TwitterIcon />
-          </a>
+          <RedditShareButton url={linkToShare} onClick={() => trackShare('Reddit')}>
+            <RedditIcon borderRadius={999} size={28} />
+          </RedditShareButton>
         </li>
+
+        {/* <li>
+          <EmailShareButton url='https://snapdeliveredteam.com/invite' onClick={() => trackShare('Email')}>
+            <EmailIcon borderRadius={999} size={28} />
+          </EmailShareButton>
+        </li> */}
       </ul>
     </li>
   )

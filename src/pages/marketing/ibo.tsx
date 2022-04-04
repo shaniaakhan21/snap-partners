@@ -1,8 +1,7 @@
 import Head from 'next/head'
-import { useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import type { Page, ReactNode } from 'lib/types'
-import { marketingArticlesIBO } from 'lib/utils/dataTest'
 import { APP_INFO } from 'config/appInfo'
 
 import DashboardLayout from 'layouts/private/Dashboard'
@@ -10,14 +9,36 @@ import { ListArticles } from 'components/page/marketing/Details/ListArtcles'
 import { Article } from 'components/page/marketing/Details/Article'
 import { FormToCreateArticle } from 'components/page/marketing/FormToCreateArticle'
 import { useAuthStore } from 'lib/stores'
-import { Button } from 'components/common/Button'
+import { handleFetchError } from 'lib/utils/handleFetchError'
+import { getArticles } from 'lib/services/marketing/getArticles'
+import { IMarketingArticle } from 'lib/types/marketing'
+import { Spinner } from 'components/common/loaders'
+import { EmptyData } from 'components/common/EmptyData'
 
 const { SEO } = APP_INFO
 
 const IBOPage: Page = () => {
-  const { current: articles } = useRef(marketingArticlesIBO)
   const [showAdminArticleEditor, setShowAdminArticleEditor] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [articles, setArticles] = useState<IMarketingArticle[]>([])
   const { auth } = useAuthStore()
+
+  useEffect(() => {
+    (async () => {
+      setLoading(true)
+      const { data, error } = await getArticles(auth.accessToken, 'ibo')
+
+      if (error) {
+        handleFetchError(error.status, error.info)
+        console.error(error)
+        setLoading(false)
+        return
+      }
+
+      setLoading(false)
+      setArticles(data)
+    })()
+  }, [])
 
   if (showAdminArticleEditor) {
     return (
@@ -38,6 +59,22 @@ const IBOPage: Page = () => {
     )
   }
 
+  if (loading) {
+    return (
+      <div className='w-full h-screen flex items-center justify-center'>
+        <Spinner />
+      </div>
+    )
+  }
+
+  if (articles.length === 0) {
+    return (
+      <div className='flex justify-center items-center h-[70vh]'>
+        <EmptyData label='Marketing Articles Empty' />
+      </div>
+    )
+  }
+
   return (
     <>
       <Head>
@@ -52,7 +89,7 @@ const IBOPage: Page = () => {
           <span className='font-semibold text-gray-800'>Now choose the arts you want to share</span>
         </div>
 
-        {
+        {/* {
           auth.roles.admin && (
             <div className='text-left mt-4'>
               <Button
@@ -63,22 +100,25 @@ const IBOPage: Page = () => {
               </Button>
             </div>
           )
-        }
+        } */}
       </div>
 
       <ListArticles>
         {
           articles.map(article => (
             <Article
+              linkToShare={`${auth.referralLink}&MARKETING=${article.id}`}
+              createdAt={article.createdAt}
+              updatedAt={article.updatedAt}
+              type={article.type}
               key={article.id}
               id={article.id}
               title={article.title}
               subtitle={article.subtitle}
-              isAuthAdmin={auth.roles.admin}
-              description={article.description}
-              imageSrc={article.imageSrc}
+              caption={article.caption}
+              imageId={article.imageId}
               hashtags={article.hashtags}
-              linkToShare={article.linkToShare}
+              isAuthAdmin={auth.roles.admin}
             />
           ))
         }
