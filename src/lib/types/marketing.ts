@@ -1,5 +1,5 @@
 export interface IMarketingArticle {
-  hashtags: string[],
+  hashtags: string[]
   createdAt: string
   id: number
   title: string
