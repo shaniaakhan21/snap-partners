@@ -1,9 +1,29 @@
-import { ReactNode } from 'react'
+import { MouseEvent, ReactNode } from 'react'
 
-export const TrainingCategoryButtonElement = ({ children }: { children: ReactNode }) => (
-  <li>
-    <button className='border border-gray-600 bg-gray-600 bg-opacity-10 text-gray-600 rounded-3xl m-2 px-5 py-1'>
-      {children}
-    </button>
-  </li>
-)
+interface IProps {
+  id: string
+  onClick: (e: MouseEvent<HTMLButtonElement>) => void
+  categorySelected: string
+  children: ReactNode
+}
+
+export const TrainingCategoryButtonElement = ({ id, onClick, categorySelected, children }: IProps) => {
+  const selected = id === categorySelected
+
+  return (
+    <li>
+      <button
+        id={id}
+        className={`
+          border rounded-3xl m-2 px-5 py-1 transition-colors
+          ${selected ? 'border-primary-500 ' : 'border-gray-600 bg-opacity-10'} 
+          ${selected ? 'bg-primary-500' : 'bg-gray-600'}
+          ${selected ? 'text-white' : 'text-gray-600'}
+        `}
+        onClick={onClick}
+      >
+        {children}
+      </button>
+    </li>
+  )
+}

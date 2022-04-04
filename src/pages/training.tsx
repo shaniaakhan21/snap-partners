@@ -1,3 +1,4 @@
+import { Fragment, MouseEvent } from 'react'
 import Head from 'next/head'
 import { Page, ReactNode } from 'lib/types'
 import { APP_INFO } from 'config/appInfo'
@@ -7,33 +8,98 @@ import { TrainingCategoryList } from 'components/page/training/TrainingCategoryL
 import { TrainingCategoryButtonElement } from 'components/page/training/TrainingCategoryButtonElement'
 import { TrainingVideoList } from 'components/page/training/TrainingVideoList'
 import { TrainingVideoElement } from 'components/page/training/TrainingVideoElement'
+import { useTrainingData } from 'lib/hooks/useTrainingData'
+import { useAuthStore } from 'lib/stores'
+import { ITraining, TTrainingType } from 'lib/types/training'
+import { Spinner } from 'components/common/loaders'
+import { EmptyData } from 'components/common/EmptyData'
 
 const { SEO } = APP_INFO
 
-const TrainingPage: Page = () => (
-  <>
-    <TrainingCategoryList>
-      <TrainingCategoryButtonElement>All</TrainingCategoryButtonElement>
-      <TrainingCategoryButtonElement>Getting Started</TrainingCategoryButtonElement>
-      <TrainingCategoryButtonElement>Customer Acquisition</TrainingCategoryButtonElement>
-      <TrainingCategoryButtonElement>Driver Acquisition</TrainingCategoryButtonElement>
-      <TrainingCategoryButtonElement>Open A Market</TrainingCategoryButtonElement>
-      <TrainingCategoryButtonElement>Build An Empire</TrainingCategoryButtonElement>
-    </TrainingCategoryList>
+const TrainingPage: Page = () => {
+  const { auth } = useAuthStore()
+  const { data, isLoading, category, setCategory } = useTrainingData(auth.accessToken)
 
-    <br />
-    <br />
+  const handleChangeCategory = (e: MouseEvent<HTMLButtonElement>) => {
+    const { id } = e.target as HTMLButtonElement
+    setCategory(id as TTrainingType)
+  }
 
-    <TrainingVideoList>
-      <TrainingVideoElement src="https://www.youtube.com/embed/kpwTpNRFR1I" />
-      <TrainingVideoElement src="https://www.youtube.com/embed/kpwTpNRFR1I" />
-      <TrainingVideoElement src="https://www.youtube.com/embed/kpwTpNRFR1I" />
-      <TrainingVideoElement src="https://www.youtube.com/embed/kpwTpNRFR1I" />
-      <TrainingVideoElement src="https://www.youtube.com/embed/kpwTpNRFR1I" />
-      <TrainingVideoElement src="https://www.youtube.com/embed/kpwTpNRFR1I" />
-    </TrainingVideoList>
-  </>
-)
+  return (
+    <>
+      <TrainingCategoryList>
+        <TrainingCategoryButtonElement
+          id='all'
+          categorySelected={category}
+          onClick={handleChangeCategory}
+        >
+          All
+        </TrainingCategoryButtonElement>
+        <TrainingCategoryButtonElement
+          id='start'
+          categorySelected={category}
+          onClick={handleChangeCategory}
+        >
+          Getting Started
+        </TrainingCategoryButtonElement>
+        <TrainingCategoryButtonElement
+          id='customer'
+          categorySelected={category}
+          onClick={handleChangeCategory}
+        >
+          Customer Acquisition
+        </TrainingCategoryButtonElement>
+        <TrainingCategoryButtonElement
+          id='driver'
+          categorySelected={category}
+          onClick={handleChangeCategory}
+        >
+          Driver Acquisition
+        </TrainingCategoryButtonElement>
+        <TrainingCategoryButtonElement
+          id='merchant'
+          categorySelected={category}
+          onClick={handleChangeCategory}
+        >
+          Open A Market
+        </TrainingCategoryButtonElement>
+        <TrainingCategoryButtonElement
+          id='empire'
+          categorySelected={category}
+          onClick={handleChangeCategory}
+        >
+          Build An Empire
+        </TrainingCategoryButtonElement>
+      </TrainingCategoryList>
+
+      <br />
+      <br />
+
+      {isLoading && (
+        <div className='w-full h-full flex items-center justify-center'>
+          <Spinner />
+        </div>
+      )}
+
+      {!isLoading && data[category] && data[category].length === 0 && <EmptyData />}
+
+      {!isLoading && data[category] && data[category].length > 0 && (
+        <TrainingVideoList>
+          {data[category].map((video: ITraining, i: number) => (
+            <Fragment key={i}>
+              <TrainingVideoElement
+                title={video.title}
+                subtitle={video.subtitle}
+                caption={video.caption}
+                url={video.url}
+              />
+            </Fragment>
+          ))}
+        </TrainingVideoList>
+      )}
+    </>
+  )
+}
 
 TrainingPage.getLayout = (page: ReactNode) => (
   <DashboardLayout>
