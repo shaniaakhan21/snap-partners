@@ -1,44 +1,26 @@
+import { GetStaticPaths, GetStaticProps } from 'next'
+import { useState } from 'react'
 import Head from 'next/head'
-import { useEffect, useState } from 'react'
 
-import type { Page, ReactNode } from 'lib/types'
+import { capitalizeFirstLetter } from 'lib/utils/capitalizeFirstLetter'
+import { useMarketingArticles } from 'lib/hooks/useMarketingArticles'
+import { TMarketingType } from 'lib/types/marketing'
 import { APP_INFO } from 'config/appInfo'
+import { useAuthStore } from 'lib/stores'
 
-import DashboardLayout from 'layouts/private/Dashboard'
+import { FormToCreateArticle } from 'components/page/marketing/FormToCreateArticle'
 import { ListArticles } from 'components/page/marketing/Details/ListArtcles'
 import { Article } from 'components/page/marketing/Details/Article'
-import { useAuthStore } from 'lib/stores'
-import { FormToCreateArticle } from 'components/page/marketing/FormToCreateArticle'
-import { getArticles } from 'lib/services/marketing/getArticles'
-import { handleFetchError } from 'lib/utils/handleFetchError'
-import { IMarketingArticle } from 'lib/types/marketing'
-import { Spinner } from 'components/common/loaders'
 import { EmptyData } from 'components/common/EmptyData'
+import DashboardLayout from 'layouts/private/Dashboard'
+import { Spinner } from 'components/common/loaders'
 
 const { SEO } = APP_INFO
 
-const CustomersPage: Page = () => {
-  const [showAdminArticleEditor, setShowAdminArticleEditor] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [articles, setArticles] = useState<IMarketingArticle[]>([])
+const MarketingArticlePage = ({ typeMarketing }: { typeMarketing: TMarketingType }) => {
   const { auth } = useAuthStore()
-
-  useEffect(() => {
-    (async () => {
-      setLoading(true)
-      const { data, error } = await getArticles(auth.accessToken, 'customer')
-
-      if (error) {
-        handleFetchError(error.status, error.info)
-        console.error(error)
-        setLoading(false)
-        return
-      }
-
-      setLoading(false)
-      setArticles(data)
-    })()
-  }, [])
+  const [showAdminArticleEditor, setShowAdminArticleEditor] = useState(false)
+  const { articles, loading } = useMarketingArticles(auth.accessToken, typeMarketing)
 
   if (showAdminArticleEditor) {
     return (
@@ -51,10 +33,17 @@ const CustomersPage: Page = () => {
         </div>
 
         <div className='text-center'>
-          <span className='font-bold text-2xl'>Create Asset for Customers</span>
+          <p className='font-bold text-2xl'>
+            Create Asset for
+            {
+              typeMarketing !== 'ibo'
+                ? <span className='capitalize'> {typeMarketing}s</span>
+                : ' IBOs'
+            }
+          </p>
         </div>
 
-        <FormToCreateArticle typeMarketing='customer' userAuth={auth} />
+        <FormToCreateArticle typeMarketing={typeMarketing} userAuth={auth} />
       </div>
     )
   }
@@ -78,7 +67,13 @@ const CustomersPage: Page = () => {
   return (
     <>
       <div className='text-center'>
-        <span className='text-3xl font-bold'>Customers</span> <br /><br />
+        <span className='text-3xl font-bold'>
+          {
+            typeMarketing !== 'ibo'
+              ? <span className='capitalize'> {typeMarketing}s</span>
+              : ' IBOs'
+          }
+        </span> <br /><br />
         <span className='font-bold text-2xl text-primary-500'>Building your Business with a Few Clicks</span>
 
         <div className='mt-6'>
@@ -123,14 +118,26 @@ const CustomersPage: Page = () => {
   )
 }
 
-CustomersPage.getLayout = (page: ReactNode) => (
+MarketingArticlePage.getLayout = (page) => (
   <DashboardLayout>
     <Head>
-      <title>{SEO.TITLE_PAGE} - Marketing Customers</title>
+      <title>{SEO.TITLE_PAGE} - Marketing {capitalizeFirstLetter(page.props.typeMarketing)}</title>
     </Head>
 
     {page}
   </DashboardLayout>
 )
 
-export default CustomersPage
+export const getStaticPaths: GetStaticPaths = async () => {
+  const MARKETING_TYPES: TMarketingType[] = ['customer', 'driver', 'ibo', 'merchant']
+
+  const paths = MARKETING_TYPES.map((type) => ({ params: { type } }))
+
+  return { paths, fallback: false }
+}
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  return { props: { typeMarketing: params.type } }
+}
+
+export default MarketingArticlePage
