@@ -12,7 +12,7 @@ import { GTM_ID, pageview } from 'lib/utils/gtm'
 import { useModalStore } from 'lib/stores'
 
 import { ModalContainer } from 'components/common/ModalContainer'
-import { LoadingPage } from 'components/layout/LoadingPage'
+import { LoadingPage } from 'components/layout/public/LoadingPage'
 import { Overlay } from 'components/common/Overlay'
 import { theme } from '../materialTheme'
 
