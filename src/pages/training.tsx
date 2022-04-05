@@ -81,7 +81,9 @@ const TrainingPage: Page = () => {
         </div>
       )}
 
-      {!isLoading && data[category] && data[category].length === 0 && <EmptyData />}
+      {!isLoading && data[category] && data[category].length === 0 && (
+        <EmptyData label='Trainings not found.' />
+      )}
 
       {!isLoading && data[category] && data[category].length > 0 && (
         <TrainingVideoList>
