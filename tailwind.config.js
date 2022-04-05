@@ -13,6 +13,11 @@ module.exports = {
       screens: {
         xs: '420px'
       },
+
+      height: {
+        'screen-80': '80vh'
+      },
+
       colors: {
         black: {
           DEFAULT: '#18203F'

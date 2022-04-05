@@ -91,7 +91,7 @@ const MyWalletPage: Page = () => {
         {
           isLoading
             ? (
-              <div className='w-full h-full flex justify-center items-center'>
+              <div className='w-full h-screen-80 flex justify-center items-center h-'>
                 <Spinner />
               </div>
             )
@@ -99,10 +99,7 @@ const MyWalletPage: Page = () => {
             : transactions.length === 0
               ? (
                 <div className='flex justify-center items-center h-[70vh]'>
-                  <EmptyData
-                    label='No transactions found'
-                    // description='Please change the date , ID or try different Keyword'
-                  />
+                  <EmptyData label='No transactions found' />
                 </div>
               )
 
