@@ -1,18 +1,19 @@
 import { Fragment, MouseEvent } from 'react'
 import Head from 'next/head'
+
+import { ITraining, TTrainingType } from 'lib/types/training'
+import { useTrainingData } from 'lib/hooks/useTrainingData'
 import { Page, ReactNode } from 'lib/types'
+import { useAuthStore } from 'lib/stores'
 import { APP_INFO } from 'config/appInfo'
 
 import DashboardLayout from 'layouts/private/Dashboard'
-import { TrainingCategoryList } from 'components/page/training/TrainingCategoryList'
 import { TrainingCategoryButtonElement } from 'components/page/training/TrainingCategoryButtonElement'
-import { TrainingVideoList } from 'components/page/training/TrainingVideoList'
+import { TrainingCategoryList } from 'components/page/training/TrainingCategoryList'
 import { TrainingVideoElement } from 'components/page/training/TrainingVideoElement'
-import { useTrainingData } from 'lib/hooks/useTrainingData'
-import { useAuthStore } from 'lib/stores'
-import { ITraining, TTrainingType } from 'lib/types/training'
-import { Spinner } from 'components/common/loaders'
+import { TrainingVideoList } from 'components/page/training/TrainingVideoList'
 import { EmptyData } from 'components/common/EmptyData'
+import { Spinner } from 'components/common/loaders'
 
 const { SEO } = APP_INFO
 

@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { useEffect } from 'react'
+import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
@@ -12,7 +13,6 @@ import DashboardLayout from 'layouts/private/Dashboard'
 import { FormBecomeMerchant } from 'components/page/become-role/FormBecomeMerchant'
 import { FormBecomeDriver } from 'components/page/become-role/FormBecomeDriver'
 import { FormBecomeCustomer } from 'components/page/become-role/FormBecomeCustomer'
-import { toast } from 'react-toastify'
 import { Spinner } from 'components/common/loaders'
 
 const { SEO } = APP_INFO
@@ -48,15 +48,13 @@ const BecomeRolePage = ({ role }: { role: 'CUSTOMER' | 'DRIVER' | 'RESTAURANT' }
 }
 
 BecomeRolePage.getLayout = (page: ReactNode) => (
-  <>
+  <DashboardLayout>
     <Head>
       <title>{SEO.TITLE_PAGE} - Become Role</title>
     </Head>
 
-    <DashboardLayout>
-      {page}
-    </DashboardLayout>
-  </>
+    {page}
+  </DashboardLayout>
 )
 
 export const getServerSideProps: GetServerSideProps = async ({ query }: GetServerSidePropsContext) => {

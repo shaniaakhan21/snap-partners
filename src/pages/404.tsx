@@ -1,6 +1,12 @@
 import Link from 'next/link'
+import Head from 'next/head'
 
-export default function Page404 () {
+import { Page } from 'lib/types'
+import { APP_INFO } from 'config/appInfo'
+
+const { SEO } = APP_INFO
+
+export const Page404: Page = () => {
   return (
     <div className='w-full h-screen bg-textAcent-500 text-white flex flex-col justify-center items-center px-4 relative'>
       <div className='bg-textAcent-500 absolute top-0 left-0 w-full h-screen -z-10'></div>
@@ -18,3 +24,15 @@ export default function Page404 () {
     </div>
   )
 }
+
+Page404.getLayout = (page) => (
+  <>
+    <Head>
+      <title>{SEO.TITLE_PAGE} - 404 Not Found</title>
+    </Head>
+
+    {page}
+  </>
+)
+
+export default Page404

@@ -1,6 +1,12 @@
+import Head from 'next/head'
 import Link from 'next/link'
 
-export default function Page500 () {
+import type { Page } from 'lib/types'
+import { APP_INFO } from 'config/appInfo'
+
+const { SEO } = APP_INFO
+
+export const Page500: Page = () => {
   return (
     <div className='w-full h-screen bg-[#FFAA00] text-white flex flex-col justify-center items-center px-4 relative'>
       <div className='bg-textAcent-500 absolute top-0 left-0 w-full h-screen -z-10'></div>
@@ -18,3 +24,15 @@ export default function Page500 () {
     </div>
   )
 }
+
+Page500.getLayout = (page) => (
+  <>
+    <Head>
+      <title>{SEO.TITLE_PAGE} - Server Error</title>
+    </Head>
+
+    {page}
+  </>
+)
+
+export default Page500

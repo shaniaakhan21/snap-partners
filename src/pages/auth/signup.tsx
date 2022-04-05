@@ -1,14 +1,14 @@
 import Head from 'next/head'
 
-import type { Page } from 'lib/types'
 import { useHandlerReferralLink } from 'lib/hooks/useHandlerReferralLink'
-import { AuthPagesLayout } from 'layouts/public/Auth'
 import { APP_INFO } from 'config/appInfo'
+import type { Page } from 'lib/types'
 
+import { AuthPagesLayout } from 'layouts/public/Auth'
+import { SignUpMerchantForm } from 'components/page/signup/SignUpForm/FormByRole/Merchant'
 import { SignUpCustomerForm, SignUpDriverForm } from 'components/page/signup/SignUpForm'
 import { SelectRoleToSignUp } from 'components/page/signup/SelectRoleToSignUp'
 import { ROLES } from 'config/roles'
-import { SignUpMerchantForm } from 'components/page/signup/SignUpForm/FormByRole/Merchant'
 
 const { SEO } = APP_INFO
 
@@ -23,15 +23,13 @@ const SignUpPage: Page = () => {
 }
 
 SignUpPage.getLayout = (page) => (
-  <>
+  <AuthPagesLayout>
     <Head>
       <title>{SEO.TITLE_PAGE} - Sign Up</title>
     </Head>
 
-    <AuthPagesLayout>
-      {page}
-    </AuthPagesLayout>
-  </>
+    {page}
+  </AuthPagesLayout>
 )
 
 export default SignUpPage
