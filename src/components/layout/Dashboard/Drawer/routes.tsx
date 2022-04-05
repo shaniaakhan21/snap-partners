@@ -38,7 +38,7 @@ export const drawerRoutes = [
   },
   {
     icon: <RelojTempIcon />,
-    to: '/comingsoon',
+    to: 'https://snapdelivered.ourproshop.com/',
     label: 'Tools'
   },
   {

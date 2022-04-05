@@ -50,7 +50,7 @@ const MarketingArticlePage = ({ typeMarketing }: { typeMarketing: TMarketingType
 
   if (loading) {
     return (
-      <div className='w-full h-screen flex items-center justify-center'>
+      <div className='w-full h-screen-80 flex items-center justify-center'>
         <Spinner />
       </div>
     )
@@ -58,7 +58,7 @@ const MarketingArticlePage = ({ typeMarketing }: { typeMarketing: TMarketingType
 
   if (articles.length === 0) {
     return (
-      <div className='flex justify-center items-center h-[70vh]'>
+      <div className='flex justify-center items-center h-screen-80'>
         <EmptyData label='Marketing Articles Empty' />
       </div>
     )
