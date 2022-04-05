@@ -8,9 +8,9 @@ import { useAuthStore } from 'lib/stores'
 import { APP_INFO } from 'config/appInfo'
 
 import DashboardLayout from 'layouts/private/Dashboard'
-import { TrainingCategoryButtonElement } from 'components/page/training/TrainingCategoryButtonElement'
-import { TrainingCategoryList } from 'components/page/training/TrainingCategoryList'
-import { TrainingVideoElement } from 'components/page/training/TrainingVideoElement'
+import { CategoryChip } from 'components/page/training/CategoryChip'
+import { ListCategoryChip } from 'components/page/training/TrainingCategoryList'
+import { TrainingVideo } from 'components/page/training/TrainingVideoElement'
 import { TrainingVideoList } from 'components/page/training/TrainingVideoList'
 import { EmptyData } from 'components/common/EmptyData'
 import { Spinner } from 'components/common/loaders'
@@ -28,50 +28,50 @@ const TrainingPage: Page = () => {
 
   return (
     <>
-      <TrainingCategoryList>
-        <TrainingCategoryButtonElement
+      <ListCategoryChip>
+        <CategoryChip
           id='all'
           categorySelected={category}
           onClick={handleChangeCategory}
         >
           All
-        </TrainingCategoryButtonElement>
-        <TrainingCategoryButtonElement
+        </CategoryChip>
+        <CategoryChip
           id='start'
           categorySelected={category}
           onClick={handleChangeCategory}
         >
           Getting Started
-        </TrainingCategoryButtonElement>
-        <TrainingCategoryButtonElement
+        </CategoryChip>
+        <CategoryChip
           id='customer'
           categorySelected={category}
           onClick={handleChangeCategory}
         >
           Customer Acquisition
-        </TrainingCategoryButtonElement>
-        <TrainingCategoryButtonElement
+        </CategoryChip>
+        <CategoryChip
           id='driver'
           categorySelected={category}
           onClick={handleChangeCategory}
         >
           Driver Acquisition
-        </TrainingCategoryButtonElement>
-        <TrainingCategoryButtonElement
+        </CategoryChip>
+        <CategoryChip
           id='merchant'
           categorySelected={category}
           onClick={handleChangeCategory}
         >
           Open A Market
-        </TrainingCategoryButtonElement>
-        <TrainingCategoryButtonElement
+        </CategoryChip>
+        <CategoryChip
           id='empire'
           categorySelected={category}
           onClick={handleChangeCategory}
         >
           Build An Empire
-        </TrainingCategoryButtonElement>
-      </TrainingCategoryList>
+        </CategoryChip>
+      </ListCategoryChip>
 
       <br />
       <br />
@@ -90,7 +90,7 @@ const TrainingPage: Page = () => {
         <TrainingVideoList>
           {data[category].map((video: ITraining, i: number) => (
             <Fragment key={i}>
-              <TrainingVideoElement
+              <TrainingVideo
                 title={video.title}
                 subtitle={video.subtitle}
                 caption={video.caption}
