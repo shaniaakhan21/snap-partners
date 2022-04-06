@@ -15,7 +15,7 @@ export const DrawerDesktop = ({ isCurrentlyPage, isManager, isAdmin }: { isCurre
       <ul className='my-10 text-white'>
         {
           drawerRoutes.map(route => {
-            if ((isAdmin || isManager) && route.to === '/upgrade-to-manager') return <Fragment />
+            if ((isAdmin || isManager) && route.to === '/upgrade-to-manager') return <Fragment key={route.label} />
 
             return (
               <li
@@ -23,7 +23,12 @@ export const DrawerDesktop = ({ isCurrentlyPage, isManager, isAdmin }: { isCurre
                 key={route.label}
               >
                 <Link href={route.to}>
-                  <a className='w-full flex justify-start items-center gap-x-2 py-4 hover:bg-[#19191914] pl-10' onClick={() => navbarPress(route.label)}>
+                  <a
+                    target={route.to.includes('https') ? '_blank' : '_self'}
+                    rel='noopener noreferrer'
+                    className='w-full flex justify-start items-center gap-x-2 py-4 hover:bg-[#19191914] pl-10'
+                    onClick={() => navbarPress(route.label)}
+                  >
                     <div>{route.icon}</div>
                     <div>{route.label}</div>
                   </a>

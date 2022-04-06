@@ -9,7 +9,7 @@ import { getLocalStorage } from 'lib/utils/localStorage'
 import { getUserMe } from 'lib/services/user/getUserMe'
 import { timeout } from 'lib/utils/timeout'
 
-import { Drawer, Navbar } from 'components/layout/Dashboard'
+import { Drawer, Navbar } from 'components/layout/private/Dashboard'
 import { FooterPrivate } from 'components/layout/private/Footer'
 import { Spinner } from 'components/common/loaders'
 import { handleFetchError } from 'lib/utils/handleFetchError'

@@ -1,22 +1,12 @@
 import { IQueryErrorReturn } from 'lib/types/http/query'
+import { IMarketingArticle, TMarketingType } from 'lib/types/marketing'
 
 interface IQueryArticlesReturn extends IQueryErrorReturn {
-  data: [
-    {
-      hashtags: string[]
-      createdAt: string
-      id: number
-      title: string
-      subtitle: string
-      caption: string
-      imageId: string
-      updatedAt: string
-    }
-  ] | null
+  data: IMarketingArticle[]
 }
 
-export const getArticles = async (token: string): Promise<IQueryArticlesReturn> => {
-  const res = await fetch('/api/marketing?page=1&limit=9999', {
+export const getArticles = async (token: string, type: TMarketingType): Promise<IQueryArticlesReturn> => {
+  const res = await fetch(`/api/marketing?page=1&limit=9999&type=${type}`, {
     method: 'GET',
     headers: { Authorization: `Bearer ${token}` }
   })

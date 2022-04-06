@@ -33,12 +33,12 @@ export const drawerRoutes = [
   },
   {
     icon: <TrainingIcon />,
-    to: '/comingsoon',
+    to: '/training',
     label: 'Training'
   },
   {
     icon: <RelojTempIcon />,
-    to: '/comingsoon',
+    to: 'https://snapdelivered.ourproshop.com/',
     label: 'Tools'
   },
   {

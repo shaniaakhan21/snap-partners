@@ -1,5 +1,4 @@
 import { AppContext, AppInitialProps, AppLayoutProps } from 'next/app'
-
 import { ThemeProvider } from '@material-ui/core/styles'
 import { Fragment, ReactNode, useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
@@ -12,7 +11,7 @@ import { GTM_ID, pageview } from 'lib/utils/gtm'
 import { useModalStore } from 'lib/stores'
 
 import { ModalContainer } from 'components/common/ModalContainer'
-import { LoadingPage } from 'components/layout/LoadingPage'
+import { LoadingPage } from 'components/layout/public/LoadingPage'
 import { Overlay } from 'components/common/Overlay'
 import { theme } from '../materialTheme'
 
@@ -22,10 +21,10 @@ import 'tippy.js/dist/tippy.css'
 import 'styles/tailwind.css'
 
 const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({ Component, pageProps }: AppLayoutProps) => {
-  const router = useRouter()
+  const getLayout = Component.getLayout || ((page: ReactNode) => page)
   const { isRouteChanging, loadingKey } = useLoadingPage()
   const { modalsData, closeModal } = useModalStore()
-  const getLayout = Component.getLayout || ((page: ReactNode) => page)
+  const router = useRouter()
 
   useEffect(() => {
     router.events.on('routeChangeComplete', pageview)

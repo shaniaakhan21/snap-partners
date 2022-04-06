@@ -7,7 +7,7 @@ type IOptions = {
 export const createObserver = (
   element: HTMLElement,
   handleIntersect: (entries, observer) => void,
-  options: IOptions = { rootMargin: '100px' }
+  options: IOptions = { rootMargin: '100px', threshold: 1 }
 ) => {
   const observer = new IntersectionObserver(handleIntersect, options)
 

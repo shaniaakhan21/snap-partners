@@ -18,21 +18,21 @@ const MarketingPage: Page = () => {
       title: 'Customer',
       subtitle: 'Subtitle text here',
       description: 'Select an image and share the link in the different social networks to get new Customers!',
-      to: '/marketing/customers'
+      to: '/marketing/customer'
     },
     {
       icon: <DriverIcon />,
       title: 'Driver',
       subtitle: 'Subtitle text here',
       description: 'Select an image and share the link in the different social networks to get new Drivers On Board',
-      to: '/marketing/drivers'
+      to: '/marketing/driver'
     },
     {
       icon: <MerchantsIcon />,
       title: 'Merchant',
       subtitle: 'Subtitle text here',
       description: 'Select an image and share the link in the different social networks to get new Merchant Partners',
-      to: '/marketing/merchants'
+      to: '/marketing/merchant'
     },
     {
       icon: <IBOIcon />,
@@ -45,10 +45,6 @@ const MarketingPage: Page = () => {
 
   return (
     <>
-      <Head>
-        <title>{SEO.TITLE_PAGE} - Marketing</title>
-      </Head>
-
       <div className='text-center'>
         <span className='text-3xl font-bold'>Marketing Tools</span> <br /><br />
         <span className='font-bold text-2xl text-primary-500'>Building your Business with a Few Clicks</span>
@@ -78,6 +74,10 @@ const MarketingPage: Page = () => {
 
 MarketingPage.getLayout = (page: ReactNode) => (
   <DashboardLayout>
+    <Head>
+      <title>{SEO.TITLE_PAGE} - Marketing</title>
+    </Head>
+
     {page}
   </DashboardLayout>
 )
