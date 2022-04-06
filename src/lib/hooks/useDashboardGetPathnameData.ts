@@ -1,4 +1,4 @@
-import { globalRoutes } from 'components/layout/Dashboard/Drawer/routes'
+import { globalRoutes } from 'components/layout/private/Dashboard/Drawer/routes'
 import { useRouter } from 'next/router'
 
 interface IDashboardGetPathnameReturn {

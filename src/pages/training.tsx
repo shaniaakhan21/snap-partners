@@ -1,19 +1,20 @@
 import { Fragment, MouseEvent } from 'react'
 import Head from 'next/head'
+
+import { ITraining, TTrainingType } from 'lib/types/training'
+import { useTrainingData } from 'lib/hooks/useTrainingData'
 import { Page, ReactNode } from 'lib/types'
+import { useAuthStore } from 'lib/stores'
 import { APP_INFO } from 'config/appInfo'
 
 import DashboardLayout from 'layouts/private/Dashboard'
-import { TrainingCategoryList } from 'components/page/training/TrainingCategoryList'
-import { TrainingCategoryButtonElement } from 'components/page/training/TrainingCategoryButtonElement'
-import { TrainingVideoList } from 'components/page/training/TrainingVideoList'
-import { TrainingVideoElement } from 'components/page/training/TrainingVideoElement'
-import { useTrainingData } from 'lib/hooks/useTrainingData'
-import { useAuthStore } from 'lib/stores'
-import { ITraining, TTrainingType } from 'lib/types/training'
-import { Spinner } from 'components/common/loaders'
+import { CategoryChip } from 'components/page/training/CategoryChip'
+import { CategoryChipList } from 'components/page/training/CategoryChipList'
+import { Video } from 'components/page/training/Video'
+import { VideoList } from 'components/page/training/VideoList'
 import { EmptyData } from 'components/common/EmptyData'
 import { useNearScreen } from 'lib/hooks/useNearScreen'
+import { Spinner } from 'components/common/loaders'
 
 const { SEO } = APP_INFO
 
@@ -41,50 +42,50 @@ const TrainingPage: Page = () => {
 
   return (
     <>
-      <TrainingCategoryList>
-        <TrainingCategoryButtonElement
+      <CategoryChipList>
+        <CategoryChip
           id='all'
           categorySelected={category}
           onClick={handleChangeCategory}
         >
           All
-        </TrainingCategoryButtonElement>
-        <TrainingCategoryButtonElement
+        </CategoryChip>
+        <CategoryChip
           id='start'
           categorySelected={category}
           onClick={handleChangeCategory}
         >
           Getting Started
-        </TrainingCategoryButtonElement>
-        <TrainingCategoryButtonElement
+        </CategoryChip>
+        <CategoryChip
           id='customer'
           categorySelected={category}
           onClick={handleChangeCategory}
         >
           Customer Acquisition
-        </TrainingCategoryButtonElement>
-        <TrainingCategoryButtonElement
+        </CategoryChip>
+        <CategoryChip
           id='driver'
           categorySelected={category}
           onClick={handleChangeCategory}
         >
           Driver Acquisition
-        </TrainingCategoryButtonElement>
-        <TrainingCategoryButtonElement
+        </CategoryChip>
+        <CategoryChip
           id='merchant'
           categorySelected={category}
           onClick={handleChangeCategory}
         >
           Open A Market
-        </TrainingCategoryButtonElement>
-        <TrainingCategoryButtonElement
+        </CategoryChip>
+        <CategoryChip
           id='empire'
           categorySelected={category}
           onClick={handleChangeCategory}
         >
           Build An Empire
-        </TrainingCategoryButtonElement>
-      </TrainingCategoryList>
+        </CategoryChip>
+      </CategoryChipList>
 
       <br />
       <br />
@@ -101,10 +102,10 @@ const TrainingPage: Page = () => {
 
       {!isFetchLoading && trainings[category] && trainings[category].length > 0 && (
         <>
-          <TrainingVideoList>
+          <VideoList>
             {trainings[category].map((video: ITraining, i: number) => (
               <Fragment key={i}>
-                <TrainingVideoElement
+                <Video
                   title={video.title}
                   subtitle={video.subtitle}
                   caption={video.caption}
@@ -112,7 +113,7 @@ const TrainingPage: Page = () => {
                 />
               </Fragment>
             ))}
-          </TrainingVideoList>
+          </VideoList>
           {isNearScreenLoading && (
             <div className='flex items-center justify-center py-8'>
               <Spinner />

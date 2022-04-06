@@ -7,7 +7,7 @@ interface IProps {
   children: ReactNode
 }
 
-export const TrainingCategoryButtonElement = ({ id, onClick, categorySelected, children }: IProps) => {
+export const CategoryChip = ({ id, onClick, categorySelected, children }: IProps) => {
   const selected = id === categorySelected
 
   return (

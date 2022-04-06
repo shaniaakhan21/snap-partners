@@ -5,7 +5,7 @@ interface IProps {
   url: string
 }
 
-export const TrainingVideoElement = ({ title, subtitle, caption, url }: IProps) => (
+export const Video = ({ title, subtitle, caption, url }: IProps) => (
   <li className='max-w-xs w-full h-min bg-white rounded-t-lg overflow-hidden'>
     <div className='w-full '>
       <iframe

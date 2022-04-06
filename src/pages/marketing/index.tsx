@@ -45,10 +45,6 @@ const MarketingPage: Page = () => {
 
   return (
     <>
-      <Head>
-        <title>{SEO.TITLE_PAGE} - Marketing</title>
-      </Head>
-
       <div className='text-center'>
         <span className='text-3xl font-bold'>Marketing Tools</span> <br /><br />
         <span className='font-bold text-2xl text-primary-500'>Building your Business with a Few Clicks</span>
@@ -78,6 +74,10 @@ const MarketingPage: Page = () => {
 
 MarketingPage.getLayout = (page: ReactNode) => (
   <DashboardLayout>
+    <Head>
+      <title>{SEO.TITLE_PAGE} - Marketing</title>
+    </Head>
+
     {page}
   </DashboardLayout>
 )

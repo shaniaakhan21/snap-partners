@@ -1,6 +1,6 @@
 import { MouseEvent } from 'react'
 import createAtom from 'zustand'
-import { dashboardPathnames } from 'components/layout/Dashboard/Drawer/routes'
+import { dashboardPathnames } from 'components/layout/private/Dashboard/Drawer/routes'
 
 interface ISearchModalAtom {
   genealogySearchIsOpen: boolean

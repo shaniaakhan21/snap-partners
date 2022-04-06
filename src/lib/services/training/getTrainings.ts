@@ -6,7 +6,7 @@ interface IQueryArticlesReturn extends IQueryErrorReturn {
 }
 
 export const getTrainings = async (token: string, type: TTrainingType = null, page: number): Promise<IQueryArticlesReturn> => {
-  const res = await fetch(`/api/training?page=${page}&limit=3${type ? `&type=${type}` : ''}`, {
+  const res = await fetch(`/api/training?page=${page}&limit=6${type ? `&type=${type}` : ''}`, {
     method: 'GET',
     headers: { Authorization: `Bearer ${token}` }
   })
