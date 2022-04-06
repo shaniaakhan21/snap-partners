@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import Head from 'next/head'
 import type { IUserBySearch, Page, ReactNode } from 'lib/types'
 import { APP_INFO } from 'config/appInfo'
@@ -11,7 +11,6 @@ import { Spinner } from 'components/common/loaders'
 import { useForm } from 'react-hook-form'
 import { getUserBySearch } from 'lib/services/user/getUserBySearch'
 import { handleFetchError } from 'lib/utils/handleFetchError'
-import { useNearScreen } from 'lib/hooks/useNearScreen'
 import { EmptyData } from 'components/common/EmptyData'
 import { ReferralCards } from 'components/page/referrals/Cards'
 import { CustomerIcon, DriverIcon, MerchantIcon } from 'components/common/icons'
@@ -70,8 +69,6 @@ const GenealogyPage: Page = () => {
   } = useModal(false)
 
   const refVisor = useRef(null)
-  const isNearScreen = useNearScreen(refVisor.current)
-
   const [tabOpen, setTabOpen] = useState('1')
   const [userDetailIdOpen, setUserdetailIdOpen] = useState(0)
   // const [levelPage, setLevelPage] = useState(1)
@@ -112,12 +109,6 @@ const GenealogyPage: Page = () => {
     setUsersSearched(data)
     setSearchIsLoading(false)
   }
-
-  useEffect(() => {
-    // if (isNearScreen) {
-    //   setLevelPage(prevState => prevState + 1)
-    // }
-  }, [isNearScreen])
 
   if (levels?.length === 0) {
     return (

@@ -5,8 +5,8 @@ interface IQueryArticlesReturn extends IQueryErrorReturn {
   data: ITraining[] | [] | null
 }
 
-export const getTrainings = async (token: string, type: TTrainingType = null): Promise<IQueryArticlesReturn> => {
-  const res = await fetch(`/api/training?page=1&limit=9999${type ? `&type=${type}` : ''}`, {
+export const getTrainings = async (token: string, type: TTrainingType = null, page: number): Promise<IQueryArticlesReturn> => {
+  const res = await fetch(`/api/training?page=${page}&limit=3${type ? `&type=${type}` : ''}`, {
     method: 'GET',
     headers: { Authorization: `Bearer ${token}` }
   })

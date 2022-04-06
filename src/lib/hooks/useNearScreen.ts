@@ -1,23 +1,16 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { createObserver } from 'lib/utils/createObserver'
 
-export const useNearScreen = (element: HTMLElement) => {
-  const [isMounted, setIsMounted] = useState(false)
-  const [isNear, setIsNear] = useState(false)
-
+export const useNearScreen = (elementId: string, cbHandleIntersection: () => void) => {
   useEffect(() => {
-    if (!element && !isMounted) return
+    const element = document.getElementById(elementId)
 
-    createObserver(element, (entries) => {
-      const element = entries[0]
+    if (!element) return
 
-      element.isIntersecting && setIsNear(true)
+    createObserver(element, (entries, observer) => {
+      const { isIntersecting } = entries[0]
+
+      isIntersecting && cbHandleIntersection()
     })
   })
-
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
-
-  return isNear
 }

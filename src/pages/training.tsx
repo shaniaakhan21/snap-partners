@@ -13,12 +13,26 @@ import { useAuthStore } from 'lib/stores'
 import { ITraining, TTrainingType } from 'lib/types/training'
 import { Spinner } from 'components/common/loaders'
 import { EmptyData } from 'components/common/EmptyData'
+import { useNearScreen } from 'lib/hooks/useNearScreen'
 
 const { SEO } = APP_INFO
 
+const VISOR_ELEMENT_ID = 'visor-training'
+
 const TrainingPage: Page = () => {
   const { auth } = useAuthStore()
-  const { data, isLoading, category, setCategory } = useTrainingData(auth.accessToken)
+  const {
+    trainings,
+    isFetchLoading,
+    isNearScreenLoading,
+    category,
+    setCategory,
+    increasePage
+  } = useTrainingData(auth.accessToken)
+
+  useNearScreen(VISOR_ELEMENT_ID, () => {
+    increasePage()
+  })
 
   const handleChangeCategory = (e: MouseEvent<HTMLButtonElement>) => {
     const { id } = e.target as HTMLButtonElement
@@ -75,29 +89,37 @@ const TrainingPage: Page = () => {
       <br />
       <br />
 
-      {isLoading && (
+      {isFetchLoading && (
         <div className='w-full h-full flex items-center justify-center'>
           <Spinner />
         </div>
       )}
 
-      {!isLoading && data[category] && data[category].length === 0 && (
+      {!isFetchLoading && trainings[category] && trainings[category].length === 0 && (
         <EmptyData label='Training videos not found.' />
       )}
 
-      {!isLoading && data[category] && data[category].length > 0 && (
-        <TrainingVideoList>
-          {data[category].map((video: ITraining, i: number) => (
-            <Fragment key={i}>
-              <TrainingVideoElement
-                title={video.title}
-                subtitle={video.subtitle}
-                caption={video.caption}
-                url={video.url}
-              />
-            </Fragment>
-          ))}
-        </TrainingVideoList>
+      {!isFetchLoading && trainings[category] && trainings[category].length > 0 && (
+        <>
+          <TrainingVideoList>
+            {trainings[category].map((video: ITraining, i: number) => (
+              <Fragment key={i}>
+                <TrainingVideoElement
+                  title={video.title}
+                  subtitle={video.subtitle}
+                  caption={video.caption}
+                  url={video.url}
+                />
+              </Fragment>
+            ))}
+          </TrainingVideoList>
+          {isNearScreenLoading && (
+            <div className='flex items-center justify-center py-8'>
+              <Spinner />
+            </div>
+          )}
+          {!isFetchLoading && !isNearScreenLoading && <div id={VISOR_ELEMENT_ID} />}
+        </>
       )}
     </>
   )

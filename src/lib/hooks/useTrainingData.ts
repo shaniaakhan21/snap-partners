@@ -1,10 +1,27 @@
+import { useEffect, useState } from 'react'
 import { getTrainings } from 'lib/services/training/getTrainings'
 import { ITrainingState, TTrainingType } from 'lib/types/training'
 import { handleFetchError } from 'lib/utils/handleFetchError'
-import { useEffect, useState } from 'react'
+
+const fnGetTrainings = async (token: string, type: TTrainingType, page: number) => {
+  const { data, error } = await getTrainings(token, type, page)
+
+  if (error) handleFetchError(error.status, error.info)
+
+  return { data, error }
+}
 
 export const useTrainingData = (token: string) => {
-  const [data, setData] = useState<ITrainingState>({
+  const [pages, setPages] = useState({
+    all: 1,
+    start: 1,
+    customer: 1,
+    driver: 1,
+    merchant: 1,
+    empire: 1
+  })
+
+  const [trainings, setTrainings] = useState<ITrainingState>({
     all: null,
     start: null,
     customer: null,
@@ -12,34 +29,85 @@ export const useTrainingData = (token: string) => {
     merchant: null,
     empire: null
   })
+
   const [type, setType] = useState<TTrainingType>('all')
-  const [isLoading, setIsLoading] = useState(true)
+  const [isFetchLoading, setIsFetchLoading] = useState(true)
+  const [isNearScreenLoading, setIsNearScreenLoading] = useState(false)
 
   useEffect(() => {
-    if (data[type]) return
+    if (trainings[type]) return
 
     (async () => {
-      if (!isLoading) setIsLoading(true)
-      const { data, error } = await getTrainings(token, type === 'all' ? null : type)
+      if (!isFetchLoading) setIsFetchLoading(true)
+      const { data, error } = await fnGetTrainings(
+        token,
+        type === 'all' ? null : type,
+        pages[type]
+      )
 
       if (error) {
-        handleFetchError(error.status, error.info)
-        setIsLoading(false)
+        setIsFetchLoading(false)
         return
       }
 
-      setData(prevState => ({
+      setTrainings(prevState => ({
         ...prevState,
         [type]: data
       }))
-      setIsLoading(false)
+      setIsFetchLoading(false)
     })()
   }, [type])
 
+  useEffect(() => {
+    if (!pages[type] || pages[type] === 1) return // * NO INIT DATA
+
+    (async () => {
+      setIsNearScreenLoading(true)
+      const { data, error } = await fnGetTrainings(
+        token,
+        type === 'all' ? null : type,
+        pages[type]
+      )
+
+      if (error) {
+        setIsNearScreenLoading(false)
+        return
+      }
+
+      if (data.length === 0) { // NO MORE DATA
+        setPages(prevState => ({
+          ...prevState,
+          [type]: null
+        }))
+        setIsNearScreenLoading(false)
+        return
+      }
+
+      setTrainings(prevState => ({
+        ...prevState,
+        [type]: [...prevState[type], ...data]
+      }))
+      setIsNearScreenLoading(false)
+    })()
+  }, [pages])
+
   return {
-    data,
-    isLoading,
+    trainings,
+    isFetchLoading,
+    isNearScreenLoading,
     category: type,
-    setCategory: setType
+    setCategory: (newCategory: TTrainingType) => {
+      if (newCategory === type) return
+
+      setType(newCategory)
+    },
+    increasePage: () => {
+      if (!pages[type]) return
+
+      setPages(prevState => ({
+        ...prevState,
+        [type]: prevState[type] + 1
+      }))
+    }
   }
 }
