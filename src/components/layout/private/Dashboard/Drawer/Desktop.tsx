@@ -15,7 +15,7 @@ export const DrawerDesktop = ({ isCurrentlyPage, isManager, isAdmin }: { isCurre
       <ul className='my-10 text-white'>
         {
           drawerRoutes.map(route => {
-            if ((isAdmin || isManager) && route.to === '/upgrade-to-manager') return <Fragment />
+            if ((isAdmin || isManager) && route.to === '/upgrade-to-manager') return <Fragment key={route.label} />
 
             return (
               <li

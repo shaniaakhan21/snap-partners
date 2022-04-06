@@ -26,7 +26,7 @@ export const DrawerMobile = ({ isCurrentlyPage, isManager, isAdmin }: { isCurren
           <ul className='mt-10 mb-20 text-white'>
             {
               drawerRoutes.map(route => {
-                if ((isAdmin || isManager) && route.to === '/upgrade-to-manager') return <Fragment />
+                if ((isAdmin || isManager) && route.to === '/upgrade-to-manager') return <Fragment key={route.label} />
 
                 return (
                   <li
