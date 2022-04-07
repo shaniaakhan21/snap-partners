@@ -1,7 +1,4 @@
-import Image from 'next/image'
-
 import { marketingSharingCard } from 'lib/utils/gtm'
-
 import { ShareRRSSIcon } from 'components/common/icons'
 import {
   FacebookShareButton,
@@ -19,6 +16,7 @@ import {
 } from 'react-share'
 import { IMarketingArticle } from 'lib/types/marketing'
 import { useCopyToClipboard } from 'lib/hooks/useCopyToClipboard'
+import { ImageSkeleton } from 'components/common/ImageWithLoader'
 
 interface IArticleProps extends IMarketingArticle {
   isAuthAdmin: boolean
@@ -51,17 +49,11 @@ export const Article = ({ linkToShare, id, imageId, title, subtitle, caption, ha
       </section> */}
 
       {/* <section className='w-full border-t-4 border-primary-500'> */}
-      {
-        imageId && (
-          <Image
-            src={imageId}
-            className='rounded-t-[4px] w-full'
-            width={384}
-            height={384}
-            loading='lazy'
-          />
-        )
-      }
+      <ImageSkeleton
+        src={imageId}
+        height={384}
+        width={384}
+      />
       {/* </section> */}
 
       <section className='w-full px-5 py-3'>
