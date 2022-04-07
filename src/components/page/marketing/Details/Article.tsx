@@ -1,4 +1,7 @@
+import Image from 'next/image'
+
 import { marketingSharingCard } from 'lib/utils/gtm'
+
 import { ShareRRSSIcon } from 'components/common/icons'
 import {
   FacebookShareButton,
@@ -48,10 +51,20 @@ export const Article = ({ linkToShare, id, imageId, title, subtitle, caption, ha
       </section> */}
 
       {/* <section className='w-full border-t-4 border-primary-500'> */}
-      <img src={imageId} className='rounded-t-[4px]' />
+      {
+        imageId && (
+          <Image
+            src={imageId}
+            className='rounded-t-[4px] w-full'
+            width={384}
+            height={384}
+            loading='lazy'
+          />
+        )
+      }
       {/* </section> */}
 
-      <section className='w-full border-t border-gray-400 px-5 py-3'>
+      <section className='w-full px-5 py-3'>
         <span className='font-bold text-lg'>{title}</span> <br />
         <span className='text-sm'>{subtitle}</span>
       </section>
@@ -60,17 +73,21 @@ export const Article = ({ linkToShare, id, imageId, title, subtitle, caption, ha
         <p>{caption}</p>
       </section>
 
-      <ul className='w-full border-t border-gray-400 px-5 py-3 flex text-sm'>
-        {
-          hashtags.map(hashtag => (
-            <li key={hashtag} className='mr-1.5'>
-              <span className='text-blue-500 select-none'>
-                #{hashtag}
-              </span>
-            </li>
-          ))
-        }
-      </ul>
+      {
+        hashtags[0] && (
+          <ul className='w-full border-t border-gray-400 px-5 py-3 flex text-sm'>
+            {
+              hashtags.map(hashtag => (
+                <li key={hashtag} className='mr-1.5'>
+                  <span className='text-blue-500 select-none'>
+                  #{hashtag}
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+        )
+      }
 
       <ul className='w-full border-t border-gray-400 px-5 py-4 flex justify-between items-start -mb-2'>
         <li>

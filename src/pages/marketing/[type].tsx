@@ -96,22 +96,27 @@ const MarketingArticlePage = ({ typeMarketing }: { typeMarketing: TMarketingType
 
       <ListArticles>
         {
-          articles.map(article => (
-            <Article
-              linkToShare={`${auth.referralLink}&marketingId=${article.id}`}
-              createdAt={article.createdAt}
-              updatedAt={article.updatedAt}
-              type={article.type}
-              key={article.id}
-              id={article.id}
-              title={article.title}
-              subtitle={article.subtitle}
-              caption={article.caption}
-              imageId={article.imageId}
-              hashtags={article.hashtags}
-              isAuthAdmin={auth.roles.admin}
-            />
-          ))
+          articles.map(article => {
+            if (!article.imageId && !article.title) return null
+
+            return (
+              <Article
+                linkToShare={`${auth.referralLink}&marketingId=${article.id}`}
+                createdAt={article.createdAt}
+                updatedAt={article.updatedAt}
+                type={article.type}
+                key={article.id}
+                id={article.id}
+                title={article.title}
+                subtitle={article.subtitle}
+                caption={article.caption}
+                imageId={article.imageId}
+                hashtags={article.hashtags}
+                isAuthAdmin={auth.roles.admin}
+              />
+            )
+          }
+          )
         }
       </ListArticles>
     </>
