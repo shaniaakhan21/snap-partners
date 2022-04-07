@@ -96,7 +96,7 @@ const MarketingArticlePage = ({ typeMarketing }: { typeMarketing: TMarketingType
 
       <ListArticles>
         {
-          articles.map(article => {
+          [...articles, ...articles].map(article => {
             if (!article.title && !article.caption) return null
 
             return (
@@ -118,6 +118,10 @@ const MarketingArticlePage = ({ typeMarketing }: { typeMarketing: TMarketingType
           }
           )
         }
+      </ListArticles>
+
+      <ListArticles>
+
       </ListArticles>
     </>
   )
