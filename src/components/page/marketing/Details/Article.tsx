@@ -1,7 +1,4 @@
-import Image from 'next/image'
-
 import { marketingSharingCard } from 'lib/utils/gtm'
-
 import { ShareRRSSIcon } from 'components/common/icons'
 import {
   FacebookShareButton,
@@ -51,17 +48,13 @@ export const Article = ({ linkToShare, id, imageId, title, subtitle, caption, ha
       </section> */}
 
       {/* <section className='w-full border-t-4 border-primary-500'> */}
-      {
-        imageId && (
-          <Image
-            src={imageId}
-            className='rounded-t-[4px] w-full'
-            width={384}
-            height={384}
-            loading='lazy'
-          />
-        )
-      }
+      <img
+        src={imageId ?? '/static/no-img.webp' }
+        height={384}
+        width={384}
+        className='rounded-t-[4px] w-full bg-gray-300'
+        loading='lazy'
+      />
       {/* </section> */}
 
       <section className='w-full px-5 py-3'>
