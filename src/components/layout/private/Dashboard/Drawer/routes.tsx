@@ -41,11 +41,6 @@ export const drawerRoutes = [
     to: 'https://snapdelivered.ourproshop.com/',
     label: 'Tools'
   },
-  {/*
-    icon: <RelojTempIcon />,
-    to: '/comingsoon',
-    label: 'Recognition'
-  */},
   {
     icon: <GenealogyIcon />,
     to: '/genealogy',
