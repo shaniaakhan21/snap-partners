@@ -3,9 +3,6 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   reactStrictMode: true,
-  images: {
-    domains: ['snap-delivered.nyc3.digitaloceanspaces.com']
-  },
   async rewrites () {
     return process.env.NODE_ENV !== 'production'
       ? [
