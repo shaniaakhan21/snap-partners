@@ -6,7 +6,7 @@ interface IProps {
 }
 
 export const Video = ({ title, subtitle, caption, url }: IProps) => (
-  <li className='max-w-xs w-full h-min bg-white rounded-t-lg overflow-hidden'>
+  <li className='max-w-xs w-full h-min bg-white rounded-t-lg overflow-hidden pb-4'>
     <div className='w-full '>
       <iframe
         src={url}
@@ -25,11 +25,17 @@ export const Video = ({ title, subtitle, caption, url }: IProps) => (
         <span>{subtitle}</span>
       </div>
 
-      <hr className='my-4 border-gray-300' />
+      {
+        caption && (
+          <>
+            <hr className='my-4 border-gray-300' />
 
-      <div className='px-6 pb-4'>
-        <p>{caption}</p>
-      </div>
+            <div className='px-6'>
+              <p>{caption}</p>
+            </div>
+          </>
+        )
+      }
     </div>
   </li>
 )
