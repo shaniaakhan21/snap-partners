@@ -1,8 +1,9 @@
+import { GetServerSideProps } from 'next'
+// import fetch from 'node-fetch'
 import Head from 'next/head'
 
 import { useHandlerReferralLink } from 'lib/hooks/useHandlerReferralLink'
 import { APP_INFO } from 'config/appInfo'
-import type { Page } from 'lib/types'
 
 import { AuthPagesLayout } from 'layouts/public/Auth'
 import { SignUpMerchantForm } from 'components/page/signup/SignUpForm/FormByRole/Merchant'
@@ -12,7 +13,7 @@ import { ROLES } from 'config/roles'
 
 const { SEO } = APP_INFO
 
-const SignUpPage: Page = () => {
+const SignUpPage = () => {
   const { referralCode: code, role } = useHandlerReferralLink()
 
   if (role === ROLES.CUSTOMER) return <SignUpCustomerForm referralLink={{ code, role }} />
@@ -26,10 +27,44 @@ SignUpPage.getLayout = (page) => (
   <AuthPagesLayout>
     <Head>
       <title>{SEO.TITLE_PAGE} - Sign Up</title>
+      {
+        page.props.rrssInfo && (
+          <>
+            <meta property='og:url' content={`${APP_INFO.SEO.URL_PAGE}/auth/signup`} />
+            <meta property='og:image' content={page.props.rrssInfo.imageId} />
+          </>
+        )
+      }
     </Head>
 
     {page}
   </AuthPagesLayout>
 )
+
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const marketingId = query.marketingId
+  const token = query.token
+
+  if (marketingId) {
+    const res = await fetch(`${APP_INFO.SEO.URL_PAGE}/api/marketing/${marketingId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    const { data } = await res.json()
+
+    return {
+      props: {
+        rrssInfo: data
+      }
+    }
+  } else {
+    return {
+      props: {
+        rrssInfo: null
+      }
+    }
+  }
+}
 
 export default SignUpPage
