@@ -23,27 +23,31 @@ const SignUpPage = () => {
   return <SelectRoleToSignUp />
 }
 
-SignUpPage.getLayout = (page) => (
-  <AuthPagesLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Sign Up</title>
-      {
-        page.props.rrssInfo && (
-          <>
-            <meta property='og:url' content={`${APP_INFO.SEO.URL_PAGE}/auth/signup`} />
-            <meta property='og:image' content={page.props.rrssInfo.imageId} />
-            <meta property='twitter:image' content={page.props.rrssInfo.imageId} />
-          </>
-        )
-      }
-    </Head>
+SignUpPage.getLayout = (page) => {
+  return (
+    <AuthPagesLayout>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - Sign Up</title>
+        {
+          page.props.rrssInfo && (
+            <>
+              <meta property='og:url' content={`${APP_INFO.SEO.URL_PAGE}/share/${page.props.referralCode}/${page.props.role}/${page.props.marketingId}`} />
+              <meta property='og:image' content={page.props.rrssInfo.imageId} />
+              <meta property='twitter:image' content={page.props.rrssInfo.imageId} />
+            </>
+          )
+        }
+      </Head>
 
-    {page}
-  </AuthPagesLayout>
-)
+      {page}
+    </AuthPagesLayout>
+  )
+}
 
 export const getServerSideProps: GetServerSideProps = async ({ query, params, resolvedUrl }) => {
   const marketingId = params.marketingId
+  const referralCode = params.referralCode
+  const role = params.role
 
   if (marketingId) {
     const res = await fetch(`${APP_INFO.SEO.URL_PAGE}/api/marketing/${marketingId}`)
@@ -52,18 +56,15 @@ export const getServerSideProps: GetServerSideProps = async ({ query, params, re
     return {
       props: {
         rrssInfo: data,
-        params,
-        resolvedUrl,
-        test: 1
+        marketingId,
+        referralCode,
+        role
       }
     }
   } else {
     return {
       props: {
-        rrssInfo: null,
-        params,
-        resolvedUrl,
-        test: 2
+        rrssInfo: null
       }
     }
   }
