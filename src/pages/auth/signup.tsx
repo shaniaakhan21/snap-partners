@@ -50,14 +50,9 @@ SignUpPage.getLayout = (page) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const marketingId = query.marketingId
-  const token = query.token
 
   if (marketingId) {
-    const res = await fetch(`https://dev.snap.devopsteam.info/api/marketing/${marketingId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    const res = await fetch(`https://dev.snap.devopsteam.info/api/marketing/${marketingId}`)
     const { data } = await res.json()
 
     return {
