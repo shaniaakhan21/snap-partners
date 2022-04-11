@@ -13,7 +13,7 @@ import { ROLES } from 'config/roles'
 
 const { SEO } = APP_INFO
 
-const SignUpPage = ({ rrssInfo }) => {
+const SignUpPage = () => {
   const { referralCode: code, role } = useHandlerReferralLink()
 
   if (role === ROLES.CUSTOMER) return <SignUpCustomerForm referralLink={{ code, role }} />
@@ -46,8 +46,10 @@ SignUpPage.getLayout = (page) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const marketingId = query.marketingId
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  console.log(params)
+  const marketingId = params?.marketingId
+  console.log(marketingId)
 
   if (marketingId) {
     const res = await fetch(`${APP_INFO.SEO.URL_PAGE}/api/marketing/${marketingId}`)
