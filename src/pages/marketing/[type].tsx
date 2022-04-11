@@ -101,7 +101,6 @@ const MarketingArticlePage = ({ typeMarketing }: { typeMarketing: TMarketingType
 
             return (
               <Article
-                // linkToShare={`${auth.referralLink}&marketingId=${article.id}&token=${auth.accessToken}`}
                 linkToShare={`${SEO.URL_PAGE}/share/${auth.referralCode}/${typeMarketing.toUpperCase()}/${article.id}`}
                 createdAt={article.createdAt}
                 updatedAt={article.updatedAt}
