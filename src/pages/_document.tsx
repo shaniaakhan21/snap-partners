@@ -2,7 +2,7 @@ import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { GTM_ID } from 'lib/utils/gtm'
 import { APP_INFO } from 'config/appInfo'
 
-const { SEO, RRSS } = APP_INFO
+const { SEO } = APP_INFO
 
 export default class MyDocument extends Document {
   render () {
