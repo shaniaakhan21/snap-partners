@@ -40,19 +40,6 @@ export default class MyDocument extends Document {
           {/* <link rel='mask-icon' href='/static/icons/safari-pinned-tab.svg' color='#DD4C37' /> */}
           <link rel='shortcut icon' href='/static/favicon.ico' />
 
-          <meta name='twitter:image:alt' content={SEO.TITLE_PAGE} />
-          <meta name='twitter:creator' content={RRSS.TWITTER.USERNAME} />
-          <meta property='twitter:card' content='summary_large_image' />
-          <meta property='twitter:url' content={SEO.URL_PAGE} />
-          <meta property='twitter:title' content={SEO.TITLE_PAGE} />
-          <meta property='twitter:description' content={SEO.DESCRIPTION_PAGE} />
-          <meta property='twitter:image:alt' content={SEO.TITLE_PAGE} />
-
-          <meta property='og:site_name' content={SEO.TITLE_PAGE} />
-          <meta property='og:type' content='website' />
-          <meta property='og:title' content={SEO.TITLE_PAGE} />
-          <meta property='og:description' content={SEO.DESCRIPTION_PAGE} />
-
           {/* <!-- apple splash screen images --> */}
           {/* <link rel='apple-touch-startup-image' href='/static/images/apple_splash_2048.png' sizes='2048x2732' />
           <link rel='apple-touch-startup-image' href='/static/images/apple_splash_1668.png' sizes='1668x2224' />
