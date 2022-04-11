@@ -1,5 +1,3 @@
-import { GetServerSideProps } from 'next'
-// import fetch from 'node-fetch'
 import Head from 'next/head'
 
 import { useHandlerReferralLink } from 'lib/hooks/useHandlerReferralLink'
@@ -14,64 +12,24 @@ import { ROLES } from 'config/roles'
 const { SEO } = APP_INFO
 
 const SignUpPage = () => {
-  console.log('pagina')
   const { referralCode: code, role } = useHandlerReferralLink()
 
   if (role === ROLES.CUSTOMER) return <SignUpCustomerForm referralLink={{ code, role }} />
   if (role === ROLES.DRIVER) return <SignUpDriverForm referralLink={{ code, role }} />
   if (role === ROLES.MERCHANT) return <SignUpMerchantForm referralLink={{ code, role }} />
 
-  return <SelectRoleToSignUp />
+  return (<SelectRoleToSignUp />)
 }
 
 SignUpPage.getLayout = (page) => {
-  console.log('layout')
-
   return (
     <AuthPagesLayout>
       <Head>
         <title>{SEO.TITLE_PAGE} - Sign Up</title>
-        {
-          page.props.rrssInfo && (
-            <>
-              <meta property='og:url' content={`${APP_INFO.SEO.URL_PAGE}/auth/signup`} />
-              <meta key='twitterImage' property='twitter:image' content={page.props.rrssInfo.imageId} />
-              <meta key='ogImage' property='og:image' content={page.props.rrssInfo.imageId} />
-            </>
-          )
-        }
-
       </Head>
-
       {page}
     </AuthPagesLayout>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  const marketingId = query.marketingId
-  const token = query.token
-
-  if (marketingId) {
-    const res = await fetch(`https://dev.snap.devopsteam.info/api/marketing/${marketingId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-    const { data } = await res.json()
-
-    return {
-      props: {
-        rrssInfo: data
-      }
-    }
-  } else {
-    return {
-      props: {
-        rrssInfo: null
-      }
-    }
-  }
 }
 
 export default SignUpPage

@@ -25,7 +25,6 @@ export default class MyDocument extends Document {
           <meta name='apple-mobile-web-app-title' content={SEO.TITLE_PAGE} />
           <meta name='format-detection' content='telephone=no' />
           <meta name='mobile-web-app-capable' content='yes' />
-          {/* <meta name='msapplication-config' content='/static/icons/browserconfig.xml' /> */}
           <meta name='msapplication-TileColor' content='#DD4C37' />
           <meta name='msapplication-tap-highlight' content='no' />
           <meta name='theme-color' content='#DD4C37' />
@@ -48,14 +47,12 @@ export default class MyDocument extends Document {
           <meta property='twitter:title' content={SEO.TITLE_PAGE} />
           <meta property='twitter:description' content={SEO.DESCRIPTION_PAGE} />
           <meta property='twitter:image:alt' content={SEO.TITLE_PAGE} />
-          <meta key='twitterImage' property='twitter:image' content={`${SEO.URL_PAGE}/images/logo-full-232px.png`} />
 
           <meta property='og:site_name' content={SEO.TITLE_PAGE} />
           <meta property='og:type' content='website' />
           <meta property='og:url' content={SEO.URL_PAGE} />
           <meta property='og:title' content={SEO.TITLE_PAGE} />
           <meta property='og:description' content={SEO.DESCRIPTION_PAGE} />
-          <meta key='ogImage' property='og:image' content={`${SEO.URL_PAGE}/images/logo-full-232px.png`} />
 
           {/* <!-- apple splash screen images --> */}
           {/* <link rel='apple-touch-startup-image' href='/static/images/apple_splash_2048.png' sizes='2048x2732' />

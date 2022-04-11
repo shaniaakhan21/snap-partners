@@ -42,11 +42,6 @@ export const drawerRoutes = [
     label: 'Tools'
   },
   {
-    icon: <RelojTempIcon />,
-    to: '/comingsoon',
-    label: 'Recognition'
-  },
-  {
     icon: <GenealogyIcon />,
     to: '/genealogy',
     label: 'Genealogy'
