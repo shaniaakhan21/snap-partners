@@ -30,7 +30,7 @@ SignUpPage.getLayout = (page) => (
       {
         page.props.rrssInfo && (
           <>
-            <meta property='og:url' content={`${APP_INFO.SEO.URL_PAGE}/auth/signup`} />
+            <meta property='og:url' content={`${APP_INFO.SEO.URL_PAGE}/auth/share`} />
             <meta property='og:image' content={page.props.rrssInfo.imageId} />
             <meta property='twitter:image' content={page.props.rrssInfo.imageId} />
           </>
