@@ -42,8 +42,8 @@ SignUpPage.getLayout = (page) => (
   </AuthPagesLayout>
 )
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const marketingId = ctx.query.marketingId
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  const marketingId = query.marketingId
 
   if (marketingId) {
     const res = await fetch(`${APP_INFO.SEO.URL_PAGE}/api/marketing/${marketingId}`)
@@ -51,15 +51,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
     return {
       props: {
-        rrssInfo: data,
-        url: `${APP_INFO.SEO.URL_PAGE}/api/marketing/${marketingId}`
+        rrssInfo: data
       }
     }
   } else {
     return {
       props: {
-        rrssInfo: null,
-        ctx
+        rrssInfo: null
       }
     }
   }
