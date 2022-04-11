@@ -24,7 +24,6 @@ const SignUpPage = () => {
 }
 
 SignUpPage.getLayout = (page) => {
-  const { referralCode: code, role } = useHandlerReferralLink()
   return (
     <AuthPagesLayout>
       <Head>
@@ -32,7 +31,7 @@ SignUpPage.getLayout = (page) => {
         {
           page.props.rrssInfo && (
             <>
-              <meta property='og:url' content={`${APP_INFO.SEO.URL_PAGE}/share/${code}/${role}/${page.props.marketingId}`} />
+              <meta property='og:url' content={`${APP_INFO.SEO.URL_PAGE}/share/${page.props.code}/${page.props.role}/${page.props.marketingId}`} />
               <meta property='og:image' content={page.props.rrssInfo.imageId} />
               <meta property='twitter:image' content={page.props.rrssInfo.imageId} />
             </>
@@ -47,6 +46,8 @@ SignUpPage.getLayout = (page) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ query, params, resolvedUrl }) => {
   const marketingId = params.marketingId
+  const referralCode = params.referralCode
+  const role = params.role
 
   if (marketingId) {
     const res = await fetch(`${APP_INFO.SEO.URL_PAGE}/api/marketing/${marketingId}`)
@@ -55,7 +56,9 @@ export const getServerSideProps: GetServerSideProps = async ({ query, params, re
     return {
       props: {
         rrssInfo: data,
-        marketingId
+        marketingId,
+        referralCode,
+        role
       }
     }
   } else {
