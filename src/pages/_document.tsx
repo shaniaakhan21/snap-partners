@@ -10,8 +10,6 @@ export default class MyDocument extends Document {
       <Html>
         <Head>
           <meta charSet='utf-8' />
-          <meta name='title' content={SEO.TITLE_PAGE} />
-          <meta name='description' content={SEO.DESCRIPTION_PAGE} />
           <meta name='keywords' content={SEO.KEYWORDS_PAGE.join(', ')} />
           <meta name='author' content={SEO.AUTHOR} />
           <meta name='copyright' content={SEO.AUTHOR} />
