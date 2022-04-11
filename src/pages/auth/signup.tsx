@@ -52,7 +52,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     return {
       props: {
         rrssInfo: data,
-        url: `${APP_INFO.SEO.URL_PAGE}/api/marketing/${marketingId}`,
+        url: `${APP_INFO.SEO.URL_PAGE}/api/marketing/${marketingId}`
       }
     }
   } else {
