@@ -10,8 +10,6 @@ export default class MyDocument extends Document {
       <Html>
         <Head>
           <meta charSet='utf-8' />
-          <meta name='title' content={SEO.TITLE_PAGE} />
-          <meta name='description' content={SEO.DESCRIPTION_PAGE} />
           <meta name='keywords' content={SEO.KEYWORDS_PAGE.join(', ')} />
           <meta name='author' content={SEO.AUTHOR} />
           <meta name='copyright' content={SEO.AUTHOR} />
@@ -39,19 +37,6 @@ export default class MyDocument extends Document {
           <link rel='manifest' href='/static/site.webmanifest' />
           {/* <link rel='mask-icon' href='/static/icons/safari-pinned-tab.svg' color='#DD4C37' /> */}
           <link rel='shortcut icon' href='/static/favicon.ico' />
-
-          <meta name='twitter:image:alt' content={SEO.TITLE_PAGE} />
-          <meta name='twitter:creator' content={RRSS.TWITTER.USERNAME} />
-          <meta property='twitter:card' content='summary_large_image' />
-          <meta property='twitter:url' content={SEO.URL_PAGE} />
-          <meta property='twitter:title' content={SEO.TITLE_PAGE} />
-          <meta property='twitter:description' content={SEO.DESCRIPTION_PAGE} />
-          <meta property='twitter:image:alt' content={SEO.TITLE_PAGE} />
-
-          <meta property='og:site_name' content={SEO.TITLE_PAGE} />
-          <meta property='og:type' content='website' />
-          <meta property='og:title' content={SEO.TITLE_PAGE} />
-          <meta property='og:description' content={SEO.DESCRIPTION_PAGE} />
 
           {/* <!-- apple splash screen images --> */}
           {/* <link rel='apple-touch-startup-image' href='/static/images/apple_splash_2048.png' sizes='2048x2732' />

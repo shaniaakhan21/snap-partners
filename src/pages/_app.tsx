@@ -5,6 +5,7 @@ import { ToastContainer } from 'react-toastify'
 import type { NextComponentType } from 'next'
 import { useRouter } from 'next/router'
 import Script from 'next/script'
+import Head from 'next/head'
 
 import { useLoadingPage } from 'lib/hooks/useLoadingPage'
 import { GTM_ID, pageview } from 'lib/utils/gtm'
@@ -19,6 +20,9 @@ import 'react-toastify/dist/ReactToastify.min.css'
 import 'react-phone-input-2/lib/style.css'
 import 'tippy.js/dist/tippy.css'
 import 'styles/tailwind.css'
+import { APP_INFO } from '../config/appInfo'
+
+const { SEO } = APP_INFO
 
 const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({ Component, pageProps }: AppLayoutProps) => {
   const getLayout = Component.getLayout || ((page: ReactNode) => page)
@@ -56,6 +60,28 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
           `
         }}
       />
+
+      {!router.asPath.startsWith('/share') && (
+        <Head>
+          <meta name='title' content={SEO.TITLE_PAGE} />
+          <meta name='description' content={SEO.DESCRIPTION_PAGE} />
+
+          <meta property='twitter:card' content='summary_large_image' />
+          <meta property='twitter:url' content={SEO.URL_PAGE} />
+          <meta property='twitter:title' content={SEO.TITLE_PAGE} />
+          <meta property='twitter:description' content={SEO.DESCRIPTION_PAGE} />
+          <meta property='twitter:image:alt' content={SEO.TITLE_PAGE} />
+          <meta property='twitter:image' content={`${SEO.URL_PAGE}/images/logo-full-232px.png`} />
+
+          <meta property='og:site_name' content={SEO.TITLE_PAGE} />
+          <meta property='og:type' content='website' />
+          <meta property='og:url' content={SEO.URL_PAGE} />
+          <meta property='og:title' content={SEO.TITLE_PAGE} />
+          <meta property='og:description' content={SEO.DESCRIPTION_PAGE} />
+          <meta property='og:image' content={`${SEO.URL_PAGE}/images/logo-full-232px.png`} />
+        </Head>
+
+      )}
 
       <LoadingPage isRouteChanging={isRouteChanging} key={loadingKey} />
 

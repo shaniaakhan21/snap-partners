@@ -31,9 +31,17 @@ SignUpPage.getLayout = (page) => {
         {
           page.props.rrssInfo && (
             <>
+              <meta name='title' content={page.props.rrssInfo.title} />
+              <meta name='description' content={page.props.rrssInfo.caption} />
+              <meta property='og:type' content='website' />
               <meta property='og:url' content={`${APP_INFO.SEO.URL_PAGE}/share/${page.props.referralCode}/${page.props.role}/${page.props.marketingId}`} />
+              <meta property='og:title' content={page.props.rrssInfo.title} />
+              <meta property='og:description' content={page.props.rrssInfo.caption} />
               <meta property='og:image' content={page.props.rrssInfo.imageId} />
+              <meta property='twitter:url' content={`${APP_INFO.SEO.URL_PAGE}/share/${page.props.referralCode}/${page.props.role}/${page.props.marketingId}`} />
+              <meta property='twitter:title' content={page.props.rrssInfo.title} />
               <meta property='twitter:image' content={page.props.rrssInfo.imageId} />
+              <meta property='twitter:description' content={page.props.rrssInfo.caption} />
             </>
           )
         }
