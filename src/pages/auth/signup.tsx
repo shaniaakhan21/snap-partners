@@ -14,6 +14,7 @@ import { ROLES } from 'config/roles'
 const { SEO } = APP_INFO
 
 const SignUpPage = () => {
+  console.log('pagina')
   const { referralCode: code, role } = useHandlerReferralLink()
 
   if (role === ROLES.CUSTOMER) return <SignUpCustomerForm referralLink={{ code, role }} />
@@ -23,17 +24,29 @@ const SignUpPage = () => {
   return <SelectRoleToSignUp />
 }
 
-SignUpPage.getLayout = (page) => (
-  <AuthPagesLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Sign Up</title>
-      <meta property='twitter:image' content={page.props.rrssInfo.imageId} />
-      <meta property='og:image' content={page.props.rrssInfo.imageId} />
-    </Head>
+SignUpPage.getLayout = (page) => {
+  console.log('layout')
 
-    {page}
-  </AuthPagesLayout>
-)
+  return (
+    <AuthPagesLayout>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - Sign Up</title>
+        {
+          page.props.rrssInfo && (
+            <>
+              <meta property='og:url' content={`${APP_INFO.SEO.URL_PAGE}/auth/signup`} />
+              <meta key='twitterImage' property='twitter:image' content={page.props.rrssInfo.imageId} />
+              <meta key='ogImage' property='og:image' content={page.props.rrssInfo.imageId} />
+            </>
+          )
+        }
+
+      </Head>
+
+      {page}
+    </AuthPagesLayout>
+  )
+}
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const marketingId = query.marketingId
