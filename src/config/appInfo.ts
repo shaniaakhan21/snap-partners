@@ -1,8 +1,8 @@
 export const APP_INFO = {
   SEO: {
-    AUTHOR: 'Snap Deliver',
-    TITLE_PAGE: 'Snap Deliver',
-    DESCRIPTION_PAGE: 'Snap Deliver Application',
+    AUTHOR: 'Snap Delivered',
+    TITLE_PAGE: 'Snap Delivered',
+    DESCRIPTION_PAGE: 'Snap Delivered Application',
     URL_PAGE: 'https://dev.snap.devopsteam.info',
     KEYWORDS_PAGE: [
       'Snap Delivered',

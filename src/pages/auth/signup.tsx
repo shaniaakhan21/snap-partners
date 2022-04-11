@@ -27,23 +27,8 @@ SignUpPage.getLayout = (page) => (
   <AuthPagesLayout>
     <Head>
       <title>{SEO.TITLE_PAGE} - Sign Up</title>
-      {
-        page.props.rrssInfo
-          ? (
-            <>
-              <meta property='og:url' content={`${APP_INFO.SEO.URL_PAGE}/auth/signup`} />
-              <meta property='twitter:image' content={page.props.rrssInfo.imageId} />
-              <meta property='og:image' content={page.props.rrssInfo.imageId} />
-            </>
-          )
-          : (
-            <>
-              <meta property='og:url' content={`${APP_INFO.SEO.URL_PAGE}/auth/signup`} />
-              <meta property='twitter:image' content={`${SEO.URL_PAGE}/images/logo-full-232px.png`} />
-              <meta property='og:image' content={`${SEO.URL_PAGE}/images/logo-full-232px.png`} />
-            </>
-          )
-      }
+      <meta property='twitter:image' content={page.props.rrssInfo.imageId} />
+      <meta property='og:image' content={page.props.rrssInfo.imageId} />
     </Head>
 
     {page}
