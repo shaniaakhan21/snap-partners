@@ -42,7 +42,7 @@ SignUpPage.getLayout = (page) => (
   </AuthPagesLayout>
 )
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps = async ({ query, params }) => {
   const marketingId = query.marketingId
 
   if (marketingId) {
@@ -53,7 +53,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       props: {
         rrssInfo: data,
         url: `${APP_INFO.SEO.URL_PAGE}/api/marketing/${marketingId}`,
-        query
+        query,
+        params
       }
     }
   } else {
@@ -61,7 +62,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
       props: {
         rrssInfo: null,
         marketingId,
-        query
+        query,
+        params
       }
     }
   }
