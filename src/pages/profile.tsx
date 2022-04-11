@@ -20,7 +20,7 @@ const ProfilePage: Page = () => {
   const { setNewWindow } = useNewWindowOpenedStore()
 
   return (
-    <>
+    <div className='max-w-4xl mx-auto'>
       <div className='flex justify-start items-center gap-x-5 select-none'>
         <PhotoAccount photoURL={null} />
         <Badges auth={auth} />
@@ -49,7 +49,7 @@ const ProfilePage: Page = () => {
       </button>
 
       <TextContactCTA />
-    </>
+    </div>
   )
 }
 

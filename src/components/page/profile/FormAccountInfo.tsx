@@ -7,7 +7,7 @@ interface IFormAccountInfoProps {
 export const FormAccountInfo = ({ auth }: IFormAccountInfoProps) => {
   return (
     <ul className='w-full h-full rounded-lg'>
-      <div className='flex flex-col sm:flex-row justify-start items-start gap-y-2 gap-x-2'>
+      {/* <div className='flex flex-col sm:flex-row justify-start items-start gap-y-2 gap-x-2'>
         <li className='rounded-xl bg-white w-full sm:w-1/2 px-4 py-3 border-y-2 border-y-gray-200 flex justify-between items-center'>
           <div>
             <label htmlFor='name' className='text-sm'>Name</label>
@@ -94,7 +94,28 @@ export const FormAccountInfo = ({ auth }: IFormAccountInfoProps) => {
             </button>
           </div>
         </li>
-      </div>
+      </div> */}
+
+      <li className='rounded-xl bg-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center'>
+        <div>
+          <label htmlFor='email' className='text-sm'>Password</label>
+          <br />
+          <input
+            id='email'
+            name='email'
+            type='email'
+            value={auth.email}
+            disabled={true}
+            className='w-full bg-transparent text-lg truncate'
+          />
+        </div>
+
+        <div>
+          <button disabled className='bg-gray-300 rounded-full px-4 py-1 text-white font-bold uppercase'>
+                Edit
+          </button>
+        </div>
+      </li>
 
       <li className='rounded-xl bg-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center'>
         <div>
