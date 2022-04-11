@@ -20,30 +20,31 @@ const SignUpPage = ({ rrssInfo }) => {
   if (role === ROLES.DRIVER) return <SignUpDriverForm referralLink={{ code, role }} />
   if (role === ROLES.MERCHANT) return <SignUpMerchantForm referralLink={{ code, role }} />
 
+  return (<SelectRoleToSignUp />)
+}
+
+SignUpPage.getLayout = (page) => {
   return (
-    <>
+    <AuthPagesLayout>
       <Head>
         <title>{SEO.TITLE_PAGE} - Sign Up</title>
         {
-          rrssInfo && (
+          page.props.rrssInfo && (
             <>
               <meta property='og:url' content={`${APP_INFO.SEO.URL_PAGE}/auth/signup`} />
-              <meta key='twitterImage' property='twitter:image' content={rrssInfo.imageId} />
-              <meta key='ogImage' property='og:image' content={rrssInfo.imageId} />
+              <meta property='twitter:image' content={page.props.rrssInfo.imageId} />
+              <meta property='og:image' content={page.props.rrssInfo.imageId} />
+              <meta property='og:image:secure_url' content={page.props.rrssInfo.imageId}/>
+              <meta property='og:image:width' content='1080' />
+              <meta property='og:image:height' content='1080' />
             </>
           )
         }
       </Head>
-      <SelectRoleToSignUp />
-    </>
+      {page}
+    </AuthPagesLayout>
   )
 }
-
-SignUpPage.getLayout = (page) => (
-  <AuthPagesLayout>
-    {page}
-  </AuthPagesLayout>
-)
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const marketingId = query.marketingId
