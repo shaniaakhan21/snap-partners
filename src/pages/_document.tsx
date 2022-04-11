@@ -51,7 +51,6 @@ export default class MyDocument extends Document {
 
           <meta property='og:site_name' content={SEO.TITLE_PAGE} />
           <meta property='og:type' content='website' />
-          <meta property='og:url' content={SEO.URL_PAGE} />
           <meta property='og:title' content={SEO.TITLE_PAGE} />
           <meta property='og:description' content={SEO.DESCRIPTION_PAGE} />
 
