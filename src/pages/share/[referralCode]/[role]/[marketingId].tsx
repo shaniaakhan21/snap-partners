@@ -23,24 +23,27 @@ const SignUpPage = () => {
   return <SelectRoleToSignUp />
 }
 
-SignUpPage.getLayout = (page) => (
-  <AuthPagesLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Sign Up</title>
-      {
-        page.props.rrssInfo && (
-          <>
-            <meta property='og:url' content={`${APP_INFO.SEO.URL_PAGE}/auth/share`} />
-            <meta property='og:image' content={page.props.rrssInfo.imageId} />
-            <meta property='twitter:image' content={page.props.rrssInfo.imageId} />
-          </>
-        )
-      }
-    </Head>
+SignUpPage.getLayout = (page) => {
+  const { referralCode: code, role } = useHandlerReferralLink()
+  return (
+    <AuthPagesLayout>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - Sign Up</title>
+        {
+          page.props.rrssInfo && (
+            <>
+              <meta property='og:url' content={`${APP_INFO.SEO.URL_PAGE}/share/${code}/${role}/${page.props.marketingId}`} />
+              <meta property='og:image' content={page.props.rrssInfo.imageId} />
+              <meta property='twitter:image' content={page.props.rrssInfo.imageId} />
+            </>
+          )
+        }
+      </Head>
 
-    {page}
-  </AuthPagesLayout>
-)
+      {page}
+    </AuthPagesLayout>
+  )
+}
 
 export const getServerSideProps: GetServerSideProps = async ({ query, params, resolvedUrl }) => {
   const marketingId = params.marketingId
@@ -52,18 +55,13 @@ export const getServerSideProps: GetServerSideProps = async ({ query, params, re
     return {
       props: {
         rrssInfo: data,
-        params,
-        resolvedUrl,
-        test: 1
+        marketingId
       }
     }
   } else {
     return {
       props: {
-        rrssInfo: null,
-        params,
-        resolvedUrl,
-        test: 2
+        rrssInfo: null
       }
     }
   }
