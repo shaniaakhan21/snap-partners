@@ -53,7 +53,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query, params, re
       props: {
         rrssInfo: data,
         params,
-        resolvedUrl
+        resolvedUrl,
+        test: 1
       }
     }
   } else {
@@ -61,7 +62,8 @@ export const getServerSideProps: GetServerSideProps = async ({ query, params, re
       props: {
         rrssInfo: null,
         params,
-        resolvedUrl
+        resolvedUrl,
+        test: 2
       }
     }
   }

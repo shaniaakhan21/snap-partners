@@ -1,5 +1,3 @@
-import { GetServerSideProps } from 'next'
-// import fetch from 'node-fetch'
 import Head from 'next/head'
 
 import { useHandlerReferralLink } from 'lib/hooks/useHandlerReferralLink'
@@ -28,45 +26,10 @@ SignUpPage.getLayout = (page) => {
     <AuthPagesLayout>
       <Head>
         <title>{SEO.TITLE_PAGE} - Sign Up</title>
-        {
-          page.props.rrssInfo && (
-            <>
-              <meta property='og:url' content={`${APP_INFO.SEO.URL_PAGE}/auth/signup`} />
-              <meta property='twitter:image' content={page.props.rrssInfo.imageId} />
-              <meta property='og:image' content={page.props.rrssInfo.imageId} />
-              <meta property='og:image:secure_url' content={page.props.rrssInfo.imageId}/>
-              <meta property='og:image:width' content='1080' />
-              <meta property='og:image:height' content='1080' />
-            </>
-          )
-        }
       </Head>
       {page}
     </AuthPagesLayout>
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  console.log(params)
-  const marketingId = params?.marketingId
-  console.log(marketingId)
-
-  if (marketingId) {
-    const res = await fetch(`${APP_INFO.SEO.URL_PAGE}/api/marketing/${marketingId}`)
-    const { data } = await res.json()
-
-    return {
-      props: {
-        rrssInfo: data
-      }
-    }
-  } else {
-    return {
-      props: {
-        rrssInfo: null
-      }
-    }
-  }
 }
 
 export default SignUpPage
