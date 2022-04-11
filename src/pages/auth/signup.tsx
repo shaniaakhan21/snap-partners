@@ -13,40 +13,37 @@ import { ROLES } from 'config/roles'
 
 const { SEO } = APP_INFO
 
-const SignUpPage = () => {
-  console.log('pagina')
+const SignUpPage = ({ rrssInfo }) => {
   const { referralCode: code, role } = useHandlerReferralLink()
 
   if (role === ROLES.CUSTOMER) return <SignUpCustomerForm referralLink={{ code, role }} />
   if (role === ROLES.DRIVER) return <SignUpDriverForm referralLink={{ code, role }} />
   if (role === ROLES.MERCHANT) return <SignUpMerchantForm referralLink={{ code, role }} />
 
-  return <SelectRoleToSignUp />
-}
-
-SignUpPage.getLayout = (page) => {
-  console.log('layout')
-
   return (
-    <AuthPagesLayout>
+    <>
       <Head>
         <title>{SEO.TITLE_PAGE} - Sign Up</title>
         {
-          page.props.rrssInfo && (
+          rrssInfo && (
             <>
               <meta property='og:url' content={`${APP_INFO.SEO.URL_PAGE}/auth/signup`} />
-              <meta key='twitterImage' property='twitter:image' content={page.props.rrssInfo.imageId} />
-              <meta key='ogImage' property='og:image' content={page.props.rrssInfo.imageId} />
+              <meta key='twitterImage' property='twitter:image' content={rrssInfo.imageId} />
+              <meta key='ogImage' property='og:image' content={rrssInfo.imageId} />
             </>
           )
         }
-
       </Head>
-
-      {page}
-    </AuthPagesLayout>
+      <SelectRoleToSignUp />
+    </>
   )
 }
+
+SignUpPage.getLayout = (page) => (
+  <AuthPagesLayout>
+    {page}
+  </AuthPagesLayout>
+)
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const marketingId = query.marketingId
