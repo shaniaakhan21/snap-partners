@@ -48,7 +48,6 @@ export default class MyDocument extends Document {
           <meta property='twitter:title' content={SEO.TITLE_PAGE} />
           <meta property='twitter:description' content={SEO.DESCRIPTION_PAGE} />
           <meta property='twitter:image:alt' content={SEO.TITLE_PAGE} />
-          <meta property='twitter:image' content={`${SEO.URL_PAGE}/images/logo-full-232px.png`} />
 
           <meta property='og:site_name' content={SEO.TITLE_PAGE} />
           <meta property='og:type' content='website' />

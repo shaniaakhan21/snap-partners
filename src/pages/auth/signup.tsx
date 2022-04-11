@@ -32,6 +32,7 @@ SignUpPage.getLayout = (page) => (
           <>
             <meta property='og:url' content={`${APP_INFO.SEO.URL_PAGE}/auth/signup`} />
             <meta property='og:image' content={page.props.rrssInfo.imageId} />
+            <meta property='twitter:image' content={page.props.rrssInfo.imageId} />
           </>
         )
       }
@@ -43,14 +44,9 @@ SignUpPage.getLayout = (page) => (
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const marketingId = query.marketingId
-  const token = query.token
 
   if (marketingId) {
-    const res = await fetch(`${APP_INFO.SEO.URL_PAGE}/api/marketing/${marketingId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
+    const res = await fetch(`${APP_INFO.SEO.URL_PAGE}/api/marketing/${marketingId}`)
     const { data } = await res.json()
 
     return {
