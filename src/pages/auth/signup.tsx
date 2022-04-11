@@ -28,12 +28,21 @@ SignUpPage.getLayout = (page) => (
     <Head>
       <title>{SEO.TITLE_PAGE} - Sign Up</title>
       {
-        page.props.rrssInfo && (
-          <>
-            <meta property='og:url' content={`${APP_INFO.SEO.URL_PAGE}/auth/signup`} />
-            <meta property='og:image' content={page.props.rrssInfo.imageId} />
-          </>
-        )
+        page.props.rrssInfo
+          ? (
+            <>
+              <meta property='og:url' content={`${APP_INFO.SEO.URL_PAGE}/auth/signup`} />
+              <meta property='twitter:image' content={page.props.rrssInfo.imageId} />
+              <meta property='og:image' content={page.props.rrssInfo.imageId} />
+            </>
+          )
+          : (
+            <>
+              <meta property='og:url' content={`${APP_INFO.SEO.URL_PAGE}/auth/signup`} />
+              <meta property='twitter:image' content={`${SEO.URL_PAGE}/images/logo-full-232px.png`} />
+              <meta property='og:image' content={`${SEO.URL_PAGE}/images/logo-full-232px.png`} />
+            </>
+          )
       }
     </Head>
 
@@ -46,7 +55,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const token = query.token
 
   if (marketingId) {
-    const res = await fetch(`${APP_INFO.SEO.URL_PAGE}/api/marketing/${marketingId}`, {
+    const res = await fetch(`https://dev.snap.devopsteam.info/api/marketing/${marketingId}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
