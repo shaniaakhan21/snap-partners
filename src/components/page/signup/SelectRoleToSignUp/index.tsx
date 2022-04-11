@@ -1,8 +1,7 @@
 import { useRef } from 'react'
-import { IBOIcon, DriverIcon, RestaurantsIcon, ArrowRightIcon } from 'components/common/icons'
-import { MobileAppsLink } from 'components/common/mobileApps/MobileAppsLink'
+import { IBOIcon, DriverIcon, MerchantsIcon, ArrowRightIcon } from 'components/common/icons'
 import { ROLES } from 'config/roles'
-import { mobileAppsLinks } from 'lib/utils/mobileAppLinks'
+import { signUp } from 'lib/utils/gtm'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -11,7 +10,7 @@ export const SelectRoleToSignUp = () => {
   const { current: roles } = useRef([
     {
       icon: <IBOIcon classes='w-14 h-14' />,
-      label: 'I’m Customer',
+      label: 'I’m a Customer',
       key: ROLES.CUSTOMER,
       link: `/auth/signup?role=${ROLES.CUSTOMER}`
     },
@@ -22,24 +21,30 @@ export const SelectRoleToSignUp = () => {
       link: `/auth/signup?role=${ROLES.DRIVER}`
     },
     {
-      icon: <RestaurantsIcon classes='w-14 h-14' />,
-      label: 'I have a Restaurant',
-      key: ROLES.RESTAURANT,
-      link: `/auth/signup?role=${ROLES.RESTAURANT}`
+      icon: <MerchantsIcon classes='w-14 h-14' />,
+      label: 'I’m a Merchant',
+      key: ROLES.MERCHANT,
+      link: `/auth/signup?role=${ROLES.MERCHANT}`
     }
   ])
 
-  return (
-    <div className='text-center'>
-      <span className='text-3xl text-gray-800 font-bold'>Welcome To Snap Delivered</span>
+  const onRoleClick = (role) => {
+    signUp(role.key, 1)
+    router.push(role.link)
+  }
 
-      <ul className='flex flex-col justify-center items-center my-4 gap-y-4'>
+  return (
+    <div className='text-center h-[85vh] flex flex-col justify-center items-center w-full'>
+      <span className='text-3xl text-gray-800 font-bold'>Welcome To Snap Delivered</span>
+      <p className='text-gray-600 font-semibold'>Please choose how you want to register, other rolls <br className='hidden sm:block' /> can be added once you log in </p>
+
+      <ul className='flex flex-col justify-center items-center my-4 gap-y-4 w-full'>
         {
           roles.map(role => {
             return (
-              <li key={role.key} className='max-w-xs w-full bg-gray-200 hover:bg-gray-300 rounded-md'>
+              <li key={role.key} className='max-w-md w-full bg-gray-200 hover:bg-gray-300 rounded-md'>
                 <button
-                  onClick={() => router.push(role.link)}
+                  onClick={() => onRoleClick(role)}
                   className='w-full py-4 px-5 flex justify-between items-center gap-x-8'
                 >
                   {role.icon}
@@ -55,36 +60,16 @@ export const SelectRoleToSignUp = () => {
         }
       </ul>
 
+      <br />
+      <p className='text-gray-700 font-semibold'>OR</p>
+      <br />
+
       <p>
         <span className='font-bold text-gray-800'>Already have an account?</span>
         <Link href='/auth/login'>
           <a className='text-textAcent-500'> Login.</a>
         </Link>
       </p>
-      <br />
-
-      <div className='max-w-sm mx-auto'>
-        <span className='text-xl text-gray-500 text-center'>You can download some of our apps below or visit our website at </span>
-        <Link href='https://snapdelivered.com/'>
-          <a target='_blank' className='text-xl text-primary-500 text-center'>snapdelivered.com</a>
-        </Link>
-      </div>
-
-      <MobileAppsLink
-        appStoreHref={mobileAppsLinks.customer.appStore}
-        playStoreHref={mobileAppsLinks.customer.playStore}
-        title={mobileAppsLinks.customer.title}
-      />
-      <MobileAppsLink
-        appStoreHref={mobileAppsLinks.driver.appStore}
-        playStoreHref={mobileAppsLinks.driver.playStore}
-        title={mobileAppsLinks.driver.title}
-      />
-      <MobileAppsLink
-        appStoreHref={mobileAppsLinks.restaurant.appStore}
-        playStoreHref={mobileAppsLinks.restaurant.playStore}
-        title={mobileAppsLinks.restaurant.title}
-      />
     </div>
   )
 }

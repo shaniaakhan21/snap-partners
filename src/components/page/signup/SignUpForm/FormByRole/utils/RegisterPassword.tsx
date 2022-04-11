@@ -14,7 +14,7 @@ export const RegisterPassword = ({ register, errors, rulesPasswordForm, rulesCon
 
   return (
     <>
-      <div>
+      <div className='w-full'>
         <label htmlFor='password' className='font-bold text-gray-700 uppercase text-sm'>
           Password <span className='text-red-500'>*</span>
         </label>
@@ -39,7 +39,7 @@ export const RegisterPassword = ({ register, errors, rulesPasswordForm, rulesCon
         </div>
       </div>
 
-      <div>
+      <div className='w-full'>
         <label htmlFor='confirmPassword' className='font-bold text-gray-700 uppercase text-sm'>
           Confirm Password <span className='text-red-500'>*</span>
         </label>

@@ -1,6 +1,8 @@
+import { useEffect, useState } from 'react'
 import { EyeHiddenIcon, EyeVisibleIcon } from 'components/common/icons'
-import { useState } from 'react'
 import { signInRulesConfig } from './formRules'
+import { ModalForgotPassword } from './ModalForgotPassword'
+import { useModalStore, MODALS_ID } from 'lib/stores'
 
 interface IInputFormProps {
   register: any,
@@ -8,7 +10,17 @@ interface IInputFormProps {
 }
 
 export const RegisterPassword = ({ register, errors }: IInputFormProps) => {
+  const { openModal, addModal } = useModalStore()
+
   const [showPassword, setShowPassword] = useState(false)
+
+  useEffect(() => {
+    addModal({
+      id: MODALS_ID.MODAL_FORGOT_PASSWORD_ID,
+      isOpen: false,
+      modalChildren: <ModalForgotPassword />
+    })
+  }, [])
 
   return (
     <div>
@@ -19,7 +31,13 @@ export const RegisterPassword = ({ register, errors }: IInputFormProps) => {
             <p className='text-sm text-red-400'>{errors.password.message}</p>
           )}
         </div>
-        <span className='text-textAcent-500 cursor-pointer'>Forgot Password?</span>
+        <button
+          type='button'
+          className='text-textAcent-500'
+          onClick={() => openModal(MODALS_ID.MODAL_FORGOT_PASSWORD_ID)}
+        >
+            Forgot Password?
+        </button>
       </div>
 
       <div className='relative'>

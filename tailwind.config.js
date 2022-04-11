@@ -9,6 +9,15 @@ module.exports = {
       fontFamily: {
         body: ['"Open Sans"', 'sans-serif']
       },
+
+      screens: {
+        xs: '420px'
+      },
+
+      height: {
+        'screen-80': '80vh'
+      },
+
       colors: {
         black: {
           DEFAULT: '#18203F'
@@ -40,7 +49,8 @@ module.exports = {
           600: '#777777',
           700: '#585858',
           800: '#404040',
-          900: '#2A2A2A'
+          900: '#2A2A2A',
+          1000: '#1C1C1C'
         },
         success: {
           100: '#EFFDD4',

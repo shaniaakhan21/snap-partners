@@ -1,5 +1,4 @@
-import { API } from 'config/api'
-import { IQueryErrorReturn } from 'lib/types/query'
+import { IQueryErrorReturn } from 'lib/types/http/query'
 import { ILevel } from 'lib/types/genealogy'
 
 interface IQueryReturn extends IQueryErrorReturn {
@@ -11,10 +10,11 @@ interface IQueryReturn extends IQueryErrorReturn {
 }
 
 export const getAllLevels = async (
+  userId: number,
   token: string,
-  userData: { username: string, userId: number }
+  page: number
 ): Promise<IQueryReturn> => {
-  const res = await fetch(`${API.BASE_URL}/api/unilevel/getAllLevels?userId=${userData.userId}&includeUsers=1&name=${userData.username}`, {
+  const res = await fetch(`/api/unilevel/getAllLevels?userId=${userId}&includeUsers=1&limit=999999999&page=${page}`, {
     headers: {
       Authorization: `Bearer ${token}`
     }

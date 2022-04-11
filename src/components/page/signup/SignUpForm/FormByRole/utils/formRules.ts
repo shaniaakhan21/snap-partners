@@ -66,8 +66,7 @@ export const registerRulesConfig = {
   },
 
   referralCode: {
-    maxLength: { value: 50, message: 'Max 50 Characters *' },
-    pattern: { value: /^[a-zA-Z0-9!@#$%\\^&*)(+=._-]*$/, message: 'Referral Code not allow *' }
+    maxLength: { value: 100, message: 'Max 100 Characters *' }
   },
 
   idImage: {
@@ -87,12 +86,19 @@ export const registerRulesConfig = {
   }
 }
 
-export const registerRestaurantRulesConfig = {
+export const registerMerchantRulesConfig = {
   username: {
     required: { value: true, message: 'Username Required *' },
     maxLength: { value: 50, message: 'Max 50 Characters *' },
     minLength: { value: 3, message: 'Min 3 Characters *' },
     pattern: { value: /^[a-zA-Z0-9!@#$%\\^&*)(+=._-]*$/, message: 'Username not allow *' }
+  },
+
+  ownerName: {
+    required: { value: true, message: 'Merchant Owner Name Required *' },
+    maxLength: { value: 80, message: 'Max 80 Characters *' },
+    minLength: { value: 3, message: 'Min 3 Characters *' },
+    pattern: { value: /^[a-zA-Z\s]*$/, message: 'Merchant Owner Name not allow *' }
   },
 
   email: {
@@ -114,10 +120,9 @@ export const registerRestaurantRulesConfig = {
   },
 
   name: {
-    required: { value: true, message: 'Name Required *' },
-    maxLength: { value: 50, message: 'Max 50 Characters *' },
-    minLength: { value: 3, message: 'Min 3 Characters *' },
-    pattern: { value: /^[a-zA-Z]*$/, message: 'Name not allow *' }
+    required: { value: true, message: 'Merchant Name Required *' },
+    maxLength: { value: 100, message: 'Max 100 Characters *' },
+    minLength: { value: 3, message: 'Min 3 Characters *' }
   },
 
   phoneExt: {
@@ -194,8 +199,7 @@ export const registerRestaurantRulesConfig = {
   },
 
   referralCode: {
-    maxLength: { value: 50, message: 'Max 50 Characters *' },
-    pattern: { value: /^[a-zA-Z0-9!@#$%\\^&*)(+=._-]*$/, message: 'Referral Code not allow *' }
+    maxLength: { value: 50, message: 'Max 50 Characters *' }
   },
 
   termsAndConditions: {

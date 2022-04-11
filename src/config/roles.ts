@@ -1,8 +1,8 @@
-import { IRolesConfig } from 'lib/types/roles'
+import { IROLES } from 'lib/types/user'
 
-export const ROLES: IRolesConfig = {
+export const ROLES: IROLES = {
   CUSTOMER: 'CUSTOMER',
-  RESTAURANT: 'RESTAURANT',
+  MERCHANT: 'MERCHANT',
   DRIVER: 'DRIVER',
   ADMIN: 'ADMIN'
 }

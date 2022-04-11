@@ -1,7 +1,6 @@
-import { ArrowRightIcon, CalendarIcon, CopyIcon } from 'components/common/icons'
+import { CalendarIcon, CopyIcon } from 'components/common/icons'
 import { useCopyToClipboard } from 'lib/hooks/useCopyToClipboard'
 import { referralCard } from 'lib/utils/gtm'
-import Link from 'next/link'
 import { useMemo } from 'react'
 
 interface IProps {
@@ -22,7 +21,7 @@ export const ReferralCards = ({ title, ilustration, link, newUser = false, class
   }, [link])
 
   const onClick = () => {
-    referralCard(title, `copy for ${userType}`, '')
+    referralCard(userType, `copy for ${userType}`, '')
     copy(link, 'Referral link')
   }
 
@@ -49,26 +48,26 @@ export const ReferralCards = ({ title, ilustration, link, newUser = false, class
         )}
       {/* el div con height imita la altura del anterior componente, si se modifica dicha altura, también se debe modificar el valor */}
 
-      <h3 className='w-full my-4'>{title}</h3>
+      <h3 className={`w-full text-lg font-semibold ${newUser ? 'my-4' : 'mb-4'}`}>{title}</h3>
 
       {ilustration}
 
       <hr className='w-full my-4 mx-auto border-t border-gray-300' />
 
       <button
-        onClick={() => onClick()}
+        onClick={onClick}
         className='lg:text-black inline-flex items-center justify-center transition-colors hover:text-blue-600'
       >
         <span className='text-sm mr-2 text-blue-600'>Copy Referral Link</span>
         <CopyIcon classes='w-5 h-5' />
       </button>
 
-      <Link href='#'>
+      {/* <Link href='#'>
         <a className='w-full p-1 bg-transparentPrimary-8% hover:bg-transparentPrimary-24% text-primary-500 border-2 border-primary-500 rounded-sm mt-4 transition-colors inline-flex items-center justify-center' onClick={() => referralCard(title, '', `genealogy - ${userType}`)}>
           <span className='font-bold mr-2 text-xs'>Open My Referral Genealogy</span>
           <ArrowRightIcon classes='w-4 h-4' />
         </a>
-      </Link>
+      </Link> */}
     </div>
   )
 }

@@ -1,7 +1,19 @@
+import Masonry from 'react-masonry-css'
+
+const breakpointLayout = {
+  default: 3,
+  1508: 2,
+  840: 1
+}
+
 export const ListArticles = ({ children } /* Should be Article Component */) => {
   return (
-    <ul className='max-w-7xl mx-auto flex flex-wrap justify-center items-center gap-x-6 gap-y-4 mt-16'>
+    <Masonry
+      breakpointCols={breakpointLayout}
+      className='my-masonry-grid mt-10'
+      columnClassName='my-masonry-grid_column mx-4'
+    >
       {children}
-    </ul>
+    </Masonry>
   )
 }

@@ -22,7 +22,7 @@ export const SignUpCustomerForm = ({ referralLink }: { referralLink: IReferralLi
   }
 
   return (
-    <div>
+    <div className='w-full'>
       {
         userTrack.step === STEPS.REGISTER_BASIC_INFO && (
           <RegisterBasicInfo
@@ -36,6 +36,7 @@ export const SignUpCustomerForm = ({ referralLink }: { referralLink: IReferralLi
       {
         userTrack.step === STEPS.VERIFY_CODE && (
           <VerifyCode
+            handleUserInfo={handleUserInfo}
             referralLink={referralLink}
             userTrack={userTrack}
             handleStep={handleStep}
@@ -46,7 +47,6 @@ export const SignUpCustomerForm = ({ referralLink }: { referralLink: IReferralLi
       {
         userTrack.step === STEPS.SUCCESS_CODE && (
           <SuccessCode
-            referralLink={referralLink}
             handleStep={handleStep}
             userTrack={userTrack}
           />

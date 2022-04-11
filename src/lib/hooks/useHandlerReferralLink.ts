@@ -17,7 +17,7 @@ export const useHandlerReferralLink = () => {
     if (typeof router.query.role === 'string') {
       if (router.query.role.toUpperCase() === ROLES.CUSTOMER) return ROLES.CUSTOMER
       if (router.query.role.toUpperCase() === ROLES.DRIVER) return ROLES.DRIVER
-      if (router.query.role.toUpperCase() === ROLES.RESTAURANT) return ROLES.RESTAURANT
+      if (router.query.role.toUpperCase() === ROLES.MERCHANT) return ROLES.MERCHANT
       else return null
     } else return null
   }

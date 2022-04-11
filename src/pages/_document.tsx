@@ -1,8 +1,8 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { GTM_ID } from 'lib/utils/gtm'
-import { PAGE_INFO } from 'config/pageInfo'
+import { APP_INFO } from 'config/appInfo'
 
-const { SEO, RRSS } = PAGE_INFO
+const { SEO, RRSS } = APP_INFO
 
 export default class MyDocument extends Document {
   render () {
@@ -32,13 +32,13 @@ export default class MyDocument extends Document {
 
           {/* <link rel='apple-touch-icon' href='/static/icons/touch-icon-iphone.png' />
           <link rel='apple-touch-icon' sizes='152x152' href='/static/icons/touch-icon-ipad.png' />
-          <link rel='apple-touch-icon' sizes='180x180' href='/static/icons/touch-icon-iphone-retina.png' />
-          <link rel='apple-touch-icon' sizes='167x167' href='/static/icons/touch-icon-ipad-retina.png' />
+        <link rel='apple-touch-icon' sizes='167x167' href='/static/icons/touch-icon-ipad-retina.png' /> */}
+          <link rel='apple-touch-icon' sizes='180x180' href='/static/apple-touch-icon.png' />
 
-          <link rel='icon' type='image/png' sizes='32x32' href='/static/icons/favicon-32x32.png' />
-          <link rel='icon' type='image/png' sizes='16x16' href='/static/icons/favicon-16x16.png' />
-          <link rel='manifest' href='/static/manifest.json' />
-          <link rel='mask-icon' href='/static/icons/safari-pinned-tab.svg' color='#DD4C37' /> */}
+          <link rel='icon' type='image/png' sizes='32x32' href='/static/favicon-32x32.png' />
+          <link rel='icon' type='image/png' sizes='16x16' href='/static/favicon-16x16.png' />
+          <link rel='manifest' href='/static/site.webmanifest' />
+          {/* <link rel='mask-icon' href='/static/icons/safari-pinned-tab.svg' color='#DD4C37' /> */}
           <link rel='shortcut icon' href='/static/favicon.ico' />
 
           <meta name='twitter:image:alt' content={SEO.TITLE_PAGE} />
@@ -48,14 +48,11 @@ export default class MyDocument extends Document {
           <meta property='twitter:title' content={SEO.TITLE_PAGE} />
           <meta property='twitter:description' content={SEO.DESCRIPTION_PAGE} />
           <meta property='twitter:image:alt' content={SEO.TITLE_PAGE} />
-          {/* <meta property='twitter:image' content={`${SEO.URL_PAGE}/img/snap-public.png`} /> */}
 
           <meta property='og:site_name' content={SEO.TITLE_PAGE} />
           <meta property='og:type' content='website' />
-          <meta property='og:url' content={SEO.URL_PAGE} />
           <meta property='og:title' content={SEO.TITLE_PAGE} />
           <meta property='og:description' content={SEO.DESCRIPTION_PAGE} />
-          {/* <meta property='og:image' content={`${SEO.URL_PAGE}/img/snap-public.png`} /> */}
 
           {/* <!-- apple splash screen images --> */}
           {/* <link rel='apple-touch-startup-image' href='/static/images/apple_splash_2048.png' sizes='2048x2732' />
@@ -74,7 +71,11 @@ export default class MyDocument extends Document {
         <body>
           <noscript>
             <iframe
-              src={`https://www.googletagmanager.com/ns.html?id=${typeof document !== 'undefined' && document.location.hostname === 'snapdeliveredteam.com' ? GTM_ID.PRE : GTM_ID.PRO}`}
+              src={`https://www.googletagmanager.com/ns.html?id=${
+                typeof document !== 'undefined' && document.location.hostname === 'snapdeliveredteam.com'
+                  ? GTM_ID.PRO
+                  : GTM_ID.PRE
+              }`}
               height="0"
               width="0"
               style={{ display: 'none', visibility: 'hidden' }}

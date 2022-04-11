@@ -1,7 +1,7 @@
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
-import { login } from 'lib/services/session/login'
-import { getUserMe } from 'lib/services/users/getUserMe'
+import { login } from 'lib/services/auth/login'
+import { getUserMe } from 'lib/services/user/getUserMe'
 import { useAuthStore } from 'lib/stores'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import Link from 'next/link'
@@ -10,13 +10,11 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { InputForm } from './utils/Input'
 import { RegisterPassword } from './utils/RegisterPassword'
-import { RememberAndPolicy } from './utils/RememberAndPolicy'
-import { RRSSAuth } from './utils/RRSSAuth'
 
 export interface IDataForm {
   username: string
   password: string
-  rememberMe: boolean
+  // rememberMe: boolean
 }
 
 export const LoginWithUsername = () => {
@@ -25,8 +23,6 @@ export const LoginWithUsername = () => {
   const { handleSubmit, register, reset, formState: { errors } } = useForm<IDataForm>()
 
   const onSubmit = async (dataForm: IDataForm) => {
-    setLoading(true)
-
     setLoading(true)
 
     const { data: dataLogin, error: errorLogin } = await login({
@@ -40,7 +36,7 @@ export const LoginWithUsername = () => {
       return
     }
 
-    const { data: dataUser, error: errorUser } = await getUserMe({ token: dataLogin.token })
+    const { data, error: errorUser } = await getUserMe({ token: dataLogin.token })
 
     if (errorUser) {
       handleFetchError(errorUser.status, errorUser.info)
@@ -51,19 +47,23 @@ export const LoginWithUsername = () => {
     toast('Login Successful!', { type: 'success' })
     setLoading(false)
     setAuth({
-      email: dataUser.email,
-      name: dataUser.email,
-      phone: dataUser.phoneNumber,
+      email: data.email,
+      name: data.name,
+      password: data.password,
+      phoneNumber: data.phoneNumber,
       accessToken: dataLogin.token,
-      lastname: dataUser.lastname,
-      roles: dataUser.roles,
+      lastname: data.lastname,
+      roles: data.roles,
       id: dataLogin.userId,
-      username: dataUser.username,
-      referralCode: dataUser.referralCode,
-      idImage: dataUser.idImage,
-      insuranceImage: dataUser.insuranceImage,
-      isManager: dataUser.isManager,
-      sponsorId: dataUser.sponsorId
+      username: data.username,
+      referralCode: data.referralCode,
+      idImage: data.idImage,
+      insuranceImage: data.insuranceImage,
+      isManager: data.ranks?.type === 'manager',
+      createdAt: data.createdAt,
+      ownerName: data.ownerName,
+      ranks: data.ranks,
+      updatedAt: data.updatedAt
     })
     reset()
   }
@@ -78,7 +78,7 @@ export const LoginWithUsername = () => {
 
   return (
     <div className='flex flex-col justify-start items-start gap-x-2 my-2'>
-      <form className='max-w-xs mt-2' onSubmit={handleSubmit(onSubmit)}>
+      <form className='w-full mt-2' onSubmit={handleSubmit(onSubmit)}>
         <InputForm
           id='username'
           name='username'
@@ -102,9 +102,9 @@ export const LoginWithUsername = () => {
           register={register}
         />
 
-        <RememberAndPolicy
+        {/* <RememberAndPolicy
           register={register}
-        />
+        /> */}
 
         <section className='mt-4 text-center sm:text-left'>
           <Button type='submit' classes='w-full mr-1 text-sm bg-primary-500'>
@@ -120,8 +120,6 @@ export const LoginWithUsername = () => {
             </Link>
           </p>
         </section>
-
-        <RRSSAuth />
       </form>
     </div>
   )
