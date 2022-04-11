@@ -51,13 +51,17 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 
     return {
       props: {
-        rrssInfo: data
+        rrssInfo: data,
+        url: `${APP_INFO.SEO.URL_PAGE}/api/marketing/${marketingId}`,
+        query
       }
     }
   } else {
     return {
       props: {
-        rrssInfo: null
+        rrssInfo: null,
+        marketingId,
+        query
       }
     }
   }
