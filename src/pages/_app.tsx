@@ -63,6 +63,9 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
 
       {!router.asPath.startsWith('/share') && (
         <Head>
+          <meta name='title' content={SEO.TITLE_PAGE} />
+          <meta name='description' content={SEO.DESCRIPTION_PAGE} />
+
           <meta property='twitter:card' content='summary_large_image' />
           <meta property='twitter:url' content={SEO.URL_PAGE} />
           <meta property='twitter:title' content={SEO.TITLE_PAGE} />
