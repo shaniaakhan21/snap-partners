@@ -17,11 +17,13 @@ interface IProps {
 }
 
 export const InputProfile = ({ inputId, inputType, value, disabled = false, labelFor, labelName, placeholder, error, register, rules, isAPasswordInput = false }: IProps) => {
+  const registerValidated = register ? { ...register(inputId, rules ?? null) } : {}
+
   const [showPassword, setShowPassword] = useState(false)
 
   return (
     <div className='relative rounded-xl bg-white w-full px-4 py-3 border-y-2 border-y-gray-200 flex flex-col justify-between'>
-      {(!disabled && error) && (
+      {!disabled && error && (
         <p className='text-sm text-red-400'>
           {error && error.message}
         </p>
@@ -29,7 +31,7 @@ export const InputProfile = ({ inputId, inputType, value, disabled = false, labe
       <label htmlFor={labelFor} className='text-sm mb-2'>{labelName}</label>
       <div className="relative">
         <input
-          {...register(inputId, rules)}
+          { ...registerValidated }
           id={inputId}
           name={inputId}
           type={`${showPassword ? 'text' : inputType}`}

@@ -66,9 +66,9 @@ export const FormUpdatePassword = ({ auth, setTypeUpdate }: IFormUpdatePasswordP
           labelFor='currentPassword'
           labelName='Current Password'
           placeholder='Insert your current password'
-          error={errors.password}
           register={register}
           rules={signInRulesConfig.password}
+          error={errors.password}
         />
 
         <InputProfile
@@ -78,9 +78,9 @@ export const FormUpdatePassword = ({ auth, setTypeUpdate }: IFormUpdatePasswordP
           labelFor='newPassword'
           labelName='New Password'
           placeholder='Insert the new password'
-          error={errors.newPassword}
           register={register}
           rules={signInRulesConfig.password}
+          error={errors.newPassword}
         />
 
         <InputProfile
@@ -90,9 +90,9 @@ export const FormUpdatePassword = ({ auth, setTypeUpdate }: IFormUpdatePasswordP
           labelFor='confirmNewPassword'
           labelName='Confirm New Password'
           placeholder='Insert the new password'
-          error={errors.confirmNewPassword}
           register={register}
           rules={signInRulesConfig.password}
+          error={errors.confirmNewPassword}
         />
 
         <br />
