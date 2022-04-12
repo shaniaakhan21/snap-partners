@@ -19,9 +19,9 @@ const ProfilePage: Page = () => {
   const { setNewWindow } = useNewWindowOpenedStore()
   const [typeUpdate, setTypeUpdate] = useState<TAccountInfoToUpdate>(null)
 
-  if (typeUpdate === 'password') return <FormUpdatePassword auth={auth} setTypeUpdate={setTypeUpdate} />
   if (typeUpdate === 'email') return <FormUpdateEmail auth={auth} setTypeUpdate={setTypeUpdate} />
   if (typeUpdate === 'phone') return <FormUpdatePhone auth={auth} setTypeUpdate={setTypeUpdate} />
+  if (typeUpdate === 'password') return <FormUpdatePassword auth={auth} setTypeUpdate={setTypeUpdate} />
 
   return (
     <AccountInfo
