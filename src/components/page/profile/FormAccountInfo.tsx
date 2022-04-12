@@ -98,7 +98,7 @@ export const FormAccountInfo = ({ auth }: IFormAccountInfoProps) => {
 
       <li className='rounded-xl bg-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center'>
         <div>
-          <label htmlFor='email' className='text-sm'>Password</label>
+          <label htmlFor='email' className='text-sm'>Email</label>
           <br />
           <input
             id='email'
@@ -119,7 +119,7 @@ export const FormAccountInfo = ({ auth }: IFormAccountInfoProps) => {
 
       <li className='rounded-xl bg-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center'>
         <div>
-          <label htmlFor='email' className='text-sm'>Password</label>
+          <label htmlFor='password' className='text-sm'>Password</label>
           <br />
           <input
             id='password'
