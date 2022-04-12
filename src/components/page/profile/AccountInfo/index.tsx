@@ -26,7 +26,10 @@ export const AccountInfo = ({ auth, removeAuth, setNewWindow, setTypeUpdate }: I
       </div>
 
       <div className='mt-11'>
-        <FormAccountInfo auth={auth} />
+        <FormAccountInfo
+          auth={auth}
+          setTypeUpdate={setTypeUpdate}
+        />
       </div>
 
       {

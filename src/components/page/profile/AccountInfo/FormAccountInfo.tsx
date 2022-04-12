@@ -1,13 +1,16 @@
+import { Dispatch, SetStateAction } from 'lib/types/core/next-react'
+import { TAccountInfoToUpdate } from 'lib/types/user/profile'
 import { IAuth } from 'lib/stores/Auth'
 
 interface IFormAccountInfoProps {
   auth: IAuth
+  setTypeUpdate: Dispatch<SetStateAction<TAccountInfoToUpdate>>
 }
 
-export const FormAccountInfo = ({ auth }: IFormAccountInfoProps) => {
+export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) => {
   return (
     <ul className='w-full h-full rounded-lg'>
-      {/* <div className='flex flex-col sm:flex-row justify-start items-start gap-y-2 gap-x-2'>
+      <div className='flex flex-col sm:flex-row justify-start items-start gap-y-2 gap-x-2'>
         <li className='rounded-xl bg-white w-full sm:w-1/2 px-4 py-3 border-y-2 border-y-gray-200 flex justify-between items-center'>
           <div>
             <label htmlFor='name' className='text-sm'>Name</label>
@@ -20,12 +23,6 @@ export const FormAccountInfo = ({ auth }: IFormAccountInfoProps) => {
               disabled={true}
               className='w-full bg-transparent text-lg truncate'
             />
-          </div>
-
-          <div>
-            <button disabled className='bg-gray-300 rounded-full px-4 py-1 text-white font-bold uppercase'>
-                  Edit
-            </button>
           </div>
         </li>
 
@@ -42,59 +39,8 @@ export const FormAccountInfo = ({ auth }: IFormAccountInfoProps) => {
               className='w-full bg-transparent text-lg truncate'
             />
           </div>
-
-          <div>
-            <button disabled className='bg-gray-300 rounded-full px-4 py-1 text-white font-bold uppercase'>
-                  Edit
-            </button>
-          </div>
         </li>
       </div>
-
-      <div className='flex flex-col sm:flex-row justify-start items-start mt-2 gap-y-2 gap-x-2'>
-        <li className='rounded-xl bg-white w-full sm:w-1/2 px-4 py-3 border-y-2 border-y-gray-200 flex justify-between items-center'>
-          <div>
-            <label htmlFor='name' className='text-sm'>Phone</label>
-            <br />
-            <input
-              id='phone'
-              name='phone'
-              type='tel'
-              value={auth.phoneNumber}
-              disabled={true}
-              className='w-full bg-transparent text-lg truncate'
-              autoComplete='off'
-            />
-          </div>
-
-          <div>
-            <button disabled className='bg-gray-300 rounded-full px-4 py-1 text-white font-bold uppercase'>
-                  Edit
-            </button>
-          </div>
-        </li>
-
-        <li className='w-full sm:w-1/2 rounded-xl bg-white px-4 py-3 border-y-2 border-y-gray-200 flex justify-between items-center'>
-          <div>
-            <label htmlFor='email' className='text-sm'>Email</label>
-            <br />
-            <input
-              id='email'
-              name='email'
-              type='email'
-              value={auth.email}
-              disabled={true}
-              className='w-full bg-transparent text-lg truncate'
-            />
-          </div>
-
-          <div>
-            <button disabled className='bg-gray-300 rounded-full px-4 py-1 text-white font-bold uppercase'>
-                Edit
-            </button>
-          </div>
-        </li>
-      </div> */}
 
       <li className='rounded-xl bg-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center'>
         <div>
@@ -111,8 +57,36 @@ export const FormAccountInfo = ({ auth }: IFormAccountInfoProps) => {
         </div>
 
         <div>
-          <button disabled className='bg-gray-300 rounded-full px-4 py-1 text-white font-bold uppercase'>
-                Edit
+          <button
+            onClick={() => setTypeUpdate('email')}
+            className='bg-primary-500 hover:bg-opacity-80 rounded-full px-4 py-1 text-white font-bold uppercase'
+          >
+            Edit
+          </button>
+        </div>
+      </li>
+
+      <li className='rounded-xl bg-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center'>
+        <div>
+          <label htmlFor='name' className='text-sm'>Phone</label>
+          <br />
+          <input
+            id='phone'
+            name='phone'
+            type='tel'
+            value={auth.phoneNumber}
+            disabled={true}
+            className='w-full bg-transparent text-lg truncate'
+            autoComplete='off'
+          />
+        </div>
+
+        <div>
+          <button
+            onClick={() => setTypeUpdate('phone')}
+            className='bg-primary-500 hover:bg-opacity-80 rounded-full px-4 py-1 text-white font-bold uppercase'
+          >
+            Edit
           </button>
         </div>
       </li>
@@ -132,8 +106,11 @@ export const FormAccountInfo = ({ auth }: IFormAccountInfoProps) => {
         </div>
 
         <div>
-          <button disabled className='bg-gray-300 rounded-full px-4 py-1 text-white font-bold uppercase'>
-                Edit
+          <button
+            onClick={() => setTypeUpdate('password')}
+            className='bg-primary-500 hover:bg-opacity-80 rounded-full px-4 py-1 text-white font-bold uppercase'
+          >
+            Edit
           </button>
         </div>
       </li>
