@@ -28,9 +28,8 @@ export const FormUpdatePassword = ({ auth, setTypeUpdate }: IFormUpdatePasswordP
   const onSubmit = async (data: IDataForm) => {
     setLoading(true)
 
-    if (data.newPassword !== data.confirmNewPassword) {
-      setError('newPassword', { message: 'The new password is not equal to the new confirm password' })
-      setError('confirmNewPassword', { message: 'The new password is not equal to the new confirm password' })
+    if (data.confirmNewPassword !== data.newPassword) {
+      setError('confirmNewPassword', { message: 'The new confirm password is not equal to the new password' })
       setLoading(false)
       return
     }
