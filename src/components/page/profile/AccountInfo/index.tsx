@@ -1,4 +1,7 @@
+import { Dispatch, SetStateAction } from 'lib/types/core/next-react'
+import { TAccountInfoToUpdate } from 'lib/types/user/profile'
 import { IAuth } from 'lib/stores/Auth'
+
 import { TextContactCTA } from 'components/common/TextContactCTA'
 import { UpgradeManagerCTA } from './UpgradeManagerCTA'
 import { FormAccountInfo } from './FormAccountInfo'
@@ -9,9 +12,9 @@ import { Rank } from './Rank'
 
 interface IAccountInfoProps {
   auth: IAuth
-  removeAuth: any
-  setNewWindow: any
-  setTypeUpdate: any
+  removeAuth: () => void
+  setNewWindow: (newWindow: Window) => void
+  setTypeUpdate: Dispatch<SetStateAction<TAccountInfoToUpdate>>
 }
 
 export const AccountInfo = ({ auth, removeAuth, setNewWindow, setTypeUpdate }: IAccountInfoProps) => {
