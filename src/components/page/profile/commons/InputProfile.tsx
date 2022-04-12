@@ -6,13 +6,15 @@ interface IProps {
   labelFor: string
   labelName: string
   placeholder?: string
+  register: any
 }
 
-export const InputProfile = ({ inputId, inputType, value, disabled = false, labelFor, labelName, placeholder }: IProps) => {
+export const InputProfile = ({ inputId, inputType, value, disabled = false, labelFor, labelName, placeholder, register }: IProps) => {
   return (
-    <div className='rounded-xl bg-white w-full px-4 py-3 border-y-2 border-y-gray-200 flex flex-col justify-between'>
+    <div className='rounded-xl bg-white w-full px-4 py-3 border-y-2 border-y-gray-200 flex flex-col justify-between mt-2'>
       <label htmlFor={labelFor} className='text-sm mb-2'>{labelName}</label>
       <input
+        {...register(inputId)}
         id={inputId}
         name={inputId}
         type={inputType}

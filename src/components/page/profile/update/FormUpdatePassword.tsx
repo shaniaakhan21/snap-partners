@@ -1,3 +1,5 @@
+import { useForm } from 'react-hook-form'
+
 import { Dispatch, SetStateAction } from 'lib/types/core/next-react'
 import { TAccountInfoToUpdate } from 'lib/types/user/profile'
 import { IAuth } from 'lib/stores/Auth'
@@ -13,9 +15,10 @@ interface IFormUpdatePasswordProps {
 
 export const FormUpdatePassword = ({ auth, setTypeUpdate }: IFormUpdatePasswordProps) => {
   const [showPassword, setShowPassword] = useState(false)
+  const { register, handleSubmit } = useForm()
 
   return (
-    <div className='max-w-4xl mx-auto'>
+    <div className='max-w-3xl mx-auto'>
       <section>
         <h3 className='text-xl font-bold'>Change password</h3>
         <p className='text-gray-800'>It should be different from last password</p>
@@ -30,6 +33,7 @@ export const FormUpdatePassword = ({ auth, setTypeUpdate }: IFormUpdatePasswordP
           labelFor='currentPassword'
           labelName='Current Password'
           placeholder='Insert your current password'
+          register={register}
         />
 
         <button
@@ -49,6 +53,7 @@ export const FormUpdatePassword = ({ auth, setTypeUpdate }: IFormUpdatePasswordP
             labelFor='newPassword'
             labelName='New Password'
             placeholder='Insert the new password'
+            register={register}
           />
           <button
             type='button'
@@ -66,6 +71,7 @@ export const FormUpdatePassword = ({ auth, setTypeUpdate }: IFormUpdatePasswordP
             labelFor='confirmNewPassword'
             labelName='Confirm New Password'
             placeholder='Insert the new password'
+            register={register}
           />
           <button
             type='button'
