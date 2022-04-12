@@ -6,6 +6,8 @@ interface IFormUpdatePasswordProps {
 
 export const FormUpdatePassword = ({ auth }: IFormUpdatePasswordProps) => {
   return (
-    <div></div>
+    <div className='max-w-4xl mx-auto'>
+
+    </div>
   )
 }
