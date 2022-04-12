@@ -1,3 +1,5 @@
+import { useForm } from 'react-hook-form'
+
 import { Dispatch, SetStateAction } from 'lib/types/core/next-react'
 import { TAccountInfoToUpdate } from 'lib/types/user/profile'
 import { IAuth } from 'lib/stores/Auth'
@@ -11,8 +13,10 @@ interface IFormUpdatePhoneProps {
 }
 
 export const FormUpdateEmail = ({ auth, setTypeUpdate }: IFormUpdatePhoneProps) => {
+  const { register, handleSubmit } = useForm()
+
   return (
-    <div className='max-w-4xl mx-auto'>
+    <div className='max-w-3xl mx-auto'>
       <section>
         <h3 className='text-xl font-bold'>Change email</h3>
         <p className='text-gray-800'>It should be different from last email</p>
@@ -27,6 +31,8 @@ export const FormUpdateEmail = ({ auth, setTypeUpdate }: IFormUpdatePhoneProps) 
         labelFor='currentEmail'
         labelName='Current Email'
         value={auth.email}
+        register={register}
+
       />
 
       <form>
@@ -36,6 +42,7 @@ export const FormUpdateEmail = ({ auth, setTypeUpdate }: IFormUpdatePhoneProps) 
           labelFor='newEmail'
           labelName='New Email'
           placeholder='Insert the new email'
+          register={register}
         />
         <br />
         <div className='flex items-center'>

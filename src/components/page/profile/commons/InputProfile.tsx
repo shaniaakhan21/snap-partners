@@ -1,3 +1,7 @@
+import { useState } from 'react'
+
+import { EyeHiddenIcon, EyeVisibleIcon } from 'components/common/icons'
+
 interface IProps {
   inputId: string
   inputType: string
@@ -7,26 +11,43 @@ interface IProps {
   labelName: string
   placeholder?: string
   error?: any
+  register?: any
+  rules?: any
+  isAPasswordInput?: boolean
 }
 
-export const InputProfile = ({ inputId, inputType, value, disabled = false, labelFor, labelName, placeholder, error }: IProps) => {
+export const InputProfile = ({ inputId, inputType, value, disabled = false, labelFor, labelName, placeholder, error, register, rules, isAPasswordInput = false }: IProps) => {
+  const [showPassword, setShowPassword] = useState(false)
+
   return (
-    <div className='rounded-xl bg-white w-full px-4 py-3 border-y-2 border-y-gray-200 flex flex-col justify-between'>
-      {(error) && (
+    <div className='relative rounded-xl bg-white w-full px-4 py-3 border-y-2 border-y-gray-200 flex flex-col justify-between'>
+      {(!disabled && error) && (
         <p className='text-sm text-red-400'>
           {error && error.message}
         </p>
       )}
       <label htmlFor={labelFor} className='text-sm mb-2'>{labelName}</label>
-      <input
-        id={inputId}
-        name={inputId}
-        type={inputType}
-        value={value}
-        disabled={disabled}
-        placeholder={placeholder}
-        className={`w-full ${disabled ? 'bg-transparent' : 'bg-gray-200'} text-lg rounded py-1 px-2`}
-      />
+      <div className="relative">
+        <input
+          {...register(inputId, rules)}
+          id={inputId}
+          name={inputId}
+          type={`${showPassword ? 'text' : inputType}`}
+          value={value}
+          disabled={disabled}
+          placeholder={placeholder}
+          className={`w-full ${disabled ? 'bg-transparent' : 'bg-gray-200'} text-lg rounded py-1 px-2`}
+        />
+        {isAPasswordInput && (
+          <button
+            type='button'
+            onClick={() => setShowPassword((prevState) => !prevState)}
+            className='absolute right-2 top-1'
+          >
+            {showPassword ? <EyeHiddenIcon /> : <EyeVisibleIcon />}
+          </button>
+        )}
+      </div>
     </div>
   )
 }
