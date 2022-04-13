@@ -47,7 +47,7 @@ export const FormUpdatePassword = ({ auth, setAuth, setTypeUpdate }: IFormUpdate
     }
 
     const { error: errorPassword } = await updateUserPassword(auth.accessToken, {
-      currentPassword: auth.password,
+      currentPassword: dataForm.password,
       newPassword: dataForm.newPassword
     })
 
