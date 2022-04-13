@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Dispatch, SetStateAction } from 'lib/types/core/next-react'
 import { TAccountInfoToUpdate } from 'lib/types/user/profile'
-import { IAuth } from 'lib/stores/Auth'
+import { IAuth, TSetAuth } from 'lib/stores/Auth'
 
 import { Button } from 'components/common/Button'
 import { InputProfile } from '../commons/InputProfile'
@@ -11,6 +11,7 @@ import { signInRulesConfig } from 'components/page/login/LoginForm/utils/formRul
 
 interface IFormUpdatePasswordProps {
   auth: IAuth
+  setAuth: TSetAuth
   setTypeUpdate: Dispatch<SetStateAction<TAccountInfoToUpdate>>
 }
 
@@ -20,7 +21,7 @@ interface IDataForm {
   confirmNewPassword: string
 }
 
-export const FormUpdatePassword = ({ auth, setTypeUpdate }: IFormUpdatePasswordProps) => {
+export const FormUpdatePassword = ({ auth, setAuth, setTypeUpdate }: IFormUpdatePasswordProps) => {
   const { handleSubmit, register, reset, formState: { errors }, setError, control } = useForm<IDataForm>()
 
   const [loading, setLoading] = useState(false)

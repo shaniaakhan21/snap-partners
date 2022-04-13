@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { Dispatch, SetStateAction } from 'lib/types/core/next-react'
 import { TAccountInfoToUpdate } from 'lib/types/user/profile'
 import { handleFetchError } from 'lib/utils/handleFetchError'
-import { IAuth } from 'lib/stores/Auth'
+import { IAuth, TSetAuth } from 'lib/stores/Auth'
 
 import { Spinner } from 'components/common/loaders'
 import { FormChangePhone } from './FormChangePhone'
@@ -15,10 +15,11 @@ import { signUpStep1 } from 'lib/services/auth/signUp'
 
 interface IFormUpdatePhoneProps {
   auth: IAuth
+  setAuth: TSetAuth
   setTypeUpdate: Dispatch<SetStateAction<TAccountInfoToUpdate>>
 }
 
-export const EditPhone = ({ auth, setTypeUpdate }: IFormUpdatePhoneProps) => {
+export const EditPhone = ({ auth, setAuth, setTypeUpdate }: IFormUpdatePhoneProps) => {
   const { register: registerPhone, handleSubmit: handleSubmitPhone, formState: { errors }, control } = useForm()
   const { handleSubmit } = useForm()
   const [isPhoneEditable, setIsPhoneEditable] = useState(false)
