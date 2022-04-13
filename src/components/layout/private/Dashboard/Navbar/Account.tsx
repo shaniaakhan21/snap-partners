@@ -1,5 +1,5 @@
 import { AccountNoImage } from 'components/common/AccountNoImage'
-import { ArrowDownIcon, NotificationIcon } from 'components/common/icons'
+import { ArrowDownIcon } from 'components/common/icons'
 import { useClickOutsideElement } from 'lib/hooks/useClickOutsideElement'
 import { useState, useRef, useEffect } from 'react'
 
