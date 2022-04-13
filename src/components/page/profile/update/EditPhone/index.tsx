@@ -11,6 +11,7 @@ import { Spinner } from 'components/common/loaders'
 import { FormChangePhone } from './FormChangePhone'
 import { VerifyCode } from './VerifyCode'
 import { FormSendPhone } from './FormSendPhone'
+import { signUpStep1 } from 'lib/services/auth/signUp'
 
 interface IFormUpdatePhoneProps {
   auth: IAuth
@@ -27,22 +28,33 @@ export const EditPhone = ({ auth, setTypeUpdate }: IFormUpdatePhoneProps) => {
 
   const sendSMSCode = async () => {
     setIsLoading(true)
+    const phone = `+${phoneNumber}`
 
-    let error
+    const { error } = await signUpStep1({ phoneNumber: phone })
 
     if (error) {
       handleFetchError(error.status, error.info)
       setIsLoading(false)
+      return
     }
 
     setIsLoading(false)
     toast('Submitted Code', { type: 'success' })
   }
 
-  const onSubmitPhone = ({ phoneNumber }) => {
+  const onSubmitPhone = async ({ phoneNumber }) => {
     setIsLoading(true)
+
     if (!phoneNumber) {
       setPhoneSent(false)
+      setIsLoading(false)
+      return
+    }
+
+    const { error } = await signUpStep1({ phoneNumber: `+${phoneNumber}` })
+
+    if (error) {
+      handleFetchError(error.status, error.info)
       setIsLoading(false)
       return
     }
@@ -57,7 +69,17 @@ export const EditPhone = ({ auth, setTypeUpdate }: IFormUpdatePhoneProps) => {
   }
 
   const onSubmitVerifyCode = async (codeToVerify) => {
+    setIsLoading(true)
     console.log(codeToVerify)
+    const { error } = await signUpStep1({ phoneNumber: `+${phoneNumber}` })
+
+    if (error) {
+      handleFetchError(error.status, error.info)
+      setIsLoading(false)
+      return
+    }
+
+    setIsLoading(false)
   }
 
   const onSubmitUpdatePhone = ({ phoneNumber }) => {
