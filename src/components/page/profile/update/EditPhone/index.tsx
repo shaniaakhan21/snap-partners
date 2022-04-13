@@ -37,7 +37,7 @@ export const EditPhone = ({ auth, setAuth, setTypeUpdate }: IFormUpdatePhoneProp
       return
     }
 
-    const { error } = await signUpStep1({ phoneNumber: `+${phoneNumber}` })
+    const { error } = await signUpStep1({ phoneNumber })
 
     if (error) {
       handleFetchError(error.status, error.info)
