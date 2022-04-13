@@ -6,8 +6,9 @@ import { IAuth, TSetAuth } from 'lib/stores/Auth'
 
 import { Button } from 'components/common/Button'
 import { InputProfile } from '../commons/InputProfile'
-import { EyeHiddenIcon, EyeVisibleIcon } from 'components/common/icons'
 import { signInRulesConfig } from 'components/page/login/LoginForm/utils/formRules'
+import { updateUserPassword } from 'lib/services/user/updateUserPassword'
+import { handleFetchError } from 'lib/utils/handleFetchError'
 
 interface IFormUpdatePasswordProps {
   auth: IAuth
@@ -22,31 +23,39 @@ interface IDataForm {
 }
 
 export const FormUpdatePassword = ({ auth, setAuth, setTypeUpdate }: IFormUpdatePasswordProps) => {
-  const { handleSubmit, register, reset, formState: { errors }, setError, control } = useForm<IDataForm>()
+  const { handleSubmit, register, reset, formState: { errors }, setError } = useForm<IDataForm>()
 
   const [loading, setLoading] = useState(false)
 
-  const onSubmit = async (data: IDataForm) => {
+  const onSubmit = async (dataForm: IDataForm) => {
     setLoading(true)
 
-    if (data.confirmNewPassword !== data.newPassword) {
+    if (dataForm.confirmNewPassword !== dataForm.newPassword) {
       setError('confirmNewPassword', { message: 'The new confirm password is not equal to the new password' })
       setLoading(false)
       return
     }
 
-    if (data.password === data.newPassword) {
+    if (dataForm.password === dataForm.newPassword) {
       setError('newPassword', { message: 'The current password is equal to the new password' })
       setError('confirmNewPassword', { message: 'The current password is equal to the confirm new password' })
       setLoading(false)
       return
     }
 
-    console.log('data:', data)
+    // const { error } = await updateUserPassword(auth.accessToken, {
+    //   currentPassword: auth.password,
+    //   newPassword: dataForm.newPassword
+    // })
 
-    // * FETCHING
-    // ...
-    // reset()
+    // if (error) {
+    //   handleFetchError(error.status, error.info)
+    //   setLoading(false)
+    //   return
+    // }
+
+    // setAuth({ ...auth, password:  })
+    reset()
     setLoading(false)
   }
 
