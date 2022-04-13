@@ -9,7 +9,7 @@ import { APP_INFO } from 'config/appInfo'
 import DashboardLayout from 'layouts/private/Dashboard'
 import { FormUpdatePassword } from 'components/page/profile/update/FormUpdatePassword'
 import { FormUpdateEmail } from 'components/page/profile/update/FormUpdateEmail'
-import { FormUpdatePhone } from 'components/page/profile/update/FormUpdatePhone'
+import { EditPhone } from 'components/page/profile/update/EditPhone'
 import { AccountInfo } from 'components/page/profile/AccountInfo'
 
 const { SEO } = APP_INFO
@@ -20,7 +20,7 @@ const ProfilePage: Page = () => {
   const [typeUpdate, setTypeUpdate] = useState<TAccountInfoToUpdate>(null)
 
   if (typeUpdate === 'email') return <FormUpdateEmail auth={auth} setAuth={setAuth} setTypeUpdate={setTypeUpdate} />
-  if (typeUpdate === 'phone') return <FormUpdatePhone auth={auth} setAuth={setAuth} setTypeUpdate={setTypeUpdate} />
+  if (typeUpdate === 'phone') return <EditPhone auth={auth} setAuth={setAuth} setTypeUpdate={setTypeUpdate} />
   if (typeUpdate === 'password') return <FormUpdatePassword auth={auth} setAuth={setAuth} setTypeUpdate={setTypeUpdate} />
 
   return (
