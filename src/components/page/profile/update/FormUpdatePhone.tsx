@@ -5,11 +5,8 @@ import { useState } from 'react'
 
 import { Dispatch, SetStateAction } from 'lib/types/core/next-react'
 import { TAccountInfoToUpdate } from 'lib/types/user/profile'
-import { handleFetchError } from 'lib/utils/handleFetchError'
 import { IAuth, TSetAuth } from 'lib/stores/Auth'
 
-import { RegisterPassword } from 'components/page/signup/SignUpForm/FormByRole/utils/RegisterPassword'
-import { registerRulesConfig } from 'components/page/signup/SignUpForm/FormByRole/utils/formRules'
 import { InputPhone } from 'components/page/signup/SignUpForm/FormByRole/utils/InputPhone'
 import { Spinner } from 'components/common/loaders'
 import { Button } from 'components/common/Button'
