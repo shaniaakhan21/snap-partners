@@ -5,7 +5,7 @@ interface IDataBody {
   code: string
 }
 
-export const updateUserPhone = async (dataBody: IDataBody, token: string): Promise<IQueryErrorReturn> => {
+export const updateUserPhone = async (token: string, dataBody: IDataBody): Promise<IQueryErrorReturn> => {
   const res = await fetch('/api/user/phone', {
     method: 'PUT',
     headers: {

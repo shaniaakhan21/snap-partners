@@ -5,7 +5,7 @@ interface IDataBody {
   newPassword: string
 }
 
-export const updateUserPassword = async (dataBody: IDataBody, token: string): Promise<IQueryErrorReturn> => {
+export const updateUserPassword = async (token: string, dataBody: IDataBody): Promise<IQueryErrorReturn> => {
   const res = await fetch('/api/user/password', {
     method: 'PUT',
     headers: {
