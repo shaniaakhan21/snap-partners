@@ -2,9 +2,11 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
 
+import { updateUserPhone } from 'lib/services/user/updateUserPhone'
 import { Dispatch, SetStateAction } from 'lib/types/core/next-react'
 import { TAccountInfoToUpdate } from 'lib/types/user/profile'
 import { handleFetchError } from 'lib/utils/handleFetchError'
+import { signUpStep1 } from 'lib/services/auth/signUp'
 import { IAuth, TSetAuth } from 'lib/stores/Auth'
 
 import { Spinner } from 'components/common/loaders'
@@ -29,42 +31,92 @@ export const EditPhone = ({ auth, setAuth, setTypeUpdate }: IFormUpdatePhoneProp
   const sendSMSCode = async () => {
     setIsLoading(true)
 
-    let error
-
-    if (error) {
-      handleFetchError(error.status, error.info)
-      setIsLoading(false)
-    }
-
-    setIsLoading(false)
-    toast('Submitted Code', { type: 'success' })
-  }
-
-  const onSubmitPhone = ({ phoneNumber }) => {
-    setIsLoading(true)
     if (!phoneNumber) {
       setPhoneSent(false)
       setIsLoading(false)
       return
     }
 
+    const { error } = await signUpStep1({ phoneNumber: `+${phoneNumber}` })
+
+    if (error) {
+      handleFetchError(error.status, error.info)
+      setIsLoading(false)
+      return
+    }
+
     const phone = `+${phoneNumber}`
-
-    console.log('onSubmitPhone data', phone)
-
     setPhoneNumber(phone)
+
+    setPhoneSent(true)
+    setIsLoading(false)
+  }
+
+  const onSubmitPhone = async ({ phoneNumber }) => {
+    setIsLoading(true)
+
+    if (!phoneNumber) {
+      setPhoneSent(false)
+      setIsLoading(false)
+      return
+    }
+
+    const { error } = await signUpStep1({ phoneNumber: `+${phoneNumber}` })
+
+    if (error) {
+      handleFetchError(error.status, error.info)
+      setIsLoading(false)
+      return
+    }
+
+    const phone = `+${phoneNumber}`
+    setPhoneNumber(phone)
+
     setPhoneSent(true)
     setIsLoading(false)
   }
 
   const onSubmitVerifyCode = async (codeToVerify) => {
+    setIsLoading(true)
     console.log(codeToVerify)
+    const { error } = await updateUserPhone(auth.accessToken, { code: codeToVerify, phone: phoneNumber })
+
+    if (error) {
+      handleFetchError(error.status, error.info)
+      setIsLoading(false)
+      return
+    }
+
+    setIsLoading(false)
+    toast('Phone Updated', { type: 'success' })
+    setAuth({ ...auth, phoneNumber })
+    setTypeUpdate(null)
   }
 
-  const onSubmitUpdatePhone = ({ phoneNumber }) => {
+  const onSubmitUpdatePhone = async ({ phoneNumber }) => {
     setIsLoading(true)
     setIsPhoneEditable(false)
-    setPhoneNumber(`+${phoneNumber}`)
+
+    setIsLoading(true)
+
+    if (!phoneNumber) {
+      setPhoneSent(false)
+      setIsLoading(false)
+      return
+    }
+
+    const { error } = await signUpStep1({ phoneNumber: `+${phoneNumber}` })
+
+    if (error) {
+      handleFetchError(error.status, error.info)
+      setIsLoading(false)
+      return
+    }
+
+    const phone = `+${phoneNumber}`
+    setPhoneNumber(phone)
+
+    setPhoneSent(true)
     setIsLoading(false)
   }
 
@@ -78,7 +130,7 @@ export const EditPhone = ({ auth, setAuth, setTypeUpdate }: IFormUpdatePhoneProp
 
   if (isPhoneEditable) {
     return (
-      <div className='flex justify-center items-center h-[70vh] w-full'>
+      <div className='flex justify-center items-center w-full'>
         <FormChangePhone
           onSubmitUpdatePhone={onSubmitUpdatePhone}
           setIsPhoneEditable={setIsPhoneEditable}
@@ -93,7 +145,7 @@ export const EditPhone = ({ auth, setAuth, setTypeUpdate }: IFormUpdatePhoneProp
   }
 
   return (
-    <div className='max-w-3xl mx-auto flex flex-col justify-center items-start h-[70vh] w-full'>
+    <div className='max-w-3xl mx-auto flex flex-col justify-center items-start w-full'>
       {
         !phoneSent && (
           <section className='text-gray-800'>
