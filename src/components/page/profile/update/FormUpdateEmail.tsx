@@ -2,14 +2,17 @@ import { useForm } from 'react-hook-form'
 
 import { Dispatch, SetStateAction } from 'lib/types/core/next-react'
 import { TAccountInfoToUpdate } from 'lib/types/user/profile'
-import { IAuth } from 'lib/stores/Auth'
+import { IAuth, TSetAuth } from 'lib/stores/Auth'
 
 import { Button } from 'components/common/Button'
 import { InputProfile } from '../commons/InputProfile'
 import { useState } from 'react'
+import { handleFetchError } from 'lib/utils/handleFetchError'
+import { updateUserEmail } from 'lib/services/user/updateUserEmail'
 
 interface IFormUpdatePhoneProps {
   auth: IAuth
+  setAuth: TSetAuth
   setTypeUpdate: Dispatch<SetStateAction<TAccountInfoToUpdate>>
 }
 
@@ -17,25 +20,33 @@ interface IDataForm {
   newEmail: string
 }
 
-export const FormUpdateEmail = ({ auth, setTypeUpdate }: IFormUpdatePhoneProps) => {
-  const { handleSubmit, register, reset, formState: { errors }, setError, control } = useForm<IDataForm>()
+export const FormUpdateEmail = ({ auth, setAuth, setTypeUpdate }: IFormUpdatePhoneProps) => {
+  const { handleSubmit, register, reset, formState: { errors }, setError } = useForm<IDataForm>()
 
   const [loading, setLoading] = useState(false)
 
-  const onSubmit = async (data: IDataForm) => {
+  const onSubmit = async (dataForm: IDataForm) => {
     setLoading(true)
 
-    if (auth.email === data.newEmail) {
+    if (auth.email === dataForm.newEmail) {
       setError('newEmail', { message: 'The current email is the same as the new email' })
       setLoading(false)
       return
     }
 
-    console.log(data)
+    const { error } = await updateUserEmail(auth.accessToken, {
+      currentEmail: auth.email,
+      newEmail: dataForm.newEmail
+    })
 
-    // * FETCHING
-    // ...
-    // reset()
+    if (error) {
+      handleFetchError(error.status, error.info)
+      setLoading(false)
+      return
+    }
+
+    setAuth({ ...auth, email: dataForm.newEmail })
+    reset()
     setLoading(false)
   }
 

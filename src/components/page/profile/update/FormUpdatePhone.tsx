@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { Dispatch, SetStateAction } from 'lib/types/core/next-react'
 import { TAccountInfoToUpdate } from 'lib/types/user/profile'
 import { handleFetchError } from 'lib/utils/handleFetchError'
-import { IAuth } from 'lib/stores/Auth'
+import { IAuth, TSetAuth } from 'lib/stores/Auth'
 
 import { RegisterPassword } from 'components/page/signup/SignUpForm/FormByRole/utils/RegisterPassword'
 import { registerRulesConfig } from 'components/page/signup/SignUpForm/FormByRole/utils/formRules'
@@ -17,10 +17,11 @@ import { InputProfile } from '../commons/InputProfile'
 
 interface IFormUpdatePhoneProps {
   auth: IAuth
+  setAuth: TSetAuth
   setTypeUpdate: Dispatch<SetStateAction<TAccountInfoToUpdate>>
 }
 
-export const FormUpdatePhone = ({ auth, setTypeUpdate }: IFormUpdatePhoneProps) => {
+export const FormUpdatePhone = ({ auth, setAuth, setTypeUpdate }: IFormUpdatePhoneProps) => {
   const { register: registerPhone, handleSubmit: handleSubmitPhone, formState: { errors }, control } = useForm()
   const { register, handleSubmit } = useForm()
   const [phoneSent, setPhoneSent] = useState(false)

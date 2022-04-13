@@ -15,13 +15,13 @@ import { AccountInfo } from 'components/page/profile/AccountInfo'
 const { SEO } = APP_INFO
 
 const ProfilePage: Page = () => {
-  const { auth, removeAuth } = useAuthStore()
+  const { auth, setAuth, removeAuth } = useAuthStore()
   const { setNewWindow } = useNewWindowOpenedStore()
   const [typeUpdate, setTypeUpdate] = useState<TAccountInfoToUpdate>(null)
 
-  if (typeUpdate === 'email') return <FormUpdateEmail auth={auth} setTypeUpdate={setTypeUpdate} />
-  if (typeUpdate === 'phone') return <FormUpdatePhone auth={auth} setTypeUpdate={setTypeUpdate} />
-  if (typeUpdate === 'password') return <FormUpdatePassword auth={auth} setTypeUpdate={setTypeUpdate} />
+  if (typeUpdate === 'email') return <FormUpdateEmail auth={auth} setAuth={setAuth} setTypeUpdate={setTypeUpdate} />
+  if (typeUpdate === 'phone') return <FormUpdatePhone auth={auth} setAuth={setAuth} setTypeUpdate={setTypeUpdate} />
+  if (typeUpdate === 'password') return <FormUpdatePassword auth={auth} setAuth={setAuth} setTypeUpdate={setTypeUpdate} />
 
   return (
     <AccountInfo
