@@ -9,6 +9,8 @@ import { InputProfile } from '../commons/InputProfile'
 import { useState } from 'react'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { updateUserEmail } from 'lib/services/user/updateUserEmail'
+import { Spinner } from 'components/common/loaders'
+import { toast } from 'react-toastify'
 
 interface IFormUpdatePhoneProps {
   auth: IAuth
@@ -23,14 +25,14 @@ interface IDataForm {
 export const FormUpdateEmail = ({ auth, setAuth, setTypeUpdate }: IFormUpdatePhoneProps) => {
   const { handleSubmit, register, reset, formState: { errors }, setError } = useForm<IDataForm>()
 
-  const [loading, setLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const onSubmit = async (dataForm: IDataForm) => {
-    setLoading(true)
+    setIsLoading(true)
 
     if (auth.email === dataForm.newEmail) {
       setError('newEmail', { message: 'The current email is the same as the new email' })
-      setLoading(false)
+      setIsLoading(false)
       return
     }
 
@@ -41,13 +43,23 @@ export const FormUpdateEmail = ({ auth, setAuth, setTypeUpdate }: IFormUpdatePho
 
     if (error) {
       handleFetchError(error.status, error.info)
-      setLoading(false)
+      setIsLoading(false)
       return
     }
 
     setAuth({ ...auth, email: dataForm.newEmail })
+    toast('Email successfully changed', { type: 'success' })
     reset()
-    setLoading(false)
+    setTypeUpdate(null)
+    setIsLoading(false)
+  }
+
+  if (isLoading) {
+    return (
+      <div className='w-full h-screen-80 flex items-center justify-center'>
+        <Spinner />
+      </div>
+    )
   }
 
   return (

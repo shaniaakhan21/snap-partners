@@ -9,6 +9,9 @@ import { InputProfile } from '../commons/InputProfile'
 import { signInRulesConfig } from 'components/page/login/LoginForm/utils/formRules'
 import { updateUserPassword } from 'lib/services/user/updateUserPassword'
 import { handleFetchError } from 'lib/utils/handleFetchError'
+import { toast } from 'react-toastify'
+import { Spinner } from 'components/common/loaders'
+import { getUserMe } from 'lib/services/user/getUserMe'
 
 interface IFormUpdatePasswordProps {
   auth: IAuth
@@ -25,38 +28,74 @@ interface IDataForm {
 export const FormUpdatePassword = ({ auth, setAuth, setTypeUpdate }: IFormUpdatePasswordProps) => {
   const { handleSubmit, register, reset, formState: { errors }, setError } = useForm<IDataForm>()
 
-  const [loading, setLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   const onSubmit = async (dataForm: IDataForm) => {
-    setLoading(true)
+    setIsLoading(true)
 
     if (dataForm.confirmNewPassword !== dataForm.newPassword) {
       setError('confirmNewPassword', { message: 'The new confirm password is not equal to the new password' })
-      setLoading(false)
+      setIsLoading(false)
       return
     }
 
     if (dataForm.password === dataForm.newPassword) {
       setError('newPassword', { message: 'The current password is equal to the new password' })
       setError('confirmNewPassword', { message: 'The current password is equal to the confirm new password' })
-      setLoading(false)
+      setIsLoading(false)
       return
     }
 
-    // const { error } = await updateUserPassword(auth.accessToken, {
-    //   currentPassword: auth.password,
-    //   newPassword: dataForm.newPassword
-    // })
+    const { error: errorPassword } = await updateUserPassword(auth.accessToken, {
+      currentPassword: auth.password,
+      newPassword: dataForm.newPassword
+    })
 
-    // if (error) {
-    //   handleFetchError(error.status, error.info)
-    //   setLoading(false)
-    //   return
-    // }
+    if (errorPassword) {
+      handleFetchError(errorPassword.status, errorPassword.info)
+      setIsLoading(false)
+      return
+    }
 
-    // setAuth({ ...auth, password:  })
+    const { data: userData, error: userError } = await getUserMe({ token: auth.accessToken })
+
+    if (userError) {
+      handleFetchError(userError.status, userError.info)
+      setIsLoading(false)
+      return
+    }
+
+    setAuth({
+      email: userData.email,
+      name: userData.name,
+      password: userData.password,
+      phoneNumber: userData.phoneNumber,
+      accessToken: auth.accessToken,
+      lastname: userData.lastname,
+      roles: userData.roles,
+      id: userData.id,
+      username: userData.username,
+      referralCode: userData.referralCode,
+      idImage: userData.idImage,
+      insuranceImage: userData.insuranceImage,
+      isManager: userData.ranks?.type === 'manager',
+      createdAt: userData.createdAt,
+      ownerName: userData.ownerName,
+      ranks: userData.ranks,
+      updatedAt: userData.updatedAt
+    })
+    toast('Password successfully changed', { type: 'success' })
     reset()
-    setLoading(false)
+    setTypeUpdate(null)
+    setIsLoading(false)
+  }
+
+  if (isLoading) {
+    return (
+      <div className='w-full h-screen-80 flex items-center justify-center'>
+        <Spinner />
+      </div>
+    )
   }
 
   return (
