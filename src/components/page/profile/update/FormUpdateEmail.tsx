@@ -8,7 +8,7 @@ import { Button } from 'components/common/Button'
 import { InputProfile } from '../commons/InputProfile'
 import { useState } from 'react'
 import { handleFetchError } from 'lib/utils/handleFetchError'
-import { updateUserEmail } from 'lib/services/user/updateUserEmail'
+import { sendEmailToConfirm } from 'lib/services/user/updateUserEmail'
 import { Spinner } from 'components/common/loaders'
 import { toast } from 'react-toastify'
 
@@ -30,24 +30,23 @@ export const FormUpdateEmail = ({ auth, setAuth, setTypeUpdate }: IFormUpdatePho
   const onSubmit = async (dataForm: IDataForm) => {
     setIsLoading(true)
 
-    // if (auth.email === dataForm.newEmail) {
-    //   setError('newEmail', { message: 'The current email is the same as the new email' })
-    //   setIsLoading(false)
-    //   return
-    // }
+    if (auth.email === dataForm.newEmail) {
+      setError('newEmail', { message: 'The current email is the same as the new email' })
+      setIsLoading(false)
+      return
+    }
 
-    // const { error } = await updateUserEmail(auth.accessToken, {
-    //   currentEmail: auth.email,
-    //   newEmail: dataForm.newEmail
-    // })
+    const { error } = await sendEmailToConfirm(auth.accessToken, {
+      newEmail: dataForm.newEmail
+    })
 
-    // if (error) {
-    //   handleFetchError(error.status, error.info)
-    //   setIsLoading(false)
-    //   return
-    // }
+    if (error) {
+      handleFetchError(error.status, error.info)
+      setIsLoading(false)
+      return
+    }
 
-    toast('We have sent you an email to confirm the change, please check it', { type: 'success' })
+    toast('We have sent you an email to confirm the change', { type: 'info' })
     reset()
     setTypeUpdate(null)
     setIsLoading(false)
