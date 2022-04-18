@@ -89,7 +89,7 @@ export const Article = ({ linkToShare, id, imageId, title, subtitle, caption, ha
         </li>
 
         <li>
-          <FacebookShareButton hashtag={hashtags.join(' ')} url={linkToShare} onClick={() => trackShare('Facebook')}>
+          <FacebookShareButton url={linkToShare} onClick={() => trackShare('Facebook')}>
             <FacebookIcon borderRadius={999} size={28} />
           </FacebookShareButton>
         </li>
