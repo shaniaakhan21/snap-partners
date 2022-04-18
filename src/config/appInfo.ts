@@ -89,7 +89,7 @@ export const APP_INFO = {
       },
 
       CUSTOMER_APP: {
-        title: 'Costumer app',
+        title: 'Custumer app',
         subtitle: 'User app',
         description: 'Order food and get it SNAP',
         link: 'https://apps.apple.com/us/app/snap-user/id1478863057'
@@ -112,7 +112,7 @@ export const APP_INFO = {
       },
 
       CUSTOMER_APP: {
-        title: 'Costumer app',
+        title: 'Custumer app',
         subtitle: 'User app',
         description: 'Order food and get it SNAP',
         link: 'https://play.google.com/store/apps/details?id=com.snapdelivered.userapp'

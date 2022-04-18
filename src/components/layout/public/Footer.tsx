@@ -18,7 +18,7 @@ export const FooterPublic = () => {
     { to: `/auth/signup?role=${ROLES.DRIVER}`, label: 'Become a Driver' },
     { to: `/auth/signup?role=${ROLES.MERCHANT}`, label: 'Become a Merchant Partner' },
     { to: `/auth/signup?role=${ROLES.CUSTOMER}`, label: 'Become a Customer' },
-    { to: 'https://opportunity.snapdelivered.com/#contact', label: 'Carrers' },
+    { to: 'https://opportunity.snapdelivered.com/#contact', label: 'Careers' },
     { to: 'https://store.snapdelivered.com/', label: 'Merch Store' }
   ])
 
