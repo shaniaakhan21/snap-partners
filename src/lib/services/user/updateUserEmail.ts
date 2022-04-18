@@ -1,11 +1,16 @@
 import { IQueryErrorReturn } from 'lib/types/http/query'
 
-interface IDataBodyUpdate {
-  currentEmail: string
+interface NewEmail {
   newEmail: string
 }
 
-type IDataBodySend = Omit<IDataBodyUpdate, 'currentEmail'>
+interface IDataBodyUpdate extends NewEmail{
+  currentEmail: string
+}
+
+interface IDataBodySend extends NewEmail {
+  domain: string
+}
 
 export const sendEmailToConfirm = async (token: string, dataBody: IDataBodySend): Promise<IQueryErrorReturn> => {
   const res = await fetch('/api/user/email', {

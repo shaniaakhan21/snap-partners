@@ -37,7 +37,8 @@ export const FormUpdateEmail = ({ auth, setAuth, setTypeUpdate }: IFormUpdatePho
     }
 
     const { error } = await sendEmailToConfirm(auth.accessToken, {
-      newEmail: dataForm.newEmail
+      newEmail: dataForm.newEmail,
+      domain: location.origin
     })
 
     if (error) {
