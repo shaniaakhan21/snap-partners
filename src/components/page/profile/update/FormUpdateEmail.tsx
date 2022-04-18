@@ -30,25 +30,24 @@ export const FormUpdateEmail = ({ auth, setAuth, setTypeUpdate }: IFormUpdatePho
   const onSubmit = async (dataForm: IDataForm) => {
     setIsLoading(true)
 
-    if (auth.email === dataForm.newEmail) {
-      setError('newEmail', { message: 'The current email is the same as the new email' })
-      setIsLoading(false)
-      return
-    }
+    // if (auth.email === dataForm.newEmail) {
+    //   setError('newEmail', { message: 'The current email is the same as the new email' })
+    //   setIsLoading(false)
+    //   return
+    // }
 
-    const { error } = await updateUserEmail(auth.accessToken, {
-      currentEmail: auth.email,
-      newEmail: dataForm.newEmail
-    })
+    // const { error } = await updateUserEmail(auth.accessToken, {
+    //   currentEmail: auth.email,
+    //   newEmail: dataForm.newEmail
+    // })
 
-    if (error) {
-      handleFetchError(error.status, error.info)
-      setIsLoading(false)
-      return
-    }
+    // if (error) {
+    //   handleFetchError(error.status, error.info)
+    //   setIsLoading(false)
+    //   return
+    // }
 
-    setAuth({ ...auth, email: dataForm.newEmail })
-    toast('Email successfully changed', { type: 'success' })
+    toast('We have sent you an email to confirm the change, please check it', { type: 'success' })
     reset()
     setTypeUpdate(null)
     setIsLoading(false)
