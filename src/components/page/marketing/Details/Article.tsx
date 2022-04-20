@@ -67,7 +67,7 @@ export const Article = ({ linkToShare, id, imageId, title, subtitle, caption, ha
 
       {
         hashtags[0] && (
-          <ul className='w-full border-t border-gray-400 px-5 py-3 flex text-sm'>
+          <ul className='w-full border-t border-gray-400 px-5 py-3 flex flex-wrap text-sm'>
             {
               hashtags.map(hashtag => (
                 <li key={hashtag} className='mr-1.5'>
