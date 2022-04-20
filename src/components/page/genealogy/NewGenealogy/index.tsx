@@ -103,6 +103,7 @@ export const NewGenealogy = ({
                     userId={user.id}
                     numUsers={0}
                     userName={user.name}
+                    lastName={user.lastname}
                     onClick={(id: number) => fnOpenModalReferralSearch(() => setUserDetailIdSearch(id))}
                   />
                 ))
@@ -145,6 +146,7 @@ export const NewGenealogy = ({
                 userId={user.id}
                 numUsers={0}
                 userName={user.name}
+                lastName={user.lastname}
                 onClick={(id: number) => fnOpenModalReferralUserDetail(() => setUserdetailIdOpen(id))}
               />
             ))}

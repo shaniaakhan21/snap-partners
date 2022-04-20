@@ -1,6 +1,7 @@
 export interface ILevelUser {
   id: number
   name: string
+  lastname: string
   email: string
   phoneNumber: string
   sponsorId: number | null

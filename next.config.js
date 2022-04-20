@@ -9,9 +9,11 @@ module.exports = {
         {
           source: '/api/:path*',
           // destination: `http://localhost:${API.BACKEND_PORT}/:path*`
-          destination: 'https://snapdeliveredteam.com/api/:path*'
+          // destination: 'https://snapdeliveredteam.com/api/:path*'
           // destination: 'https://devstage.snap.devopsteam.info/api/:path*'
           // destination: 'https://dev.snap.devopsteam.info/api/:path*'
+          destination: 'http://snap401stage.snap.devopsteam.info/api/:path*'
+          // destination: 'http://snap401.snap.devopsteam.info:9090/api/:path*'
         }
       ]
       : []
