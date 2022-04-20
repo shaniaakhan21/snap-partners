@@ -38,6 +38,8 @@ SignUpPage.getLayout = (page) => {
               <meta property='og:title' content={page.props.rrssInfo.title} />
               <meta property='og:description' content={page.props.rrssInfo.caption} />
               <meta property='og:image' content={page.props.rrssInfo.imageId} />
+              <meta property='og:image:width' content='1080' />
+              <meta property='og:image:height' content='1080' />
               <meta property='twitter:url' content={`${APP_INFO.SEO.URL_PAGE}/share/${page.props.referralCode}/${page.props.role}/${page.props.marketingId}`} />
               <meta property='twitter:title' content={page.props.rrssInfo.title} />
               <meta property='twitter:image' content={page.props.rrssInfo.imageId} />
