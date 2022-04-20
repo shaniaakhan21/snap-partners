@@ -46,7 +46,7 @@ export const NewGenealogy = ({
   return (
     <>
       <div className='w-full flex flex-col justify-start'>
-        <div className='w-full flex items-center justify-between'>
+        <div className='w-full flex flex-col-reverse gap-y-4 sm:flex-row items-center justify-between'>
           <form onSubmit={handleSubmit(onSubmit)}>
             <input
               id='search'
