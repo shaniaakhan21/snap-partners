@@ -49,6 +49,7 @@ export interface IUserById extends IUserCommonData {
 export interface IUserBySearch {
   id: number
   name: string
+  lastname: string
   phoneNumber: string
   sponsorId: string | null
 }

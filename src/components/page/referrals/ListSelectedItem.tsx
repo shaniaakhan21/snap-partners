@@ -1,10 +1,10 @@
 import { AdjuntIcon } from 'components/common/icons'
 
-export const ReferralListSelectedItem = ({ userId, userName, numUsers, onClick }) => {
+export const ReferralListSelectedItem = ({ userId, userName, lastName, numUsers, onClick }) => {
   return (
     <li className='mb-4 last:mb-0'>
       <button className='w-full h-16 flex items-center justify-between transition-colors lg:px-2 hover:bg-gray-200' onClick={() => onClick(userId)}>
-        <span className='font-bold w-1/3 truncate text-sm text-left text-gray-800 mx-auto'>{userName.toUpperCase()}</span>
+        <span className='font-bold w-1/3 truncate text-sm text-left text-gray-800 mx-auto'>{userName?.toUpperCase()} {lastName?.toUpperCase()}</span>
 
         {/* <span className='w-1/4 truncate text-sm text-center'>{numUsers} users</span> */}
 
