@@ -10,6 +10,26 @@ export interface IAuth extends IUserMe {
   accessToken: string
 }
 
+export type TSetAuth = ({
+  accessToken,
+  id,
+  username,
+  password,
+  email,
+  name,
+  lastname,
+  phoneNumber,
+  roles,
+  isManager,
+  referralCode,
+  idImage,
+  insuranceImage,
+  createdAt,
+  ownerName,
+  ranks,
+  updatedAt
+}: IAuth) => void
+
 interface IAuthAtom {
   auth: IAuth | null
   setAuth: ({

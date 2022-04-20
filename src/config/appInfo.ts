@@ -1,8 +1,8 @@
 export const APP_INFO = {
   SEO: {
-    AUTHOR: 'Snap Deliver',
-    TITLE_PAGE: 'Snap Deliver',
-    DESCRIPTION_PAGE: 'Snap Deliver Application',
+    AUTHOR: 'Snap Delivered',
+    TITLE_PAGE: 'Snap Delivered',
+    DESCRIPTION_PAGE: 'Snap Delivered Application',
     URL_PAGE: 'https://snapdeliveredteam.com',
     KEYWORDS_PAGE: [
       'Snap Delivered',
@@ -89,7 +89,7 @@ export const APP_INFO = {
       },
 
       CUSTOMER_APP: {
-        title: 'Costumer app',
+        title: 'Custumer app',
         subtitle: 'User app',
         description: 'Order food and get it SNAP',
         link: 'https://apps.apple.com/us/app/snap-user/id1478863057'
@@ -112,7 +112,7 @@ export const APP_INFO = {
       },
 
       CUSTOMER_APP: {
-        title: 'Costumer app',
+        title: 'Custumer app',
         subtitle: 'User app',
         description: 'Order food and get it SNAP',
         link: 'https://play.google.com/store/apps/details?id=com.snapdelivered.userapp'

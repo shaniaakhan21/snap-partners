@@ -1,56 +1,95 @@
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
 
 import { useAuthStore, useNewWindowOpenedStore } from 'lib/stores'
-import type { Page, ReactNode } from 'lib/types'
+import { TAccountInfoToUpdate } from 'lib/types/user/profile'
+import { ReactNode } from 'lib/types'
 import { APP_INFO } from 'config/appInfo'
 
 import DashboardLayout from 'layouts/private/Dashboard'
-import { UpgradeManagerCTA } from 'components/page/profile/UpgradeManagerCTA'
-import { FormAccountInfo } from 'components/page/profile/FormAccountInfo'
-import { PhotoAccount } from 'components/page/profile/PhotoAccount'
-import { BecomeRoles } from 'components/page/profile/BecomeRoles'
-import { TextContactCTA } from 'components/common/TextContactCTA'
-import { Badges } from 'components/page/profile/Badges'
-import { Rank } from 'components/page/profile/Rank'
+import { FormUpdatePassword } from 'components/page/profile/update/FormUpdatePassword'
+import { FormUpdateEmail } from 'components/page/profile/update/FormUpdateEmail'
+import { EditPhone } from 'components/page/profile/update/EditPhone'
+import { AccountInfo } from 'components/page/profile/AccountInfo'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import { decodeEmailToken } from 'lib/utils/decodeEmailToken'
+import { updateUserEmail } from 'lib/services/user/updateUserEmail'
+import { handleFetchError } from 'lib/utils/handleFetchError'
+import { toast } from 'react-toastify'
+import { Spinner } from 'components/common/loaders'
 
 const { SEO } = APP_INFO
 
-const ProfilePage: Page = () => {
-  const { auth, removeAuth } = useAuthStore()
+const ProfilePage = ({ email, tokenExist }: { email: string, tokenExist: boolean }) => {
+  const { auth, setAuth, removeAuth } = useAuthStore()
   const { setNewWindow } = useNewWindowOpenedStore()
+  const [typeUpdate, setTypeUpdate] = useState<TAccountInfoToUpdate>(null)
 
-  return (
-    <>
-      <div className='flex justify-start items-center gap-x-5 select-none'>
-        <PhotoAccount photoURL={null} />
-        <Badges auth={auth} />
-      </div>
+  const [isLoading, setIsLoading] = useState(false)
 
-      <div className='mt-11'>
-        <FormAccountInfo auth={auth} />
-      </div>
+  useEffect(() => {
+    (async () => {
+      if (!tokenExist && !email) return
 
-      {
-        !auth.roles.admin && (
-          <div className='flex flex-col md:flex-row items-center justify-center mt-11'>
-            <Rank auth={auth} />
-            <UpgradeManagerCTA auth={auth} setNewWindow={setNewWindow} />
-          </div>
-        )
+      if (tokenExist && !email) {
+        toast('Could not change the email, please contact support', { type: 'error' })
+        return
       }
 
-      <BecomeRoles auth={auth} />
+      setIsLoading(true)
 
-      <button
-        className='block text-primary-500 mx-auto mt-11 font-bold text-lg'
-        onClick={removeAuth}
-      >
-        Logout
-      </button>
+      const { error } = await updateUserEmail(auth.accessToken, {
+        currentEmail: auth.email,
+        newEmail: email
+      })
 
-      <TextContactCTA />
-    </>
+      if (error) {
+        handleFetchError(error.status, error.info)
+        setIsLoading(false)
+        return
+      }
+
+      setAuth({ ...auth, email })
+      toast('Email successfully changed', { type: 'success' })
+      setIsLoading(false)
+    })()
+  }, [email, tokenExist])
+
+  if (isLoading) {
+    return (
+      <div className='w-full h-screen flex items-center justify-center'>
+        <Spinner />
+      </div>
+    )
+  }
+  if (typeUpdate === 'email') return <FormUpdateEmail auth={auth} setAuth={setAuth} setTypeUpdate={setTypeUpdate} />
+  if (typeUpdate === 'phone') return <EditPhone auth={auth} setAuth={setAuth} setTypeUpdate={setTypeUpdate} />
+  if (typeUpdate === 'password') return <FormUpdatePassword auth={auth} setAuth={setAuth} setTypeUpdate={setTypeUpdate} />
+
+  return (
+    <AccountInfo
+      auth={auth}
+      removeAuth={removeAuth}
+      setNewWindow={setNewWindow}
+      setTypeUpdate={setTypeUpdate}
+    />
   )
+}
+
+export const getServerSideProps: GetServerSideProps = async ({ query }: GetServerSidePropsContext) => {
+  const { token } = query
+
+  let data: { [key: string]: any }
+
+  try {
+    data = token ? decodeEmailToken(token as string) : null
+  } catch {
+    data = null
+  }
+
+  return {
+    props: { email: data?.email ?? null, tokenExist: !!token }
+  }
 }
 
 ProfilePage.getLayout = (page: ReactNode) => (

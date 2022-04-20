@@ -2,7 +2,7 @@ import Document, { Html, Head, Main, NextScript } from 'next/document'
 import { GTM_ID } from 'lib/utils/gtm'
 import { APP_INFO } from 'config/appInfo'
 
-const { SEO, RRSS } = APP_INFO
+const { SEO } = APP_INFO
 
 export default class MyDocument extends Document {
   render () {
@@ -23,7 +23,6 @@ export default class MyDocument extends Document {
           <meta name='apple-mobile-web-app-title' content={SEO.TITLE_PAGE} />
           <meta name='format-detection' content='telephone=no' />
           <meta name='mobile-web-app-capable' content='yes' />
-          {/* <meta name='msapplication-config' content='/static/icons/browserconfig.xml' /> */}
           <meta name='msapplication-TileColor' content='#DD4C37' />
           <meta name='msapplication-tap-highlight' content='no' />
           <meta name='theme-color' content='#DD4C37' />
