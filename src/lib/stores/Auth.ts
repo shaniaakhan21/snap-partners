@@ -5,7 +5,13 @@ import { IUserMe } from 'lib/types'
 
 const { SEO } = APP_INFO
 
-export interface IAuth extends IUserMe {
+export interface INsurAccount {
+  nsurAccount?: {
+    myPoints: number | string
+  }
+}
+
+export interface IAuth extends IUserMe, INsurAccount {
   referralLink?: string
   accessToken: string
 }
@@ -27,7 +33,8 @@ export type TSetAuth = ({
   createdAt,
   ownerName,
   ranks,
-  updatedAt
+  updatedAt,
+  nsurAccount
 }: IAuth) => void
 
 interface IAuthAtom {
@@ -49,7 +56,8 @@ interface IAuthAtom {
     createdAt,
     ownerName,
     ranks,
-    updatedAt
+    updatedAt,
+    nsurAccount
   }: IAuth) => void
   removeAuth: () => void
 }
@@ -74,7 +82,8 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
     createdAt,
     ownerName,
     ranks,
-    updatedAt
+    updatedAt,
+    nsurAccount
   }) => {
     set({
       auth: {
@@ -95,6 +104,7 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
         ownerName,
         ranks,
         updatedAt,
+        nsurAccount,
         referralLink: referralCode ? `${SEO.URL_PAGE}/auth/signup?referralCode=${referralCode}` : null
       }
     })
