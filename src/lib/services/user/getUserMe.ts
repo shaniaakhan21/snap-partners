@@ -34,7 +34,6 @@ interface IQueryUserMeReturn extends IQueryErrorReturn {
       updatedAt: string
     }
   }
- | null
 }
 
 export const getUserMe = async (authorizations: IAuthorizations): Promise<IQueryUserMeReturn> => {

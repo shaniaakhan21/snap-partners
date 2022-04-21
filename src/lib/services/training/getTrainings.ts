@@ -2,7 +2,7 @@ import { IQueryErrorReturn } from 'lib/types/http/query'
 import { ITraining, TTrainingType } from 'lib/types/training'
 
 interface IQueryArticlesReturn extends IQueryErrorReturn {
-  data: ITraining[] | [] | null
+  data: ITraining[]
 }
 
 export const getTrainings = async (token: string, type: TTrainingType = null, page: number): Promise<IQueryArticlesReturn> => {

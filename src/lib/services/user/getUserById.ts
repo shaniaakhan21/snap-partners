@@ -2,7 +2,7 @@ import { IUserById } from 'lib/types'
 import { IQueryErrorReturn } from 'lib/types/http/query'
 
 interface IQueryReturn extends IQueryErrorReturn {
-  data: IUserById | null
+  data: IUserById
 }
 
 export const getUserById = async (id: number | string, token: string): Promise<IQueryReturn> => {

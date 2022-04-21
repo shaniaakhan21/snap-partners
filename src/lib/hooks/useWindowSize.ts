@@ -5,6 +5,7 @@ export const useWindowSize = () => {
     width: undefined,
     height: undefined
   })
+
   useEffect(() => {
     const handleResize = () => {
       setWindowSize({
