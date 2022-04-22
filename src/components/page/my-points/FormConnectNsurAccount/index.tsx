@@ -97,7 +97,7 @@ export const FormConnectNsurAccount = ({ auth, setAuth }: IFormConnectNsurAccoun
             <input
               {...register('password', {
                 required: { value: true, message: 'Password Required *' },
-                maxLength: { value: 50, message: 'Max 50 Characters *' },
+                maxLength: { value: 50, message: 'Max 100 Characters *' },
                 minLength: { value: 3, message: 'Min 3 Characters *' }
               })}
               id='password'
