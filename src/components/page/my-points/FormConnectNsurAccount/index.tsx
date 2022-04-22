@@ -10,10 +10,11 @@ import { CheckTermsAndConditions } from 'components/common/CheckTermsAndConditio
 import { InputBasicForm } from 'components/common/InputBasicForm'
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
+import { EyeHiddenIcon, EyeVisibleIcon } from 'components/common/icons'
 
 interface IDataFormConnectNsurAccount {
   email: string
-  username: string
+  password: string
   termsAndConditions: boolean
 }
 
@@ -24,11 +25,12 @@ interface IFormConnectNsurAccountProps {
 
 export const FormConnectNsurAccount = ({ auth, setAuth }: IFormConnectNsurAccountProps) => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm<IDataFormConnectNsurAccount>()
+  const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
 
   const onSubmit = async (dataForm: IDataFormConnectNsurAccount) => {
     setLoading(true)
-    // const { data, error } = await connectNsurAccount(dataForm.email, dataForm.username)
+    // const { data, error } = await connectNsurAccount(dataForm.email, dataForm.password)
 
     // if (error) {
     //   handleFetchError(error.status, error.info)
@@ -85,23 +87,34 @@ export const FormConnectNsurAccount = ({ auth, setAuth }: IFormConnectNsurAccoun
           }}
         />
 
-        <InputBasicForm
-          id='username'
-          isRequired
-          name='username'
-          type='text'
-          label='NSUR USER NAME'
-          registerId='username'
-          placeholder='Enter username'
-          autoComplete='username'
-          errors={errors.username}
-          register={register}
-          rulesForm={{
-            required: { value: true, message: 'Username Required *' },
-            maxLength: { value: 50, message: 'Max 50 Characters *' },
-            minLength: { value: 3, message: 'Min 3 Characters *' }
-          }}
-        />
+        <div>
+          <label htmlFor='password' className='font-bold text-gray-700 uppercase text-sm'>
+            NSUR Password <span className='text-red-500'>*</span>
+          </label>
+
+          {errors.password && <p className='text-sm text-red-400'>{errors.password.message}</p>}
+          <div className='relative'>
+            <input
+              {...register('password', {
+                required: { value: true, message: 'Password Required *' },
+                maxLength: { value: 50, message: 'Max 50 Characters *' },
+                minLength: { value: 3, message: 'Min 3 Characters *' }
+              })}
+              id='password'
+              name='password'
+              type={`${showPassword ? 'text' : 'password'}`}
+              autoComplete='current-password'
+              className='w-full pl-3 pr-14 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
+              placeholder='Enter Password'
+            />
+            <div
+              onClick={() => setShowPassword((prevState) => !prevState)}
+              className='cursor-pointer absolute right-4 mr-0.5 top-3.5 mt-0.5'
+            >
+              {showPassword ? <EyeHiddenIcon /> : <EyeVisibleIcon />}
+            </div>
+          </div>
+        </div>
 
         <CheckTermsAndConditions
           errors={errors.termsAndConditions}
@@ -110,7 +123,7 @@ export const FormConnectNsurAccount = ({ auth, setAuth }: IFormConnectNsurAccoun
         />
 
         <Button type='submit' classes='mt-6'>
-        Connect to nsur
+          Connect to nsur
         </Button>
       </section>
     </form>

@@ -4,10 +4,10 @@ interface IQueryReturn extends IQueryErrorReturn {
   data: { points: number }
 }
 
-export const connectNsurAccount = async (email: string, username: string): Promise<IQueryReturn> => {
+export const connectNsurAccount = async (email: string, password: string): Promise<IQueryReturn> => {
   const res = await fetch('/api/nsur', {
     method: 'POST',
-    body: JSON.stringify({ email, username })
+    body: JSON.stringify({ email, password })
   })
 
   const data = await res.json()
