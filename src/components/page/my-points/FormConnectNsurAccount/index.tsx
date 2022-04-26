@@ -2,15 +2,15 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { useState } from 'react'
 
-// import { connectNsurAccount } from 'lib/services/nsur/connectNsurAccount'
-// import { handleFetchError } from 'lib/utils/handleFetchError'
+import { getMyPoints } from 'lib/services/nsur/getMyPoints'
+import { handleFetchError } from 'lib/utils/handleFetchError'
 import { IAuth, TSetAuth } from 'lib/stores/Auth'
 
 import { CheckTermsAndConditions } from 'components/common/CheckTermsAndConditions'
-import { InputBasicForm } from 'components/common/InputBasicForm'
-import { Button } from 'components/common/Button'
-import { Spinner } from 'components/common/loaders'
 import { EyeHiddenIcon, EyeVisibleIcon } from 'components/common/icons'
+import { InputBasicForm } from 'components/common/InputBasicForm'
+import { Spinner } from 'components/common/loaders'
+import { Button } from 'components/common/Button'
 
 interface IDataFormConnectNsurAccount {
   email: string
@@ -30,18 +30,18 @@ export const FormConnectNsurAccount = ({ auth, setAuth }: IFormConnectNsurAccoun
 
   const onSubmit = async (dataForm: IDataFormConnectNsurAccount) => {
     setLoading(true)
-    // const { data, error } = await connectNsurAccount(dataForm.email, dataForm.password)
+    const { data, error } = await getMyPoints(auth.id, auth.accessToken)
 
-    // if (error) {
-    //   handleFetchError(error.status, error.info)
-    //   setLoading(false)
-    //   return
-    // }
+    if (error) {
+      handleFetchError(error.status, error.info)
+      setLoading(false)
+      return
+    }
 
     setAuth({
       ...auth,
       nsurAccount: {
-        myPoints: 1 // should be data.points
+        myPoints: data.totalAmount
       }
     })
 

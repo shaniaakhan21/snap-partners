@@ -7,7 +7,7 @@ const { SEO } = APP_INFO
 
 export interface INsurAccount {
   nsurAccount?: {
-    myPoints: number | string
+    myPoints: number
   }
 }
 
