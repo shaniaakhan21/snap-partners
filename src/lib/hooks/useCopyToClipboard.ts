@@ -23,7 +23,7 @@ export const useCopyToClipboard = () => {
 
     // console.info('Clipboard not supported')
 
-    // make a textarea out of viewport
+    // Making a textarea out of viewport
     const textArea = document.createElement('textarea')
     textArea.value = textToCopy
     textArea.style.position = 'fixed'

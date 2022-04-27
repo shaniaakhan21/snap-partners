@@ -10,8 +10,8 @@ interface ISignUpDataBodyStep2 extends ISignUpDataBodyStep1 {
   email: string
   username: string
   password: string
-  idImage: string | null
-  insuranceImage: string | null
+  idImage: string
+  insuranceImage: string
   ownerName?: string
   roles: {
     admin: boolean
@@ -20,7 +20,7 @@ interface ISignUpDataBodyStep2 extends ISignUpDataBodyStep1 {
     merchant: boolean
   },
   code: number
-  sponsorReferralCode: string | null
+  sponsorReferralCode: string
 }
 
 interface ISignUpDataBodyMerchant {
@@ -55,7 +55,7 @@ interface ISignUpDataBodyMerchant {
     pincode: '1234',
     'save_on_snap': true
   },
-  sponsorReferralCode: string | null
+  sponsorReferralCode: string
 }
 
 export const signUpStep1 = async (dataBody: ISignUpDataBodyStep1 | ISignUpDataBodyMerchant): Promise<IQueryErrorReturn> => {

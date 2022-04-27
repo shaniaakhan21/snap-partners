@@ -1,4 +1,5 @@
 import createAtom from 'zustand'
+
 import { removeLocalStorage } from 'lib/utils/localStorage'
 import { APP_INFO } from 'config/appInfo'
 import { IUserMe } from 'lib/types'
@@ -39,7 +40,7 @@ export type TSetAuth = ({
 }: IAuth) => void
 
 interface IAuthAtom {
-  auth: IAuth | null
+  auth: IAuth
   setAuth: ({
     accessToken,
     id,

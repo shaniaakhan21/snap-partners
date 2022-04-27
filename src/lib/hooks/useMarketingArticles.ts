@@ -15,7 +15,6 @@ export const useMarketingArticles = (accessToken: string, typeMarketing: TMarket
 
       if (error) {
         handleFetchError(error.status, error.info)
-        console.error(error)
         setLoading(false)
         return
       }

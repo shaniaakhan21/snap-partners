@@ -1,6 +1,6 @@
 import { setLocalStorage } from 'lib/utils/localStorage'
 import { IQueryErrorReturn } from 'lib/types/http/query'
-import { decodeAccessToken } from 'lib/utils/decodeAccessToken'
+import { decodeAccessToken } from 'lib/utils/decodeToken'
 
 interface ILoginDataBody {
   username?: string
@@ -13,7 +13,7 @@ interface IQueryLoginReturn extends IQueryErrorReturn {
   data: {
     token: string,
     userId: number
-  } | null
+  }
 }
 
 export const login = async (dataBody: ILoginDataBody): Promise<IQueryLoginReturn> => {

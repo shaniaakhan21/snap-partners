@@ -17,7 +17,7 @@ interface IQueryReturn extends IQueryErrorReturn {
       }
       date: string
       time: string
-  }[] | null
+  }[]
 }
 
 export const getWallet = async (token: string, userId: number, page: number): Promise<IQueryReturn> => {

@@ -41,7 +41,7 @@ export interface IUserCommonData {
 export interface IUserById extends IUserCommonData {
   sponsor: {
     id: number
-    lastname: string | null
+    lastname: string
     name: string
   }
 }
@@ -51,7 +51,7 @@ export interface IUserBySearch {
   name: string
   lastname: string
   phoneNumber: string
-  sponsorId: string | null
+  sponsorId: string
 }
 
 export interface IUserMe extends IUserCommonData {
