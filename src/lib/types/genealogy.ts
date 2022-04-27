@@ -4,7 +4,7 @@ export interface ILevelUser {
   lastname: string
   email: string
   phoneNumber: string
-  sponsorId: number | null
+  sponsorId: number
 }
 
 export interface ILevel {

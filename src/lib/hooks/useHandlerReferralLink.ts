@@ -1,40 +1,35 @@
 import { useRouter } from 'next/router'
-import { ROLES } from 'config/roles'
 import { useEffect, useState } from 'react'
+
 import { IReferralLink } from 'lib/types'
+import { ROLES } from 'config/roles'
 
 export const useHandlerReferralLink = () => {
-  const [referralLink, setReferralLink] = useState<IReferralLink>({ code: null, role: null })
   const router = useRouter()
+  const queryReferralCode = router.query.referralCode as string
+  const queryRole = router.query.role as string
 
-  const handlerIdentifyCode = () => {
-    if (typeof router.query.referralCode === 'string') {
-      return router.query.referralCode
-    } else return null
-  }
+  const [referralLink, setReferralLink] = useState<IReferralLink>({ code: null, role: null })
 
   const handlerIdentifyRole = () => {
-    if (typeof router.query.role === 'string') {
-      if (router.query.role.toUpperCase() === ROLES.CUSTOMER) return ROLES.CUSTOMER
-      if (router.query.role.toUpperCase() === ROLES.DRIVER) return ROLES.DRIVER
-      if (router.query.role.toUpperCase() === ROLES.MERCHANT) return ROLES.MERCHANT
-      else return null
-    } else return null
+    const role = ROLES[queryRole]
+
+    return role === ROLES.ADMIN || !role ? null : role
   }
 
   useEffect(() => {
     setReferralLink(prevState => ({
       ...prevState,
-      code: handlerIdentifyCode()
+      code: queryReferralCode
     }))
-  }, [router.query.referralCode])
+  }, [queryReferralCode])
 
   useEffect(() => {
     setReferralLink(prevState => ({
       ...prevState,
       role: handlerIdentifyRole()
     }))
-  }, [router.query.role])
+  }, [queryRole])
 
   return {
     referralCode: referralLink.code,
