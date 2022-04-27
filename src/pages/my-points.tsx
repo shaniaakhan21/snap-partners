@@ -1,13 +1,14 @@
+import { useEffect, useState } from 'react'
 import Head from 'next/head'
 
+import { handleFetchError } from 'lib/utils/handleFetchError'
+import { getMyPoints } from 'lib/services/nsur/getMyPoints'
+import DashboardLayout from 'layouts/private/Dashboard'
 import type { Page, ReactNode } from 'lib/types'
+import { useAuthStore } from 'lib/stores'
 import { APP_INFO } from 'config/appInfo'
 
-import DashboardLayout from 'layouts/private/Dashboard'
-import { useAuthStore } from 'lib/stores'
-import { useEffect, useState } from 'react'
-import { getMyPoints } from 'lib/services/nsur/getMyPoints'
-import { handleFetchError } from 'lib/utils/handleFetchError'
+import { FormConnectNsurAccount } from 'components/page/my-points/FormConnectNsurAccount'
 import { Spinner } from 'components/common/loaders'
 
 const { SEO } = APP_INFO
@@ -30,6 +31,7 @@ const MyPointsPage: Page = () => {
       setAuth({
         ...auth,
         nsurAccount: {
+          ...auth.nsurAccount,
           myPoints: data.totalAmount
         }
       })
@@ -45,19 +47,21 @@ const MyPointsPage: Page = () => {
     )
   }
 
+  if (auth.nsurAccount?.nsurUserId) {
+    return (
+      <div className='max-w-lg mx-auto w-full text-center'>
+        <span className='font-semibold text-lg'>Now you’re connected to NSUR</span>
+        <p className='font-bold text-4xl'>{auth.nsurAccount?.myPoints ? auth.nsurAccount?.myPoints : '0'} points</p>
+        {/* <span className='font-semibold text-lg'>You can win more points by _________</span> */}
+      </div>
+    )
+  }
+
   return (
-    <div className='max-w-lg mx-auto w-full text-center'>
-      <span className='font-semibold text-lg'>Now you’re connected to NSUR</span>
-      <p className='font-bold text-4xl'>{auth.nsurAccount?.myPoints ? auth.nsurAccount?.myPoints : '0'} points</p>
-      <span className='font-semibold text-lg'>You can win more points by _________</span>
+    <div className='max-w-lg mx-auto w-full'>
+      <FormConnectNsurAccount auth={auth} setAuth={setAuth} />
     </div>
   )
-
-  // return (
-  //   <div className='max-w-lg mx-auto w-full'>
-  //     <FormConnectNsurAccount auth={auth} setAuth={setAuth} />
-  //   </div>
-  // )
 }
 
 MyPointsPage.getLayout = (page: ReactNode) => (
