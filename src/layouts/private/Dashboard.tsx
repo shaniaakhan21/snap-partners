@@ -64,7 +64,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         deleted: data.deleted,
         nsurAccount: {
           nsurUserId: data.nsurUserId,
-          myPoints: auth.nsurAccount?.myPoints || null
+          myPoints: auth?.nsurAccount?.myPoints || null
         }
       })
     })()
