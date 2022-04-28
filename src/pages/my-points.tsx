@@ -16,7 +16,7 @@ const MyPointsPage: Page = () => {
     return (
       <div className='max-w-lg mx-auto w-full text-center'>
         <span className='font-semibold text-lg'>Now you’re connected to NSUR</span>
-        <p className='font-bold text-4xl'>{auth.nsurAccount?.myPoints ? auth.nsurAccount?.myPoints : '0'} points</p>
+        <p className='font-bold text-4xl'>{auth.nsurAccount?.myPoints ? auth.nsurAccount?.myPoints : 'No'} points</p>
         {/* <span className ='font-semibold text-lg'>You can win more points by _________</span> */}
       </div>
     )

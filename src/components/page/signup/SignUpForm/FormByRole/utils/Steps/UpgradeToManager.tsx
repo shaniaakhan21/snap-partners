@@ -15,7 +15,7 @@ import { signUp } from 'lib/utils/gtm'
 export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { userTrack: IUserTrack, handleStep: IHandleStep, referralLink: IReferralLink }) => {
   const router = useRouter()
   const role = useRoleFromUrl()
-  const { setAuth } = useAuthStore()
+  const { auth, setAuth } = useAuthStore()
   const { setNewWindow } = useNewWindowOpenedStore()
   const [isLoading, setIsLoading] = useState(false)
 
@@ -58,7 +58,13 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
       createdAt: data.createdAt,
       ownerName: data.ownerName,
       ranks: data.ranks,
-      updatedAt: data.updatedAt
+      updatedAt: data.updatedAt,
+      blocked: data.blocked,
+      deleted: data.deleted,
+      nsurAccount: {
+        nsurUserId: data.nsurUserId,
+        myPoints: auth.nsurAccount?.myPoints || null
+      }
     })
     // When change auth state, directly the app push the user to /overview path
     // This logic is on AuthPageLayout useEffect

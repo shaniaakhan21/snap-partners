@@ -16,6 +16,8 @@ export interface INsurAccount {
 export interface IAuth extends IUserMe, INsurAccount {
   referralLink?: string
   accessToken: string
+  deleted: boolean
+  blocked: boolean
 }
 
 export type TSetAuth = ({
@@ -36,7 +38,9 @@ export type TSetAuth = ({
   ownerName,
   ranks,
   updatedAt,
-  nsurAccount
+  nsurAccount,
+  deleted,
+  blocked
 }: IAuth) => void
 
 interface IAuthAtom {
@@ -59,7 +63,9 @@ interface IAuthAtom {
     ownerName,
     ranks,
     updatedAt,
-    nsurAccount
+    nsurAccount,
+    blocked,
+    deleted
   }: IAuth) => void
   removeAuth: () => void
 }
@@ -85,6 +91,8 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
     ownerName,
     ranks,
     updatedAt,
+    blocked,
+    deleted,
     nsurAccount
   }) => {
     set({
@@ -106,6 +114,8 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
         ownerName,
         ranks,
         updatedAt,
+        blocked,
+        deleted,
         nsurAccount,
         referralLink: referralCode ? `${SEO.URL_PAGE}/auth/signup?referralCode=${referralCode}` : null
       }

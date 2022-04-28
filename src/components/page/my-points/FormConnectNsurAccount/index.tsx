@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { connectNsurAccount } from 'lib/services/nsur/connectNsurAccount'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { getMyPoints } from 'lib/services/nsur/getMyPoints'
+import { getUserMe } from 'lib/services/user/getUserMe'
 import { IAuth, TSetAuth } from 'lib/stores/Auth'
 
 import { CheckTermsAndConditions } from 'components/common/CheckTermsAndConditions'
@@ -31,10 +32,18 @@ export const FormConnectNsurAccount = ({ auth, setAuth }: IFormConnectNsurAccoun
 
   const onSubmit = async (dataForm: IDataFormConnectNsurAccount) => {
     setLoading(true)
-    const { data, error } = await connectNsurAccount(dataForm.email, dataForm.password)
+    const { error } = await connectNsurAccount(dataForm.email, dataForm.password, auth.accessToken)
 
     if (error) {
       handleFetchError(error.status, error.info)
+      setLoading(false)
+      return
+    }
+
+    const { data: dataUserMe, error: errorUserMe } = await getUserMe({ token: auth.accessToken })
+
+    if (errorUserMe) {
+      handleFetchError(errorUserMe.status, errorUserMe.info)
       setLoading(false)
       return
     }
@@ -50,7 +59,7 @@ export const FormConnectNsurAccount = ({ auth, setAuth }: IFormConnectNsurAccoun
     setAuth({
       ...auth,
       nsurAccount: {
-        nsurUserId: data.nsurUserId,
+        nsurUserId: dataUserMe.nsurUserId,
         myPoints: dataMyPoints.totalAmount
       }
     })

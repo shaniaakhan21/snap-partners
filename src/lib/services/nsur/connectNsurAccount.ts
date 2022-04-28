@@ -2,14 +2,17 @@ import { IQueryErrorReturn } from 'lib/types/http/query'
 
 interface IQueryReturn extends IQueryErrorReturn {
   data: {
-    nsurUserId: number
+    success: boolean
   }
 }
 
-export const connectNsurAccount = async (email: string, password: string): Promise<IQueryReturn> => {
+export const connectNsurAccount = async (email: string, password: string, token: string): Promise<IQueryReturn> => {
   const res = await fetch('/api/nsur/checkUser', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`
+    },
     body: JSON.stringify({ email, password })
   })
 
