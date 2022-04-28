@@ -14,8 +14,9 @@ import { Spinner } from 'components/common/loaders'
 const { SEO } = APP_INFO
 
 const MyPointsPage: Page = () => {
-  const { auth, setAuth } = useAuthStore()
+  const { auth } = useAuthStore()
   const [loading, setLoading] = useState(false)
+  const [myPoints, setMypoints] = useState(null)
 
   useEffect(() => {
     (async () => {
@@ -28,13 +29,7 @@ const MyPointsPage: Page = () => {
         return
       }
 
-      setAuth({
-        ...auth,
-        nsurAccount: {
-          ...auth.nsurAccount,
-          myPoints: data.totalAmount
-        }
-      })
+      setMypoints(data.totalAmount)
 
       setLoading(false)
     })()
@@ -51,7 +46,7 @@ const MyPointsPage: Page = () => {
   return (
     <div className='max-w-lg mx-auto w-full text-center'>
       <span className='font-semibold text-lg'>Now you’re connected to NSUR</span>
-      <p className='font-bold text-4xl'>{auth.nsurAccount?.myPoints ? auth.nsurAccount?.myPoints : 'No'} points</p>
+      <p className='font-bold text-4xl'>{myPoints || 'No'} points</p>
       {/* <span className ='font-semibold text-lg'>You can win more points by _________</span> */}
     </div>
   )
