@@ -1,13 +1,23 @@
 import createAtom from 'zustand'
+
 import { removeLocalStorage } from 'lib/utils/localStorage'
 import { APP_INFO } from 'config/appInfo'
 import { IUserMe } from 'lib/types'
 
 const { SEO } = APP_INFO
 
-export interface IAuth extends IUserMe {
+export interface INsurAccount {
+  nsurAccount?: {
+    myPoints: number
+    nsurUserId: number
+  }
+}
+
+export interface IAuth extends IUserMe, INsurAccount {
   referralLink?: string
   accessToken: string
+  deleted: boolean
+  blocked: boolean
 }
 
 export type TSetAuth = ({
@@ -27,11 +37,14 @@ export type TSetAuth = ({
   createdAt,
   ownerName,
   ranks,
-  updatedAt
+  updatedAt,
+  nsurAccount,
+  deleted,
+  blocked
 }: IAuth) => void
 
 interface IAuthAtom {
-  auth: IAuth | null
+  auth: IAuth
   setAuth: ({
     accessToken,
     id,
@@ -49,7 +62,10 @@ interface IAuthAtom {
     createdAt,
     ownerName,
     ranks,
-    updatedAt
+    updatedAt,
+    nsurAccount,
+    blocked,
+    deleted
   }: IAuth) => void
   removeAuth: () => void
 }
@@ -74,7 +90,10 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
     createdAt,
     ownerName,
     ranks,
-    updatedAt
+    updatedAt,
+    blocked,
+    deleted,
+    nsurAccount
   }) => {
     set({
       auth: {
@@ -95,6 +114,9 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
         ownerName,
         ranks,
         updatedAt,
+        blocked,
+        deleted,
+        nsurAccount,
         referralLink: referralCode ? `${SEO.URL_PAGE}/auth/signup?referralCode=${referralCode}` : null
       }
     })

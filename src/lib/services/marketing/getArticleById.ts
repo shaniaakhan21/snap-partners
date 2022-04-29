@@ -10,7 +10,7 @@ interface IQueryReturn extends IQueryErrorReturn {
     caption: string
     imageId: string
     updatedAt: string
-  } | null
+  }
 }
 
 export const getArticleById = async (id: number, token: string): Promise<IQueryReturn> => {

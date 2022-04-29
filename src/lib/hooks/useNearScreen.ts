@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+
 import { createObserver } from 'lib/utils/createObserver'
 
 export const useNearScreen = (elementId: string, cbHandleIntersection: () => void) => {

@@ -6,7 +6,7 @@ interface IQueryReturn extends IQueryErrorReturn {
     userId: number
     name: string
     levels: ILevel[]
-  } | null
+  }
 }
 
 export const getAllLevels = async (

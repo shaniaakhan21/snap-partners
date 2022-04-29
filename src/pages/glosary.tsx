@@ -56,7 +56,13 @@ const GlosaryPage: Page = () => {
           createdAt: data.createdAt,
           ownerName: data.ownerName,
           ranks: data.ranks,
-          updatedAt: data.updatedAt
+          updatedAt: data.updatedAt,
+          blocked: data.blocked,
+          deleted: data.deleted,
+          nsurAccount: {
+            nsurUserId: data.nsurUserId,
+            myPoints: auth.nsurAccount?.myPoints || null
+          }
         })
       }
     })()

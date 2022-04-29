@@ -12,8 +12,7 @@ module.exports = {
           // destination: 'https://snapdeliveredteam.com/api/:path*'
           // destination: 'https://devstage.snap.devopsteam.info/api/:path*'
           // destination: 'https://dev.snap.devopsteam.info/api/:path*'
-          destination: 'https://snap401stage.snap.devopsteam.info/api/:path*'
-          // destination: 'https://snap401.snap.devopsteam.info:9090/api/:path*'
+          destination: 'https://snap403.snap.devopsteam.info/api/:path*'
         }
       ]
       : []

@@ -32,9 +32,11 @@ interface IQueryUserMeReturn extends IQueryErrorReturn {
       earns: string
       percentage: string
       updatedAt: string
-    }
+    },
+    deleted: boolean,
+    blocked: boolean,
+    nsurUserId: number
   }
- | null
 }
 
 export const getUserMe = async (authorizations: IAuthorizations): Promise<IQueryUserMeReturn> => {

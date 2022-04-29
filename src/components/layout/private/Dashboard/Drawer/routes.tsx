@@ -7,7 +7,8 @@ import {
   RelojTempIcon,
   AccountIcon,
   TrainingIcon,
-  CreditCardIcon
+  CreditCardIcon,
+  CubeIcon
 } from 'components/common/icons'
 
 export const drawerRoutes = [
@@ -55,6 +56,11 @@ export const drawerRoutes = [
     icon: <AccountIcon />,
     to: '/profile',
     label: 'Profile'
+  },
+  {
+    icon: <CubeIcon />,
+    to: '/my-points',
+    label: 'My Points'
   },
   {
     icon: <RelojTempIcon />,
