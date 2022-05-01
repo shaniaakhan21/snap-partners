@@ -44,9 +44,20 @@ const MyPointsPage: Page = () => {
   }
 
   return (
-    <div className='max-w-lg mx-auto w-full text-center'>
-      <span className='font-semibold text-lg'>Now you’re connected to NSUR</span>
-      <p className='font-bold text-4xl'>{myPoints || 'No'} points</p>
+    <div className='max-w-xl mx-auto w-full text-center'>
+      <p className='font-bold text-4xl'>{myPoints || "You currently don't have any"} points</p>
+      <br/>
+      <span className='font-semibold text-lg'>Generate points by orders that will be converted to NSUR Coin.</span>
+
+      <br/>
+      <br/>
+      <span className='font-semibold text-sm'>Start now by creating an account in NSUR and start accumulating points.</span>
+
+      <br/>
+      <br/>
+      <a href={"https://nsurcoin.com/invite/5/snapdelivered/website"} className='uppercase text-white bg-primary-500 px-4 py-1.5 rounded-full font-semibold hover:opacity-80'>
+        REGISTER NOW!
+      </a>
       {/* <span className ='font-semibold text-lg'>You can win more points by _________</span> */}
     </div>
   )
