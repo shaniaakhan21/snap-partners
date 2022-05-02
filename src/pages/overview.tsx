@@ -1,8 +1,7 @@
 import Head from 'next/head'
-import { useEffect, useState } from 'react'
 
-import { getReport } from 'lib/services/overview/reports'
 import type { Page, ReactNode } from 'lib/types'
+import { useReports } from 'lib/hooks/useReports'
 import { useAuthStore } from 'lib/stores'
 import { APP_INFO } from 'config/appInfo'
 
@@ -28,17 +27,7 @@ const { SEO } = APP_INFO
 
 const DashboardOverViewPage: Page = () => {
   const { auth } = useAuthStore()
-  const [overViewData, setOverViewData] = useState({
-    estimatedCommissions: '-',
-    myOrders: '-',
-    payRank: '-',
-    topCustomer: '-',
-    topDriver: '-',
-    topMerchants: '-',
-    topRestaurant: '-',
-    totalEarnings: '-',
-    totalOrders: '-'
-  })
+  const { reports } = useReports()
 
   const data = [
     {
@@ -63,15 +52,6 @@ const DashboardOverViewPage: Page = () => {
     }
   ]
 
-  const loadReport = async () => {
-    const { data } = await getReport(auth.accessToken)
-    setOverViewData(data)
-  }
-
-  useEffect(() => {
-    loadReport()
-  }, [])
-
   return (
     <>
       <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-full h-fit gap-4'>
@@ -81,18 +61,18 @@ const DashboardOverViewPage: Page = () => {
 
       <OverViewGrid>
         <Stepper data={{}} />
-        <TotalEarnings data={overViewData} />
-        <TotalOrders data={overViewData} />
-        <EstimatedCommissions data={overViewData} />
-        <MyOrders data={overViewData} />
-        <PayRank data={overViewData} />
+        <TotalEarnings data={reports} />
+        <TotalOrders data={reports} />
+        <EstimatedCommissions data={reports} />
+        <MyOrders data={reports} />
+        <PayRank data={reports} />
       </OverViewGrid>
 
       <TopEntitiesGrid>
-        <TopMerchantsAcquisition data={overViewData} />
-        <TopDriverAcquisition data={overViewData} />
-        <TopCustomerAcquisition data={overViewData} />
-        <TopOrderLine data={overViewData} />
+        <TopMerchantsAcquisition data={reports} />
+        <TopDriverAcquisition data={reports} />
+        <TopCustomerAcquisition data={reports} />
+        <TopOrderLine data={reports} />
       </TopEntitiesGrid>
     </>
   )

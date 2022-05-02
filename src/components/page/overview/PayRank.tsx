@@ -10,7 +10,7 @@ export const PayRank = ({ data }: { data: IReport }) => {
 
       <div className='leading-5 text-gray-400 text-center md:text-left'>
         <span>Pay Rank</span> <br />
-        <span className='text-gray-800 font-bold text-2xl'>{data.payRank}</span>
+        <span className='text-gray-800 font-bold text-2xl'>{data.payRank || '0'}</span>
       </div>
     </div>
   )
