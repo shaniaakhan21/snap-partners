@@ -1,6 +1,7 @@
 import { TrendingUpIcon } from 'components/common/icons'
+import { IReport } from 'lib/types/overview'
 
-export const PayRank = ({ data }: { data: any }) => {
+export const PayRank = ({ data }: { data: IReport }) => {
   return (
     <div className=' bg-white rounded-md col-span-2 row-span-1 flex flex-col md:flex-row justify-center items-center gap-3 p-3'>
       <div className='h-12 w-12 rounded-md bg-[#DBFBAB] flex justify-center items-center'>
@@ -9,7 +10,7 @@ export const PayRank = ({ data }: { data: any }) => {
 
       <div className='leading-5 text-gray-400 text-center md:text-left'>
         <span>Pay Rank</span> <br />
-        <span className='text-gray-800 font-bold text-2xl'>0</span>
+        <span className='text-gray-800 font-bold text-2xl'>{data.payRank}</span>
       </div>
     </div>
   )

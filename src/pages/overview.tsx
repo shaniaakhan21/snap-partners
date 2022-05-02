@@ -3,6 +3,7 @@ import Head from 'next/head'
 import type { Page, ReactNode } from 'lib/types'
 import { useAuthStore } from 'lib/stores'
 import { APP_INFO } from 'config/appInfo'
+import { getReport } from 'lib/services/overview/reports'
 
 import DashboardLayout from 'layouts/private/Dashboard'
 import {
@@ -21,11 +22,23 @@ import {
   TotalEarnings,
   TotalOrders
 } from 'components/page/overview'
+import { useEffect, useState } from 'react'
 
 const { SEO } = APP_INFO
 
 const DashboardOverViewPage: Page = () => {
   const { auth } = useAuthStore()
+  const [overViewData, setOverViewData] = useState({
+    estimatedCommissions: '-',
+    myOrders: '-',
+    payRank: '-',
+    topCustomer: '-',
+    topDriver: '-',
+    topMerchants: '-',
+    topRestaurant: '-',
+    totalEarnings: '-',
+    totalOrders: '-'
+  })
 
   const data = [
     {
@@ -50,6 +63,17 @@ const DashboardOverViewPage: Page = () => {
     }
   ]
 
+  const loadReport = async () => {
+    const { data, error } = await getReport(auth.accessToken)
+    setOverViewData(data)
+  }
+
+  useEffect(() => {
+    loadReport()
+  }, [])
+
+  console.log(overViewData)
+
   return (
     <>
       <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-full h-fit gap-4'>
@@ -59,18 +83,18 @@ const DashboardOverViewPage: Page = () => {
 
       <OverViewGrid>
         <Stepper data={{}} />
-        <TotalEarnings data={{}} />
-        <TotalOrders data={{}} />
-        <EstimatedCommissions data={{}} />
-        <MyOrders data={{}} />
-        <PayRank data={{}} />
+        <TotalEarnings data={overViewData} />
+        <TotalOrders data={overViewData} />
+        <EstimatedCommissions data={overViewData} />
+        <MyOrders data={overViewData} />
+        <PayRank data={overViewData} />
       </OverViewGrid>
 
       <TopEntitiesGrid>
-        <TopMerchantsAcquisition data={{}} />
-        <TopDriverAcquisition data={{}} />
-        <TopCustomerAcquisition data={{}} />
-        <TopOrderLine data={{}} />
+        <TopMerchantsAcquisition data={overViewData} />
+        <TopDriverAcquisition data={overViewData} />
+        <TopCustomerAcquisition data={overViewData} />
+        <TopOrderLine data={overViewData} />
       </TopEntitiesGrid>
     </>
   )
