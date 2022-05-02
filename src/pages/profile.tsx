@@ -1,22 +1,22 @@
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 import Head from 'next/head'
 
+import { updateUserEmail } from 'lib/services/user/updateUserEmail'
 import { useAuthStore, useNewWindowOpenedStore } from 'lib/stores'
 import { TAccountInfoToUpdate } from 'lib/types/user/profile'
-import { ReactNode } from 'lib/types'
+import { handleFetchError } from 'lib/utils/handleFetchError'
+import { decodeEmailToken } from 'lib/utils/decodeToken'
 import { APP_INFO } from 'config/appInfo'
+import { ReactNode } from 'lib/types'
 
 import DashboardLayout from 'layouts/private/Dashboard'
 import { FormUpdatePassword } from 'components/page/profile/update/FormUpdatePassword'
 import { FormUpdateEmail } from 'components/page/profile/update/FormUpdateEmail'
+import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { EditPhone } from 'components/page/profile/update/EditPhone'
 import { AccountInfo } from 'components/page/profile/AccountInfo'
-import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import { decodeEmailToken } from 'lib/utils/decodeToken'
-import { updateUserEmail } from 'lib/services/user/updateUserEmail'
-import { handleFetchError } from 'lib/utils/handleFetchError'
-import { toast } from 'react-toastify'
-import { Spinner } from 'components/common/loaders'
 
 const { SEO } = APP_INFO
 
@@ -55,13 +55,7 @@ const ProfilePage = ({ email, tokenExist }: { email: string, tokenExist: boolean
     })()
   }, [email, tokenExist])
 
-  if (isLoading) {
-    return (
-      <div className='w-full h-screen flex items-center justify-center'>
-        <Spinner />
-      </div>
-    )
-  }
+  if (isLoading) return <SpinnerPageContent />
   if (typeUpdate === 'email') return <FormUpdateEmail auth={auth} setAuth={setAuth} setTypeUpdate={setTypeUpdate} />
   if (typeUpdate === 'phone') return <EditPhone auth={auth} setAuth={setAuth} setTypeUpdate={setTypeUpdate} />
   if (typeUpdate === 'password') return <FormUpdatePassword auth={auth} setAuth={setAuth} setTypeUpdate={setTypeUpdate} />

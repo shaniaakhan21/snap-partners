@@ -19,6 +19,28 @@ export const useReports = () => {
     totalEarnings: '-',
     totalOrders: '-'
   })
+  const [dataGraphic] = ([
+    {
+      name: '1a',
+      pv: 0
+    },
+    {
+      name: '6m',
+      pv: 0
+    },
+    {
+      name: '1m',
+      pv: 0
+    },
+    {
+      name: '1s',
+      pv: 0
+    },
+    {
+      name: '1d',
+      pv: 0
+    }
+  ])
 
   useEffect(() => {
     (async () => {
@@ -35,5 +57,5 @@ export const useReports = () => {
     })()
   }, [])
 
-  return { reports, loading }
+  return { reports, dataGraphic, loading }
 }

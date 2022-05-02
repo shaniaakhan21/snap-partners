@@ -9,7 +9,7 @@ import { useAuthStore } from 'lib/stores'
 import { APP_INFO } from 'config/appInfo'
 
 // import { FormConnectNsurAccount } from 'components/page/my-points/FormConnectNsurAccount'
-import { Spinner } from 'components/common/loaders'
+import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 
 const { SEO } = APP_INFO
 
@@ -35,13 +35,7 @@ const MyPointsPage: Page = () => {
     })()
   }, [])
 
-  if (loading) {
-    return (
-      <div className='w-full h-screen-80 flex justify-center items-center'>
-        <Spinner />
-      </div>
-    )
-  }
+  if (loading) return <SpinnerPageContent />
 
   return (
     <div className='max-w-xl mx-auto w-full text-center'>

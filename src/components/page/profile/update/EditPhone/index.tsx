@@ -9,10 +9,10 @@ import { handleFetchError } from 'lib/utils/handleFetchError'
 import { signUpStep1 } from 'lib/services/auth/signUp'
 import { IAuth, TSetAuth } from 'lib/stores/Auth'
 
-import { Spinner } from 'components/common/loaders'
+import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { FormChangePhone } from './FormChangePhone'
-import { VerifyCode } from './VerifyCode'
 import { FormSendPhone } from './FormSendPhone'
+import { VerifyCode } from './VerifyCode'
 
 interface IFormUpdatePhoneProps {
   auth: IAuth
@@ -121,11 +121,7 @@ export const EditPhone = ({ auth, setAuth, setTypeUpdate }: IFormUpdatePhoneProp
   }
 
   if (isLoading) {
-    return (
-      <div className='w-full h-screen-80 flex items-center justify-center'>
-        <Spinner />
-      </div>
-    )
+    return <SpinnerPageContent />
   }
 
   if (isPhoneEditable) {

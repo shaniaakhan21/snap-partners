@@ -22,40 +22,20 @@ import {
   TotalEarnings,
   TotalOrders
 } from 'components/page/overview'
+import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 
 const { SEO } = APP_INFO
 
 const DashboardOverViewPage: Page = () => {
+  const { reports, dataGraphic, loading } = useReports()
   const { auth } = useAuthStore()
-  const { reports } = useReports()
 
-  const data = [
-    {
-      name: '1a',
-      pv: 0
-    },
-    {
-      name: '6m',
-      pv: 0
-    },
-    {
-      name: '1m',
-      pv: 0
-    },
-    {
-      name: '1s',
-      pv: 0
-    },
-    {
-      name: '1d',
-      pv: 0
-    }
-  ]
+  if (loading) return <SpinnerPageContent />
 
   return (
     <>
       <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-full h-fit gap-4'>
-        <Graphics data={data} />
+        <Graphics data={dataGraphic} />
         <PromotionTracker userAuth={auth} />
       </div>
 

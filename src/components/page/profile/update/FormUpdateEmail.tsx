@@ -1,16 +1,16 @@
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+import { useState } from 'react'
 
+import { sendEmailToConfirm } from 'lib/services/user/updateUserEmail'
 import { Dispatch, SetStateAction } from 'lib/types/core/next-react'
+import { handleFetchError } from 'lib/utils/handleFetchError'
 import { TAccountInfoToUpdate } from 'lib/types/user/profile'
 import { IAuth, TSetAuth } from 'lib/stores/Auth'
 
-import { Button } from 'components/common/Button'
+import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { InputProfile } from '../commons/InputProfile'
-import { useState } from 'react'
-import { handleFetchError } from 'lib/utils/handleFetchError'
-import { sendEmailToConfirm } from 'lib/services/user/updateUserEmail'
-import { Spinner } from 'components/common/loaders'
-import { toast } from 'react-toastify'
+import { Button } from 'components/common/Button'
 
 interface IFormUpdatePhoneProps {
   auth: IAuth
@@ -54,11 +54,7 @@ export const FormUpdateEmail = ({ auth, setAuth, setTypeUpdate }: IFormUpdatePho
   }
 
   if (isLoading) {
-    return (
-      <div className='w-full h-screen-80 flex items-center justify-center'>
-        <Spinner />
-      </div>
-    )
+    return <SpinnerPageContent />
   }
 
   return (
