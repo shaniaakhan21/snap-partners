@@ -55,7 +55,7 @@ const MyPointsPage: Page = () => {
 
       <br/>
       <br/>
-      <a href={"https://nsurcoin.com/invite/5/snapdelivered/website"} className='uppercase text-white bg-primary-500 px-4 py-1.5 rounded-full font-semibold hover:opacity-80'>
+      <a href='https://nsurcoin.com/invite/5/snapdelivered/website' className='uppercase text-white bg-primary-500 px-4 py-1.5 rounded-full font-semibold hover:opacity-80'>
         REGISTER NOW!
       </a>
       {/* <span className ='font-semibold text-lg'>You can win more points by _________</span> */}

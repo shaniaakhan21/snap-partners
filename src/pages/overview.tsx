@@ -1,9 +1,10 @@
 import Head from 'next/head'
+import { useEffect, useState } from 'react'
 
+import { getReport } from 'lib/services/overview/reports'
 import type { Page, ReactNode } from 'lib/types'
 import { useAuthStore } from 'lib/stores'
 import { APP_INFO } from 'config/appInfo'
-import { getReport } from 'lib/services/overview/reports'
 
 import DashboardLayout from 'layouts/private/Dashboard'
 import {
@@ -22,7 +23,6 @@ import {
   TotalEarnings,
   TotalOrders
 } from 'components/page/overview'
-import { useEffect, useState } from 'react'
 
 const { SEO } = APP_INFO
 
@@ -64,15 +64,13 @@ const DashboardOverViewPage: Page = () => {
   ]
 
   const loadReport = async () => {
-    const { data, error } = await getReport(auth.accessToken)
+    const { data } = await getReport(auth.accessToken)
     setOverViewData(data)
   }
 
   useEffect(() => {
     loadReport()
   }, [])
-
-  console.log(overViewData)
 
   return (
     <>
