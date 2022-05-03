@@ -19,7 +19,7 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
               id='name'
               name='name'
               type='text'
-              value={auth.name}
+              value={auth.name ?? ''}
               disabled={true}
               className='w-full bg-transparent text-lg truncate'
             />
@@ -34,7 +34,7 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
               id='lastname'
               name='lastname'
               type='text'
-              value={auth.lastname}
+              value={auth.lastname ?? ''}
               disabled={true}
               className='w-full bg-transparent text-lg truncate'
             />
