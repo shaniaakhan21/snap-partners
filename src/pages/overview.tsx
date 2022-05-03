@@ -36,10 +36,10 @@ const DashboardOverViewPage: Page = () => {
 
   return (
     <>
-      <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-full h-fit gap-4'>
+      {/* <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-full h-fit gap-4'>
         <Graphics data={dataGraphic} />
         <PromotionTracker userAuth={auth} />
-      </div>
+      </div> */}
 
       <div className='w-full h-fit text-sm grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 grid-flow-row md:grid-rows-[9] gap-4'>
         <div className=' col-span-1 row-span-1 md:col-span-3 md:col-start-2 flex justify-center items-center'> {/* Graphic */}
