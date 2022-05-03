@@ -8,12 +8,12 @@ import { TMarketingType } from 'lib/types/marketing'
 import { APP_INFO } from 'config/appInfo'
 import { useAuthStore } from 'lib/stores'
 
+import DashboardLayout from 'layouts/private/Dashboard'
 import { FormToCreateArticle } from 'components/page/marketing/FormToCreateArticle'
 import { ListArticles } from 'components/page/marketing/Details/ListArtcles'
+import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { Article } from 'components/page/marketing/Details/Article'
 import { EmptyData } from 'components/common/EmptyData'
-import DashboardLayout from 'layouts/private/Dashboard'
-import { Spinner } from 'components/common/loaders'
 
 const { SEO } = APP_INFO
 
@@ -48,13 +48,7 @@ const MarketingArticlePage = ({ typeMarketing }: { typeMarketing: TMarketingType
     )
   }
 
-  if (loading) {
-    return (
-      <div className='w-full h-screen-80 flex items-center justify-center'>
-        <Spinner />
-      </div>
-    )
-  }
+  if (loading) return <SpinnerPageContent />
 
   if (articles.length === 0) {
     return (

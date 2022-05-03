@@ -1,7 +1,8 @@
 // import { Button } from 'components/common/Button'
+import { IReport } from 'lib/types/overview'
 import { StarIcon } from 'components/common/icons'
 
-export const TopCustomerAcquisition = ({ data }: { data: any }) => {
+export const TopCustomerAcquisition = ({ data }: { data: IReport }) => {
   const topMerchantsAcquisition = []
 
   return (

@@ -1,22 +1,24 @@
+import { useForm } from 'react-hook-form'
 import { useRef, useState } from 'react'
 import Head from 'next/head'
-import type { IUserBySearch, Page, ReactNode } from 'lib/types'
-import { APP_INFO } from 'config/appInfo'
-import DashboardLayout from 'layouts/private/Dashboard'
-import { useReferralsData } from 'lib/hooks/useReferralsData'
-import { useModal } from 'lib/hooks/useModal'
-import { useWindowSize } from 'lib/hooks/useWindowSize'
-import { useAuthStore, useLayoutConfig } from 'lib/stores'
-import { Spinner } from 'components/common/loaders'
-import { useForm } from 'react-hook-form'
+
 import { getUserBySearch } from 'lib/services/user/getUserBySearch'
+import type { IUserBySearch, Page, ReactNode } from 'lib/types'
+import { useAuthStore, useLayoutConfig } from 'lib/stores'
+import { useReferralsData } from 'lib/hooks/useReferralsData'
 import { handleFetchError } from 'lib/utils/handleFetchError'
-import { EmptyData } from 'components/common/EmptyData'
-import { ReferralCards } from 'components/page/referrals/Cards'
-import { CustomerIcon, DriverIcon, MerchantIcon } from 'components/common/icons'
+import { useWindowSize } from 'lib/hooks/useWindowSize'
+import { useModal } from 'lib/hooks/useModal'
+import { APP_INFO } from 'config/appInfo'
 import { ROLES } from 'config/roles'
-import { NewGenealogy } from 'components/page/genealogy/NewGenealogy'
+
+import DashboardLayout from 'layouts/private/Dashboard'
 import { Unilevel as OldGenealogy } from '../components/page/genealogy/OldGenealogy/UniLevel'
+import { CustomerIcon, DriverIcon, MerchantIcon } from 'components/common/icons'
+import { SpinnerPageContent } from 'components/common/loaders/PageContent'
+import { NewGenealogy } from 'components/page/genealogy/NewGenealogy'
+import { ReferralCards } from 'components/page/referrals/Cards'
+import { EmptyData } from 'components/common/EmptyData'
 
 const { SEO } = APP_INFO
 
@@ -147,11 +149,7 @@ const GenealogyPage: Page = () => {
     !levelSelected ||
     !levelSelectedUsers
   ) {
-    return (
-      <div className='w-full h-screen-80 flex items-center justify-center'>
-        <Spinner />
-      </div>
-    )
+    return <SpinnerPageContent />
   }
 
   return (

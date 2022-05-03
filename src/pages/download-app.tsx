@@ -4,18 +4,18 @@ import Head from 'next/head'
 
 import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 import type { Page as PageNext } from 'lib/types'
+import { useAuthStore } from 'lib/stores'
 import { APP_INFO } from 'config/appInfo'
 import { signUp } from 'lib/utils/gtm'
 
+import { ListDeviceLinkApp } from 'components/page/download-app/ListDeviceLinkApp'
 import { AndroidLinkApp } from 'components/page/download-app/AndroidLinkApp'
+import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { AppleLinkApp } from 'components/page/download-app/AppleLinkApp'
 import { SelectDevice } from 'components/page/download-app/SelectDevice'
 import { HeaderCTA } from 'components/page/download-app/HeaderCTA'
 import { FooterPublic } from 'components/layout/public/Footer'
-import { Spinner } from 'components/common/loaders'
-import { ListDeviceLinkApp } from 'components/page/download-app/ListDeviceLinkApp'
 import { AuthCTA } from 'components/page/download-app/AuthCTA'
-import { useAuthStore } from 'lib/stores'
 
 const { SEO, APPS } = APP_INFO
 
@@ -55,13 +55,7 @@ const DownloadAppPage: PageNext = () => {
     setIsLoading(false)
   }, [router.query.device])
 
-  if (isLoading) {
-    return (
-      <div className='flex items-center justify-center w-screen h-[85vh] md:w-full'>
-        <Spinner classes='w-20 h-20 md:w-10 md:h-10' />
-      </div>
-    )
-  }
+  if (isLoading) return <SpinnerPageContent />
 
   if (!device) {
     return (

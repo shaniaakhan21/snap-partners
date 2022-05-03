@@ -1,17 +1,18 @@
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+import { useState } from 'react'
+
+import { updateUserPassword } from 'lib/services/user/updateUserPassword'
 import { Dispatch, SetStateAction } from 'lib/types/core/next-react'
 import { TAccountInfoToUpdate } from 'lib/types/user/profile'
+import { handleFetchError } from 'lib/utils/handleFetchError'
+import { getUserMe } from 'lib/services/user/getUserMe'
 import { IAuth, TSetAuth } from 'lib/stores/Auth'
 
-import { Button } from 'components/common/Button'
-import { InputProfile } from '../commons/InputProfile'
 import { signInRulesConfig } from 'components/page/login/LoginForm/utils/formRules'
-import { updateUserPassword } from 'lib/services/user/updateUserPassword'
-import { handleFetchError } from 'lib/utils/handleFetchError'
-import { toast } from 'react-toastify'
-import { Spinner } from 'components/common/loaders'
-import { getUserMe } from 'lib/services/user/getUserMe'
+import { SpinnerPageContent } from 'components/common/loaders/PageContent'
+import { InputProfile } from '../commons/InputProfile'
+import { Button } from 'components/common/Button'
 
 interface IFormUpdatePasswordProps {
   auth: IAuth
@@ -97,11 +98,7 @@ export const FormUpdatePassword = ({ auth, setAuth, setTypeUpdate }: IFormUpdate
   }
 
   if (isLoading) {
-    return (
-      <div className='w-full h-screen-80 flex items-center justify-center'>
-        <Spinner />
-      </div>
-    )
+    return <SpinnerPageContent />
   }
 
   return (

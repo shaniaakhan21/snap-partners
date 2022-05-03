@@ -1,6 +1,7 @@
 import Head from 'next/head'
 
 import type { Page, ReactNode } from 'lib/types'
+import { useReports } from 'lib/hooks/useReports'
 import { useAuthStore } from 'lib/stores'
 import { APP_INFO } from 'config/appInfo'
 
@@ -21,56 +22,37 @@ import {
   TotalEarnings,
   TotalOrders
 } from 'components/page/overview'
+import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 
 const { SEO } = APP_INFO
 
 const DashboardOverViewPage: Page = () => {
+  const { reports, dataGraphic, loading } = useReports()
   const { auth } = useAuthStore()
 
-  const data = [
-    {
-      name: '1a',
-      pv: 0
-    },
-    {
-      name: '6m',
-      pv: 0
-    },
-    {
-      name: '1m',
-      pv: 0
-    },
-    {
-      name: '1s',
-      pv: 0
-    },
-    {
-      name: '1d',
-      pv: 0
-    }
-  ]
+  if (loading) return <SpinnerPageContent />
 
   return (
     <>
       <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-full h-fit gap-4'>
-        <Graphics data={data} />
+        <Graphics data={dataGraphic} />
         <PromotionTracker userAuth={auth} />
       </div>
 
       <OverViewGrid>
         <Stepper data={{}} />
-        <TotalEarnings data={{}} />
-        <TotalOrders data={{}} />
-        <EstimatedCommissions data={{}} />
-        <MyOrders data={{}} />
-        <PayRank data={{}} />
+        <TotalEarnings data={reports} />
+        <TotalOrders data={reports} />
+        <EstimatedCommissions data={reports} />
+        <MyOrders data={reports} />
+        <PayRank data={reports} />
       </OverViewGrid>
 
       <TopEntitiesGrid>
-        <TopMerchantsAcquisition data={{}} />
-        <TopDriverAcquisition data={{}} />
-        <TopCustomerAcquisition data={{}} />
-        <TopOrderLine data={{}} />
+        <TopMerchantsAcquisition data={reports} />
+        <TopDriverAcquisition data={reports} />
+        <TopCustomerAcquisition data={reports} />
+        <TopOrderLine data={reports} />
       </TopEntitiesGrid>
     </>
   )

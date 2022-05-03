@@ -7,9 +7,9 @@ import { TAccountInfoToUpdate } from 'lib/types/user/profile'
 import { IAuth, TSetAuth } from 'lib/stores/Auth'
 
 import { InputPhone } from 'components/page/signup/SignUpForm/FormByRole/utils/InputPhone'
-import { Spinner } from 'components/common/loaders'
-import { Button } from 'components/common/Button'
+import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { InputProfile } from '../commons/InputProfile'
+import { Button } from 'components/common/Button'
 
 interface IFormUpdatePhoneProps {
   auth: IAuth
@@ -50,11 +50,7 @@ export const FormUpdatePhone = ({ auth, setAuth, setTypeUpdate }: IFormUpdatePho
   }
 
   if (isLoading) {
-    return (
-      <div className='w-full h-screen-80 flex items-center justify-center'>
-        <Spinner />
-      </div>
-    )
+    return <SpinnerPageContent />
   }
 
   return (
