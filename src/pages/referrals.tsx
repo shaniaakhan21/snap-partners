@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import type { Page, ReactNode } from 'lib/types'
 import { APP_INFO } from 'config/appInfo'
 import { useAuthStore } from 'lib/stores'
@@ -8,8 +7,6 @@ import { ROLES } from 'config/roles'
 import DashboardLayout from 'layouts/private/Dashboard'
 import { ReferralCards } from 'components/page/referrals/Cards'
 import { CustomerIcon, DriverIcon, MerchantIcon } from 'components/common/icons'
-
-import vidgoLogo from '../../public/images/vidgo/vidgo-logo.png'
 
 const { SEO } = APP_INFO
 
@@ -43,7 +40,7 @@ const ReferralsPage: Page = () => {
         title='Refer Vidgo'
         ilustration={(
           <div className='h-[100px]'>
-            <Image src={vidgoLogo} alt='Vidgo logo' />
+            <img src='/images/vidgo/vidgo-logo.png' alt='Vidgo logo' />
           </div>
         )}
         link={`https://www.vidgo.com/snap/?subpid=${auth.referralCode}` || 'With Out Link'}
