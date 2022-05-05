@@ -11,7 +11,7 @@ export const TopDriverAcquisition = ({ data }: { data: IReport }) => {
         </div>
 
         <div>
-          <span className='text-primary-500 text-xs'>TOP Driver Acquisition</span> <br />
+          <span className='text-primary-500 text-lg font-bold'>TOP Driver Acquisition</span> <br />
           {/* <span className='text-gray-800 text-lg font-bold'>54 Last week</span> */}
         </div>
       </section>
