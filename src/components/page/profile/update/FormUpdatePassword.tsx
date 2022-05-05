@@ -88,7 +88,7 @@ export const FormUpdatePassword = ({ auth, setAuth, setTypeUpdate }: IFormUpdate
       deleted: userData.deleted,
       nsurAccount: {
         nsurUserId: userData.nsurUserId,
-        myPoints: auth.nsurAccount?.myPoints || null
+        myPoints: auth?.nsurAccount?.myPoints || null
       }
     })
     toast('Password successfully changed', { type: 'success' })
