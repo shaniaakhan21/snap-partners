@@ -10,7 +10,7 @@ export const EstimatedCommissions = ({ data }: { data: IReport }) => {
 
       <div className='leading-5 text-gray-400 text-center md:text-left'>
         <span>Estimated commissions</span> <br />
-        <span className='text-gray-800 font-bold text-2xl'>${data.estimatedCommissions}</span>
+        <span className='text-gray-800 font-bold text-2xl'>${data.estimatedCommissions || '0'}</span>
       </div>
     </div>
   )

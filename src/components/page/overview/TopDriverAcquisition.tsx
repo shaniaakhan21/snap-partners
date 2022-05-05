@@ -3,8 +3,6 @@ import { StarIcon } from 'components/common/icons'
 import { IReport } from 'lib/types/overview'
 
 export const TopDriverAcquisition = ({ data }: { data: IReport }) => {
-  const topMerchantsAcquisition = []
-
   return (
     <div className='overviewLayout__topDriverAcquisition h-full p-4 bg-white rounded-md'>
       <section className='w-full flex flex-col lg:flex-row justify-start items-center gap-2 pb-3 pt-1'>
@@ -14,13 +12,13 @@ export const TopDriverAcquisition = ({ data }: { data: IReport }) => {
 
         <div>
           <span className='text-primary-500 text-xs'>TOP Driver Acquisition</span> <br />
-          <span className='text-gray-800 text-lg font-bold'>54 Last week</span>
+          {/* <span className='text-gray-800 text-lg font-bold'>54 Last week</span> */}
         </div>
       </section>
 
       <ul className='border-t border-gray-300 w-full pt-2'>
         {
-          topMerchantsAcquisition.length === 0
+          data.topUsers.topDriver.length === 0
             ? (
               <li className='w-full flex justify-start items-center py-2 gap-x-2'>
                 <div>
@@ -28,12 +26,12 @@ export const TopDriverAcquisition = ({ data }: { data: IReport }) => {
                 </div>
               </li>
             )
-            : topMerchantsAcquisition.map((merchant, idx) => (
+            : data.topUsers.topDriver.map((merchant, idx) => (
               <li key={idx} className='w-full flex justify-start items-center py-2 gap-x-2'>
-                <img src={merchant.imageSrc} className='w-10 h-10' />
+                {/* <img src={merchant.imageSrc} className='w-10 h-10' /> */}
 
                 <div>
-                  <span className='text-gray-400'>{merchant.position}</span> <br />
+                  {/* <span className='text-gray-400'>{merchant.position}</span> <br /> */}
                   <span className='text-gray-800 font-bold'>{merchant.name}</span>
                 </div>
               </li>
