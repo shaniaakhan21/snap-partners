@@ -1,6 +1,6 @@
 // import { Button } from 'components/common/Button'
 import { IReport } from 'lib/types/overview'
-import { topUsers } from 'lib/utils/topUsers'
+import { EmptyData } from 'components/common/EmptyData'
 
 export const TopCustomerAcquisition = ({ data }: { data: IReport }) => {
   return (
@@ -18,15 +18,13 @@ export const TopCustomerAcquisition = ({ data }: { data: IReport }) => {
 
       <ul className='w-full pt-2 overflow-y-scroll h-64 lg:h-72 scroll-primary mt-1 lg:mt-2'>
         {
-          topUsers.slice(0, 10).length === 0
+          data.topUsers.topCustomer.length === 0
             ? (
-              <li className='w-full flex justify-start items-center py-2 gap-x-2'>
-                <div>
-                  <span className='text-gray-400 font-bold'>Empty</span>
-                </div>
+              <li className='w-full flex justify-center items-center h-full -mt-4'>
+                <EmptyData classes='w-52 h-52' description='Top Customer Empty' />
               </li>
             )
-            : topUsers.slice(0, 10).map((merchant, idx) => (
+            : data.topUsers.topCustomer.map((merchant, idx) => (
               <li key={idx} className='w-full flex justify-start items-center py-2 gap-x-2'>
                 {/* <img src={merchant.imageSrc} className='w-10 h-10' /> */}
 
