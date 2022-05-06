@@ -1,11 +1,31 @@
+export interface ITopEntity {
+  createdAt: string
+  id: number
+  name: string
+  lastname: string
+  email: string
+  username: string
+  phoneNumber: string
+  roles: {
+    admin: boolean
+    customer: boolean
+    driver: boolean
+    merchant: boolean
+  },
+  isManager: boolean
+  ownerName: string
+  nsurUserId: number
+}
+
 export interface IReport {
-  estimatedCommissions: string
-  myOrders: string
-  payRank: string
-  topCustomer: string
-  topDriver: string
-  topMerchants: string
-  topRestaurant: string
-  totalEarnings: string
-  totalOrders: string
+  totalEarnings: number
+  totalOrders: number
+  estimatedCommissions: number
+  myOrders: number
+  payRank: number
+  topUsers: {
+    topMerchant: ITopEntity[]
+    topCustomer: ITopEntity[]
+    topDriver: ITopEntity[]
+  }
 }

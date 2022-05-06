@@ -9,15 +9,16 @@ export const useReports = () => {
   const { auth } = useAuthStore()
   const [loading, setIsLoading] = useState(false)
   const [reports, setReportsData] = useState<IReport>({
-    estimatedCommissions: '-',
-    myOrders: '-',
-    payRank: '-',
-    topCustomer: '-',
-    topDriver: '-',
-    topMerchants: '-',
-    topRestaurant: '-',
-    totalEarnings: '-',
-    totalOrders: '-'
+    estimatedCommissions: 0,
+    myOrders: 0,
+    payRank: 0,
+    totalEarnings: 0,
+    totalOrders: 0,
+    topUsers: {
+      topCustomer: [],
+      topDriver: [],
+      topMerchant: []
+    }
   })
   const [dataGraphic] = ([
     {

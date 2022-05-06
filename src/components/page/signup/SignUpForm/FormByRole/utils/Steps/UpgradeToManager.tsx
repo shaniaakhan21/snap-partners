@@ -63,7 +63,7 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
       deleted: data.deleted,
       nsurAccount: {
         nsurUserId: data.nsurUserId,
-        myPoints: auth.nsurAccount?.myPoints || null
+        myPoints: auth?.nsurAccount?.myPoints || null
       }
     })
     // When change auth state, directly the app push the user to /overview path
