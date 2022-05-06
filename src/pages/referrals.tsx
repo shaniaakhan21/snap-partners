@@ -40,7 +40,7 @@ const ReferralsPage: Page = () => {
         title='Refer Vidgo'
         ilustration={(
           <div className='h-[100px]'>
-            <img src='/images/vidgo/vidgo-logo.png' alt='Vidgo logo' />
+            <img src='/images/vidgo/vidgo-ilustration.jpg' alt='Vidgo logo' />
           </div>
         )}
         link={`https://www.vidgo.com/snap/?subpid=${auth.referralCode}` || 'With Out Link'}
