@@ -12,7 +12,7 @@ export const TopDriverAcquisition = ({ data }: { data: IReport }) => {
 
         <div>
           <span className='text-primary-500 text-lg font-bold'>TOP Driver <br /> Acquisition</span> <br />
-          {/* <span className='text-gray-800 text-lg font-bold'>54 Last week</span> */}
+          {<span className='text-gray-800 text-lg font-bold'>Last 7 days</span>}
         </div>
       </section>
 
@@ -29,8 +29,9 @@ export const TopDriverAcquisition = ({ data }: { data: IReport }) => {
                 {/* <img src={merchant.imageSrc} className='w-10 h-10' /> */}
 
                 <div>
-                  <span className='text-gray-400'>{idx}</span> <br />
-                  <span className='text-gray-800 font-bold'>{merchant.name}</span>
+                  <span className='text-gray-800 font-bold'>{merchant.amount}{' '}</span>
+                  <span className='text-gray-800'>new drivers by {' '}</span>
+                  <span className='text-gray-800 font-bold'>{merchant.name}!</span>
                 </div>
               </li>
             ))

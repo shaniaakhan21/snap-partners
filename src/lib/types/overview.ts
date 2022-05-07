@@ -1,20 +1,6 @@
 export interface ITopEntity {
-  createdAt: string
-  id: number
   name: string
-  lastname: string
-  email: string
-  username: string
-  phoneNumber: string
-  roles: {
-    admin: boolean
-    customer: boolean
-    driver: boolean
-    merchant: boolean
-  },
-  isManager: boolean
-  ownerName: string
-  nsurUserId: number
+  amount: number
 }
 
 export interface IReport {
