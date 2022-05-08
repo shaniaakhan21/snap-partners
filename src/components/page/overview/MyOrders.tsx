@@ -9,7 +9,7 @@ export const MyOrders = ({ data }: { data: IReport }) => {
       </div>
 
       <div className='leading-5 text-gray-400 text-center md:text-left'>
-        <span>My orders</span> <br />
+        <span>My PCV (This Month)</span> <br />
         <span className='text-gray-800 font-bold text-2xl'>${data.myOrders || '0'}</span>
       </div>
     </div>

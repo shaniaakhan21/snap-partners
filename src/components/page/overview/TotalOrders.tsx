@@ -9,7 +9,7 @@ export const TotalOrders = ({ data }: { data: IReport }) => {
       </div>
 
       <div className='leading-5 text-gray-400 text-center md:text-left'>
-        <span>Total orders</span> <br />
+        <span>Network Orders (This Month)</span> <br />
         <span className='text-gray-800 font-bold text-2xl'>{data.totalOrders || '0'}</span>
       </div>
     </div>
