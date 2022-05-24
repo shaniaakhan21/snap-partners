@@ -62,11 +62,14 @@ export const getServerSideProps: GetServerSideProps = async ({ query, params, re
 
   if (marketingId) {
     const res = await fetch(`${APP_INFO.SEO.URL_PAGE}/api/marketing/${marketingId}`)
-    const { data } = await res.json()
+    const { data, timestamp } = await res.json()
 
     return {
       props: {
-        rrssInfo: data,
+        rrssInfo: {
+          ...data,
+          imageId: `${data.imageId}?timestamp=${timestamp}`
+        },
         marketingId,
         referralCode,
         role
