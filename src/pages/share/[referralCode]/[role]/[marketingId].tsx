@@ -33,7 +33,8 @@ SignUpPage.getLayout = (page) => {
             <>
               <meta name='title' content={page.props.rrssInfo.title} />
               <meta name='description' content={page.props.rrssInfo.caption} />
-              <meta name='twitter:card' content='summary_large_image' />
+              {/* <meta name='twitter:card' content='summary_large_image' /> */}
+              <meta name='twitter:card' content='summary' />
               <meta name='twitter:url' content={`${APP_INFO.SEO.URL_PAGE}/share/${page.props.referralCode}/${page.props.role}/${page.props.marketingId}`} />
               <meta name='twitter:title' content={page.props.rrssInfo.title} />
               <meta name='twitter:image' content={page.props.rrssInfo.imageId} />
@@ -43,8 +44,9 @@ SignUpPage.getLayout = (page) => {
               <meta property='og:title' content={page.props.rrssInfo.title} />
               <meta property='og:description' content={page.props.rrssInfo.caption} />
               <meta property='og:image' content={page.props.rrssInfo.imageId} />
-              <meta property='og:image:width' content='1200' />
-              <meta property='og:image:height' content='630' />
+              <meta property='og:image:width' content='1080' />
+              <meta property='og:image:height' content='1080' />
+              <meta property='og:image:type' content='image/png' />
             </>
           )
         }
@@ -62,11 +64,14 @@ export const getServerSideProps: GetServerSideProps = async ({ query, params, re
 
   if (marketingId) {
     const res = await fetch(`${APP_INFO.SEO.URL_PAGE}/api/marketing/${marketingId}`)
-    const { data } = await res.json()
+    const { data, timestamp } = await res.json()
 
     return {
       props: {
-        rrssInfo: data,
+        rrssInfo: {
+          ...data,
+          imageId: `${data.imageId}?timestamp=${timestamp}`
+        },
         marketingId,
         referralCode,
         role
