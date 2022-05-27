@@ -33,7 +33,7 @@ SignUpPage.getLayout = (page) => {
             <>
               <meta name='title' content={page.props.rrssInfo.title} />
               <meta name='description' content={page.props.rrssInfo.caption} />
-              <meta name='twitter:card' content='summary_large_image' />
+              <meta name='twitter:card' content='summary' />
               <meta name='twitter:url' content={`${APP_INFO.SEO.URL_PAGE}/share/${page.props.referralCode}/${page.props.role}/${page.props.marketingId}`} />
               <meta name='twitter:title' content={page.props.rrssInfo.title} />
               <meta name='twitter:image' content={page.props.rrssInfo.imageId} />
@@ -43,9 +43,11 @@ SignUpPage.getLayout = (page) => {
               <meta property='og:title' content={page.props.rrssInfo.title} />
               <meta property='og:description' content={page.props.rrssInfo.caption} />
               <meta property='og:image' content={page.props.rrssInfo.imageId} />
-              <meta property='og:image:width' content='1200' />
-              <meta property='og:image:height' content='600' />
-              <meta property='og:image:type' content='image/jpeg' />
+              <meta property='og:image:width' content='300' />
+              <meta property='og:image:height' content='300' />
+              <meta property='og:image:type' content='image/png' />
+              <meta property="og:image:alt" content={page.props.rrssInfo.title} />
+              <meta property="og:site_name" content={APP_INFO.SEO.TITLE_PAGE} />
             </>
           )
         }
