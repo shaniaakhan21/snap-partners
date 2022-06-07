@@ -55,18 +55,16 @@ const MarketingPage: Page = () => {
       </div>
 
       <ListMarketingTools>
-        {
-          marketingDetails.map(detail => (
-            <MarketingTool
-              key={detail.title}
-              title={detail.title}
-              subtitle={detail.subtitle}
-              description={detail.description}
-              icon={detail.icon}
-              to={detail.to}
-            />
-          ))
-        }
+        {marketingDetails.map(detail => (
+          <MarketingTool
+            key={detail.title}
+            title={detail.title}
+            subtitle={detail.subtitle}
+            description={detail.description}
+            icon={detail.icon}
+            to={detail.to}
+          />
+        ))}
       </ListMarketingTools>
     </>
   )
