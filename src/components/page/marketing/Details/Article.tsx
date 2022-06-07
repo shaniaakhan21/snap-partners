@@ -1,5 +1,5 @@
 import { marketingSharingCard } from 'lib/utils/gtm'
-import { ShareRRSSIcon } from 'components/common/icons'
+import { DownloadIcon, ShareRRSSIcon } from 'components/common/icons'
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -82,7 +82,7 @@ export const Article = ({ linkToShare, id, imageId, title, subtitle, caption, ha
       }
 
       <ul className='w-full border-t border-gray-400 px-5 py-4 flex justify-between items-start -mb-2'>
-        <li>
+        {/* <li>
           <button onClick={() => { trackShare('copyLink'); copy(linkToShare, 'Copy Link') }}>
             <ShareRRSSIcon />
           </button>
@@ -116,13 +116,19 @@ export const Article = ({ linkToShare, id, imageId, title, subtitle, caption, ha
           <RedditShareButton url={linkToShare} onClick={() => trackShare('Reddit')}>
             <RedditIcon borderRadius={999} size={28} />
           </RedditShareButton>
-        </li>
+        </li> */}
 
         {/* <li>
           <EmailShareButton url='https://snapdeliveredteam.com/invite' onClick={() => trackShare('Email')}>
             <EmailIcon borderRadius={999} size={28} />
           </EmailShareButton>
         </li> */}
+
+        <li>
+          <a href={imageId} download>
+            <DownloadIcon />
+          </a>
+        </li>
       </ul>
     </li>
   )
