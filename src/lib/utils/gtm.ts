@@ -110,12 +110,21 @@ const editProfile = (editType: string) => {
   })
 }
 
+const myPoints = () => {
+  window.dataLayer.push({
+    category: 'my points',
+    action: 'click',
+    label: 'register now'
+  })
+}
+
 export const GTMTrack = {
   changeCompensationPlanPage,
   downloadCompensationPlan,
   editProfile,
   marketingCard,
   marketingSharingCard,
+  myPoints,
   navbarPress,
   pageview,
   referralCard,
