@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { IBOIcon, DriverIcon, MerchantsIcon, ArrowRightIcon } from 'components/common/icons'
 import { ROLES } from 'config/roles'
-import { signUp } from 'lib/utils/gtm'
+import { GTMTrack } from 'lib/utils/gtm'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -29,7 +29,7 @@ export const SelectRoleToSignUp = () => {
   ])
 
   const onRoleClick = (role) => {
-    signUp(role.key, 1)
+    GTMTrack.signUp(role.key, 1)
     router.push(role.link)
   }
 

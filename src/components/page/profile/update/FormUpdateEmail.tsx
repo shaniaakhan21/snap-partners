@@ -7,7 +7,7 @@ import { Dispatch, SetStateAction } from 'lib/types/core/next-react'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { TAccountInfoToUpdate } from 'lib/types/user/profile'
 import { IAuth, TSetAuth } from 'lib/stores/Auth'
-import { GTMHandlers } from 'lib/utils/gtm'
+import { GTMTrack } from 'lib/utils/gtm'
 
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { InputProfile } from '../commons/InputProfile'
@@ -49,7 +49,7 @@ export const FormUpdateEmail = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IF
       return
     }
 
-    GTMHandlers.editProfile(typeUpdate)
+    GTMTrack.editProfile(typeUpdate)
     toast('We have sent you an email to confirm the change', { type: 'info' })
     reset()
     setTypeUpdate(null)

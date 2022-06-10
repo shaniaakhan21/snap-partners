@@ -13,7 +13,7 @@ import { Drawer, Navbar } from 'components/layout/private/Dashboard'
 import { FooterPrivate } from 'components/layout/private/Footer'
 import { Spinner } from 'components/common/loaders'
 import { handleFetchError } from 'lib/utils/handleFetchError'
-import { userInfo } from 'lib/utils/gtm'
+import { GTMTrack } from 'lib/utils/gtm'
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const router = useRouter()
@@ -94,7 +94,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         referralLink
       } = auth
 
-      userInfo({
+      GTMTrack.userInfo({
         id,
         username,
         name,
@@ -117,7 +117,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         nsurAccount
       })
     } else {
-      userInfo()
+      GTMTrack.userInfo()
     }
   }, [auth])
 

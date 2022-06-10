@@ -8,7 +8,7 @@ import { TAccountInfoToUpdate } from 'lib/types/user/profile'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { getUserMe } from 'lib/services/user/getUserMe'
 import { IAuth, TSetAuth } from 'lib/stores/Auth'
-import { GTMHandlers } from 'lib/utils/gtm'
+import { GTMTrack } from 'lib/utils/gtm'
 
 import { signInRulesConfig } from 'components/page/login/LoginForm/utils/formRules'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
@@ -93,7 +93,7 @@ export const FormUpdatePassword = ({ auth, setAuth, typeUpdate, setTypeUpdate }:
         myPoints: auth?.nsurAccount?.myPoints || null
       }
     })
-    GTMHandlers.editProfile(typeUpdate)
+    GTMTrack.editProfile(typeUpdate)
     toast('Password successfully changed', { type: 'success' })
     reset()
     setTypeUpdate(null)

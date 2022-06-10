@@ -6,7 +6,7 @@ export const GTM_ID = {
   PRO: 'GTM-NNQS9S8'
 }
 
-export const userInfo = (info?: Partial<IAuth>) => {
+const userInfo = (info?: Partial<IAuth>) => {
   window.dataLayer.push({
     event: 'userInfo',
     ...info,
@@ -14,14 +14,14 @@ export const userInfo = (info?: Partial<IAuth>) => {
   })
 }
 
-export const pageview = (url) => {
+const pageview = (url) => {
   window.dataLayer.push({
     event: 'pageview',
     page: url
   })
 }
 
-export const referralCard = (label: string, copyReferral: string, openMyGeneaology: string) => {
+const referralCard = (label: string, copyReferral: string, openMyGeneaology: string) => {
   window.dataLayer.push({
     event: 'ReferralCard',
     category: 'ReferralCard',
@@ -32,7 +32,7 @@ export const referralCard = (label: string, copyReferral: string, openMyGeneaolo
   })
 }
 
-export const navbarPress = (label:string) => {
+const navbarPress = (label:string) => {
   window.dataLayer.push({
     event: 'sidebar',
     category: 'sidebar',
@@ -41,7 +41,7 @@ export const navbarPress = (label:string) => {
   })
 }
 
-export const downloadCompensationPlan = (fileName: string) => {
+const downloadCompensationPlan = (fileName: string) => {
   window.dataLayer.push({
     event: 'Download Compensation Plan',
     category: 'Download Compensation Plan',
@@ -50,7 +50,7 @@ export const downloadCompensationPlan = (fileName: string) => {
   })
 }
 
-export const compensationPlanPageChange = (currentPage: number) => {
+const changeCompensationPlanPage = (currentPage: number) => {
   window.dataLayer.push({
     event: 'View Compensation Plan',
     category: 'View Compensation Plan',
@@ -59,7 +59,7 @@ export const compensationPlanPageChange = (currentPage: number) => {
   })
 }
 
-export const marketingCard = (userType: string) => {
+const marketingCard = (userType: string) => {
   window.dataLayer.push({
     event: 'MarketingCard',
     category: 'MarketingCard',
@@ -69,7 +69,7 @@ export const marketingCard = (userType: string) => {
   })
 }
 
-export const marketingSharingCard = (name: string, socialMediaClicked: string, downloadImg) => {
+const marketingSharingCard = (name: string, socialMediaClicked: string, downloadImg) => {
   window.dataLayer.push({
     event: 'MarketingSharingCard',
     category: 'MarketingSharingCard',
@@ -81,7 +81,7 @@ export const marketingSharingCard = (name: string, socialMediaClicked: string, d
   })
 }
 
-export const signUp = (userType: TROLE, step: number, app?: 'android' | 'ios', upgradeToManager?: 'yes' | 'no', accountSettings?: 'yes' | 'no') => {
+const signUp = (userType: TROLE, step: number, app?: 'android' | 'ios', upgradeToManager?: 'yes' | 'no', accountSettings?: 'yes' | 'no') => {
   window.dataLayer.push({
     event: 'signup',
     category: 'signupProcess',
@@ -94,7 +94,7 @@ export const signUp = (userType: TROLE, step: number, app?: 'android' | 'ios', u
   })
 }
 
-export const upgradeToManagerGTM = (isUpgradeToManagerPage: boolean) => {
+const upgradeToManager = (isUpgradeToManagerPage: boolean) => {
   window.dataLayer.push({
     category: 'upgrade to Manager',
     action: 'click',
@@ -110,6 +110,16 @@ const editProfile = (editType: string) => {
   })
 }
 
-export const GTMHandlers = {
-  editProfile
+export const GTMTrack = {
+  changeCompensationPlanPage,
+  downloadCompensationPlan,
+  editProfile,
+  marketingCard,
+  marketingSharingCard,
+  navbarPress,
+  pageview,
+  referralCard,
+  signUp,
+  upgradeToManager,
+  userInfo
 }

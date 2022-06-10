@@ -29,8 +29,8 @@ export const TopCustomerAcquisition = ({ data }: { data: IReport }) => {
                 {/* <img src={merchant.imageSrc} className='w-10 h-10' /> */}
 
                 <div>
-                  <span className='text-gray-800 font-bold'>{merchant.amount}{" "}</span>
-                  <span className='text-gray-800'>new customers by {" "}</span>
+                  <span className='text-gray-800 font-bold'>{merchant.amount}{' '}</span>
+                  <span className='text-gray-800'>new customers by {' '}</span>
                   <span className='text-gray-800 font-bold'>{merchant.name}!</span>
                 </div>
               </li>

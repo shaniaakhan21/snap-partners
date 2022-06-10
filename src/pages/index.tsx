@@ -8,7 +8,7 @@ import { getLocalStorage } from 'lib/utils/localStorage'
 import { getUserMe } from 'lib/services/user/getUserMe'
 import { useAuthStore } from 'lib/stores'
 import { APP_INFO } from 'config/appInfo'
-import { userInfo } from 'lib/utils/gtm'
+import { GTMTrack } from 'lib/utils/gtm'
 import type { Page } from 'lib/types'
 
 import { FooterPublic } from 'components/layout/public/Footer'
@@ -91,7 +91,7 @@ const HomePage: Page = () => {
         referralLink
       } = auth
 
-      userInfo({
+      GTMTrack.userInfo({
         id,
         username,
         name,
@@ -111,7 +111,7 @@ const HomePage: Page = () => {
         referralLink
       })
     } else {
-      userInfo()
+      GTMTrack.userInfo()
     }
   }, [auth])
 

@@ -6,7 +6,7 @@ import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 import type { Page as PageNext } from 'lib/types'
 import { useAuthStore } from 'lib/stores'
 import { APP_INFO } from 'config/appInfo'
-import { signUp } from 'lib/utils/gtm'
+import { GTMTrack } from 'lib/utils/gtm'
 
 import { ListDeviceLinkApp } from 'components/page/download-app/ListDeviceLinkApp'
 import { AndroidLinkApp } from 'components/page/download-app/AndroidLinkApp'
@@ -47,7 +47,7 @@ const DownloadAppPage: PageNext = () => {
   }
 
   const trackStore = (store: 'android' | 'ios') => {
-    signUp(role, 3, store)
+    GTMTrack.signUp(role, 3, store)
   }
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { marketingSharingCard } from 'lib/utils/gtm'
+import { GTMTrack } from 'lib/utils/gtm'
 import {
   DownloadIcon
   // ShareRRSSIcon
@@ -38,7 +38,7 @@ export const Article = ({ linkToShare, id, imageId, title, subtitle, caption, ha
 
   const trackDownload = () => {
     setDownloadImg(true)
-    marketingSharingCard(title, null, true)
+    GTMTrack.marketingSharingCard(title, null, true)
   }
 
   return (

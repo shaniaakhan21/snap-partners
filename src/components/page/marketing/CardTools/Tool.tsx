@@ -1,9 +1,9 @@
 import Link from 'next/link'
-import { marketingCard } from 'lib/utils/gtm'
+import { GTMTrack } from 'lib/utils/gtm'
 
 export const MarketingTool = ({ title, subtitle, icon, description, to }) => {
   const onClick = () => {
-    marketingCard(title)
+    GTMTrack.marketingCard(title)
   }
 
   return (
