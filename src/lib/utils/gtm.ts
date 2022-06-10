@@ -69,14 +69,15 @@ export const marketingCard = (userType: string) => {
   })
 }
 
-export const marketingSharingCard = (name: string, socialMediaClicked: string) => {
+export const marketingSharingCard = (name: string, socialMediaClicked: string, downloadImg) => {
   window.dataLayer.push({
     event: 'MarketingSharingCard',
     category: 'MarketingSharingCard',
     action: 'click',
     label: name,
     step: 2,
-    shareType: socialMediaClicked
+    shareType: socialMediaClicked,
+    downloadImg
   })
 }
 

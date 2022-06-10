@@ -1,22 +1,26 @@
 import { marketingSharingCard } from 'lib/utils/gtm'
-import { DownloadIcon, ShareRRSSIcon } from 'components/common/icons'
 import {
-  FacebookShareButton,
-  FacebookIcon,
-  TwitterShareButton,
-  TwitterIcon,
-  // EmailIcon,
-  // EmailShareButton,
-  RedditShareButton,
-  RedditIcon,
-  TelegramShareButton,
-  WhatsappShareButton,
-  WhatsappIcon,
-  TelegramIcon
-} from 'react-share'
+  DownloadIcon
+  // ShareRRSSIcon
+} from 'components/common/icons'
+// import {
+//   FacebookShareButton,
+//   FacebookIcon,
+//   TwitterShareButton,
+//   TwitterIcon,
+//   // EmailIcon,
+//   // EmailShareButton,
+//   RedditShareButton,
+//   RedditIcon,
+//   TelegramShareButton,
+//   WhatsappShareButton,
+//   WhatsappIcon,
+//   TelegramIcon
+// } from 'react-share'
 import { IMarketingArticle } from 'lib/types/marketing'
-import { useCopyToClipboard } from 'lib/hooks/useCopyToClipboard'
+// import { useCopyToClipboard } from 'lib/hooks/useCopyToClipboard'
 import { ImageSkeleton } from 'components/common/ImageWithLoader'
+import { useState } from 'react'
 
 interface IArticleProps extends IMarketingArticle {
   isAuthAdmin: boolean
@@ -24,10 +28,17 @@ interface IArticleProps extends IMarketingArticle {
 }
 
 export const Article = ({ linkToShare, id, imageId, title, subtitle, caption, hashtags, isAuthAdmin }: IArticleProps) => {
-  const { copy } = useCopyToClipboard()
+  // const { copy } = useCopyToClipboard()
 
-  const trackShare = (shareType: string) => {
-    marketingSharingCard(title, shareType)
+  const [downloadImg, setDownloadImg] = useState(false)
+
+  // const trackShare = (shareType: string) => {
+  //   marketingSharingCard(title, shareType, downloadImg)
+  // }
+
+  const trackDownload = () => {
+    setDownloadImg(true)
+    marketingSharingCard(title, null, true)
   }
 
   return (
@@ -125,7 +136,7 @@ export const Article = ({ linkToShare, id, imageId, title, subtitle, caption, ha
         </li> */}
 
         <li>
-          <a href={imageId} download>
+          <a href={imageId} download onClick={trackDownload}>
             <DownloadIcon />
           </a>
         </li>
