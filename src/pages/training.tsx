@@ -107,7 +107,7 @@ const TrainingPage: Page = () => {
             {trainings[category].map((video: ITraining, i: number) => (
               <Fragment key={i}>
                 <Video
-                  id={`training-iframe-video-${removeSpaces(video.title)}-${i}`}
+                  id={`training-iframe-video-${removeSpaces(category)}-${removeSpaces(video.title)}-${i}`}
                   category={category}
                   title={video.title}
                   subtitle={video.subtitle}
