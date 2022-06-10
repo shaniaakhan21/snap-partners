@@ -7,7 +7,7 @@ interface IProps {
 
 export const Video = ({ title, subtitle, caption, url }: IProps) => (
   <li className='max-w-xs w-full h-min bg-white rounded-t-lg overflow-hidden pb-4'>
-    <div className='w-full '>
+    <div className='w-full'>
       <iframe
         src={url}
         title={`Snap Video - ${title}`}
