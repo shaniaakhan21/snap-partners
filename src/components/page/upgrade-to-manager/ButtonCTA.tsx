@@ -1,4 +1,5 @@
 import { IAuth } from 'lib/stores/Auth'
+import { upgradeToManagerGTM } from 'lib/utils/gtm'
 
 interface IButtonCTAProps {
   auth: IAuth
@@ -7,6 +8,7 @@ interface IButtonCTAProps {
 
 export const ButtonCTA = ({ auth, setNewWindow }: IButtonCTAProps) => {
   const handleClickUpgradeToManager = () => {
+    upgradeToManagerGTM(true)
     const windowOpened = window.open(
       `https://store.snapdelivered.com/product/manager-upgrade?userId=${auth.id}`,
       'windowUpgradeToManager'

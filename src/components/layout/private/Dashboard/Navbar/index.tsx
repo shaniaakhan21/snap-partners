@@ -52,15 +52,13 @@ export const Navbar = () => {
           </div> */}
         </section>
 
-        {
-          auth && <Account
-            name={auth.name}
-            email={auth.email}
-            signOut={removeAuth}
-            phone={auth.phoneNumber}
-            photoUrl={null}
-          />
-        }
+        {auth && <Account
+          name={auth.name}
+          email={auth.email}
+          signOut={removeAuth}
+          phone={auth.phoneNumber}
+          photoUrl={null}
+        />}
       </div>
     </header>
   )

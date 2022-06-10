@@ -93,3 +93,11 @@ export const signUp = (userType: TROLE, step: number, app?: 'android' | 'ios', u
     ...(step === 4 ? { accountSettings } : {})
   })
 }
+
+export const upgradeToManagerGTM = (isUpgradeToManagerPage) => {
+  window.dataLayer.push({
+    category: 'upgrade to Manager',
+    action: 'click',
+    label: isUpgradeToManagerPage ? 'Upgrade interest' : 'Upgrade interest from Profile'
+  })
+}
