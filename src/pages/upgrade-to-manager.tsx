@@ -8,12 +8,20 @@ import DashboardLayout from 'layouts/private/Dashboard'
 import { RewardPointsCard } from 'components/page/upgrade-to-manager/RewardPointsCard'
 import { ButtonCTA } from 'components/page/upgrade-to-manager/ButtonCTA'
 import { TextContactCTA } from 'components/common/TextContactCTA'
+import { useEffect } from 'react'
+import { toast } from 'react-toastify'
 
 const { SEO } = APP_INFO
 
 const UpgradeToManagerPage: Page = () => {
   const { auth } = useAuthStore()
   const { setNewWindow } = useNewWindowOpenedStore()
+
+  useEffect(() => {
+    if (auth.roles.admin || auth.isManager) {
+      toast('You are already a manager', { type: 'info' })
+    }
+  }, [])
 
   return (
     <div className='max-w-4xl mx-auto w-full'>
