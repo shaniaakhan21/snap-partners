@@ -94,10 +94,22 @@ export const signUp = (userType: TROLE, step: number, app?: 'android' | 'ios', u
   })
 }
 
-export const upgradeToManagerGTM = (isUpgradeToManagerPage) => {
+export const upgradeToManagerGTM = (isUpgradeToManagerPage: boolean) => {
   window.dataLayer.push({
     category: 'upgrade to Manager',
     action: 'click',
     label: isUpgradeToManagerPage ? 'Upgrade interest' : 'Upgrade interest from Profile'
   })
+}
+
+const editProfile = (editType: string) => {
+  window.dataLayer.push({
+    category: 'profile edit',
+    action: 'click',
+    label: editType
+  })
+}
+
+export const GTMHandlers = {
+  editProfile
 }
