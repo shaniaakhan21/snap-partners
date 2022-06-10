@@ -15,6 +15,7 @@ import { VideoList } from 'components/page/training/VideoList'
 import { EmptyData } from 'components/common/EmptyData'
 import { useNearScreen } from 'lib/hooks/useNearScreen'
 import { Spinner } from 'components/common/loaders'
+import { removeSpaces } from 'lib/utils/removeSpaces'
 
 const { SEO } = APP_INFO
 
@@ -106,6 +107,8 @@ const TrainingPage: Page = () => {
             {trainings[category].map((video: ITraining, i: number) => (
               <Fragment key={i}>
                 <Video
+                  id={`training-iframe-video-${removeSpaces(video.title)}-${i}`}
+                  category={category}
                   title={video.title}
                   subtitle={video.subtitle}
                   caption={video.caption}

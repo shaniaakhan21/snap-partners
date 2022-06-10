@@ -118,6 +118,15 @@ const myPoints = () => {
   })
 }
 
+const trainingVideo = (section: string, videoTitle: string) => {
+  window.dataLayer.push({
+    category: 'training',
+    action: 'click',
+    label: videoTitle,
+    section
+  })
+}
+
 export const GTMTrack = {
   changeCompensationPlanPage,
   downloadCompensationPlan,
@@ -129,6 +138,7 @@ export const GTMTrack = {
   pageview,
   referralCard,
   signUp,
+  trainingVideo,
   upgradeToManager,
   userInfo
 }
