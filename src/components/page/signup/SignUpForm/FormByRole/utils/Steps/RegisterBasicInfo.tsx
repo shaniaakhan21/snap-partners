@@ -15,7 +15,7 @@ import { BulletPagination } from './BulletPagination'
 import { signUpStep1 } from 'lib/services/auth/signUp'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
-import { signUp } from 'lib/utils/gtm'
+import { GTMTrack } from 'lib/utils/gtm'
 
 interface IStepOpeProps {
   referralLink: IReferralLink,
@@ -96,7 +96,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
     })
 
     setLoading(false)
-    signUp(role, 2)
+    GTMTrack.signUp(role, 2)
     handleStep(STEPS.VERIFY_CODE)
     reset()
   }

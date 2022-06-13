@@ -8,6 +8,7 @@ import { TAccountInfoToUpdate } from 'lib/types/user/profile'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { getUserMe } from 'lib/services/user/getUserMe'
 import { IAuth, TSetAuth } from 'lib/stores/Auth'
+import { GTMTrack } from 'lib/utils/gtm'
 
 import { signInRulesConfig } from 'components/page/login/LoginForm/utils/formRules'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
@@ -17,6 +18,7 @@ import { Button } from 'components/common/Button'
 interface IFormUpdatePasswordProps {
   auth: IAuth
   setAuth: TSetAuth
+  typeUpdate: string
   setTypeUpdate: Dispatch<SetStateAction<TAccountInfoToUpdate>>
 }
 
@@ -26,7 +28,7 @@ interface IDataForm {
   confirmNewPassword: string
 }
 
-export const FormUpdatePassword = ({ auth, setAuth, setTypeUpdate }: IFormUpdatePasswordProps) => {
+export const FormUpdatePassword = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IFormUpdatePasswordProps) => {
   const { handleSubmit, register, reset, formState: { errors }, setError } = useForm<IDataForm>()
 
   const [isLoading, setIsLoading] = useState(false)
@@ -91,6 +93,7 @@ export const FormUpdatePassword = ({ auth, setAuth, setTypeUpdate }: IFormUpdate
         myPoints: auth?.nsurAccount?.myPoints || null
       }
     })
+    GTMTrack.editProfile(typeUpdate)
     toast('Password successfully changed', { type: 'success' })
     reset()
     setTypeUpdate(null)

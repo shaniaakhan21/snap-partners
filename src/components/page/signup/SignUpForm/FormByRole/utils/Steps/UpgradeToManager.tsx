@@ -10,7 +10,7 @@ import { IHandleStep, IUserTrack } from '../types'
 import { IReferralLink } from 'lib/types'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
-import { signUp } from 'lib/utils/gtm'
+import { GTMTrack } from 'lib/utils/gtm'
 
 export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { userTrack: IUserTrack, handleStep: IHandleStep, referralLink: IReferralLink }) => {
   const router = useRouter()
@@ -79,14 +79,14 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
       `https://store.snapdelivered.com/product/manager-upgrade?userId=${userId}`,
       'windowUpgradeToManager'
     )
-    signUp(role, 4, undefined, 'yes', 'no')
+    GTMTrack.signUp(role, 4, undefined, 'yes', 'no')
     setNewWindow(windowOpened)
     // When a newWindow is sent, in DashboardLayout we have an effect to handle upgrade to manager.
   }
 
   const handleSkip = () => {
     handleClickLogin()
-    signUp(role, 4, undefined, 'no', 'yes')
+    GTMTrack.signUp(role, 4, undefined, 'no', 'yes')
   }
 
   if (isLoading) {

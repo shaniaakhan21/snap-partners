@@ -32,14 +32,12 @@ export const AccountInfo = ({ auth, removeAuth, setNewWindow, setTypeUpdate }: I
         />
       </div>
 
-      {
-        !auth.roles.admin && (
-          <div className='flex flex-col md:flex-row items-center justify-center mt-11'>
-            <Rank auth={auth} />
-            <UpgradeManagerCTA auth={auth} setNewWindow={setNewWindow} />
-          </div>
-        )
-      }
+      {!auth.roles.admin && (
+        <div className='flex flex-col md:flex-row items-center justify-center mt-11'>
+          <Rank auth={auth} />
+          <UpgradeManagerCTA auth={auth} setNewWindow={setNewWindow} />
+        </div>
+      )}
 
       <BecomeRoles auth={auth} />
 

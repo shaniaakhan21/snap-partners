@@ -5,7 +5,7 @@ import type { Page, ReactNode } from 'lib/types'
 import DashboardLayout from 'layouts/private/Dashboard'
 import { Spinner } from 'components/common/loaders'
 import { APP_INFO } from 'config/appInfo'
-import { downloadCompensationPlan } from 'lib/utils/gtm'
+import { GTMTrack } from 'lib/utils/gtm'
 
 const { SEO } = APP_INFO
 
@@ -34,7 +34,7 @@ const CompensationPlanPage: Page = () => {
           target='_blank'
           rel='noopener noreferrer'
           className='px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed bg-black-primary text-white bg-primary-500 rounded-full font-semibold focus:outline-none hover:opacity-90'
-          onClick={() => downloadCompensationPlan('new-plan.pdf')}
+          onClick={() => GTMTrack.downloadCompensationPlan('new-plan.pdf')}
         >
           Download Compensation Plan
         </a>

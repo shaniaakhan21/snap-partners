@@ -8,6 +8,7 @@ import { TAccountInfoToUpdate } from 'lib/types/user/profile'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { signUpStep1 } from 'lib/services/auth/signUp'
 import { IAuth, TSetAuth } from 'lib/stores/Auth'
+import { GTMTrack } from 'lib/utils/gtm'
 
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { FormChangePhone } from './FormChangePhone'
@@ -17,10 +18,11 @@ import { VerifyCode } from './VerifyCode'
 interface IFormUpdatePhoneProps {
   auth: IAuth
   setAuth: TSetAuth
+  typeUpdate: string
   setTypeUpdate: Dispatch<SetStateAction<TAccountInfoToUpdate>>
 }
 
-export const EditPhone = ({ auth, setAuth, setTypeUpdate }: IFormUpdatePhoneProps) => {
+export const EditPhone = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IFormUpdatePhoneProps) => {
   const { register: registerPhone, handleSubmit: handleSubmitPhone, formState: { errors }, control } = useForm()
   const { handleSubmit } = useForm()
   const [isPhoneEditable, setIsPhoneEditable] = useState(false)
@@ -87,6 +89,7 @@ export const EditPhone = ({ auth, setAuth, setTypeUpdate }: IFormUpdatePhoneProp
       return
     }
 
+    GTMTrack.editProfile(typeUpdate)
     setIsLoading(false)
     toast('Phone Updated', { type: 'success' })
     setAuth({ ...auth, phoneNumber })

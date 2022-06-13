@@ -1,4 +1,5 @@
 import { IAuth } from 'lib/stores/Auth'
+import { GTMTrack } from 'lib/utils/gtm'
 
 interface IButtonCTAProps {
   auth: IAuth
@@ -7,6 +8,7 @@ interface IButtonCTAProps {
 
 export const ButtonCTA = ({ auth, setNewWindow }: IButtonCTAProps) => {
   const handleClickUpgradeToManager = () => {
+    GTMTrack.upgradeToManager(true)
     const windowOpened = window.open(
       `https://store.snapdelivered.com/product/manager-upgrade?userId=${auth.id}`,
       'windowUpgradeToManager'
@@ -21,6 +23,7 @@ export const ButtonCTA = ({ auth, setNewWindow }: IButtonCTAProps) => {
       <button
         onClick={handleClickUpgradeToManager}
         className='w-full h-20 bg-textAcent-500 text-white rounded-lg shadow-md flex flex-col justify-center px-4'
+        disabled={auth.roles.admin || auth.isManager}
       >
         <h6 className='text-lg font-semibold'>Upgrade to manager</h6>
       </button>

@@ -26,18 +26,16 @@ export const Account = ({ email, name, phone, photoUrl, signOut }) => {
 
       <div className='flex justify-start items-center relative select-none'>
         <div className='relative'>
-          {
-            photoUrl
-              ? (
-                <img
-                  src={photoUrl}
-                  className='ml-3 w-10 h-10 rounded-3xl'
-                />
-              )
-              : (
-                <AccountNoImage />
-              )
-          }
+          {photoUrl
+            ? (
+              <img
+                src={photoUrl}
+                className='ml-3 w-10 h-10 rounded-3xl'
+              />
+            )
+            : (
+              <AccountNoImage />
+            )}
 
           {/* <div className='sm:hidden absolute -top-1 -right-2 h-3.5 w-3.5 bg-[#FF4343] rounded-full text-white flex justify-center items-center' /> */}
         </div>

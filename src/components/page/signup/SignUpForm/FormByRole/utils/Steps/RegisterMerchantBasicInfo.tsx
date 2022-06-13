@@ -14,7 +14,7 @@ import { IReferralLink } from 'lib/types'
 import { IHandleStep } from '../types'
 import { STEPS } from '.'
 import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
-import { signUp } from 'lib/utils/gtm'
+import { GTMTrack } from 'lib/utils/gtm'
 
 export interface dataFormSignUpMerchant {
   'city' : string
@@ -121,7 +121,7 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
     }
 
     reset()
-    signUp(role, 2)
+    GTMTrack.signUp(role, 2)
     setLoading(false)
     handleStep(STEPS.SUCCESS_CODE)
   }

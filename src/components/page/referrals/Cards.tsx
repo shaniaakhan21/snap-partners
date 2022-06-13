@@ -1,6 +1,6 @@
 import { CalendarIcon, CopyIcon } from 'components/common/icons'
 import { useCopyToClipboard } from 'lib/hooks/useCopyToClipboard'
-import { referralCard } from 'lib/utils/gtm'
+import { GTMTrack } from 'lib/utils/gtm'
 import { useMemo } from 'react'
 
 interface IProps {
@@ -21,7 +21,7 @@ export const ReferralCards = ({ title, ilustration, link, newUser = false, class
   }, [link])
 
   const onClick = () => {
-    referralCard(userType, `copy for ${userType}`, '')
+    GTMTrack.referralCard(userType, `copy for ${userType}`, '')
     copy(link, 'Referral link')
   }
 

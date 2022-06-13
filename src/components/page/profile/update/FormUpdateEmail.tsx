@@ -7,6 +7,7 @@ import { Dispatch, SetStateAction } from 'lib/types/core/next-react'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { TAccountInfoToUpdate } from 'lib/types/user/profile'
 import { IAuth, TSetAuth } from 'lib/stores/Auth'
+import { GTMTrack } from 'lib/utils/gtm'
 
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { InputProfile } from '../commons/InputProfile'
@@ -15,6 +16,7 @@ import { Button } from 'components/common/Button'
 interface IFormUpdatePhoneProps {
   auth: IAuth
   setAuth: TSetAuth
+  typeUpdate: string
   setTypeUpdate: Dispatch<SetStateAction<TAccountInfoToUpdate>>
 }
 
@@ -22,7 +24,7 @@ interface IDataForm {
   newEmail: string
 }
 
-export const FormUpdateEmail = ({ auth, setAuth, setTypeUpdate }: IFormUpdatePhoneProps) => {
+export const FormUpdateEmail = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IFormUpdatePhoneProps) => {
   const { handleSubmit, register, reset, formState: { errors }, setError } = useForm<IDataForm>()
 
   const [isLoading, setIsLoading] = useState(false)
@@ -47,6 +49,7 @@ export const FormUpdateEmail = ({ auth, setAuth, setTypeUpdate }: IFormUpdatePho
       return
     }
 
+    GTMTrack.editProfile(typeUpdate)
     toast('We have sent you an email to confirm the change', { type: 'info' })
     reset()
     setTypeUpdate(null)

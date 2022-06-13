@@ -8,7 +8,7 @@ import Script from 'next/script'
 import Head from 'next/head'
 
 import { useLoadingPage } from 'lib/hooks/useLoadingPage'
-import { GTM_ID, pageview } from 'lib/utils/gtm'
+import { GTM_ID, GTMTrack } from 'lib/utils/gtm'
 import { useModalStore } from 'lib/stores'
 
 import { ModalContainer } from 'components/common/ModalContainer'
@@ -31,10 +31,10 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
   const router = useRouter()
 
   useEffect(() => {
-    router.events.on('routeChangeComplete', pageview)
+    router.events.on('routeChangeComplete', GTMTrack.pageview)
 
     return () => {
-      router.events.off('routeChangeComplete', pageview)
+      router.events.off('routeChangeComplete', GTMTrack.pageview)
     }
   }, [router.events])
 

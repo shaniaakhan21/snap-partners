@@ -10,6 +10,7 @@ import { APP_INFO } from 'config/appInfo'
 
 // import { FormConnectNsurAccount } from 'components/page/my-points/FormConnectNsurAccount'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
+import { GTMTrack } from 'lib/utils/gtm'
 
 const { SEO } = APP_INFO
 
@@ -49,7 +50,7 @@ const MyPointsPage: Page = () => {
 
       <br/>
       <br/>
-      <a href='https://nsurcoin.com/invite/5/snapdelivered/website' className='uppercase text-white bg-primary-500 px-4 py-1.5 rounded-full font-semibold hover:opacity-80'>
+      <a href='https://nsurcoin.com/invite/5/snapdelivered/website' className='uppercase text-white bg-primary-500 px-4 py-1.5 rounded-full font-semibold hover:opacity-80' onClick={GTMTrack.myPoints}>
         REGISTER NOW!
       </a>
       {/* <span className ='font-semibold text-lg'>You can win more points by _________</span> */}

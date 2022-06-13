@@ -56,9 +56,9 @@ const ProfilePage = ({ email, tokenExist }: { email: string, tokenExist: boolean
   }, [email, tokenExist])
 
   if (isLoading) return <SpinnerPageContent />
-  if (typeUpdate === 'email') return <FormUpdateEmail auth={auth} setAuth={setAuth} setTypeUpdate={setTypeUpdate} />
-  if (typeUpdate === 'phone') return <EditPhone auth={auth} setAuth={setAuth} setTypeUpdate={setTypeUpdate} />
-  if (typeUpdate === 'password') return <FormUpdatePassword auth={auth} setAuth={setAuth} setTypeUpdate={setTypeUpdate} />
+  if (typeUpdate === 'email') return <FormUpdateEmail auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
+  if (typeUpdate === 'phone') return <EditPhone auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
+  if (typeUpdate === 'password') return <FormUpdatePassword auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
 
   return (
     <AccountInfo
