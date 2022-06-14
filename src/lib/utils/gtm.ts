@@ -98,7 +98,8 @@ const upgradeToManager = (isUpgradeToManagerPage: boolean) => {
   window.dataLayer.push({
     category: 'upgrade to Manager',
     action: 'click',
-    label: isUpgradeToManagerPage ? 'Upgrade interest' : 'Upgrade interest from Profile'
+    label: isUpgradeToManagerPage ? 'Upgrade interest' : 'Upgrade interest from Profile',
+    event: 'upgrade to manager'
   })
 }
 
@@ -106,7 +107,8 @@ const editProfile = (editType: string) => {
   window.dataLayer.push({
     category: 'profile edit',
     action: 'click',
-    label: editType
+    label: editType,
+    event: 'profile edit'
   })
 }
 
@@ -114,7 +116,8 @@ const myPoints = () => {
   window.dataLayer.push({
     category: 'my points',
     action: 'click',
-    label: 'register now'
+    label: 'register now',
+    event: 'my points'
   })
 }
 
@@ -123,6 +126,7 @@ const trainingVideo = (section: string, videoTitle: string) => {
     category: 'training',
     action: 'click',
     label: videoTitle,
+    event: 'training',
     section
   })
 }
