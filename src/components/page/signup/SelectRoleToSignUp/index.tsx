@@ -29,7 +29,7 @@ export const SelectRoleToSignUp = () => {
   ])
 
   const onRoleClick = (role) => {
-    GTMTrack.signUp(role.key, 1)
+    GTMTrack.signUp(role.key)
     router.push(role.link)
   }
 

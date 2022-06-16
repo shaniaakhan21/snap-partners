@@ -12,6 +12,7 @@ import { IReferralLink } from 'lib/types'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { InputPhone } from '../InputPhone'
 import { Button } from 'components/common/Button'
+import { GTMTrack } from 'lib/utils/gtm'
 
 interface IDataFormVerifyCode {
   code: string
@@ -122,6 +123,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
     }
 
     toast('Code Verified', { type: 'success' })
+    GTMTrack.signUp(referralLink.role, 2)
     setIsVerifyingCode(false)
     handleStep(STEPS.SUCCESS_CODE)
   }

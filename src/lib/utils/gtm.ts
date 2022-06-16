@@ -1,6 +1,12 @@
 import { IAuth } from 'lib/stores/Auth'
 import { TROLE } from 'lib/types'
 
+const STEP_SIGNUP_LABELS = {
+  1: 'user information',
+  2: 'register success',
+  3: 'upgrade to manager interest'
+}
+
 export const GTM_ID = {
   PRE: 'GTM-PRJVWRJ',
   PRO: 'GTM-NNQS9S8'
@@ -81,16 +87,33 @@ const marketingSharingCard = (name: string, socialMediaClicked: string, download
   })
 }
 
-const signUp = (userType: TROLE, step: number, app?: 'android' | 'ios', upgradeToManager?: 'yes' | 'no', accountSettings?: 'yes' | 'no') => {
+const signUp = (userType: TROLE, step?: number, upgradeToManager?: 'yes' | 'no', accountSettings?: 'yes' | 'no') => {
   window.dataLayer.push({
     event: 'signup',
-    category: 'signupProcess',
+    category: step ? 'signupProcess' : 'signup user type',
     action: 'click',
-    label: userType,
-    step,
-    ...(step === 3 ? { appDownloaded: app } : {}),
-    ...(step === 4 ? { upgradeToManager } : {}),
-    ...(step === 4 ? { accountSettings } : {})
+    label: step ? `user type ${userType}` : STEP_SIGNUP_LABELS[step],
+    ...(step ? { step, userType } : {}),
+    ...(step === 3 ? { upgradeToManager, accountSettings } : {})
+  })
+}
+
+const downloadMobileApp = (store: 'android' | 'ios') => {
+  window.dataLayer.push({
+    event: 'app download',
+    category: 'app download',
+    action: 'download',
+    label: `${store} app interest`
+  })
+}
+
+const logIn = (userType: TROLE, loginType: 'phone' | 'email' | 'username', interested: boolean) => {
+  window.dataLayer.push({
+    event: 'login',
+    category: 'login process',
+    action: interested ? 'click' : 'login',
+    label: interested ? `user type ${userType} interest` : `user type ${userType}`,
+    loginType
   })
 }
 
@@ -134,11 +157,13 @@ const trainingVideo = (section: string, videoTitle: string) => {
 export const GTMTrack = {
   changeCompensationPlanPage,
   downloadCompensationPlan,
+  downloadMobileApp,
   editProfile,
   marketingCard,
   marketingSharingCard,
   myPoints,
   navbarPress,
+  logIn,
   pageview,
   referralCard,
   signUp,

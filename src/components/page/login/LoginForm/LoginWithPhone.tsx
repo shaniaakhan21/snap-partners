@@ -3,6 +3,7 @@ import { Spinner } from 'components/common/loaders'
 import { login } from 'lib/services/auth/login'
 import { getUserMe } from 'lib/services/user/getUserMe'
 import { useAuthStore } from 'lib/stores'
+import { GTMTrack } from 'lib/utils/gtm'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -18,12 +19,17 @@ export interface IDataForm {
   // rememberMe: boolean
 }
 
-export const LoginWithPhone = () => {
+interface IProps {
+  trackLoginHandle: (beforeLogin) => void
+}
+
+export const LoginWithPhone = ({ trackLoginHandle }: IProps) => {
   const { setAuth } = useAuthStore()
   const [isLoading, setLoading] = useState(false)
   const { handleSubmit, register, reset, formState: { errors }, control } = useForm<IDataForm>()
 
   const onSubmit = async (dataForm: IDataForm) => {
+    trackLoginHandle(true)
     setLoading(true)
     const phoneNumber = `+${dataForm.phoneNumber}`
 
@@ -47,6 +53,7 @@ export const LoginWithPhone = () => {
     }
 
     toast('Login Successful!', { type: 'success' })
+    trackLoginHandle(false)
     setLoading(false)
     setAuth({
       email: data.email,

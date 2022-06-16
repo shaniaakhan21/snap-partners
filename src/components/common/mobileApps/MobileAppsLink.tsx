@@ -1,12 +1,10 @@
-import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 import { GTMTrack } from 'lib/utils/gtm'
 import Link from 'next/link'
 import { AppleStore, GooglePlayBanner } from '../icons'
 
 export const MobileAppsLink = () => {
-  const role = useRoleFromUrl()
   const trackStore = (store: 'android' | 'ios') => {
-    GTMTrack.signUp(role, 3, store)
+    GTMTrack.downloadMobileApp(store)
   }
   return (
     <div className='flex flex-col justify-center items-center mt-8'>

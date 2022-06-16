@@ -96,7 +96,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
     })
 
     setLoading(false)
-    GTMTrack.signUp(role, 2)
+    GTMTrack.signUp(role, 1)
     handleStep(STEPS.VERIFY_CODE)
     reset()
   }

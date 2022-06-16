@@ -16,12 +16,17 @@ export interface IDataForm {
   // rememberMe: boolean
 }
 
-export const LoginWithEmail = () => {
+interface IProps {
+  trackLoginHandle: (beforeLogin) => void
+}
+
+export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
   const { setAuth } = useAuthStore()
   const [isLoading, setLoading] = useState(false)
   const { handleSubmit, register, reset, formState: { errors } } = useForm<IDataForm>()
 
   const onSubmit = async (dataForm: IDataForm) => {
+    trackLoginHandle(true)
     setLoading(true)
 
     const { data: dataLogin, error: errorLogin } = await login({
@@ -44,6 +49,7 @@ export const LoginWithEmail = () => {
     }
 
     toast('Login Successful!', { type: 'success' })
+    trackLoginHandle(false)
     setLoading(false)
     setAuth({
       email: data.email,

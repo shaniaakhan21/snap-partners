@@ -121,7 +121,7 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
     }
 
     reset()
-    GTMTrack.signUp(role, 2)
+    GTMTrack.signUp(role, 1)
     setLoading(false)
     handleStep(STEPS.SUCCESS_CODE)
   }

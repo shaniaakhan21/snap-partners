@@ -72,21 +72,21 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
     return dataLogin.userId
   }
 
-  const handleUpagradeToManage = async () => {
+  const handleUpgradeToManage = async () => {
     const userId = await handleClickLogin()
 
     const windowOpened = window.open(
       `https://store.snapdelivered.com/product/manager-upgrade?userId=${userId}`,
       'windowUpgradeToManager'
     )
-    GTMTrack.signUp(role, 4, undefined, 'yes', 'no')
+    GTMTrack.signUp(role, 3, 'yes', 'no')
     setNewWindow(windowOpened)
     // When a newWindow is sent, in DashboardLayout we have an effect to handle upgrade to manager.
   }
 
   const handleSkip = () => {
+    GTMTrack.signUp(role, 3, 'no', 'yes')
     handleClickLogin()
-    GTMTrack.signUp(role, 4, undefined, 'no', 'yes')
   }
 
   if (isLoading) {
@@ -116,7 +116,7 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
       </ul>
 
       <div className='w-full mt-10'>
-        <Button classes='w-full ' onClick={handleUpagradeToManage}>
+        <Button classes='w-full ' onClick={handleUpgradeToManage}>
           Continue
         </Button>
 
