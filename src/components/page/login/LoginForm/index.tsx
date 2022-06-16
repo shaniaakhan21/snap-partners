@@ -1,3 +1,4 @@
+import { GTMTrack } from 'lib/utils/gtm'
 import { useState } from 'react'
 import { LoginWithEmail } from './LoginWithEmail'
 import { LoginWithPhone } from './LoginWithPhone'
@@ -5,6 +6,10 @@ import { LoginWithUsername } from './LoginWithUsername'
 
 export const LoginForm = () => {
   const [typeInput, setTypeInput] = useState<'phone' | 'email' | 'username'>('phone')
+
+  const trackLoginHandle = (beforeLogin: boolean) => {
+    GTMTrack.logIn(typeInput, beforeLogin)
+  }
 
   return (
     <div className='max-w-md mx-auto w-full'>
@@ -36,9 +41,9 @@ export const LoginForm = () => {
         </button>
       </div>
 
-      { typeInput === 'phone' && <LoginWithPhone /> }
-      { typeInput === 'email' && <LoginWithEmail /> }
-      { typeInput === 'username' && <LoginWithUsername /> }
+      { typeInput === 'phone' && <LoginWithPhone trackLoginHandle={trackLoginHandle} /> }
+      { typeInput === 'email' && <LoginWithEmail trackLoginHandle={trackLoginHandle} /> }
+      { typeInput === 'username' && <LoginWithUsername trackLoginHandle={trackLoginHandle} /> }
     </div>
   )
 }

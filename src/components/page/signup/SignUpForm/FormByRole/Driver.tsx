@@ -23,45 +23,37 @@ export const SignUpDriverForm = ({ referralLink }: { referralLink: IReferralLink
 
   return (
     <div className='w-full'>
-      {
-        userTrack.step === STEPS.REGISTER_BASIC_INFO && (
-          <RegisterBasicInfo
-            handleUserInfo={handleUserInfo}
-            handleStep={handleStep}
-            referralLink={referralLink}
-          />
-        )
-      }
+      {userTrack.step === STEPS.REGISTER_BASIC_INFO && (
+        <RegisterBasicInfo
+          handleUserInfo={handleUserInfo}
+          handleStep={handleStep}
+          referralLink={referralLink}
+        />
+      )}
 
-      {
-        userTrack.step === STEPS.VERIFY_CODE && (
-          <VerifyCode
-            handleUserInfo={handleUserInfo}
-            referralLink={referralLink}
-            userTrack={userTrack}
-            handleStep={handleStep}
-          />
-        )
-      }
+      {userTrack.step === STEPS.VERIFY_CODE && (
+        <VerifyCode
+          handleUserInfo={handleUserInfo}
+          referralLink={referralLink}
+          userTrack={userTrack}
+          handleStep={handleStep}
+        />
+      )}
 
-      {
-        userTrack.step === STEPS.SUCCESS_CODE && (
-          <SuccessCode
-            handleStep={handleStep}
-            userTrack={userTrack}
-          />
-        )
-      }
+      {userTrack.step === STEPS.SUCCESS_CODE && (
+        <SuccessCode
+          handleStep={handleStep}
+          userTrack={userTrack}
+        />
+      )}
 
-      {
-        userTrack.step === STEPS.UPGRADE_TO_MANAGER && (
-          <UpgradeToManager
-            referralLink={referralLink}
-            handleStep={handleStep}
-            userTrack={userTrack}
-          />
-        )
-      }
+      {userTrack.step === STEPS.UPGRADE_TO_MANAGER && (
+        <UpgradeToManager
+          referralLink={referralLink}
+          handleStep={handleStep}
+          userTrack={userTrack}
+        />
+      )}
     </div>
   )
 }

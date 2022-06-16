@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 
-import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 import type { Page as PageNext } from 'lib/types'
 import { useAuthStore } from 'lib/stores'
 import { APP_INFO } from 'config/appInfo'
@@ -23,7 +22,6 @@ const DownloadAppPage: PageNext = () => {
   const [device, setDevice] = useState<'APPLE' | 'ANDROID'>(null)
   const [isLoading, setIsLoading] = useState(true)
   const { auth } = useAuthStore()
-  const role = useRoleFromUrl()
   const router = useRouter()
 
   const { current: androidApps } = useRef([
@@ -47,7 +45,7 @@ const DownloadAppPage: PageNext = () => {
   }
 
   const trackStore = (store: 'android' | 'ios') => {
-    GTMTrack.signUp(role, 3, store)
+    GTMTrack.downloadMobileApp(store)
   }
 
   useEffect(() => {
