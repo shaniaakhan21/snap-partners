@@ -107,12 +107,12 @@ const downloadMobileApp = (store: 'android' | 'ios') => {
   })
 }
 
-const logIn = (userType: TROLE, loginType: 'phone' | 'email' | 'username', interested: boolean) => {
+const logIn = (loginType: 'phone' | 'email' | 'username', interested: boolean) => {
   window.dataLayer.push({
     event: 'login',
     category: 'login process',
     action: interested ? 'click' : 'login',
-    label: interested ? `user type ${userType} interest` : `user type ${userType}`,
+    label: interested ? 'login interest' : 'login success',
     loginType
   })
 }
