@@ -4,7 +4,7 @@ import { AppleStore, GooglePlayBanner } from '../icons'
 
 export const MobileAppsLink = () => {
   const trackStore = (store: 'android' | 'ios') => {
-    GTMTrack.downloadMobileApp(store)
+    GTMTrack.downloadMobileApp(store, 'register success code section')
   }
   return (
     <div className='flex flex-col justify-center items-center mt-8'>

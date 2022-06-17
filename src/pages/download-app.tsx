@@ -45,7 +45,7 @@ const DownloadAppPage: PageNext = () => {
   }
 
   const trackStore = (store: 'android' | 'ios') => {
-    GTMTrack.downloadMobileApp(store)
+    GTMTrack.downloadMobileApp(store, 'page download app')
   }
 
   useEffect(() => {

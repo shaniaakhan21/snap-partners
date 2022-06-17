@@ -98,12 +98,13 @@ const signUp = (userType: TROLE, step?: number, upgradeToManager?: 'yes' | 'no',
   })
 }
 
-const downloadMobileApp = (store: 'android' | 'ios') => {
+const downloadMobileApp = (store: 'android' | 'ios', from: string) => {
   window.dataLayer.push({
     event: 'app download',
     category: 'app download',
     action: 'download',
-    label: `${store} app interest`
+    label: `${store} app interest`,
+    from
   })
 }
 
@@ -154,11 +155,20 @@ const trainingVideo = (section: string, videoTitle: string) => {
   })
 }
 
+const footerPrivate = (clickOption: string) => {
+  window.dataLayer.push({
+    category: 'footer',
+    action: 'click',
+    label: clickOption
+  })
+}
+
 export const GTMTrack = {
   changeCompensationPlanPage,
   downloadCompensationPlan,
   downloadMobileApp,
   editProfile,
+  footerPrivate,
   marketingCard,
   marketingSharingCard,
   myPoints,

@@ -1,4 +1,5 @@
 import { AppleIcon, GooglePlayIcon, YoutubeIcon } from 'components/common/icons'
+import { GTMTrack } from 'lib/utils/gtm'
 import Link from 'next/link'
 import { useRef } from 'react'
 
@@ -13,10 +14,14 @@ export const FooterPrivate = () => {
   ])
 
   const { current: socialLinks } = useRef([
-    { to: '/download-app?device=APPLE', icon: <AppleIcon classes='w-6 h-6' /> },
-    { to: '/download-app?device=ANDROID', icon: <GooglePlayIcon classes='w-6 h-6' /> },
+    { to: '/download-app?device=APPLE', store: 'ios', icon: <AppleIcon classes='w-6 h-6' /> },
+    { to: '/download-app?device=ANDROID', store: 'android', icon: <GooglePlayIcon classes='w-6 h-6' /> },
     { to: 'https://www.youtube.com/channel/UC7zzJ0gaX5QrE8lPqG_Lr1w', icon: <YoutubeIcon classes='w-6 h-6' /> }
   ])
+
+  const footerAppsTrack = (store?: string) => {
+    store && GTMTrack.downloadMobileApp(store as 'android' | 'ios', 'private footer')
+  }
 
   return (
     <footer className='w-full bg-transparent p-4 text-sm'>
@@ -26,7 +31,12 @@ export const FooterPrivate = () => {
             footerLinks.map(footerLink => (
               <li key={footerLink.label}>
                 <Link href={footerLink.to}>
-                  <a className='hover:text-primary-500'>{footerLink.label}</a>
+                  <a
+                    className='hover:text-primary-500'
+                    onClick={() => GTMTrack.footerPrivate(footerLink.label)}
+                  >
+                    {footerLink.label}
+                  </a>
                 </Link>
               </li>
             ))
@@ -39,7 +49,7 @@ export const FooterPrivate = () => {
               socialLinks.map((socialLink, index) => (
                 <li key={index} className='bg-white rounded-full p-2 cursor-pointer hover:bg-primary-300 hover:bg-opacity-30'>
                   <Link href={socialLink.to}>
-                    <a>{socialLink.icon}</a>
+                    <a onClick={() => footerAppsTrack(socialLink.store ?? null)}>{socialLink.icon}</a>
                   </Link>
                 </li>
               ))
