@@ -158,6 +158,7 @@ const trainingVideo = (section: string, videoTitle: string) => {
 const footerPrivate = (clickOption: string) => {
   window.dataLayer.push({
     category: 'footer',
+    event: 'footer',
     action: 'click',
     label: clickOption
   })

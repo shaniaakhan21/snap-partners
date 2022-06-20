@@ -15,6 +15,10 @@ export const ReferralCards = ({ title, ilustration, link, newUser = false, class
   const { copy } = useCopyToClipboard()
 
   const userType: string = useMemo(() => {
+    if (link.includes('vidgo')) {
+      return 'VIDGO'
+    }
+
     // find card userType
     const idx = link.indexOf('role=')
     return link.substring(idx + 5)
