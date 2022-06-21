@@ -34,6 +34,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
       setIsVerifyingCode(false)
     }
 
+    GTMTrack.signUp(referralLink.role, 2, 'yes')
     setIsVerifyingCode(false)
     toast('Submitted Code', { type: 'success' })
   }
@@ -123,7 +124,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
     }
 
     toast('Code Verified', { type: 'success' })
-    GTMTrack.signUp(referralLink.role, 2)
+    GTMTrack.signUp(referralLink.role, 2, 'no')
     setIsVerifyingCode(false)
     handleStep(STEPS.SUCCESS_CODE)
   }

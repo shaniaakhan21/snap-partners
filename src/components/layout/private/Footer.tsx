@@ -19,10 +19,6 @@ export const FooterPrivate = () => {
     { to: 'https://www.youtube.com/channel/UC7zzJ0gaX5QrE8lPqG_Lr1w', icon: <YoutubeIcon classes='w-6 h-6' /> }
   ])
 
-  const footerAppsTrack = (store?: string) => {
-    store && GTMTrack.downloadMobileApp(store as 'android' | 'ios', 'private footer')
-  }
-
   return (
     <footer className='w-full bg-transparent p-4 text-sm'>
       <div className='max-w-7xl mx-auto 2xl:flex 2xl:justify-center 2xl:items-center 2xl:gap-x-3'>
@@ -49,7 +45,7 @@ export const FooterPrivate = () => {
               socialLinks.map((socialLink, index) => (
                 <li key={index} className='bg-white rounded-full p-2 cursor-pointer hover:bg-primary-300 hover:bg-opacity-30'>
                   <Link href={socialLink.to}>
-                    <a onClick={() => footerAppsTrack(socialLink.store ?? null)}>{socialLink.icon}</a>
+                    <a>{socialLink.icon}</a>
                   </Link>
                 </li>
               ))
