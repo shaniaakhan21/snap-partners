@@ -166,12 +166,22 @@ const footerPrivate = (clickOption: string) => {
   })
 }
 
+const genealogyType = (type: 'new' | 'old') => {
+  window.dataLayer.push({
+    category: 'genealogy',
+    event: 'genealogy',
+    action: 'click',
+    label: type
+  })
+}
+
 export const GTMTrack = {
   changeCompensationPlanPage,
   downloadCompensationPlan,
   downloadMobileApp,
   editProfile,
   footerPrivate,
+  genealogyType,
   marketingCard,
   marketingSharingCard,
   myPoints,

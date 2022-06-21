@@ -9,6 +9,7 @@ import { ReferralListSelectedItem } from 'components/page/referrals/ListSelected
 import { Spinner } from 'components/common/loaders'
 import { ILevelUser } from 'lib/types/genealogy'
 import { useLayoutConfig } from 'lib/stores'
+import { GTMTrack } from 'lib/utils/gtm'
 
 export const NewGenealogy = ({
   handleSubmit,
@@ -43,6 +44,11 @@ export const NewGenealogy = ({
 }) => {
   const { genealogy: genealogyLayoutConfig } = useLayoutConfig()
 
+  const handleToggleGenealogy = () => {
+    genealogyLayoutConfig.toggleTypeGenealogy()
+    GTMTrack.genealogyType('old')
+  }
+
   return (
     <>
       <div className='w-full flex flex-col justify-start'>
@@ -72,7 +78,7 @@ export const NewGenealogy = ({
                 id='toggle-example-checked'
                 className='sr-only'
                 checked={genealogyLayoutConfig.isNewGenealogy}
-                onChange={() => genealogyLayoutConfig.toggleTypeGenealogy()}
+                onChange={handleToggleGenealogy}
               />
               <div className='toggle-bg bg-gray-400 border-2 border-gray-200 h-6 w-11 rounded-full'></div>
               <span className='ml-3 text-sm font-medium'>
