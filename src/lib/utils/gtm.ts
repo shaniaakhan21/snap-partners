@@ -2,9 +2,10 @@ import { IAuth } from 'lib/stores/Auth'
 import { TROLE } from 'lib/types'
 
 const STEP_SIGNUP_LABELS = {
-  1: 'user information',
-  2: 'register success',
-  3: 'upgrade to manager interest'
+  1: 'account information',
+  2: 'number verification',
+  3: 'register success',
+  4: 'upgrade to manager interest'
 }
 
 export const GTM_ID = {
@@ -87,14 +88,15 @@ const marketingSharingCard = (name: string, socialMediaClicked: string, download
   })
 }
 
-const signUp = (userType: TROLE, step?: number, upgradeToManager?: 'yes' | 'no', accountSettings?: 'yes' | 'no') => {
+const signUp = (userType: TROLE, step?: number, sendAgain?: 'yes' | 'no', upgradeToManager?: 'yes' | 'no', accountSettings?: 'yes' | 'no') => {
   window.dataLayer.push({
-    event: 'signup',
-    category: step ? 'signupProcess' : 'signup user type',
     action: 'click',
-    label: step ? `user type ${userType}` : STEP_SIGNUP_LABELS[step],
+    event: 'signup',
+    category: step ? 'register' : 'start registration',
+    label: step ? STEP_SIGNUP_LABELS[step] : userType,
     ...(step ? { step, userType } : {}),
-    ...(step === 3 ? { upgradeToManager, accountSettings } : {})
+    ...(step === 2 ? { sendAgain } : {}),
+    ...(step === 4 ? { upgradeToManager, accountSettings } : {})
   })
 }
 

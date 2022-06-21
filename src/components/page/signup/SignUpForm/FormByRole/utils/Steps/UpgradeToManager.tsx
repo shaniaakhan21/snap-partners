@@ -79,13 +79,13 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
       `https://store.snapdelivered.com/product/manager-upgrade?userId=${userId}`,
       'windowUpgradeToManager'
     )
-    GTMTrack.signUp(role, 3, 'yes', 'no')
+    GTMTrack.signUp(role, 4, null, 'yes', 'no')
     setNewWindow(windowOpened)
     // When a newWindow is sent, in DashboardLayout we have an effect to handle upgrade to manager.
   }
 
   const handleSkip = () => {
-    GTMTrack.signUp(role, 3, 'no', 'yes')
+    GTMTrack.signUp(role, 4, null, 'no', 'yes')
     handleClickLogin()
   }
 

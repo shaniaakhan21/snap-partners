@@ -25,9 +25,9 @@ export const SignUpDriverForm = ({ referralLink }: { referralLink: IReferralLink
     <div className='w-full'>
       {userTrack.step === STEPS.REGISTER_BASIC_INFO && (
         <RegisterBasicInfo
+          referralLink={referralLink}
           handleUserInfo={handleUserInfo}
           handleStep={handleStep}
-          referralLink={referralLink}
         />
       )}
 
@@ -42,8 +42,9 @@ export const SignUpDriverForm = ({ referralLink }: { referralLink: IReferralLink
 
       {userTrack.step === STEPS.SUCCESS_CODE && (
         <SuccessCode
-          handleStep={handleStep}
+          referralLink={referralLink}
           userTrack={userTrack}
+          handleStep={handleStep}
         />
       )}
 
