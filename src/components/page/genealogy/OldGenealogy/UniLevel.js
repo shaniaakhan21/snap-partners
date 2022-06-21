@@ -7,6 +7,7 @@ import SearchIcon from '@material-ui/icons/Search'
 import axios from 'axios'
 import { useAuthStore, useLayoutConfig } from 'lib/stores'
 import { API } from 'config/api'
+import { GTMTrack } from 'lib/utils/gtm'
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -94,15 +95,20 @@ export const Unilevel = () => {
     }
   ]
 
+  const handleToggleGenealogy = () => {
+    genealogyLayoutConfig.toggleTypeGenealogy()
+    GTMTrack.genealogyType('new')
+  }
+
   return (
     <>
-      <ModalUninivelUser id={id} name={name} openUser={openUser} open={showModal} close={setshowModal}/>
+      <ModalUninivelUser id={id} name={name} openUser={openUser} open={showModal} close={setshowModal} />
       <Card style={{ width: '100%' }}>
         <Grid className={classes.container} container>
           <Grid container className={classes.title} >
             <Grid container item xs={12} md={12} justifyContent={'space-between'} alignItems='center' style={{ marginBottom: 20 }} >
               <Grid justifyContent='flex-end' alignItems='center' style={{ display: 'flex' }}>
-                <TextField value={searchId} onChange={(e) => { setsearchId(e.target.value) }} size={'small'} variant="outlined" placeholder="Search by ID/Name/Phone" InputProps={{ startAdornment: <SearchIcon fontSize="small"/> }}/>
+                <TextField value={searchId} onChange={(e) => { setsearchId(e.target.value) }} size={'small'} variant="outlined" placeholder="Search by ID/Name/Phone" InputProps={{ startAdornment: <SearchIcon fontSize="small" /> }} />
                 <Button disabled={(searchId.length === 0)} onClick={() => { search() }} variant="contained" className={classes.Btn}>Search</Button>
               </Grid>
 
@@ -112,7 +118,7 @@ export const Unilevel = () => {
                     type='checkbox'
                     id='toggle-example-checked'
                     className='sr-only'
-                    onChange={() => genealogyLayoutConfig.toggleTypeGenealogy()}
+                    onChange={handleToggleGenealogy}
                     checked={genealogyLayoutConfig.isNewGenealogy}
                   />
                   <div className='toggle-bg bg-gray-400 border-2 border-gray-200 h-6 w-11 rounded-full'></div>
@@ -128,10 +134,10 @@ export const Unilevel = () => {
             </Grid>
           </Grid>
           <Grid item container style={{ marginBottom: 30 }}>
-            <Table columns={columns} rows={rows}/>
+            <Table columns={columns} rows={rows} />
           </Grid>
           <Grid item container>
-            <RecursiveAccordion openUser={openUser} master={true} user={user}/>
+            <RecursiveAccordion openUser={openUser} master={true} user={user} />
           </Grid>
         </Grid>
       </Card>
