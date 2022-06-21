@@ -44,7 +44,12 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
       <Script
         id='gtm-init-datalayer'
         strategy='afterInteractive'
-        dangerouslySetInnerHTML={{ __html: 'window.dataLayer = window.dataLayer || [];' }}
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({ event: 'optimize.activate' });
+          `
+        }}
       />
       {/* Google Tag Manager (gtm.ts) - Global base code */}
       <Script
