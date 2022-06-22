@@ -32,6 +32,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
     if (error) {
       handleFetchError(error.status, error.info)
       setIsVerifyingCode(false)
+      return
     }
 
     GTMTrack.signUp(referralLink.role, 2, 'yes')
@@ -47,6 +48,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
     if (error) {
       handleFetchError(error.status, error.info)
       setIsVerifyingCode(false)
+      return
     }
 
     handleUserInfo({ ...userTrack.userInfo, phone: `+${phoneNumber}` })
