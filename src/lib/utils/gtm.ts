@@ -88,7 +88,7 @@ const marketingSharingCard = (name: string, socialMediaClicked: string, download
   })
 }
 
-const signUp = (userType: TROLE, step?: number, sendAgain?: 'yes' | 'no', upgradeToManager?: 'yes' | 'no', accountSettings?: 'yes' | 'no') => {
+const signUp = (userType: TROLE, step?: number, sendAgain?: 'yes' | 'no', upgradeToManager?: 'yes' | 'no') => {
   window.dataLayer.push({
     action: 'click',
     event: 'signup',
@@ -96,7 +96,10 @@ const signUp = (userType: TROLE, step?: number, sendAgain?: 'yes' | 'no', upgrad
     label: step ? STEP_SIGNUP_LABELS[step] : userType,
     ...(step ? { step, userType } : {}),
     ...(step === 2 ? { sendAgain } : {}),
-    ...(step === 4 ? { upgradeToManager, accountSettings } : {})
+    ...(step === 4
+      ? { upgradeToManager, accountSettings: upgradeToManager === 'yes' ? 'no' : 'yes' }
+      : {}
+    )
   })
 }
 
