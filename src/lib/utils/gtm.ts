@@ -178,6 +178,14 @@ const genealogyType = (type: 'new' | 'old') => {
   })
 }
 
+const logOut = () => {
+  window.dataLayer.push({
+    category: 'logout',
+    event: 'logout',
+    action: 'click'
+  })
+}
+
 export const GTMTrack = {
   changeCompensationPlanPage,
   downloadCompensationPlan,
@@ -190,6 +198,7 @@ export const GTMTrack = {
   myPoints,
   navbarPress,
   logIn,
+  logout: logOut,
   pageview,
   referralCard,
   signUp,
