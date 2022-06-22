@@ -160,11 +160,12 @@ const trainingVideo = (section: string, videoTitle: string) => {
   })
 }
 
-const footerPrivate = (clickOption: string) => {
+const footer = (from: 'public' | 'private', clickOption: string) => {
   window.dataLayer.push({
     category: 'footer',
     event: 'footer',
     action: 'click',
+    from,
     label: clickOption
   })
 }
@@ -191,7 +192,7 @@ export const GTMTrack = {
   downloadCompensationPlan,
   downloadMobileApp,
   editProfile,
-  footerPrivate,
+  footer: footer,
   genealogyType,
   marketingCard,
   marketingSharingCard,

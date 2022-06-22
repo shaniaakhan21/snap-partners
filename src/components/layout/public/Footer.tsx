@@ -2,6 +2,7 @@ import { FooterApple, FooterFacebook, FooterYoutube } from 'components/common/ic
 import { FooterAndroid } from 'components/common/icons/FooterAndroid'
 import { APP_INFO } from 'config/appInfo'
 import { ROLES } from 'config/roles'
+import { GTMTrack } from 'lib/utils/gtm'
 import Link from 'next/link'
 import { useRef } from 'react'
 
@@ -9,8 +10,8 @@ const { RRSS, LEGAL } = APP_INFO
 
 export const FooterPublic = () => {
   const { current: socialLinks } = useRef([
-    { to: RRSS.FACEBOOK.link, icon: <FooterFacebook /> },
-    { to: RRSS.YOUTUBE.link, icon: <FooterYoutube /> }
+    { to: RRSS.FACEBOOK.link, icon: <FooterFacebook />, label: 'facebook' },
+    { to: RRSS.YOUTUBE.link, icon: <FooterYoutube />, label: 'youtube' }
   ])
 
   const { current: joinUsLinks } = useRef([
@@ -51,20 +52,19 @@ export const FooterPublic = () => {
           </p>
 
           <ul className='flex justify-start items-center gap-x-4 mt-6'>
-            {
-              socialLinks.map(socialLink => (
-                <li key={socialLink.to}>
-                  <a
-                    href={socialLink.to}
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    className='flex justify-center items-center h-14 w-14 rounded-full bg-[#19191929] cursor-pointer hover:bg-primary-300 hover:bg-opacity-20'
-                  >
-                    {socialLink.icon}
-                  </a>
-                </li>
-              ))
-            }
+            {socialLinks.map(socialLink => (
+              <li key={socialLink.to}>
+                <a
+                  href={socialLink.to}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='flex justify-center items-center h-14 w-14 rounded-full bg-[#19191929] cursor-pointer hover:bg-primary-300 hover:bg-opacity-20'
+                  onClick={() => GTMTrack.footer('public', socialLink.label)}
+                >
+                  {socialLink.icon}
+                </a>
+              </li>
+            ))}
           </ul>
         </section>
 
@@ -73,15 +73,18 @@ export const FooterPublic = () => {
             <span className='text-2xl font-semibold'>Join Us</span>
 
             <ul className='mt-2 text-gray-300'>
-              {
-                joinUsLinks.map(joinUsLink => (
-                  <li key={joinUsLink.to} className='mt-2'>
-                    <Link href={joinUsLink.to}>
-                      <a className='hover:text-primary-500'>{joinUsLink.label}</a>
-                    </Link>
-                  </li>
-                ))
-              }
+              {joinUsLinks.map(joinUsLink => (
+                <li key={joinUsLink.to} className='mt-2'>
+                  <Link href={joinUsLink.to}>
+                    <a
+                      className='hover:text-primary-500'
+                      onClick={() => GTMTrack.footer('public', joinUsLink.label)}
+                    >
+                      {joinUsLink.label}
+                    </a>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </section>
 
@@ -89,15 +92,13 @@ export const FooterPublic = () => {
             <span className='text-2xl font-semibold'>Let us help you</span>
 
             <ul className='mt-2 text-gray-300'>
-              {
-                helpLinks.map(helpLink => (
+              {helpLinks.map(helpLink => (
                   <li key={helpLink.to} className='mt-2'>
                     <Link href={helpLink.to}>
                       <a className='hover:text-primary-500'>{helpLink.label}</a>
                     </Link>
                   </li>
-                ))
-              }
+                ))}
             </ul>
           </section> */}
 
@@ -105,17 +106,15 @@ export const FooterPublic = () => {
             <span className='text-2xl font-semibold'>Download our app </span>
 
             <ul className='mt-2 text-gray-300 flex justfiy-start lg:justify-end items-start gap-x-4'>
-              {
-                Apps.map(app => (
-                  <li key={app.to}>
-                    <Link key={app.to} href={app.to}>
-                      <a className='mt-2 flex justify-center items-center h-14 w-14 rounded-full bg-[#19191929] cursor-pointer hover:bg-primary-300 hover:bg-opacity-20'>
-                        {app.icon}
-                      </a>
-                    </Link>
-                  </li>
-                ))
-              }
+              {Apps.map(app => (
+                <li key={app.to}>
+                  <Link key={app.to} href={app.to}>
+                    <a className='mt-2 flex justify-center items-center h-14 w-14 rounded-full bg-[#19191929] cursor-pointer hover:bg-primary-300 hover:bg-opacity-20'>
+                      {app.icon}
+                    </a>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </section>
         </div>
@@ -130,15 +129,18 @@ export const FooterPublic = () => {
           </section>
 
           <ul className='text-gray-300 flex flex-col lg:flex-row justify-end items-start gap-y-2 gap-x-6'>
-            {
-              legalLinks.map(legalLink => (
-                <li key={legalLink.to}>
-                  <Link href={legalLink.to}>
-                    <a className='hover:text-primary-500'>{legalLink.label}</a>
-                  </Link>
-                </li>
-              ))
-            }
+            {legalLinks.map(legalLink => (
+              <li key={legalLink.to}>
+                <Link href={legalLink.to}>
+                  <a
+                    className='hover:text-primary-500'
+                    onClick={() => GTMTrack.footer('public', legalLink.label)}
+                  >
+                    {legalLink.label}
+                  </a>
+                </Link>
+              </li>
+            ))}
           </ul>
         </div>
       </div>
