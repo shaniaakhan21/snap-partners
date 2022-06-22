@@ -14,42 +14,50 @@ export const FooterPrivate = () => {
   ])
 
   const { current: socialLinks } = useRef([
-    { to: '/download-app?device=APPLE', store: 'ios', icon: <AppleIcon classes='w-6 h-6' /> },
-    { to: '/download-app?device=ANDROID', store: 'android', icon: <GooglePlayIcon classes='w-6 h-6' /> },
-    { to: 'https://www.youtube.com/channel/UC7zzJ0gaX5QrE8lPqG_Lr1w', icon: <YoutubeIcon classes='w-6 h-6' /> }
+    { to: '/download-app?device=APPLE', icon: <AppleIcon classes='w-6 h-6' />, label: 'apple' },
+    { to: '/download-app?device=ANDROID', icon: <GooglePlayIcon classes='w-6 h-6' />, label: 'android' },
+    { to: 'https://www.youtube.com/channel/UC7zzJ0gaX5QrE8lPqG_Lr1w', icon: <YoutubeIcon classes='w-6 h-6' />, label: 'youtube' }
   ])
+
+  const handleClickSocialLinks = (label: string) => {
+    if (label === 'youtube') {
+      GTMTrack.footer('private', label)
+    }
+  }
 
   return (
     <footer className='w-full bg-transparent p-4 text-sm'>
       <div className='max-w-7xl mx-auto 2xl:flex 2xl:justify-center 2xl:items-center 2xl:gap-x-3'>
         <ul className='grid place-content-center grid-flow-row md:grid-rows-2 grid-cols-1 md:grid-cols-3 2xl:flex 2xl:justify-start 2xl:items-start 2xl:gap-x-4 text-gray-800 gap-y-2 2xl:mr-3'>
-          {
-            footerLinks.map(footerLink => (
-              <li key={footerLink.label}>
-                <Link href={footerLink.to}>
-                  <a
-                    className='hover:text-primary-500'
-                    onClick={() => GTMTrack.footerPrivate(footerLink.label)}
-                  >
-                    {footerLink.label}
-                  </a>
-                </Link>
-              </li>
-            ))
-          }
+          {footerLinks.map(footerLink => (
+            <li key={footerLink.label}>
+              <Link href={footerLink.to}>
+                <a
+                  className='hover:text-primary-500'
+                  onClick={() => GTMTrack.footer('private', footerLink.label)}
+                >
+                  {footerLink.label}
+                </a>
+              </Link>
+            </li>
+          ))}
         </ul>
 
         <section className='flex flex-col sm:flex-row justify-between items-center 2xl:gap-x-4 2xl:mr-3'>
           <ul className='flex justify-center items-center my-4 gap-x-4'>
-            {
-              socialLinks.map((socialLink, index) => (
-                <li key={index} className='bg-white rounded-full p-2 cursor-pointer hover:bg-primary-300 hover:bg-opacity-30'>
-                  <Link href={socialLink.to}>
-                    <a>{socialLink.icon}</a>
-                  </Link>
-                </li>
-              ))
-            }
+            {socialLinks.map((socialLink, index) => (
+              <li key={index} className='bg-white rounded-full p-2 cursor-pointer hover:bg-primary-300 hover:bg-opacity-30'>
+                <Link href={socialLink.to}>
+                  <a
+                    target={socialLink.label === 'youtube' ? '_blank' : '_self'}
+                    rel="noopener noreferrer"
+                    onClick={() => handleClickSocialLinks(socialLink.label)}
+                  >
+                    {socialLink.icon}
+                  </a>
+                </Link>
+              </li>
+            ))}
           </ul>
 
           <div>
