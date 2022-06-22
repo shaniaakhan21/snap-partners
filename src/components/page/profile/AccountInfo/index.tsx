@@ -9,6 +9,7 @@ import { PhotoAccount } from './PhotoAccount'
 import { BecomeRoles } from './BecomeRoles'
 import { Badges } from './Badges'
 import { Rank } from './Rank'
+import { GTMTrack } from 'lib/utils/gtm'
 
 interface IAccountInfoProps {
   auth: IAuth
@@ -18,6 +19,11 @@ interface IAccountInfoProps {
 }
 
 export const AccountInfo = ({ auth, removeAuth, setNewWindow, setTypeUpdate }: IAccountInfoProps) => {
+  const handleClickLogout = () => {
+    GTMTrack.logout()
+    removeAuth()
+  }
+
   return (
     <div className='max-w-4xl mx-auto'>
       <div className='flex justify-start items-center gap-x-5 select-none'>
@@ -43,7 +49,7 @@ export const AccountInfo = ({ auth, removeAuth, setNewWindow, setTypeUpdate }: I
 
       <button
         className='block text-primary-500 mx-auto mt-11 font-bold text-lg'
-        onClick={removeAuth}
+        onClick={handleClickLogout}
       >
         Logout
       </button>

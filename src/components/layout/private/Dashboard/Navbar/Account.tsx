@@ -1,6 +1,7 @@
 import { AccountNoImage } from 'components/common/AccountNoImage'
 import { ArrowDownIcon } from 'components/common/icons'
 import { useClickOutsideElement } from 'lib/hooks/useClickOutsideElement'
+import { GTMTrack } from 'lib/utils/gtm'
 import { useState, useRef, useEffect } from 'react'
 
 export const Account = ({ email, name, phone, photoUrl, signOut }) => {
@@ -9,6 +10,11 @@ export const Account = ({ email, name, phone, photoUrl, signOut }) => {
   const clickOutsideUserMenu = useClickOutsideElement(userMenuRef)
 
   const handleShowOptions = () => setShowMenu(prevState => !prevState)
+
+  const handleClickLogout = () => {
+    GTMTrack.logout()
+    signOut()
+  }
 
   useEffect(() => {
     if (clickOutsideUserMenu && showMenu) setShowMenu(false)
@@ -57,7 +63,7 @@ export const Account = ({ email, name, phone, photoUrl, signOut }) => {
         >
           <ul className='w-full h-full px-2 py-1'>
             <li>
-              <button onClick={signOut} className='w-full h-full hover:bg-gray-100 px-5 py-1 rounded-sm hover:cursor-pointer font-semibold'>
+              <button onClick={handleClickLogout} className='w-full h-full hover:bg-gray-100 px-5 py-1 rounded-sm hover:cursor-pointer font-semibold'>
                 Logout
               </button>
             </li>
