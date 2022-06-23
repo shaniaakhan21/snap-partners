@@ -20,7 +20,7 @@ interface IAccountInfoProps {
 
 export const AccountInfo = ({ auth, removeAuth, setNewWindow, setTypeUpdate }: IAccountInfoProps) => {
   const handleClickLogout = () => {
-    GTMTrack.logout()
+    GTMTrack.logout('profile')
     removeAuth()
   }
 

@@ -12,7 +12,7 @@ export const Account = ({ email, name, phone, photoUrl, signOut }) => {
   const handleShowOptions = () => setShowMenu(prevState => !prevState)
 
   const handleClickLogout = () => {
-    GTMTrack.logout()
+    GTMTrack.logout('navbar')
     signOut()
   }
 
