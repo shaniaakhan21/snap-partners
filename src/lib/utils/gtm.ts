@@ -179,11 +179,12 @@ const genealogyType = (type: 'new' | 'old') => {
   })
 }
 
-const logOut = () => {
+const logOut = (from: string) => {
   window.dataLayer.push({
     category: 'logout',
     event: 'logout',
-    action: 'click'
+    action: 'click',
+    from
   })
 }
 
