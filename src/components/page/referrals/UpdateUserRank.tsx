@@ -57,65 +57,14 @@ export const UpdateUserRank = ({ id, rank, authToken }: { id: number, rank: TRAN
           {...register('rankToUpdate')}
           onChange={() => setDisableUpdateRank(false)}
         >
-          {
-            rank === 'referralPartner' && (
-              <>
-                <option disabled selected>Select Rank</option>
-                <option className='text-black' value='manager'>Manager</option>
-                <option className='text-black' value='supervisor'>Supervisor</option>
-                <option className='text-black' value='director'>Director</option>
-                <option className='text-black' value='executive'>Executive</option>
-              </>
-            )
-          }
-
-          {
-            rank === 'manager' && (
-              <>
-                <option disabled selected>Select Rank</option>
-                <option className='text-black' value='referralPartner'>Referral Partner</option>
-                <option className='text-black' value='supervisor'>Supervisor</option>
-                <option className='text-black' value='director'>Director</option>
-                <option className='text-black' value='executive'>Executive</option>
-              </>
-            )
-          }
-
-          {
-            rank === 'supervisor' && (
-              <>
-                <option disabled selected>Select Rank</option>
-                <option className='text-black' value='referralPartner'>Referral Partner</option>
-                <option className='text-black' value='manager'>Manager</option>
-                <option className='text-black' value='director'>Director</option>
-                <option className='text-black' value='executive'>Executive</option>
-              </>
-            )
-          }
-
-          {
-            rank === 'director' && (
-              <>
-                <option disabled selected>Select Rank</option>
-                <option className='text-black' value='referralPartner'>Referral Partner</option>
-                <option className='text-black' value='manager'>Manager</option>
-                <option className='text-black' value='supervisor'>Supervisor</option>
-                <option className='text-black' value='executive'>Executive</option>
-              </>
-            )
-          }
-
-          {
-            rank === 'executive' && (
-              <>
-                <option disabled selected>Select Rank</option>
-                <option className='text-black' value='referralPartner'>Referral Partner</option>
-                <option className='text-black' value='manager'>Manager</option>
-                <option className='text-black' value='supervisor'>Supervisor</option>
-                <option className='text-black' value='director'>Director</option>
-              </>
-            )
-          }
+          <>
+            <option disabled selected>Select Rank</option>
+            <option className='text-black' value='referralPartner'>Referral Partner</option>
+            <option className='text-black' value='manager'>Manager</option>
+            <option className='text-black' value='supervisor'>Supervisor</option>
+            <option className='text-black' value='director'>Director</option>
+            <option className='text-black' value='executive'>Executive Director</option>
+          </>
         </select>
 
         <button

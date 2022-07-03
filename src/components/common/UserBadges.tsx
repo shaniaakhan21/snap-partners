@@ -102,21 +102,21 @@ export const UserBadges = ({ userRank, userRoles }: IUserBadgesProps) => {
       )}
 
       {(userRank === 'executive' && userRoles.customer) && (
-        <Tippy content='Executive'>
+        <Tippy content='Executive Director'>
           <li>
             <img src='/static/badges/ExecutiveCustomer.png' />
           </li>
         </Tippy>
       )}
       {(userRank === 'executive' && userRoles.driver) && (
-        <Tippy content='Executive'>
+        <Tippy content='Executive Director'>
           <li>
             <img src='/static/badges/ExecutiveDriver.png' />
           </li>
         </Tippy>
       )}
       {(userRank === 'executive' && userRoles.merchant) && (
-        <Tippy content='Executive'>
+        <Tippy content='Executive Director'>
           <li>
             <img src='/static/badges/ExecutiveMerchant.png' />
           </li>
