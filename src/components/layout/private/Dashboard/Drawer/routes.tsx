@@ -10,6 +10,7 @@ import {
   CreditCardIcon,
   CubeIcon
 } from 'components/common/icons'
+import { VidgoLogo } from 'components/common/illustrations'
 
 export const drawerRoutes = [
   {
@@ -71,6 +72,11 @@ export const drawerRoutes = [
     icon: <CreditCardIcon />,
     to: '/my-wallet',
     label: 'My Wallet'
+  },
+  {
+    icon: <VidgoLogo />,
+    to: '/vidgo-comisions',
+    label: 'Vidgo Comisions'
   }
 ]
 
