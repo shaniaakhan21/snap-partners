@@ -73,8 +73,7 @@ const VidgoComisionsPage: Page = () => {
   //           </select>
   //         </div>
 
-  //         <TableRetentionBonusTracker
-  //         />
+  //         <TableRetentionBonusTracker />
   //       </div>
 
   //       <div className='w-full lg:w-1/3'>
