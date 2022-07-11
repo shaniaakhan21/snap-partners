@@ -1,6 +1,4 @@
 import Head from 'next/head'
-// import ReactDataGrid from '@inovua/reactdatagrid-community'
-import '@inovua/reactdatagrid-community/index.css'
 
 import type { Page, ReactNode } from 'lib/types'
 // import { useAuthStore } from 'lib/stores'
@@ -11,36 +9,10 @@ import DashboardLayout from 'layouts/private/Dashboard'
 // import { RetentionMonthly } from 'components/page/vidgo-comisions/RetentionMonthly'
 // import { CustomerTable } from 'components/page/vidgo-comisions/CustomerTable'
 // import { TeamCustomerTable } from 'components/page/vidgo-comisions/TeamCustomerTable'
+// import { TableRetentionBonusTracker } from 'components/page/vidgo-comisions/TableRetentionBonusTracker'
 import ComingSoon from './comingsoon'
 
 const { SEO } = APP_INFO
-
-// const columns = [
-//   { name: 'name', header: 'Name', minWidth: 50, defaultFlex: 2 },
-//   { name: 'age', header: 'Age', maxWidth: 1000, defaultFlex: 1 }
-// ]
-
-// const gridStyle = { minHeight: 550 }
-
-// const dataSource = [
-//   { id: 1, name: 'John McQueen', age: 35 },
-//   { id: 2, name: 'Mary Stones', age: 25 },
-//   { id: 3, name: 'Robert Fil', age: 27 },
-//   { id: 4, name: 'Roger Robson', age: 81 },
-//   { id: 5, name: 'Billary Konwik', age: 18 },
-//   { id: 6, name: 'Bob Martin', age: 18 },
-//   { id: 7, name: 'Matthew Richardson', age: 54 },
-//   { id: 8, name: 'Ritchie Peterson', age: 54 },
-//   { id: 9, name: 'Bryan Martin', age: 40 },
-//   { id: 10, name: 'Mark Martin', age: 44 },
-//   { id: 11, name: 'Michelle Sebastian', age: 24 },
-//   { id: 12, name: 'Michelle Sullivan', age: 61 },
-//   { id: 13, name: 'Jordan Bike', age: 16 },
-//   { id: 14, name: 'Nelson Ford', age: 34 },
-//   { id: 15, name: 'Tim Cheap', age: 3 },
-//   { id: 16, name: 'Robert Carlson', age: 31 },
-//   { id: 17, name: 'Johny Perterson', age: 40 }
-// ]
 
 const VidgoComisionsPage: Page = () => {
   // const { auth } = useAuthStore()
@@ -60,7 +32,7 @@ const VidgoComisionsPage: Page = () => {
   // return (
   //   <div>
   //     <section className='w-full h-full flex flex-col-reverse lg:flex-row justify-between items-center lg:items-start gap-x-8 gap-y-8'>
-  //       <div className='overflow-x-scroll w-full lg:w-2/3 h-full'>
+  //       <div className='overflow-x-scroll scroll-primary w-full lg:w-2/3 h-full'>
   //         <h5 className='text-lg font-semibold'>
   //           Your Customers
   //         </h5>
@@ -101,12 +73,7 @@ const VidgoComisionsPage: Page = () => {
   //           </select>
   //         </div>
 
-  //         <ReactDataGrid
-  //           idProperty='id'
-  //           className='mt-5'
-  //           columns={columns}
-  //           dataSource={dataSource}
-  //           style={gridStyle}
+  //         <TableRetentionBonusTracker
   //         />
   //       </div>
 
