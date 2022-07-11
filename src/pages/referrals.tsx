@@ -47,6 +47,30 @@ const ReferralsPage: Page = () => {
         newUser={false}
         classes='col-span-1'
       />
+
+      {/* <ReferralCards
+        title='Refer ERC'
+        ilustration={(
+          <div className='h-[100px]'>
+            <img src='/images/j-logo.png' alt='J logo' />
+          </div>
+        )}
+        link={'https://snapdeliveredteam.com/' || 'With Out Link'}
+        newUser={false}
+        classes='col-span-1'
+      />
+
+      <ReferralCards
+        title='Refer Snap Kitchens'
+        ilustration={(
+          <div className='h-[100px] '>
+            <img src='/images/snap-kitchen-logo.png' alt='Snap Kitchens' className='w-[110px]' />
+          </div>
+        )}
+        link={'https://snapkitchens.net/' || 'With Out Link'}
+        newUser={false}
+        classes='col-span-1'
+      /> */}
     </div>
   )
 }

@@ -6,9 +6,9 @@ const tableHeaders = [
 
 const tableBody = [
   {
-    level: ' ',
-    customerCount: ' ',
-    comission: ' '
+    level: 'Level 1',
+    customerCount: '10',
+    comission: '$13'
   }
 ]
 
@@ -19,7 +19,7 @@ export const TeamCustomerTable = () => {
         <tr>
           {
             tableHeaders.map((header) => (
-              <td className='px-4 py-2 text-sm font-semibold text-gray-600'>
+              <td className='px-4 py-2 text-sm font-semibold text-center'>
                 <span>{header}</span>
               </td>
             ))
@@ -31,9 +31,9 @@ export const TeamCustomerTable = () => {
         {
           tableBody.map((body) => (
             <tr className='border-t border-zinc-300'>
-              <td className='px-4 py-2'>{body.level}</td>
-              <td className='px-4 py-2'>{body.customerCount}</td>
-              <td className='px-4 py-2'>{body.comission}</td>
+              <td className='px-4 py-2 text-center border-r border-zinc-300'>{body.level}</td>
+              <td className='px-4 py-2 text-center border-r border-zinc-300'>{body.customerCount}</td>
+              <td className='px-4 py-2 text-center border-r border-zinc-300'>{body.comission}</td>
             </tr>
           ))
         }

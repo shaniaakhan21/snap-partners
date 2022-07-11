@@ -9,12 +9,12 @@ const tableHeaders = [
 
 const tableBody = [
   {
-    customerName: ' ',
-    customerEmail: ' ',
-    package: ' ',
-    joinDate: ' ',
-    lastPayment: ' ',
-    monthlyEarning: ' '
+    customerName: 'customer',
+    customerEmail: 'customer@gmail.com',
+    package: 'Package 1',
+    joinDate: '01/01/2020',
+    lastPayment: '01/01/2020',
+    monthlyEarning: '$0'
   }
 ]
 
@@ -25,7 +25,7 @@ export const CustomerTable = () => {
         <tr>
           {
             tableHeaders.map((header) => (
-              <td className='px-4 py-2 text-sm font-semibold text-gray-600'>
+              <td className='px-4 py-2 text-sm font-semibold'>
                 <span>{header}</span>
               </td>
             ))
@@ -33,16 +33,16 @@ export const CustomerTable = () => {
         </tr>
       </thead>
 
-      <tbody>
+      <tbody className='text-sm'>
         {
           tableBody.map((body) => (
             <tr className='border-t border-zinc-300'>
-              <td className='px-4 py-2'>{body.customerName}</td>
-              <td className='px-4 py-2'>{body.customerEmail}</td>
-              <td className='px-4 py-2'>{body.package}</td>
-              <td className='px-4 py-2'>{body.joinDate}</td>
-              <td className='px-4 py-2'>{body.lastPayment}</td>
-              <td className='px-4 py-2'>{body.monthlyEarning}</td>
+              <td className='px-4 py-2 text-left'>{body.customerName}</td>
+              <td className='px-4 py-2 text-left'>{body.customerEmail}</td>
+              <td className='px-4 py-2 text-left'>{body.package}</td>
+              <td className='px-4 py-2 text-left'>{body.joinDate}</td>
+              <td className='px-4 py-2 text-left'>{body.lastPayment}</td>
+              <td className='px-4 py-2 text-center'>{body.monthlyEarning}</td>
             </tr>
           ))
         }
