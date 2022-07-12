@@ -19,3 +19,26 @@
 .scroll-primary::-webkit-scrollbar-thumb:hover {
   background: #a1a1a1;
 }
+
+
+.scroll-x-primary::-webkit-scrollbar {
+  width: 4px;
+  height: 8px;
+}
+
+/* Track */
+.scroll-x-primary::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+ 
+/* Handle */
+.scroll-x-primary::-webkit-scrollbar-thumb {
+  background: #C4C4C4;
+  border-radius: 4px;
+}
+
+
+/* Handle on hover */
+.scroll-x-primary::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}
