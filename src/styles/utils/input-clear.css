@@ -20,6 +20,19 @@ input[type="search"]::-webkit-search-results-decoration {
 
 /* Select Input */
 
+select.select-clean {
+  background: white;
+}
+
+select.select-clean:focus {
+  background: white;
+}
+
+select.select-clean:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #000;
+}
+
 select {
   background-image:
     linear-gradient(45deg, transparent 50%, gray 50%),

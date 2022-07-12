@@ -7,18 +7,7 @@ const tableHeaders = [
   'Monthly Earning'
 ]
 
-const tableBody = [
-  {
-    customerName: 'customer',
-    customerEmail: 'customer@gmail.com',
-    package: 'Package 1',
-    joinDate: '01/01/2020',
-    lastPayment: '01/01/2020',
-    monthlyEarning: '$0'
-  }
-]
-
-export const CustomerTable = () => {
+export const CustomerTable = ({ myCustomers }: { myCustomers: any[] }) => {
   return (
     <table className='table-auto w-full bg-white mt-4'>
       <thead>
@@ -35,14 +24,14 @@ export const CustomerTable = () => {
 
       <tbody className='text-sm'>
         {
-          tableBody.map((body) => (
+          myCustomers.map((customer) => (
             <tr className='border-t border-zinc-300'>
-              <td className='px-4 py-2 text-left'>{body.customerName}</td>
-              <td className='px-4 py-2 text-left'>{body.customerEmail}</td>
-              <td className='px-4 py-2 text-left'>{body.package}</td>
-              <td className='px-4 py-2 text-left'>{body.joinDate}</td>
-              <td className='px-4 py-2 text-left'>{body.lastPayment}</td>
-              <td className='px-4 py-2 text-center'>{body.monthlyEarning}</td>
+              <td className='px-4 py-2 text-left'>{customer.customerName}</td>
+              <td className='px-4 py-2 text-left'>{customer.customerEmail}</td>
+              <td className='px-4 py-2 text-left'>{customer.package}</td>
+              <td className='px-4 py-2 text-left'>{customer.joinDate}</td>
+              <td className='px-4 py-2 text-left'>{customer.lastPayment}</td>
+              <td className='px-4 py-2 text-center'>{customer.monthlyEarning}</td>
             </tr>
           ))
         }
