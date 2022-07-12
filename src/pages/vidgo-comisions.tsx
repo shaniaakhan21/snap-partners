@@ -100,7 +100,12 @@ const { SEO } = APP_INFO
 
 const VidgoComisionsPage: Page = () => {
   // const [vidgoReport] = useState(dataReport)
+  // const [dateSelected, setDateSelected] = useState('')
   // const { auth } = useAuthStore()
+
+  // const handleChange = (event) => {
+  //   setDateSelected(event.target.value)
+  // }
 
   return (
     <ComingSoon />
@@ -153,7 +158,7 @@ const VidgoComisionsPage: Page = () => {
   //         </h5>
 
   //         <div className='flex flex-col justify-start items-start'>
-  //           <select className='mt-4 py-1 px-4 select-clean'>
+  //           <select className='mt-4 py-1 px-4 select-clean' value={dateSelected} onChange={handleChange}>
   //             <option value='Month: May 2022'>Month: May 2022</option>
   //           </select>
   //         </div>
