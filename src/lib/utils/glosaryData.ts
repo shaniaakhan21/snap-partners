@@ -6,7 +6,7 @@ export const glosaryData = {
       description: 'Fullfil and Manage orders'
     },
     {
-      title: 'Custumer app',
+      title: 'Customer app',
       subtitle: 'User app',
       description: 'Order food and get it SNAP'
     },
@@ -25,7 +25,7 @@ export const glosaryData = {
     },
     {
       icon: '/static/glosary/customer.png',
-      title: 'Custumer',
+      title: 'Customer',
       subtitle: 'User'
     },
     {
