@@ -86,6 +86,8 @@ export const FormBecomeDriver = ({ userAuth, userSetAuth }: { userAuth: IAuth, u
 
     const { error } = await updateUserRole(dataToSend, userAuth.accessToken)
 
+    console.log(error)
+
     if (error) {
       handleFetchError(error.status, error.info)
       return
