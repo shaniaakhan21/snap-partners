@@ -5,7 +5,7 @@ export const TableRetentionBonusTracker = () => {
         <table className='table-auto w-full bg-white mt-4'>
           <thead>
             <tr>
-              <th>&nbsp;</th>
+              <th className='w-52'>&nbsp;</th>
               <th className='px-2'>Month 1</th>
               <th className='px-2'>Month 2</th>
               <th className='px-2'>Month 3</th>
@@ -61,7 +61,7 @@ export const TableRetentionBonusTracker = () => {
         <table className='table-auto w-full bg-white mt-2 overflow-y-scroll'>
           <thead>
             <tr>
-              <th>&nbsp;</th>
+              <th className='w-52'>&nbsp;</th>
               <th className='px-4'>Month 1</th>
               <th className='px-4'>Month 2</th>
               <th className='px-4'>Month 3</th>
