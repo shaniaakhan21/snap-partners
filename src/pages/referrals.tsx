@@ -14,53 +14,54 @@ const ReferralsPage: Page = () => {
   const { auth } = useAuthStore()
 
   return (
-    <div className='min-h-[80vh] grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 items-center justify-center justify-items-center gap-4'>
-      <ReferralCards
-        title='Refer Customers'
-        ilustration={<CustomerIcon />}
-        link={`${auth.referralLink}&role=${ROLES.CUSTOMER}` || 'With Out Link'}
-        newUser={false}
-        classes='col-span-1'
-      />
-      <ReferralCards
-        title='Driver'
-        ilustration={<DriverIcon />}
-        link={`${auth.referralLink}&role=${ROLES.DRIVER}` || 'With Out Link'}
-        newUser={false}
-        classes='col-span-1'
-      />
-      <ReferralCards
-        title='Merchant Customers'
-        ilustration={<MerchantIcon />}
-        link={`${auth.referralLink}&role=${ROLES.MERCHANT}` || 'With Out Link'}
-        newUser={false}
-        classes='col-span-1'
-      />
-      <ReferralCards
-        title='Refer Vidgo'
-        ilustration={(
-          <div className='h-[100px]'>
-            <img src='/images/vidgo/vidgo-ilustration.jpg' alt='Vidgo logo' />
-          </div>
-        )}
-        link={`https://www.vidgo.com/snap/?subpid=${auth.referralCode}` || 'With Out Link'}
-        newUser={false}
-        classes='col-span-1'
-      />
+    <div className='min-h-[80vh] flex justify-center items-center'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-center justify-center justify-items-center gap-4'>
+        <ReferralCards
+          title='Refer Customers'
+          ilustration={<CustomerIcon />}
+          link={`${auth.referralLink}&role=${ROLES.CUSTOMER}` || 'With Out Link'}
+          newUser={false}
+          classes='col-span-1'
+        />
+        <ReferralCards
+          title='Driver'
+          ilustration={<DriverIcon />}
+          link={`${auth.referralLink}&role=${ROLES.DRIVER}` || 'With Out Link'}
+          newUser={false}
+          classes='col-span-1'
+        />
+        <ReferralCards
+          title='Merchant Customers'
+          ilustration={<MerchantIcon />}
+          link={`${auth.referralLink}&role=${ROLES.MERCHANT}` || 'With Out Link'}
+          newUser={false}
+          classes='col-span-1'
+        />
+        <ReferralCards
+          title='Refer Vidgo'
+          ilustration={(
+            <div className='h-[100px]'>
+              <img src='/images/vidgo/vidgo-ilustration.jpg' alt='Vidgo logo' />
+            </div>
+          )}
+          link={`https://www.vidgo.com/snap/?subpid=${auth.referralCode}` || 'With Out Link'}
+          newUser={false}
+          classes='col-span-1'
+        />
 
-      {/* <ReferralCards
-        title='Refer ERC'
-        ilustration={(
-          <div className='h-[100px]'>
-            <img src='/images/j-logo.png' alt='J logo' />
-          </div>
-        )}
-        link={'https://snapdeliveredteam.com/' || 'With Out Link'}
-        newUser={false}
-        classes='col-span-1'
-      />
+        <ReferralCards
+          title='Refer ERC'
+          ilustration={(
+            <div className='h-[100px] w-5/6'>
+              <img src='/images/j-logo.png' alt='Refer ERC' />
+            </div>
+          )}
+          link={'https://www.jornscpa.com/snap/' || 'With Out Link'}
+          newUser={false}
+          classes='col-span-1'
+        />
 
-      <ReferralCards
+        {/* <ReferralCards
         title='Refer Snap Kitchens'
         ilustration={(
           <div className='h-[100px] '>
@@ -71,6 +72,7 @@ const ReferralsPage: Page = () => {
         newUser={false}
         classes='col-span-1'
       /> */}
+      </div>
     </div>
   )
 }
