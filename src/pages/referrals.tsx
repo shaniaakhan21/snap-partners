@@ -49,7 +49,7 @@ const ReferralsPage: Page = () => {
           classes='col-span-1'
         />
 
-        <ReferralCards
+        {/* <ReferralCards
           title='Refer ERC'
           ilustration={(
             <div className='h-[100px] w-5/6'>
@@ -59,7 +59,7 @@ const ReferralsPage: Page = () => {
           link={'https://www.jornscpa.com/snap/' || 'With Out Link'}
           newUser={false}
           classes='col-span-1'
-        />
+        /> */}
 
         {/* <ReferralCards
         title='Refer Snap Kitchens'
