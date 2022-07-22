@@ -49,12 +49,12 @@ export const BonusBenmarks = () => {
                 Direct Bonus
             </td>
 
-            <td className='bg-gray-1000 text-white text-right'>$200</td>
+            <td className='bg-gray-1000 text-white text-right'>$3,000</td>
           </tr>
 
           <tr>
             <td className='px-2'>Upline Bonus</td>
-            <td className='bg-gray-1000 text-white text-right'>$80</td>
+            <td className='bg-gray-1000 text-white text-right'>$2,000</td>
           </tr>
         </tbody>
       </table>
@@ -78,12 +78,12 @@ export const BonusBenmarks = () => {
                 Direct Bonus
             </td>
 
-            <td className='bg-gray-1000 text-white text-right'>$200</td>
+            <td className='bg-gray-1000 text-white text-right'>$10,000</td>
           </tr>
 
           <tr>
             <td className='px-2'>Upline Bonus</td>
-            <td className='bg-gray-1000 text-white text-right'>$80</td>
+            <td className='bg-gray-1000 text-white text-right'>$6,000</td>
           </tr>
         </tbody>
       </table>

@@ -9,81 +9,13 @@ import DashboardLayout from 'layouts/private/Dashboard'
 import { BonusBenmarks } from 'components/page/vidgo-comisions/BonusBenmarksTable'
 import { RetentionMonthly } from 'components/page/vidgo-comisions/RetentionMonthly'
 import { CustomerTable } from 'components/page/vidgo-comisions/CustomerTable'
-import { TeamCustomerTable } from 'components/page/vidgo-comisions/TeamCustomerTable'
+// import { TeamCustomerTable } from 'components/page/vidgo-comisions/TeamCustomerTable'
 import { TableRetentionBonusTracker } from 'components/page/vidgo-comisions/TableRetentionBonusTracker'
 
 import { commissions } from 'lib/services/vidgo/commissions'
 import { handleFetchError } from 'lib/utils/handleFetchError'
-import { DataUsage } from '@material-ui/icons'
 
 const { SEO } = APP_INFO
-
-const dataReport = {
-  teamCustomers: [
-    {
-      label: 'Level 1',
-      count: 10,
-      comission: 13
-    }
-  ],
-
-  myCustomers: [
-    {
-      level: 1,
-      customerName: 'customer1',
-      customerEmail: 'customer@gmail.com',
-      package: 'Package 1',
-      joinDate: '01/01/2020',
-      lastPayment: '01/01/2020',
-      monthlyEarning: 4
-    }
-  ],
-
-  bonusTrackerMonthly: {
-    totalActiveCount: {
-      month1: 0,
-      month2: 0,
-      month3: 0,
-      month6: 0,
-      month12: 0
-    },
-
-    eligibleBenchmark: {
-      month1: 0,
-      month2: 0,
-      month3: 0,
-      month6: 0,
-      month12: 0
-    },
-
-    payOfTotal: {
-      month1: 0,
-      month2: 0,
-      month3: 0,
-      month6: 0,
-      month12: 0
-    },
-
-    commission: {
-      month1: 0,
-      month2: 0,
-      month3: 0,
-      month6: 0,
-      month12: 0
-    }
-  },
-
-  activePayments: [
-    {
-      customerName: 'customer1',
-      month1: 0,
-      month2: 0,
-      month3: 0,
-      month6: 0,
-      month12: 0
-    }
-  ]
-}
 
 const monthNames = [
   'January',
@@ -102,7 +34,8 @@ const monthNames = [
 
 const VidgoComisionsPage: Page = () => {
   const [vidgoReport, setVidgoReport] = useState(null)
-  const [dateSelected, setDateSelected] = useState(0)
+  const [dateSelected, setDateSelected] = useState('0')
+  const [monthSelectedNumber, setMonthSelectedNumber] = useState(0)
   const [loading, setLoading] = useState(false)
   const { auth } = useAuthStore()
   const [customers, setCustomers] = useState([])
@@ -127,6 +60,8 @@ const VidgoComisionsPage: Page = () => {
   }, [])
 
   const handleChange = (event) => {
+    const dateFinded = dates.find(date => date.value === event.target.value)
+    setMonthSelectedNumber(dateFinded.monthNumber)
     setDateSelected(event.target.value)
   }
 
@@ -167,15 +102,18 @@ const VidgoComisionsPage: Page = () => {
         ).toDateString()
         const monthObj = {
           name: name,
-          value: value
+          value: value,
+          monthNumber: rowDate.getMonth() + 2
         }
         if (!months.some((e) => e.value === value)) {
           months.push(monthObj)
         }
       })
+      setMonthSelectedNumber(months[0].monthNumber)
       setDates(months)
       setCustomers(customs)
       setTeamCustomers(teams)
+      setDateSelected(months[0].value)
     }
   }, [vidgoReport])
 
@@ -197,19 +135,19 @@ const VidgoComisionsPage: Page = () => {
     }
   }, [dateSelected])
 
-  if (!auth.roles.merchant) {
-    return (
-      <div className="h-screen-80 w-full flex justify-center items-center">
-        <span className="text-4xl font-black">Should be a IBO</span>
-      </div>
-    )
-  }
+  // if (!auth.roles.merchant) {
+  //   return (
+  //     <div className="h-screen-80 w-full flex justify-center items-center">
+  //       <span className="text-4xl font-black">Should be a IBO</span>
+  //     </div>
+  //   )
+  // }
 
   return (
     vidgoReport && (
       <div>
         <section className="w-full h-full flex flex-col-reverse lg:flex-row justify-between items-center lg:items-start gap-x-8 gap-y-8">
-          <div className="overflow-x-scroll scroll-x-primary w-full lg:w-2/3 h-full">
+          <div className="overflow-x-scroll scroll-x-primary w-full lg:w-2/3 h-96">
             <h5 className="text-lg font-semibold">Your Customers</h5>
 
             <CustomerTable myCustomers={customers} />
@@ -219,7 +157,7 @@ const VidgoComisionsPage: Page = () => {
             <div className="flex justify-between items-start">
               <h5 className="text-lg font-semibold">Team Customers</h5>
 
-              <div className="flex justify-end items-center gap-x-4 text-right">
+              {/* <div className="flex justify-end items-center gap-x-4 text-right">
                 <span className="text-xs">
                   Total Downline <br /> Customers
                 </span>
@@ -227,17 +165,22 @@ const VidgoComisionsPage: Page = () => {
                 <div className="border border-zinc-400 rounded-sm px-4 py-1">
                   <span className="text-xl font-semibold">1766</span>
                 </div>
-              </div>
+              </div> */}
             </div>
 
-            <TeamCustomerTable teamCustomers={teamCustomers} />
+            <div className='w-full border-primary-500 border-2 rounded-md p-4 mt-3'>
+              <span className='font-bold text-primary-500'>
+                Comming Soon
+              </span>
+            </div>
+            {/* <TeamCustomerTable teamCustomers={teamCustomers} /> */}
           </div>
         </section>
 
         <section className="w-full h-full mt-10 flex flex-col-reverse lg:flex-row justify-between items-center lg:items-start gap-x-8 gap-y-8">
           <div className="w-full lg:w-2/3 h-full">
             <h5 className="text-2xl font-bold text-primary-500">
-              Vidgo Premium Service RETENTION BONUS TRACKER
+              Personal Retention Bonus Tracker
             </h5>
 
             <div className="flex flex-col justify-start items-start">
@@ -254,7 +197,14 @@ const VidgoComisionsPage: Page = () => {
               </select>
             </div>
 
-            <TableRetentionBonusTracker report={monthlyReport} />
+            <TableRetentionBonusTracker
+              report={monthlyReport}
+              dateSelected={{
+                monthNumber: monthSelectedNumber,
+                date: dateSelected,
+                year: new Date(dateSelected).getFullYear()
+              }}
+            />
           </div>
 
           <div className="w-full lg:w-1/3">

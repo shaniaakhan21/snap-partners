@@ -7,26 +7,26 @@ interface IQueryReturn {
 }
 
 export const commissions = async (token: string): Promise<IQueryReturn> => {
-  const res = await fetch("/api/vidgo/commissions", {
+  const res = await fetch('/api/vidgo/commissions', {
     headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+      Authorization: `Bearer ${token}`
+    }
+  })
 
-  const data = await res.json();
+  const data = await res.json()
 
   if (!res.ok) {
     return {
       data: null,
       error: {
         status: res.status,
-        info: data.error,
-      },
-    };
+        info: data.error
+      }
+    }
   }
 
   return {
     data: data.data,
-    error: null,
-  };
-};
+    error: null
+  }
+}

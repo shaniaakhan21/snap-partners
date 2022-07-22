@@ -22,7 +22,7 @@ export const CustomerTable = ({ myCustomers }: { myCustomers: any[] }) => {
         </tr>
       </thead>
 
-      <tbody className='text-sm'>
+      <tbody className='text-xs'>
         {
           myCustomers.map((customer) => (
             <tr className='border-t border-zinc-300'>
