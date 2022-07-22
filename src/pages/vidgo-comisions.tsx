@@ -1,5 +1,7 @@
 import Head from 'next/head'
 import { useState } from 'react'
+import YearMonthSelector from 'react-year-month-selector'
+// import 'react-year-month-selector/src'
 
 import type { Page, ReactNode } from 'lib/types'
 // import { useAuthStore } from 'lib/stores'
@@ -12,6 +14,7 @@ import { CustomerTable } from 'components/page/vidgo-comisions/CustomerTable'
 import { TeamCustomerTable } from 'components/page/vidgo-comisions/TeamCustomerTable'
 import { TableRetentionBonusTracker } from 'components/page/vidgo-comisions/TableRetentionBonusTracker'
 // import ComingSoon from './comingsoon'
+import MonthYearPicker from 'react-month-year-picker';
 
 const { SEO } = APP_INFO
 
@@ -73,27 +76,27 @@ const dataReport = {
   activePayments: [
     {
       customerName: 'customer1',
-      month1: 0,
-      month2: 0,
-      month3: 0,
-      month6: 0,
-      month12: 0
+      month1: true,
+      month2: true,
+      month3: true,
+      month6: true,
+      month12: true
     },
     {
       customerName: 'customer3',
-      month1: 0,
-      month2: 0,
-      month3: 0,
-      month6: 0,
-      month12: 0
+      month1: true,
+      month2: true,
+      month3: true,
+      month6: true,
+      month12: true
     },
     {
       customerName: 'customer2',
-      month1: 0,
-      month2: 0,
-      month3: 0,
-      month6: 0,
-      month12: 0
+      month1: true,
+      month2: true,
+      month3: true,
+      month6: true,
+      month12: true
     }
   ]
 }
@@ -101,10 +104,12 @@ const dataReport = {
 const VidgoComisionsPage: Page = () => {
   const [vidgoReport] = useState(dataReport)
   const [dateSelected, setDateSelected] = useState('')
+  const [openDate, setOpenDate] = useState(true)
   // const { auth } = useAuthStore()
 
-  const handleChange = (event) => {
-    setDateSelected(event.target.value)
+  const handleChange = (data) => {
+    console.log(data)
+    // setDateSelected(event.target.value)
   }
 
   // return (
@@ -158,9 +163,29 @@ const VidgoComisionsPage: Page = () => {
           </h5>
 
           <div className='flex flex-col justify-start items-start'>
-            <select className='mt-4 py-1 px-4 select-clean' value={dateSelected} onChange={handleChange}>
+            <button onClick={() => setOpenDate(prevState => !prevState)}>
+              Select Month
+            </button>
+
+            <MonthYearPicker
+              selectedMonth={10}
+              selectedYear={2022}
+              minYear={2000}
+              maxYear={2030}
+              onChangeYear={year => console.log({ year: year })}
+              onChangeMonth={month => console.log({ month: month })}
+            />
+            {/* <YearMonthSelector
+              year={2022}
+              month={1}
+              onChange={(year, month) => console.log(month)}
+              open={openDate}
+              onClose={() => setOpenDate(false)}
+            /> */}
+
+            {/* <select className='mt-4 py-1 px-4 select-clean' value={dateSelected} onChange={handleChange}>
               <option value='Month: May 2022'>Month: May 2022</option>
-            </select>
+            </select> */}
           </div>
 
           <TableRetentionBonusTracker />
