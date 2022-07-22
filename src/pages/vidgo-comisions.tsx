@@ -122,11 +122,25 @@ const VidgoComisionsPage: Page = () => {
       }
 
       setVidgoReport(data);
+      setLoading(false);
+    })();
+  }, []);
 
+  const handleChange = (event) => {
+    setDateSelected(event.target.value);
+  };
+
+  const getMonthName = (date, fullName) => {
+    var monthName = monthNames[date];
+    return fullName ? monthName : monthName.substring(0, 3);
+  };
+
+  useEffect(() => {
+    if (vidgoReport) {
       let customs = [];
       let teams = [];
       let months = [];
-      data.forEach((element) => {
+      vidgoReport.forEach((element) => {
         customs.push({
           customerName: element["name"],
           customerEmail: element["email"],
@@ -162,18 +176,8 @@ const VidgoComisionsPage: Page = () => {
       setDates(months);
       setCustomers(customs);
       setTeamCustomers(teams);
-      setLoading(false);
-    })();
-  }, []);
-
-  const handleChange = (event) => {
-    setDateSelected(event.target.value);
-  };
-
-  const getMonthName = (date, fullName) => {
-    var monthName = monthNames[date];
-    return fullName ? monthName : monthName.substring(0, 3);
-  };
+    }
+  }, [vidgoReport]);
 
   useEffect(() => {
     if (vidgoReport) {
