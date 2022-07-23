@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { useEffect, useState } from 'react'
 
+import { monthGenerator } from 'lib/utils/vidgoCalculates'
 import type { Page, ReactNode } from 'lib/types'
 import { useAuthStore } from 'lib/stores'
 import { APP_INFO } from 'config/appInfo'
@@ -9,11 +10,11 @@ import DashboardLayout from 'layouts/private/Dashboard'
 import { BonusBenmarks } from 'components/page/vidgo-comisions/BonusBenmarksTable'
 import { RetentionMonthly } from 'components/page/vidgo-comisions/RetentionMonthly'
 import { CustomerTable } from 'components/page/vidgo-comisions/CustomerTable'
-// import { TeamCustomerTable } from 'components/page/vidgo-comisions/TeamCustomerTable'
 import { TableRetentionBonusTracker } from 'components/page/vidgo-comisions/TableRetentionBonusTracker'
 
 import { commissions } from 'lib/services/vidgo/commissions'
 import { handleFetchError } from 'lib/utils/handleFetchError'
+import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 
 const { SEO } = APP_INFO
 
@@ -33,15 +34,21 @@ const monthNames = [
 ]
 
 const VidgoComisionsPage: Page = () => {
+  const { auth } = useAuthStore()
   const [vidgoReport, setVidgoReport] = useState(null)
   const [dateSelected, setDateSelected] = useState('0')
-  const [monthSelectedNumber, setMonthSelectedNumber] = useState(0)
+  const [, setTeamCustomers] = useState([])
   const [loading, setLoading] = useState(false)
-  const { auth } = useAuthStore()
   const [customers, setCustomers] = useState([])
-  const [teamCustomers, setTeamCustomers] = useState([])
-  const [monthlyReport, setMonthlyReport] = useState([])
   const [dates, setDates] = useState([])
+
+  const [reportFullData, setReportFullData] = useState({
+    month1: [],
+    month2: [],
+    month3: [],
+    month6: [],
+    month12: []
+  })
 
   useEffect(() => {
     (async () => {
@@ -60,8 +67,6 @@ const VidgoComisionsPage: Page = () => {
   }, [])
 
   const handleChange = (event) => {
-    const dateFinded = dates.find(date => date.value === event.target.value)
-    setMonthSelectedNumber(dateFinded.monthNumber)
     setDateSelected(event.target.value)
   }
 
@@ -109,7 +114,6 @@ const VidgoComisionsPage: Page = () => {
           months.push(monthObj)
         }
       })
-      setMonthSelectedNumber(months[0].monthNumber)
       setDates(months)
       setCustomers(customs)
       setTeamCustomers(teams)
@@ -119,29 +123,43 @@ const VidgoComisionsPage: Page = () => {
 
   useEffect(() => {
     if (vidgoReport) {
-      const nextMonth = new Date(
-        new Date(dateSelected).getFullYear(),
-        new Date(dateSelected).getMonth() + 1,
-        1
-      )
-      const report = vidgoReport.filter((item: any) => {
-        return (
-          new Date(item.paymentDate).getTime() <
-            new Date(dateSelected).getTime() ||
-          new Date(item.paymentDate).getTime() > nextMonth.getTime()
-        )
+      const dateSelectedFormated = new Date(dateSelected)
+
+      const reportFullData = vidgoReport.map(report => {
+        return {
+          ...report,
+          month: new Date(report.paymentDate).getMonth() + 1,
+          year: new Date(report.paymentDate).getFullYear()
+        }
       })
-      setMonthlyReport(report)
+
+      const monthYear = monthGenerator(dateSelectedFormated)
+
+      const reportDataFiltered = {
+        month1: reportFullData.filter(report => report.month === monthYear.month1.month && report.year === monthYear.month1.year),
+        month2: reportFullData.filter(report => report.month === monthYear.month2.month && report.year === monthYear.month2.year),
+        month3: reportFullData.filter(report => report.month === monthYear.month3.month && report.year === monthYear.month3.year),
+        month6: reportFullData.filter(report => report.month === monthYear.month6.month && report.year === monthYear.month6.year),
+        month12: reportFullData.filter(report => report.month === monthYear.month12.month && report.year === monthYear.month12.year)
+      }
+
+      setReportFullData(reportDataFiltered)
     }
   }, [dateSelected])
 
-  // if (!auth.roles.merchant) {
-  //   return (
-  //     <div className="h-screen-80 w-full flex justify-center items-center">
-  //       <span className="text-4xl font-black">Should be a IBO</span>
-  //     </div>
-  //   )
-  // }
+  if (loading) {
+    return (
+      <SpinnerPageContent />
+    )
+  }
+
+  if (!auth.roles.merchant) {
+    return (
+      <div className="h-screen-80 w-full flex justify-center items-center">
+        <span className="text-4xl font-black">Should be a IBO</span>
+      </div>
+    )
+  }
 
   return (
     vidgoReport && (
@@ -197,14 +215,7 @@ const VidgoComisionsPage: Page = () => {
               </select>
             </div>
 
-            <TableRetentionBonusTracker
-              report={monthlyReport}
-              dateSelected={{
-                monthNumber: monthSelectedNumber,
-                date: dateSelected,
-                year: new Date(dateSelected).getFullYear()
-              }}
-            />
+            <TableRetentionBonusTracker report={reportFullData} />
           </div>
 
           <div className="w-full lg:w-1/3">

@@ -1,49 +1,25 @@
-import { useState } from "react"
+import { IReport } from 'lib/types'
+import { getActivePayments, getVidgoCalculates } from 'lib/utils/vidgoCalculates'
+import { useEffect, useState } from 'react'
 
-interface IVidgoReportMonthly {
-  accountUID: string
-  subID: string
-  name: string
-  UID: string | null,
-  zip: string
-  city: string
-  state: string
-  partner: string
-  partnerAgentId: string
-  package: string
-  joinDate: string
-  paymentDate: string
-  days: string
-  start: string
-  end: string
-  invoice: string
-  subtotal: string
-  tax: string
-  discount: string
-  total: string
-  status: string
-  createdAt: string
-  updatedAt: string
-}
+export const TableRetentionBonusTracker = ({ report }: { report: IReport }) => {
+  const [dataTotalActiveCount, setTotalActiveCount] = useState({ month1: 0, month2: 0, month3: 0, month6: 0, month12: 0 })
+  const [dataPayOfTotal, setPayOfTotal] = useState({ month1: 0, month2: 0, month3: 0, month6: 0, month12: 0 })
+  const [dataEligibleBenchmark, setEligibleBenchmark] = useState({ month1: 0, month2: 0, month3: 0, month6: 0, month12: 0 })
+  const [dataCommission, setCommission] = useState({ month1: 0, month2: 0, month3: 0, month6: 0, month12: 0 })
+  const [usersActivePaymet, setUsersActivePayments] = useState([])
 
-interface IDateSelected {
-  monthNumber: number
-  date: string
-  year: number
-}
+  useEffect(() => {
+    const { commission, eligibleBenchmark, payOfTotal, totalActiveCount } = getVidgoCalculates(report)
+    setCommission(commission)
+    setEligibleBenchmark(eligibleBenchmark)
+    setPayOfTotal(payOfTotal)
+    setTotalActiveCount(totalActiveCount)
 
-export const TableRetentionBonusTracker = ({ report, dateSelected }: { report: IVidgoReportMonthly[], dateSelected: IDateSelected }) => {
-  console.log('dateSelected', dateSelected)
-
-  console.log('month 1', dateSelected.monthNumber)
-  console.log('month 2', dateSelected.monthNumber + 1)
-  console.log('month 3', dateSelected.monthNumber + 2)
-  console.log('month 6', dateSelected.monthNumber + 5)
-  console.log('month 12', dateSelected.monthNumber + 11)
-
-  // console.log('Report[0]', report[0])
-  // console.log('Report[0] paymentDate.getMonth => ', report.length > 1 && new Date(report[0].paymentDate).getMonth())
-  // console.log(`Report [Month ${monthSelectedNumber} - Year ${yearSelected}]`, report)
+    const users = getActivePayments(report)
+    const objValues = Object.values(users)
+    setUsersActivePayments(objValues)
+  }, [report])
 
   return (
     <>
@@ -64,74 +40,61 @@ export const TableRetentionBonusTracker = ({ report, dateSelected }: { report: I
               <td className="px-4 py-2 border-r border-zinc-300">
                 Total Active Count
               </td>
-              <td className="text-center px-4 py-2 border-r border-zinc-300">
-                {report.filter(row => (new Date(row.paymentDate).getMonth() === dateSelected.monthNumber)).length || 0}
-              </td>
-              <td className="text-center px-4 py-2 border-r border-zinc-300">
-                0
-              </td>
-              <td className="text-center px-4 py-2 border-r border-zinc-300">
-                0
-              </td>
-              <td className="text-center px-4 py-2 border-r border-zinc-300">
-                0
-              </td>
-              <td className="text-center px-4 py-2">0</td>
+              {
+                Object.keys(dataTotalActiveCount).map((key, index) => {
+                  return (
+                    <td key={index} className="text-center px-4 py-2 border-r border-zinc-300">
+                      {dataTotalActiveCount[key]}
+                    </td>
+                  )
+                })
+              }
             </tr>
 
             <tr className="border-t border-zinc-300">
               <td className="px-4 py-2 border-r border-zinc-300">
                 Eligible Benchmark
               </td>
-              <td className="text-center px-4 py-2 border-r border-zinc-300">
-                0
-              </td>
-              <td className="text-center px-4 py-2 border-r border-zinc-300">
-                0
-              </td>
-              <td className="text-center px-4 py-2 border-r border-zinc-300">
-                0
-              </td>
-              <td className="text-center px-4 py-2 border-r border-zinc-300">
-                0
-              </td>
-              <td className="text-center px-4 py-2">0</td>
+
+              {
+                Object.keys(dataEligibleBenchmark).map((key, index) => {
+                  return (
+                    <td key={index} className="text-center px-4 py-2 border-r border-zinc-300">
+                      {dataEligibleBenchmark[key]}
+                    </td>
+                  )
+                })
+              }
             </tr>
 
             <tr className="border-t border-zinc-300">
               <td className="px-4 py-2 border-r border-zinc-300">
                 % Pay of Total
               </td>
-              <td className="text-center px-4 py-2 border-r border-zinc-300">
-                0
-              </td>
-              <td className="text-center px-4 py-2 border-r border-zinc-300">
-                0
-              </td>
-              <td className="text-center px-4 py-2 border-r border-zinc-300">
-                0
-              </td>
-              <td className="text-center px-4 py-2 border-r border-zinc-300">
-                0
-              </td>
-              <td className="text-center px-4 py-2">0</td>
+
+              {
+                Object.keys(dataPayOfTotal).map((key, index) => {
+                  return (
+                    <td key={index} className="text-center px-4 py-2 border-r border-zinc-300">
+                      {dataPayOfTotal[key]}%
+                    </td>
+                  )
+                })
+              }
             </tr>
 
             <tr className="border-t border-zinc-300">
               <td className="px-4 py-2 border-r border-zinc-300">Commission</td>
-              <td className="text-center px-4 py-2 border-r border-zinc-300">
-                0
-              </td>
-              <td className="text-center px-4 py-2 border-r border-zinc-300">
-                0
-              </td>
-              <td className="text-center px-4 py-2 border-r border-zinc-300">
-                0
-              </td>
-              <td className="text-center px-4 py-2 border-r border-zinc-300">
-                0
-              </td>
-              <td className="text-center px-4 py-2">0</td>
+
+              {
+                Object.keys(dataCommission).map((key, index) => {
+                  return (
+                    <td key={index} className="text-center px-4 py-2 border-r border-zinc-300">
+                      ${dataCommission[key]}
+                    </td>
+                  )
+                })
+              }
             </tr>
           </tbody>
         </table>
@@ -154,31 +117,36 @@ export const TableRetentionBonusTracker = ({ report, dateSelected }: { report: I
             </tr>
           </thead>
 
-          <tbody>
-            {report.map((customer, idx) => {
-              return (
-                <tr className="border-t border-zinc-300" key={idx}>
-                  <td className="px-4 py-2 border-r border-zinc-300">
-                    {customer.name}
+          <tbody className='text-sm'>
+            {
+              usersActivePaymet?.map((userActivePayment, idx) => (
+                <tr key={idx}>
+                  <td className='text-left px-4 py-2 border-r border-zinc-300 border-t'>
+                    {userActivePayment[0]}
                   </td>
-                  <td className="text-center px-4 py-2 border-r border-zinc-300">
-                    {customer.status}
+
+                  <td className={`font-bold text-left px-4 py-2 border-r border-zinc-300 border-t ${userActivePayment[1] ? 'text-green-500' : 'text-red-500'}`}>
+                    {userActivePayment[1] ? 'ACTIVE' : 'INACTIVE'} {/* Month 1 */}
                   </td>
-                  <td className="text-center px-4 py-2 border-r border-zinc-300">
-                    {customer.status}
+
+                  <td className={`font-bold text-left px-4 py-2 border-r border-zinc-300 border-t ${userActivePayment[2] ? 'text-green-500' : 'text-red-500'}`}>
+                    {userActivePayment[2] ? 'ACTIVE' : 'INACTIVE'} {/* Month 2 */}
                   </td>
-                  <td className="text-center px-4 py-2 border-r border-zinc-300">
-                    {customer.status}
+
+                  <td className={`font-bold text-left px-4 py-2 border-r border-zinc-300 border-t ${userActivePayment[3] ? 'text-green-500' : 'text-red-500'}`}>
+                    {userActivePayment[3] ? 'ACTIVE' : 'INACTIVE'} {/* Month 3 */}
                   </td>
-                  <td className="text-center px-4 py-2 border-r border-zinc-300">
-                    {customer.status}
+
+                  <td className={`font-bold text-left px-4 py-2 border-r border-zinc-300 border-t ${userActivePayment[4] ? 'text-green-500' : 'text-red-500'}`}>
+                    {userActivePayment[4] ? 'ACTIVE' : 'INACTIVE'} {/* Month 6 */}
                   </td>
-                  <td className="text-center px-4 py-2">
-                    {customer.status}
+
+                  <td className={`font-bold text-left px-4 py-2 border-r border-zinc-300 border-t ${userActivePayment[5] ? 'text-green-500' : 'text-red-500'}`}>
+                    {userActivePayment[5] ? 'ACTIVE' : 'INACTIVE'} {/* Month 12 */}
                   </td>
                 </tr>
-              )
-            })}
+              ))
+            }
           </tbody>
         </table>
       </div>
