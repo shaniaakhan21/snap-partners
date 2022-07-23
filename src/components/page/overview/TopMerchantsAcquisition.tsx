@@ -1,6 +1,6 @@
 // import { Button } from 'components/common/Button'
 import { IReport } from 'lib/types/overview'
-import { EmptyData } from 'components/common/EmptyData'
+import { EmptyData } from 'components/common/empty/EmptyData'
 
 export const TopMerchantsAcquisition = ({ data }: { data: IReport }) => {
   return (

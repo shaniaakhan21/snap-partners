@@ -13,7 +13,7 @@ import { FormToCreateArticle } from 'components/page/marketing/FormToCreateArtic
 import { ListArticles } from 'components/page/marketing/Details/ListArtcles'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { Article } from 'components/page/marketing/Details/Article'
-import { EmptyData } from 'components/common/EmptyData'
+import { EmptyData } from 'components/common/empty/EmptyData'
 
 const { SEO } = APP_INFO
 

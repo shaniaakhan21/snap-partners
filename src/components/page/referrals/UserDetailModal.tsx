@@ -8,7 +8,7 @@ import { IUserData } from 'lib/types/user'
 import { IAuth } from 'lib/stores/Auth'
 
 import { CopyIcon, EmailIcon, InfoIcon, PhoneIcon } from 'components/common/icons'
-import { EmptyData } from 'components/common/EmptyData'
+import { EmptyData } from 'components/common/empty/EmptyData'
 import { UpdateUserRank } from './UpdateUserRank'
 import { UserBadges } from 'components/common/UserBadges'
 

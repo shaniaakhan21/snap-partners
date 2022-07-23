@@ -1,11 +1,5 @@
-import { EmptyIllustration } from './illustrations/EmptyIllustration'
-
-interface IEmptyDataProps {
-  classes?: string
-  label?: string
-  description?: string
-  imgClasses?: string
-}
+import { IEmptyDataProps } from 'lib/types/empty'
+import { EmptyIllustration } from '../illustrations/EmptyIllustration'
 
 export const EmptyData = ({ classes, label, description, imgClasses }: IEmptyDataProps) => {
   return (

@@ -18,7 +18,7 @@ import { CustomerIcon, DriverIcon, MerchantIcon } from 'components/common/icons'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { NewGenealogy } from 'components/page/genealogy/NewGenealogy'
 import { ReferralCards } from 'components/page/referrals/Cards'
-import { EmptyData } from 'components/common/EmptyData'
+import { EmptyData } from 'components/common/empty/EmptyData'
 
 const { SEO } = APP_INFO
 

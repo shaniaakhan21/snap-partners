@@ -6,7 +6,7 @@ import { APP_INFO } from 'config/appInfo'
 import { useWallet } from 'lib/hooks/useWallet'
 
 import DashboardLayout from 'layouts/private/Dashboard'
-import { EmptyData } from 'components/common/EmptyData'
+import { EmptyData } from 'components/common/empty/EmptyData'
 import { Spinner } from 'components/common/loaders'
 import { TableTransactions } from 'components/page/my-wallet/TableTransactions'
 

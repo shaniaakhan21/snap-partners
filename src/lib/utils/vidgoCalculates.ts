@@ -168,7 +168,5 @@ export const getActivePayments = (reports: IReport) => {
   getData('month6')
   getData('month12')
 
-  console.log('getActivePayments data', data)
-
   return data
 }
