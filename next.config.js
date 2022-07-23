@@ -3,7 +3,7 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   reactStrictMode: true,
-  async rewrites() {
+  async rewrites () {
     return process.env.NODE_ENV !== 'production'
       ? [
         {
