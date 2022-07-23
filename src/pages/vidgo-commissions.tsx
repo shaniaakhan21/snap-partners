@@ -151,13 +151,13 @@ const VidgoComissionsPage: Page = () => {
     }
   }, [dateSelected])
 
-  // if (!auth.roles.merchant) {
-  //   return (
-  //     <div className="h-screen-80 w-full flex justify-center items-center">
-  //       <span className="text-4xl font-black">Should be a IBO</span>
-  //     </div>
-  //   )
-  // }
+  if (!auth.roles.merchant) {
+    return (
+      <div className="h-screen-80 w-full flex justify-center items-center">
+        <span className="text-4xl font-black">Should be a IBO</span>
+      </div>
+    )
+  }
 
   if (loading) {
     return (
