@@ -24,14 +24,14 @@ const ReferralsPage: Page = () => {
           classes='col-span-1'
         />
         <ReferralCards
-          title='Driver'
+          title='Refer Driver'
           ilustration={<DriverIcon />}
           link={`${auth.referralLink}&role=${ROLES.DRIVER}` || 'With Out Link'}
           newUser={false}
           classes='col-span-1'
         />
         <ReferralCards
-          title='Merchant Customers'
+          title='Refer Merchant/SK'
           ilustration={<MerchantIcon />}
           link={`${auth.referralLink}&role=${ROLES.MERCHANT}` || 'With Out Link'}
           newUser={false}
