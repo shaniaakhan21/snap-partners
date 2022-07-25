@@ -74,6 +74,8 @@ const getRetentionBonuxBenchmarked = (totalActiveCount: number): { retention: nu
 }
 
 export const getVidgoCalculates = (reports: IReport): IActivePaymentsReturn => {
+  console.log('getVidgoCalculates reports', reports)
+
   const data = {
     month1: reports.month1.map(report => report.status === 'Active'),
     month2: reports.month2.map(report => report.status === 'Active'),
@@ -89,6 +91,8 @@ export const getVidgoCalculates = (reports: IReport): IActivePaymentsReturn => {
     month6: data.month6.filter(Boolean).length,
     month12: data.month12.filter(Boolean).length
   }
+
+  console.log('getVidgoCalculates totalActiveCount', totalActiveCount)
 
   const eligibleBenchmarkFull = {
     month1: getRetentionBonuxBenchmarked(totalActiveCount.month1),
@@ -144,10 +148,20 @@ export const monthGenerator = (date: Date) => {
   }
 }
 
+type TMonths = 'month1' | 'month2' | 'month3' | 'month6' | 'month12'
+
 export const getActivePayments = (reports: IReport) => {
   const data = {}
 
-  const getData = (month) => {
+  const getData = (month: TMonths) => {
+    const monthFill = {
+      month1: [],
+      month2: [false],
+      month3: [false, false],
+      month6: [false, false, false],
+      month12: [false, false, false, false]
+    }
+
     reports[month].forEach((report) => {
       // eslint-disable-next-line no-prototype-builtins
       if (data.hasOwnProperty(report.name)) {
@@ -155,8 +169,10 @@ export const getActivePayments = (reports: IReport) => {
         return
       }
 
+      // inicializacion de datos
       data[report.name] = [
         report.name,
+        ...monthFill[month],
         report?.status === 'Active'
       ]
     })
