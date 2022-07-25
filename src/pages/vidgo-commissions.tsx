@@ -106,8 +106,7 @@ const VidgoComissionsPage: Page = () => {
         ).toDateString()
         const monthObj = {
           name: name,
-          value: value,
-          monthNumber: rowDate.getMonth() + 2
+          value: value
         }
         if (!months.some((e) => e.value === value)) {
           months.push(monthObj)
@@ -151,13 +150,13 @@ const VidgoComissionsPage: Page = () => {
     }
   }, [dateSelected])
 
-  if (!auth.roles.merchant) {
-    return (
-      <div className="h-screen-80 w-full flex justify-center items-center">
-        <span className="text-4xl font-black">Should be a IBO</span>
-      </div>
-    )
-  }
+  // if (!auth.roles.merchant && !auth.roles.admin && auth.ranks.type !== 'executive') {
+  //   return (
+  //     <div className="h-screen-80 w-full flex justify-center items-center">
+  //       <span className="text-4xl font-black">Should be a IBO</span>
+  //     </div>
+  //   )
+  // }
 
   if (loading) {
     return (
@@ -191,7 +190,7 @@ const VidgoComissionsPage: Page = () => {
               </div> */}
           </div>
 
-          <div className='w-full border-primary-500 border-2 rounded-md p-4 mt-3'>
+          <div className='w-full border-primary-500 border-2 rounded-md px-4 py-4 lg:py-[9.9rem] mt-3 text-center'>
             <span className='font-bold text-primary-500'>
                 Comming Soon
             </span>
