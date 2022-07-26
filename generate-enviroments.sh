@@ -39,6 +39,12 @@ server {
     access_log off;
     error_log off;
     root /home/gitlab-runner/snap-website-$SUBDOMAIN/dist;
+    # Any route containing a file extension (e.g. /devicesfile.js)
+    location _next/ {
+      alias /home/gitlab-runner/nsur-website-$SUBDOMAIN/.next/;
+      expires 30d;
+      access_log on;
+    }
     location / {
       proxy_set_header Upgrade \$http_upgrade;
       proxy_set_header Connection "upgrade";
