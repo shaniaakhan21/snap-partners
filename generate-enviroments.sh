@@ -39,12 +39,6 @@ server {
     access_log off;
     error_log off;
     root /home/gitlab-runner/snap-website-$SUBDOMAIN/dist;
-    # Any route containing a file extension (e.g. /devicesfile.js)
-    location _next/ {
-      alias /home/gitlab-runner/nsur-website-$SUBDOMAIN/.next/;
-      expires 30d;
-      access_log on;
-    }
     location / {
       proxy_set_header Upgrade \$http_upgrade;
       proxy_set_header Connection "upgrade";
@@ -52,6 +46,32 @@ server {
       proxy_set_header Host \$host;
       proxy_http_version 1.1;
       proxy_pass http://localhost:4$PORT;
+    }
+    location ~ ^/api/(.+) {
+      rewrite ^/api(.*)\$ \$1 break;
+      proxy_set_header Upgrade \$http_upgrade;
+      proxy_set_header Connection "upgrade";
+      proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+      proxy_set_header Host \$host;
+      proxy_pass http://localhost:9090;
+    }
+    listen [::]:443 ssl;
+    listen 443 ssl;
+    ssl_certificate /etc/letsencrypt/live/snap.devopsteam.info/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/snap.devopsteam.info/privkey.pem;
+    error_page  405     =200 \$uri;
+}
+server {
+    client_max_body_size 100M;
+    server_name $SUBDOMAIN-admin.snap.devopsteam.info;
+    access_log off;
+    error_log off;
+    root /home/gitlab-runner/snap-admin-$SUBDOMAIN/build;
+    location ~ ^.+\..+$ {
+      try_files $uri =404;
+    }
+    location / {
+      try_files $uri $uri/ /index.html;
     }
     location ~ ^/api/(.+) {
       rewrite ^/api(.*)\$ \$1 break;
