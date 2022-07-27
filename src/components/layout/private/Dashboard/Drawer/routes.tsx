@@ -75,8 +75,8 @@ export const drawerRoutes = [
   },
   {
     icon: <VidgoLogo />,
-    to: '/vidgo-commissions',
-    label: 'Vidgo Commissions'
+    to: '/vidgo-reporting',
+    label: 'Vidgo Reporting'
   }
 ]
 
