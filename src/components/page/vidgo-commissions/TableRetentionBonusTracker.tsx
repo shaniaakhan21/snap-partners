@@ -126,23 +126,23 @@ export const TableRetentionBonusTracker = ({ report }: { report: IReport }) => {
                   </td>
 
                   <td className={`font-bold text-left px-4 py-2 border-r border-zinc-300 border-t ${userActivePayment[1] ? 'text-green-500' : 'text-red-500'}`}>
-                    {userActivePayment[1] ? 'ACTIVE' : 'INACTIVE'} {/* Month 1 */}
+                    {userActivePayment[1] ? 'ACTIVE' : 'N/A'} {/* Month 1 */}
                   </td>
 
                   <td className={`font-bold text-left px-4 py-2 border-r border-zinc-300 border-t ${userActivePayment[2] ? 'text-green-500' : 'text-red-500'}`}>
-                    {userActivePayment[2] ? 'ACTIVE' : 'INACTIVE'} {/* Month 2 */}
+                    {userActivePayment[2] ? 'ACTIVE' : 'N/A'} {/* Month 2 */}
                   </td>
 
                   <td className={`font-bold text-left px-4 py-2 border-r border-zinc-300 border-t ${userActivePayment[3] ? 'text-green-500' : 'text-red-500'}`}>
-                    {userActivePayment[3] ? 'ACTIVE' : 'INACTIVE'} {/* Month 3 */}
+                    {userActivePayment[3] ? 'ACTIVE' : 'N/A'} {/* Month 3 */}
                   </td>
 
                   <td className={`font-bold text-left px-4 py-2 border-r border-zinc-300 border-t ${userActivePayment[4] ? 'text-green-500' : 'text-red-500'}`}>
-                    {userActivePayment[4] ? 'ACTIVE' : 'INACTIVE'} {/* Month 6 */}
+                    {userActivePayment[4] ? 'ACTIVE' : 'N/A'} {/* Month 6 */}
                   </td>
 
                   <td className={`font-bold text-left px-4 py-2 border-r border-zinc-300 border-t ${userActivePayment[5] ? 'text-green-500' : 'text-red-500'}`}>
-                    {userActivePayment[5] ? 'ACTIVE' : 'INACTIVE'} {/* Month 12 */}
+                    {userActivePayment[5] ? 'ACTIVE' : 'N/A'} {/* Month 12 */}
                   </td>
                 </tr>
               ))

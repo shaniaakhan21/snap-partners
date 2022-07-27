@@ -12,10 +12,10 @@ import { RetentionMonthly } from 'components/page/vidgo-commissions/RetentionMon
 import { CustomerTable } from 'components/page/vidgo-commissions/CustomerTable'
 import { TableRetentionBonusTracker } from 'components/page/vidgo-commissions/TableRetentionBonusTracker'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
-import { EmptyPageContent } from 'components/common/empty/PageContent'
 
 import { commissions } from 'lib/services/vidgo/commissions'
 import { handleFetchError } from 'lib/utils/handleFetchError'
+import { EmptyData } from 'components/common/empty/EmptyData'
 
 const { SEO } = APP_INFO
 
@@ -89,7 +89,8 @@ const VidgoComissionsPage: Page = () => {
           package: report.package,
           joinDate: report.joinDate,
           lastPayment: report.paymentDate,
-          monthlyEarning: report.total
+          monthlyEarning: report.total,
+          days: report.days
         })
         teams.push({
           name: report.name,
@@ -152,8 +153,8 @@ const VidgoComissionsPage: Page = () => {
 
   // if (!auth.roles.merchant && !auth.roles.admin && auth.ranks.type !== 'executive') {
   //   return (
-  //     <div className="h-screen-80 w-full flex justify-center items-center">
-  //       <span className="text-4xl font-black">Should be a IBO</span>
+  //     <div className='h-screen-80 w-full flex justify-center items-center'>
+  //       <span className='text-4xl font-black'>Should be a IBO</span>
   //     </div>
   //   )
   // }
@@ -164,28 +165,42 @@ const VidgoComissionsPage: Page = () => {
     )
   }
 
-  if (vidgoReport?.length === 0) return <EmptyPageContent label='Vidgo Commissions Empty' />
+  if (vidgoReport?.length === 0) {
+    return (
+      <div className='w-full h-screen-80 flex flex-col items-center justify-center'>
+        <EmptyData label='Vidgo Reporting Empty' classes='w-52 h-52' />
+        <a
+          href='https://www.vidgo.com/snap'
+          target='_blank'
+          rel='noopener noreferrer'
+          className='mt-4 font-semibold text-primary-500 px-6 py-1 border border-primary-500 rounded-md hover:bg-primary-500 hover:text-white'
+        >
+        About Vidgo
+        </a>
+      </div>
+    )
+  }
 
   return (
     <div>
-      <section className="w-full h-full flex flex-col-reverse lg:flex-row justify-between items-center lg:items-start gap-x-8 gap-y-8">
-        <div className="overflow-x-scroll scroll-x-primary w-full lg:w-2/3 h-96">
-          <h5 className="text-lg font-semibold">Your Customers</h5>
+      <section className='w-full h-full flex flex-col-reverse lg:flex-row justify-between items-center lg:items-start gap-x-8 gap-y-8'>
+        <div className='overflow-x-scroll scroll-x-primary w-full lg:w-2/3 h-96'>
+          <h5 className='text-lg font-semibold'>Your Customers</h5>
 
           <CustomerTable myCustomers={customers} />
         </div>
 
-        <div className="w-full lg:w-1/3">
-          <div className="flex justify-between items-start">
-            <h5 className="text-lg font-semibold">Team Customers</h5>
+        <div className='w-full lg:w-1/3'>
+          <div className='flex justify-between items-start'>
+            <h5 className='text-lg font-semibold'>Team Customers</h5>
 
-            {/* <div className="flex justify-end items-center gap-x-4 text-right">
-                <span className="text-xs">
+            {/* <div className='flex justify-end items-center gap-x-4 text-right'>
+                <span className='text-xs'>
                   Total Downline <br /> Customers
                 </span>
 
-                <div className="border border-zinc-400 rounded-sm px-4 py-1">
-                  <span className="text-xl font-semibold">1766</span>
+                <div className='border border-zinc-400 rounded-sm px-4 py-1'>
+                  <span className='text-xl font-semibold'>1766</span>
                 </div>
               </div> */}
           </div>
@@ -199,15 +214,15 @@ const VidgoComissionsPage: Page = () => {
         </div>
       </section>
 
-      <section className="w-full h-full mt-10 flex flex-col-reverse lg:flex-row justify-between items-center lg:items-start gap-x-8 gap-y-8">
-        <div className="w-full lg:w-2/3 h-full">
-          <h5 className="text-2xl font-bold text-primary-500">
+      <section className='w-full h-full mt-10 flex flex-col-reverse lg:flex-row justify-between items-center lg:items-start gap-x-8 gap-y-8'>
+        <div className='w-full lg:w-2/3 h-full'>
+          <h5 className='text-2xl font-bold text-primary-500'>
               Personal Retention Bonus Tracker
           </h5>
 
-          <div className="flex flex-col justify-start items-start">
+          <div className='flex flex-col justify-start items-start'>
             <select
-              className="mt-4 py-1 px-4 select-clean"
+              className='mt-4 py-1 px-4 select-clean'
               value={dateSelected}
               onChange={handleChange}
             >
@@ -222,14 +237,21 @@ const VidgoComissionsPage: Page = () => {
           <TableRetentionBonusTracker report={reportFullData} />
         </div>
 
-        <div className="w-full lg:w-1/3">
-          <span className="text-xl font-bold">
-              Retention Bonus Benchmarked
+        <div className='w-full lg:w-1/3'>
+          <span className='text-xl font-bold'>
+            Benchmarked
           </span>
           <br />
 
-          <div className="w-full h-full mt-5">
+          <div className='w-full h-full mt-5'>
             <BonusBenmarks />
+
+            <br />
+
+            <span className='text-xl font-bold'>
+              Weighted Payout Scale
+            </span>
+            <br />
 
             <RetentionMonthly />
           </div>
@@ -242,7 +264,7 @@ const VidgoComissionsPage: Page = () => {
 VidgoComissionsPage.getLayout = (page: ReactNode) => (
   <DashboardLayout>
     <Head>
-      <title>{SEO.TITLE_PAGE} - Vidgo Commissions</title>
+      <title>{SEO.TITLE_PAGE} - Vidgo Reporting</title>
     </Head>
     {page}
   </DashboardLayout>

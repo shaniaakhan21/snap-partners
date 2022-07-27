@@ -1,3 +1,6 @@
+import { calculateMonthlyEarning } from 'lib/utils/vidgoCalculates'
+import { useEffect, useState } from 'react'
+
 const tableHeaders = [
   'Customer Name',
   'Customer Email',
@@ -8,6 +11,13 @@ const tableHeaders = [
 ]
 
 export const CustomerTable = ({ myCustomers }: { myCustomers: any[] }) => {
+  const [customerNormalized, setCustomersNormalized] = useState([])
+
+  useEffect(() => {
+    const customersWithMonthlyEarning = calculateMonthlyEarning(myCustomers)
+    setCustomersNormalized(customersWithMonthlyEarning)
+  }, [myCustomers])
+
   return (
     <table className='table-auto w-full bg-white mt-4'>
       <thead>
@@ -21,14 +31,16 @@ export const CustomerTable = ({ myCustomers }: { myCustomers: any[] }) => {
       </thead>
 
       <tbody className='text-xs'>
-        {myCustomers.map((customer, key) => (
+        {customerNormalized.map((customer, key) => (
           <tr key={key} className='border-t border-zinc-300'>
             <td className='px-4 py-2 text-left'>{customer.customerName}</td>
             <td className='px-4 py-2 text-left'>{customer.customerEmail}</td>
             <td className='px-4 py-2 text-left'>{customer.package}</td>
             <td className='px-4 py-2 text-left'>{customer.joinDate}</td>
             <td className='px-4 py-2 text-left'>{customer.lastPayment}</td>
-            <td className='px-4 py-2 text-center'>{customer.monthlyEarning}</td>
+            <td className={`px-4 py-2 text-center font-semibold ${customer.monthlyEarning !== 'Empty' ? 'text-green-500' : 'text-zinc-500'}`}>
+              {customer.monthlyEarning}
+            </td>
           </tr>
         ))}
         <tr>

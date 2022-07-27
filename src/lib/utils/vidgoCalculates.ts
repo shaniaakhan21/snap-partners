@@ -186,3 +186,23 @@ export const getActivePayments = (reports: IReport) => {
 
   return data
 }
+
+interface ICustomersData {
+  customerName: string
+  package: string
+  joinDate: string
+  lastPayment: string
+  monthlyEarning: string
+  days: string
+}
+
+export const calculateMonthlyEarning = (customersData: ICustomersData[]) => {
+  const DOLAR = 12
+  const PERCENTAGE = 0.2 // 20%
+  const formula = (DOLAR * PERCENTAGE).toFixed(2)
+
+  return customersData.map(customer => ({
+    ...customer,
+    monthlyEarning: customer.package.includes('Premium') ? `$${formula}` : 'Empty'
+  }))
+}
