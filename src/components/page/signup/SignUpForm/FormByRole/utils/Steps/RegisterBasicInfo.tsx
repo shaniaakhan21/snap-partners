@@ -114,9 +114,15 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
     )
   }
 
+  let signUpas = 'Sign up as a'
+
+  if (referralLink.role === 'AGENT') {
+    signUpas = 'Sign up as an'
+  }
+
   return (
     <div className='max-w-md mx-auto w-full'>
-      <p className='font-bold text-4xl text-[#18203F]'>Sign up as a{' '}
+      <p className='font-bold text-4xl text-[#18203F]'>{signUpas}{' '}
         <span className='text-primary-500'>{capitalizeFirstLetter(referralLink.role)}</span>
       </p>
       <p className='text-gray-500'>Welcome! register to continue.</p>
