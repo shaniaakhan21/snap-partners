@@ -50,6 +50,18 @@ const ReferralsPage: Page = () => {
         />
 
         <ReferralCards
+          title='Refer Agent'
+          ilustration={(
+            <div className='h-[100px]'>
+              <img src='/images/agent.jpg' alt='Agent logo' />
+            </div>
+          )}
+          link={`${auth.referralLink}&role=${ROLES.AGENT}` || 'With Out Link'}
+          newUser={false}
+          classes='col-span-1'
+        />
+
+        <ReferralCards
           title='Refer ERC'
           ilustration={(
             <div className='h-[100px] w-5/6'>
