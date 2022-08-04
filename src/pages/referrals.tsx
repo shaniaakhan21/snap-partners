@@ -53,7 +53,7 @@ const ReferralsPage: Page = () => {
           title='Refer Agent'
           ilustration={(
             <div className='h-[100px]'>
-              <img src='/images/agent.jpg' alt='Agent logo' />
+              <img src='/images/agentv2.jpg' alt='Agent logo' />
             </div>
           )}
           link={`${auth.referralLink}&role=${ROLES.AGENT}` || 'With Out Link'}
