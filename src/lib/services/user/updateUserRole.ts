@@ -23,6 +23,7 @@ interface IDataBody {
     customer: boolean
     driver: boolean
     merchant: boolean
+    agent: boolean
   },
   idImage: File
   insuranceImage: File

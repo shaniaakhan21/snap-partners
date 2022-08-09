@@ -7,6 +7,7 @@ interface IDecodedTokenAT extends JwtPayload {
     customer: boolean
     driver: boolean
     merchant: boolean
+    agent: boolean
   }
   iat: number
 }

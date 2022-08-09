@@ -29,7 +29,8 @@ interface IProps extends IUserData {
     admin: boolean,
     customer: boolean,
     driver: boolean,
-    merchant: boolean
+    merchant: boolean,
+    agent: boolean
   }
 }
 
