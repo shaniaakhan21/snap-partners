@@ -39,6 +39,11 @@ export const drawerRoutes = [
     label: 'Training'
   },
   {
+    icon: <GenealogyIcon />,
+    to: '/ercreferrals',
+    label: 'ERC Referrals'
+  },
+  {
     icon: <RelojTempIcon />,
     to: 'https://snapdelivered.ourproshop.com/',
     label: 'Tools'
