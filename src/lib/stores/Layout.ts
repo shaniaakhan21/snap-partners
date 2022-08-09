@@ -9,7 +9,7 @@ interface ILayoutConfigAtom {
 
 export const useLayoutConfig = createAtom<ILayoutConfigAtom>(set => ({
   genealogy: {
-    isNewGenealogy: false,
+    isNewGenealogy: true,
 
     toggleTypeGenealogy: () => set(prevState => ({
       genealogy: {
