@@ -96,7 +96,8 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
             admin: userTrack.userInfo.roles.admin,
             customer: userTrack.userInfo.roles.customer,
             driver: userTrack.userInfo.roles.driver,
-            merchant: userTrack.userInfo.roles.merchant
+            merchant: userTrack.userInfo.roles.merchant,
+            agent: userTrack.userInfo.roles.agent
           },
           code: code,
           sponsorReferralCode: userTrack.userInfo.sponsorReferralCode,

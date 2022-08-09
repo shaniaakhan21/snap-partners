@@ -6,8 +6,7 @@ import DashboardLayout from 'layouts/private/Dashboard'
 import ReactDataGrid from '@inovua/reactdatagrid-community'
 import '@inovua/reactdatagrid-community/index.css'
 import { ITransaction } from 'lib/types/transaction'
-import {useEffect, useState} from 'react'
-import axios from 'axios'
+import { useEffect, useState } from 'react'
 
 const { SEO } = APP_INFO
 
@@ -46,9 +45,7 @@ export const TableTransactions = ({ transactions }: ITableTransactionsProps) => 
 }
 
 const ErcreferralsPage: Page = () => {
-
   const [transactions, setTransactions] = useState([])
-
 
   useEffect(() => {
     (async function () {

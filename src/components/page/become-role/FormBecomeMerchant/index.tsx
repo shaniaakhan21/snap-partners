@@ -42,7 +42,8 @@ export const FormBecomeMerchant = ({ userAuth, userSetAuth }: { userAuth: IAuth,
         admin: userAuth.roles.admin,
         customer: userAuth.roles.customer,
         driver: userAuth.roles.driver,
-        merchant: userAuth.roles.merchant
+        merchant: userAuth.roles.merchant,
+        agent: userAuth.roles.agent
       },
       idImage: null,
       insuranceImage: null,
