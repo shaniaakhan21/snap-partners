@@ -7,6 +7,7 @@ interface IUserBadgesProps {
     customer: boolean
     driver: boolean
     merchant: boolean
+    agent: boolean
   }
 }
 
@@ -34,6 +35,13 @@ export const UserBadges = ({ userRank, userRoles }: IUserBadgesProps) => {
           </li>
         </Tippy>
       )}
+      {(userRank === 'referralPartner' && userRoles.agent) && (
+        <Tippy content='Referral Partner'>
+          <li>
+            <img src='/static/badges/FreeMemberAgent.png' />
+          </li>
+        </Tippy>
+      )}
 
       {(userRank === 'manager' && userRoles.customer) && (
         <Tippy content='Manager'>
@@ -53,6 +61,13 @@ export const UserBadges = ({ userRank, userRoles }: IUserBadgesProps) => {
         <Tippy content='Manager'>
           <li>
             <img src='/static/badges/ManagerMerchant.png' />
+          </li>
+        </Tippy>
+      )}
+      {(userRank === 'manager' && userRoles.merchant) && (
+        <Tippy content='Manager'>
+          <li>
+            <img src='/static/badges/ManagerAgent.png' />
           </li>
         </Tippy>
       )}
@@ -78,6 +93,13 @@ export const UserBadges = ({ userRank, userRoles }: IUserBadgesProps) => {
           </li>
         </Tippy>
       )}
+      {(userRank === 'supervisor' && userRoles.agent) && (
+        <Tippy content='Supervisor'>
+          <li>
+            <img src='/static/badges/SupervisorAgent.png' />
+          </li>
+        </Tippy>
+      )}
 
       {(userRank === 'director' && userRoles.customer) && (
         <Tippy content='Director'>
@@ -100,6 +122,13 @@ export const UserBadges = ({ userRank, userRoles }: IUserBadgesProps) => {
           </li>
         </Tippy>
       )}
+      {(userRank === 'director' && userRoles.agent) && (
+        <Tippy content='Director'>
+          <li>
+            <img src='/static/badges/DirectorAgent.png' />
+          </li>
+        </Tippy>
+      )}
 
       {(userRank === 'executive' && userRoles.customer) && (
         <Tippy content='Executive Director'>
@@ -119,6 +148,13 @@ export const UserBadges = ({ userRank, userRoles }: IUserBadgesProps) => {
         <Tippy content='Executive Director'>
           <li>
             <img src='/static/badges/ExecutiveMerchant.png' />
+          </li>
+        </Tippy>
+      )}
+      {(userRank === 'executive' && userRoles.agent) && (
+        <Tippy content='Executive Director'>
+          <li>
+            <img src='/static/badges/ExecutiveAgent.png' />
           </li>
         </Tippy>
       )}
