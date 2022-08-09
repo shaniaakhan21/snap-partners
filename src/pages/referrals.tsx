@@ -62,7 +62,7 @@ const ReferralsPage: Page = () => {
         />
 
         <ReferralCards
-          title='Refer ERC'
+          title='Refer ERC Client'
           ilustration={(
             <div className='h-[100px] w-5/6'>
               <img src='/images/j-logo.png' alt='Refer ERC' />
