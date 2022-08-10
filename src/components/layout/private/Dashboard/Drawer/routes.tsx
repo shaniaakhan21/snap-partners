@@ -21,7 +21,7 @@ export const drawerRoutes = [
   {
     icon: <ReferralLinksIcon />,
     to: '/referrals',
-    label: 'My Referrals Link'
+    label: 'My Referral Links'
   },
   {
     icon: <MarketingIcon />,
