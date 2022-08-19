@@ -15,6 +15,7 @@ const columns = [
   { name: 'business_name', header: 'Company Name', defaultFlex: 1 },
   { name: 'name', header: 'Contact', defaultFlex: 1 },
   { name: 'email', header: 'Email', defaultFlex: 1 },
+  { name: 'phone', header: 'Phone', defaultFlex: 1 },
   { name: 'createdAtUs', header: 'Registered', defaultFlex: 1 }
 ]
 
