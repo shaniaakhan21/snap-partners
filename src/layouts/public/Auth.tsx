@@ -2,14 +2,25 @@ import { useAuthStore } from 'lib/stores'
 import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { FooterPublic } from 'components/layout/public/Footer'
+import { useHandlerReferralLink } from '../../lib/hooks/useHandlerReferralLink'
+import { ROLES } from '../../config/roles'
 
 export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Page
+  const { referralCode: code, role } = useHandlerReferralLink()
   const router = useRouter()
   const { auth } = useAuthStore()
 
   useEffect(() => {
     auth && router.push('/overview')
   }, [auth])
+
+  let t1 = 'Snap Delivered'
+  let t2 = 'Order-Eat-Repeat'
+
+  if (role === ROLES.AGENT) {
+    t1 = 'Snap Financial'
+    t2 = 'Employee Retention Credit Program'
+  }
 
   return (
     <>
@@ -20,8 +31,8 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
 
             <div className='absolute w-full h-full top-0 right-0 z-10 px-4 pb-8 md:px-12'>
               <div className='mt-24 max-w-2xl'>
-                <h1 className='text-5xl font-bold 2xl:text-7xl'>Snap Delivered</h1>
-                <p className='text-3xl font-bold mt-1'>Order-Eat-Repeat</p>
+                <h1 className='text-5xl font-bold 2xl:text-7xl'>{t1}</h1>
+                <p className='text-3xl font-bold mt-1'>{t2}</p>
                 <br />
               </div>
 
