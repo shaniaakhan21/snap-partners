@@ -14,14 +14,6 @@ const columns = [
     defaultFlex: 1
   },
   { name: 'amount', header: 'Amount', defaultFlex: 1, type: 'number' },
-  {
-    name: 'state',
-    header: 'State',
-    render: ({ value }) => {
-      return value ? '✔ APPROVED' : '❌ DENIED'
-    },
-    defaultFlex: 1
-  },
   { name: 'date', header: 'Date', defaultFlex: 1 },
   { name: 'time', header: 'Time', defaultFlex: 1 }
 ]
