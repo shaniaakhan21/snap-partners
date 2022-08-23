@@ -64,7 +64,8 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
       nsurAccount: {
         nsurUserId: data.nsurUserId,
         myPoints: auth?.nsurAccount?.myPoints || null
-      }
+      },
+      bank_information: data.bank_information
     })
     // When change auth state, directly the app push the user to /overview path
     // This logic is on AuthPageLayout useEffect
