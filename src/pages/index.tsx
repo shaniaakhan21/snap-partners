@@ -64,7 +64,8 @@ const HomePage: Page = () => {
           nsurAccount: {
             nsurUserId: data.nsurUserId,
             myPoints: auth?.nsurAccount?.myPoints || null
-          }
+          },
+          bank_information: data.bank_information
         })
         router.push('/overview')
       }

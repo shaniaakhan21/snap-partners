@@ -40,7 +40,8 @@ export type TSetAuth = ({
   updatedAt,
   nsurAccount,
   deleted,
-  blocked
+  blocked,
+  bank_information
 }: IAuth) => void
 
 interface IAuthAtom {
@@ -65,7 +66,8 @@ interface IAuthAtom {
     updatedAt,
     nsurAccount,
     blocked,
-    deleted
+    deleted,
+    bank_information
   }: IAuth) => void
   removeAuth: () => void
 }
@@ -93,7 +95,8 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
     updatedAt,
     blocked,
     deleted,
-    nsurAccount
+    nsurAccount,
+    bank_information
   }) => {
     set({
       auth: {
@@ -117,7 +120,8 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
         blocked,
         deleted,
         nsurAccount,
-        referralLink: referralCode ? `${SEO.URL_PAGE}/auth/signup?referralCode=${referralCode}` : null
+        referralLink: referralCode ? `${SEO.URL_PAGE}/auth/signup?referralCode=${referralCode}` : null,
+        bank_information
       }
     })
   },

@@ -36,7 +36,18 @@ interface IQueryUserMeReturn extends IQueryErrorReturn {
     },
     deleted: boolean,
     blocked: boolean,
-    nsurUserId: number
+    nsurUserId: number,
+    bank_information: {
+      city: string,
+      state: string
+      abartn: string
+      postCode: string
+      firstLine: string
+      legalType: string
+      accountType: string
+      accountNumber: string
+      accountHolderName: string
+    }
   }
 }
 

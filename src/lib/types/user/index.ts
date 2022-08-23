@@ -21,6 +21,17 @@ export interface IUserCommonData {
   username: string
   phoneNumber: string
   referralCode: string
+  bank_information: {
+    city: string,
+    state: string
+    abartn: string
+    postCode: string
+    firstLine: string
+    legalType: string
+    accountType: string
+    accountNumber: string
+    accountHolderName: string
+  },
   roles: {
     admin: boolean
     customer: boolean

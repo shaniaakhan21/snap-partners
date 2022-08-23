@@ -71,6 +71,7 @@ export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
       updatedAt: data.updatedAt,
       blocked: data.blocked,
       deleted: data.deleted,
+      bank_information: data.bank_information,
       nsurAccount: {
         nsurUserId: data.nsurUserId,
         myPoints: null

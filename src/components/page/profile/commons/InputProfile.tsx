@@ -14,9 +14,10 @@ interface IProps {
   register?: any
   rules?: any
   isAPasswordInput?: boolean
+  defaultValue?: string
 }
 
-export const InputProfile = ({ inputId, inputType, value, disabled = false, labelFor, labelName, placeholder, error, register, rules, isAPasswordInput = false }: IProps) => {
+export const InputProfile = ({ inputId, inputType, value, disabled = false, labelFor, labelName, placeholder, error, register, rules, isAPasswordInput = false, defaultValue }: IProps) => {
   const registerValidated = register ? { ...register(inputId, rules ?? null) } : {}
 
   const [showPassword, setShowPassword] = useState(false)
@@ -35,6 +36,7 @@ export const InputProfile = ({ inputId, inputType, value, disabled = false, labe
           id={inputId}
           name={inputId}
           type={`${showPassword ? 'text' : inputType}`}
+          defaultValue={defaultValue}
           value={value}
           disabled={disabled}
           placeholder={placeholder}
