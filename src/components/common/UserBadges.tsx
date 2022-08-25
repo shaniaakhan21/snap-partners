@@ -64,7 +64,7 @@ export const UserBadges = ({ userRank, userRoles }: IUserBadgesProps) => {
           </li>
         </Tippy>
       )}
-      {(userRank === 'manager' && userRoles.merchant) && (
+      {(userRank === 'manager' && userRoles.agent) && (
         <Tippy content='Manager'>
           <li>
             <img src='/static/badges/ManagerAgent.png' />
