@@ -5,14 +5,6 @@ import { ITransaction } from 'lib/types/transaction'
 const columns = [
   { name: 'id', header: 'Transaction ID', defaultFlex: 1 },
   { name: 'description', header: 'Description', defaultFlex: 1 },
-  {
-    name: 'user',
-    header: 'Name',
-    render: ({ value }) => {
-      return `${value.name} ${value.lastname}`
-    },
-    defaultFlex: 1
-  },
   { name: 'amount', header: 'Amount', defaultFlex: 1, type: 'number' },
   { name: 'date', header: 'Date', defaultFlex: 1 },
   { name: 'time', header: 'Time', defaultFlex: 1 }
