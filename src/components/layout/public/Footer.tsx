@@ -46,11 +46,6 @@ export const FooterPublic = () => {
         <section>
           <img src='/images/logo-white.png' className='w-14' />
 
-          <p className='mt-2'>
-            <span className='text-2xl font-bold'>SnapDelivered</span> <br />
-            <span className='text-xl font-semibold'>Order-Eat-Repeat</span>
-          </p>
-
           <ul className='flex justify-start items-center gap-x-4 mt-6'>
             {socialLinks.map(socialLink => (
               <li key={socialLink.to}>
