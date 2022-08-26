@@ -20,8 +20,7 @@ export const DrawerMobile = ({ isCurrentlyPage, isManager, isAdmin }: { isCurren
       >
         <aside className={`dashboardLayout__drawer scroll-primary absolute h-screen lg:hidden ${isOpen ? 'visible opacity-100 block' : 'invisible opacity-0'}`}>
           <section className='mt-32 pl-10'>
-            <h2 className='text-white font-bold text-2xl'>SnapDelivered</h2>
-          </section>
+            </section>
 
           <ul className='mt-10 mb-20 text-white'>
             {

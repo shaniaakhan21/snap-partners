@@ -9,8 +9,7 @@ export const DrawerDesktop = ({ isCurrentlyPage, isManager, isAdmin }: { isCurre
     <aside className='dashboardLayout__drawer scroll-primary'>
       <section className='mt-16 pl-10 flex justify-start items-center gap-x-2'>
         <img src='/images/logo-dark.png' className='w-7' />
-        <h2 className='text-white font-bold text-2xl'>SnapDelivered</h2>
-      </section>
+        </section>
 
       <ul className='my-10 text-white'>
         {

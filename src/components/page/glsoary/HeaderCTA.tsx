@@ -14,8 +14,7 @@ export const HeaderCTA = ({ auth }: IHeaderCTAProps) => {
           className='w-16 h-16 mr-4'
         />
 
-        <span className='text-3xl font-bold text-gray-800'>SnapDelivered</span>
-      </section>
+         </section>
 
       <section className='hidden md:block'>
         {

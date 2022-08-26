@@ -20,8 +20,6 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
 
   return (
     <div className='flex flex-col justify-center items-center max-w-xl mx-auto'>
-      <span className='text-3xl font-bold'>SnapDelivered</span>
-      <br />
       <br />
       <span className='text-4xl font-bold text-primary-500'>Register Done!</span>
       <CheckSuccess classes='my-10' />

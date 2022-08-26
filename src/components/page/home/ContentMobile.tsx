@@ -12,12 +12,6 @@ export const ContentMobile = () => {
           />
         </div>
 
-        <div>
-          <p>
-            <span className='text-2xl font-bold'>SnapDelivered</span> <br />
-            <span className='text-lg font-semibold'>Order-Eat-Repeat</span>
-          </p>
-        </div>
       </div>
 
       <div className='mt-40 text-center'>

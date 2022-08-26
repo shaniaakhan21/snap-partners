@@ -106,8 +106,6 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
         <img src='/images/logo-full.png' className='w-28 h-28' />
       </figure>
 
-      <span className='text-3xl font-bold mt-4'>SnapDelivered</span>
-
       <div className='mt-10'>
         <span className='text-4xl font-bold text-primary-500'>Upgrade to <br /> Manager Account</span>
       </div>

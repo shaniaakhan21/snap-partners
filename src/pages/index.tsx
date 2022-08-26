@@ -138,7 +138,6 @@ const HomePage: Page = () => {
 
             <div className='absolute bottom-10 left-12 flex items-center gap-x-4'>
               <img src='/images/logo-dark.png' />
-              <span className='font-bold text-2xl'>SnapDelivered</span>
             </div>
           </div>
         </section>
