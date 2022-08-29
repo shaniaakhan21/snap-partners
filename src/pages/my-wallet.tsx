@@ -14,13 +14,15 @@ import { useModal } from 'lib/hooks/useModal'
 import { ModalContainer } from 'components/common/ModalContainer'
 import { useEffect, useState } from 'react'
 import { useAuthStore } from '../lib/stores'
+import { toast } from 'react-toastify'
 
 const { SEO } = APP_INFO
 
 const MyWalletPage: Page = () => {
-  const { transactions, loading } = useWallet()
+  const { transactions, loading, refresh } = useWallet()
   const { auth, setAuth, removeAuth } = useAuthStore()
   const [balance, setBalance] = useState('')
+  const [loadingButton, setloadingButton] = useState(false)
   const [enableWithdraw, setenableWithdraw] = useState(false)
   const [bank_information, setbank_information] = useState({}) as any
 
@@ -45,7 +47,7 @@ const MyWalletPage: Page = () => {
         if (res.status === 200) {
           const data = await res.json()
           setBalance(parseFloat(data.balance).toFixed(2))
-          if (parseFloat(data.balance) >= 50) {
+          if (parseFloat(data.balance) >= 5) {
             setenableWithdraw(true)
           }
           setbank_information(data.bank_information)
@@ -55,6 +57,25 @@ const MyWalletPage: Page = () => {
       }
     })()
   }, [])
+
+  const withdraw = async () => {
+    setloadingButton(true)
+    const res = await fetch('/api/user/withdraw-balance', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${auth.accessToken}`,
+        'Content-Type': 'application/json'
+      }
+    })
+    fnOpenModalConfirmationManually()
+    setloadingButton(false)
+    await refresh()
+    if (res.status !== 200) {
+      toast('Error while processing transfer, contact support', { type: 'error' })
+      return
+    }
+    toast('Transfer processed succesfully', { type: 'success' })
+  }
 
   return (
     <div className='max-w-4xl w-full mx-auto'>
@@ -83,13 +104,19 @@ const MyWalletPage: Page = () => {
                     <br/>
                     <span className='font-semibold text-lg'>Current Balance: ${balance}</span>
                     <br/>
-                    <span className='font-semibold text-sm'>Minimum Balance to withdraw is $50.00</span>
+                    <span className='font-semibold text-sm'>minimum balance to withdraw is $5.00</span>
                   </div>
                   {modalConfirmationIsOpen && (
                     <Overlay onClick={fnCloseModalConfirmation}>
                       <ModalContainer>
 
-                        {!bank_information?.accountNumber && (
+                        { loadingButton && (
+                          <div className='w-full flex justify-center items-center'>
+                            <Spinner />
+                          </div>
+                        )}
+
+                        {(!bank_information?.accountNumber && !loadingButton) && (
                           <>
                             <div className={'w-full referral-list--height rounded-sm bg-white p-4 overflow-y-auto scroll-primary lg:block'}>
                               <div className='max-w-xl mx-auto w-full text-center mb-3'>
@@ -108,7 +135,7 @@ const MyWalletPage: Page = () => {
                           </>
                         )}
 
-                        {bank_information?.accountNumber && (
+                        {(bank_information?.accountNumber && !loadingButton) && (
                           <>
                             <div className={'w-full referral-list--height rounded-sm bg-white p-4 overflow-y-auto scroll-primary lg:block'}>
                               <div className='max-w-xl mx-auto w-full text-center mb-3'>
@@ -117,7 +144,7 @@ const MyWalletPage: Page = () => {
                                 Are you sure you want to withdraw ${balance} to your bank account ending in {bank_information?.accountNumber.substr(-4)}
                             </div>
                             <div className='max-w-xl mx-auto w-full text-center mb-1'>
-                              <Button onClick={() => { fnOpenModalConfirmation() }} classes=' mr-1 text-sm '>
+                              <Button onClick={() => { withdraw() }} classes=' mr-1 text-sm '>
                                   Withdraw
                               </Button>
                               <Button onClick={() => { fnOpenModalConfirmationManually() }} style={{ backgroundColor: 'grey' }} classes=' mr-1 text-sm '>

@@ -34,6 +34,7 @@ export const TableTransactions = ({ transactions }: ITableTransactionsProps) => 
   return (
     <ReactDataGrid
       idProperty="id"
+      defaultSortInfo={{ name: 'id', dir: -1 }}
       columns={columns}
       dataSource={transactions}
       sortable={true}

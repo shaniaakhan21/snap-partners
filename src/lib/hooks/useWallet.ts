@@ -10,20 +10,24 @@ export const useWallet = () => {
   const [transactions, setTransactions] = useState<ITransaction[]>([])
   const [loading, setIsLoading] = useState(false)
 
+  const refresh = async () => {
+    setIsLoading(true)
+    const { data, error } = await getWallet(auth.accessToken, auth.id, 1)
+
+    if (error) {
+      handleFetchError(error.status, error.info)
+      setIsLoading(false)
+    }
+
+    setTransactions([...data])
+    setIsLoading(false)
+  }
+
   useEffect(() => {
     (async () => {
-      setIsLoading(true)
-      const { data, error } = await getWallet(auth.accessToken, auth.id, 1)
-
-      if (error) {
-        handleFetchError(error.status, error.info)
-        setIsLoading(false)
-      }
-
-      setTransactions([...data])
-      setIsLoading(false)
+      await refresh()
     })()
   }, [])
 
-  return { transactions, loading }
+  return { transactions, loading, refresh }
 }
