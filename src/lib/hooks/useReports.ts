@@ -17,7 +17,8 @@ export const useReports = () => {
     topUsers: {
       topCustomer: [],
       topDriver: [],
-      topMerchant: []
+      topMerchant: [],
+      topAgent: []
     }
   })
   const [dataGraphic] = ([
