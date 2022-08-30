@@ -13,5 +13,6 @@ export interface IReport {
     topMerchant: ITopEntity[]
     topCustomer: ITopEntity[]
     topDriver: ITopEntity[]
+    topAgent: ITopEntity[]
   }
 }

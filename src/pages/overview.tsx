@@ -19,6 +19,7 @@ import {
   TopEntitiesGrid,
   // TopOrderLine,
   TopMerchantsAcquisition,
+  TopAgentAcquisition,
   TotalEarnings,
   TotalOrders
 } from 'components/page/overview'
@@ -52,6 +53,7 @@ const DashboardOverViewPage: Page = () => {
         <TopMerchantsAcquisition data={reports} />
         <TopDriverAcquisition data={reports} />
         <TopCustomerAcquisition data={reports} />
+        <TopAgentAcquisition data={reports} />
         {/* <TopOrderLine data={reports} /> */}
       </TopEntitiesGrid>
     </>
