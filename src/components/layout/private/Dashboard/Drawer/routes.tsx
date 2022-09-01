@@ -69,11 +69,6 @@ export const drawerRoutes = [
     label: 'My Points'
   },
   {
-    icon: <RelojTempIcon />,
-    to: '/upgrade-to-manager',
-    label: 'Upgrade To Manager'
-  },
-  {
     icon: <CreditCardIcon />,
     to: '/my-wallet',
     label: 'My Wallet'
