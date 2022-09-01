@@ -14,6 +14,8 @@ import { FooterPrivate } from 'components/layout/private/Footer'
 import { Spinner } from 'components/common/loaders'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { GTMTrack } from 'lib/utils/gtm'
+import { FormBecomeDriver } from '../../components/page/become-role/FormBecomeDriver'
+import Alert from '@material-ui/lab/Alert'
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const router = useRouter()
@@ -53,6 +55,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         id: data.id,
         username: data.username,
         referralCode: data.referralCode,
+        driver_status: data.driver_status,
         idImage: data.idImage,
         insuranceImage: data.insuranceImage,
         isManager: data.ranks?.type === 'manager',
@@ -86,6 +89,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         idImage,
         insuranceImage,
         ownerName,
+        driver_status,
         ranks,
         referralCode,
         updatedAt,
@@ -105,6 +109,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         roles,
         isManager,
         createdAt,
+        driver_status,
         accessToken,
         idImage,
         insuranceImage,
@@ -164,6 +169,24 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
     )
   }
 
+  if (auth.roles.driver && auth.driver_status === null && auth.idImage === '' && auth.insuranceImage === '') {
+    return (
+      <div className='dashboardLayout'>
+        <Navbar/>
+        <Drawer/>
+
+        <main className='dashboardLayout__content scroll-primary'>
+          <div className='mx-auto min-h-[89vh] h-fit px-5 pt-5 pb-20 max-w-7xl'>
+            <Alert severity="warning">Please upload your documents to activate your driver account</Alert><br/>
+            <FormBecomeDriver userAuth={auth} userSetAuth={setAuth}/>
+          </div>
+
+          <FooterPrivate/>
+        </main>
+      </div>
+    )
+  }
+
   return (
     <div className='dashboardLayout'>
       <Navbar />
@@ -171,6 +194,11 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
 
       <main className='dashboardLayout__content scroll-primary'>
         <div className='mx-auto min-h-[89vh] h-fit px-5 pt-5 pb-20 max-w-7xl'>
+          {auth.roles.driver && auth.driver_status === null && (
+            <>
+              <Alert severity="warning">Your driver documents are being reviewed by our team, your account will be activated soon.</Alert><br/>
+            </>
+          )}
           {children}
         </div>
 

@@ -52,6 +52,7 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
       id: dataLogin.userId,
       username: data.username,
       referralCode: data.referralCode,
+      driver_status: data.driver_status,
       idImage: data.idImage,
       insuranceImage: data.insuranceImage,
       isManager: data.ranks?.type === 'manager',

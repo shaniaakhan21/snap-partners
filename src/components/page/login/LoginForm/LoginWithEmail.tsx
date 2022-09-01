@@ -63,6 +63,7 @@ export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
       username: data.username,
       referralCode: data.referralCode,
       idImage: data.idImage,
+      driver_status: data.driver_status,
       insuranceImage: data.insuranceImage,
       isManager: data.ranks?.type === 'manager',
       createdAt: data.createdAt,

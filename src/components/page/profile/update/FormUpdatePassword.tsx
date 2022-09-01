@@ -79,6 +79,7 @@ export const FormUpdatePassword = ({ auth, setAuth, typeUpdate, setTypeUpdate }:
       id: userData.id,
       username: userData.username,
       referralCode: userData.referralCode,
+      driver_status: userData.driver_status,
       idImage: userData.idImage,
       insuranceImage: userData.insuranceImage,
       isManager: userData.ranks?.type === 'manager',

@@ -68,6 +68,7 @@ export interface IUserBySearch {
 
 export interface IUserMe extends IUserCommonData {
   createdAt: string
+  driver_status: boolean | null
   idImage: string
   insuranceImage: string
   password: string

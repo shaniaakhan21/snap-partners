@@ -50,6 +50,7 @@ const GlosaryPage: Page = () => {
           id: data.id,
           username: data.username,
           referralCode: data.referralCode,
+          driver_status: data.driver_status,
           idImage: data.idImage,
           insuranceImage: data.insuranceImage,
           isManager: data.ranks?.type === 'manager',

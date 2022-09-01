@@ -10,7 +10,8 @@ export const SuccessBecomeRole = ({ roleBecomed }: { roleBecomed: 'CUSTOMER' | '
         DESCRIPTION: 'Order food and get it SNAP',
         TO_ANDROID: 'https://play.google.com/store/apps/details?id=com.snapdelivered.userapp',
         TO_APPLE: 'https://apps.apple.com/us/app/snap-user/id1478863057'
-      }
+      },
+      HEADER: 'Congrats, you’re a customer now!'
     },
     DRIVER: {
       CTA_DESCRIPTION: 'Now that you have decided to become a driver make sure to download our driver app and get started earning  delivering today!',
@@ -20,8 +21,8 @@ export const SuccessBecomeRole = ({ roleBecomed }: { roleBecomed: 'CUSTOMER' | '
         DESCRIPTION: 'Fullfil and Manage orders',
         TO_ANDROID: 'https://play.google.com/store/apps/details?id=com.snapdelivered.driverapp',
         TO_APPLE: 'https://apps.apple.com/us/app/snap-operations-specialist/id1478862279'
-      }
-
+      },
+      HEADER: 'We have received your documents and will review in the next 24-48 hours, you will receive an email when the process is completed'
     },
     MERCHANT: {
       CTA_DESCRIPTION: 'Now that you have decided to become a Merchant make sure to download our restaurant app and get started earning',
@@ -31,13 +32,14 @@ export const SuccessBecomeRole = ({ roleBecomed }: { roleBecomed: 'CUSTOMER' | '
         DESCRIPTION: 'Manager orders and payments',
         TO_ANDROID: 'https://play.google.com/store/apps/details?id=com.snapdelivered.restaurantapp',
         TO_APPLE: 'https://apps.apple.com/ve/app/snap-merchant-control/id1478737288'
-      }
+      },
+      HEADER: 'Congrats, you’re a merchant now!'
     }
   }
   return (
     <div className='max-w-sm w-full h-full mx-auto flex flex-col items-center justify-center'>
       <div className='text-center'>
-        <span className='font-bold text-xl'>Congrats, you’re a {roleBecomed.toLowerCase()} too!</span>
+        <span className='font-bold text-xl'>{copyByRole[roleBecomed].HEADER}</span>
       </div>
 
       <div className='mt-2'>

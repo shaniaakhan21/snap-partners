@@ -36,6 +36,7 @@ interface IQueryUserMeReturn extends IQueryErrorReturn {
     },
     deleted: boolean,
     blocked: boolean,
+    driver_status: boolean | null,
     nsurUserId: number,
     bank_information: {
       city: string,

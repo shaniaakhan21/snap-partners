@@ -100,7 +100,9 @@ export const FormBecomeDriver = ({ userAuth, userSetAuth }: { userAuth: IAuth, u
       roles: {
         ...userAuth.roles,
         driver: true
-      }
+      },
+      idImage: dataForm.idImage[0],
+      insuranceImage: dataForm.insuranceImage[0]
     })
 
     reset()
@@ -145,7 +147,7 @@ export const FormBecomeDriver = ({ userAuth, userSetAuth }: { userAuth: IAuth, u
 
         <br />
 
-        <label htmlFor='idImage' className='font-bold text-gray-700 uppercase text-sm'>ID <span className='text-red-500'>*</span></label>
+        <label htmlFor='idImage' className='font-bold text-gray-700 uppercase text-sm'>Driver's License Front Image <span className='text-red-500'>*</span></label>
         {errors.idImage && <p className='text-sm text-red-400'>{errors.idImage.message}</p>}
         <span className='block text-gray-800 text-sm'>Format JPG, JPEG, PNG, WEBP and PDF Max 5mb</span>
         <input
