@@ -11,7 +11,7 @@ export default function PDFViewer () {
         className='mx-auto w-full'
         style={{ height: '750px', maxWidth: 1280 }}
       >
-        <Viewer fileUrl="/static/new-plan.pdf" defaultScale={SpecialZoomLevel.PageFit} onPageChange={onPageChange}/>
+        <Viewer fileUrl="/static/new-plan-v2.pdf" defaultScale={SpecialZoomLevel.PageFit} onPageChange={onPageChange}/>
       </div>
     </Worker>
   )
