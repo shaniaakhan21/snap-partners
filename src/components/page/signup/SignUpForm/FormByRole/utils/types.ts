@@ -3,6 +3,7 @@ export interface IUserToSignUp {
   username: string
   name: string
   lastname: string
+  businessName: string
   phone: string
   password: string
   referralCode?: string | null

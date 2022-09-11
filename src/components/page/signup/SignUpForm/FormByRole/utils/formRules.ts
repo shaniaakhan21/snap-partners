@@ -69,6 +69,10 @@ export const registerRulesConfig = {
     maxLength: { value: 100, message: 'Max 100 Characters *' }
   },
 
+  businessName: {
+    maxLength: { value: 500, message: 'Max 500 Characters *' }
+  },
+
   idImage: {
     required: { value: true, message: 'ID Image Required *' }
   },

@@ -87,6 +87,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       name: dataForm.name,
       lastname: dataForm.lastname,
       password: dataForm.password,
+      businessName: dataForm.businessName,
       phone: phoneNumber,
       sponsorReferralCode: dataForm.referralCode || null,
       idImage: null,
@@ -193,6 +194,19 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           register={register}
           rulesForm={registerRulesConfig.lastname}
           isRequired
+        />
+
+        <InputForm
+          id='businessName'
+          name='businessName'
+          type='text'
+          label='Business Name (Optional)'
+          registerId='businessName'
+          placeholder='Enter Business Name'
+          errors={errors.businessName}
+          register={register}
+          rulesForm={registerRulesConfig.businessName}
+          isRequired={false}
         />
 
         <InputPhone
