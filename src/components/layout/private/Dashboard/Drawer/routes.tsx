@@ -66,7 +66,8 @@ export const drawerRoutes = [
   {
     icon: <CubeIcon />,
     to: '/my-points',
-    label: 'My Points'
+    label: 'My Points',
+    snap: true
   },
   {
     icon: <CreditCardIcon />,

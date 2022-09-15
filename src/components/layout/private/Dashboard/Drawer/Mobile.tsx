@@ -5,7 +5,7 @@ import { drawerRoutes } from './routes'
 import { GTMTrack } from 'lib/utils/gtm'
 import { Fragment } from 'react'
 
-export const DrawerMobile = ({ isCurrentlyPage, isManager, isAdmin }: { isCurrentlyPage: (route: string) => boolean, isManager: boolean, isAdmin: boolean }) => {
+export const DrawerMobile = ({ isCurrentlyPage, auth, isManager, isAdmin }: { isCurrentlyPage: (route: string) => boolean, auth:any, isManager: boolean, isAdmin: boolean }) => {
   const { isOpen, closeDrawer } = useDrawerStore()
 
   return (
@@ -26,6 +26,8 @@ export const DrawerMobile = ({ isCurrentlyPage, isManager, isAdmin }: { isCurren
             {
               drawerRoutes.map(route => {
                 if ((isAdmin || isManager) && route.to === '/upgrade-to-manager') return <Fragment key={route.label} />
+                const isSnap = (auth.roles.customer || auth.roles.driver || auth.roles.merchant)
+                if (route.snap && !isSnap) return <Fragment key={route.label} />
 
                 return (
                   <li

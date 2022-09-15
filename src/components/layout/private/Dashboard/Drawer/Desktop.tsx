@@ -4,17 +4,20 @@ import { Fragment } from 'react'
 
 import { drawerRoutes } from './routes'
 
-export const DrawerDesktop = ({ isCurrentlyPage, isManager, isAdmin }: { isCurrentlyPage: (route: string) => boolean, isManager: boolean, isAdmin: boolean }) => {
+export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { isCurrentlyPage: (route: string) => boolean, auth:any, isManager: boolean, isAdmin: boolean }) => {
   return (
     <aside className='dashboardLayout__drawer scroll-primary'>
       <section className='mt-16 pl-10 flex justify-start items-center gap-x-2'>
         <img src='/images/logo-dark.png' className='w-7' />
-        </section>
+      </section>
 
       <ul className='my-10 text-white'>
         {
           drawerRoutes.map(route => {
             if ((isAdmin || isManager) && route.to === '/upgrade-to-manager') return <Fragment key={route.label} />
+
+            const isSnap = (auth.roles.customer || auth.roles.driver || auth.roles.merchant)
+            if (route.snap && !isSnap) return <Fragment key={route.label} />
 
             return (
               <li
