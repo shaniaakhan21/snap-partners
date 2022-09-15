@@ -16,38 +16,46 @@ const ReferralsPage: Page = () => {
   return (
     <div className='min-h-[80vh] flex justify-center items-center'>
       <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-center justify-center justify-items-center gap-4'>
-        <ReferralCards
-          title='Refer Customers'
-          ilustration={<CustomerIcon />}
-          link={`${auth.referralLink}&role=${ROLES.CUSTOMER}` || 'With Out Link'}
-          newUser={false}
-          classes='col-span-1'
-        />
-        <ReferralCards
-          title='Refer Driver'
-          ilustration={<DriverIcon />}
-          link={`${auth.referralLink}&role=${ROLES.DRIVER}` || 'With Out Link'}
-          newUser={false}
-          classes='col-span-1'
-        />
-        <ReferralCards
-          title='Refer Merchant/SK'
-          ilustration={<MerchantIcon />}
-          link={`${auth.referralLink}&role=${ROLES.MERCHANT}` || 'With Out Link'}
-          newUser={false}
-          classes='col-span-1'
-        />
-        <ReferralCards
-          title='Refer Vidgo'
-          ilustration={(
-            <div className='h-[100px]'>
-              <img src='/images/vidgo/vidgo-ilustration.jpg' alt='Vidgo logo' />
-            </div>
-          )}
-          link={`https://www.vidgo.com/snap/?subpid=${auth.referralCode}` || 'With Out Link'}
-          newUser={false}
-          classes='col-span-1'
-        />
+        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && (
+          <ReferralCards
+            title='Refer Customers'
+            ilustration={<CustomerIcon />}
+            link={`${auth.referralLink}&role=${ROLES.CUSTOMER}` || 'With Out Link'}
+            newUser={false}
+            classes='col-span-1'
+          />
+        )}
+        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && (
+          <ReferralCards
+            title='Refer Driver'
+            ilustration={<DriverIcon />}
+            link={`${auth.referralLink}&role=${ROLES.DRIVER}` || 'With Out Link'}
+            newUser={false}
+            classes='col-span-1'
+          />
+        )}
+        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && (
+          <ReferralCards
+            title='Refer Merchant/SK'
+            ilustration={<MerchantIcon />}
+            link={`${auth.referralLink}&role=${ROLES.MERCHANT}` || 'With Out Link'}
+            newUser={false}
+            classes='col-span-1'
+          />
+        )}
+        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && (
+          <ReferralCards
+            title='Refer Vidgo'
+            ilustration={(
+              <div className='h-[100px]'>
+                <img src='/images/vidgo/vidgo-ilustration.jpg' alt='Vidgo logo' />
+              </div>
+            )}
+            link={`https://www.vidgo.com/snap/?subpid=${auth.referralCode}` || 'With Out Link'}
+            newUser={false}
+            classes='col-span-1'
+          />
+        )}
 
         <ReferralCards
           title='Refer Agent'
