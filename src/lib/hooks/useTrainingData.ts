@@ -18,6 +18,7 @@ export const useTrainingData = (token: string) => {
     customer: 1,
     driver: 1,
     merchant: 1,
+    agent: 1,
     empire: 1
   })
 
@@ -27,6 +28,7 @@ export const useTrainingData = (token: string) => {
     customer: null,
     driver: null,
     merchant: null,
+    agent: null,
     empire: null
   })
 

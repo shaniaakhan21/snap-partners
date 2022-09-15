@@ -43,4 +43,5 @@ export interface ITrainingState {
   driver: ITraining[],
   merchant: ITraining[],
   empire: ITraining[],
+  agent: ITraining[],
 }

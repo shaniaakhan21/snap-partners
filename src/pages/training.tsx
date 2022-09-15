@@ -44,47 +44,66 @@ const TrainingPage: Page = () => {
   return (
     <>
       <CategoryChipList>
-        <CategoryChip
-          id='all'
-          categorySelected={category}
-          onClick={handleChangeCategory}
-        >
+        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && (
+          <CategoryChip
+            id='all'
+            categorySelected={category}
+            onClick={handleChangeCategory}
+          >
           All
-        </CategoryChip>
-        <CategoryChip
-          id='start'
-          categorySelected={category}
-          onClick={handleChangeCategory}
-        >
+          </CategoryChip>
+        )}
+        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && (
+          <CategoryChip
+            id='start'
+            categorySelected={category}
+            onClick={handleChangeCategory}
+          >
           Getting Started
-        </CategoryChip>
-        <CategoryChip
-          id='customer'
-          categorySelected={category}
-          onClick={handleChangeCategory}
-        >
+          </CategoryChip>
+        )}
+        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && (
+          <CategoryChip
+            id='customer'
+            categorySelected={category}
+            onClick={handleChangeCategory}
+          >
           Customer Acquisition
-        </CategoryChip>
-        <CategoryChip
-          id='driver'
-          categorySelected={category}
-          onClick={handleChangeCategory}
-        >
+          </CategoryChip>
+        )}
+        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && (
+          <CategoryChip
+            id='driver'
+            categorySelected={category}
+            onClick={handleChangeCategory}
+          >
           Driver Acquisition
-        </CategoryChip>
-        <CategoryChip
-          id='merchant'
-          categorySelected={category}
-          onClick={handleChangeCategory}
-        >
+          </CategoryChip>
+        )}
+        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && (
+          <CategoryChip
+            id='merchant'
+            categorySelected={category}
+            onClick={handleChangeCategory}
+          >
           Open A Market
-        </CategoryChip>
+          </CategoryChip>
+        )}
+        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && (
+          <CategoryChip
+            id='empire'
+            categorySelected={category}
+            onClick={handleChangeCategory}
+          >
+          Build An Empire
+          </CategoryChip>
+        )}
         <CategoryChip
-          id='empire'
+          id='agent'
           categorySelected={category}
           onClick={handleChangeCategory}
         >
-          Build An Empire
+          Agent Training
         </CategoryChip>
       </CategoryChipList>
 
