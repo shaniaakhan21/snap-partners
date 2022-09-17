@@ -3,7 +3,6 @@ import { TAccountInfoToUpdate } from 'lib/types/user/profile'
 import { IAuth } from 'lib/stores/Auth'
 
 import { TextContactCTA } from 'components/common/TextContactCTA'
-import { UpgradeManagerCTA } from './UpgradeManagerCTA'
 import { FormAccountInfo } from './FormAccountInfo'
 import { PhotoAccount } from './PhotoAccount'
 import { BecomeRoles } from './BecomeRoles'
@@ -37,13 +36,6 @@ export const AccountInfo = ({ auth, removeAuth, setNewWindow, setTypeUpdate }: I
           setTypeUpdate={setTypeUpdate}
         />
       </div>
-
-      {!auth.roles.admin && (
-        <div className='flex flex-col md:flex-row items-center justify-center mt-11'>
-          <Rank auth={auth} />
-          <UpgradeManagerCTA auth={auth} setNewWindow={setNewWindow} />
-        </div>
-      )}
 
       <BecomeRoles auth={auth} />
 
