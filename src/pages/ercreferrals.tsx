@@ -11,12 +11,22 @@ import { useEffect, useState } from 'react'
 const { SEO } = APP_INFO
 
 const columns = [
-  { name: 'id', header: 'Registration ID', defaultFlex: 1 },
-  { name: 'business_name', header: 'Company Name', defaultFlex: 1 },
-  { name: 'name', header: 'Contact', defaultFlex: 1 },
-  { name: 'email', header: 'Email', defaultFlex: 1 },
-  { name: 'phone', header: 'Phone', defaultFlex: 1 },
-  { name: 'createdAtUs', header: 'Registered', defaultFlex: 1 }
+  { name: 'id', header: 'Registration ID', defaultFlex: 1, minWidth: 150 },
+  { name: 'createdAtUs', header: 'Signup Date', defaultFlex: 1, minWidth: 150 },
+  { name: 'business_name', header: 'Company Name', defaultFlex: 1, minWidth: 220 },
+  { name: 'email', header: 'Email', defaultFlex: 1, minWidth: 150 },
+  { name: 'signedAgreement', header: 'Signed Agreement', flex: 1, minWidth: 220 },
+  { name: 'depositPaid', header: 'Deposit Paid', flex: 1, minWidth: 130 },
+  { name: 'docCollection', header: 'Doc Collection', flex: 1, minWidth: 130 },
+  { name: 'excelTeam', header: 'Excel Team', flex: 1, minWidth: 130 },
+  { name: 'qualificationTeam', header: 'Qualification Team', flex: 1, minWidth: 220 },
+  { name: 'docsSentForSignature', header: 'Docs Sent For Signature', flex: 1, minWidth: 220 },
+  { name: 'docsSentForSignatureDateUs', header: 'Docs Sent For Signature Date', flex: 1, minWidth: 250 },
+  { name: 'filledWithIRS', header: 'Filled with IRS?', flex: 1, minWidth: 130 },
+  { name: 'filledWithIRSDateUs', header: 'Filled with IRS Date', flex: 1, minWidth: 180 },
+  { name: 'paid', header: 'Paid', flex: 1, minWidth: 130 },
+  { name: 'paidDateUs', header: 'Paid Date', flex: 1, minWidth: 130 },
+  { name: 'commission', header: 'Commision', flex: 1, minWidth: 130 }
 ]
 
 const gridStyle = { minHeight: 550 }
