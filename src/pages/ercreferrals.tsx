@@ -15,6 +15,7 @@ const columns = [
   { name: 'createdAtUs', header: 'Signup Date', defaultFlex: 1, minWidth: 150 },
   { name: 'business_name', header: 'Company Name', defaultFlex: 1, minWidth: 220 },
   { name: 'email', header: 'Email', defaultFlex: 1, minWidth: 150 },
+  { name: 'phone', header: 'Phone', defaultFlex: 1, minWidth: 150 },
   { name: 'signedAgreement', header: 'Signed Agreement', flex: 1, minWidth: 220 },
   { name: 'depositPaid', header: 'Deposit Paid', flex: 1, minWidth: 130 },
   { name: 'docCollection', header: 'Doc Collection', flex: 1, minWidth: 130 },
