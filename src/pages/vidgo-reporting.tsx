@@ -170,7 +170,7 @@ const VidgoComissionsPage: Page = () => {
       <div className='w-full h-screen-80 flex flex-col items-center justify-center'>
         <EmptyData label='Vidgo Reporting Empty' classes='w-52 h-52' />
         <a
-          href='https://www.vidgo.com/snap'
+          href={`https://www.vidgo.com/snap/?subpid=${auth.referralCode}`}
           target='_blank'
           rel='noopener noreferrer'
           className='mt-4 font-semibold text-primary-500 px-6 py-1 border border-primary-500 rounded-md hover:bg-primary-500 hover:text-white'
