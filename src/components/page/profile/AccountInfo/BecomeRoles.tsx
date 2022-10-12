@@ -8,6 +8,7 @@ interface IBecomeRolesProps {
 }
 
 export const BecomeRoles = ({ auth }: IBecomeRolesProps) => {
+  console.log(auth.roles)
   return (
     <>
       {
@@ -23,6 +24,18 @@ export const BecomeRoles = ({ auth }: IBecomeRolesProps) => {
             }
 
             <div className='w-full flex flex-col md:flex-row justify-between items-start gap-y-10 gap-x-10 mt-10'>
+              {
+                ((auth.roles.agent && !auth.roles.customer) && (
+                  <Link href={`/become-role?role=${ROLES.CUSTOMER}`}>
+                    <a className='bg-white hover:bg-primary-300 hover:bg-opacity-30 rounded-md p-4 w-full'>
+                      <div className='flex flex-col md:flex-row justify-center items-center'>
+                        <span className='text-2xl font-bold text-gray-800 mr-10'>Become a Customer</span>
+                        <CustomerIcon classes='w-24' />
+                      </div>
+                    </a>
+                  </Link>
+                ))
+              }
               {
                 ((auth.roles.merchant || auth.roles.driver) && !auth.roles.customer) && (
                   <Link href={`/become-role?role=${ROLES.CUSTOMER}`}>

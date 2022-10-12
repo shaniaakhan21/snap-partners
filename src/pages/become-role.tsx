@@ -28,6 +28,13 @@ const BecomeRolePage = ({ role }: { role: 'CUSTOMER' | 'DRIVER' | 'RESTAURANT' }
     validateRole && router.push('/overview')
   }, [])
 
+  useEffect(() => {
+    const validateRole = role ? auth.roles[role.toLowerCase()] : null
+
+    validateRole && toast(`You are now a ${role.toLowerCase()}!`, { type: 'success' })
+    validateRole && router.push('/overview')
+  }, [auth])
+
   if (role.toLocaleUpperCase() === 'CUSTOMER' && !auth.roles.customer) {
     return (<FormBecomeCustomer userAuth={auth} userSetAuth={setAuth} />)
   }
