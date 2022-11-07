@@ -41,7 +41,7 @@ export const drawerRoutes = [
   {
     icon: <GenealogyIcon />,
     to: '/ercreferrals',
-    label: 'ERC Referral Client'
+    label: 'ERC Reporting'
   },
   {
     icon: <RelojTempIcon />,

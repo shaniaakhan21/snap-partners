@@ -79,14 +79,22 @@ const ErcreferralsPage: Page = () => {
   }, [])
 
   return (
-    <TableTransactions transactions={transactions} />
+    <>
+      <span className='text-2xl font-bold'>Your Personal Clients</span> <br /><br />
+      <TableTransactions transactions={transactions} />
+      <br /><br />
+      <span className='text-2xl font-bold'>Your Team Clients</span> <br /><br />
+      <div className='text-center'>
+        <span className='text-2xl'>COMING SOON</span>
+      </div>
+    </>
   )
 }
 
 ErcreferralsPage.getLayout = (page: ReactNode) => (
   <DashboardLayout>
     <Head>
-      <title>{SEO.TITLE_PAGE} - ERC Referrals</title>
+      <title>{SEO.TITLE_PAGE} - ERC Reporting</title>
     </Head>
 
     {page}
