@@ -56,8 +56,48 @@ export const TableTransactions = ({ transactions }: ITableTransactionsProps) => 
   )
 }
 
+const columnsClient = [
+  { name: 'level', header: 'Level', defaultFlex: 1, minWidth: 150 },
+  { name: 'totalClients', header: 'Total Clients', defaultFlex: 1, minWidth: 150 },
+  { name: 'registereds', header: '# Registered', defaultFlex: 1, minWidth: 150 },
+  { name: 'signedAgreements', header: '# Signed Agreements', defaultFlex: 1, minWidth: 220 },
+  { name: 'depositPaids', header: '# Deposits Paid', defaultFlex: 1, minWidth: 150 },
+  { name: 'docCollections', header: '# Doc Collections', defaultFlex: 1, minWidth: 150 },
+  { name: 'excelTeams', header: '# Excel Teams', flex: 1, minWidth: 200 },
+  { name: 'qualificationTeams', header: '# Qualification Teams', flex: 1, minWidth: 200 },
+  { name: 'docsSentForSignatures', header: '# Docs Sent for Signature', flex: 1, minWidth: 220 },
+  { name: 'filleds', header: '# Filled', flex: 1, minWidth: 130 },
+  { name: 'paids', header: '# Paid?', flex: 1, minWidth: 220 },
+  { name: 'totalCommissions', header: 'Total Commission', flex: 1, minWidth: 220 }
+]
+
+export const TableClientTransactions = ({ transactions }: ITableTransactionsProps) => {
+  return (
+    <ReactDataGrid
+      idProperty="id"
+      columns={columnsClient}
+      dataSource={transactions}
+      sortable={true}
+      defaultFilterValue={filterValue}
+      style={gridStyle}
+      defaultLimit={10}
+      pagination
+    />
+  )
+}
+
 const ErcreferralsPage: Page = () => {
   const [transactions, setTransactions] = useState([])
+  const [transactionsClient, setTransactionsClient] = useState([])
+  const [monthSelected, setMonthSelected] = useState(String(new Date().getMonth()))
+  const [yearSelected, setYearSelected] = useState(String(new Date().getFullYear()))
+
+  const month = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+  const years = []
+  for (let i = new Date().getFullYear(); i >= 2022; i--) {
+    years.push(i)
+  }
 
   useEffect(() => {
     (async function () {
@@ -78,14 +118,69 @@ const ErcreferralsPage: Page = () => {
     })()
   }, [])
 
+  useEffect(() => {
+    (async function () {
+      try {
+        const token = getLocalStorage('accessToken')
+
+        const res = await fetch(`/api/erc/getTableClients?month=${monthSelected}&year=${yearSelected}`, {
+          method: 'GET',
+          headers: { Authorization: `Bearer ${token}` }
+        })
+
+        const data = await res.json()
+
+        setTransactionsClient(data)
+      } catch (e) {
+
+      }
+    })()
+  }, [monthSelected, yearSelected])
+
   return (
     <>
       <span className='text-2xl font-bold'>Your Personal Clients</span> <br /><br />
       <TableTransactions transactions={transactions} />
       <br /><br />
-      <span className='text-2xl font-bold'>Your Team Clients</span> <br /><br />
+      <span className='text-2xl font-bold'>Your Team Clients</span>
+
+      <select
+        id='legalType'
+        name='legalType'
+        className='ml-5 cursor-pointer relative xs:mr-2 pl-2 pr-12 py-0 xs:py-1 my-2 bg-[rgba(255,255,255,.13)] rounded-md border border-solid border-black outline-none appearance-none leading-8'
+        placeholder='User Rank'
+        onChange={(current) => { setMonthSelected(current.target.value) }}
+      >
+        {month.map((m, i) => {
+          return (
+            <option key={i} selected={(new Date().getMonth() === i)} value={i}>
+              {m}
+            </option>
+          )
+        })
+        }
+      </select>
+
+      <select
+        id='legalType'
+        name='legalType'
+        className='ml-5 cursor-pointer relative xs:mr-2 pl-2 pr-12 py-0 xs:py-1 my-2 bg-[rgba(255,255,255,.13)] rounded-md border border-solid border-black outline-none appearance-none leading-8'
+        placeholder='User Rank'
+        onChange={(current) => { setYearSelected(current.target.value) }}
+      >
+        {years.map((y, i) => {
+          return (
+            <option key={i} selected={(new Date().getFullYear() === y)} value={y}>
+              {y}
+            </option>
+          )
+        })
+        }
+      </select>
+
+      <br /><br />
       <div className='text-center'>
-        <span className='text-2xl'>COMING SOON</span>
+        <TableClientTransactions transactions={transactionsClient} />
       </div>
     </>
   )
