@@ -90,7 +90,7 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
   }
 
   const handleSkip = () => {
-    GTMTrack.signUp(role, 4, null, 'no')
+    GTMTrack.signUp(role, 3, null, 'no')
     handleClickLogin()
   }
 
