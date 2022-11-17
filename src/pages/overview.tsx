@@ -37,13 +37,23 @@ const DashboardOverViewPage: Page = () => {
     <>
       <>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-5'>
-          <a href="https://store.snapdelivered.com/product/snap-disruption-university-part-3-live-event/" target={"_blank"}>
+          <a href="https://store.snapdelivered.com/product/snap-disruption-university-part-3-live-event/" target={'_blank'}>
             <img src='/images/img1.jpg' alt='Agent logo' />
           </a>
-          <a href="https://store.snapdelivered.com/product/snap-disruption-university-part-3-live-stream/" target={"_blank"}>
+          <a href="https://store.snapdelivered.com/product/snap-disruption-university-part-3-live-stream/" target={'_blank'}>
             <img src='/images/img2.jpg' alt='Agent logo' />
           </a>
-      </div>
+        </div>
+      </>
+      <>
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-5'>
+          <a href="https://jorns.smartstudenthub.com/Account/ERCLogin" target={'_blank'}>
+            <img src='/images/1.png' alt='Agent logo' />
+          </a>
+          <a href="https://snapfinancialcertified.com/" target={'_blank'}>
+            <img src='/images/2.png' alt='Agent logo' />
+          </a>
+        </div>
       </>
       <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-full h-fit gap-4'>
         <Graphics data={dataGraphic} />
