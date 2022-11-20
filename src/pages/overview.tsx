@@ -48,7 +48,7 @@ const DashboardOverViewPage: Page = () => {
       <>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-5'>
           <a href="https://jorns.smartstudenthub.com/ERC/Register" target={'_blank'}>
-            <img src='/images/1.png' alt='Agent logo' />
+            <img src='/images/1v1.png' alt='Agent logo' />
           </a>
           <a href="https://snapfinancialcertified.com/" target={'_blank'}>
             <img src='/images/2.png' alt='Agent logo' />
