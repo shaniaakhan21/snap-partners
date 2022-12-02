@@ -14,6 +14,7 @@ const columns = [
   { name: 'id', header: 'Registration ID', defaultFlex: 1, minWidth: 150 },
   { name: 'createdAtUs', header: 'Signup Date', defaultFlex: 1, minWidth: 150 },
   { name: 'business_name', header: 'Company Name', defaultFlex: 1, minWidth: 220 },
+  { name: 'name', header: 'Name', defaultFlex: 1, minWidth: 220 },
   { name: 'email', header: 'Email', defaultFlex: 1, minWidth: 150 },
   { name: 'phone', header: 'Phone', defaultFlex: 1, minWidth: 150 },
   { name: 'signedAgreement', header: 'Signed Agreement', flex: 1, minWidth: 220 },
