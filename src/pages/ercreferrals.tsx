@@ -11,23 +11,23 @@ import { useEffect, useState } from 'react'
 const { SEO } = APP_INFO
 
 const columns = [
-  { name: 'id', header: 'Registration ID', defaultFlex: 1, minWidth: 150 },
-  { name: 'createdAtUs', header: 'Signup Date', defaultFlex: 1, minWidth: 150 },
-  { name: 'business_name', header: 'Company Name', defaultFlex: 1, minWidth: 220 },
-  { name: 'name', header: 'Name', defaultFlex: 1, minWidth: 220 },
-  { name: 'email', header: 'Email', defaultFlex: 1, minWidth: 150 },
-  { name: 'phone', header: 'Phone', defaultFlex: 1, minWidth: 150 },
-  { name: 'signedAgreement', header: 'Signed Agreement', flex: 1, minWidth: 220 },
-  { name: 'depositPaid', header: 'Deposit Paid', flex: 1, minWidth: 130 },
-  { name: 'docCollection', header: 'Doc Collection', flex: 1, minWidth: 130 },
-  { name: 'excelTeam', header: 'Excel Team', flex: 1, minWidth: 130 },
-  { name: 'qualificationTeam', header: 'Qualification Team', flex: 1, minWidth: 220 },
-  { name: 'docsSentForSignature', header: 'Docs Sent For Signature', flex: 1, minWidth: 220 },
-  { name: 'docsSentForSignatureDateUs', header: 'Docs Sent For Signature Date', flex: 1, minWidth: 250 },
-  { name: 'filledWithIRS', header: 'Filled with IRS?', flex: 1, minWidth: 130 },
-  { name: 'filledWithIRSDateUs', header: 'Filled with IRS Date', flex: 1, minWidth: 180 },
-  { name: 'paid', header: 'Paid', flex: 1, minWidth: 130 },
-  { name: 'paidDateUs', header: 'Paid Date', flex: 1, minWidth: 130 },
+  { name: 'id', header: 'ID', defaultFlex: 1, minWidth: 60 },
+  { name: 'createdAtUs', header: 'Signup Date', defaultFlex: 1, minWidth: 130 },
+  { name: 'business_name', header: 'Company', defaultFlex: 1, minWidth: 110 },
+  { name: 'name', header: 'Name', defaultFlex: 1, minWidth: 85 },
+  { name: 'email', header: 'Email', defaultFlex: 1, minWidth: 85 },
+  { name: 'phone', header: 'Phone', defaultFlex: 1, minWidth: 90 },
+  { name: 'signedAgreement', header: 'Signed Agreement', flex: 1, minWidth: 120 },
+  { name: 'depositPaid', header: 'Deposit Paid', flex: 1, minWidth: 110 },
+  { name: 'docCollection', header: 'Doc Collection', flex: 1, minWidth: 110 },
+  { name: 'excelTeam', header: 'Excel Team', flex: 1, minWidth: 110 },
+  { name: 'qualificationTeam', header: 'Qualification Team', flex: 1, minWidth: 110 },
+  { name: 'docsSentForSignature', header: 'Docs Sent For Signature', flex: 1, minWidth: 110 },
+  { name: 'docsSentForSignatureDateUs', header: 'Docs Sent For Signature Date', flex: 1, minWidth: 110 },
+  { name: 'filledWithIRS', header: 'Filed with IRS?', flex: 1, minWidth: 110 },
+  { name: 'filledWithIRSDateUs', header: 'Filed with IRS Date', flex: 1, minWidth: 110 },
+  { name: 'paid', header: 'Paid', flex: 1, minWidth: 80 },
+  { name: 'paidDateUs', header: 'Paid Date', flex: 1, minWidth: 120 },
   { name: 'commission', header: 'Commision', flex: 1, minWidth: 130 }
 ]
 
@@ -141,7 +141,31 @@ const ErcreferralsPage: Page = () => {
   return (
     <>
       <span className='text-2xl font-bold'>Your Personal Clients</span> <br /><br />
+
+      <div id="cro-erc-process">
+          <img src="https://snapdeliveredteam.com/images/j-logo.png" />
+          <div>
+              <h1>The ERC Process has 3 Phases</h1>
+              <div>
+              <ul>
+                  <li>Phase 1</li>
+                  <li>New Client</li>
+              </ul>
+              <ul>
+                  <li>Phase 2</li>
+                  <li> Jorns Filling Work</li>
+              </ul>
+              <ul>
+                  <li>Phase 3</li>
+                  <li>IRS Payment</li>
+              </ul>
+              </div>
+      </div>
+      </div>
+
+      <div id="table1erc">
       <TableTransactions transactions={transactions} />
+      </div>
       <br /><br />
       <span className='text-2xl font-bold'>Your Team Clients</span>
 
