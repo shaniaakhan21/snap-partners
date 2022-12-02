@@ -3,10 +3,9 @@ import { useEffect, useState } from 'react'
 
 const tableHeaders = [
   'Customer Name',
-  'Customer Email',
+  'Last Payment',
   'Package',
   'Join Date',
-  'Last Payment',
   'Monthly Earning'
 ]
 
@@ -34,10 +33,9 @@ export const CustomerTable = ({ myCustomers }: { myCustomers: any[] }) => {
         {customerNormalized.map((customer, key) => (
           <tr key={key} className='border-t border-zinc-300'>
             <td className='px-4 py-2 text-left'>{customer.customerName}</td>
-            <td className='px-4 py-2 text-left'>{customer.customerEmail}</td>
+            <td className='px-4 py-2 text-left'>{customer.lastPayment}</td>
             <td className='px-4 py-2 text-left'>{customer.package}</td>
             <td className='px-4 py-2 text-left'>{customer.joinDate}</td>
-            <td className='px-4 py-2 text-left'>{customer.lastPayment}</td>
             <td className={`px-4 py-2 text-center font-semibold ${customer.monthlyEarning !== 'Empty' ? 'text-green-500' : 'text-zinc-500'}`}>
               {customer.monthlyEarning}
             </td>

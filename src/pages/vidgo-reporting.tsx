@@ -183,7 +183,7 @@ const VidgoComissionsPage: Page = () => {
 
   return (
     <div>
-      <section className='w-full h-full flex flex-col-reverse lg:flex-row justify-between items-center lg:items-start gap-x-8 gap-y-8'>
+      <section className='w-full h-full flex flex-col lg:flex-row justify-between items-center lg:items-start gap-x-8 gap-y-8'>
         <div className='overflow-x-scroll scroll-x-primary w-full lg:w-2/3 h-96'>
           <h5 className='text-lg font-semibold'>Your Customers</h5>
 
@@ -207,7 +207,7 @@ const VidgoComissionsPage: Page = () => {
 
           <div className='w-full border-primary-500 border-2 rounded-md px-4 py-4 lg:py-[9.9rem] mt-3 text-center'>
             <span className='font-bold text-primary-500'>
-                Comming Soon
+                Coming Soon
             </span>
           </div>
           {/* <TeamCustomerTable teamCustomers={teamCustomers} /> */}
