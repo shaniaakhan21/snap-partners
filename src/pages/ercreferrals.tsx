@@ -67,7 +67,7 @@ const columnsClient = [
   { name: 'excelTeams', header: '# Excel Teams', flex: 1, minWidth: 200 },
   { name: 'qualificationTeams', header: '# Qualification Teams', flex: 1, minWidth: 200 },
   { name: 'docsSentForSignatures', header: '# Docs Sent for Signature', flex: 1, minWidth: 220 },
-  { name: 'filleds', header: '# Filled', flex: 1, minWidth: 130 },
+  { name: 'filleds', header: '# Filed', flex: 1, minWidth: 130 },
   { name: 'paids', header: '# Paid?', flex: 1, minWidth: 220 },
   { name: 'totalCommissions', header: 'Total Commission', flex: 1, minWidth: 220 }
 ]
