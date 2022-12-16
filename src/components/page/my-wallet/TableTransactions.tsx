@@ -3,7 +3,7 @@ import '@inovua/reactdatagrid-community/index.css'
 import { ITransaction } from 'lib/types/transaction'
 
 const columns = [
-  { name: 'id', header: 'Transaction ID', defaultFlex: 1 },
+  { name: 'id', header: 'Transaction ID', defaultFlex: 1, type: 'number' },
   { name: 'description', header: 'Description', defaultFlex: 3 },
   {
     name: 'date',
