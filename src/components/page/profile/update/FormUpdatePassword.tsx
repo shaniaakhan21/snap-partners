@@ -69,6 +69,7 @@ export const FormUpdatePassword = ({ auth, setAuth, typeUpdate, setTypeUpdate }:
     }
 
     setAuth({
+      socialSecurityNumber: userData.socialSecurityNumber,
       email: userData.email,
       name: userData.name,
       password: userData.password,

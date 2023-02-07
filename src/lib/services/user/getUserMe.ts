@@ -7,6 +7,7 @@ interface IAuthorizations {
 
 interface IQueryUserMeReturn extends IQueryErrorReturn {
   data: {
+    socialSecurityNumber: string
     createdAt: string
     id: number
     name: string

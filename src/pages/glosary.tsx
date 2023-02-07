@@ -40,6 +40,7 @@ const GlosaryPage: Page = () => {
 
         toast('Session recovered!', { type: 'success' })
         setAuth({
+          socialSecurityNumber: data.socialSecurityNumber,
           email: data.email,
           name: data.name,
           password: data.password,

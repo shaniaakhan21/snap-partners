@@ -53,6 +53,7 @@ export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
     trackLoginHandle(false)
     setLoading(false)
     setAuth({
+      socialSecurityNumber: data.socialSecurityNumber,
       email: data.email,
       name: data.name,
       password: data.password,

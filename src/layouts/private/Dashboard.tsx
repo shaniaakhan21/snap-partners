@@ -45,6 +45,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
 
       toast('Session recovered!', { type: 'success' })
       setAuth({
+        socialSecurityNumber: data.socialSecurityNumber,
         email: data.email,
         name: data.name,
         password: data.password,

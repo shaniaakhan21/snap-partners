@@ -1,1 +1,1 @@
-export type TAccountInfoToUpdate = 'email' | 'phone' | 'password' | 'bankaccount'
+export type TAccountInfoToUpdate = 'email' | 'phone' | 'password' | 'bankaccount' | 'socialsecurity'

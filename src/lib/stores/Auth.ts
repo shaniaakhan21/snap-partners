@@ -21,6 +21,7 @@ export interface IAuth extends IUserMe, INsurAccount {
 }
 
 export type TSetAuth = ({
+  socialSecurityNumber,
   accessToken,
   id,
   username,
@@ -47,6 +48,7 @@ export type TSetAuth = ({
 interface IAuthAtom {
   auth: IAuth
   setAuth: ({
+    socialSecurityNumber,
     accessToken,
     id,
     username,
@@ -76,6 +78,7 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
   auth: null,
 
   setAuth: ({
+    socialSecurityNumber,
     accessToken,
     id,
     username,
@@ -101,6 +104,7 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
   }) => {
     set({
       auth: {
+        socialSecurityNumber,
         accessToken,
         id,
         username,

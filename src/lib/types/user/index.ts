@@ -14,6 +14,7 @@ export interface IUserData {
 }
 
 export interface IUserCommonData {
+  socialSecurityNumber: string
   id: number
   name: string
   lastname: string

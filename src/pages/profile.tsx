@@ -14,6 +14,7 @@ import { ReactNode } from 'lib/types'
 import DashboardLayout from 'layouts/private/Dashboard'
 import { FormUpdatePassword } from 'components/page/profile/update/FormUpdatePassword'
 import { FormUpdateBankAccount } from 'components/page/profile/update/FormUpdateBankAccount'
+import { FormUpdateSocialSecurity } from 'components/page/profile/update/FormUpdateSocialSecurity'
 import { FormUpdateEmail } from 'components/page/profile/update/FormUpdateEmail'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { EditPhone } from 'components/page/profile/update/EditPhone'
@@ -61,6 +62,7 @@ const ProfilePage = ({ email, tokenExist }: { email: string, tokenExist: boolean
   if (typeUpdate === 'phone') return <EditPhone auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
   if (typeUpdate === 'password') return <FormUpdatePassword auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
   if (typeUpdate === 'bankaccount') return <FormUpdateBankAccount auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
+  if (typeUpdate === 'socialsecurity') return <FormUpdateSocialSecurity auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
 
   return (
     <AccountInfo

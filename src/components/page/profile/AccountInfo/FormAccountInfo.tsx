@@ -117,6 +117,30 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
 
       <li className='rounded-xl bg-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center'>
         <div>
+          <label htmlFor='password' className='text-sm'>Social Security Number</label>
+          <br />
+          <input
+            id='password'
+            name='text'
+            type='text'
+            value={auth.socialSecurityNumber}
+            disabled={true}
+            className='w-full bg-transparent text-lg truncate'
+          />
+        </div>
+
+        <div>
+          <button
+            onClick={() => setTypeUpdate('socialsecurity')}
+            className='bg-primary-500 hover:bg-opacity-80 rounded-full px-4 py-1 text-white font-bold uppercase'
+          >
+            Edit
+          </button>
+        </div>
+      </li>
+
+      <li className='rounded-xl bg-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center'>
+        <div>
           <label htmlFor='password' className='text-sm'>Bank Account Information</label>
           <br />
           <input

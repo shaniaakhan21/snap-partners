@@ -49,6 +49,7 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
     toast('Login Successful!', { type: 'success' })
     setIsLoading(false)
     setAuth({
+      socialSecurityNumber: data.socialSecurityNumber,
       email: data.email,
       name: data.name,
       password: data.password,
