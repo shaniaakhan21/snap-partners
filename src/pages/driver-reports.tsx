@@ -54,7 +54,7 @@ const ComingSoon: PageNext = () => {
   const [buttonDisabled, setbuttonDisabled] = useState(true)
 
   const columns = [
-    { field: 'orders', headerName: 'Deliveries', headerClassName: 'mui-table-bg-header', minWidth: 130, flex: 1 },
+    { field: 'orders', headerName: 'Deliveries', headerClassName: 'mui-table-bg-header', minWidth: 130, flex: 1 }
   ]
 
   const columns2 = [
