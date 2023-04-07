@@ -29,9 +29,19 @@ export const drawerRoutes = [
     label: 'Marketing Tools'
   },
   {
-    icon: <RelojTempIcon />,
-    to: '/comingsoon',
-    label: 'Reports'
+    icon: <CompensationPlanIcon />,
+    to: '/customer-reports',
+    label: 'Customer Reports'
+  },
+  {
+    icon: <CompensationPlanIcon />,
+    to: '/driver-reports',
+    label: 'Driver Reports'
+  },
+  {
+    icon: <CompensationPlanIcon />,
+    to: '/merchant-reports',
+    label: 'Merchant Reports'
   },
   {
     icon: <TrainingIcon />,
@@ -53,6 +63,11 @@ export const drawerRoutes = [
     to: '/genealogy',
     label: 'Genealogy'
   },
+  // {
+  //  icon: <GenealogyIcon />,
+  //  to: '/tree',
+  //  label: 'Tree'
+  // },
   {
     icon: <CompensationPlanIcon />,
     to: '/compensation-plan',

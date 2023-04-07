@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 import { Card, Grid, makeStyles, TextField, Button } from '@material-ui/core'
-import { DataGrid } from '@material-ui/data-grid'
+import { DataGrid } from '@mui/x-data-grid'
 import { RecursiveAccordion } from './RecursiveAccordion'
 import { ModalUninivelUser } from './Modals/UniLevelUser'
 import SearchIcon from '@material-ui/icons/Search'

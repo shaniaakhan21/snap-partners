@@ -124,3 +124,28 @@
   @apply bg-primary-300 border-primary-500 border border-solid rounded-md;
   grid-area: topOrderline;
 } */
+
+.mui-table-bg-header {
+  background-color: #DD4C37;
+  color: white
+}
+
+.mui-table-bg-row {
+  background-color: white;
+}
+
+.MuiInputBase-input {
+  background-color: white !important; /* Change the background color here */
+}
+
+.orgchart{
+  background: none !important;
+}
+
+.orgchart ul li .oc-node .oc-heading{
+  background-color: #DD4C37!important;
+}
+
+.oc-node:hover {
+  cursor: pointer;
+}

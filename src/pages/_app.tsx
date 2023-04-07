@@ -1,4 +1,5 @@
 import { AppContext, AppInitialProps, AppLayoutProps } from 'next/app'
+import { LicenseInfo } from '@mui/x-license-pro';
 import { ThemeProvider } from '@material-ui/core/styles'
 import { Fragment, ReactNode, useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
@@ -23,6 +24,8 @@ import 'styles/tailwind.css'
 import { APP_INFO } from '../config/appInfo'
 
 const { SEO } = APP_INFO
+
+LicenseInfo.setLicenseKey('fd071382740945dd691689004ef10226Tz02MzY2NixFPTE3MTIzMTEwODQ0MjYsUz1wcm8sTE09c3Vic2NyaXB0aW9uLEtWPTI=');
 
 const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({ Component, pageProps }: AppLayoutProps) => {
   const getLayout = Component.getLayout || ((page: ReactNode) => page)
