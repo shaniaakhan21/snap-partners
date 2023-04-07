@@ -1,20 +1,19 @@
-// const { API } = require('config/api')
+const withTM = require('next-transpile-modules')(['@dabeng/react-orgchart'])
 
 /** @type {import('next').NextConfig} */
-module.exports = {
+const nextConfig = {
   reactStrictMode: true,
   async rewrites () {
     return process.env.NODE_ENV !== 'production'
       ? [
         {
           source: '/api/:path*',
-          // destination: `http://localhost:${API.BACKEND_PORT}/:path*`
+          // destination: `http://localhost:5062/:path*`
           destination: 'https://snapdeliveredteam.com/api/:path*'
-          // destination: 'https://devstage.snap.devopsteam.info/api/:path*'
-          // destination: 'https://dev.snap.devopsteam.info/api/:path*'
-          // destination: 'https://snap421.snap.devopsteam.info/api/:path*'
         }
       ]
       : []
   }
 }
+
+module.exports = withTM(nextConfig)
