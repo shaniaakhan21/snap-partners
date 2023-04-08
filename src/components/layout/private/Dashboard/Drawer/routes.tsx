@@ -30,28 +30,39 @@ export const drawerRoutes = [
   },
   {
     icon: <CompensationPlanIcon />,
-    to: '/customer-reports',
-    label: 'Customer Reports'
-  },
-  {
-    icon: <CompensationPlanIcon />,
-    to: '/driver-reports',
-    label: 'Driver Reports'
-  },
-  {
-    icon: <CompensationPlanIcon />,
-    to: '/merchant-reports',
-    label: 'Merchant Reports'
+    to: '/',
+    label: 'Reports',
+    subItems: [
+      {
+        label: 'Global Reports',
+        to: '/global-reports'
+      },
+      {
+        label: 'Customer Reports',
+        to: '/customer-reports'
+      },
+      {
+        label: 'Driver Reports',
+        to: '/driver-reports'
+      },
+      {
+        label: 'Merchant Reports',
+        to: '/merchant-reports'
+      },
+      {
+        label: 'ERC Reports',
+        to: '/ercreferrals'
+      },
+      {
+        label: 'Vidgo Reports',
+        to: '/vidgo-reporting'
+      }
+    ]
   },
   {
     icon: <TrainingIcon />,
     to: '/training',
     label: 'Training'
-  },
-  {
-    icon: <GenealogyIcon />,
-    to: '/ercreferrals',
-    label: 'ERC Reporting'
   },
   {
     icon: <RelojTempIcon />,
@@ -88,11 +99,6 @@ export const drawerRoutes = [
     icon: <CreditCardIcon />,
     to: '/my-wallet',
     label: 'My Wallet'
-  },
-  {
-    icon: <VidgoLogo />,
-    to: '/vidgo-reporting',
-    label: 'Vidgo Reporting'
   }
 ]
 

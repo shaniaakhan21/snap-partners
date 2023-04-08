@@ -3,10 +3,25 @@ import Link from 'next/link'
 import { useDrawerStore } from 'lib/stores'
 import { drawerRoutes } from './routes'
 import { GTMTrack } from 'lib/utils/gtm'
-import { Fragment } from 'react'
+import { Fragment, ReactNode, useState } from 'react'
 
 export const DrawerMobile = ({ isCurrentlyPage, auth, isManager, isAdmin }: { isCurrentlyPage: (route: string) => boolean, auth:any, isManager: boolean, isAdmin: boolean }) => {
   const { isOpen, closeDrawer } = useDrawerStore()
+  const [activeSubmenu, setActiveSubmenu] = useState(null)
+
+  const toggleSubmenu = (index: number) => {
+    setActiveSubmenu(activeSubmenu === index ? null : index)
+  }
+
+  const renderMenuItem = (content: ReactNode, hasSubItems: boolean, routeTo: string) => {
+    return hasSubItems
+      ? (
+        content
+      )
+      : (
+        <Link href={routeTo}>{content}</Link>
+      )
+  }
 
   return (
     <div
@@ -20,11 +35,11 @@ export const DrawerMobile = ({ isCurrentlyPage, auth, isManager, isAdmin }: { is
       >
         <aside className={`dashboardLayout__drawer scroll-primary absolute h-screen lg:hidden ${isOpen ? 'visible opacity-100 block' : 'invisible opacity-0'}`}>
           <section className='mt-32 pl-10'>
-            </section>
+          </section>
 
           <ul className='mt-10 mb-20 text-white'>
             {
-              drawerRoutes.map(route => {
+              drawerRoutes.map((route, index) => {
                 if ((isAdmin || isManager) && route.to === '/upgrade-to-manager') return <Fragment key={route.label} />
                 const isSnap = (auth.roles.customer || auth.roles.driver || auth.roles.merchant)
                 if (route.snap && !isSnap) return <Fragment key={route.label} />
@@ -34,16 +49,39 @@ export const DrawerMobile = ({ isCurrentlyPage, auth, isManager, isAdmin }: { is
                     className={`w-full relative ${isCurrentlyPage(route.to) && 'linkWrapper__activate bg-[#19191914]'}`}
                     key={route.label}
                   >
-                    <Link href={route.to}>
+                    {renderMenuItem(
                       <a
                         target={route.to.includes('https') ? '_blank' : '_self'}
-                        className='w-full flex justify-start items-center gap-x-2 py-4 hover:bg-[#19191914] pl-10'
-                        onClick={() => GTMTrack.navbarPress(route.label)}
+                        className='cursor-pointer w-full flex justify-start items-center gap-x-2 py-4 hover:bg-[#19191914] pl-10'
+                        onClick={(e) => {
+                          GTMTrack.navbarPress(route.label)
+                          if (route.subItems) {
+                            e.stopPropagation()
+                            toggleSubmenu(index)
+                          }
+                        }}
                       >
                         <div>{route.icon}</div>
                         <div>{route.label}</div>
-                      </a>
-                    </Link>
+                      </a>,
+                      !!route.subItems,
+                      route.to
+                    )}
+                    {route.subItems && activeSubmenu === index && (
+                      <ul className='mt-2'>
+                        {route.subItems.map(subItem => (
+                          <li key={subItem.label}>
+                            <Link href={subItem.to}>
+                              <a
+                                className='w-full flex justify-start items-center gap-x-2 py-2 hover:bg-[#19191914] pl-16'
+                              >
+                                <div>{subItem.label}</div>
+                              </a>
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </li>
                 )
               })
