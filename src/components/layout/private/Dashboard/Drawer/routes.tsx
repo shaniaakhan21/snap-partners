@@ -30,7 +30,7 @@ export const drawerRoutes = [
   },
   {
     icon: <CompensationPlanIcon />,
-    to: '/',
+    to: '/reports',
     label: 'Reports',
     subItems: [
       {

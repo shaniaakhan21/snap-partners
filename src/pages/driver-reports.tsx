@@ -105,6 +105,7 @@ const ComingSoon: PageNext = () => {
 
   return (
     <>
+      <span className='text-2xl font-bold'>Driver Reports</span> <br /><br />
       <div className="grid grid-cols-12 gap-4">
         <div className="col-span-10">
           <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -129,7 +130,7 @@ const ComingSoon: PageNext = () => {
           <br />
           <div className="grid grid-cols-3 gap-4">
             <div className="col-span-1">
-              <h1 style={{ fontWeight: 'bold' }}>Total Deliveries on my team</h1>
+              <h1 style={{ fontWeight: 'bold' }}>Total deliveries on my team</h1>
               <br/>
               <Table columns={columns} rows={rowsOrdersSummary}/>
             </div>

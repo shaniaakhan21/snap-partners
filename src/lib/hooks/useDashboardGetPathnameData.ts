@@ -10,7 +10,20 @@ interface IDashboardGetPathnameReturn {
 export const useDashboardGetPathname = (): IDashboardGetPathnameReturn => {
   const router = useRouter()
 
-  const pathnameData = globalRoutes.find(pathnameData => router.pathname.includes(pathnameData.to))
+  const flattenRoutes = (routes) => {
+    let flatRoutes = []
+    routes.forEach(route => {
+      flatRoutes.push(route)
+
+      if (route.subItems) {
+        flatRoutes = flatRoutes.concat(route.subItems)
+      }
+    })
+    return flatRoutes
+  }
+
+  const flatRoutes = flattenRoutes(globalRoutes);
+  const pathnameData = flatRoutes.find(pathnameData => router.pathname.includes(pathnameData.to));
 
   return pathnameData
     ? {
