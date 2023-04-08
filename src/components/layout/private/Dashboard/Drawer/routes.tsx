@@ -34,27 +34,27 @@ export const drawerRoutes = [
     label: 'Reports',
     subItems: [
       {
-        label: 'Global Reports',
+        label: 'Global',
         to: '/global-reports'
       },
       {
-        label: 'Customer Reports',
+        label: 'Customer',
         to: '/customer-reports'
       },
       {
-        label: 'Driver Reports',
+        label: 'Driver',
         to: '/driver-reports'
       },
       {
-        label: 'Merchant Reports',
+        label: 'Merchant',
         to: '/merchant-reports'
       },
       {
-        label: 'ERC Reports',
+        label: 'ERC',
         to: '/ercreferrals'
       },
       {
-        label: 'Vidgo Reports',
+        label: 'Vidgo',
         to: '/vidgo-reporting'
       }
     ]
