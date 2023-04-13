@@ -4,6 +4,7 @@ import type { Page, ReactNode } from 'lib/types'
 import { useReports } from 'lib/hooks/useReports'
 import { useAuthStore } from 'lib/stores'
 import { APP_INFO } from 'config/appInfo'
+import RankComponent from 'components/common/overview/RankComponent'
 
 import DashboardLayout from 'layouts/private/Dashboard'
 import {
@@ -35,7 +36,26 @@ const DashboardOverViewPage: Page = () => {
 
   return (
     <>
-      <>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-2">
+          <div className="h-19 bg-purple-400 rounded-md mb-4 px-4">
+            <div>
+              <p className="text-white">Current Rank</p>
+              <h1 className="text-2xl text-white font-bold pb-2">Manager</h1>
+            </div>
+          </div>
+          <div className="bg-white">
+            <div className='pt-2 pl-2 pr-2'>
+              <RankComponent />
+            </div >
+          </div>
+        </div>
+        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1">Item 2</div>
+        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1">Item 3</div>
+        <div className="col-span-3 sm:col-span-3 md:col-span-3 h-10 bg-gray-500">Full-width row</div>
+      </div>
+
+      {/* <>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-5'>
           <a href="https://store.snapdelivered.com/product/snap-u-live-event-in-cincinnati-ohio/" target={'_blank'}>
             <img src='/images/livev1.jpg' alt='Agent logo' />
@@ -54,8 +74,8 @@ const DashboardOverViewPage: Page = () => {
             <img src='/images/2.png' alt='Agent logo' />
           </a>
         </div>
-      </>
-      <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-full h-fit gap-4'>
+      </> */}
+      {/* <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-full h-fit gap-4'>
         <Graphics data={dataGraphic} />
         <PromotionTracker userAuth={auth} />
       </div>
@@ -75,7 +95,7 @@ const DashboardOverViewPage: Page = () => {
         <TopCustomerAcquisition data={reports} />
         <TopAgentAcquisition data={reports} />
         {/* <TopOrderLine data={reports} /> */}
-      </TopEntitiesGrid>
+      {/* </TopEntitiesGrid> */}
     </>
   )
 }
