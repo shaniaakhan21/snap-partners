@@ -6,7 +6,8 @@ import Tab from '@mui/material/Tab'
 import Typography from '@mui/material/Typography'
 import StarIcon from '@material-ui/icons/Star'
 import { styled } from '@material-ui/core/styles'
-import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress'
+import BarWithText from './BarWithText'
+
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -44,44 +45,6 @@ const StyledBox = styled(Box)({
   borderRadius: 4
 })
 
-const BorderLinearProgress = styled(LinearProgress)(({ theme }) => ({
-  height: 20,
-  borderRadius: 15,
-  [`&.${linearProgressClasses.colorPrimary}`]: {
-    backgroundColor: theme.palette.mode === 'light' ? '#D2D2D2' : '#D2D2D2'
-  },
-  [`& .${linearProgressClasses.bar}`]: {
-    borderRadius: 5,
-    backgroundColor: theme.palette.mode === 'light' ? '#1a90ff' : '#C99FFF'
-  }
-}))
-
-const BarWithText = ({ value, variant }) => {
-  const [textPosition, setTextPosition] = React.useState(0)
-
-  React.useEffect(() => {
-    // set the text position based on the value
-    setTextPosition((value * 100) / 90)
-  }, [value])
-
-  return (
-    <>
-      <Typography
-        variant="caption"
-        style={{
-          zIndex: 100,
-          position: 'relative',
-          right: `${100 - textPosition}%`, // set right property based on value
-          top: '25px'
-        }}
-      >
-        {`${value}%`}
-      </Typography>
-      <BorderLinearProgress className='mt-1' variant={variant} value={value} />
-    </>
-  )
-}
-
 export default function RankComponent () {
   const [value, setValue] = React.useState(0)
 
@@ -109,11 +72,43 @@ export default function RankComponent () {
           <h1 className="text-2xl text-black font-bold pl-2">Manager</h1>
         </div>
         <div className='col-span-3 text-xs pt-5'>
-          <strong>You need 100 Personal Commissionable Volume</strong>
-          <BarWithText value={50} variant={'determinate'} />
+          <span className='text-10'><strong>You need 100 Personal Commissionable Volume</strong></span>
+          <BarWithText value={30} variant={'determinate'} />
         </div>
         <div className='col-span-3 text-xs pt-5'>
-
+          <span className="text-15">To become a <strong>Supervisor</strong> you'll need</span>
+        </div>
+        <div className="flex pt-2">
+          <span className="text-left text-10"><strong>You have 2/3 PSM</strong></span>
+          <span className="text-right ml-auto text-10"><strong>You need 3 Active PSM</strong></span>
+        </div>
+        <BarWithText value={70} variant={'determinate'}/>
+        <div className="flex pt-2">
+          <span className="text-left text-10"><strong>You need</strong></span>
+          <span className="text-right ml-auto text-10"><strong>3 Working Legs, 2500 V. Each</strong></span>
+        </div>
+        <div>
+          <div className='grid grid-cols-2 sm:grid-cols-4 md:grid-cols-4 gap-2'>
+            <div className='col-span-1'>
+              <BarWithText value={70} variant={'determinate'}/>
+            </div>
+            <div className='col-span-1'>
+              <BarWithText value={70} variant={'determinate'}/>
+            </div>
+            <div className='col-span-1'>
+              <BarWithText value={70} variant={'determinate'}/>
+            </div>
+            <div className='col-span-1 flex justify-end items-end'>
+              <button className="flex items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-10 py-2 px-4 rounded-l-full rounded-r-full">+</button>
+            </div>
+          </div>
+        </div>
+        <div className="flex pt-2">
+          <span className="text-left text-10"><strong>Gv You have $3500</strong></span>
+          <span className="text-right ml-auto text-10"><strong>You need $5000</strong></span>
+        </div>
+        <div className='col-span-1'>
+          <BarWithText value={70} variant={'determinate'}/>
         </div>
       </TabPanel>
       <TabPanel value={value} index={2}>

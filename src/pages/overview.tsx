@@ -5,6 +5,7 @@ import { useReports } from 'lib/hooks/useReports'
 import { useAuthStore } from 'lib/stores'
 import { APP_INFO } from 'config/appInfo'
 import RankComponent from 'components/common/overview/RankComponent'
+import MonthlySubscription from 'components/common/overview/MonthlySubscription'
 
 import DashboardLayout from 'layouts/private/Dashboard'
 import {
@@ -50,7 +51,9 @@ const DashboardOverViewPage: Page = () => {
             </div >
           </div>
         </div>
-        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1">Item 2</div>
+        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1 bg-white">
+          <MonthlySubscription />
+        </div>
         <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1">Item 3</div>
         <div className="col-span-3 sm:col-span-3 md:col-span-3 h-10 bg-gray-500">Full-width row</div>
       </div>
