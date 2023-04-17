@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import ServeImage from '../../../../public/images/subscription_serve.svg'
 
-const MonthlySubscription = () => {
+const MonthlyProduction = () => {
   return (
     <>
       <div className='grid gap-4 py-6'>
@@ -12,7 +12,7 @@ const MonthlySubscription = () => {
             </div>
             <div className="text-left text-10">
               <h1 className="text-2xl text-black font-bold pb-2 pl-5">Monthly</h1>
-              <h1 className="text-2xl text-black font-bold pb-2 pl-5">Subscription</h1>
+              <h1 className="text-2xl text-black font-bold pb-2 pl-5">Production</h1>
             </div>
           </div>
         </div>
@@ -25,13 +25,13 @@ const MonthlySubscription = () => {
           </div>
           <div className='grid grid-cols-1 sm:grid-cols-4 md:grid-cols-4 gap-2 pt-5'>
             <div>
-              <strong><u><p className='text-xs'>Customers</p></u></strong>
+              <strong><u><p className='text-xs'>Customers Orders</p></u></strong>
             </div>
             <div>
               <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
             </div>
             <div>
-              <strong><p className='text-green-600 text-xs text-right'>20 New Customers!</p></strong>
+              <strong><p className='text-green-600 text-xs text-right'>20 Orders</p></strong>
             </div>
             <div>
               <p className='text-xs text-right'>8823 Total</p>
@@ -39,13 +39,13 @@ const MonthlySubscription = () => {
           </div>
           <div className='grid grid-cols-1 sm:grid-cols-4 md:grid-cols-4 gap-2 pt-5'>
             <div>
-              <strong><u><p className='text-xs'>Drivers</p></u></strong>
+              <strong><u><p className='text-xs'>Driver Deliveries</p></u></strong>
             </div>
             <div>
               <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
             </div>
             <div>
-              <strong><p className='text-green-600 text-xs text-right'>20 New Drivers!</p></strong>
+              <strong><p className='text-green-600 text-xs text-right'>20 Deliveries</p></strong>
             </div>
             <div>
               <p className='text-xs text-right'>4546 Total</p>
@@ -53,13 +53,13 @@ const MonthlySubscription = () => {
           </div>
           <div className='grid grid-cols-1 sm:grid-cols-4 md:grid-cols-4 gap-2 pt-5'>
             <div>
-              <strong><u><p className='text-xs'>Merchants</p></u></strong>
+              <strong><u><p className='text-xs'>Merchants Orders</p></u></strong>
             </div>
             <div>
               <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
             </div>
             <div>
-              <strong><p className='text-green-600 text-xs text-right'>20 New Drivers!</p></strong>
+              <strong><p className='text-green-600 text-xs text-right'>20 Orders</p></strong>
             </div>
             <div>
               <p className='text-xs text-right'>682 Total</p>
@@ -73,7 +73,7 @@ const MonthlySubscription = () => {
               <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
             </div>
             <div>
-              <strong><p className='text-green-600 text-xs text-right'>20 New Drivers!</p></strong>
+              <strong><p className='text-green-600 text-xs text-right'>20 Vidgo</p></strong>
             </div>
             <div>
               <p className='text-xs text-right'>34 Total</p>
@@ -81,13 +81,13 @@ const MonthlySubscription = () => {
           </div>
           <div className='grid grid-cols-1 sm:grid-cols-4 md:grid-cols-4 gap-2 pt-5'>
             <div>
-              <strong><u><p className='text-xs'>ERC Agents</p></u></strong>
+              <strong><u><p className='text-xs'>ERC</p></u></strong>
             </div>
             <div>
               <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
             </div>
             <div>
-              <strong><p className='text-green-600 text-xs text-right'>20 New Drivers!</p></strong>
+              <strong><p className='text-green-600 text-xs text-right'>20 Orders</p></strong>
             </div>
             <div>
               <p className='text-xs text-right'>34 Total</p>
@@ -102,4 +102,4 @@ const MonthlySubscription = () => {
   )
 }
 
-export default MonthlySubscription
+export default MonthlyProduction

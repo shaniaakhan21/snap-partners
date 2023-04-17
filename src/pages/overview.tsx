@@ -6,6 +6,8 @@ import { useAuthStore } from 'lib/stores'
 import { APP_INFO } from 'config/appInfo'
 import RankComponent from 'components/common/overview/RankComponent'
 import MonthlySubscription from 'components/common/overview/MonthlySubscription'
+import MonthlyProduction from 'components/common/overview/MonthlyProduction'
+import TeamCommission from 'components/common/overview/TeamCommission'
 
 import DashboardLayout from 'layouts/private/Dashboard'
 import {
@@ -54,8 +56,14 @@ const DashboardOverViewPage: Page = () => {
         <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1 bg-white">
           <MonthlySubscription />
         </div>
-        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1">Item 3</div>
-        <div className="col-span-3 sm:col-span-3 md:col-span-3 h-10 bg-gray-500">Full-width row</div>
+        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1 bg-white">
+          <MonthlyProduction />
+        </div>
+        <div className="col-span-3 sm:col-span-3 md:col-span-3 bg-white">
+          <div className='p-10'>
+            <TeamCommission />
+          </div>
+        </div>
       </div>
 
       {/* <>
