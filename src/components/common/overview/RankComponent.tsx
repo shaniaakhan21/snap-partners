@@ -1,5 +1,4 @@
-// eslint-disable-next-line no-use-before-define
-import * as React from 'react'
+import { ReactNode, SyntheticEvent, useEffect, useState } from 'react'
 import Box from '@mui/material/Box'
 import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
@@ -10,7 +9,7 @@ import BarWithText from './BarWithText'
 import { data } from './mock'
 
 interface TabPanelProps {
-  children?: React.ReactNode;
+  children?: ReactNode;
   index: number;
   value: number;
 }
@@ -57,20 +56,20 @@ interface WorkingLegs {
 }
 
 interface GV {
-  value: string,
-  percentage: string
+  value: number,
+  percentage: number
 }
 
 interface Post {
   commissionVol: number,
   PSMRatio: string,
-  PSMPercentage: string,
+  PSMPercentage: number,
   workingLegs: WorkingLegs,
   gv: GV
 }
 interface PVC {
   value: number,
-  percentage: string
+  percentage: number
 }
 
 interface RankData {
@@ -84,16 +83,16 @@ interface RankData {
 }
 
 export default function RankComponent () {
-  const [value, setValue] = React.useState(0)
+  const [value, setValue] = useState(0)
 
-  const [rankData, setRankData] = React.useState<RankData>(null)
+  const [rankData, setRankData] = useState<RankData>(null)
 
-  React.useEffect(() => {
+  useEffect(() => {
     const details = data as RankData
     setRankData(details)
   }, [])
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+  const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue)
   }
 
