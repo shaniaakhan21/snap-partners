@@ -233,12 +233,12 @@ export default function RankComponent () {
           </div>
           <div className="flex pt-2">
             <span className="text-left text-10"><strong>{`You have ${rankData.dct.PSMRatio} PSM`}</strong></span>
-            <span className="text-right ml-auto text-10"><strong>You need 3 Active PSM</strong></span>
+            <span className="text-right ml-auto text-10"><strong>You need 4 Active PSM</strong></span>
           </div>
           <BarWithText progressColor={'#F18A00'} value={+rankData.dct.PSMPercentage} variant={'determinate'}/>
           <div className="flex pt-2">
             <span className="text-left text-10"><strong>You need</strong></span>
-            <span className="text-right ml-auto text-10"><strong>3 Working Legs, 2500 V. Each</strong></span>
+            <span className="text-right ml-auto text-10"><strong>4 Working Legs, 2500 V. Each</strong></span>
           </div>
           <div>
             <div className='grid grid-cols-2 sm:grid-cols-6 md:grid-cols-6 gap-2'>
