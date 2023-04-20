@@ -48,7 +48,7 @@ const StyledBox = styled(Box)<StyledBoxProps>((props) => ({
   height: 32,
   backgroundColor: props.backgroundColor,
   borderRadius: 4
-}));
+}))
 
 interface WorkingLegs {
   [key: string]: {
@@ -76,8 +76,9 @@ interface Post {
   gv: GV
 }
 
-
 interface RankData {
+  currentRank: string,
+  currentRankLevel: number,
   mng: Post,
   sv: Post,
   dct: Post,
@@ -98,6 +99,8 @@ export default function RankComponent () {
         }
       })
       setRankData(response.data)
+      setValue(response.data.currentRankLevel)
+      console.log(response.data.currentRankLevel)
     })()
   }, [])
 
@@ -105,8 +108,23 @@ export default function RankComponent () {
     setValue(newValue)
   }
 
+  const RankToBgColor = (rank: string) => {
+    if (rank === '') return '#E35C49'
+    if (rank === 'Free Member') return '#E35C49'
+    if (rank === 'Manager') return '#C99FFF'
+    if (rank === 'Supervisor') return '#54A52C'
+    if (rank === 'Director') return '#F18A00'
+    if (rank === 'Executive') return '#000000'
+  }
+
   return (
     <Box sx={{ '& .Mui-selected': { color: 'black', bgcolor: 'white' }, '& .MuiTabs-indicator': { backgroundColor: 'transparent' } }}>
+      <div className="h-19 rounded-md mb-4 px-4" style={{ backgroundColor: RankToBgColor(rankData?.currentRank || '') }}>
+        <div>
+          <p className="text-white" style={{ paddingTop: 10 }}>Current Rank</p>
+          <h1 className="text-2xl text-white font-bold pb-2">{rankData?.currentRank || ''}</h1>
+        </div>
+      </div>
       <Tabs value={value} onChange={handleChange} centered>
         <Tab sx={{ fontSize: 12, minWidth: 0, width: '80px', maxWidth: 100, bgcolor: '#E35C49' }} label="FM" />
         <Tab sx={{ fontSize: 12, minWidth: 0, width: '80px', maxWidth: 100, bgcolor: '#C99FFF' }} label="MNG" />
@@ -137,7 +155,7 @@ export default function RankComponent () {
           </div>
           <div className='col-span-3 text-xs pt-5'>
             <span className="text-15">To be a <strong>Manager</strong> you need</span>
-          </div>          
+          </div>
           <div className='col-span-3 text-xs pt-5'>
             <span className='text-10'><strong>You need 100 Personal Commissionable Volume</strong></span>
             <BarWithText progressColor={'#C99FFF'} value={+rankData.mng.commissionVol} variant={'determinate'} />
@@ -208,7 +226,7 @@ export default function RankComponent () {
           </div>
           <div className='col-span-3 text-xs pt-5'>
             <span className="text-15">To be a <strong>Director</strong> you need</span>
-          </div>          
+          </div>
           <div className='col-span-3 text-xs pt-5'>
             <span className='text-10'><strong>You need 100 Personal Commissionable Volume</strong></span>
             <BarWithText progressColor={'#F18A00'} value={+rankData.dct.commissionVol} variant={'determinate'} />
@@ -258,7 +276,7 @@ export default function RankComponent () {
           </div>
           <div className='col-span-3 text-xs pt-5'>
             <span className="text-15">To be a <strong>Executive</strong> you need</span>
-          </div>          
+          </div>
           <div className='col-span-3 text-xs pt-5'>
             <span className='text-10'><strong>You need 100 Personal Commissionable Volume</strong></span>
             <BarWithText progressColor={'#000000'} value={+rankData.exec.commissionVol} variant={'determinate'} />

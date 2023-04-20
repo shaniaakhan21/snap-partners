@@ -41,12 +41,6 @@ const DashboardOverViewPage: Page = () => {
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-2">
-          <div className="h-19 bg-purple-400 rounded-md mb-4 px-4">
-            <div>
-              <p className="text-white">Current Rank</p>
-              <h1 className="text-2xl text-white font-bold pb-2">Manager</h1>
-            </div>
-          </div>
           <div className="bg-white">
             <div className='pt-2 pl-2 pr-2'>
               <RankComponent />
