@@ -34,7 +34,7 @@ const TeamCommission = () => {
   return (
     <>
       {
-        data && <>
+        data && <div className="overflow-x-auto">
           <div className='grid grid-cols-2 gap-4 pb-5'>
             <div className="col-span-1 flex items-center">
               <StyledBox>
@@ -73,7 +73,7 @@ const TeamCommission = () => {
               }
             </tbody>
           </table>
-        </>
+        </div>
       }
     </>
   )
