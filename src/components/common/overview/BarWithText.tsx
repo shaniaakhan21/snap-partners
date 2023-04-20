@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-use-before-define
 import * as React from 'react'
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress'
-import { styled } from '@material-ui/core/styles'
+import { styled } from '@mui/system'
 interface BorderLinearProgressProps {
   progressColor: string;
 }
@@ -11,14 +11,14 @@ const BorderLinearProgress = styled(LinearProgress)<BorderLinearProgressProps>(
     height: 20,
     borderRadius: 15,
     [`&.${linearProgressClasses.colorPrimary}`]: {
-      backgroundColor: "#D2D2D2",
+      backgroundColor: '#D2D2D2'
     },
     [`& .${linearProgressClasses.bar}`]: {
       borderRadius: 5,
-      backgroundColor: progressColor,
-    },
+      backgroundColor: progressColor
+    }
   })
-);
+)
 
 const BarWithText = ({ value, variant, progressColor }) => {
   return (

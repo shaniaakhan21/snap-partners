@@ -4,7 +4,7 @@ import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import Typography from '@mui/material/Typography'
 import StarIcon from '@material-ui/icons/Star'
-import { styled } from '@material-ui/core/styles'
+import { styled } from '@mui/system';
 import BarWithText from './BarWithText'
 import { data } from './mock'
 import axios from 'axios'
