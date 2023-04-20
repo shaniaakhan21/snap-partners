@@ -40,7 +40,8 @@ const MonthlySubscription = () => {
               </div>
             </div>
           </div>
-          <div className='pl-5 pr-5'>
+          {/* This is visible in 100% zoom */}
+          <div className='pl-5 pr-5 zoom-screen-layout-hide'>
             <div className='grid grid-cols-1 sm:grid-cols-4 md:grid-cols-4 gap-2'>
               <div></div>
               <div></div>
@@ -118,11 +119,103 @@ const MonthlySubscription = () => {
               </div>
             </div>
           </div>
+          {/* This is visible above 100% zoom */}
+          <div className='pl-5 pr-5 zoom-screen-layout-show hidden'>
+            <div className='grid grid-cols-1 gap-2'>
+              <div></div>
+              <div></div>
+              <div className='text-green-600 text-right'><strong><p>New</p></strong></div>
+              <div><strong><p className='text-right'>Total</p></strong></div>
+            </div>
+            <div className='grid grid-cols-1 gap-2 pt-5'>
+              <div>
+                <strong><u><p className='text-xs'>Customers</p></u></strong>
+              </div>
+              <div>
+                <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+              </div>
+              <div>
+                <strong><p className='text-green-600 text-xs text-right'>{`${data.customers.new} New Customers!`}</p></strong>
+              </div>
+              <div>
+                <p className='text-xs text-right'>{`${data.customers.total} Total`}</p>
+              </div>
+            </div>
+            <div className='grid grid-cols-1 gap-2 pt-5'>
+              <div>
+                <strong><u><p className='text-xs'>Drivers</p></u></strong>
+              </div>
+              <div>
+                <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+              </div>
+              <div>
+                <strong><p className='text-green-600 text-xs text-right'>{`${data.drivers.new} New Drivers!`}</p></strong>
+              </div>
+              <div>
+                <p className='text-xs text-right'>{`${data.drivers.total}  Total`}</p>
+              </div>
+            </div>
+            <div className='grid grid-cols-1 gap-2 pt-5'>
+              <div>
+                <strong><u><p className='text-xs'>Merchants</p></u></strong>
+              </div>
+              <div>
+                <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+              </div>
+              <div>
+                <strong><p className='text-green-600 text-xs text-right'>{`${data.merchants.new} New Restaurants!`}</p></strong>
+              </div>
+              <div>
+                <p className='text-xs text-right'>{`${data.merchants.total} Total`}</p>
+              </div>
+            </div>
+            <div className='grid grid-cols-1 gap-2 pt-5'>
+              <div>
+                <strong><u><p className='text-xs'>VIDGO</p></u></strong>
+              </div>
+              <div>
+                <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+              </div>
+              <div>
+                <strong><p className='text-green-600 text-xs text-right'>{`${data.vidgo.new} New Agents!`}</p></strong>
+              </div>
+              <div>
+                <p className='text-xs text-right'>{`${data.vidgo.total} Total`}</p>
+              </div>
+            </div>
+            <div className='grid grid-cols-1 gap-2 pt-5'>
+              <div>
+                <strong><u><p className='text-xs'>ERC Agents</p></u></strong>
+              </div>
+              <div>
+                <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+              </div>
+              <div>
+                <strong><p className='text-green-600 text-xs text-right'>{`${data.erc.new} New Agents!`} </p></strong>
+              </div>
+              <div>
+                <p className='text-xs text-right'>{`${data.erc.total} Total`}</p>
+              </div>
+            </div>
+          </div>
           <div className='pl-5 pr-5'>
             <button className="text-sm bg-red-600 hover:bg-red-700 text-white font-bold h-10 w-full py-3 px-4 rounded-l-full rounded-r-full">SEE REPORT</button>
           </div>
         </div>
       }
+      <style jsx>
+        {`
+          @media only screen and (min-resolution: 105dpi) and (max-resolution: 210dpi) {
+            /* Adjust the layout for zoom levels between 110% to 210% */
+            .zoom-screen-layout-hide {
+              display: none;
+            }
+            .zoom-screen-layout-show {
+              display: block;
+            }
+          }
+        `}
+      </style>
     </>
   )
 }
