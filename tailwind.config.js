@@ -6,6 +6,10 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontSize: {
+        15: '15px',
+        10: '10px'
+      },
       fontFamily: {
         body: ['"Open Sans"', 'sans-serif']
       },

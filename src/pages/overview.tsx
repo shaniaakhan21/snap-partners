@@ -4,25 +4,29 @@ import type { Page, ReactNode } from 'lib/types'
 import { useReports } from 'lib/hooks/useReports'
 import { useAuthStore } from 'lib/stores'
 import { APP_INFO } from 'config/appInfo'
+import RankComponent from 'components/common/overview/RankComponent'
+import MonthlySubscription from 'components/common/overview/MonthlySubscription'
+import MonthlyProduction from 'components/common/overview/MonthlyProduction'
+import TeamCommission from 'components/common/overview/TeamCommission'
 
 import DashboardLayout from 'layouts/private/Dashboard'
-import {
-  EstimatedCommissions,
-  Graphics,
-  MyOrders,
-  OverViewGrid,
-  PayRank,
-  PromotionTracker,
-  Stepper,
-  TopCustomerAcquisition,
-  TopDriverAcquisition,
-  TopEntitiesGrid,
-  // TopOrderLine,
-  TopMerchantsAcquisition,
-  TopAgentAcquisition,
-  TotalEarnings,
-  TotalOrders
-} from 'components/page/overview'
+// import {
+//   EstimatedCommissions,
+//   Graphics,
+//   MyOrders,
+//   OverViewGrid,
+//   PayRank,
+//   PromotionTracker,
+//   Stepper,
+//   TopCustomerAcquisition,
+//   TopDriverAcquisition,
+//   TopEntitiesGrid,
+//   // TopOrderLine,
+//   TopMerchantsAcquisition,
+//   TopAgentAcquisition,
+//   TotalEarnings,
+//   TotalOrders
+// } from 'components/page/overview'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 
 const { SEO } = APP_INFO
@@ -55,7 +59,29 @@ const DashboardOverViewPage: Page = () => {
           </a>
         </div>
       </>
-      <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-full h-fit gap-4'>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-2">
+          <div className="bg-white">
+            <div className='pt-2 pl-2 pr-2'>
+              <RankComponent />
+            </div >
+          </div>
+        </div>
+        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1 bg-white">
+          <MonthlySubscription />
+        </div>
+        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1 bg-white">
+          <MonthlyProduction />
+        </div>
+        {/*
+        <div className="col-span-3 sm:col-span-3 md:col-span-3 bg-white">
+          <div className='p-10'>
+            <TeamCommission />
+          </div>
+        </div>
+  */}
+      </div>
+      {/* <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-full h-fit gap-4'>
         <Graphics data={dataGraphic} />
         <PromotionTracker userAuth={auth} />
       </div>
@@ -75,7 +101,7 @@ const DashboardOverViewPage: Page = () => {
         <TopCustomerAcquisition data={reports} />
         <TopAgentAcquisition data={reports} />
         {/* <TopOrderLine data={reports} /> */}
-      </TopEntitiesGrid>
+      {/* </TopEntitiesGrid> */}
     </>
   )
 }
