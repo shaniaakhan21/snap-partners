@@ -39,28 +39,7 @@ const DashboardOverViewPage: Page = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-2">
-          <div className="bg-white">
-            <div className='pt-2 pl-2 pr-2'>
-              <RankComponent />
-            </div >
-          </div>
-        </div>
-        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1 bg-white">
-          <MonthlySubscription />
-        </div>
-        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1 bg-white">
-          <MonthlyProduction />
-        </div>
-        <div className="col-span-3 sm:col-span-3 md:col-span-3 bg-white">
-          <div className='p-10'>
-            <TeamCommission />
-          </div>
-        </div>
-      </div>
-
-      {/* <>
+      <>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-5'>
           <a href="https://store.snapdelivered.com/product/snap-u-live-event-in-cincinnati-ohio/" target={'_blank'}>
             <img src='/images/livev1.jpg' alt='Agent logo' />
@@ -79,7 +58,29 @@ const DashboardOverViewPage: Page = () => {
             <img src='/images/2.png' alt='Agent logo' />
           </a>
         </div>
-      </> */}
+      </>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-2">
+          <div className="bg-white">
+            <div className='pt-2 pl-2 pr-2'>
+              <RankComponent />
+            </div >
+          </div>
+        </div>
+        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1 bg-white">
+          <MonthlySubscription />
+        </div>
+        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1 bg-white">
+          <MonthlyProduction />
+        </div>
+        {/*
+        <div className="col-span-3 sm:col-span-3 md:col-span-3 bg-white">
+          <div className='p-10'>
+            <TeamCommission />
+          </div>
+        </div>
+  */}
+      </div>
       {/* <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-full h-fit gap-4'>
         <Graphics data={dataGraphic} />
         <PromotionTracker userAuth={auth} />

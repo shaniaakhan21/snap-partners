@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import ServeImage from '../../../../public/images/subscription_serve.svg'
 import { monthlyProductionData } from './mock'
+import axios from 'axios'
+import { getLocalStorage } from 'lib/utils/localStorage'
+import Link from 'next/link'
 
 interface CountData {
   new: number;
@@ -20,8 +23,15 @@ const MonthlyProduction = () => {
   const [data, setData] = useState<MonthlyProductionData>()
 
   useEffect(() => {
-    const details = monthlyProductionData as MonthlyProductionData
-    setData(details)
+    (async () => {
+      const token = getLocalStorage('accessToken')
+      const response = await axios.get('/api/reports/getMonthlyProduction', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      setData(response.data)
+    })()
   }, [])
 
   return (
@@ -53,7 +63,9 @@ const MonthlyProduction = () => {
                 <strong><u><p className='text-xs'>Customers Orders</p></u></strong>
               </div>
               <div>
-                <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+                <Link href='/customer-reports'>
+                  <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+                </Link>
               </div>
               <div>
                 <strong><p className='text-green-600 text-xs text-right '>{`${data.customers.new} Orders`}</p></strong>
@@ -67,7 +79,9 @@ const MonthlyProduction = () => {
                 <strong><u><p className='text-xs'>Driver Deliveries</p></u></strong>
               </div>
               <div>
-                <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+                <Link href='/driver-reports'>
+                  <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+                </Link>
               </div>
               <div>
                 <strong><p className='text-green-600 text-xs text-right'>{`${data.drivers.new} Deliveries`}</p></strong>
@@ -81,7 +95,9 @@ const MonthlyProduction = () => {
                 <strong><u><p className='text-xs'>Merchants Orders</p></u></strong>
               </div>
               <div>
-                <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+                <Link href='/merchant-reports'>
+                  <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+                </Link>
               </div>
               <div>
                 <strong><p className='text-green-600 text-xs text-right'>{`${data.merchants.new}  Orders`}</p></strong>
@@ -95,7 +111,9 @@ const MonthlyProduction = () => {
                 <strong><u><p className='text-xs'>VIDGO</p></u></strong>
               </div>
               <div>
-                <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+                <Link href='/vidgo-reporting'>
+                  <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+                </Link>
               </div>
               <div>
                 <strong><p className='text-green-600 text-xs text-right'>{`${data.vidgo.new} Vidgo`}</p></strong>
@@ -109,10 +127,12 @@ const MonthlyProduction = () => {
                 <strong><u><p className='text-xs'>ERC</p></u></strong>
               </div>
               <div>
-                <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+                <Link href='/ercreferrals'>
+                  <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+                </Link>
               </div>
               <div>
-                <strong><p className='text-green-600 text-xs text-right'>{`${data.erc.new} Orders`}</p></strong>
+                <strong><p className='text-green-600 text-xs text-right'>{`${data.erc.new} Erc`}</p></strong>
               </div>
               <div>
                 <p className='text-xs text-right'>{`${data.erc.total} Total`}</p>
@@ -132,7 +152,9 @@ const MonthlyProduction = () => {
                 <strong><u><p className='text-xs'>Customers Orders</p></u></strong>
               </div>
               <div>
-                <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+                <Link href='/customer-reports'>
+                  <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+                </Link>
               </div>
               <div>
                 <strong><p className='text-green-600 text-xs text-right '>{`${data.customers.new} Orders`}</p></strong>
@@ -146,7 +168,9 @@ const MonthlyProduction = () => {
                 <strong><u><p className='text-xs'>Driver Deliveries</p></u></strong>
               </div>
               <div>
-                <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+                <Link href='/driver-reports'>
+                  <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+                </Link>
               </div>
               <div>
                 <strong><p className='text-green-600 text-xs text-right'>{`${data.drivers.new} Deliveries`}</p></strong>
@@ -160,7 +184,9 @@ const MonthlyProduction = () => {
                 <strong><u><p className='text-xs'>Merchants Orders</p></u></strong>
               </div>
               <div>
-                <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+                <Link href='/merchant-reports'>
+                  <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+                </Link>
               </div>
               <div>
                 <strong><p className='text-green-600 text-xs text-right'>{`${data.merchants.new}  Orders`}</p></strong>
@@ -174,7 +200,9 @@ const MonthlyProduction = () => {
                 <strong><u><p className='text-xs'>VIDGO</p></u></strong>
               </div>
               <div>
-                <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+                <Link href='/vidgo-reporting'>
+                  <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+                </Link>
               </div>
               <div>
                 <strong><p className='text-green-600 text-xs text-right'>{`${data.vidgo.new} Vidgo`}</p></strong>
@@ -188,18 +216,17 @@ const MonthlyProduction = () => {
                 <strong><u><p className='text-xs'>ERC</p></u></strong>
               </div>
               <div>
-                <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+                <Link href='/ercreferrals'>
+                  <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">SEE MORE</button>
+                </Link>
               </div>
               <div>
-                <strong><p className='text-green-600 text-xs text-right'>{`${data.erc.new} Orders`}</p></strong>
+                <strong><p className='text-green-600 text-xs text-right'>{`${data.erc.new} Erc`}</p></strong>
               </div>
               <div>
                 <p className='text-xs text-right'>{`${data.erc.total} Total`}</p>
               </div>
             </div>
-          </div>
-          <div className='pl-5 pr-5'>
-            <button className="text-sm bg-red-600 hover:bg-red-700 text-white font-bold h-10 w-full py-3 px-4 rounded-l-full rounded-r-full">SEE REPORT</button>
           </div>
         </div>
       }

@@ -74,11 +74,11 @@ export const drawerRoutes = [
     to: '/genealogy',
     label: 'Genealogy'
   },
-  // {
-  //  icon: <GenealogyIcon />,
-  //  to: '/tree',
-  //  label: 'Tree'
-  // },
+  {
+    icon: <GenealogyIcon />,
+    to: '/tree',
+    label: 'Tree'
+   },
   {
     icon: <CompensationPlanIcon />,
     to: '/compensation-plan',

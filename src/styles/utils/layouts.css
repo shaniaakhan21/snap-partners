@@ -146,6 +146,14 @@
   background-color: #DD4C37!important;
 }
 
-.oc-node:hover {
+.oc-topheading {
+  font-size: 14px;
+}
+
+.oc-info{
+  cursor: pointer;
+}
+
+.oc-view{
   cursor: pointer;
 }
