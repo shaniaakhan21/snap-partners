@@ -8,6 +8,7 @@ import RankComponent from 'components/common/overview/RankComponent'
 import MonthlySubscription from 'components/common/overview/MonthlySubscription'
 import MonthlyProduction from 'components/common/overview/MonthlyProduction'
 import TeamCommission from 'components/common/overview/TeamCommission'
+import NextSnap from 'components/common/overview/NextSnap'
 
 import DashboardLayout from 'layouts/private/Dashboard'
 // import {
@@ -72,6 +73,9 @@ const DashboardOverViewPage: Page = () => {
         </div>
         <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1 bg-white">
           <MonthlyProduction />
+        </div>
+        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1 bg-white">
+          <NextSnap></NextSnap>
         </div>
         {/*
         <div className="col-span-3 sm:col-span-3 md:col-span-3 bg-white">
