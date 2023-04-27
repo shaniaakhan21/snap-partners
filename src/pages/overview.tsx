@@ -8,7 +8,7 @@ import RankComponent from 'components/common/overview/RankComponent'
 import MonthlySubscription from 'components/common/overview/MonthlySubscription'
 import MonthlyProduction from 'components/common/overview/MonthlyProduction'
 import TeamCommission from 'components/common/overview/TeamCommission'
-import NextSnap from 'components/common/overview/NextSnap'
+import Event from 'components/common/overview/Event'
 
 import DashboardLayout from 'layouts/private/Dashboard'
 // import {
@@ -29,6 +29,8 @@ import DashboardLayout from 'layouts/private/Dashboard'
 //   TotalOrders
 // } from 'components/page/overview'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
+import TopProducers from 'components/common/overview/TopProducers'
+import Certification from 'components/common/overview/Certification'
 
 const { SEO } = APP_INFO
 
@@ -75,7 +77,13 @@ const DashboardOverViewPage: Page = () => {
           <MonthlyProduction />
         </div>
         <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1 bg-white">
-          <NextSnap></NextSnap>
+          <Event />
+        </div>
+        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1 bg-white">
+          <TopProducers />
+        </div>
+        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1 bg-white">
+          <Certification />
         </div>
         {/*
         <div className="col-span-3 sm:col-span-3 md:col-span-3 bg-white">

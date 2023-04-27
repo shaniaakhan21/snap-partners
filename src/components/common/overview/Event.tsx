@@ -10,7 +10,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import SwipeableViews from 'react-swipeable-views'
 import { autoPlay } from 'react-swipeable-views-utils'
-import NextSnapTile from './NextSnapTile'
+import NextSnapTile from './EventTile'
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
 
@@ -37,7 +37,7 @@ const images = [
   }
 ]
 
-function NextSnap () {
+function Event () {
   const theme = useTheme()
   const [activeStep, setActiveStep] = React.useState(0)
   const maxSteps = images.length
@@ -67,7 +67,11 @@ function NextSnap () {
           bgcolor: 'background.default'
         }}
       >
-        <Typography>{images[activeStep].label}</Typography>
+        <Typography
+          sx={{
+            fontSize: '20px'
+          }}
+        >Next Snap U</Typography>
       </Paper>
       <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
@@ -122,4 +126,4 @@ function NextSnap () {
   )
 }
 
-export default NextSnap
+export default Event
