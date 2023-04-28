@@ -31,6 +31,7 @@ import DashboardLayout from 'layouts/private/Dashboard'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import TopProducers from 'components/common/overview/TopProducers'
 import Certification from 'components/common/overview/Certification'
+import TopProducerCategory from 'components/common/overview/TopProducerCategory'
 
 const { SEO } = APP_INFO
 
@@ -80,7 +81,7 @@ const DashboardOverViewPage: Page = () => {
           <Event />
         </div>
         <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1 bg-white">
-          <TopProducers />
+          <TopProducerCategory />
         </div>
         <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1 bg-white">
           <Certification />

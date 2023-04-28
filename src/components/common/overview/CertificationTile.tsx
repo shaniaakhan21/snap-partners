@@ -1,11 +1,9 @@
 // eslint-disable-next-line no-use-before-define
 import * as React from 'react'
 import Card from '@mui/material/Card'
-import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
-import Link from 'next/link'
 
 export default function CertificationTile ({ title, description, image }) {
   return (
