@@ -143,7 +143,7 @@ export const TopProducers: React.FC<ITopProducerProps> = ({ data }) => {
             </div>
             <div className="grid grid-cols-2 gap-0">
               {
-                data.personal.map((itm) => <div>
+                data.personal.map((itm) => <div className='mt-3'>
                   <Info img={itm.profileImage} noOfCustomers={itm.noOfCustomers} name={itm.name}/>
                 </div>)
               }

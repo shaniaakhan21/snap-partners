@@ -24,7 +24,7 @@ const BarWithText = ({ value, variant, progressColor }) => {
   return (
     <div style={{ position: 'relative' }}>
       <BorderLinearProgress className='mt-1' variant={variant} value={value} progressColor={progressColor} />
-      <div style={{ position: 'absolute', top: '2px', left: '5px', width: `${value}%`, height: '100%', display: 'flex', alignItems: 'center', paddingLeft: '5px' }}>
+      <div style={{ position: 'absolute', top: '0px', left: '5px', width: `${value}%`, height: '100%', display: 'flex', alignItems: 'center', justifyContent:'center', paddingLeft: '5px' }}>
         <span style={{ color: 'white', fontSize: '10px', fontWeight: 'bold' }}>{value}%</span>
       </div>
     </div>

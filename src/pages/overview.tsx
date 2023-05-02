@@ -2,42 +2,23 @@ import Head from 'next/head'
 
 import type { Page, ReactNode } from 'lib/types'
 import { useReports } from 'lib/hooks/useReports'
-import { useAuthStore } from 'lib/stores'
 import { APP_INFO } from 'config/appInfo'
 import RankComponent from 'components/common/overview/RankComponent'
 import MonthlySubscription from 'components/common/overview/MonthlySubscription'
 import MonthlyProduction from 'components/common/overview/MonthlyProduction'
-import TeamCommission from 'components/common/overview/TeamCommission'
 import Event from 'components/common/overview/Event'
-
 import DashboardLayout from 'layouts/private/Dashboard'
-// import {
-//   EstimatedCommissions,
-//   Graphics,
-//   MyOrders,
-//   OverViewGrid,
-//   PayRank,
-//   PromotionTracker,
-//   Stepper,
-//   TopCustomerAcquisition,
-//   TopDriverAcquisition,
-//   TopEntitiesGrid,
-//   // TopOrderLine,
-//   TopMerchantsAcquisition,
-//   TopAgentAcquisition,
-//   TotalEarnings,
-//   TotalOrders
-// } from 'components/page/overview'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
-import TopProducers from 'components/common/overview/TopProducers'
 import Certification from 'components/common/overview/Certification'
 import TopProducerCategory from 'components/common/overview/TopProducerCategory'
+import Commissions from 'components/common/overview/Comissions'
+import TierTable from 'components/common/overview/TierTable'
+import RewardsProgram from 'components/common/overview/RewardsProgram'
 
 const { SEO } = APP_INFO
 
 const DashboardOverViewPage: Page = () => {
-  const { reports, dataGraphic, loading } = useReports()
-  const { auth } = useAuthStore()
+  const { loading } = useReports()
 
   if (loading) return <SpinnerPageContent />
 
@@ -63,58 +44,37 @@ const DashboardOverViewPage: Page = () => {
           </a>
         </div>
       </>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-2">
-          <div className="bg-white">
-            <div className='pt-2 pl-2 pr-2'>
-              <RankComponent />
-            </div >
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
+        <div>
+          <div>
+            <RankComponent />
+          </div>
+          <div className='mt-4'>
+            <TierTable />
+          </div>
+          <div className='mt-4'>
+            <Commissions />
+          </div>
+          <div className='mt-4'>
+            <RewardsProgram />
+          </div>
+          <div className='mt-4 bg-white rounded-lg'>
+            <MonthlySubscription />
+          </div>
+          <div className='mt-4 bg-white rounded-lg'>
+            <MonthlyProduction />
           </div>
         </div>
-        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1 bg-white">
-          <MonthlySubscription />
-        </div>
-        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1 bg-white">
-          <MonthlyProduction />
-        </div>
-        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1 bg-white">
+        <div>
           <Event />
-        </div>
-        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1 bg-white">
-          <TopProducerCategory />
-        </div>
-        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1 bg-white">
-          <Certification />
-        </div>
-        {/*
-        <div className="col-span-3 sm:col-span-3 md:col-span-3 bg-white">
-          <div className='p-10'>
-            <TeamCommission />
+          <div className='mt-4 bg-white rounded-lg'>
+            <TopProducerCategory />
+          </div>
+          <div className='mt-4'>
+            <Certification />
           </div>
         </div>
-  */}
       </div>
-      {/* <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-full h-fit gap-4'>
-        <Graphics data={dataGraphic} />
-        <PromotionTracker userAuth={auth} />
-      </div>
-
-      <OverViewGrid>
-        <Stepper data={{}} />
-        <TotalEarnings data={reports} />
-        <TotalOrders data={reports} />
-        <EstimatedCommissions data={reports} />
-        <MyOrders data={reports} />
-        <PayRank data={reports} />
-      </OverViewGrid>
-
-      <TopEntitiesGrid>
-        <TopMerchantsAcquisition data={reports} />
-        <TopDriverAcquisition data={reports} />
-        <TopCustomerAcquisition data={reports} />
-        <TopAgentAcquisition data={reports} />
-        {/* <TopOrderLine data={reports} /> */}
-      {/* </TopEntitiesGrid> */}
     </>
   )
 }

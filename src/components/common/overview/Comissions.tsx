@@ -10,7 +10,7 @@ export default function Commissions () {
     <div className="bg-white rounded-lg px-2.5 py-3">
       <div className='flex flex-row justify-between'>
         <span className='text-lg text-semibold'>Commissions</span>
-        <Button classes='bg-white text-textAcent-500 focus:ring-0'>See Details</Button>
+        <Button classes='bg-white text-textAcent-500 focus:ring-0 font-normal'>See Details</Button>
       </div>
       <Tabs value={selectedTimeline}
         onChange={(_, value) => setSelectedTimeline(value)}

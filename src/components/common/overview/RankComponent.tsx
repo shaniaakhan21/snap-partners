@@ -113,7 +113,7 @@ export default function RankComponent () {
   return (
     <div>
       <Box sx={{ '& .Mui-selected': { color: 'black', bgcolor: 'white' }, '& .MuiTabs-indicator': { backgroundColor: 'transparent' } }}>
-        <div className='bg-white py-3 px-2 rounded-lg'>
+        {/* <div className='bg-white py-3 px-2 rounded-lg'>
           <div className='flex flex-row justify-between items-center'>
             <p className='text-lg font-semibold'>Your Current Rank</p>
             <div className='flex flex-row items-center'>
@@ -124,9 +124,8 @@ export default function RankComponent () {
           <div className='mt-5'>
             <RankSteps currentRank={rankData?.currentRankLevel || 0}/>
           </div>
-        </div>
-        <div className='mt-5 bg-white p-2.5 rounded-lg'>
-
+        </div> */}
+        <div className='bg-white p-2.5 rounded-lg'>
           <Tabs value={value} onChange={handleChange} centered>
             <Tab sx={{ fontSize: 12, width: '20%', bgcolor: '#E35C49' }} label="FM" />
             <Tab sx={{ fontSize: 12, width: '20%', bgcolor: '#C99FFF' }} label="MNG" />
