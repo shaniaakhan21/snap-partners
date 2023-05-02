@@ -16,3 +16,5 @@ export interface IReport {
     topAgent: ITopEntity[]
   }
 }
+
+export type Rank = 'Free Member' | 'Manager' | 'Supervisor'| 'Director' | 'Executive'
