@@ -84,7 +84,7 @@ export const FormUpdateSocialSecurity = ({ auth, setAuth, typeUpdate, setTypeUpd
             required: { value: true, message: 'Social Security Number *' },
             pattern: {
               value:
-              /^(?!666|000|9\d{2})\d{3}-(?!00)\d{2}-(?!0{4})\d{4}$/,
+              /^(?!666|000|9\d{2})\d{3}-(?!00)\d{2}-(?!0{4})\d{4}$|^(?!00)\d{2}(?!0{7})\d{7}$/,
               message: 'Enter a valid Social Security Number *'
             }
           }}
