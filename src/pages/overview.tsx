@@ -41,40 +41,42 @@ const DashboardOverViewPage: Page = () => {
   if (loading) return <SpinnerPageContent />
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2">
-      <div>
+    <>
+      <div className="grid grid-cols-1 lg:grid-cols-2">
         <div>
-          <RankComponent data={rankData} />
+          <div>
+            <RankComponent data={rankData} />
+          </div>
+          <div className='mt-4'>
+            <TierTable />
+          </div>
+          <div className='mt-4'>
+            <Commissions />
+          </div>
+          <div className='mt-4'>
+            <RewardsProgram />
+          </div>
+          <div className='mt-4 bg-white rounded-lg'>
+            <MonthlySubscription />
+          </div>
+          <div className='mt-4 bg-white rounded-lg'>
+            <MonthlyProduction />
+          </div>
         </div>
-        <div>
-          <TierTable />
-        </div>
-        <div className='mt-4'>
-          <Commissions />
-        </div>
-        <div className='mt-4'>
-          <RewardsProgram />
-        </div>
-        <div className='mt-4 bg-white rounded-lg'>
-          <MonthlySubscription />
-        </div>
-        <div className='mt-4 bg-white rounded-lg'>
-          <MonthlyProduction />
-        </div>
-      </div>
-      <div className='ml-4 mt-4'>
-        <Event />
-        <div className='mt-4 bg-white rounded-lg'>
-          <TopProducerCategory />
-        </div>
-        <div className='mt-4'>
-          <Certification />
+        <div className='ml-4'>
+          <Event />
+          <div className='mt-4 bg-white rounded-lg'>
+            <TopProducerCategory />
+          </div>
+          <div className='mt-4'>
+            <Certification />
+          </div>
         </div>
       </div>
       <div className='col-span-12 mt-4'>
         <Referrals rankData={rankData} />
       </div>
-    </div>
+    </>
   )
 }
 

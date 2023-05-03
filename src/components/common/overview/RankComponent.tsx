@@ -1,7 +1,5 @@
-import { ReactNode, SyntheticEvent, useEffect, useState } from 'react'
+import { ReactNode, useEffect, useState } from 'react'
 import Box from '@mui/material/Box'
-import Tabs from '@mui/material/Tabs'
-import Tab from '@mui/material/Tab'
 import Typography from '@mui/material/Typography'
 import StarIcon from '@material-ui/icons/Star'
 import { styled } from '@mui/system'
@@ -56,9 +54,6 @@ interface RankComponentProps{
 export default function RankComponent (props: RankComponentProps) {
   const { data: rankData } = props
   const [value, setValue] = useState(0)
-  const handleChange = (event: SyntheticEvent, newValue: number) => {
-    setValue(newValue)
-  }
 
   useEffect(() => {
     if (rankData) {
@@ -69,26 +64,8 @@ export default function RankComponent (props: RankComponentProps) {
   return (
     <div>
       <Box sx={{ '& .Mui-selected': { color: 'black', bgcolor: 'white' }, '& .MuiTabs-indicator': { backgroundColor: 'transparent' } }}>
-        <div className='bg-white py-3 px-2 rounded-lg'>
-          <div className='flex flex-row justify-between items-center'>
-            <p className='text-lg font-semibold'>Your Current Rank</p>
-            <div className='flex flex-row items-center'>
-              <p className='text-sm font-semibold'>Next Rank:</p>
-              <p className='text-sm font-semibold ml-1' style={{ color: '#E35C49' }}>{rankData?.currentRank || ''}</p>
-            </div>
-          </div>
-          <div className='mt-5'>
-            <RankSteps currentRank={rankData?.currentRankLevel || 0}/>
-          </div>
-        </div>
         <div className='bg-white p-2.5 rounded-lg'>
-          <Tabs value={value} onChange={handleChange} centered>
-            <Tab sx={{ fontSize: 12, width: '20%', bgcolor: '#E35C49' }} label="FM" />
-            <Tab sx={{ fontSize: 12, width: '20%', bgcolor: '#C99FFF' }} label="MNG" />
-            <Tab sx={{ fontSize: 12, width: '20%', bgcolor: '#54A52C' }} label="SV" />
-            <Tab sx={{ fontSize: 12, width: '20%', bgcolor: '#F18A00' }} label="DCT" />
-            <Tab sx={{ fontSize: 12, width: '20%', bgcolor: '#000000', color: '#FFFFFF' }} label="EXE" />
-          </Tabs>
+          <RankSteps currentRank={value} onRankPress={setValue}/>
           <TabPanel value={value} index={0}>
             {/* Free Member */}
             {

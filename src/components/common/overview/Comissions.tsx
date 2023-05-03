@@ -36,13 +36,13 @@ export default function Commissions () {
             ${commissionAtRank}
           </span>
         </div>
-        <table className="table-auto flex-1 ml-2 text-center">
+        <table className="table-fixed flex-1 ml-2 text-center">
           <thead>
             <tr>
-              <th className='text-xs font-normal'>As Manager</th>
-              <th className='text-xs font-normal'>As Supervisor</th>
-              <th className='text-xs font-normal'>As Director</th>
-              <th className='text-xs font-normal'>As Executive</th>
+              <th className='text-xs font-normal'>Manager</th>
+              <th className='text-xs font-normal'>Supervisor</th>
+              <th className='text-xs font-normal'>Director</th>
+              <th className='text-xs font-normal'>Executive</th>
             </tr>
           </thead>
           <tbody>

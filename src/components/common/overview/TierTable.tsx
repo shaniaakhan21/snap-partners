@@ -58,14 +58,14 @@ export default function TierTable () {
 
   return (
     <div className="bg-white rounded-lg py-3 px-2">
-      <table className="table-auto w-full text-center">
+      <table className="table-fixed w-full text-center">
         <thead>
           <tr>
             <th className="text-left">Team</th>
-            <th>As Manager</th>
-            <th>As Supervisor</th>
-            <th>As Director</th>
-            <th>As Executive</th>
+            <th>Manager</th>
+            <th>Supervisor</th>
+            <th>Director</th>
+            <th>Executive</th>
           </tr>
         </thead>
         <tbody>
