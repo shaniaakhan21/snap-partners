@@ -14,68 +14,67 @@ import TopProducerCategory from 'components/common/overview/TopProducerCategory'
 import Commissions from 'components/common/overview/Comissions'
 import TierTable from 'components/common/overview/TierTable'
 import RewardsProgram from 'components/common/overview/RewardsProgram'
+import { useEffect, useState } from 'react'
+import { RankData } from 'lib/types/overview'
+import { getLocalStorage } from 'lib/utils/localStorage'
+import axios from 'axios'
+import Referrals from 'components/common/overview/Referrals'
 
 const { SEO } = APP_INFO
 
 const DashboardOverViewPage: Page = () => {
   const { loading } = useReports()
+  const [rankData, setRankData] = useState<RankData>(null)
+
+  useEffect(() => {
+    (async () => {
+      const token = getLocalStorage('accessToken')
+      const response = await axios.get('/api/reports/getRanks', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      setRankData(response.data)
+    })()
+  }, [])
 
   if (loading) return <SpinnerPageContent />
 
   return (
-    <>
-      <>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-5'>
-          <a href="https://store.snapdelivered.com/product/snap-u-live-event-in-cincinnati-ohio/" target={'_blank'}>
-            <img src='/images/livev1.jpg' alt='Agent logo' />
-          </a>
-          <a href="https://store.snapdelivered.com/product/snap-u-live-stream-in-cincinnati-ohio/" target={'_blank'}>
-            <img src='/images/streamv1.jpg' alt='Agent logo' />
-          </a>
-        </div>
-      </>
-      <>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-5'>
-          <a href="https://jorns.smartstudenthub.com/ERC/Register" target={'_blank'}>
-            <img src='/images/1v1.png' alt='Agent logo' />
-          </a>
-          <a href="https://snapfinancialcertified.com/" target={'_blank'}>
-            <img src='/images/2.png' alt='Agent logo' />
-          </a>
-        </div>
-      </>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
+    <div className="grid grid-cols-1 lg:grid-cols-2">
+      <div>
         <div>
-          <div>
-            <RankComponent />
-          </div>
-          <div className='mt-4'>
-            <TierTable />
-          </div>
-          <div className='mt-4'>
-            <Commissions />
-          </div>
-          <div className='mt-4'>
-            <RewardsProgram />
-          </div>
-          <div className='mt-4 bg-white rounded-lg'>
-            <MonthlySubscription />
-          </div>
-          <div className='mt-4 bg-white rounded-lg'>
-            <MonthlyProduction />
-          </div>
+          <RankComponent data={rankData} />
         </div>
         <div>
-          <Event />
-          <div className='mt-4 bg-white rounded-lg'>
-            <TopProducerCategory />
-          </div>
-          <div className='mt-4'>
-            <Certification />
-          </div>
+          <TierTable />
+        </div>
+        <div className='mt-4'>
+          <Commissions />
+        </div>
+        <div className='mt-4'>
+          <RewardsProgram />
+        </div>
+        <div className='mt-4 bg-white rounded-lg'>
+          <MonthlySubscription />
+        </div>
+        <div className='mt-4 bg-white rounded-lg'>
+          <MonthlyProduction />
         </div>
       </div>
-    </>
+      <div className='ml-4 mt-4'>
+        <Event />
+        <div className='mt-4 bg-white rounded-lg'>
+          <TopProducerCategory />
+        </div>
+        <div className='mt-4'>
+          <Certification />
+        </div>
+      </div>
+      <div className='col-span-12 mt-4'>
+        <Referrals rankData={rankData} />
+      </div>
+    </div>
   )
 }
 

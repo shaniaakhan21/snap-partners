@@ -6,8 +6,7 @@ import Typography from '@mui/material/Typography'
 import StarIcon from '@material-ui/icons/Star'
 import { styled } from '@mui/system'
 import BarWithText from './BarWithText'
-import axios from 'axios'
-import { getLocalStorage } from 'lib/utils/localStorage'
+import { RankData } from 'lib/types/overview'
 import { RankSteps } from './RankSteps'
 
 interface TabPanelProps {
@@ -50,70 +49,27 @@ const StyledBox = styled(Box)<StyledBoxProps>((props) => ({
   borderRadius: 4
 }))
 
-interface WorkingLegs {
-  [key: string]: {
-    rate: number;
-    percentage: number;
-  };
+interface RankComponentProps{
+  data: RankData | null
 }
 
-interface GV {
-  value: number,
-  percentage: number
-}
-
-interface PVC {
-  value: number,
-  percentage: number
-}
-
-interface Post {
-  pvc: PVC
-  commissionVol: number,
-  PSMRatio: string,
-  PSMPercentage: number,
-  workingLegs: WorkingLegs,
-  gv: GV
-}
-
-interface RankData {
-  currentRank: string,
-  currentRankLevel: number,
-  mng: Post,
-  sv: Post,
-  dct: Post,
-  exec: Post
-}
-
-export default function RankComponent () {
+export default function RankComponent (props: RankComponentProps) {
+  const { data: rankData } = props
   const [value, setValue] = useState(0)
-
-  const [rankData, setRankData] = useState<RankData>(null)
-
-  useEffect(() => {
-    (async () => {
-      const token = getLocalStorage('accessToken')
-      const response = await axios.get('/api/reports/getRanks', {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-      setRankData(response.data)
-      setValue(response.data.currentRankLevel)
-      console.log(response.data.currentRankLevel)
-    })()
-  }, [])
-
   const handleChange = (event: SyntheticEvent, newValue: number) => {
     setValue(newValue)
   }
 
-  console.log({ rankData })
+  useEffect(() => {
+    if (rankData) {
+      setValue(rankData.currentRankLevel)
+    }
+  }, [rankData])
 
   return (
     <div>
       <Box sx={{ '& .Mui-selected': { color: 'black', bgcolor: 'white' }, '& .MuiTabs-indicator': { backgroundColor: 'transparent' } }}>
-        {/* <div className='bg-white py-3 px-2 rounded-lg'>
+        <div className='bg-white py-3 px-2 rounded-lg'>
           <div className='flex flex-row justify-between items-center'>
             <p className='text-lg font-semibold'>Your Current Rank</p>
             <div className='flex flex-row items-center'>
@@ -124,7 +80,7 @@ export default function RankComponent () {
           <div className='mt-5'>
             <RankSteps currentRank={rankData?.currentRankLevel || 0}/>
           </div>
-        </div> */}
+        </div>
         <div className='bg-white p-2.5 rounded-lg'>
           <Tabs value={value} onChange={handleChange} centered>
             <Tab sx={{ fontSize: 12, width: '20%', bgcolor: '#E35C49' }} label="FM" />
