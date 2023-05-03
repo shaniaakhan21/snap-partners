@@ -41,11 +41,8 @@ const DashboardOverViewPage: Page = () => {
     <>
       <>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-5'>
-          <a href="https://store.snapdelivered.com/product/snap-u-live-event-in-cincinnati-ohio/" target={'_blank'}>
-            <img src='/images/livev1.jpg' alt='Agent logo' />
-          </a>
-          <a href="https://store.snapdelivered.com/product/snap-u-live-stream-in-cincinnati-ohio/" target={'_blank'}>
-            <img src='/images/streamv1.jpg' alt='Agent logo' />
+          <a href="https://snapseminars.com" target={'_blank'}>
+            <img src='/images/leadershipcertv1.png' alt='Agent logo' />
           </a>
         </div>
       </>
