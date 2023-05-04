@@ -92,7 +92,7 @@ export default function TopProducerCategory () {
             fontSize: '20px',
             paddingBottom: '20px'
           }}
-        >Next Snap U</Typography>
+        >Top Producers</Typography>
         <Tabs
           // disable the tab indicator because it doesn't work well with wrapped container
           TabIndicatorProps={{ sx: { display: 'none' } }}

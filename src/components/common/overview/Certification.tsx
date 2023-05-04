@@ -61,7 +61,7 @@ function Certification () {
           sx={{
             fontSize: '20px'
           }}
-        >Next Snap U</Typography>
+        >Certifications</Typography>
       </Paper>
       <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}

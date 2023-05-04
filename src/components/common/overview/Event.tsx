@@ -61,7 +61,7 @@ function Event () {
           sx={{
             fontSize: '20px'
           }}
-        >Next Snap U</Typography>
+        >Next Snap Events</Typography>
       </Paper>
       <AutoPlaySwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
