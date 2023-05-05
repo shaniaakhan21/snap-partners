@@ -15,7 +15,7 @@ import Commissions from 'components/common/overview/Comissions'
 import TierTable from 'components/common/overview/TierTable'
 import RewardsProgram from 'components/common/overview/RewardsProgram'
 import { useEffect, useState } from 'react'
-import { RankData } from 'lib/types/overview'
+import { Rank, RankData } from 'lib/types/overview'
 import { getLocalStorage } from 'lib/utils/localStorage'
 import axios from 'axios'
 import Referrals from 'components/common/overview/Referrals'
@@ -51,7 +51,7 @@ const DashboardOverViewPage: Page = () => {
             <TierTable />
           </div>
           <div className='mt-4'>
-            <Commissions />
+            <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} />
           </div>
           <div className='mt-4'>
             <RewardsProgram />

@@ -19,6 +19,7 @@ interface ICertification {
   title: string;
   description: string;
   imageURL: string;
+  redirectUrl: string
 }
 
 function Certification () {
@@ -73,7 +74,9 @@ function Certification () {
           <div key={index}>
             {Math.abs(activeStep - index) <= 2
               ? (
-                <CertificationTile title={certificate.title}
+                <CertificationTile
+                  redirectUrl={certificate.redirectUrl}
+                  title={certificate.title}
                   description={certificate.description}
                   image={certificate.imageURL}/>
               )

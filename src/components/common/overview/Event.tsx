@@ -18,7 +18,8 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
 interface IEvent {
   img: string,
   title: string,
-  description: string
+  description: string,
+  redirectUrl: string
 }
 
 function Event () {
@@ -73,7 +74,9 @@ function Event () {
           <div key={index}>
             {Math.abs(activeStep - index) <= 2
               ? (
-                <NextSnapTile title={step.title}
+                <NextSnapTile
+                  redirectUrl={step.redirectUrl}
+                  title={step.title}
                   description={step.description}
                   image={step.img}/>
               )

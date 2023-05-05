@@ -127,14 +127,16 @@ export const teamCommission = [
 // This will be the API response format for certification
 export const certification = [
   {
-    title: 'Google Certification 1',
-    description: 'This is the certification issued for Google Learning',
-    imageURL: 'https://contentstatic.timesjobs.com/photo/76353635/trending/top-5-google-certifications-for-free-during-lockdown.jpg'
+    title: 'ERC TRAINING MODULES',
+    description: 'Step 1',
+    imageURL: 'https://snapdeliveredteam.com/images/1v1.png',
+    redirectUrl: 'https://jorns.smartstudenthub.com/ERC/Register'
   },
   {
-    title: 'Google Certification 2',
-    description: 'This is the certification issued for Google Learning',
-    imageURL: 'https://contentstatic.timesjobs.com/photo/76353635/trending/top-5-google-certifications-for-free-during-lockdown.jpg'
+    title: 'ERC CERTIFICATION EXAM',
+    description: 'Step 2',
+    imageURL: 'https://snapdeliveredteam.com/images/2.png',
+    redirectUrl: 'https://snapfinancialcertified.com/'
   }
 ]
 
@@ -142,361 +144,361 @@ export const certification = [
 export const topProducers = {
   ibo: {
     personal: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }, {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }, {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ],
     manager: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ],
     supervisor: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ],
     director: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ],
     executive: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ]
   },
   erc: {
     personal: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ],
     manager: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ],
     supervisor: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ],
     director: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ],
     executive: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ]
   },
   delivery: {
     personal: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ],
     manager: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ],
     supervisor: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ],
     director: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ],
     executive: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ]
   },
   vidgo: {
     personal: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ],
     manager: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ],
     supervisor: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ],
     director: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ],
     executive: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ]
   },
   products: {
     personal: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ],
     manager: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ],
     supervisor: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ],
     director: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ],
     executive: [
-      {
-        name: 'Cameron Williamson',
-        noOfCustomers: '3',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      },
-      {
-        name: 'Sam Williamson',
-        noOfCustomers: '4',
-        profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
-      }
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
     ]
   }
 }
@@ -504,13 +506,9 @@ export const topProducers = {
 // This will be the API response for Events
 export const events = [
   {
-    img: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60',
-    title: 'Event A',
-    description: 'This is event A'
-  },
-  {
-    img: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60',
-    title: 'Event B',
-    description: 'This is event B'
+    img: 'https://snapdeliveredteam.com/images/leadershipcertv1.png',
+    title: 'Leadership Certification Conference',
+    description: 'July 21st - 23rd, 2023',
+    redirectUrl: 'https://snapseminars.com/'
   }
 ]

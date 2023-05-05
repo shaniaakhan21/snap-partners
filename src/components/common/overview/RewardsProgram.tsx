@@ -12,34 +12,34 @@ interface RewardProgramRow{
 }
 
 const mockData: RewardProgramRow[] = [
-  {
-    rv: 1230,
-    months: 2,
-    reward: 'Apple TV',
-    cash: 75,
-    progress: 100
-  },
-  {
-    rv: 1230,
-    months: 2,
-    reward: 'Sony TV',
-    cash: 125,
-    progress: 50
-  },
-  {
-    rv: 1230,
-    months: 2,
-    reward: 'iPad 10,5',
-    cash: 250,
-    progress: 50
-  },
-  {
-    rv: 1230,
-    months: 2,
-    reward: 'iWatch Ult',
-    cash: 375,
-    progress: 50
-  }
+  // {
+  //   rv: 1230,
+  //   months: 2,
+  //   reward: 'Apple TV',
+  //   cash: 75,
+  //   progress: 100
+  // },
+  // {
+  //   rv: 1230,
+  //   months: 2,
+  //   reward: 'Sony TV',
+  //   cash: 125,
+  //   progress: 50
+  // },
+  // {
+  //   rv: 1230,
+  //   months: 2,
+  //   reward: 'iPad 10,5',
+  //   cash: 250,
+  //   progress: 50
+  // },
+  // {
+  //   rv: 1230,
+  //   months: 2,
+  //   reward: 'iWatch Ult',
+  //   cash: 375,
+  //   progress: 50
+  // }
 ]
 
 export default function RewardsProgram () {
