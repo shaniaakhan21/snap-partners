@@ -2,103 +2,80 @@ import Head from 'next/head'
 
 import type { Page, ReactNode } from 'lib/types'
 import { useReports } from 'lib/hooks/useReports'
-import { useAuthStore } from 'lib/stores'
 import { APP_INFO } from 'config/appInfo'
 import RankComponent from 'components/common/overview/RankComponent'
 import MonthlySubscription from 'components/common/overview/MonthlySubscription'
 import MonthlyProduction from 'components/common/overview/MonthlyProduction'
-import TeamCommission from 'components/common/overview/TeamCommission'
-
+import Event from 'components/common/overview/Event'
 import DashboardLayout from 'layouts/private/Dashboard'
-// import {
-//   EstimatedCommissions,
-//   Graphics,
-//   MyOrders,
-//   OverViewGrid,
-//   PayRank,
-//   PromotionTracker,
-//   Stepper,
-//   TopCustomerAcquisition,
-//   TopDriverAcquisition,
-//   TopEntitiesGrid,
-//   // TopOrderLine,
-//   TopMerchantsAcquisition,
-//   TopAgentAcquisition,
-//   TotalEarnings,
-//   TotalOrders
-// } from 'components/page/overview'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
+import Certification from 'components/common/overview/Certification'
+import TopProducerCategory from 'components/common/overview/TopProducerCategory'
+import Commissions from 'components/common/overview/Comissions'
+import TierTable from 'components/common/overview/TierTable'
+import RewardsProgram from 'components/common/overview/RewardsProgram'
+import { useEffect, useState } from 'react'
+import { Rank, RankData } from 'lib/types/overview'
+import { getLocalStorage } from 'lib/utils/localStorage'
+import axios from 'axios'
+import Referrals from 'components/common/overview/Referrals'
 
 const { SEO } = APP_INFO
 
 const DashboardOverViewPage: Page = () => {
-  const { reports, dataGraphic, loading } = useReports()
-  const { auth } = useAuthStore()
+  const { loading } = useReports()
+  const [rankData, setRankData] = useState<RankData>(null)
+
+  useEffect(() => {
+    (async () => {
+      const token = getLocalStorage('accessToken')
+      const response = await axios.get('/api/reports/getRanks', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      setRankData(response.data)
+    })()
+  }, [])
 
   if (loading) return <SpinnerPageContent />
 
   return (
     <>
-      <>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-5'>
-          <a href="https://snapseminars.com" target={'_blank'}>
-            <img src='/images/leadershipcertv1.png' alt='Agent logo' />
-          </a>
-        </div>
-      </>
-      <>
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mb-5'>
-          <a href="https://jorns.smartstudenthub.com/ERC/Register" target={'_blank'}>
-            <img src='/images/1v1.png' alt='Agent logo' />
-          </a>
-          <a href="https://snapfinancialcertified.com/" target={'_blank'}>
-            <img src='/images/2.png' alt='Agent logo' />
-          </a>
-        </div>
-      </>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-2">
-          <div className="bg-white">
-            <div className='pt-2 pl-2 pr-2'>
-              <RankComponent />
-            </div >
+      <div className="grid grid-cols-1 lg:grid-cols-2">
+        <div>
+          <div>
+            <RankComponent data={rankData} />
+          </div>
+          <div className='mt-4'>
+            <TierTable />
+          </div>
+          <div className='mt-4'>
+            <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} />
+          </div>
+          <div className='mt-4'>
+            <RewardsProgram />
+          </div>
+          <div className='mt-4 bg-white rounded-lg'>
+            <MonthlySubscription />
+          </div>
+          <div className='mt-4 bg-white rounded-lg'>
+            <MonthlyProduction />
           </div>
         </div>
-        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1 bg-white">
-          <MonthlySubscription />
-        </div>
-        <div className="col-span-3 sm:col-span-3 md:col-span-1 row-span-1 bg-white">
-          <MonthlyProduction />
-        </div>
-        {/*
-        <div className="col-span-3 sm:col-span-3 md:col-span-3 bg-white">
-          <div className='p-10'>
-            <TeamCommission />
+        <div className='ml-4'>
+          <Event />
+          <div className='mt-4 bg-white rounded-lg'>
+            <TopProducerCategory />
+          </div>
+          <div className='mt-4'>
+            <Certification />
           </div>
         </div>
-  */}
       </div>
-      {/* <div className='grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 w-full h-fit gap-4'>
-        <Graphics data={dataGraphic} />
-        <PromotionTracker userAuth={auth} />
+      <div className='col-span-12 mt-4'>
+        <Referrals rankData={rankData} />
       </div>
-
-      <OverViewGrid>
-        <Stepper data={{}} />
-        <TotalEarnings data={reports} />
-        <TotalOrders data={reports} />
-        <EstimatedCommissions data={reports} />
-        <MyOrders data={reports} />
-        <PayRank data={reports} />
-      </OverViewGrid>
-
-      <TopEntitiesGrid>
-        <TopMerchantsAcquisition data={reports} />
-        <TopDriverAcquisition data={reports} />
-        <TopCustomerAcquisition data={reports} />
-        <TopAgentAcquisition data={reports} />
-        {/* <TopOrderLine data={reports} /> */}
-      {/* </TopEntitiesGrid> */}
     </>
   )
 }

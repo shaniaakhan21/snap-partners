@@ -123,3 +123,392 @@ export const teamCommission = [
   { level: '2 Tier', riders: '5', restaurantOrders: '2', clientOrders: '12', erc: '0', vidgo: '5' },
   { level: '5 Tier', riders: '3', restaurantOrders: '2', clientOrders: '10', erc: '0', vidgo: '5' }
 ]
+
+// This will be the API response format for certification
+export const certification = [
+  {
+    title: 'ERC TRAINING MODULES',
+    description: 'Step 1',
+    imageURL: 'https://snapdeliveredteam.com/images/1v1.png',
+    redirectUrl: 'https://jorns.smartstudenthub.com/ERC/Register'
+  },
+  {
+    title: 'ERC CERTIFICATION EXAM',
+    description: 'Step 2',
+    imageURL: 'https://snapdeliveredteam.com/images/2.png',
+    redirectUrl: 'https://snapfinancialcertified.com/'
+  }
+]
+
+// This will be the API response for top producers
+export const topProducers = {
+  ibo: {
+    personal: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }, {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ],
+    manager: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ],
+    supervisor: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ],
+    director: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ],
+    executive: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ]
+  },
+  erc: {
+    personal: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ],
+    manager: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ],
+    supervisor: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ],
+    director: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ],
+    executive: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ]
+  },
+  delivery: {
+    personal: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ],
+    manager: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ],
+    supervisor: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ],
+    director: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ],
+    executive: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ]
+  },
+  vidgo: {
+    personal: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ],
+    manager: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ],
+    supervisor: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ],
+    director: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ],
+    executive: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ]
+  },
+  products: {
+    personal: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ],
+    manager: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ],
+    supervisor: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ],
+    director: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ],
+    executive: [
+      // {
+      //   name: 'Cameron Williamson',
+      //   noOfCustomers: '3',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // },
+      // {
+      //   name: 'Sam Williamson',
+      //   noOfCustomers: '4',
+      //   profileImage: 'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60'
+      // }
+    ]
+  }
+}
+
+// This will be the API response for Events
+export const events = [
+  {
+    img: 'https://snapdeliveredteam.com/images/leadershipcertv1.png',
+    title: 'Leadership Certification Conference',
+    description: 'July 21st - 23rd, 2023',
+    redirectUrl: 'https://snapseminars.com/'
+  }
+]
