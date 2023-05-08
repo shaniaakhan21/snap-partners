@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Tab, Tabs } from '@mui/material'
 import BarWithText from './BarWithText'
 import { Button } from '../Button'
+import HiddenTabScrollButton from './HiddenTabScrollButton'
 
 interface RewardProgramRow{
     rv: number;
@@ -42,6 +43,17 @@ const mockData: RewardProgramRow[] = [
   // }
 ]
 
+const tabStyle = {
+  color: '#777777',
+  backgroundColoR: '#FFFFFF',
+  fontSize: 12,
+  width: '33.33%',
+  '&.Mui-selected': {
+    backgroundColor: '#E35C49',
+    color: '#FFFFFF'
+  }
+}
+
 export default function RewardsProgram () {
   const [selectedRank, setSelectedRank] = useState(0)
 
@@ -77,12 +89,14 @@ export default function RewardsProgram () {
         className='mt-2.5 border-b-4 border-textAcent-500'
         textColor="inherit"
         indicatorColor="secondary"
+        variant='scrollable'
+        ScrollButtonComponent={HiddenTabScrollButton}
         TabIndicatorProps={{
           style: { display: 'none' }
         }}>
-        <Tab sx={{ fontSize: 12, width: '33.33%', bgcolor: selectedRank === 0 ? '#E35C49' : '#FFFFFF', color: selectedRank === 0 ? '#FFFFFF' : '#777777' }} color='#Ffffff' label="Director" />
-        <Tab sx={{ fontSize: 12, width: '33.33%', bgcolor: selectedRank === 1 ? '#E35C49' : '#FFFFFF', color: selectedRank === 1 ? '#FFFFFF' : '#777777' }} label="Supervisor" />
-        <Tab sx={{ fontSize: 12, width: '33.34%', bgcolor: selectedRank === 2 ? '#E35C49' : '#FFFFFF', color: selectedRank === 2 ? '#FFFFFF' : '#777777' }} label="Executive" />
+        <Tab sx={tabStyle} color='#Ffffff' label="Director" />
+        <Tab sx={tabStyle} label="Supervisor" />
+        <Tab sx={tabStyle} label="Executive" />
       </Tabs>
       <table className="mt-4 table-auto w-full ml-2 text-center">
         <thead>

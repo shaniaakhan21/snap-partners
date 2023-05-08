@@ -4,6 +4,18 @@ import { Button } from '../Button'
 import { getLocalStorage } from 'lib/utils/localStorage'
 import axios from 'axios'
 import { Rank } from 'lib/types/overview'
+import HiddenTabScrollButton from './HiddenTabScrollButton'
+
+const tabStyle = {
+  color: '#777777',
+  backgroundColoR: '#FFFFFF',
+  fontSize: 12,
+  width: '20%',
+  '&.Mui-selected': {
+    backgroundColor: '#E35C49',
+    color: '#FFFFFF'
+  }
+}
 
 interface Commission{
   manager: number;
@@ -68,7 +80,6 @@ export default function Commissions (props: CommissionsProps) {
         }
       })
       setCommissionData(response.data)
-      console.log({ data: response.data })
     })()
   }, [])
 
@@ -80,18 +91,20 @@ export default function Commissions (props: CommissionsProps) {
       </div>
       <Tabs value={selectedTimeline}
         onChange={(_, value) => setSelectedTimeline(value)}
-        centered
         className='mt-2.5 border-b-4 border-textAcent-500'
         textColor="inherit"
         indicatorColor="secondary"
+        variant='scrollable'
+        ScrollButtonComponent={HiddenTabScrollButton}
+        scrollButtons='auto'
         TabIndicatorProps={{
           style: { display: 'none' }
         }}>
-        <Tab sx={{ fontSize: 12, width: '20%', bgcolor: selectedTimeline === 0 ? '#E35C49' : '#FFFFFF', color: selectedTimeline === 0 ? '#FFFFFF' : '#777777' }} color='#Ffffff' label="Current" />
-        <Tab sx={{ fontSize: 12, width: '20%', bgcolor: selectedTimeline === 1 ? '#E35C49' : '#FFFFFF', color: selectedTimeline === 1 ? '#FFFFFF' : '#777777' }} label="Last Month" />
-        <Tab sx={{ fontSize: 12, width: '20%', bgcolor: selectedTimeline === 2 ? '#E35C49' : '#FFFFFF', color: selectedTimeline === 2 ? '#FFFFFF' : '#777777' }} label="Quarter" />
-        <Tab sx={{ fontSize: 12, width: '20%', bgcolor: selectedTimeline === 3 ? '#E35C49' : '#FFFFFF', color: selectedTimeline === 3 ? '#FFFFFF' : '#777777' }} label="Year" />
-        <Tab sx={{ fontSize: 12, width: '20%', bgcolor: selectedTimeline === 4 ? '#E35C49' : '#FFFFFF', color: selectedTimeline === 4 ? '#FFFFFF' : '#777777' }} label="All time" />
+        <Tab sx={tabStyle} color='#Ffffff' label="Current" />
+        <Tab sx={tabStyle} label="Last Month" />
+        <Tab sx={tabStyle} label="Quarter" />
+        <Tab sx={tabStyle} label="Year" />
+        <Tab sx={tabStyle} label="All time" />
       </Tabs>
       <div className='flex flex-row mt-5'>
         <div className='flex flex-col text-right'>

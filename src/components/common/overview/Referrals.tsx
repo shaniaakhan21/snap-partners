@@ -28,7 +28,7 @@ export default function Referrals (props: ReferralsProps) {
   if (!rankData) return <></>
 
   return (
-    <div className="bg-white rounded-lg pl-10 pr-12 py-7">
+    <div className="bg-white rounded-lg pl-5 pr-6 md:pl-10 md:pr-12 py-7">
       <div className="flex flex-row justify-between">
         <div className="flex flex-row items-center">
           <StyledBox backgroundColor={bgFromRank(rankData.currentRank as Rank)}>
@@ -45,20 +45,20 @@ export default function Referrals (props: ReferralsProps) {
       <table className="table-fixed w-full border-collapse border border-slate-500 mt-4 text-left">
         <thead>
           <tr className='bg-transparentPrimary-24%'>
-            <th className='border border-gray-300 pl-4'>Levels</th>
-            <th className='border border-gray-300 pl-4'>Restaurants</th>
-            <th className='border border-gray-300 pl-4'>Drivers</th>
-            <th className='border border-gray-300 pl-4'>Customers</th>
-            <th className='border border-gray-300 pl-4'>ERC</th>
+            <th className='text-ellipsis overflow-hidden whitespace-nowrap text-xs md:text-base border border-gray-300 pl-4'>Levels</th>
+            <th className='text-ellipsis overflow-hidden whitespace-nowrap text-xs md:text-base border border-gray-300 pl-4'>Restaurants</th>
+            <th className='text-ellipsis overflow-hidden whitespace-nowrap text-xs md:text-base border border-gray-300 pl-4'>Drivers</th>
+            <th className='text-ellipsis overflow-hidden whitespace-nowrap text-xs md:text-base border border-gray-300 pl-4'>Customers</th>
+            <th className='text-ellipsis overflow-hidden whitespace-nowrap text-xs md:text-base border border-gray-300 pl-4'>ERC</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td className='border border-gray-300 pl-4'>Personal referrals</td>
-            <td className='border border-gray-300 pl-4'></td>
-            <td className='border border-gray-300 pl-4'></td>
-            <td className='border border-gray-300 pl-4'></td>
-            <td className='border border-gray-300 pl-4'></td>
+            <td className='text-xs md:text-base border border-gray-300 pl-4'>Personal referrals</td>
+            <td className='text-xs md:text-base border border-gray-300 pl-4'></td>
+            <td className='text-xs md:text-base border border-gray-300 pl-4'></td>
+            <td className='text-xs md:text-base border border-gray-300 pl-4'></td>
+            <td className='text-xs md:text-base border border-gray-300 pl-4'></td>
           </tr>
         </tbody>
       </table>

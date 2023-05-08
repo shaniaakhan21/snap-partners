@@ -46,9 +46,9 @@ export default function TierTable () {
   const renderRow = (row: TierTableRow) => {
     return (
       <tr key={row.title}>
-        <td className="text-left">{row.title}</td>
+        <td className="text-left text-xs sm:text-base">{row.title}</td>
         {row.values.map((value, idx) => (
-          <td key={`${row.title}${value}${idx}`}>
+          <td key={`${row.title}${value}${idx}`} className="text-xs sm:text-base">
             {value}
           </td>
         ))}
@@ -61,11 +61,11 @@ export default function TierTable () {
       <table className="table-fixed w-full text-center">
         <thead>
           <tr>
-            <th className="text-left">Team</th>
-            <th>Manager</th>
-            <th>Supervisor</th>
-            <th>Director</th>
-            <th>Executive</th>
+            <th className="text-left text-xs sm:text-base">Team</th>
+            <th className="text-xs sm:text-base">Manager</th>
+            <th className="text-xs sm:text-base">Supervisor</th>
+            <th className="text-xs sm:text-base">Director</th>
+            <th className="text-xs sm:text-base">Executive</th>
           </tr>
         </thead>
         <tbody>
