@@ -83,7 +83,7 @@ const DashboardOverViewPage: Page = () => {
 DashboardOverViewPage.getLayout = (page: ReactNode) => (
   <DashboardLayout>
     <Head>
-      <title>{SEO.TITLE_PAGE} - Overview</title>
+      <title>{SEO.TITLE_PAGE} - Dashboard</title>
     </Head>
 
     {page}
