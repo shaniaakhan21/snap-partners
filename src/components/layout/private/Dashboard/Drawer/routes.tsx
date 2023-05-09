@@ -16,7 +16,7 @@ export const drawerRoutes = [
   {
     icon: <DashboardIcon />,
     to: '/overview',
-    label: 'Overview'
+    label: 'Dashboard'
   },
   {
     icon: <ReferralLinksIcon />,
