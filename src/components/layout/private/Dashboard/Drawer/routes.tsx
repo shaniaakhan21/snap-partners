@@ -33,22 +33,22 @@ export const drawerRoutes = [
     to: '/reports',
     label: 'Reports',
     subItems: [
-      {
-        label: 'Global',
-        to: '/global-reports'
-      },
-      {
-        label: 'Customer',
-        to: '/customer-reports'
-      },
-      {
-        label: 'Driver',
-        to: '/driver-reports'
-      },
-      {
-        label: 'Merchant',
-        to: '/merchant-reports'
-      },
+      // {
+      //   label: 'Global',
+      //   to: '/global-reports'
+      // },
+      // {
+      //   label: 'Customer',
+      //   to: '/customer-reports'
+      // },
+      // {
+      //   label: 'Driver',
+      //   to: '/driver-reports'
+      // },
+      // {
+      //   label: 'Merchant',
+      //   to: '/merchant-reports'
+      // },
       {
         label: 'ERC',
         to: '/ercreferrals'
