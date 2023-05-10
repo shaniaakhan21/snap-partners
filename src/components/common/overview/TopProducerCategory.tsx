@@ -32,8 +32,6 @@ interface ITopProducerCategory {
 }
 
 const tabStyle = {
-  borderTopLeftRadius: '10px',
-  borderTopRightRadius: '10px',
   borderTop: '1px solid #c8c8c8',
   borderLeft: '1px solid #c8c8c8',
   borderRight: '1px solid #c8c8c8',
@@ -124,11 +122,11 @@ export default function TopProducerCategory () {
         variant='scrollable'
         ScrollButtonComponent={HiddenTabScrollButton}
       >
-        <Tab sx={tabStyle} label="IBO" {...a11yProps(0)} />
-        <Tab sx={tabStyle} label="ERC" {...a11yProps(1)} />
-        <Tab sx={tabStyle} label="Delivery" {...a11yProps(2)} />
-        <Tab sx={tabStyle} label="Vidgo" {...a11yProps(3)} />
-        <Tab sx={tabStyle} label="Products" {...a11yProps(4)} />
+        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="IBO" {...a11yProps(0)} />
+        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="ERC" {...a11yProps(1)} />
+        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Delivery" {...a11yProps(2)} />
+        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Vidgo" {...a11yProps(3)} />
+        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Products" {...a11yProps(4)} />
       </Tabs>
       <Tabs
         TabIndicatorProps={{ sx: { display: 'none' } }}
@@ -139,11 +137,11 @@ export default function TopProducerCategory () {
         ScrollButtonComponent={HiddenTabScrollButton}
         className='border-b-4 border-primary-500'
       >
-        <Tab sx={subTabStyle} label="Personal" />
-        <Tab sx={subTabStyle} label="Manager" />
-        <Tab sx={subTabStyle} label="Supervisor" />
-        <Tab sx={subTabStyle} label="Director" />
-        <Tab sx={subTabStyle} label="Executive" />
+        <Tab sx={subTabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Personal" />
+        <Tab sx={subTabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Manager" />
+        <Tab sx={subTabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Supervisor" />
+        <Tab sx={subTabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Director" />
+        <Tab sx={subTabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Executive" />
       </Tabs>
       <TabPanel value={value} index={0}>
         <TopProducers data={topProducerData?.ibo} value={subctegoryValue}/>
