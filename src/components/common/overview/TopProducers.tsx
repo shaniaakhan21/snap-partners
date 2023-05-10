@@ -59,7 +59,7 @@ function TabPanel (props) {
   const { children, value, index, ...other } = props
 
   return (
-    <div role="tabpanel" style={{ borderTop: '5px solid #fe0002', marginTop: '-1px' }} hidden={value !== index} {...other}>
+    <div role="tabpanel" hidden={value !== index} {...other}>
       {value === index && (
         <Box sx={{ p: 3 }}>
           {children}
@@ -75,46 +75,14 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired
 }
 
-function a11yProps (index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`
-  }
-}
-
 interface ITopProducerProps {
   data: ITopProducerCategoryGeneric;
+  value: number
 }
 
-export const TopProducers: React.FC<ITopProducerProps> = ({ data }) => {
-  const [value, setValue] = React.useState(0)
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue)
-  }
-
+export const TopProducers: React.FC<ITopProducerProps> = ({ data, value }) => {
   return (
     <Box sx={{ width: '100%' }}>
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs
-          // disable the tab indicator because it doesn't work well with wrapped container
-          TabIndicatorProps={{ sx: { display: 'none' } }}
-          sx={{
-            '& .MuiTabs-flexContainer': {
-              flexWrap: 'wrap'
-            }
-          }}
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-        >
-          <Tab sx={tabStyle} label="Personal" {...a11yProps(0)} />
-          <Tab sx={tabStyle} label="Manager" {...a11yProps(1)} />
-          <Tab sx={tabStyle} label="supervisor" {...a11yProps(2)} />
-          <Tab sx={tabStyle} label="Director" {...a11yProps(3)} />
-          <Tab sx={tabStyle} label="Executive" {...a11yProps(4)} />
-        </Tabs>
-      </Box>
       <TabPanel value={value} index={0}>
         {
           data && data.personal && <>
