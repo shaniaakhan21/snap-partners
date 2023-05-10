@@ -91,7 +91,7 @@ const ErcreferralsPage: Page = () => {
   const [monthSelected, setMonthSelected] = useState(String(new Date().getMonth()))
   const [yearSelected, setYearSelected] = useState(String(new Date().getFullYear()))
 
-  const month = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
   const years = []
   for (let i = new Date().getFullYear(); i >= 2022; i--) {
@@ -141,28 +141,28 @@ const ErcreferralsPage: Page = () => {
       <span className='text-2xl font-bold'>Your Personal Clients</span> <br /><br />
 
       <div id="cro-erc-process">
-          <img src="https://snapdeliveredteam.com/images/j-logo.png" />
+        <img src="https://snapdeliveredteam.com/images/j-logo.png" />
+        <div>
+          <h1>The ERC Process has 3 Phases</h1>
           <div>
-              <h1>The ERC Process has 3 Phases</h1>
-              <div>
-              <ul>
-                  <li>Phase 1</li>
-                  <li>New Client</li>
-              </ul>
-              <ul>
-                  <li>Phase 2</li>
-                  <li> Jorns Filling Work</li>
-              </ul>
-              <ul>
-                  <li>Phase 3</li>
-                  <li>IRS Payment</li>
-              </ul>
-              </div>
-      </div>
+            <ul>
+              <li>Phase 1</li>
+              <li>New Client</li>
+            </ul>
+            <ul>
+              <li>Phase 2</li>
+              <li> Jorns Filling Work</li>
+            </ul>
+            <ul>
+              <li>Phase 3</li>
+              <li>IRS Payment</li>
+            </ul>
+          </div>
+        </div>
       </div>
 
       <div id="table1erc">
-      <TableTransactions transactions={transactions} />
+        <TableTransactions transactions={transactions} />
       </div>
       <br /><br />
       <span className='text-2xl font-bold'>Your Team Clients</span>
