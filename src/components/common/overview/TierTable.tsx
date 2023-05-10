@@ -25,10 +25,6 @@ const rows: TierTableRow [] = [
     values: ['1%', '2%', '3%', '5%']
   },
   {
-    title: 'Tier6',
-    values: ['1%', '2%', '3%', '5%']
-  },
-  {
     title: 'Infinite',
     values: ['', '1%', '1%', '2%']
   },
