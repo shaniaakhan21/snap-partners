@@ -24,7 +24,7 @@ export default function CertificationTile ({ title, description, image, redirect
         </CardContent>
         <CardMedia
           className="border-t border-l border-r border-b border-gray-400"
-          sx={{ height: 225 }}
+          sx={{ height: 225, backgroundSize: 'contain' }}
           image={image}
           title="green iguana"
         />

@@ -12,7 +12,7 @@ export default function EventTile ({ title, description, image, redirectUrl }) {
     <Card sx={{ maxWidth: '100%', padding: '10px' }}>
       <CardMedia
         className="border-t border-l border-r border-gray-400"
-        sx={{ height: 225 }}
+        sx={{ height: 225, backgroundSize: 'contain' }}
         image={image}
         title="green iguana"
       />
