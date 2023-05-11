@@ -8,8 +8,8 @@ const nextConfig = {
       ? [
         {
           source: '/api/:path*',
-          // destination: `http://192.168.2.103:8080/:path*`
-          destination: 'https://snapdeliveredteam.com/api/:path*'
+          destination: `http://localhost:5062/:path*`
+          // destination: 'https://snapdeliveredteam.com/api/:path*'
         }
       ]
       : []

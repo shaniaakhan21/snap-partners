@@ -1,6 +1,9 @@
 import { GenealogyIcon } from 'components/common/icons'
 import BorderColorIcon from '@mui/icons-material/BorderColor'
 import { IconButton, makeStyles } from '@material-ui/core'
+import { IAuth } from 'lib/stores/Auth'
+import { updateUserProfileImage } from 'lib/services/user/updateUserProfileImage'
+import { SyntheticEvent } from 'react'
 const useStyles = makeStyles({
   root: {
     position: 'relative',
@@ -29,13 +32,17 @@ const useStyles = makeStyles({
 })
 
 interface IPhotoAccountProps {
-  photoURL: string
+  photoURL: string;
+  auth: IAuth
 }
 
-export const PhotoAccount = ({ photoURL }: IPhotoAccountProps) => {
+export const PhotoAccount = ({ photoURL, auth }: IPhotoAccountProps) => {
   const classes = useStyles()
-  const handleImageUpload = (event) => {
+  const handleImageUpload = async (event: SyntheticEvent) => {
     // Upload image api
+    if ((event.nativeEvent.target as HTMLInputElement).files?.length > 0) {
+      await updateUserProfileImage(auth.accessToken, { image: (event.nativeEvent.target as HTMLInputElement).files[0] })
+    }
   }
   return (
     <div className={classes.root}>
