@@ -121,7 +121,6 @@ const ErcreferralsPage: Page = () => {
     (async function () {
       try {
         const token = getLocalStorage('accessToken')
-
         const res = await fetch(`/api/erc/getTableClients?month=${monthSelected}&year=${yearSelected}`, {
           method: 'GET',
           headers: { Authorization: `Bearer ${token}` }
@@ -176,7 +175,7 @@ const ErcreferralsPage: Page = () => {
       >
         {month.map((m, i) => {
           return (
-            <option key={i} selected={(new Date().getMonth() === i)} value={i}>
+            <option key={i} selected={(new Date().getMonth() === i)} value={i + 1}>
               {m}
             </option>
           )
