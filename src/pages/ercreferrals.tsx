@@ -88,8 +88,8 @@ export const TableClientTransactions = ({ transactions }: ITableTransactionsProp
 const ErcreferralsPage: Page = () => {
   const [transactions, setTransactions] = useState([])
   const [transactionsClient, setTransactionsClient] = useState([])
-  const [monthSelected, setMonthSelected] = useState(String(new Date().getMonth()))
-  const [yearSelected, setYearSelected] = useState(String(new Date().getFullYear()))
+  const [monthSelected, setMonthSelected] = useState(new Date().getMonth()) // 0-11
+  const [yearSelected, setYearSelected] = useState(new Date().getFullYear())
 
   const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
@@ -121,7 +121,7 @@ const ErcreferralsPage: Page = () => {
     (async function () {
       try {
         const token = getLocalStorage('accessToken')
-        const res = await fetch(`/api/erc/getTableClients?month=${monthSelected}&year=${yearSelected}`, {
+        const res = await fetch(`/api/erc/getTableClients?month=${monthSelected + 1}&year=${yearSelected}`, {
           method: 'GET',
           headers: { Authorization: `Bearer ${token}` }
         })
@@ -171,11 +171,11 @@ const ErcreferralsPage: Page = () => {
         name='legalType'
         className='ml-5 cursor-pointer relative xs:mr-2 pl-2 pr-12 py-0 xs:py-1 my-2 bg-[rgba(255,255,255,.13)] rounded-md border border-solid border-black outline-none appearance-none leading-8'
         placeholder='User Rank'
-        onChange={(current) => { setMonthSelected(current.target.value) }}
+        onChange={(current) => { setMonthSelected(parseInt(current.target.value)) }}
       >
         {month.map((m, i) => {
           return (
-            <option key={i} selected={(new Date().getMonth() === i)} value={i + 1}>
+            <option key={i} selected={(new Date().getMonth() === i)} value={i}>
               {m}
             </option>
           )
@@ -188,7 +188,7 @@ const ErcreferralsPage: Page = () => {
         name='legalType'
         className='ml-5 cursor-pointer relative xs:mr-2 pl-2 pr-12 py-0 xs:py-1 my-2 bg-[rgba(255,255,255,.13)] rounded-md border border-solid border-black outline-none appearance-none leading-8'
         placeholder='User Rank'
-        onChange={(current) => { setYearSelected(current.target.value) }}
+        onChange={(current) => { setYearSelected(parseInt(current.target.value)) }}
       >
         {years.map((y, i) => {
           return (
