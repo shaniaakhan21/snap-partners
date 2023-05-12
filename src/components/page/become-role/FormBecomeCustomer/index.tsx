@@ -42,6 +42,7 @@ export const FormBecomeCustomer = ({ userAuth, userSetAuth }) => {
       },
       idImage: null,
       insuranceImage: null,
+      profileImage: userAuth.profileImage,
       merchant: {
         city: null,
         street_name: null,

@@ -22,6 +22,7 @@ export interface IUserCommonData {
   username: string
   phoneNumber: string
   referralCode: string
+  profileImage: string
   bank_information: {
     city: string,
     state: string

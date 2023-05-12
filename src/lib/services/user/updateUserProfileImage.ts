@@ -6,10 +6,12 @@ interface IUpdateUserProfileImageBody {
 
 export const updateUserProfileImage = async (token: string, dataBody: IUpdateUserProfileImageBody): Promise<IQueryErrorReturn> => {
   const formData = new FormData()
-  formData.append('image', dataBody.image)
-      for (var key of formData.entries()) {
-        console.log(key[0] + ', ' + key[1]);
-    }
+  const entries = Object.entries(dataBody)
+
+  entries.forEach(([key, value]) => {
+    formData.append(key, value)
+  })
+
   const res = await fetch('/api/user/profileImage', {
     method: 'PUT',
     headers: { Authorization: `Bearer ${token}` },
@@ -21,8 +23,8 @@ export const updateUserProfileImage = async (token: string, dataBody: IUpdateUse
   if (!res.ok) {
     return {
       error: {
-        info: data.error,
-        status: res.status
+        status: res.status,
+        info: data.error
       }
     }
   }

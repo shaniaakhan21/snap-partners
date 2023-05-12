@@ -67,6 +67,7 @@ export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
       driver_status: data.driver_status,
       idImage: data.idImage,
       insuranceImage: data.insuranceImage,
+      profileImage: data.profileImage,
       isManager: data.ranks?.type === 'manager',
       createdAt: data.createdAt,
       ownerName: data.ownerName,

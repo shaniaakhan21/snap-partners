@@ -19,6 +19,7 @@ interface IQueryUserMeReturn extends IQueryErrorReturn {
     referralCode: string
     idImage: string
     insuranceImage: string
+    profileImage: string
     roles: {
       admin: boolean
       customer: boolean

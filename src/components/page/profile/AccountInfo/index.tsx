@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'lib/types/core/next-react'
 import { TAccountInfoToUpdate } from 'lib/types/user/profile'
-import { IAuth } from 'lib/stores/Auth'
+import { IAuth, TSetAuth } from 'lib/stores/Auth'
 
 import { TextContactCTA } from 'components/common/TextContactCTA'
 import { FormAccountInfo } from './FormAccountInfo'
@@ -12,12 +12,13 @@ import { GTMTrack } from 'lib/utils/gtm'
 
 interface IAccountInfoProps {
   auth: IAuth
+  setAuth: TSetAuth
   removeAuth: () => void
   setNewWindow: (newWindow: Window) => void
   setTypeUpdate: Dispatch<SetStateAction<TAccountInfoToUpdate>>
 }
 
-export const AccountInfo = ({ auth, removeAuth, setNewWindow, setTypeUpdate }: IAccountInfoProps) => {
+export const AccountInfo = ({ auth, setAuth, removeAuth, setNewWindow, setTypeUpdate }: IAccountInfoProps) => {
   const handleClickLogout = () => {
     GTMTrack.logout('profile')
     removeAuth()
@@ -26,7 +27,7 @@ export const AccountInfo = ({ auth, removeAuth, setNewWindow, setTypeUpdate }: I
   return (
     <div className='max-w-4xl mx-auto'>
       <div className='flex justify-start items-center gap-x-5 select-none'>
-        <PhotoAccount photoURL={null} auth={auth}/>
+        <PhotoAccount photoURL={auth.profileImage} auth={auth} setAuth={setAuth}/>
         <Badges auth={auth} />
       </div>
 
