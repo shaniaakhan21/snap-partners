@@ -66,6 +66,7 @@ export const FormBecomeDriver = ({ userAuth, userSetAuth }: { userAuth: IAuth, u
       },
       idImage: dataForm.idImage[0],
       insuranceImage: dataForm.insuranceImage[0],
+      profileImage: userAuth.profileImage,
       merchant: {
         city: null,
         street_name: null,

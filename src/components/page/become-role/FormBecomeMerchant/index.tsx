@@ -47,6 +47,7 @@ export const FormBecomeMerchant = ({ userAuth, userSetAuth }: { userAuth: IAuth,
       },
       idImage: null,
       insuranceImage: null,
+      profileImage: userAuth.profileImage,
       merchant: {
         city: dataForm.city,
         street_name: dataForm.streetName,

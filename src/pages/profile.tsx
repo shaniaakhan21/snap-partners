@@ -70,6 +70,7 @@ const ProfilePage = ({ email, tokenExist }: { email: string, tokenExist: boolean
       removeAuth={removeAuth}
       setNewWindow={setNewWindow}
       setTypeUpdate={setTypeUpdate}
+      setAuth={setAuth}
     />
   )
 }

@@ -57,7 +57,7 @@ export const Navbar = () => {
           email={auth.email}
           signOut={removeAuth}
           phone={auth.phoneNumber}
-          photoUrl={null}
+          photoUrl={auth.profileImage}
         />}
       </div>
     </header>

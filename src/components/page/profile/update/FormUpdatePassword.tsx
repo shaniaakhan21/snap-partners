@@ -83,6 +83,7 @@ export const FormUpdatePassword = ({ auth, setAuth, typeUpdate, setTypeUpdate }:
       driver_status: userData.driver_status,
       idImage: userData.idImage,
       insuranceImage: userData.insuranceImage,
+      profileImage: userData.profileImage,
       isManager: userData.ranks?.type === 'manager',
       createdAt: userData.createdAt,
       ownerName: userData.ownerName,

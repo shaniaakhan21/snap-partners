@@ -1,6 +1,11 @@
-import { GenealogyIcon } from 'components/common/icons'
+import { SyntheticEvent, useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 import BorderColorIcon from '@mui/icons-material/BorderColor'
 import { IconButton, makeStyles } from '@material-ui/core'
+import { IAuth, TSetAuth } from 'lib/stores/Auth'
+import { updateUserProfileImage } from 'lib/services/user/updateUserProfileImage'
+import AccountDefaultImage from 'components/common/AccountDefaultImage'
+
 const useStyles = makeStyles({
   root: {
     position: 'relative',
@@ -10,8 +15,9 @@ const useStyles = makeStyles({
   },
   img: {
     maxWidth: '100%',
-    width: '20px',
-    height: '20px',
+    borderRadius: '40px',
+    width: '80px',
+    height: '80px',
     display: 'flex'
   },
   editButton: {
@@ -29,20 +35,41 @@ const useStyles = makeStyles({
 })
 
 interface IPhotoAccountProps {
-  photoURL: string
+  photoURL: string;
+  auth: IAuth;
+  setAuth: TSetAuth
 }
 
-export const PhotoAccount = ({ photoURL }: IPhotoAccountProps) => {
+export const PhotoAccount = ({ photoURL, auth, setAuth }: IPhotoAccountProps) => {
+  const [img, setImg] = useState(photoURL)
   const classes = useStyles()
-  const handleImageUpload = (event) => {
-    // Upload image api
+
+  useEffect(() => {
+    setImg(img)
+  }, [photoURL])
+
+  const handleImageUpload = async (event: SyntheticEvent) => {
+    const input = event.nativeEvent.target as HTMLInputElement
+    const files = input.files
+    if (files?.length > 0) {
+      try {
+        const file = files[0]
+        await updateUserProfileImage(auth.accessToken, { image: file })
+        const url = URL.createObjectURL(file)
+        setImg(url)
+        setAuth({ ...auth, profileImage: url })
+        toast('Profile photo changed!', { type: 'success' })
+      } catch (error) {
+        toast('Profile photo could not be changed!', { type: 'error' })
+      }
+    }
   }
   return (
     <div className={classes.root}>
       {
-        photoURL
-          ? <img src={photoURL} className={classes.img} />
-          : <GenealogyIcon classes='w-20 h-20' />
+        img
+          ? <img src={img} className={classes.img} />
+          : <AccountDefaultImage auth={auth}/>
       }
 
       <IconButton
