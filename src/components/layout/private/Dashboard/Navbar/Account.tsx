@@ -1,10 +1,10 @@
-import { AccountNoImage } from 'components/common/AccountNoImage'
+import AccountDefaultImage from 'components/common/AccountDefaultImage'
 import { ArrowDownIcon } from 'components/common/icons'
 import { useClickOutsideElement } from 'lib/hooks/useClickOutsideElement'
 import { GTMTrack } from 'lib/utils/gtm'
 import { useState, useRef, useEffect } from 'react'
 
-export const Account = ({ email, name, phone, photoUrl, signOut }) => {
+export const Account = ({ email, name, phone, photoUrl, signOut, rank }) => {
   const userMenuRef = useRef(null)
   const [showMenu, setShowMenu] = useState(false)
   const clickOutsideUserMenu = useClickOutsideElement(userMenuRef)
@@ -40,7 +40,7 @@ export const Account = ({ email, name, phone, photoUrl, signOut }) => {
               />
             )
             : (
-              <AccountNoImage />
+              <AccountDefaultImage rank={rank} size={40} />
             )}
 
           {/* <div className='sm:hidden absolute -top-1 -right-2 h-3.5 w-3.5 bg-[#FF4343] rounded-full text-white flex justify-center items-center' /> */}

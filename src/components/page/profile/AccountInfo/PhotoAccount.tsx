@@ -67,9 +67,9 @@ export const PhotoAccount = ({ photoURL, auth, setAuth }: IPhotoAccountProps) =>
   return (
     <div className={classes.root}>
       {
-        img
+        !img
           ? <img src={img} className={classes.img} />
-          : <AccountDefaultImage auth={auth}/>
+          : <AccountDefaultImage rank={auth?.ranks?.type}/>
       }
 
       <IconButton
