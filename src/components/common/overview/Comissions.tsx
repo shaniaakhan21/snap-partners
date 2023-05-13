@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Tab, Tabs } from '@mui/material'
+import { Link, Tab, Tabs } from '@mui/material'
 import { Button } from '../Button'
 import { getLocalStorage } from 'lib/utils/localStorage'
 import axios from 'axios'
@@ -87,7 +87,13 @@ export default function Commissions (props: CommissionsProps) {
     <div className="bg-white rounded-lg px-2.5 py-3">
       <div className='flex flex-row justify-between'>
         <span className='text-lg text-semibold'>Commissions</span>
-        <Button classes='bg-white text-textAcent-500 focus:ring-0 font-normal'>See Details</Button>
+        <Button classes='bg-white  focus:ring-0'>
+          <Link href='/my-wallet' sx={{ textTransform: 'none', textDecoration: 'none' }}>
+            <span className='font-normal text-textAcent-500'>
+              See Details
+            </span>
+          </Link>
+        </Button>
       </div>
       <Tabs value={selectedTimeline}
         onChange={(_, value) => setSelectedTimeline(value)}
@@ -108,7 +114,7 @@ export default function Commissions (props: CommissionsProps) {
       </Tabs>
       <div className='flex flex-row mt-5'>
         <div className='flex flex-col text-right'>
-          <span className='text-sm'>
+          <span className='text-xs sm:text-sm'>
             Your Commissions <br /> at current rank
           </span>
           <span className='text-2xl font-bold'>
@@ -133,6 +139,9 @@ export default function Commissions (props: CommissionsProps) {
             </tr>
           </tbody>
         </table>
+      </div>
+      <div className='text-center'>
+        <span className='text-xs sm:text-sm md:text-base text-center font-semibold'>Your Potential Commission</span>
       </div>
     </div>
   )
