@@ -22,7 +22,7 @@ const tabStyle = {
   textTransform: 'none'
 }
 
-const Info = ({ img, noOfCustomers, name }) => {
+const Info = ({ img, noOfCustomers, name, nameValue }) => {
   return (
     <div className="grid grid-cols-4">
       <div className='col-span-1'>
@@ -36,7 +36,7 @@ const Info = ({ img, noOfCustomers, name }) => {
               color: '#828282'
             }}
           >
-            + {noOfCustomers} customers
+            + {noOfCustomers} {noOfCustomers === 1 ? nameValue.slice(0, -1).toLowerCase() : nameValue.toLowerCase()}
           </Typography>
         </div>
         <div>
@@ -80,91 +80,67 @@ interface ITopProducerProps {
   value: number
 }
 
-export const TopProducers: React.FC<ITopProducerProps> = ({ data, value }) => {
+export const TopProducers: React.FC<any> = ({ data, value, type, typeText, monthSelected, yearSelected }) => {
+  const rankTolevel = new Map()
+  rankTolevel.set('referralPartner', 0)
+  rankTolevel.set('manager', 1)
+  rankTolevel.set('supervisor', 2)
+  rankTolevel.set('director', 3)
+  rankTolevel.set('executive', 4)
+
+  const rankTolevelUppercasy = new Map()
+  rankTolevelUppercasy.set(0, 'Referral Partners')
+  rankTolevelUppercasy.set(1, 'Managers')
+  rankTolevelUppercasy.set(2, 'Supervisors')
+  rankTolevelUppercasy.set(3, 'Directors')
+  rankTolevelUppercasy.set(4, 'Executives')
+
+  const values = [0, 1, 2, 3, 4]
+  const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
   return (
     <Box sx={{ width: '100%' }}>
-      <TabPanel value={value} index={0}>
-        {
-          data && data.personal && <>
-            <div className='pt-5 pb-1'>
-              <Typography variant="body1"
-                sx={{
-                  fontSize: '12px',
-                  color: '#DC2626'
-                }}
-              >
-            Independent Business Owners
-              </Typography>
-            </div>
-            <div className='pb-2'>
-              <Typography variant="body1"
-                sx={{
-                  fontSize: '15px',
-                  color: 'black'
-                }}
-              >
-            For the last 7 days
-              </Typography>
-            </div>
-            <div className='pb-3'>
-              <Divider color="primary"/>
-            </div>
-            <div className="grid grid-cols-2 gap-0">
-              {
-                data.personal.map((itm) => <div className='mt-3'>
-                  <Info img={itm.profileImage} noOfCustomers={itm.noOfCustomers} name={itm.name}/>
-                </div>)
-              }
-            </div>
-          </>
-        }
-
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        {
-          data && data.manager && <>
-            <div className='pt-5 pb-1'>
-              <Typography variant="body1"
-                sx={{
-                  fontSize: '12px',
-                  color: '#DC2626'
-                }}
-              >
-            Independent Business Owners
-              </Typography>
-            </div>
-            <div className='pb-2'>
-              <Typography variant="body1"
-                sx={{
-                  fontSize: '15px',
-                  color: 'black'
-                }}
-              >
-            For the last 7 days
-              </Typography>
-            </div>
-            <div className='pb-3'>
-              <Divider color="primary"/>
-            </div>
-            <div className="grid grid-cols-2 gap-0">
-              {
-                data.manager.map((itm) => <div>
-                  <Info img={itm.profileImage} noOfCustomers={itm.noOfCustomers} name={itm.name}/>
-                </div>)
-              }
-            </div>
-          </>
-        }
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        Item Three
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        Item 4
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        Item 5
-      </TabPanel>
+      {values.map((index) =>
+        <TabPanel value={value} index={index}>
+          {
+            data && data[type] && <>
+              <div className='pt-5 pb-1'>
+                <Typography variant="body1"
+                  sx={{
+                    fontSize: '12px',
+                    color: '#DC2626'
+                  }}
+                >
+                  New {typeText} Acquired by {rankTolevelUppercasy.get(value)}
+                </Typography>
+              </div>
+              <div className='pb-2'>
+                <Typography variant="body1"
+                  sx={{
+                    fontSize: '15px',
+                    color: 'black'
+                  }}
+                >
+            For {month[monthSelected]} {yearSelected}
+                </Typography>
+              </div>
+              <div className='pb-3'>
+                <Divider color="primary"/>
+              </div>
+              <div className="grid grid-cols-2 gap-0">
+                {
+                  data[type].map((itm) => {
+                    if(rankTolevel.get(itm.rank) < index) return <></>
+                    return (<div>
+                      <Info img={itm.profileImage} noOfCustomers={itm.amount} name={itm.name} nameValue={typeText}/>
+                    </div>)
+                  })
+                }
+              </div>
+            </>
+          }
+        </TabPanel>
+      )}
     </Box>
   )
 }

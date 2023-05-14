@@ -9,6 +9,8 @@ import { topProducers } from './mock'
 import { Typography } from '@mui/material'
 import { TabScrollButton, withStyles } from '@material-ui/core'
 import HiddenTabScrollButton from './HiddenTabScrollButton'
+import { getLocalStorage } from 'lib/utils/localStorage'
+import axios from 'axios'
 
 interface ISubCategoryInfo {
   name: string,
@@ -82,13 +84,36 @@ TabPanel.propTypes = {
 export default function TopProducerCategory () {
   const [value, setValue] = React.useState(0)
   const [subctegoryValue, setSubcategoryValue] = React.useState(0)
+  const [data, setData] = React.useState({})
+
+  const [monthSelected, setMonthSelected] = React.useState(new Date().getMonth()) // 0-11
+  const [yearSelected, setYearSelected] = React.useState(new Date().getFullYear())
+
+  const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+
+  const years = []
+  for (let i = new Date().getFullYear(); i >= 2022; i--) {
+    years.push(i)
+  }
 
   const [topProducerData, setTopProducers] = React.useState<ITopProducerCategory>()
 
   React.useEffect(() => {
-    const data = topProducers
-    setTopProducers(data)
-  }, [])
+    (async () => {
+      const token = getLocalStorage('accessToken')
+      const response = await axios.get('/api/reports/getTopProducers', {
+        params: {
+          monthSelected,
+          yearSelected
+        },
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      setData(response.data)
+      setTopProducers(response.data)
+    })()
+  }, [monthSelected, yearSelected])
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
@@ -112,7 +137,48 @@ export default function TopProducerCategory () {
           fontSize: '20px',
           paddingBottom: '20px'
         }}
-      >Top Producers</Typography>
+      >Global SNAP Top Producers
+
+        <select
+          id='legalType'
+          name='legalType'
+          className='ml-5 cursor-pointer relative xs:mr-2 pl-2 pr-12 py-0 xs:py-1 my-2 bg-[rgba(255,255,255,.13)] rounded-md border border-solid border-black outline-none appearance-none leading-8'
+          placeholder='User Rank'
+          style={{ float: 'right' }}
+          onChange={(current) => { setYearSelected(parseInt(current.target.value)) }}
+        >
+          {years.map((y, i) => {
+            return (
+              <option key={i} selected={(new Date().getFullYear() === y)} value={y}>
+                {y}
+              </option>
+            )
+          })
+          }
+        </select>
+
+        <select
+          id='legalType'
+          name='legalType'
+          className='ml-5 cursor-pointer relative xs:mr-2 pl-2 pr-12 py-0 xs:py-1 my-2 bg-[rgba(255,255,255,.13)] rounded-md border border-solid border-black outline-none appearance-none leading-8'
+          placeholder='User Rank'
+          style={{ float: 'right' }}
+          onChange={(current) => { setMonthSelected(parseInt(current.target.value)) }}
+        >
+          {month.map((m, i) => {
+            return (
+              <option key={i} selected={(new Date().getMonth() === i)} value={i}>
+                {m}
+              </option>
+            )
+          })
+          }
+        </select>
+        <br/>
+        <br/>
+
+      </Typography>
+
       <Tabs
         // disable the tab indicator because it doesn't work well with wrapped container
         TabIndicatorProps={{ sx: { display: 'none' } }}
@@ -122,11 +188,10 @@ export default function TopProducerCategory () {
         variant='scrollable'
         ScrollButtonComponent={HiddenTabScrollButton}
       >
-        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="IBO" {...a11yProps(0)} />
-        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="ERC" {...a11yProps(1)} />
-        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Delivery" {...a11yProps(2)} />
-        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Vidgo" {...a11yProps(3)} />
-        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Products" {...a11yProps(4)} />
+        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Merchant" {...a11yProps(0)} />
+        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Customer" {...a11yProps(1)} />
+        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Driver" {...a11yProps(2)} />
+        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="IBO" {...a11yProps(3)} />
       </Tabs>
       <Tabs
         TabIndicatorProps={{ sx: { display: 'none' } }}
@@ -137,26 +202,23 @@ export default function TopProducerCategory () {
         ScrollButtonComponent={HiddenTabScrollButton}
         className='border-b-4 border-primary-500'
       >
-        <Tab sx={subTabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Personal" />
+        <Tab sx={subTabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Referral Partner" />
         <Tab sx={subTabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Manager" />
         <Tab sx={subTabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Supervisor" />
         <Tab sx={subTabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Director" />
         <Tab sx={subTabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Executive" />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <TopProducers data={topProducerData?.ibo} value={subctegoryValue}/>
+        <TopProducers monthSelected={monthSelected} yearSelected={yearSelected} data={topProducerData} value={subctegoryValue} type='topMerchant' typeText='Merchants'/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <TopProducers monthSelected={monthSelected} yearSelected={yearSelected} data={topProducerData} value={subctegoryValue} type='topCustomer' typeText='Customers'/>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        <TopProducers monthSelected={monthSelected} yearSelected={yearSelected} data={topProducerData} value={subctegoryValue} type='topDriver' typeText='Drivers'/>
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Item 4
-      </TabPanel>
-      <TabPanel value={value} index={4}>
-        Item 5
+        <TopProducers monthSelected={monthSelected} yearSelected={yearSelected} data={topProducerData} value={subctegoryValue} type='topAgent' typeText='IBOs'/>
       </TabPanel>
     </Box>
   )
