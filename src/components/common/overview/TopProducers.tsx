@@ -130,7 +130,9 @@ export const TopProducers: React.FC<any> = ({ data, value, type, typeText, month
               <div className="grid grid-cols-2 gap-0">
                 {
                   data[type].map((itm) => {
-                    if(rankTolevel.get(itm.rank) < index) return <></>
+                    if (index === 0 && ![0, 1].includes(rankTolevel.get(itm.rank))) return <></>
+                    if (index === 1 && ![1].includes(rankTolevel.get(itm.rank))) return <></>
+                    if (rankTolevel.get(itm.rank) < index) return <></>
                     return (<div>
                       <Info img={itm.profileImage} noOfCustomers={itm.amount} name={itm.name} nameValue={typeText}/>
                     </div>)
