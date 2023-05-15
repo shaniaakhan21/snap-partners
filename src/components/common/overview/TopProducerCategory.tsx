@@ -188,10 +188,11 @@ export default function TopProducerCategory () {
         variant='scrollable'
         ScrollButtonComponent={HiddenTabScrollButton}
       >
-        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Merchant" {...a11yProps(0)} />
-        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Customer" {...a11yProps(1)} />
-        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Driver" {...a11yProps(2)} />
-        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="IBO" {...a11yProps(3)} />
+        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="IBO" {...a11yProps(0)} />
+        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="ERC" {...a11yProps(1)} />
+        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Merchant" {...a11yProps(2)} />
+        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Customer" {...a11yProps(3)} />
+        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Driver" {...a11yProps(4)} />
       </Tabs>
       <Tabs
         TabIndicatorProps={{ sx: { display: 'none' } }}
@@ -209,16 +210,19 @@ export default function TopProducerCategory () {
         <Tab sx={subTabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Executive" />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <TopProducers monthSelected={monthSelected} yearSelected={yearSelected} data={topProducerData} value={subctegoryValue} type='topMerchant' typeText='Merchants'/>
+        <TopProducers monthSelected={monthSelected} yearSelected={yearSelected} data={topProducerData} value={subctegoryValue} type='topAgent' typeText='IBOs'/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <TopProducers monthSelected={monthSelected} yearSelected={yearSelected} data={topProducerData} value={subctegoryValue} type='topCustomer' typeText='Customers'/>
+        <TopProducers monthSelected={monthSelected} yearSelected={yearSelected} data={topProducerData} value={subctegoryValue} type='topErc' typeText='ERCs'/>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <TopProducers monthSelected={monthSelected} yearSelected={yearSelected} data={topProducerData} value={subctegoryValue} type='topDriver' typeText='Drivers'/>
+        <TopProducers monthSelected={monthSelected} yearSelected={yearSelected} data={topProducerData} value={subctegoryValue} type='topMerchant' typeText='Merchants'/>
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <TopProducers monthSelected={monthSelected} yearSelected={yearSelected} data={topProducerData} value={subctegoryValue} type='topAgent' typeText='IBOs'/>
+        <TopProducers monthSelected={monthSelected} yearSelected={yearSelected} data={topProducerData} value={subctegoryValue} type='topCustomer' typeText='Customers'/>
+      </TabPanel>
+      <TabPanel value={value} index={4}>
+        <TopProducers monthSelected={monthSelected} yearSelected={yearSelected} data={topProducerData} value={subctegoryValue} type='topDriver' typeText='Drivers'/>
       </TabPanel>
     </Box>
   )
