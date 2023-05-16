@@ -190,9 +190,9 @@ export default function TopProducerCategory () {
       >
         <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="IBO" {...a11yProps(0)} />
         <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="ERC" {...a11yProps(1)} />
-        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Merchant" {...a11yProps(2)} />
-        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Customer" {...a11yProps(3)} />
-        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Driver" {...a11yProps(4)} />
+        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Delivery Merchant" {...a11yProps(2)} />
+        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Delivery Customer" {...a11yProps(3)} />
+        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Delivery Driver" {...a11yProps(4)} />
       </Tabs>
       <Tabs
         TabIndicatorProps={{ sx: { display: 'none' } }}
@@ -203,7 +203,7 @@ export default function TopProducerCategory () {
         ScrollButtonComponent={HiddenTabScrollButton}
         className='border-b-4 border-primary-500'
       >
-        <Tab sx={subTabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Referral Partner" />
+        <Tab sx={subTabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Directly Sponsored" />
         <Tab sx={subTabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Manager" />
         <Tab sx={subTabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Supervisor" />
         <Tab sx={subTabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Director" />
