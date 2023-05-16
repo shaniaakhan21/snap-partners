@@ -80,13 +80,20 @@ interface ITopProducerProps {
   value: number
 }
 
-export const TopProducers: React.FC<any> = ({ data, value, type, typeText, monthSelected, yearSelected }) => {
+export const TopProducers: React.FC<any> = ({ data, value, type, typeLow, typeText, monthSelected, yearSelected }) => {
   const rankTolevel = new Map()
   rankTolevel.set('referralPartner', 0)
   rankTolevel.set('manager', 1)
   rankTolevel.set('supervisor', 2)
   rankTolevel.set('director', 3)
   rankTolevel.set('executive', 4)
+
+  const levelToRank = new Map()
+  levelToRank.set(0, 'referralPartner')
+  levelToRank.set(1, 'manager')
+  levelToRank.set(2, 'supervisor')
+  levelToRank.set(3, 'director')
+  levelToRank.set(4, 'executive')
 
   const rankTolevelUppercasy = new Map()
   rankTolevelUppercasy.set(0, 'Referral Partners')
@@ -103,7 +110,7 @@ export const TopProducers: React.FC<any> = ({ data, value, type, typeText, month
       {values.map((index) =>
         <TabPanel value={value} index={index}>
           {
-            data && data[type] && <>
+            data && data[`${typeLow}_${levelToRank.get(index)}`] && <>
               <div className='pt-5 pb-1'>
                 <Typography variant="body1"
                   sx={{
@@ -129,10 +136,7 @@ export const TopProducers: React.FC<any> = ({ data, value, type, typeText, month
               </div>
               <div className="grid grid-cols-2 gap-0">
                 {
-                  data[type].map((itm) => {
-                    if (index === 0 && ![0, 1].includes(rankTolevel.get(itm.rank))) return <></>
-                    if (index === 1 && ![1].includes(rankTolevel.get(itm.rank))) return <></>
-                    if (rankTolevel.get(itm.rank) < index) return <></>
+                  data[`${typeLow}_${levelToRank.get(index)}`].map((itm) => {
                     return (<div>
                       <Info img={itm.profileImage} noOfCustomers={itm.amount} name={itm.name} nameValue={typeText}/>
                     </div>)
