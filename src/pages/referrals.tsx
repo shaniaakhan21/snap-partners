@@ -81,6 +81,18 @@ const ReferralsPage: Page = () => {
           classes='col-span-1'
         />
 
+        <ReferralCards
+          title='Refer Commercial Energy'
+          ilustration={(
+            <div className='h-[100px]'>
+              <img src='/images/usaenergy/commercialenergy.png' alt='USA Commercial Energy Logo' />
+            </div>
+          )}
+          link={`https://usaenergy.com/free-rate-analysis/?subid=${auth.referralCode}` || 'With Out Link'}
+          newUser={false}
+          classes='col-span-1'
+        />
+
         {/* <ReferralCards
         title='Refer Snap Kitchens'
         ilustration={(
