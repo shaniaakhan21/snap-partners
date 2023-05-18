@@ -132,53 +132,45 @@ export default function TopProducerCategory () {
 
   return (
     <Box sx={{ width: '100%', padding: '10px' }}>
-      <Typography
-        sx={{
-          fontSize: '20px',
-          paddingBottom: '20px'
-        }}
-      >Global SNAP Top Producers
-
-        <select
-          id='legalType'
-          name='legalType'
-          className='ml-5 cursor-pointer relative xs:mr-2 pl-2 pr-12 py-0 xs:py-1 my-2 bg-[rgba(255,255,255,.13)] rounded-md border border-solid border-black outline-none appearance-none leading-8'
-          placeholder='User Rank'
-          style={{ float: 'right' }}
-          onChange={(current) => { setYearSelected(parseInt(current.target.value)) }}
-        >
-          {years.map((y, i) => {
-            return (
-              <option key={i} selected={(new Date().getFullYear() === y)} value={y}>
-                {y}
-              </option>
-            )
-          })
-          }
-        </select>
-
-        <select
-          id='legalType'
-          name='legalType'
-          className='ml-5 cursor-pointer relative xs:mr-2 pl-2 pr-12 py-0 xs:py-1 my-2 bg-[rgba(255,255,255,.13)] rounded-md border border-solid border-black outline-none appearance-none leading-8'
-          placeholder='User Rank'
-          style={{ float: 'right' }}
-          onChange={(current) => { setMonthSelected(parseInt(current.target.value)) }}
-        >
-          {month.map((m, i) => {
-            return (
-              <option key={i} selected={(new Date().getMonth() === i)} value={i}>
-                {m}
-              </option>
-            )
-          })
-          }
-        </select>
-        <br/>
-        <br/>
-
-      </Typography>
-
+      <div className='flex flex-row justify-between items-center'>
+        <span className='text-sm sm:text-lg md:text-lg'>
+          Global SNAP Top Producers
+        </span>
+        <div className='flex flex-row items-center'>
+          <select
+            id='legalType'
+            name='legalType'
+            className='cursor-pointer outline-none appearance-none rounded-md border border-solid border-black py-2 pl-2 pr-12 text-sm sm:text-base'
+            placeholder='User Rank'
+            onChange={(current) => { setYearSelected(parseInt(current.target.value)) }}
+          >
+            {years.map((y, i) => {
+              return (
+                <option key={i} selected={(new Date().getFullYear() === y)} value={y}>
+                  {y}
+                </option>
+              )
+            })
+            }
+          </select>
+          <select
+            id='legalType'
+            name='legalType'
+            className='ml-5 cursor-pointer outline-none appearance-none rounded-md border border-solid border-black py-2 pl-2 text-sm sm:text-base'
+            placeholder='User Rank'
+            onChange={(current) => { setMonthSelected(parseInt(current.target.value)) }}
+          >
+            {month.map((m, i) => {
+              return (
+                <option key={i} selected={(new Date().getMonth() === i)} value={i}>
+                  {m}
+                </option>
+              )
+            })
+            }
+          </select>
+        </div>
+      </div>
       <Tabs
         // disable the tab indicator because it doesn't work well with wrapped container
         TabIndicatorProps={{ sx: { display: 'none' } }}
@@ -187,6 +179,7 @@ export default function TopProducerCategory () {
         aria-label="Top Producers Categories"
         variant='scrollable'
         ScrollButtonComponent={HiddenTabScrollButton}
+        sx={{ marginTop: '10px' }}
       >
         <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="IBO" {...a11yProps(0)} />
         <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="ERC" {...a11yProps(1)} />
