@@ -88,7 +88,7 @@ const ReferralsPage: Page = () => {
               <img src='/images/usaenergy/commercialenergy.png' alt='USA Commercial Energy Logo' />
             </div>
           )}
-          link={`https://usaenergy.com/free-rate-analysis/?subid=${auth.referralCode}` || 'With Out Link'}
+          link={`https://usaenergy.com/free-rate-analysis/?subid=${auth.id}` || 'With Out Link'}
           newUser={false}
           classes='col-span-1'
         />
