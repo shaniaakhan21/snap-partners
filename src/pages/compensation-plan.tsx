@@ -6,6 +6,7 @@ import DashboardLayout from 'layouts/private/Dashboard'
 import { Spinner } from 'components/common/loaders'
 import { APP_INFO } from 'config/appInfo'
 import { GTMTrack } from 'lib/utils/gtm'
+import { CardComingSoon } from 'components/common/CardComingSoon'
 
 const { SEO } = APP_INFO
 
@@ -26,8 +27,10 @@ const CompensationPlanPage: Page = () => {
   return (
     <div className='w-full text-center'>
       <h4 className='font-black text-4xl md:text-5xl'>Compensation Plan</h4>
-
-      <div className='mt-8'>
+      <div className='mt-8 flex justify-center'>
+        <CardComingSoon text='We will get you the new Compensation Plan document soon!'/>
+      </div>
+      {/* <div className='mt-8'>
         <a
           href='/static/new-plan-v2.pdf'
           download
@@ -42,7 +45,7 @@ const CompensationPlanPage: Page = () => {
 
       <div className='mt-10'>
         <PDFViewer />
-      </div>
+      </div> */}
     </div>
   )
 }
