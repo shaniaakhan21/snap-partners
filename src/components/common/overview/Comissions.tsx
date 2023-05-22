@@ -135,7 +135,7 @@ export default function Commissions (props: CommissionsProps) {
               <td className='text-sm'>${selectedData.manager}</td>
               <td className='text-sm'>${selectedData.supervisor}</td>
               <td className='text-sm'>${selectedData.director}</td>
-              <td className='text-sm'>${selectedData.manager}</td>
+              <td className='text-sm'>${selectedData.executive}</td>
             </tr>
           </tbody>
         </table>
