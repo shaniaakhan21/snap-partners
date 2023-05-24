@@ -1,5 +1,5 @@
 import Head from 'next/head'
-
+import PVComponent from 'components/common/overview/PersonalVolume'
 import type { Page, ReactNode } from 'lib/types'
 import { useReports } from 'lib/hooks/useReports'
 import { APP_INFO } from 'config/appInfo'
@@ -20,6 +20,7 @@ import { getLocalStorage } from 'lib/utils/localStorage'
 import axios from 'axios'
 import Referrals from 'components/common/overview/Referrals'
 import { useAuthStore } from 'lib/stores'
+import MonthlyMilestones from 'components/common/overview/MonthlyMilestones'
 
 const { SEO } = APP_INFO
 
@@ -57,7 +58,21 @@ const DashboardOverViewPage: Page = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-2">
+      <div className="flex flex-wrap">
+        <div className="w-full md:w-1/3">
+          <PVComponent/>
+          <MonthlyMilestones/>
+        </div>
+        <div className="w-full md:w-1/3">
+          <PVComponent/>
+          <MonthlyMilestones/>
+        </div>
+        <div className="w-full md:w-1/3">
+          <PVComponent/>
+          <MonthlyMilestones/>
+        </div>
+      </div>
+      {/* <div className="grid grid-cols-1 lg:grid-cols-2">
         <div>
           <div>
             <RankComponent data={rankData} />
@@ -90,7 +105,7 @@ const DashboardOverViewPage: Page = () => {
       </div>
       <div className='col-span-12 mt-4'>
         <Referrals rankData={rankData} />
-      </div>
+      </div> */}
     </>
   )
 }
