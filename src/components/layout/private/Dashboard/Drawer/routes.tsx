@@ -10,9 +10,23 @@ import {
   CreditCardIcon,
   CubeIcon
 } from 'components/common/icons'
+import { SnapPartnersIcon } from 'components/common/icons/SnapPartners'
+import { SnapWellnessIcon } from 'components/common/icons/SnapWellness'
 import { VidgoLogo } from 'components/common/illustrations'
 
 export const drawerRoutes = [
+  {
+    icon: <SnapPartnersIcon />,
+    to: '/overview#snap-partners',
+    label: 'Visit Snap Partners Backoffice',
+    integrous: true
+  },
+  {
+    icon: <SnapWellnessIcon />,
+    to: '/overview#snap-wellness',
+    label: 'Visit Snap Wellness Backoffice',
+    integrous: true
+  },
   {
     icon: <DashboardIcon />,
     to: '/overview',

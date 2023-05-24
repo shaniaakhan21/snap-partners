@@ -13,10 +13,14 @@ const { SEO } = APP_INFO
 const ReferralsPage: Page = () => {
   const { auth } = useAuthStore()
 
+  const _auth: any = auth
+
+  const isIntegrous = (_auth.roles.integrousAssociate || _auth.roles.integrousCustomer)
+
   return (
     <div className='min-h-[80vh] flex justify-center items-center'>
       <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-center justify-center justify-items-center gap-4'>
-        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && (
+        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
           <ReferralCards
             title='Refer Customers'
             ilustration={<CustomerIcon />}
@@ -25,7 +29,7 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />
         )}
-        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && (
+        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
           <ReferralCards
             title='Refer Driver'
             ilustration={<DriverIcon />}
@@ -34,7 +38,7 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />
         )}
-        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && (
+        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
           <ReferralCards
             title='Refer Merchant/SK'
             ilustration={<MerchantIcon />}
@@ -43,7 +47,7 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />
         )}
-        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && (
+        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
           <ReferralCards
             title='Refer Vidgo'
             ilustration={(
@@ -57,17 +61,19 @@ const ReferralsPage: Page = () => {
           />
         )}
 
-        <ReferralCards
-          title='Refer Agent'
-          ilustration={(
-            <div className='h-[100px]'>
-              <img src='/images/agentv4.png' alt='Agent logo' />
-            </div>
-          )}
-          link={`${auth.referralLink}&role=${ROLES.AGENT}` || 'With Out Link'}
-          newUser={false}
-          classes='col-span-1'
-        />
+        {!isIntegrous && (
+          <ReferralCards
+            title='Refer Agent'
+            ilustration={(
+              <div className='h-[100px]'>
+                <img src='/images/agentv4.png' alt='Agent logo' />
+              </div>
+            )}
+            link={`${auth.referralLink}&role=${ROLES.AGENT}` || 'With Out Link'}
+            newUser={false}
+            classes='col-span-1'
+          />
+        )}
 
         <ReferralCards
           title='Refer ERC Client'
@@ -81,17 +87,19 @@ const ReferralsPage: Page = () => {
           classes='col-span-1'
         />
 
-        <ReferralCards
-          title='Refer Commercial Energy'
-          ilustration={(
-            <div className='h-[100px]'>
-              <img src='/images/usaenergy/commercialenergy.png' alt='USA Commercial Energy Logo' />
-            </div>
-          )}
-          link={`https://usaenergy.com/free-rate-analysis/?subid=${auth.id}` || 'With Out Link'}
-          newUser={false}
-          classes='col-span-1'
-        />
+        {!isIntegrous && (
+          <ReferralCards
+            title='Refer Commercial Energy'
+            ilustration={(
+              <div className='h-[100px]'>
+                <img src='/images/usaenergy/commercialenergy.png' alt='USA Commercial Energy Logo' />
+              </div>
+            )}
+            link={`https://usaenergy.com/free-rate-analysis/?subid=${auth.id}` || 'With Out Link'}
+            newUser={false}
+            classes='col-span-1'
+          />
+        )}
 
         {/* <ReferralCards
         title='Refer Snap Kitchens'
