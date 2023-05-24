@@ -18,9 +18,15 @@ const ComingSoon: PageNext = () => {
   const [userId, setUserId] = useState(auth.id)
   const [tree, setTree] = useState({})
   const [history, setHistory] = useState([])
+  const [key, setKey] = useState(0);
+
+  const refreshComponent = () => {
+    setKey(prevKey => prevKey + 1); // incrementing key will cause the component to be recreated
+  };
   useEffect(() => {
     (async () => {
       const token = getLocalStorage('accessToken')
+      setTree({})
       const response = await axios.get('/api/reports/getTree', {
         params: { userId: userId },
         headers: {
@@ -28,6 +34,7 @@ const ComingSoon: PageNext = () => {
         }
       })
       setTree(response.data)
+      refreshComponent()
     })()
   }, [userId])
 
@@ -39,6 +46,12 @@ const ComingSoon: PageNext = () => {
     setHistory(newHistory)
     console.log(goBackTo)
     setUserId(goBackTo)
+  }
+
+  const onToTop = () => {
+    const newHistory = []
+    setHistory(newHistory)
+    setUserId(auth.id)
   }
 
   const MyNode = ({ nodeData }) => {
@@ -67,10 +80,11 @@ const ComingSoon: PageNext = () => {
           <button onClick={() => { onGoBack() }} className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">GO BACK</button>
         )}
         {auth.id !== userId && (
-          <button className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-50  py-3 px-4 rounded-l-full rounded-r-full">GO TO TOP</button>
+          <button onClick={() => { onToTop() }} className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-50  py-3 px-4 rounded-l-full rounded-r-full">GO TO TOP</button>
         )}
       </div>
       <OrganizationChart
+        key={key}
         datasource={tree}
         pan={true}
         NodeTemplate ={MyNode}

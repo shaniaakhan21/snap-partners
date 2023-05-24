@@ -19,6 +19,11 @@ const ComingSoon: PageNext = () => {
   const [userId, setUserId] = useState(myId)
   const [currentUserId, setCurrentUserId] = useState(myId)
   const [tree, setTree] = useState({})
+  const [key, setKey] = useState(0);
+
+  const refreshComponent = () => {
+    setKey(prevKey => prevKey + 1); // incrementing key will cause the component to be recreated
+  };
   useEffect(() => {
     (async () => {
       const token = getLocalStorage('accessToken')
@@ -30,6 +35,7 @@ const ComingSoon: PageNext = () => {
         }
       })
       setTree(response.data)
+      refreshComponent()
     })()
   }, [userId])
 
@@ -43,6 +49,7 @@ const ComingSoon: PageNext = () => {
       }
     })
     setTree(response.data)
+    refreshComponent()
     setCurrentUserId(response.data.id)
   }
 
@@ -56,6 +63,7 @@ const ComingSoon: PageNext = () => {
       }
     })
     setTree(response.data)
+    refreshComponent()
     setCurrentUserId(response.data.id)
   }
 
@@ -69,6 +77,7 @@ const ComingSoon: PageNext = () => {
       }
     })
     setTree(response.data)
+    refreshComponent()
     setCurrentUserId(response.data.id)
   }
 
@@ -109,6 +118,7 @@ const ComingSoon: PageNext = () => {
         <button onClick={() => { goBottom('right') }} className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-50  py-3 px-4 rounded-l-full rounded-r-full">GO BOTTOM RIGHT</button>
       </div>
       <OrganizationChart
+        key={key}
         datasource={tree}
         pan={true}
         NodeTemplate ={MyNode}
