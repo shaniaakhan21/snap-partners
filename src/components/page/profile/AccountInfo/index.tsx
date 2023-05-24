@@ -24,6 +24,9 @@ export const AccountInfo = ({ auth, setAuth, removeAuth, setNewWindow, setTypeUp
     removeAuth()
   }
 
+  const _auth :any = auth
+  const isIntegrous = (_auth.roles.integrousAssociate || _auth.roles.integrousCustomer)
+
   return (
     <div className='max-w-4xl mx-auto'>
       <div className='flex justify-start items-center gap-x-5 select-none'>
@@ -38,7 +41,9 @@ export const AccountInfo = ({ auth, setAuth, removeAuth, setNewWindow, setTypeUp
         />
       </div>
 
-      <BecomeRoles auth={auth} />
+      {!isIntegrous && (
+        <BecomeRoles auth={auth} />
+      )}
 
       <button
         className='block text-primary-500 mx-auto mt-11 font-bold text-lg'

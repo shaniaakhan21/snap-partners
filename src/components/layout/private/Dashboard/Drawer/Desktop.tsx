@@ -35,6 +35,11 @@ export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { i
             const isSnap = (auth.roles.customer || auth.roles.driver || auth.roles.merchant)
             if (route.snap && !isSnap) return <Fragment key={route.label} />
 
+            const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
+            if (!route.integrous && isIntegrous) return <Fragment key={route.label} />
+
+            if (route.to === '/binarytree' && !isIntegrous) return <Fragment key={route.label} />
+
             return (
               <li
                 className={`w-full relative ${isCurrentlyPage(route.to) && 'linkWrapper__activate bg-[#19191914]'}`}

@@ -146,8 +146,20 @@
   background-color: #DD4C37!important;
 }
 
+.orgchart ul li .oc-node .oc-heading-available{
+  background-color: #13a827!important;
+}
+
+.orgchart ul li .oc-node .oc-heading-blocked{
+  background-color: #a19f9f!important;
+}
+
 .oc-topheading {
-  font-size: 14px;
+  font-size: 13px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 130px;
 }
 
 .oc-info{

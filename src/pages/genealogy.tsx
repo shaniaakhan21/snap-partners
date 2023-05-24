@@ -51,7 +51,8 @@ interface IDataFormSearch {
 const GenealogyPage: Page = () => {
   const { handleSubmit, register } = useForm<IDataFormSearch>()
   const { genealogy: genealogyLayoutConfig } = useLayoutConfig()
-  const { auth } = useAuthStore()
+  const store = useAuthStore()
+  const auth: any = store.auth
   const { width: windowWidth } = useWindowSize()
   const {
     isOpen: modalReferralListlIsOpen,
@@ -110,6 +111,18 @@ const GenealogyPage: Page = () => {
 
     setUsersSearched(data)
     setSearchIsLoading(false)
+  }
+
+  const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
+
+  if (isIntegrous) {
+    if (levels?.length === 0) {
+      return (
+        <div className='w-full flex flex-col justify-center items-center min-h-[80vh]'>
+           <EmptyData label='You have no referrals yet' />
+        </div>
+      )
+    }
   }
 
   if (levels?.length === 0) {

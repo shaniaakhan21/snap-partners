@@ -19,12 +19,15 @@ import { Rank, RankData } from 'lib/types/overview'
 import { getLocalStorage } from 'lib/utils/localStorage'
 import axios from 'axios'
 import Referrals from 'components/common/overview/Referrals'
+import { useAuthStore } from 'lib/stores'
 
 const { SEO } = APP_INFO
 
 const DashboardOverViewPage: Page = () => {
   const { loading } = useReports()
   const [rankData, setRankData] = useState<RankData>(null)
+  const store = useAuthStore()
+  const auth: any = store.auth
 
   useEffect(() => {
     (async () => {
@@ -39,6 +42,18 @@ const DashboardOverViewPage: Page = () => {
   }, [])
 
   if (loading) return <SpinnerPageContent />
+
+  const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
+
+  if (isIntegrous) {
+    return (
+      <>
+        <h1 style={{fontSize: 60}}>Launching June 1, 2023</h1>
+        <br></br>
+        <h1 style={{fontSize: 30}}>Dashboard Widgets & More Left Bar Menu Items</h1>
+      </>
+    )
+  }
 
   return (
     <>

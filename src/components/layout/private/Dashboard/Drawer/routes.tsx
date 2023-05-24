@@ -16,7 +16,8 @@ export const drawerRoutes = [
   {
     icon: <DashboardIcon />,
     to: '/overview',
-    label: 'Dashboard'
+    label: 'Dashboard',
+    integrous: true
   },
   {
     icon: <ReferralLinksIcon />,
@@ -77,7 +78,14 @@ export const drawerRoutes = [
   {
     icon: <GenealogyIcon />,
     to: '/tree',
-    label: 'Tree'
+    label: 'Tree',
+    integrous: true
+   },
+   {
+    icon: <GenealogyIcon />,
+    to: '/binarytree',
+    label: 'Binary Tree',
+    integrous: true
    },
   {
     icon: <CompensationPlanIcon />,
@@ -87,7 +95,8 @@ export const drawerRoutes = [
   {
     icon: <AccountIcon />,
     to: '/profile',
-    label: 'Profile'
+    label: 'Profile',
+    integrous: true
   },
   {
     icon: <CubeIcon />,
