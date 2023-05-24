@@ -48,9 +48,9 @@ const DashboardOverViewPage: Page = () => {
   if (isIntegrous) {
     return (
       <>
-        <h1 style={{fontSize: 60}}>Launching June 1, 2023</h1>
+        <h1 style={{ fontSize: 60 }}>Launching June 1, 2023</h1>
         <br></br>
-        <h1 style={{fontSize: 30}}>Dashboard Widgets & More Left Bar Menu Items</h1>
+        <h1 style={{ fontSize: 30 }}>Dashboard Widgets & More Left Bar Menu Items</h1>
       </>
     )
   }
