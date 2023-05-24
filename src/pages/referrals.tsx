@@ -47,19 +47,17 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />
         )}
-        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
-          <ReferralCards
-            title='Refer Vidgo'
-            ilustration={(
-              <div className='h-[100px]'>
-                <img src='/images/vidgo/vidgo-ilustration.jpg' alt='Vidgo logo' />
-              </div>
-            )}
-            link={`https://www.vidgo.com/snap/?subpid=${auth.referralCode}` || 'With Out Link'}
-            newUser={false}
-            classes='col-span-1'
-          />
-        )}
+        <ReferralCards
+          title='Refer Vidgo'
+          ilustration={(
+            <div className='h-[100px]'>
+              <img src='/images/vidgo/vidgo-ilustration.jpg' alt='Vidgo logo' />
+            </div>
+          )}
+          link={`https://www.vidgo.com/snap/?subpid=${auth.referralCode}` || 'With Out Link'}
+          newUser={false}
+          classes='col-span-1'
+        />
 
         {!isIntegrous && (
           <ReferralCards
@@ -87,19 +85,17 @@ const ReferralsPage: Page = () => {
           classes='col-span-1'
         />
 
-        {!isIntegrous && (
-          <ReferralCards
-            title='Refer Commercial Energy'
-            ilustration={(
-              <div className='h-[100px]'>
-                <img src='/images/usaenergy/commercialenergy.png' alt='USA Commercial Energy Logo' />
-              </div>
-            )}
-            link={`https://usaenergy.com/free-rate-analysis/?subid=${auth.id}` || 'With Out Link'}
-            newUser={false}
-            classes='col-span-1'
-          />
-        )}
+        <ReferralCards
+          title='Refer Commercial Energy'
+          ilustration={(
+            <div className='h-[100px]'>
+              <img src='/images/usaenergy/commercialenergy.png' alt='USA Commercial Energy Logo' />
+            </div>
+          )}
+          link={`https://usaenergy.com/free-rate-analysis/?subid=${auth.id}` || 'With Out Link'}
+          newUser={false}
+          classes='col-span-1'
+        />
 
         {/* <ReferralCards
         title='Refer Snap Kitchens'
