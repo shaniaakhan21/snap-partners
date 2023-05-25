@@ -16,7 +16,7 @@ import TierTable from 'components/common/overview/TierTable'
 import RewardsProgram from 'components/common/overview/RewardsProgram'
 import { useEffect, useState } from 'react'
 import { Rank, RankData } from 'lib/types/overview'
-import { getLocalStorage } from 'lib/utils/localStorage'
+import { getLocalStorage, setLocalStorage } from 'lib/utils/localStorage'
 import axios from 'axios'
 import Referrals from 'components/common/overview/Referrals'
 import { useAuthStore } from 'lib/stores'
@@ -25,13 +25,17 @@ import MonthlyMilestones from 'components/common/overview/MonthlyMilestones'
 const { SEO } = APP_INFO
 
 const DashboardOverViewPage: Page = () => {
-  const { loading } = useReports()
+  // const { loading } = useReports()
   const [rankData, setRankData] = useState<RankData>(null)
   const store = useAuthStore()
   const auth: any = store.auth
 
+  const currentOverview = getLocalStorage('currentBackoffice') || ''
+  const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
+
   useEffect(() => {
     (async () => {
+      if (isIntegrous && currentOverview === '') return
       const token = getLocalStorage('accessToken')
       const response = await axios.get('/api/reports/getRanks', {
         headers: {
@@ -42,11 +46,9 @@ const DashboardOverViewPage: Page = () => {
     })()
   }, [])
 
-  if (loading) return <SpinnerPageContent />
+  // if (loading) return <SpinnerPageContent />
 
-  const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
-
-  if (isIntegrous) {
+  if (isIntegrous && currentOverview === '') {
     return (
       <>
         <h1 style={{ fontSize: 60 }}>Launching June 1, 2023</h1>

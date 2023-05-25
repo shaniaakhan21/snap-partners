@@ -1,6 +1,7 @@
 import { GTMTrack } from 'lib/utils/gtm'
 import Link from 'next/link'
 import { Fragment, ReactNode, useState } from 'react'
+import { setLocalStorage, getLocalStorage } from 'lib/utils/localStorage'
 
 import { drawerRoutes } from './routes'
 
@@ -21,6 +22,10 @@ export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { i
       )
   }
 
+  const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
+
+  const currentOverview = getLocalStorage('currentBackoffice') || ''
+
   return (
     <aside className='dashboardLayout__drawer scroll-primary'>
       <section className='mt-16 pl-10 flex justify-start items-center gap-x-2'>
@@ -35,10 +40,18 @@ export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { i
             const isSnap = (auth.roles.customer || auth.roles.driver || auth.roles.merchant)
             if (route.snap && !isSnap) return <Fragment key={route.label} />
 
-            const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
-            if (!route.integrous && isIntegrous) return <Fragment key={route.label} />
+            if (currentOverview === '') {
+              if (!route.integrous && isIntegrous) return <Fragment key={route.label} />
+            }
+
+            if (currentOverview === 'partners') {
+              if (route.to === '/binarytree') return <Fragment key={route.label} />
+            }
 
             if (route.to === '/binarytree' && !isIntegrous) return <Fragment key={route.label} />
+            if (route.label.includes('Visit') && !isIntegrous) return <Fragment key={route.label} />
+            if (route.label.includes('Visit Snap Partners') && currentOverview === 'partners') return <Fragment key={route.label} />
+            if (route.label.includes('Visit Snap Wellness') && currentOverview === '') return <Fragment key={route.label} />
 
             return (
               <li
@@ -51,6 +64,14 @@ export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { i
                     rel='noopener noreferrer'
                     className='cursor-pointer w-full flex justify-start items-center gap-x-2 py-4 hover:bg-[#19191914] pl-10'
                     onClick={() => {
+                      if (route.label.includes('Visit Snap Partners')) {
+                        setLocalStorage('currentBackoffice', 'partners')
+                        return
+                      }
+                      if (route.label.includes('Visit Snap Wellness')) {
+                        setLocalStorage('currentBackoffice', '')
+                        return
+                      }
                       GTMTrack.navbarPress(route.label)
                       if (route.subItems) toggleSubmenu(index)
                     }}
