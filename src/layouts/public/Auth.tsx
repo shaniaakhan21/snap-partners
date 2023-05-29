@@ -14,12 +14,18 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
     auth && router.push('/overview')
   }, [auth])
 
-  let t1 = 'Snap Delivered'
-  let t2 = 'Order-Eat-Repeat'
+  const isSignupIntegrous = router.pathname === '/auth/signup-integrous'
+  let t1 = isSignupIntegrous ? 'Snap Partners' : 'Snap Delivered'
+  let t2 = isSignupIntegrous ? 'FREE Business Signup' : 'Order-Eat-Repeat'
 
   if (role === ROLES.AGENT) {
     t1 = 'Snap Financial'
     t2 = 'Employee Retention Credit Program'
+  }
+
+  if (isSignupIntegrous && (ROLES.integrousCustomer || ROLES.integrousAssociate)) {
+    t1 = 'Snap Partners'
+    t2 = 'FREE Business Signup'
   }
 
   return (
