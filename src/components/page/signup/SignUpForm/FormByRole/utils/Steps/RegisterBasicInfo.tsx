@@ -16,6 +16,7 @@ import { signUpStep1 } from 'lib/services/auth/signUp'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 import { GTMTrack } from 'lib/utils/gtm'
+import { useRouter } from 'next/router'
 
 interface IStepOpeProps {
   referralLink: IReferralLink,
@@ -120,6 +121,9 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
   if (referralLink.role === 'AGENT') {
     signUpas = 'Sign up as an'
   }
+
+  const router = useRouter()
+  const loginURL = router.pathname === '/auth/signup-integrous' ? '/auth/login-integrous' : '/auth/login'
 
   return (
     <div className='max-w-md mx-auto w-full'>
@@ -276,7 +280,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
 
           <p className='mt-4'>
             <span className='font-semibold'>Already have an account?</span>
-            <Link href='/auth/login'>
+            <Link href={loginURL}>
               <a className='text-textAcent-500 focus:underline'> Login.</a>
             </Link>
           </p>

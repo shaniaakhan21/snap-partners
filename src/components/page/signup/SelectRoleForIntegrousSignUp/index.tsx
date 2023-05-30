@@ -62,7 +62,7 @@ export const SelectRoleForIntegrousSignUp = () => {
 
       <p>
         <span className='font-bold text-gray-800'>Already have an account?</span>
-        <Link href='/auth/login'>
+        <Link href='/auth/login-integrous'>
           <a className='text-textAcent-500'> Login.</a>
         </Link>
       </p>
