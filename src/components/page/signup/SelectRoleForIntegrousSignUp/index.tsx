@@ -11,14 +11,14 @@ export const SelectRoleForIntegrousSignUp = () => {
   const { current: roles } = useRef([
     {
       icon: <IBOIcon classes='w-14 h-14' />,
-      label: 'I’m a Customer',
+      label: 'Register as a Customer',
       key: ROLES.integrousCustomer,
       link: `/auth/signup-integrous?role=${ROLES.integrousCustomer}`
     },
 
     {
       icon: <AssociateIcon classes='w-14 h-14' />,
-      label: 'I’m a Associate',
+      label: 'Register as an Associate',
       key: ROLES.integrousAssociate,
       link: `/auth/signup-integrous?role=${ROLES.integrousAssociate}`
     }
