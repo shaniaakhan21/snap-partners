@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { setLocalStorage } from 'lib/utils/localStorage'
 
 import { IReferralLink } from 'lib/types'
 import { ROLES } from 'config/roles'
@@ -8,6 +9,7 @@ export const useHandlerReferralLink = () => {
   const router = useRouter()
   const queryReferralCode = router.query.referralCode as string
   const queryRole = router.query.role as string
+  const redirectToIntegrous = router.query.redirectToIntegrous as string
 
   const [referralLink, setReferralLink] = useState<IReferralLink>({ code: null, role: null })
 
@@ -15,6 +17,10 @@ export const useHandlerReferralLink = () => {
     const role = ROLES[queryRole]
 
     return role === ROLES.ADMIN || !role ? null : role
+  }
+
+  if (redirectToIntegrous === 'true') {
+    setLocalStorage('redirectToIntegrous', true)
   }
 
   useEffect(() => {
