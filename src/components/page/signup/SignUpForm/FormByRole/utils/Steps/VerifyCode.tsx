@@ -76,7 +76,9 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
             customer: userTrack.userInfo.roles.customer,
             driver: userTrack.userInfo.roles.driver,
             agent: userTrack.userInfo.roles.agent,
-            merchant: userTrack.userInfo.roles.merchant
+            merchant: userTrack.userInfo.roles.merchant,
+            integrousCustomer: userTrack.userInfo.roles.integrousCustomer,
+            integrousAssociate: userTrack.userInfo.roles.integrousAssociate
           },
           code,
           sponsorReferralCode: userTrack.userInfo.sponsorReferralCode
@@ -97,7 +99,9 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
             customer: userTrack.userInfo.roles.customer,
             driver: userTrack.userInfo.roles.driver,
             merchant: userTrack.userInfo.roles.merchant,
-            agent: userTrack.userInfo.roles.agent
+            agent: userTrack.userInfo.roles.agent,
+            integrousCustomer: userTrack.userInfo.roles.integrousCustomer,
+            integrousAssociate: userTrack.userInfo.roles.integrousAssociate
           },
           code: code,
           sponsorReferralCode: userTrack.userInfo.sponsorReferralCode,
