@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { InputPhone } from './utils/InputPhone'
 import { RegisterPassword } from './utils/RegisterPassword'
+import { useRouter } from 'next/router'
 
 export interface IDataForm {
   phoneExt: string
@@ -94,6 +95,9 @@ export const LoginWithPhone = ({ trackLoginHandle }: IProps) => {
     )
   }
 
+  const router = useRouter()
+  const signupURL = router.pathname === '/auth/login-integrous' ? '/auth/signup-integrous' : '/auth/signup'
+
   return (
     <div className='flex flex-col justify-start items-start gap-x-2 mb-2 mt-3 w-full'>
       <form className='mt-2 w-full' onSubmit={handleSubmit(onSubmit)}>
@@ -134,7 +138,7 @@ export const LoginWithPhone = ({ trackLoginHandle }: IProps) => {
 
           <p>
             <span className='font-semibold'>Don’t have an account?</span>
-            <Link href='/auth/signup'>
+            <Link href={signupURL}>
               <a className='text-textAcent-500'> Sign Up.</a>
             </Link>
           </p>
