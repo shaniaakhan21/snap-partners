@@ -19,6 +19,8 @@ interface ISignUpDataBodyStep2 extends ISignUpDataBodyStep1 {
     driver: boolean
     merchant: boolean
     agent: boolean
+    integrousCustomer: boolean
+    integrousAssociate: boolean
   },
   code: number
   sponsorReferralCode: string

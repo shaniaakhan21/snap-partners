@@ -14,12 +14,18 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
     auth && router.push('/overview')
   }, [auth])
 
-  let t1 = 'Snap Delivered'
-  let t2 = 'Order-Eat-Repeat'
+  const isSignupIntegrous = router.pathname === '/auth/signup-integrous'
+  let t1 = isSignupIntegrous ? 'Snap Partners' : 'Snap Delivered'
+  let t2 = isSignupIntegrous ? 'FREE Business Signup' : 'Order-Eat-Repeat'
 
   if (role === ROLES.AGENT) {
     t1 = 'Snap Financial'
     t2 = 'Employee Retention Credit Program'
+  }
+
+  if (isSignupIntegrous && (ROLES.integrousCustomer || ROLES.integrousAssociate)) {
+    t1 = 'Snap Partners'
+    t2 = 'FREE Business Signup'
   }
 
   return (
@@ -35,6 +41,17 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
                 <p className='text-3xl font-bold mt-1'>{t2}</p>
                 <br />
               </div>
+              {isSignupIntegrous && (ROLES.integrousCustomer || ROLES.integrousAssociate) && (
+                <div className='z-1 relative w-[60%]'>
+                  <div className='flex w-full justify-start'>
+                    <img className='w-[21%]' src='/static/Snap Wellness Large.png'/>
+                    <img className='py-[3%] px-[5%]' src='/static/logo-integrous.png'/>
+                  </div>
+                  <div>
+                    <h3 className='text-md font-bold mt-1 uppercase'>Partnered with Integrous Wellnes</h3>
+                  </div>
+                </div>
+              )}
 
               <ul className='list-disc pl-6 mt-20 text-xl 2xl:text-2xl space-y-4'>
                 <li>Get notified about company updates</li>
