@@ -89,7 +89,9 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
         customer: false,
         driver: false,
         merchant: true,
-        agent: false
+        agent: false,
+        integrousCustomer: false,
+        integrousAssociate: false
       },
       code: null,
       ownerName: dataForm.ownerName,

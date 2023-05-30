@@ -39,7 +39,9 @@ interface ISignUpDataBodyMerchant {
     admin: false,
     customer: false,
     driver: false,
-    merchant: true
+    merchant: true,
+    integrousCustomer: false,
+    integrousAssociate: false
   },
   code: null,
   ownerName: string
