@@ -4,6 +4,7 @@ import { ROLES } from 'config/roles'
 import { GTMTrack } from 'lib/utils/gtm'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { AssociateIcon } from 'components/common/icons/Associate'
 
 export const SelectRoleForIntegrousSignUp = () => {
   const router = useRouter()
@@ -16,7 +17,7 @@ export const SelectRoleForIntegrousSignUp = () => {
     },
 
     {
-      icon: <IBOIcon classes='w-14 h-14' />,
+      icon: <AssociateIcon classes='w-14 h-14' />,
       label: 'I’m a Associate',
       key: ROLES.integrousAssociate,
       link: `/auth/signup-integrous?role=${ROLES.integrousAssociate}`
