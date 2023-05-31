@@ -11,6 +11,7 @@ import { toast } from 'react-toastify'
 import { InputPhone } from './utils/InputPhone'
 import { RegisterPassword } from './utils/RegisterPassword'
 import { useRouter } from 'next/router'
+import { getLocalStorage, removeLocalStorage } from 'lib/utils/localStorage'
 
 export interface IDataForm {
   phoneExt: string
@@ -85,6 +86,13 @@ export const LoginWithPhone = ({ trackLoginHandle }: IProps) => {
       bank_information: data.bank_information
     })
     reset()
+    const redirectToIntegrous = getLocalStorage('redirectToIntegrous')
+    const redirectToIntegrousReferralCode = getLocalStorage('redirectToIntegrousReferralCode')
+    if (redirectToIntegrous === true) {
+      removeLocalStorage('redirectToIntegrous')
+      removeLocalStorage('redirectToIntegrousReferralCode')
+      window.location.href = `https://test.integrouswellness.com/${redirectToIntegrousReferralCode}?access_token=${dataLogin.token}`
+    }
   }
 
   if (isLoading) {

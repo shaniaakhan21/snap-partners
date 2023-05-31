@@ -21,6 +21,7 @@ export const useHandlerReferralLink = () => {
 
   if (redirectToIntegrous === 'true') {
     setLocalStorage('redirectToIntegrous', true)
+    setLocalStorage('redirectToIntegrousReferralCode', queryReferralCode || '')
   }
 
   useEffect(() => {
