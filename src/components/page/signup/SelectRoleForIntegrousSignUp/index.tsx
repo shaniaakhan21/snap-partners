@@ -8,21 +8,22 @@ import { AssociateIcon } from 'components/common/icons/Associate'
 
 export const SelectRoleForIntegrousSignUp = () => {
   const router = useRouter()
-  const { current: roles } = useRef([
+  const queryReferralCode = router.query.referralCode as string
+  const roles = [
     {
       icon: <IBOIcon classes='w-14 h-14' />,
       label: 'Register as a Customer',
       key: ROLES.integrousCustomer,
-      link: `/auth/signup-integrous?role=${ROLES.integrousCustomer}`
+      link: `/auth/signup-integrous?role=${ROLES.integrousCustomer}&referralCode=${queryReferralCode}`
     },
 
     {
       icon: <AssociateIcon classes='w-14 h-14' />,
       label: 'Register as an Associate',
       key: ROLES.integrousAssociate,
-      link: `/auth/signup-integrous?role=${ROLES.integrousAssociate}`
+      link: `/auth/signup-integrous?role=${ROLES.integrousAssociate}&referralCode=${queryReferralCode}`
     }
-  ])
+  ]
 
   const onRoleClick = (role) => {
     GTMTrack.signUp(role.key)

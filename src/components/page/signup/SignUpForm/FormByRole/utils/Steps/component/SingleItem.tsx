@@ -12,7 +12,14 @@ const ResponsiveCard = styled(Card)(({ theme }) => ({
   }
 }))
 
-export default function SingleItem ({ image, name, price }) {
+export default function SingleItem ({ userId, image, name, price }) {
+  let link = ''
+  if (price === '$249.00') {
+    link = `https://0f4c5e-3.myshopify.com/cart/45373739991342:1?attributes[UID]=${userId}`
+  }
+  if (price === '$499.00') {
+    link = `https://0f4c5e-3.myshopify.com/cart/45373746413870:1?attributes[UID]=${userId}`
+  }
   return (
     <ResponsiveCard sx={{ background: 'none', boxShadow: 'none' }}>
       <CardActionArea>
@@ -30,6 +37,7 @@ export default function SingleItem ({ image, name, price }) {
             {price}
           </Typography>
           <Button
+            onClick={() => { window.location.href = link }}
             variant="contained"
             sx={{
               width: '95%',

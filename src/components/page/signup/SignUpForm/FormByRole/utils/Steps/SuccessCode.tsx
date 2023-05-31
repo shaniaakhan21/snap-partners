@@ -15,7 +15,7 @@ import { toast } from 'react-toastify'
 import { useRouter } from 'next/router'
 import { useRoleFromUrl } from '../../../../../../../lib/hooks/useRoleFromUrl'
 import { useAuthStore } from '../../../../../../../lib/stores'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Spinner } from '../../../../../../common/loaders'
 import { ROLES } from './../../../../../../../config/roles'
 
@@ -29,6 +29,7 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
   const role = useRoleFromUrl()
   const { auth, setAuth } = useAuthStore()
   const [isLoading, setIsLoading] = useState(false)
+  const [userId, setUserId] = useState(null)
 
   const handleClickLogin = async () => {
     setIsLoading(true)
@@ -100,6 +101,14 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
     handleClickLogin()
   }
 
+  useEffect(() => {
+    const getTokenId = async () => {
+      const { data: dataLogin, error: errorLogin } = await login({ username: userTrack.userInfo.username, password: userTrack.userInfo.password })
+      setUserId(dataLogin.userId)
+    }
+    getTokenId();
+  }, [])
+
   return (
     <div className='flex flex-col justify-center items-center max-w-xl mx-auto'>
       <br />
@@ -118,8 +127,8 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
             }}
           >
             <div className="w-full flex flex-col justify-around md:flex-row">
-              <SingleItem image='/images/kits/249.png' name="$249 Enrollment Kit" price="$249.00" />
-              <SingleItem image='/images/kits/499.png' name="$499 Enrollment Kit" price="$499.00" />
+              <SingleItem userId={userId} image='/images/kits/249.png' name="$249 Enrollment Kit" price="$249.00" />
+              <SingleItem userId={userId} image='/images/kits/499.png' name="$499 Enrollment Kit" price="$499.00" />
             </div>
           </Card>
         </>
