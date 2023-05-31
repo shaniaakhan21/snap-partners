@@ -61,7 +61,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
   const onSubmitVerifyCode = async (code) => {
     setIsVerifyingCode(true)
 
-    const validateRole = userTrack.userInfo.roles.driver || userTrack.userInfo.roles.customer || ROLES.integrousAssociate || userTrack.userInfo.roles.agent || userTrack.userInfo.roles.admin
+    const validateRole = userTrack.userInfo.roles.driver || userTrack.userInfo.roles.customer || userTrack.userInfo.roles.integrousAssociate || userTrack.userInfo.roles.integrousCustomer || userTrack.userInfo.roles.agent || userTrack.userInfo.roles.admin
       ? {
         data: {
           name: userTrack.userInfo.name,

@@ -99,7 +99,9 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
         customer: referralLink.role === 'CUSTOMER',
         driver: referralLink.role === 'DRIVER',
         merchant: referralLink.role === 'MERCHANT',
-        agent: referralLink.role === 'AGENT'
+        agent: referralLink.role === 'AGENT',
+        integrousAssociate: referralLink.role === 'integrousAssociate',
+        integrousCustomer: referralLink.role === 'integrousCustomer'
       }
     })
 

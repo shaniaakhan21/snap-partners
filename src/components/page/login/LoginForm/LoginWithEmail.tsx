@@ -55,7 +55,7 @@ export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
     if (redirectToIntegrous === true) {
       removeLocalStorage('redirectToIntegrous')
       removeLocalStorage('redirectToIntegrousReferralCode')
-      window.location.href = `https://test.integrouswellness.com/${redirectToIntegrousReferralCode}?access_token=${dataLogin.token}`
+      window.location.href = `https://www.integrouswellness.com/${redirectToIntegrousReferralCode}?access_token=${dataLogin.token}`
       return
     }
 
