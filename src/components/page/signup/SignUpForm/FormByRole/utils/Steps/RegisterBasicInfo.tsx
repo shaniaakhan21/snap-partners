@@ -17,6 +17,7 @@ import { handleFetchError } from 'lib/utils/handleFetchError'
 import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 import { GTMTrack } from 'lib/utils/gtm'
 import { useRouter } from 'next/router'
+import { ROLES } from './../../../../../../../config/roles'
 
 interface IStepOpeProps {
   referralLink: IReferralLink,
@@ -128,7 +129,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
   return (
     <div className='max-w-md mx-auto w-full'>
       <p className='font-bold text-4xl text-[#18203F]'>{signUpas}{' '}
-        <span className='text-primary-500'>{capitalizeFirstLetter(referralLink.role.split(/(?=[a-z])/).join(' '))}</span>
+        <span className='text-primary-500'>{capitalizeFirstLetter(referralLink.role)}</span>
       </p>
       <p className='text-gray-500'>Welcome! register to continue.</p>
 
@@ -178,7 +179,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           id='name'
           name='name'
           type='text'
-          label={referralLink.role ? `${referralLink.role.split(/(?=[a-z])/).join(' ')} First Name` : 'First Name'}
+          label={referralLink.role ? `${referralLink.role} First Name` : 'First Name'}
           registerId='name'
           placeholder='Enter Name'
           errors={errors.name}
@@ -214,7 +215,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
         />
 
         <InputPhone
-          label={referralLink.role ? `${referralLink.role.split(/(?=[a-z])/).join(' ')} Phone` : 'Phone'}
+          label={referralLink.role ? `${referralLink.role} Phone` : 'Phone'}
           isRequired
           register={register}
           errors={errors}

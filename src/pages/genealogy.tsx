@@ -113,7 +113,7 @@ const GenealogyPage: Page = () => {
     setSearchIsLoading(false)
   }
 
-  const isIntegrous = (auth.roles.INTEGROUSaSSOCIATE || auth.roles.INTEGROUScUSTOMER)
+  const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
 
   if (isIntegrous) {
     if (levels?.length === 0) {

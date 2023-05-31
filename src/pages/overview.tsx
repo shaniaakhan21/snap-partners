@@ -30,7 +30,7 @@ const DashboardOverViewPage: Page = () => {
   const auth: any = store.auth
 
   const currentOverview = getLocalStorage('currentBackoffice') || ''
-  const isIntegrous = (auth.roles.INTEGROUSaSSOCIATE || auth.roles.INTEGROUScUSTOMER)
+  const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
 
   useEffect(() => {
     (async () => {

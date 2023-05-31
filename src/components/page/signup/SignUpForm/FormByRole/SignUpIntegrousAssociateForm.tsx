@@ -4,7 +4,7 @@ import { IReferralLink } from 'lib/types'
 import { STEPS, RegisterBasicInfo, VerifyCode, SuccessCode, UpgradeToManager } from './utils/Steps'
 import { IHandleStep, IUserTrack, IHandleUserInfo } from './utils/types'
 
-export const SignUpINTEGROUSaSSOCIATEForm = ({ referralLink }: { referralLink: IReferralLink }) => {
+export const SignUpintegrousAssociateForm = ({ referralLink }: { referralLink: IReferralLink }) => {
   const [userTrack, setUserTrack] = useState<IUserTrack>({ step: 'STEP_1', userInfo: null })
 
   const handleStep: IHandleStep = (step) => {

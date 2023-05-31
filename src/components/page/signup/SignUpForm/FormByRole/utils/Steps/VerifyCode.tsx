@@ -61,7 +61,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
   const onSubmitVerifyCode = async (code) => {
     setIsVerifyingCode(true)
 
-    const validateRole = userTrack.userInfo.roles.driver || userTrack.userInfo.roles.customer || ROLES.INTEGROUSaSSOCIATE || userTrack.userInfo.roles.agent || userTrack.userInfo.roles.admin
+    const validateRole = userTrack.userInfo.roles.driver || userTrack.userInfo.roles.customer || ROLES.integrousAssociate || userTrack.userInfo.roles.agent || userTrack.userInfo.roles.admin
       ? {
         data: {
           name: userTrack.userInfo.name,
@@ -78,8 +78,8 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
             driver: userTrack.userInfo.roles.driver,
             agent: userTrack.userInfo.roles.agent,
             merchant: userTrack.userInfo.roles.merchant,
-            INTEGROUScUSTOMER: userTrack.userInfo.roles.INTEGROUScUSTOMER,
-            INTEGROUSaSSOCIATE: userTrack.userInfo.roles.INTEGROUSaSSOCIATE
+            integrousCustomer: userTrack.userInfo.roles.integrousCustomer,
+            integrousAssociate: userTrack.userInfo.roles.integrousAssociate
           },
           code,
           sponsorReferralCode: userTrack.userInfo.sponsorReferralCode
@@ -101,8 +101,8 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
             driver: userTrack.userInfo.roles.driver,
             merchant: userTrack.userInfo.roles.merchant,
             agent: userTrack.userInfo.roles.agent,
-            INTEGROUScUSTOMER: userTrack.userInfo.roles.INTEGROUScUSTOMER,
-            INTEGROUSaSSOCIATE: userTrack.userInfo.roles.INTEGROUSaSSOCIATE
+            integrousCustomer: userTrack.userInfo.roles.integrousCustomer,
+            integrousAssociate: userTrack.userInfo.roles.integrousAssociate
           },
           code: code,
           sponsorReferralCode: userTrack.userInfo.sponsorReferralCode,

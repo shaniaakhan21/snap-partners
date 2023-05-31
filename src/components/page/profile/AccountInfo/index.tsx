@@ -25,7 +25,7 @@ export const AccountInfo = ({ auth, setAuth, removeAuth, setNewWindow, setTypeUp
   }
 
   const _auth :any = auth
-  const isIntegrous = (_auth.roles.INTEGROUSaSSOCIATE || _auth.roles.INTEGROUScUSTOMER)
+  const isIntegrous = (_auth.roles.integrousAssociate || _auth.roles.integrousCustomer)
 
   return (
     <div className='max-w-4xl mx-auto'>

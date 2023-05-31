@@ -1,5 +1,5 @@
 export { SignUpDriverForm } from './FormByRole/Driver'
 export { SignUpCustomerForm } from './FormByRole/Customer'
 export { SignUpAgentForm } from './FormByRole/Agent'
-export { SignUpINTEGROUScUSTOMERForm } from './FormByRole/SignUpIntegrousCustomerForm'
-export { SignUpINTEGROUSaSSOCIATEForm } from './FormByRole/SignUpIntegrousAssociateForm'
+export { SignUpintegrousCustomerForm } from './FormByRole/SignUpIntegrousCustomerForm'
+export { SignUpintegrousAssociateForm } from './FormByRole/SignUpIntegrousAssociateForm'
