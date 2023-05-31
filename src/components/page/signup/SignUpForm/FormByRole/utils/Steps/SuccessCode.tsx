@@ -17,6 +17,10 @@ import { useRoleFromUrl } from '../../../../../../../lib/hooks/useRoleFromUrl'
 import { useAuthStore } from '../../../../../../../lib/stores'
 import { useState } from 'react'
 import { Spinner } from '../../../../../../common/loaders'
+import { ROLES } from './../../../../../../../config/roles'
+
+import Card from '@mui/material/Card'
+import SingleItem from './component/SingleItem'
 
 const { SEO } = APP_INFO
 
@@ -99,19 +103,50 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
   return (
     <div className='flex flex-col justify-center items-center max-w-xl mx-auto'>
       <br />
-      <span className='text-4xl font-bold text-primary-500'>Register Done!</span>
+      <span className='text-4xl font-bold text-primary-500'>Registration Done!</span>
       <CheckSuccess classes='my-10' />
-      <span className='text-xl text-primary-500'>Welcome!</span>
-      <span className='text-4xl text-primary-500 font-bold'>{userTrack.userInfo.name ? userTrack.userInfo.name : userTrack.userInfo.merchant.name }</span>
 
-      <Button onClick={handleSkip} classes='w-full mt-10'>CONTINUE</Button>
+      {ROLES.INTEGROUSaSSOCIATE
+        ? (<>
+          <span className='text-xl text-primary-500'>Select your welcome pack!</span>
+          <Card
+            sx={{
+              p: 2,
+              mx: { xs: 2, lg: 3 },
+              mt: 2,
+              mb: 2
+            }}
+          >
+            <div className="w-full flex flex-col justify-around md:flex-row">
+              <SingleItem image='/images/kits/249.png' name="$249 Enrollment Kit" price="$249.00" />
+              <SingleItem image='/images/kits/499.png' name="$499 Enrollment Kit" price="$499.00" />
+            </div>
+          </Card>
+        </>
+
+        )
+        : (
+          <>
+            <span className='text-xl text-primary-500'>Welcome!</span>
+            <span className='text-4xl text-primary-500 font-bold'>
+              {userTrack.userInfo.name ? userTrack.userInfo.name : userTrack.userInfo.merchant.name}
+            </span>
+            <Button onClick={handleSkip} classes='w-full mt-10'>CONTINUE</Button>
+          </>
+        )}
+
       <br/>
-      <span className='text-xl text-gray-500 text-center'>Please download the app below or visit our website at </span>
-      <Link href={SEO.URL_PAGE}>
-        <a target='_blank' className='text-xl text-primary-500 text-center'>{SEO.URL_PAGE.substring(8)}</a>
-      </Link>
+      { ROLES.INTEGROUSaSSOCIATE
+        ? (<></>)
+        : (
+          <>
+            <span className='text-xl text-gray-500 text-center'>Please download the app below or visit our website at </span>
+            <Link href={SEO.URL_PAGE}>
+              <a target='_blank' className='text-xl text-primary-500 text-center'>{SEO.URL_PAGE.substring(8)}</a>
+            </Link>
+            <MobileAppsLink /></>
+        )}
       <br/>
-      <MobileAppsLink />
     </div>
   )
 }

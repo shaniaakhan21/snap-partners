@@ -7,7 +7,7 @@ interface IBadgesProps {
 
 export const Badges = ({ auth }: IBadgesProps) => {
   const _auth :any = auth
-  const isIntegrous = (_auth.roles.integrousAssociate || _auth.roles.integrousCustomer)
+  const isIntegrous = (_auth.roles.INTEGROUSaSSOCIATE || _auth.roles.INTEGROUScUSTOMER)
   return (
     <div>
       <span className='text-2xl font-bold text-gray-800'>{auth.username}</span>

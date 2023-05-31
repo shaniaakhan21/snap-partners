@@ -15,7 +15,7 @@ const ReferralsPage: Page = () => {
 
   const _auth: any = auth
 
-  const isIntegrous = (_auth.roles.integrousAssociate || _auth.roles.integrousCustomer)
+  const isIntegrous = (_auth.roles.INTEGROUSaSSOCIATE || _auth.roles.INTEGROUScUSTOMER)
 
   return (
     <div className='min-h-[80vh] flex justify-center items-center'>

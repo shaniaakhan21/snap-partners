@@ -4,8 +4,8 @@ export interface IROLES {
   DRIVER: 'DRIVER',
   AGENT: 'AGENT',
   ADMIN: 'ADMIN',
-  integrousCustomer: 'integrousCustomer',
-  integrousAssociate: 'integrousAssociate'
+  INTEGROUScUSTOMER: 'INTEGROUScUSTOMER',
+  INTEGROUSaSSOCIATE: 'INTEGROUSaSSOCIATE'
 }
 
 export type TROLE =
@@ -14,5 +14,5 @@ export type TROLE =
   IROLES['DRIVER'] |
   IROLES['AGENT'] |
   IROLES['ADMIN'] |
-  IROLES['integrousCustomer'] |
-  IROLES['integrousAssociate']
+  IROLES['INTEGROUScUSTOMER'] |
+  IROLES['INTEGROUSaSSOCIATE']

@@ -6,6 +6,6 @@ export const ROLES: IROLES = {
   DRIVER: 'DRIVER',
   AGENT: 'AGENT',
   ADMIN: 'ADMIN',
-  integrousCustomer: 'integrousCustomer',
-  integrousAssociate: 'integrousAssociate'
+  INTEGROUScUSTOMER: 'INTEGROUScUSTOMER',
+  INTEGROUSaSSOCIATE: 'INTEGROUSaSSOCIATE'
 }

@@ -13,6 +13,7 @@ import { handleFetchError } from 'lib/utils/handleFetchError'
 import { InputPhone } from '../InputPhone'
 import { Button } from 'components/common/Button'
 import { GTMTrack } from 'lib/utils/gtm'
+import { ROLES } from './../../../../../../../config/roles'
 
 interface IDataFormVerifyCode {
   code: string
@@ -60,7 +61,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
   const onSubmitVerifyCode = async (code) => {
     setIsVerifyingCode(true)
 
-    const validateRole = userTrack.userInfo.roles.driver || userTrack.userInfo.roles.customer || userTrack.userInfo.roles.agent || userTrack.userInfo.roles.admin
+    const validateRole = userTrack.userInfo.roles.driver || userTrack.userInfo.roles.customer || ROLES.INTEGROUSaSSOCIATE || userTrack.userInfo.roles.agent || userTrack.userInfo.roles.admin
       ? {
         data: {
           name: userTrack.userInfo.name,
@@ -77,8 +78,8 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
             driver: userTrack.userInfo.roles.driver,
             agent: userTrack.userInfo.roles.agent,
             merchant: userTrack.userInfo.roles.merchant,
-            integrousCustomer: userTrack.userInfo.roles.integrousCustomer,
-            integrousAssociate: userTrack.userInfo.roles.integrousAssociate
+            INTEGROUScUSTOMER: userTrack.userInfo.roles.INTEGROUScUSTOMER,
+            INTEGROUSaSSOCIATE: userTrack.userInfo.roles.INTEGROUSaSSOCIATE
           },
           code,
           sponsorReferralCode: userTrack.userInfo.sponsorReferralCode
@@ -100,8 +101,8 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
             driver: userTrack.userInfo.roles.driver,
             merchant: userTrack.userInfo.roles.merchant,
             agent: userTrack.userInfo.roles.agent,
-            integrousCustomer: userTrack.userInfo.roles.integrousCustomer,
-            integrousAssociate: userTrack.userInfo.roles.integrousAssociate
+            INTEGROUScUSTOMER: userTrack.userInfo.roles.INTEGROUScUSTOMER,
+            INTEGROUSaSSOCIATE: userTrack.userInfo.roles.INTEGROUSaSSOCIATE
           },
           code: code,
           sponsorReferralCode: userTrack.userInfo.sponsorReferralCode,

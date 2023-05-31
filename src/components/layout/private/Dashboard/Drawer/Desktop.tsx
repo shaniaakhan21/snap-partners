@@ -22,7 +22,7 @@ export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { i
       )
   }
 
-  const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
+  const isIntegrous = (auth.roles.INTEGROUSaSSOCIATE || auth.roles.INTEGROUScUSTOMER)
 
   const currentOverview = getLocalStorage('currentBackoffice') || ''
 

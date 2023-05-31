@@ -29,7 +29,7 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
     t2 = 'FREE Business Log In'
   }
 
-  if (isSignupIntegrous && (ROLES.integrousCustomer || ROLES.integrousAssociate)) {
+  if (isSignupIntegrous && (ROLES.INTEGROUScUSTOMER || ROLES.INTEGROUSaSSOCIATE)) {
     t1 = 'Snap Partners'
     t2 = 'FREE Business Sign Up'
   }
@@ -47,7 +47,7 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
                 <p className='text-3xl font-bold mt-1'>{t2}</p>
                 <br />
               </div>
-              {(isLoginIntegrous || isSignupIntegrous) && (ROLES.integrousCustomer || ROLES.integrousAssociate) && (
+              {(isLoginIntegrous || isSignupIntegrous) && (ROLES.INTEGROUScUSTOMER || ROLES.INTEGROUSaSSOCIATE) && (
                 <div className='z-1 relative w-[60%]'>
                   <div className='flex w-full justify-start'>
                     <img className='w-[21%]' src='/static/Snap Wellness Large.png'/>
