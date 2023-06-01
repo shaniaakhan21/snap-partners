@@ -92,7 +92,7 @@ export const drawerRoutes = [
   {
     icon: <GenealogyIcon />,
     to: '/tree',
-    label: 'Tree',
+    label: 'Sponsor Tree',
     integrous: true
    },
    {
