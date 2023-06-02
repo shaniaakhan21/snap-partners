@@ -20,6 +20,7 @@ import { getLocalStorage, setLocalStorage } from 'lib/utils/localStorage'
 import axios from 'axios'
 import Referrals from 'components/common/overview/Referrals'
 import { useAuthStore } from 'lib/stores'
+import GrowthSummary from "../components/common/overview/GrowthSummary";
 
 const { SEO } = APP_INFO
 
@@ -76,6 +77,9 @@ const DashboardOverViewPage: Page = () => {
           </div>
           <div className='mt-4'>
             <RewardsProgram />
+          </div>
+          <div className='mt-4'>
+            <GrowthSummary />
           </div>
           <div className='mt-4 bg-white rounded-lg'>
             <MonthlySubscription />
