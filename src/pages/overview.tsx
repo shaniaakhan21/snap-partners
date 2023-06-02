@@ -56,8 +56,9 @@ const DashboardOverViewPage: Page = () => {
         <br></br>
         <br></br>
         <h1 style={{ fontSize: 60 }}>WE'RE OPEN</h1>
-        <br></br>
+        <br />
         <h1 style={{ fontSize: 30 }}>Log back in every day to see us roll out your new dashboard widgets</h1>
+        <br />
         <TotalLeg />
       </>
     )

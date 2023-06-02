@@ -11,7 +11,7 @@ export default function MonthlyMilestones () {
   const [data, setData] = useState<MonthlyMilestonesData>()
 
   useEffect(() => {
-    fetch(`/api/ibo/customer/tracking/${auth.id}`, {
+    fetch(`/api/ibo/customer/tracking`, {
       method: 'GET',
       headers: { Authorization: `Bearer ${auth.accessToken}` }
     }).then((response) => {
