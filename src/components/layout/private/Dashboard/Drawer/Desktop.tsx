@@ -23,6 +23,8 @@ export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { i
   }
 
   const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
+  const isIntegrousAssociate = auth.roles.integrousAssociate
+  const isIntegrousCustomer = auth.roles.integrousCustomer && !auth.roles.integrousAssociate
 
   const currentOverview = getLocalStorage('currentBackoffice') || ''
 
@@ -40,6 +42,8 @@ export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { i
             const isSnap = (auth.roles.customer || auth.roles.driver || auth.roles.merchant)
             if (route.snap && !isSnap) return <Fragment key={route.label} />
 
+            if (route.to !== '/overview' && isIntegrousCustomer) return <Fragment key={route.label} />
+
             if (currentOverview === '') {
               if (!route.integrous && isIntegrous) return <Fragment key={route.label} />
             }
@@ -48,8 +52,8 @@ export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { i
               if (route.to === '/binarytree') return <Fragment key={route.label} />
             }
 
-            if (route.to === '/binarytree' && !isIntegrous) return <Fragment key={route.label} />
-            if (route.label.includes('Visit') && !isIntegrous) return <Fragment key={route.label} />
+            if (route.to === '/binarytree' && !isIntegrousAssociate) return <Fragment key={route.label} />
+            if (route.label.includes('Visit') && !isIntegrousAssociate) return <Fragment key={route.label} />
             if (route.label.includes('Visit Snap Partners') && currentOverview === 'partners') return <Fragment key={route.label} />
             if (route.label.includes('Visit Snap Wellness') && currentOverview === '') return <Fragment key={route.label} />
 
