@@ -38,7 +38,7 @@ export default function MonthlyMilestones () {
               <p className="text-3xl text-gray-800 font-bold p-2">${data?.revenue}</p>
             </div>
             <div>
-              <p className="text-md text-gray-800 pb-6 text-center">(Incl Taxes + Shipping)</p>
+              <p className="text-md text-gray-800 pb-6 text-center">Customer Revenue</p>
             </div>
           </div>
         </div>
