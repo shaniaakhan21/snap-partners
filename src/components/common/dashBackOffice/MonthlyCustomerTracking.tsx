@@ -35,7 +35,10 @@ export default function MonthlyMilestones () {
           </div>
           <div className="flex flex-col items-center w-1/2 items-center ">
             <div>
-              <p className="text-3xl text-gray-800 font-bold p-2" style={{ marginTop: '-50px' }}>${data?.revenue}</p>
+              <p className="text-3xl text-gray-800 font-bold p-2">${data?.revenue}</p>
+            </div>
+            <div>
+              <p className="text-md text-gray-800 pb-6 text-center">(Incl Taxes + Shipping)</p>
             </div>
           </div>
         </div>
