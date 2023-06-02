@@ -42,7 +42,7 @@ export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { i
             const isSnap = (auth.roles.customer || auth.roles.driver || auth.roles.merchant)
             if (route.snap && !isSnap) return <Fragment key={route.label} />
 
-            if (route.to !== '/overview' && isIntegrousCustomer) return <Fragment key={route.label} />
+            if (!['/overview', '/profile'].includes(route.to) && isIntegrousCustomer) return <Fragment key={route.label} />
 
             if (currentOverview === '') {
               if (!route.integrous && isIntegrous) return <Fragment key={route.label} />
