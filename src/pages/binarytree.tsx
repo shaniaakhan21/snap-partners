@@ -9,11 +9,33 @@ import { GeneralModal } from 'components/page/genealogy/OldGenealogy/Modals/Gene
 import { CardComingSoon } from 'components/common/CardComingSoon'
 import { getLocalStorage } from 'lib/utils/localStorage'
 import { useAuthStore, useNewWindowOpenedStore } from 'lib/stores'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import axios from 'axios'
 import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Select } from '@material-ui/core'
+import { Grid, TextField } from '@mui/material'
+import { SearchIcon } from 'components/common/icons'
+import { DataGrid } from '@mui/x-data-grid'
 
 const { SEO } = APP_INFO
+
+const Table = (props) => {
+  const rows = useMemo(() => props.rows, [props.rows])
+  const columns = useMemo(() => props.columns, [props.columns])
+  return (
+    <DataGrid
+      rows={rows}
+      autoHeight
+      columns={columns}
+      density="compact"
+      initialState={{
+        sorting: {
+          sortModel: [{ field: 'name', sort: 'asc' }]
+        },
+        pagination: { paginationModel: { pageSize: 10 } }
+      }}
+    />
+  )
+}
 
 const ComingSoon: PageNext = () => {
   const { auth, setAuth, removeAuth } = useAuthStore()
@@ -26,6 +48,8 @@ const ComingSoon: PageNext = () => {
   const [holdingTank, setHoldingTank] = useState([])
   const [selectedHoldingTank, setSelectedHoldingTank] = useState(null)
   const [placement, setPLacement] = useState({}) as any
+  const [searchId, setsearchId] = useState('')
+  const [rows, setDataRows] = useState([])
 
   const refreshComponent = () => {
     setKey(prevKey => prevKey + 1) // incrementing key will cause the component to be recreated
@@ -146,6 +170,37 @@ const ComingSoon: PageNext = () => {
     )
   }
 
+  const columns = [
+    { field: 'id', headerName: 'User Id', minWidth: 130, flex: 1 },
+    { field: 'name', headerName: 'Name', minWidth: 130, flex: 1 },
+    {
+      field: 'sponsorId',
+      headerName: 'View',
+      flex: 1,
+      minWidth: 170,
+      renderCell: (item) => {
+        if (item.row.placed) {
+          return <Button onClick={() => {
+            setUserId(item.row.id)
+            setCurrentUserId(item.row.id)
+          }} variant="contained" color={'primary'} size={'small'}>View User</Button>
+        }
+        return <>User not yet placed - In Holding Tank</>
+      }
+    }
+  ]
+
+  const search = async () => {
+    const token = getLocalStorage('accessToken')
+    const response = await axios.get('/api/tree/searchUsers', {
+      params: { search: searchId },
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    setDataRows(response.data)
+  }
+
   return (
     <>
       <div className="flex justify-center gap-2">
@@ -156,6 +211,13 @@ const ComingSoon: PageNext = () => {
         <button onClick={() => { goBottom('left') }} className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-50  py-3 px-4 rounded-l-full rounded-r-full">GO BOTTOM LEFT</button>
         <button onClick={() => { goBottom('right') }} className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-50  py-3 px-4 rounded-l-full rounded-r-full">GO BOTTOM RIGHT</button>
       </div>
+      <Grid justifyContent='flex-end' alignItems='center' style={{ display: 'flex' }}>
+        <TextField value={searchId} onChange={(e) => { setsearchId(e.target.value) }} size={'small'} variant="outlined" placeholder="Search by Name" InputProps={{ startAdornment: <SearchIcon /> }} />
+        <Button disabled={(searchId.length === 0)} onClick={() => { search() }} variant="contained" >Search</Button>
+      </Grid>
+      <Grid item container style={{ marginBottom: 30 }}>
+        <Table columns={columns} rows={rows} />
+      </Grid>
       <OrganizationChart
         key={key}
         datasource={tree}
