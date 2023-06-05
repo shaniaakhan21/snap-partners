@@ -271,7 +271,7 @@ const ComingSoon: PageNext = () => {
     return (
       <>
         <Grid justifyContent='center' alignItems='center' style={{ display: 'flex' }}>
-          <h1 style={{ fontSize: 25, textAlign: 'center' }}>You are still wainting to be placed on the binary by your sponsor</h1>
+          <h1 style={{ fontSize: 25, textAlign: 'center' }}>You are still waiting to be placed on the binary by your sponsor</h1>
         </Grid>
         <Grid justifyContent='center' alignItems='center' style={{ display: 'flex' }}>
           <h2 style={{ fontSize: 18, textAlign: 'center' }}>Come back after your position has been placed</h2>
