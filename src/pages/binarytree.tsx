@@ -353,7 +353,7 @@ const ComingSoon: PageNext = () => {
 ComingSoon.getLayout = (page: ReactNode) => (
   <DashboardLayout>
     <Head>
-      <title>{SEO.TITLE_PAGE} - Coming Soon</title>
+      <title>{SEO.TITLE_PAGE} - Binary Tree</title>
     </Head>
 
     {page}
