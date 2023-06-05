@@ -29,7 +29,7 @@ const Table = (props) => {
       density="compact"
       initialState={{
         sorting: {
-          sortModel: [{ field: 'name', sort: 'asc' }]
+          sortModel: props.sortModel
         },
         pagination: { paginationModel: { pageSize: 10 } }
       }}
@@ -45,11 +45,14 @@ const ComingSoon: PageNext = () => {
   const [tree, setTree] = useState({})
   const [key, setKey] = useState(0)
   const [showModal, setshowModal] = useState(false)
+  const [showModalCustomer, setshowModalCustomer] = useState(false)
   const [holdingTank, setHoldingTank] = useState([])
+  const [holdingTankCustomer, setHoldingTankCustomer] = useState([])
   const [selectedHoldingTank, setSelectedHoldingTank] = useState(null)
   const [placement, setPLacement] = useState({}) as any
   const [searchId, setsearchId] = useState('')
   const [rows, setDataRows] = useState([])
+  const [pending, setPending] = useState(false)
 
   const refreshComponent = () => {
     setKey(prevKey => prevKey + 1) // incrementing key will cause the component to be recreated
@@ -65,23 +68,42 @@ const ComingSoon: PageNext = () => {
     setHoldingTank(response.data)
   }
 
-  const getBinaryTree = async (id) => {
+  const getHoldingTankCustomer = async () => {
     const token = getLocalStorage('accessToken')
-    setTree({})
-    const response = await axios.get('/api/tree/getBinaryTree', {
-      params: { userId: id },
+    const response = await axios.get('/api/tree/getHoldingTankUsersCustomer', {
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
-    setTree(response.data)
-    refreshComponent()
-    return response.data.id
+    setHoldingTankCustomer(response.data)
+  }
+
+  const getBinaryTree = async (id) => {
+    try {
+      const token = getLocalStorage('accessToken')
+      setTree({})
+      const response = await axios.get('/api/tree/getBinaryTree', {
+        params: { userId: id },
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      setTree(response.data)
+      refreshComponent()
+      return response.data.id
+    } catch (error) {
+      console.log(error.response)
+      if (error.response.status === 400) {
+        setPending(true)
+      }
+      return 0
+    }
   }
 
   useEffect(() => {
     (async () => {
       await getHoldingTank()
+      await getHoldingTankCustomer()
     })()
   }, [])
 
@@ -139,6 +161,19 @@ const ComingSoon: PageNext = () => {
     await getHoldingTank()
   }
 
+  const setHoldingTankUserCustomer = async (userId, side) => {
+    const token = getLocalStorage('accessToken')
+    await axios.post('/api/tree/setHoldingTankUsersCustomer', {
+      userId,
+      side
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    await getHoldingTankCustomer()
+  }
+
   const MyNode = ({ nodeData }) => {
     return (
       <div>
@@ -190,6 +225,37 @@ const ComingSoon: PageNext = () => {
     }
   ]
 
+  const columnsCustomer = [
+    { field: 'id', headerName: 'User Id', maxWidth: 110, flex: 1 },
+    { field: 'name', headerName: 'Name', maxWidth: 270, flex: 1 },
+    { field: 'placed', headerName: 'Placed', maxWidth: 100, flex: 1 },
+    {
+      field: 'sponsorId',
+      headerName: 'View',
+      flex: 1,
+      minWidth: 170,
+      renderCell: (item) => {
+        if (item.row.placed === 'NO') {
+          return (
+            <>
+              <Button onClick={() => {
+                setHoldingTankUserCustomer(item.row.id, 'pv')
+              }} variant="contained" color={'default'} size={'small'}>PV</Button>
+              <Button onClick={() => {
+                setHoldingTankUserCustomer(item.row.id, 'left')
+              }} style={{ marginLeft: 10 }} variant="contained" color={'primary'} size={'small'}>LEFT</Button>
+              <Button onClick={() => {
+                setHoldingTankUserCustomer(item.row.id, 'right')
+              }} style={{ marginLeft: 10 }} variant="contained" color={'secondary'} size={'small'}>RIGHT</Button>
+
+            </>
+          )
+        }
+        return <>{item.row.placedName}</>
+      }
+    }
+  ]
+
   const search = async () => {
     const token = getLocalStorage('accessToken')
     const response = await axios.get('/api/tree/searchUsers', {
@@ -201,6 +267,20 @@ const ComingSoon: PageNext = () => {
     setDataRows(response.data)
   }
 
+  if (pending) {
+    return (
+      <>
+        <Grid justifyContent='center' alignItems='center' style={{ display: 'flex' }}>
+          <h1 style={{ fontSize: 25, textAlign: 'center' }}>You are still wainting to be placed on the binary by your sponsor</h1>
+        </Grid>
+        <Grid justifyContent='center' alignItems='center' style={{ display: 'flex' }}>
+          <h2 style={{ fontSize: 18, textAlign: 'center' }}>Come back after your position has been placed</h2>
+        </Grid>
+      </>
+
+    )
+  }
+
   return (
     <>
       <div className="flex justify-center gap-2">
@@ -210,13 +290,14 @@ const ComingSoon: PageNext = () => {
         )}
         <button onClick={() => { goBottom('left') }} className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-50  py-3 px-4 rounded-l-full rounded-r-full">GO BOTTOM LEFT</button>
         <button onClick={() => { goBottom('right') }} className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-50  py-3 px-4 rounded-l-full rounded-r-full">GO BOTTOM RIGHT</button>
+        <button onClick={() => { setshowModalCustomer(true) }} className="flex text-xs items-center bg-green-600 hover:bg-green-700 text-white font-bold h-6 w-50  py-3 px-4 rounded-l-full rounded-r-full">CUSTOMER HOLDING TANK</button>
       </div>
       <Grid justifyContent='flex-end' alignItems='center' style={{ display: 'flex' }}>
         <TextField value={searchId} onChange={(e) => { setsearchId(e.target.value) }} size={'small'} variant="outlined" placeholder="Search by Name" InputProps={{ startAdornment: <SearchIcon /> }} />
         <Button disabled={(searchId.length === 0)} onClick={() => { search() }} variant="contained" >Search</Button>
       </Grid>
       <Grid item container style={{ marginBottom: 30 }}>
-        <Table columns={columns} rows={rows} />
+        <Table columns={columns} rows={rows} sortModel={[{ field: 'name', sort: 'asc' }]} />
       </Grid>
       <OrganizationChart
         key={key}
@@ -228,7 +309,7 @@ const ComingSoon: PageNext = () => {
 
       <GeneralModal onClose={() => { setshowModal(false) }} open={showModal} showClose={true}>
         <div style={{ marginTop: 50 }}>
-          <h1 style={{ marginBottom: 20 }}>Holding Tank Placement</h1>
+          <h1 style={{ marginBottom: 20 }}>AFFILIATE Holding Tank Placement</h1>
           <FormControl fullWidth>
             <InputLabel id="demo-simple-select-label">User</InputLabel>
             <Select
@@ -254,6 +335,15 @@ const ComingSoon: PageNext = () => {
             <Button onClick={() => { setHoldingTankUser() }} disabled={!selectedHoldingTank} variant="contained" color="primary" style={{ marginTop: 20 }}>Place</Button>
           </FormControl>
 
+        </div>
+      </GeneralModal>
+
+      <GeneralModal onClose={() => { setshowModalCustomer(false) }} open={showModalCustomer} showClose={true}>
+        <div style={{ marginTop: 50 }}>
+          <h1 style={{ marginBottom: 20 }}>Customer Holding Tank Placement</h1>
+          <Grid item container style={{ marginBottom: 30 }}>
+            <Table columns={columnsCustomer} rows={holdingTankCustomer} sortModel={[{ field: 'placed', sort: 'asc' }]} />
+          </Grid>
         </div>
       </GeneralModal>
     </>
