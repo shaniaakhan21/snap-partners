@@ -112,7 +112,7 @@ export default function WeeklyBinary (...restProps: any[]) {
             </div>
           </div>
           <div className="flex flex-col w-2/5 items-center pl-2 pt-3">
-            <PVProgress color="#FFBE9D" transformStyle="rotate(120deg)" data={rData} />
+            {/* <PVProgress color="#FFBE9D" transformStyle="rotate(120deg)" data={rData} /> */}
             {rData.map((item) => (
               <h1 className="text-md text-center pt-2">{item.rtNumber}% to Diamond</h1>
             ))}
