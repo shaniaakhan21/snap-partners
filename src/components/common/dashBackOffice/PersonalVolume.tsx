@@ -25,7 +25,7 @@ export default function PVComponent () {
   return (
     <>
       <div className="w-full max-w-full p-4 space-y-2 h-fit bg-white rounded-xl">
-        <h1 className="text-lg text-gray-800 font-semibold ">Personale Volume (pv)</h1>
+        <h1 className="text-lg text-gray-800 font-semibold ">Personal Volume (pv)</h1>
         <div className="p-0 flex flex-row items-start">
           <div className="flex flex-col items-center w-1/2 h-3/5">
             <div>
