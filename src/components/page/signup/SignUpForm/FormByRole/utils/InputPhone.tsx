@@ -1,5 +1,6 @@
 import { FieldErrors, UseFormRegister, Controller } from 'react-hook-form'
 import PhoneInput from 'react-phone-input-2'
+import { useTranslation } from "next-i18next";
 
 interface IInputFormProps {
   register?: UseFormRegister<any>
@@ -13,6 +14,8 @@ interface IInputFormProps {
 }
 
 export const InputPhone = ({ errors, register, classes, isRequired, withVerifyCode, label, control }: IInputFormProps) => {
+  const { t } = useTranslation()
+
   return (
     <div className='flex flex-col justify-start items-start gap-x-2 my-2'>
       <div className='flex gap-x-2 justify-start items-center w-full'>
@@ -24,7 +27,7 @@ export const InputPhone = ({ errors, register, classes, isRequired, withVerifyCo
           }
         </label>
         {
-          withVerifyCode && <span className='text-xs text-gray-600 font-normal'>(Verified with SMS code)</span>
+          withVerifyCode && <span className='text-xs text-gray-600 font-normal'>{t('auth:signup.form.phone.verify')}</span>
         }
       </div>
 

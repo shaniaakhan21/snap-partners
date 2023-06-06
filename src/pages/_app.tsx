@@ -22,6 +22,7 @@ import 'react-phone-input-2/lib/style.css'
 import 'tippy.js/dist/tippy.css'
 import 'styles/tailwind.css'
 import { APP_INFO } from '../config/appInfo'
+import { appWithTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
 
@@ -122,4 +123,4 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
   )
 }
 
-export default MyApp
+export default appWithTranslation(MyApp)

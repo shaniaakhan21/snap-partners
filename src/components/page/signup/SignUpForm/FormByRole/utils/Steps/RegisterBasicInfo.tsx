@@ -18,6 +18,7 @@ import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 import { GTMTrack } from 'lib/utils/gtm'
 import { useRouter } from 'next/router'
 import { ROLES } from './../../../../../../../config/roles'
+import { useTranslation } from "next-i18next";
 
 interface IStepOpeProps {
   referralLink: IReferralLink,
@@ -32,6 +33,7 @@ const capitalizeFirstLetter = (string) => {
 }
 
 export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: IStepOpeProps) => {
+  const { t } = useTranslation()
   const { handleSubmit, register, reset, formState: { errors }, setError, control } = useForm<IDataForm>()
   const [isLoading, setLoading] = useState(false)
   const role = useRoleFromUrl()
@@ -41,34 +43,34 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
 
     if (dataForm.confirmEmail !== dataForm.email) {
       setLoading(false)
-      setError('confirmEmail', { message: 'The email does not match' })
+      setError('confirmEmail', { message: t('auth:signup.error.email-not-match') })
 
       if (dataForm.confirmPassword !== dataForm.password) {
-        return setError('confirmPassword', { message: 'The password does not match' })
+        return setError('confirmPassword', { message: t('auth:signup.error.email-not-match') })
       }
 
       return
     }
 
     if (dataForm.confirmPassword !== dataForm.password) {
-      setError('confirmPassword', { message: 'The password does not match' })
+      setError('confirmPassword', { message: t('auth:signup.error.email-not-match') })
       setLoading(false)
 
       if (dataForm.confirmEmail !== dataForm.email) {
-        return setError('confirmEmail', { message: 'The email does not match' })
+        return setError('confirmEmail', { message: t('auth:signup.error.email-not-match') })
       }
 
       return
     }
 
     if (dataForm.idImage && dataForm.idImage[0].size > (maxFileSizeInMb * 1000000)) {
-      setError('idImage', { message: `The maximum file size in ID Image is ${maxFileSizeInMb}mb, please upload a file with a maximum file size of ${maxFileSizeInMb}mb` })
+      setError('idImage', { message: t('auth:signup.error.file-size-id', { maxFileSizeInMb }) })
       setLoading(false)
       return
     }
 
     if (dataForm.insuranceImage && dataForm.insuranceImage[0].size > (maxFileSizeInMb * 1000000)) {
-      setError('insuranceImage', { message: `The maximum file size in Insurance Image is ${maxFileSizeInMb}mb, please upload a file with a maximum file size of ${maxFileSizeInMb}mb` })
+      setError('insuranceImage', { message: t('auth:signup.error.file-size-insurance', { maxFileSizeInMb }) })
       setLoading(false)
       return
     }
@@ -119,10 +121,10 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
     )
   }
 
-  let signUpas = 'Sign up as a'
+  let signUpas = t('auth:signup.signup-as-a')
 
   if (referralLink.role === 'AGENT') {
-    signUpas = 'Sign up as an'
+    signUpas = t('auth:signup.signup-as-an')
   }
 
   const router = useRouter()
@@ -133,16 +135,16 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       <p className='font-bold text-4xl text-[#18203F]'>{signUpas}{' '}
         <span className='text-primary-500'>{capitalizeFirstLetter(referralLink.role)}</span>
       </p>
-      <p className='text-gray-500'>Welcome! register to continue.</p>
+      <p className='text-gray-500'>{t('auth:signup.form.welcome')}</p>
 
       <form className='mt-6 w-full' onSubmit={handleSubmit(onSubmit)}>
         <InputForm
           id='email'
           name='email'
           type='email'
-          label='Email'
+          label={t('auth:signup.form.email.label')}
           registerId='email'
-          placeholder='Enter Email'
+          placeholder={t('auth:signup.form.email.placeholder')}
           autoComplete='email'
           errors={errors.email}
           register={register}
@@ -154,9 +156,9 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           id='confirmEmail'
           name='confirmEmail'
           type='email'
-          label='Confirm Email'
+          label={t('auth:signup.form.confirm-email.label')}
           registerId='confirmEmail'
-          placeholder='Confirm Email'
+          placeholder={t('auth:signup.form.confirm-email.placeholder')}
           autoComplete='email'
           errors={errors.confirmEmail}
           register={register}
@@ -168,9 +170,9 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           id='username'
           name='username'
           type='text'
-          label='Username'
+          label={t('auth:signup.form.username.label')}
           registerId='username'
-          placeholder='Enter Username'
+          placeholder={t('auth:signup.form.username.placeholder')}
           errors={errors.username}
           register={register}
           rulesForm={registerRulesConfig.username}
@@ -181,9 +183,9 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           id='name'
           name='name'
           type='text'
-          label={'First Name'}
+          label={t('auth:signup.form.first-name.label')}
           registerId='name'
-          placeholder='Enter Name'
+          placeholder={t('auth:signup.form.first-name.placeholder')}
           errors={errors.name}
           register={register}
           rulesForm={registerRulesConfig.name}
@@ -194,9 +196,9 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           id='lastname'
           name='lastname'
           type='text'
-          label='Last Name'
+          label={t('auth:signup.form.last-name.label')}
           registerId='lastname'
-          placeholder='Enter Lastname'
+          placeholder={t('auth:signup.form.last-name.placeholder')}
           errors={errors.lastname}
           register={register}
           rulesForm={registerRulesConfig.lastname}
@@ -207,9 +209,9 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           id='businessName'
           name='businessName'
           type='text'
-          label='Business Name (Optional)'
+          label={t('auth:signup.form.business-name.label')}
           registerId='businessName'
-          placeholder='Enter Business Name'
+          placeholder={t('auth:signup.form.business-name.placeholder')}
           errors={errors.businessName}
           register={register}
           rulesForm={registerRulesConfig.businessName}
@@ -217,7 +219,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
         />
 
         <InputPhone
-          label={'Phone'}
+          label={t('auth:signup.form.phone.label')}
           isRequired
           register={register}
           errors={errors}
@@ -236,9 +238,9 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           id='referralCode'
           name='referralCode'
           type='text'
-          label='Referral Code'
+          label={t('auth:signup.form.referralCode.label')}
           registerId='referralCode'
-          placeholder='Referral Code'
+          placeholder={t('auth:signup.form.referralCode.placeholder')}
           defaultValue={referralLink.code}
           errors={errors.referralCode}
           register={register}
@@ -278,13 +280,14 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           <BulletPagination stepToActivate='REGISTER_BASIC_INFO' />
 
           <Button type='submit' classes='w-full mt-4 text-sm bg-primary-500'>
-            Sign Up
+            {t('auth:signup.form.submit')}
           </Button>
 
           <p className='mt-4'>
-            <span className='font-semibold'>Already have an account?</span>
+            <span className='font-semibold'>{t('auth:signup.already-have-an-account')}</span>
+            {' '}
             <Link href={loginURL}>
-              <a className='text-textAcent-500 focus:underline'> Login.</a>
+              <a className='text-textAcent-500 focus:underline'>{t('auth:signup.login')}</a>
             </Link>
           </p>
         </section>

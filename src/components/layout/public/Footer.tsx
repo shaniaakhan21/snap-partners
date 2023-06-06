@@ -5,22 +5,24 @@ import { ROLES } from 'config/roles'
 import { GTMTrack } from 'lib/utils/gtm'
 import Link from 'next/link'
 import { useRef } from 'react'
+import { useTranslation } from "next-i18next";
 
 const { RRSS, LEGAL } = APP_INFO
 
 export const FooterPublic = () => {
+  const { t } = useTranslation()
   const { current: socialLinks } = useRef([
     { to: RRSS.FACEBOOK.link, icon: <FooterFacebook />, label: 'facebook' },
     { to: RRSS.YOUTUBE.link, icon: <FooterYoutube />, label: 'youtube' }
   ])
 
   const { current: joinUsLinks } = useRef([
-    { to: 'https://opportunity.snapdelivered.com/#about', label: 'About us' },
-    { to: `/auth/signup?role=${ROLES.DRIVER}`, label: 'Become a Driver' },
-    { to: `/auth/signup?role=${ROLES.MERCHANT}`, label: 'Become a Merchant Partner' },
-    { to: `/auth/signup?role=${ROLES.CUSTOMER}`, label: 'Become a Customer' },
-    { to: 'https://opportunity.snapdelivered.com/#contact', label: 'Careers' },
-    { to: 'https://store.snapdelivered.com/', label: 'Merch Store' }
+    { to: 'https://opportunity.snapdelivered.com/#about', label: t('footer:join.about-us') },
+    { to: `/auth/signup?role=${ROLES.DRIVER}`, label: t('footer:join.become-a-driver') },
+    { to: `/auth/signup?role=${ROLES.MERCHANT}`, label: t('footer:join.become-a-merchant') },
+    { to: `/auth/signup?role=${ROLES.CUSTOMER}`, label: t('footer:join.become-a-customer') },
+    { to: 'https://opportunity.snapdelivered.com/#contact', label: t('footer:join.careers') },
+    { to: 'https://store.snapdelivered.com/', label: t('footer:join.merch-store') }
   ])
 
   // const { current: helpLinks } = useRef([
@@ -65,7 +67,7 @@ export const FooterPublic = () => {
 
         <div className='flex flex-col lg:flex-row justify-end items-start gap-x-28 gap-y-10 mt-10 lg:mt-0'>
           <section className='text-left lg:text-right'>
-            <span className='text-2xl font-semibold'>Join Us</span>
+            <span className='text-2xl font-semibold'>{t('footer:join-us')}</span>
 
             <ul className='mt-2 text-gray-300'>
               {joinUsLinks.map(joinUsLink => (
@@ -98,7 +100,7 @@ export const FooterPublic = () => {
           </section> */}
 
           <section className='text-left lg:text-right'>
-            <span className='text-2xl font-semibold'>Download our app </span>
+            <span className='text-2xl font-semibold'>{t('footer:download-our-app')}</span>
 
             <ul className='mt-2 text-gray-300 flex justfiy-start lg:justify-end items-start gap-x-4'>
               {Apps.map(app => (

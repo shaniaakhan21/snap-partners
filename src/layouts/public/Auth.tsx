@@ -4,8 +4,10 @@ import { useEffect } from 'react'
 import { FooterPublic } from 'components/layout/public/Footer'
 import { useHandlerReferralLink } from '../../lib/hooks/useHandlerReferralLink'
 import { ROLES } from '../../config/roles'
+import { useTranslation } from "next-i18next";
 
 export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Page
+  const { t } = useTranslation()
   const { referralCode: code, role } = useHandlerReferralLink()
   const router = useRouter()
   const { auth } = useAuthStore()
@@ -16,22 +18,22 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
 
   const isSignupIntegrous = router.pathname === '/auth/signup-integrous'
   const isLoginIntegrous = router.pathname === '/auth/login-integrous'
-  let t1 = 'Snap Delivered'
-  let t2 = 'Order-Eat-Repeat'
+  let t1 = t('auth:title-default.t1')
+  let t2 = t('auth:title-default.t2')
 
   if (role === ROLES.AGENT) {
-    t1 = 'Snap Financial'
-    t2 = 'Employee Retention Credit Program'
+    t1 = t('auth:title-agent.t1')
+    t2 = t('auth:title-agent.t2')
   }
 
   if (isLoginIntegrous) {
-    t1 = 'Snap Partners'
-    t2 = 'FREE Business Log In'
+    t1 = t('auth:title-login-integrous.t1')
+    t2 = t('auth:title-login-integrous.t2')
   }
 
   if (isSignupIntegrous && (ROLES.integrousCustomer || ROLES.integrousAssociate)) {
-    t1 = 'Snap Partners'
-    t2 = 'FREE Business Sign Up'
+    t1 = t('auth:title-register-integrous.t1')
+    t2 = t('auth:title-register-integrous.t2')
   }
 
   return (
@@ -54,16 +56,16 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
                     <img className='py-[3%] px-[5%]' src='/static/logo-integrous.png'/>
                   </div>
                   <div>
-                    <h3 className='text-md font-bold mt-1 uppercase'>Partnered with Integrous Wellness</h3>
+                    <h3 className='text-md font-bold mt-1 uppercase'>{t('auth:integrous-subtitle')}</h3>
                   </div>
                 </div>
               )}
 
               <ul className='list-disc pl-6 mt-20 text-xl 2xl:text-2xl space-y-4'>
-                <li>Get notified about company updates</li>
-                <li>Access to company training</li>
-                <li>Get synced</li>
-                <li>Track your team</li>
+                <li>{t('auth:list-1')}</li>
+                <li>{t('auth:list-2')}</li>
+                <li>{t('auth:list-3')}</li>
+                <li>{t('auth:list-4')}</li>
               </ul>
 
               <div className='absolute bottom-10 left-12 flex items-center gap-x-4'>
