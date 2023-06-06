@@ -20,11 +20,11 @@ const TotalLeg = () => {
     <>
       <div className="flex flex-wrap">
         <div className="w-full lg:w-1/3 lg:m-0 p-1">
-          <MonthlyCustomerTracking/>
-          {/* <PVComponent/>
-          <MonthlyMilestones/> */}
+          <PVComponent/>
+          {/* <MonthlyMilestones/> */}
         </div>
         <div className="w-full lg:w-1/3 lg:m-0 p-1">
+          <MonthlyCustomerTracking/>
           {/* <WeeklyBinary/>
           <RankTracker/> */}
         </div>

@@ -1,18 +1,25 @@
 import { useState, useEffect } from 'react'
 import { PVProgress } from './CustomCircularProgress'
-import { pvData } from './MockMilestones'
+import { useAuthStore } from 'lib/stores'
 
-interface PvInterface {
-  pvPercentage: number;
-  pvNumber: string;
+export interface PersonalVolumeInfo {
+  pvValue: number,
+  pvPercentage: number
 }
 
 export default function PVComponent () {
-  const [data, setData] = useState<PvInterface[]>([])
+  const { auth } = useAuthStore()
+  const [data, setData] = useState<PersonalVolumeInfo>()
 
   useEffect(() => {
-    const details = pvData
-    setData(details)
+    fetch('/api/ibo/personal/pvInfo', {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${auth.accessToken}` }
+    }).then((response) => {
+      response.json().then((data) => {
+        setData(data.data)
+      })
+    })
   }, [])
 
   return (
@@ -25,15 +32,13 @@ export default function PVComponent () {
               <p className="text-xs text-textAcent-500">View Order History</p>
             </div>
             <div className="ml-0">
-              <PVProgress color="#82B254" transformStyle="rotate(120deg)" data={data} />
+              <PVProgress color="#82B254" transformStyle="rotate(120deg)" percentage={data?.pvPercentage} />
             </div>
           </div>
           <div className="flex flex-col items-center w-1/2 items-center">
-            {data.map((item) => (
-              <div key={item.pvNumber}>
-                <p className="text-3xl text-gray-800 font-bold p-2">{item.pvNumber}</p>
-              </div>
-            ))}
+            <div>
+              <p className="text-3xl text-gray-800 font-bold p-2">{data?.pvValue}</p>
+            </div>
             <div>
               <p className="text-xs text-gray-800 pb-6">Active= 100pv/month</p>
             </div>
