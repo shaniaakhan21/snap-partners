@@ -12,6 +12,7 @@ import { InputForm } from './utils/Input'
 import { RegisterPassword } from './utils/RegisterPassword'
 import { useRouter } from 'next/router'
 import { getLocalStorage, removeLocalStorage } from 'lib/utils/localStorage'
+import { useTranslation } from "next-i18next";
 export interface IDataForm {
   email: string
   password: string
@@ -23,6 +24,7 @@ interface IProps {
 }
 
 export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
+  const { t } = useTranslation()
   const { setAuth } = useAuthStore()
   const [isLoading, setLoading] = useState(false)
   const { handleSubmit, register, reset, formState: { errors } } = useForm<IDataForm>()
@@ -139,15 +141,15 @@ export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
 
         <section className='mt-4 text-center sm:text-left'>
           <Button type='submit' classes='w-full mr-1 text-sm bg-primary-500'>
-            Login
+            {t('auth:login')}
           </Button>
 
           <br /><br />
 
           <p>
-            <span className='font-semibold'>Don’t have an account?</span>
+            <span className='font-semibold'>{t('auth:dont-have-an-account')}</span>
             <Link href={signupURL}>
-              <a className='text-textAcent-500'> Sign Up.</a>
+              <a className='text-textAcent-500'>{t('auth:dont-have-an-account-sign-up')}</a>
             </Link>
           </p>
         </section>

@@ -11,8 +11,10 @@ import { IReferralLink } from 'lib/types'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 import { GTMTrack } from 'lib/utils/gtm'
+import { Trans, useTranslation } from "next-i18next";
 
 export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { userTrack: IUserTrack, handleStep: IHandleStep, referralLink: IReferralLink }) => {
+  const { t } = useTranslation()
   const router = useRouter()
   const role = useRoleFromUrl()
   const { auth, setAuth } = useAuthStore()
@@ -39,7 +41,7 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
       return
     }
 
-    toast('Login Successful!', { type: 'success' })
+    toast(t('auth:signup.success.toast'), { type: 'success' })
     setIsLoading(false)
     setAuth({
       socialSecurityNumber: data.socialSecurityNumber,
@@ -110,22 +112,24 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
       </figure>
 
       <div className='mt-10'>
-        <span className='text-4xl font-bold text-primary-500'>Upgrade to <br /> Manager Account</span>
+        <span className='text-4xl font-bold text-primary-500'>
+          <Trans i18nKey="auth:signup.upgradeToManager.title" components={{ br: <br /> }} />
+        </span>
       </div>
 
       <ul className='mt-5 list-disc custom__bulletList text-left self-start text-gray-400 px-5'>
-        <li>Earn beyond just the personal referrals.</li>
-        <li>Managers earn 10% on all Level 1 referrals</li>
-        <li>Multiply your profits!</li>
+        <li>{t('auth:signup.upgradeToManager.list-1')}</li>
+        <li>{t('auth:signup.upgradeToManager.list-2')}</li>
+        <li>{t('auth:signup.upgradeToManager.list-3')}</li>
       </ul>
 
       <div className='w-full mt-10'>
         <Button classes='w-full ' onClick={handleUpgradeToManage}>
-          Continue
+          {t('auth:signup.upgradeToManager.continue')}
         </Button>
 
         <p className='mt-2'>
-          Do it later in{' '}
+          {t('auth:signup.upgradeToManager.do_it_later')}{' '}
           <button onClick={handleSkip} className='text-primary-500 cursor-pointer focus:underline'>Profile</button>
         </p>
       </div>

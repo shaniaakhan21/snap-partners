@@ -20,10 +20,13 @@ import { getLocalStorage, setLocalStorage } from 'lib/utils/localStorage'
 import axios from 'axios'
 import Referrals from 'components/common/overview/Referrals'
 import { useAuthStore } from 'lib/stores'
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const { SEO } = APP_INFO
 
 const DashboardOverViewPage: Page = () => {
+  const { t } = useTranslation()
   // const { loading } = useReports()
   const [rankData, setRankData] = useState<RankData>(null)
   const store = useAuthStore()
@@ -50,13 +53,13 @@ const DashboardOverViewPage: Page = () => {
   if (isIntegrous && currentOverview === '') {
     return (
       <>
-        <h1 style={{ fontSize: 30 }}>Referral link to sign up IBO's (Affiliates) & Customers</h1>
+        <h1 style={{ fontSize: 30 }}>{t('overview:integrous.title')}</h1>
         <a target='_blank' href={`https://www.integrouswellness.com/${auth.referralCode}`} style={{ fontSize: 30, textDecoration: 'underline' }}>https://www.integrouswellness.com/{auth.referralCode}</a>
         <br></br>
         <br></br>
-        <h1 style={{ fontSize: 60 }}>WE'RE OPEN</h1>
+        <h1 style={{ fontSize: 60 }}>{t('overview:integrous.title-2')}</h1>
         <br></br>
-        <h1 style={{ fontSize: 30 }}>Log back in every day to see us roll out your new dashboard widgets</h1>
+        <h1 style={{ fontSize: 30 }}>{t('overview:integrous.subtitle')}</h1>
       </>
     )
   }
@@ -110,5 +113,13 @@ DashboardOverViewPage.getLayout = (page: ReactNode) => (
     {page}
   </DashboardLayout>
 )
+
+export async function getStaticProps ({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['footer', 'common', 'overview']))
+    }
+  }
+}
 
 export default DashboardOverViewPage

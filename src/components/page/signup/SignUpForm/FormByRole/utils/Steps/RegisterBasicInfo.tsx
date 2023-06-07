@@ -46,14 +46,14 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       setError('confirmEmail', { message: t('auth:signup.error.email-not-match') })
 
       if (dataForm.confirmPassword !== dataForm.password) {
-        return setError('confirmPassword', { message: t('auth:signup.error.email-not-match') })
+        return setError('confirmPassword', { message: t('auth:signup.error.password-not-match') })
       }
 
       return
     }
 
     if (dataForm.confirmPassword !== dataForm.password) {
-      setError('confirmPassword', { message: t('auth:signup.error.email-not-match') })
+      setError('confirmPassword', { message: t('auth:signup.error.password-not-match') })
       setLoading(false)
 
       if (dataForm.confirmEmail !== dataForm.email) {

@@ -5,6 +5,7 @@ import type { Page } from 'lib/types'
 
 import { AuthPagesLayout } from 'layouts/public/Auth'
 import { LoginForm } from 'components/page/login/LoginForm'
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const { SEO } = APP_INFO
 
@@ -19,5 +20,13 @@ LoginPage.getLayout = (page) => (
     {page}
   </AuthPagesLayout>
 )
+
+export async function getStaticProps ({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['auth', 'footer', 'common']))
+    }
+  }
+}
 
 export default LoginPage

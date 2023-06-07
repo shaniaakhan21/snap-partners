@@ -14,10 +14,13 @@ import type { Page } from 'lib/types'
 import { FooterPublic } from 'components/layout/public/Footer'
 import { ContentMobile } from 'components/page/home/ContentMobile'
 import { ContentDesktop } from 'components/page/home/ContentDesktop'
+import { useTranslation } from "next-i18next";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const { SEO } = APP_INFO
 
 const HomePage: Page = () => {
+  const { t } = useTranslation()
   const { auth, setAuth } = useAuthStore()
   const router = useRouter()
 
@@ -40,7 +43,7 @@ const HomePage: Page = () => {
           return
         }
 
-        toast('Session recovered!', { type: 'success' })
+        toast(t('common:sessionRecovered'), { type: 'success' })
         setAuth({
           socialSecurityNumber: data.socialSecurityNumber,
           email: data.email,
@@ -129,16 +132,13 @@ const HomePage: Page = () => {
 
           <div className='absolute w-full h-full top-0 right-0 z-10 px-4 pb-8 md:px-12'>
             <div className='mt-24'>
-              <h1 className='text-5xl font-bold 2xl:text-7xl'>Snap Delivered</h1>
-              <p className='text-3xl font-bold mt-1'>Order-Eat-Repeat</p>
+              <h1 className='text-5xl font-bold 2xl:text-7xl'>{t('homepage:title')}</h1>
+              <p className='text-3xl font-bold mt-1'>{t('homepage:subtitle')}</p>
               <br />
             </div>
 
             <ul className='list-disc pl-6 mt-20 text-xl space-y-4'>
-              <li>Get notified about company updates</li>
-              <li>Access to company training</li>
-              <li>Get synced</li>
-              <li>Track your team</li>
+              {[0, 1, 2, 3].map(k => <li key={k}>{t(`homepage:list[${k}]`)}</li>)}
             </ul>
 
             <div className='absolute bottom-10 left-12 flex items-center gap-x-4'>
@@ -165,5 +165,13 @@ HomePage.getLayout = (page) => (
     <FooterPublic />
   </>
 )
+
+export async function getStaticProps ({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['footer', 'common', 'homepage']))
+    }
+  }
+}
 
 export default HomePage
