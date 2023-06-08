@@ -21,19 +21,20 @@ const TotalLeg = () => {
       <div className="flex flex-wrap">
         <div className="w-full lg:w-1/3 lg:m-0 p-1">
           <PVComponent/>
-          <MonthlyMilestones/>
-        </div>
-        <div className="w-full lg:w-1/3 lg:m-0 p-1">
-          <WeeklyBinary/>
-          <RankTracker/>
+          {/* <MonthlyMilestones/> */}
         </div>
         <div className="w-full lg:w-1/3 lg:m-0 p-1">
           <MonthlyCustomerTracking/>
-          <CustomerGlobalPool/>
+          {/* <WeeklyBinary/>
+          <RankTracker/> */}
+        </div>
+        <div className="w-full lg:w-1/3 lg:m-0 p-1">
+          {/* <MonthlyCustomerTracking/> */}
+          {/* <CustomerGlobalPool/>
           <button className="rounded-full bg-primary-500 w-full max-w-3xl flex flex-row items-center justify-center mt-4">
             <p className='text-xs text-white font-medium p-2 uppercase'>Visit Snap Services Dashboard</p>
             <ArrowForwardIcon className={classes.customIcon} />
-          </button>
+          </button> */}
         </div>
       </div>
     </>

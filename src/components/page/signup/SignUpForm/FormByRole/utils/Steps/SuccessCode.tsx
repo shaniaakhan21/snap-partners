@@ -115,7 +115,7 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
       <span className='text-4xl font-bold text-primary-500'>Registration Done!</span>
       <CheckSuccess classes='my-10' />
 
-      {ROLES.integrousAssociate
+      {userTrack.userInfo.roles.integrousAssociate
         ? (<>
           <span className='text-xl text-primary-500'>Select your welcome pack!</span>
           <Card

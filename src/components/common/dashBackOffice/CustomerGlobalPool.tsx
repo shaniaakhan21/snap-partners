@@ -25,7 +25,7 @@ export default function CustomerGlobalPool () {
         <h1 className="text-lg text-gray-800 font-semibold">Customer Global Pool</h1>
         <div className="flex flex-row w-full items-center">
           <div className="flex flex-col items-center items-center w-1/2">
-            <PVProgress color="#FFBE9D" transformStyle="rotate(120deg)" data={data} />
+            {/* <PVProgress color="#FFBE9D" transformStyle="rotate(120deg)" data={data} /> */}
           </div>
           <div className="flex flex-col items-center w-1/2 items-center ">
             {poolData.map(item => (
