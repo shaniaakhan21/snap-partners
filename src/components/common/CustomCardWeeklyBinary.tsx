@@ -5,9 +5,9 @@ import { Fragment } from 'react'
 
 interface OutlinedCardProps {
   legName: string;
-  legCVvalue: string;
-  rollovervalue: string;
-  totalValue: string;
+  legCVvalue: number;
+  rollovervalue: number;
+  totalValue: number;
 }
 
 const OutlinedCard = ({
@@ -27,7 +27,7 @@ const OutlinedCard = ({
             LEG CV
           </p>
           <p className='text-sm'>
-            {legCVvalue}
+            {legCVvalue} CV
           </p>
         </div>
         <div className='p-1'>
@@ -35,7 +35,7 @@ const OutlinedCard = ({
             ROLLOVER
           </p>
           <p className='text-sm'>
-            {rollovervalue}
+            {rollovervalue} CV
           </p>
         </div>
         <div className='p-1'>
@@ -43,7 +43,7 @@ const OutlinedCard = ({
             TOTAL
           </p>
           <p className='text-sm'>
-            {totalValue}
+            {totalValue} CV
           </p>
         </div>
       </CardContent>

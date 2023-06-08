@@ -105,7 +105,7 @@ export default function WeeklyBinary (...restProps: any[]) {
                 legValuesData && <div className="flex flex-col w-full">
                   {
                     legValuesData.map(leg =>
-                      <TotalLeg legValue={leg.legValue} legVLabel={leg.legVLabel} />)
+                      <TotalLeg legValue={0} legVLabel={leg.legVLabel} />) // this component is not active yet
                   }
                 </div>
               }

@@ -1,31 +1,42 @@
 import CustomCardWeeklyBinary from '../CustomCardWeeklyBinary'
-import { legValues, legTable, priceValue } from './MockMilestones'
-import { useState, useEffect } from 'react'
+import { useAuthStore } from 'lib/stores'
+import { useEffect, useState } from 'react'
 import TotalLeg from './TotalLegComp'
 
-interface WbLegInterface {
-  legValue: string
-  legVLabel: string
-}
-
-interface WbLegtableInterface {
-  legName: string
-  legCVvalue: string
-}
-
-interface WbpriceInterface {
-  price:number
+interface WeeklyBinaryData {
+  leftLeg: {
+      legVal: number,
+      rollOver: number,
+      total: number
+  },
+  rightLeg: {
+      legVal: number,
+      rollOver: number,
+      total: number
+  },
+  cycles: number,
+  leftLegUsableVol: {
+      value: number
+  },
+  rightLegUsableVol: {
+      value: number
+  },
+  amount: number
 }
 
 export default function WeeklyBinary () {
-  const [legValuesData, setLegValuesData] = useState<WbLegInterface[]>([])
-  const [legTableData, setLegTableData] = useState<WbLegtableInterface[]>([])
-  const [priceData, setPriceData] = useState<WbpriceInterface[]>([])
+  const { auth } = useAuthStore()
+  const [data, setData] = useState<WeeklyBinaryData>()
 
   useEffect(() => {
-    setLegValuesData(legValues as unknown as WbLegInterface[])
-    setLegTableData(legTable as unknown as WbLegtableInterface[])
-    setPriceData(priceValue as unknown as WbpriceInterface[])
+    fetch('/api/ibo/personal/weeklyBinary', {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${auth.accessToken}` }
+    }).then((response) => {
+      response.json().then((data) => {
+        setData(data.data)
+      })
+    })
   }, [])
 
   return (
@@ -40,32 +51,21 @@ export default function WeeklyBinary () {
           </div>
         </div>
         {
-          legTableData && <div className="flex flex-row">
-            {legTable.map(item =>
-              <CustomCardWeeklyBinary legName={item.legName} legCVvalue={item.legCVvalue} rollovervalue={item.rollovervalue} totalValue={item.totalValue} />
-            )}
+          <div className="flex flex-row">
+            <CustomCardWeeklyBinary legName={'LEFT LEG'} legCVvalue={data?.leftLeg?.legVal} rollovervalue={data?.leftLeg?.rollOver} totalValue={data?.leftLeg?.total} />
+            <CustomCardWeeklyBinary legName={'RIGHT LEG'} legCVvalue={data?.rightLeg?.legVal} rollovervalue={data?.rightLeg?.rollOver} totalValue={data?.rightLeg?.total} />
           </div>
         }
         <div>
-          <h1 className="text-base text-gray-800 font-medium text-center">In 8 Cycles</h1>
+          <h1 className="text-base text-gray-800 font-medium text-center">{data?.cycles} Current Cycles</h1>
           <div className="flex flex-row align-start w-full p-1">
-            {
-              legValuesData && <div className="flex flex-col w-1/2">
-                {
-                  legValuesData.map(leg =>
-                    <TotalLeg legValue={leg.legValue} legVLabel={leg.legVLabel} />)
-                }
-              </div>
-            }
-
-            {
-              priceData && <div className='w-1/2 pt-4'>
-                {
-                  priceData.map(leg =>
-                    <p className="text-3xl text-black-800 font-bold p-2">$ {leg.price}</p>)
-                }
-              </div>
-            }
+            <div className="flex flex-col w-2/3">
+              <TotalLeg legValue={data?.leftLegUsableVol?.value} legVLabel={'LEFT LEG Usable Volume'} />
+              <TotalLeg legValue={data?.rightLegUsableVol?.value} legVLabel={'RIGHT LEG Usable Volume'} />
+            </div>
+            <div className='w-1/2 pt-4'>
+              <p className="text-3xl text-black-800 font-bold p-2">$ {data?.amount}</p>
+            </div>
           </div>
         </div>
       </div>
