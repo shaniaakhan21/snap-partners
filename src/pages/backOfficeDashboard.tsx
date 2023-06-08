@@ -25,7 +25,7 @@ const TotalLeg = () => {
           <PVComponent/>
           {/* <MonthlyMilestones/> */}
         </div>
-        {auth.id === 11462407 && (
+        {auth && auth.id === 11462407 && (
           <div className="w-full lg:w-1/3 lg:m-0 p-1">
             <WeeklyBinary/>
             {/*
