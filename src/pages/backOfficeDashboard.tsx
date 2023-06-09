@@ -7,6 +7,12 @@ import { makeStyles } from '@material-ui/core/styles'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import PVComponent from 'components/common/dashBackOffice/PersonalVolume'
 import { useAuthStore } from 'lib/stores'
+import { useEffect, useState } from 'react'
+
+export interface PersonalVolumeInfo {
+  pvValue: number,
+  pvPercentage: number
+}
 
 const useStyles = makeStyles({
   customIcon: {
@@ -18,18 +24,30 @@ const useStyles = makeStyles({
 const TotalLeg = () => {
   const { auth } = useAuthStore()
   const classes = useStyles()
+  const [personalVolData, setPersonalVolData] = useState<PersonalVolumeInfo>()
+
+  useEffect(() => {
+    fetch('/api/ibo/personal/pvInfo', {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${auth.accessToken}` }
+    }).then((response) => {
+      response.json().then((data) => {
+        setPersonalVolData(data.data)
+      })
+    })
+  }, [])
   return (
     <>
       <div className="flex flex-wrap">
         <div className="w-full lg:w-1/3 lg:m-0 p-1">
-          <PVComponent/>
-          {/* <MonthlyMilestones/> */}
+          <PVComponent data={personalVolData}/>
+          <MonthlyMilestones data={personalVolData}/>
         </div>
         <div className="w-full lg:w-1/3 lg:m-0 p-1">
-            <WeeklyBinary/>
-            {/*
+          <WeeklyBinary/>
+          {/*
           <RankTracker/> */}
-          </div>
+        </div>
         <div className="w-full lg:w-1/3 lg:m-0 p-1">
           <MonthlyCustomerTracking/>
           {/* <CustomerGlobalPool/>

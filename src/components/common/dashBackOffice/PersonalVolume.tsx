@@ -1,27 +1,7 @@
-import { useState, useEffect } from 'react'
 import { PVProgress } from './CustomCircularProgress'
-import { useAuthStore } from 'lib/stores'
+import { PersonalVolumeInfo } from 'pages/backOfficeDashboard'
 
-export interface PersonalVolumeInfo {
-  pvValue: number,
-  pvPercentage: number
-}
-
-export default function PVComponent () {
-  const { auth } = useAuthStore()
-  const [data, setData] = useState<PersonalVolumeInfo>()
-
-  useEffect(() => {
-    fetch('/api/ibo/personal/pvInfo', {
-      method: 'GET',
-      headers: { Authorization: `Bearer ${auth.accessToken}` }
-    }).then((response) => {
-      response.json().then((data) => {
-        setData(data.data)
-      })
-    })
-  }, [])
-
+export default function PVComponent ({ data }: {data: PersonalVolumeInfo}) {
   return (
     <>
       <div className="w-full max-w-full p-4 space-y-2 h-fit bg-white rounded-xl">
