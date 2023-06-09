@@ -181,7 +181,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           id='name'
           name='name'
           type='text'
-          label={referralLink.role ? `${referralLink.role} First Name` : 'First Name'}
+          label={'First Name'}
           registerId='name'
           placeholder='Enter Name'
           errors={errors.name}
@@ -217,7 +217,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
         />
 
         <InputPhone
-          label={referralLink.role ? `${referralLink.role} Phone` : 'Phone'}
+          label={'Phone'}
           isRequired
           register={register}
           errors={errors}

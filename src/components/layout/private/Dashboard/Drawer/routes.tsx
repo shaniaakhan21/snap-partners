@@ -87,14 +87,14 @@ export const drawerRoutes = [
   {
     icon: <GenealogyIcon />,
     to: '/genealogy',
-    label: 'Genealogy'
+    label: 'Genealogy',
+    integrous: true
   },
   {
     icon: <GenealogyIcon />,
     to: '/tree',
-    label: 'Tree',
-    integrous: true
-   },
+    label: 'Tree'
+  },
    {
     icon: <GenealogyIcon />,
     to: '/binarytree',
