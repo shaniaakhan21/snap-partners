@@ -67,6 +67,11 @@ export default function WeeklyBinary () {
               <p className="text-3xl text-black-800 font-bold p-2">$ {data?.amount}</p>
             </div>
           </div>
+          <div className='flex flex-row justify-center items-center w-full p-1'>
+            <div className='flex flex-col'>
+              <p className="text-black-100 p-2">Settles Every Monday at 12:01AM Pacific</p>
+            </div>
+          </div>
         </div>
       </div>
     </>
