@@ -4,7 +4,9 @@ import { useAuthStore } from 'lib/stores'
 
 export interface PersonalVolumeInfo {
   pvValue: number,
-  pvPercentage: number
+  pvPercentage: number,
+  leftQV: number,
+  rightQV: number
 }
 
 export default function PVComponent () {
@@ -44,6 +46,8 @@ export default function PVComponent () {
             </div>
           </div>
         </div>
+        <h1 className="text-lg text-gray-800 font-semibold text-center">Monthly QV Tracking</h1>
+        <h1 className="text-lg text-gray-800 font-semibold text-center">Left Leg QV:{data?.leftQV} {"---"} Right Leg QV:{data?.rightQV}</h1>
       </div>
     </>
   )
