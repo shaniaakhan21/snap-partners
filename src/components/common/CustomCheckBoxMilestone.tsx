@@ -10,6 +10,7 @@ export const CustomCheckBoxUnCheckedMilestone = ({ label, ...restProps }: Custom
     <div className="flex items-center">
       <Checkbox
         defaultChecked
+        disabled
         {...restProps}
         color="primary"
         checkedIcon={<CrossIcon sx={{ color: 'red' }}/>} // Use the cross icon as the checked icon
@@ -30,6 +31,7 @@ export const CustomCheckBoxCheckedMilestone = ({ label, ...restProps }: CustomCh
   return (
     <div className="flex items-center">
       <Checkbox defaultChecked
+        disabled
         {...restProps} color="primary"
         sx={{
           color: 'rgb(130, 178, 84)',
