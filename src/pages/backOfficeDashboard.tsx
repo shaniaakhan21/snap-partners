@@ -11,7 +11,10 @@ import { useEffect, useState } from 'react'
 
 export interface PersonalVolumeInfo {
   pvValue: number,
-  pvPercentage: number
+  pvPercentage: number,
+  leftQV: number,
+  rightQV: number
+
 }
 
 const useStyles = makeStyles({

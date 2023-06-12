@@ -24,6 +24,8 @@ export default function PVComponent ({ data }: {data: PersonalVolumeInfo}) {
             </div>
           </div>
         </div>
+        <h1 className="text-lg text-gray-800 font-semibold text-center">Monthly QV Tracking</h1>
+        <h1 className="text-lg text-gray-800 font-semibold text-center">Left Leg QV:{data?.leftQV} {"---"} Right Leg QV:{data?.rightQV}</h1>
       </div>
     </>
   )
