@@ -41,7 +41,7 @@ const TotalLeg = () => {
       <div className="flex flex-wrap">
         <div className="w-full lg:w-1/3 lg:m-0 p-1">
           <PVComponent data={personalVolData}/>
-          <MonthlyMilestones data={personalVolData}/>
+          {auth?.id === 11462407 && <MonthlyMilestones data={personalVolData}/>}
         </div>
         <div className="w-full lg:w-1/3 lg:m-0 p-1">
           <WeeklyBinary/>
