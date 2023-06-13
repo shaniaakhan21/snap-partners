@@ -117,7 +117,7 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
       <span className='text-4xl font-bold text-primary-500'>{t('auth:signup.success.success_message')}</span>
       <CheckSuccess classes='my-10' />
 
-      {ROLES.integrousAssociate
+      {userTrack.userInfo.roles.integrousAssociate
         ? (<>
           <span className='text-xl text-primary-500'>{t('auth:signup.success.welcome_pack')}</span>
           <Card

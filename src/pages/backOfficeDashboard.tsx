@@ -6,6 +6,16 @@ import CustomerGlobalPool from 'components/common/dashBackOffice/CustomerGlobalP
 import { makeStyles } from '@material-ui/core/styles'
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import PVComponent from 'components/common/dashBackOffice/PersonalVolume'
+import { useAuthStore } from 'lib/stores'
+import { useEffect, useState } from 'react'
+
+export interface PersonalVolumeInfo {
+  pvValue: number,
+  pvPercentage: number,
+  leftQV: number,
+  rightQV: number
+
+}
 
 const useStyles = makeStyles({
   customIcon: {
@@ -15,25 +25,39 @@ const useStyles = makeStyles({
 })
 
 const TotalLeg = () => {
+  const { auth } = useAuthStore()
   const classes = useStyles()
+  const [personalVolData, setPersonalVolData] = useState<PersonalVolumeInfo>()
+
+  useEffect(() => {
+    fetch('/api/ibo/personal/pvInfo', {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${auth.accessToken}` }
+    }).then((response) => {
+      response.json().then((data) => {
+        setPersonalVolData(data.data)
+      })
+    })
+  }, [])
   return (
     <>
       <div className="flex flex-wrap">
         <div className="w-full lg:w-1/3 lg:m-0 p-1">
-          <PVComponent/>
-          <MonthlyMilestones/>
+          <PVComponent data={personalVolData}/>
+          {auth?.id === 11462407 && <MonthlyMilestones data={personalVolData}/>}
         </div>
         <div className="w-full lg:w-1/3 lg:m-0 p-1">
           <WeeklyBinary/>
-          <RankTracker/>
+          {/*
+          <RankTracker/> */}
         </div>
         <div className="w-full lg:w-1/3 lg:m-0 p-1">
           <MonthlyCustomerTracking/>
-          <CustomerGlobalPool/>
+          {/* <CustomerGlobalPool/>
           <button className="rounded-full bg-primary-500 w-full max-w-3xl flex flex-row items-center justify-center mt-4">
             <p className='text-xs text-white font-medium p-2 uppercase'>Visit Snap Services Dashboard</p>
             <ArrowForwardIcon className={classes.customIcon} />
-          </button>
+          </button> */}
         </div>
       </div>
     </>
