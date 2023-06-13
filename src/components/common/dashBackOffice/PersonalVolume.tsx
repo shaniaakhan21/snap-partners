@@ -1,27 +1,7 @@
-import { useState, useEffect } from 'react'
 import { PVProgress } from './CustomCircularProgress'
-import { useAuthStore } from 'lib/stores'
+import { PersonalVolumeInfo } from 'pages/backOfficeDashboard'
 
-export interface PersonalVolumeInfo {
-  pvValue: number,
-  pvPercentage: number
-}
-
-export default function PVComponent () {
-  const { auth } = useAuthStore()
-  const [data, setData] = useState<PersonalVolumeInfo>()
-
-  useEffect(() => {
-    fetch('/api/ibo/personal/pvInfo', {
-      method: 'GET',
-      headers: { Authorization: `Bearer ${auth.accessToken}` }
-    }).then((response) => {
-      response.json().then((data) => {
-        setData(data.data)
-      })
-    })
-  }, [])
-
+export default function PVComponent ({ data }: {data: PersonalVolumeInfo}) {
   return (
     <>
       <div className="w-full max-w-full p-4 space-y-2 h-fit bg-white rounded-xl">
@@ -44,6 +24,8 @@ export default function PVComponent () {
             </div>
           </div>
         </div>
+        <h1 className="text-lg text-gray-800 font-semibold text-center">Monthly QV Tracking</h1>
+        <h1 className="text-lg text-gray-800 font-semibold text-center">Left Leg QV:{data?.leftQV} {"---"} Right Leg QV:{data?.rightQV}</h1>
       </div>
     </>
   )

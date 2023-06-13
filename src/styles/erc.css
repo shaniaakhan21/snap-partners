@@ -17,6 +17,8 @@
 #table1erc div:nth-child(5) > .InovuaReactDataGrid__column-header--unlockable,
 #table1erc div:nth-child(6) > .InovuaReactDataGrid__column-header--unlockable,
 #table1erc div:nth-child(7) > .InovuaReactDataGrid__column-header--unlockable,
+#table1erc div:nth-child(8) > .InovuaReactDataGrid__column-header--unlockable,
+#table1erc div:nth-child(9) > .InovuaReactDataGrid__column-header--unlockable,
 #cro-erc-process > div > div > ul:nth-child(1) > li:nth-child(1)
 
   {
@@ -24,8 +26,7 @@
   background-color: #DD4C37 !important;
 }
   
-#table1erc div:nth-child(8) > .InovuaReactDataGrid__column-header--unlockable,
-#table1erc div:nth-child(9) > .InovuaReactDataGrid__column-header--unlockable,
+
 #table1erc div:nth-child(10) > .InovuaReactDataGrid__column-header--unlockable,
 #table1erc div:nth-child(11) > .InovuaReactDataGrid__column-header--unlockable,
 #table1erc div:nth-child(12) > .InovuaReactDataGrid__column-header--unlockable,

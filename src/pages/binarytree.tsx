@@ -251,7 +251,12 @@ const ComingSoon: PageNext = () => {
             </>
           )
         }
-        return <>{item.row.placedName}</>
+        return <>{item.row.placedName}
+          {item.row.allowChange === true && (
+            <Button style={{ marginLeft: 10 }} onClick={() => {
+              setHoldingTankUserCustomer(item.row.id, 'reset')
+            }} variant="contained" color={'default'} size={'small'}>RESET</Button>
+          )}</>
       }
     }
   ]
