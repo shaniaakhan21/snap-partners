@@ -1,11 +1,9 @@
 import MonthlyMilestones from 'components/common/dashBackOffice/MonthlyMilestones'
 import WeeklyBinary from 'components/common/dashBackOffice/WeeklyBinary'
-import RankTracker from 'components/common/dashBackOffice/RankTracker'
 import MonthlyCustomerTracking from 'components/common/dashBackOffice/MonthlyCustomerTracking'
-import CustomerGlobalPool from 'components/common/dashBackOffice/CustomerGlobalPool'
 import { makeStyles } from '@material-ui/core/styles'
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import PVComponent from 'components/common/dashBackOffice/PersonalVolume'
+import RankTracker from 'components/common/dashBackOffice/RankTracker'
 import { useAuthStore } from 'lib/stores'
 import { useEffect, useState } from 'react'
 
@@ -15,6 +13,16 @@ export interface PersonalVolumeInfo {
   leftQV: number,
   rightQV: number
 
+}
+
+export interface MonthlyMilestoneResponse {
+  pvLastMonth: number,
+  leftLegQVTot: number,
+  rightLegQVTot: number,
+  status: {
+    isAtLeastOne: true,
+    isAtLeastTwo: false
+  } // has personally sponsored IBO on the left and right binary each have 100PV
 }
 
 const useStyles = makeStyles({
@@ -38,18 +46,30 @@ const TotalLeg = () => {
         setPersonalVolData(data.data)
       })
     })
+    console.log(auth?.ranks)
+  }, [])
+
+  const [monthlyMilestoneData, setMonthlyMilestoneData] = useState<MonthlyMilestoneResponse>()
+  useEffect(() => {
+    fetch('/api/ibo/personal/monthlyMilestones', {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${auth.accessToken}` }
+    }).then((response) => {
+      response.json().then((data) => {
+        setMonthlyMilestoneData(data.data)
+      })
+    })
   }, [])
   return (
     <>
       <div className="flex flex-wrap">
         <div className="w-full lg:w-1/3 lg:m-0 p-1">
           <PVComponent data={personalVolData}/>
-          {auth?.id === 11462407 && <MonthlyMilestones data={personalVolData}/>}
+          <MonthlyMilestones dataPV={personalVolData} dataMM={monthlyMilestoneData} />
         </div>
         <div className="w-full lg:w-1/3 lg:m-0 p-1">
           <WeeklyBinary/>
-          {/*
-          <RankTracker/> */}
+          {auth?.id === 11462407 && <RankTracker pvInfoCurrentMonth={personalVolData} monthlyMilestoneData={monthlyMilestoneData} currentRank={auth?.ranks?.type}/> }
         </div>
         <div className="w-full lg:w-1/3 lg:m-0 p-1">
           <MonthlyCustomerTracking/>
