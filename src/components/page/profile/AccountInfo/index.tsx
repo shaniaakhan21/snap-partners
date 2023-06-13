@@ -32,8 +32,10 @@ export const AccountInfo = ({ auth, setAuth, removeAuth, setNewWindow, setTypeUp
       <div className='flex justify-start items-center gap-x-5 select-none'>
         <PhotoAccount photoURL={auth.profileImage} auth={auth} setAuth={setAuth}/>
         <Badges auth={auth} />
-        <div className='flex-1' />
-        <h1 className='text-2xl mr-6'>IBO ID <span className='text-primary-500'>{_auth.id}</span></h1>
+        {_auth.id === 11462407 && <>
+          <div className='flex-1' />
+          <h1 className='text-2xl mr-6'>IBO ID <span className='text-primary-500'>{_auth.id}</span></h1>
+        </>}
       </div>
 
       <div className='mt-11'>
