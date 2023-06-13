@@ -12,7 +12,7 @@
     "test:components": "jest tests/components --watch",
     "test:lib": "jest tests/lib --watch",
     "test:ci": "jest --ci",
-    "pull-translations": "i18nexus pull"
+    "pull-translations": "i18nexus pull -k 96QMg5PCqJst7cR6CtVh5Q"
   },
   "dependencies": {
     "@dabeng/react-orgchart": "^1.0.3",

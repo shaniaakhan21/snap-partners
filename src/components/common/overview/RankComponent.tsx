@@ -103,7 +103,7 @@ export default function RankComponent (props: RankComponentProps) {
                 <StyledBox backgroundColor={'#C99FFF'}>
                   <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: '#C99FFF' }} />
                 </StyledBox>
-                <h1 className="text-2xl text-black font-bold pl-2">Manager</h1>
+                <h1 className="text-2xl text-black font-bold pl-2">{t('overview:rank.manager.title')}</h1>
               </div>
               <div className='col-span-3 text-xs pt-5'>
                 <span className="text-15">
@@ -163,10 +163,10 @@ export default function RankComponent (props: RankComponentProps) {
                 <StyledBox backgroundColor={'#54A52C'}>
                   <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: '#54A52C' }} />
                 </StyledBox>
-                <h1 className="text-2xl text-black font-bold pl-2">Supervisor</h1>
+                <h1 className="text-2xl text-black font-bold pl-2">{t('overview:rank.supervisor.title')}</h1>
               </div>
               <div className='col-span-3 text-xs pt-5'>
-                <span className="text-15">To become a <strong>Director</strong> you'll need</span>
+                <span className="text-15">{t('overview:rank.supervisor.next_become')}</span>
               </div>
               <div className='col-span-3 text-xs pt-5'>
                 <div className='flex flex-row justify-between'>
