@@ -46,7 +46,6 @@ const TotalLeg = () => {
         setPersonalVolData(data.data)
       })
     })
-    console.log(auth?.ranks)
   }, [])
 
   const [monthlyMilestoneData, setMonthlyMilestoneData] = useState<MonthlyMilestoneResponse>()

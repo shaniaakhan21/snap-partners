@@ -37,27 +37,29 @@ const ActiveRL = ({ isAtLeastTwo }:
 const calculateCompletionPercentageAndNextRank = (currentRank: string, totalLeftLeg: number, totalRightLeg: number): {
   percentage: number, nextRank: string, teamVol: number, nonPowerLeg: number, powerLeg: number
 } => {
-  console.log(currentRank)
-  for (const rank in rankCriteria) {
-    if (Object.prototype.hasOwnProperty.call(rankCriteria, rank)) {
-      if (currentRank.toLowerCase() === rank.toLocaleLowerCase()) {
-        // Get next rank
-        let nextRank = ''
-        let teamVol = 0
-        let nonPowerLeg = 0
-        let powerLeg = 0
-        const rankKeys = Object.keys(rankCriteria)
-        const currentIndex = rankKeys.findIndex(key => key.toLowerCase() === rank.toLowerCase())
-        if (currentIndex !== -1 && currentIndex < rankKeys.length - 1) {
-          nextRank = rankKeys[currentIndex + 1]
-        }
+  const rankKeys = Object.keys(rankCriteria)
+  let teamVol = null
+  let nonPowerLeg = null
+  let powerLeg = null
+  let percentage = null
+  let nextRank = ''
+  rankKeys.forEach((rank, index) => {
+    if (rank.toLowerCase() === currentRank.toLocaleLowerCase()) {
+      if (index !== -1 && index < rankKeys.length - 1) {
+        nextRank = rankKeys[index + 1]
         teamVol = rankCriteria[nextRank]?.teamVolume
         nonPowerLeg = rankCriteria[nextRank]?.qvNonPL
         powerLeg = rankCriteria[nextRank]?.qvPL
-        const percentage = ((totalLeftLeg / powerLeg) + (totalRightLeg / nonPowerLeg)) * 100
-        return { percentage: percentage, nextRank: nextRank, teamVol: teamVol, nonPowerLeg: nonPowerLeg, powerLeg: powerLeg }
+        percentage = Math.round(((totalLeftLeg / powerLeg) + (totalRightLeg / nonPowerLeg)) * 100)
       }
     }
+  })
+  return {
+    percentage: percentage,
+    nextRank: nextRank,
+    teamVol: teamVol,
+    nonPowerLeg: nonPowerLeg,
+    powerLeg: powerLeg
   }
 }
 
