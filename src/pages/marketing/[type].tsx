@@ -14,10 +14,13 @@ import { ListArticles } from 'components/page/marketing/Details/ListArtcles'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { Article } from 'components/page/marketing/Details/Article'
 import { EmptyData } from 'components/common/empty/EmptyData'
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
 
 const MarketingArticlePage = ({ typeMarketing }: { typeMarketing: TMarketingType }) => {
+  const { t } = useTranslation()
   const { auth } = useAuthStore()
   const [showAdminArticleEditor, setShowAdminArticleEditor] = useState(false)
   const { articles, loading } = useMarketingArticles(auth.accessToken, typeMarketing)
@@ -62,16 +65,12 @@ const MarketingArticlePage = ({ typeMarketing }: { typeMarketing: TMarketingType
     <>
       <div className='text-center'>
         <span className='text-3xl font-bold'>
-          {
-            typeMarketing !== 'ibo'
-              ? <span className='capitalize'> {typeMarketing}s</span>
-              : ' IBOs'
-          }
+          {t(`marketing:page-${typeMarketing}.heading`)}
         </span> <br /><br />
-        <span className='font-bold text-2xl text-primary-500'>Building your Business with a Few Clicks</span>
+        <span className='font-bold text-2xl text-primary-500'>{t(`marketing:page-${typeMarketing}.subtitle`)}</span>
 
         <div className='mt-6'>
-          <span className='font-semibold text-gray-800'>Now choose the arts you want to share</span>
+          <span className='font-semibold text-gray-800'>{t(`marketing:page-${typeMarketing}.desc`)}</span>
         </div>
 
         {/* {
@@ -121,15 +120,18 @@ const MarketingArticlePage = ({ typeMarketing }: { typeMarketing: TMarketingType
   )
 }
 
-MarketingArticlePage.getLayout = (page) => (
-  <DashboardLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Marketing {capitalizeFirstLetter(page.props.typeMarketing)}</title>
-    </Head>
+MarketingArticlePage.getLayout = (page) => {
+  const { t } = useTranslation()
+  return (
+    <DashboardLayout>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - Marketing {t(`marketing:page-${page.props.typeMarketing}.heading`)}</title>
+      </Head>
 
-    {page}
-  </DashboardLayout>
-)
+      {page}
+    </DashboardLayout>
+  )
+}
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const MARKETING_TYPES: TMarketingType[] = ['customer', 'driver', 'ibo', 'merchant']
@@ -139,8 +141,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
   return { paths, fallback: false }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  return { props: { typeMarketing: params.type } }
+export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
+  return { props: { typeMarketing: params.type, ...(await serverSideTranslations(locale, ['footer', 'common', 'marketing'])) } }
 }
 
 export default MarketingArticlePage

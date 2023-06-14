@@ -4,8 +4,10 @@ import { Fragment, ReactNode, useState } from 'react'
 import { setLocalStorage, getLocalStorage } from 'lib/utils/localStorage'
 
 import { drawerRoutes } from './routes'
+import { useTranslation } from "next-i18next";
 
 export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { isCurrentlyPage: (route: string) => boolean, auth:any, isManager: boolean, isAdmin: boolean }) => {
+  const { t } = useTranslation()
   const [activeSubmenu, setActiveSubmenu] = useState(null)
 
   const toggleSubmenu = (index: number) => {
@@ -81,7 +83,7 @@ export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { i
                     }}
                   >
                     <div>{route.icon}</div>
-                    <div>{route.label}</div>
+                    <div>{t(`common:${route.i18n}`)}</div>
                   </a>,
                   !!route.subItems,
                   route.to
@@ -94,7 +96,7 @@ export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { i
                           <a
                             className='w-full flex justify-start items-center gap-x-2 py-2 hover:bg-[#19191914] pl-16'
                           >
-                            <div>{subItem.label}</div>
+                            <div>{t(subItem.i18n)}</div>
                           </a>
                         </Link>
                       </li>

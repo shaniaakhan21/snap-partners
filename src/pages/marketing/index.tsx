@@ -9,41 +9,44 @@ import DashboardLayout from 'layouts/private/Dashboard'
 import { CustomerIcon, DriverIcon, IBOIcon, MerchantsIcon } from 'components/common/icons'
 import { MarketingTool } from 'components/page/marketing/CardTools/Tool'
 import { ListMarketingTools } from 'components/page/marketing/CardTools/ListTools'
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
 
 const MarketingPage: Page = () => {
+  const { t } = useTranslation()
   const { auth } = useAuthStore()
   const { current: marketingDetails } = useRef([
     {
       icon: <CustomerIcon />,
-      title: 'Customer',
+      title: t('marketing:customer.title'),
       subtitle: 'Subtitle text here',
-      description: 'Select an image and share the link in the different social networks to get new Customers!',
+      description: t('marketing:customer.description'),
       to: '/marketing/customer',
       snap: true
     },
     {
       icon: <DriverIcon />,
-      title: 'Driver',
+      title: t('marketing:driver.title'),
       subtitle: 'Subtitle text here',
-      description: 'Select an image and share the link in the different social networks to get new Drivers On Board',
+      description: t('marketing:driver.description'),
       to: '/marketing/driver',
       snap: true
     },
     {
       icon: <MerchantsIcon />,
-      title: 'Merchant',
+      title: t('marketing:merchant.title'),
       subtitle: 'Subtitle text here',
-      description: 'Select an image and share the link in the different social networks to get new Merchant Partners',
+      description: t('marketing:merchant.description'),
       to: '/marketing/merchant',
       snap: true
     },
     {
       icon: <IBOIcon />,
-      title: 'IBO',
+      title: t('marketing:ibo.title'),
       subtitle: 'Subtitle text here',
-      description: 'Select an image and share the link in the different social networks to get new Business partners',
+      description: t('marketing:ibo.description'),
       to: '/marketing/ibo'
     }
   ])
@@ -51,11 +54,11 @@ const MarketingPage: Page = () => {
   return (
     <>
       <div className='text-center'>
-        <span className='text-3xl font-bold'>Marketing Tools</span> <br /><br />
-        <span className='font-bold text-2xl text-primary-500'>Building your Business with a Few Clicks</span>
+        <span className='text-3xl font-bold'>{t('marketing:heading')}</span> <br /><br />
+        <span className='font-bold text-2xl text-primary-500'>{t('marketing:subtitle')}</span>
 
         <div className='mt-6'>
-          <span className='font-semibold'>Send Branded Campaings with our system, let’s start by clicking who you want to reach out</span>
+          <span className='font-semibold'>{t('marketing:desc')}</span>
         </div>
       </div>
 
@@ -79,14 +82,26 @@ const MarketingPage: Page = () => {
   )
 }
 
-MarketingPage.getLayout = (page: ReactNode) => (
-  <DashboardLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Marketing</title>
-    </Head>
+MarketingPage.getLayout = (page: ReactNode) => {
+  const { t } = useTranslation()
 
-    {page}
-  </DashboardLayout>
-)
+  return (
+    <DashboardLayout>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - {t('marketing:title')}</title>
+      </Head>
+
+      {page}
+    </DashboardLayout>
+  )
+}
+
+export async function getStaticProps ({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['footer', 'common', 'marketing']))
+    }
+  }
+}
 
 export default MarketingPage

@@ -7,10 +7,13 @@ import { ROLES } from 'config/roles'
 import DashboardLayout from 'layouts/private/Dashboard'
 import { ReferralCards } from 'components/page/referrals/Cards'
 import { CustomerIcon, DriverIcon, MerchantIcon } from 'components/common/icons'
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
 
 const ReferralsPage: Page = () => {
+  const { t } = useTranslation()
   const { auth } = useAuthStore()
 
   const _auth: any = auth
@@ -22,7 +25,7 @@ const ReferralsPage: Page = () => {
       <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-center justify-center justify-items-center gap-4'>
         {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
           <ReferralCards
-            title='Refer Customers'
+            title={t('referrals:refer_customer')}
             ilustration={<CustomerIcon />}
             link={`${auth.referralLink}&role=${ROLES.CUSTOMER}` || 'With Out Link'}
             newUser={false}
@@ -31,7 +34,7 @@ const ReferralsPage: Page = () => {
         )}
         {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
           <ReferralCards
-            title='Refer Driver'
+            title={t('referrals:refer_driver')}
             ilustration={<DriverIcon />}
             link={`${auth.referralLink}&role=${ROLES.DRIVER}` || 'With Out Link'}
             newUser={false}
@@ -40,7 +43,7 @@ const ReferralsPage: Page = () => {
         )}
         {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
           <ReferralCards
-            title='Refer Merchant/SK'
+            title={t('referrals:refer_merchant')}
             ilustration={<MerchantIcon />}
             link={`${auth.referralLink}&role=${ROLES.MERCHANT}` || 'With Out Link'}
             newUser={false}
@@ -48,7 +51,7 @@ const ReferralsPage: Page = () => {
           />
         )}
         <ReferralCards
-          title='Refer Vidgo'
+          title={t('common:refer_vidgo')}
           ilustration={(
             <div className='h-[100px]'>
               <img src='/images/vidgo/vidgo-ilustration.jpg' alt='Vidgo logo' />
@@ -61,7 +64,7 @@ const ReferralsPage: Page = () => {
 
         {!isIntegrous && (
           <ReferralCards
-            title='Refer Agent'
+            title={t('referrals:refer_agent')}
             ilustration={(
               <div className='h-[100px]'>
                 <img src='/images/agentv4.png' alt='Agent logo' />
@@ -74,10 +77,10 @@ const ReferralsPage: Page = () => {
         )}
 
         <ReferralCards
-          title='Refer ERC Client'
+          title={t('referrals:refer_erc')}
           ilustration={(
             <div className='h-[100px] w-5/6'>
-              <img src='/images/j-logo.png' alt='Refer ERC' />
+              <img src='/images/j-logo.png' alt={t('referrals:refer_erc')} />
             </div>
           )}
           link={`https://www.jornscpa.com/snap/?refid=${auth.id}` || 'With Out Link'}
@@ -86,10 +89,10 @@ const ReferralsPage: Page = () => {
         />
 
         <ReferralCards
-          title='Refer Commercial Energy'
+          title={t('referrals:refer_energy')}
           ilustration={(
             <div className='h-[100px]'>
-              <img src='/images/usaenergy/commercialenergy.png' alt='USA Commercial Energy Logo' />
+              <img src='/images/usaenergy/commercialenergy.png' alt={t('referrals:refer_energy')} />
             </div>
           )}
           link={`https://usaenergy.com/free-rate-analysis/?subid=${auth.id}` || 'With Out Link'}
@@ -113,14 +116,25 @@ const ReferralsPage: Page = () => {
   )
 }
 
-ReferralsPage.getLayout = (page: ReactNode) => (
-  <DashboardLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Referrals</title>
-    </Head>
+ReferralsPage.getLayout = (page: ReactNode) => {
+  const { t } = useTranslation()
+  return (
+    <DashboardLayout>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - ${t('referrals:title')}</title>
+      </Head>
 
-    {page}
-  </DashboardLayout>
-)
+      {page}
+    </DashboardLayout>
+  )
+}
+
+export async function getStaticProps ({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['footer', 'common', 'referrals']))
+    }
+  }
+}
 
 export default ReferralsPage
