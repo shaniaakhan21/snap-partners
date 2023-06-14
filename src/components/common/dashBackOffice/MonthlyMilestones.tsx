@@ -3,6 +3,11 @@ import { CustomCheckBoxCheckedMilestone, CustomCheckBoxUnCheckedMilestone } from
 import { PersonalVolumeInfo } from 'pages/backOfficeDashboard'
 import { useAuthStore } from 'lib/stores'
 
+interface Status {
+  isAtLeastOne: boolean,
+  isAtLeastTwo: boolean,
+}
+
 const Active = ({ pvVal }: { pvVal: number }) => {
   if (pvVal >= 100) {
     return (<CustomCheckBoxCheckedMilestone label={'Active 100pv'} />)
@@ -11,9 +16,8 @@ const Active = ({ pvVal }: { pvVal: number }) => {
   }
 }
 
-const Binary = ({ pvValLastMonth, pvValCurrentMonth, hasPSIBO }:
-  { pvValLastMonth: number, pvValCurrentMonth: number, hasPSIBO: boolean }) => {
-  if ((pvValLastMonth >= 100 || pvValCurrentMonth >= 100) && hasPSIBO) {
+const Binary = ({ status }: { status: Status }) => {
+  if ((status.isAtLeastOne || status.isAtLeastTwo)) {
     return (<CustomCheckBoxCheckedMilestone label={'Binary'} />)
   } else {
     return (<CustomCheckBoxUnCheckedMilestone label={'Binary'} />)
@@ -29,9 +33,10 @@ const VolumeBanking = ({ pvValLastMonth, pvValCurrentMonth }:
   }
 }
 
+
 export interface MonthlyMilestoneResponse {
   pvLastMonth: number,
-  hasPSIBO: boolean // has personally sponsored IBO on the left and right binary each have 100PV
+  status: Status // has personally sponsored IBO on the left and right binary each have 100PV
 }
 
 export default function MonthlyMilestones ({ data }: {data: PersonalVolumeInfo}) {
@@ -59,9 +64,7 @@ export default function MonthlyMilestones ({ data }: {data: PersonalVolumeInfo})
                   <Active pvVal={data?.pvValue}/>
                 </div>
                 <div>
-                  <Binary pvValLastMonth={monthlyMilestoneData?.pvLastMonth}
-                    pvValCurrentMonth={data?.pvValue}
-                    hasPSIBO={monthlyMilestoneData?.hasPSIBO}/>
+                  <Binary status={monthlyMilestoneData?.status}/>
                 </div>
                 <div>
                   <VolumeBanking pvValCurrentMonth={data?.pvValue} pvValLastMonth={monthlyMilestoneData?.pvLastMonth} />
