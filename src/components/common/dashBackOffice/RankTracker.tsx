@@ -14,20 +14,20 @@ const Personal = ({ pvVal }: { pvVal: number }) => {
   }
 }
 
-const ActiveLL = ({ isAtLeastOne }:
-  { isAtLeastOne: boolean }) => {
+const ActiveLL = ({ activeLeftLeg }:
+  { activeLeftLeg: boolean }) => {
   const label = 'Active-100pv Left Leg'
-  if (isAtLeastOne) {
+  if (activeLeftLeg) {
     return (<CustomCheckBoxCheckedMilestone checkBoxSize={20} labelSize='sm' label={label} />)
   } else {
     return (<CustomCheckBoxUnCheckedMilestone checkBoxSize={20} labelSize='sm' label={label} />)
   }
 }
 
-const ActiveRL = ({ isAtLeastTwo }:
-  { isAtLeastTwo: boolean }) => {
+const ActiveRL = ({ activeRightLeg }:
+  { activeRightLeg: boolean }) => {
   const label = 'Active-100pv Right Leg'
-  if (isAtLeastTwo) {
+  if (activeRightLeg) {
     return (<CustomCheckBoxCheckedMilestone checkBoxSize={20} labelSize='sm' label={label} />)
   } else {
     return (<CustomCheckBoxUnCheckedMilestone checkBoxSize={20} labelSize='sm' label={label} />)
@@ -84,8 +84,8 @@ export default function RankTracker ({ pvInfoCurrentMonth, monthlyMilestoneData,
         <div className="flex flex-row justify-between  w-full">
           <div className="flex flex-col">
             <Personal pvVal={pvInfoCurrentMonth?.pvValue} />
-            <ActiveLL isAtLeastOne={monthlyMilestoneData?.status?.isAtLeastOne}/>
-            <ActiveRL isAtLeastTwo={monthlyMilestoneData?.status?.isAtLeastTwo}/>
+            <ActiveLL activeLeftLeg={monthlyMilestoneData?.activeLeftLeg}/>
+            <ActiveRL activeRightLeg={monthlyMilestoneData?.activeRightLeg}/>
             <div className="flex flex-col px-4 py-1 mt-3 rounded-lg" style={{ backgroundColor: 'rgb(239 239 239)' }}>
               {
                 monthlyMilestoneData?.leftLegQVTot && <div className="flex flex-col w-full">

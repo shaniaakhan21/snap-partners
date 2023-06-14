@@ -19,10 +19,8 @@ export interface MonthlyMilestoneResponse {
   pvLastMonth: number,
   leftLegQVTot: number,
   rightLegQVTot: number,
-  status: {
-    isAtLeastOne: true,
-    isAtLeastTwo: false
-  } // has personally sponsored IBO on the left and right binary each have 100PV
+  activeLeftLeg: boolean,
+  activeRightLeg: boolean,
 }
 
 const useStyles = makeStyles({
