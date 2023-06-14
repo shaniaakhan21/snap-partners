@@ -1,83 +1,75 @@
-import { Checkbox } from '@mui/material'
-import { legValues, rtData, rankValues } from './MockMilestones'
-import { useState, useEffect } from 'react'
-import { PVProgress } from './CustomCircularProgress'
 import TotalLeg from './TotalLegComp'
+import { CustomCheckBoxCheckedMilestone, CustomCheckBoxUnCheckedMilestone } from '../CustomCheckBoxMilestone'
+import { MonthlyMilestoneResponse, PersonalVolumeInfo } from 'pages/backOfficeDashboard'
+import { PVProgress } from './CustomCircularProgress'
+import { rankCriteria } from './ranks'
+import { useEffect, useState } from 'react'
 
-interface CheckboxWithTextProps {
-  defaultChecked?: boolean;
-  restProps?: any;
-  color?: string;
-  primaryColor?: string;
-  text: string;
-  subText: string;
+const Personal = ({ pvVal }: { pvVal: number }) => {
+  const label = 'Personal 100pv'
+  if (pvVal >= 100) {
+    return (<CustomCheckBoxCheckedMilestone checkBoxSize={20} labelSize='sm' label={label} />)
+  } else {
+    return (<CustomCheckBoxUnCheckedMilestone checkBoxSize={20} labelSize='sm' label={label} />)
+  }
 }
 
-const CheckboxWithText = ({
-  defaultChecked = false,
-  restProps = {},
-  color = '#9D9D9D',
-  primaryColor = '#54A52C',
-  text,
-  subText
-} : CheckboxWithTextProps) => {
-  return (
-    <div className="flex flex-row items-center mb-4">
-      <div className='h-fit'>
-        <Checkbox
-          defaultChecked={defaultChecked}
-          {...restProps}
-          color="primary"
-          sx={{
-            color,
-            padding: 0,
-            '&.Mui-checked': {
-              color: primaryColor,
-              border: 'none!important',
-              padding: 0
-            },
-            '&.Mui-unchecked': {
-              padding: 0
-            },
-            '& .MuiSvgIcon-root': { fontSize: 30 }
-          }}
-        />
-      </div>
-      <div className="flex flex-col pl-1">
-        <p className="text-sm text-start">{text}</p>
-        <p className="text-xs text-start text-gray-600">{subText}</p>
-      </div>
-    </div>
-  )
+const ActiveLL = ({ isAtLeastOne }:
+  { isAtLeastOne: boolean }) => {
+  const label = 'Active-100pv Left Leg'
+  if (isAtLeastOne) {
+    return (<CustomCheckBoxCheckedMilestone checkBoxSize={20} labelSize='sm' label={label} />)
+  } else {
+    return (<CustomCheckBoxUnCheckedMilestone checkBoxSize={20} labelSize='sm' label={label} />)
+  }
 }
 
-interface RtInterface {
-  rtPercentage: number
-  rtNumber: string
+const ActiveRL = ({ isAtLeastTwo }:
+  { isAtLeastTwo: boolean }) => {
+  const label = 'Active-100pv Right Leg'
+  if (isAtLeastTwo) {
+    return (<CustomCheckBoxCheckedMilestone checkBoxSize={20} labelSize='sm' label={label} />)
+  } else {
+    return (<CustomCheckBoxUnCheckedMilestone checkBoxSize={20} labelSize='sm' label={label} />)
+  }
 }
 
-interface WbLegInterface {
-  legValue: string
-  legVLabel: string
+const calculateCompletionPercentageAndNextRank = (currentRank: string, totalLeftLeg: number, totalRightLeg: number): {
+  percentage: number, nextRank: string, teamVol: number, nonPowerLeg: number, powerLeg: number
+} => {
+  const rankKeys = Object.keys(rankCriteria)
+  let teamVol = null
+  let nonPowerLeg = null
+  let powerLeg = null
+  let percentage = null
+  let nextRank = ''
+  rankKeys.forEach((rank, index) => {
+    if (rank.toLowerCase() === currentRank.toLocaleLowerCase()) {
+      if (index !== -1 && index < rankKeys.length - 1) {
+        nextRank = rankKeys[index + 1]
+        teamVol = rankCriteria[nextRank]?.teamVolume
+        nonPowerLeg = rankCriteria[nextRank]?.qvNonPL
+        powerLeg = rankCriteria[nextRank]?.qvPL
+        percentage = Math.round(((totalLeftLeg / powerLeg) + (totalRightLeg / nonPowerLeg)) * 100)
+      }
+    }
+  })
+  return {
+    percentage: percentage,
+    nextRank: nextRank,
+    teamVol: teamVol,
+    nonPowerLeg: nonPowerLeg,
+    powerLeg: powerLeg
+  }
 }
 
-interface rankInterface {
-  rankValue: string
-  rankLabel: string
-}
-
-export default function WeeklyBinary (...restProps: any[]) {
-  const [rData, setRtData] = useState<RtInterface[]>([])
-  const [legValuesData, setLegValuesData] = useState<WbLegInterface[]>([])
-  const [rankData, setrankData] = useState<rankInterface[]>([])
-
+export default function RankTracker ({ pvInfoCurrentMonth, monthlyMilestoneData, currentRank }:
+  {pvInfoCurrentMonth: PersonalVolumeInfo, monthlyMilestoneData: MonthlyMilestoneResponse, currentRank: string}) {
+  const [processedData, setPercentage] = useState({ percentage: 0, nextRank: '', teamVol: 0, nonPowerLeg: 0, powerLeg: 0 })
   useEffect(() => {
-    setLegValuesData(legValues as unknown as WbLegInterface[])
-    setrankData(rankValues as unknown as rankInterface[])
-    const details = rtData
-    setRtData(details)
-  }, [])
-
+    const data = calculateCompletionPercentageAndNextRank(currentRank, monthlyMilestoneData?.leftLegQVTot, monthlyMilestoneData?.rightLegQVTot)
+    setPercentage({ ...data })
+  }, [monthlyMilestoneData, currentRank])
   return (
     <>
       <div className="w-full max-w-full p-4 space-y-2 h-fit bg-white rounded-xl  mt-4">
@@ -91,34 +83,24 @@ export default function WeeklyBinary (...restProps: any[]) {
         </div>
         <div className="flex flex-row justify-between  w-full">
           <div className="flex flex-col">
-            {rankData.map(item => (
-              <CheckboxWithText
-                key={item.rankValue}
-                defaultChecked
-                restProps={restProps}
-                text={item.rankValue}
-                subText={item.rankLabel}
-              />
-            ))}
+            <Personal pvVal={pvInfoCurrentMonth?.pvValue} />
+            <ActiveLL isAtLeastOne={monthlyMilestoneData?.status?.isAtLeastOne}/>
+            <ActiveRL isAtLeastTwo={monthlyMilestoneData?.status?.isAtLeastTwo}/>
             <div className="flex flex-col px-4 py-1 mt-3 rounded-lg" style={{ backgroundColor: 'rgb(239 239 239)' }}>
               {
-                legValuesData && <div className="flex flex-col w-full">
-                  {
-                    legValuesData.map(leg =>
-                      <TotalLeg legValue={0} legVLabel={leg.legVLabel} />) // this component is not active yet
-                  }
+                monthlyMilestoneData?.leftLegQVTot && <div className="flex flex-col w-full">
+                  <TotalLeg legValue={monthlyMilestoneData?.leftLegQVTot} legVLabel={'Total Left Leg (QV)'} />
+                  <TotalLeg legValue={monthlyMilestoneData?.rightLegQVTot} legVLabel={'Total Right Leg (QV)'} />
                 </div>
               }
             </div>
           </div>
           <div className="flex flex-col w-2/5 items-center pl-2 pt-3">
-            {/* <PVProgress color="#FFBE9D" transformStyle="rotate(120deg)" data={rData} /> */}
-            {rData.map((item) => (
-              <h1 className="text-md text-center pt-2">{item.rtNumber}% to Diamond</h1>
-            ))}
+            <PVProgress color="#FFBE9D" transformStyle="rotate(120deg)" percentage={processedData?.percentage} />
+            <h1 className="text-md text-center pt-2">{processedData?.percentage}% to {processedData?.nextRank}</h1>
           </div>
         </div>
-        <p className="text-xs text-start text-gray-800 text-center pt-3">Diamond=25,500qv 17,000qv / 8,500qv</p>
+        <p className="text-xs text-start text-gray-800 text-center pt-3">{processedData?.nextRank}={processedData?.teamVol}qv {processedData?.powerLeg}qv / {processedData?.nonPowerLeg}qv</p>
       </div>
     </>
   )
