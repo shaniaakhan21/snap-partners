@@ -10,10 +10,10 @@ const Active = ({ pvVal }: { pvVal: number }) => {
   }
 }
 
-const Binary = ({ pvValLastMonth, pvValCurrentMonth, hasPSIBO }:
-  { pvValLastMonth: number, pvValCurrentMonth: number, hasPSIBO: boolean }) => {
+const Binary = ({ status }:
+  { status: MonthlyMilestoneResponse["status"] }) => {
   const label = 'Binary'
-  if ((pvValLastMonth >= 100 || pvValCurrentMonth >= 100) && hasPSIBO) {
+  if ((status.isAtLeastOne || status.isAtLeastTwo)) {
     return (<CustomCheckBoxCheckedMilestone labelSize='lg' checkBoxSize={55} label={label} />)
   } else {
     return (<CustomCheckBoxUnCheckedMilestone labelSize='lg' checkBoxSize={55} label={label} />)
@@ -43,9 +43,7 @@ export default function MonthlyMilestones ({ dataPV, dataMM }: {dataPV: Personal
                   <Active pvVal={dataPV?.pvValue}/>
                 </div>
                 <div>
-                  <Binary pvValLastMonth={dataMM?.pvLastMonth}
-                    pvValCurrentMonth={dataPV?.pvValue}
-                    hasPSIBO={dataMM?.status.isAtLeastOne}/>
+                  <Binary status={dataMM?.status}/>
                 </div>
                 <div>
                   <VolumeBanking pvValCurrentMonth={dataPV?.pvValue} pvValLastMonth={dataMM?.pvLastMonth} />
