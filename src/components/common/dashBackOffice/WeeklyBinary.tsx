@@ -2,6 +2,9 @@ import CustomCardWeeklyBinary from '../CustomCardWeeklyBinary'
 import { useAuthStore } from 'lib/stores'
 import { useEffect, useState } from 'react'
 import TotalLeg from './TotalLegComp'
+import MenuItem from '@mui/material/MenuItem'
+import Select from '@mui/material/Select'
+import { makeStyles } from '@material-ui/core'
 
 interface WeeklyBinaryData {
   leftLeg: {
@@ -24,30 +27,66 @@ interface WeeklyBinaryData {
   amount: number
 }
 
+const useStyles = makeStyles({
+  dropdown: {
+    height: '25px',
+    width: '180px'
+  }
+})
+
 export default function WeeklyBinary () {
   const { auth } = useAuthStore()
   const [data, setData] = useState<WeeklyBinaryData>()
+  const [week, setWeek] = useState(null)
+  const classes = useStyles()
 
   useEffect(() => {
-    fetch('/api/ibo/personal/weeklyBinary', {
-      method: 'GET',
-      headers: { Authorization: `Bearer ${auth.accessToken}` }
-    }).then((response) => {
-      response.json().then((data) => {
-        setData(data.data)
+    if (week) {
+      fetch(`/api/ibo/personal/weeklyBinary?weekNumber=${week}`, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${auth.accessToken}` }
+      }).then((response) => {
+        response.json().then((data) => {
+          setData(data.data)
+        })
       })
-    })
-  }, [])
+    } else {
+      fetch('/api/ibo/personal/weeklyBinary', {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${auth.accessToken}` }
+      }).then((response) => {
+        response.json().then((data) => {
+          setData(data.data)
+        })
+      })
+    }
+  }, [week])
+
+  const timingStatusTracker = (event) => {
+    setWeek(event.target.value)
+  }
 
   return (
     <>
       <div className="w-full max-w-full p-4 space-y-2 h-fit bg-white rounded-xl">
-        <div className="flex flex-row justify-between items-center">
+        <div className="flex flex-row justify-between">
           <div>
             <h1 className="text-lg text-gray-800 font-semibold">Weekly Binary</h1>
           </div>
           <div>
-            <p className="text-xs text-textAcent-500">View Requirements</p>
+            <div>
+              <p className="text-xs text-textAcent-500 pt-5">View Requirements</p>
+            </div>
+            <div className='pt-4'>
+              <Select onChange={(e) => timingStatusTracker(e)} className={classes.dropdown}>
+                <MenuItem value="">None</MenuItem>
+                {
+                  Array.from({ length: 10 }).map((item, index) => (
+                    <MenuItem value={index + 1}>{index + 1} Week ago</MenuItem>
+                  ))
+                }
+              </Select>
+            </div>
           </div>
         </div>
         {
