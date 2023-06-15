@@ -6,6 +6,8 @@ import { Page } from 'lib/types'
 import { APP_INFO } from 'config/appInfo'
 
 import { Button } from 'components/common/Button'
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {useTranslation} from "next-i18next";
 
 const { SEO } = APP_INFO
 
@@ -582,14 +584,26 @@ const TermsOfUsePage: Page = () => {
   )
 }
 
-TermsOfUsePage.getLayout = (page: ReactNode) => (
-  <>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Terms Of Use</title>
-    </Head>
+TermsOfUsePage.getLayout = (page: ReactNode) => {
+  const { t } = useTranslation()
 
-    {page}
-  </>
-)
+  return (
+    <>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - Terms Of Use</title>
+      </Head>
+
+      {page}
+    </>
+  )
+}
+
+export async function getStaticProps ({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST]))
+    }
+  }
+}
 
 export default TermsOfUsePage

@@ -280,7 +280,7 @@ VidgoComissionsPage.getLayout = (page: ReactNode) => {
 export async function getStaticProps ({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['footer', 'common', 'vidgo-reporting']))
+      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST, 'vidgo-reporting']))
     }
   }
 }

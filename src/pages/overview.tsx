@@ -129,20 +129,24 @@ const DashboardOverViewPage: Page = () => {
   )
 }
 
-DashboardOverViewPage.getLayout = (page: ReactNode) => (
-  <DashboardLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Dashboard</title>
-    </Head>
+DashboardOverViewPage.getLayout = (page: ReactNode) => {
+  const { t } = useTranslation()
 
-    {page}
-  </DashboardLayout>
-)
+  return (
+    <DashboardLayout>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - {t('overview:title')}</title>
+      </Head>
+
+      {page}
+    </DashboardLayout>
+  )
+}
 
 export async function getStaticProps ({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['footer', 'common', 'overview']))
+      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST, 'overview']))
     }
   }
 }

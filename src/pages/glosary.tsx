@@ -17,6 +17,7 @@ import { HeaderCTA } from 'components/page/glsoary/HeaderCTA'
 import { InfoRank } from 'components/page/glsoary/InfoRank'
 import { InfoRole } from 'components/page/glsoary/InfoRole'
 import { InfoApp } from 'components/page/glsoary/InfoApp'
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 const { SEO } = APP_INFO
 
@@ -107,14 +108,24 @@ const GlosaryPage: Page = () => {
   )
 }
 
-GlosaryPage.getLayout = (page) => (
-  <>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Glosary</title>
-    </Head>
+GlosaryPage.getLayout = (page) => {
+  return (
+    <>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - Glosary</title>
+      </Head>
 
-    {page}
-  </>
-)
+      {page}
+    </>
+  )
+}
+
+export async function getStaticProps ({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST]))
+    }
+  }
+}
 
 export default GlosaryPage

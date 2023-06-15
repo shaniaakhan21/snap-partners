@@ -142,7 +142,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  return { props: { typeMarketing: params.type, ...(await serverSideTranslations(locale, ['footer', 'common', 'marketing'])) } }
+  return { props: { typeMarketing: params.type, ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST, 'marketing'])) } }
 }
 
 export default MarketingArticlePage

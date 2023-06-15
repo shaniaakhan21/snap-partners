@@ -33,7 +33,7 @@ IntegrousSignUpPage.getLayout = (page) => {
 export async function getStaticProps ({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['auth', 'footer', 'common']))
+      ...(await serverSideTranslations(locale, ['auth', ...APP_INFO.COMMON_NS_LIST]))
     }
   }
 }

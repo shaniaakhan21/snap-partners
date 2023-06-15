@@ -6,6 +6,8 @@ import { APP_INFO } from 'config/appInfo'
 import { Page } from 'lib/types'
 
 import { Button } from 'components/common/Button'
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {useTranslation} from "next-i18next";
 
 const { SEO } = APP_INFO
 
@@ -171,14 +173,26 @@ const PrivacyPolicyPage: Page = () => {
   )
 }
 
-PrivacyPolicyPage.getLayout = (page: ReactNode) => (
-  <>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Privacy Policy</title>
-    </Head>
+PrivacyPolicyPage.getLayout = (page: ReactNode) => {
+  const { t } = useTranslation()
 
-    {page}
-  </>
-)
+  return (
+    <>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - Privacy Policy</title>
+      </Head>
+
+      {page}
+    </>
+  )
+}
+
+export async function getStaticProps ({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST]))
+    }
+  }
+}
 
 export default PrivacyPolicyPage

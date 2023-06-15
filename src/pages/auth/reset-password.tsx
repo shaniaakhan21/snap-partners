@@ -3,6 +3,7 @@ import Head from 'next/head'
 
 import { APP_INFO } from 'config/appInfo'
 import { FormResetPassword } from 'components/page/reset-password/FormResetPassword'
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 const { SEO } = APP_INFO
 
@@ -33,5 +34,13 @@ ResetPasswordPage.getLayout = (page) => (
     {page}
   </>
 )
+
+export async function getStaticProps ({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['auth', ...APP_INFO.COMMON_NS_LIST]))
+    }
+  }
+}
 
 export default ResetPasswordPage

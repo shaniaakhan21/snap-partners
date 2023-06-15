@@ -125,5 +125,6 @@ export const APP_INFO = {
         link: 'https://play.google.com/store/apps/details?id=com.snapdelivered.restaurantapp'
       }
     }
-  }
+  },
+  COMMON_NS_LIST: ['common', 'footer']
 }

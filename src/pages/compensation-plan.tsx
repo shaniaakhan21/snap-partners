@@ -7,6 +7,8 @@ import { Spinner } from 'components/common/loaders'
 import { APP_INFO } from 'config/appInfo'
 import { GTMTrack } from 'lib/utils/gtm'
 import { CardComingSoon } from 'components/common/CardComingSoon'
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {useTranslation} from "next-i18next";
 // import { Document, Page } from "react-pdf";
 
 
@@ -52,14 +54,26 @@ const CompensationPlanPage: Page = () => {
   )
 }
 
-CompensationPlanPage.getLayout = (page: ReactNode) => (
-  <DashboardLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Compensation Plan</title>
-    </Head>
+CompensationPlanPage.getLayout = (page: ReactNode) => {
+  const { t } = useTranslation()
 
-    {page}
-  </DashboardLayout>
-)
+  return (
+    <DashboardLayout>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - Compensation Plan</title>
+      </Head>
+
+      {page}
+    </DashboardLayout>
+  )
+}
+
+export async function getStaticProps ({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST]))
+    }
+  }
+}
 
 export default CompensationPlanPage

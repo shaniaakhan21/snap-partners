@@ -26,7 +26,7 @@ export default LoginPage
 export async function getStaticProps ({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['auth', 'footer']))
+      ...(await serverSideTranslations(locale, ['auth', ...APP_INFO.COMMON_NS_LIST]))
     }
   }
 }

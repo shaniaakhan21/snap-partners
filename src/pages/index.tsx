@@ -154,22 +154,26 @@ const HomePage: Page = () => {
   )
 }
 
-HomePage.getLayout = (page) => (
-  <>
-    <Head>
-      <title>{SEO.TITLE_PAGE}</title>
-    </Head>
+HomePage.getLayout = (page) => {
+  const { t } = useTranslation()
 
-    {page}
+  return (
+    <>
+      <Head>
+        <title>{SEO.TITLE_PAGE}</title>
+      </Head>
 
-    <FooterPublic />
-  </>
-)
+      {page}
+
+      <FooterPublic />
+    </>
+  )
+}
 
 export async function getStaticProps ({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['footer', 'common', 'homepage']))
+      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST, 'homepage']))
     }
   }
 }

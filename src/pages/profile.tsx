@@ -19,7 +19,9 @@ import { FormUpdateEmail } from 'components/page/profile/update/FormUpdateEmail'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { EditPhone } from 'components/page/profile/update/EditPhone'
 import { AccountInfo } from 'components/page/profile/AccountInfo'
-import { FormUpdateUsename } from 'components/page/profile/update/FormUpdateUsename'
+import {FormUpdateUsename} from "../components/page/profile/update/FormUpdateUsename";
+import {useTranslation} from "next-i18next";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 const { SEO } = APP_INFO
 
@@ -77,7 +79,7 @@ const ProfilePage = ({ email, tokenExist }: { email: string, tokenExist: boolean
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query }: GetServerSidePropsContext) => {
+export const getServerSideProps: GetServerSideProps = async ({ query, locale }: GetServerSidePropsContext) => {
   const { token } = query
 
   let data: { [key: string]: any }
@@ -89,18 +91,22 @@ export const getServerSideProps: GetServerSideProps = async ({ query }: GetServe
   }
 
   return {
-    props: { email: data?.email ?? null, tokenExist: !!token }
+    props: { email: data?.email ?? null, tokenExist: !!token, ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST, 'profile'])) }
   }
 }
 
-ProfilePage.getLayout = (page: ReactNode) => (
-  <DashboardLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Profile</title>
-    </Head>
+ProfilePage.getLayout = (page: ReactNode) => {
+  const { t } = useTranslation()
 
-    {page}
-  </DashboardLayout>
-)
+  return (
+    <DashboardLayout>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - Profile</title>
+      </Head>
+
+      {page}
+    </DashboardLayout>
+  )
+}
 
 export default ProfilePage

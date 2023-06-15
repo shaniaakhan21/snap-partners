@@ -8,6 +8,8 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward'
 import PVComponent from 'components/common/dashBackOffice/PersonalVolume'
 import { useAuthStore } from 'lib/stores'
 import { useEffect, useState } from 'react'
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {APP_INFO} from "../config/appInfo";
 
 export interface PersonalVolumeInfo {
   pvValue: number,
@@ -24,7 +26,7 @@ const useStyles = makeStyles({
   }
 })
 
-const TotalLeg = () => {
+const BackOfficeDashboard = () => {
   const { auth } = useAuthStore()
   const classes = useStyles()
   const [personalVolData, setPersonalVolData] = useState<PersonalVolumeInfo>()
@@ -64,4 +66,12 @@ const TotalLeg = () => {
   )
 }
 
-export default TotalLeg
+export async function getStaticProps ({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST]))
+    }
+  }
+}
+
+export default BackOfficeDashboard

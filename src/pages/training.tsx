@@ -16,12 +16,15 @@ import { EmptyData } from 'components/common/empty/EmptyData'
 import { useNearScreen } from 'lib/hooks/useNearScreen'
 import { Spinner } from 'components/common/loaders'
 import { removeSpaces } from 'lib/utils/removeSpaces'
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {useTranslation} from "next-i18next";
 
 const { SEO } = APP_INFO
 
 const VISOR_ELEMENT_ID = 'visor-training'
 
 const TrainingPage: Page = () => {
+  const { t } = useTranslation('training')
   const { auth } = useAuthStore()
   const {
     trainings,
@@ -117,7 +120,7 @@ const TrainingPage: Page = () => {
       )}
 
       {!isFetchLoading && trainings[category] && trainings[category].length === 0 && (
-        <EmptyData label='Training videos not found.' />
+        <EmptyData label={t('empty_message')} />
       )}
 
       {!isFetchLoading && trainings[category] && trainings[category].length > 0 && (
@@ -148,14 +151,26 @@ const TrainingPage: Page = () => {
   )
 }
 
-TrainingPage.getLayout = (page: ReactNode) => (
-  <DashboardLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Training</title>
-    </Head>
+TrainingPage.getLayout = (page: ReactNode) => {
+  const { t } = useTranslation('training')
 
-    {page}
-  </DashboardLayout>
-)
+  return (
+    <DashboardLayout>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - {t('title')}</title>
+      </Head>
+
+      {page}
+    </DashboardLayout>
+  )
+}
+
+export async function getStaticProps ({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST, 'training']))
+    }
+  }
+}
 
 export default TrainingPage

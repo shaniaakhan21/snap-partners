@@ -19,6 +19,8 @@ import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { NewGenealogy } from 'components/page/genealogy/NewGenealogy'
 import { ReferralCards } from 'components/page/referrals/Cards'
 import { EmptyData } from 'components/common/empty/EmptyData'
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {useTranslation} from "next-i18next";
 
 const { SEO } = APP_INFO
 
@@ -206,16 +208,28 @@ const GenealogyPage: Page = () => {
   )
 }
 
-GenealogyPage.getLayout = (page: ReactNode) => (
-  <>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Genealogy</title>
-    </Head>
+GenealogyPage.getLayout = (page: ReactNode) => {
+  const { t } = useTranslation()
 
-    <DashboardLayout>
-      {page}
-    </DashboardLayout>
-  </>
-)
+  return (
+    <>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - Genealogy</title>
+      </Head>
+
+      <DashboardLayout>
+        {page}
+      </DashboardLayout>
+    </>
+  )
+}
+
+export async function getStaticProps ({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST, 'genealogy']))
+    }
+  }
+}
 
 export default GenealogyPage
