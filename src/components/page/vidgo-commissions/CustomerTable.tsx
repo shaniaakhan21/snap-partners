@@ -1,16 +1,17 @@
 import { calculateMonthlyEarning } from 'lib/utils/vidgoCalculates'
-import { useEffect, useState } from 'react'
-
-const tableHeaders = [
-  'Customer Name',
-  'Last Payment',
-  'Package',
-  'Join Date',
-  'Monthly Earning'
-]
+import {useEffect, useMemo, useState} from 'react'
+import {useTranslation} from "next-i18next";
 
 export const CustomerTable = ({ myCustomers }: { myCustomers: any[] }) => {
+  const { t } = useTranslation()
   const [customerNormalized, setCustomersNormalized] = useState([])
+  const tableHeaders = useMemo(() => [
+    t('customerTable.heading_name'),
+    t('customerTable.heading_last_payment'),
+    t('customerTable.heading_package'),
+    t('customerTable.heading_join_date'),
+    t('customerTable.heading_monthly_earning')
+  ], [t])
 
   useEffect(() => {
     const customersWithMonthlyEarning = calculateMonthlyEarning(myCustomers)

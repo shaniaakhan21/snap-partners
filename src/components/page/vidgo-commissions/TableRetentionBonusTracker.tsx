@@ -1,8 +1,10 @@
 import { IReport } from 'lib/types'
 import { getActivePayments, getVidgoCalculates } from 'lib/utils/vidgoCalculates'
 import { useEffect, useState } from 'react'
+import {useTranslation} from "next-i18next";
 
 export const TableRetentionBonusTracker = ({ report }: { report: IReport }) => {
+  const { t } = useTranslation('vidgo-reporting')
   const [dataTotalActiveCount, setTotalActiveCount] = useState({ month1: 0, month2: 0, month3: 0, month6: 0, month12: 0 })
   const [dataPayOfTotal, setPayOfTotal] = useState({ month1: 0, month2: 0, month3: 0, month6: 0, month12: 0 })
   const [dataEligibleBenchmark, setEligibleBenchmark] = useState({ month1: 0, month2: 0, month3: 0, month6: 0, month12: 0 })
@@ -28,17 +30,17 @@ export const TableRetentionBonusTracker = ({ report }: { report: IReport }) => {
           <thead>
             <tr>
               <th className="w-52">&nbsp;</th>
-              <th className="px-2">Month 1</th>
-              <th className="px-2">Month 2</th>
-              <th className="px-2">Month 3</th>
-              <th className="px-2">Month 6</th>
-              <th className="px-2">Month 12</th>
+              <th className="px-2">{t('bonusTracker.month_n', {  month: 1 })}</th>
+              <th className="px-2">{t('bonusTracker.month_n', {  month: 2 })}</th>
+              <th className="px-2">{t('bonusTracker.month_n', {  month: 3 })}</th>
+              <th className="px-2">{t('bonusTracker.month_n', {  month: 6 })}</th>
+              <th className="px-2">{t('bonusTracker.month_n', {  month: 12 })}</th>
             </tr>
           </thead>
           <tbody>
             <tr className="border-t border-zinc-300">
               <td className="px-4 py-2 border-r border-zinc-300">
-                Total Active Count
+                {t('bonusTracker.total_active_count')}
               </td>
               {
                 Object.keys(dataTotalActiveCount).map((key, index) => {
@@ -53,7 +55,7 @@ export const TableRetentionBonusTracker = ({ report }: { report: IReport }) => {
 
             <tr className="border-t border-zinc-300">
               <td className="px-4 py-2 border-r border-zinc-300">
-                Eligible Benchmark
+                {t('bonusTracker.eligible_benchmark')}
               </td>
 
               {
@@ -69,7 +71,7 @@ export const TableRetentionBonusTracker = ({ report }: { report: IReport }) => {
 
             <tr className="border-t border-zinc-300">
               <td className="px-4 py-2 border-r border-zinc-300">
-                % Pay of Total
+                {t('bonusTracker.pay_of_total')}
               </td>
 
               {
@@ -84,7 +86,7 @@ export const TableRetentionBonusTracker = ({ report }: { report: IReport }) => {
             </tr>
 
             <tr className="border-t border-zinc-300">
-              <td className="px-4 py-2 border-r border-zinc-300">Commission</td>
+              <td className="px-4 py-2 border-r border-zinc-300">{t('bonusTracker.commission')}</td>
 
               {
                 Object.keys(dataCommission).map((key, index) => {
@@ -101,7 +103,7 @@ export const TableRetentionBonusTracker = ({ report }: { report: IReport }) => {
       </div>
 
       <section className="text-center mt-4">
-        <h5 className="text-lg font-bold">Active Payments</h5>
+        <h5 className="text-lg font-bold">{t('bonusTracker.active_payments')}</h5>
       </section>
 
       <div className="overflow-x-scroll scroll-x-primary w-full h-full">
@@ -109,11 +111,11 @@ export const TableRetentionBonusTracker = ({ report }: { report: IReport }) => {
           <thead>
             <tr>
               <th className="w-52">&nbsp;</th>
-              <th className="px-4">Month 1</th>
-              <th className="px-4">Month 2</th>
-              <th className="px-4">Month 3</th>
-              <th className="px-4">Month 6</th>
-              <th className="px-4">Month 12</th>
+              <th className="px-4">{t('bonusTracker.month_n', { month: 1 })}</th>
+              <th className="px-4">{t('bonusTracker.month_n', { month: 2 })}</th>
+              <th className="px-4">{t('bonusTracker.month_n', { month: 3 })}</th>
+              <th className="px-4">{t('bonusTracker.month_n', { month: 6 })}</th>
+              <th className="px-4">{t('bonusTracker.month_n', { month: 12 })}</th>
             </tr>
           </thead>
 
