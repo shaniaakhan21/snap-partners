@@ -34,6 +34,36 @@ const ActiveRL = ({ activeRightLeg }:
   }
 }
 
+const calculateCurrentRank = (currentLeftTot: number, currentRightTot: number): string => {
+  const entries = Object.entries(rankCriteria)
+
+  console.log(currentLeftTot)
+  console.log(currentRightTot)
+  let currentRole = ''
+  const [initialKey, initialEntry] = entries[0]
+  const [lastKey, lastEntry] = entries[entries.length - 1]
+  if (currentLeftTot < initialEntry?.qvNonPL || currentRightTot < initialEntry?.qvPL) {
+    return currentRole
+  }
+
+  if (currentLeftTot >= lastEntry?.qvNonPL && currentRightTot >= lastEntry?.qvPL) {
+    return lastKey
+  }
+
+  for (let i = 0; i < entries.length; i++) {
+    const [currentKey, currentCriteria] = entries[i]
+    const nextIndex = i + 1
+    if (entries.length > nextIndex) {
+      const [nextKey, nextCriteria] = entries[nextIndex]
+      if (currentLeftTot < nextCriteria?.qvNonPL || currentRightTot < nextCriteria?.qvPL) {
+        currentRole = currentKey
+        break
+      }
+    }
+  }
+  return currentRole
+}
+
 const calculateCompletionPercentageAndNextRank = (currentRank: string, totalLeftLeg: number, totalRightLeg: number): {
   percentage: number, nextRank: string, teamVol: number, nonPowerLeg: number, powerLeg: number
 } => {
@@ -43,6 +73,9 @@ const calculateCompletionPercentageAndNextRank = (currentRank: string, totalLeft
   let powerLeg = null
   let percentage = null
   let nextRank = ''
+  if (!currentRank) {
+    nextRank = rankKeys[0]
+  }
   rankKeys.forEach((rank, index) => {
     if (rank.toLowerCase() === currentRank.toLocaleLowerCase()) {
       if (index !== -1 && index < rankKeys.length - 1) {
@@ -52,6 +85,12 @@ const calculateCompletionPercentageAndNextRank = (currentRank: string, totalLeft
         powerLeg = rankCriteria[nextRank]?.qvPL
         percentage = Math.round(((totalLeftLeg / powerLeg) + (totalRightLeg / nonPowerLeg)) * 100)
       }
+    }
+    if (nextRank) {
+      teamVol = rankCriteria[nextRank]?.teamVolume
+      nonPowerLeg = rankCriteria[nextRank]?.qvNonPL
+      powerLeg = rankCriteria[nextRank]?.qvPL
+      percentage = Math.round(((totalLeftLeg / powerLeg) + (totalRightLeg / nonPowerLeg)) * 100)
     }
   })
   return {
@@ -63,13 +102,16 @@ const calculateCompletionPercentageAndNextRank = (currentRank: string, totalLeft
   }
 }
 
-export default function RankTracker ({ pvInfoCurrentMonth, monthlyMilestoneData, currentRank }:
-  {pvInfoCurrentMonth: PersonalVolumeInfo, monthlyMilestoneData: MonthlyMilestoneResponse, currentRank: string}) {
+export default function RankTracker ({ pvInfoCurrentMonth, monthlyMilestoneData }:
+  {pvInfoCurrentMonth: PersonalVolumeInfo, monthlyMilestoneData: MonthlyMilestoneResponse}) {
   const [processedData, setPercentage] = useState({ percentage: 0, nextRank: '', teamVol: 0, nonPowerLeg: 0, powerLeg: 0 })
   useEffect(() => {
-    const data = calculateCompletionPercentageAndNextRank(currentRank, monthlyMilestoneData?.leftLegQVTot, monthlyMilestoneData?.rightLegQVTot)
+    const legLegQVTot = monthlyMilestoneData?.leftLegQVTot
+    const rightLegQVTot = monthlyMilestoneData?.rightLegQVTot
+    const currentRank = calculateCurrentRank(legLegQVTot, rightLegQVTot)
+    const data = calculateCompletionPercentageAndNextRank(currentRank, legLegQVTot, rightLegQVTot)
     setPercentage({ ...data })
-  }, [monthlyMilestoneData, currentRank])
+  }, [monthlyMilestoneData])
   return (
     <>
       <div className="w-full max-w-full p-4 space-y-2 h-fit bg-white rounded-xl  mt-4">
