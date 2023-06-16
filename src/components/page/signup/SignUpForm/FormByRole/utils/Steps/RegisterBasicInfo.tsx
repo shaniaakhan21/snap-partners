@@ -125,13 +125,23 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
     signUpas = 'Sign up as an'
   }
 
+  let roleText = capitalizeFirstLetter(referralLink.role)
+
+  if (referralLink.role === 'integrousAssociate') {
+    roleText = 'Snap Partners Associate'
+  }
+
+  if (referralLink.role === 'integrousCustomer') {
+    roleText = 'Snap Partners Customer to purchase Integrous Products'
+  }
+
   const router = useRouter()
   const loginURL = router.pathname === '/auth/signup-integrous' ? '/auth/login-integrous' : '/auth/login'
 
   return (
     <div className='max-w-md mx-auto w-full'>
       <p className='font-bold text-4xl text-[#18203F]'>{signUpas}{' '}
-        <span className='text-primary-500'>{capitalizeFirstLetter(referralLink.role)}</span>
+        <span className='text-primary-500'>{roleText}</span>
       </p>
       <p className='text-gray-500'>Welcome! register to continue.</p>
 
