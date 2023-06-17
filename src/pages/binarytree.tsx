@@ -199,7 +199,7 @@ const ComingSoon: PageNext = () => {
 
           )}
           {!['Blocked', 'Available'].includes(nodeData.name) && (
-            <div className="oc-view" style={{ position: 'relative' }}>{nodeData.PV}</div>
+            <span className="oc-view" style={{ position: 'relative' }}>{nodeData.PV}</span>
           )}
           {nodeData.title}
         </div>
