@@ -74,10 +74,10 @@ server {
     error_log off;
     root /home/gitlab-runner/snap-admin-$SUBDOMAIN/build;
     location ~ ^.+\..+$ {
-      try_files $uri =404;
+      try_files \$uri =404;
     }
     location / {
-      try_files $uri $uri/ /index.html;
+      try_files \$uri \$uri/ /index.html;
     }
     location ~ ^/api/(.+) {
       rewrite ^/api(.*)\$ \$1 break;

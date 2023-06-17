@@ -2,10 +2,12 @@ import Checkbox, { CheckboxProps } from '@mui/material/Checkbox'
 import { Close as CrossIcon } from '@mui/icons-material'
 
 interface CustomCheckboxProps extends CheckboxProps {
-  label: string
+  label: string,
+  checkBoxSize: number,
+  labelSize: string
 }
 
-export const CustomCheckBoxUnCheckedMilestone = ({ label, ...restProps }: CustomCheckboxProps) => {
+export const CustomCheckBoxUnCheckedMilestone = ({ label, checkBoxSize, labelSize, ...restProps }: CustomCheckboxProps) => {
   return (
     <div className="flex items-center">
       <Checkbox
@@ -19,15 +21,17 @@ export const CustomCheckBoxUnCheckedMilestone = ({ label, ...restProps }: Custom
           '&.Mui-checked': {
             color: '#54A52C'
           },
-          '& .MuiSvgIcon-root': { fontSize: 55 }
+          '& .MuiSvgIcon-root': { fontSize: checkBoxSize }
         }}
       />
-      <p className="ml-2 text-lg">{label}</p>
+      {labelSize === 'lg' && <p className="ml-2 text-lg">{label}</p>}
+      {labelSize === 'sm' && <p className="ml-2 text-sm">{label}</p>}
+      {labelSize === 'xsm' && <p className="ml-2 text-xsm">{label}</p>}
     </div>
   )
 }
 
-export const CustomCheckBoxCheckedMilestone = ({ label, ...restProps }: CustomCheckboxProps) => {
+export const CustomCheckBoxCheckedMilestone = ({ label, checkBoxSize, labelSize, ...restProps }: CustomCheckboxProps) => {
   return (
     <div className="flex items-center">
       <Checkbox defaultChecked
@@ -38,10 +42,12 @@ export const CustomCheckBoxCheckedMilestone = ({ label, ...restProps }: CustomCh
           '&.Mui-checked': {
             color: '#54A52C'
           },
-          '& .MuiSvgIcon-root': { fontSize: 55 }
+          '& .MuiSvgIcon-root': { fontSize: checkBoxSize }
         }}
       />
-      <p className="ml-2 text-lg">{label}</p>
+      {labelSize === 'lg' && <p className="ml-2 text-lg">{label}</p>}
+      {labelSize === 'sm' && <p className="ml-2 text-sm">{label}</p>}
+      {labelSize === 'xsm' && <p className="ml-2 text-xsm">{label}</p>}
     </div>
   )
 }
