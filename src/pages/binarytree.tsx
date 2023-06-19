@@ -200,9 +200,20 @@ const ComingSoon: PageNext = () => {
             }} className="oc-view" style={{ position: 'absolute', right: 5 }}><i className="fa-solid fa-eye"></i></div>
 
           )}
+          {!['Blocked', 'Available'].includes(nodeData.name) && (
+            <span className="oc-view" style={{ position: 'relative' }}>{nodeData.PV}</span>
+          )}
           {nodeData.title}
         </div>
-        <div className="oc-content">{nodeData.subtitle}</div>
+        <div className="oc-content">
+        {!['Blocked', 'Available'].includes(nodeData.name) && (
+            <span>{nodeData.LL}</span>
+          )}
+        <br/>
+        {!['Blocked', 'Available'].includes(nodeData.name) && (
+            <span>{nodeData.RL}</span>
+          )}
+        </div>
       </div>
     )
   }
