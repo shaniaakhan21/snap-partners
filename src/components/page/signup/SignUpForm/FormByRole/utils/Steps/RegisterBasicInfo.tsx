@@ -126,13 +126,14 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
   }
 
   let roleText = capitalizeFirstLetter(referralLink.role)
-
+  let subtext = ''
   if (referralLink.role === 'integrousAssociate') {
     roleText = 'Snap Partners Associate'
   }
 
   if (referralLink.role === 'integrousCustomer') {
-    roleText = 'Snap Partners Customer to purchase Integrous Products'
+    roleText = 'Snap Partners Customer'
+    subtext = 'to purchase Integrous Products'
   }
 
   const router = useRouter()
@@ -143,6 +144,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       <p className='font-bold text-4xl text-[#18203F]'>{signUpas}{' '}
         <span className='text-primary-500'>{roleText}</span>
       </p>
+      <p className='text-[#18203F] font-bold text-md mb-2'>{subtext}</p>
       <p className='text-gray-500'>Welcome! register to continue.</p>
 
       <form className='mt-6 w-full' onSubmit={handleSubmit(onSubmit)}>
