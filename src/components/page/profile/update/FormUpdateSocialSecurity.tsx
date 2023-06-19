@@ -12,6 +12,7 @@ import { GTMTrack } from 'lib/utils/gtm'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { InputProfile } from '../commons/InputProfile'
 import { Button } from 'components/common/Button'
+import { useTranslation } from 'next-i18next'
 
 interface IFormUpdatePhoneProps {
   auth: IAuth
@@ -25,6 +26,7 @@ interface IDataForm {
 }
 
 export const FormUpdateSocialSecurity = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IFormUpdatePhoneProps) => {
+  const { t } = useTranslation('profile')
   const { handleSubmit, register, reset, formState: { errors }, setError } = useForm<IDataForm>()
 
   const [isLoading, setIsLoading] = useState(false)
@@ -58,7 +60,7 @@ export const FormUpdateSocialSecurity = ({ auth, setAuth, typeUpdate, setTypeUpd
   return (
     <div className='max-w-3xl mx-auto'>
       <section>
-        <h3 className='text-xl font-bold'>Change Social Security Number</h3>
+        <h3 className='text-xl font-bold'>{t('update_ssn.title')}</h3>
       </section>
 
       <br />
@@ -69,7 +71,7 @@ export const FormUpdateSocialSecurity = ({ auth, setAuth, typeUpdate, setTypeUpd
           inputId='email'
           inputType='email'
           labelFor='email'
-          labelName='Current Social Security Number'
+          labelName={t('update_ssn.current_ssn')}
           value={auth.socialSecurityNumber}
         />
 
@@ -77,24 +79,24 @@ export const FormUpdateSocialSecurity = ({ auth, setAuth, typeUpdate, setTypeUpd
           inputId='newEmail'
           inputType='text'
           labelFor='newEmail'
-          labelName='New Social Security Number'
-          placeholder='Insert the new Social Security Number'
+          labelName={t('update_ssn.new_ssn')}
+          placeholder={t('update_ssn.new_ssn_placeholder')}
           register={register}
           rules={{ // TODO: REFACTOR - It is the same as the login with email
-            required: { value: true, message: 'Social Security Number *' },
+            required: { value: true, message: t('update_ssn.new_ssn_validation_required') },
             pattern: {
               value:
               /^(?!666|000|9\d{2})\d{3}-(?!00)\d{2}-(?!0{4})\d{4}$|^(?!00)\d{2}(?!0{7})\d{7}$/,
-              message: 'Enter a valid Social Security Number *'
+              message: t('update_ssn.new_ssn_validation_pattern')
             }
           }}
           error={errors.newEmail}
         />
         <br />
         <div className='flex items-center'>
-          <Button type='submit' classes='mr-2'>Save</Button>
+          <Button type='submit' classes='mr-2'>{t('update_ssn.save')}</Button>
           <Button onClick={() => setTypeUpdate(null)}>
-            Cancel
+            {t('update_ssn.cancel')}
           </Button>
         </div>
       </form>

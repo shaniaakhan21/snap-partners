@@ -8,6 +8,7 @@ import axios from 'axios'
 import { useAuthStore, useLayoutConfig } from 'lib/stores'
 import { API } from 'config/api'
 import { GTMTrack } from 'lib/utils/gtm'
+import {useTranslation} from "next-i18next";
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -45,6 +46,8 @@ const Table = (props) => {
 }
 
 export const Unilevel = () => {
+  const { t } = useTranslation('genealogy')
+
   const { genealogy: genealogyLayoutConfig } = useLayoutConfig()
   const { auth } = useAuthStore()
   const user = {
@@ -80,7 +83,7 @@ export const Unilevel = () => {
     }
   }
 
-  const columns = [
+  const columns = useMemo(() => [
     { field: 'id', headerName: 'User Id', minWidth: 130, flex: 1 },
     { field: 'name', headerName: 'Name', minWidth: 130, flex: 1 },
     { field: 'phoneNumber', headerName: 'Phone Number', minWidth: 130, flex: 1 },
@@ -93,7 +96,7 @@ export const Unilevel = () => {
         return <Button onClick={() => { openUser(item.id, item.row.name) }} variant="contained" color={'primary'} size={'small'}>View User</Button>
       }
     }
-  ]
+  ].map(data => ({ ...data, headerName: t(data.field) })), [t])
 
   const handleToggleGenealogy = () => {
     genealogyLayoutConfig.toggleTypeGenealogy()
@@ -108,8 +111,8 @@ export const Unilevel = () => {
           <Grid container className={classes.title} >
             <Grid container item xs={12} md={12} justifyContent={'space-between'} alignItems='center' style={{ marginBottom: 20 }} >
               <Grid justifyContent='flex-end' alignItems='center' style={{ display: 'flex' }}>
-                <TextField value={searchId} onChange={(e) => { setsearchId(e.target.value) }} size={'small'} variant="outlined" placeholder="Search by ID/Name/Phone" InputProps={{ startAdornment: <SearchIcon fontSize="small" /> }} />
-                <Button disabled={(searchId.length === 0)} onClick={() => { search() }} variant="contained" className={classes.Btn}>Search</Button>
+                <TextField value={searchId} onChange={(e) => { setsearchId(e.target.value) }} size={'small'} variant="outlined" placeholder={t('old.search_placeholder')} InputProps={{ startAdornment: <SearchIcon fontSize="small" /> }} />
+                <Button disabled={(searchId.length === 0)} onClick={() => { search() }} variant="contained" className={classes.Btn}>{t('old.search')}</Button>
               </Grid>
 
               <Grid md={6} justifyContent='flex-end' alignItems='center' style={{ display: 'flex' }}>
@@ -125,8 +128,8 @@ export const Unilevel = () => {
                   <span className='ml-3 text-sm font-medium'>
                     {
                       genealogyLayoutConfig.isNewGenealogy
-                        ? 'New Genealogy Layout'
-                        : 'Legacy Genealogy Layout'
+                        ? t('new_genealogy_layout')
+                        : t('old_genealogy_layout')
                     }
                   </span>
                 </label>

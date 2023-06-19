@@ -16,6 +16,8 @@ import {useTranslation} from "next-i18next";
 const { SEO } = APP_INFO
 
 const ComingSoon: PageNext = () => {
+  const { t } = useTranslation('tree')
+
   const { auth, setAuth, removeAuth } = useAuthStore()
   const [userId, setUserId] = useState(auth.id)
   const [tree, setTree] = useState({})
@@ -79,10 +81,10 @@ const ComingSoon: PageNext = () => {
     <>
       <div className="flex justify-center gap-2">
         {history.length > 0 && (
-          <button onClick={() => { onGoBack() }} className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">GO BACK</button>
+          <button onClick={() => { onGoBack() }} className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">{t('go_back')}</button>
         )}
         {auth.id !== userId && (
-          <button onClick={() => { onToTop() }} className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-50  py-3 px-4 rounded-l-full rounded-r-full">GO TO TOP</button>
+          <button onClick={() => { onToTop() }} className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-50  py-3 px-4 rounded-l-full rounded-r-full">{t('go_to_top')}</button>
         )}
       </div>
       <OrganizationChart
@@ -97,12 +99,12 @@ const ComingSoon: PageNext = () => {
 }
 
 ComingSoon.getLayout = (page: ReactNode) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('tree')
 
   return (
     <DashboardLayout>
       <Head>
-        <title>{SEO.TITLE_PAGE} - Coming Soon</title>
+        <title>{SEO.TITLE_PAGE} - {t('title')}</title>
       </Head>
 
       {page}
@@ -113,7 +115,7 @@ ComingSoon.getLayout = (page: ReactNode) => {
 export async function getStaticProps ({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST]))
+      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST, 'tree']))
     }
   }
 }

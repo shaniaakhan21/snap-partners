@@ -17,8 +17,11 @@ import EmailIcon from '@material-ui/icons/Email'
 import PhoneIcon from '@material-ui/icons/Phone'
 import { useAuthStore } from 'lib/stores'
 import { API } from 'config/api'
+import {useTranslation} from "next-i18next";
 
 export const ModalUninivelUser = ({ id, name, close, open, openUser }) => {
+  const { t } = useTranslation('genealogy')
+
   const { auth } = useAuthStore()
   const [user, setUser] = useState({})
   const [userData, setUserData] = useState(null)
@@ -57,7 +60,7 @@ export const ModalUninivelUser = ({ id, name, close, open, openUser }) => {
     <GeneralModal onClose={() => { close(false) }} open={open} showClose={true}>
       <Grid item xs={12} style={{ marginBottom: 15 }}>
         <Typography sx={{ mt: 4, mb: 2 }} variant="h6" component="div">
-          Searching ID: {id}
+          {t('old.user_model.searching_id')}: {id}
         </Typography>
       </Grid>
       {loading && (
@@ -69,7 +72,7 @@ export const ModalUninivelUser = ({ id, name, close, open, openUser }) => {
             <ListItemIcon>
               <PersonIcon />
             </ListItemIcon>
-            <ListItemText primary={`Sponsor: ${userData.sponsor.id !== null ? `${userData.sponsor.name} [${userData.sponsor.id}]` : 'No Sponsor'}`} />
+            <ListItemText primary={`${userData.sponsor.id !== null ? t('old.user_model.sponsor', { name: `${userData.sponsor.name} [${userData.sponsor.id}]` }) : t('old.user_model.no_sponsor')}`} />
             {/* {(userData['sponsor.id'] !== null) && (
               <Button onClick={(e) => { e.stopPropagation(); openUser(userData['sponsor.id'], userData['sponsor.name']) }} size={'small'} variant="contained">View Sponsor</Button>
             )} */}

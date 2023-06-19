@@ -17,17 +17,23 @@ const { SEO } = APP_INFO
 const PDFViewer = dynamic(
   () => import('../components/page/compensation-plan/PDFViewer'),
   {
-    loading: () => (
-      <div className='flex flex-col justify-center items-center'>
-        <Spinner />
-        <span>Loading Compensation Plan...</span>
-      </div>
-    ),
+    loading: () => {
+      const { t } = useTranslation('compensation-plan')
+
+      return (
+        <div className='flex flex-col justify-center items-center'>
+          <Spinner />
+          <span>{t('loading_compensation_plan')}</span>
+        </div>
+      )
+    },
     ssr: false
   }
 )
 
 const CompensationPlanPage: Page = () => {
+  const { t } = useTranslation('compensation-plan')
+
   return (
     <div className='w-full text-center'>
       {/* <h4 className='font-black text-4xl md:text-5xl'>Compensation Plan</h4>
@@ -43,7 +49,7 @@ const CompensationPlanPage: Page = () => {
           className='px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed bg-black-primary text-white bg-primary-500 rounded-full font-semibold focus:outline-none hover:opacity-90'
           onClick={() => GTMTrack.downloadCompensationPlan('new-plan-v2.pdf')}
         >
-          Download Compensation Plan
+          {t('download_compensation_plan')}
         </a>
       </div>
 
@@ -55,12 +61,12 @@ const CompensationPlanPage: Page = () => {
 }
 
 CompensationPlanPage.getLayout = (page: ReactNode) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('compensation-plan')
 
   return (
     <DashboardLayout>
       <Head>
-        <title>{SEO.TITLE_PAGE} - Compensation Plan</title>
+        <title>{SEO.TITLE_PAGE} - {t('title')}</title>
       </Head>
 
       {page}
@@ -71,7 +77,7 @@ CompensationPlanPage.getLayout = (page: ReactNode) => {
 export async function getStaticProps ({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST]))
+      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST, 'compensation-plan']))
     }
   }
 }

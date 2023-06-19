@@ -1,5 +1,6 @@
 import { Button } from 'components/common/Button'
 import { InputPhone } from 'components/page/signup/SignUpForm/FormByRole/utils/InputPhone'
+import {useTranslation} from "next-i18next";
 
 export const FormSendPhone = ({
   handleSubmitPhone,
@@ -9,10 +10,12 @@ export const FormSendPhone = ({
   control,
   errors
 }) => {
+  const { t } = useTranslation('profile')
+
   return (
     <form onSubmit={handleSubmitPhone(onSubmitPhone)} className='w-full'>
       <InputPhone
-        label='Phone'
+        label={t('send_phone.input')}
         isRequired
         register={registerPhone}
         errors={errors}
@@ -22,11 +25,11 @@ export const FormSendPhone = ({
 
       <div className='mt-4 flex items-center'>
         <Button type='submit' classes='text-sm mr-2'>
-          Send
+          {t('send_phone.send')}
         </Button>
 
         <Button onClick={() => setTypeUpdate(null)} classes='text-sm'>
-          Cancel
+          {t('send_phone.cancel')}
         </Button>
       </div>
     </form>

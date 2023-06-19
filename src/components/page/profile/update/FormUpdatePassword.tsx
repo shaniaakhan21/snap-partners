@@ -14,6 +14,7 @@ import { signInRulesConfig } from 'components/page/login/LoginForm/utils/formRul
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { InputProfile } from '../commons/InputProfile'
 import { Button } from 'components/common/Button'
+import { useTranslation } from 'next-i18next'
 
 interface IFormUpdatePasswordProps {
   auth: IAuth
@@ -29,6 +30,7 @@ interface IDataForm {
 }
 
 export const FormUpdatePassword = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IFormUpdatePasswordProps) => {
+  const { t } = useTranslation('profile')
   const { handleSubmit, register, reset, formState: { errors }, setError } = useForm<IDataForm>()
 
   const [isLoading, setIsLoading] = useState(false)
@@ -37,14 +39,14 @@ export const FormUpdatePassword = ({ auth, setAuth, typeUpdate, setTypeUpdate }:
     setIsLoading(true)
 
     if (dataForm.confirmNewPassword !== dataForm.newPassword) {
-      setError('confirmNewPassword', { message: 'The new confirm password is not equal to the new password' })
+      setError('confirmNewPassword', { message: t('update_password.error_password_confirm_not_equal') })
       setIsLoading(false)
       return
     }
 
     if (dataForm.password === dataForm.newPassword) {
-      setError('newPassword', { message: 'The current password is equal to the new password' })
-      setError('confirmNewPassword', { message: 'The current password is equal to the confirm new password' })
+      setError('newPassword', { message: t('update_password.error_password_same_as_old') })
+      setError('confirmNewPassword', { message: t('update_password.error_password_same_as_old') })
       setIsLoading(false)
       return
     }
@@ -111,8 +113,8 @@ export const FormUpdatePassword = ({ auth, setAuth, typeUpdate, setTypeUpdate }:
   return (
     <div className='max-w-3xl mx-auto'>
       <section>
-        <h3 className='text-xl font-bold'>Change password</h3>
-        <p className='text-gray-800'>It should be different from last password</p>
+        <h3 className='text-xl font-bold'>{t('update_password.title')}</h3>
+        <p className='text-gray-800'>{t('update_password.subtitle')}</p>
       </section>
 
       <br />
@@ -123,8 +125,8 @@ export const FormUpdatePassword = ({ auth, setAuth, typeUpdate, setTypeUpdate }:
           inputType='password'
           isAPasswordInput
           labelFor='currentPassword'
-          labelName='Current Password'
-          placeholder='Insert your current password'
+          labelName={t('update_password.current_password')}
+          placeholder={t('update_password.current_password_placeholder')}
           register={register}
           rules={signInRulesConfig.password}
           error={errors.password}
@@ -135,8 +137,8 @@ export const FormUpdatePassword = ({ auth, setAuth, typeUpdate, setTypeUpdate }:
           inputType='password'
           isAPasswordInput
           labelFor='newPassword'
-          labelName='New Password'
-          placeholder='Insert the new password'
+          labelName={t('update_password.new_password')}
+          placeholder={t('update_password.new_password_placeholder')}
           register={register}
           rules={signInRulesConfig.password}
           error={errors.newPassword}
@@ -147,8 +149,8 @@ export const FormUpdatePassword = ({ auth, setAuth, typeUpdate, setTypeUpdate }:
           inputType='password'
           isAPasswordInput
           labelFor='confirmNewPassword'
-          labelName='Confirm New Password'
-          placeholder='Insert the new password'
+          labelName={t('update_password.confirm_password')}
+          placeholder={t('update_password.confirm_password_placeholder')}
           register={register}
           rules={signInRulesConfig.password}
           error={errors.confirmNewPassword}
@@ -157,9 +159,9 @@ export const FormUpdatePassword = ({ auth, setAuth, typeUpdate, setTypeUpdate }:
         <br />
 
         <div className='flex items-center'>
-          <Button type='submit' classes='mr-2'>Save</Button>
+          <Button type='submit' classes='mr-2'>{t('update_password.save')}</Button>
           <Button onClick={() => setTypeUpdate(null)}>
-            Cancel
+            {t('update_password.cancel')}
           </Button>
         </div>
       </form>

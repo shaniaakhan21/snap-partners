@@ -51,6 +51,7 @@ interface IDataFormSearch {
 }
 
 const GenealogyPage: Page = () => {
+  const { t } = useTranslation('genealogy')
   const { handleSubmit, register } = useForm<IDataFormSearch>()
   const { genealogy: genealogyLayoutConfig } = useLayoutConfig()
   const store = useAuthStore()
@@ -121,7 +122,7 @@ const GenealogyPage: Page = () => {
     if (levels?.length === 0) {
       return (
         <div className='w-full flex flex-col justify-center items-center min-h-[80vh]'>
-           <EmptyData label='You have no referrals yet' />
+           <EmptyData label={t('no_data')} />
         </div>
       )
     }
@@ -130,25 +131,25 @@ const GenealogyPage: Page = () => {
   if (levels?.length === 0) {
     return (
       <div className='w-full flex flex-col justify-center items-center min-h-[80vh]'>
-        <EmptyData label='You have no referrals yet' />
+        <EmptyData label={t('no_data')} />
 
         <div className='w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-center justify-center justify-items-center gap-4 mt-8'>
           <ReferralCards
-            title='Refer Customers'
+            title={t('refer_customers')}
             ilustration={<CustomerIcon />}
             link={`${auth.referralLink}&role=${ROLES.CUSTOMER}` || 'With Out Link'}
             newUser={false}
             classes='col-span-1'
           />
           <ReferralCards
-            title='Driver'
+            title={t('refer_drivers')}
             ilustration={<DriverIcon />}
             link={`${auth.referralLink}&role=${ROLES.DRIVER}` || 'With Out Link'}
             newUser={false}
             classes='col-span-1'
           />
           <ReferralCards
-            title='Merchant Customers'
+            title={t('refer_merchants')}
             ilustration={<MerchantIcon />}
             link={`${auth.referralLink}&role=${ROLES.MERCHANT}` || 'With Out Link'}
             newUser={false}
@@ -209,12 +210,12 @@ const GenealogyPage: Page = () => {
 }
 
 GenealogyPage.getLayout = (page: ReactNode) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('genealogy')
 
   return (
     <>
       <Head>
-        <title>{SEO.TITLE_PAGE} - Genealogy</title>
+        <title>{SEO.TITLE_PAGE} - {t('title')}</title>
       </Head>
 
       <DashboardLayout>
@@ -227,7 +228,7 @@ GenealogyPage.getLayout = (page: ReactNode) => {
 export async function getStaticProps ({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST, 'genealogy']))
+      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST, 'genealogy', 'referrals']))
     }
   }
 }

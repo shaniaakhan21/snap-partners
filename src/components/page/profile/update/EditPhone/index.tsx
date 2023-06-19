@@ -14,6 +14,7 @@ import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { FormChangePhone } from './FormChangePhone'
 import { FormSendPhone } from './FormSendPhone'
 import { VerifyCode } from './VerifyCode'
+import {Trans, useTranslation} from "next-i18next";
 
 interface IFormUpdatePhoneProps {
   auth: IAuth
@@ -23,6 +24,7 @@ interface IFormUpdatePhoneProps {
 }
 
 export const EditPhone = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IFormUpdatePhoneProps) => {
+  const { t }  = useTranslation('profile')
   const { register: registerPhone, handleSubmit: handleSubmitPhone, formState: { errors }, control } = useForm()
   const { handleSubmit } = useForm()
   const [isPhoneEditable, setIsPhoneEditable] = useState(false)
@@ -91,7 +93,7 @@ export const EditPhone = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IFormUpd
 
     GTMTrack.editProfile(typeUpdate)
     setIsLoading(false)
-    toast('Phone Updated', { type: 'success' })
+    toast(t('update_phone.success_message'), { type: 'success' })
     setAuth({ ...auth, phoneNumber })
     setTypeUpdate(null)
   }
@@ -148,9 +150,11 @@ export const EditPhone = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IFormUpd
       {
         !phoneSent && (
           <section className='text-gray-800'>
-            <h3 className='font-bold text-2xl'>Change Your Phone</h3>
-            <span>It should be different from last Phone</span>
-            <p className='text-sm'>Your current phone is: <span className='font-bold'>{auth.phoneNumber}</span></p>
+            <h3 className='font-bold text-2xl'>{t('update_phone.title')}</h3>
+            <span>{t('update_phone.subtitle')}</span>
+            <p className='text-sm'>
+              <Trans i18nKey='profile:update_phone.current_number' components={{ span: <span className='font-bold' /> }} values={{ phoneNumber: auth.phoneNumber }} />
+            </p>
           </section>
         )
       }
