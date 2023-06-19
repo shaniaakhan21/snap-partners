@@ -21,6 +21,7 @@ import {useTranslation} from "next-i18next";
 const { SEO } = APP_INFO
 
 const MyWalletPage: Page = () => {
+  const { t } = useTranslation('my-wallet')
   const { transactions, loading, refresh } = useWallet()
   const { auth, setAuth, removeAuth } = useAuthStore()
   const [balance, setBalance] = useState('')
@@ -73,10 +74,10 @@ const MyWalletPage: Page = () => {
     setloadingButton(false)
     await refresh()
     if (res.status !== 200) {
-      toast('Error while processing transfer, contact support', { type: 'error' })
+      toast(t('error_transfer'), { type: 'error' })
       return
     }
-    toast('Transfer processed succesfully', { type: 'success' })
+    toast(t('success_transter'), { type: 'success' })
   }
 
   return (
@@ -93,12 +94,12 @@ const MyWalletPage: Page = () => {
         <>
           <div className='max-w-xl mx-auto w-full text-center mb-2'>
             <Button disabled={!enableWithdraw} onClick={() => { fnOpenModalConfirmation() }} type='submit' classes=' mr-1 text-sm bg-primary-500'>
-                      Withdraw Available Balance
+              {t('withdraw_button')}
             </Button>
             <br/>
-            <span className='font-semibold text-lg'>Current Balance: ${balance}</span>
+            <span className='font-semibold text-lg'>{t('current_balance', { balance })}</span>
             <br/>
-            <span className='font-semibold text-sm'>minimum balance to withdraw is $5.00</span>
+            <span className='font-semibold text-sm'>{t('min_withdraw')}</span>
           </div>
           {modalConfirmationIsOpen && (
             <Overlay onClick={fnCloseModalConfirmation}>
@@ -114,16 +115,16 @@ const MyWalletPage: Page = () => {
                   <>
                     <div className={'w-full referral-list--height rounded-sm bg-white p-4 overflow-y-auto scroll-primary lg:block'}>
                       <div className='max-w-xl mx-auto w-full text-center mb-3'>
-                        <span className='font-semibold text-lg'>Withdraw Balance</span>
+                        <span className='font-semibold text-lg'>{t('withdraw_balance.title')}</span>
                       </div>
-                              In order to withdraw your balance, please add your bank account in profile
+                      {t('withdraw_balance.subtitle')}
                     </div>
                     <div className='max-w-xl mx-auto w-full text-center mb-1'>
                       <Button onClick={() => { window.location.href = '/profile' }} classes=' mr-1 text-sm '>
-                                Go to Profile
+                        {t('withdraw_balance.goto_profile')}
                       </Button>
                       <Button onClick={() => { fnOpenModalConfirmationManually() }} style={{ backgroundColor: 'grey' }} classes=' mr-1 text-sm '>
-                                Cancel
+                        {t('withdraw_balance.cancel')}
                       </Button>
                     </div>
                   </>
@@ -133,16 +134,16 @@ const MyWalletPage: Page = () => {
                   <>
                     <div className={'w-full referral-list--height rounded-sm bg-white p-4 overflow-y-auto scroll-primary lg:block'}>
                       <div className='max-w-xl mx-auto w-full text-center mb-3'>
-                        <span className='font-semibold text-lg'>Withdraw Balance</span>
+                        <span className='font-semibold text-lg'>{t('confirmation.title')}</span>
                       </div>
-                                Are you sure you want to withdraw ${balance} to your bank account ending in {bank_information?.accountNumber.substr(-4)}
+                      {t('confirmation.message', { balance, accountNumber: bank_information?.accountNumber.substr(-4) })}
                     </div>
                     <div className='max-w-xl mx-auto w-full text-center mb-1'>
                       <Button onClick={() => { withdraw() }} classes=' mr-1 text-sm '>
-                                  Withdraw
+                        {'withdraw_balance.withdraw'}
                       </Button>
                       <Button onClick={() => { fnOpenModalConfirmationManually() }} style={{ backgroundColor: 'grey' }} classes=' mr-1 text-sm '>
-                                  Cancel
+                        {t('withdraw_balance.cancel')}
                       </Button>
                     </div>
                   </>
@@ -154,7 +155,7 @@ const MyWalletPage: Page = () => {
           { transactions.length === 0
             ? (
               <div className='flex justify-center items-center'>
-                <EmptyData label='No transactions found' />
+                <EmptyData label={t('no_transactions')} />
               </div>
             )
             : (
@@ -168,12 +169,12 @@ const MyWalletPage: Page = () => {
 }
 
 MyWalletPage.getLayout = (page: ReactNode) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('my-wallet')
 
   return (
     <DashboardLayout>
       <Head>
-        <title>{SEO.TITLE_PAGE} - My Wallet</title>
+        <title>{SEO.TITLE_PAGE} - {t('title')}</title>
       </Head>
 
       {page}
@@ -184,7 +185,7 @@ MyWalletPage.getLayout = (page: ReactNode) => {
 export async function getStaticProps ({ locale }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST]))
+      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST, 'my-wallet']))
     }
   }
 }
