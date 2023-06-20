@@ -8,6 +8,7 @@ import { SignUpintegrousAssociateForm, SignUpintegrousCustomerForm } from 'compo
 import { SelectRoleForIntegrousSignUp } from 'components/page/signup/SelectRoleForIntegrousSignUp'
 import { ROLES } from 'config/roles'
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import {useTranslation} from "next-i18next";
 
 const { SEO } = APP_INFO
 
@@ -20,10 +21,12 @@ const IntegrousSignUpPage = () => {
 }
 
 IntegrousSignUpPage.getLayout = (page) => {
+  const { t } = useTranslation('auth')
+
   return (
     <AuthPagesLayout>
       <Head>
-        <title>{SEO.TITLE_PAGE} - Sign Up</title>
+        <title>{SEO.TITLE_PAGE} - {t('signup-title')}</title>
       </Head>
       {page}
     </AuthPagesLayout>

@@ -9,6 +9,7 @@ import { SignUpCustomerForm, SignUpDriverForm, SignUpAgentForm } from 'component
 import { SelectRoleToSignUp } from 'components/page/signup/SelectRoleToSignUp'
 import { ROLES } from 'config/roles'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import {useTranslation} from "next-i18next";
 
 const { SEO } = APP_INFO
 
@@ -24,10 +25,12 @@ const SignUpPage = () => {
 }
 
 SignUpPage.getLayout = (page) => {
+  const { t } = useTranslation('auth')
+
   return (
     <AuthPagesLayout>
       <Head>
-        <title>{SEO.TITLE_PAGE} - Sign Up</title>
+        <title>{SEO.TITLE_PAGE} - {t('signup-title')}</title>
       </Head>
       {page}
     </AuthPagesLayout>
