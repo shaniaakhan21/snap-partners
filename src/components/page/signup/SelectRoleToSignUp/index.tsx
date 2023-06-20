@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { IBOIcon, DriverIcon, MerchantsIcon, ArrowRightIcon } from 'components/common/icons'
+import { IBOIcon, DriverIcon, MerchantsIcon, ArrowRightIcon, CustomerIcon } from 'components/common/icons'
 import { ROLES } from 'config/roles'
 import { GTMTrack } from 'lib/utils/gtm'
 import Link from 'next/link'
@@ -10,6 +10,12 @@ export const SelectRoleToSignUp = () => {
   const { current: roles } = useRef([
     {
       icon: <IBOIcon classes='w-14 h-14' />,
+      label: 'I’m a Snap Partner',
+      key: ROLES.IBO,
+      link: `/auth/signup?role=${ROLES.IBO}`
+    },
+    {
+      icon: <CustomerIcon classes='w-14 h-14' />,
       label: 'I’m a Customer',
       key: ROLES.CUSTOMER,
       link: `/auth/signup?role=${ROLES.CUSTOMER}`
