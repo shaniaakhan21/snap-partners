@@ -40,6 +40,7 @@ export interface IUserCommonData {
     driver: boolean
     merchant: boolean
     agent: boolean
+    ibo: boolean
   },
   isManager: boolean // ?
   ownerName: string

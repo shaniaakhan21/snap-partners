@@ -90,6 +90,10 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       lastname: dataForm.lastname,
       password: dataForm.password,
       businessName: dataForm.businessName,
+      street: dataForm.street,
+      state: dataForm.state,
+      zip: dataForm.zip,
+      ssn: dataForm.ssn,
       phone: phoneNumber,
       sponsorReferralCode: dataForm.referralCode || null,
       idImage: null,
@@ -100,6 +104,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
         driver: referralLink.role === 'DRIVER',
         merchant: referralLink.role === 'MERCHANT',
         agent: referralLink.role === 'AGENT',
+        ibo: referralLink.role === ROLES.IBO,
         integrousAssociate: referralLink.role === 'integrousAssociate',
         integrousCustomer: referralLink.role === 'integrousCustomer'
       }
@@ -130,8 +135,8 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
 
   return (
     <div className='max-w-md mx-auto w-full'>
-      <p className='font-bold text-4xl text-[#18203F]'>{signUpas}{' '}
-        <span className='text-primary-500'>{capitalizeFirstLetter(referralLink.role)}</span>
+      <p className='font-bold text-4xl text-[#18203F]'>{signUpas}{referralLink.role === ROLES.IBO ? <br /> : ' '}
+        <span className='text-primary-500'>{referralLink.role === ROLES.IBO ? 'Snap Partners Associate' : capitalizeFirstLetter(referralLink.role)}</span>
       </p>
       <p className='text-gray-500'>Welcome! register to continue.</p>
 
@@ -214,6 +219,59 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           register={register}
           rulesForm={registerRulesConfig.businessName}
           isRequired={false}
+        />
+
+        <InputForm
+          id='street'
+          name='street'
+          type='text'
+          label='Street'
+          registerId='street'
+          placeholder='Enter Street Name'
+          errors={errors.street}
+          register={register}
+          rulesForm={registerRulesConfig.street}
+          isRequired
+        />
+
+        <InputForm
+          id='state'
+          name='state'
+          type='text'
+          label='State / Province'
+          registerId='state'
+          placeholder='Enter State / Province'
+          errors={errors.state}
+          register={register}
+          rulesForm={registerRulesConfig.state}
+          isRequired
+        />
+
+        <InputForm
+          id='zip'
+          name='zip'
+          type='text'
+          label='Zip'
+          registerId='zip'
+          placeholder='Enter Zip Code'
+          errors={errors.zip}
+          register={register}
+          rulesForm={registerRulesConfig.zip}
+          isRequired
+        />
+
+        <InputForm
+          id='ssn'
+          name='ssn'
+          type='text'
+          label='Social Security Number'
+          registerId='ssn'
+          placeholder='Enter Social Security Number'
+          errors={errors.ssn}
+          register={register}
+          rulesForm={registerRulesConfig.ssn}
+          isRequired={false}
+          helpText='* Required to receive commissions beyold $600'
         />
 
         <InputPhone

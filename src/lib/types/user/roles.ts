@@ -1,4 +1,5 @@
 export interface IROLES {
+  IBO: 'IBO',
   CUSTOMER: 'CUSTOMER',
   MERCHANT: 'MERCHANT',
   DRIVER: 'DRIVER',
@@ -9,6 +10,7 @@ export interface IROLES {
 }
 
 export type TROLE =
+  IROLES['IBO'] |
   IROLES['CUSTOMER'] |
   IROLES['MERCHANT'] |
   IROLES['DRIVER'] |
