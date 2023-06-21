@@ -3,8 +3,12 @@ import { Document, Page, pdfjs } from 'react-pdf/dist/esm/entry.webpack'
 import { GTMTrack } from 'lib/utils/gtm'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-
-export default function PDFViewer () {
+interface pdfViewerData {
+  fileData:any,
+  setFileData:any,
+}
+export default function PDFViewer (props:pdfViewerData) {
+  const { fileData } = props
   const onPageChange = (e) => {
     GTMTrack.changeCompensationPlanPage(numPages)
   }
@@ -12,19 +16,6 @@ export default function PDFViewer () {
   const onDocumentLoadSuccess = ({ numPages }) => {
     setNumPages(numPages)
   }
-
-  const [fileData, setFileData] = useState(null)
-
-  const fetchData = async () => {
-    await axios.get('https://snap281.snap.devopsteam.info/api/compensation')
-      .then((result) => {
-        setFileData(result?.data?.result)
-      })
-  }
-
-  useEffect(() => {
-    fetchData()
-  }, [])
 
   GTMTrack.changeCompensationPlanPage(numPages)
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
