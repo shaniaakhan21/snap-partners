@@ -122,12 +122,12 @@ export const drawerRoutes = [
     icon: <CreditCardIcon />,
     to: '/my-wallet',
     label: 'My Wallet'
-  },
-  {
-    icon: <CompensationPlanIcon />,
-    to: '/Documents',
-    label: 'Documents'
   }
+  // {
+  //   icon: <CompensationPlanIcon />,
+  //   to: '/Documents',
+  //   label: 'Documents'
+  // }
 ]
 
 export const globalRoutes = [
