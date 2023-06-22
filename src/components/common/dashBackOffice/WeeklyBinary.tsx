@@ -38,15 +38,20 @@ export default function WeeklyBinary () {
   const { auth } = useAuthStore()
   const [data, setData] = useState<WeeklyBinaryData>()
   const [week, setWeek] = useState(null)
+  const [noSnapshotfound, setNoSnapshotFound] = useState(false)
   const classes = useStyles()
 
   useEffect(() => {
+    setNoSnapshotFound(false)
     if (week) {
       fetch(`/api/ibo/personal/weeklyBinary?weekNumber=${week}`, {
         method: 'GET',
         headers: { Authorization: `Bearer ${auth.accessToken}` }
       }).then((response) => {
         response.json().then((data) => {
+          if (data.data === 'no snapshot found') {
+            setNoSnapshotFound(true)
+          }
           setData(data.data)
         })
       })
@@ -109,6 +114,9 @@ export default function WeeklyBinary () {
           <div className='flex flex-row justify-center items-center w-full p-1'>
             <div className='flex flex-col'>
               <p className="text-black-100 p-2">Settles Every Monday at 12:01AM Pacific</p>
+              {
+                noSnapshotfound && <p className="text-black-100 p-2 text-red-500">Could not find binary data for this week</p>
+              }
             </div>
           </div>
         </div>
