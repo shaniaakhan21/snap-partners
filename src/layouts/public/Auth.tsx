@@ -34,6 +34,11 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
     t2 = 'FREE Business Sign Up'
   }
 
+  if (role === ROLES.IBO) {
+    t1 = 'Snap Partners'
+    t2 = ''
+  }
+
   return (
     <>
       <div className='w-full'>
@@ -45,7 +50,7 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
               <div className='mt-24 max-w-2xl'>
                 <h1 className='text-5xl font-bold 2xl:text-7xl'>{t1}</h1>
                 <p className='text-3xl font-bold mt-1'>{t2}</p>
-                <br />
+                <br/>
               </div>
               {(isLoginIntegrous || isSignupIntegrous) && (ROLES.integrousCustomer || ROLES.integrousAssociate) && (
                 <div className='z-1 relative w-[60%]'>
@@ -59,15 +64,15 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
                 </div>
               )}
 
-              <ul className='list-disc pl-6 mt-20 text-xl 2xl:text-2xl space-y-4'>
+              {role !== ROLES.IBO && <ul className='list-disc pl-6 mt-20 text-xl 2xl:text-2xl space-y-4'>
                 <li>Get notified about company updates</li>
                 <li>Access to company training</li>
                 <li>Get synced</li>
                 <li>Track your team</li>
-              </ul>
+              </ul>}
 
               <div className='absolute bottom-10 left-12 flex items-center gap-x-4'>
-                <img src='/images/logo-dark.png' />
+                <img src='/images/logo-dark.png'/>
               </div>
             </div>
           </section>

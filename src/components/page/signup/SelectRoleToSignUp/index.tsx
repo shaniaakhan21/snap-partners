@@ -9,12 +9,6 @@ export const SelectRoleToSignUp = () => {
   const router = useRouter()
   const { current: roles } = useRef([
     {
-      icon: <IBOIcon classes='w-14 h-14' />,
-      label: 'I’m a Snap Partner',
-      key: ROLES.IBO,
-      link: `/auth/signup?role=${ROLES.IBO}`
-    },
-    {
       icon: <CustomerIcon classes='w-14 h-14' />,
       label: 'I’m a Customer',
       key: ROLES.CUSTOMER,
