@@ -27,21 +27,21 @@ const Documents = () => {
   const fetchFile = async (categoryId) => {
     console.log('category id we are getting', categoryId)
     if (categoryId === 0) {
-      await axios.get(`https://snap249-admin.snap.devopsteam.info/api/document/file`)
+      await axios.get(`/api/document/file`)
         .then((response) => {
           console.log('result we get from function', response)
           setCategoryFiles(response.data.result)
         })
       return
     }
-    await axios.get(`https://snap249-admin.snap.devopsteam.info/api/document/file/${categoryId}`)
+    await axios.get(`/api/document/file/${categoryId}`)
       .then((response) => {
         console.log('result we get from function', response)
         setCategoryFiles(response.data.result)
       })
   }
   const fetchCategory = async () => {
-    await axios.get('https://snap249-admin.snap.devopsteam.info/api/document/category')
+    await axios.get('/api/document/category')
       .then((response) => {
         setCategoryData(response?.data?.result)
       })
