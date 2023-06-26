@@ -21,6 +21,7 @@ import { ROLES } from './../../../../../../../config/roles'
 
 import Card from '@mui/material/Card'
 import SingleItem from './component/SingleItem'
+import {builderWebsiteFields} from "../../../../../../../lib/types/user/profile";
 
 const { SEO } = APP_INFO
 
@@ -80,7 +81,8 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
         nsurUserId: data.nsurUserId,
         myPoints: auth?.nsurAccount?.myPoints || null
       },
-      bank_information: data.bank_information
+      bank_information: data.bank_information,
+      ...(builderWebsiteFields.reduce((acc, field) => ({...acc, [field]: data[field]}), {}) as any)
     })
     // When change auth state, directly the app push the user to /overview path
     // This logic is on AuthPageLayout useEffect

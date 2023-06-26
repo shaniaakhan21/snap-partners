@@ -49,7 +49,11 @@ export interface IUserCommonData {
     earns: string
     percentage: string
     updatedAt: string
-  } | null
+  } | null,
+  facebook_url: string
+  twitter_url: string
+  linkedin_url: string
+  instagram_url: string
 }
 
 export interface IUserById extends IUserCommonData {
