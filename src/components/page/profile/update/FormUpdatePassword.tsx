@@ -96,7 +96,7 @@ export const FormUpdatePassword = ({ auth, setAuth, typeUpdate, setTypeUpdate }:
         myPoints: auth?.nsurAccount?.myPoints || null
       },
       bank_information: userData.bank_information,
-      ...(builderWebsiteFields.reduce((acc, field) => ({...acc, [field]: data[field]}), {}) as any)
+      ...(builderWebsiteFields.reduce((acc, field) => ({...acc, [field]: userData[field]}), {}) as any)
     })
     GTMTrack.editProfile(typeUpdate)
     toast('Password successfully changed', { type: 'success' })
