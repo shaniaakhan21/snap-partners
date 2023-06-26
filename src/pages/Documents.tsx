@@ -1,32 +1,84 @@
 /* eslint-disable no-use-before-define */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import type { Page, ReactNode } from 'lib/types'
 import DashboardLayout from 'layouts/private/Dashboard'
 import { APP_INFO } from 'config/appInfo'
-import { CategoryChip } from 'components/page/training/CategoryChip'
-import { CategoryChipList } from 'components/page/training/CategoryChipList'
+import { CategoryChip } from 'components/page/Documents/CategoryChip'
+import { CategoryChipList } from 'components/page/Documents/CategoryChipList'
 import DocumentCard from 'components/page/Documents/DocumentCard'
 import { Grid } from '@mui/material'
 import { dummyData } from 'components/page/Documents/DocumentDummyData'
+import axios from 'axios'
 
 const { SEO } = APP_INFO
 const Documents = () => {
-  const [Category, setCategory] = useState('all')
+  const [Category, setCategory] = useState('0')
+  const [categoryData, setCategoryData] = useState(null)
+  const [categoryFiles, setCategoryFiles] = useState(null)
 
-  const handleCategory = (e) => {
+  const handleCategory = async (e) => {
     console.log('category changed', e.target.id)
     setCategory(e.target.id)
+    fetchFile(parseInt(e.target.id))
   }
 
-  console.log('dummy data is', dummyData[1].title)
+  const fetchFile = async (categoryId) => {
+    console.log('category id we are getting', categoryId)
+    if (categoryId === 0) {
+      await axios.get(`https://snap249-admin.snap.devopsteam.info/api/document/file`)
+        .then((response) => {
+          console.log('result we get from function', response)
+          setCategoryFiles(response.data.result)
+        })
+      return
+    }
+    await axios.get(`https://snap249-admin.snap.devopsteam.info/api/document/file/${categoryId}`)
+      .then((response) => {
+        console.log('result we get from function', response)
+        setCategoryFiles(response.data.result)
+      })
+  }
+  const fetchCategory = async () => {
+    await axios.get('https://snap249-admin.snap.devopsteam.info/api/document/category')
+      .then((response) => {
+        setCategoryData(response?.data?.result)
+      })
+  }
+  useEffect(() => {
+    fetchCategory()
+    fetchFile(0)
+  }, [])
+
+  console.log('dummy data is', categoryData)
+  console.log('files we are sending', categoryFiles)
   return (
     <>
       <div>Documents</div>
       <div>
         <CategoryChipList>
           <CategoryChip
+            id={'0'}
+            categoryId = {0}
+            categorySelected={Category}
+            onClick={handleCategory}
+          >
+          All
+          </CategoryChip>
+          {categoryData
+            ? categoryData.map((cat) => (
+              <CategoryChip
+                id={`${cat?.categoryId}`}
+                categoryId = {cat?.categoryId}
+                categorySelected={Category}
+                onClick={handleCategory}
+              >
+                {cat?.categoryName}
+              </CategoryChip>
+            ))
+            : <></>}
+          {/* <CategoryChip
             id='all'
             categorySelected={Category}
             onClick={handleCategory}
@@ -74,20 +126,12 @@ const Documents = () => {
             onClick={handleCategory}
           >
           Training Materials
-          </CategoryChip>
+          </CategoryChip> */}
         </CategoryChipList>
       </div>
       <div className='document-cards'>
         <Grid container spacing={2}>
-          { Array.apply(0, Array(7)).map((index) => {
-            const a = Math.floor(Math.random() * 5)
-            return (
-
-              <DocumentCard title={dummyData[a].title} description={dummyData[a].Description} imgUrl={dummyData[a].imgUrl} />
-
-            )
-          })
-          }
+          <DocumentCard categoryFiles = {categoryFiles} />
         </Grid>
       </div>
     </>
