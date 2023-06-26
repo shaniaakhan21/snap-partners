@@ -32,7 +32,7 @@ const CompensationPlanPage: Page = () => {
   const [fileUrl, setFileUrl] = useState(null)
 
   const fetchData = async () => {
-    await axios.get('https://snap249-admin.snap.devopsteam.info/api/compensation')
+    await axios.get('/api/compensation')
       .then((result) => {
         setFileData(result?.data?.result)
         const buffer = Buffer.from(result?.data?.result?.fileData)
