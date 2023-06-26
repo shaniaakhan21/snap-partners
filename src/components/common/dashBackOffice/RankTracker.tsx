@@ -83,14 +83,14 @@ const calculateCompletionPercentageAndNextRank = (currentRank: string, totalLeft
         teamVol = rankCriteria[nextRank]?.teamVolume
         nonPowerLeg = rankCriteria[nextRank]?.qvNonPL
         powerLeg = rankCriteria[nextRank]?.qvPL
-        percentage = Math.round(((totalLeftLeg / powerLeg) + (totalRightLeg / nonPowerLeg)) * 100)
+        percentage = Math.round((((totalLeftLeg / powerLeg) * 100) + ((totalRightLeg / nonPowerLeg) * 100)) / 2)
       }
     }
     if (nextRank) {
       teamVol = rankCriteria[nextRank]?.teamVolume
       nonPowerLeg = rankCriteria[nextRank]?.qvNonPL
       powerLeg = rankCriteria[nextRank]?.qvPL
-      percentage = Math.round(((totalLeftLeg / powerLeg) + (totalRightLeg / nonPowerLeg)) * 100)
+      percentage = Math.round((((totalLeftLeg / powerLeg) * 100) + ((totalRightLeg / nonPowerLeg) * 100)) / 2)
     }
   })
   return {
