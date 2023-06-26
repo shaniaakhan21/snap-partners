@@ -101,7 +101,12 @@ export default function WeeklyBinary () {
           </div>
         }
         <div>
-          <h1 className="text-base text-gray-800 font-medium text-center">{data?.cycles} Current Cycles</h1>
+          {
+            !week && <h1 className="text-base text-gray-800 font-medium text-center">{data?.cycles} Current Cycles</h1>
+          }
+          {
+            week && <h1 className="text-base text-gray-800 font-medium text-center">{data?.cycles} cycles {week} week(s) ago</h1>
+          }
           <div className="flex flex-row align-start w-full p-1">
             <div className="flex flex-col w-2/3">
               <TotalLeg legValue={data?.leftLegUsableVol?.value} legVLabel={'LEFT LEG Usable Volume'} />
