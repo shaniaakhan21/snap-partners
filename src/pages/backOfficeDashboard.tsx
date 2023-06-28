@@ -12,6 +12,7 @@ export interface PersonalVolumeInfo {
   pvPercentage: number,
   leftQV: number,
   rightQV: number
+  customers:any
 
 }
 
