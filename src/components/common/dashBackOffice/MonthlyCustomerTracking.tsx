@@ -46,9 +46,12 @@ export default function MonthlyMilestones () {
   }, [])
 
   const columns = [
-    { field: 'id', headerName: 'User Id', minWidth: 130, flex: 1 },
+    { field: 'id', headerName: 'User Id', maxWidth: 90, flex: 1 },
+    { field: 'orderId', headerName: 'Order Id', maxWidth: 90, flex: 1 },
+    { field: 'createdAt', headerName: 'Order Date', minWidth: 130, flex: 1 },
     { field: 'name', headerName: 'Name', minWidth: 130, flex: 1 },
-    { field: 'revenue', headerName: 'Revenue', minWidth: 130, flex: 1 }
+    { field: 'trackingNumber', headerName: 'Tracking Number', minWidth: 270, flex: 1 },
+    { field: 'revenue', headerName: 'Revenue', maxWidth: 90, flex: 1 }
   ]
 
   return (
