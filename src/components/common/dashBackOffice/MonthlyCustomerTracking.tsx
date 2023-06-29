@@ -51,7 +51,7 @@ export default function MonthlyMilestones () {
     { field: 'createdAt', headerName: 'Order Date', minWidth: 130, flex: 1 },
     { field: 'name', headerName: 'Name', minWidth: 130, flex: 1 },
     { field: 'trackingNumber', headerName: 'Tracking Number', minWidth: 270, flex: 1 },
-    { field: 'revenue', headerName: 'Revenue', maxWidth: 90, flex: 1 }
+    { field: 'subtotal', headerName: 'Order Total', maxWidth: 90, flex: 1 }
   ]
 
   return (
@@ -72,7 +72,7 @@ export default function MonthlyMilestones () {
               <p className="text-3xl text-gray-800 font-bold p-2">${data?.revenue}</p>
             </div>
             <div>
-              <p className="text-md text-gray-800 pb-6 text-center">Customer Revenue</p>
+              <p className="text-md text-gray-800 pb-6 text-center">Customer Commission</p>
             </div>
           </div>
         </div>

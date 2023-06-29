@@ -32,7 +32,7 @@ export default function PVComponent ({ data }: {data: PersonalVolumeInfo}) {
     { field: 'createdAt', headerName: 'Order Date', minWidth: 130, flex: 1 },
     { field: 'name', headerName: 'Name', minWidth: 130, flex: 1 },
     { field: 'trackingNumber', headerName: 'Tracking Number', minWidth: 270, flex: 1 },
-    { field: 'revenue', headerName: 'Revenue', maxWidth: 90, flex: 1 }
+    { field: 'subtotal', headerName: 'Order Total', maxWidth: 90, flex: 1 }
   ]
 
   return (
