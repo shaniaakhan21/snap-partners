@@ -29,7 +29,7 @@ function Event () {
   const [eventData, setEvent] = React.useState<Array<IEvent>>([])
 
   const getEventData = async () => {
-    await axios.get('https://snap305.snap.devopsteam.info/api/event')
+    await axios.get('/api/event')
       .then((response) => {
         if (response.data.status) {
           let convertedData = response.data.result.map((eventBanner) => (
