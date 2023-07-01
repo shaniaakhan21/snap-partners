@@ -27,14 +27,14 @@ const Table = (props) => {
   )
 }
 
-export default function MonthlyMilestones () {
+export default function MonthlyMilestones ({ lastMonth }: { lastMonth: boolean}) {
   const { auth } = useAuthStore()
   const [data, setData] = useState<MonthlyMilestonesData>()
   const [open, setOpen] = useState(false)
   const [rows, setRows] = useState([])
 
   useEffect(() => {
-    fetch('/api/ibo/customer/tracking', {
+    fetch(`/api/ibo/customer/tracking?lastMonth=${Number(lastMonth)}`, {
       method: 'GET',
       headers: { Authorization: `Bearer ${auth.accessToken}` }
     }).then((response) => {
@@ -43,7 +43,7 @@ export default function MonthlyMilestones () {
         setRows(data.data.customers)
       })
     })
-  }, [])
+  }, [lastMonth])
 
   const columns = [
     { field: 'id', headerName: 'User Id', maxWidth: 90, flex: 1 },
