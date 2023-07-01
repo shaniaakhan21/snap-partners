@@ -103,7 +103,8 @@ export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
   }
 
   const router = useRouter()
-  const signupURL = router.pathname === '/auth/login-integrous' ? '/auth/signup-integrous' : '/auth/signup'
+  const referralCode = router.query.referralCode || 'IntegrousWellness'
+  const signupURL = router.pathname === '/auth/login-integrous' ? `/auth/signup-integrous?referralCode=${referralCode}` : '/auth/signup'
 
   return (
     <div className='flex flex-col justify-start items-start gap-x-2 my-2'>
@@ -143,7 +144,7 @@ export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
           <br /><br />
 
           <p>
-            <span className='font-semibold'>Don’t have an account?</span>
+            <span className='font-semibold'>referralCode?</span>
             <Link href={signupURL}>
               <a className='text-textAcent-500'> Sign Up.</a>
             </Link>
