@@ -1,10 +1,12 @@
 import CustomCardWeeklyBinary from '../CustomCardWeeklyBinary'
 import { useAuthStore } from 'lib/stores'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import TotalLeg from './TotalLegComp'
 import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
 import { makeStyles } from '@material-ui/core'
+import { DataGrid } from '@mui/x-data-grid'
+import { GeneralModal } from 'components/page/genealogy/OldGenealogy/Modals/GeneralModal'
 
 interface WeeklyBinaryData {
   leftLeg: {
@@ -24,7 +26,8 @@ interface WeeklyBinaryData {
   rightLegUsableVol: {
       value: number
   },
-  amount: number
+  amount: number,
+  tableData: any
 }
 
 const useStyles = makeStyles({
@@ -34,11 +37,36 @@ const useStyles = makeStyles({
   }
 })
 
+const Table = (props) => {
+  const rows = useMemo(() => props.rows, [props.rows])
+  const columns = useMemo(() => props.columns, [props.columns])
+  return (
+    <DataGrid
+      rows={rows}
+      autoHeight
+      columns={columns}
+      density="compact"
+      initialState={{
+        columns: {
+          columnVisibilityModel: {
+            id: false
+          }
+        },
+        sorting: {
+          sortModel: props.sortModel
+        },
+        pagination: { paginationModel: { pageSize: 10 } }
+      }}
+    />
+  )
+}
+
 export default function WeeklyBinary () {
   const { auth } = useAuthStore()
   const [data, setData] = useState<WeeklyBinaryData>()
   const [week, setWeek] = useState(null)
   const [noSnapshotfound, setNoSnapshotFound] = useState(false)
+  const [open, setOpen] = useState(false)
   const classes = useStyles()
 
   useEffect(() => {
@@ -70,6 +98,14 @@ export default function WeeklyBinary () {
   const timingStatusTracker = (event) => {
     setWeek(event.target.value)
   }
+
+  const columns = [
+    { field: 'id', headerName: 'Point Id', maxWidth: 90, flex: 1, hide: true, sortable: false },
+    { field: 'description', headerName: 'Description', minWidth: 150, flex: 1, sortable: false },
+    { field: 'left', headerName: 'left', maxWidth: 90, flex: 1, sortable: false },
+    { field: 'right', headerName: 'right', maxWidth: 90, flex: 1, sortable: false },
+    { field: 'createdAt', headerName: 'Date', minWidth: 270, flex: 1, headerAlign: 'center', align: 'center', sortable: false }
+  ]
 
   return (
     <>
@@ -124,8 +160,19 @@ export default function WeeklyBinary () {
               }
             </div>
           </div>
+          <button onClick={() => { setOpen(true) }} style={{ cursor: 'pointer' }} className="rounded-full bg-primary-500 w-full flex flex-row items-center justify-center bg-red-500 text-gray-500">
+            <img className='w-1/14' src='/images/icons/order-details.svg' alt="Current profile photo" />
+            <p className='text-xs text-white font-medium p-2 uppercase'>View Binary Points History</p>
+          </button>
         </div>
       </div>
+
+      <GeneralModal onClose={() => { setOpen(false) }} open={open} showClose={true}>
+        <div style={{ marginTop: 50 }}>
+          <h1 style={{ marginBottom: 20 }}>Binary Points History</h1>
+          <Table columns={columns} rows={data?.tableData || [] } sortModel={[{ field: 'name', sort: 'asc' }]} />
+        </div>
+      </GeneralModal>
     </>
   )
 }
