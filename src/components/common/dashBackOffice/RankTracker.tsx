@@ -64,7 +64,16 @@ const calculateCurrentRank = (currentLeftTot: number, currentRightTot: number, i
   return currentRole
 }
 
-const calculateCompletionPercentageAndNextRank = (currentRank: string, totalLeftLeg: number, totalRightLeg: number): {
+const calculatePercentage = (adjustedTotLL: number, powerLeg: number, adjustedTotRL: number,
+  nonPowerLeg: number, adjustedPV: number, adjustedActiveLeft: number, adjustedActiveRight: number) => {
+  return Math.round((((adjustedTotLL / powerLeg) * 100) +
+                    ((adjustedTotRL / nonPowerLeg) * 100) +
+                    ((adjustedPV / 100) * 100) +
+                    ((adjustedActiveLeft / 100) * 100) +
+                    ((adjustedActiveRight / 100) * 100)) / 5)
+}
+
+const calculateCompletionPercentageAndNextRank = (currentRank: string, totalLeftLeg: number, totalRightLeg: number, isActiveLeft: boolean, isActiveRight: boolean, pvVal: number): {
   percentage: number, nextRank: string, teamVol: number, nonPowerLeg: number, powerLeg: number
 } => {
   const rankKeys = Object.keys(rankCriteria)
@@ -85,7 +94,10 @@ const calculateCompletionPercentageAndNextRank = (currentRank: string, totalLeft
         powerLeg = rankCriteria[nextRank]?.qvPL
         const adjustedTotLL = totalLeftLeg > powerLeg ? powerLeg : totalLeftLeg
         const adjustedTotRL = totalRightLeg > nonPowerLeg ? nonPowerLeg : totalRightLeg
-        percentage = Math.round((((adjustedTotLL / powerLeg) * 100) + ((adjustedTotRL / nonPowerLeg) * 100)) / 2)
+        const adjustedPV = pvVal > 100 ? 100 : pvVal
+        const adjustedActiveLeft = isActiveLeft ? 100 : 0
+        const adjustedActiveRight = isActiveRight ? 100 : 0
+        percentage = calculatePercentage(adjustedTotLL, powerLeg, adjustedTotRL, nonPowerLeg, adjustedPV, adjustedActiveLeft, adjustedActiveRight)
       }
     }
     if (nextRank) {
@@ -94,7 +106,10 @@ const calculateCompletionPercentageAndNextRank = (currentRank: string, totalLeft
       powerLeg = rankCriteria[nextRank]?.qvPL
       const adjustedTotLL = totalLeftLeg > powerLeg ? powerLeg : totalLeftLeg
       const adjustedTotRL = totalRightLeg > nonPowerLeg ? nonPowerLeg : totalRightLeg
-      percentage = Math.round((((adjustedTotLL / powerLeg) * 100) + ((adjustedTotRL / nonPowerLeg) * 100)) / 2)
+      const adjustedPV = pvVal > 100 ? 100 : pvVal
+      const adjustedActiveLeft = isActiveLeft ? 100 : 0
+      const adjustedActiveRight = isActiveRight ? 100 : 0
+      percentage = calculatePercentage(adjustedTotLL, powerLeg, adjustedTotRL, nonPowerLeg, adjustedPV, adjustedActiveLeft, adjustedActiveRight)
     }
   })
   return {
