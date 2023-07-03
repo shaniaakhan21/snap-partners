@@ -1,7 +1,7 @@
 import { AppContext, AppInitialProps, AppLayoutProps } from 'next/app'
 import { LicenseInfo } from '@mui/x-license-pro';
 import { ThemeProvider } from '@material-ui/core/styles'
-import { Fragment, ReactNode, useEffect } from 'react'
+import {Fragment, ReactNode, useEffect, useState} from 'react'
 import { ToastContainer } from 'react-toastify'
 import type { NextComponentType } from 'next'
 import { useRouter } from 'next/router'
@@ -23,6 +23,8 @@ import 'tippy.js/dist/tippy.css'
 import 'styles/tailwind.css'
 import { APP_INFO } from '../config/appInfo'
 import { appWithTranslation } from "next-i18next";
+import Backend from "i18next-http-backend";
+import {initReactI18next} from "react-i18next";
 
 const { SEO } = APP_INFO
 
@@ -123,4 +125,22 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
   )
 }
 
-export default appWithTranslation(MyApp)
+
+const apiKey = "96QMg5PCqJst7cR6CtVh5Q";
+const loadPath = `https://api.i18nexus.com/project_resources/translations/{{lng}}/{{ns}}.json?api_key=${apiKey}`;
+
+export default appWithTranslation(MyApp, {
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en']
+  },
+  backend: {
+    loadPath: loadPath,
+    allowMultiLoading: false,
+  },
+  ns: ["common","auth","footer","homepage","Binary Dashboard","referrals","marketing","ercreferrals","vidgo-reporting","training","genealogy","tree","compensation-plan","profile","my-points","my-wallet"],
+  fallbackLng: 'en',
+  reloadOnPrerender: process.env.NODE_ENV === 'development',
+  react: { useSuspense: false },
+  use: [Backend, initReactI18next]
+})

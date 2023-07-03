@@ -53,7 +53,7 @@ interface RankComponentProps{
 }
 
 export default function RankComponent (props: RankComponentProps) {
-  const { t } = useTranslation()
+  const { t } = useTranslation('overview')
   const { data: rankData } = props
   const [value, setValue] = useState(0)
 
@@ -75,7 +75,7 @@ export default function RankComponent (props: RankComponentProps) {
                 <StyledBox backgroundColor={'#DD4C37'}>
                   <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: '#DD4C37' }} />
                 </StyledBox>
-                <h1 className="text-2xl text-black font-bold pl-2">{t('overview:rank.free.title')}</h1>
+                <h1 className="text-2xl text-black font-bold pl-2">{t('rank.free.title')}</h1>
               </div>
               <div className='col-span-3 text-xs pt-5'>
                 <span className="text-15">
@@ -85,10 +85,10 @@ export default function RankComponent (props: RankComponentProps) {
               <div className='col-span-3 text-xs pt-5'>
                 <div className='flex flex-row justify-between'>
                   <strong className='text-10'>
-                    {t('overview:rank.free.pvc', { commissionVol: rankData.mng.commissionVol })}
+                    {t('rank.free.pvc', { commissionVol: rankData.mng.commissionVol })}
                   </strong>
                   <strong className='text-10'>
-                    {t('overview:rank.free.need_pvc')}
+                    {t('rank.free.need_pvc')}
                   </strong>
                 </div>
                 <BarWithText progressColor={'#C99FFF'} value={+rankData.mng.commissionVol} variant={'determinate'} />
@@ -103,7 +103,7 @@ export default function RankComponent (props: RankComponentProps) {
                 <StyledBox backgroundColor={'#C99FFF'}>
                   <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: '#C99FFF' }} />
                 </StyledBox>
-                <h1 className="text-2xl text-black font-bold pl-2">{t('overview:rank.manager.title')}</h1>
+                <h1 className="text-2xl text-black font-bold pl-2">{t('rank.manager.title')}</h1>
               </div>
               <div className='col-span-3 text-xs pt-5'>
                 <span className="text-15">
@@ -163,10 +163,12 @@ export default function RankComponent (props: RankComponentProps) {
                 <StyledBox backgroundColor={'#54A52C'}>
                   <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: '#54A52C' }} />
                 </StyledBox>
-                <h1 className="text-2xl text-black font-bold pl-2">{t('overview:rank.supervisor.title')}</h1>
+                <h1 className="text-2xl text-black font-bold pl-2">{t('rank.supervisor.title')}</h1>
               </div>
               <div className='col-span-3 text-xs pt-5'>
-                <span className="text-15">{t('overview:rank.supervisor.next_become')}</span>
+                <span className="text-15">
+                  <Trans i18nKey='overview:rank.supervisor.next_become' components={{ strong: <strong /> }} />
+                </span>
               </div>
               <div className='col-span-3 text-xs pt-5'>
                 <div className='flex flex-row justify-between'>

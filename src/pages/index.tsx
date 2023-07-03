@@ -15,7 +15,6 @@ import { FooterPublic } from 'components/layout/public/Footer'
 import { ContentMobile } from 'components/page/home/ContentMobile'
 import { ContentDesktop } from 'components/page/home/ContentDesktop'
 import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
 const { SEO } = APP_INFO
 
@@ -168,14 +167,6 @@ HomePage.getLayout = (page) => {
       <FooterPublic />
     </>
   )
-}
-
-export async function getStaticProps ({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST, 'homepage']))
-    }
-  }
 }
 
 export default HomePage

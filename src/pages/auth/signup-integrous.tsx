@@ -7,8 +7,7 @@ import { AuthPagesLayout } from 'layouts/public/Auth'
 import { SignUpintegrousAssociateForm, SignUpintegrousCustomerForm } from 'components/page/signup/SignUpForm'
 import { SelectRoleForIntegrousSignUp } from 'components/page/signup/SelectRoleForIntegrousSignUp'
 import { ROLES } from 'config/roles'
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import {useTranslation} from "next-i18next";
+import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
 
@@ -31,14 +30,6 @@ IntegrousSignUpPage.getLayout = (page) => {
       {page}
     </AuthPagesLayout>
   )
-}
-
-export async function getStaticProps ({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['auth', ...APP_INFO.COMMON_NS_LIST]))
-    }
-  }
 }
 
 export default IntegrousSignUpPage

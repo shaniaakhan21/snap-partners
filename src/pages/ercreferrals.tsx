@@ -6,9 +6,8 @@ import DashboardLayout from 'layouts/private/Dashboard'
 import ReactDataGrid from '@inovua/reactdatagrid-community'
 import '@inovua/reactdatagrid-community/index.css'
 import { ITransaction } from 'lib/types/transaction'
-import {useEffect, useMemo, useState} from 'react'
-import {useTranslation} from "next-i18next";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import { useEffect, useMemo, useState } from 'react'
+import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
 
@@ -24,7 +23,7 @@ interface ITableTransactionsProps {
 }
 
 export const TableTransactions = ({ transactions }: ITableTransactionsProps) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('ercreferrals')
 
   const columns = useMemo(() => [
     { name: 'id', header: 'ID', defaultFlex: 1, minWidth: 60 },
@@ -44,7 +43,7 @@ export const TableTransactions = ({ transactions }: ITableTransactionsProps) => 
     { name: 'paid', header: 'Paid', flex: 1, minWidth: 80 },
     { name: 'paidDateUs', header: 'Paid Date', flex: 1, minWidth: 120 },
     { name: 'commission', header: 'Commision', flex: 1, minWidth: 130 }
-  ].map((data) => ({ ...data, header: t(`ercreferrals:transactions.${data.name}`) })), [t])
+  ].map((data) => ({ ...data, header: t(`transactions.${data.name}`) })), [t])
   return (
     <ReactDataGrid
       idProperty="id"
@@ -60,7 +59,7 @@ export const TableTransactions = ({ transactions }: ITableTransactionsProps) => 
 }
 
 export const TableClientTransactions = ({ transactions }: ITableTransactionsProps) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('ercreferrals')
 
   const columnsClient = useMemo(() => [
     { name: 'level', header: 'Level', defaultFlex: 1, minWidth: 150 },
@@ -74,7 +73,7 @@ export const TableClientTransactions = ({ transactions }: ITableTransactionsProp
     { name: 'filleds', header: '# Filed', flex: 1, minWidth: 130 },
     { name: 'paids', header: '# Paid?', flex: 1, minWidth: 220 },
     { name: 'totalCommissions', header: 'Total Commission', flex: 1, minWidth: 220 }
-  ].map((data) => ({ ...data, header: t(`ercreferrals:clientTransactions.${data.name}`) })), [t])
+  ].map((data) => ({ ...data, header: t(`clientTransactions.${data.name}`) })), [t])
 
   return (
     <ReactDataGrid
@@ -91,7 +90,7 @@ export const TableClientTransactions = ({ transactions }: ITableTransactionsProp
 }
 
 const ErcreferralsPage: Page = () => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('ercreferrals')
   const [transactions, setTransactions] = useState([])
   const [transactionsClient, setTransactionsClient] = useState([])
   const [monthSelected, setMonthSelected] = useState(new Date().getMonth()) // 0-11
@@ -143,24 +142,24 @@ const ErcreferralsPage: Page = () => {
 
   return (
     <>
-      <span className='text-2xl font-bold'>{t('ercreferrals:your_personal_clients')}</span> <br /><br />
+      <span className='text-2xl font-bold'>{t('your_personal_clients')}</span> <br /><br />
 
       <div id="cro-erc-process">
         <img src="https://snapdeliveredteam.com/images/j-logo.png" />
         <div>
-          <h1>{t('ercreferrals:erc_process_3_phases')}</h1>
+          <h1>{t('erc_process_3_phases')}</h1>
           <div>
             <ul>
-              <li>{t('ercreferrals:phase_1')}</li>
-              <li>{t('ercreferrals:phase_1_item')}</li>
+              <li>{t('phase_1')}</li>
+              <li>{t('phase_1_item')}</li>
             </ul>
             <ul>
-              <li>{t('ercreferrals:phase_2')}</li>
-              <li>{t('ercreferrals:phase_2_item')}</li>
+              <li>{t('phase_2')}</li>
+              <li>{t('phase_2_item')}</li>
             </ul>
             <ul>
-              <li>{t('ercreferrals:phase_3')}</li>
-              <li>{t('ercreferrals:phase_3_item')}</li>
+              <li>{t('phase_3')}</li>
+              <li>{t('phase_3_item')}</li>
             </ul>
           </div>
         </div>
@@ -170,13 +169,13 @@ const ErcreferralsPage: Page = () => {
         <TableTransactions transactions={transactions} />
       </div>
       <br /><br />
-      <span className='text-2xl font-bold'>{t('ercreferrals:your_team_clients')}</span>
+      <span className='text-2xl font-bold'>{t('your_team_clients')}</span>
 
       <select
         id='legalType'
         name='legalType'
         className='ml-5 cursor-pointer relative xs:mr-2 pl-2 pr-12 py-0 xs:py-1 my-2 bg-[rgba(255,255,255,.13)] rounded-md border border-solid border-black outline-none appearance-none leading-8'
-        placeholder={t('ercreferrals:user_rank')}
+        placeholder={t('user_rank')}
         onChange={(current) => { setMonthSelected(parseInt(current.target.value)) }}
       >
         {month.map((m, i) => {
@@ -193,7 +192,7 @@ const ErcreferralsPage: Page = () => {
         id='legalType'
         name='legalType'
         className='ml-5 cursor-pointer relative xs:mr-2 pl-2 pr-12 py-0 xs:py-1 my-2 bg-[rgba(255,255,255,.13)] rounded-md border border-solid border-black outline-none appearance-none leading-8'
-        placeholder={t('ercreferrals:user_rank')}
+        placeholder={t('user_rank')}
         onChange={(current) => { setYearSelected(parseInt(current.target.value)) }}
       >
         {years.map((y, i) => {
@@ -220,20 +219,12 @@ ErcreferralsPage.getLayout = (page: ReactNode) => {
   return (
     <DashboardLayout>
       <Head>
-        <title>{SEO.TITLE_PAGE} - {t('ercreferrals:title')}</title>
+        <title>{SEO.TITLE_PAGE} - {t('title')}</title>
       </Head>
 
       {page}
     </DashboardLayout>
   )
-}
-
-export async function getStaticProps ({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST, 'ercreferrals']))
-    }
-  }
 }
 
 export default ErcreferralsPage

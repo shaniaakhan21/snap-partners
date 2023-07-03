@@ -6,7 +6,6 @@ import PVComponent from 'components/common/dashBackOffice/PersonalVolume'
 import RankTracker from 'components/common/dashBackOffice/RankTracker'
 import { useAuthStore } from 'lib/stores'
 import { useEffect, useState } from 'react'
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {APP_INFO} from "../config/appInfo";
 
 export interface PersonalVolumeInfo {
@@ -81,14 +80,6 @@ const BackOfficeDashboard = () => {
       </div>
     </>
   )
-}
-
-export async function getStaticProps ({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST]))
-    }
-  }
 }
 
 export default BackOfficeDashboard

@@ -14,7 +14,6 @@ import { FormBecomeMerchant } from 'components/page/become-role/FormBecomeMercha
 import { FormBecomeDriver } from 'components/page/become-role/FormBecomeDriver'
 import { FormBecomeCustomer } from 'components/page/become-role/FormBecomeCustomer'
 import { Spinner } from 'components/common/loaders'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 
 const { SEO } = APP_INFO
@@ -70,7 +69,7 @@ BecomeRolePage.getLayout = (page: ReactNode) => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query, locale }: GetServerSidePropsContext) => {
+export const getServerSideProps: GetServerSideProps = async ({ query }: GetServerSidePropsContext) => {
   const { role } = query
   const validateRole = role ? ROLES[role.toString().toLocaleUpperCase()] : null
 
@@ -81,7 +80,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query, locale }: 
   }
 
   return {
-    props: { role, ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST])) }
+    props: { role }
   }
 }
 

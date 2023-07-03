@@ -11,8 +11,7 @@ import { APP_INFO } from 'config/appInfo'
 // import { FormConnectNsurAccount } from 'components/page/my-points/FormConnectNsurAccount'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { GTMTrack } from 'lib/utils/gtm'
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {useTranslation} from "next-i18next";
+import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
 
@@ -89,14 +88,6 @@ MyPointsPage.getLayout = (page: ReactNode) => {
       {page}
     </DashboardLayout>
   )
-}
-
-export async function getStaticProps ({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST, 'my-points'])),
-    }
-  }
 }
 
 export default MyPointsPage

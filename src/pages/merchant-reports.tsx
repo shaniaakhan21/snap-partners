@@ -13,8 +13,7 @@ import DashboardLayout from 'layouts/private/Dashboard'
 import { useMemo, useState, useEffect } from 'react'
 import axios from 'axios'
 import { getLocalStorage } from 'lib/utils/localStorage'
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {useTranslation} from "next-i18next";
+import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
 
@@ -167,14 +166,6 @@ ComingSoon.getLayout = (page: ReactNode) => {
       {page}
     </DashboardLayout>
   )
-}
-
-export async function getStaticProps ({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST]))
-    }
-  }
 }
 
 export default ComingSoon

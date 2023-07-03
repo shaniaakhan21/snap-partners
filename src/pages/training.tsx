@@ -16,8 +16,7 @@ import { EmptyData } from 'components/common/empty/EmptyData'
 import { useNearScreen } from 'lib/hooks/useNearScreen'
 import { Spinner } from 'components/common/loaders'
 import { removeSpaces } from 'lib/utils/removeSpaces'
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {useTranslation} from "next-i18next";
+import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
 
@@ -163,14 +162,6 @@ TrainingPage.getLayout = (page: ReactNode) => {
       {page}
     </DashboardLayout>
   )
-}
-
-export async function getStaticProps ({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST, 'training']))
-    }
-  }
 }
 
 export default TrainingPage

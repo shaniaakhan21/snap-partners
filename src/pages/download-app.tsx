@@ -15,8 +15,7 @@ import { SelectDevice } from 'components/page/download-app/SelectDevice'
 import { HeaderCTA } from 'components/page/download-app/HeaderCTA'
 import { FooterPublic } from 'components/layout/public/Footer'
 import { AuthCTA } from 'components/page/download-app/AuthCTA'
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {useTranslation} from "next-i18next";
+import { useTranslation } from "next-i18next";
 
 const { SEO, APPS } = APP_INFO
 
@@ -105,14 +104,6 @@ DownloadAppPage.getLayout = (page) => {
       <FooterPublic />
     </>
   )
-}
-
-export async function getStaticProps ({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST]))
-    }
-  }
 }
 
 export default DownloadAppPage

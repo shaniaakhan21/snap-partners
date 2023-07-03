@@ -21,7 +21,6 @@ import { EditPhone } from 'components/page/profile/update/EditPhone'
 import { AccountInfo } from 'components/page/profile/AccountInfo'
 import {FormUpdateUsername} from "../components/page/profile/update/FormUpdateUsername";
 import {useTranslation} from "next-i18next";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 const { SEO } = APP_INFO
 
@@ -93,7 +92,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query, locale }: 
   }
 
   return {
-    props: { email: data?.email ?? null, tokenExist: !!token, ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST, 'profile'])) }
+    props: { email: data?.email ?? null, tokenExist: !!token }
   }
 }
 

@@ -8,8 +8,7 @@ import { SignUpMerchantForm } from 'components/page/signup/SignUpForm/FormByRole
 import { SignUpCustomerForm, SignUpDriverForm, SignUpAgentForm } from 'components/page/signup/SignUpForm'
 import { SelectRoleToSignUp } from 'components/page/signup/SelectRoleToSignUp'
 import { ROLES } from 'config/roles'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import {useTranslation} from "next-i18next";
+import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
 
@@ -35,14 +34,6 @@ SignUpPage.getLayout = (page) => {
       {page}
     </AuthPagesLayout>
   )
-}
-
-export async function getStaticProps ({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ['auth', ...APP_INFO.COMMON_NS_LIST]))
-    }
-  }
 }
 
 export default SignUpPage

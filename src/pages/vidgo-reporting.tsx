@@ -16,8 +16,7 @@ import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { commissions } from 'lib/services/vidgo/commissions'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { EmptyData } from 'components/common/empty/EmptyData'
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {useTranslation} from "next-i18next";
+import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
 
@@ -275,14 +274,6 @@ VidgoComissionsPage.getLayout = (page: ReactNode) => {
       {page}
     </DashboardLayout>
   )
-}
-
-export async function getStaticProps ({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST, 'vidgo-reporting']))
-    }
-  }
 }
 
 export default VidgoComissionsPage

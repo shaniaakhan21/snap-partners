@@ -15,8 +15,7 @@ import { ModalContainer } from 'components/common/ModalContainer'
 import { useEffect, useState } from 'react'
 import { useAuthStore } from '../lib/stores'
 import { toast } from 'react-toastify'
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {useTranslation} from "next-i18next";
+import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
 
@@ -180,14 +179,6 @@ MyWalletPage.getLayout = (page: ReactNode) => {
       {page}
     </DashboardLayout>
   )
-}
-
-export async function getStaticProps ({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST, 'my-wallet']))
-    }
-  }
 }
 
 export default MyWalletPage

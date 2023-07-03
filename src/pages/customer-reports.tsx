@@ -2,19 +2,18 @@ import Head from 'next/head'
 
 import type { Page as PageNext, ReactNode } from 'lib/types'
 import { APP_INFO } from 'config/appInfo'
-import { DataGrid, GridSortModel } from '@mui/x-data-grid'
+import { DataGrid } from '@mui/x-data-grid'
 import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs'
 import { LocalizationProvider } from '@mui/x-date-pickers-pro'
 import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker'
-import dayjs, { Dayjs } from 'dayjs'
+import { Dayjs } from 'dayjs'
 import { Spinner } from 'components/common/loaders'
 
 import DashboardLayout from 'layouts/private/Dashboard'
 import { useMemo, useState, useEffect } from 'react'
 import axios from 'axios'
 import { getLocalStorage } from 'lib/utils/localStorage'
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {useTranslation} from "next-i18next";
+import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
 
@@ -167,14 +166,6 @@ ComingSoon.getLayout = (page: ReactNode) => {
       {page}
     </DashboardLayout>
   )
-}
-
-export async function getStaticProps ({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST]))
-    }
-  }
 }
 
 export default ComingSoon

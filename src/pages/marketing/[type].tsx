@@ -14,7 +14,6 @@ import { ListArticles } from 'components/page/marketing/Details/ListArtcles'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { Article } from 'components/page/marketing/Details/Article'
 import { EmptyData } from 'components/common/empty/EmptyData'
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
@@ -142,7 +141,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  return { props: { typeMarketing: params.type, ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST, 'marketing'])) } }
+  return { props: { typeMarketing: params.type } }
 }
 
 export default MarketingArticlePage

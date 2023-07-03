@@ -1,7 +1,6 @@
 import Head from 'next/head'
 
 import type { Page, ReactNode } from 'lib/types'
-import { useReports } from 'lib/hooks/useReports'
 import { APP_INFO } from 'config/appInfo'
 import RankComponent from 'components/common/overview/RankComponent'
 import MonthlySubscription from 'components/common/overview/MonthlySubscription'
@@ -21,7 +20,6 @@ import axios from 'axios'
 import Referrals from 'components/common/overview/Referrals'
 import { useAuthStore } from 'lib/stores'
 import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import TotalLeg from './backOfficeDashboard'
 
 const { SEO } = APP_INFO
@@ -141,14 +139,6 @@ DashboardOverViewPage.getLayout = (page: ReactNode) => {
       {page}
     </DashboardLayout>
   )
-}
-
-export async function getStaticProps ({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST, 'overview']))
-    }
-  }
 }
 
 export default DashboardOverViewPage

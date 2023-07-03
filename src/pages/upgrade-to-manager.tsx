@@ -10,8 +10,7 @@ import { ButtonCTA } from 'components/page/upgrade-to-manager/ButtonCTA'
 import { TextContactCTA } from 'components/common/TextContactCTA'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {useTranslation} from "next-i18next";
+import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
 
@@ -46,14 +45,6 @@ UpgradeToManagerPage.getLayout = (page: ReactNode) => {
       {page}
     </DashboardLayout>
   )
-}
-
-export async function getStaticProps ({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST]))
-    }
-  }
 }
 
 export default UpgradeToManagerPage

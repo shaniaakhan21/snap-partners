@@ -6,8 +6,6 @@ import DashboardLayout from 'layouts/private/Dashboard'
 import { Spinner } from 'components/common/loaders'
 import { APP_INFO } from 'config/appInfo'
 import { GTMTrack } from 'lib/utils/gtm'
-import { CardComingSoon } from 'components/common/CardComingSoon'
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useTranslation} from "next-i18next";
 // import { Document, Page } from "react-pdf";
 
@@ -72,14 +70,6 @@ CompensationPlanPage.getLayout = (page: ReactNode) => {
       {page}
     </DashboardLayout>
   )
-}
-
-export async function getStaticProps ({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST, 'compensation-plan']))
-    }
-  }
 }
 
 export default CompensationPlanPage

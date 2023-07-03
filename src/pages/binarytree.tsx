@@ -15,8 +15,7 @@ import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Select } fro
 import { Grid, TextField } from '@mui/material'
 import { SearchIcon } from 'components/common/icons'
 import { DataGrid } from '@mui/x-data-grid'
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {useTranslation} from "next-i18next";
+import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
 
@@ -380,14 +379,6 @@ ComingSoon.getLayout = (page: ReactNode) => {
       {page}
     </DashboardLayout>
   )
-}
-
-export async function getStaticProps ({ locale }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, [...APP_INFO.COMMON_NS_LIST]))
-    }
-  }
 }
 
 export default ComingSoon
