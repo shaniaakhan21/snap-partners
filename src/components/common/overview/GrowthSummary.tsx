@@ -232,13 +232,13 @@ export default function GrowthSummary () {
             <tr>
               <th className='text-xs font-normal'>&nbsp;</th>
               {selectedTab !== 3 && <th className='text-xs font-normal'>Direct</th>}
-              <th className='text-xs font-normal hidden xs:table-cell'>Open-Line Manager</th>
+              <th className='text-xs font-normal hidden xs:table-cell'>O-L Manager</th>
               <th className='text-xs font-normal xs:hidden'>O-L Mngr.</th>
-              <th className='text-xs font-normal hidden xs:table-cell'>Open-Line Director</th>
+              <th className='text-xs font-normal hidden xs:table-cell'>O-L Director</th>
               <th className='text-xs font-normal xs:hidden'>O-L Dire.</th>
-              <th className='text-xs font-normal hidden xs:table-cell'>Open-Line Supervisory</th>
+              <th className='text-xs font-normal hidden xs:table-cell'>O-L Supervisor</th>
               <th className='text-xs font-normal xs:hidden'>O-L Supv.</th>
-              <th className='text-xs font-normal hidden xs:table-cell'>Open-Line Executive</th>
+              <th className='text-xs font-normal hidden xs:table-cell'>O-L Executive</th>
               <th className='text-xs font-normal xs:hidden'>O-L Exec.</th>
               <th className='text-xs font-normal'>Total</th>
             </tr>
