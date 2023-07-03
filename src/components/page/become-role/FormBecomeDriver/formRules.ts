@@ -4,7 +4,7 @@ export const becomeDriverRulesConfig = {
     required: { value: true, message: 'Username Required *' },
     maxLength: { value: 50, message: 'Max 50 Characters *' },
     minLength: { value: 3, message: 'Min 3 Characters *' },
-    pattern: { value: /^[a-zA-Z0-9!@#$%\\^&*)(+=._-]*$/, message: 'Username not allow *' }
+    pattern: { value: /^[a-zA-Z0-9]*$/, message: 'Username can only contain alphanumeric characters.' }
   },
 
   name: {
