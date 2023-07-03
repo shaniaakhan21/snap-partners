@@ -3,12 +3,17 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { FooterPublic } from 'components/layout/public/Footer'
 import { useHandlerReferralLink } from '../../lib/hooks/useHandlerReferralLink'
+import { getLocalStorage } from 'lib/utils/localStorage'
 import { ROLES } from '../../config/roles'
 
 export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Page
   const { referralCode: code, role } = useHandlerReferralLink()
   const router = useRouter()
   const { auth } = useAuthStore()
+
+  useEffect(() => {
+    getLocalStorage("accessToken") && router.push('/overview')
+  }, [])
 
   useEffect(() => {
     auth && router.push('/overview')

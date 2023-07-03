@@ -7,6 +7,8 @@ import { Spinner } from 'components/common/loaders'
 import { APP_INFO } from 'config/appInfo'
 import { GTMTrack } from 'lib/utils/gtm'
 import { CardComingSoon } from 'components/common/CardComingSoon'
+import axios from 'axios'
+import { useState, useEffect } from 'react'
 // import { Document, Page } from "react-pdf";
 
 
@@ -26,6 +28,22 @@ const PDFViewer = dynamic(
 )
 
 const CompensationPlanPage: Page = () => {
+  const [fileData, setFileData] = useState(null)
+  const [fileUrl, setFileUrl] = useState(null)
+
+  const fetchData = async () => {
+    await axios.get('/api/compensation')
+      .then((result) => {
+        setFileData(result?.data?.result)
+        const buffer = Buffer.from(result?.data?.result?.fileData)
+        const data = new Blob([buffer], { type: 'application/pdf' })
+        setFileUrl(URL.createObjectURL(data))
+      })
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
   return (
     <div className='w-full text-center'>
       {/* <h4 className='font-black text-4xl md:text-5xl'>Compensation Plan</h4>
@@ -34,19 +52,20 @@ const CompensationPlanPage: Page = () => {
       </div> */}
       <div className='mt-8'>
         <a
-          href='/static/new-plan-v2.pdf'
-          download
+          // href='/static/FULL_Comp_Plan_1.pdf'
+          href= {fileUrl}
+          download={`${fileData?.fileName}`}
           target='_blank'
           rel='noopener noreferrer'
           className='px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed bg-black-primary text-white bg-primary-500 rounded-full font-semibold focus:outline-none hover:opacity-90'
-          onClick={() => GTMTrack.downloadCompensationPlan('new-plan-v2.pdf')}
+          onClick={() => GTMTrack.downloadCompensationPlan(`${fileData?.fileName}`)}
         >
           Download Compensation Plan
         </a>
       </div>
 
       <div className='mt-10'>
-        <PDFViewer />
+        <PDFViewer fileData={fileData} setFileData={setFileData} />
       </div>
     </div>
   )
