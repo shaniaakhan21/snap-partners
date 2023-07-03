@@ -34,19 +34,17 @@ const ActiveRL = ({ activeRightLeg }:
   }
 }
 
-const calculateCurrentRank = (currentLeftTot: number, currentRightTot: number): string => {
+const calculateCurrentRank = (currentLeftTot: number, currentRightTot: number, isActiveLeft: boolean, isActiveRight: boolean, pvVal: number): string => {
   const entries = Object.entries(rankCriteria)
 
-  console.log(currentLeftTot)
-  console.log(currentRightTot)
   let currentRole = ''
   const [initialKey, initialEntry] = entries[0]
   const [lastKey, lastEntry] = entries[entries.length - 1]
-  if (currentLeftTot < initialEntry?.qvNonPL || currentRightTot < initialEntry?.qvPL) {
+  if (currentLeftTot < initialEntry?.qvNonPL || currentRightTot < initialEntry?.qvPL || !isActiveLeft || !isActiveRight || pvVal < 100) {
     return currentRole
   }
 
-  if (currentLeftTot >= lastEntry?.qvNonPL && currentRightTot >= lastEntry?.qvPL) {
+  if (currentLeftTot >= lastEntry?.qvNonPL && currentRightTot >= lastEntry?.qvPL && isActiveLeft && isActiveRight && pvVal >= 100) {
     return lastKey
   }
 
@@ -56,7 +54,9 @@ const calculateCurrentRank = (currentLeftTot: number, currentRightTot: number): 
     if (entries.length > nextIndex) {
       const [nextKey, nextCriteria] = entries[nextIndex]
       if (currentLeftTot < nextCriteria?.qvNonPL || currentRightTot < nextCriteria?.qvPL) {
-        currentRole = currentKey
+        if (isActiveLeft && isActiveRight && pvVal >= 100) {
+          currentRole = currentKey
+        }
         break
       }
     }
@@ -112,7 +112,9 @@ export default function RankTracker ({ pvInfoCurrentMonth, monthlyMilestoneData 
   useEffect(() => {
     const legLegQVTot = monthlyMilestoneData?.leftLegQVTot
     const rightLegQVTot = monthlyMilestoneData?.rightLegQVTot
-    const currentRank = calculateCurrentRank(legLegQVTot, rightLegQVTot)
+    const isActiveLeft = monthlyMilestoneData?.activeLeftLeg
+    const isActiveRight = monthlyMilestoneData?.activeRightLeg
+    const currentRank = calculateCurrentRank(legLegQVTot, rightLegQVTot, isActiveLeft, isActiveRight, pvInfoCurrentMonth?.pvValue)
     const data = calculateCompletionPercentageAndNextRank(currentRank, legLegQVTot, rightLegQVTot)
     setPercentage({ ...data })
   }, [monthlyMilestoneData])
