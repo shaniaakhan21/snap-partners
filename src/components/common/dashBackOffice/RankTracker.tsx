@@ -152,12 +152,10 @@ export default function RankTracker ({ pvInfoCurrentMonth, monthlyMilestoneData 
             <ActiveLL activeLeftLeg={monthlyMilestoneData?.activeLeftLeg}/>
             <ActiveRL activeRightLeg={monthlyMilestoneData?.activeRightLeg}/>
             <div className="flex flex-col px-4 py-1 mt-3 rounded-lg" style={{ backgroundColor: 'rgb(239 239 239)' }}>
-              {
-                monthlyMilestoneData?.leftLegQVTot && <div className="flex flex-col w-full">
-                  <TotalLeg legValue={monthlyMilestoneData?.leftLegQVTot} legVLabel={'Total Left Leg (QV)'} />
-                  <TotalLeg legValue={monthlyMilestoneData?.rightLegQVTot} legVLabel={'Total Right Leg (QV)'} />
-                </div>
-              }
+              <div className="flex flex-col w-full">
+                <TotalLeg legValue={monthlyMilestoneData?.leftLegQVTot} legVLabel={'Total Left Leg (QV)'} />
+                <TotalLeg legValue={monthlyMilestoneData?.rightLegQVTot} legVLabel={'Total Right Leg (QV)'} />
+              </div>
             </div>
           </div>
           <div className="flex flex-col w-2/5 items-center pl-2 pt-3">
