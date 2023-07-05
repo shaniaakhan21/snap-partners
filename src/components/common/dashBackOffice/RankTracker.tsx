@@ -66,14 +66,11 @@ const calculateCurrentRank = (currentLeftTot: number, currentRightTot: number, i
 
 const calculatePercentage = (adjustedTotLL: number, powerLeg: number, adjustedTotRL: number,
   nonPowerLeg: number, adjustedPV: number, adjustedActiveLeft: number, adjustedActiveRight: number) => {
-  if (adjustedTotLL && adjustedTotRL && adjustedPV && adjustedActiveLeft && adjustedActiveRight) {
-    return Math.round((((adjustedTotLL / powerLeg) * 100) +
+  return Math.round((((adjustedTotLL / powerLeg) * 100) +
                     ((adjustedTotRL / nonPowerLeg) * 100) +
                     ((adjustedPV / 100) * 100) +
                     ((adjustedActiveLeft / 100) * 100) +
                     ((adjustedActiveRight / 100) * 100)) / 5)
-  }
-  return 0
 }
 
 const calculateCompletionPercentageAndNextRank = (currentRank: string, totalLeftLeg: number, totalRightLeg: number, isActiveLeft: boolean, isActiveRight: boolean, pvVal: number): {
