@@ -132,7 +132,7 @@ export default function RankTracker ({ pvInfoCurrentMonth, monthlyMilestoneData 
     const currentRank = calculateCurrentRank(legLegQVTot, rightLegQVTot, isActiveLeft, isActiveRight, pvInfoCurrentMonth?.pvValue)
     const data = calculateCompletionPercentageAndNextRank(currentRank, legLegQVTot, rightLegQVTot, isActiveLeft, isActiveRight, pvInfoCurrentMonth?.pvValue)
     setPercentage({ ...data })
-  }, [monthlyMilestoneData])
+  }, [monthlyMilestoneData, pvInfoCurrentMonth])
   return (
     <>
       <div className="w-full max-w-full p-4 space-y-2 h-fit bg-white rounded-xl  mt-4">
@@ -150,17 +150,15 @@ export default function RankTracker ({ pvInfoCurrentMonth, monthlyMilestoneData 
             <ActiveLL activeLeftLeg={monthlyMilestoneData?.activeLeftLeg}/>
             <ActiveRL activeRightLeg={monthlyMilestoneData?.activeRightLeg}/>
             <div className="flex flex-col px-4 py-1 mt-3 rounded-lg" style={{ backgroundColor: 'rgb(239 239 239)' }}>
-              {
-                monthlyMilestoneData?.leftLegQVTot && <div className="flex flex-col w-full">
-                  <TotalLeg legValue={monthlyMilestoneData?.leftLegQVTot} legVLabel={'Total Left Leg (QV)'} />
-                  <TotalLeg legValue={monthlyMilestoneData?.rightLegQVTot} legVLabel={'Total Right Leg (QV)'} />
-                </div>
-              }
+              <div className="flex flex-col w-full">
+                <TotalLeg legValue={monthlyMilestoneData?.leftLegQVTot} legVLabel={'Total Left Leg (QV)'} />
+                <TotalLeg legValue={monthlyMilestoneData?.rightLegQVTot} legVLabel={'Total Right Leg (QV)'} />
+              </div>
             </div>
           </div>
           <div className="flex flex-col w-2/5 items-center pl-2 pt-3">
-            <PVProgress color="#FFBE9D" transformStyle="rotate(120deg)" percentage={processedData?.percentage} />
-            <h1 className="text-md text-center pt-2">{processedData?.percentage}% to {processedData?.nextRank}</h1>
+            <PVProgress color="#FFBE9D" transformStyle="rotate(120deg)" percentage={isNaN(processedData?.percentage) ? 0 : processedData?.percentage} />
+            <h1 className="text-md text-center pt-2">{isNaN(processedData?.percentage) ? 0 : processedData?.percentage}% to {processedData?.nextRank}</h1>
           </div>
         </div>
         <p className="text-xs text-start text-gray-800 text-center pt-3">{processedData?.nextRank}={processedData?.teamVol}qv {processedData?.powerLeg}qv / {processedData?.nonPowerLeg}qv</p>
