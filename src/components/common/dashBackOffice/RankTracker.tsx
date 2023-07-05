@@ -159,8 +159,8 @@ export default function RankTracker ({ pvInfoCurrentMonth, monthlyMilestoneData 
             </div>
           </div>
           <div className="flex flex-col w-2/5 items-center pl-2 pt-3">
-            <PVProgress color="#FFBE9D" transformStyle="rotate(120deg)" percentage={processedData?.percentage} />
-            <h1 className="text-md text-center pt-2">{processedData?.percentage}% to {processedData?.nextRank}</h1>
+            <PVProgress color="#FFBE9D" transformStyle="rotate(120deg)" percentage={isNaN(processedData?.percentage) ? 0 : processedData?.percentage} />
+            <h1 className="text-md text-center pt-2">{isNaN(processedData?.percentage) ? 0 : processedData?.percentage}% to {processedData?.nextRank}</h1>
           </div>
         </div>
         <p className="text-xs text-start text-gray-800 text-center pt-3">{processedData?.nextRank}={processedData?.teamVol}qv {processedData?.powerLeg}qv / {processedData?.nonPowerLeg}qv</p>
