@@ -134,7 +134,7 @@ export default function RankTracker ({ pvInfoCurrentMonth, monthlyMilestoneData 
     const data = calculateCompletionPercentageAndNextRank(currentRank, legLegQVTot, rightLegQVTot, isActiveLeft, isActiveRight, pvInfoCurrentMonth?.pvValue)
     console.log('calculateCompletionPercentageAndNextRank---------->>', data)
     setPercentage({ ...data })
-  }, [monthlyMilestoneData])
+  }, [monthlyMilestoneData, pvInfoCurrentMonth])
   return (
     <>
       <div className="w-full max-w-full p-4 space-y-2 h-fit bg-white rounded-xl  mt-4">
