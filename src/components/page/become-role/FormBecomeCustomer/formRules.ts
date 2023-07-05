@@ -16,8 +16,7 @@ export const becomeCustomerRulesConfig = {
   lastname: {
     required: { value: true, message: 'Last Name Required *' },
     maxLength: { value: 50, message: 'Max 50 Characters *' },
-    minLength: { value: 3, message: 'Min 3 Characters *' },
-    pattern: { value: /^[a-zA-Z0-9!@#$%\\^&*)(+=._-]*$/, message: 'Last Name not allow *' }
+    minLength: { value: 3, message: 'Min 3 Characters *' }
   },
 
   email: {
