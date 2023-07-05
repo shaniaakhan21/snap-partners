@@ -113,7 +113,9 @@ export default function RankTracker ({ pvInfoCurrentMonth, monthlyMilestoneData 
     const legLegQVTot = monthlyMilestoneData?.leftLegQVTot
     const rightLegQVTot = monthlyMilestoneData?.rightLegQVTot
     const currentRank = calculateCurrentRank(legLegQVTot, rightLegQVTot)
+    console.log('calculateCurrentRank-------------->>', currentRank)
     const data = calculateCompletionPercentageAndNextRank(currentRank, legLegQVTot, rightLegQVTot)
+    console.log('calculateCompletionPercentageAndNextRank---------->>', data)
     setPercentage({ ...data })
   }, [monthlyMilestoneData])
   return (
