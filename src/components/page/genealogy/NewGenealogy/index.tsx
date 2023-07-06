@@ -49,8 +49,6 @@ export const NewGenealogy = ({
     GTMTrack.genealogyType('old')
   }
 
-  console.log('here',userSearchData)
-
   return (
     <>
       <div className='w-full flex flex-col justify-start'>

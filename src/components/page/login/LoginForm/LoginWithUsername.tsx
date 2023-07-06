@@ -56,6 +56,7 @@ export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
     if (router.query.redirectToIntegrous || redirectToIntegrous === true) {
       removeLocalStorage('redirectToIntegrous')
       removeLocalStorage('redirectToIntegrousReferralCode')
+      // eslint-disable-next-line no-return-assign
       setTimeout(() => window.location.href = `https://www.integrouswellness.com/${redirectToIntegrousReferralCode}?access_token=${dataLogin.token}`, 1000)
     }
 
