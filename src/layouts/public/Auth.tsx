@@ -72,7 +72,7 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
               </ul>}
 
               <div className='absolute bottom-10 left-12 flex items-center gap-x-4'>
-                <img src='/images/logo-dark.png'/>
+                {role === ROLES.IBO ? <img width={100} height={100} src='/images/profile/referralPartner.png'/> : <img src='/images/logo-dark.png' />}
               </div>
             </div>
           </section>
@@ -83,7 +83,7 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
         </div>
       </div>
 
-      <FooterPublic />
+      {role !== ROLES.IBO && <FooterPublic/>}
     </>
   )
 }
