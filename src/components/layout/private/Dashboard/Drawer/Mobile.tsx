@@ -65,6 +65,7 @@ export const DrawerMobile = ({ isCurrentlyPage, auth, isManager, isAdmin }: { is
                 if (route.label.includes('Visit') && !isIntegrousAssociate) return <Fragment key={route.label} />
                 if (route.label.includes('Visit Snap Partners') && currentOverview === 'partners') return <Fragment key={route.label} />
                 if (route.label.includes('Visit Snap Wellness') && currentOverview === '') return <Fragment key={route.label} />
+                if (route.label.includes('Shopping Cart') && !isIntegrousAssociate) return <Fragment key={route.label} />
 
                 return (
                   <li
@@ -95,7 +96,7 @@ export const DrawerMobile = ({ isCurrentlyPage, auth, isManager, isAdmin }: { is
                         <div>{route.label}</div>
                       </a>,
                       !!route.subItems,
-                      route.to
+                      route.label.includes('Shopping Cart') ? `https://www.integrouswellness.com/${auth.referralCode}?access_token=${auth.accessToken}` : route.to
                     )}
                     {route.subItems && activeSubmenu === index && (
                       <ul className='mt-2'>
