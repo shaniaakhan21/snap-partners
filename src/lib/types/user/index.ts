@@ -8,6 +8,8 @@ export type { IReferralLink } from './referralLink'
 export interface IUserData {
   id: number
   name: string
+  lastname: string
+  createdAt: string
   numUsers?: number
   email: string
   phone: string
