@@ -197,6 +197,8 @@ export const NewGenealogy = ({
                 referralUsers={[]}
                 id={levelSelectedUserData.id}
                 name={levelSelectedUserData.name}
+                lastname={levelSelectedUserData.lastname}
+                createdAt={levelSelectedUserData.createdAtUs}
                 email={levelSelectedUserData.email}
                 phone={levelSelectedUserData.phoneNumber}
                 openNewUserInfo={(id: number) => fnOpenModalReferralUserDetail(() => setUserdetailIdOpen(id))}
@@ -227,6 +229,8 @@ export const NewGenealogy = ({
                 id={userSearchData.id}
                 name={userSearchData.name}
                 email={userSearchData.email}
+                lastname={userSearchData.lastname}
+                createdAt={userSearchData.createdAtUs}
                 phone={userSearchData.phoneNumber}
                 openNewUserInfo={(id: number) => fnOpenModalReferralSearch(() => setUserDetailIdSearch(id))}
                 levels={userSearchData.levels}

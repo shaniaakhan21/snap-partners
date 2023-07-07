@@ -55,10 +55,11 @@ export const LoginWithPhone = ({ trackLoginHandle }: IProps) => {
 
     const redirectToIntegrous = getLocalStorage('redirectToIntegrous')
     const redirectToIntegrousReferralCode = getLocalStorage('redirectToIntegrousReferralCode')
-    if (redirectToIntegrous === true) {
+    if (router.query.redirectToIntegrous || redirectToIntegrous === true) {
       removeLocalStorage('redirectToIntegrous')
       removeLocalStorage('redirectToIntegrousReferralCode')
-      window.location.href = `https://www.integrouswellness.com/${redirectToIntegrousReferralCode}?access_token=${dataLogin.token}`
+      // eslint-disable-next-line no-return-assign
+      setTimeout(() => window.location.href = `https://www.integrouswellness.com/${redirectToIntegrousReferralCode}?access_token=${dataLogin.token}`, 1000)
       return
     }
 
@@ -106,7 +107,8 @@ export const LoginWithPhone = ({ trackLoginHandle }: IProps) => {
   }
 
   const router = useRouter()
-  const signupURL = router.pathname === '/auth/login-integrous' ? '/auth/signup-integrous' : '/auth/signup'
+  const referralCode = router.query.referralCode || 'IntegrousWellness'
+  const signupURL = router.pathname === '/auth/login-integrous' ? `/auth/signup-integrous?referralCode=${referralCode}` : '/auth/signup'
 
   return (
     <div className='flex flex-col justify-start items-start gap-x-2 mb-2 mt-3 w-full'>

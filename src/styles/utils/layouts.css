@@ -146,6 +146,10 @@
   background-color: #DD4C37!important;
 }
 
+.orgchart ul li .oc-node .oc-content{
+  height: 35px!important;
+}
+
 .orgchart ul li .oc-node .oc-heading-available{
   background-color: #13a827!important;
 }
