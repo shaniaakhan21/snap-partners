@@ -4,11 +4,13 @@ import { useClickOutsideElement } from 'lib/hooks/useClickOutsideElement'
 import { useAuthStore } from 'lib/stores'
 import { GTMTrack } from 'lib/utils/gtm'
 import { useState, useRef, useEffect } from 'react'
+import AdminToolMainMenu from './adminTools/AdminToolMainMenu'
 
-export const Account = ({ email, name, phone, photoUrl, signOut, rank }) => {
+export const Account = ({ email, name, phone, photoUrl, signOut, rank, roles }) => {
   const userMenuRef = useRef(null)
   const { auth } = useAuthStore()
   const [showMenu, setShowMenu] = useState(false)
+  const [adminTools, setAdminTools] = useState<boolean>(false)
   const clickOutsideUserMenu = useClickOutsideElement(userMenuRef)
 
   const handleShowOptions = () => setShowMenu(prevState => !prevState)
@@ -29,6 +31,20 @@ export const Account = ({ email, name, phone, photoUrl, signOut, rank }) => {
 
   return (
     <section className='w-full h-full flex justify-end items-center gap-x-5'>
+      {roles.admin
+        ? <div className='admin-tools-container'>
+          <div>
+            <span className='text-l font-bold text-gray-700 whitespace-nowrap'>Admin Tools</span>
+          </div>
+          <ArrowDownIcon classes='cursor-pointer' onClick={() => { setAdminTools(!adminTools) }} />
+          {
+            adminTools
+              ? <AdminToolMainMenu />
+              : <></>
+          }
+        </div>
+        : <></>
+      }
       <div className='relative'>
         {/* <NotificationIcon classes='w-6 h-6' />
 

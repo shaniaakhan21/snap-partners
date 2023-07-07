@@ -13,7 +13,6 @@ export const Navbar = () => {
   const { auth, removeAuth } = useAuthStore()
   const { toggleDrawer } = useDrawerStore()
   // const { toggleGenealogySearch } = useSearchModalStore()
-
   return (
     <header className='dashboardLayout__navbar h-16'>
       <div className='w-full h-full px-6 py-3 flex justify-between items-center max-w-7xl mx-auto'>
@@ -51,8 +50,11 @@ export const Navbar = () => {
             </button>
           </div> */}
         </section>
+        <section className='w-full h-full flex justify-end items-center'>
+        </section>
 
         {auth && <Account
+          roles={auth.roles}
           name={auth.name}
           email={auth.email}
           signOut={removeAuth}

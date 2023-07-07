@@ -1,0 +1,38 @@
+.profilePage-individualProfile-conatiner
+{
+    padding: 25px;
+    margin: 20px 50px 20px 50px;
+}
+
+.profilePage-individualProfile-header-list
+{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 2%;
+}
+.profilePage-individualProfile-header-listItems
+{
+    color:#E35C49;
+    text-align: center;
+
+/* Button Font AA/ Tiny */
+    font-size: 10px;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 12px;
+    text-transform: uppercase;
+}
+.profilePage-individualProfile-header-listItems:hover{
+    cursor: pointer;
+    background-color: #E35C49;
+    padding: 10px 5px 10px 5px;
+    color: #FFFFFF;
+}
+.listItems-active{
+    padding: 10px 5px 10px 5px;
+    color: #FFFFFF;
+    background-color: #E35C49;
+}
