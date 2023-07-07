@@ -127,6 +127,12 @@ export const drawerRoutes = [
     icon: <CompensationPlanIcon />,
     to: '/Documents',
     label: 'Documents'
+  },
+  {
+    icon: <ReferralLinksIcon />,
+    to: 'https://www.integrouswellness.com',
+    integrous: true,
+    label: 'Shopping Cart'
   }
 ]
 
