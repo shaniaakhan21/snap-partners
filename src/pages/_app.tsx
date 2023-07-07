@@ -89,6 +89,7 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
           <meta property='og:title' content={SEO.TITLE_PAGE} />
           <meta property='og:description' content={SEO.DESCRIPTION_PAGE} />
           <meta property='og:image' content={`${SEO.URL_PAGE}/images/partners-logo-233px.png`} />
+          <meta property='og:image:secure_url' content={`${SEO.URL_PAGE}/images/partners-logo-233px.png`} />
 
           <meta property='al:ios:url' content={SEO.URL_PAGE} />
           <meta property='al:ios:image' content={`${SEO.URL_PAGE}/images/partners-logo-233px.png`} />
