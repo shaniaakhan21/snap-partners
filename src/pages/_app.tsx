@@ -101,6 +101,7 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
           <meta property='al:android:url' content={SEO.URL_PAGE} />
           <meta property='al:android:app_name' content={SEO.TITLE_PAGE} />
           <meta property='al:android:image' content={`${SEO.URL_PAGE}/images/partners-logo-233px.png`} />
+
         </Head>
 
       )}
