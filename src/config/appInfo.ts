@@ -1,12 +1,12 @@
 export const APP_INFO = {
   SEO: {
-    AUTHOR: 'Snap Delivered',
-    TITLE_PAGE: 'Snap Delivered',
-    DESCRIPTION_PAGE: 'Snap Delivered Application',
-    URL_PAGE: 'https://snapdeliveredteam.com',
+    AUTHOR: 'Snap Partners',
+    TITLE_PAGE: 'Delivering what matters most',
+    DESCRIPTION_PAGE: '… In a SNAP!',
+    URL_PAGE: 'https://snap145.snap.devopsteam.info',
     KEYWORDS_PAGE: [
-      'Snap Delivered',
-      'Snap Delivered App'
+      'Snap Partners',
+      'Snap Partners'
     ]
   },
 
