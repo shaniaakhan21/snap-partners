@@ -510,5 +510,11 @@ export const events = [
     title: 'Leadership Certification Conference',
     description: 'July 21st - 23rd, 2023',
     redirectUrl: 'https://snapseminars.com/'
+  },
+  {
+    img: 'https://snapdeliveredteam.com/images/leadershipcertv1.png',
+    title: 'Leadership Certification Conference',
+    description: 'July 21st - 23rd, 2023',
+    redirectUrl: 'https://snapseminars.com/'
   }
 ]
