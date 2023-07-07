@@ -21,6 +21,7 @@ import { ROLES } from './../../../../../../../config/roles'
 
 import Card from '@mui/material/Card'
 import SingleItem from './component/SingleItem'
+import { getLocalStorage, removeLocalStorage } from 'lib/utils/localStorage'
 
 const { SEO } = APP_INFO
 
@@ -30,6 +31,14 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
   const { auth, setAuth } = useAuthStore()
   const [isLoading, setIsLoading] = useState(false)
   const [userId, setUserId] = useState(null)
+
+  useEffect(() => {
+    const getTokenId = async () => {
+      const { data: dataLogin, error: errorLogin } = await login({ username: userTrack.userInfo.username, password: userTrack.userInfo.password })
+      setUserId(dataLogin.userId)
+    }
+    getTokenId();
+  }, [])
 
   const handleClickLogin = async () => {
     setIsLoading(true)
@@ -48,6 +57,15 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
     if (errorUser) {
       handleFetchError(errorUser.status, errorUser.info)
       setIsLoading(false)
+      return
+    }
+
+    const redirectToIntegrous = getLocalStorage('redirectToIntegrous')
+    const redirectToIntegrousReferralCode = getLocalStorage('redirectToIntegrousReferralCode')
+    if (redirectToIntegrous === true) {
+      removeLocalStorage('redirectToIntegrous')
+      removeLocalStorage('redirectToIntegrousReferralCode')
+      window.location.href = `https://www.integrouswellness.com/${redirectToIntegrousReferralCode}?access_token=${dataLogin.token}`
       return
     }
 
@@ -100,14 +118,6 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
     GTMTrack.signUp(role, 3, null, 'no')
     handleClickLogin()
   }
-
-  useEffect(() => {
-    const getTokenId = async () => {
-      const { data: dataLogin, error: errorLogin } = await login({ username: userTrack.userInfo.username, password: userTrack.userInfo.password })
-      setUserId(dataLogin.userId)
-    }
-    getTokenId();
-  }, [])
 
   return (
     <div className='flex flex-col justify-center items-center max-w-xl mx-auto'>
