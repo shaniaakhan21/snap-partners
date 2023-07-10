@@ -57,19 +57,20 @@ type OrdersDataItem = {
 
 type GrowthSummaryData = {
   volume: { direct?: number, manager?: number, director?: number, supervisor?: number, executive?: number },
-  newIOBs: { direct?: number, manager?: number, director?: number, supervisor?: number, executive?: number },
+  newIBOs: { direct?: number, manager?: number, director?: number, supervisor?: number, executive?: number },
   newClientsData: { direct: ClientDataItem, manager: ClientDataItem, director: ClientDataItem, supervisor: ClientDataItem, executive: ClientDataItem },
   newOrdersData: { direct: OrdersDataItem, manager: OrdersDataItem, director: OrdersDataItem, supervisor: OrdersDataItem, executive: OrdersDataItem },
 }
 
-const sum = (...args: (number | undefined)[]) => args.reduce((a, b) => a + (b ?? 0), 0)
+const sum = (...args: (number | undefined)[]) => args.reduce((a, b) => a + (parseFloat(b?.toString() ?? '0')), 0)
 
 export default function GrowthSummary () {
 
   const [monthSelected, setMonthSelected] = React.useState(new Date().getMonth()) // 0-11
   const [yearSelected, setYearSelected] = React.useState(new Date().getFullYear())
 
-  const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'Septemb' +
+  'er', 'October', 'November', 'December']
 
   const years = []
   for (let i = new Date().getFullYear(); i >= 2022; i--) {
@@ -91,30 +92,29 @@ export default function GrowthSummary () {
           Authorization: `Bearer ${token}`
         }
       })
-      console.log(response.data)
       setGrowthSummaryData(response.data)
     })()
   }, [monthSelected, yearSelected])
 
   const showingData = useMemo(() => {
     if (!growthSummaryData) return []
-    const { newIOBs, newClientsData, newOrdersData, volume } = growthSummaryData
+    const { newIBOs, newClientsData, newOrdersData, volume } = growthSummaryData
     switch (selectedTab) {
       case 0:
         return [
           [
             'Total',
-            newIOBs?.direct ?? 0,
-            newIOBs?.manager ?? 0,
-            newIOBs?.director ?? 0,
-            newIOBs?.supervisor ?? 0,
-            newIOBs?.executive ?? 0,
+            newIBOs?.direct ?? 0,
+            newIBOs?.manager ?? 0,
+            newIBOs?.supervisor ?? 0,
+            newIBOs?.director ?? 0,
+            newIBOs?.executive ?? 0,
             sum(
-              newIOBs?.direct,
-              newIOBs?.manager,
-              newIOBs?.director,
-              newIOBs?.supervisor,
-              newIOBs?.executive
+              newIBOs?.direct,
+              newIBOs?.manager,
+              newIBOs?.director,
+              newIBOs?.supervisor,
+              newIBOs?.executive
             )
           ]
         ]
@@ -123,8 +123,8 @@ export default function GrowthSummary () {
           name,
           newClientsData?.direct?.[type] ?? 0,
           newClientsData?.manager?.[type] ?? 0,
-          newClientsData?.director?.[type] ?? 0,
           newClientsData?.supervisor?.[type] ?? 0,
+          newClientsData?.director?.[type] ?? 0,
           newClientsData?.executive?.[type] ?? 0,
           sum(
             newClientsData?.direct?.[type],
@@ -139,8 +139,8 @@ export default function GrowthSummary () {
           name,
           newOrdersData?.direct?.[type] ?? 0,
           newOrdersData?.manager?.[type] ?? 0,
-          newOrdersData?.director?.[type] ?? 0,
           newOrdersData?.supervisor?.[type] ?? 0,
+          newOrdersData?.director?.[type] ?? 0,
           newOrdersData?.executive?.[type] ?? 0,
           sum(
             newOrdersData?.direct?.[type],
@@ -155,8 +155,8 @@ export default function GrowthSummary () {
           [
             "",
             volume?.manager ?? 0,
-            volume?.director ?? 0,
             volume?.supervisor ?? 0,
+            volume?.director ?? 0,
             volume?.executive ?? 0,
             sum(
               volume?.manager,
@@ -234,10 +234,10 @@ export default function GrowthSummary () {
               {selectedTab !== 3 && <th className='text-xs font-normal'>Direct</th>}
               <th className='text-xs font-normal hidden xs:table-cell'>O-L Manager</th>
               <th className='text-xs font-normal xs:hidden'>O-L Mngr.</th>
-              <th className='text-xs font-normal hidden xs:table-cell'>O-L Director</th>
-              <th className='text-xs font-normal xs:hidden'>O-L Dire.</th>
               <th className='text-xs font-normal hidden xs:table-cell'>O-L Supervisor</th>
               <th className='text-xs font-normal xs:hidden'>O-L Supv.</th>
+              <th className='text-xs font-normal hidden xs:table-cell'>O-L Director</th>
+              <th className='text-xs font-normal xs:hidden'>O-L Dire.</th>
               <th className='text-xs font-normal hidden xs:table-cell'>O-L Executive</th>
               <th className='text-xs font-normal xs:hidden'>O-L Exec.</th>
               <th className='text-xs font-normal'>Total</th>
