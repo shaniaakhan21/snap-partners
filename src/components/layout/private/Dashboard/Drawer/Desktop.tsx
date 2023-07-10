@@ -56,7 +56,6 @@ export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { i
             if (route.label.includes('Visit') && !isIntegrousAssociate) return <Fragment key={route.label} />
             if (route.label.includes('Visit Snap Partners') && currentOverview === 'partners') return <Fragment key={route.label} />
             if (route.label.includes('Visit Snap Wellness') && currentOverview === '') return <Fragment key={route.label} />
-            if (route.label.includes('Shopping Cart') && !isIntegrousAssociate) return <Fragment key={route.label} />
 
             return (
               <li
