@@ -1,12 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
-import { useAuthStore } from 'lib/stores'
+import { useMemo, useState } from 'react'
 import { GeneralModal } from 'components/page/genealogy/OldGenealogy/Modals/GeneralModal'
 import { DataGrid } from '@mui/x-data-grid'
-
-interface MonthlyMilestonesData {
-  revenue: number
-  customerCount: number
-}
 
 const Table = (props) => {
   const rows = useMemo(() => props.rows, [props.rows])
@@ -27,23 +21,8 @@ const Table = (props) => {
   )
 }
 
-export default function MonthlyMilestones ({ lastMonth }: { lastMonth: boolean}) {
-  const { auth } = useAuthStore()
-  const [data, setData] = useState<MonthlyMilestonesData>()
+export default function MonthlyMilestones ({ data, rows }: { data: any, rows: any}) {
   const [open, setOpen] = useState(false)
-  const [rows, setRows] = useState([])
-
-  useEffect(() => {
-    fetch(`/api/ibo/customer/tracking?lastMonth=${Number(lastMonth)}`, {
-      method: 'GET',
-      headers: { Authorization: `Bearer ${auth.accessToken}` }
-    }).then((response) => {
-      response.json().then((data) => {
-        setData(data.data)
-        setRows(data.data.customers)
-      })
-    })
-  }, [lastMonth])
 
   const columns = [
     { field: 'id', headerName: 'Order Id', maxWidth: 90, flex: 1 },

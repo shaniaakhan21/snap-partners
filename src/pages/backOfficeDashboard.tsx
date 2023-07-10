@@ -3,6 +3,7 @@ import WeeklyBinary from 'components/common/dashBackOffice/WeeklyBinary'
 import MonthlyCustomerTracking from 'components/common/dashBackOffice/MonthlyCustomerTracking'
 import { makeStyles } from '@material-ui/core/styles'
 import PVComponent from 'components/common/dashBackOffice/PersonalVolume'
+import CustomerGlobalPool from 'components/common/dashBackOffice/CustomerGlobalPool'
 import RankTracker from 'components/common/dashBackOffice/RankTracker'
 import { useAuthStore } from 'lib/stores'
 import { useEffect, useState } from 'react'
@@ -58,6 +59,21 @@ const TotalLeg = ({ lastMonth }: { lastMonth: boolean}) => {
       })
     })
   }, [])
+
+  const [data, setData] = useState()
+  const [rows, setRows] = useState([])
+  useEffect(() => {
+    fetch(`/api/ibo/customer/tracking?lastMonth=${Number(lastMonth)}`, {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${auth.accessToken}` }
+    }).then((response) => {
+      response.json().then((data) => {
+        setData(data.data)
+        setRows(data.data.customers)
+      })
+    })
+  }, [lastMonth])
+
   return (
     <>
       <div className="flex flex-wrap">
@@ -70,12 +86,8 @@ const TotalLeg = ({ lastMonth }: { lastMonth: boolean}) => {
           <RankTracker pvInfoCurrentMonth={personalVolData} monthlyMilestoneData={monthlyMilestoneData}/>
         </div>
         <div className="w-full lg:w-1/3 lg:m-0 p-1">
-          <MonthlyCustomerTracking lastMonth={lastMonth} />
-          {/* <CustomerGlobalPool/>
-          <button className="rounded-full bg-primary-500 w-full max-w-3xl flex flex-row items-center justify-center mt-4">
-            <p className='text-xs text-white font-medium p-2 uppercase'>Visit Snap Services Dashboard</p>
-            <ArrowForwardIcon className={classes.customIcon} />
-          </button> */}
+          <MonthlyCustomerTracking data={data} rows={rows} />
+          <CustomerGlobalPool data={data} />
         </div>
       </div>
     </>
