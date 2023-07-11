@@ -73,10 +73,6 @@ const DashboardOverViewPage: Page = () => {
         <h1 style={{ fontSize: 30 }}>Referral link to sign up IBO's (Affiliates) & Customers</h1>
         <a target='_blank' href={`https://www.integrouswellness.com/${auth.referralCode}`} style={{ fontSize: 30, textDecoration: 'underline' }}>https://www.integrouswellness.com/{auth.referralCode}</a>
         <br></br>
-        <br></br>
-        <h1 style={{ fontSize: 60 }}>WE'RE OPEN</h1>
-        <br />
-        <h1 style={{ fontSize: 30 }}>Log back in every day to see us roll out your new dashboard widgets</h1>
       </>
     )
   }

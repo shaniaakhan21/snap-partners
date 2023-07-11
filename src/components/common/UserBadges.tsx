@@ -160,14 +160,21 @@ export const UserBadges = ({ userRank, userRoles }: IUserBadgesProps) => {
           </li>
         </Tippy>
       )}
+      {(userRoles.integrousCustomer || userRoles.integrousAssociate) && (
+        <Tippy content='Snap Binary'>
+          <li>
+            <img style={{ width: 70 }} src='/static/badges/binary.png' />
+          </li>
+        </Tippy>
+      )}
       {(userRoles.integrousAssociate) && (
         <Tippy content='Integrous Associate'>
-          <p>Integrous Associate</p>
+          <p>Associate</p>
         </Tippy>
       )}
       {(userRoles.integrousCustomer && !userRoles.integrousAssociate) && (
         <Tippy content='Integrous Customer'>
-          <p>Integrous Customer</p>
+          <p>Customer</p>
         </Tippy>
       )}
     </>
