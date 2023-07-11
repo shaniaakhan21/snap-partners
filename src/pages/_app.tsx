@@ -86,23 +86,21 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
           </div>
           <meta property='og:type' content='website' />
           <meta property='og:url' content={SEO.URL_PAGE} />
-          <meta property='og:title' content={SEO.TITLE_PAGE} />
           <meta property='og:description' content={SEO.DESCRIPTION_PAGE} />
           <meta property='og:image' content={`${SEO.URL_PAGE}/images/partners-logo-233px.png`} />
           <meta property='og:image:secure_url' content={`${SEO.URL_PAGE}/images/partners-logo-233px.png`} />
 
           <meta property='al:ios:url' content={SEO.URL_PAGE} />
+          <meta property='al:ios:title' content={SEO.TITLE_PAGE} />
+          <meta property='al:ios:description' content={SEO.DESCRIPTION_PAGE} />
           <meta property='al:ios:image' content={`${SEO.URL_PAGE}/images/partners-logo-233px.png`} />
           <meta property='al:ios:app_name' content={SEO.TITLE_PAGE} />
 
           <meta property='al:android:url' content={SEO.URL_PAGE} />
+          <meta property='al:android:title' content={SEO.TITLE_PAGE} />
+          <meta property='al:android:description' content={SEO.DESCRIPTION_PAGE} />
           <meta property='al:android:app_name' content={SEO.TITLE_PAGE} />
           <meta property='al:android:image' content={`${SEO.URL_PAGE}/images/partners-logo-233px.png`} />
-
-          <meta property='al:android:url' content={SEO.URL_PAGE} />
-          <meta property='al:android:app_name' content={SEO.TITLE_PAGE} />
-          <meta property='al:android:image' content={`${SEO.URL_PAGE}/images/partners-logo-233px.png`} />
-
         </Head>
 
       )}
