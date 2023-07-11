@@ -71,26 +71,39 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
 
       {!router.asPath.startsWith('/share') && (
         <Head>
-          <meta name='title' content={SEO.TITLE_PAGE} />
+          <meta name='title' content={SEO.AUTHOR} />
           <meta name='description' content={SEO.DESCRIPTION_PAGE} />
 
           <meta property='twitter:card' content='summary_large_image' />
           <meta property='twitter:url' content={SEO.URL_PAGE} />
           <meta property='twitter:title' content={SEO.TITLE_PAGE} />
           <meta property='twitter:description' content={SEO.DESCRIPTION_PAGE} />
-          <meta property='twitter:image:alt' content={SEO.TITLE_PAGE} />
-          <meta property='twitter:image' content={`${SEO.URL_PAGE}/images/logo-full-232px.png`} />
+          <meta property='twitter:image:alt' content={SEO.AUTHOR} />
+          <meta property='twitter:image' content={`${SEO.URL_PAGE}/images/partners-logo-233px.png`} />
 
-          <meta property='og:site_name' content={SEO.TITLE_PAGE} />
+          <div style={{ color: 'red' }}>
+            <meta property='og:site_name' content={SEO.AUTHOR} />
+          </div>
           <meta property='og:type' content='website' />
           <meta property='og:url' content={SEO.URL_PAGE} />
-          <meta property='og:title' content={SEO.TITLE_PAGE} />
           <meta property='og:description' content={SEO.DESCRIPTION_PAGE} />
-          <meta property='og:image' content={`${SEO.URL_PAGE}/images/logo-full-232px.png`} />
+          <meta property='og:image' content={`${SEO.URL_PAGE}/images/partners-logo-233px.png`} />
+          <meta property='og:image:secure_url' content={`${SEO.URL_PAGE}/images/partners-logo-233px.png`} />
+
+          <meta property='al:ios:url' content={SEO.URL_PAGE} />
+          <meta property='al:ios:title' content={SEO.TITLE_PAGE} />
+          <meta property='al:ios:description' content={SEO.DESCRIPTION_PAGE} />
+          <meta property='al:ios:image' content={`${SEO.URL_PAGE}/images/partners-logo-233px.png`} />
+          <meta property='al:ios:app_name' content={SEO.TITLE_PAGE} />
+
+          <meta property='al:android:url' content={SEO.URL_PAGE} />
+          <meta property='al:android:title' content={SEO.TITLE_PAGE} />
+          <meta property='al:android:description' content={SEO.DESCRIPTION_PAGE} />
+          <meta property='al:android:app_name' content={SEO.TITLE_PAGE} />
+          <meta property='al:android:image' content={`${SEO.URL_PAGE}/images/partners-logo-233px.png`} />
         </Head>
 
       )}
-
       <LoadingPage isRouteChanging={isRouteChanging} key={loadingKey} />
 
       <ThemeProvider theme={theme}>
