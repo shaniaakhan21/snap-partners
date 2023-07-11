@@ -6,10 +6,12 @@ function IndividualProfileHeader ({ body, setBody }) {
   return (
     <div className={`${cname}-header`}>
           <ul className={`${cname}-header-list`}>
-            <li className={body === 'iboProfile' ? `${cname}-header-listItems listItems-active` : `${cname}-header-listItems`}>IBO profile</li>
+            <li className={body === 'iboProfile' ? `${cname}-header-listItems listItems-active` : `${cname}-header-listItems`}
+            onClick={() => setBody('iboProfile')}>IBO profile</li>
             <li className={`${cname}-header-listItems`}>comissions</li>
             <li className={`${cname}-header-listItems`}>transactions</li>
-            <li className={`${cname}-header-listItems`}>Order</li>
+            <li className={body === 'order' ? `${cname}-header-listItems listItems-active` : `${cname}-header-listItems`}
+            onClick={() => setBody('order')}>Order</li>
             <li className={`${cname}-header-listItems`}>subscription</li>
             <li className={`${cname}-header-listItems`}>tickets</li>
             <li className={`${cname}-header-listItems`}>upline</li>

@@ -12,19 +12,20 @@ function SearchResult ({ resultData }) {
     // console.log('view more', id)
     router.push(`/search/profile/${id}`)
   }
+  console.log('result from search is', resultData)
   return (
     <Container>
       <p>Result</p>
       <Paper elevation={2} className={`${cname}-container`}>
         {
-          resultData.map((result) => (
+          resultData && resultData?.map((result) => (
             <div className={`${cname}-row`}>
               <Avatar style={{ width: '40px', height: '40px' }} />
-              <p>{result.name}</p>
+              <p>{`${result.name} ${result.lastname}`}</p>
               <p>{result.id}</p>
-              <p>{result.rank}</p>
+              <p>{result?.ranks?.percentage}</p>
               <p>{result.grandfatherRank}</p>
-              <p>{result.amount}</p>
+              <p>{result.phoneNumber}</p>
               <p>{result.email}</p>
               <div className={`${cname}-row-button`}>
                 <ButtonComponent title={'view more'} onClickFunction={handleViewMore} param={result.id} />

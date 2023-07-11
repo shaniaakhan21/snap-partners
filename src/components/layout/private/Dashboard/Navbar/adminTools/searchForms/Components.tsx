@@ -7,28 +7,55 @@ interface IButtonComponent{
     param?:any
 }
 
-export const InputComponent = ({ label, placeholder }) => {
+interface IInputComponent
+{
+    label:string,
+    placeholder:string,
+    onChangeFunction?:any,
+    param?:any,
+    value?:any
+}
+
+interface ISelectComponent {
+    label:string,
+    options?:Array<any>,
+    name: string
+    onChangeFunction?:any,
+    param?:any,
+}
+
+export const InputComponent = (props:IInputComponent) => {
+  const { label, placeholder, onChangeFunction, param, value } = props
   return (
     <div>
       <label className='search-form-label'>{label}</label>
       <div>
-        <input type='text' className='search-form-input search-form-box' placeholder={`${placeholder}`} />
+        <input type='text' className='search-form-input search-form-box' placeholder={`${placeholder}`} onChange={(event) => { onChangeFunction(event, param) }} value={value} />
       </div>
     </div>
   )
 }
 
-export const SelectComponent = ({ label }) => {
+export const SelectComponent = (props:ISelectComponent) => {
+  const { label, options, name, onChangeFunction, param } = props
   return (
     <div>
       <div>
         <label className='search-form-label'>{label}</label>
       </div>
       <div>
-        <select name='userLevel' className='search-form-select search-form-box'>
+        <select name={`${name}`} className='search-form-select search-form-box' onChange={(event) => { onChangeFunction(event, param) }}>
           <option value={''}>Select</option>
+          {
+            options
+              ? options.map((option) => (
+                <option value={option.value}>{option.name}</option>
+              ))
+              : <></>
+          }
+          {/* <option value={''}>Select</option>
           <option value={''}>OP 1</option>
-          <option value={''}>OP 2</option>
+          <option value={''}>OP 2</option> */}
         </select>
       </div>
     </div>
@@ -36,7 +63,7 @@ export const SelectComponent = ({ label }) => {
 }
 
 export const ButtonComponent = (props:IButtonComponent) => {
- const { title, onClickFunction, param } = props
+  const { title, onClickFunction, param } = props
   return (
     <div>
       <button className='search-form-button button-label' onClick={() => { onClickFunction(param) }}>{title}</button>

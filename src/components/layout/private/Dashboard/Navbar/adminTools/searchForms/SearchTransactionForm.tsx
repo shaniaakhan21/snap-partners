@@ -6,7 +6,7 @@ function SearchTransactionForm () {
   return (
     <div>
       <InputComponent label={'Order Id'} placeholder={'Order ID/Customer ID'} />
-      <SelectComponent label={'status'} />
+      <SelectComponent label={'status'} name={'status'} />
       <ButtonComponent title={'submit'} />
     </div>
   )
