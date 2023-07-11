@@ -271,7 +271,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           register={register}
           rulesForm={registerRulesConfig.ssn}
           isRequired={false}
-          helpText='* Required to receive commissions beyold $600'
+          helpText='* Required to receive commissions beyond $600'
         />
 
         <InputPhone
@@ -339,12 +339,12 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             Sign Up
           </Button>
 
-          <p className='mt-4'>
+          {role !== ROLES.IBO && <p className='mt-4'>
             <span className='font-semibold'>Already have an account?</span>
             <Link href={loginURL}>
               <a className='text-textAcent-500 focus:underline'> Login.</a>
             </Link>
-          </p>
+          </p>}
         </section>
       </form>
     </div>

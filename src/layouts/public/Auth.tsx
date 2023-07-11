@@ -64,15 +64,17 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
                 </div>
               )}
 
-              {role !== ROLES.IBO && <ul className='list-disc pl-6 mt-20 text-xl 2xl:text-2xl space-y-4'>
+              {role === ROLES.IBO && <div className='flex justify-end'><img width={200} height={200} src='/images/profile/referralPartner.png'/></div>}
+
+              <ul className={`list-disc pl-6 ${role !== ROLES.IBO ? 'mt-20' : 'mt-5'} text-xl 2xl:text-2xl space-y-4`}>
                 <li>Get notified about company updates</li>
                 <li>Access to company training</li>
                 <li>Get synced</li>
                 <li>Track your team</li>
-              </ul>}
+              </ul>
 
               <div className='absolute bottom-10 left-12 flex items-center gap-x-4'>
-                {role === ROLES.IBO ? <img width={100} height={100} src='/images/profile/referralPartner.png'/> : <img src='/images/logo-dark.png' />}
+                {role !== ROLES.IBO && <img src='/images/logo-dark.png' />}
               </div>
             </div>
           </section>
