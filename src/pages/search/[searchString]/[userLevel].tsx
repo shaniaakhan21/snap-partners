@@ -64,26 +64,28 @@ function ProfileSearch () {
       console.log('search by name')
       if (typeof searchString === 'string')
       {
-        const newStr = searchString.split(' ')
-        const name = newStr[0]
-        const lastname = newStr[1]
-        let params = {}
-        if (name)
-        {
-          params = {
-            ...params,
-            name: name
-          }
-        }
-        if (lastname)
-        {
-          params = {
-            ...params,
-            lastname: lastname
-          }
-        }
+        // const newStr = searchString.split(' ')
+        // const name = newStr[0]
+        // const lastname = newStr[1]
+        // let params = {}
+        // if (name)
+        // {
+        //   params = {
+        //     ...params,
+        //     name: name
+        //   }
+        // }
+        // if (lastname)
+        // {
+        //   params = {
+        //     ...params,
+        //     lastname: lastname
+        //   }
+        // }
         await axios.get('/api/user/getUserByName', {
-          params: params,
+          params: {
+            name: searchString
+          },
           headers: {
             Authorization: `Bearer ${token}`
           }
