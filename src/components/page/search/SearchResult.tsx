@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 import React from 'react'
-import { Container, Paper, Avatar } from '@mui/material'
+import { Container, Paper, Avatar, TableContainer, TableBody, TableCell, Table, TableHead, TableRow } from '@mui/material'
 import { ButtonComponent } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/Components'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -17,22 +17,43 @@ function SearchResult ({ resultData }) {
     <Container>
       <p>Result</p>
       <Paper elevation={2} className={`${cname}-container`}>
-        {
-          resultData && resultData?.map((result) => (
-            <div className={`${cname}-row`}>
-              <Avatar style={{ width: '40px', height: '40px' }} />
-              <p>{`${result.name} ${result.lastname}`}</p>
-              <p>{result.id}</p>
-              <p>{result?.ranks?.percentage}</p>
-              <p>{result.grandfatherRank}</p>
-              <p>{result.phoneNumber}</p>
-              <p>{result.email}</p>
-              <div className={`${cname}-row-button`}>
-                <ButtonComponent title={'view more'} onClickFunction={handleViewMore} param={result.id} />
-              </div>
-            </div>
-          ))
-        }
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell> </TableCell>
+                <TableCell>Full Name</TableCell>
+                <TableCell>ID</TableCell>
+                <TableCell>Rank</TableCell>
+                <TableCell>Grandfather rank</TableCell>
+                <TableCell>Phone num</TableCell>
+                <TableCell>Email</TableCell>
+                <TableCell> </TableCell>
+              </TableRow>
+            </TableHead>
+
+            <TableBody>
+              {
+                resultData && resultData?.map((result) => (
+                  <TableRow>
+                    <TableCell><Avatar style={{ width: '40px', height: '40px' }} /></TableCell>
+                    <TableCell><p>{`${result.name} ${result.lastname}`}</p></TableCell>
+                    <TableCell><p>{result.id}</p></TableCell>
+                    <TableCell><p>{result?.ranks?.percentage}</p></TableCell>
+                    <TableCell><p>{result.grandfatherRank}</p></TableCell>
+                    <TableCell><p>{result.phoneNumber}</p></TableCell>
+                    <TableCell><p>{result.email}</p></TableCell>
+                    <TableCell>
+                      <div className={`${cname}-row-button`}>
+                      <ButtonComponent title={'view more'} onClickFunction={handleViewMore} param={result.id} />
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))
+              }
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Paper>
     </Container>
   )
