@@ -13,12 +13,13 @@ import { APP_INFO } from 'config/appInfo'
 import { ROLES } from 'config/roles'
 
 import DashboardLayout from 'layouts/private/Dashboard'
-import { Unilevel as OldGenealogy } from '../components/page/genealogy/OldGenealogy/UniLevel'
+import { Unilevel as OldGenealogy } from '../../components/page/genealogy/OldGenealogy/UniLevel'
 import { CustomerIcon, DriverIcon, MerchantIcon } from 'components/common/icons'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { NewGenealogy } from 'components/page/genealogy/NewGenealogy'
 import { ReferralCards } from 'components/page/referrals/Cards'
 import { EmptyData } from 'components/common/empty/EmptyData'
+import { useRouter } from 'next/router'
 
 const { SEO } = APP_INFO
 
@@ -48,7 +49,9 @@ interface IDataFormSearch {
   search: string
 }
 
-const GenealogyPage: Page = () => {
+const IndividualGenealogyPage: Page = () => {
+  const router = useRouter()
+  const { id } = router.query
   const { handleSubmit, register } = useForm<IDataFormSearch>()
   const { genealogy: genealogyLayoutConfig } = useLayoutConfig()
   const store = useAuthStore()
@@ -89,7 +92,7 @@ const GenealogyPage: Page = () => {
     fetchLevelIsLoading,
     fetchUserDataLevelIsLoading,
     fetchUserDataSearchIsLoading
-  } = useReferralsData(auth, tabOpen, userDetailIdOpen, userDetailIdSearch, levelPage)
+  } = useReferralsData(auth, tabOpen, userDetailIdOpen, userDetailIdSearch, levelPage, id)
   // } = useReferralsData(auth, tabOpen, userDetailIdOpen, page)
 
   const handleClickTab = (id: string) => setTabOpen(id)
@@ -114,6 +117,7 @@ const GenealogyPage: Page = () => {
   }
 
   const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
+
 
   if (isIntegrous) {
     if (levels?.length === 0) {
@@ -206,7 +210,7 @@ const GenealogyPage: Page = () => {
   )
 }
 
-GenealogyPage.getLayout = (page: ReactNode) => (
+IndividualGenealogyPage.getLayout = (page: ReactNode) => (
   <>
     <Head>
       <title>{SEO.TITLE_PAGE} - Genealogy</title>
@@ -218,4 +222,4 @@ GenealogyPage.getLayout = (page: ReactNode) => (
   </>
 )
 
-export default GenealogyPage
+export default IndividualGenealogyPage

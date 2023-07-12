@@ -10,6 +10,7 @@ import { getLocalStorage, removeLocalStorage } from 'lib/utils/localStorage'
 function IndividualProfileHeader ({ body, setBody, profileData }) {
   const cname = 'profilePage-individualProfile'
   const { setAuth } = useAuthStore()
+  const router = useRouter()
 
   // trackLoginHandle(true)
   // setLoading(true)
@@ -89,7 +90,8 @@ function IndividualProfileHeader ({ body, setBody, profileData }) {
         <li className={`${cname}-header-listItems`}>subscription</li>
         <li className={`${cname}-header-listItems`}>tickets</li>
         <li className={`${cname}-header-listItems`}>upline</li>
-        <li className={`${cname}-header-listItems`}>downline</li>
+        <li className={`${cname}-header-listItems`}
+        onClick={() => { router.push(`/genealogy/${profileData[0]?.id}`) }}>downline</li>
         <li className={`${cname}-header-listItems`}
           onClick={() => { LoginAsRepHandle() }}>Login as rep</li>
       </ul>
