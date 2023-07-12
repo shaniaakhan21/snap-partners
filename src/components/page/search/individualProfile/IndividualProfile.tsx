@@ -12,7 +12,7 @@ function IndividualProfile ({ profileData }) {
   return (
     <Container>
       <Paper className={`${cname}-conatiner`}>
-        <IndividualProfileHeader body={body} setBody={setBody} />
+        <IndividualProfileHeader body={body} setBody={setBody} profileData={profileData} />
         {
           body === 'iboProfile'
             ? <IBOProfile profileData={profileData} />

@@ -6,6 +6,7 @@ interface ILoginDataBody {
   username?: string
   email?: string
   phoneNumber?: string
+  loginAsRep?: boolean
   password: string
 }
 
