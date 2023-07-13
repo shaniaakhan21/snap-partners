@@ -25,7 +25,7 @@ function IBOProfile ({ profileData }) {
 
         <div className={`${cname}-midSection-AdditionalInfo`}>
           <div>
-            <p className={`${cname}-footer-heading`}>{`${profileData[0]?.ranks?.percentage}`}</p>
+            <p className={`${cname}-footer-heading`}>{`${profileData[0]?.ranks?.type}`}</p>
             <p className={`${cname}-midSection-mainInfo-name adInfoText`}>Sponsered by </p>
           </div>
           <div>
