@@ -70,7 +70,7 @@ export const ReferralsUserDetailModal = ({ id, name, lastname, createdAt, email,
 
         <div className='w-full'>
           <div className='flex justify-between items-start'>
-            <p className='mb-4 block text-primary-500 font-bold'>{name.toUpperCase()} {lastname.toUpperCase()}</p>
+            <p className='mb-4 block text-primary-500 font-bold'>{name.toUpperCase()} {lastname?.toUpperCase()}</p>
             <ul className='flex justify-end gap-x-2'>
               <UserBadges userRank={rank} userRoles={roles} />
             </ul>
