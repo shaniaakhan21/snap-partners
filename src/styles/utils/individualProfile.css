@@ -28,11 +28,13 @@
     cursor: pointer;
     background-color: #E35C49;
     padding: 10px 5px 10px 5px;
+    margin-top: -20px;
     color: #FFFFFF;
 }
 .listItems-active{
     padding: 10px 5px 10px 5px;
     color: #FFFFFF;
+    margin-top: -20px;
     background-color: #E35C49;
 }
 .profilePage-IBOProfile-container
