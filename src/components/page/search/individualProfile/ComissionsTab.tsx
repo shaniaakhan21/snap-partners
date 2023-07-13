@@ -49,19 +49,19 @@ export default function CommissionsTab (props: CommissionsProps) {
   const { currentRank, userId } = props
   let rankKey: keyof Commission = 'manager'
   switch (currentRank) {
-  case 'Manager': {
+  case 'manager': {
     rankKey = 'manager'
     break
   }
-  case 'Director': {
+  case 'director': {
     rankKey = 'director'
     break
   }
-  case 'Supervisor': {
+  case 'supervisor': {
     rankKey = 'supervisor'
     break
   }
-  case 'Executive': {
+  case 'executive': {
     rankKey = 'executive'
     break
   }
