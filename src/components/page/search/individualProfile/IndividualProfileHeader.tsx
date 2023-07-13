@@ -83,7 +83,8 @@ function IndividualProfileHeader ({ body, setBody, profileData }) {
       <ul className={`${cname}-header-list`}>
         <li className={body === 'iboProfile' ? `${cname}-header-listItems listItems-active` : `${cname}-header-listItems`}
           onClick={() => setBody('iboProfile')}>IBO profile</li>
-        <li className={`${cname}-header-listItems`}>comissions</li>
+        <li className={body === 'comissions' ? `${cname}-header-listItems listItems-active` : `${cname}-header-listItems`}
+        onClick={() => { setBody('comissions') }}>comissions</li>
         <li className={`${cname}-header-listItems`}>transactions</li>
         <li className={body === 'order' ? `${cname}-header-listItems listItems-active` : `${cname}-header-listItems`}
           onClick={() => setBody('order')}>Order</li>
