@@ -34,7 +34,7 @@ function IndividualProfile ({ profileData }) {
         }
         {
           body === 'comissions'
-            ? <CommissionsTab currentRank={profileData[0]?.ranks || 'Free Member'} userId={profileData[0]?.id} />
+            ? <CommissionsTab currentRank={profileData[0]?.ranks?.type} userId={profileData[0]?.id} />
             : <></>
         }
       </Paper>

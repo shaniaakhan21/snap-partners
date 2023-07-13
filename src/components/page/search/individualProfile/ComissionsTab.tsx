@@ -41,7 +41,7 @@ const timelineMap = {
 }
 
 interface CommissionsProps{
-  currentRank: Rank
+  currentRank: string
   userId: number
 }
 
