@@ -60,8 +60,7 @@ export const Navbar = () => {
           signOut={removeAuth}
           phone={auth.phoneNumber}
           photoUrl={auth.profileImage}
-          // rank={auth.ranks.type}
-          rank={'type'}
+          rank={auth.ranks.type}
         />}
       </div>
     </header>

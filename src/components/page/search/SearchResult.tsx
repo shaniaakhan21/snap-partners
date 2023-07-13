@@ -36,9 +36,9 @@ function SearchResult ({ resultData }) {
               {
                 resultData && resultData?.map((result) => (
                   <TableRow>
-                    <TableCell><Avatar style={{ width: '40px', height: '40px' }} /></TableCell>
-                    <TableCell><p>{`${result.name} ${result.lastname}`}</p></TableCell>
-                    <TableCell><p>{result.id}</p></TableCell>
+                    <TableCell><Avatar src={result?.profileImage} style={{ width: '40px', height: '40px' }} /></TableCell>
+                    <TableCell><p>{`${result?.name} ${result?.lastname}`}</p></TableCell>
+                    <TableCell><p>{result?.id}</p></TableCell>
                     <TableCell><p>{result?.ranks?.percentage}</p></TableCell>
                     <TableCell><p>{result.grandfatherRank}</p></TableCell>
                     <TableCell><p>{result.phoneNumber}</p></TableCell>
