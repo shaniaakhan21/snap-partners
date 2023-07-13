@@ -7,6 +7,7 @@ import { ROLES } from 'config/roles'
 import DashboardLayout from 'layouts/private/Dashboard'
 import { ReferralCards } from 'components/page/referrals/Cards'
 import { CustomerIcon, DriverIcon, MerchantIcon, IBOIcon } from 'components/common/icons'
+import PartnerLogo from '../../public/images/profile/referralPartner.png'
 
 const { SEO } = APP_INFO
 
@@ -23,7 +24,7 @@ const ReferralsPage: Page = () => {
         {auth.roles.ibo && (
           <ReferralCards
             title='Sponsor a Snap IBO'
-            ilustration={<IBOIcon />}
+            ilustration={<img src={'/images/profile/referralPartner.png'} width={100} />}
             link={`${auth.referralLink}&role=${ROLES.IBO}` || 'With Out Link'}
             newUser={false}
             classes='col-span-1'
