@@ -52,6 +52,9 @@ interface IDataFormSearch {
 const IndividualGenealogyPage: Page = () => {
   const router = useRouter()
   const { id } = router.query
+  if (typeof id === 'string') {
+    var userId = parseInt(id)
+  }
   const { handleSubmit, register } = useForm<IDataFormSearch>()
   const { genealogy: genealogyLayoutConfig } = useLayoutConfig()
   const store = useAuthStore()
@@ -92,7 +95,7 @@ const IndividualGenealogyPage: Page = () => {
     fetchLevelIsLoading,
     fetchUserDataLevelIsLoading,
     fetchUserDataSearchIsLoading
-  } = useReferralsData(auth, tabOpen, userDetailIdOpen, userDetailIdSearch, levelPage, id)
+  } = useReferralsData(auth, tabOpen, userDetailIdOpen, userDetailIdSearch, levelPage, userId)
   // } = useReferralsData(auth, tabOpen, userDetailIdOpen, page)
 
   const handleClickTab = (id: string) => setTabOpen(id)
@@ -118,12 +121,11 @@ const IndividualGenealogyPage: Page = () => {
 
   const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
 
-
   if (isIntegrous) {
     if (levels?.length === 0) {
       return (
         <div className='w-full flex flex-col justify-center items-center min-h-[80vh]'>
-           <EmptyData label='You have no referrals yet' />
+          <EmptyData label='You have no referrals yet' />
         </div>
       )
     }
