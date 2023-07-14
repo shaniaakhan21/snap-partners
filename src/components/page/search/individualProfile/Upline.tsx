@@ -6,6 +6,8 @@ import CardContent from '@mui/material/CardContent'
 import axios from 'axios'
 import { getLocalStorage } from 'lib/utils/localStorage'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
+import { ButtonComponent } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/Components'
+import { PhoneIcon } from 'components/common/icons'
 
 function Upline ({ id }) {
   const cname = 'user-upline'
@@ -39,12 +41,21 @@ function Upline ({ id }) {
         ? UplineData?.map((data) => (
           <Card variant='outlined' className={`${cname}-card`}>
             <CardContent>
-              <p>id-{data?.id}</p>
-              <p>rank-{data?.ranks?.type}</p>
-              <p>name-{data?.name}</p>
+              <p className={`${cname}-card-heading`}>{data?.name} {data?.lastname}</p>
+              <div className={`${cname}-card-info`}>
+                <p><span className={`${cname}-card-info-title`}>id</span>-<span className={`${cname}-card-info-content`}>{data?.id}</span></p>
+                <p><span className={`${cname}-card-info-title`}>Rank</span>-<span className={`${cname}-card-info-content`}>{data?.ranks?.type}</span></p>
+              </div>
+
+              <div className={`${cname}-card-info`}>
+                <div style={{ display: 'flex', flexDirection: 'row' }}><img src='/images/icons/email.svg'/><p><span className={`${cname}-card-info-content`}>{data?.email}</span></p></div>
+                <div style={{ display: 'flex', flexDirection: 'row' }}><PhoneIcon classes='w-4 h-4' /><p><span className={`${cname}-card-info-content`}>{data?.phoneNumber}</span></p></div>
+              </div>
             </CardContent>
-            <CardActions>
-              <button onClick={() => { setUserId(data?.id) }}>see upline</button>
+            <CardActions >
+              <div style={{ textAlign: 'center', width: '100%' }}>
+                <ButtonComponent title='See Upline' onClickFunction={setUserId} param={data?.id} />
+              </div>
             </CardActions>
           </Card>
         ))

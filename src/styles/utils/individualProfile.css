@@ -9,7 +9,7 @@
     list-style: none;
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    /* justify-content: space-evenly; */
 }
 .profilePage-individualProfile-header-listItems
 {
@@ -23,18 +23,47 @@
     font-weight: 700;
     line-height: 12px;
     text-transform: uppercase;
+    padding: 10px;
+    width: 100%;
+}
+.listItems-midItem
+{
+    border-top: 2px;
+    border-bottom: 2px;
+    border-right: 2px;
+    border-color: black;
+    border-style: solid;
+}
+.listItems-firstItem
+{
+    border-top: 2px;
+    border-bottom: 2px;
+    border-right: 2px;
+    border-left: 2px;
+    border-radius: 10px 0px 0px 10px;
+    border-color: black;
+    border-style: solid;
+}
+.listItems-lastItem
+{
+    border-top: 2px;
+    border-bottom: 2px;
+    border-right: 2px;
+    border-radius: 0px 10px 10px 0px;
+    border-color: black;
+    border-style: solid;
 }
 .profilePage-individualProfile-header-listItems:hover{
     cursor: pointer;
     background-color: #E35C49;
-    padding: 10px 5px 10px 5px;
-    margin-top: -20px;
+    /* padding: 10px 5px 10px 5px; */
+    /* margin-top: -20px; */
     color: #FFFFFF;
 }
 .listItems-active{
-    padding: 10px 5px 10px 5px;
+    /* padding: 10px 5px 10px 5px; */
     color: #FFFFFF;
-    margin-top: -20px;
+    /* margin-top: -20px; */
     background-color: #E35C49;
 }
 .profilePage-IBOProfile-container
@@ -177,12 +206,35 @@ flex-direction: row;
 }
 .user-upline-card
 {
-    width: 250px;
-    height: 150px;
+    width: 400px;
+    height: 200px;
     margin: 10px auto 10px auto;
 }
 .user-upline-container
 {
     max-height: 500px;
     overflow-y: scroll;
+}
+.user-upline-card-heading
+{
+    text-align: center;
+    color: #E35C49;
+    font-weight: 600;
+    font-size: 18px;
+}
+.user-upline-card-info
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-top: 10px;
+}
+.user-upline-card-info-title
+{
+    color: #E35C49;
+}
+.user-upline-card-info-content
+{
+    color: rgb(37,99,235);
 }
