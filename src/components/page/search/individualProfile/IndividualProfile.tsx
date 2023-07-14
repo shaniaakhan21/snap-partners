@@ -6,10 +6,11 @@ import IBOProfile from './IBOProfile'
 import Order from './Order'
 import Downline from './Downline'
 import CommissionsTab from './ComissionsTab'
+import Upline from './Upline'
 
 function IndividualProfile ({ profileData }) {
   const cname = 'profilePage-individualProfile'
-  const [body, setBody] = useState<'iboProfile' | 'order' | 'downline' | 'comissions'>('iboProfile')
+  const [body, setBody] = useState<'iboProfile' | 'order' | 'downline' | 'comissions' | 'upline'>('iboProfile')
   console.log('body is ', body)
   return (
     <Container>
@@ -37,6 +38,12 @@ function IndividualProfile ({ profileData }) {
             ? <CommissionsTab currentRank={profileData[0]?.ranks?.type} userId={profileData[0]?.id} />
             : <></>
         }
+        {
+          body === 'upline'
+            ? <Upline id={profileData[0]?.id}/>
+            : <></>
+        }
+
       </Paper>
     </Container>
   )

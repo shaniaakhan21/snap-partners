@@ -71,7 +71,7 @@ export const Account = ({ email, name, phone, photoUrl, signOut, rank, roles }) 
             : (
               <AccountDefaultImage rank={rank} size={40} />
             )}
-            {email}
+            {name}
 
           {/* <div className='sm:hidden absolute -top-1 -right-2 h-3.5 w-3.5 bg-[#FF4343] rounded-full text-white flex justify-center items-center' /> */}
         </div>

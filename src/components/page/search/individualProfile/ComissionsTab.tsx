@@ -119,7 +119,7 @@ export default function CommissionsTab (props: CommissionsProps) {
       <div className=''>
         <div style={{ textAlign: 'center' }}>
           <span className='text-xs sm:text-sm'>
-            Commissions at current rank {currentRank}
+            Commissions at current rank
           </span>
           <div className='text-2xl font-bold'>
             ${currentRank === 'Free Member' ? 0 : selectedData[rankKey]}

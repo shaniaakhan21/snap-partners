@@ -90,7 +90,8 @@ function IndividualProfileHeader ({ body, setBody, profileData }) {
           onClick={() => setBody('order')}>Order</li>
         <li className={`${cname}-header-listItems`}>subscription</li>
         <li className={`${cname}-header-listItems`}>tickets</li>
-        <li className={`${cname}-header-listItems`}>upline</li>
+        <li className={body === 'upline' ? `${cname}-header-listItems listItems-active` : `${cname}-header-listItems`}
+        onClick={() => setBody('upline')}>upline</li>
         {/* <li className={`${cname}-header-listItems`}
         onClick={() => { router.push(`/genealogy/${profileData[0]?.id}`) }}>downline</li> */}
         <li className={body === 'downline' ? `${cname}-header-listItems listItems-active` : `${cname}-header-listItems`}
