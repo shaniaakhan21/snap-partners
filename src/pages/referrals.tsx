@@ -21,15 +21,13 @@ const ReferralsPage: Page = () => {
   return (
     <div className='min-h-[80vh] flex justify-center items-center'>
       <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-center justify-center justify-items-center gap-4'>
-        {auth.roles.ibo && (
-          <ReferralCards
-            title='Sponsor a Snap IBO'
-            ilustration={<img src={'/images/profile/referralPartner.png'} width={100} />}
-            link={`${auth.referralLink}&role=${ROLES.IBO}` || 'With Out Link'}
-            newUser={false}
-            classes='col-span-1'
-          />
-        )}
+        <ReferralCards
+          title='Sponsor a Snap IBO'
+          ilustration={<img src={'/images/profile/referralPartner.png'} width={100} />}
+          link={`${auth.referralLink}&role=${ROLES.IBO}` || 'With Out Link'}
+          newUser={false}
+          classes='col-span-1'
+        />
 
         {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
           <ReferralCards
