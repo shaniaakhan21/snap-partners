@@ -1,3 +1,5 @@
+/* eslint-disable prefer-const */
+/* eslint-disable no-unused-expressions */
 // eslint-disable-next-line no-use-before-define
 import * as React from 'react'
 import { useTheme } from '@mui/material/styles'
@@ -12,6 +14,7 @@ import SwipeableViews from 'react-swipeable-views'
 import { autoPlay } from 'react-swipeable-views-utils'
 import NextSnapTile from './EventTile'
 import { events } from './mock'
+import axios from 'axios'
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
 
@@ -23,11 +26,41 @@ interface IEvent {
 }
 
 function Event () {
-  const [eventData, setEvent] = React.useState<Array<IEvent>>()
+  const [eventData, setEvent] = React.useState<Array<IEvent>>([])
+
+  const getEventData = async () => {
+    await axios.get('/api/event')
+      .then((response) => {
+        if (response.data.status) {
+          let convertedData = response.data.result.map((eventBanner) => (
+            {
+              img: getImgUrl(eventBanner.fileData, eventBanner.fileType),
+              title: `${eventBanner.title}`,
+              description: extractDate(new Date(eventBanner.fromDate), new Date(eventBanner.toDate)),
+              redirectUrl: `${eventBanner.redirectUrl}`
+            }
+          ))
+          setEvent(convertedData)
+        }
+      })
+      .catch((e) => {
+        return ''
+      })
+  }
+
+  const getImgUrl = (fileData, fileType) => {
+    const buffer = Buffer.from(fileData)
+    const data = new Blob([buffer], { type: `${fileType}` })
+    return URL.createObjectURL(data)
+  }
+
+  const extractDate = (fromDate:Date, toDate:Date) => {
+    const description = `${fromDate.getDate()}/${fromDate.getMonth()}/${fromDate.getFullYear()} to ${toDate.getDate()}/${toDate.getMonth()}/${toDate.getFullYear()}`
+    return description
+  }
 
   React.useEffect(() => {
-    const data = events
-    setEvent(data)
+    getEventData()
   }, [])
   const theme = useTheme()
   const [activeStep, setActiveStep] = React.useState(0)

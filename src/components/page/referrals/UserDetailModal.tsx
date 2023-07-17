@@ -24,17 +24,19 @@ interface IProps extends IUserData {
   }
   rank?: TRANK
   auth: IAuth
-  levels: ILevel[]
+  levels: ILevel[],
   roles: {
     admin: boolean,
     customer: boolean,
     driver: boolean,
     merchant: boolean,
     agent: boolean
+    integrousAssociate: boolean
+    integrousCustomer: boolean
   }
 }
 
-export const ReferralsUserDetailModal = ({ id, name, email, phone, sponsor, rank, onClick, openNewUserInfo, levels, auth, roles, closeModalManually }: IProps) => {
+export const ReferralsUserDetailModal = ({ id, name, lastname, createdAt, email, phone, sponsor, rank, onClick, openNewUserInfo, levels, auth, roles, closeModalManually }: IProps) => {
   const { copy } = useCopyToClipboard()
 
   return (
@@ -68,10 +70,18 @@ export const ReferralsUserDetailModal = ({ id, name, email, phone, sponsor, rank
 
         <div className='w-full'>
           <div className='flex justify-between items-start'>
-            <p className='mb-4 block text-primary-500 font-bold'>{name.toUpperCase()}</p>
+            <p className='mb-4 block text-primary-500 font-bold'>{name.toUpperCase()} {lastname?.toUpperCase()}</p>
             <ul className='flex justify-end gap-x-2'>
               <UserBadges userRank={rank} userRoles={roles} />
             </ul>
+          </div>
+          <div className='flex justify-between items-start' style={{ marginBottom: 10 }}>
+            <p className='inline-block'>
+                Registered on {' '}
+              <span className='inline-block text-primary-500'>
+                {createdAt}
+              </span>
+            </p>
           </div>
         </div>
 

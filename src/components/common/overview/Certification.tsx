@@ -12,6 +12,7 @@ import SwipeableViews from 'react-swipeable-views'
 import { autoPlay } from 'react-swipeable-views-utils'
 import CertificationTile from './CertificationTile'
 import { certification } from './mock'
+import axios from 'axios'
 
 const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
 
@@ -23,10 +24,35 @@ interface ICertification {
 }
 
 function Certification () {
+  const getEventData = async () => {
+    await axios.get('/api/certificate')
+      .then((response) => {
+        console.log('certification data', response)
+        if (response.data.status) {
+          const convertedData : ICertification[] = response.data.result.map((eventBanner) => (
+            {
+              imageURL: getImgUrl(eventBanner.fileData, eventBanner.fileType),
+              title: `${eventBanner.title}`,
+              description: `${eventBanner.description}`,
+              redirectUrl: `${eventBanner.redirectUrl}`
+            }
+          ))
+          setCertificationData(convertedData)
+        }
+      })
+      .catch((e) => {
+        return ''
+      })
+  }
+
+  const getImgUrl = (fileData, fileType) => {
+    const buffer = Buffer.from(fileData)
+    const data = new Blob([buffer], { type: `${fileType}` })
+    return URL.createObjectURL(data)
+  }
   const [certifications, setCertificationData] = React.useState<Array<ICertification>>([])
   React.useEffect(() => {
-    const data = certification
-    setCertificationData(data)
+    getEventData()
   }, [])
 
   const theme = useTheme()

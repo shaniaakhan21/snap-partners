@@ -95,7 +95,7 @@ export const DrawerMobile = ({ isCurrentlyPage, auth, isManager, isAdmin }: { is
                         <div>{route.label}</div>
                       </a>,
                       !!route.subItems,
-                      route.to
+                      route.label.includes('Shopping Cart') ? `https://www.integrouswellness.com/${auth.referralCode}?access_token=${auth.accessToken}` : route.to
                     )}
                     {route.subItems && activeSubmenu === index && (
                       <ul className='mt-2'>

@@ -8,6 +8,8 @@ export type { IReferralLink } from './referralLink'
 export interface IUserData {
   id: number
   name: string
+  lastname: string
+  createdAt: string
   numUsers?: number
   email: string
   phone: string
@@ -41,6 +43,8 @@ export interface IUserCommonData {
     merchant: boolean
     agent: boolean
     ibo: boolean
+    integrousAssociate: boolean
+    integrousCustomer: boolean
   },
   isManager: boolean // ?
   ownerName: string

@@ -1,12 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
-import { useAuthStore } from 'lib/stores'
+import { useMemo, useState } from 'react'
 import { GeneralModal } from 'components/page/genealogy/OldGenealogy/Modals/GeneralModal'
 import { DataGrid } from '@mui/x-data-grid'
-
-interface MonthlyMilestonesData {
-  revenue: number
-  customerCount: number
-}
 
 const Table = (props) => {
   const rows = useMemo(() => props.rows, [props.rows])
@@ -27,28 +21,16 @@ const Table = (props) => {
   )
 }
 
-export default function MonthlyMilestones () {
-  const { auth } = useAuthStore()
-  const [data, setData] = useState<MonthlyMilestonesData>()
+export default function MonthlyMilestones ({ data, rows }: { data: any, rows: any}) {
   const [open, setOpen] = useState(false)
-  const [rows, setRows] = useState([])
-
-  useEffect(() => {
-    fetch('/api/ibo/customer/tracking', {
-      method: 'GET',
-      headers: { Authorization: `Bearer ${auth.accessToken}` }
-    }).then((response) => {
-      response.json().then((data) => {
-        setData(data.data)
-        setRows(data.data.customers)
-      })
-    })
-  }, [])
 
   const columns = [
-    { field: 'id', headerName: 'User Id', minWidth: 130, flex: 1 },
+    { field: 'id', headerName: 'Order Id', maxWidth: 90, flex: 1 },
+    { field: 'userId', headerName: 'User Id', maxWidth: 90, flex: 1 },
+    { field: 'createdAt', headerName: 'Order Date', minWidth: 130, flex: 1 },
     { field: 'name', headerName: 'Name', minWidth: 130, flex: 1 },
-    { field: 'revenue', headerName: 'Revenue', minWidth: 130, flex: 1 }
+    { field: 'trackingNumber', headerName: 'Tracking Number', minWidth: 270, flex: 1 },
+    { field: 'subtotal', headerName: 'Order Total', maxWidth: 90, flex: 1 }
   ]
 
   return (
@@ -69,7 +51,7 @@ export default function MonthlyMilestones () {
               <p className="text-3xl text-gray-800 font-bold p-2">${data?.revenue}</p>
             </div>
             <div>
-              <p className="text-md text-gray-800 pb-6 text-center">Customer Revenue</p>
+              <p className="text-md text-gray-800 pb-6 text-center">Customer Commission</p>
             </div>
           </div>
         </div>

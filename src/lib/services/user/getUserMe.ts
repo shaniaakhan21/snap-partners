@@ -27,6 +27,8 @@ interface IQueryUserMeReturn extends IQueryErrorReturn {
       merchant: boolean
       agent: boolean
       ibo: boolean
+      integrousAssociate: boolean
+      integrousCustomer: boolean
     },
     isManager: boolean
     ownerName: string
