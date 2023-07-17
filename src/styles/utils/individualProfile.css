@@ -158,6 +158,9 @@ line-height: 24px;
 
     margin-top: 20px;
 }
+.resetPasswordText:hover{
+    cursor: pointer;
+}
 .profilePage-IBOProfile-midSection-AdditionalInfo-icons{
 
     display: flex;
@@ -238,3 +241,14 @@ flex-direction: row;
 {
     color: rgb(37,99,235);
 }
+
+/* .resetPasswordModal{
+    width:796px;
+    height:147px;
+    border-radius:30px;
+    background-color: #FFFFFF;
+    margin: 10% auto 10px auto;
+}
+.resetPasswordModal > .css-i9fmh8-MuiBackdrop-root-MuiModal-backdrop {
+    background: transparent;
+} */
