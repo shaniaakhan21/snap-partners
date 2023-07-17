@@ -61,7 +61,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
   const onSubmitVerifyCode = async (code) => {
     setIsVerifyingCode(true)
 
-    const validateRole = userTrack.userInfo.roles.driver || userTrack.userInfo.roles.customer || userTrack.userInfo.roles.integrousAssociate || userTrack.userInfo.roles.integrousCustomer || userTrack.userInfo.roles.agent || userTrack.userInfo.roles.admin
+    const validateRole = userTrack.userInfo.roles.driver || userTrack.userInfo.roles.customer || userTrack.userInfo.roles.integrousAssociate || userTrack.userInfo.roles.integrousCustomer || userTrack.userInfo.roles.agent || userTrack.userInfo.roles.ibo || userTrack.userInfo.roles.admin
       ? {
         data: {
           name: userTrack.userInfo.name,
@@ -70,6 +70,10 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
           username: userTrack.userInfo.username,
           password: userTrack.userInfo.password,
           phoneNumber: userTrack.userInfo.phone,
+          street: userTrack.userInfo.street,
+          state: userTrack.userInfo.state,
+          zip: userTrack.userInfo.zip,
+          ssn: userTrack.userInfo.ssn,
           idImage: userTrack.userInfo.idImage,
           insuranceImage: userTrack.userInfo.insuranceImage,
           roles: {
@@ -78,6 +82,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
             driver: userTrack.userInfo.roles.driver,
             agent: userTrack.userInfo.roles.agent,
             merchant: userTrack.userInfo.roles.merchant,
+            ibo: userTrack.userInfo.roles.ibo,
             integrousCustomer: userTrack.userInfo.roles.integrousCustomer,
             integrousAssociate: userTrack.userInfo.roles.integrousAssociate
           },

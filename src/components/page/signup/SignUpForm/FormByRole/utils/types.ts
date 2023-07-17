@@ -18,6 +18,12 @@ export interface IDataForm extends IUserToSignUp {
   termsAndConditions: boolean
   phoneNumber: string
 
+  // IBO
+  street: string
+  state: string
+  zip: string
+  ssn: string
+
   //   "name": "CustomerName",
   //   "lastname": "CustomerLastName",
   // "email": "customer@snapdelivery.com",
