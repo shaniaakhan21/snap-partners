@@ -77,7 +77,7 @@ function IBOProfile ({ profileData }) {
           <div className={`${cname}-midSection-AdditionalInfo`}>
             <div>
               <p className={`${cname}-footer-heading`}>{`${profileData[0]?.ranks?.type}`}</p>
-              <p className={`${cname}-midSection-mainInfo-name adInfoText`}>Sponsered by </p>
+              <p className={`${cname}-midSection-mainInfo-name adInfoText`}>Sponsered by {profileData[0]?.sponsor?.name} {profileData[0]?.sponsor?.lastname}</p>
             </div>
             <div>
               <div className={`${cname}-midSection-AdditionalInfo-icons`}>
