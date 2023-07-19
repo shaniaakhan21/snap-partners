@@ -8,7 +8,7 @@ import { SignUpMerchantForm } from 'components/page/signup/SignUpForm/FormByRole
 import { SignUpCustomerForm, SignUpDriverForm, SignUpAgentForm } from 'components/page/signup/SignUpForm'
 import { SelectRoleToSignUp } from 'components/page/signup/SelectRoleToSignUp'
 import { ROLES } from 'config/roles'
-import {SignUpIBOForm} from "../../components/page/signup/SignUpForm/FormByRole/ibo";
+import { SignUpIBOForm } from "../../components/page/signup/SignUpForm/FormByRole/ibo";
 
 const { SEO } = APP_INFO
 
