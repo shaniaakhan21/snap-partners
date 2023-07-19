@@ -14,56 +14,64 @@ function ProfileSearch () {
   const getProfileData = async () => {
     let emailString = []
     let idString = []
+    let userLevelString = ''
+    if (userLevel !== 'noLevel' && typeof userLevel === 'string')
+    {
+      userLevelString = userLevel
+    }
     const token = getLocalStorage('accessToken')
-    if (typeof searchString === 'string') {
-      emailString = searchString.match(/^[\w.-]+@[a-zA-Z_-]+?\.[a-zA-Z]{2,6}$/)
-      idString = searchString.match(/^\d+$/)
-    }
-    console.log('in useEffect', emailString, idString)
-    if (emailString)
-    {
-      console.log('email')
-      await axios.get('/api/user/getUserByEmail', {
-        params: {
-          email: searchString
-        },
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-        .then((result) => {
-          setSearchResult(result.data.result)
-          console.log('ret from email search', result.data.result)
-        })
-        .catch((e) => {
-          console.log('error while getting profile', e)
-        })
-    }
-
-    else if (idString)
-    {
-      console.log('search by id id')
-      await axios.get('/api/user/getUserById', {
-        params: {
-          id: searchString
-        },
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-        .then((result) => {
-          setSearchResult([result.data.data])
-          console.log('ret', result.data.data)
-        })
-        .catch((e) => {
-          console.log('error while getting profile', e)
-        })
-    }
-    else
-    {
-      console.log('search by name')
-      if (typeof searchString === 'string')
+    if (searchString !== 'noName') {
+      if (typeof searchString === 'string') {
+        emailString = searchString.match(/^[\w.-]+@[a-zA-Z_-]+?\.[a-zA-Z]{2,6}$/)
+        idString = searchString.match(/^\d+$/)
+      }
+      console.log('in useEffect', emailString, idString)
+      if (emailString)
       {
+        console.log('email')
+        await axios.get('/api/user/getUserByEmail', {
+          params: {
+            email: searchString,
+            userLevelString: userLevelString || ''
+          },
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+          .then((result) => {
+            setSearchResult(result.data.result)
+            console.log('ret from email search', result.data.result)
+          })
+          .catch((e) => {
+            console.log('error while getting profile', e)
+          })
+      }
+
+      else if (idString)
+      {
+        console.log('search by id id')
+        await axios.get('/api/user/getUserById', {
+          params: {
+            id: searchString,
+            userLevelString: userLevelString || ''
+          },
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+          .then((result) => {
+            setSearchResult([result.data.data])
+            console.log('ret', result.data.data)
+          })
+          .catch((e) => {
+            console.log('error while getting profile', e)
+          })
+      }
+      else
+      {
+        console.log('search by name')
+        if (typeof searchString === 'string')
+        {
         // const newStr = searchString.split(' ')
         // const name = newStr[0]
         // const lastname = newStr[1]
@@ -82,22 +90,39 @@ function ProfileSearch () {
         //     lastname: lastname
         //   }
         // }
-        await axios.get('/api/user/getUserByName', {
-          params: {
-            name: searchString
-          },
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
-        })
-        .then((result) => {
-            setSearchResult(result.data.result)
-            console.log('ret from name search', result.data.result)
+          await axios.get('/api/user/getUserByName', {
+            params: {
+              name: searchString,
+              userLevelString: userLevelString || ''
+            },
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
           })
-          .catch((e) => {
-            console.log('error while getting profile', e)
-          })
+            .then((result) => {
+              setSearchResult(result.data.result)
+            })
+            .catch((e) => {
+              console.log('error while getting profile', e)
+            })
+        }
       }
+    }
+    else{
+        await axios.get('/api/user/getUserByLevel', {
+            params: {
+              userLevelString: userLevelString || ''
+            },
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          })
+            .then((result) => {
+              setSearchResult(result.data.result)
+            })
+            .catch((e) => {
+              console.log('error while getting profile', e)
+            })
     }
   }
 

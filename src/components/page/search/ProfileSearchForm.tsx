@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-return */
 /* eslint-disable no-use-before-define */
 import React, { useState } from 'react'
 import { Container, Paper } from '@mui/material'
@@ -25,10 +26,16 @@ function ProfileSearchForm ({ children }) {
   }
 
   const handleSubmit = (value) => {
-    if (value.profileSearchString !== '' && value.userLevel !== '') {
-      console.log("clkd from main form")
-      window.location.href = `/search/${value.profileSearchString}/${value.userLevel}`
+    if (value.profileSearchString !== '' && value.userLevel === '') {
+      console.log('clkd')
+      window.location.href = `/search/${value.profileSearchString}/noLevel`
       // router.push()
+    } else if (value.userLevel !== '' && value.profileSearchString === '') {
+      window.location.href = `/search/noName/${value.userLevel}`
+    } else if (value.userLevel === '' && value.profileSearchString === '') {
+      return
+    } else {
+      window.location.href = `/search/${value.profileSearchString}/${value.userLevel}`
     }
   }
   return (

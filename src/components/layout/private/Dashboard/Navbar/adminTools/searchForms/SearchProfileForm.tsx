@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-return */
 /* eslint-disable no-use-before-define */
 import React, { useState } from 'react'
 import { ButtonComponent, InputComponent, SelectComponent } from './Components'
@@ -5,12 +6,12 @@ import { userLevelOptions } from './formOptionData'
 import { useRouter } from 'next/router'
 interface IProfileSearchForm {
   profileSearchString: string | number
-  userLevel: number
+  userLevel: string
 }
 function SearchProfileForm () {
   const [profileSearchForm, setProfileSearchForm] = useState<IProfileSearchForm>({
     profileSearchString: '',
-    userLevel: 0
+    userLevel: ''
   })
   const router = useRouter()
   const setProfileSearchInput = (event, param) => {
@@ -19,10 +20,16 @@ function SearchProfileForm () {
   }
 
   const handleSubmit = (value) => {
-    if (value.profileSearchString !== '' && value.userLevel !== '') {
-      console.log("clkd")
-      window.location.href = `/search/${value.profileSearchString}/${value.userLevel}`
+    if (value.profileSearchString !== '' && value.userLevel === '') {
+      console.log('clkd')
+      window.location.href = `/search/${value.profileSearchString}/noLevel`
       // router.push()
+    } else if (value.userLevel !== '' && value.profileSearchString === '') {
+      window.location.href = `/search/noName/${value.userLevel}`
+    } else if (value.userLevel === '' && value.profileSearchString === '') {
+      return
+    } else {
+      window.location.href = `/search/${value.profileSearchString}/${value.userLevel}`
     }
   }
 

@@ -74,7 +74,8 @@ function IndividualProfileHeader ({ body, setBody, profileData }) {
       nsurAccount: {
         nsurUserId: data.nsurUserId,
         myPoints: null
-      }
+      },
+      level: data.level
     })
     window.location.href = '/overview'
   }

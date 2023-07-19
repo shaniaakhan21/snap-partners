@@ -92,7 +92,8 @@ export const LoginWithPhone = ({ trackLoginHandle }: IProps) => {
         nsurUserId: data.nsurUserId,
         myPoints: null
       },
-      bank_information: data.bank_information
+      bank_information: data.bank_information,
+      level: data.level
     })
     reset()
   }

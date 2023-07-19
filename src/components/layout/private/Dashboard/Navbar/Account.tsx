@@ -6,7 +6,7 @@ import { GTMTrack } from 'lib/utils/gtm'
 import { useState, useRef, useEffect } from 'react'
 import AdminToolMainMenu from './adminTools/AdminToolMainMenu'
 
-export const Account = ({ email, name, phone, photoUrl, signOut, rank, roles }) => {
+export const Account = ({ email, name, phone, photoUrl, signOut, rank, roles, level }) => {
   const userMenuRef = useRef(null)
   const { auth } = useAuthStore()
   const [showMenu, setShowMenu] = useState(false)
@@ -31,7 +31,7 @@ export const Account = ({ email, name, phone, photoUrl, signOut, rank, roles }) 
 
   return (
     <section className='w-full h-full flex justify-end items-center gap-x-5'>
-      {roles.admin
+      {level?.toLowerCase() === 'admin'
         ? <div className='admin-tools-container'>
           <div>
             <span className='text-l font-bold text-gray-700 whitespace-nowrap'>Admin Tools</span>

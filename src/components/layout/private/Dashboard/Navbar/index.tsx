@@ -61,6 +61,7 @@ export const Navbar = () => {
           phone={auth.phoneNumber}
           photoUrl={auth.profileImage}
           rank={auth?.ranks?.type}
+          level={auth?.level}
         />}
       </div>
     </header>

@@ -1,46 +1,75 @@
 export const userLevelOptions = [
   {
     name: 'admin',
-    value: 1000
+    value: 'admin'
   },
   {
     name: 'owner',
-    value: 900
+    value: 'owner'
   },
   {
     name: 'VP',
-    value: 850
+    value: 'VP'
   },
   {
     name: 'Accounting',
-    value: 750
+    value: 'accounting'
   },
   {
     name: 'Help Team Manager',
-    value: 700
+    value: 'helpTeamManager'
   },
   {
     name: 'Help Team',
-    value: 650
+    value: 'helpTeam'
   },
   {
     name: 'Snap Staff',
-    value: 600
+    value: 'snapStaff'
   },
   {
     name: 'IBO',
-    value: 100
+    value: 'ibo'
   },
   {
     name: 'Driver',
-    value: 50
+    value: 'driver'
   },
   {
     name: 'Merchant',
-    value: 30
+    value: 'merchant'
   },
   {
     name: 'Customer',
-    value: 10
+    value: 'customer'
   }
 ]
+
+export const userLevelMapping = {
+  100: 'customer',
+  200: 'merchant',
+  300: 'driver',
+  400: 'ibo',
+  500: 'snapStaff',
+  600: 'helpTeam',
+  700: 'helpTeamManager',
+  800: 'accounting',
+  900: 'VP',
+  1000: 'owner',
+  1100: 'admin'
+
+}
+
+export const userLevelReverseMapping = {
+  customer: 100,
+  merchant: 200,
+  driver: 300,
+  ibo: 400,
+  snapStaff: 500,
+  helpTeam: 600,
+  helpTeamManager: 700,
+  accounting: 800,
+  VP: 900,
+  owner: 1000,
+  admin: 1100
+}

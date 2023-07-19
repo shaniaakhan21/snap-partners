@@ -89,7 +89,8 @@ export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
       nsurAccount: {
         nsurUserId: data.nsurUserId,
         myPoints: null
-      }
+      },
+      level: data?.level
     })
     reset()
   }
