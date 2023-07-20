@@ -41,7 +41,7 @@ function Upline ({ id }) {
   }, [userId])
 
   const viewProfileFunction = (id?:number) => {
-    router.push(`/search/profile/${id}`)
+    window.location.href = (`/search/profile/${id}`)
   }
   return (
     <div className={`${cname}-container`}>
