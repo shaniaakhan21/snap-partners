@@ -20,6 +20,7 @@ interface IInputFormProps {
   isNumberFloat?: boolean
   disabled?: boolean
   readOnly?: boolean
+  helpText?: string
 }
 
 export const InputForm = ({
@@ -40,7 +41,8 @@ export const InputForm = ({
   onKeyPress,
   isNumberFloat,
   disabled,
-  readOnly
+  readOnly,
+  helpText
 }: IInputFormProps) => {
   return (
     <div>
@@ -67,6 +69,7 @@ export const InputForm = ({
         step={isNumberFloat ? '0.01' : 'any'}
         disabled={disabled}
       />
+      {helpText && <div className='text-xs text-gray-600 font-normal -mt-1 mb-2'>{helpText}</div>}
     </div>
   )
 }

@@ -8,6 +8,8 @@ interface IUserBadgesProps {
     driver: boolean
     merchant: boolean
     agent: boolean
+    integrousAssociate: boolean
+    integrousCustomer: boolean
   }
 }
 
@@ -156,6 +158,23 @@ export const UserBadges = ({ userRank, userRoles }: IUserBadgesProps) => {
           <li>
             <img src='/static/badges/ExecutiveAgent.png' />
           </li>
+        </Tippy>
+      )}
+      {(userRoles.integrousCustomer || userRoles.integrousAssociate) && (
+        <Tippy content='Snap Binary'>
+          <li>
+            <img style={{ width: 70 }} src='/static/badges/binary.png' />
+          </li>
+        </Tippy>
+      )}
+      {(userRoles.integrousAssociate) && (
+        <Tippy content='Integrous Associate'>
+          <p>Associate</p>
+        </Tippy>
+      )}
+      {(userRoles.integrousCustomer && !userRoles.integrousAssociate) && (
+        <Tippy content='Integrous Customer'>
+          <p>Customer</p>
         </Tippy>
       )}
     </>

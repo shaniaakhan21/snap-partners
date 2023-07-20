@@ -3,12 +3,19 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { FooterPublic } from 'components/layout/public/Footer'
 import { useHandlerReferralLink } from '../../lib/hooks/useHandlerReferralLink'
+import { getLocalStorage } from 'lib/utils/localStorage'
 import { ROLES } from '../../config/roles'
 
 export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Page
   const { referralCode: code, role } = useHandlerReferralLink()
   const router = useRouter()
   const { auth } = useAuthStore()
+
+  /*
+  useEffect(() => {
+    getLocalStorage("accessToken") && router.push('/overview')
+  }, [])
+  */
 
   useEffect(() => {
     auth && router.push('/overview')
@@ -32,6 +39,11 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
   if (isSignupIntegrous && (ROLES.integrousCustomer || ROLES.integrousAssociate)) {
     t1 = 'Snap Partners'
     t2 = 'FREE Business Sign Up'
+  }
+
+  if (role === ROLES.IBO) {
+    t1 = 'Snap Partners'
+    t2 = ''
   }
 
   const displayContent = (
@@ -77,7 +89,9 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
                 ? displayIntegrousContent
                 : displayContent}
 
-              <ul className='list-disc pl-6 mt-20 text-xl 2xl:text-2xl space-y-4'>
+              {role === ROLES.IBO && <div className='flex justify-end'><img width={200} height={200} src='/images/profile/referralPartner.png'/></div>}
+
+              <ul className={`list-disc pl-6 ${role !== ROLES.IBO ? 'mt-20' : 'mt-5'} text-xl 2xl:text-2xl space-y-4`}>
                 <li>Get notified about company updates</li>
                 <li>Access to company training</li>
                 <li>Get synced</li>
@@ -85,7 +99,7 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
               </ul>
 
               <div className='absolute bottom-10 left-12 flex items-center gap-x-4'>
-                <img src='/images/logo-dark.png' />
+                {role !== ROLES.IBO && <img src='/images/logo-dark.png' />}
               </div>
             </div>
           </section>
@@ -96,7 +110,7 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
         </div>
       </div>
 
-      <FooterPublic />
+      {role !== ROLES.IBO && <FooterPublic/>}
     </>
   )
 }

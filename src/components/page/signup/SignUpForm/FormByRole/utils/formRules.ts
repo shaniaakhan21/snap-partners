@@ -28,15 +28,14 @@ export const registerRulesConfig = {
   lastname: {
     required: { value: true, message: 'Last Name Required *' },
     maxLength: { value: 50, message: 'Max 50 Characters *' },
-    minLength: { value: 3, message: 'Min 3 Characters *' },
-    pattern: { value: /^[a-zA-Z0-9!@#$%\\^&*)(+=._-]*$/, message: 'Last Name not allow *' }
+    minLength: { value: 3, message: 'Min 3 Characters *' }
   },
 
   username: {
     required: { value: true, message: 'Username Required *' },
     maxLength: { value: 50, message: 'Max 50 Characters *' },
     minLength: { value: 3, message: 'Min 3 Characters *' },
-    pattern: { value: /^[a-zA-Z0-9!@#$%\\^&*)(+=._-]*$/, message: 'Username not allow *' }
+    pattern: { value: /^[a-zA-Z0-9]*$/, message: 'Username can only contain alphanumeric characters.' }
   },
 
   phoneExt: {
@@ -68,6 +67,26 @@ export const registerRulesConfig = {
     maxLength: { value: 100, message: 'Max 100 Characters *' }
   },
 
+  street: {
+    required: { value: true, message: 'Street is Required *' },
+    maxLength: { value: 500, message: 'Max 500 Characters *' }
+  },
+
+  state: {
+    required: { value: true, message: 'State Required *' },
+    maxLength: { value: 50, message: 'Max 50 Characters *' }
+  },
+
+  zip: {
+    required: { value: true, message: 'Zip code is Required *' },
+    maxLength: { value: 5, message: 'Max 5 Characters *' },
+    minLength: { value: 3, message: 'Min 3 Characters *' }
+  },
+
+  ssn: {
+    pattern: { value: /^(?!666|000|9\d{2})\d{3}-(?!00)\d{2}-(?!0{4})\d{4}$/i, message: 'Invalid Social Security Number' }
+  },
+
   businessName: {
     maxLength: { value: 500, message: 'Max 500 Characters *' }
   },
@@ -94,7 +113,7 @@ export const registerMerchantRulesConfig = {
     required: { value: true, message: 'Username Required *' },
     maxLength: { value: 50, message: 'Max 50 Characters *' },
     minLength: { value: 3, message: 'Min 3 Characters *' },
-    pattern: { value: /^[a-zA-Z0-9!@#$%\\^&*)(+=._-]*$/, message: 'Username not allow *' }
+    pattern: { value: /^[a-zA-Z0-9]*$/, message: 'Username can only contain alphanumeric characters.' }
   },
 
   ownerName: {

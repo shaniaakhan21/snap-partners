@@ -1,11 +1,13 @@
 import AccountDefaultImage from 'components/common/AccountDefaultImage'
 import { ArrowDownIcon } from 'components/common/icons'
 import { useClickOutsideElement } from 'lib/hooks/useClickOutsideElement'
+import { useAuthStore } from 'lib/stores'
 import { GTMTrack } from 'lib/utils/gtm'
 import { useState, useRef, useEffect } from 'react'
 
 export const Account = ({ email, name, phone, photoUrl, signOut, rank }) => {
   const userMenuRef = useRef(null)
+  const { auth } = useAuthStore()
   const [showMenu, setShowMenu] = useState(false)
   const clickOutsideUserMenu = useClickOutsideElement(userMenuRef)
 
@@ -20,14 +22,25 @@ export const Account = ({ email, name, phone, photoUrl, signOut, rank }) => {
     if (clickOutsideUserMenu && showMenu) setShowMenu(false)
   }, [clickOutsideUserMenu])
 
+  const _auth: any = auth
+
+  const link = `https://www.integrouswellness.com/${auth.username}?access_token=${auth.accessToken}`
+  const isIntegrous = (_auth.roles.integrousAssociate || _auth.roles.integrousCustomer)
+
   return (
     <section className='w-1/3 h-full flex justify-end items-center gap-x-5'>
-      <div className='relative hidden sm:block'>
+      <div className='relative'>
         {/* <NotificationIcon classes='w-6 h-6' />
 
         <div className='absolute -top-2 -right-4 h-5 w-5 bg-[#FF4343] rounded-full text-white text-sm font-semibold flex justify-center items-center'>
           <span>3</span>
         </div> */}
+        {isIntegrous && (
+          <a href={link} style={{ cursor: 'pointer', marginLeft: 10, width: 150, padding: 6, paddingLeft: 10, color: 'white' }} className="rounded-full bg-primary-500 bg-red-500 ">
+            <i className="fa-solid fa-cart-shopping"></i>
+            <span className='text-xs text-white font-medium p-2 uppercase'>Shopping Cart</span>
+          </a>
+        )}
       </div>
 
       <div className='flex justify-start items-center relative select-none'>
