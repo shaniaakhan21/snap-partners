@@ -21,7 +21,7 @@ export const Account = ({ email, name, phone, photoUrl, signOut, rank }) => {
   }, [clickOutsideUserMenu])
 
   return (
-    <section className='w-full h-full flex justify-end items-center gap-x-5'>
+    <section className='w-1/3 h-full flex justify-end items-center gap-x-5'>
       <div className='relative hidden sm:block'>
         {/* <NotificationIcon classes='w-6 h-6' />
 
