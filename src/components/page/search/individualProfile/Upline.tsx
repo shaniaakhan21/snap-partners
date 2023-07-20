@@ -8,9 +8,11 @@ import { getLocalStorage } from 'lib/utils/localStorage'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { ButtonComponent } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/Components'
 import { PhoneIcon } from 'components/common/icons'
+import { useRouter } from 'next/router'
 
 function Upline ({ id }) {
   const cname = 'user-upline'
+  const router = useRouter()
   const [UplineData, setUplineData] = useState([])
   const [userId, setUserId] = useState<number>(id)
   const [isLoading, setIsLoading] = useState(false)
@@ -24,7 +26,9 @@ function Upline ({ id }) {
     })
       .then((result) => {
         console.log('result from getUplineData', result.data.resultData)
-        setUplineData(result.data.resultData)
+        const resultArray = result.data.resultData
+        resultArray.reverse()
+        setUplineData(resultArray)
         setIsLoading(false)
       })
       .catch((e) => {
@@ -35,13 +39,24 @@ function Upline ({ id }) {
   useEffect(() => {
     getUplineData()
   }, [userId])
+
+  const viewProfileFunction = (id?:number) => {
+    router.push(`/search/profile/${id}`)
+  }
   return (
     <div className={`${cname}-container`}>
       {UplineData && !isLoading
         ? UplineData?.map((data) => (
           <Card variant='outlined' className={`${cname}-card`}>
             <CardContent>
-              <p className={`${cname}-card-heading`}>{data?.name} {data?.lastname}</p>
+              <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }} className={`${cname}-card-container`}>
+                <p className={`${cname}-card-heading`}>{data?.name} {data?.lastname}</p>
+                {/* <div style={{ fontSize: '12px' }}> */}
+                  <a href='#' onClick={() => { viewProfileFunction(data?.id) }} style={{ fontSize: '12px' }}>View Profile</a>
+                  {/* <ButtonComponent title='See Profile' onClickFunction={viewProfileFunction} param={data?.id} /> */}
+                {/* </div> */}
+              </div>
+
               <div className={`${cname}-card-info`}>
                 <p><span className={`${cname}-card-info-title`}>id</span>-<span className={`${cname}-card-info-content`}>{data?.id}</span></p>
                 <p><span className={`${cname}-card-info-title`}>Rank</span>-<span className={`${cname}-card-info-content`}>{data?.ranks?.type}</span></p>
@@ -52,11 +67,6 @@ function Upline ({ id }) {
                 <div style={{ display: 'flex', flexDirection: 'row' }}><PhoneIcon classes='w-4 h-4' /><p><span className={`${cname}-card-info-content`}>{data?.phoneNumber}</span></p></div>
               </div>
             </CardContent>
-            <CardActions >
-              <div style={{ textAlign: 'center', width: '100%' }}>
-                <ButtonComponent title='See Upline' onClickFunction={setUserId} param={data?.id} />
-              </div>
-            </CardActions>
           </Card>
         ))
         : <SpinnerPageContent />

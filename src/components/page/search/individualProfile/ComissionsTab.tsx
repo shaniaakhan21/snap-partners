@@ -173,7 +173,7 @@ import axios from 'axios'
 const { SEO } = APP_INFO
 
 const ComissionsTab = ({ userId }) => {
-  const { transactions, loading, refresh } = useWallet()
+  const { transactions, loading, refresh } = useWallet(userId)
   const { auth, setAuth, removeAuth } = useAuthStore()
   const [balance, setBalance] = useState('')
   const [loadingButton, setloadingButton] = useState(false)
@@ -210,7 +210,7 @@ const ComissionsTab = ({ userId }) => {
         //   params: requestData
         // })
 
-          .then((result) => {
+          .then(async (result) => {
             if (result.status === 200) {
               const data = result.data
               console.log('result data is', data)
@@ -219,6 +219,7 @@ const ComissionsTab = ({ userId }) => {
                 setenableWithdraw(true)
               }
               setbank_information(data.bank_information)
+              await refresh(userId)
             }
           })
       } catch (e) {
@@ -226,6 +227,7 @@ const ComissionsTab = ({ userId }) => {
       }
     })()
   }, [])
+
 
   const withdraw = async () => {
     setloadingButton(true)

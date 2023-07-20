@@ -210,7 +210,7 @@ flex-direction: row;
 .user-upline-card
 {
     width: 400px;
-    height: 200px;
+    /* height: 200px; */
     margin: 10px auto 10px auto;
 }
 .user-upline-container
@@ -240,6 +240,16 @@ flex-direction: row;
 .user-upline-card-info-content
 {
     color: rgb(37,99,235);
+}
+
+.user-upline-card-container a
+{
+    text-decoration: underline;
+    color: #139ECF;
+}
+.user-upline-card-container a:hover
+{
+    cursor: pointer;
 }
 
 /* .resetPasswordModal{

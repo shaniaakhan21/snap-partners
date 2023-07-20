@@ -9,14 +9,14 @@ import { userLevelOptions } from 'components/layout/private/Dashboard/Navbar/adm
 
 interface IProfileSearchForm {
     profileSearchString: string | number
-    userLevel: number
+    userLevel: string
   }
 
 function ProfileSearchForm ({ children }) {
   const cname = 'profilePage-searchForm'
   const [profileSearchForm, setProfileSearchForm] = useState<IProfileSearchForm>({
     profileSearchString: '',
-    userLevel: 0
+    userLevel: ''
   })
 
   const router = useRouter()
