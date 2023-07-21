@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-return */
 /* eslint-disable no-use-before-define */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Container, Paper } from '@mui/material'
 import { ButtonComponent, InputComponent, SelectComponent } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/Components'
 import { Person } from 'components/common/icons'
@@ -38,6 +38,10 @@ function ProfileSearchForm ({ children }) {
       window.location.href = `/search/${value.profileSearchString}/${value.userLevel}`
     }
   }
+  useEffect(() => {
+    console.log('router query is ', router.query)
+    setProfileSearchForm({ ...profileSearchForm, profileSearchString: typeof router.query.searchString === 'string' ? router.query.searchString : '', userLevel: typeof router.query.userLevel === 'string' ? router.query.userLevel : '' })
+  }, [router.query])
   return (
     <div>
       <Container>
@@ -51,7 +55,7 @@ function ProfileSearchForm ({ children }) {
               <InputComponent label={'profile search'} placeholder={'repID, Name or Email'} value={profileSearchForm.profileSearchString} onChangeFunction={setProfileSearchInput} param={'profileSearchString'} />
             </div>
             <div className='searchForm-inputContainer'>
-              <SelectComponent label={'user level'} name={'userLevel'} options={userLevelOptions} onChangeFunction={setProfileSearchInput} param={'userLevel'} />
+              <SelectComponent label={'user level'} name={'userLevel'} options={userLevelOptions} value={profileSearchForm.userLevel} onChangeFunction={setProfileSearchInput} param={'userLevel'} />
             </div>
             <div className='searchForm-ButtonContainer'>
               <ButtonComponent title={'search'} onClickFunction={handleSubmit} param={profileSearchForm} />

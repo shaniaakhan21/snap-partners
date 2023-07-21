@@ -107,7 +107,7 @@ font-style: normal;
 font-weight: 400;
 line-height: 24px;
 }
-.profilePage-IBOProfile-midSection-mainInfo-name
+.profilePage-IBOProfile-midSection-mainInfo-name>a
 {
     color: var(--text-color-accent-link, #E35C49);
 
@@ -171,6 +171,13 @@ line-height: 24px;
 {
     display: flex;
     flex-direction: row;
+}
+.profilePage-IBOProfile-midSection-mainInfo-text:hover{
+    cursor: pointer;
+}
+.profilePage-IBOProfile-midSection-mainInfo-title
+{
+    color: #E35C49;
 }
 
 .profilePage-order-container

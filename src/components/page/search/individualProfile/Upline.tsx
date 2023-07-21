@@ -41,7 +41,7 @@ function Upline ({ id }) {
   }, [userId])
 
   const viewProfileFunction = (id?:number) => {
-    window.location.href = (`/search/profile/${id}`)
+    router.push(`/search/profile/${id}`)
   }
   return (
     <div className={`${cname}-container`}>
@@ -52,7 +52,7 @@ function Upline ({ id }) {
               <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }} className={`${cname}-card-container`}>
                 <p className={`${cname}-card-heading`}>{data?.name} {data?.lastname}</p>
                 {/* <div style={{ fontSize: '12px' }}> */}
-                  <a onClick={() => { viewProfileFunction(data?.id) }} style={{ fontSize: '12px' }}>View Profile</a>
+                  <a href={`/search/profile/${id}`} style={{ fontSize: '12px' }}>View Profile</a>
                   {/* <ButtonComponent title='See Profile' onClickFunction={viewProfileFunction} param={data?.id} /> */}
                 {/* </div> */}
               </div>

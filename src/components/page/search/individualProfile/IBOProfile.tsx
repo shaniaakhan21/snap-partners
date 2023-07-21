@@ -1,13 +1,16 @@
 /* eslint-disable no-use-before-define */
 import { Avatar, Modal, Box } from '@mui/material'
-import { ButtonComponent, InputComponent } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/Components'
+import { ButtonComponent, InputComponent, SelectComponent } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/Components'
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useAuthStore } from '../../../../lib/stores'
 import { getLocalStorage } from 'lib/utils/localStorage'
+import { userLevelOptions } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/formOptionData'
 
 function IBOProfile ({ profileData }) {
   const [passwordResetModal, setPasswordResetModal] = useState<boolean>(false)
+  const [userLevelModal, setUserLevelModal] = useState<boolean>(false)
+  const [editProfileModal, setEditProfileModal] = useState<boolean>(false)
   const [newPassword, setNewPassword] = useState({
     password: ''
   })
@@ -16,6 +19,12 @@ function IBOProfile ({ profileData }) {
   console.log('data from ibo', profileData)
   const onClosePasswordResetModal = () => {
     setPasswordResetModal(false)
+  }
+  const onCloseUserLevelModal = () => {
+    setUserLevelModal(false)
+  }
+  const onCloseEditProfileModal = () => {
+    setEditProfileModal(false)
   }
   const style = {
     position: 'absolute' as 'absolute',
@@ -55,12 +64,16 @@ function IBOProfile ({ profileData }) {
       }
     }
   }
+  const formatDate = (dateString) => {
+    const currentDate = new Date(dateString)
+    return `${currentDate.getDate()}/${currentDate.getMonth()}/${currentDate.getFullYear()}`
+  }
   return (
     <>
       <div className={`${cname}-container`}>
         <div className={`${cname}-header`}>
           <p className={`${cname}-header-text`}>User ID - {`${profileData[0]?.id}`}</p>
-          <p className={`${cname}-header-text ${cname}-midSection-mainInfo-text`}>Edit Profile<img src='/images/icons/edit.svg' style={{ width: '18px', height: '24px' }}/></p>
+          <p className={`${cname}-header-text ${cname}-midSection-mainInfo-text`} onClick={() => { setEditProfileModal(true) }}>Edit Profile<img src='/images/icons/edit.svg' style={{ width: '18px', height: '24px' }}/></p>
         </div>
 
         <div className={`${cname}-midSection`}>
@@ -70,14 +83,18 @@ function IBOProfile ({ profileData }) {
               <div style={{ marginTop: '-15px' }}><p className={`${cname}-midSection-mainInfo-name`}>{`${profileData[0]?.name} ${profileData[0]?.lastname}`}</p>
                 <p className={`${cname}-midSection-mainInfo-text`}><img src='/images/icons/email.svg'/>{`${profileData[0]?.email}`}</p></div>
             </div>
-            <p className={`${cname}-midSection-mainInfo-text`}><img src='/images/icons/flip-2.svg' style={{ width: '18px', height: '24px' }}/>resend email</p>
+            <p className={`${cname}-midSection-mainInfo-text`}><img src='/images/icons/flip-2.svg' style={{ width: '18px', height: '24px' }}/>resend welcome email</p>
             <p className={`${cname}-midSection-mainInfo-text`}><img src='/images/icons/edit.svg' style={{ width: '18px', height: '24px' }}/>{`${profileData[0]?.phoneNumber}`}</p>
+          </div>
+          <div className={`${cname}-midSection-mainInfo`}>
+            <p className={`${cname}-footer-heading`}>{`${profileData[0]?.ranks?.type}`}</p>
+            <p className={`${cname}-midSection-mainInfo-text`}><span className={`${cname}-midSection-mainInfo-title`}>User Level -</span>{profileData[0]?.level}</p>
+            <p className={`${cname}-midSection-mainInfo-text`}><span className={`${cname}-midSection-mainInfo-title`}>GrandfatherRank -</span>{profileData[0]?.gRanks[0]?.gRank}</p>
           </div>
 
           <div className={`${cname}-midSection-AdditionalInfo`}>
             <div>
-              <p className={`${cname}-footer-heading`}>{`${profileData[0]?.ranks?.type}`}</p>
-              <p className={`${cname}-midSection-mainInfo-name adInfoText`}>Sponsered by {profileData[0]?.sponsor?.name} {profileData[0]?.sponsor?.lastname}</p>
+              <p className={`${cname}-midSection-mainInfo-name adInfoText`}>Sponsered by <a href={`/search/profile/${profileData[0]?.sponsor?.id}`}>{profileData[0]?.sponsor?.name} {profileData[0]?.sponsor?.lastname}</a></p>
             </div>
             <div>
               <div className={`${cname}-midSection-AdditionalInfo-icons`}>
@@ -86,6 +103,7 @@ function IBOProfile ({ profileData }) {
                 <img src='/images/icons/tray.png' />
               </div>
               <p className={`${cname}-midSection-mainInfo-name adInfoText resetPasswordText`} onClick={() => { setPasswordResetModal(true) }}>reset Password </p>
+              <p className={`${cname}-midSection-mainInfo-name adInfoText resetPasswordText`} onClick={() => { setUserLevelModal(true) }}>reset User Level </p>
             </div>
           </div>
 
@@ -97,8 +115,8 @@ function IBOProfile ({ profileData }) {
             </div>
 
             <div>
-              <h2 className={`${cname}-footer-heading`}>Date Added :</h2>
-              <p className={`${cname}-footer-text`}>date</p>
+              <h2 className={`${cname}-footer-heading`}>Start Date:</h2>
+              <p className={`${cname}-footer-text`}>{`${formatDate(profileData[0]?.createdAt)}`}</p>
             </div>
 
             <div>
@@ -113,6 +131,27 @@ function IBOProfile ({ profileData }) {
         <Modal open={passwordResetModal} onClose={onClosePasswordResetModal} className='resetPasswordModal'>
           <Box sx={style}>
             <InputComponent label='New Password' placeholder='newPassword' value={newPassword.password} onChangeFunction={handlePasswordUpdate} param={'password'} />
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
+              <ButtonComponent title='submit' onClickFunction={ handleResetPassword } />
+            </div>
+          </Box>
+        </Modal>
+
+        <Modal open={userLevelModal} onClose={onCloseUserLevelModal} className='resetPasswordModal'>
+          <Box sx={style}>
+          <SelectComponent label={'Reset User level'} name={'userLevel'} options={userLevelOptions}/>
+            {/* <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
+              <ButtonComponent title='submit' onClickFunction={ handleResetPassword } />
+            </div> */}
+          </Box>
+        </Modal>
+
+        <Modal open={editProfileModal} onClose={onCloseEditProfileModal} className='resetPasswordModal'>
+          <Box sx={style}>
+          <InputComponent label='New Email' placeholder='New Email' value={newPassword.password} onChangeFunction={handlePasswordUpdate} param={'password'} />
+          <InputComponent label='New Email' placeholder='New Email' value={newPassword.password} onChangeFunction={handlePasswordUpdate} param={'password'} />
+          <InputComponent label='New Email' placeholder='New Email' value={newPassword.password} onChangeFunction={handlePasswordUpdate} param={'password'} />
+          <InputComponent label='New Email' placeholder='New Email' value={newPassword.password} onChangeFunction={handlePasswordUpdate} param={'password'} />
             <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
               <ButtonComponent title='submit' onClickFunction={ handleResetPassword } />
             </div>

@@ -22,6 +22,7 @@ interface ISelectComponent {
     name: string
     onChangeFunction?:any,
     param?:any,
+    value?:any
 }
 
 export const InputComponent = (props:IInputComponent) => {
@@ -37,14 +38,14 @@ export const InputComponent = (props:IInputComponent) => {
 }
 
 export const SelectComponent = (props:ISelectComponent) => {
-  const { label, options, name, onChangeFunction, param } = props
+  const { label, options, name, onChangeFunction, param, value } = props
   return (
     <div>
       <div>
         <label className='search-form-label'>{label}</label>
       </div>
       <div>
-        <select name={`${name}`} className='search-form-select search-form-box' onChange={(event) => { onChangeFunction(event, param) }}>
+        <select name={`${name}`} className='search-form-select search-form-box' value={value} onChange={(event) => { onChangeFunction(event, param) }}>
           <option value={''}>Select</option>
           {
             options

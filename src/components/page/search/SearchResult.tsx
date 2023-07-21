@@ -25,7 +25,7 @@ function SearchResult ({ resultData }) {
                 <TableCell>Full Name</TableCell>
                 <TableCell>ID</TableCell>
                 <TableCell>Rank</TableCell>
-                <TableCell>Grandfather rank</TableCell>
+                <TableCell>User Level</TableCell>
                 <TableCell>Phone num</TableCell>
                 <TableCell>Email</TableCell>
                 <TableCell> </TableCell>
@@ -40,7 +40,7 @@ function SearchResult ({ resultData }) {
                     <TableCell><p>{`${result?.name} ${result?.lastname}`}</p></TableCell>
                     <TableCell><p>{result?.id}</p></TableCell>
                     <TableCell><p>{result?.ranks?.type}</p></TableCell>
-                    <TableCell><p>{result.grandfatherRank}</p></TableCell>
+                    <TableCell><p>{result?.level}</p></TableCell>
                     <TableCell><p>{result.phoneNumber}</p></TableCell>
                     <TableCell><p>{result.email}</p></TableCell>
                     <TableCell>
