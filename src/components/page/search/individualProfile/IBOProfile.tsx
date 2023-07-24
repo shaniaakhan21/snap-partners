@@ -6,6 +6,8 @@ import axios from 'axios'
 import { useAuthStore } from '../../../../lib/stores'
 import { getLocalStorage } from 'lib/utils/localStorage'
 import { userLevelOptions } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/formOptionData'
+import UpdateUserLevelModal from './modalPopups/UpdateUserLevelModal'
+import EditProfileModal from './modalPopups/EditProfileModal'
 
 function IBOProfile ({ profileData }) {
   const [passwordResetModal, setPasswordResetModal] = useState<boolean>(false)
@@ -66,6 +68,7 @@ function IBOProfile ({ profileData }) {
   }
   const formatDate = (dateString) => {
     const currentDate = new Date(dateString)
+    console.log('date from format date ', currentDate)
     return `${currentDate.getDate()}/${currentDate.getMonth()}/${currentDate.getFullYear()}`
   }
   return (
@@ -98,8 +101,9 @@ function IBOProfile ({ profileData }) {
             </div>
             <div>
               <div className={`${cname}-midSection-AdditionalInfo-icons`}>
+                <img src='/static/badges/binary.png' style={{ width: '70px' }} />
                 <img src='/images/icons/deliveryMan.png' />
-                <img src='/images/icons/shopper.png' />
+                <img src='/images/icons/Shopper.png' />
                 <img src='/images/icons/tray.png' />
               </div>
               <p className={`${cname}-midSection-mainInfo-name adInfoText resetPasswordText`} onClick={() => { setPasswordResetModal(true) }}>reset Password </p>
@@ -137,26 +141,16 @@ function IBOProfile ({ profileData }) {
           </Box>
         </Modal>
 
-        <Modal open={userLevelModal} onClose={onCloseUserLevelModal} className='resetPasswordModal'>
+        {/* <Modal open={userLevelModal} onClose={onCloseUserLevelModal} className='resetPasswordModal'>
           <Box sx={style}>
           <SelectComponent label={'Reset User level'} name={'userLevel'} options={userLevelOptions}/>
             {/* <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
               <ButtonComponent title='submit' onClickFunction={ handleResetPassword } />
-            </div> */}
-          </Box>
-        </Modal>
-
-        <Modal open={editProfileModal} onClose={onCloseEditProfileModal} className='resetPasswordModal'>
-          <Box sx={style}>
-          <InputComponent label='New Email' placeholder='New Email' value={newPassword.password} onChangeFunction={handlePasswordUpdate} param={'password'} />
-          <InputComponent label='New Email' placeholder='New Email' value={newPassword.password} onChangeFunction={handlePasswordUpdate} param={'password'} />
-          <InputComponent label='New Email' placeholder='New Email' value={newPassword.password} onChangeFunction={handlePasswordUpdate} param={'password'} />
-          <InputComponent label='New Email' placeholder='New Email' value={newPassword.password} onChangeFunction={handlePasswordUpdate} param={'password'} />
-            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
-              <ButtonComponent title='submit' onClickFunction={ handleResetPassword } />
             </div>
           </Box>
-        </Modal>
+        </Modal> */}
+        <UpdateUserLevelModal userLevelModal={userLevelModal} onCloseUserLevelModal={onCloseUserLevelModal} userId={profileData[0]?.id} />
+        <EditProfileModal editProfileModal={editProfileModal} onCloseEditProfileModal={onCloseEditProfileModal} userId={profileData[0]?.id}/>
       </div>
     </>
   )

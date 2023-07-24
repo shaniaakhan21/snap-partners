@@ -13,7 +13,8 @@ interface IInputComponent
     placeholder:string,
     onChangeFunction?:any,
     param?:any,
-    value?:any
+    value?:any,
+    type?:any
 }
 
 interface ISelectComponent {
@@ -26,12 +27,12 @@ interface ISelectComponent {
 }
 
 export const InputComponent = (props:IInputComponent) => {
-  const { label, placeholder, onChangeFunction, param, value } = props
+  const { label, placeholder, onChangeFunction, param, value, type } = props
   return (
     <div>
       <label className='search-form-label'>{label}</label>
       <div>
-        <input type='text' className='search-form-input search-form-box' placeholder={`${placeholder}`} onChange={(event) => { onChangeFunction(event, param) }} value={value} />
+        <input type={type || 'text'} className='search-form-input search-form-box' placeholder={`${placeholder}`} onChange={(event) => { onChangeFunction(event, param) }} value={value} />
       </div>
     </div>
   )
