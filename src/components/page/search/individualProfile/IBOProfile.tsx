@@ -67,10 +67,15 @@ function IBOProfile ({ profileData }) {
     }
   }
   const formatDate = (dateString) => {
-    console.log('date input', dateString)
-    const currentDate = new Date(dateString)
-    console.log('date from format date ', currentDate)
-    return `${currentDate.getDate()}/${currentDate.getMonth()}/${currentDate.getFullYear()}`
+    console.log('date from format date ', dateString)
+    if (dateString) {
+      const [date, time] = dateString?.split(' ')
+      const [day, month, year] = date?.split('/')
+      const formattedDatestring = `${month}/${day}/${year}`
+      const currentDate = new Date(formattedDatestring)
+      console.log('date from format date ', currentDate)
+      return `${currentDate.getDate()}/${(currentDate.getMonth() + 1)}/${currentDate.getFullYear()}`
+    }
   }
   return (
     <>
