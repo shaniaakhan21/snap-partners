@@ -13,7 +13,7 @@ import { APP_INFO } from 'config/appInfo'
 import { ROLES } from 'config/roles'
 
 import DashboardLayout from 'layouts/private/Dashboard'
-import { Unilevel as OldGenealogy } from '../components/page/genealogy/OldGenealogy/UniLevel'
+import { Unilevel as OldGenealogy } from '../../components/page/genealogy/OldGenealogy/UniLevel'
 import { CustomerIcon, DriverIcon, MerchantIcon } from 'components/common/icons'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { NewGenealogy } from 'components/page/genealogy/NewGenealogy'

@@ -71,7 +71,8 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           nsurUserId: data.nsurUserId,
           myPoints: auth?.nsurAccount?.myPoints || null
         },
-        bank_information: data.bank_information
+        bank_information: data.bank_information,
+        level: data.level
       })
     })()
 

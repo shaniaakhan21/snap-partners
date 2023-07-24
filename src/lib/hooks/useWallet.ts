@@ -5,14 +5,14 @@ import { handleFetchError } from 'lib/utils/handleFetchError'
 import { useAuthStore } from 'lib/stores'
 import { ITransaction } from 'lib/types/transaction'
 
-export const useWallet = () => {
+export const useWallet = (id?:number) => {
   const { auth } = useAuthStore()
   const [transactions, setTransactions] = useState<ITransaction[]>([])
   const [loading, setIsLoading] = useState(false)
 
-  const refresh = async () => {
+  const refresh = async (id?:number) => {
     setIsLoading(true)
-    const { data, error } = await getWallet(auth.accessToken, auth.id, 1)
+    const { data, error } = await getWallet(auth.accessToken, id || auth.id, 1)
 
     if (error) {
       handleFetchError(error.status, error.info)
@@ -25,7 +25,7 @@ export const useWallet = () => {
 
   useEffect(() => {
     (async () => {
-      await refresh()
+      id ? await refresh(id) : await refresh()
     })()
   }, [])
 

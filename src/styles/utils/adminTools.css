@@ -1,0 +1,129 @@
+
+.admin-tool-main-menu-container{
+    width:200%;
+    padding:10px;
+    position: absolute;
+    top:30px;
+    right:0;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    box-shadow: 0 4px 5px 0 rgba(60, 75, 100, .14), 0 1px 10px 0 rgba(60, 75, 100, .12), 0 2px 4px -1px rgba(60, 75, 100, .20);
+}
+
+.menuItem{
+    padding: 5px;
+}
+.admin-tools-container{
+    position:relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.item-0:hover{
+    cursor: pointer;
+    background-color: #18C8FF;
+    color: #FFFFFF;
+}
+
+.item-1:hover{
+    cursor: pointer;
+    background-color: #FFAA00;
+    color: #FFFFFF;
+}
+
+.item-2:hover{
+    cursor: pointer;
+    background-color: #54A52C;
+    color: #FFFFFF;
+}
+
+.item-3:hover{
+    cursor: pointer;
+    background-color: #EC6C59;
+    color: #FFFFFF;
+}
+
+.item-4:hover{
+    cursor: pointer;
+    background-color: #B81D5B;
+    color: #FFFFFF;
+}
+
+.subItem{
+    width: 100%;
+    background: #FFFFFF;
+    border-radius: 5px;
+    position: absolute;
+    top:0px;
+    right:250px;
+    opacity: 1;
+    z-index: 1;
+    list-style: none;
+    padding: 5px;
+    box-shadow: 0 4px 5px 0 rgba(60, 75, 100, .14), 0 1px 10px 0 rgba(60, 75, 100, .12), 0 2px 4px -1px rgba(60, 75, 100, .20);
+}
+
+.sub-list-items{
+    margin-top: 10px;
+    padding: 5px;
+}
+.sub-list-items:hover{
+    cursor: pointer;
+    box-shadow: 0 4px 5px 0 rgba(var(--elevation-base-color), .14), 0 1px 10px 0 rgba(var(--elevation-base-color), .12), 0 2px 4px -1px rgba(var(--elevation-base-color), .20);
+}
+
+.search-form-box
+{
+    border: 1px solid #B3B3B3;
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    color: #777777;
+    margin-top: 8px;
+}
+
+.search-form-label
+{
+    color:#777777;
+
+/* Text Font / LABEL */
+font-size: 12px;
+font-family: Open Sans;
+font-style: normal;
+font-weight: 700;
+line-height: 16px;
+text-transform: uppercase;
+}
+.search-form-select{
+    background-image: none;
+   
+}
+.search-form-button{
+    border-radius: 26px;
+    padding: 10px;
+    margin-top: 24px;
+    background-color: #DD4C37;
+}
+.button-label
+{
+    color: #FFF;
+    text-align: center;
+
+/* Button Font AA / Medium */
+    font-size: 14px;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px;
+    text-transform: uppercase;
+}
+.sub-list-span{
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+}
+.list-span-title{
+    display: flex;
+    flex-direction: row;
+    gap:5px;
+}

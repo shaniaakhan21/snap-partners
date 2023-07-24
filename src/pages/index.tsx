@@ -68,7 +68,8 @@ const HomePage: Page = () => {
             nsurUserId: data.nsurUserId,
             myPoints: auth?.nsurAccount?.myPoints || null
           },
-          bank_information: data.bank_information
+          bank_information: data.bank_information,
+          level: data?.level
         })
         router.push('/overview')
       }
@@ -93,7 +94,8 @@ const HomePage: Page = () => {
         ranks,
         referralCode,
         updatedAt,
-        referralLink
+        referralLink,
+        level
       } = auth
 
       GTMTrack.userInfo({
@@ -114,7 +116,8 @@ const HomePage: Page = () => {
         ranks,
         referralCode,
         updatedAt,
-        referralLink
+        referralLink,
+        level
       })
     } else {
       GTMTrack.userInfo()
