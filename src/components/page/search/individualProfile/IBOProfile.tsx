@@ -112,8 +112,8 @@ function IBOProfile ({ profileData }) {
                 <img src='/images/icons/Shopper.png' />
                 <img src='/images/icons/tray.png' />
               </div>
-              <p className={`${cname}-midSection-mainInfo-name adInfoText resetPasswordText`} onClick={() => { setPasswordResetModal(true) }}>reset Password </p>
-              <p className={`${cname}-midSection-mainInfo-name adInfoText resetPasswordText`} onClick={() => { setUserLevelModal(true) }}>reset User Level </p>
+              <p style={{ textAlign: 'right' }} className={`${cname}-midSection-mainInfo-name adInfoText resetPasswordText`} onClick={() => { setPasswordResetModal(true) }}>reset Password </p>
+              <p style={{ textAlign: 'right' }} className={`${cname}-midSection-mainInfo-name adInfoText resetPasswordText`} onClick={() => { setUserLevelModal(true) }}>reset User Level </p>
             </div>
           </div>
 
@@ -121,7 +121,7 @@ function IBOProfile ({ profileData }) {
           <div className={`${cname}-footer`}>
             <div>
               <h2 className={`${cname}-footer-heading`}>Address :</h2>
-              <p className={`${cname}-footer-text`}>skudgfoish sifhvksb sihsic j</p>
+              <p className={`${cname}-footer-text`}>{profileData[0]?.street} {profileData[0]?.state} {profileData[0]?.zip}</p>
             </div>
 
             <div>
@@ -131,8 +131,11 @@ function IBOProfile ({ profileData }) {
 
             <div>
               <h2 className={`${cname}-footer-heading`}>Activity Log :</h2>
-              <p className={`${cname}-footer-text`}>line 1</p>
-              <p className={`${cname}-footer-text`}>line 2</p>
+              {
+                profileData[0]?.activityLog?.map((activity) => (
+                  <p className={`${cname}-footer-text`}>{activity?.description}</p>
+                ))
+              }
             </div>
 
           </div>

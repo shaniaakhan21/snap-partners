@@ -10,7 +10,10 @@ interface IProfileData {
     username?: string,
     phoneNumber?: string,
     name?: string,
-    lastname?: string
+    lastname?: string,
+    street?: string,
+    state?: string,
+    zip?: string
 }
 
 function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId }) {
@@ -20,7 +23,10 @@ function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId }
     username: '',
     name: '',
     phoneNumber: '',
-    lastname: ''
+    lastname: '',
+    street: '',
+    state: '',
+    zip: ''
   })
   const style = {
     position: 'absolute' as 'absolute',
@@ -53,6 +59,15 @@ function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId }
     if (editProfileData.phoneNumber !== '') {
       body = { ...body, phoneNumber: editProfileData.phoneNumber }
     }
+    if (editProfileData.street !== '') {
+      body = { ...body, street: editProfileData.street }
+    }
+    if (editProfileData.state !== '') {
+      body = { ...body, state: editProfileData.state }
+    }
+    if (editProfileData.zip !== '') {
+      body = { ...body, zip: editProfileData.zip }
+    }
 
     if (Object.keys(body).length !== 0) {
       console.log('in submit profile')
@@ -72,6 +87,9 @@ function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId }
     if (param === 'name') { setEditProfileData({ ...editProfileData, name: event.target.value }) }
     if (param === 'lastname') { setEditProfileData({ ...editProfileData, lastname: event.target.value }) }
     if (param === 'phoneNumber') { setEditProfileData({ ...editProfileData, phoneNumber: event.target.value }) }
+    if (param === 'street') { setEditProfileData({ ...editProfileData, street: event.target.value }) }
+    if (param === 'state') { setEditProfileData({ ...editProfileData, state: event.target.value }) }
+    if (param === 'zip') { setEditProfileData({ ...editProfileData, zip: event.target.value }) }
   }
   return (
     <Modal open={editProfileModal} onClose={onCloseEditProfileModal} className='resetPasswordModal'>
@@ -82,6 +100,10 @@ function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId }
         <InputComponent label='Phone Number' placeholder='phone number' value={editProfileData.phoneNumber} onChangeFunction={handleEditProfileUpdate} param={'phoneNumber'} />
         <InputComponent label='Name' placeholder='name' value={editProfileData.name} onChangeFunction={handleEditProfileUpdate} param={'name'} />
         <InputComponent label='lastname' placeholder='Lastname' value={editProfileData.lastname} onChangeFunction={handleEditProfileUpdate} param={'lastname'} />
+        <hr />
+        <InputComponent label='street' placeholder='Street' value={editProfileData.street} onChangeFunction={handleEditProfileUpdate} param={'street'} />
+        <InputComponent label='state' placeholder='State' value={editProfileData.state} onChangeFunction={handleEditProfileUpdate} param={'state'} />
+        <InputComponent label='zip' placeholder='Zip' value={editProfileData.zip} onChangeFunction={handleEditProfileUpdate} param={'zip'} />
 
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
           <ButtonComponent title='submit' onClickFunction={ handleEditProfile } />
