@@ -67,6 +67,7 @@ function IBOProfile ({ profileData }) {
     }
   }
   const formatDate = (dateString) => {
+    console.log('date input', dateString)
     const currentDate = new Date(dateString)
     console.log('date from format date ', currentDate)
     return `${currentDate.getDate()}/${currentDate.getMonth()}/${currentDate.getFullYear()}`
