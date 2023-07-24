@@ -26,6 +26,7 @@ interface IQueryUserMeReturn extends IQueryErrorReturn {
       driver: boolean
       merchant: boolean
       agent: boolean
+      ibo: boolean
       integrousAssociate: boolean
       integrousCustomer: boolean
     },

@@ -8,6 +8,7 @@ import { SignUpMerchantForm } from 'components/page/signup/SignUpForm/FormByRole
 import { SignUpCustomerForm, SignUpDriverForm, SignUpAgentForm } from 'components/page/signup/SignUpForm'
 import { SelectRoleToSignUp } from 'components/page/signup/SelectRoleToSignUp'
 import { ROLES } from 'config/roles'
+import { SignUpIBOForm } from "../../components/page/signup/SignUpForm/FormByRole/ibo";
 
 const { SEO } = APP_INFO
 
@@ -18,6 +19,7 @@ const SignUpPage = () => {
   if (role === ROLES.DRIVER) return <SignUpDriverForm referralLink={{ code, role }} />
   if (role === ROLES.MERCHANT) return <SignUpMerchantForm referralLink={{ code, role }} />
   if (role === ROLES.AGENT) return <SignUpAgentForm referralLink={{ code, role }} />
+  if (role === ROLES.IBO) return <SignUpIBOForm referralLink={{ code, role }} />
 
   return (<SelectRoleToSignUp />)
 }

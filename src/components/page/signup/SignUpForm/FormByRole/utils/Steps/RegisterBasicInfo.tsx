@@ -90,6 +90,10 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       lastname: dataForm.lastname,
       password: dataForm.password,
       businessName: dataForm.businessName,
+      street: dataForm.street,
+      state: dataForm.state,
+      zip: dataForm.zip,
+      ssn: dataForm.ssn,
       phone: phoneNumber,
       sponsorReferralCode: dataForm.referralCode || null,
       idImage: null,
@@ -100,6 +104,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
         driver: referralLink.role === 'DRIVER',
         merchant: referralLink.role === 'MERCHANT',
         agent: referralLink.role === 'AGENT',
+        ibo: referralLink.role === ROLES.IBO,
         integrousAssociate: referralLink.role === 'integrousAssociate',
         integrousCustomer: referralLink.role === 'integrousCustomer'
       }
@@ -134,6 +139,11 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
   if (referralLink.role === 'integrousCustomer') {
     roleText = 'Snap Partners Customer'
     subtext = 'to purchase Integrous Products'
+  }
+
+  if (referralLink.role === ROLES.IBO) {
+    roleText = 'Snap Partners Associate'
+    subtext = ''
   }
 
   const router = useRouter()
@@ -228,6 +238,59 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           isRequired={false}
         />
 
+        <InputForm
+          id='street'
+          name='street'
+          type='text'
+          label='Street'
+          registerId='street'
+          placeholder='Enter Street Name'
+          errors={errors.street}
+          register={register}
+          rulesForm={registerRulesConfig.street}
+          isRequired
+        />
+
+        <InputForm
+          id='state'
+          name='state'
+          type='text'
+          label='State / Province'
+          registerId='state'
+          placeholder='Enter State / Province'
+          errors={errors.state}
+          register={register}
+          rulesForm={registerRulesConfig.state}
+          isRequired
+        />
+
+        <InputForm
+          id='zip'
+          name='zip'
+          type='text'
+          label='Zip'
+          registerId='zip'
+          placeholder='Enter Zip Code'
+          errors={errors.zip}
+          register={register}
+          rulesForm={registerRulesConfig.zip}
+          isRequired
+        />
+
+        <InputForm
+          id='ssn'
+          name='ssn'
+          type='text'
+          label='Social Security Number'
+          registerId='ssn'
+          placeholder='Enter Social Security Number'
+          errors={errors.ssn}
+          register={register}
+          rulesForm={registerRulesConfig.ssn}
+          isRequired={false}
+          helpText='* Required to receive commissions beyond $600'
+        />
+
         <InputPhone
           label={'Phone'}
           isRequired
@@ -293,12 +356,12 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             Sign Up
           </Button>
 
-          <p className='mt-4'>
+          {role !== ROLES.IBO && <p className='mt-4'>
             <span className='font-semibold'>Already have an account?</span>
             <Link href={loginURL}>
               <a className='text-textAcent-500 focus:underline'> Login.</a>
             </Link>
-          </p>
+          </p>}
         </section>
       </form>
     </div>
