@@ -1,7 +1,9 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState } from "react";
 
-type Props = {};
+type Props = {
+  closemodal: () => void;
+};
 
 const ErcModal = (props: Props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,38 +17,73 @@ const ErcModal = (props: Props) => {
   };
 
   return (
-    <div className="w-full ">
+    <div className="w-full flex justify-center">
       <button
-        className="bg-red-500 text-white px-4 py-2 rounded w-36 cursor-pointer"
+        className="bg-blue-500 text-white px-4 py-2 rounded w-36 h-12 cursor-pointer"
         onClick={openModal}
       >
         Open Modal
       </button>
       {isOpen && (
-        <div className="flex justify-center items-center fixed z-10 inset-0 overflow-y-auto ">
-          <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center">
-            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl">
-              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                <div className="sm:flex sm:items-start">
-                  <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <h3 className="text-lg leading-6 font-medium text-gray-500">
-                      Modal Title
-                    </h3>
-                    <div className="mt-2">
-                      <p className="text-sm text-gray-500">
-                        Your modal content can go here.
-                      </p>
-                    </div>
-                  </div>
-                </div>
+        <div className="bg-white w-[866px] h-[762px] rounded-lg ">
+          {/* header  */}
+          <div>
+            <div className="flex justify-between items-center px-2.5 pt-5 font-open-sans ">
+              <div className="font-semibold font-lg">Company Name Detail</div>
+              <div
+                className="cursor-pointer text-2xl w-8 h-8"
+                onClick={closeModal}
+              >
+                x
               </div>
-              <div className="bg-red-500 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse cursor-pointer">
-                <div
-                  className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={closeModal}
-                >
-                  Close
-                </div>
+            </div>
+            <div className="flex space-x-5 px-2.5 py-5 items-center">
+              <div className="text-sm">Signup Date: MM/DD/YYYY</div>
+              <div className="text-xs">example@email.com</div>
+              <div className="text-xs">+1 555 5555 5555</div>
+            </div>
+          </div>
+          {/* body  */}
+          <div className="flex space-x-5 justify-center">
+            {/* phase 1  */}
+            <div className="bg-phase-100 w-64 px-2.5 py-3 rounded-lg">
+              <div className="flex justify-between items-center">
+                <div>Phase 1 Progress</div>
+                <div className="text-xs font-bold">2/2</div>
+              </div>
+              <div className="flex space-x-2 pt-2.5">
+                <div className="bg-textAcent-500 h-2 w-32 rounded-lg"></div>
+                <div className="bg-textAcent-500 h-2 w-32 rounded-lg"></div>
+              </div>
+            </div>
+            {/* phase 2  */}
+            <div className="bg-phase-200 w-64 px-2.5 py-3 rounded-lg">
+              <div className="flex justify-between items-center">
+                <div>Phase 2 Progress</div>
+                <div className="text-xs font-bold">3/6</div>
+              </div>
+              <div className="flex space-x-2 pt-2.5">
+                <div className="bg-textAcent-100 h-2 w-32 rounded-lg"></div>
+                <div className="bg-textAcent-100 h-2 w-32 rounded-lg"></div>
+                <div className="bg-textAcent-100 h-2 w-32 rounded-lg"></div>
+                <div className="bg-white h-2 w-32 rounded-lg"></div>
+                <div className="bg-white h-2 w-32 rounded-lg"></div>
+                <div className="bg-white h-2 w-32 rounded-lg"></div>
+              </div>
+            </div>
+            {/* phase 3  */}
+            <div className="bg-phase-300 w-64 px-2.5 py-3 rounded-lg">
+              <div className="flex justify-between items-center">
+                <div>Phase 3 Progress</div>
+                <div className="text-xs font-bold">0/6</div>
+              </div>
+              <div className="flex space-x-2 pt-2.5">
+                <div className="bg-textAcent-200 h-2 w-32 rounded-lg"></div>
+                <div className="bg-white h-2 w-32 rounded-lg"></div>
+                <div className="bg-white h-2 w-32 rounded-lg"></div>
+                <div className="bg-white h-2 w-32 rounded-lg"></div>
+                <div className="bg-white h-2 w-32 rounded-lg"></div>
+                <div className="bg-white h-2 w-32 rounded-lg"></div>
               </div>
             </div>
           </div>
