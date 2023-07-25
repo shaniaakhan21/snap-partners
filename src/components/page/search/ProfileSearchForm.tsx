@@ -40,7 +40,7 @@ function ProfileSearchForm ({ children }) {
   }
   useEffect(() => {
     console.log('router query is ', router.query)
-    setProfileSearchForm({ ...profileSearchForm, profileSearchString: typeof router.query.searchString === 'string' ? router.query.searchString : '', userLevel: typeof router.query.userLevel === 'string' ? router.query.userLevel : '' })
+    setProfileSearchForm({ ...profileSearchForm, profileSearchString: typeof router.query.searchString === 'string' && router.query.searchString !== 'noName' ? router.query.searchString : '', userLevel: typeof router.query.userLevel === 'string' && router.query.userLevel !== 'noLevel' ? router.query.userLevel : '' })
   }, [router.query])
   return (
     <div>

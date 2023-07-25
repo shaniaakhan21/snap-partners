@@ -77,6 +77,17 @@ function IBOProfile ({ profileData }) {
       return `${currentDate.getDate()}/${(currentDate.getMonth() + 1)}/${currentDate.getFullYear()}`
     }
   }
+
+  const handleResendEmail = async () => {
+    const token = getLocalStorage('accessToken')
+    await axios.post('/api/admin/user-resend-email',
+      { id: profileData[0]?.id },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+  }
   return (
     <>
       <div className={`${cname}-container`}>
@@ -92,7 +103,7 @@ function IBOProfile ({ profileData }) {
               <div style={{ marginTop: '-15px' }}><p className={`${cname}-midSection-mainInfo-name`}>{`${profileData[0]?.name} ${profileData[0]?.lastname}`}</p>
                 <p className={`${cname}-midSection-mainInfo-text`}><img src='/images/icons/email.svg'/>{`${profileData[0]?.email}`}</p></div>
             </div>
-            <p className={`${cname}-midSection-mainInfo-text`}><img src='/images/icons/flip-2.svg' style={{ width: '18px', height: '24px' }}/>resend welcome email</p>
+            <p className={`${cname}-midSection-mainInfo-text`} onClick={() => { handleResendEmail() }}><img src='/images/icons/flip-2.svg' style={{ width: '18px', height: '24px' }}/>resend welcome email</p>
             <p className={`${cname}-midSection-mainInfo-text`}><img src='/images/icons/edit.svg' style={{ width: '18px', height: '24px' }}/>{`${profileData[0]?.phoneNumber}`}</p>
           </div>
           <div className={`${cname}-midSection-mainInfo`}>
