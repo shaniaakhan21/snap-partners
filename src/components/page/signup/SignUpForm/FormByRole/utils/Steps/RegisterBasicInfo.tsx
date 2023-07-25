@@ -146,7 +146,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
     subtext = ''
   }
 
-  const showSSNField = referralLink.role !== 'CUSTOMER';
+  const showSSNField = referralLink.role !== 'CUSTOMER' && referralLink.role !== 'integrousCustomer' && referralLink.role !== 'integrousAssociate' ;
 
   const router = useRouter()
   const loginURL = router.pathname === '/auth/signup-integrous' ? '/auth/login-integrous' : '/auth/login'
