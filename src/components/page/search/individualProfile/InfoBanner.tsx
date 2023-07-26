@@ -18,6 +18,9 @@ function InfoBanner ({ profileData, userLevel }) {
           Authorization: `Bearer ${token}`
         }
       })
+      .then((result) => {
+        console.log('result from resend email', result.data)
+      })
   }
   return (
     <>
