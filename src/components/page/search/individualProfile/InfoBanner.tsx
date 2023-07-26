@@ -20,6 +20,22 @@ function InfoBanner ({ profileData, userLevel }) {
       })
       .then((result) => {
         console.log('result from resend email', result.data)
+        alert('email sent successfully')
+      })
+  }
+
+  const handleResendEmail2 = async () => {
+    const token = getLocalStorage('accessToken')
+    await axios.post('/api/admin/user-resend-email2',
+      { id: profileData[0]?.id },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      .then((result) => {
+        console.log('result from resend email', result.data)
+        alert('email sent successfully')
       })
   }
   return (
@@ -31,7 +47,10 @@ function InfoBanner ({ profileData, userLevel }) {
             <p className={`${cname}-midSection-mainInfo-text`}><img src='/images/icons/email.svg'/>{`${profileData[0]?.email}`}</p></div>
         </div>
         { mapping[userLevel] >= 600 &&
+        <div>
         <p className={`${cname}-midSection-mainInfo-text`} onClick={() => { handleResendEmail() }}><img src='/images/icons/flip-2.svg' style={{ width: '18px', height: '24px' }}/>resend welcome email</p>
+        <p className={`${cname}-midSection-mainInfo-text`} onClick={() => { handleResendEmail2() }}><img src='/images/icons/flip-2.svg' style={{ width: '18px', height: '24px' }}/>resend welcome email-2</p>
+        </div>
         }
         <p className={`${cname}-midSection-mainInfo-text`}><img src='/images/icons/edit.svg' style={{ width: '18px', height: '24px' }}/>{`${profileData[0]?.phoneNumber}`}</p>
       </div>
