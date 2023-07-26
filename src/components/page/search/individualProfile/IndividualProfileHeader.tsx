@@ -6,12 +6,12 @@ import { getUserMe } from 'lib/services/user/getUserMe'
 import { useAuthStore } from 'lib/stores'
 import { useRouter } from 'next/router'
 import { getLocalStorage, removeLocalStorage } from 'lib/utils/localStorage'
-
-function IndividualProfileHeader ({ body, setBody, profileData }) {
+import { userLevelReverseMapping } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/formOptionData'
+function IndividualProfileHeader ({ body, setBody, profileData, userLevel }) {
   const cname = 'profilePage-individualProfile'
   const { setAuth } = useAuthStore()
   const router = useRouter()
-
+  const mapping = userLevelReverseMapping
   // trackLoginHandle(true)
   // setLoading(true)
   const LoginAsRepHandle = async () => {
@@ -97,8 +97,10 @@ function IndividualProfileHeader ({ body, setBody, profileData }) {
         onClick={() => { router.push(`/genealogy/${profileData[0]?.id}`) }}>downline</li> */}
         <li className={body === 'downline' ? `${cname}-header-listItems listItems-active listItems-midItem` : `${cname}-header-listItems listItems-midItem`}
         onClick={() => { setBody('downline') }}>downline</li>
+        { mapping[userLevel] >= 600 &&
         <li className={`${cname}-header-listItems listItems-lastItem`}
           onClick={() => { LoginAsRepHandle() }}>Login as rep</li>
+        }
       </ul>
     </div>
   )

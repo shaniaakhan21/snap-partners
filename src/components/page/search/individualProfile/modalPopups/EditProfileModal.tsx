@@ -2,7 +2,7 @@
 import { Modal, Box } from '@mui/material'
 import axios from 'axios'
 import { InputComponent, ButtonComponent } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/Components'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 interface IProfileData {
     email?:string,
@@ -13,21 +13,27 @@ interface IProfileData {
     lastname?: string,
     street?: string,
     state?: string,
-    zip?: string
+    zip?: string,
+    city?: string
 }
 
-function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId }) {
-  const [editProfileData, setEditProfileData] = useState<IProfileData>({
-    email: '',
-    socialSecurityNumber: null,
-    username: '',
-    name: '',
-    phoneNumber: '',
-    lastname: '',
-    street: '',
-    state: '',
-    zip: ''
-  })
+function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId, profileData }) {
+  const InitialValues:IProfileData = {}
+  useEffect(() => {
+    setEditProfileData({
+      email: profileData?.email,
+      socialSecurityNumber: profileData?.socialSecurityNumber,
+      username: profileData?.username,
+      name: profileData?.name,
+      phoneNumber: profileData?.phoneNumber,
+      lastname: profileData?.lastname,
+      street: profileData?.street,
+      state: profileData?.state,
+      zip: profileData?.zip,
+      city: profileData?.city
+    })
+  }, [profileData])
+  const [editProfileData, setEditProfileData] = useState<IProfileData>(InitialValues)
   const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -40,34 +46,34 @@ function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId }
     p: 4
   }
   const handleEditProfile = async () => {
-    let body = {}
-    if (editProfileData.email !== '') {
-      body = { ...body, email: editProfileData.email }
-    }
-    if (editProfileData.username !== '') {
-      body = { ...body, username: editProfileData.username }
-    }
-    if (editProfileData.socialSecurityNumber !== null && !Number.isNaN(editProfileData.socialSecurityNumber)) {
-      body = { ...body, socialSecurityNumber: editProfileData.socialSecurityNumber }
-    }
-    if (editProfileData.name !== '') {
-      body = { ...body, name: editProfileData.name }
-    }
-    if (editProfileData.lastname !== '') {
-      body = { ...body, lastname: editProfileData.lastname }
-    }
-    if (editProfileData.phoneNumber !== '') {
-      body = { ...body, phoneNumber: editProfileData.phoneNumber }
-    }
-    if (editProfileData.street !== '') {
-      body = { ...body, street: editProfileData.street }
-    }
-    if (editProfileData.state !== '') {
-      body = { ...body, state: editProfileData.state }
-    }
-    if (editProfileData.zip !== '') {
-      body = { ...body, zip: editProfileData.zip }
-    }
+    const body = editProfileData
+    // if (editProfileData.email !== '') {
+    //   body = { ...body, email: editProfileData.email }
+    // }
+    // if (editProfileData.username !== '') {
+    //   body = { ...body, username: editProfileData.username }
+    // }
+    // if (editProfileData.socialSecurityNumber !== null && !Number.isNaN(editProfileData.socialSecurityNumber)) {
+    //   body = { ...body, socialSecurityNumber: editProfileData.socialSecurityNumber }
+    // }
+    // if (editProfileData.name !== '') {
+    //   body = { ...body, name: editProfileData.name }
+    // }
+    // if (editProfileData.lastname !== '') {
+    //   body = { ...body, lastname: editProfileData.lastname }
+    // }
+    // if (editProfileData.phoneNumber !== '') {
+    //   body = { ...body, phoneNumber: editProfileData.phoneNumber }
+    // }
+    // if (editProfileData.street !== '') {
+    //   body = { ...body, street: editProfileData.street }
+    // }
+    // if (editProfileData.state !== '') {
+    //   body = { ...body, state: editProfileData.state }
+    // }
+    // if (editProfileData.zip !== '') {
+    //   body = { ...body, zip: editProfileData.zip }
+    // }
 
     if (Object.keys(body).length !== 0) {
       console.log('in submit profile')
@@ -90,7 +96,9 @@ function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId }
     if (param === 'street') { setEditProfileData({ ...editProfileData, street: event.target.value }) }
     if (param === 'state') { setEditProfileData({ ...editProfileData, state: event.target.value }) }
     if (param === 'zip') { setEditProfileData({ ...editProfileData, zip: event.target.value }) }
+    if (param === 'city') { setEditProfileData({ ...editProfileData, city: event.target.value }) }
   }
+  console.log('edit profile data', editProfileData, profileData)
   return (
     <Modal open={editProfileModal} onClose={onCloseEditProfileModal} className='resetPasswordModal'>
       <Box sx={style}>
@@ -104,6 +112,7 @@ function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId }
         <InputComponent label='street' placeholder='Street' value={editProfileData.street} onChangeFunction={handleEditProfileUpdate} param={'street'} />
         <InputComponent label='state' placeholder='State' value={editProfileData.state} onChangeFunction={handleEditProfileUpdate} param={'state'} />
         <InputComponent label='zip' placeholder='Zip' value={editProfileData.zip} onChangeFunction={handleEditProfileUpdate} param={'zip'} />
+        <InputComponent label='city' placeholder='City' value={editProfileData.city} onChangeFunction={handleEditProfileUpdate} param={'city'} />
 
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
           <ButtonComponent title='submit' onClickFunction={ handleEditProfile } />

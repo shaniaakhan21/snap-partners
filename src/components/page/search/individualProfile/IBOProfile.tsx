@@ -5,11 +5,12 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useAuthStore } from '../../../../lib/stores'
 import { getLocalStorage } from 'lib/utils/localStorage'
-import { userLevelOptions } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/formOptionData'
+import { userLevelReverseMapping } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/formOptionData'
 import UpdateUserLevelModal from './modalPopups/UpdateUserLevelModal'
 import EditProfileModal from './modalPopups/EditProfileModal'
+import InfoBanner from './InfoBanner'
 
-function IBOProfile ({ profileData }) {
+function IBOProfile ({ profileData, userLevel }) {
   const [passwordResetModal, setPasswordResetModal] = useState<boolean>(false)
   const [userLevelModal, setUserLevelModal] = useState<boolean>(false)
   const [editProfileModal, setEditProfileModal] = useState<boolean>(false)
@@ -19,6 +20,7 @@ function IBOProfile ({ profileData }) {
   const { auth, setAuth, removeAuth } = useAuthStore()
   const cname = 'profilePage-IBOProfile'
   console.log('data from ibo', profileData)
+  const mapping = userLevelReverseMapping
   const onClosePasswordResetModal = () => {
     setPasswordResetModal(false)
   }
@@ -78,39 +80,18 @@ function IBOProfile ({ profileData }) {
     }
   }
 
-  const handleResendEmail = async () => {
-    const token = getLocalStorage('accessToken')
-    await axios.post('/api/admin/user-resend-email',
-      { id: profileData[0]?.id },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-  }
+
   return (
     <>
       <div className={`${cname}-container`}>
         <div className={`${cname}-header`}>
           <p className={`${cname}-header-text`}>User ID - {`${profileData[0]?.id}`}</p>
+          { mapping[userLevel] >= 600 &&
           <p className={`${cname}-header-text ${cname}-midSection-mainInfo-text`} onClick={() => { setEditProfileModal(true) }}>Edit Profile<img src='/images/icons/edit.svg' style={{ width: '18px', height: '24px' }}/></p>
+          }
         </div>
 
         <div className={`${cname}-midSection`}>
-          <div className={`${cname}-midSection-mainInfo`}>
-            <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
-              <Avatar src={profileData[0]?.profileImage} style={{ width: '78px', height: '78px' }} />
-              <div style={{ marginTop: '-15px' }}><p className={`${cname}-midSection-mainInfo-name`}>{`${profileData[0]?.name} ${profileData[0]?.lastname}`}</p>
-                <p className={`${cname}-midSection-mainInfo-text`}><img src='/images/icons/email.svg'/>{`${profileData[0]?.email}`}</p></div>
-            </div>
-            <p className={`${cname}-midSection-mainInfo-text`} onClick={() => { handleResendEmail() }}><img src='/images/icons/flip-2.svg' style={{ width: '18px', height: '24px' }}/>resend welcome email</p>
-            <p className={`${cname}-midSection-mainInfo-text`}><img src='/images/icons/edit.svg' style={{ width: '18px', height: '24px' }}/>{`${profileData[0]?.phoneNumber}`}</p>
-          </div>
-          <div className={`${cname}-midSection-mainInfo`}>
-            <p className={`${cname}-footer-heading`}>{`${profileData[0]?.ranks?.type}`}</p>
-            <p className={`${cname}-midSection-mainInfo-text`}><span className={`${cname}-midSection-mainInfo-title`}>User Level -</span>{profileData[0]?.level}</p>
-            <p className={`${cname}-midSection-mainInfo-text`}><span className={`${cname}-midSection-mainInfo-title`}>GrandfatherRank -</span>{profileData[0]?.gRanks[0]?.gRank}</p>
-          </div>
 
           <div className={`${cname}-midSection-AdditionalInfo`}>
             <div>
@@ -118,13 +99,20 @@ function IBOProfile ({ profileData }) {
             </div>
             <div>
               <div className={`${cname}-midSection-AdditionalInfo-icons`}>
+                { (profileData[0]?.roles?.integrousAssociate || profileData[0]?.roles?.integrousCustomer) &&
                 <img src='/static/badges/binary.png' style={{ width: '70px' }} />
+                }
                 <img src='/images/icons/deliveryMan.png' />
                 <img src='/images/icons/Shopper.png' />
                 <img src='/images/icons/tray.png' />
               </div>
+              { mapping[userLevel] >= 600 &&
               <p style={{ textAlign: 'right' }} className={`${cname}-midSection-mainInfo-name adInfoText resetPasswordText`} onClick={() => { setPasswordResetModal(true) }}>reset Password </p>
-              <p style={{ textAlign: 'right' }} className={`${cname}-midSection-mainInfo-name adInfoText resetPasswordText`} onClick={() => { setUserLevelModal(true) }}>reset User Level </p>
+              }
+
+              { mapping[userLevel] === 1100 &&
+              <p style={{ textAlign: 'right' }} className={`${cname}-midSection-mainInfo-name adInfoText resetPasswordText`} onClick={() => { setUserLevelModal(true) }}>Edit User Level </p>
+              }
             </div>
           </div>
 
@@ -132,7 +120,7 @@ function IBOProfile ({ profileData }) {
           <div className={`${cname}-footer`}>
             <div>
               <h2 className={`${cname}-footer-heading`}>Address :</h2>
-              <p className={`${cname}-footer-text`}>{profileData[0]?.street} {profileData[0]?.state} {profileData[0]?.zip}</p>
+              <p className={`${cname}-footer-text`}>{profileData[0]?.street} {profileData[0]?.city} {profileData[0]?.state} {profileData[0]?.zip}</p>
             </div>
 
             <div>
@@ -170,7 +158,7 @@ function IBOProfile ({ profileData }) {
           </Box>
         </Modal> */}
         <UpdateUserLevelModal userLevelModal={userLevelModal} onCloseUserLevelModal={onCloseUserLevelModal} userId={profileData[0]?.id} />
-        <EditProfileModal editProfileModal={editProfileModal} onCloseEditProfileModal={onCloseEditProfileModal} userId={profileData[0]?.id}/>
+        <EditProfileModal editProfileModal={editProfileModal} onCloseEditProfileModal={onCloseEditProfileModal} userId={profileData[0]?.id} profileData={profileData[0]} />
       </div>
     </>
   )

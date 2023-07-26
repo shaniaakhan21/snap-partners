@@ -7,20 +7,26 @@ import Order from './Order'
 import Downline from './Downline'
 import CommissionsTab from './ComissionsTab'
 import Upline from './Upline'
+import InfoBanner from './InfoBanner'
+import { useAuthStore } from 'lib/stores'
 
 function IndividualProfile ({ profileData }) {
   const cname = 'profilePage-individualProfile'
   const [body, setBody] = useState<'iboProfile' | 'order' | 'downline' | 'comissions' | 'upline'>('iboProfile')
+  const { auth } = useAuthStore()
   console.log('body is ', body)
   return (
     <Container>
       <Paper className={`${cname}-conatiner`}>
-        <IndividualProfileHeader body={body} setBody={setBody} profileData={profileData} />
+        <IndividualProfileHeader body={body} setBody={setBody} profileData={profileData} userLevel={auth?.level} />
+      </Paper>
+      <Paper className={`${cname}-conatiner`}>
+        <InfoBanner profileData={profileData} userLevel={auth?.level} />
       </Paper>
       <Paper className={`${cname}-conatiner`}>
         {
           body === 'iboProfile'
-            ? <IBOProfile profileData={profileData} />
+            ? <IBOProfile profileData={profileData} userLevel={auth?.level} />
             : <></>
         }
         {

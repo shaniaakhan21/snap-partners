@@ -130,7 +130,7 @@ const Downline = ({ profileData }) => {
       <div className='w-full flex flex-col justify-center items-center min-h-[80vh]'>
         <EmptyData label='You have no referrals yet' />
 
-        <div className='w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-center justify-center justify-items-center gap-4 mt-8'>
+        {/* <div className='w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-center justify-center justify-items-center gap-4 mt-8'>
           <ReferralCards
             title='Refer Customers'
             ilustration={<CustomerIcon />}
@@ -152,7 +152,7 @@ const Downline = ({ profileData }) => {
             newUser={false}
             classes='col-span-1'
           />
-        </div>
+        </div> */}
       </div>
     )
   }

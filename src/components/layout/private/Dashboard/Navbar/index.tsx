@@ -13,6 +13,7 @@ export const Navbar = () => {
   const { auth, removeAuth } = useAuthStore()
   const { toggleDrawer } = useDrawerStore()
   // const { toggleGenealogySearch } = useSearchModalStore()
+  console.log('auth level is', auth)
   return (
     <header className='dashboardLayout__navbar h-16'>
       <div className='w-full h-full px-6 py-3 flex justify-between items-center max-w-7xl mx-auto'>
