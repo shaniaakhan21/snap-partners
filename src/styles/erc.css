@@ -6,7 +6,7 @@
   font-weight: bold;
 }
 
-/* #table1erc div:nth-child(1) > .InovuaReactDataGrid__column-header--unlockable,*/
+/* #table1erc div:nth-child(1) > .InovuaReactDataGrid__column-header--unlockable,  */
 #cro-erc-process > div > div > ul:nth-child(1) > li:nth-child(1) {
   color: white;
   background-color: #dd4c37 !important;
