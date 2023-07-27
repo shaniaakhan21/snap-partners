@@ -36,6 +36,42 @@
   border-radius: 0.5rem;
 }
 
+#table1erc .InovuaReactDataGrid {
+  border: none;
+}
+
+#table1erc .InovuaReactDataGrid__cell {
+  border: none;
+}
+
+/* #table1erc .inovua-react-scroll-container__wrapper {
+  border: 1px solid black;
+} */
+
+#table1erc .InovuaReactDataGrid__row-cell-wrap {
+  border: solid 1px black;
+  border-top: none;
+}
+
+/* #table1erc
+  .InovuaReactDataGrid__row-cell-wrap
+  .InovuaReactDataGrid__cell:first-child {
+  background-color: red;
+} */
+
+#table1erc
+  .InovuaReactDataGrid__column-header__resize-wrapper--show-border-left {
+  border: none;
+}
+
+#table1erc .InovuaReactDataGrid__header {
+  border-color: black;
+}
+
+#table1erc .InovuaReactDataGrid__column-header__filter-wrapper--empty {
+  display: none;
+}
+
 #cro-erc-process {
   background-color: white;
   padding: 1rem;
