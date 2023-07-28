@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 import ErcModal from "lib/modals/ErcModal";
 import PersonalClientsTable from "components/page/erc/PersonalClientsTable";
 import TeamClientsTable from "components/page/erc/TeamClientsTable";
+import TableHeader from "components/page/erc/TableHeader";
 
 const { SEO } = APP_INFO;
 
@@ -18,6 +19,16 @@ const ErcreferralsPage: Page = () => {
   const [transactionsClient, setTransactionsClient] = useState([]);
   const [monthSelected, setMonthSelected] = useState(new Date().getMonth());
   const [yearSelected, setYearSelected] = useState(new Date().getFullYear());
+  const [isOpen, setIsOpen] = useState(false);
+  const [showTables, setShowTables] = useState(false);
+
+  const toggleModal = (toggle: boolean) => {
+    setIsOpen(toggle);
+  };
+
+  const toggleTables = (toggle: boolean) => {
+    setShowTables(toggle);
+  };
 
   const month = [
     "January",
@@ -98,61 +109,26 @@ const ErcreferralsPage: Page = () => {
           </div>
         </div>
       </div>
-      <ErcModal />
+      <ErcModal isOpen={isOpen} toggleModal={toggleModal} />
       <div id="table1erc" className="">
         <div className="pb-2 text-lg font-sans font-semibold text-gray-800">
           Your Personal Clients
         </div>
-        <PersonalClientsTable transactions={transactions} />
-        <div className="flex items-center">
-          <div className="text-lg font-sans font-semibold text-gray-800">
-            Your Team Clients
-          </div>
-          <select
-            id="legalType"
-            name="legalType"
-            className="ml-5 cursor-pointer relative xs:mr-2 pl-2 pr-12 py-0 xs:py-1 my-2 bg-[rgba(255,255,255,.13)] rounded-md border border-solid border-black outline-none appearance-none leading-8"
-            placeholder="User Rank"
-            onChange={(current) => {
-              setMonthSelected(parseInt(current.target.value));
-            }}
-          >
-            {month.map((m, i) => {
-              return (
-                <option
-                  key={i}
-                  selected={new Date().getMonth() === i}
-                  value={i}
-                >
-                  {m}
-                </option>
-              );
-            })}
-          </select>
-          <select
-            id="legalType"
-            name="legalType"
-            className="ml-5 cursor-pointer relative xs:mr-2 pl-2 pr-12 py-0 xs:py-1 my-2 bg-[rgba(255,255,255,.13)] rounded-md border border-solid border-black outline-none appearance-none leading-8"
-            placeholder="User Rank"
-            onChange={(current) => {
-              setYearSelected(parseInt(current.target.value));
-            }}
-          >
-            {years.map((y, i) => {
-              return (
-                <option
-                  key={i}
-                  selected={new Date().getFullYear() === y}
-                  value={y}
-                >
-                  {y}
-                </option>
-              );
-            })}
-          </select>
-        </div>
+        <PersonalClientsTable
+          transactions={transactions}
+          toggleModal={toggleModal}
+        />
+        <TableHeader
+          tableName="Your Team Clients"
+          setMonthSelected={setMonthSelected}
+          setYearSelected={setYearSelected}
+        />
         <div className="text-center">
-          <TeamClientsTable transactions={transactionsClient} />
+          <TeamClientsTable
+            transactions={transactionsClient}
+            showTables={showTables}
+            toggleTable={toggleTables}
+          />
         </div>
       </div>
     </>
