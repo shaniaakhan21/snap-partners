@@ -1,14 +1,41 @@
 import ReactDataGrid from "@inovua/reactdatagrid-community";
 import { ITableTransactionsProps } from "lib/types/transaction";
+import React from "react";
+import TableHeader from "components/page/erc/TableHeader";
 
-const PersonalClientsTable = ({ transactions }: ITableTransactionsProps) => {
+const PersonalClientsTable: React.FC<ITableTransactionsProps> = ({
+  transactions,
+  toggleModal,
+}) => {
   const columns = [
-    { name: "phase", header: "Phase", defaultFlex: 1, minWidth: 60 },
+    {
+      name: "phase",
+      header: "Phase",
+      defaultFlex: 1,
+      minWidth: 60,
+    },
     { name: "id", header: "ID", defaultFlex: 1, minWidth: 60 },
     { name: "business_name", header: "Company", defaultFlex: 1, minWidth: 110 },
     { name: "email", header: "Email", defaultFlex: 1, minWidth: 85 },
     { name: "phone", header: "Phone", defaultFlex: 1, minWidth: 90 },
-    { name: "details", header: "See More", defaultFlex: 1, minWidth: 90 },
+    {
+      name: "details",
+      header: "See More",
+      defaultFlex: 1,
+      minWidth: 90,
+      render: () => {
+        return (
+          <span>
+            <button
+              className="text-textAcent-500"
+              onClick={() => toggleModal(true)}
+            >
+              Details
+            </button>
+          </span>
+        );
+      },
+    },
   ];
 
   const newtransactions = [

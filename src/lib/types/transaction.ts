@@ -18,4 +18,17 @@ export interface ITransaction {
 
 export interface ITableTransactionsProps {
   transactions: ITransaction[];
+  toggleModal: (toggle: boolean) => void;
+}
+
+export interface ITable2TransactionsProps {
+  transactions: ITransaction[];
+  showTables: boolean;
+  toggleTable: (toggle: boolean) => void;
+}
+
+export interface TableHeaderProps {
+  tableName: string;
+  setYearSelected: (prop: number) => void;
+  setMonthSelected: (prop: number) => void;
 }
