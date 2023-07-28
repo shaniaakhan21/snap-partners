@@ -7,6 +7,7 @@ import { useAuthStore } from 'lib/stores'
 import { useRouter } from 'next/router'
 import { getLocalStorage, removeLocalStorage } from 'lib/utils/localStorage'
 import { userLevelReverseMapping } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/formOptionData'
+import { builderWebsiteFields } from 'lib/types/user/profile'
 function IndividualProfileHeader ({ body, setBody, profileData, userLevel }) {
   const cname = 'profilePage-individualProfile'
   const { setAuth } = useAuthStore()
@@ -75,7 +76,8 @@ function IndividualProfileHeader ({ body, setBody, profileData, userLevel }) {
         nsurUserId: data.nsurUserId,
         myPoints: null
       },
-      level: data.level
+      level: data.level,
+      ...(builderWebsiteFields.reduce((acc, field) => ({...acc, [field]: data[field]}), {}) as any)
     })
     window.location.href = '/overview'
   }
