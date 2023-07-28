@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 import { updateUserPassword } from 'lib/services/user/updateUserPassword'
 import { Dispatch, SetStateAction } from 'lib/types/core/next-react'
-import { TAccountInfoToUpdate } from 'lib/types/user/profile'
+import {builderWebsiteFields, TAccountInfoToUpdate} from 'lib/types/user/profile'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { getUserMe } from 'lib/services/user/getUserMe'
 import { IAuth, TSetAuth } from 'lib/stores/Auth'
@@ -96,7 +96,8 @@ export const FormUpdatePassword = ({ auth, setAuth, typeUpdate, setTypeUpdate }:
         myPoints: auth?.nsurAccount?.myPoints || null
       },
       bank_information: userData.bank_information,
-      level: userData?.level
+      level: userData?.level,
+      ...(builderWebsiteFields.reduce((acc, field) => ({...acc, [field]: userData[field]}), {}) as any)
     })
     GTMTrack.editProfile(typeUpdate)
     toast('Password successfully changed', { type: 'success' })

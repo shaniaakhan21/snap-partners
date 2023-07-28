@@ -5,6 +5,7 @@ import { Account } from './Account'
 import { useAuthStore, useDrawerStore } from 'lib/stores'
 import { useDashboardGetPathname } from 'lib/hooks/useDashboardGetPathnameData'
 import { useRouter } from 'next/router'
+import {Button} from "../../../../common/Button";
 
 export const Navbar = () => {
   const router = useRouter()
@@ -17,7 +18,7 @@ export const Navbar = () => {
   return (
     <header className='dashboardLayout__navbar h-16'>
       <div className='w-full h-full px-6 py-3 flex justify-between items-center max-w-7xl mx-auto'>
-        <section className='w-1/2 h-full flex justify-between items-center gap-x-5'>
+        <section className='w-1/3 h-full flex justify-between items-center gap-x-5'>
           <div className='lg:hidden cursor-pointer' onClick={toggleDrawer}>
             <MoarOptionsVerticalIcon />
           </div>
@@ -51,7 +52,12 @@ export const Navbar = () => {
             </button>
           </div> */}
         </section>
-        <section className='w-full h-full flex justify-end items-center'>
+        <section className='w-1/3 h-full flex justify-end items-center gap-x-5'>
+          <a target="_blank" href={`https://mysnappartners.com/login/token=${auth.accessToken}`}>
+            <Button classes='text-sm bg-primary-500'>
+              Your Builder Website
+            </Button>
+          </a>
         </section>
 
         {auth && <Account
