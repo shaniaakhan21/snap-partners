@@ -192,32 +192,32 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
         </div>
       </li>
 
-      <li className='rounded-xl bg-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center'>
-        <div>
-          <h2 className='text-lg mb-4 font-bold'>Builder Website Info</h2>
-          {builderWebsiteFields.map((item, index) => (<>
-            <label htmlFor='password' className='text-sm capitalize'>{item.replace('_url', '')} URL</label>
-            <br />
-            <input
-              id={item}
-              name={item}
-              type='text'
-              value={auth[item] ?? ''}
-              disabled={true}
-              className='w-full bg-transparent text-lg truncate mb-3 ml-4'
-            />
-          </>))}
-        </div>
+      {/*<li className='rounded-xl bg-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center'>*/}
+      {/*  <div>*/}
+      {/*    <h2 className='text-lg mb-4 font-bold'>Builder Website Info</h2>*/}
+      {/*    {builderWebsiteFields.map((item, index) => (<>*/}
+      {/*      <label htmlFor='password' className='text-sm capitalize'>{item.replace('_url', '')} URL</label>*/}
+      {/*      <br />*/}
+      {/*      <input*/}
+      {/*        id={item}*/}
+      {/*        name={item}*/}
+      {/*        type='text'*/}
+      {/*        value={auth[item] ?? ''}*/}
+      {/*        disabled={true}*/}
+      {/*        className='w-full bg-transparent text-lg truncate mb-3 ml-4'*/}
+      {/*      />*/}
+      {/*    </>))}*/}
+      {/*  </div>*/}
 
-        <div>
-          <button
-            onClick={() => setTypeUpdate('builderInfo')}
-            className='bg-primary-500 hover:bg-opacity-80 rounded-full px-4 py-1 text-white font-bold uppercase'
-          >
-            Edit
-          </button>
-        </div>
-      </li>
+      {/*  <div>*/}
+      {/*    <button*/}
+      {/*      onClick={() => setTypeUpdate('builderInfo')}*/}
+      {/*      className='bg-primary-500 hover:bg-opacity-80 rounded-full px-4 py-1 text-white font-bold uppercase'*/}
+      {/*    >*/}
+      {/*      Edit*/}
+      {/*    </button>*/}
+      {/*  </div>*/}
+      {/*</li>*/}
 
     </ul>
   )
