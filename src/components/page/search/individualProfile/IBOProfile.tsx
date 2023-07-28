@@ -110,9 +110,9 @@ function IBOProfile ({ profileData, userLevel }) {
               <p style={{ textAlign: 'right' }} className={`${cname}-midSection-mainInfo-name adInfoText resetPasswordText`} onClick={() => { setPasswordResetModal(true) }}>reset Password </p>
               }
 
-              {/* { mapping[userLevel] === 1100 && */}
+              { mapping[userLevel] === 1100 &&
               <p style={{ textAlign: 'right' }} className={`${cname}-midSection-mainInfo-name adInfoText resetPasswordText`} onClick={() => { setUserLevelModal(true) }}>Edit User Level </p>
-              {/* } */}
+              }
             </div>
           </div>
 
@@ -120,7 +120,7 @@ function IBOProfile ({ profileData, userLevel }) {
           <div className={`${cname}-footer`}>
             <div>
               <h2 className={`${cname}-footer-heading`}>Address :</h2>
-              <p className={`${cname}-footer-text`}>{profileData[0]?.street} {profileData[0]?.city} {profileData[0]?.state} {profileData[0]?.zip}</p>
+              <p className={`${cname}-footer-text`}>{profileData[0]?.street}, {profileData[0]?.city}, {profileData[0]?.state}, {profileData[0]?.zip}</p>
             </div>
 
             <div>

@@ -9,8 +9,12 @@ import { userData } from 'lib/constants/mockUserData'
 import SearchResult from 'components/page/search/SearchResult'
 import axios from 'axios'
 import { getLocalStorage, setLocalStorage } from 'lib/utils/localStorage'
+import { useAuthStore } from 'lib/stores'
+import { userLevelReverseMapping } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/formOptionData'
 
 function ProfileSearch () {
+  const { auth } = useAuthStore()
+  const mapping = userLevelReverseMapping
   const getProfileData = async () => {
     let emailString = []
     let idString = []
@@ -39,8 +43,8 @@ function ProfileSearch () {
           }
         })
           .then((result) => {
-            setSearchResult(result.data.result)
-            console.log('ret from email search', result.data.result)
+            const newArr = result?.data?.result?.filter((res) => mapping[res.level] <= mapping[auth.level])
+            setSearchResult(newArr)
           })
           .catch((e) => {
             console.log('error while getting profile', e)
@@ -60,8 +64,8 @@ function ProfileSearch () {
           }
         })
           .then((result) => {
-            setSearchResult([result.data.data])
-            console.log('ret', result.data.data)
+            const newArr = result?.data?.result?.filter((res) => mapping[res.level] <= mapping[auth.level])
+            setSearchResult(newArr)
           })
           .catch((e) => {
             console.log('error while getting profile', e)
@@ -100,7 +104,8 @@ function ProfileSearch () {
             }
           })
             .then((result) => {
-              setSearchResult(result.data.result)
+              const newArr = result?.data?.result?.filter((res) => mapping[res.level] <= mapping[auth.level])
+              setSearchResult(newArr)
             })
             .catch((e) => {
               console.log('error while getting profile', e)
@@ -108,21 +113,22 @@ function ProfileSearch () {
         }
       }
     }
-    else{
-        await axios.get('/api/user/getUserByLevel', {
-            params: {
-              userLevelString: userLevelString || ''
-            },
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          })
-            .then((result) => {
-              setSearchResult(result.data.result)
-            })
-            .catch((e) => {
-              console.log('error while getting profile', e)
-            })
+    else {
+      await axios.get('/api/user/getUserByLevel', {
+        params: {
+          userLevelString: userLevelString || ''
+        },
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then((result) => {
+          const newArr = result?.data?.result?.filter((res) => mapping[res.level] <= mapping[auth.level])
+          setSearchResult(newArr)
+        })
+        .catch((e) => {
+          console.log('error while getting profile', e)
+        })
     }
   }
 
