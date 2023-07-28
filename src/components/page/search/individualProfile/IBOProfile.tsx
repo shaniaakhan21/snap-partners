@@ -111,7 +111,7 @@ function IBOProfile ({ profileData, userLevel }) {
               }
 
               { mapping[userLevel] === 1100 &&
-              <p style={{ textAlign: 'right' }} className={`${cname}-midSection-mainInfo-name adInfoText resetPasswordText`} onClick={() => { setUserLevelModal(true) }}>Edit User Level </p>
+              <p style={{ textAlign: 'right' }} className={`${cname}-midSection-mainInfo-name adInfoText resetPasswordText`} onClick={() => { setUserLevelModal(true) }}>Edit User Role </p>
               }
             </div>
           </div>
