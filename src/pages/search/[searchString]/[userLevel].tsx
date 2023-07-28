@@ -64,8 +64,14 @@ function ProfileSearch () {
           }
         })
           .then((result) => {
-            const newArr = result?.data?.result?.filter((res) => mapping[res.level] <= mapping[auth.level])
-            setSearchResult(newArr)
+            console.log('result is from get by id', result.data.data.level, mapping[result?.data?.data?.level], mapping[auth.level])
+            if (mapping[result?.data?.data?.level] <= mapping[auth.level])
+            {
+              setSearchResult([result.data.data])
+            }
+            else {
+              setSearchResult([])
+            }
           })
           .catch((e) => {
             console.log('error while getting profile', e)
