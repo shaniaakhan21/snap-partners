@@ -38,7 +38,7 @@ function UpdateUserLevelModal ({ userLevelModal, onCloseUserLevelModal, userId }
   return (
     <Modal open={userLevelModal} onClose={onCloseUserLevelModal} className='resetPasswordModal'>
       <Box sx={style}>
-        <SelectComponent label={'Reset User level'} name={'userLevel'} value={userLevel} options={userLevelOptions} onChangeFunction={updateUsreLevel} param={'userLevel'} />
+        <SelectComponent label={'Edit User Role'} name={'userLevel'} value={userLevel} options={userLevelOptions} onChangeFunction={updateUsreLevel} param={'userLevel'} />
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
           <ButtonComponent title='submit' onClickFunction={handleUpdateUserLevel}/>
         </div>
