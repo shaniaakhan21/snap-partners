@@ -70,7 +70,11 @@ interface IAuthAtom {
     nsurAccount,
     blocked,
     deleted,
-    bank_information
+    bank_information,
+    facebook_url,
+    twitter_url,
+    linkedin_url,
+    instagram_url
   }: IAuth) => void
   removeAuth: () => void
 }
@@ -102,7 +106,11 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
     blocked,
     deleted,
     nsurAccount,
-    bank_information
+    bank_information,
+    facebook_url,
+    twitter_url,
+    linkedin_url,
+    instagram_url
   }) => {
     set({
       auth: {
@@ -130,7 +138,11 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
         deleted,
         nsurAccount,
         referralLink: referralCode ? `${SEO.URL_PAGE}/auth/signup?referralCode=${referralCode}` : null,
-        bank_information
+        bank_information,
+        facebook_url,
+        twitter_url,
+        linkedin_url,
+        instagram_url
       }
     })
   },

@@ -14,6 +14,7 @@ import type { Page } from 'lib/types'
 import { FooterPublic } from 'components/layout/public/Footer'
 import { ContentMobile } from 'components/page/home/ContentMobile'
 import { ContentDesktop } from 'components/page/home/ContentDesktop'
+import {builderWebsiteFields} from "../lib/types/user/profile";
 
 const { SEO } = APP_INFO
 
@@ -68,7 +69,8 @@ const HomePage: Page = () => {
             nsurUserId: data.nsurUserId,
             myPoints: auth?.nsurAccount?.myPoints || null
           },
-          bank_information: data.bank_information
+          bank_information: data.bank_information,
+          ...(builderWebsiteFields.reduce((acc, field) => ({...acc, [field]: data[field]}), {}) as any)
         })
         router.push('/overview')
       }

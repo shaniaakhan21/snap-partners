@@ -11,6 +11,7 @@ import { IReferralLink } from 'lib/types'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 import { GTMTrack } from 'lib/utils/gtm'
+import {builderWebsiteFields} from "../../../../../../../lib/types/user/profile";
 
 export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { userTrack: IUserTrack, handleStep: IHandleStep, referralLink: IReferralLink }) => {
   const router = useRouter()
@@ -68,7 +69,8 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
         nsurUserId: data.nsurUserId,
         myPoints: auth?.nsurAccount?.myPoints || null
       },
-      bank_information: data.bank_information
+      bank_information: data.bank_information,
+      ...(builderWebsiteFields.reduce((acc, field) => ({...acc, [field]: data[field]}), {}) as any)
     })
     // When change auth state, directly the app push the user to /overview path
     // This logic is on AuthPageLayout useEffect

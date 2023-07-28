@@ -20,6 +20,7 @@ import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { EditPhone } from 'components/page/profile/update/EditPhone'
 import { AccountInfo } from 'components/page/profile/AccountInfo'
 import { FormUpdateUsename } from 'components/page/profile/update/FormUpdateUsename'
+import {FormUpdateBuilderInfo} from "../components/page/profile/update/FormUpdateBuilderInfo";
 
 const { SEO } = APP_INFO
 
@@ -65,6 +66,7 @@ const ProfilePage = ({ email, tokenExist }: { email: string, tokenExist: boolean
   if (typeUpdate === 'password') return <FormUpdatePassword auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
   if (typeUpdate === 'bankaccount') return <FormUpdateBankAccount auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
   if (typeUpdate === 'socialsecurity') return <FormUpdateSocialSecurity auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
+  if (typeUpdate === 'builderInfo') return <FormUpdateBuilderInfo auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
 
   return (
     <AccountInfo

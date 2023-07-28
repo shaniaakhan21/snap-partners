@@ -16,6 +16,7 @@ import { handleFetchError } from 'lib/utils/handleFetchError'
 import { GTMTrack } from 'lib/utils/gtm'
 import { FormBecomeDriver } from '../../components/page/become-role/FormBecomeDriver'
 import Alert from '@material-ui/lab/Alert'
+import {builderWebsiteFields} from "../../lib/types/user/profile";
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const router = useRouter()
@@ -71,7 +72,8 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           nsurUserId: data.nsurUserId,
           myPoints: auth?.nsurAccount?.myPoints || null
         },
-        bank_information: data.bank_information
+        bank_information: data.bank_information,
+        ...(builderWebsiteFields.reduce((acc, field) => ({...acc, [field]: data[field]}), {}) as any)
       })
     })()
 

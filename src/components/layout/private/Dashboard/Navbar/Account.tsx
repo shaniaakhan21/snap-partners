@@ -28,7 +28,7 @@ export const Account = ({ email, name, phone, photoUrl, signOut, rank }) => {
   const isIntegrous = (_auth.roles.integrousAssociate || _auth.roles.integrousCustomer)
 
   return (
-    <section className='w-full h-full flex justify-end items-center gap-x-5'>
+    <section className='w-1/3 h-full flex justify-end items-center gap-x-5'>
       <div className='relative'>
         {/* <NotificationIcon classes='w-6 h-6' />
 
