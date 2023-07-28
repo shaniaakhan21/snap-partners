@@ -5,6 +5,7 @@ import { useAuthStore } from 'lib/stores'
 import { GTMTrack } from 'lib/utils/gtm'
 import { useState, useRef, useEffect } from 'react'
 import AdminToolMainMenu from './adminTools/AdminToolMainMenu'
+import { userLevelReverseMapping } from './adminTools/searchForms/formOptionData'
 
 export const Account = ({ email, name, phone, photoUrl, signOut, rank, roles, level }) => {
   const userMenuRef = useRef(null)
@@ -14,6 +15,8 @@ export const Account = ({ email, name, phone, photoUrl, signOut, rank, roles, le
   const clickOutsideUserMenu = useClickOutsideElement(userMenuRef)
 
   const handleShowOptions = () => setShowMenu(prevState => !prevState)
+  const mapping = userLevelReverseMapping
+  console.log('mapping is', mapping[level])
 
   const handleClickLogout = () => {
     GTMTrack.logout('navbar')
@@ -31,7 +34,7 @@ export const Account = ({ email, name, phone, photoUrl, signOut, rank, roles, le
 
   return (
     <section className='w-full h-full flex justify-end items-center gap-x-5'>
-      {level?.toLowerCase() === 'admin'
+      {mapping[level] >= 500
         ? <div className='admin-tools-container'>
           <div>
             <span className='text-l font-bold text-gray-700 whitespace-nowrap'>Admin Tools</span>

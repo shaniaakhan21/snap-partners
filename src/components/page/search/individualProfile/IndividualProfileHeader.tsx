@@ -85,19 +85,19 @@ function IndividualProfileHeader ({ body, setBody, profileData, userLevel }) {
         <li className={body === 'iboProfile' ? `${cname}-header-listItems listItems-firstItem listItems-active` : `${cname}-header-listItems listItems-firstItem`}
           onClick={() => setBody('iboProfile')}>IBO profile</li>
         <li className={body === 'comissions' ? `${cname}-header-listItems listItems-active listItems-midItem` : `${cname}-header-listItems listItems-midItem`}
-        onClick={() => { setBody('comissions') }}>comissions</li>
+          onClick={() => { setBody('comissions') }}>comissions</li>
         <li className={`${cname}-header-listItems listItems-midItem`}>transactions</li>
         <li className={body === 'order' ? `${cname}-header-listItems listItems-active listItems-midItem` : `${cname}-header-listItems listItems-midItem`}
           onClick={() => setBody('order')}>Order</li>
         <li className={`${cname}-header-listItems listItems-midItem`}>subscription</li>
         <li className={`${cname}-header-listItems listItems-midItem`}>tickets</li>
         <li className={body === 'upline' ? `${cname}-header-listItems listItems-active listItems-midItem` : `${cname}-header-listItems listItems-midItem`}
-        onClick={() => setBody('upline')}>upline</li>
+          onClick={() => setBody('upline')}>upline</li>
         {/* <li className={`${cname}-header-listItems`}
         onClick={() => { router.push(`/genealogy/${profileData[0]?.id}`) }}>downline</li> */}
         <li className={body === 'downline' ? `${cname}-header-listItems listItems-active listItems-midItem` : `${cname}-header-listItems listItems-midItem`}
-        onClick={() => { setBody('downline') }}>downline</li>
-        { mapping[userLevel] >= 600 &&
+          onClick={() => { setBody('downline') }}>downline</li>
+        { (mapping[userLevel] >= 600 && mapping[userLevel] >= mapping[profileData[0]?.level]) &&
         <li className={`${cname}-header-listItems listItems-lastItem`}
           onClick={() => { LoginAsRepHandle() }}>Login as rep</li>
         }

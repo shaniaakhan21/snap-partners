@@ -4,7 +4,8 @@ import React from 'react'
 interface IButtonComponent{
     title:string,
     onClickFunction?:any,
-    param?:any
+    param?:any,
+    type?: 'button' | 'reset' | 'submit'
 }
 
 interface IInputComponent
@@ -23,7 +24,7 @@ interface ISelectComponent {
     name: string
     onChangeFunction?:any,
     param?:any,
-    value?:any
+    value?: any
 }
 
 export const InputComponent = (props:IInputComponent) => {
@@ -65,7 +66,7 @@ export const SelectComponent = (props:ISelectComponent) => {
 }
 
 export const ButtonComponent = (props:IButtonComponent) => {
-  const { title, onClickFunction, param } = props
+  const { title, onClickFunction, param, type } = props
   return (
     <div>
       <button className='search-form-button button-label' onClick={() => { onClickFunction(param) }}>{title}</button>

@@ -110,9 +110,9 @@ function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId, 
         <InputComponent label='lastname' placeholder='Lastname' value={editProfileData.lastname} onChangeFunction={handleEditProfileUpdate} param={'lastname'} />
         <hr />
         <InputComponent label='street' placeholder='Street' value={editProfileData.street} onChangeFunction={handleEditProfileUpdate} param={'street'} />
+        <InputComponent label='city' placeholder='City' value={editProfileData.city} onChangeFunction={handleEditProfileUpdate} param={'city'} />
         <InputComponent label='state' placeholder='State' value={editProfileData.state} onChangeFunction={handleEditProfileUpdate} param={'state'} />
         <InputComponent label='zip' placeholder='Zip' value={editProfileData.zip} onChangeFunction={handleEditProfileUpdate} param={'zip'} />
-        <InputComponent label='city' placeholder='City' value={editProfileData.city} onChangeFunction={handleEditProfileUpdate} param={'city'} />
 
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
           <ButtonComponent title='submit' onClickFunction={ handleEditProfile } />

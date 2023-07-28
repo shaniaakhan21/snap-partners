@@ -55,7 +55,7 @@ function InfoBanner ({ profileData, userLevel }) {
         <p className={`${cname}-midSection-mainInfo-text`}><img src='/images/icons/edit.svg' style={{ width: '18px', height: '24px' }}/>{`${profileData[0]?.phoneNumber}`}</p>
       </div>
       <div className={`${cname}-midSection-mainInfo`}>
-        <p className={`${cname}-footer-heading`}><span className={`${cname}-midSection-mainInfo-title`}>Actual Rank -</span>{`${profileData[0]?.ranks?.type}`}</p>
+        <p className={`${cname}-footer-heading`}><span className={`${cname}-midSection-mainInfo-title`}>Actual Rank -</span>{`${profileData[0]?.ranks?.type.charAt(0).toUpperCase()}${profileData[0]?.ranks?.type.slice(1)}`}</p>
         <p className={`${cname}-midSection-mainInfo-text`}><span className={`${cname}-midSection-mainInfo-title`}>User Level -</span>{profileData[0]?.level}</p>
         { mapping[userLevel] >= 700 &&
         <p className={`${cname}-midSection-mainInfo-text`}><span className={`${cname}-midSection-mainInfo-title`}>GrandfatherRank -</span>{profileData[0]?.gRanks[0]?.gRank}</p>

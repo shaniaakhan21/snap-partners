@@ -32,6 +32,14 @@ export const userLevelOptions = [
     value: 'ibo'
   },
   {
+    name: 'IBO ERC',
+    value: 'iboErc'
+  },
+  {
+    name: 'IBO Wellness',
+    value: 'iboWellness'
+  },
+  {
     name: 'Driver',
     value: 'driver'
   },
@@ -49,6 +57,8 @@ export const userLevelMapping = {
   100: 'customer',
   200: 'merchant',
   300: 'driver',
+  310: 'iboWellness',
+  320: 'iboErc',
   400: 'ibo',
   500: 'snapStaff',
   600: 'helpTeam',
@@ -64,6 +74,8 @@ export const userLevelReverseMapping = {
   customer: 100,
   merchant: 200,
   driver: 300,
+  iboWellness: 310,
+  iboErc: 320,
   ibo: 400,
   snapStaff: 500,
   helpTeam: 600,
