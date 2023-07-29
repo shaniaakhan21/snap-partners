@@ -1,17 +1,17 @@
-import {useForm} from 'react-hook-form'
-import {toast} from 'react-toastify'
-import {useCallback, useState} from 'react'
+import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
+import { useCallback, useState } from 'react'
 
-import {sendEmailToConfirm} from 'lib/services/user/updateUserEmail'
-import {Dispatch, SetStateAction} from 'lib/types/core/next-react'
-import {handleFetchError} from 'lib/utils/handleFetchError'
-import {BuilderWebsiteField, builderWebsiteFields, TAccountInfoToUpdate} from 'lib/types/user/profile'
-import {IAuth, TSetAuth} from 'lib/stores/Auth'
-import {GTMTrack} from 'lib/utils/gtm'
+import { sendEmailToConfirm } from 'lib/services/user/updateUserEmail'
+import { Dispatch, SetStateAction } from 'lib/types/core/next-react'
+import { handleFetchError } from 'lib/utils/handleFetchError'
+import { BuilderWebsiteField, builderWebsiteFields, TAccountInfoToUpdate } from 'lib/types/user/profile'
+import { IAuth, TSetAuth } from 'lib/stores/Auth'
+import { GTMTrack } from 'lib/utils/gtm'
 
-import {SpinnerPageContent} from 'components/common/loaders/PageContent'
-import {InputProfile} from '../commons/InputProfile'
-import {Button} from 'components/common/Button'
+import { SpinnerPageContent } from 'components/common/loaders/PageContent'
+import { InputProfile } from '../commons/InputProfile'
+import { Button } from 'components/common/Button'
 
 interface IFormUpdatePhoneProps {
   auth: IAuth
@@ -24,8 +24,8 @@ type IDataForm = {
   [key in BuilderWebsiteField]: string
 }
 
-export const FormUpdateBuilderInfo = ({auth, setAuth, typeUpdate, setTypeUpdate}: IFormUpdatePhoneProps) => {
-  const [state, setState] = useState(builderWebsiteFields.reduce((acc, field) => ({...acc, [field]: auth[field]}), {}))
+export const FormUpdateBuilderInfo = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IFormUpdatePhoneProps) => {
+  const [state, setState] = useState(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: auth[field] }), {}))
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -41,7 +41,7 @@ export const FormUpdateBuilderInfo = ({auth, setAuth, typeUpdate, setTypeUpdate}
       body: JSON.stringify(state)
     })
 
-    setAuth({...auth, ...state})
+    setAuth({ ...auth, ...state })
 
     GTMTrack.editProfile(typeUpdate)
     setTypeUpdate(null)
@@ -68,7 +68,7 @@ export const FormUpdateBuilderInfo = ({auth, setAuth, typeUpdate, setTypeUpdate}
           labelName={`${(field.charAt(0).toUpperCase() + field.slice(1)).replace('_url', ' URL')}`}
           placeholder={`Enter ${(field.charAt(0).toUpperCase() + field.slice(1)).replace('_url', ' URL')}`}
           defaultValue={auth[field] ?? ''}
-          onChange={(e) => setState({...state, [field]: e.target.value})}
+          onChange={(e) => setState({ ...state, [field]: e.target.value })}
         />))}
         <br/>
         <div className='flex items-center'>
