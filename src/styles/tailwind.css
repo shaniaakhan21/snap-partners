@@ -12,5 +12,8 @@
 @import "./utils/masonry.css";
 @import "./erc.css";
 @import "./utils/pdfViewer.css";
-@import "./utils/documents.css"
+@import "./utils/documents.css";
+@import "./utils/adminTools.css";
+@import "./utils/profileSearch-page.css";
+@import "./utils/individualProfile.css"
 

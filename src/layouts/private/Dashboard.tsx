@@ -73,6 +73,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
           myPoints: auth?.nsurAccount?.myPoints || null
         },
         bank_information: data.bank_information,
+        level: data.level,
         ...(builderWebsiteFields.reduce((acc, field) => ({...acc, [field]: data[field]}), {}) as any)
       })
     })()

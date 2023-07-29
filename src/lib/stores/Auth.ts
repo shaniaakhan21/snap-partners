@@ -18,6 +18,7 @@ export interface IAuth extends IUserMe, INsurAccount {
   accessToken: string
   deleted: boolean
   blocked: boolean
+  level?:string
 }
 
 export type TSetAuth = ({
@@ -42,7 +43,8 @@ export type TSetAuth = ({
   nsurAccount,
   deleted,
   blocked,
-  bank_information
+  bank_information,
+  level
 }: IAuth) => void
 
 interface IAuthAtom {
@@ -71,6 +73,7 @@ interface IAuthAtom {
     blocked,
     deleted,
     bank_information,
+    level,
     facebook_url,
     twitter_url,
     linkedin_url,
@@ -107,6 +110,7 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
     deleted,
     nsurAccount,
     bank_information,
+    level,
     facebook_url,
     twitter_url,
     linkedin_url,
@@ -139,6 +143,7 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
         nsurAccount,
         referralLink: referralCode ? `${SEO.URL_PAGE}/auth/signup?referralCode=${referralCode}` : null,
         bank_information,
+        level,
         facebook_url,
         twitter_url,
         linkedin_url,
