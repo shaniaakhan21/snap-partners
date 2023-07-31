@@ -12,7 +12,24 @@ const PersonalClientsTable: React.FC<ITableTransactionsProps> = ({
       name: "phase",
       header: "Phase",
       defaultFlex: 1,
-      minWidth: 60,
+      minWidth: 30,
+      maxWidth: 100,
+      render: (e) => {
+        const phase = e.data.phase;
+        return (
+          <div
+            className={`${
+              phase === 1
+                ? "bg-primary-500 text-white text-center p-2 text-sm"
+                : phase === 2
+                ? "bg-primary-100 text-white text-center p-2 text-sm"
+                : "bg-primary-200 text-white text-center p-2 text-sm"
+            }`}
+          >
+            {phase}
+          </div>
+        );
+      },
     },
     { name: "id", header: "ID", defaultFlex: 1, minWidth: 60 },
     { name: "business_name", header: "Company", defaultFlex: 1, minWidth: 110 },
@@ -65,6 +82,7 @@ const PersonalClientsTable: React.FC<ITableTransactionsProps> = ({
     { name: "description", operator: "startsWith", type: "string", value: "" },
     { name: "amount", operator: "startsWith", type: "string", value: "" },
   ];
+
   return (
     <ReactDataGrid
       idProperty="id"
@@ -72,6 +90,7 @@ const PersonalClientsTable: React.FC<ITableTransactionsProps> = ({
       dataSource={newtransactions}
       sortable={true}
       defaultFilterValue={filterValue}
+      rowHeight={null}
       style={gridStyle}
       defaultLimit={10}
       pagination

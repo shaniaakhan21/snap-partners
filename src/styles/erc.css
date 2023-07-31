@@ -42,6 +42,8 @@
 
 #table1erc .InovuaReactDataGrid__cell {
   border: none;
+  padding: 0;
+  padding-right: 0.5rem;
 }
 
 /* #table1erc .inovua-react-scroll-container__wrapper {
@@ -51,6 +53,10 @@
 #table1erc .InovuaReactDataGrid__row-cell-wrap {
   border: solid 1px black;
   border-top: none;
+}
+
+#table1erc .InovuaReactDataGrid__box--ellipsis {
+  padding: 0.5rem 0;
 }
 
 /* #table1erc
