@@ -116,28 +116,28 @@ const ErcreferralsPage: Page = () => {
             transactions={transactionsClient}
             toggleTable={toggleTables}
           />
-          {showTables && (
-            <div>
-              <TableHeader
-                tableName="Team Level Report"
-                setMonthSelected={setMonthSelected}
-                setYearSelected={setYearSelected}
-              />
-              <ShowDetailedTables setPersonListOpen={setPersonListOpen} />
-              {personListOpen && (
-                <div>
-                  <TableHeader
-                    tableName="Bill Jones List"
-                    setMonthSelected={setMonthSelected}
-                    setYearSelected={setYearSelected}
-                  />
-                  <PersonListTable />
-                </div>
-              )}
-            </div>
-          )}
         </div>
       </div>
+      {showTables && (
+        <div id="table1erc">
+          <TableHeader
+            tableName="Team Level Report"
+            setMonthSelected={setMonthSelected}
+            setYearSelected={setYearSelected}
+          />
+          <ShowDetailedTables setPersonListOpen={setPersonListOpen} />
+        </div>
+      )}
+      {personListOpen && (
+        <div id="table1erc">
+          <TableHeader
+            tableName="Bill Jones List"
+            setMonthSelected={setMonthSelected}
+            setYearSelected={setYearSelected}
+          />
+          <PersonListTable />
+        </div>
+      )}
     </>
   );
 };

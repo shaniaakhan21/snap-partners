@@ -78,7 +78,6 @@ const TeamClientsTable: React.FC<ITable2TransactionsProps> = ({
               className="text-textAcent-500"
               onClick={() => {
                 toggleTable(true);
-                console.log("here");
               }}
             >
               Details

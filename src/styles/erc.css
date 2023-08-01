@@ -40,6 +40,10 @@
   border: none;
 }
 
+#table1erc .InovuaReactDataGrid__row-active-borders {
+  display: none;
+}
+
 #table1erc .InovuaReactDataGrid__cell {
   border: none;
   padding: 0;

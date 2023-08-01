@@ -10,7 +10,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, toggleModal }) => {
   return (
     <div>
       {isOpen && (
-        <div className="absolute top-0 left-0 flex justify-center font-sans z-50 items-center h-screen w-screen bg-slate-800 bg-opacity-20 ">
+        <div className="absolute top-0 left-0 justify-center pl-44 flex  font-sans z-50 items-center h-screen w-screen bg-slate-800 bg-opacity-20 ">
           <div className="bg-white w-[866px] h-[762px] rounded-lg max-h-[90vh] ">
             {/* header  */}
             <div>
