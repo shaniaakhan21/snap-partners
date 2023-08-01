@@ -3,6 +3,8 @@ import { Modal, Box } from '@mui/material'
 import axios from 'axios'
 import { InputComponent, ButtonComponent } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/Components'
 import React, { useState, useEffect } from 'react'
+import { useAuthStore } from 'lib/stores'
+import { getLocalStorage } from 'lib/utils/localStorage'
 
 interface IProfileData {
     email?:string,
@@ -19,6 +21,7 @@ interface IProfileData {
 
 function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId, profileData }) {
   const InitialValues:IProfileData = {}
+  const { auth } = useAuthStore()
   useEffect(() => {
     setEditProfileData({
       email: profileData?.email,
@@ -79,8 +82,12 @@ function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId, 
     }
 
     if (Object.keys(body).length !== 0) {
-      console.log('in submit profile')
-      await axios.put(`/api/admin/editUserProfile/${userId}`, body)
+      const token = getLocalStorage('accessToken')
+      await axios.put(`/api/admin/editUserProfile/${userId}`, body, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
         .then((result) => {
           if (result.data.result[0] === 1) {
             alert('user Profile Updated')

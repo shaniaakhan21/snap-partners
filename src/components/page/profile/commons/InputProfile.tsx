@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { useState } from 'react'
 
 import { EyeHiddenIcon, EyeVisibleIcon } from 'components/common/icons'

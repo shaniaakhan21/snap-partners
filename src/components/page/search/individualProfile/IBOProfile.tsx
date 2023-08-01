@@ -138,7 +138,7 @@ function IBOProfile ({ profileData, userLevel }) {
                           <TableCell><strong>Date & Time</strong></TableCell>
                           <TableCell><strong>Description</strong></TableCell>
                           <TableCell><strong>Type</strong></TableCell>
-                          <TableCell><strong>UserId</strong></TableCell>
+                          <TableCell><strong>User</strong></TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
@@ -148,7 +148,7 @@ function IBOProfile ({ profileData, userLevel }) {
                               <TableCell>{activity?.createdAt}</TableCell>
                               <TableCell>{activity?.description}</TableCell>
                               <TableCell>{activity?.type}</TableCell>
-                              <TableCell>{activity?.userId}</TableCell>
+                              <TableCell>{activity?.byUser}</TableCell>
                             </TableRow>
                             // <p className={`${cname}-footer-text`}>{activity?.description}</p>
                           ))

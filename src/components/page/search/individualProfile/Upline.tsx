@@ -9,10 +9,12 @@ import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { ButtonComponent } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/Components'
 import { PhoneIcon } from 'components/common/icons'
 import { useRouter } from 'next/router'
+import { userLevelReverseMapping } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/formOptionData'
 
-function Upline ({ id }) {
+function Upline ({ id, currentUserLevel }) {
   const cname = 'user-upline'
   const router = useRouter()
+  const mapping = userLevelReverseMapping
   const [UplineData, setUplineData] = useState([])
   const [userId, setUserId] = useState<number>(id)
   const [isLoading, setIsLoading] = useState(false)
@@ -28,6 +30,7 @@ function Upline ({ id }) {
         console.log('result from getUplineData', result.data.resultData)
         const resultArray = result.data.resultData
         resultArray.reverse()
+        console.log('result array is ', resultArray)
         setUplineData(resultArray)
         setIsLoading(false)
       })

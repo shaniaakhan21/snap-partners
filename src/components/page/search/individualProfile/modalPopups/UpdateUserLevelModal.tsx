@@ -3,6 +3,7 @@ import { Box, Modal } from '@mui/material'
 import axios from 'axios'
 import { ButtonComponent, SelectComponent } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/Components'
 import { userLevelOptions } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/formOptionData'
+import { getLocalStorage } from 'lib/utils/localStorage'
 import React, { useState } from 'react'
 
 function UpdateUserLevelModal ({ userLevelModal, onCloseUserLevelModal, userId }) {
@@ -19,11 +20,16 @@ function UpdateUserLevelModal ({ userLevelModal, onCloseUserLevelModal, userId }
   }
   const [userLevel, setUserLevel] = useState('')
   const handleUpdateUserLevel = async () => {
+    const token = getLocalStorage('accessToken')
     if (userLevel !== '') {
       const body = {
         userLevel
       }
-      await axios.put(`/api/admin/updateUserLevel/${userId}`, body)
+      await axios.put(`/api/admin/updateUserLevel/${userId}`, body, {
+        headers: {
+            Authorization: `Bearer ${token}`
+          }
+      })
         .then((result) => {
           if (result.data.result[0]) {
             alert('User Level Updated Successfully')

@@ -77,7 +77,7 @@ function IndividualProfileHeader ({ body, setBody, profileData, userLevel }) {
         myPoints: null
       },
       level: data.level,
-      ...(builderWebsiteFields.reduce((acc, field) => ({...acc, [field]: data[field]}), {}) as any)
+      ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
     })
     window.location.href = '/overview'
   }

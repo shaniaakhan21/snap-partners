@@ -46,7 +46,7 @@ function IndividualProfile ({ profileData }) {
         }
         {
           body === 'upline'
-            ? <Upline id={profileData[0]?.id}/>
+            ? <Upline id={profileData[0]?.id} currentUserLevel={auth?.level}/>
             : <></>
         }
 
