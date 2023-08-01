@@ -5,19 +5,24 @@ import type { Page } from 'lib/types'
 
 import { AuthPagesLayout } from 'layouts/public/Auth'
 import { LoginForm } from 'components/page/login/LoginForm'
+import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
 
-const LoginPage: Page = () => <LoginForm/>
+const LoginPage: Page = LoginForm
 
-LoginPage.getLayout = (page) => (
-  <AuthPagesLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Login</title>
-    </Head>
+LoginPage.getLayout = (page) => {
+  const { t } = useTranslation('auth')
 
-    {page}
-  </AuthPagesLayout>
-)
+  return (
+    <AuthPagesLayout>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - {t('login-page.title')}</title>
+      </Head>
+
+      {page}
+    </AuthPagesLayout>
+  )
+}
 
 export default LoginPage

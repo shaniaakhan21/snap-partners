@@ -10,6 +10,7 @@ import { ButtonCTA } from 'components/page/upgrade-to-manager/ButtonCTA'
 import { TextContactCTA } from 'components/common/TextContactCTA'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
+import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
 
@@ -32,14 +33,18 @@ const UpgradeToManagerPage: Page = () => {
   )
 }
 
-UpgradeToManagerPage.getLayout = (page: ReactNode) => (
-  <DashboardLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Upgrade To Manager</title>
-    </Head>
+UpgradeToManagerPage.getLayout = (page: ReactNode) => {
+  const { t } = useTranslation()
 
-    {page}
-  </DashboardLayout>
-)
+  return (
+    <DashboardLayout>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - Upgrade To Manager</title>
+      </Head>
+
+      {page}
+    </DashboardLayout>
+  )
+}
 
 export default UpgradeToManagerPage

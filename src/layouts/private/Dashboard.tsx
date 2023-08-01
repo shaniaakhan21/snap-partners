@@ -17,8 +17,10 @@ import { GTMTrack } from 'lib/utils/gtm'
 import { FormBecomeDriver } from '../../components/page/become-role/FormBecomeDriver'
 import Alert from '@material-ui/lab/Alert'
 import {builderWebsiteFields} from "../../lib/types/user/profile";
+import { useTranslation } from "next-i18next";
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
+  const { t } = useTranslation()
   const router = useRouter()
   const { auth, setAuth } = useAuthStore()
   const { newWindow, closeNewWindow } = useNewWindowOpenedStore()
@@ -182,7 +184,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
 
         <main className='dashboardLayout__content scroll-primary'>
           <div className='mx-auto min-h-[89vh] h-fit px-5 pt-5 pb-20 max-w-7xl'>
-            <Alert severity="warning">Please upload your documents to activate your driver account</Alert><br/>
+            <Alert severity="warning">{t('common:alert.document_upload_needed')}</Alert><br/>
             <FormBecomeDriver userAuth={auth} userSetAuth={setAuth}/>
           </div>
 
@@ -201,7 +203,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         <div className='mx-auto min-h-[89vh] h-fit px-5 pt-5 pb-20 max-w-7xl'>
           {auth.roles.driver && auth.driver_status === null && (
             <>
-              <Alert severity="warning">Your driver documents are being reviewed by our team, your account will be activated soon.</Alert><br/>
+              <Alert severity="warning">{t('common:alert.wait_account_activation')}</Alert><br/>
             </>
           )}
           {children}

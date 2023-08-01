@@ -16,6 +16,7 @@ import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { commissions } from 'lib/services/vidgo/commissions'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { EmptyData } from 'components/common/empty/EmptyData'
+import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
 
@@ -35,6 +36,7 @@ const monthNames = [
 ]
 
 const VidgoComissionsPage: Page = () => {
+  const { t } = useTranslation('vidgo-reporting')
   const { auth } = useAuthStore()
   const [vidgoReport, setVidgoReport] = useState(null)
   const [dateSelected, setDateSelected] = useState('0')
@@ -168,14 +170,14 @@ const VidgoComissionsPage: Page = () => {
   if (vidgoReport?.length === 0) {
     return (
       <div className='w-full h-screen-80 flex flex-col items-center justify-center'>
-        <EmptyData label='Vidgo Reporting Empty' classes='w-52 h-52' />
+        <EmptyData label={t('empty-title')} classes='w-52 h-52' />
         <a
           href={`https://www.vidgo.com/snap/?subpid=${auth.referralCode}`}
           target='_blank'
           rel='noopener noreferrer'
           className='mt-4 font-semibold text-primary-500 px-6 py-1 border border-primary-500 rounded-md hover:bg-primary-500 hover:text-white'
         >
-        About Vidgo
+          {t('about_vidgo')}
         </a>
       </div>
     )
@@ -185,14 +187,14 @@ const VidgoComissionsPage: Page = () => {
     <div>
       <section className='w-full h-full flex flex-col lg:flex-row justify-between items-center lg:items-start gap-x-8 gap-y-8'>
         <div className='overflow-x-scroll scroll-x-primary w-full lg:w-2/3 h-96'>
-          <h5 className='text-lg font-semibold'>Your Customers</h5>
+          <h5 className='text-lg font-semibold'>{t('your_customers')}</h5>
 
           <CustomerTable myCustomers={customers} />
         </div>
 
         <div className='w-full lg:w-1/3'>
           <div className='flex justify-between items-start'>
-            <h5 className='text-lg font-semibold'>Team Customers</h5>
+            <h5 className='text-lg font-semibold'>{t('team_customers')}</h5>
 
             {/* <div className='flex justify-end items-center gap-x-4 text-right'>
                 <span className='text-xs'>
@@ -207,7 +209,7 @@ const VidgoComissionsPage: Page = () => {
 
           <div className='w-full border-primary-500 border-2 rounded-md px-4 py-4 lg:py-[9.9rem] mt-3 text-center'>
             <span className='font-bold text-primary-500'>
-                Coming Soon
+                {t('coming_soon')}
             </span>
           </div>
           {/* <TeamCustomerTable teamCustomers={teamCustomers} /> */}
@@ -217,7 +219,7 @@ const VidgoComissionsPage: Page = () => {
       <section className='w-full h-full mt-10 flex flex-col-reverse lg:flex-row justify-between items-center lg:items-start gap-x-8 gap-y-8'>
         <div className='w-full lg:w-2/3 h-full'>
           <h5 className='text-2xl font-bold text-primary-500'>
-              Personal Retention Bonus Tracker
+            {t('personal_retention_bonus_tracker')}
           </h5>
 
           <div className='flex flex-col justify-start items-start'>
@@ -239,7 +241,7 @@ const VidgoComissionsPage: Page = () => {
 
         <div className='w-full lg:w-1/3'>
           <span className='text-xl font-bold'>
-            Benchmarked
+            {t('benchmarked')}
           </span>
           <br />
 
@@ -249,7 +251,7 @@ const VidgoComissionsPage: Page = () => {
             <br />
 
             <span className='text-xl font-bold'>
-              Weighted Payout Scale
+              {t('weighted_payout_scale')}
             </span>
             <br />
 
@@ -261,13 +263,17 @@ const VidgoComissionsPage: Page = () => {
   )
 }
 
-VidgoComissionsPage.getLayout = (page: ReactNode) => (
-  <DashboardLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Vidgo Reporting</title>
-    </Head>
-    {page}
-  </DashboardLayout>
-)
+VidgoComissionsPage.getLayout = (page: ReactNode) => {
+  const { t } = useTranslation()
+
+  return (
+    <DashboardLayout>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - {t('vidgo-reporting:title')}</title>
+      </Head>
+      {page}
+    </DashboardLayout>
+  )
+}
 
 export default VidgoComissionsPage

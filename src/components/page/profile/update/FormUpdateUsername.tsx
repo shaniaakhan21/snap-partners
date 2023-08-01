@@ -13,6 +13,7 @@ import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { InputProfile } from '../commons/InputProfile'
 import { Button } from 'components/common/Button'
 import axios from 'axios'
+import {useTranslation} from "next-i18next";
 
 interface IFormUpdatePhoneProps {
   auth: IAuth
@@ -25,7 +26,8 @@ interface IDataForm {
   newUsername: string
 }
 
-export const FormUpdateUsename = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IFormUpdatePhoneProps) => {
+export const FormUpdateUsername = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IFormUpdatePhoneProps) => {
+  const { t } = useTranslation('profile')
   const { handleSubmit, register, reset, formState: { errors }, setError } = useForm<IDataForm>()
 
   const [isLoading, setIsLoading] = useState(false)
@@ -50,7 +52,7 @@ export const FormUpdateUsename = ({ auth, setAuth, typeUpdate, setTypeUpdate }: 
       setTypeUpdate(null)
       setIsLoading(false)
     } catch (error) {
-      toast('Username is already in use, plesae try another one', { type: 'error' })
+      toast(t('update_username.error_username_exists'), { type: 'error' })
     }
     setIsLoading(false)
   }
@@ -62,7 +64,7 @@ export const FormUpdateUsename = ({ auth, setAuth, typeUpdate, setTypeUpdate }: 
   return (
     <div className='max-w-3xl mx-auto'>
       <section>
-        <h3 className='text-xl font-bold'>Change Username</h3>
+        <h3 className='text-xl font-bold'>{t('update_username.title')}</h3>
       </section>
 
       <br />
@@ -73,7 +75,7 @@ export const FormUpdateUsename = ({ auth, setAuth, typeUpdate, setTypeUpdate }: 
           inputId='username'
           inputType='username'
           labelFor='username'
-          labelName='Current Username'
+          labelName={t('update_username.current_username')}
           value={auth.username}
         />
 
@@ -81,23 +83,23 @@ export const FormUpdateUsename = ({ auth, setAuth, typeUpdate, setTypeUpdate }: 
           inputId='newUsername'
           inputType='text'
           labelFor='newUsername'
-          labelName='New Username'
-          placeholder='Insert the new Username'
+          labelName={t('update_username.current_username')}
+          placeholder={t('update_username.new_username_placeholder')}
           register={register}
           rules={{ // TODO: REFACTOR - It is the same as the login with email
-            required: { value: true, message: 'Username is required *' },
+            required: { value: true, message: t('update_username.new_username_validation_required') },
             minLength: {
               value: 5,
-              message: 'Username must have at least 5 characters *'
+              message: t('update_username.new_username_validation_minLength')
             }
           }}
           error={errors.newUsername}
         />
         <br />
         <div className='flex items-center'>
-          <Button type='submit' classes='mr-2'>Save</Button>
+          <Button type='submit' classes='mr-2'>{t('update_username.save')}</Button>
           <Button onClick={() => setTypeUpdate(null)}>
-            Cancel
+            {t('update_username.cancel')}
           </Button>
         </div>
       </form>

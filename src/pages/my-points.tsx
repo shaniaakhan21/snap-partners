@@ -11,10 +11,12 @@ import { APP_INFO } from 'config/appInfo'
 // import { FormConnectNsurAccount } from 'components/page/my-points/FormConnectNsurAccount'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { GTMTrack } from 'lib/utils/gtm'
+import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
 
 const MyPointsPage: Page = () => {
+  const { t } = useTranslation('my-points')
   const { auth } = useAuthStore()
   const [loading, setLoading] = useState(false)
   const [myPoints, setMypoints] = useState(null)
@@ -40,18 +42,18 @@ const MyPointsPage: Page = () => {
 
   return (
     <div className='max-w-xl mx-auto w-full text-center'>
-      <p className='font-bold text-4xl'>{myPoints || "You currently don't have any"} points</p>
+      <p className='font-bold text-4xl'>{myPoints ? t('points-count', { count: myPoints }) : t('no-points')}</p>
       <br/>
-      <span className='font-semibold text-lg'>Generate points by orders that will be converted to NSUR Coin.</span>
+      <span className='font-semibold text-lg'>{t('subtitle')}</span>
 
       <br/>
       <br/>
-      <span className='font-semibold text-sm'>Start now by creating an account in NSUR and start accumulating points.</span>
+      <span className='font-semibold text-sm'>{t('subtitle2')}</span>
 
       <br/>
       <br/>
       <a href='https://nsurcoin.com/invite/5/snapdelivered/website' className='uppercase text-white bg-primary-500 px-4 py-1.5 rounded-full font-semibold hover:opacity-80' onClick={GTMTrack.myPoints}>
-        REGISTER NOW!
+        {t('register-now')}
       </a>
       {/* <span className ='font-semibold text-lg'>You can win more points by _________</span> */}
     </div>
@@ -74,14 +76,18 @@ const MyPointsPage: Page = () => {
   // )
 }
 
-MyPointsPage.getLayout = (page: ReactNode) => (
-  <DashboardLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - My Points</title>
-    </Head>
+MyPointsPage.getLayout = (page: ReactNode) => {
+  const { t } = useTranslation('my-points')
 
-    {page}
-  </DashboardLayout>
-)
+  return (
+    <DashboardLayout>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - {t('title')}</title>
+      </Head>
+
+      {page}
+    </DashboardLayout>
+  )
+}
 
 export default MyPointsPage

@@ -3,6 +3,7 @@ import Head from 'next/head'
 
 import { APP_INFO } from 'config/appInfo'
 import { FormResetPassword } from 'components/page/reset-password/FormResetPassword'
+import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
 
@@ -24,14 +25,18 @@ export const getServerSideProps: GetServerSideProps = async ({ query }: GetServe
   }
 }
 
-ResetPasswordPage.getLayout = (page) => (
-  <>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Reset Password</title>
-    </Head>
+ResetPasswordPage.getLayout = (page) => {
+  const { t } = useTranslation('auth')
 
-    {page}
-  </>
-)
+  return (
+    <>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - {t('resetpw-page.title')}</title>
+      </Head>
+
+      {page}
+    </>
+  )
+}
 
 export default ResetPasswordPage

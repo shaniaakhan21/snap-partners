@@ -1,6 +1,7 @@
 import { Ranks } from 'lib/constants/variables'
 import { Rank } from 'lib/types/overview'
 import { CheckMarkGreenIcon } from '../icons'
+import { useTranslation } from "next-i18next";
 
 interface RankStepsProps {
     currentRank: number;
@@ -8,6 +9,7 @@ interface RankStepsProps {
 }
 
 export const RankSteps = (props: RankStepsProps) => {
+  const { t } = useTranslation()
   const { currentRank, onRankPress } = props
 
   const renderRank = (rank: Rank, idx: number) => {
@@ -28,7 +30,7 @@ export const RankSteps = (props: RankStepsProps) => {
   }
   return (
     <div className='flex flex-row justify-between items-center'>
-      {Ranks.map(renderRank)}
+      {['free', 'manager', 'supervisor', 'director', 'executive'].map(rank => t(`overview:rank.${rank}.title`)).map(renderRank)}
     </div>
   )
 }

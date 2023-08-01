@@ -12,7 +12,7 @@ import { InputForm } from './utils/Input'
 import { RegisterPassword } from './utils/RegisterPassword'
 import { useRouter } from 'next/router'
 import { getLocalStorage, removeLocalStorage } from 'lib/utils/localStorage'
-import { builderWebsiteFields } from '../../../../lib/types/user/profile'
+import { useTranslation } from "next-i18next";
 
 export interface IDataForm {
   username: string
@@ -25,6 +25,7 @@ interface IProps {
 }
 
 export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
+  const { t } = useTranslation()
   const { setAuth } = useAuthStore()
   const [isLoading, setLoading] = useState(false)
   const { handleSubmit, register, reset, formState: { errors } } = useForm<IDataForm>()
@@ -90,9 +91,7 @@ export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
         nsurUserId: data.nsurUserId,
         myPoints: null
       },
-      bank_information: data.bank_information,
-      level: data.level,
-      ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
+      bank_information: data.bank_information
     })
     reset()
   }
@@ -106,8 +105,7 @@ export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
   }
 
   const router = useRouter()
-  const referralCode = router.query.referralCode || 'IntegrousWellness'
-  const signupURL = router.pathname === '/auth/login-integrous' ? `/auth/signup-integrous?referralCode=${referralCode}` : '/auth/signup'
+  const signupURL = router.pathname === '/auth/login-integrous' ? '/auth/signup-integrous' : '/auth/signup'
 
   return (
     <div className='flex flex-col justify-start items-start gap-x-2 my-2'>
@@ -141,15 +139,16 @@ export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
 
         <section className='mt-4 text-center sm:text-left'>
           <Button type='submit' classes='w-full mr-1 text-sm bg-primary-500'>
-            Login
+            {t('auth:login')}
           </Button>
 
           <br /><br />
 
           <p>
-            <span className='font-semibold'>referralCode?</span>
+            <span className='font-semibold'>{t('auth:dont-have-an-account')}</span>
+            {' '}
             <Link href={signupURL}>
-              <a className='text-textAcent-500'> Sign Up.</a>
+              <a className='text-textAcent-500'>{t('auth:dont-have-an-account-sign-up')}</a>
             </Link>
           </p>
         </section>

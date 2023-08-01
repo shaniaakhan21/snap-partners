@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useRef } from 'react'
+import {useMemo, useRef} from 'react'
 
 import type { Page, ReactNode } from 'lib/types'
 import { useAuthStore } from 'lib/stores'
@@ -9,53 +9,55 @@ import DashboardLayout from 'layouts/private/Dashboard'
 import { CustomerIcon, DriverIcon, IBOIcon, MerchantsIcon } from 'components/common/icons'
 import { MarketingTool } from 'components/page/marketing/CardTools/Tool'
 import { ListMarketingTools } from 'components/page/marketing/CardTools/ListTools'
+import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
 
 const MarketingPage: Page = () => {
+  const { t } = useTranslation('marketing')
   const { auth } = useAuthStore()
-  const { current: marketingDetails } = useRef([
+  const marketingDetails = useMemo(() => [
     {
       icon: <CustomerIcon />,
-      title: 'Customer',
+      title: t('customer.title'),
       subtitle: 'Subtitle text here',
-      description: 'Select an image and share the link in the different social networks to get new Customers!',
+      description: t('customer.description'),
       to: '/marketing/customer',
       snap: true
     },
     {
       icon: <DriverIcon />,
-      title: 'Driver',
+      title: t('driver.title'),
       subtitle: 'Subtitle text here',
-      description: 'Select an image and share the link in the different social networks to get new Drivers On Board',
+      description: t('driver.description'),
       to: '/marketing/driver',
       snap: true
     },
     {
       icon: <MerchantsIcon />,
-      title: 'Merchant',
+      title: t('merchant.title'),
       subtitle: 'Subtitle text here',
-      description: 'Select an image and share the link in the different social networks to get new Merchant Partners',
+      description: t('merchant.description'),
       to: '/marketing/merchant',
       snap: true
     },
     {
       icon: <IBOIcon />,
-      title: 'IBO',
+      title: t('ibo.title'),
       subtitle: 'Subtitle text here',
-      description: 'Select an image and share the link in the different social networks to get new Business partners',
+      description: t('ibo.description'),
       to: '/marketing/ibo'
     }
-  ])
+  ], [t])
 
   return (
     <>
       <div className='text-center'>
-        <span className='text-3xl font-bold'>Marketing Tools</span> <br /><br />
-        <span className='font-bold text-2xl text-primary-500'>Building your Business with a Few Clicks</span>
+        <span className='text-3xl font-bold'>{t('heading')}</span> <br /><br />
+        <span className='font-bold text-2xl text-primary-500'>{t('subtitle')}</span>
 
         <div className='mt-6'>
-          <span className='font-semibold'>Send Branded Campaings with our system, let’s start by clicking who you want to reach out</span>
+          <span className='font-semibold'>{t('desc')}</span>
         </div>
       </div>
 
@@ -79,14 +81,18 @@ const MarketingPage: Page = () => {
   )
 }
 
-MarketingPage.getLayout = (page: ReactNode) => (
-  <DashboardLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Marketing</title>
-    </Head>
+MarketingPage.getLayout = (page: ReactNode) => {
+  const { t } = useTranslation()
 
-    {page}
-  </DashboardLayout>
-)
+  return (
+    <DashboardLayout>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - {t('title')}</title>
+      </Head>
+
+      {page}
+    </DashboardLayout>
+  )
+}
 
 export default MarketingPage

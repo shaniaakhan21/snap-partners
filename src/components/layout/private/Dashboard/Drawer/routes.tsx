@@ -19,34 +19,40 @@ export const drawerRoutes = [
     icon: <SnapPartnersIcon />,
     to: '/overview#snap-partners',
     label: 'Visit Snap Partners Backoffice',
+    i18n: 'drawer.overview.snap-partners',
     integrous: true
   },
   {
     icon: <SnapWellnessIcon />,
     to: '/overview#snap-wellness',
     label: 'Visit Snap Wellness Backoffice',
+    i18n: 'drawer.overview.snap-wellness',
     integrous: true
   },
   {
     icon: <DashboardIcon />,
     to: '/overview',
     label: 'Dashboard',
+    i18n: 'drawer.overview-main',
     integrous: true
   },
   {
     icon: <ReferralLinksIcon />,
     to: '/referrals',
-    label: 'My Referral Links'
+    label: 'My Referral Links',
+    i18n: 'drawer.referrals'
   },
   {
     icon: <MarketingIcon />,
     to: '/marketing',
-    label: 'Marketing Tools'
+    label: 'Marketing Tools',
+    i18n: 'drawer.marketing'
   },
   {
     icon: <CompensationPlanIcon />,
     to: '/reports',
     label: 'Reports',
+    i18n: 'drawer.reports-main',
     subItems: [
       // {
       //   label: 'Global',
@@ -66,67 +72,82 @@ export const drawerRoutes = [
       // },
       {
         label: 'ERC',
-        to: '/ercreferrals'
+        to: '/ercreferrals',
+        i18n: 'drawer.reports.ercreferrals'
       },
       {
         label: 'Vidgo',
-        to: '/vidgo-reporting'
+        to: '/vidgo-reporting',
+        i18n: 'drawer.reports.vidgo-reporting'
       }
     ]
   },
   {
     icon: <TrainingIcon />,
     to: '/training',
-    label: 'Training'
+    label: 'Training',
+    i18n: 'drawer.training'
   },
   {
     icon: <RelojTempIcon />,
     to: 'https://snapdelivered.ourproshop.com/',
-    label: 'Tools'
+    label: 'Tools',
+    i18n: 'drawer.tools'
   },
   {
     icon: <GenealogyIcon />,
     to: '/genealogy',
     label: 'Genealogy',
+    i18n: 'drawer.genealogy',
     integrous: true
   },
   {
     icon: <GenealogyIcon />,
     to: '/tree',
-    label: 'Tree'
+    label: 'Tree',
+    i18n: 'drawer.tree'
   },
    {
     icon: <GenealogyIcon />,
     to: '/binarytree',
     label: 'Binary Tree',
+    i18n: 'drawer.binarytree',
     integrous: true
    },
   {
     icon: <CompensationPlanIcon />,
     to: '/compensation-plan',
-    label: 'Compensation Plan'
+    label: 'Compensation Plan',
+    i18n: 'drawer.compensation-plan',
   },
   {
     icon: <AccountIcon />,
     to: '/profile',
     label: 'Profile',
+    i18n: 'drawer.profile',
     integrous: true
   },
   {
     icon: <CubeIcon />,
     to: '/my-points',
     label: 'My Points',
+    i18n: 'drawer.my-points',
     snap: true
   },
   {
     icon: <CreditCardIcon />,
     to: '/my-wallet',
+<<<<<<< HEAD
     label: 'My Wallet'
   },
   {
     icon: <CompensationPlanIcon />,
     to: '/Documents',
     label: 'Documents'
+=======
+    label: 'My Wallet',
+    i18n: 'drawer.my-wallet'
+>>>>>>> 62b6bded2ef10da694717975e421a29d22f187df
   }
 ]
 

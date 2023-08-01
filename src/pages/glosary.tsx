@@ -110,14 +110,16 @@ const GlosaryPage: Page = () => {
   )
 }
 
-GlosaryPage.getLayout = (page) => (
-  <>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Glosary</title>
-    </Head>
+GlosaryPage.getLayout = (page) => {
+  return (
+    <>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - Glosary</title>
+      </Head>
 
-    {page}
-  </>
-)
+      {page}
+    </>
+  )
+}
 
 export default GlosaryPage

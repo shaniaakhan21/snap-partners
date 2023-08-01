@@ -3,6 +3,7 @@ import { EyeHiddenIcon, EyeVisibleIcon } from 'components/common/icons'
 import { signInRulesConfig } from './formRules'
 import { ModalForgotPassword } from './ModalForgotPassword'
 import { useModalStore, MODALS_ID } from 'lib/stores'
+import { useTranslation } from "next-i18next";
 
 interface IInputFormProps {
   register: any,
@@ -10,6 +11,7 @@ interface IInputFormProps {
 }
 
 export const RegisterPassword = ({ register, errors }: IInputFormProps) => {
+  const { t } = useTranslation()
   const { openModal, addModal } = useModalStore()
 
   const [showPassword, setShowPassword] = useState(false)
@@ -26,7 +28,7 @@ export const RegisterPassword = ({ register, errors }: IInputFormProps) => {
     <div>
       <div className='w-full flex justify-between items-center text-sm'>
         <div>
-          <label htmlFor='password' className='font-bold text-gray-700 uppercase'>Password</label>
+          <label htmlFor='password' className='font-bold text-gray-700 uppercase'>{t('auth:password')}</label>
           {errors.password && (
             <p className='text-sm text-red-400'>{errors.password.message}</p>
           )}
@@ -36,7 +38,7 @@ export const RegisterPassword = ({ register, errors }: IInputFormProps) => {
           className='text-textAcent-500'
           onClick={() => openModal(MODALS_ID.MODAL_FORGOT_PASSWORD_ID)}
         >
-            Forgot Password?
+          {t('auth:forgot-password')}
         </button>
       </div>
 
@@ -48,7 +50,7 @@ export const RegisterPassword = ({ register, errors }: IInputFormProps) => {
           type={`${showPassword ? 'text' : 'password'}`}
           autoComplete='current-password'
           className='w-full pl-3 pr-14 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
-          placeholder='Enter Password'
+          placeholder={t('auth:password-placeholder')}
         />
         <div
           onClick={() => setShowPassword((prevState) => !prevState)}

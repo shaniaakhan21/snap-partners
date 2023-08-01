@@ -5,21 +5,23 @@ import { GTMTrack } from 'lib/utils/gtm'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { AssociateIcon } from 'components/common/icons/Associate'
+import { Trans, useTranslation } from "next-i18next";
 
 export const SelectRoleForIntegrousSignUp = () => {
+  const { t } = useTranslation()
   const router = useRouter()
   const queryReferralCode = router.query.referralCode as string
   const roles = [
     {
       icon: <IBOIcon classes='w-14 h-14' />,
-      label: 'Register as a Customer',
+      label: t('auth:signup.integrous.register_as_customer'),
       key: ROLES.integrousCustomer,
       link: `/auth/signup-integrous?role=${ROLES.integrousCustomer}&referralCode=${queryReferralCode}`
     },
 
     {
       icon: <AssociateIcon classes='w-14 h-14' />,
-      label: 'Register as an Associate',
+      label: t('auth:signup.integrous.register_as_associate'),
       key: ROLES.integrousAssociate,
       link: `/auth/signup-integrous?role=${ROLES.integrousAssociate}&referralCode=${queryReferralCode}`
     }
@@ -32,8 +34,10 @@ export const SelectRoleForIntegrousSignUp = () => {
 
   return (
     <div className='text-center h-[85vh] flex flex-col justify-center items-center w-full'>
-      <span className='text-3xl text-gray-800 font-bold'>Welcome To Snap Partners</span>
-      <p className='text-gray-600 font-semibold'>Please choose how you want to register, other rolls <br className='hidden sm:block' /> can be added once you log in </p>
+      <span className='text-3xl text-gray-800 font-bold'>{t('auth:signup.integrous.welcome')}</span>
+      <p className='text-gray-600 font-semibold'>
+        <Trans i18nKey='auth:signup.integrous.subtitle' components={{ br: <br className='hidden sm:block' /> }} />
+      </p>
 
       <ul className='flex flex-col justify-center items-center my-4 gap-y-4 w-full'>
         {
@@ -58,13 +62,13 @@ export const SelectRoleForIntegrousSignUp = () => {
       </ul>
 
       <br />
-      <p className='text-gray-700 font-semibold'>OR</p>
+      <p className='text-gray-700 font-semibold'>{t('auth:signup.integrous.or')}</p>
       <br />
 
       <p>
-        <span className='font-bold text-gray-800'>Already have an account?</span>
+        <span className='font-bold text-gray-800'>{t('auth:signup.integrous.already_have_account')}</span>
         <Link href='/auth/login-integrous'>
-          <a className='text-textAcent-500'> Login.</a>
+          <a className='text-textAcent-500'>{t('auth:signup.integrous.login')}</a>
         </Link>
       </p>
     </div>

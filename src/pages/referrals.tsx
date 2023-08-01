@@ -8,10 +8,12 @@ import DashboardLayout from 'layouts/private/Dashboard'
 import { ReferralCards } from 'components/page/referrals/Cards'
 import { CustomerIcon, DriverIcon, MerchantIcon, IBOIcon } from 'components/common/icons'
 import PartnerLogo from '../../public/images/profile/referralPartner.png'
+import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
 
 const ReferralsPage: Page = () => {
+  const { t } = useTranslation('referrals')
   const { auth } = useAuthStore()
 
   const _auth: any = auth
@@ -31,7 +33,7 @@ const ReferralsPage: Page = () => {
 
         {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
           <ReferralCards
-            title='Refer Customers'
+            title={t('refer_customer')}
             ilustration={<CustomerIcon />}
             link={`${auth.referralLink}&role=${ROLES.CUSTOMER}` || 'With Out Link'}
             newUser={false}
@@ -40,7 +42,7 @@ const ReferralsPage: Page = () => {
         )}
         {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
           <ReferralCards
-            title='Refer Driver'
+            title={t('refer_driver')}
             ilustration={<DriverIcon />}
             link={`${auth.referralLink}&role=${ROLES.DRIVER}` || 'With Out Link'}
             newUser={false}
@@ -49,7 +51,7 @@ const ReferralsPage: Page = () => {
         )}
         {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
           <ReferralCards
-            title='Refer Merchant/SK'
+            title={t('refer_merchant')}
             ilustration={<MerchantIcon />}
             link={`${auth.referralLink}&role=${ROLES.MERCHANT}` || 'With Out Link'}
             newUser={false}
@@ -57,7 +59,7 @@ const ReferralsPage: Page = () => {
           />
         )}
         <ReferralCards
-          title='Refer Vidgo'
+          title={t('common:refer_vidgo')}
           ilustration={(
             <div className='h-[100px]'>
               <img src='/images/vidgo/vidgo-ilustration.jpg' alt='Vidgo logo' />
@@ -70,7 +72,7 @@ const ReferralsPage: Page = () => {
 
         {!isIntegrous && (
           <ReferralCards
-            title='Refer ERC Agent'
+            title={t('refer_agent')}
             ilustration={(
               <div className='h-[100px]'>
                 <img src='/images/agentv4.png' alt='Agent logo' />
@@ -83,10 +85,10 @@ const ReferralsPage: Page = () => {
         )}
 
         <ReferralCards
-          title='Refer ERC Client'
+          title={t('refer_erc')}
           ilustration={(
             <div className='h-[100px] w-5/6'>
-              <img src='/images/j-logo.png' alt='Refer ERC' />
+              <img src='/images/j-logo.png' alt={t('refer_erc')} />
             </div>
           )}
           link={`https://www.jornscpa.com/snap/?refid=${auth.id}` || 'With Out Link'}
@@ -95,10 +97,10 @@ const ReferralsPage: Page = () => {
         />
 
         <ReferralCards
-          title='Refer Commercial Energy'
+          title={t('refer_energy')}
           ilustration={(
             <div className='h-[100px]'>
-              <img src='/images/usaenergy/commercialenergy.png' alt='USA Commercial Energy Logo' />
+              <img src='/images/usaenergy/commercialenergy.png' alt={t('refer_energy')} />
             </div>
           )}
           link={`https://usaenergy.com/free-rate-analysis/?subid=${auth.id}` || 'With Out Link'}
@@ -122,14 +124,17 @@ const ReferralsPage: Page = () => {
   )
 }
 
-ReferralsPage.getLayout = (page: ReactNode) => (
-  <DashboardLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Referrals</title>
-    </Head>
+ReferralsPage.getLayout = (page: ReactNode) => {
+  const { t } = useTranslation()
+  return (
+    <DashboardLayout>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - ${t('title')}</title>
+      </Head>
 
-    {page}
-  </DashboardLayout>
-)
+      {page}
+    </DashboardLayout>
+  )
+}
 
 export default ReferralsPage

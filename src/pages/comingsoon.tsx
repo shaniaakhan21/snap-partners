@@ -5,6 +5,7 @@ import { APP_INFO } from 'config/appInfo'
 
 import DashboardLayout from 'layouts/private/Dashboard'
 import { CardComingSoon } from 'components/common/CardComingSoon'
+import {useTranslation} from "next-i18next";
 
 const { SEO } = APP_INFO
 
@@ -16,14 +17,18 @@ const ComingSoon: PageNext = () => {
   )
 }
 
-ComingSoon.getLayout = (page: ReactNode) => (
-  <DashboardLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Coming Soon</title>
-    </Head>
+ComingSoon.getLayout = (page: ReactNode) => {
+  const { t } = useTranslation()
 
-    {page}
-  </DashboardLayout>
-)
+  return (
+    <DashboardLayout>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - Coming Soon</title>
+      </Head>
+
+      {page}
+    </DashboardLayout>
+  )
+}
 
 export default ComingSoon

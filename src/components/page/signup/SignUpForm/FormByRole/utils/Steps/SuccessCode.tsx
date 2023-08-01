@@ -21,12 +21,17 @@ import { ROLES } from './../../../../../../../config/roles'
 
 import Card from '@mui/material/Card'
 import SingleItem from './component/SingleItem'
+<<<<<<< HEAD
 import { builderWebsiteFields } from '../../../../../../../lib/types/user/profile'
 import { getLocalStorage, removeLocalStorage } from 'lib/utils/localStorage'
+=======
+import { useTranslation } from "next-i18next";
+>>>>>>> 62b6bded2ef10da694717975e421a29d22f187df
 
 const { SEO } = APP_INFO
 
 export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack: any, handleStep: IHandleStep, referralLink: IReferralLink }) => {
+  const { t } = useTranslation()
   const router = useRouter()
   const role = useRoleFromUrl()
   const { auth, setAuth } = useAuthStore()
@@ -61,6 +66,7 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
       return
     }
 
+<<<<<<< HEAD
     const redirectToIntegrous = getLocalStorage('redirectToIntegrous')
     const redirectToIntegrousReferralCode = getLocalStorage('redirectToIntegrousReferralCode')
     if (redirectToIntegrous === true) {
@@ -71,6 +77,9 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
     }
 
     toast('Login Successful!', { type: 'success' })
+=======
+    toast(t('auth:signup.success.toast'), { type: 'success' })
+>>>>>>> 62b6bded2ef10da694717975e421a29d22f187df
     setIsLoading(false)
     setAuth({
       socialSecurityNumber: data.socialSecurityNumber,
@@ -125,12 +134,12 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
   return (
     <div className='flex flex-col justify-center items-center max-w-xl mx-auto'>
       <br />
-      <span className='text-4xl font-bold text-primary-500'>Registration Done!</span>
+      <span className='text-4xl font-bold text-primary-500'>{t('auth:signup.success.success_message')}</span>
       <CheckSuccess classes='my-10' />
 
       {userTrack.userInfo.roles.integrousAssociate
         ? (<>
-          <span className='text-xl text-primary-500'>Select your welcome pack!</span>
+          <span className='text-xl text-primary-500'>{t('auth:signup.success.welcome_pack')}</span>
           <Card
             sx={{
               p: 2,
@@ -149,11 +158,11 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
         )
         : (
           <>
-            <span className='text-xl text-primary-500'>Welcome!</span>
+            <span className='text-xl text-primary-500'>{t('auth:signup.success.welcome')}</span>
             <span className='text-4xl text-primary-500 font-bold'>
               {userTrack.userInfo.name ? userTrack.userInfo.name : userTrack.userInfo.merchant.name}
             </span>
-            <Button onClick={handleSkip} classes='w-full mt-10'>CONTINUE</Button>
+            <Button onClick={handleSkip} classes='w-full mt-10'>{t('auth:signup.success.continue')}</Button>
           </>
         )}
 
@@ -162,7 +171,7 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
         ? (<></>)
         : (
           <>
-            <span className='text-xl text-gray-500 text-center'>Please download the app below or visit our website at </span>
+            <span className='text-xl text-gray-500 text-center'>{t('auth:signup.success.download_app')}{' '}</span>
             <Link href={SEO.URL_PAGE}>
               <a target='_blank' className='text-xl text-primary-500 text-center'>{SEO.URL_PAGE.substring(8)}</a>
             </Link>

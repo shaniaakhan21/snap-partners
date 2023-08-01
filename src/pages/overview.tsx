@@ -1,7 +1,6 @@
 import Head from 'next/head'
 
 import type { Page, ReactNode } from 'lib/types'
-import { useReports } from 'lib/hooks/useReports'
 import { APP_INFO } from 'config/appInfo'
 import RankComponent from 'components/common/overview/RankComponent'
 import MonthlySubscription from 'components/common/overview/MonthlySubscription'
@@ -20,11 +19,13 @@ import { getLocalStorage, setLocalStorage } from 'lib/utils/localStorage'
 import axios from 'axios'
 import Referrals from 'components/common/overview/Referrals'
 import { useAuthStore } from 'lib/stores'
+import { useTranslation } from "next-i18next";
 import TotalLeg from './backOfficeDashboard'
 
 const { SEO } = APP_INFO
 
 const DashboardOverViewPage: Page = () => {
+  const { t } = useTranslation()
   // const { loading } = useReports()
   const [rankData, setRankData] = useState<RankData>(null)
   const [lastMonth, setLastMonth] = useState<boolean>(false)
@@ -70,9 +71,13 @@ const DashboardOverViewPage: Page = () => {
         <br/>
         <TotalLeg lastMonth={lastMonth} />
         <br />
-        <h1 style={{ fontSize: 30 }}>Referral link to sign up IBO's (Affiliates) & Customers</h1>
+        <h1 style={{ fontSize: 30 }}>{t('overview:integrous.title')}</h1>
         <a target='_blank' href={`https://www.integrouswellness.com/${auth.referralCode}`} style={{ fontSize: 30, textDecoration: 'underline' }}>https://www.integrouswellness.com/{auth.referralCode}</a>
         <br></br>
+        <br></br>
+        <h1 style={{ fontSize: 60 }}>{t('overview:integrous.title-2')}</h1>
+        <br />
+        <h1 style={{ fontSize: 30 }}>{t('overview:integrous.subtitle')}</h1>
       </>
     )
   }
@@ -129,14 +134,18 @@ const DashboardOverViewPage: Page = () => {
   )
 }
 
-DashboardOverViewPage.getLayout = (page: ReactNode) => (
-  <DashboardLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Dashboard</title>
-    </Head>
+DashboardOverViewPage.getLayout = (page: ReactNode) => {
+  const { t } = useTranslation()
 
-    {page}
-  </DashboardLayout>
-)
+  return (
+    <DashboardLayout>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - {t('overview:title')}</title>
+      </Head>
+
+      {page}
+    </DashboardLayout>
+  )
+}
 
 export default DashboardOverViewPage

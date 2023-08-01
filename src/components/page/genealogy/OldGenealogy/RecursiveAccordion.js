@@ -13,6 +13,7 @@ import axios from 'axios'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { useAuthStore } from 'lib/stores'
 import { API } from 'config/api'
+import {useTranslation} from "next-i18next";
 
 const useStyles = makeStyles(theme => ({
   Btn: {
@@ -30,6 +31,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export const RecursiveAccordion = ({ openUser, user, master = false }) => {
+  const { t } = useTranslation('genealogy')
   const { auth } = useAuthStore()
   const [levels, setlevels] = useState([])
   const [, setVolume] = useState(0)
@@ -112,7 +114,7 @@ export const RecursiveAccordion = ({ openUser, user, master = false }) => {
             <AccordionSummary className={classes.wrappingViewOptions} aria-controls="panel1a-content" id="panel1a-header">
               <Chip style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} size="small" label={`${user.name} [${user.id}]`} />
               <Chip style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} size="small" label={'Users : 0'} variant="outlined" />
-              <Button style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} onClick={(e) => { e.stopPropagation(); openUser(user.id, user.name) }} className={classes.Btn} color={'primary'} size={'small'} variant="contained">View user</Button>
+              <Button style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} onClick={(e) => { e.stopPropagation(); openUser(user.id, user.name) }} className={classes.Btn} color={'primary'} size={'small'} variant="contained">{t('old.accordion.view_user')}</Button>
             </AccordionSummary>
           </Accordion>
         )
@@ -121,9 +123,9 @@ export const RecursiveAccordion = ({ openUser, user, master = false }) => {
         return (
           <Accordion style={{ width: '100%', border: '1px solid grey' }} key={key}>
             <AccordionSummary style={{ display: 'flex', flexWrap: 'wrap' }} onClick={() => { getUsers(key) }} expandIcon={<ExpandMoreIcon/>} aria-controls="panel1a-content" id="panel1a-header">
-              {master === true ? (<Typography style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }}>Level {level.level}</Typography>) : <Chip style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} size="small" label={`${user.name} [${user.id}]`} />}
+              {master === true ? (<Typography style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }}>{t('old.accordion.level', { level: level.level })}</Typography>) : <Chip style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} size="small" label={`${user.name} [${user.id}]`} />}
               <Chip style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} size="small" label={`Users : ${level.usersLength}`} variant="outlined" />
-              {master === false && <Button onClick={(e) => { e.stopPropagation(); openUser(user.id, user.name) }} className={classes.Btn} color={'primary'} size={'small'} variant="contained" style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }}>View user</Button>}
+              {master === false && <Button onClick={(e) => { e.stopPropagation(); openUser(user.id, user.name) }} className={classes.Btn} color={'primary'} size={'small'} variant="contained" style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }}>{t('old.accordion.view_user')}</Button>}
             </AccordionSummary>
             <AccordionDetails>
               {showLevels[key] && (
@@ -144,9 +146,9 @@ export const RecursiveAccordion = ({ openUser, user, master = false }) => {
               )}
             </AccordionDetails>
             <Typography style={{ marginLeft: 20, marginBottom: 10 }}>
-                       Currently Showing {(limits[level.level] || 5) > level.usersLength ? level.usersLength : (limits[level.level] || 5)}
+              {t('old.accordion.currently_showing', { n: (limits[level.level] || 5) > level.usersLength ? level.usersLength : (limits[level.level] || 5) })}
               {level.usersLength > (limits[level.level] || 5) && (
-                <Button style={{ marginLeft: 10 }} size={'small'} variant={'contained'} color={'primary'} onClick={() => { setLimitsLevels(level.level, (limits[level.level] || 5) + 5) }}>Load 5 more</Button>
+                <Button style={{ marginLeft: 10 }} size={'small'} variant={'contained'} color={'primary'} onClick={() => { setLimitsLevels(level.level, (limits[level.level] || 5) + 5) }}>{t('old.accordion.load_5_more')}</Button>
               )}
             </Typography>
 

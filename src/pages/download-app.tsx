@@ -15,6 +15,7 @@ import { SelectDevice } from 'components/page/download-app/SelectDevice'
 import { HeaderCTA } from 'components/page/download-app/HeaderCTA'
 import { FooterPublic } from 'components/layout/public/Footer'
 import { AuthCTA } from 'components/page/download-app/AuthCTA'
+import { useTranslation } from "next-i18next";
 
 const { SEO, APPS } = APP_INFO
 
@@ -89,16 +90,20 @@ const DownloadAppPage: PageNext = () => {
   )
 }
 
-DownloadAppPage.getLayout = (page) => (
-  <>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Download App</title>
-    </Head>
+DownloadAppPage.getLayout = (page) => {
+  const { t } = useTranslation()
 
-    {page}
+  return (
+    <>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - Download App</title>
+      </Head>
 
-    <FooterPublic />
-  </>
-)
+      {page}
+
+      <FooterPublic />
+    </>
+  )
+}
 
 export default DownloadAppPage

@@ -19,12 +19,15 @@ import { FormUpdateEmail } from 'components/page/profile/update/FormUpdateEmail'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { EditPhone } from 'components/page/profile/update/EditPhone'
 import { AccountInfo } from 'components/page/profile/AccountInfo'
-import { FormUpdateUsename } from 'components/page/profile/update/FormUpdateUsename'
+import { FormUpdateUsername } from '../components/page/profile/update/FormUpdateUsername'
+import { useTranslation } from 'next-i18next'
 import { FormUpdateBuilderInfo } from '../components/page/profile/update/FormUpdateBuilderInfo'
 
 const { SEO } = APP_INFO
 
 const ProfilePage = ({ email, tokenExist }: { email: string, tokenExist: boolean }) => {
+  const { t } = useTranslation('profile')
+
   const { auth, setAuth, removeAuth } = useAuthStore()
   const { setNewWindow } = useNewWindowOpenedStore()
   const [typeUpdate, setTypeUpdate] = useState<TAccountInfoToUpdate>(null)
@@ -36,7 +39,7 @@ const ProfilePage = ({ email, tokenExist }: { email: string, tokenExist: boolean
       if (!tokenExist && !email) return
 
       if (tokenExist && !email) {
-        toast('Could not change the email, please contact support', { type: 'error' })
+        toast(t('email_change_error'), { type: 'error' })
         return
       }
 
@@ -54,14 +57,14 @@ const ProfilePage = ({ email, tokenExist }: { email: string, tokenExist: boolean
       }
 
       setAuth({ ...auth, email })
-      toast('Email successfully changed', { type: 'success' })
+      toast(t('email_change_success'), { type: 'success' })
       setIsLoading(false)
     })()
-  }, [email, tokenExist])
+  }, [email, tokenExist, t])
 
   if (isLoading) return <SpinnerPageContent />
   if (typeUpdate === 'email') return <FormUpdateEmail auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
-  if (typeUpdate === 'username') return <FormUpdateUsename auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
+  if (typeUpdate === 'username') return <FormUpdateUsername auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
   if (typeUpdate === 'phone') return <EditPhone auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
   if (typeUpdate === 'password') return <FormUpdatePassword auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
   if (typeUpdate === 'bankaccount') return <FormUpdateBankAccount auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
@@ -79,7 +82,7 @@ const ProfilePage = ({ email, tokenExist }: { email: string, tokenExist: boolean
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query }: GetServerSidePropsContext) => {
+export const getServerSideProps: GetServerSideProps = async ({ query, locale }: GetServerSidePropsContext) => {
   const { token } = query
 
   let data: { [key: string]: any }
@@ -95,14 +98,18 @@ export const getServerSideProps: GetServerSideProps = async ({ query }: GetServe
   }
 }
 
-ProfilePage.getLayout = (page: ReactNode) => (
-  <DashboardLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Profile</title>
-    </Head>
+ProfilePage.getLayout = (page: ReactNode) => {
+  const { t } = useTranslation('profile')
 
-    {page}
-  </DashboardLayout>
-)
+  return (
+    <DashboardLayout>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - {t('title')}</title>
+      </Head>
+
+      {page}
+    </DashboardLayout>
+  )
+}
 
 export default ProfilePage

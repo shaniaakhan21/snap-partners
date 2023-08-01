@@ -15,6 +15,7 @@ import { IHandleStep } from '../types'
 import { STEPS } from '.'
 import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 import { GTMTrack } from 'lib/utils/gtm'
+import { useTranslation } from "next-i18next";
 
 export interface dataFormSignUpMerchant {
   'city' : string
@@ -44,6 +45,7 @@ interface IRegisterMerchantBasicInfoProps {
 }
 
 export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handleStep }: IRegisterMerchantBasicInfoProps) => {
+  const { t } = useTranslation()
   const { handleSubmit, register, reset, formState: { errors }, setError, control } = useForm<dataFormSignUpMerchant>()
   const [isLoading, setLoading] = useState(false)
   const role = useRoleFromUrl()
@@ -53,21 +55,21 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
 
     if (dataForm.confirmEmail !== dataForm.email) {
       setLoading(false)
-      setError('confirmEmail', { message: 'The email does not match' })
+      setError('confirmEmail', { message: t('auth:signup.error.email-not-match') })
 
       if (dataForm.confirmPassword !== dataForm.password) {
-        return setError('confirmPassword', { message: 'The password does not match' })
+        return setError('confirmPassword', { message: t('auth:signup.error.password-not-match') })
       }
 
       return
     }
 
     if (dataForm.confirmPassword !== dataForm.password) {
-      setError('confirmPassword', { message: 'The password does not match' })
+      setError('confirmPassword', { message: t('auth:signup.error.password-not-match') })
       setLoading(false)
 
       if (dataForm.confirmEmail !== dataForm.email) {
-        return setError('confirmEmail', { message: 'The email does not match' })
+        return setError('confirmEmail', { message: t('auth:signup.error.email-not-match') })
       }
 
       return
@@ -139,19 +141,19 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
 
   return (
     <div className='max-w-md mx-auto w-full'>
-      <p className='font-bold text-4xl text-[#18203F]'>Sign up as a{' '}
-        <span className='text-primary-500'>Merchant</span>
+      <p className='font-bold text-4xl text-[#18203F]'>{t('auth:signup.merchant.sign_up_as')}{' '}
+        <span className='text-primary-500'>{t('auth:signup.merchant.title')}</span>
       </p>
-      <p className='text-gray-500'>Welcome! register to continue.</p>
+      <p className='text-gray-500'>{t('auth:signup.merchant.welcome')}</p>
 
       <form className='mt-6' onSubmit={handleSubmit(onSubmit)}>
         <InputForm
           id='username'
           name='username'
           type='text'
-          label='Username'
+          label={t('auth:signup.merchant.username-label')}
           registerId='username'
-          placeholder='Enter Username'
+          placeholder={t('auth:signup.merchant.username-placeholder')}
           errors={errors.username}
           register={register}
           rulesForm={registerMerchantRulesConfig.username}
@@ -162,9 +164,9 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
           id='email'
           name='email'
           type='email'
-          label='Email'
+          label={t('auth:signup.merchant.username-label')}
           registerId='email'
-          placeholder='Enter Email'
+          placeholder={t('auth:signup.merchant.username-placeholder')}
           autoComplete='email'
           errors={errors.email}
           register={register}
@@ -176,9 +178,9 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
           id='confirmEmail'
           name='confirmEmail'
           type='email'
-          label='Confirm Email'
+          label={t('auth:signup.merchant.confirmEmail-label')}
           registerId='confirmEmail'
-          placeholder='Confirm Email'
+          placeholder={t('auth:signup.merchant.confirmEmail-placeholder')}
           autoComplete='email'
           errors={errors.confirmEmail}
           register={register}
@@ -190,9 +192,9 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
           id='name'
           name='name'
           type='text'
-          label='Merchant Name'
+          label={t('auth:signup.merchant.name-label')}
           registerId='name'
-          placeholder='Enter Merchant Name'
+          placeholder={t('auth:signup.merchant.name-placeholder')}
           errors={errors.name}
           register={register}
           rulesForm={registerMerchantRulesConfig.name}
@@ -203,9 +205,9 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
           id='ownerName'
           name='ownerName'
           type='text'
-          label='Merchant Owner Name'
+          label={t('auth:signup.merchant.ownerName-label')}
           registerId='ownerName'
-          placeholder='Enter Merchant Owner Name'
+          placeholder={t('auth:signup.merchant.ownerName-placeholder')}
           errors={errors.ownerName}
           register={register}
           rulesForm={registerMerchantRulesConfig.ownerName}
@@ -213,7 +215,7 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
         />
 
         <InputPhone
-          label='Merchant Phone number'
+          label={t('auth:signup.merchant.phone-label')}
           isRequired
           register={register}
           errors={errors}
@@ -232,9 +234,9 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
           id='city'
           name='city'
           type='text'
-          label='City'
           registerId='city'
-          placeholder='Enter City'
+          label={t('auth:signup.merchant.city-label')}
+          placeholder={t('auth:signup.merchant.city-placeholder')}
           autoComplete='city'
           errors={errors.city}
           register={register}
@@ -246,9 +248,9 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
           id='street_name'
           name='street_name'
           type='text'
-          label='Street Name'
           registerId='street_name'
-          placeholder='Enter Street Name'
+          label={t('auth:signup.merchant.street_name-label')}
+          placeholder={t('auth:signup.merchant.street_name-placeholder')}
           autoComplete='street'
           errors={errors.street_name}
           register={register}
@@ -260,9 +262,9 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
           id='state'
           name='state'
           type='text'
-          label='State'
           registerId='state'
-          placeholder='Enter State'
+          label={t('auth:signup.merchant.state-label')}
+          placeholder={t('auth:signup.merchant.state-placeholder')}
           autoComplete='state'
           errors={errors.state}
           register={register}
@@ -274,9 +276,9 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
           id='referralCode'
           name='referralCode'
           type='text'
-          label='Referral Code'
+          label={t('auth:signup.merchant.referralCode-label')}
+          placeholder={t('auth:signup.merchant.referralCode-placeholder')}
           registerId='referralCode'
-          placeholder='Referral Code'
           defaultValue={referralLink.code}
           errors={errors.referralCode}
           register={register}
@@ -293,14 +295,14 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
 
         <section className='mt-4'>
           <Button type='submit' classes='w-full mt-4 text-sm bg-primary-500'>
-            Sign Up
+            {t('auth:signup.merchant.submit')}
           </Button>
 
           <p className='mt-4'>
-            <span className='font-semibold'>Already have an account?</span>
+            <span className='font-semibold'>{t('auth:signup.merchant.already_have_account')}</span>
 
             <Link href='/auth/login'>
-              <a className='text-textAcent-500 focus:underline'> Login.</a>
+              <a className='text-textAcent-500 focus:underline'>{t('auth:signup.merchant.login')}</a>
             </Link>
           </p>
         </section>

@@ -14,6 +14,7 @@ import { FormBecomeMerchant } from 'components/page/become-role/FormBecomeMercha
 import { FormBecomeDriver } from 'components/page/become-role/FormBecomeDriver'
 import { FormBecomeCustomer } from 'components/page/become-role/FormBecomeCustomer'
 import { Spinner } from 'components/common/loaders'
+import { useTranslation } from 'next-i18next'
 
 const { SEO } = APP_INFO
 
@@ -54,15 +55,19 @@ const BecomeRolePage = ({ role }: { role: 'CUSTOMER' | 'DRIVER' | 'RESTAURANT' }
   )
 }
 
-BecomeRolePage.getLayout = (page: ReactNode) => (
-  <DashboardLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Become Role</title>
-    </Head>
+BecomeRolePage.getLayout = (page: ReactNode) => {
+  const { t } = useTranslation()
 
-    {page}
-  </DashboardLayout>
-)
+  return (
+    <DashboardLayout>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - Become Role</title>
+      </Head>
+
+      {page}
+    </DashboardLayout>
+  )
+}
 
 export const getServerSideProps: GetServerSideProps = async ({ query }: GetServerSidePropsContext) => {
   const { role } = query

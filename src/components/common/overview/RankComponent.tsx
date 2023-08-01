@@ -6,6 +6,7 @@ import { styled } from '@mui/system'
 import BarWithText from './BarWithText'
 import { RankData } from 'lib/types/overview'
 import { RankSteps } from './RankSteps'
+import { Trans, useTranslation } from "next-i18next";
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -52,6 +53,7 @@ interface RankComponentProps{
 }
 
 export default function RankComponent (props: RankComponentProps) {
+  const { t } = useTranslation('overview')
   const { data: rankData } = props
   const [value, setValue] = useState(0)
 
@@ -73,18 +75,20 @@ export default function RankComponent (props: RankComponentProps) {
                 <StyledBox backgroundColor={'#DD4C37'}>
                   <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: '#DD4C37' }} />
                 </StyledBox>
-                <h1 className="text-2xl text-black font-bold pl-2">Free Member</h1>
+                <h1 className="text-2xl text-black font-bold pl-2">{t('rank.free.title')}</h1>
               </div>
               <div className='col-span-3 text-xs pt-5'>
-                <span className="text-15">To become a <strong>Manager</strong> you'll need</span>
+                <span className="text-15">
+                  <Trans i18nKey='overview:rank.free.next_become' components={{ strong: <strong /> }} />
+                </span>
               </div>
               <div className='col-span-3 text-xs pt-5'>
                 <div className='flex flex-row justify-between'>
                   <strong className='text-10'>
-                    You have {rankData.mng.commissionVol} PVC
+                    {t('rank.free.pvc', { commissionVol: rankData.mng.commissionVol })}
                   </strong>
                   <strong className='text-10'>
-                    You need 100 PVC
+                    {t('rank.free.need_pvc')}
                   </strong>
                 </div>
                 <BarWithText progressColor={'#C99FFF'} value={+rankData.mng.commissionVol} variant={'determinate'} />
@@ -99,10 +103,12 @@ export default function RankComponent (props: RankComponentProps) {
                 <StyledBox backgroundColor={'#C99FFF'}>
                   <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: '#C99FFF' }} />
                 </StyledBox>
-                <h1 className="text-2xl text-black font-bold pl-2">Manager</h1>
+                <h1 className="text-2xl text-black font-bold pl-2">{t('rank.manager.title')}</h1>
               </div>
               <div className='col-span-3 text-xs pt-5'>
-                <span className="text-15">To become a <strong>Supervisor</strong> you'll need</span>
+                <span className="text-15">
+                  <Trans i18nKey='overview:rank.manager.next_become' components={{ strong: <strong /> }} />
+                </span>
               </div>
               <div className='col-span-3 text-xs pt-5'>
                 <div className='flex flex-row justify-between'>
@@ -157,10 +163,12 @@ export default function RankComponent (props: RankComponentProps) {
                 <StyledBox backgroundColor={'#54A52C'}>
                   <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: '#54A52C' }} />
                 </StyledBox>
-                <h1 className="text-2xl text-black font-bold pl-2">Supervisor</h1>
+                <h1 className="text-2xl text-black font-bold pl-2">{t('rank.supervisor.title')}</h1>
               </div>
               <div className='col-span-3 text-xs pt-5'>
-                <span className="text-15">To become a <strong>Director</strong> you'll need</span>
+                <span className="text-15">
+                  <Trans i18nKey='overview:rank.supervisor.next_become' components={{ strong: <strong /> }} />
+                </span>
               </div>
               <div className='col-span-3 text-xs pt-5'>
                 <div className='flex flex-row justify-between'>

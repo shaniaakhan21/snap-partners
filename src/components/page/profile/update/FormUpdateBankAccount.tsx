@@ -15,6 +15,7 @@ import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { InputProfile } from '../commons/InputProfile'
 import { Button } from 'components/common/Button'
 import Alert from '@material-ui/lab/Alert'
+import {useTranslation} from "next-i18next";
 
 interface IFormUpdatePasswordProps {
   auth: IAuth
@@ -275,6 +276,7 @@ const accountTypes = [
 ]
 
 export const FormUpdateBankAccount = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IFormUpdatePasswordProps) => {
+  const { t } = useTranslation('profile')
   const { handleSubmit, register, reset, formState: { errors }, setError } = useForm<IDataForm>()
 
   const [legalType, setlegalType] = useState(auth.bank_information?.legalType || '')
@@ -307,7 +309,7 @@ export const FormUpdateBankAccount = ({ auth, setAuth, typeUpdate, setTypeUpdate
     })
 
     if (res.status === 400) {
-      toast('Error while updating bank information', { type: 'error' })
+      toast(t('update_bank.error_message'), { type: 'error' })
       setIsLoading(false)
       setErrorMessage(true)
       return
@@ -320,7 +322,7 @@ export const FormUpdateBankAccount = ({ auth, setAuth, typeUpdate, setTypeUpdate
       bank_information: { ...userData.bank_information }
     })
 
-    toast('Bank Information successfully updated', { type: 'success' })
+    toast(t('update_bank.success_message'), { type: 'success' })
     setTypeUpdate(null)
     setIsLoading(false)
   }
@@ -332,13 +334,13 @@ export const FormUpdateBankAccount = ({ auth, setAuth, typeUpdate, setTypeUpdate
   return (
     <div className='max-w-3xl mx-auto'>
       <section>
-        <h3 className='text-xl font-bold'>Set or update your payout details</h3>
+        <h3 className='text-xl font-bold'>{t('update_bank.title')}</h3>
       </section>
 
       {errorMessage && (
         <>
           <br />
-          <Alert severity="error">There is an error with the provided data, Please verify Routing number, Zip Code, Account number and that all details are correct</Alert>
+          <Alert severity="error">{t('update_bank.error_message2')}</Alert>
         </>
       )}
 
@@ -350,7 +352,7 @@ export const FormUpdateBankAccount = ({ auth, setAuth, typeUpdate, setTypeUpdate
           inputId='accountHolderName'
           inputType='text'
           labelFor='accountHolderName'
-          labelName='Full name of the account holder or Name of the business / organization'
+          labelName={t('update_bank.account_holder_name')}
           placeholder=''
           register={register}
           rules={{}}
@@ -359,17 +361,17 @@ export const FormUpdateBankAccount = ({ auth, setAuth, typeUpdate, setTypeUpdate
 
         <div
           className='relative rounded-xl bg-white w-full px-4 py-3 border-y-2 border-y-gray-200 flex flex-col justify-between'>
-          <label htmlFor="test1" className='text-sm mb-2'>Recipient Type</label>
+          <label htmlFor="test1" className='text-sm mb-2'>{t('update_bank.recepient_type')}</label>
           <div className="relative">
             <select
               id='legalType'
               name='legalType'
               className='cursor-pointer relative block xs:mr-2 pl-2 pr-12 py-0 xs:py-1 my-2 bg-[rgba(255,255,255,.13)] rounded-md border border-solid border-black outline-none appearance-none leading-8'
-              placeholder='User Rank'
+              placeholder={t('update_bank.user_rank')}
               onChange={(current) => { setlegalType(current.target.value) }}
             >
               <>
-                <option disabled selected>Select Recipient Type</option>
+                <option disabled selected>{t('update_bank.select_recipient_type')}</option>
                 {recipientTypes.map(value => {
                   let selected = false
                   if (value.code === legalType) selected = true
@@ -384,7 +386,7 @@ export const FormUpdateBankAccount = ({ auth, setAuth, typeUpdate, setTypeUpdate
 
         <div
           className='relative rounded-xl bg-white w-full px-4 py-3 border-y-2 border-y-gray-200 flex flex-col justify-between'>
-          <label htmlFor="test1" className='text-sm mb-2'>Account Type</label>
+          <label htmlFor="test1" className='text-sm mb-2'>{t('update_bank.account_type')}</label>
           <div className="relative">
             <select
               id='accountType'
@@ -393,7 +395,7 @@ export const FormUpdateBankAccount = ({ auth, setAuth, typeUpdate, setTypeUpdate
               onChange={(current) => { setaccountType(current.target.value) }}
             >
               <>
-                <option disabled selected>Select Account Type</option>
+                <option disabled selected>{t('update_bank.select_account_type')}</option>
                 {accountTypes.map(value => {
                   let selected = false
                   if (value.code === accountType) selected = true
@@ -410,8 +412,8 @@ export const FormUpdateBankAccount = ({ auth, setAuth, typeUpdate, setTypeUpdate
           inputId='abartn'
           inputType='text'
           labelFor='abartn'
-          labelName='ACH routing number'
-          placeholder='026009593'
+          labelName={t('update_bank.abartn')}
+          placeholder={t('update_bank.abartn_placeholder')}
           register={register}
           rules={{}}
           defaultValue={auth.bank_information?.abartn || ''}
@@ -421,8 +423,8 @@ export const FormUpdateBankAccount = ({ auth, setAuth, typeUpdate, setTypeUpdate
           inputId='accountNumber'
           inputType='text'
           labelFor='accountNumber'
-          labelName='Account number'
-          placeholder='12345678'
+          labelName={t('update_bank.account_number')}
+          placeholder={t('update_bank.account_number_placeholder')}
           register={register}
           rules={{}}
           defaultValue={auth.bank_information?.accountNumber || ''}
@@ -432,7 +434,7 @@ export const FormUpdateBankAccount = ({ auth, setAuth, typeUpdate, setTypeUpdate
           inputId='city'
           inputType='text'
           labelFor='city'
-          labelName='City'
+          labelName={t('update_bank.city')}
           placeholder=''
           register={register}
           rules={{}}
@@ -443,7 +445,7 @@ export const FormUpdateBankAccount = ({ auth, setAuth, typeUpdate, setTypeUpdate
           inputId='firstLine'
           inputType='text'
           labelFor='firstLine'
-          labelName='Address'
+          labelName={t('update_bank.first_line')}
           placeholder=''
           register={register}
           rules={{}}
@@ -452,7 +454,7 @@ export const FormUpdateBankAccount = ({ auth, setAuth, typeUpdate, setTypeUpdate
 
         <div
           className='relative rounded-xl bg-white w-full px-4 py-3 border-y-2 border-y-gray-200 flex flex-col justify-between'>
-          <label htmlFor="test1" className='text-sm mb-2'>State</label>
+          <label htmlFor="test1" className='text-sm mb-2'>{t('update_bank.state')}</label>
           <div className="relative">
             <select
               id='state'
@@ -461,7 +463,7 @@ export const FormUpdateBankAccount = ({ auth, setAuth, typeUpdate, setTypeUpdate
               onChange={(current) => { setstate(current.target.value) }}
             >
               <>
-                <option disabled selected>Select State</option>
+                <option disabled selected>{t('update_bank.select_state')}</option>
                 {states.map(value => {
                   let selected = false
                   if (value.code === state) selected = true
@@ -478,7 +480,7 @@ export const FormUpdateBankAccount = ({ auth, setAuth, typeUpdate, setTypeUpdate
           inputId='postCode'
           inputType='text'
           labelFor='postCode'
-          labelName='Zip Code'
+          labelName={t('update_bank.post_code')}
           placeholder=''
           register={register}
           rules={{}}
@@ -489,16 +491,15 @@ export const FormUpdateBankAccount = ({ auth, setAuth, typeUpdate, setTypeUpdate
 
         {errorMessage && (
           <>
-            <Alert severity="error">There is an error with the provided data, Please verify Routing number, Zip Code,
-                Account number and that all details are correct</Alert>
+            <Alert severity="error">{t('update_bank.error_message3')}</Alert>
             <br/>
           </>
         )}
 
         <div className='flex items-center'>
-          <Button type='submit' classes='mr-2'>Save</Button>
+          <Button type='submit' classes='mr-2'>{t('update_bank.save')}</Button>
           <Button onClick={() => setTypeUpdate(null)}>
-              Cancel
+            {t('update_bank.cancel')}
           </Button>
         </div>
       </form>

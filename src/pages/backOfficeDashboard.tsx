@@ -7,6 +7,7 @@ import CustomerGlobalPool from 'components/common/dashBackOffice/CustomerGlobalP
 import RankTracker from 'components/common/dashBackOffice/RankTracker'
 import { useAuthStore } from 'lib/stores'
 import { useEffect, useState } from 'react'
+import {APP_INFO} from "../config/appInfo";
 
 export interface PersonalVolumeInfo {
   pvValue: number,
@@ -32,7 +33,7 @@ const useStyles = makeStyles({
   }
 })
 
-const TotalLeg = ({ lastMonth }: { lastMonth: boolean}) => {
+const BackOfficeDashboard = ({ lastMonth }: { lastMonth: boolean}) => {
   const { auth } = useAuthStore()
   const classes = useStyles()
   const [personalVolData, setPersonalVolData] = useState<PersonalVolumeInfo>()
@@ -94,4 +95,4 @@ const TotalLeg = ({ lastMonth }: { lastMonth: boolean}) => {
   )
 }
 
-export default TotalLeg
+export default BackOfficeDashboard

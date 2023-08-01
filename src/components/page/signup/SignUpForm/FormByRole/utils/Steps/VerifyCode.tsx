@@ -14,12 +14,14 @@ import { InputPhone } from '../InputPhone'
 import { Button } from 'components/common/Button'
 import { GTMTrack } from 'lib/utils/gtm'
 import { ROLES } from './../../../../../../../config/roles'
+import { useTranslation } from 'next-i18next'
 
 interface IDataFormVerifyCode {
   code: string
 }
 
 export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo }: { userTrack: any, handleStep: IHandleStep, referralLink: IReferralLink, handleUserInfo: any }) => {
+  const { t } = useTranslation()
   const [isVerifyingCode, setIsVerifyingCode] = useState(false)
   const [isPhoneEditable, setIsPhoneEditable] = useState(false)
   const { handleSubmit: handleSubmitVerifyCode } = useForm<IDataFormVerifyCode>()
@@ -38,7 +40,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
 
     GTMTrack.signUp(referralLink.role, 2, 'yes')
     setIsVerifyingCode(false)
-    toast('Submitted Code', { type: 'success' })
+    toast(t('auth:signup.phone.submitted-code'), { type: 'success' })
   }
 
   const onSubmitUpdatePhone = async ({ phoneNumber }) => {
@@ -55,7 +57,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
     handleUserInfo({ ...userTrack.userInfo, phone: `+${phoneNumber}` })
     setIsVerifyingCode(false)
     setIsPhoneEditable(false)
-    toast('Submitted Code', { type: 'success' })
+    toast(t('auth:signup.phone.submitted-code'), { type: 'success' })
   }
 
   const onSubmitVerifyCode = async (code) => {
@@ -137,7 +139,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
       return
     }
 
-    toast('Code Verified', { type: 'success' })
+    toast(t('auth:signup.phone.verified-code'), { type: 'success' })
     GTMTrack.signUp(referralLink.role, 2, 'no')
     setIsVerifyingCode(false)
     handleStep(STEPS.SUCCESS_CODE)
@@ -155,15 +157,14 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
     return (
       <div className='flex justify-center items-center h-[85vh]'>
         <form className='max-w-sm mt-6 text-center' onSubmit={handleSubmitPhone(onSubmitUpdatePhone)}>
-          <span className='text-4xl font-bold'>Verify Phone</span>
-          <p className='text-gray-500 mt-3'>
-          Code is Sent to <span className='font-bold text-black'>{userTrack.userInfo.phone}</span>
+          <span className='text-4xl font-bold'>{t('auth:signup.phone.verify-phone')}</span>
+          <p className='text-gray-500 mt-3'>{t('auth:signup.phone.code-sent-to')}{' '}<span className='font-bold text-black'>{userTrack.userInfo.phone}</span>
           </p>
 
           <div className='mt-4'>
             <div className='text-left'>
               <InputPhone
-                label='Phone'
+                label={t('auth:signup.form.phone.label')}
                 isRequired
                 register={registerPhone}
                 errors={errors}
@@ -172,7 +173,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
               />
 
               <Button type='submit' classes='w-full text-sm bg-primary-500'>
-                  Update Phone
+                {t('auth:signup.phone.update-phone')}
               </Button>
             </div>
           </div>
@@ -188,9 +189,8 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
   return (
     <div className='flex justify-center items-center h-[85vh]'>
       <form className='max-w-sm mt-6 text-center' onSubmit={handleSubmitVerifyCode(onSubmitVerifyCode)}>
-        <span className='text-4xl font-bold'>Verify Phone</span>
-        <p className='text-gray-500 mt-3'>
-          Code is Sent to <span className='font-bold text-black'>{userTrack.userInfo.phone}</span>
+        <span className='text-4xl font-bold'>{t('auth:signup.phone.verify-phone')}</span>
+        <p className='text-gray-500 mt-3'>{t('auth:signup.phone.code-sent-to')}{' '}<span className='font-bold text-black'>{userTrack.userInfo.phone}</span>
         </p>
 
         <button
@@ -198,7 +198,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
           onClick={() => setIsPhoneEditable(true)}
           className='text-primary-500 font-medium'
         >
-              Change Number
+          {t('auth:signup.phone.change-number')}
         </button>
 
         <div className='mt-4'>
@@ -212,12 +212,13 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
 
         <div className='mt-4'>
           <p className='font-bold'>
-                Didn’t recieve the code? {' '}
+            {t('auth:signup.phone.didnt-receive-code')}{' '}
             <button
               type='button'
               onClick={sendSMSCode}
               className='text-primary-500 font-medium'
-            > Send Again
+            >
+              {t('auth:signup.phone.send-again')}
             </button>
           </p>
         </div>

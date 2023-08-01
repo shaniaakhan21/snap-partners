@@ -10,10 +10,13 @@ import { getLocalStorage } from 'lib/utils/localStorage'
 import { useAuthStore, useNewWindowOpenedStore } from 'lib/stores'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
 
 const ComingSoon: PageNext = () => {
+  const { t } = useTranslation('tree')
+
   const { auth, setAuth, removeAuth } = useAuthStore()
   const [userId, setUserId] = useState(auth.id)
   const [tree, setTree] = useState({})
@@ -77,10 +80,10 @@ const ComingSoon: PageNext = () => {
     <>
       <div className="flex justify-center gap-2">
         {history.length > 0 && (
-          <button onClick={() => { onGoBack() }} className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">GO BACK</button>
+          <button onClick={() => { onGoBack() }} className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-24 py-3 px-4 rounded-l-full rounded-r-full">{t('go_back')}</button>
         )}
         {auth.id !== userId && (
-          <button onClick={() => { onToTop() }} className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-50  py-3 px-4 rounded-l-full rounded-r-full">GO TO TOP</button>
+          <button onClick={() => { onToTop() }} className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-6 w-50  py-3 px-4 rounded-l-full rounded-r-full">{t('go_to_top')}</button>
         )}
       </div>
       <OrganizationChart
@@ -94,14 +97,18 @@ const ComingSoon: PageNext = () => {
   )
 }
 
-ComingSoon.getLayout = (page: ReactNode) => (
-  <DashboardLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Coming Soon</title>
-    </Head>
+ComingSoon.getLayout = (page: ReactNode) => {
+  const { t } = useTranslation('tree')
 
-    {page}
-  </DashboardLayout>
-)
+  return (
+    <DashboardLayout>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - {t('title')}</title>
+      </Head>
+
+      {page}
+    </DashboardLayout>
+  )
+}
 
 export default ComingSoon

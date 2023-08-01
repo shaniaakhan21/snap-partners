@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
 
 import { globalRoutes } from 'components/layout/private/Dashboard/Drawer/routes'
+import { useTranslation } from "next-i18next";
 
 interface IDashboardGetPathnameReturn {
   pathname: string,
@@ -8,6 +9,7 @@ interface IDashboardGetPathnameReturn {
 }
 
 export const useDashboardGetPathname = (): IDashboardGetPathnameReturn => {
+  const { t } = useTranslation()
   const router = useRouter()
 
   const flattenRoutes = (routes) => {
@@ -28,7 +30,7 @@ export const useDashboardGetPathname = (): IDashboardGetPathnameReturn => {
   return pathnameData
     ? {
       pathname: pathnameData.to,
-      title: pathnameData.label
+      title: t(`common:${pathnameData.i18n}`)
     }
     : null
 }

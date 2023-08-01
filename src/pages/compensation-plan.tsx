@@ -6,7 +6,7 @@ import DashboardLayout from 'layouts/private/Dashboard'
 import { Spinner } from 'components/common/loaders'
 import { APP_INFO } from 'config/appInfo'
 import { GTMTrack } from 'lib/utils/gtm'
-import { CardComingSoon } from 'components/common/CardComingSoon'
+import {useTranslation} from "next-i18next";
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 // import { Document, Page } from "react-pdf";
@@ -17,12 +17,16 @@ const { SEO } = APP_INFO
 const PDFViewer = dynamic(
   () => import('../components/page/compensation-plan/PDFViewer'),
   {
-    loading: () => (
-      <div className='flex flex-col justify-center items-center'>
-        <Spinner />
-        <span>Loading Compensation Plan...</span>
-      </div>
-    ),
+    loading: () => {
+      const { t } = useTranslation('compensation-plan')
+
+      return (
+        <div className='flex flex-col justify-center items-center'>
+          <Spinner />
+          <span>{t('loading_compensation_plan')}</span>
+        </div>
+      )
+    },
     ssr: false
   }
 )
@@ -44,6 +48,8 @@ const CompensationPlanPage: Page = () => {
   useEffect(() => {
     fetchData()
   }, [])
+  const { t } = useTranslation('compensation-plan')
+
   return (
     <div className='w-full text-center'>
       {/* <h4 className='font-black text-4xl md:text-5xl'>Compensation Plan</h4>
@@ -60,7 +66,7 @@ const CompensationPlanPage: Page = () => {
           className='px-4 py-2 disabled:opacity-50 disabled:cursor-not-allowed bg-black-primary text-white bg-primary-500 rounded-full font-semibold focus:outline-none hover:opacity-90'
           onClick={() => GTMTrack.downloadCompensationPlan(`${fileData?.fileName}`)}
         >
-          Download Compensation Plan
+          {t('download_compensation_plan')}
         </a>
       </div>
 
@@ -71,14 +77,18 @@ const CompensationPlanPage: Page = () => {
   )
 }
 
-CompensationPlanPage.getLayout = (page: ReactNode) => (
-  <DashboardLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Compensation Plan</title>
-    </Head>
+CompensationPlanPage.getLayout = (page: ReactNode) => {
+  const { t } = useTranslation('compensation-plan')
 
-    {page}
-  </DashboardLayout>
-)
+  return (
+    <DashboardLayout>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - {t('title')}</title>
+      </Head>
+
+      {page}
+    </DashboardLayout>
+  )
+}
 
 export default CompensationPlanPage

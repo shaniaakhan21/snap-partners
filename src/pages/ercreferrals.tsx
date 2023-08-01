@@ -6,29 +6,10 @@ import DashboardLayout from 'layouts/private/Dashboard'
 import ReactDataGrid from '@inovua/reactdatagrid-community'
 import '@inovua/reactdatagrid-community/index.css'
 import { ITransaction } from 'lib/types/transaction'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
-
-const columns = [
-  { name: 'id', header: 'ID', defaultFlex: 1, minWidth: 60 },
-  { name: 'createdAtUs', header: 'Signup Date', defaultFlex: 1, minWidth: 130 },
-  { name: 'business_name', header: 'Company', defaultFlex: 1, minWidth: 110 },
-  { name: 'name', header: 'Name', defaultFlex: 1, minWidth: 85 },
-  { name: 'email', header: 'Email', defaultFlex: 1, minWidth: 85 },
-  { name: 'phone', header: 'Phone', defaultFlex: 1, minWidth: 90 },
-  { name: 'signedAgreement', header: 'Signed Agreement', flex: 1, minWidth: 120 },
-  { name: 'depositPaid', header: 'Deposit Paid', flex: 1, minWidth: 110 },
-  { name: 'docCollection', header: 'Doc Collection', flex: 1, minWidth: 110 },
-  { name: 'excelTeam', header: 'Excel Team', flex: 1, minWidth: 110 },
-  { name: 'docsSentForSignature', header: 'Docs Sent For Signature', flex: 1, minWidth: 110 },
-  { name: 'docsSentForSignatureDateUs', header: 'Docs Sent For Signature Date', flex: 1, minWidth: 110 },
-  { name: 'filledWithIRS', header: 'Filed with IRS?', flex: 1, minWidth: 110 },
-  { name: 'filledWithIRSDateUs', header: 'Filed with IRS Date', flex: 1, minWidth: 110 },
-  { name: 'paid', header: 'Paid', flex: 1, minWidth: 80 },
-  { name: 'paidDateUs', header: 'Paid Date', flex: 1, minWidth: 120 },
-  { name: 'commission', header: 'Commision', flex: 1, minWidth: 130 }
-]
 
 const gridStyle = { minHeight: 550 }
 
@@ -42,6 +23,27 @@ interface ITableTransactionsProps {
 }
 
 export const TableTransactions = ({ transactions }: ITableTransactionsProps) => {
+  const { t } = useTranslation('ercreferrals')
+
+  const columns = useMemo(() => [
+    { name: 'id', header: 'ID', defaultFlex: 1, minWidth: 60 },
+    { name: 'createdAtUs', header: 'Signup Date', defaultFlex: 1, minWidth: 130 },
+    { name: 'business_name', header: 'Company', defaultFlex: 1, minWidth: 110 },
+    { name: 'name', header: 'Name', defaultFlex: 1, minWidth: 85 },
+    { name: 'email', header: 'Email', defaultFlex: 1, minWidth: 85 },
+    { name: 'phone', header: 'Phone', defaultFlex: 1, minWidth: 90 },
+    { name: 'signedAgreement', header: 'Signed Agreement', flex: 1, minWidth: 120 },
+    { name: 'depositPaid', header: 'Deposit Paid', flex: 1, minWidth: 110 },
+    { name: 'docCollection', header: 'Doc Collection', flex: 1, minWidth: 110 },
+    { name: 'excelTeam', header: 'Excel Team', flex: 1, minWidth: 110 },
+    { name: 'docsSentForSignature', header: 'Docs Sent For Signature', flex: 1, minWidth: 110 },
+    { name: 'docsSentForSignatureDateUs', header: 'Docs Sent For Signature Date', flex: 1, minWidth: 110 },
+    { name: 'filledWithIRS', header: 'Filed with IRS?', flex: 1, minWidth: 110 },
+    { name: 'filledWithIRSDateUs', header: 'Filed with IRS Date', flex: 1, minWidth: 110 },
+    { name: 'paid', header: 'Paid', flex: 1, minWidth: 80 },
+    { name: 'paidDateUs', header: 'Paid Date', flex: 1, minWidth: 120 },
+    { name: 'commission', header: 'Commision', flex: 1, minWidth: 130 }
+  ].map((data) => ({ ...data, header: t(`transactions.${data.name}`) })), [t])
   return (
     <ReactDataGrid
       idProperty="id"
@@ -56,21 +58,23 @@ export const TableTransactions = ({ transactions }: ITableTransactionsProps) => 
   )
 }
 
-const columnsClient = [
-  { name: 'level', header: 'Level', defaultFlex: 1, minWidth: 150 },
-  { name: 'totalClients', header: 'Total Clients', defaultFlex: 1, minWidth: 150 },
-  { name: 'registereds', header: '# Registered', defaultFlex: 1, minWidth: 150 },
-  { name: 'signedAgreements', header: '# Signed Agreements', defaultFlex: 1, minWidth: 220 },
-  { name: 'depositPaids', header: '# Deposits Paid', defaultFlex: 1, minWidth: 150 },
-  { name: 'docCollections', header: '# Doc Collections', defaultFlex: 1, minWidth: 150 },
-  { name: 'excelTeams', header: '# Excel Teams', flex: 1, minWidth: 200 },
-  { name: 'docsSentForSignatures', header: '# Docs Sent for Signature', flex: 1, minWidth: 220 },
-  { name: 'filleds', header: '# Filed', flex: 1, minWidth: 130 },
-  { name: 'paids', header: '# Paid?', flex: 1, minWidth: 220 },
-  { name: 'totalCommissions', header: 'Total Commission', flex: 1, minWidth: 220 }
-]
-
 export const TableClientTransactions = ({ transactions }: ITableTransactionsProps) => {
+  const { t } = useTranslation('ercreferrals')
+
+  const columnsClient = useMemo(() => [
+    { name: 'level', header: 'Level', defaultFlex: 1, minWidth: 150 },
+    { name: 'totalClients', header: 'Total Clients', defaultFlex: 1, minWidth: 150 },
+    { name: 'registereds', header: '# Registered', defaultFlex: 1, minWidth: 150 },
+    { name: 'signedAgreements', header: '# Signed Agreements', defaultFlex: 1, minWidth: 220 },
+    { name: 'depositPaids', header: '# Deposits Paid', defaultFlex: 1, minWidth: 150 },
+    { name: 'docCollections', header: '# Doc Collections', defaultFlex: 1, minWidth: 150 },
+    { name: 'excelTeams', header: '# Excel Teams', flex: 1, minWidth: 200 },
+    { name: 'docsSentForSignatures', header: '# Docs Sent for Signature', flex: 1, minWidth: 220 },
+    { name: 'filleds', header: '# Filed', flex: 1, minWidth: 130 },
+    { name: 'paids', header: '# Paid?', flex: 1, minWidth: 220 },
+    { name: 'totalCommissions', header: 'Total Commission', flex: 1, minWidth: 220 }
+  ].map((data) => ({ ...data, header: t(`clientTransactions.${data.name}`) })), [t])
+
   return (
     <ReactDataGrid
       idProperty="id"
@@ -86,6 +90,7 @@ export const TableClientTransactions = ({ transactions }: ITableTransactionsProp
 }
 
 const ErcreferralsPage: Page = () => {
+  const { t } = useTranslation('ercreferrals')
   const [transactions, setTransactions] = useState([])
   const [transactionsClient, setTransactionsClient] = useState([])
   const [monthSelected, setMonthSelected] = useState(new Date().getMonth()) // 0-11
@@ -137,24 +142,24 @@ const ErcreferralsPage: Page = () => {
 
   return (
     <>
-      <span className='text-2xl font-bold'>Your Personal Clients</span> <br /><br />
+      <span className='text-2xl font-bold'>{t('your_personal_clients')}</span> <br /><br />
 
       <div id="cro-erc-process">
         <img src="https://snapdeliveredteam.com/images/j-logo.png" />
         <div>
-          <h1>The ERC Process has 3 Phases</h1>
+          <h1>{t('erc_process_3_phases')}</h1>
           <div>
             <ul>
-              <li>Phase 1</li>
-              <li>New Client</li>
+              <li>{t('phase_1')}</li>
+              <li>{t('phase_1_item')}</li>
             </ul>
             <ul>
-              <li>Phase 2</li>
-              <li> Jorns Filling Work</li>
+              <li>{t('phase_2')}</li>
+              <li>{t('phase_2_item')}</li>
             </ul>
             <ul>
-              <li>Phase 3</li>
-              <li>IRS Payment</li>
+              <li>{t('phase_3')}</li>
+              <li>{t('phase_3_item')}</li>
             </ul>
           </div>
         </div>
@@ -164,13 +169,13 @@ const ErcreferralsPage: Page = () => {
         <TableTransactions transactions={transactions} />
       </div>
       <br /><br />
-      <span className='text-2xl font-bold'>Your Team Clients</span>
+      <span className='text-2xl font-bold'>{t('your_team_clients')}</span>
 
       <select
         id='legalType'
         name='legalType'
         className='ml-5 cursor-pointer relative xs:mr-2 pl-2 pr-12 py-0 xs:py-1 my-2 bg-[rgba(255,255,255,.13)] rounded-md border border-solid border-black outline-none appearance-none leading-8'
-        placeholder='User Rank'
+        placeholder={t('user_rank')}
         onChange={(current) => { setMonthSelected(parseInt(current.target.value)) }}
       >
         {month.map((m, i) => {
@@ -187,7 +192,7 @@ const ErcreferralsPage: Page = () => {
         id='legalType'
         name='legalType'
         className='ml-5 cursor-pointer relative xs:mr-2 pl-2 pr-12 py-0 xs:py-1 my-2 bg-[rgba(255,255,255,.13)] rounded-md border border-solid border-black outline-none appearance-none leading-8'
-        placeholder='User Rank'
+        placeholder={t('user_rank')}
         onChange={(current) => { setYearSelected(parseInt(current.target.value)) }}
       >
         {years.map((y, i) => {
@@ -208,14 +213,18 @@ const ErcreferralsPage: Page = () => {
   )
 }
 
-ErcreferralsPage.getLayout = (page: ReactNode) => (
-  <DashboardLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - ERC Reporting</title>
-    </Head>
+ErcreferralsPage.getLayout = (page: ReactNode) => {
+  const { t } = useTranslation()
 
-    {page}
-  </DashboardLayout>
-)
+  return (
+    <DashboardLayout>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - {t('title')}</title>
+      </Head>
+
+      {page}
+    </DashboardLayout>
+  )
+}
 
 export default ErcreferralsPage

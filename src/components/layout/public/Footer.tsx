@@ -4,24 +4,31 @@ import { APP_INFO } from 'config/appInfo'
 import { ROLES } from 'config/roles'
 import { GTMTrack } from 'lib/utils/gtm'
 import Link from 'next/link'
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useTranslation } from "next-i18next";
 
 const { RRSS, LEGAL } = APP_INFO
 
 export const FooterPublic = () => {
+  const { t } = useTranslation('footer')
   const { current: socialLinks } = useRef([
     { to: RRSS.FACEBOOK.link, icon: <FooterFacebook />, label: 'facebook' },
     { to: RRSS.YOUTUBE.link, icon: <FooterYoutube />, label: 'youtube' }
   ])
 
-  const { current: joinUsLinks } = useRef([
-    { to: 'https://opportunity.snapdelivered.com/#about', label: 'About us' },
-    { to: `/auth/signup?role=${ROLES.DRIVER}`, label: 'Become a Driver' },
-    { to: `/auth/signup?role=${ROLES.MERCHANT}`, label: 'Become a Merchant Partner' },
-    { to: `/auth/signup?role=${ROLES.CUSTOMER}`, label: 'Become a Customer' },
-    { to: 'https://opportunity.snapdelivered.com/#contact', label: 'Careers' },
-    { to: 'https://store.snapdelivered.com/', label: 'Merch Store' }
-  ])
+  const [joinUsLinks, setJoinUsLinks] = useState([]);
+
+  useEffect(() => {
+    // Fetch and set the translated joinUsLinks when the translations are ready
+    setJoinUsLinks([
+      { to: 'https://opportunity.snapdelivered.com/#about', label: t('join-us') },
+      { to: `/auth/signup?role=${ROLES.DRIVER}`, label: t('join.become-a-driver') },
+      { to: `/auth/signup?role=${ROLES.MERCHANT}`, label: t('join.become-a-merchant') },
+      { to: `/auth/signup?role=${ROLES.CUSTOMER}`, label: t('join.become-a-customer') },
+      { to: 'https://opportunity.snapdelivered.com/#contact', label: t('join.careers') },
+      { to: 'https://store.snapdelivered.com/', label: t('join.merch-store') }
+    ]);
+  }, [t]);
 
   // const { current: helpLinks } = useRef([
   //   { to: '#faqs', label: 'FAQs' },
@@ -65,7 +72,7 @@ export const FooterPublic = () => {
 
         <div className='flex flex-col lg:flex-row justify-end items-start gap-x-28 gap-y-10 mt-10 lg:mt-0'>
           <section className='text-left lg:text-right'>
-            <span className='text-2xl font-semibold'>Join Us</span>
+            <span className='text-2xl font-semibold'>{t('join-us')}</span>
 
             <ul className='mt-2 text-gray-300'>
               {joinUsLinks.map(joinUsLink => (
@@ -98,7 +105,7 @@ export const FooterPublic = () => {
           </section> */}
 
           <section className='text-left lg:text-right'>
-            <span className='text-2xl font-semibold'>Download our app </span>
+            <span className='text-2xl font-semibold'>{t('download-our-app')}</span>
 
             <ul className='mt-2 text-gray-300 flex justfiy-start lg:justify-end items-start gap-x-4'>
               {Apps.map(app => (

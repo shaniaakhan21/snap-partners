@@ -1,7 +1,9 @@
 import Link from 'next/link'
 import { GTMTrack } from 'lib/utils/gtm'
+import { useTranslation } from "next-i18next";
 
 export const MarketingTool = ({ title, subtitle, icon, description, to }) => {
+  const { t } = useTranslation()
   const onClick = () => {
     GTMTrack.marketingCard(title)
   }
@@ -15,7 +17,7 @@ export const MarketingTool = ({ title, subtitle, icon, description, to }) => {
           <section className='px-6 pb-4 pt-5'>
             <div className='text-center w-full'>
               <span className='font-bold text-xl '>
-                {title} <br /> Marketing
+                {title} <br />{t('marketing:card_title_suffix')}
               </span>
 
             </div>
@@ -32,7 +34,7 @@ export const MarketingTool = ({ title, subtitle, icon, description, to }) => {
 
           <section className='w-full border-t-2 border-solid flex justify-center items-center py-5'>
             <button className='uppercase text-white bg-primary-500 px-4 py-1.5 rounded-full font-semibold hover:opacity-80'>
-              See More
+              {t('marketing:see-more')}
             </button>
           </section>
         </li>

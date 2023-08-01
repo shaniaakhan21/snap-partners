@@ -15,6 +15,7 @@ import { Button, FormControl, FormHelperText, InputLabel, MenuItem, Select } fro
 import { Grid, TextField } from '@mui/material'
 import { SearchIcon } from 'components/common/icons'
 import { DataGrid } from '@mui/x-data-grid'
+import { useTranslation } from "next-i18next";
 
 const { SEO } = APP_INFO
 
@@ -366,14 +367,18 @@ const ComingSoon: PageNext = () => {
   )
 }
 
-ComingSoon.getLayout = (page: ReactNode) => (
-  <DashboardLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Binary Tree</title>
-    </Head>
+ComingSoon.getLayout = (page: ReactNode) => {
+  const { t } = useTranslation()
 
-    {page}
-  </DashboardLayout>
-)
+  return (
+    <DashboardLayout>
+      <Head>
+        <title>{SEO.TITLE_PAGE} - Binary Tree</title>
+      </Head>
+
+      {page}
+    </DashboardLayout>
+  )
+}
 
 export default ComingSoon
