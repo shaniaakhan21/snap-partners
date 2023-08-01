@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import {useMemo, useRef} from 'react'
+import { useMemo, useRef } from 'react'
 
 import type { Page, ReactNode } from 'lib/types'
 import { useAuthStore } from 'lib/stores'
@@ -9,7 +9,7 @@ import DashboardLayout from 'layouts/private/Dashboard'
 import { CustomerIcon, DriverIcon, IBOIcon, MerchantsIcon } from 'components/common/icons'
 import { MarketingTool } from 'components/page/marketing/CardTools/Tool'
 import { ListMarketingTools } from 'components/page/marketing/CardTools/ListTools'
-import { useTranslation } from "next-i18next";
+import { useTranslation } from 'next-i18next'
 
 const { SEO } = APP_INFO
 

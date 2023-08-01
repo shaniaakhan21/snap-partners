@@ -1,4 +1,4 @@
-import {Trans, useTranslation} from "next-i18next";
+import { Trans, useTranslation } from 'next-i18next'
 
 export const BonusBenmarks = () => {
   const { t } = useTranslation('vidgo-reporting')
@@ -74,7 +74,7 @@ export const BonusBenmarks = () => {
         <tbody>
           <tr className='border-b border-zinc-300'>
             <td rowSpan={2} className='border-r border-zinc-300 text-lg font-semibold text-center pb-4 px-2'>
-                <Trans i18nKey='bonusBenchmarks.get_n' components={{ br: <br /> }} values={{ n: 20 }} />
+              <Trans i18nKey='bonusBenchmarks.get_n' components={{ br: <br /> }} values={{ n: 20 }} />
             </td>
 
             <td className='px-2'>

@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
-import {useCallback, useState} from 'react'
+import { useCallback, useState } from 'react'
 
 import { sendEmailToConfirm } from 'lib/services/user/updateUserEmail'
 import { Dispatch, SetStateAction } from 'lib/types/core/next-react'
@@ -12,7 +12,7 @@ import { GTMTrack } from 'lib/utils/gtm'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { InputProfile } from '../commons/InputProfile'
 import { Button } from 'components/common/Button'
-import {useTranslation} from "next-i18next";
+import { useTranslation } from 'next-i18next'
 
 interface IFormUpdatePhoneProps {
   auth: IAuth

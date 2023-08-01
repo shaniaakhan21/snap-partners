@@ -17,7 +17,7 @@ import EmailIcon from '@material-ui/icons/Email'
 import PhoneIcon from '@material-ui/icons/Phone'
 import { useAuthStore } from 'lib/stores'
 import { API } from 'config/api'
-import {useTranslation} from "next-i18next";
+import { useTranslation } from 'next-i18next'
 
 export const ModalUninivelUser = ({ id, name, close, open, openUser }) => {
   const { t } = useTranslation('genealogy')

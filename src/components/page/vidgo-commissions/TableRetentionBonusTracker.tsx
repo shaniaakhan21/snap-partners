@@ -1,7 +1,7 @@
 import { IReport } from 'lib/types'
 import { getActivePayments, getVidgoCalculates } from 'lib/utils/vidgoCalculates'
 import { useEffect, useState } from 'react'
-import {useTranslation} from "next-i18next";
+import { useTranslation } from 'next-i18next'
 
 export const TableRetentionBonusTracker = ({ report }: { report: IReport }) => {
   const { t } = useTranslation('vidgo-reporting')
@@ -30,11 +30,11 @@ export const TableRetentionBonusTracker = ({ report }: { report: IReport }) => {
           <thead>
             <tr>
               <th className="w-52">&nbsp;</th>
-              <th className="px-2">{t('bonusTracker.month_n', {  month: 1 })}</th>
-              <th className="px-2">{t('bonusTracker.month_n', {  month: 2 })}</th>
-              <th className="px-2">{t('bonusTracker.month_n', {  month: 3 })}</th>
-              <th className="px-2">{t('bonusTracker.month_n', {  month: 6 })}</th>
-              <th className="px-2">{t('bonusTracker.month_n', {  month: 12 })}</th>
+              <th className="px-2">{t('bonusTracker.month_n', { month: 1 })}</th>
+              <th className="px-2">{t('bonusTracker.month_n', { month: 2 })}</th>
+              <th className="px-2">{t('bonusTracker.month_n', { month: 3 })}</th>
+              <th className="px-2">{t('bonusTracker.month_n', { month: 6 })}</th>
+              <th className="px-2">{t('bonusTracker.month_n', { month: 12 })}</th>
             </tr>
           </thead>
           <tbody>

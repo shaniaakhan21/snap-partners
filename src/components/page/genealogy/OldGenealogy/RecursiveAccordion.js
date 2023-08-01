@@ -13,7 +13,7 @@ import axios from 'axios'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import { useAuthStore } from 'lib/stores'
 import { API } from 'config/api'
-import {useTranslation} from "next-i18next";
+import { useTranslation } from 'next-i18next'
 
 const useStyles = makeStyles(theme => ({
   Btn: {

@@ -1,6 +1,6 @@
 import { Button } from 'components/common/Button'
 import { InputPhone } from 'components/page/signup/SignUpForm/FormByRole/utils/InputPhone'
-import {Trans, useTranslation} from "next-i18next";
+import { Trans, useTranslation } from 'next-i18next'
 
 export const FormChangePhone = ({
   onSubmitUpdatePhone,

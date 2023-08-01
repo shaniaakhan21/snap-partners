@@ -8,11 +8,8 @@ import { SignUpMerchantForm } from 'components/page/signup/SignUpForm/FormByRole
 import { SignUpCustomerForm, SignUpDriverForm, SignUpAgentForm } from 'components/page/signup/SignUpForm'
 import { SelectRoleToSignUp } from 'components/page/signup/SelectRoleToSignUp'
 import { ROLES } from 'config/roles'
-<<<<<<< HEAD
-import { SignUpIBOForm } from "../../components/page/signup/SignUpForm/FormByRole/ibo";
-=======
-import { useTranslation } from "next-i18next";
->>>>>>> 62b6bded2ef10da694717975e421a29d22f187df
+import { SignUpIBOForm } from '../../components/page/signup/SignUpForm/FormByRole/ibo'
+import { useTranslation } from 'next-i18next'
 
 const { SEO } = APP_INFO
 

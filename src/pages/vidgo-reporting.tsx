@@ -16,7 +16,7 @@ import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { commissions } from 'lib/services/vidgo/commissions'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { EmptyData } from 'components/common/empty/EmptyData'
-import { useTranslation } from "next-i18next";
+import { useTranslation } from 'next-i18next'
 
 const { SEO } = APP_INFO
 
@@ -209,7 +209,7 @@ const VidgoComissionsPage: Page = () => {
 
           <div className='w-full border-primary-500 border-2 rounded-md px-4 py-4 lg:py-[9.9rem] mt-3 text-center'>
             <span className='font-bold text-primary-500'>
-                {t('coming_soon')}
+              {t('coming_soon')}
             </span>
           </div>
           {/* <TeamCustomerTable teamCustomers={teamCustomers} /> */}

@@ -1,4 +1,4 @@
-import {useTranslation} from "next-i18next";
+import { useTranslation } from 'next-i18next'
 
 export const RetentionMonthly = () => {
   const { t } = useTranslation('vidgo-reporting')

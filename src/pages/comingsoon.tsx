@@ -5,7 +5,7 @@ import { APP_INFO } from 'config/appInfo'
 
 import DashboardLayout from 'layouts/private/Dashboard'
 import { CardComingSoon } from 'components/common/CardComingSoon'
-import {useTranslation} from "next-i18next";
+import { useTranslation } from 'next-i18next'
 
 const { SEO } = APP_INFO
 

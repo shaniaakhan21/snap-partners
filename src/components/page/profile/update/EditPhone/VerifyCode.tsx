@@ -1,5 +1,5 @@
 import ReactCodeInput from 'react-verification-code-input'
-import {Trans, useTranslation} from "next-i18next";
+import { Trans, useTranslation } from 'next-i18next'
 
 export const VerifyCode = ({
   onSubmitUpdatePhone,
@@ -40,11 +40,13 @@ export const VerifyCode = ({
 
           <div className='mt-4'>
             <p className='font-bold'>
-              <Trans i18nKey='profile:verify_phone.send_again' components={{ button: <button
+              <Trans i18nKey='profile:verify_phone.send_again' components={{
+                button: <button
                   type='button'
                   onClick={sendSMSCode}
                   className='text-primary-500 font-medium'
-                /> }}
+                />
+              }}
               />
             </p>
           </div>

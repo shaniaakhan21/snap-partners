@@ -16,8 +16,8 @@ import { handleFetchError } from 'lib/utils/handleFetchError'
 import { GTMTrack } from 'lib/utils/gtm'
 import { FormBecomeDriver } from '../../components/page/become-role/FormBecomeDriver'
 import Alert from '@material-ui/lab/Alert'
-import {builderWebsiteFields} from "../../lib/types/user/profile";
-import { useTranslation } from "next-i18next";
+import { builderWebsiteFields } from '../../lib/types/user/profile'
+import { useTranslation } from 'next-i18next'
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const { t } = useTranslation()
@@ -76,7 +76,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         },
         bank_information: data.bank_information,
         level: data.level,
-        ...(builderWebsiteFields.reduce((acc, field) => ({...acc, [field]: data[field]}), {}) as any)
+        ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
       })
     })()
 

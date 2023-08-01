@@ -13,7 +13,7 @@ import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { InputProfile } from '../commons/InputProfile'
 import { Button } from 'components/common/Button'
 import axios from 'axios'
-import {useTranslation} from "next-i18next";
+import { useTranslation } from 'next-i18next'
 
 interface IFormUpdatePhoneProps {
   auth: IAuth

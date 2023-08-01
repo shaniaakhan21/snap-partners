@@ -15,7 +15,7 @@ import { IHandleStep } from '../types'
 import { STEPS } from '.'
 import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 import { GTMTrack } from 'lib/utils/gtm'
-import { useTranslation } from "next-i18next";
+import { useTranslation } from 'next-i18next'
 
 export interface dataFormSignUpMerchant {
   'city' : string

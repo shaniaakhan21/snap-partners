@@ -158,12 +158,8 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       <p className='font-bold text-4xl text-[#18203F]'>{signUpas}{' '}
         <span className='text-primary-500'>{roleText}</span>
       </p>
-<<<<<<< HEAD
       <p className='text-[#18203F] font-bold text-md mb-2'>{subtext}</p>
-      <p className='text-gray-500'>Welcome! register to continue.</p>
-=======
       <p className='text-gray-500'>{t('auth:signup.form.welcome')}</p>
->>>>>>> 62b6bded2ef10da694717975e421a29d22f187df
 
       <form className='mt-6 w-full' onSubmit={handleSubmit(onSubmit)}>
         <InputForm
@@ -366,14 +362,9 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             {t('auth:signup.form.submit')}
           </Button>
 
-<<<<<<< HEAD
           {role !== ROLES.IBO && <p className='mt-4'>
-            <span className='font-semibold'>Already have an account?</span>
-=======
-          <p className='mt-4'>
             <span className='font-semibold'>{t('auth:signup.already-have-an-account')}</span>
             {' '}
->>>>>>> 62b6bded2ef10da694717975e421a29d22f187df
             <Link href={loginURL}>
               <a className='text-textAcent-500 focus:underline'>{t('auth:signup.login')}</a>
             </Link>

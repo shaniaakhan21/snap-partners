@@ -11,11 +11,8 @@ import { IReferralLink } from 'lib/types'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 import { GTMTrack } from 'lib/utils/gtm'
-<<<<<<< HEAD
 import { builderWebsiteFields } from '../../../../../../../lib/types/user/profile'
-=======
-import { Trans, useTranslation } from "next-i18next";
->>>>>>> 62b6bded2ef10da694717975e421a29d22f187df
+import { Trans, useTranslation } from 'next-i18next'
 
 export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { userTrack: IUserTrack, handleStep: IHandleStep, referralLink: IReferralLink }) => {
   const { t } = useTranslation()

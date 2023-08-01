@@ -15,7 +15,7 @@ import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { InputProfile } from '../commons/InputProfile'
 import { Button } from 'components/common/Button'
 import Alert from '@material-ui/lab/Alert'
-import {useTranslation} from "next-i18next";
+import { useTranslation } from 'next-i18next'
 
 interface IFormUpdatePasswordProps {
   auth: IAuth

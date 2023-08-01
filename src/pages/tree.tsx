@@ -10,7 +10,7 @@ import { getLocalStorage } from 'lib/utils/localStorage'
 import { useAuthStore, useNewWindowOpenedStore } from 'lib/stores'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useTranslation } from "next-i18next";
+import { useTranslation } from 'next-i18next'
 
 const { SEO } = APP_INFO
 
@@ -21,11 +21,11 @@ const ComingSoon: PageNext = () => {
   const [userId, setUserId] = useState(auth.id)
   const [tree, setTree] = useState({})
   const [history, setHistory] = useState([])
-  const [key, setKey] = useState(0);
+  const [key, setKey] = useState(0)
 
   const refreshComponent = () => {
-    setKey(prevKey => prevKey + 1); // incrementing key will cause the component to be recreated
-  };
+    setKey(prevKey => prevKey + 1) // incrementing key will cause the component to be recreated
+  }
   useEffect(() => {
     (async () => {
       const token = getLocalStorage('accessToken')

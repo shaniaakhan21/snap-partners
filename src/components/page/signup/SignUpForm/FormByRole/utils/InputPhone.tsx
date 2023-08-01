@@ -1,6 +1,6 @@
 import { FieldErrors, UseFormRegister, Controller } from 'react-hook-form'
 import PhoneInput from 'react-phone-input-2'
-import { useTranslation } from "next-i18next";
+import { useTranslation } from 'next-i18next'
 
 interface IInputFormProps {
   register?: UseFormRegister<any>

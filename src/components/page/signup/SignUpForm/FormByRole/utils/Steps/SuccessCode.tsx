@@ -21,12 +21,9 @@ import { ROLES } from './../../../../../../../config/roles'
 
 import Card from '@mui/material/Card'
 import SingleItem from './component/SingleItem'
-<<<<<<< HEAD
 import { builderWebsiteFields } from '../../../../../../../lib/types/user/profile'
 import { getLocalStorage, removeLocalStorage } from 'lib/utils/localStorage'
-=======
 import { useTranslation } from "next-i18next";
->>>>>>> 62b6bded2ef10da694717975e421a29d22f187df
 
 const { SEO } = APP_INFO
 
@@ -65,8 +62,6 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
       setIsLoading(false)
       return
     }
-
-<<<<<<< HEAD
     const redirectToIntegrous = getLocalStorage('redirectToIntegrous')
     const redirectToIntegrousReferralCode = getLocalStorage('redirectToIntegrousReferralCode')
     if (redirectToIntegrous === true) {
@@ -75,11 +70,7 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
       window.location.href = `https://www.integrouswellness.com/${redirectToIntegrousReferralCode}?access_token=${dataLogin.token}`
       return
     }
-
-    toast('Login Successful!', { type: 'success' })
-=======
     toast(t('auth:signup.success.toast'), { type: 'success' })
->>>>>>> 62b6bded2ef10da694717975e421a29d22f187df
     setIsLoading(false)
     setAuth({
       socialSecurityNumber: data.socialSecurityNumber,

@@ -5,7 +5,7 @@ import { GTMTrack } from 'lib/utils/gtm'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { AssociateIcon } from 'components/common/icons/Associate'
-import { Trans, useTranslation } from "next-i18next";
+import { Trans, useTranslation } from 'next-i18next'
 
 export const SelectRoleForIntegrousSignUp = () => {
   const { t } = useTranslation()

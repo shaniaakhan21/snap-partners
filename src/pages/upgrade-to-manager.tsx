@@ -10,7 +10,7 @@ import { ButtonCTA } from 'components/page/upgrade-to-manager/ButtonCTA'
 import { TextContactCTA } from 'components/common/TextContactCTA'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'
-import { useTranslation } from "next-i18next";
+import { useTranslation } from 'next-i18next'
 
 const { SEO } = APP_INFO
 

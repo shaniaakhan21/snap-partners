@@ -14,7 +14,7 @@ import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { FormChangePhone } from './FormChangePhone'
 import { FormSendPhone } from './FormSendPhone'
 import { VerifyCode } from './VerifyCode'
-import {Trans, useTranslation} from "next-i18next";
+import { Trans, useTranslation } from 'next-i18next'
 
 interface IFormUpdatePhoneProps {
   auth: IAuth
@@ -24,7 +24,7 @@ interface IFormUpdatePhoneProps {
 }
 
 export const EditPhone = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IFormUpdatePhoneProps) => {
-  const { t }  = useTranslation('profile')
+  const { t } = useTranslation('profile')
   const { register: registerPhone, handleSubmit: handleSubmitPhone, formState: { errors }, control } = useForm()
   const { handleSubmit } = useForm()
   const [isPhoneEditable, setIsPhoneEditable] = useState(false)

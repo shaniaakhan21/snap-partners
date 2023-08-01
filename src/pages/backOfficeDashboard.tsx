@@ -7,7 +7,6 @@ import CustomerGlobalPool from 'components/common/dashBackOffice/CustomerGlobalP
 import RankTracker from 'components/common/dashBackOffice/RankTracker'
 import { useAuthStore } from 'lib/stores'
 import { useEffect, useState } from 'react'
-import {APP_INFO} from "../config/appInfo";
 
 export interface PersonalVolumeInfo {
   pvValue: number,

@@ -6,11 +6,10 @@ import DashboardLayout from 'layouts/private/Dashboard'
 import { Spinner } from 'components/common/loaders'
 import { APP_INFO } from 'config/appInfo'
 import { GTMTrack } from 'lib/utils/gtm'
-import {useTranslation} from "next-i18next";
+import { useTranslation } from 'next-i18next'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 // import { Document, Page } from "react-pdf";
-
 
 const { SEO } = APP_INFO
 

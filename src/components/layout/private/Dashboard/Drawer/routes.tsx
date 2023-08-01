@@ -107,18 +107,18 @@ export const drawerRoutes = [
     label: 'Tree',
     i18n: 'drawer.tree'
   },
-   {
+  {
     icon: <GenealogyIcon />,
     to: '/binarytree',
     label: 'Binary Tree',
     i18n: 'drawer.binarytree',
     integrous: true
-   },
+  },
   {
     icon: <CompensationPlanIcon />,
     to: '/compensation-plan',
     label: 'Compensation Plan',
-    i18n: 'drawer.compensation-plan',
+    i18n: 'drawer.compensation-plan'
   },
   {
     icon: <AccountIcon />,
@@ -137,17 +137,14 @@ export const drawerRoutes = [
   {
     icon: <CreditCardIcon />,
     to: '/my-wallet',
-<<<<<<< HEAD
-    label: 'My Wallet'
+    label: 'My Wallet',
+    i18n: 'drawer.my-wallet'
   },
   {
     icon: <CompensationPlanIcon />,
     to: '/Documents',
-    label: 'Documents'
-=======
-    label: 'My Wallet',
-    i18n: 'drawer.my-wallet'
->>>>>>> 62b6bded2ef10da694717975e421a29d22f187df
+    label: 'Documents',
+    i18n: 'drawer.documents'
   }
 ]
 

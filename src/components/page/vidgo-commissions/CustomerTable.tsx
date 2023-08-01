@@ -1,6 +1,6 @@
 import { calculateMonthlyEarning } from 'lib/utils/vidgoCalculates'
-import {useEffect, useMemo, useState} from 'react'
-import {useTranslation} from "next-i18next";
+import { useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'next-i18next'
 
 export const CustomerTable = ({ myCustomers }: { myCustomers: any[] }) => {
   const { t } = useTranslation()

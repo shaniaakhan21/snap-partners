@@ -8,7 +8,7 @@ import axios from 'axios'
 import { useAuthStore, useLayoutConfig } from 'lib/stores'
 import { API } from 'config/api'
 import { GTMTrack } from 'lib/utils/gtm'
-import {useTranslation} from "next-i18next";
+import { useTranslation } from 'next-i18next'
 
 const useStyles = makeStyles(theme => ({
   container: {
