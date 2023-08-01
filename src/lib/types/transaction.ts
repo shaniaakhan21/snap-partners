@@ -23,7 +23,6 @@ export interface ITableTransactionsProps {
 
 export interface ITable2TransactionsProps {
   transactions: ITransaction[];
-  showTables: boolean;
   toggleTable: (toggle: boolean) => void;
 }
 

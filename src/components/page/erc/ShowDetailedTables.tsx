@@ -1,12 +1,17 @@
 import ReactDataGrid from "@inovua/reactdatagrid-community";
-import { ITable2TransactionsProps } from "lib/types/transaction";
-import React, { useState } from "react";
-import TableHeader from "components/page/erc/TableHeader";
+import React from "react";
 
-const TeamClientsTable: React.FC<ITable2TransactionsProps> = ({
-  transactions,
-  toggleTable,
+type ShowDetailedTablesProps = {
+  setPersonListOpen: (prop: boolean) => void;
+};
+
+const ShowDetailedTables: React.FC<ShowDetailedTablesProps> = ({
+  setPersonListOpen,
 }) => {
+  const gridStyle = {
+    minHeight: 350,
+  };
+
   const teamList = [
     {
       IBO: "Kvicha",
@@ -34,8 +39,12 @@ const TeamClientsTable: React.FC<ITable2TransactionsProps> = ({
     },
   ];
 
-  const columnsClient = [
-    { name: "level", header: "Level", defaultFlex: 1, minWidth: 150 },
+  const filterValue = [
+    { name: "description", operator: "startsWith", type: "string", value: "" },
+    { name: "amount", operator: "startsWith", type: "string", value: "" },
+  ];
+  const teamLevelReport = [
+    { name: "IBO", header: "IBO Name", defaultFlex: 1, minWidth: 150 },
     {
       name: "totalClients",
       header: "Total Clients",
@@ -76,10 +85,7 @@ const TeamClientsTable: React.FC<ITable2TransactionsProps> = ({
           <span>
             <button
               className="text-textAcent-500"
-              onClick={() => {
-                toggleTable(true);
-                console.log("here");
-              }}
+              onClick={() => setPersonListOpen(true)}
             >
               Details
             </button>
@@ -88,21 +94,12 @@ const TeamClientsTable: React.FC<ITable2TransactionsProps> = ({
       },
     },
   ];
-
-  const gridStyle = {
-    minHeight: 350,
-  };
-
-  const filterValue = [
-    { name: "description", operator: "startsWith", type: "string", value: "" },
-    { name: "amount", operator: "startsWith", type: "string", value: "" },
-  ];
   return (
     <div>
       <ReactDataGrid
         idProperty="id"
-        columns={columnsClient}
-        dataSource={transactions}
+        columns={teamLevelReport}
+        dataSource={teamList}
         sortable={true}
         defaultFilterValue={filterValue}
         style={gridStyle}
@@ -113,4 +110,4 @@ const TeamClientsTable: React.FC<ITable2TransactionsProps> = ({
   );
 };
 
-export default TeamClientsTable;
+export default ShowDetailedTables;

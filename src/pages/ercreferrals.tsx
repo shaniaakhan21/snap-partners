@@ -11,6 +11,8 @@ import ErcModal from "lib/modals/ErcModal";
 import PersonalClientsTable from "components/page/erc/PersonalClientsTable";
 import TeamClientsTable from "components/page/erc/TeamClientsTable";
 import TableHeader from "components/page/erc/TableHeader";
+import PersonListTable from "components/page/erc/PersonListTable";
+import ShowDetailedTables from "components/page/erc/ShowDetailedTables";
 
 const { SEO } = APP_INFO;
 
@@ -19,6 +21,7 @@ const ErcreferralsPage: Page = () => {
   const [transactionsClient, setTransactionsClient] = useState([]);
   const [monthSelected, setMonthSelected] = useState(new Date().getMonth());
   const [yearSelected, setYearSelected] = useState(new Date().getFullYear());
+  const [personListOpen, setPersonListOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [showTables, setShowTables] = useState(false);
 
@@ -29,21 +32,6 @@ const ErcreferralsPage: Page = () => {
   const toggleTables = (toggle: boolean) => {
     setShowTables(toggle);
   };
-
-  const month = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
 
   const years = [];
   for (let i = new Date().getFullYear(); i >= 2022; i--) {
@@ -126,9 +114,28 @@ const ErcreferralsPage: Page = () => {
         <div className="text-center">
           <TeamClientsTable
             transactions={transactionsClient}
-            showTables={showTables}
             toggleTable={toggleTables}
           />
+          {showTables && (
+            <div>
+              <TableHeader
+                tableName="Team Level Report"
+                setMonthSelected={setMonthSelected}
+                setYearSelected={setYearSelected}
+              />
+              <ShowDetailedTables setPersonListOpen={setPersonListOpen} />
+              {personListOpen && (
+                <div>
+                  <TableHeader
+                    tableName="Bill Jones List"
+                    setMonthSelected={setMonthSelected}
+                    setYearSelected={setYearSelected}
+                  />
+                  <PersonListTable />
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </>
