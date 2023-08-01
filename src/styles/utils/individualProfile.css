@@ -258,6 +258,11 @@ flex-direction: row;
 {
     cursor: pointer;
 }
+.profilePage-IBOProfile-activityLog-table-container
+{
+    max-height: 200px;
+    overflow-y: scroll;
+}
 
 /* .resetPasswordModal{
     width:796px;

@@ -46,34 +46,37 @@ function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId, 
     p: 4
   }
   const handleEditProfile = async () => {
-    const body = editProfileData
-    // if (editProfileData.email !== '') {
-    //   body = { ...body, email: editProfileData.email }
-    // }
-    // if (editProfileData.username !== '') {
-    //   body = { ...body, username: editProfileData.username }
-    // }
-    // if (editProfileData.socialSecurityNumber !== null && !Number.isNaN(editProfileData.socialSecurityNumber)) {
-    //   body = { ...body, socialSecurityNumber: editProfileData.socialSecurityNumber }
-    // }
-    // if (editProfileData.name !== '') {
-    //   body = { ...body, name: editProfileData.name }
-    // }
-    // if (editProfileData.lastname !== '') {
-    //   body = { ...body, lastname: editProfileData.lastname }
-    // }
-    // if (editProfileData.phoneNumber !== '') {
-    //   body = { ...body, phoneNumber: editProfileData.phoneNumber }
-    // }
-    // if (editProfileData.street !== '') {
-    //   body = { ...body, street: editProfileData.street }
-    // }
-    // if (editProfileData.state !== '') {
-    //   body = { ...body, state: editProfileData.state }
-    // }
-    // if (editProfileData.zip !== '') {
-    //   body = { ...body, zip: editProfileData.zip }
-    // }
+    let body = {}
+    if (editProfileData.email !== profileData.email) {
+      body = { ...body, email: editProfileData.email }
+    }
+    if (editProfileData.username !== profileData.username) {
+      body = { ...body, username: editProfileData.username }
+    }
+    if (editProfileData.socialSecurityNumber !== null && !Number.isNaN(editProfileData.socialSecurityNumber) && editProfileData.socialSecurityNumber !== profileData.socialSecurityNumber) {
+      body = { ...body, socialSecurityNumber: editProfileData.socialSecurityNumber }
+    }
+    if (editProfileData.name !== profileData.name) {
+      body = { ...body, name: editProfileData.name }
+    }
+    if (editProfileData.lastname !== profileData.lastname) {
+      body = { ...body, lastname: editProfileData.lastname }
+    }
+    if (editProfileData.phoneNumber !== profileData.phoneNumber) {
+      body = { ...body, phoneNumber: editProfileData.phoneNumber }
+    }
+    if (editProfileData.street !== profileData.street) {
+      body = { ...body, street: editProfileData.street }
+    }
+    if (editProfileData.state !== profileData.state) {
+      body = { ...body, state: editProfileData.state }
+    }
+    if (editProfileData.zip !== profileData.zip) {
+      body = { ...body, zip: editProfileData.zip }
+    }
+    if (editProfileData.city !== profileData.city) {
+      body = { ...body, city: editProfileData.city }
+    }
 
     if (Object.keys(body).length !== 0) {
       console.log('in submit profile')

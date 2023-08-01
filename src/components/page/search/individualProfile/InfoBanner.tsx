@@ -4,6 +4,7 @@ import React from 'react'
 import { getLocalStorage } from 'lib/utils/localStorage'
 import axios from 'axios'
 import { userLevelReverseMapping } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/formOptionData'
+import { PhoneIcon } from 'components/common/icons/Phone'
 
 function InfoBanner ({ profileData, userLevel }) {
   const cname = 'profilePage-IBOProfile'
@@ -47,12 +48,12 @@ function InfoBanner ({ profileData, userLevel }) {
             <p className={`${cname}-midSection-mainInfo-text`}><img src='/images/icons/email.svg'/>{`${profileData[0]?.email}`}</p></div>
         </div>
         { mapping[userLevel] >= 600 &&
-        <div>
+        <React.Fragment>
         <p className={`${cname}-midSection-mainInfo-text`} onClick={() => { handleResendEmail() }}><img src='/images/icons/flip-2.svg' style={{ width: '18px', height: '24px' }}/>resend welcome email</p>
         <p className={`${cname}-midSection-mainInfo-text`} onClick={() => { handleResendEmail2() }}><img src='/images/icons/flip-2.svg' style={{ width: '18px', height: '24px' }}/>resend welcome email-2</p>
-        </div>
+        </React.Fragment>
         }
-        <p className={`${cname}-midSection-mainInfo-text`}><img src='/images/icons/edit.svg' style={{ width: '18px', height: '24px' }}/>{`${profileData[0]?.phoneNumber}`}</p>
+        <p className={`${cname}-midSection-mainInfo-text`}><PhoneIcon classes='w-5 h-5' />{`${profileData[0]?.phoneNumber}`}</p>
       </div>
       <div className={`${cname}-midSection-mainInfo`}>
         <p className={`${cname}-footer-heading`}><span className={`${cname}-midSection-mainInfo-title`}>Actual Rank -</span>{`${profileData[0]?.ranks?.type.charAt(0).toUpperCase()}${profileData[0]?.ranks?.type.slice(1)}`}</p>
