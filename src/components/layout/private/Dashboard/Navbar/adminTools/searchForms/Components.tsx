@@ -69,7 +69,7 @@ export const ButtonComponent = (props:IButtonComponent) => {
   const { title, onClickFunction, param, type } = props
   return (
     <div>
-      <button className='search-form-button button-label' onClick={() => { onClickFunction(param) }}>{title}</button>
+      {onClickFunction ? <button style={{ backgroundColor: '#DD4C37' }} type='submit' className='search-form-button button-label' onClick={(e) => { onClickFunction(e, param) }}>{title}</button> : <button style={{ backgroundColor: '#DD4C37' }} type='submit' className='search-form-button button-label'>{title}</button>}
     </div>
   )
 }

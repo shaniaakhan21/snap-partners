@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import { Avatar, Modal, Box } from '@mui/material'
+import { Avatar, Modal, Box, TableContainer, Table, TableRow, TableCell, TableBody, TableHead } from '@mui/material'
 import { ButtonComponent, InputComponent, SelectComponent } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/Components'
 import React, { useState } from 'react'
 import axios from 'axios'
@@ -44,7 +44,7 @@ function IBOProfile ({ profileData, userLevel }) {
   const handlePasswordUpdate = (event, param) => {
     setNewPassword({ ...newPassword, password: event.target.value })
   }
-  const handleResetPassword = async () => {
+  const handleResetPassword = async (e) => {
     if (newPassword.password !== '') {
       if (confirm('Do you want to reset this user password')) {
         const token = getLocalStorage('accessToken')
@@ -79,7 +79,6 @@ function IBOProfile ({ profileData, userLevel }) {
       return `${currentDate.getDate()}/${(currentDate.getMonth() + 1)}/${currentDate.getFullYear()}`
     }
   }
-
 
   return (
     <>
@@ -130,10 +129,35 @@ function IBOProfile ({ profileData, userLevel }) {
 
             <div>
               <h2 className={`${cname}-footer-heading`}>Activity Log :</h2>
-              {
-                profileData[0]?.activityLog?.map((activity) => (
-                  <p className={`${cname}-footer-text`}>{activity?.description}</p>
-                ))
+              { profileData[0]?.activityLog?.length > 0
+                ? <div className={`${cname}-activityLog-table-container`}>
+                  <TableContainer>
+                    <Table>
+                      <TableHead>
+                        <TableRow>
+                          <TableCell><strong>Date & Time</strong></TableCell>
+                          <TableCell><strong>Description</strong></TableCell>
+                          <TableCell><strong>Type</strong></TableCell>
+                          <TableCell><strong>User</strong></TableCell>
+                        </TableRow>
+                      </TableHead>
+                      <TableBody>
+                        {
+                          profileData[0]?.activityLog?.map((activity) => (
+                            <TableRow>
+                              <TableCell>{activity?.createdAt}</TableCell>
+                              <TableCell>{activity?.description}</TableCell>
+                              <TableCell>{activity?.type}</TableCell>
+                              <TableCell>{activity?.byUser}</TableCell>
+                            </TableRow>
+                            // <p className={`${cname}-footer-text`}>{activity?.description}</p>
+                          ))
+                        }
+                      </TableBody>
+                    </Table>
+                  </TableContainer>
+                </div>
+                : <></>
               }
             </div>
 

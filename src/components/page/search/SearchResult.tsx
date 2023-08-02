@@ -4,11 +4,12 @@ import { Container, Paper, Avatar, TableContainer, TableBody, TableCell, Table, 
 import { ButtonComponent } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/Components'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { userProfilePictureMapping } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/formOptionData'
 
 function SearchResult ({ resultData }) {
   const router = useRouter()
   const cname = 'profilePage-searchResult'
-  const handleViewMore = (id:number) => {
+  const handleViewMore = (e, id:number) => {
     // console.log('view more', id)
     router.push(`/search/profile/${id}`)
   }
@@ -36,7 +37,7 @@ function SearchResult ({ resultData }) {
               {
                 resultData && resultData?.map((result) => (
                   <TableRow>
-                    <TableCell><Avatar src={result?.profileImage} style={{ width: '40px', height: '40px' }} /></TableCell>
+                    <TableCell><Avatar src={result?.profileImage ? result?.profileImage : userProfilePictureMapping[result?.ranks?.type]} style={{ width: '40px', height: '40px' }} /></TableCell>
                     <TableCell><p>{`${result?.name} ${result?.lastname}`}</p></TableCell>
                     <TableCell><p>{result?.id}</p></TableCell>
                     <TableCell><p>{result?.ranks?.type}</p></TableCell>
