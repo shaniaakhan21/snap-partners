@@ -17,7 +17,7 @@ import { HeaderCTA } from 'components/page/glsoary/HeaderCTA'
 import { InfoRank } from 'components/page/glsoary/InfoRank'
 import { InfoRole } from 'components/page/glsoary/InfoRole'
 import { InfoApp } from 'components/page/glsoary/InfoApp'
-import { builderWebsiteFields } from "../lib/types/user/profile";
+import { builderWebsiteFields } from '../lib/types/user/profile'
 
 const { SEO } = APP_INFO
 

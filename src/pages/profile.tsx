@@ -20,7 +20,7 @@ import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { EditPhone } from 'components/page/profile/update/EditPhone'
 import { AccountInfo } from 'components/page/profile/AccountInfo'
 import { FormUpdateUsename } from 'components/page/profile/update/FormUpdateUsename'
-import { FormUpdateBuilderInfo } from "../components/page/profile/update/FormUpdateBuilderInfo";
+import { FormUpdateBuilderInfo } from '../components/page/profile/update/FormUpdateBuilderInfo'
 
 const { SEO } = APP_INFO
 

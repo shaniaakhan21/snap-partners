@@ -5,7 +5,7 @@ import { Account } from './Account'
 import { useAuthStore, useDrawerStore } from 'lib/stores'
 import { useDashboardGetPathname } from 'lib/hooks/useDashboardGetPathnameData'
 import { useRouter } from 'next/router'
-import { Button } from "../../../../common/Button";
+import { Button } from '../../../../common/Button'
 
 export const Navbar = () => {
   const router = useRouter()

@@ -1,5 +1,5 @@
-/* eslint-disable no-undef */
-import { useState } from 'react'
+// eslint-disable-next-line no-use-before-define
+import React, { useState } from 'react'
 
 import { EyeHiddenIcon, EyeVisibleIcon } from 'components/common/icons'
 

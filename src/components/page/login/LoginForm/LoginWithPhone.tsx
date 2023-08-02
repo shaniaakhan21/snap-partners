@@ -12,7 +12,7 @@ import { InputPhone } from './utils/InputPhone'
 import { RegisterPassword } from './utils/RegisterPassword'
 import { useRouter } from 'next/router'
 import { getLocalStorage, removeLocalStorage } from 'lib/utils/localStorage'
-import { builderWebsiteFields } from "../../../../lib/types/user/profile";
+import { builderWebsiteFields } from '../../../../lib/types/user/profile'
 
 export interface IDataForm {
   phoneExt: string

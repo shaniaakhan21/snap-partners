@@ -105,8 +105,8 @@ const DashboardOverViewPage: Page = () => {
           <div className='mt-4'>
             <RewardsProgram />
           </div>
-          { /* <div className='mt-4 bg-white rounded-lg'> */}
-          {/* <MonthlySubscription /> */}
+          {/* <div className='mt-4 bg-white rounded-lg'> */}
+          {/*  <MonthlySubscription /> */}
           {/* </div> */}
           {/* <div className='mt-4 bg-white rounded-lg'> */}
           {/*  <MonthlyProduction /> */}

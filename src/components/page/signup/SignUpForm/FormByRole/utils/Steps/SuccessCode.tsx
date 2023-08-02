@@ -21,7 +21,7 @@ import { ROLES } from './../../../../../../../config/roles'
 
 import Card from '@mui/material/Card'
 import SingleItem from './component/SingleItem'
-import { builderWebsiteFields } from "../../../../../../../lib/types/user/profile";
+import { builderWebsiteFields } from '../../../../../../../lib/types/user/profile'
 import { getLocalStorage, removeLocalStorage } from 'lib/utils/localStorage'
 
 const { SEO } = APP_INFO
@@ -38,7 +38,7 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
       const { data: dataLogin, error: errorLogin } = await login({ username: userTrack.userInfo.username, password: userTrack.userInfo.password })
       setUserId(dataLogin.userId)
     }
-    getTokenId();
+    getTokenId()
   }, [])
 
   const handleClickLogin = async () => {
