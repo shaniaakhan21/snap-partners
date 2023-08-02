@@ -44,7 +44,7 @@ function IBOProfile ({ profileData, userLevel }) {
   const handlePasswordUpdate = (event, param) => {
     setNewPassword({ ...newPassword, password: event.target.value })
   }
-  const handleResetPassword = async () => {
+  const handleResetPassword = async (e) => {
     if (newPassword.password !== '') {
       if (confirm('Do you want to reset this user password')) {
         const token = getLocalStorage('accessToken')

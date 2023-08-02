@@ -19,7 +19,7 @@ function UpdateUserLevelModal ({ userLevelModal, onCloseUserLevelModal, userId }
     p: 4
   }
   const [userLevel, setUserLevel] = useState('')
-  const handleUpdateUserLevel = async () => {
+  const handleUpdateUserLevel = async (e) => {
     const token = getLocalStorage('accessToken')
     if (userLevel !== '') {
       const body = {

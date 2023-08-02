@@ -48,7 +48,7 @@ function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId, 
     boxShadow: 24,
     p: 4
   }
-  const handleEditProfile = async () => {
+  const handleEditProfile = async (e) => {
     let body = {}
     if (editProfileData.email !== profileData.email) {
       body = { ...body, email: editProfileData.email }

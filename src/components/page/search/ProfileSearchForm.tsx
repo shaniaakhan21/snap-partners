@@ -25,7 +25,8 @@ function ProfileSearchForm ({ children }) {
     if (param === 'userLevel') { setProfileSearchForm({ ...profileSearchForm, userLevel: event.target.value }) }
   }
 
-  const handleSubmit = (value) => {
+  const handleSubmit = (e, value) => {
+    e.preventDefault()
     if (value.profileSearchString !== '' && value.userLevel === '') {
       console.log('clkd')
       window.location.href = `/search/${value.profileSearchString}/noLevel`
@@ -50,7 +51,7 @@ function ProfileSearchForm ({ children }) {
             <Person />
             <p>Search Profile</p>
           </div>
-          <div className={`${cname}`}>
+          <form className={`${cname}`} onSubmit={(e) => handleSubmit(e, profileSearchForm)}>
             <div className='searchForm-inputContainer'>
               <InputComponent label={'profile search'} placeholder={'repID, Name or Email'} value={profileSearchForm.profileSearchString} onChangeFunction={setProfileSearchInput} param={'profileSearchString'} />
             </div>
@@ -58,9 +59,9 @@ function ProfileSearchForm ({ children }) {
               <SelectComponent label={'user level'} name={'userLevel'} options={userLevelOptions} value={profileSearchForm.userLevel} onChangeFunction={setProfileSearchInput} param={'userLevel'} />
             </div>
             <div className='searchForm-ButtonContainer'>
-              <ButtonComponent title={'search'} onClickFunction={handleSubmit} param={profileSearchForm} />
+              <ButtonComponent title={'search'} />
             </div>
-          </div>
+          </form>
         </Paper>
       </Container>
       {children}
