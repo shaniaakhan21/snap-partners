@@ -105,12 +105,12 @@ const DashboardOverViewPage: Page = () => {
           <div className='mt-4'>
             <RewardsProgram />
           </div>
-          <div className='mt-4 bg-white rounded-lg'>
-            <MonthlySubscription />
-          </div>
-          <div className='mt-4 bg-white rounded-lg'>
-            <MonthlyProduction />
-          </div>
+          {/* <div className='mt-4 bg-white rounded-lg'> */}
+          {/*  <MonthlySubscription /> */}
+          {/* </div> */}
+          {/* <div className='mt-4 bg-white rounded-lg'> */}
+          {/*  <MonthlyProduction /> */}
+          {/* </div> */}
         </div>
         <div className='ml-4'>
           <Event />
@@ -122,9 +122,9 @@ const DashboardOverViewPage: Page = () => {
           </div>
         </div>
       </div>
-      <div className='col-span-12 mt-4'>
-        <Referrals rankData={rankData} />
-      </div>
+      {/* <div className='col-span-12 mt-4'> */}
+      {/*  <Referrals rankData={rankData} /> */}
+      {/* </div> */}
     </>
   )
 }

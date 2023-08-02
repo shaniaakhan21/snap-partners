@@ -17,6 +17,7 @@ import { HeaderCTA } from 'components/page/glsoary/HeaderCTA'
 import { InfoRank } from 'components/page/glsoary/InfoRank'
 import { InfoRole } from 'components/page/glsoary/InfoRole'
 import { InfoApp } from 'components/page/glsoary/InfoApp'
+import { builderWebsiteFields } from '../lib/types/user/profile'
 
 const { SEO } = APP_INFO
 
@@ -66,7 +67,9 @@ const GlosaryPage: Page = () => {
             nsurUserId: data.nsurUserId,
             myPoints: auth?.nsurAccount?.myPoints || null
           },
-          bank_information: data.bank_information
+          bank_information: data.bank_information,
+          level: data.level,
+          ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
         })
       }
     })()

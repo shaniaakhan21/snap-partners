@@ -152,6 +152,14 @@ export const globalRoutes = [
   {
     to: '/my-wallet',
     label: 'My Wallet'
+  },
+  {
+    to: '/search',
+    label: 'Advance Search'
+  },
+  {
+    to: '/search/profile',
+    label: 'Individual Profile'
   }
 ]
 

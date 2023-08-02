@@ -53,7 +53,8 @@ interface IQueryUserMeReturn extends IQueryErrorReturn {
       accountType: string
       accountNumber: string
       accountHolderName: string
-    }
+    },
+    level?: string
   }
 }
 

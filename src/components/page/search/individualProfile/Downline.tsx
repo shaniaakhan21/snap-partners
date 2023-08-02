@@ -13,7 +13,7 @@ import { APP_INFO } from 'config/appInfo'
 import { ROLES } from 'config/roles'
 
 import DashboardLayout from 'layouts/private/Dashboard'
-import { Unilevel as OldGenealogy } from '../components/page/genealogy/OldGenealogy/UniLevel'
+import { Unilevel as OldGenealogy } from '../../../../components/page/genealogy/OldGenealogy/UniLevel'
 import { CustomerIcon, DriverIcon, MerchantIcon } from 'components/common/icons'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { NewGenealogy } from 'components/page/genealogy/NewGenealogy'
@@ -48,7 +48,7 @@ interface IDataFormSearch {
   search: string
 }
 
-const GenealogyPage: Page = () => {
+const Downline = ({ profileData }) => {
   const { handleSubmit, register } = useForm<IDataFormSearch>()
   const { genealogy: genealogyLayoutConfig } = useLayoutConfig()
   const store = useAuthStore()
@@ -89,7 +89,7 @@ const GenealogyPage: Page = () => {
     fetchLevelIsLoading,
     fetchUserDataLevelIsLoading,
     fetchUserDataSearchIsLoading
-  } = useReferralsData(auth, tabOpen, userDetailIdOpen, userDetailIdSearch, levelPage)
+  } = useReferralsData(auth, tabOpen, userDetailIdOpen, userDetailIdSearch, levelPage, profileData[0]?.id)
   // } = useReferralsData(auth, tabOpen, userDetailIdOpen, page)
 
   const handleClickTab = (id: string) => setTabOpen(id)
@@ -119,7 +119,7 @@ const GenealogyPage: Page = () => {
     if (levels?.length === 0) {
       return (
         <div className='w-full flex flex-col justify-center items-center min-h-[80vh]'>
-           <EmptyData label='You have no referrals yet' />
+          <EmptyData label='You have no referrals yet' />
         </div>
       )
     }
@@ -130,7 +130,7 @@ const GenealogyPage: Page = () => {
       <div className='w-full flex flex-col justify-center items-center min-h-[80vh]'>
         <EmptyData label='You have no referrals yet' />
 
-        <div className='w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-center justify-center justify-items-center gap-4 mt-8'>
+        {/* <div className='w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-center justify-center justify-items-center gap-4 mt-8'>
           <ReferralCards
             title='Refer Customers'
             ilustration={<CustomerIcon />}
@@ -152,7 +152,7 @@ const GenealogyPage: Page = () => {
             newUser={false}
             classes='col-span-1'
           />
-        </div>
+        </div> */}
       </div>
     )
   }
@@ -206,16 +206,16 @@ const GenealogyPage: Page = () => {
   )
 }
 
-GenealogyPage.getLayout = (page: ReactNode) => (
-  <>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - Genealogy</title>
-    </Head>
+// GenealogyPage.getLayout = (page: ReactNode) => (
+//   <>
+//     <Head>
+//       <title>{SEO.TITLE_PAGE} - Genealogy</title>
+//     </Head>
 
-    <DashboardLayout>
-      {page}
-    </DashboardLayout>
-  </>
-)
+//     <DashboardLayout>
+//       {page}
+//     </DashboardLayout>
+//   </>
+// )
 
-export default GenealogyPage
+export default Downline

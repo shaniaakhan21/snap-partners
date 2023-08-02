@@ -1,8 +1,9 @@
-import { useState } from 'react'
+// eslint-disable-next-line no-use-before-define
+import React, { useState } from 'react'
 
 import { EyeHiddenIcon, EyeVisibleIcon } from 'components/common/icons'
 
-interface IProps {
+type IProps = {
   inputId: string
   inputType: string
   value?: string
@@ -15,9 +16,9 @@ interface IProps {
   rules?: any
   isAPasswordInput?: boolean
   defaultValue?: string
-}
+} & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
-export const InputProfile = ({ inputId, inputType, value, disabled = false, labelFor, labelName, placeholder, error, register, rules, isAPasswordInput = false, defaultValue }: IProps) => {
+export const InputProfile = ({ inputId, inputType, value, disabled = false, labelFor, labelName, placeholder, error, register, rules, isAPasswordInput = false, defaultValue, ...props }: IProps) => {
   const registerValidated = register ? { ...register(inputId, rules ?? null) } : {}
 
   const [showPassword, setShowPassword] = useState(false)
@@ -41,6 +42,7 @@ export const InputProfile = ({ inputId, inputType, value, disabled = false, labe
           disabled={disabled}
           placeholder={placeholder}
           className={`w-full ${disabled ? 'bg-transparent' : 'bg-gray-200'} text-lg rounded py-1 px-2`}
+          {...props}
         />
         {isAPasswordInput && (
           <button

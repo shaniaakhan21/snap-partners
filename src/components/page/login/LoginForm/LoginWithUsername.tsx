@@ -12,6 +12,7 @@ import { InputForm } from './utils/Input'
 import { RegisterPassword } from './utils/RegisterPassword'
 import { useRouter } from 'next/router'
 import { getLocalStorage, removeLocalStorage } from 'lib/utils/localStorage'
+import { builderWebsiteFields } from '../../../../lib/types/user/profile'
 
 export interface IDataForm {
   username: string
@@ -89,7 +90,9 @@ export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
         nsurUserId: data.nsurUserId,
         myPoints: null
       },
-      bank_information: data.bank_information
+      bank_information: data.bank_information,
+      level: data.level,
+      ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
     })
     reset()
   }

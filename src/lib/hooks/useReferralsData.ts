@@ -13,7 +13,7 @@ interface IUserByIdWithLevels extends IUserById {
 
 const fnGetAllLevels = async (id: number, token: string, page: number) => {
   const { data, error } = await getAllLevels(id, token, page)
-
+  console.log('fetching with id', id)
   if (error) handleFetchError(error.status, error.info)
 
   return { data, error }
@@ -33,7 +33,8 @@ export const useReferralsData = (
   tabOpen: string,
   userDetailIdOpen: number,
   userDetailIdSearch,
-  levelPage: number
+  levelPage: number,
+  id?:number
 ) => {
   const [levels, setLevels] = useState<ILevel[] | null>(null)
   const [levelSelected, setLevelSelected] = useState<ILevel | null>(null)
@@ -46,13 +47,16 @@ export const useReferralsData = (
   const [fetchLevelIsLoading] = useState(false)
   const [fetchUserDataLevelIsLoading, setFetchUserDataLevelIsLoading] = useState(false)
   const [fetchUserDataSearchIsLoading, setFetchUserDataSearchIsLoading] = useState(false)
+  // if (typeof id === 'string') {
+  //   var userId = parseInt(id)
+  // }
 
   // Init Data and Level Page Changed
   useEffect(() => {
     (async () => {
       // setFetchLevelIsLoading(true)
       const { data, error } = await fnGetAllLevels(
-        userAuth.id,
+        id || userAuth.id,
         userAuth.accessToken,
         levelPage
       )

@@ -4,11 +4,13 @@ import { handleFetchError } from 'lib/utils/handleFetchError'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
+import { useAuthStore } from 'lib/stores'
 
 export const UpdateUserRank = ({ id, rank, authToken }: { id: number, rank: TRANK, authToken: string }) => {
   const { handleSubmit, register } = useForm<{ rankToUpdate: TRANK }>()
   const [disableUpdateRank, setDisableUpdateRank] = useState(true)
   const [, setIsLoading] = useState(false)
+  const { auth } = useAuthStore()
 
   const onSubmit = async ({ rankToUpdate }: { rankToUpdate: TRANK }) => {
     setIsLoading(true)
@@ -24,8 +26,8 @@ export const UpdateUserRank = ({ id, rank, authToken }: { id: number, rank: TRAN
     //   userId: id,
     //   rank: rankToUpdate
     // })
-
-    const { error } = await updateUserRank(id, rankToUpdate, authToken)
+    const byUser = `${auth?.name} ${auth?.lastname}`
+    const { error } = await updateUserRank(id, rankToUpdate, authToken, byUser)
 
     if (error) {
       handleFetchError(error.status, error.info)

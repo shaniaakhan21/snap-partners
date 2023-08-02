@@ -1,0 +1,48 @@
+.profilePage-searchForm-container{
+    padding: 25px;
+    margin: 20px 50px 20px 50px;
+}
+.profilePage-searchForm{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap:10px;
+    margin-top: 10px;
+}
+.searchForm-inputContainer{
+    width: 100%;
+}
+.profilePage-searchForm-label
+{
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        color:#404040;
+    
+        /* Text Font/H6 Headline */
+        font-size: 18px;
+        font-family: Open Sans;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 24px;
+}
+.profilePage-searchResult-container
+{
+    padding: 25px;
+    margin: 20px 50px 20px 50px;
+    max-height: 500px;
+    overflow-y: scroll;
+}
+.profilePage-searchResult-row
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 5%;
+    margin-top: 20px;
+}
+.profilePage-searchResult-row-button
+{
+    margin-top: -20px;
+}

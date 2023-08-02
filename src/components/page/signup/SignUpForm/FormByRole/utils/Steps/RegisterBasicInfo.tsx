@@ -146,6 +146,8 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
     subtext = ''
   }
 
+  const showSSNField = referralLink.role !== 'CUSTOMER' && referralLink.role !== 'integrousCustomer'
+
   const router = useRouter()
   const loginURL = router.pathname === '/auth/signup-integrous' ? '/auth/login-integrous' : '/auth/login'
 
@@ -277,19 +279,21 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           isRequired
         />
 
-        <InputForm
-          id='ssn'
-          name='ssn'
-          type='text'
-          label='Social Security Number'
-          registerId='ssn'
-          placeholder='Enter Social Security Number'
-          errors={errors.ssn}
-          register={register}
-          rulesForm={registerRulesConfig.ssn}
-          isRequired={false}
-          helpText='* Required to receive commissions beyond $600'
-        />
+        {showSSNField && (
+          <InputForm
+            id='ssn'
+            name='ssn'
+            type='text'
+            label='Social Security Number'
+            registerId='ssn'
+            placeholder='Enter Social Security Number'
+            errors={errors.ssn}
+            register={register}
+            rulesForm={registerRulesConfig.ssn}
+            isRequired={false}
+            helpText='* Required to receive commissions beyond $600'
+          />
+        )}
 
         <InputPhone
           label={'Phone'}

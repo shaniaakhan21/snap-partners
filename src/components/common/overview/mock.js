@@ -518,3 +518,26 @@ export const events = [
     redirectUrl: 'https://snapseminars.com/'
   }
 ]
+
+export const uplineData = [
+  {
+    id: 1,
+    rank: 'executive',
+    name: 'Amir Ali'
+  },
+  {
+    id: 2,
+    rank: 'referral partner',
+    name: 'Zeenat'
+  },
+  {
+    id: 3,
+    rank: 'referral partner',
+    name: 'Nisha'
+  },
+  {
+    id: 4,
+    rank: 'customer',
+    name: 'Sakina'
+  }
+]
