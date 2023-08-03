@@ -19,7 +19,8 @@ function SearchProfileForm () {
     if (param === 'userLevel') { setProfileSearchForm({ ...profileSearchForm, userLevel: event.target.value }) }
   }
 
-  const handleSubmit = (value) => {
+  const handleSubmit = (e, value) => {
+    e.preventDefault()
     if (value.profileSearchString !== '' && value.userLevel === '') {
       console.log('clkd')
       window.location.href = `/search/${value.profileSearchString}/noLevel`
@@ -34,11 +35,11 @@ function SearchProfileForm () {
   }
 
   return (
-    <div>
+    <form onSubmit={(e) => handleSubmit(e, profileSearchForm)}>
       <InputComponent label={'Profile Search'} placeholder={'RepID, Name or Email '} value={profileSearchForm.profileSearchString} onChangeFunction={setProfileSearchInput} param={'profileSearchString'}/>
       <SelectComponent label={'User Level'} name={'userLevel'} options={userLevelOptions} onChangeFunction={setProfileSearchInput} param={'userLevel'} />
-      <ButtonComponent title={'submit'} onClickFunction={handleSubmit} param={profileSearchForm} type='submit' />
-    </div>
+      <ButtonComponent title={'submit'} />
+    </form>
   )
 }
 

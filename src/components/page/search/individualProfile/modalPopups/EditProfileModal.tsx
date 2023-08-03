@@ -3,6 +3,8 @@ import { Modal, Box } from '@mui/material'
 import axios from 'axios'
 import { InputComponent, ButtonComponent } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/Components'
 import React, { useState, useEffect } from 'react'
+import { useAuthStore } from 'lib/stores'
+import { getLocalStorage } from 'lib/utils/localStorage'
 
 interface IProfileData {
     email?:string,
@@ -19,6 +21,7 @@ interface IProfileData {
 
 function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId, profileData }) {
   const InitialValues:IProfileData = {}
+  const { auth } = useAuthStore()
   useEffect(() => {
     setEditProfileData({
       email: profileData?.email,
@@ -45,39 +48,46 @@ function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId, 
     boxShadow: 24,
     p: 4
   }
-  const handleEditProfile = async () => {
-    const body = editProfileData
-    // if (editProfileData.email !== '') {
-    //   body = { ...body, email: editProfileData.email }
-    // }
-    // if (editProfileData.username !== '') {
-    //   body = { ...body, username: editProfileData.username }
-    // }
-    // if (editProfileData.socialSecurityNumber !== null && !Number.isNaN(editProfileData.socialSecurityNumber)) {
-    //   body = { ...body, socialSecurityNumber: editProfileData.socialSecurityNumber }
-    // }
-    // if (editProfileData.name !== '') {
-    //   body = { ...body, name: editProfileData.name }
-    // }
-    // if (editProfileData.lastname !== '') {
-    //   body = { ...body, lastname: editProfileData.lastname }
-    // }
-    // if (editProfileData.phoneNumber !== '') {
-    //   body = { ...body, phoneNumber: editProfileData.phoneNumber }
-    // }
-    // if (editProfileData.street !== '') {
-    //   body = { ...body, street: editProfileData.street }
-    // }
-    // if (editProfileData.state !== '') {
-    //   body = { ...body, state: editProfileData.state }
-    // }
-    // if (editProfileData.zip !== '') {
-    //   body = { ...body, zip: editProfileData.zip }
-    // }
+  const handleEditProfile = async (e) => {
+    let body = {}
+    if (editProfileData.email !== profileData.email) {
+      body = { ...body, email: editProfileData.email }
+    }
+    if (editProfileData.username !== profileData.username) {
+      body = { ...body, username: editProfileData.username }
+    }
+    if (editProfileData.socialSecurityNumber !== null && !Number.isNaN(editProfileData.socialSecurityNumber) && editProfileData.socialSecurityNumber !== profileData.socialSecurityNumber) {
+      body = { ...body, socialSecurityNumber: editProfileData.socialSecurityNumber }
+    }
+    if (editProfileData.name !== profileData.name) {
+      body = { ...body, name: editProfileData.name }
+    }
+    if (editProfileData.lastname !== profileData.lastname) {
+      body = { ...body, lastname: editProfileData.lastname }
+    }
+    if (editProfileData.phoneNumber !== profileData.phoneNumber) {
+      body = { ...body, phoneNumber: editProfileData.phoneNumber }
+    }
+    if (editProfileData.street !== profileData.street) {
+      body = { ...body, street: editProfileData.street }
+    }
+    if (editProfileData.state !== profileData.state) {
+      body = { ...body, state: editProfileData.state }
+    }
+    if (editProfileData.zip !== profileData.zip) {
+      body = { ...body, zip: editProfileData.zip }
+    }
+    if (editProfileData.city !== profileData.city) {
+      body = { ...body, city: editProfileData.city }
+    }
 
     if (Object.keys(body).length !== 0) {
-      console.log('in submit profile')
-      await axios.put(`/api/admin/editUserProfile/${userId}`, body)
+      const token = getLocalStorage('accessToken')
+      await axios.put(`/api/admin/editUserProfile/${userId}`, body, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
         .then((result) => {
           if (result.data.result[0] === 1) {
             alert('user Profile Updated')

@@ -85,3 +85,11 @@ export const userLevelReverseMapping = {
   owner: 1000,
   admin: 1100
 }
+
+export const userProfilePictureMapping = {
+  referralPartner: '/images/profile/referralPartner.png',
+  director: '/images/profile/director.png',
+  manager: '/images/profile/manager.png',
+  supervisor: '/images/profile/supervisor.png',
+  executive: '/images/profile/executive.png'
+}
