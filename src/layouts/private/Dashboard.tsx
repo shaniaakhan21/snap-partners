@@ -16,7 +16,7 @@ import { handleFetchError } from 'lib/utils/handleFetchError'
 import { GTMTrack } from 'lib/utils/gtm'
 import { FormBecomeDriver } from '../../components/page/become-role/FormBecomeDriver'
 import Alert from '@material-ui/lab/Alert'
-import {  builderWebsiteFields  } from '../../lib/types/user/profile'
+import { builderWebsiteFields } from '../../lib/types/user/profile'
 import { useTranslation } from 'next-i18next'
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
