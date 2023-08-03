@@ -104,6 +104,7 @@ export default function WeeklyBinary () {
     { field: 'description', headerName: 'Description', minWidth: 150, flex: 1, sortable: false },
     { field: 'left', headerName: 'left', maxWidth: 90, flex: 1, sortable: false },
     { field: 'right', headerName: 'right', maxWidth: 90, flex: 1, sortable: false },
+    { field: 'historicalQV', headerName: 'Historical QV (Monthly)', minWidth: 150, flex: 1, sortable: false },
     { field: 'createdAt', headerName: 'Date', minWidth: 270, flex: 1, headerAlign: 'center', align: 'center', sortable: false }
   ]
 
