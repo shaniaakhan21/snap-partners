@@ -50,6 +50,7 @@ export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { i
 
             if (currentOverview === 'partners') {
               if (route.to === '/binarytree') return <Fragment key={route.label} />
+              if (route.to === '/network-activity') return <Fragment key={route.label} />
             }
 
             if (route.to === '/binarytree' && !isIntegrousAssociate) return <Fragment key={route.label} />

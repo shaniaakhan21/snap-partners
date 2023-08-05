@@ -59,6 +59,7 @@ export const DrawerMobile = ({ isCurrentlyPage, auth, isManager, isAdmin }: { is
 
                 if (currentOverview === 'partners') {
                   if (route.to === '/binarytree') return <Fragment key={route.label} />
+                  if (route.to === '/network-activity') return <Fragment key={route.label} />
                 }
 
                 if (route.to === '/binarytree' && !isIntegrousAssociate) return <Fragment key={route.label} />
