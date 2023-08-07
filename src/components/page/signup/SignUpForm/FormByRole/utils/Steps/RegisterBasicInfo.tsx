@@ -73,9 +73,22 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       return
     }
 
-    const phoneNumber = `+${dataForm.phoneNumber}`
-
-    const { error } = await signUpStep1({ phoneNumber })
+    const { error } = await signUpStep1({
+      phoneNumber: `+${dataForm.phoneNumber}`,
+      email: dataForm.email,
+      roles: {
+        admin: referralLink.role === 'ADMIN',
+        customer: referralLink.role === 'CUSTOMER',
+        driver: referralLink.role === 'DRIVER',
+        merchant: referralLink.role === 'MERCHANT',
+        agent: referralLink.role === 'AGENT',
+        ibo: referralLink.role === ROLES.IBO,
+        integrousAssociate: referralLink.role === 'integrousAssociate',
+        integrousCustomer: referralLink.role === 'integrousCustomer'
+      },
+      username: dataForm.username,
+      sponsorReferralCode: dataForm.referralCode || null
+    })
 
     if (error) {
       handleFetchError(error.status, error.info)
@@ -94,7 +107,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       state: dataForm.state,
       zip: dataForm.zip,
       ssn: dataForm.ssn,
-      phone: phoneNumber,
+      phone: `+${dataForm.phoneNumber}`,
       sponsorReferralCode: dataForm.referralCode || null,
       idImage: null,
       insuranceImage: null,

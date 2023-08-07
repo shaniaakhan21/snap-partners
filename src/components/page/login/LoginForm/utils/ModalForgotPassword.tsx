@@ -14,7 +14,7 @@ import { toast } from 'react-toastify'
 import ReactCodeInput from 'react-verification-code-input'
 import { RegisterPassword } from 'components/page/signup/SignUpForm/FormByRole/utils/RegisterPassword'
 import { registerRulesConfig } from 'components/page/signup/SignUpForm/FormByRole/utils/formRules'
-import { signUpStep1 } from 'lib/services/auth/signUp'
+import { sendOTP } from 'lib/services/auth/sendOTP'
 import { MODALS_ID, useModalStore } from 'lib/stores'
 
 const ruleEmail = {
@@ -50,7 +50,7 @@ export const ModalForgotPassword = () => {
   const onSubmitPhone = async (dataForm: { phoneNumber: string }) => {
     setPhone(`+${dataForm.phoneNumber}`)
 
-    const { error } = await signUpStep1({ phoneNumber: `+${dataForm.phoneNumber}` })
+    const { error } = await sendOTP({ phoneNumber: `+${dataForm.phoneNumber}` })
 
     if (error) {
       handleFetchError(error.status, error.info)
