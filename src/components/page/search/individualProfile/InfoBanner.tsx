@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable no-use-before-define */
 import { Avatar, Paper } from '@mui/material'
 import React from 'react'
@@ -23,6 +24,17 @@ function InfoBanner ({ profileData, userLevel }) {
         console.log('result from resend email', result.data)
         alert('email sent successfully')
       })
+  }
+
+  const snapType = (roles) => {
+    let roleStr = ''
+   roles && Object.keys(roles)?.map((role) => {
+      if (roles[role]) {
+        roleStr = roleStr + ` ${role}`
+      }
+    })
+
+    return roleStr
   }
 
   const handleResendEmail2 = async () => {
@@ -60,7 +72,8 @@ function InfoBanner ({ profileData, userLevel }) {
         <p className={`${cname}-midSection-mainInfo-text`}><PhoneIcon classes='w-5 h-5' />{`${profileData[0]?.phoneNumber}`}</p>
       </div>
       <div className={`${cname}-midSection-mainInfo`}>
-        <p className={`${cname}-footer-heading`}><span className={`${cname}-midSection-mainInfo-title`}>Actual Rank - </span>{`${profileData[0]?.ranks?.type.charAt(0).toUpperCase()}${profileData[0]?.ranks?.type.slice(1)}`}</p>
+        <p className={`${cname}-footer-heading`}><span className={`${cname}-midSection-mainInfo-title`}>Snap Rank - </span>{`${profileData[0]?.ranks?.type.charAt(0).toUpperCase()}${profileData[0]?.ranks?.type.slice(1)}`}</p>
+        <p className={`${cname}-midSection-mainInfo-text`}><span className={`${cname}-midSection-mainInfo-title`}>Snap Type -</span>{snapType(profileData[0]?.roles)}</p>
         <p className={`${cname}-midSection-mainInfo-text`}><span className={`${cname}-midSection-mainInfo-title`}>User Role -</span>{profileData[0]?.level}</p>
         { mapping[userLevel] >= 700 &&
         <p className={`${cname}-midSection-mainInfo-text`}><span className={`${cname}-midSection-mainInfo-title`}>GrandfatherRank -</span>{profileData[0]?.gRanks[0]?.gRank}</p>
