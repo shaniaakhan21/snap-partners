@@ -87,7 +87,8 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
             integrousAssociate: userTrack.userInfo.roles.integrousAssociate
           },
           code,
-          sponsorReferralCode: userTrack.userInfo.sponsorReferralCode
+          sponsorReferralCode: userTrack.userInfo.sponsorReferralCode,
+          level: userTrack.userInfo.level
         }
       }
       : {
@@ -125,7 +126,8 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
             name: userTrack.userInfo.merchant.name,
             password: userTrack.userInfo.merchant.password,
             save_on_snap: userTrack.userInfo.merchant.save_on_snap
-          }
+          },
+          level: userTrack.userInfo.level
         }
       }
 

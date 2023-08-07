@@ -23,7 +23,8 @@ interface ISignUpDataBodyStep2 extends ISignUpDataBodyStep1 {
     integrousAssociate: boolean
   },
   code: number
-  sponsorReferralCode: string
+  sponsorReferralCode: string,
+  level
 }
 
 interface ISignUpDataBodyMerchant {
@@ -60,7 +61,8 @@ interface ISignUpDataBodyMerchant {
     pincode: '1234',
     'save_on_snap': true
   },
-  sponsorReferralCode: string
+  sponsorReferralCode: string,
+  level
 }
 
 export const signUpStep1 = async (dataBody: ISignUpDataBodyStep1 | ISignUpDataBodyMerchant): Promise<IQueryErrorReturn> => {

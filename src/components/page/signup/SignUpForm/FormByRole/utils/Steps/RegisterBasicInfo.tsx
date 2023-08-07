@@ -83,6 +83,17 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       return
     }
 
+    const setLevel = (referral) => {
+      let level = ''
+      if (referral === 'ADMIN') {
+        level = 'admin'
+      } else if (referral === 'CUSTOMER') {
+        level = 'customer'
+      } else {
+        level = 'ibo'
+      }
+      return level
+    }
     handleUserInfo({
       email: dataForm.email,
       username: dataForm.username,
@@ -107,7 +118,8 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
         ibo: referralLink.role === ROLES.IBO,
         integrousAssociate: referralLink.role === 'integrousAssociate',
         integrousCustomer: referralLink.role === 'integrousCustomer'
-      }
+      },
+      level: setLevel(referralLink.role)
     })
 
     setLoading(false)
