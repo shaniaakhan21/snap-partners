@@ -73,6 +73,18 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
       return
     }
 
+    const setLevel = (referral) => {
+      let level = ''
+      if (referral === 'ADMIN') {
+        level = 'admin'
+      } else if (referral === 'CUSTOMER') {
+        level = 'customer'
+      } else {
+        level = 'ibo'
+      }
+      return level
+    }
+
     const phoneNumber = `+${dataForm.phoneNumber}`
 
     const dataToSend = {
@@ -110,7 +122,8 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
         pincode: '1234',
         save_on_snap: true
       },
-      sponsorReferralCode: dataForm.referralCode || null
+      sponsorReferralCode: dataForm.referralCode || null,
+      level: setLevel(referralLink.role)
     }
 
     handleUserInfo(dataToSend)

@@ -62,7 +62,7 @@ interface ISignUpDataBodyMerchant {
     'save_on_snap': true
   },
   sponsorReferralCode: string,
-  level
+  level?: string
 }
 
 export const signUpStep1 = async (dataBody: ISignUpDataBodyStep1 | ISignUpDataBodyMerchant): Promise<IQueryErrorReturn> => {
