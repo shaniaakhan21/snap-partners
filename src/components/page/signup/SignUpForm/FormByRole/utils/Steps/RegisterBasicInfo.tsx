@@ -85,9 +85,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
 
     const setLevel = (referral) => {
       let level = ''
-      if (referral === 'ADMIN') {
-        level = 'admin'
-      } else if (referral === 'CUSTOMER') {
+      if (referral === 'CUSTOMER') {
         level = 'customer'
       } else {
         level = 'ibo'
