@@ -8,12 +8,16 @@ import { getLocalStorage } from 'lib/utils/localStorage'
 import { userLevelReverseMapping } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/formOptionData'
 import UpdateUserLevelModal from './modalPopups/UpdateUserLevelModal'
 import EditProfileModal from './modalPopups/EditProfileModal'
+import UpdateGrandfatherModal from './modalPopups/UpdateGrandfatherModal'
+import SponsorUpdateModal from './modalPopups/SponsorUpdateModal'
 import InfoBanner from './InfoBanner'
 
 function IBOProfile ({ profileData, userLevel }) {
   const [passwordResetModal, setPasswordResetModal] = useState<boolean>(false)
   const [userLevelModal, setUserLevelModal] = useState<boolean>(false)
   const [editProfileModal, setEditProfileModal] = useState<boolean>(false)
+  const [grandfatherModal, setGrandfatherModal] = useState<boolean>(false)
+  const [sponsorUpdateModal, setSponsorUpdateModal] = useState<boolean>(false)
   const [newPassword, setNewPassword] = useState({
     password: ''
   })
@@ -29,6 +33,12 @@ function IBOProfile ({ profileData, userLevel }) {
   }
   const onCloseEditProfileModal = () => {
     setEditProfileModal(false)
+  }
+  const onCloseGrandfatherModal = () => {
+    setGrandfatherModal(false)
+  }
+  const onCloseSponsorUpdateModal = () => {
+    setSponsorUpdateModal(false)
   }
   const style = {
     position: 'absolute' as 'absolute',
@@ -85,6 +95,9 @@ function IBOProfile ({ profileData, userLevel }) {
       <div className={`${cname}-container`}>
         <div className={`${cname}-header`}>
           <p className={`${cname}-header-text`}>User ID - {`${profileData[0]?.id}`}</p>
+          { mapping[userLevel] >= 700 &&
+          <p className={`${cname}-header-text ${cname}-midSection-mainInfo-text`} onClick={() => { setGrandfatherModal(true) }}>Edit Grandfather Rank</p>
+          }
           { mapping[userLevel] >= 600 &&
           <p className={`${cname}-header-text ${cname}-midSection-mainInfo-text`} onClick={() => { setEditProfileModal(true) }}>Edit Profile<img src='/images/icons/edit.svg' style={{ width: '18px', height: '24px' }}/></p>
           }
@@ -95,6 +108,9 @@ function IBOProfile ({ profileData, userLevel }) {
           <div className={`${cname}-midSection-AdditionalInfo`}>
             <div>
               <p className={`${cname}-midSection-mainInfo-name adInfoText`}>Sponsered by <a href={`/search/profile/${profileData[0]?.sponsor?.id}`}>{profileData[0]?.sponsor?.name} {profileData[0]?.sponsor?.lastname}</a></p>
+              { mapping[userLevel] >= 700 &&
+                <p className={`${cname}-header-text ${cname}-midSection-mainInfo-text`} onClick={() => { setSponsorUpdateModal(true) }}>Edit Sponser</p>
+              }
             </div>
             <div>
               <div className={`${cname}-midSection-AdditionalInfo-icons`}>
@@ -183,6 +199,8 @@ function IBOProfile ({ profileData, userLevel }) {
         </Modal> */}
         <UpdateUserLevelModal userLevelModal={userLevelModal} onCloseUserLevelModal={onCloseUserLevelModal} userId={profileData[0]?.id} />
         <EditProfileModal editProfileModal={editProfileModal} onCloseEditProfileModal={onCloseEditProfileModal} userId={profileData[0]?.id} profileData={profileData[0]} />
+        <UpdateGrandfatherModal grandfatherModal={grandfatherModal} onCloseGrandfatherModal={onCloseGrandfatherModal} userId={profileData[0]?.id} profileData={profileData[0]} />
+        <SponsorUpdateModal sponsorUpdateModal={sponsorUpdateModal} onCloseSponsorUpdateModal={onCloseSponsorUpdateModal} userId={profileData[0]?.id} />
       </div>
     </>
   )

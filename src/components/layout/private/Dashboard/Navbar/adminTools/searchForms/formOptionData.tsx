@@ -93,3 +93,23 @@ export const userProfilePictureMapping = {
   supervisor: '/images/profile/supervisor.png',
   executive: '/images/profile/executive.png'
 }
+
+
+export const grandfatherRankOptions = [
+  {
+    name: 'Manager',
+    value: 'manager'
+  },
+  {
+    name: 'Supervisor',
+    value: 'supervisor'
+  },
+  {
+    name: 'Director',
+    value: 'director'
+  },
+  {
+    name: 'Executive',
+    value: 'executive'
+  }
+]
