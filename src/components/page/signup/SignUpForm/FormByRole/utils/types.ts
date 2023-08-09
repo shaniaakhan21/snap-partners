@@ -21,6 +21,7 @@ export interface IDataForm extends IUserToSignUp {
   // IBO
   street: string
   state: string
+  city: string
   zip: string
   ssn: string
   level: string

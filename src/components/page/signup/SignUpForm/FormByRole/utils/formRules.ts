@@ -72,6 +72,11 @@ export const registerRulesConfig = {
     maxLength: { value: 500, message: 'Max 500 Characters *' }
   },
 
+  city: {
+    required: { value: true, message: 'City is Required *' },
+    maxLength: { value: 500, message: 'Max 500 Characters *' }
+  },
+
   state: {
     required: { value: true, message: 'State Required *' },
     maxLength: { value: 50, message: 'Max 50 Characters *' }

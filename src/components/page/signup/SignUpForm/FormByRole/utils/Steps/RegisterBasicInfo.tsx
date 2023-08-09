@@ -50,16 +50,16 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       return
     }
 
-    if (dataForm.confirmPassword !== dataForm.password) {
-      setError('confirmPassword', { message: 'The password does not match' })
-      setLoading(false)
+    // if (dataForm.confirmPassword !== dataForm.password) {
+    //   setError('confirmPassword', { message: 'The password does not match' })
+    //   setLoading(false)
 
-      if (dataForm.confirmEmail !== dataForm.email) {
-        return setError('confirmEmail', { message: 'The email does not match' })
-      }
+    //   if (dataForm.confirmEmail !== dataForm.email) {
+    //     return setError('confirmEmail', { message: 'The email does not match' })
+    //   }
 
-      return
-    }
+    //   return
+    // }
 
     if (dataForm.idImage && dataForm.idImage[0].size > (maxFileSizeInMb * 1000000)) {
       setError('idImage', { message: `The maximum file size in ID Image is ${maxFileSizeInMb}mb, please upload a file with a maximum file size of ${maxFileSizeInMb}mb` })
@@ -100,6 +100,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       password: dataForm.password,
       businessName: dataForm.businessName,
       street: dataForm.street,
+      city: dataForm.city,
       state: dataForm.state,
       zip: dataForm.zip,
       ssn: dataForm.ssn,
@@ -260,6 +261,19 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           errors={errors.street}
           register={register}
           rulesForm={registerRulesConfig.street}
+          isRequired
+        />
+
+        <InputForm
+          id='city'
+          name='city'
+          type='text'
+          label='city'
+          registerId='city'
+          placeholder='Enter City Name'
+          errors={errors.city}
+          register={register}
+          rulesForm={registerRulesConfig.city}
           isRequired
         />
 
