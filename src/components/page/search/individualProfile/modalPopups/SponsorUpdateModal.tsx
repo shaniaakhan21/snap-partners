@@ -22,27 +22,29 @@ function SponsorUpdateModal ({ sponsorUpdateModal, onCloseSponsorUpdateModal, us
   const [sponsor, setSponsor] = useState('')
   const [sponserSearchResult, setSponsorSearchResult] = useState([])
   const [selectedSponsor, setSelectedSponsor] = useState(null)
-  const handleUpdateUserLevel = async (e) => {
-    if (selectedSponsor) {
-      if (userId === selectedSponsor.id) {
-        alert("user and sponsor can't be same")
-        return
-      }
-      await axios.put('/api/user/sponsor', {
-        userId,
-        sponsorId: selectedSponsor.id
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
+  const handleUpdateSponsor = async (e) => {
+    if (confirm('Are you sure you want to edit sponsor for this user')) {
+      if (selectedSponsor) {
+        if (userId === selectedSponsor.id) {
+          alert("user and sponsor can't be same")
+          return
         }
-      })
-        .then((result) => {
-          if (result?.data?.data?.success) {
-            alert('Sponsor updated')
-            window.location.reload()
+        await axios.put('/api/user/sponsor', {
+          userId,
+          sponsorId: selectedSponsor.id
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
           }
         })
+          .then((result) => {
+            if (result?.data?.data?.success) {
+              alert('Sponsor updated')
+              window.location.reload()
+            }
+          })
+      }
     }
   }
   const updateSponsor = async (event, param) => {
@@ -95,7 +97,7 @@ function SponsorUpdateModal ({ sponsorUpdateModal, onCloseSponsorUpdateModal, us
           </div>
         }
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
-          <ButtonComponent title='submit' onClickFunction={handleUpdateUserLevel}/>
+          <ButtonComponent title='submit' onClickFunction={handleUpdateSponsor}/>
         </div>
       </Box>
     </Modal>
