@@ -140,7 +140,7 @@ function IBOProfile ({ profileData, userLevel }) {
 
             <div>
               <h2 className={`${cname}-footer-heading`}>Start Date:</h2>
-              <p className={`${cname}-footer-text`}>{`${formatDate(profileData[0]?.createdAt)}`}</p>
+              <p className={`${cname}-footer-text`}>{`${profileData[0]?.createdAtUs}`}</p>
             </div>
 
             <div>
