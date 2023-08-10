@@ -88,7 +88,7 @@ function SponsorUpdateModal ({ sponsorUpdateModal, onCloseSponsorUpdateModal, us
               sponserSearchResult.map((result) => (
                 <div className='sponsor-searchResult' onClick={() => {
                   setSelectedSponsor({ ...result })
-                  setSponsor(result.name)
+                  setSponsor(`${result?.name} ${result?.lastname}`)
                 }}>{result?.name} {result?.lastname}</div>
               ))
             }

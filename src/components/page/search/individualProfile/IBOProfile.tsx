@@ -81,12 +81,12 @@ function IBOProfile ({ profileData, userLevel }) {
   const formatDate = (dateString) => {
     console.log('date from format date ', dateString)
     if (dateString) {
-      const [date, time] = dateString?.split(' ')
+      const [date, time, meridiem] = dateString?.split(' ')
       const [day, month, year] = date?.split('/')
       const formattedDatestring = `${month}/${day}/${year}`
       const currentDate = new Date(formattedDatestring)
       console.log('date from format date ', currentDate)
-      return `${currentDate.getDate()}/${(currentDate.getMonth() + 1)}/${currentDate.getFullYear()}`
+      return `${currentDate.getMonth() + 1}/${(currentDate.getDate())}/${currentDate.getFullYear()} ${time} ${meridiem}`
     }
   }
 
@@ -161,7 +161,7 @@ function IBOProfile ({ profileData, userLevel }) {
                         {
                           profileData[0]?.activityLog?.map((activity) => (
                             <TableRow>
-                              <TableCell>{activity?.createdAt}</TableCell>
+                              <TableCell>{formatDate(activity?.createdAt)}</TableCell>
                               <TableCell>{activity?.description}</TableCell>
                               <TableCell>{activity?.type}</TableCell>
                               <TableCell>{activity?.byUser}</TableCell>
