@@ -85,6 +85,12 @@ export const drawerRoutes = [
     label: 'Tools'
   },
   {
+    icon: <AccountIcon />,
+    to: '/network-activity',
+    label: 'Network Activity',
+    integrous: true
+   },
+  {
     icon: <GenealogyIcon />,
     to: '/genealogy',
     label: 'Genealogy',

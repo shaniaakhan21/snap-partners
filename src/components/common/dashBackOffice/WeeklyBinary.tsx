@@ -102,8 +102,9 @@ export default function WeeklyBinary () {
   const columns = [
     { field: 'id', headerName: 'Point Id', maxWidth: 90, flex: 1, hide: true, sortable: false },
     { field: 'description', headerName: 'Description', minWidth: 150, flex: 1, sortable: false },
-    { field: 'left', headerName: 'left', maxWidth: 90, flex: 1, sortable: false },
-    { field: 'right', headerName: 'right', maxWidth: 90, flex: 1, sortable: false },
+    { field: 'left', headerName: 'Left CV', maxWidth: 90, flex: 1, sortable: false },
+    { field: 'right', headerName: 'Right CV', maxWidth: 90, flex: 1, sortable: false },
+    { field: 'historicalQV', headerName: 'Historical QV (Monthly)', minWidth: 150, flex: 1, sortable: false },
     { field: 'createdAt', headerName: 'Date', minWidth: 270, flex: 1, headerAlign: 'center', align: 'center', sortable: false }
   ]
 

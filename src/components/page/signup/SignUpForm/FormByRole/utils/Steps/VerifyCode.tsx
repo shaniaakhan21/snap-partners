@@ -28,7 +28,22 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
   const sendSMSCode = async () => {
     setIsVerifyingCode(true)
 
-    const { error } = await signUpStep1({ phoneNumber: userTrack.userInfo.phone })
+    const { error } = await signUpStep1({
+      phoneNumber: userTrack.userInfo.phone,
+      email: userTrack.userInfo.email,
+      roles: {
+        admin: userTrack.userInfo.roles.admin,
+        customer: userTrack.userInfo.roles.customer,
+        driver: userTrack.userInfo.roles.driver,
+        agent: userTrack.userInfo.roles.agent,
+        merchant: userTrack.userInfo.roles.merchant,
+        ibo: userTrack.userInfo.roles.ibo,
+        integrousCustomer: userTrack.userInfo.roles.integrousCustomer,
+        integrousAssociate: userTrack.userInfo.roles.integrousAssociate
+      },
+      username: userTrack.userInfo.username,
+      sponsorReferralCode: userTrack.userInfo.referralCode || null
+    })
 
     if (error) {
       handleFetchError(error.status, error.info)
@@ -44,7 +59,22 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
   const onSubmitUpdatePhone = async ({ phoneNumber }) => {
     setIsVerifyingCode(true)
 
-    const { error } = await signUpStep1({ phoneNumber: `+${phoneNumber}` })
+    const { error } = await signUpStep1({
+      phoneNumber: `+${phoneNumber}`,
+      email: userTrack.userInfo.email,
+      roles: {
+        admin: userTrack.userInfo.roles.admin,
+        customer: userTrack.userInfo.roles.customer,
+        driver: userTrack.userInfo.roles.driver,
+        agent: userTrack.userInfo.roles.agent,
+        merchant: userTrack.userInfo.roles.merchant,
+        ibo: userTrack.userInfo.roles.ibo,
+        integrousCustomer: userTrack.userInfo.roles.integrousCustomer,
+        integrousAssociate: userTrack.userInfo.roles.integrousAssociate
+      },
+      username: userTrack.userInfo.username,
+      sponsorReferralCode: userTrack.userInfo.referralCode || null
+    })
 
     if (error) {
       handleFetchError(error.status, error.info)
@@ -108,6 +138,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
             customer: userTrack.userInfo.roles.customer,
             driver: userTrack.userInfo.roles.driver,
             merchant: userTrack.userInfo.roles.merchant,
+            ibo: userTrack.userInfo.roles.ibo,
             agent: userTrack.userInfo.roles.agent,
             integrousCustomer: userTrack.userInfo.roles.integrousCustomer,
             integrousAssociate: userTrack.userInfo.roles.integrousAssociate
