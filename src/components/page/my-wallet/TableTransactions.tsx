@@ -31,12 +31,22 @@ interface ITableTransactionsProps {
 }
 
 export const TableTransactions = ({ transactions }: ITableTransactionsProps) => {
+  const formatDate = (dateString) => {
+    if (dateString) {
+      const [day, month, year] = dateString?.split('/')
+      return `${month}/${day}/${year}`
+    }
+  }
+  const changeDateFormat = (arr) => {
+    const newArr = arr.map((element) => ({ ...element, date: formatDate(element.date) }))
+    return newArr
+  }
   return (
     <ReactDataGrid
       idProperty="id"
       defaultSortInfo={{ name: 'id', dir: -1 }}
       columns={columns}
-      dataSource={transactions}
+      dataSource={ changeDateFormat(transactions)}
       sortable={true}
       defaultFilterValue={filterValue}
       style={gridStyle}
