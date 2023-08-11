@@ -161,7 +161,7 @@ function IBOProfile ({ profileData, userLevel }) {
                         {
                           profileData[0]?.activityLog?.map((activity) => (
                             <TableRow>
-                              <TableCell>{formatDate(activity?.createdAt)}</TableCell>
+                              <TableCell>{activity?.createdAt}</TableCell>
                               <TableCell>{activity?.description}</TableCell>
                               <TableCell>{activity?.type}</TableCell>
                               <TableCell>{activity?.byUser}</TableCell>
