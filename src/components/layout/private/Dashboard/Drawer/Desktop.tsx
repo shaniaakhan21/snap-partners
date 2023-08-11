@@ -60,7 +60,7 @@ export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { i
 
             return (
               <li
-                className={`w-full relative ${isCurrentlyPage(route.to) && 'linkWrapper__activate bg-[#19191914]'}`}
+                className={`w-full relative ${isCurrentlyPage(route.to) && !route.to.includes('/Accounting') && 'linkWrapper__activate bg-[#19191914]'}`}
                 key={route.label}
               >
                 {renderMenuItem(
