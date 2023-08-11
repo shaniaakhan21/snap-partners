@@ -83,7 +83,7 @@ const TotalLeg = ({ lastMonth }: { lastMonth: boolean}) => {
         </div>
         <div className="w-full lg:w-1/3 lg:m-0 p-1">
           <WeeklyBinary/>
-          <RankTracker pvInfoCurrentMonth={personalVolData} monthlyMilestoneData={monthlyMilestoneData}/>
+          <RankTracker pvInfoCurrentMonth={personalVolData} monthlyMilestoneData={monthlyMilestoneData} />
         </div>
         <div className="w-full lg:w-1/3 lg:m-0 p-1">
           <MonthlyCustomerTracking data={data} rows={rows} />
