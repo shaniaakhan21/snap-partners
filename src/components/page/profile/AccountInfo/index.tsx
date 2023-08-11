@@ -9,6 +9,8 @@ import { BecomeRoles } from './BecomeRoles'
 import { Badges } from './Badges'
 import { Rank } from './Rank'
 import { GTMTrack } from 'lib/utils/gtm'
+import { getLocalStorage } from 'lib/utils/localStorage'
+import axios from 'axios'
 
 interface IAccountInfoProps {
   auth: IAuth
@@ -26,6 +28,17 @@ export const AccountInfo = ({ auth, setAuth, removeAuth, setNewWindow, setTypeUp
 
   const _auth :any = auth
   const isIntegrous = (_auth.roles.integrousAssociate || _auth.roles.integrousCustomer)
+  const isIntegrousCustomer = auth.roles.integrousCustomer
+
+  const becomeAffiliate = async () => {
+    const token = getLocalStorage('accessToken')
+    await axios.post('/api/integrous/upgradeToAffiliate', {}, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    window.location.href = '/overview'
+  }
 
   return (
     <div className='max-w-4xl mx-auto'>
@@ -43,6 +56,15 @@ export const AccountInfo = ({ auth, setAuth, removeAuth, setNewWindow, setTypeUp
         />
       </div>
 
+      {isIntegrousCustomer && (
+        <div className='mt-10'>
+          <h1 style={{ fontSize: 35 }}>To become an IBO (Affiliate) click below</h1>
+          <br />
+          <button onClick={() => { becomeAffiliate() }}style={{ fontSize: 20 }} className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-10 w-50  py-3 px-4 rounded-l-full rounded-r-full">
+          REGISTER NOW {'>'}
+          </button>
+        </div>
+      )}
       {!isIntegrous && (
         <BecomeRoles auth={auth} />
       )}

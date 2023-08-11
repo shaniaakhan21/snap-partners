@@ -50,25 +50,15 @@ const DashboardOverViewPage: Page = () => {
     })()
   }, [lastMonth])
 
-  const becomeAffiliate = async () => {
-    const token = getLocalStorage('accessToken')
-    await axios.post('/api/integrous/upgradeToAffiliate', {}, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-    window.location.href = '/overview'
-  }
-
   if (isIntegrousAssociate && currentOverview === '') {
     return (
       <>
-        <span className="text-sm text-gray-800 font-semibold text-center">Viewing {lastMonth ? 'Last' : 'Current'} Month Data</span>
+        <span className="text-sm text-gray-800 font-semibold text-center">Viewing Monthly Data</span>
         <select
           value={selectedMonth}
           onChange={(e) => setSelectedMonth(e.target.value)}
           style={{ marginLeft: 10 }}
-          className="rounded-full bg-primary-500 text-gray-500"
+          className="rounded-full bg-primary-500 text-white text-md p-1 white text-center"
         >
           <option value="Current Month">Current Month</option>
           <option value="Last Month">Last Month</option>
@@ -88,11 +78,7 @@ const DashboardOverViewPage: Page = () => {
   if (isIntegrousCustomer && currentOverview === '') {
     return (
       <>
-        <h1 style={{ fontSize: 35 }}>To become an IBO (Affiliate) click below</h1>
-        <br />
-        <button onClick={() => { becomeAffiliate() }}style={{ fontSize: 20 }} className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-10 w-50  py-3 px-4 rounded-l-full rounded-r-full">
-          REGISTER NOW {'>'}
-        </button>
+        <h1 style={{ fontSize: 35 }}>Welcome To SNAP WELLNESS </h1>
       </>
     )
   }
