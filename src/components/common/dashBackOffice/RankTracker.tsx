@@ -125,12 +125,12 @@ export default function RankTracker ({ pvInfoCurrentMonth, monthlyMilestoneData 
   {pvInfoCurrentMonth: PersonalVolumeInfo, monthlyMilestoneData: MonthlyMilestoneResponse}) {
   const [processedData, setPercentage] = useState({ percentage: 0, nextRank: '', teamVol: 0, nonPowerLeg: 0, powerLeg: 0 })
   useEffect(() => {
-    const legLegQVTot = monthlyMilestoneData?.leftLegQVTot
+    const leftLegQVTot = monthlyMilestoneData?.leftLegQVTot
     const rightLegQVTot = monthlyMilestoneData?.rightLegQVTot
     const isActiveLeft = monthlyMilestoneData?.activeLeftLeg
     const isActiveRight = monthlyMilestoneData?.activeRightLeg
-    const currentRank = calculateCurrentRank(legLegQVTot, rightLegQVTot, isActiveLeft, isActiveRight, pvInfoCurrentMonth?.pvValue)
-    const data = calculateCompletionPercentageAndNextRank(currentRank, legLegQVTot, rightLegQVTot, isActiveLeft, isActiveRight, pvInfoCurrentMonth?.pvValue)
+    const currentRank = calculateCurrentRank(leftLegQVTot, rightLegQVTot, isActiveLeft, isActiveRight, pvInfoCurrentMonth?.pvValue)
+    const data = calculateCompletionPercentageAndNextRank(currentRank, leftLegQVTot, rightLegQVTot, isActiveLeft, isActiveRight, pvInfoCurrentMonth?.pvValue)
     setPercentage({ ...data })
   }, [monthlyMilestoneData, pvInfoCurrentMonth, TotalLeg])
 
