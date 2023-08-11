@@ -47,7 +47,7 @@ const DashboardOverViewPage: Page = () => {
       })
       setRankData(response.data)
     })()
-  }, [])
+  }, [lastMonth])
 
   const becomeAffiliate = async () => {
     const token = getLocalStorage('accessToken')

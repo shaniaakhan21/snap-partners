@@ -19,8 +19,6 @@ export interface PersonalVolumeInfo {
 
 export interface MonthlyMilestoneResponse {
   pvLastMonth: number,
-  leftLegQVTot: number,
-  rightLegQVTot: number,
   activeLeftLeg: boolean,
   activeRightLeg: boolean,
 }
@@ -32,7 +30,9 @@ const useStyles = makeStyles({
   }
 })
 
-const TotalLeg = ({ lastMonth }: { lastMonth: boolean}) => {
+const TotalLeg = (props) => {
+  const lastMonth = props.lastMonth
+  console.log('Inside TotalLeg. Last month:', lastMonth)
   const { auth } = useAuthStore()
   const classes = useStyles()
   const [personalVolData, setPersonalVolData] = useState<PersonalVolumeInfo>()
@@ -44,6 +44,7 @@ const TotalLeg = ({ lastMonth }: { lastMonth: boolean}) => {
     }).then((response) => {
       response.json().then((data) => {
         setPersonalVolData(data.data)
+        console.log('data 1', data.data)
       })
     })
   }, [lastMonth])
@@ -56,6 +57,7 @@ const TotalLeg = ({ lastMonth }: { lastMonth: boolean}) => {
     }).then((response) => {
       response.json().then((data) => {
         setMonthlyMilestoneData(data.data)
+        console.log('data', data.data)
       })
     })
   }, [])
@@ -63,6 +65,7 @@ const TotalLeg = ({ lastMonth }: { lastMonth: boolean}) => {
   const [data, setData] = useState()
   const [rows, setRows] = useState([])
   useEffect(() => {
+    console.log('LastMonth value: ', lastMonth)
     fetch(`/api/ibo/customer/tracking?lastMonth=${Number(lastMonth)}`, {
       method: 'GET',
       headers: { Authorization: `Bearer ${auth.accessToken}` }

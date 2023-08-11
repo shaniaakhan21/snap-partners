@@ -125,15 +125,14 @@ export default function RankTracker ({ pvInfoCurrentMonth, monthlyMilestoneData 
   {pvInfoCurrentMonth: PersonalVolumeInfo, monthlyMilestoneData: MonthlyMilestoneResponse}) {
   const [processedData, setPercentage] = useState({ percentage: 0, nextRank: '', teamVol: 0, nonPowerLeg: 0, powerLeg: 0 })
   useEffect(() => {
-    const leftLegQVTot = monthlyMilestoneData?.leftLegQVTot
-    const rightLegQVTot = monthlyMilestoneData?.rightLegQVTot
+    const legLegQVTot = pvInfoCurrentMonth?.leftQV
+    const rightLegQVTot = pvInfoCurrentMonth?.rightQV
     const isActiveLeft = monthlyMilestoneData?.activeLeftLeg
     const isActiveRight = monthlyMilestoneData?.activeRightLeg
-    const currentRank = calculateCurrentRank(leftLegQVTot, rightLegQVTot, isActiveLeft, isActiveRight, pvInfoCurrentMonth?.pvValue)
-    const data = calculateCompletionPercentageAndNextRank(currentRank, leftLegQVTot, rightLegQVTot, isActiveLeft, isActiveRight, pvInfoCurrentMonth?.pvValue)
+    const currentRank = calculateCurrentRank(legLegQVTot, rightLegQVTot, isActiveLeft, isActiveRight, pvInfoCurrentMonth?.pvValue)
+    const data = calculateCompletionPercentageAndNextRank(currentRank, legLegQVTot, rightLegQVTot, isActiveLeft, isActiveRight, pvInfoCurrentMonth?.pvValue)
     setPercentage({ ...data })
-  }, [monthlyMilestoneData, pvInfoCurrentMonth, TotalLeg])
-
+  }, [monthlyMilestoneData, pvInfoCurrentMonth])
   return (
     <>
       <div className="w-full max-w-full p-4 space-y-2 h-fit bg-white rounded-xl  mt-4">
@@ -152,8 +151,8 @@ export default function RankTracker ({ pvInfoCurrentMonth, monthlyMilestoneData 
             <ActiveRL activeRightLeg={monthlyMilestoneData?.activeRightLeg}/>
             <div className="flex flex-col px-4 py-1 mt-3 rounded-lg" style={{ backgroundColor: 'rgb(239 239 239)' }}>
               <div className="flex flex-col w-full">
-                <TotalLeg legValue={monthlyMilestoneData?.leftLegQVTot} legVLabel={'Total Left Leg (QV)'} />
-                <TotalLeg legValue={monthlyMilestoneData?.rightLegQVTot} legVLabel={'Total Right Leg (QV)'} />
+                <TotalLeg legValue={pvInfoCurrentMonth?.leftQV} legVLabel={'Total Left Leg (QV)'} />
+                <TotalLeg legValue={pvInfoCurrentMonth?.rightQV} legVLabel={'Total Right Leg (QV)'} />
               </div>
             </div>
           </div>
