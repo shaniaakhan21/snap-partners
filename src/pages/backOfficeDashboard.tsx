@@ -31,14 +31,27 @@ const useStyles = makeStyles({
 })
 
 const TotalLeg = (props) => {
-  const lastMonth = props.lastMonth
-  console.log('Inside TotalLeg. Last month:', lastMonth)
+  const { selectedMonth } = props
   const { auth } = useAuthStore()
   const classes = useStyles()
   const [personalVolData, setPersonalVolData] = useState<PersonalVolumeInfo>()
+  const getMonthParam = (monthSelection) => {
+    switch (monthSelection) {
+    case 'Current Month':
+      return 0
+    case 'Last Month':
+      return 1
+    case 'Last 2 Months':
+      return 2
+    default:
+      return 0
+    }
+  }
+
+  const monthParam = getMonthParam(selectedMonth)
 
   useEffect(() => {
-    fetch(`/api/ibo/personal/pvInfo?lastMonth=${Number(lastMonth)}`, {
+    fetch(`/api/ibo/personal/pvInfo?lastMonth=${monthParam}`, {
       method: 'GET',
       headers: { Authorization: `Bearer ${auth.accessToken}` }
     }).then((response) => {
@@ -47,7 +60,7 @@ const TotalLeg = (props) => {
         console.log('data 1', data.data)
       })
     })
-  }, [lastMonth])
+  }, [selectedMonth])
 
   const [monthlyMilestoneData, setMonthlyMilestoneData] = useState<MonthlyMilestoneResponse>()
   useEffect(() => {
@@ -65,8 +78,7 @@ const TotalLeg = (props) => {
   const [data, setData] = useState()
   const [rows, setRows] = useState([])
   useEffect(() => {
-    console.log('LastMonth value: ', lastMonth)
-    fetch(`/api/ibo/customer/tracking?lastMonth=${Number(lastMonth)}`, {
+    fetch(`/api/ibo/customer/tracking?lastMonth=${monthParam}`, {
       method: 'GET',
       headers: { Authorization: `Bearer ${auth.accessToken}` }
     }).then((response) => {
@@ -75,7 +87,7 @@ const TotalLeg = (props) => {
         setRows(data.data.customers)
       })
     })
-  }, [lastMonth])
+  }, [selectedMonth])
 
   return (
     <>

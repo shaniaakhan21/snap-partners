@@ -28,6 +28,7 @@ const DashboardOverViewPage: Page = () => {
   // const { loading } = useReports()
   const [rankData, setRankData] = useState<RankData>(null)
   const [lastMonth, setLastMonth] = useState<boolean>(false)
+  const [selectedMonth, setSelectedMonth] = useState('Current Month')
   const store = useAuthStore()
   const auth: any = store.auth
 
@@ -63,12 +64,19 @@ const DashboardOverViewPage: Page = () => {
     return (
       <>
         <span className="text-sm text-gray-800 font-semibold text-center">Viewing {lastMonth ? 'Last' : 'Current'} Month Data</span>
-        <button onClick={() => { setLastMonth(!lastMonth) }} style={{ cursor: 'pointer', marginLeft: 10 }} className="rounded-full bg-primary-500 bg-red-500 text-gray-500">
-          <p className='text-xs text-white font-medium p-2 uppercase'>View {lastMonth ? 'Current' : 'Last'} Month</p>
-        </button>
+        <select
+          value={selectedMonth}
+          onChange={(e) => setSelectedMonth(e.target.value)}
+          style={{ marginLeft: 10 }}
+          className="rounded-full bg-primary-500 text-gray-500"
+        >
+          <option value="Current Month">Current Month</option>
+          <option value="Last Month">Last Month</option>
+          <option value="Last 2 Months">Last 2 Months</option>
+        </select>
         <br/>
         <br/>
-        <TotalLeg lastMonth={lastMonth} />
+        <TotalLeg selectedMonth={selectedMonth} />
         <br />
         <h1 style={{ fontSize: 30 }}>Referral link to sign up IBO's (Affiliates) & Customers</h1>
         <a target='_blank' href={`https://www.integrouswellness.com/${auth.referralCode}`} style={{ fontSize: 30, textDecoration: 'underline' }}>https://www.integrouswellness.com/{auth.referralCode}</a>
