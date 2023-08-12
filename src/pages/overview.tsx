@@ -70,7 +70,10 @@ const DashboardOverViewPage: Page = () => {
               backgroundColor: '#DD4C37!important',
               border:'0!important',
               padding:'4px 35px!important',
-              fontSize:'0.875rem'
+              fontSize:'0.875rem',
+              '&:focus':{
+                borderRadius: '60px!important',
+              }
             },
             '& .MuiOutlinedInput-notchedOutline':{
               borderWidth:'0px!important'
