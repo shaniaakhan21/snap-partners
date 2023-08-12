@@ -64,6 +64,7 @@ const DashboardOverViewPage: Page = () => {
             backgroundColor: 'none',
             border:'transparent!important',
             color: 'white',
+            borderRadius: '60px',
             '& .MuiSelect-select': {
               borderRadius: '60px',
               backgroundColor: '#DD4C37!important',
