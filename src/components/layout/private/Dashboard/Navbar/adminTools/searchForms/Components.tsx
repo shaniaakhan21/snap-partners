@@ -27,6 +27,14 @@ interface ISelectComponent {
     value?: any
 }
 
+interface ICheckboxComponent {
+  label: string,
+  options?: Array<any>,
+  onChangeFunction?:any,
+  param?:any,
+  checkedArray?: Array<any>
+}
+
 export const InputComponent = (props:IInputComponent) => {
   const { label, placeholder, onChangeFunction, param, value, type } = props
   return (
@@ -56,10 +64,28 @@ export const SelectComponent = (props:ISelectComponent) => {
               ))
               : <></>
           }
-          {/* <option value={''}>Select</option>
-          <option value={''}>OP 1</option>
-          <option value={''}>OP 2</option> */}
         </select>
+      </div>
+    </div>
+  )
+}
+
+export const CheckboxComponent = (props:ICheckboxComponent) => {
+  const { label, options, onChangeFunction, param, checkedArray } = props
+  return (
+    <div>
+      <div>
+        <label className='search-form-label'>{label}</label>
+      </div>
+      <div>
+        {
+          options.map((option) => (
+            <div>
+              <input type='checkbox' value= {`${option.value}`} checked={!!(checkedArray && checkedArray.includes(option.value))} onChange={(event) => { onChangeFunction(event, param) }} />
+              <span>{option.name}</span>
+            </div>
+          ))
+        }
       </div>
     </div>
   )

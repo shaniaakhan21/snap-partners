@@ -302,6 +302,19 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
           />
 
           <InputForm
+            id='city'
+            name='city'
+            type='text'
+            label='city'
+            registerId='city'
+            placeholder='Enter City Name'
+            errors={errors.city}
+            register={register}
+            rulesForm={registerRulesConfig.city}
+            isRequired
+          />
+
+          <InputForm
             id='state'
             name='state'
             type='text'

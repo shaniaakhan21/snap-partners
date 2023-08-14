@@ -102,7 +102,7 @@ function UpdateGrandfatherModal ({ grandfatherModal, onCloseGrandfatherModal, us
 
   const handleDeleteGrandfatherRank = async () => {
     if (confirm('You want to delete Grandfather rank for this user')) {
-      axios.delete(`/api/admin/gRank/${profileData?.gRanks[0]?.id}`, {
+      axios.delete(`/api/admin/gRank/${profileData?.gRanks[0]?.id}/${profileData?.id}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }

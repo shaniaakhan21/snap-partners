@@ -113,3 +113,35 @@ export const grandfatherRankOptions = [
     value: 'executive'
   }
 ]
+
+export const userRoleOptions = [
+  {
+    name: 'Customer',
+    value: 'customer'
+  },
+  {
+    name: 'Agent',
+    value: 'agent'
+  },
+  {
+    name: 'Driver',
+    value: 'driver'
+  },
+  {
+    name: 'Merchant',
+    value: 'merchant'
+  },
+  {
+    name: 'IBO',
+    value: 'ibo'
+  },
+  {
+    name: 'Integrous Customer',
+    value: 'integrousCustomer'
+  },
+  {
+    name: 'IntegrousAssociate',
+    value: 'integrousAssociate'
+  }
+
+]
