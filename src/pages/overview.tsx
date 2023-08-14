@@ -31,7 +31,7 @@ const DashboardOverViewPage: Page = () => {
   const [selectedMonth, setSelectedMonth] = useState('Current Month')
   const store = useAuthStore()
   const auth: any = store.auth
-
+  const [orders, setOrders] = useState([])
   const currentOverview = getLocalStorage('currentBackoffice') || ''
   const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
   const isIntegrousAssociate = auth.roles.integrousAssociate
@@ -49,6 +49,21 @@ const DashboardOverViewPage: Page = () => {
       setRankData(response.data)
     })()
   }, [lastMonth])
+
+  const fetchOrders = async () => {
+    try {
+      const response = await axios.get('/api/shopify')
+      setOrders(response.data)
+    } catch (error) {
+      console.error('Failed to fetch orders:', error)
+    }
+  }
+
+  useEffect(() => {
+    if (isIntegrousCustomer && currentOverview === '') {
+      fetchOrders()
+    }
+  }, [isIntegrousCustomer, currentOverview])
 
   if (isIntegrousAssociate && currentOverview === '') {
     return (
@@ -79,6 +94,26 @@ const DashboardOverViewPage: Page = () => {
     return (
       <>
         <h1 style={{ fontSize: 35 }}>Welcome To SNAP WELLNESS </h1>
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>User ID</th>
+              <th>Free Coupon Codes</th>
+              {/* Add other columns as needed */}
+            </tr>
+          </thead>
+          <tbody>
+            {orders.map((order) => (
+              <tr key={order.id}>
+                <td>{order.orderId}</td>
+                <td>{order.userId}</td>
+                <td>{order.freeCouponCodes}</td>
+                {/* Add other columns as needed */}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </>
     )
   }
