@@ -21,6 +21,7 @@ import axios from 'axios'
 import Referrals from 'components/common/overview/Referrals'
 import { useAuthStore } from 'lib/stores'
 import TotalLeg from './backOfficeDashboard'
+import { MenuItem, Select } from '@mui/material'
 
 const { SEO } = APP_INFO
 
@@ -69,16 +70,38 @@ const DashboardOverViewPage: Page = () => {
     return (
       <>
         <span className="text-sm text-gray-800 font-semibold text-center">Viewing Monthly Data</span>
-        <select
+        <Select
           value={selectedMonth}
           onChange={(e) => setSelectedMonth(e.target.value)}
           style={{ marginLeft: 10 }}
-          className="rounded-full bg-primary-500 text-white text-md p-1 white text-center"
+          sx={{
+            marginLeft: 10,
+            backgroundColor: 'none',
+            border:'transparent!important',
+            color: 'white',
+            borderRadius: '60px',
+            '& .MuiSelect-select': {
+              borderRadius: '60px',
+              backgroundColor: '#DD4C37!important',
+              border:'0!important',
+              padding:'4px 35px!important',
+              fontSize:'0.875rem',
+              '&:focus':{
+                borderRadius: '60px!important',
+              }
+            },
+            '& .MuiOutlinedInput-notchedOutline':{
+              borderWidth:'0px!important'
+            },
+            '& .MuiSvgIcon-root': {
+              color:'white!important'
+            }
+          }}
         >
-          <option value="Current Month">Current Month</option>
-          <option value="Last Month">Last Month</option>
-          <option value="Last 2 Months">Last 2 Months</option>
-        </select>
+          <MenuItem value="Current Month">Current Month</MenuItem>
+          <MenuItem value="Last Month">Last Month</MenuItem>
+          <MenuItem value="Last 2 Months">Last 2 Months</MenuItem>
+        </Select>
         <br/>
         <br/>
         <TotalLeg selectedMonth={selectedMonth} />
