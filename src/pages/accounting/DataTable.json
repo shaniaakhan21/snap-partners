@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name": "John Doe",
+        "date": ["2023-05-21", "2023-05-21"],
+        "type": ["CAB", "CAB"],
+        "amount": [300.00, 200.00],
+        "item_id": ["1990235A", "1990235A"],
+        "product_id": ["WKIT.US", "WKIT.US"],
+        "total": 200
+    },
+    {
+        "id": 2,
+        "name": "John Doe",
+        "date": ["2023-05-21", "2023-05-21"],
+        "type": ["CAB", "CAB"],
+        "amount": [100.00, 300.00],
+        "item_id": ["1990235A", "1990235A"],
+        "product_id": ["WKIT.US", "WKIT.US"],
+        "total": 200
+    },
+    {
+        "id": 3,
+        "name": "John Doe",
+        "date": ["2023-05-21", "2023-05-21"],
+        "type": ["CAB", "CAB"],
+        "amount": [600.00, 300.00],
+        "item_id": ["1990235A", "1990235A"],
+        "product_id": ["WKIT.US", "WKIT.US"],
+        "total": 200
+    },
+    {
+        "id": 4,
+        "name": "John Doe",
+        "date": ["2023-05-21", "2023-05-21"],
+        "type": ["CAB", "CAB"],
+        "amount": [300.00, 400.00],
+        "item_id": ["1990235A", "1990235A"],
+        "product_id": ["WKIT.US", "WKIT.US"],
+        "total": 200
+    }
+]

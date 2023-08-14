@@ -1,4 +1,4 @@
-const Image = ({ text }) => {
+const result = ({ text }) => {
   return (
     <div
       className='text-md bg-custom-gray rounded-2xl px-3 py-1'
@@ -8,4 +8,4 @@ const Image = ({ text }) => {
   )
 }
 
-export default Image
+export default result

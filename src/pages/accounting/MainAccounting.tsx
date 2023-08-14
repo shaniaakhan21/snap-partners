@@ -1,8 +1,8 @@
 
-const MainAccounting = ({ setShowComponent }) => {
+const MainAccounting = ({ setCurrentComponent }) => {
   return (
     <><div
-      onClick={() => setShowComponent(true)}
+      onClick={() => setCurrentComponent('PayRun')}
       className="flex items-center space-x-5 bg-white px-2 py-2 text-textAcent-500 font-bold hover:bg-[#E35C49] focus:bg-[#E35C49] hover:text-white focus:text-white focus:outline-none"
       tabIndex={0}
     >
@@ -16,8 +16,9 @@ div:hover > svg {
 }
 `}</style>
 
-      <span>PayRoll</span>
+      <span>Pay Run</span>
     </div><div
+      onClick={() => setCurrentComponent('PayReport')}
       className="flex items-center space-x-5 bg-white px-2 py-2 text-textAcent-500 font-bold hover:bg-[#E35C49] focus:bg-[#E35C49] hover:text-white focus:text-white focus:outline-none"
       tabIndex={0}
     >
