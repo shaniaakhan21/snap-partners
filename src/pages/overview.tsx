@@ -53,7 +53,7 @@ const DashboardOverViewPage: Page = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get(`shopify/order-history/${auth.userId}`)
+      const response = await axios.get(`/api/shopify/order-history/${auth.userId}`)
       setOrders(response.data);
     } catch (error) {
       console.error('Failed to fetch orders:', error);
