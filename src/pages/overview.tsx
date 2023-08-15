@@ -53,10 +53,10 @@ const DashboardOverViewPage: Page = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get('/api/shopify')
-      setOrders(response.data)
+      const response = await axios.get(`/order-history/${auth.userId}`);
+      setOrders(response.data);
     } catch (error) {
-      console.error('Failed to fetch orders:', error)
+      console.error('Failed to fetch orders:', error);
     }
   }
 
@@ -77,24 +77,24 @@ const DashboardOverViewPage: Page = () => {
           sx={{
             marginLeft: 10,
             backgroundColor: 'none',
-            border:'transparent!important',
+            border: 'transparent!important',
             color: 'white',
             borderRadius: '60px',
             '& .MuiSelect-select': {
               borderRadius: '60px',
               backgroundColor: '#DD4C37!important',
-              border:'0!important',
-              padding:'4px 35px!important',
-              fontSize:'0.875rem',
-              '&:focus':{
-                borderRadius: '60px!important',
+              border: '0!important',
+              padding: '4px 35px!important',
+              fontSize: '0.875rem',
+              '&:focus': {
+                borderRadius: '60px!important'
               }
             },
-            '& .MuiOutlinedInput-notchedOutline':{
-              borderWidth:'0px!important'
+            '& .MuiOutlinedInput-notchedOutline': {
+              borderWidth: '0px!important'
             },
             '& .MuiSvgIcon-root': {
-              color:'white!important'
+              color: 'white!important'
             }
           }}
         >
