@@ -51,19 +51,17 @@ const DashboardOverViewPage: Page = () => {
     })()
   }, [lastMonth])
 
-  const fetchOrders = async () => {
-    try {
-      const response = await axios.get(`/api/shopify/order-history/${auth.userId}`)
-      setOrders(response.data);
-    } catch (error) {
-      console.error('Failed to fetch orders:', error);
-    }
-  }
-
   useEffect(() => {
-    if (isIntegrousCustomer && currentOverview === '') {
-      fetchOrders()
-    }
+    (async () => {
+      if (isIntegrous && currentOverview === '') return
+      const token = getLocalStorage('accessToken')
+      const response = await axios.get(`/api/shopify/order-history/${auth.userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+      setOrders(response.data)
+    })()
   }, [isIntegrousCustomer, currentOverview])
 
   if (isIntegrousAssociate && currentOverview === '') {
