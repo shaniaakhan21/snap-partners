@@ -10,7 +10,18 @@ const ReportComponent = ({ title }: ReportComponentProps) => {
   const [data, setData] = useState<{columns: GridColDef[], rows: GridRowsProp} | null>(null)
 
   useEffect(() => {
-    setData(reportData)
+    const updatedRows = reportData.rows.map(row => {
+      const total = row.personal_income + row.team_bonus + row.team_residual + row.cab_bonus
+      return {
+        ...row,
+        total: total
+      }
+    })
+
+    setData({
+      ...reportData,
+      rows: updatedRows
+    })
   }, [])
 
   if (!data) return <p>Loading...</p>

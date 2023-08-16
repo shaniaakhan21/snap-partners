@@ -60,6 +60,31 @@
             "field": "country",
             "headerName": "Country",
             "width": 110
+        },
+        {
+            "field": "personal_income",
+            "headerName": "Personal Income",
+            "width": 150
+        },
+        {
+            "field": "team_bonus",
+            "headerName": "Team Bonus",
+            "width": 110
+        },
+        {
+            "field": "team_residual",
+            "headerName": "Team Residual",
+            "width": 110
+        },
+        {
+            "field": "cab_bonus",
+            "headerName": "CAB Bonus",
+            "width": 110
+        },
+        {
+            "field": "total",
+            "headerName": "Total",
+            "width": 110
         }
     ],
     "rows": [
@@ -75,7 +100,11 @@
             "city": "Springfield",
             "state": "IL",
             "zip": "12345",
-            "country": "USA"
+            "country": "USA",
+            "personal_income": 2100,
+            "team_bonus": 2100,
+            "team_residual": 2200,
+            "cab_bonus": 200
         },
         {
             "id": 2,
@@ -89,7 +118,11 @@
             "city": "Shelbyville",
             "state": "IL",
             "zip": "67890",
-            "country": "USA"
+            "country": "USA",
+            "personal_income": 2100,
+            "team_bonus": 2100,
+            "team_residual": 2200,
+            "cab_bonus": 200
         },
         {
             "id": 3,
@@ -103,7 +136,11 @@
             "city": "Capital City",
             "state": "IL",
             "zip": "11223",
-            "country": "USA"
+            "country": "USA",
+            "personal_income": 2100,
+            "team_bonus": 2100,
+            "team_residual": 2200,
+            "cab_bonus": 400
         }
     ]
 }
