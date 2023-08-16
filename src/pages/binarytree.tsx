@@ -55,7 +55,7 @@ const ComingSoon: PageNext = () => {
   const [pending, setPending] = useState(false)
 
   const refreshComponent = () => {
-    setKey(prevKey => prevKey + 1) // incrementing key will cause the component to be recreated
+    setKey(prevKey => prevKey + 1)
   }
 
   const getHoldingTank = async () => {

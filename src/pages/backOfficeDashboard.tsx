@@ -64,7 +64,7 @@ const TotalLeg = (props) => {
 
   const [monthlyMilestoneData, setMonthlyMilestoneData] = useState<MonthlyMilestoneResponse>()
   useEffect(() => {
-    fetch('/api/ibo/personal/monthlyMilestones', {
+    fetch(`/api/ibo/personal/monthlyMilestoneslastMonth=${monthParam}`, {
       method: 'GET',
       headers: { Authorization: `Bearer ${auth.accessToken}` }
     }).then((response) => {
@@ -73,7 +73,7 @@ const TotalLeg = (props) => {
         console.log('data', data.data)
       })
     })
-  }, [])
+  }, [selectedMonth])
 
   const [data, setData] = useState()
   const [rows, setRows] = useState([])
