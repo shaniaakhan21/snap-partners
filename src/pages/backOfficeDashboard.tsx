@@ -58,7 +58,7 @@ const TotalLeg = ({ lastMonth }: { lastMonth: boolean}) => {
         setMonthlyMilestoneData(data.data)
       })
     })
-  }, [])
+  }, [lastMonth])
 
   const [data, setData] = useState()
   const [rows, setRows] = useState([])
