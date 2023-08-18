@@ -37,7 +37,7 @@ deploy:
   script:
     - rm -rf /home/gitlab-runner/snap-website-deploy-temp
     - cd /home/gitlab-runner
-    - git clone git@gitlab.worldce.info:snap/snap-website.git snap-website-deploy-temp
+    - git clone git@gitlab.devopsteam.info:snap/snap-website.git snap-website-deploy-temp
     - cd /home/gitlab-runner/snap-website-deploy-temp
     - git checkout master
     - git pull
