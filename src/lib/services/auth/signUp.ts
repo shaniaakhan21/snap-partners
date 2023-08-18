@@ -38,7 +38,8 @@ interface ISignUpDataBodyStep2 extends ISignUpDataBodyStep1 {
   },
   code: number
   sponsorReferralCode: string,
-  level
+  level: string,
+  city: string
 }
 
 interface ISignUpDataBodyMerchant {

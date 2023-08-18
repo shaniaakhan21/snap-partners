@@ -22,48 +22,50 @@ function SponsorUpdateModal ({ sponsorUpdateModal, onCloseSponsorUpdateModal, us
   const [sponsor, setSponsor] = useState('')
   const [sponserSearchResult, setSponsorSearchResult] = useState([])
   const [selectedSponsor, setSelectedSponsor] = useState(null)
-  const handleUpdateUserLevel = async (e) => {
-    if (selectedSponsor) {
-      if (userId === selectedSponsor.id) {
-        alert("user and sponsor can't be same")
-        return
-      }
-      await axios.put('/api/user/sponsor', {
-        userId,
-        sponsorId: selectedSponsor.id
-      },
-      {
-        headers: {
-          Authorization: `Bearer ${token}`
+  const handleUpdateSponsor = async (e) => {
+    if (confirm('Are you sure you want to edit sponsor for this user')) {
+      if (selectedSponsor) {
+        if (userId === selectedSponsor.id) {
+          alert("user and sponsor can't be same")
+          return
         }
-      })
-        .then((result) => {
-          console.log('result from sponsor api', result?.data)
-          if (result?.data?.data?.success) {
-            alert('Sponsor updated')
-            window.location.reload()
+        await axios.put('/api/user/sponsor', {
+          userId,
+          sponsorId: selectedSponsor.id
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
           }
         })
+          .then((result) => {
+            if (result?.data?.data?.success) {
+              alert('Sponsor updated')
+              window.location.reload()
+            }
+          })
+      }
     }
-    // const token = getLocalStorage('accessToken')
-    // if (userLevel !== '') {
-    //   const body = {
-    //     userLevel
-    //   }
-    //   await axios.put(`/api/admin/updateUserLevel/${userId}`, body, {
-    //   })
-    //     .then((result) => {
-    //       if (result.data.result[0]) {
-    //         alert('User Level Updated Successfully')
-    //         window.location.reload()
-    //       }
-    //     })
-    // }
   }
   const updateSponsor = async (event, param) => {
     setSponsor(event.target.value)
-    if (sponsor.length >= 2) {
-      axios.get(`/api/user/getUserByName?name=${sponsor}`, {
+    if (parseInt(event.target.value)) {
+      axios.get('/api/user/getUserById', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        params: {
+          id: parseInt(event.target.value)
+        }
+      })
+        .then((result) => {
+          if (result.data?.data) {
+            setSponsorSearchResult([result.data.data])
+          }
+        })
+    }
+    if (event.target.value.length >= 2 && !parseInt(event.target.value)) {
+      axios.get(`/api/user/getUserByName?name=${event.target.value}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
@@ -80,7 +82,7 @@ function SponsorUpdateModal ({ sponsorUpdateModal, onCloseSponsorUpdateModal, us
   return (
     <Modal open={sponsorUpdateModal} onClose={onCloseSponsorUpdateModal} className='resetPasswordModal'>
       <Box sx={style}>
-        <InputComponent label={'Update Sponsor'} placeholder='Search sponsor name' value={sponsor} onChangeFunction={updateSponsor} param={'sponsor'} />
+        <InputComponent label={'Update Sponsor'} placeholder='Search sponsor name or ID' value={sponsor} onChangeFunction={updateSponsor} param={'sponsor'} />
         {
           sponserSearchResult &&
           <div className='sponsor-searchResult-container'>
@@ -88,14 +90,14 @@ function SponsorUpdateModal ({ sponsorUpdateModal, onCloseSponsorUpdateModal, us
               sponserSearchResult.map((result) => (
                 <div className='sponsor-searchResult' onClick={() => {
                   setSelectedSponsor({ ...result })
-                  setSponsor(result.name)
-                }}>{result?.name}</div>
+                  setSponsor(`${result?.name} ${result?.lastname}`)
+                }}>{result?.name} {result?.lastname}</div>
               ))
             }
           </div>
         }
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
-          <ButtonComponent title='submit' onClickFunction={handleUpdateUserLevel}/>
+          <ButtonComponent title='submit' onClickFunction={handleUpdateSponsor}/>
         </div>
       </Box>
     </Modal>
