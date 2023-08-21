@@ -94,6 +94,7 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
       phoneNumber,
       idImage: null,
       insuranceImage: null,
+      city: dataForm.city,
       roles: {
         admin: false,
         customer: false,

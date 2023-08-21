@@ -16,8 +16,8 @@ const Binary = ({ activeLeftLeg, activeRightLeg }:
   if ((activeLeftLeg && activeRightLeg)) {
     return (<CustomCheckBoxCheckedMilestone labelSize='lg' checkBoxSize={55} label={label} />)
   } else {
-    return (<CustomCheckBoxCheckedMilestone labelSize='lg' checkBoxSize={55} label={label} />)
-    // return (<CustomCheckBoxUnCheckedMilestone labelSize='lg' checkBoxSize={55} label={label} />)
+    // return (<CustomCheckBoxCheckedMilestone labelSize='lg' checkBoxSize={55} label={label} />)
+    return (<CustomCheckBoxUnCheckedMilestone labelSize='lg' checkBoxSize={55} label={label} />)
   }
 }
 
