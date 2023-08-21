@@ -28,6 +28,10 @@ interface IStepOpeProps {
 
 const maxFileSizeInMb = 5
 
+const ssnHelptextDesign = {
+  fontStyle: 'italic'
+}
+
 const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
 }
@@ -121,8 +125,16 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
 
     const setLevel = (referral) => {
       let level = ''
-      if (referral === 'CUSTOMER') {
+      if (referral === 'CUSTOMER' || referral === 'integrousCustomer') {
         level = 'customer'
+      } else if (referral === 'integrousAssociate') {
+        level = 'iboWellness'
+      } else if (referral === 'AGENT') {
+        level = 'iboErc'
+      } else if (referral === 'DRIVER') {
+        level = 'driver'
+      } else if (referral === 'MERCHANT') {
+        level = 'merchant'
       } else {
         level = 'ibo'
       }
@@ -352,7 +364,8 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
               register={register}
               rulesForm={registerRulesConfig.ssn}
               isRequired={false}
-              helpText='* Required to receive commissions beyond $600'
+              helpText='Optional field today but REQUIRED to receive commissions beyond $600'
+              style = {ssnHelptextDesign}
             />
           )}
 

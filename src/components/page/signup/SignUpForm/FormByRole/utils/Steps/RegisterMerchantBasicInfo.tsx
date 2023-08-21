@@ -80,6 +80,14 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
       } else {
         level = 'ibo'
       }
+      if (referral === 'integrousAssociate')
+      {
+        level = 'iboWellness'
+      }
+      if (referral === 'integrousCustomer')
+      {
+        level = 'iboErc'
+      }
       return level
     }
 

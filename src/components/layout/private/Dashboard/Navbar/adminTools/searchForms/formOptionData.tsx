@@ -136,12 +136,21 @@ export const userRoleOptions = [
     value: 'ibo'
   },
   {
-    name: 'Integrous Customer',
+    name: 'IBO Customer',
     value: 'integrousCustomer'
   },
   {
-    name: 'IntegrousAssociate',
+    name: 'IBO Wellness',
     value: 'integrousAssociate'
   }
 
 ]
+
+export const userRoleMapping = {
+  customer: 100,
+  merchant: 200,
+  driver: 300,
+  agent: 400,
+  ibo: 500,
+  integrouAssociate: 600
+}

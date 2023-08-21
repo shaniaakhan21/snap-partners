@@ -28,9 +28,15 @@ function InfoBanner ({ profileData, userLevel }) {
 
   const snapType = (roles) => {
     let roleStr = ''
-   roles && Object.keys(roles)?.map((role) => {
+    roles && Object.keys(roles)?.map((role) => {
       if (roles[role]) {
-        roleStr = roleStr + ` ${role}`
+        if (role === 'integrousAssociate') {
+          roleStr = roleStr + ' iboWellness'
+        } else if (role === 'integrousCustomer') {
+          roleStr = roleStr + ' iboCustomer'
+        } else {
+          roleStr = roleStr + ` ${role}`
+        }
       }
     })
 

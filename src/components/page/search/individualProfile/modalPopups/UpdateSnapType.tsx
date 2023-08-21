@@ -2,6 +2,7 @@
 /* eslint-disable array-callback-return */
 /* eslint-disable no-use-before-define */
 import { Box, Modal } from '@mui/material'
+import { passFilterLogic } from '@mui/x-data-grid/internals'
 import axios from 'axios'
 import { ButtonComponent, CheckboxComponent, SelectComponent } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/Components'
 import { userRoleOptions } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/formOptionData'
@@ -33,14 +34,23 @@ function UpdateSnapTypeModal ({ snapTypeModal, onCloseSnapTypeModal, userId, use
   const [snapType, setSnapType] = useState([])
 
   const handleUpdateSnapType = async (e) => {
-    var roles = { ...roles, admin: userRoles.admin }
+    var roles = {}
+    var snapTypeArray = snapType
     userRoles && Object.keys(userRoles).map((role) => {
-      if (snapType.includes(role)) {
+      if (role === 'admin') {
+        roles[role] = userRoles.admin
+      } else if (snapTypeArray.includes(role)) {
+        snapTypeArray.splice(snapTypeArray.indexOf(role), 1)
         roles[role] = true
       } else {
         roles[role] = false
       }
     })
+    if (snapTypeArray.length > 0) {
+      snapTypeArray.map((role) => {
+        roles[role] = true
+      })
+    }
     var body = { userId, roles }
     const token = getLocalStorage('accessToken')
     await axios.put('/api/admin/snapType', body, {
@@ -68,7 +78,7 @@ function UpdateSnapTypeModal ({ snapTypeModal, onCloseSnapTypeModal, userId, use
   return (
     <Modal open={snapTypeModal} onClose={onCloseSnapTypeModal} className='resetPasswordModal'>
       <Box sx={style}>
-        <CheckboxComponent label={'select user role'} options={userRoleOptions} onChangeFunction={updateSnapType} checkedArray={snapType} />
+        <CheckboxComponent label={'select user type'} options={userRoleOptions} onChangeFunction={updateSnapType} checkedArray={snapType} />
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
           <ButtonComponent title='submit' onClickFunction={handleUpdateSnapType}/>
         </div>
