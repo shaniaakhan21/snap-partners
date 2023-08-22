@@ -4,7 +4,7 @@ import axios from 'axios'
 import { ButtonComponent, InputComponent, SelectComponent } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/Components'
 import { grandfatherRankOptions } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/formOptionData'
 import { getLocalStorage } from 'lib/utils/localStorage'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 function UpdateGrandfatherModal ({ grandfatherModal, onCloseGrandfatherModal, userId, profileData }) {
   const style = {
@@ -18,14 +18,29 @@ function UpdateGrandfatherModal ({ grandfatherModal, onCloseGrandfatherModal, us
     boxShadow: 24,
     p: 4
   }
+  useEffect(() => {
+    setGrandfatherRank({
+      ...grandfatherRank,
+      rank: profileData?.gRanks[0]?.gRank,
+      from: formatDate(profileData?.gRanks[0]?.from),
+      to: formatDate(profileData?.gRanks[0]?.to)
+    })
+  }, [profileData])
   const [grandfatherRank, setGrandfatherRank] = useState({
     rank: '',
     from: null,
     to: null
 
   })
+
+  const formatDate = (dateString) => {
+    if (dateString) {
+      const currentDate = new Date(dateString)
+      return `${currentDate.getFullYear()}-${('0' + (currentDate.getMonth() + 1)).slice(-2)}-${('0' + (currentDate.getDate())).slice(-2)}`
+    }
+  }
   const token = getLocalStorage('accessToken')
-  const handleUpdateUserLevel = async (e) => {
+  const handleUpdateGrandfatherRank = async (e) => {
     console.log('update grandfather rank to', grandfatherRank)
 
     if (profileData?.gRanks.length > 0) {
@@ -84,6 +99,23 @@ function UpdateGrandfatherModal ({ grandfatherModal, onCloseGrandfatherModal, us
     //     })
     // }
   }
+
+  const handleDeleteGrandfatherRank = async () => {
+    if (confirm('You want to delete Grandfather rank for this user')) {
+      axios.delete(`/api/admin/gRank/${profileData?.gRanks[0]?.id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then((result) => {
+          if (result.data.data.isSuccess) {
+            alert('Grandfather Rank Deleted Successfully')
+            window.location.reload()
+          }
+        })
+    }
+  }
+
   const updateGrandfatherRank = (event, param) => {
     if (param === 'grandfatherRank') {
       setGrandfatherRank({ ...grandfatherRank, rank: event.target.value })
@@ -101,8 +133,9 @@ function UpdateGrandfatherModal ({ grandfatherModal, onCloseGrandfatherModal, us
         <SelectComponent label={'Edit Grandfather Rank'} name={'grandfatherRank'} value={grandfatherRank?.rank} options={grandfatherRankOptions} onChangeFunction={updateGrandfatherRank} param={'grandfatherRank'} />
         <InputComponent label='from' placeholder='from Date' type={'date'} value={grandfatherRank?.from} onChangeFunction={updateGrandfatherRank} param={'from'} />
         <InputComponent label='to' placeholder='to Date' type={'date'} value={grandfatherRank?.to} onChangeFunction={updateGrandfatherRank} param={'to'} />
-        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
-          <ButtonComponent title='submit' onClickFunction={handleUpdateUserLevel}/>
+        <div style={{ display: 'flex', flexDirection: 'row-reverse', justifyContent: 'space-between' }}>
+          <ButtonComponent title='submit' onClickFunction={handleUpdateGrandfatherRank}/>
+          <ButtonComponent title='delete' onClickFunction={handleDeleteGrandfatherRank}/>
         </div>
       </Box>
     </Modal>

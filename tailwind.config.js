@@ -100,6 +100,12 @@ module.exports = {
           '0%': { opacity: '0' },
           '100%': { opacity: '1' }
         }
+      },
+      width: {
+        '9/10': '90%'
+      },
+      backgroundColor: {
+        'custom-gray': '#E0E0E0'
       }
     }
   },

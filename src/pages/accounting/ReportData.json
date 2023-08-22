@@ -1,0 +1,146 @@
+{
+    "columns": [
+        {
+            "field": "id",
+            "headerName": "ID",
+            "width": 90,
+            "color": "#DD4C37"
+        },
+        {
+            "field": "rep_id",
+            "headerName": "Rep ID",
+            "width": 150
+        },
+        {
+            "field": "name",
+            "headerName": "Name",
+            "width": 110
+        },
+        {
+            "field": "social",
+            "headerName": "Social",
+            "width": 110
+        },
+        {
+            "field": "business",
+            "headerName": "Business",
+            "width": 110
+        },
+        {
+            "field": "Tax_ID",
+            "headerName": "Tax ID",
+            "width": 110
+        },
+        {
+            "field": "address",
+            "headerName": "Address",
+            "width": 110
+        },
+        {
+            "field": "#",
+            "headerName": "#",
+            "width": 110
+        },
+        {
+            "field": "city",
+            "headerName": "City",
+            "width": 110
+        },
+        {
+            "field": "state",
+            "headerName": "State",
+            "width": 110
+        },
+        {
+            "field": "zip",
+            "headerName": "ZIP",
+            "width": 110
+        },
+        {
+            "field": "country",
+            "headerName": "Country",
+            "width": 110
+        },
+        {
+            "field": "personal_income",
+            "headerName": "Personal Income",
+            "width": 150
+        },
+        {
+            "field": "team_bonus",
+            "headerName": "Team Bonus",
+            "width": 110
+        },
+        {
+            "field": "team_residual",
+            "headerName": "Team Residual",
+            "width": 110
+        },
+        {
+            "field": "cab_bonus",
+            "headerName": "CAB Bonus",
+            "width": 110
+        },
+        {
+            "field": "total",
+            "headerName": "Total",
+            "width": 110
+        }
+    ],
+    "rows": [
+        {
+            "id": 1,
+            "rep_id": "R001",
+            "name": "Alice",
+            "social": "123-45-6789",
+            "business": "Alice Corp",
+            "Tax_ID": "TAX001",
+            "address": "123 Main St",
+            "#": "Apt 4B",
+            "city": "Springfield",
+            "state": "IL",
+            "zip": "12345",
+            "country": "USA",
+            "personal_income": 2100,
+            "team_bonus": 2100,
+            "team_residual": 2200,
+            "cab_bonus": 200
+        },
+        {
+            "id": 2,
+            "rep_id": "R002",
+            "name": "Bob",
+            "social": "987-65-4321",
+            "business": "Bob Corp",
+            "Tax_ID": "TAX002",
+            "address": "456 Elm St",
+            "#": "Suite 2A",
+            "city": "Shelbyville",
+            "state": "IL",
+            "zip": "67890",
+            "country": "USA",
+            "personal_income": 2100,
+            "team_bonus": 2100,
+            "team_residual": 2200,
+            "cab_bonus": 200
+        },
+        {
+            "id": 3,
+            "rep_id": "R003",
+            "name": "Charlie",
+            "social": "456-78-9012",
+            "business": "Charlie Corp",
+            "Tax_ID": "TAX003",
+            "address": "789 Maple St",
+            "#": "Room 12",
+            "city": "Capital City",
+            "state": "IL",
+            "zip": "11223",
+            "country": "USA",
+            "personal_income": 2100,
+            "team_bonus": 2100,
+            "team_residual": 2200,
+            "cab_bonus": 400
+        }
+    ]
+}

@@ -112,7 +112,7 @@ To get a local copy up and running follow these simple example steps.
 1. Clone the repo - example with `HTTPS`
 
    ```sh
-   git clone https://gitlab.worldce.info/snap/snap-website.git
+   git clone https://gitlab.devopsteam.info/snap/snap-website.git
    ```
 
 2. Install NPM packages
@@ -254,7 +254,7 @@ Check: [Next.js Routing](https://nextjs.org/docs/routing/introduction)
 2. Switch to the new branch (`git checkout feature/-------/master`)
 3. Save all you changes and commits
 4. Push the new branch (`git push origin feature/-------/master`) This will create a 1 use enviroment to view the progress
-5. Open a `Merge Request` into `feature/dev/master` - when creating a new MR please provide your environment link for review `https://gitlab.worldce.info/snap/snap-website/-/environments`
+5. Open a `Merge Request` into `feature/dev/master` - when creating a new MR please provide your environment link for review `https://gitlab.devopsteam.info/snap/snap-website/-/environments`
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
