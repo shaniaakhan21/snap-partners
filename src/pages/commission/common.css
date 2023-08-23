@@ -1,0 +1,32 @@
+.align-center{
+    text-align: center;
+}
+
+.align-end{
+    text-align: end;
+}
+
+.red-text{
+    color: #E35C49;
+}
+
+.disc-here::before{
+        content: '•';
+        font-size: 16px; 
+        margin-right: 10px; 
+        display: inline-block;
+        vertical-align: middle
+}
+
+.custom-green{
+    background-color: rgba(84, 165, 44, 1);
+}
+
+.myDataGrid .MuiDataGrid-columnHeader {
+    border-right: 'none!important';
+    font-weight: 'bold!important';
+    font-size: '1.5em!important';
+}
+.myDataGrid .MuiDataGrid-cell {
+    border-right: 'none!important';
+}

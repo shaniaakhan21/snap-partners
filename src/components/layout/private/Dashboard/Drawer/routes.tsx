@@ -130,6 +130,11 @@ export const drawerRoutes = [
     label: 'My Wallet'
   },
   {
+    icon: <CreditCardIcon />,
+    to: '/commission',
+    label: 'My Commission'
+  },
+  {
     icon: <CompensationPlanIcon />,
     to: '/Documents',
     label: 'Documents'
