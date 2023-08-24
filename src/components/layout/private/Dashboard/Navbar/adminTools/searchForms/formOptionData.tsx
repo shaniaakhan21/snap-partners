@@ -136,7 +136,7 @@ export const userRoleOptions = [
     value: 'ibo'
   },
   {
-    name: 'IBO Customer',
+    name: 'Customer Wellness',
     value: 'integrousCustomer'
   },
   {

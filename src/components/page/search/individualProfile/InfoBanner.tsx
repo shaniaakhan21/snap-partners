@@ -31,16 +31,16 @@ function InfoBanner ({ profileData, userLevel }) {
     roles && Object.keys(roles)?.map((role) => {
       if (roles[role]) {
         if (role === 'integrousAssociate') {
-          roleStr = roleStr + ' iboWellness'
+          roleStr = roleStr + ' IBO-Wellness'
         } else if (role === 'integrousCustomer') {
-          roleStr = roleStr + ' iboCustomer'
+          roleStr = roleStr + ' Customer-Wellness'
         } else {
           roleStr = roleStr + ` ${role}`
         }
       }
     })
 
-    return roleStr
+    return roleStr.trim().split(' ').join(' | ').split('-').join(' ')
   }
 
   const handleResendEmail2 = async () => {

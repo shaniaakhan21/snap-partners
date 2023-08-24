@@ -100,11 +100,11 @@ function IBOProfile ({ profileData, userLevel }) {
       <div className={`${cname}-container`}>
         <div className={`${cname}-header`}>
           <p className={`${cname}-header-text`}>User ID - {`${profileData[0]?.id}`}</p>
-          { mapping[userLevel] >= 700 &&
-          <p className={`${cname}-header-text ${cname}-midSection-mainInfo-text`} onClick={() => { setGrandfatherModal(true) }}>Edit Grandfather Rank</p>
-          }
           { mapping[userLevel] >= 600 &&
           <p className={`${cname}-header-text ${cname}-midSection-mainInfo-text`} onClick={() => { setSnapTypeModal(true) }}>Edit Snap Type</p>
+          }
+          { mapping[userLevel] >= 700 &&
+          <p className={`${cname}-header-text ${cname}-midSection-mainInfo-text`} onClick={() => { setGrandfatherModal(true) }}>Edit Grandfather Rank</p>
           }
           { mapping[userLevel] >= 600 &&
           <p className={`${cname}-header-text ${cname}-midSection-mainInfo-text`} onClick={() => { setEditProfileModal(true) }}>Edit Profile<img src='/images/icons/edit.svg' style={{ width: '18px', height: '24px' }}/></p>
