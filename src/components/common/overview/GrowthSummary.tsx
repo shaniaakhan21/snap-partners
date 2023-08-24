@@ -248,12 +248,6 @@ export default function GrowthSummary () {
                 <tr key={idx} className='h-10'>
                   <td className='text-xs font-normal'>{row[0]}</td>
                   {row.slice(1).map((r, idx2) => <td key={`${idx}_${idx2}`} className='text-sm text-gray-500'>{r}</td>)}
-                  {/* <td className='text-sm text-gray-500'> */}
-                  {/*  <div className=' flex items-center justify-between'> */}
-                  {/*    {Object.values(row).slice(2).reduce((a, r) => a + r, 0)} */}
-                  {/*    <i className="fa-sharp fa-solid fa-square-plus fa-1.5x text-primary-500 ml-2"></i> */}
-                  {/*  </div> */}
-                  {/* </td> */}
                 </tr>
               )
             })}
