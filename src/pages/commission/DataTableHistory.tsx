@@ -24,7 +24,7 @@ const columns = [
     flex: 5,
     id: 'id',
     renderCell: (params) => {
-      let color = 'black' // Default color
+      let color = 'black'
 
       if (['1234', '1235', '1236'].includes(params.value)) {
         color = '#E35C49'
@@ -70,7 +70,7 @@ const rows = [
   }
 ]
 
-const DataTableHistory = () => {
+const DataTableHistory = ({ onRowIdClick }) => {
   const [data, setData] = useState(rows)
   return (
     <div>
@@ -82,7 +82,7 @@ const DataTableHistory = () => {
         className="myDataGrid"
         columns={columns}
         onRowClick={(event, row) => {
-          console.log(row)
+          onRowIdClick()
         }}
       />
     </div>

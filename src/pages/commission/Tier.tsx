@@ -16,7 +16,7 @@ const StyledDataGrid = styled(MUIDataGrid)({
   },
   '& .MuiDataGrid-cellContent': {
     textAlign: 'start!important',
-    width: '40%'
+    width: '50%'
   },
   border: 'none',
   boxShadow: 'none',
@@ -25,6 +25,9 @@ const StyledDataGrid = styled(MUIDataGrid)({
   },
   '& .MuiTablePagination-root': {
     display: 'none'
+  },
+  '& .specialRowStyle': {
+    fontWeight: 'bold'
   }
 })
 
@@ -144,6 +147,12 @@ const Tier = () => {
           console.log(row)
         }}
         rowHeight={33}
+        getRowClassName={(params) => {
+          if (params.row.Team === '1er Gen' || params.row.Team === '2er Gen') {
+            return 'specialRowStyle'
+          }
+          return ''
+        }}
       />
     </div>
   )

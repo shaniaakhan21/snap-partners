@@ -22,6 +22,14 @@
     background-color: rgba(84, 165, 44, 1);
 }
 
+.custom-yellow{
+    background-color: #FFAA00;
+}
+
+.custom-gray{
+    background-color: #404040;
+}
+
 .myDataGrid .MuiDataGrid-columnHeader {
     border-right: 'none!important';
     font-weight: 'bold!important';

@@ -3,7 +3,7 @@ import VPHBox from './VPHBox'
 import VerifiedIncomeSection from './VerifiedIncomeSection'
 import VerifiedTeamBonus from './VerifiedTeamBonus'
 
-const VerifiedDetail = () => {
+const HistoryDetail = () => {
   const data = [
     {
       id: 1,
@@ -76,16 +76,16 @@ const VerifiedDetail = () => {
   ]
   return (
     <><div className="w-full bg-white rounded-lg px-8 py-8">
-      <div className="w-full py-0 flex flex-row justify-between">
+      <div className="w-full py-0 flex flex-row justify-between mb-10">
         <div className="w-3/12">
-          <VPHBox title="Verified pay amount" amount="$ 567.16" bgColor="custom-green" additionalText1={undefined} additionalText2={undefined} />
+          <VPHBox title="Payment History Detail" amount="$ 215.50" bgColor="custom-gray" additionalText1="Payment ID 13406" additionalText2="July 11, 2023"/>
         </div>
         <div className="w-8/12 ml-4">
           <Tier />
         </div>
       </div>
-      <VerifiedIncomeSection data={data} headerText='Verified Personal Income'/>
-      <VerifiedTeamBonus data={data2} />
+      <VerifiedIncomeSection data={data} headerText="Verified Personal Income"/>
+      <VerifiedTeamBonus data={data2} headerText="Verified Team Bonus - Rank Director" subText="Comp Detail"/>
       <div className='flex flex-row justify-between mt-4 ml-2'>
         <div className="font-semibold text-2xl text-slate-700 mb-4 mt-1">
         </div>
@@ -105,4 +105,4 @@ const VerifiedDetail = () => {
   )
 }
 
-export default VerifiedDetail
+export default HistoryDetail

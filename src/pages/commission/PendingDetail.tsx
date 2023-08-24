@@ -3,7 +3,7 @@ import VPHBox from './VPHBox'
 import VerifiedIncomeSection from './VerifiedIncomeSection'
 import VerifiedTeamBonus from './VerifiedTeamBonus'
 
-const VerifiedDetail = () => {
+const PendingDetail = () => {
   const data = [
     {
       id: 1,
@@ -78,14 +78,14 @@ const VerifiedDetail = () => {
     <><div className="w-full bg-white rounded-lg px-8 py-8">
       <div className="w-full py-0 flex flex-row justify-between">
         <div className="w-3/12">
-          <VPHBox title="Verified pay amount" amount="$ 567.16" bgColor="custom-green" additionalText1={undefined} additionalText2={undefined} />
+          <VPHBox title="Pending pay amount" amount="$ 52.16" bgColor="custom-yellow" additionalText1={undefined} additionalText2={undefined} />
         </div>
         <div className="w-8/12 ml-4">
           <Tier />
         </div>
       </div>
-      <VerifiedIncomeSection data={data} headerText='Verified Personal Income'/>
-      <VerifiedTeamBonus data={data2} />
+      <VerifiedIncomeSection data={data} headerText="Pending Personal Income"/>
+      <VerifiedTeamBonus data={data2} headerText="Pending Team Bonus - Rank Director" subText="Comp Detail"/>
       <div className='flex flex-row justify-between mt-4 ml-2'>
         <div className="font-semibold text-2xl text-slate-700 mb-4 mt-1">
         </div>
@@ -93,7 +93,7 @@ const VerifiedDetail = () => {
           <h1>$80.00</h1>
         </div>
       </div>
-      <VerifiedTeamBonus data={data2} headerText="Verified  Team RESIDUALS - Rank Director" subText="Comp Detail"/>
+      <VerifiedTeamBonus data={data2} headerText="Pending  Team RESIDUALS - Rank Director" subText="Comp Detail"/>
       <div className='flex flex-row justify-between mt-4 ml-2'>
         <div className="font-semibold text-2xl text-slate-700 mb-4 mt-1">
         </div>
@@ -105,4 +105,4 @@ const VerifiedDetail = () => {
   )
 }
 
-export default VerifiedDetail
+export default PendingDetail

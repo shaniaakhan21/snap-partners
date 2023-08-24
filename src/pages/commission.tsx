@@ -9,15 +9,28 @@ import DataTableSummary from './commission/DataTableSummary'
 import DataTableHistory from './commission/DataTableHistory'
 import VerifiedDetail from './commission/VerifiedDetail'
 import { useState } from 'react'
+import PendingDetail from './commission/PendingDetail'
+import HistoryDetail from './commission/HistoryDetail'
+import { Button } from '@mui/material'
 
 const { SEO } = APP_INFO
 
 const commission: Page = () => {
+  const [detailToShow, setDetailToShow] = useState<null | 'verified' | 'pending'>(null)
   const [showDetail, setShowDetail] = useState(false)
 
   if (showDetail) {
+    return <HistoryDetail/>
+  }
+
+  if (detailToShow === 'verified') {
     return <VerifiedDetail />
   }
+
+  if (detailToShow === 'pending') {
+    return <PendingDetail />
+  }
+
   return (
     <div className="w-full bg-white rounded-lg px-6 py-8">
       <div className='flex flex-row justify-between'>
@@ -40,15 +53,18 @@ const commission: Page = () => {
         </div>
         <div className='w-4/12'>
           <div className='mt-10'>
-            <VPCard onClick={() => setShowDetail(true)}/>
+            <VPCard onClick={() => setDetailToShow('verified')}/>
           </div>
           <div className='mt-3'>
-            <VPCard title="Pending pay amount" amount="$ 52.16" detailsText="Click for details" bgColor="bg-amber-500"/>
+            <VPCard onClick={() => setDetailToShow('pending')} title="Pending pay amount" amount="$ 52.16" detailsText="Click for details" bgColor="bg-amber-500"/>
           </div>
         </div>
       </div>
+      <div>
+        <Button/>
+      </div>
       <DataTableSummary/>
-      <DataTableHistory/>
+      <DataTableHistory onRowIdClick={() => setShowDetail(true)}/>
     </div>
   )
 }
