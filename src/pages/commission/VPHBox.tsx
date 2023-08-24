@@ -1,10 +1,17 @@
+type VPHBoxProps = {
+  title?: string;
+  amount?: string;
+  bgColor?: string;
+  additionalText1?: string;
+  additionalText2?: string;
+};
 const VPHBox = ({
   title = 'Verified pay amount',
   amount = '$ 567.16',
   bgColor = 'custom-green',
   additionalText1,
   additionalText2
-}) => {
+}: VPHBoxProps) => {
   return (
     <div className={`px-4 py-36 ${bgColor} rounded-xl text-start text-white`}>
       <h1 className="font-medium text-2xl mb-1">{title}</h1>
