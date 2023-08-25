@@ -7,9 +7,9 @@ const VPCard = ({
 }) => {
   return (
     <div className={`p-3 ${bgColor} rounded-xl text-center text-white`}>
-      <h1 className="font-medium text-2xl mb-1">{title}</h1>
-      <p className="font-light underline text-xl mb-1">{amount}</p>
-      <a className="font-light underline text-xl cursor-pointer" onClick={onClick}>{detailsText}</a>
+      <h1 className="font-medium text-lg lg:text-2xl mb-1">{title}</h1>
+      <p className="font-light underline text-base lg:text-xl mb-1">{amount}</p>
+      <a className="font-light underline text-base lg:text-xl cursor-pointer" onClick={onClick}>{detailsText}</a>
     </div>
   )
 }

@@ -77,7 +77,7 @@ const DataTableSummary = () => {
   const [data, setData] = useState(rows)
   return (
     <div>
-      <div className="font-semibold text-2xl text-slate-700 mb-4 mt-4">
+      <div className="font-semibold text-base text-center lg:text-start lg:text-2xl text-slate-700 mb-4 mt-4">
         <h1>Commission Summary</h1>
       </div>
       <StyledDataGrid

@@ -41,4 +41,7 @@
 
 .left-83{
     left: 83%;
+    @media screen and (max-width: 399px) {
+        left: 0;
+    }
 }

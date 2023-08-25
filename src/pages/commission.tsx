@@ -41,24 +41,24 @@ const commission: Page = () => {
     <div className="w-full bg-white rounded-lg px-6 py-8">
       <div className='flex flex-row justify-between'>
         <div>
-          <h1 className='text-2xl font-bold'>
+          <h1 className='text-md lg:text-2xl font-bold'>
             My Commission
           </h1>
         </div>
         <div>
-          <h1 className='text-2xl font-bold'>
+          <h1 className='text-md lg:text-2xl font-bold'>
             Client — NAME
           </h1>
         </div>
       </div>
 
       <CommissionDetails commissionID={'4567890'} nextWeeklyPayRun={'12-12-2023'} nextMonthlyPayRun={'12-12-2023'} rank={'RANK NAME HERE'} gfrank={'RANK NAME HERE'}/>
-      <div className='w-full flex flex-row'>
-        <div className='w-8/12 mt-3'>
+      <div className='w-full flex flex-col lg:flex-row'>
+        <div className='lg:w-8/12 mt-3'>
           <Notes/>
         </div>
-        <div className='w-4/12'>
-          <div className='mt-10'>
+        <div className='lg:w-4/12'>
+          <div className='mt-1 lg:mt-10'>
             <VPCard onClick={() => setDetailToShow('verified')}/>
           </div>
           <div className='mt-3'>
@@ -66,8 +66,8 @@ const commission: Page = () => {
           </div>
         </div>
       </div>
-      <div className='w-1/6 flex relative text-center border-2 border-black rounded-2xl left-83'>
-        <Button className='text-red-500 text-lg font-semibold w-full' onClick={() => setShowWallet(true)}> View E- Wallet</Button>
+      <div className='lg:w-1/6 flex relative text-center border-2 border-black rounded-2xl left-83 m-4 lg:m-0'>
+        <Button className='text-red-500 text-base lg:text-lg font-semibold w-full' onClick={() => setShowWallet(true)}> View E- Wallet</Button>
       </div>
       <DataTableSummary/>
       <DataTableHistory onRowIdClick={() => setShowDetail(true)}/>

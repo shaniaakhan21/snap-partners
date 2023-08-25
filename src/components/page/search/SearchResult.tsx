@@ -46,7 +46,7 @@ function SearchResult ({ resultData }) {
                     <TableCell><p>{result.email}</p></TableCell>
                     <TableCell>
                       <div className={`${cname}-row-button`}>
-                      <ButtonComponent title={'view more'} onClickFunction={handleViewMore} param={result.id} />
+                        <ButtonComponent title={'view more'} onClickFunction={handleViewMore} param={result.id} />
                       </div>
                     </TableCell>
                   </TableRow>

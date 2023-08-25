@@ -17,7 +17,7 @@ const CommissionDetails: FC<CommissionDetailsProps> = ({
   const [isEditing, setIsEditing] = useState(false)
 
   return (
-    <div className='flex flex-row justify-between mt-4 p-4 bg-zinc-100'>
+    <div className='flex flex-col lg:flex-row text-sm justify-between mt-4 p-4 bg-zinc-100'>
       <div>
         <div>
           <ul>
@@ -28,9 +28,9 @@ const CommissionDetails: FC<CommissionDetailsProps> = ({
           </ul>
         </div>
         <div className='flex flex-row justify-between mb-3 mt-5 w-full'>
-          <label className='w-8/12'>Commission ID</label>
+          <label className='w-2/4 lg:w-8/12'>Commission ID</label>
           <input
-            className='w-2/5 font-bold bg-zinc-100'
+            className='w-2/4 lg:w-2/5 font-bold bg-zinc-100 align-end'
             type="text"
             value={commissionID}
             readOnly={!isEditing}
@@ -42,7 +42,7 @@ const CommissionDetails: FC<CommissionDetailsProps> = ({
             type="text"
             value={nextWeeklyPayRun}
             readOnly={!isEditing}
-            className='font-bold bg-zinc-100 align-center'
+            className='font-bold bg-zinc-100 align-end lg:align-center'
           />
         </div>
         <div className='flex flex-row justify-between'>
@@ -51,17 +51,17 @@ const CommissionDetails: FC<CommissionDetailsProps> = ({
             type="text"
             value={nextMonthlyPayRun}
             readOnly={!isEditing}
-            className='font-bold bg-zinc-100 align-center'
+            className='font-bold bg-zinc-100 align-end lg:align-center'
           />
         </div>
       </div>
 
       <div className='mt-3'>
-        <div className='align-end'>
+        <div className='align-start lg:align-end'>
           <i className="fa fa-pencil mr-2 text-gray-400 text-xs" aria-hidden="true"></i>
           <span className='uppercase red-text text-sm font-bold'>Edit My Details</span>
         </div>
-        <div className='align-end'>
+        <div className='align-start lg:align-end'>
           <ul>
             <li className='mb-1'>Ana Parra Coll</li>
             <li className='mb-1'>D’pero  23 1-2 Pichincha</li>
@@ -69,7 +69,7 @@ const CommissionDetails: FC<CommissionDetailsProps> = ({
             <li className='mb-1'>USA</li>
           </ul>
         </div>
-        <div className='flex flex-row justify-between mt-2'>
+        <div className='flex flex-row justify-between mt-6'>
           <label>Rank</label>
           <input
             type="text"
@@ -78,7 +78,7 @@ const CommissionDetails: FC<CommissionDetailsProps> = ({
             className='font-bold bg-zinc-100 align-end'
           />
         </div>
-        <div className='mt-1'>
+        <div className='flex flex-row justify-between mt-2'>
           <label>GF Rank</label>
           <input
             type="text"

@@ -1,8 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { DataGrid as MUIDataGrid } from '@mui/x-data-grid'
 import { styled } from '@mui/system'
 
-const StyledDataGrid = styled(MUIDataGrid)({
+const StyledDataGrid = styled(MUIDataGrid)(({ theme }) => ({
   '&& .MuiDataGrid-columnHeaderTitleContainer .MuiDataGrid-columnHeaderTitle': {
     fontWeight: 'bold',
     fontSize: '1.2em'
@@ -14,38 +14,24 @@ const StyledDataGrid = styled(MUIDataGrid)({
   boxShadow: 'none',
   '& .MuiDataGrid-footerContainer': {
     justifyContent: 'center'
-  }
-})
-
-const columns = [
-  {
-    field: 'id',
-    headerName: 'ID',
-    flex: 5,
-    id: 'id',
-    renderCell: (params) => {
-      let color = 'black'
-
-      if (['1234', '1235', '1236'].includes(params.value)) {
-        color = '#E35C49'
-      } else if (params.value === '1237') {
-        color = '#2C7D0E'
-      }
-
-      return <span style={{ color, cursor: 'pointer' }}>{params.value}</span>
+  },
+  [`@media (max-width: ${theme.breakpoints.values.sm}px)`]: {
+    '&& .MuiDataGrid-columnHeaderTitleContainer .MuiDataGrid-columnHeaderTitle': {
+      fontSize: '14px'
+    },
+    '& .MuiDataGrid-cell': {
+      fontSize: '0.9em'
     }
   },
-  {
-    field: 'PayDate',
-    headerName: 'Pay Date',
-    flex: 2
-  },
-  {
-    field: 'Amount',
-    headerName: 'Amount',
-    flex: 0.5
+  [`@media (max-width: ${theme.breakpoints.values.xs}px)`]: {
+    '&& .MuiDataGrid-columnHeaderTitleContainer .MuiDataGrid-columnHeaderTitle': {
+      fontSize: '0.8em'
+    },
+    '& .MuiDataGrid-cell': {
+      fontSize: '0.8em'
+    }
   }
-]
+}))
 
 const rows = [
   {
@@ -72,19 +58,66 @@ const rows = [
 
 const DataTableHistory = ({ onRowIdClick }) => {
   const [data, setData] = useState(rows)
+  const [viewportWidth, setViewportWidth] = useState(window.innerWidth)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setViewportWidth(window.innerWidth)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  const columns = [
+    {
+      field: 'id',
+      headerName: 'ID',
+      id: 'id',
+      flex: viewportWidth <= 480 ? 0.4 : 5,
+      renderCell: (params) => {
+        let color = 'black'
+
+        if (['1234', '1235', '1236'].includes(params.value)) {
+          color = '#E35C49'
+        } else if (params.value === '1237') {
+          color = '#2C7D0E'
+        }
+
+        return <span style={{ color, cursor: 'pointer' }}>{params.value}</span>
+      }
+    },
+    {
+      field: 'PayDate',
+      headerName: 'Pay Date',
+      flex: viewportWidth <= 480 ? 0.4 : 1.5
+    },
+    {
+      field: 'Amount',
+      headerName: 'Amount',
+      flex: viewportWidth <= 480 ? 0.4 : 0.5
+    }
+  ]
+
   return (
     <div>
-      <div className="font-semibold text-2xl text-slate-700 mb-4 mt-4">
+      <div className="font-semibold text-base text-center lg:text-start lg:text-2xl text-slate-700 mb-4 mt-4">
         <h1>Commission History</h1>
       </div>
-      <StyledDataGrid
-        rows={data}
-        className="myDataGrid"
-        columns={columns}
-        onRowClick={(event, row) => {
-          onRowIdClick()
-        }}
-      />
+      <div style={{ width: '100%', overflowX: 'auto' }}>
+        <StyledDataGrid
+          style={{ width: '200%' }}
+          rows={data}
+          className="myDataGrid"
+          columns={columns}
+          onRowClick={(event, row) => {
+            onRowIdClick()
+          }}
+        />
+      </div>
     </div>
   )
 }
