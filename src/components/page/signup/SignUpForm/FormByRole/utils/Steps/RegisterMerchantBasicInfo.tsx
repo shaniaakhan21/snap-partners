@@ -75,18 +75,18 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
 
     const setLevel = (referral) => {
       let level = ''
-      if (referral === 'CUSTOMER') {
+      if (referral === 'CUSTOMER' || referral === 'integrousCustomer') {
         level = 'customer'
+      } else if (referral === 'integrousAssociate') {
+        level = 'iboWellness'
+      } else if (referral === 'AGENT') {
+        level = 'iboErc'
+      } else if (referral === 'DRIVER') {
+        level = 'driver'
+      } else if (referral === 'MERCHANT') {
+        level = 'merchant'
       } else {
         level = 'ibo'
-      }
-      if (referral === 'integrousAssociate')
-      {
-        level = 'iboWellness'
-      }
-      if (referral === 'integrousCustomer')
-      {
-        level = 'iboErc'
       }
       return level
     }
