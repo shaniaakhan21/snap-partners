@@ -78,7 +78,7 @@ const VerifiedDetail = () => {
     <><div className="w-full bg-white rounded-lg px-8 py-8">
       <div className="w-full py-0 flex flex-row justify-between">
         <div className="w-3/12">
-          <VPHBox title="Verified pay amount" amount="$ 567.16" bgColor="custom-green" additionalText1={undefined} additionalText2={undefined} />
+          <VPHBox title="Verified pay amount" amount="$ 567.16" bgColor="custom-green"/>
         </div>
         <div className="w-8/12 ml-4">
           <Tier />

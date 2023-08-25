@@ -16,7 +16,7 @@ interface VerifiedIncomeSectionProps {
   headerText?: string;
 }
 
-export default function VerifiedIncomeSection ({ data, headerText = 'Verified Personal Income' } : VerifiedIncomeSectionProps) {
+export default function VerifiedIncomeSection ({ data = [], headerText = 'Verified Personal Income' } : VerifiedIncomeSectionProps) {
   return (
     <div className='ml-2'>
       <div className="font-semibold text-2xl text-slate-700 mb-4 mt-1 ">

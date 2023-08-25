@@ -56,7 +56,7 @@ const columns = [
   { field: 'total', headerName: 'Total', width: 110, headerClassName: 'datagrid-header text-slate-800', flex: 0.5 }
 ]
 
-export default function PersonalIncomeTable ({ rowData }: PersonalIncomeTableProps) {
+export default function PersonalIncomeTable ({ rowData = [] }: PersonalIncomeTableProps) {
   return (
     <div style={{ height: 150, width: '100%' }}>
       <StyledDataGrid

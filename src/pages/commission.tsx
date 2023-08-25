@@ -12,12 +12,18 @@ import { useState } from 'react'
 import PendingDetail from './commission/PendingDetail'
 import HistoryDetail from './commission/HistoryDetail'
 import { Button } from '@mui/material'
+import MyWalletPage from './wallet'
 
 const { SEO } = APP_INFO
 
 const commission: Page = () => {
   const [detailToShow, setDetailToShow] = useState<null | 'verified' | 'pending'>(null)
   const [showDetail, setShowDetail] = useState(false)
+  const [showWallet, setShowWallet] = useState(false)
+
+  if (showWallet) {
+    return <MyWalletPage />
+  }
 
   if (showDetail) {
     return <HistoryDetail/>
@@ -60,8 +66,8 @@ const commission: Page = () => {
           </div>
         </div>
       </div>
-      <div>
-        <Button/>
+      <div className='w-1/6 flex relative text-center border-2 border-black rounded-2xl left-83'>
+        <Button className='text-red-500 text-lg font-semibold w-full' onClick={() => setShowWallet(true)}> View E- Wallet</Button>
       </div>
       <DataTableSummary/>
       <DataTableHistory onRowIdClick={() => setShowDetail(true)}/>

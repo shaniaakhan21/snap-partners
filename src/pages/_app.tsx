@@ -22,7 +22,6 @@ import 'react-phone-input-2/lib/style.css'
 import 'tippy.js/dist/tippy.css'
 import 'styles/tailwind.css'
 import { APP_INFO } from '../config/appInfo'
-import '../pages/commission/common.css'
 
 const { SEO } = APP_INFO
 

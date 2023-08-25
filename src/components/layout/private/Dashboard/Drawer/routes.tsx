@@ -126,11 +126,6 @@ export const drawerRoutes = [
   },
   {
     icon: <CreditCardIcon />,
-    to: '/my-wallet',
-    label: 'My Wallet'
-  },
-  {
-    icon: <CreditCardIcon />,
     to: '/commission',
     label: 'My Commission'
   },

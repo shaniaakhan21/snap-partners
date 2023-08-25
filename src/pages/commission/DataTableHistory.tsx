@@ -32,7 +32,7 @@ const columns = [
         color = '#2C7D0E'
       }
 
-      return <span style={{ color }}>{params.value}</span>
+      return <span style={{ color, cursor: 'pointer' }}>{params.value}</span>
     }
   },
   {

@@ -74,7 +74,7 @@ const columns = [
   { field: 'sup1', headerName: 'Sup. 1', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-red-400', flex: 1, renderCell: (params) => <div className='w-full h-full bg-red-400 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> }
 ]
 
-export default function TeamBonusTable ({ rowData }: TeamBonusTableProps) {
+export default function TeamBonusTable ({ rowData = [] }: TeamBonusTableProps) {
   return (
     <div style={{ width: '100%' }}>
       <StyledDataGrid
