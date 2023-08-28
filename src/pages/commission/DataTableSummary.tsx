@@ -21,6 +21,13 @@ const StyledDataGrid = styled(MUIDataGrid)({
 const DataTableSummary = () => {
   const [data, setData] = useState(rows)
 
+  useEffect(() => {
+    fetch('/src/pages/commisson/DataTableSummary.json')
+      .then(response => response.json())
+      .then(data => setData(data))
+      .catch(error => console.error('Error loading data:', error))
+  }, [])
+
   const columns = [
     {
       field: 'Title',
