@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { DataGrid as MUIDataGrid } from '@mui/x-data-grid'
 import { styled } from '@mui/system'
-import { makeStyles } from '@mui/styles'
+import rows from './DataTableSummary.json'
 
 const StyledDataGrid = styled(MUIDataGrid)({
   '&& .MuiDataGrid-columnHeaderTitleContainer .MuiDataGrid-columnHeaderTitle': {
@@ -18,41 +18,10 @@ const StyledDataGrid = styled(MUIDataGrid)({
   }
 })
 
-const rows = [
-  {
-    Title: 'Personal Income',
-    Description: 'Personal sales',
-    Pending: '$0.00',
-    Verified: '$ 214.00',
-    id: '1'
-  },
-  {
-    Title: 'Team Bonus',
-    Description: 'Downline one-time product sales',
-    Pending: '$0.00',
-    Verified: '$ 214.00',
-    id: '2'
-  },
-  {
-    Title: 'Team Residual',
-    Description: 'Downline residual services sales',
-    Pending: '$0.00',
-    Verified: '$ 214.00',
-    id: '3'
-  },
-  {
-    Title: 'CAB',
-    Description: 'Customer acquisition Bonus',
-    Pending: '$0.00',
-    Verified: '$ 214.00',
-    id: '4'
-  }
-]
-
 const DataTableSummary = () => {
   const [data, setData] = useState(rows)
 
-  const [viewportWidth, setViewportWidth] = useState(window.innerWidth)
+  const [viewportWidth, setViewportWidth] = useState(1000)
 
   useEffect(() => {
     setViewportWidth(window.innerWidth)
