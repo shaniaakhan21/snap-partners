@@ -58,7 +58,7 @@ const rows = [
 
 const DataTableHistory = ({ onRowIdClick }) => {
   const [data, setData] = useState(rows)
-  const [viewportWidth, setViewportWidth] = useState(null)
+  const [viewportWidth, setViewportWidth] = useState(window.innerWidth)
 
   useEffect(() => {
     setViewportWidth(window.innerWidth)

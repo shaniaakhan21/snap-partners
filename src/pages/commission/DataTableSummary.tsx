@@ -52,7 +52,7 @@ const rows = [
 const DataTableSummary = () => {
   const [data, setData] = useState(rows)
 
-  const [viewportWidth, setViewportWidth] = useState(null)
+  const [viewportWidth, setViewportWidth] = useState(window.innerWidth)
 
   useEffect(() => {
     setViewportWidth(window.innerWidth)
