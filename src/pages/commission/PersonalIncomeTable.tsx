@@ -53,13 +53,14 @@ const columns = [
   { field: 'product', headerName: 'Product', width: 150, headerClassName: 'datagrid-header text-slate-800', flex: 2 },
   { field: 'pcv', headerName: 'PCV', width: 100, headerClassName: 'datagrid-header text-slate-800', flex: 1.5 },
   { field: 'cv', headerName: 'CV', width: 100, headerClassName: 'datagrid-header text-slate-800', flex: 1 },
-  { field: 'total', headerName: 'Total', width: 110, headerClassName: 'datagrid-header text-slate-800', flex: 0.5 }
+  { field: 'total', headerName: 'Total', width: 110, headerClassName: 'datagrid-header text-slate-800', flex: 1 }
 ]
 
 export default function PersonalIncomeTable ({ rowData = [] }: PersonalIncomeTableProps) {
   return (
-    <div style={{ height: 150, width: '100%' }}>
+    <div style={{ height: 150, width: '100%', overflowX: 'auto' }}>
       <StyledDataGrid
+        className="myDataGridIT"
         rows={rowData}
         columns={columns}
       />

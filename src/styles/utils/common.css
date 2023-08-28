@@ -30,6 +30,29 @@
     background-color: #404040;
 }
 
+.myDataGrid {
+    @media screen and (max-width: 480px) {
+          width: 200%;
+        }
+}
+
+.myDataGridSum {
+    @media screen and (max-width: 480px) {
+          width: 300%;
+        }
+}
+
+.myDataGridIT {
+    @media screen and (max-width: 480px) {
+          width: 600%;
+        }
+}
+
+.myDataGridTB {
+    @media screen and (max-width: 480px) {
+          width: 900%;
+        }
+}
 .myDataGrid .MuiDataGrid-columnHeader {
     border-right: 'none!important';
     font-weight: 'bold!important';

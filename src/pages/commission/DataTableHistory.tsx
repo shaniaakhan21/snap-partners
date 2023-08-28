@@ -94,7 +94,7 @@ const DataTableHistory = ({ onRowIdClick }) => {
     {
       field: 'PayDate',
       headerName: 'Pay Date',
-      flex: viewportWidth <= 480 ? 0.4 : 1.5
+      flex: viewportWidth <= 480 ? 0.4 : 2
     },
     {
       field: 'Amount',
@@ -105,12 +105,11 @@ const DataTableHistory = ({ onRowIdClick }) => {
 
   return (
     <div>
-      <div className="font-semibold text-base text-center lg:text-start lg:text-2xl text-slate-700 mb-4 mt-4">
+      <div className="font-semibold text-base text-center lg:text-left lg:text-2xl text-slate-700 mb-4 mt-4">
         <h1>Commission History</h1>
       </div>
       <div style={{ width: '100%', overflowX: 'auto' }}>
         <StyledDataGrid
-          style={{ width: '200%' }}
           rows={data}
           className="myDataGrid"
           columns={columns}

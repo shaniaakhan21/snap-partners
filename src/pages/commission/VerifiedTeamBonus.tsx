@@ -27,10 +27,10 @@ export default function VerifiedTeamBonus ({ data, headerText = 'Verified Team B
   return (
     <div className='ml-2'>
       <div className='flex flex-row justify-between'>
-        <div className="font-semibold text-2xl text-slate-700 mb-4 mt-1">
+        <div className="font-semibold text-base lg:text-2xl text-slate-700 mb-4 mt-1">
           <h1>{headerText}</h1>
         </div>
-        <div className="font-semibold text-2xl text-slate-700 mb-4 mt-1">
+        <div className="font-semibold text-base lg:text-2xl text-slate-700 mb-4 mt-1">
           <h1>{subText}</h1>
         </div>
       </div>

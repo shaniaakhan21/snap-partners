@@ -76,11 +76,11 @@ const PendingDetail = () => {
   ]
   return (
     <><div className="w-full bg-white rounded-lg px-8 py-8">
-      <div className="w-full py-0 flex flex-row justify-between">
-        <div className="w-3/12">
+      <div className="w-full py-0 flex flex-col lg:flex-row justify-between">
+        <div className="w-full lg:w-3/12">
           <VPHBox title="Pending pay amount" amount="$ 52.16" bgColor="custom-yellow" />
         </div>
-        <div className="w-8/12 ml-4">
+        <div className="w-full lg:w-8/12 ml-4">
           <Tier />
         </div>
       </div>

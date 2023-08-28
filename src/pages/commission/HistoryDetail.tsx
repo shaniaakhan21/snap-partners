@@ -76,11 +76,11 @@ const HistoryDetail = () => {
   ]
   return (
     <><div className="w-full bg-white rounded-lg px-8 py-8">
-      <div className="w-full py-0 flex flex-row justify-between mb-10">
-        <div className="w-3/12">
+      <div className="w-full py-0 flex flex flex-col lg:flex-row justify-between mb-10">
+        <div className="w-full lg:w-3/12">
           <VPHBox title="Payment History Detail" amount="$ 215.50" bgColor="custom-gray" additionalText1="Payment ID 13406" additionalText2="July 11, 2023" />
         </div>
-        <div className="w-8/12 ml-4">
+        <div className="w-full lg:w-8/12 ml-4">
           <Tier />
         </div>
       </div>

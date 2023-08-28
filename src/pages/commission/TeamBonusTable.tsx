@@ -34,8 +34,7 @@ interface DataRow {
   lv2: string;
   lv3: string;
   lv4: string;
-  lv5: string;
-  lv6: string;
+  lv5: string
   sup1: string;
 }
 
@@ -70,15 +69,15 @@ const columns = [
   { field: 'lv3', headerName: 'LV 3', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-amber-200', flex: 1, renderCell: (params) => <div className='w-full h-full bg-amber-200 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> },
   { field: 'lv4', headerName: 'LV 4', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-amber-200', flex: 1, renderCell: (params) => <div className='w-full h-full bg-amber-200 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> },
   { field: 'lv5', headerName: 'LV 5', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-amber-200', flex: 1, renderCell: (params) => <div className='w-full h-full bg-amber-200 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> },
-  { field: 'lv6', headerName: 'LV 6', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-amber-200', flex: 1, renderCell: (params) => <div className='w-full h-full bg-amber-200 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> },
-  { field: 'sup1', headerName: 'Sup. 1', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-red-400', flex: 1, renderCell: (params) => <div className='w-full h-full bg-red-400 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> }
+  { field: 'sup1', headerName: 'Sup', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-red-400', flex: 1, renderCell: (params) => <div className='w-full h-full bg-red-400 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> }
 ]
 
 export default function TeamBonusTable ({ rowData = [] }: TeamBonusTableProps) {
   return (
-    <div style={{ width: '100%' }}>
+    <div style={{ width: '100%', overflowX: 'auto' }}>
       <StyledDataGrid
         rows={rowData}
+        className="myDataGridTB"
         columns={columns}
       />
     </div>
