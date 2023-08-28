@@ -126,8 +126,8 @@ export const drawerRoutes = [
   },
   {
     icon: <CreditCardIcon />,
-    to: '/my-wallet',
-    label: 'My Wallet'
+    to: '/commission',
+    label: 'My Commission'
   },
   {
     icon: <CompensationPlanIcon />,

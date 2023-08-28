@@ -88,10 +88,8 @@ export default function Commissions (props: CommissionsProps) {
       <div className='flex flex-row justify-between'>
         <span className='text-lg text-semibold'>Commissions</span>
         <Button classes='bg-white  focus:ring-0'>
-          <Link href='/my-wallet' sx={{ textTransform: 'none', textDecoration: 'none' }}>
-            <span className='font-normal text-textAcent-500'>
+          <Link href='/commission' className='text-white' sx={{ textTransform: 'none', textDecoration: 'none !important' }}>
               See Details
-            </span>
           </Link>
         </Button>
       </div>

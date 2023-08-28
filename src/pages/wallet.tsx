@@ -1,11 +1,5 @@
-import Head from 'next/head'
-
-import type { Page, ReactNode } from 'lib/types'
-import { APP_INFO } from 'config/appInfo'
-
 import { useWallet } from 'lib/hooks/useWallet'
 import { Overlay } from 'components/common/Overlay'
-import DashboardLayout from 'layouts/private/Dashboard'
 import { EmptyData } from 'components/common/empty/EmptyData'
 import { Spinner } from 'components/common/loaders'
 import { TableTransactions } from 'components/page/my-wallet/TableTransactions'
@@ -16,9 +10,7 @@ import { useEffect, useState } from 'react'
 import { useAuthStore } from '../lib/stores'
 import { toast } from 'react-toastify'
 
-const { SEO } = APP_INFO
-
-const MyWalletPage: Page = () => {
+const MyWalletPage = () => {
   const { transactions, loading, refresh } = useWallet()
   const { auth, setAuth, removeAuth } = useAuthStore()
   const [balance, setBalance] = useState('')
@@ -164,15 +156,5 @@ const MyWalletPage: Page = () => {
     </div>
   )
 }
-
-MyWalletPage.getLayout = (page: ReactNode) => (
-  <DashboardLayout>
-    <Head>
-      <title>{SEO.TITLE_PAGE} - My Wallet</title>
-    </Head>
-
-    {page}
-  </DashboardLayout>
-)
 
 export default MyWalletPage
