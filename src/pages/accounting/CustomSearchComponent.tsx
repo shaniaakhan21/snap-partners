@@ -6,6 +6,16 @@ import AddBoxIcon from '@mui/icons-material/AddBox'
 import InputSection from './InputSection'
 import CustomSearchHeader from './CustomSearchHeader'
 import DataTable from './DataTable.json'
+import FlagIcon from '@mui/icons-material/Flag'
+import DeleteIcon from '@mui/icons-material/Delete'
+import { styled } from '@mui/system'
+
+const StyledDataGrid = styled(DataGrid)({
+  '&& .MuiDataGrid-columnHeaderTitleContainer .MuiDataGrid-columnHeaderTitle': {
+    fontWeight: 'bold',
+    fontSize: '1.2em'
+  }
+})
 
 const CustomSearchComponent = () => {
   const [data, setData] = useState([])
@@ -111,28 +121,31 @@ const CustomDataGrid = ({ data, setData }) => {
     }
   }
 
-  const handleDeleteSelected = (rowId) => {
-    const updatedData = data.map(row => {
-      if (row.id === rowId) {
-        const newDate = row.date.filter((_, index) => !row.dateChecked[index])
-        const newType = row.type.filter((_, index) => !row.dateChecked[index])
-        const newAmount = row.amount.filter((_, index) => !row.dateChecked[index])
-        const newItemId = row.item_id.filter((_, index) => !row.dateChecked[index])
-        const newProductId = row.product_id.filter((_, index) => !row.dateChecked[index])
+  const handleDeleteSelected = (rowId, indexToDelete) => {
+    const userConfirmed = window.confirm('Are you sure you want to delete this data?')
+    if (userConfirmed) {
+      const updatedData = data.map(row => {
+        if (row.id === rowId) {
+          const newDate = row.date.filter((_, index) => index !== indexToDelete)
+          const newType = row.type.filter((_, index) => index !== indexToDelete)
+          const newAmount = row.amount.filter((_, index) => index !== indexToDelete)
+          const newItemId = row.item_id.filter((_, index) => index !== indexToDelete)
+          const newProductId = row.product_id.filter((_, index) => index !== indexToDelete)
 
-        return {
-          ...row,
-          date: newDate,
-          type: newType,
-          amount: newAmount,
-          item_id: newItemId,
-          product_id: newProductId,
-          dateChecked: Array(newDate.length).fill(false)
+          return {
+            ...row,
+            date: newDate,
+            type: newType,
+            amount: newAmount,
+            item_id: newItemId,
+            product_id: newProductId,
+            dateChecked: Array(newDate.length).fill(false)
+          }
         }
-      }
-      return row
-    })
-    setData(updatedData)
+        return row
+      })
+      setData(updatedData)
+    }
   }
 
   const renderExpandableCell = (cellData, field) => {
@@ -151,7 +164,7 @@ const CustomDataGrid = ({ data, setData }) => {
       return (
         <div className='flex flex-col'>
           {cellData.row[field].map((detail, index) => (
-            <div key={index}>
+            <div key={index} className='mb-2'>
               {field === 'date' && new Date(detail).toLocaleDateString()}
               {field === 'amount' && `$${detail.toFixed(2)}`}
               {field !== 'date' && field !== 'amount' && detail}
@@ -162,10 +175,44 @@ const CustomDataGrid = ({ data, setData }) => {
     }
   }
 
+  const renderActionIcons = (cellData, index) => (
+    <div className='flex space-x-1'>
+      <Checkbox
+        className='p-0'
+        checked={cellData.row.dateChecked[index]}
+        onChange={(e) => {
+          e.stopPropagation()
+          const newChecks = [...cellData.row.dateChecked]
+          newChecks[index] = !newChecks[index]
+          const newData = data.map(row => {
+            if (row.id === cellData.row.id) {
+              return {
+                ...row,
+                dateChecked: newChecks
+              }
+            }
+            return row
+          })
+          setData(newData)
+        }}
+        color="default"
+        style={{ color: '#E35C49' }}
+        sx={{ '& svg': { fontSize: '20px' } }}
+      />
+      <IconButton onClick={() => console.log('Flag icon clicked!')} style={{ color: '#E35C49', padding: 0 }} sx={{ '& svg': { fontSize: '20px' } }}>
+        <FlagIcon />
+      </IconButton>
+      <IconButton onClick={() => handleDeleteSelected(cellData.row.id, index)} style={{ color: '#E35C49', padding: 0 }} sx={{ '& svg': { fontSize: '20px' } }}>
+        <DeleteIcon />
+      </IconButton>
+    </div>
+  )
+
   const baseColumns = [
     {
       field: 'id',
       headerName: 'IBO ID',
+      type: 'string',
       width: 110,
       renderCell: (cellData) => (
         <span>
@@ -203,41 +250,25 @@ const CustomDataGrid = ({ data, setData }) => {
     {
       field: 'date',
       headerName: 'Order Date',
-      width: 150,
+      width: 170,
       renderCell: (cellData) => {
-        if (cellData.row.id === activeEditRowId) {
-          return renderExpandableCell(cellData, 'date')
-        } else {
-          return (
-            <div className='flex flex-col'>
-              {cellData.row.date.map((detail, index) => (
-                <div key={index} className='flex items-center'>
-                  <Checkbox
-                    className='p-0'
-                    checked={cellData.row.dateChecked[index]}
-                    onChange={(e) => {
-                      e.stopPropagation()
-                      const newChecks = [...cellData.row.dateChecked]
-                      newChecks[index] = !newChecks[index]
-                      const newData = data.map(row => {
-                        if (row.id === cellData.row.id) {
-                          return {
-                            ...row,
-                            dateChecked: newChecks
-                          }
-                        }
-                        return row
-                      })
-                      setData(newData)
-                    }}
-                  />
+        return (
+          <div className='flex flex-col'>
+            {cellData.row.id === activeEditRowId
+              ? (
+                renderExpandableCell(cellData, 'date')
+              )
+              : (
+                cellData.row.date.map((detail, index) => (
+                  <div key={index} className='flex items-center mb-2'>
+                    {renderActionIcons(cellData, index)}
+                    {new Date(detail).toLocaleDateString()}
+                  </div>
+                ))
+              )}
 
-                  {new Date(detail).toLocaleDateString()}
-                </div>
-              ))}
-            </div>
-          )
-        }
+          </div>
+        )
       }
     },
 
@@ -312,39 +343,33 @@ const CustomDataGrid = ({ data, setData }) => {
     }
   }
 
-  const deleteColumn = {
-    field: 'delete',
-    headerName: 'Delete',
-    width: 100,
-    sortable: false,
-    disableClickEventBubbling: true,
-    renderCell: (cellData) => {
-      return (
-        <button
-          className="bg-red-600 hover:bg-red-700 text-white font-medium py-1 px-2"
-          onClick={() => handleDeleteSelected(cellData.row.id)}
-        >
-          Delete
-        </button>
-      )
-    }
+  const getMaxDataElements = () => {
+    let maxCount = 0
+    data.forEach(row => {
+      maxCount = Math.max(maxCount, row.date.length)
+    })
+    return maxCount
   }
 
-  const anyRowChecked = data.some(row => row.dateChecked.some(checked => checked));
+  const baseRowHeight = 60
+  const dynamicRowHeight = baseRowHeight + (getMaxDataElements() - 1) * 25
+
+  const anyRowChecked = data.some(row => row.dateChecked.some(checked => checked))
   const columns = activeEditRowId
     ? [...baseColumns.slice(0, -1), saveColumn, baseColumns[baseColumns.length - 1]]
     : anyRowChecked
-      ? [...baseColumns.slice(0, -1), deleteColumn, baseColumns[baseColumns.length - 1]]
+      ? [...baseColumns.slice(0, -1), baseColumns[baseColumns.length - 1]]
       : baseColumns
 
   return (
     <>
       <div className="mt-10" style={{ height: 400, width: '100%' }}>
-        <DataGrid
+        <StyledDataGrid
           rows={data}
           columns={columns}
           style={{ width: '100%', margin: 0, padding: 0 }}
-          rowHeight={100}
+          rowHeight={dynamicRowHeight}
+          className="boldHeader"
         />
       </div>
     </>

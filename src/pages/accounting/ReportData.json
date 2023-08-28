@@ -17,6 +17,26 @@
             "width": 110
         },
         {
+            "field": "personal_income",
+            "headerName": "Personal Income",
+            "width": 150
+        },
+        {
+            "field": "team_bonus",
+            "headerName": "Team Bonus",
+            "width": 110
+        },
+        {
+            "field": "team_residual",
+            "headerName": "Team Residual",
+            "width": 110
+        },
+        {
+            "field": "cab_bonus",
+            "headerName": "CAB Bonus",
+            "width": 110
+        },
+        {
             "field": "social",
             "headerName": "Social",
             "width": 110
@@ -61,26 +81,7 @@
             "headerName": "Country",
             "width": 110
         },
-        {
-            "field": "personal_income",
-            "headerName": "Personal Income",
-            "width": 150
-        },
-        {
-            "field": "team_bonus",
-            "headerName": "Team Bonus",
-            "width": 110
-        },
-        {
-            "field": "team_residual",
-            "headerName": "Team Residual",
-            "width": 110
-        },
-        {
-            "field": "cab_bonus",
-            "headerName": "CAB Bonus",
-            "width": 110
-        },
+
         {
             "field": "total",
             "headerName": "Total",
@@ -92,6 +93,10 @@
             "id": 1,
             "rep_id": "R001",
             "name": "Alice",
+            "personal_income": 2100,
+            "team_bonus": 2100,
+            "team_residual": 2200,
+            "cab_bonus": 200,
             "social": "123-45-6789",
             "business": "Alice Corp",
             "Tax_ID": "TAX001",
@@ -100,16 +105,16 @@
             "city": "Springfield",
             "state": "IL",
             "zip": "12345",
-            "country": "USA",
-            "personal_income": 2100,
-            "team_bonus": 2100,
-            "team_residual": 2200,
-            "cab_bonus": 200
+            "country": "USA"
         },
         {
             "id": 2,
             "rep_id": "R002",
             "name": "Bob",
+            "personal_income": 2100,
+            "team_bonus": 2100,
+            "team_residual": 2200,
+            "cab_bonus": 200,
             "social": "987-65-4321",
             "business": "Bob Corp",
             "Tax_ID": "TAX002",
@@ -118,16 +123,16 @@
             "city": "Shelbyville",
             "state": "IL",
             "zip": "67890",
-            "country": "USA",
-            "personal_income": 2100,
-            "team_bonus": 2100,
-            "team_residual": 2200,
-            "cab_bonus": 200
+            "country": "USA"
         },
         {
             "id": 3,
             "rep_id": "R003",
             "name": "Charlie",
+            "personal_income": 2100,
+            "team_bonus": 2100,
+            "team_residual": 2200,
+            "cab_bonus": 400,
             "social": "456-78-9012",
             "business": "Charlie Corp",
             "Tax_ID": "TAX003",
@@ -136,11 +141,7 @@
             "city": "Capital City",
             "state": "IL",
             "zip": "11223",
-            "country": "USA",
-            "personal_income": 2100,
-            "team_bonus": 2100,
-            "team_residual": 2200,
-            "cab_bonus": 400
+            "country": "USA"
         }
     ]
 }

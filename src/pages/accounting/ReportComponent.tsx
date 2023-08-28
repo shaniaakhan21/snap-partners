@@ -1,10 +1,18 @@
 import { useState, useEffect } from 'react'
 import { DataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid'
 import reportData from './ReportData.json'
+import { styled } from '@mui/system'
 
 interface ReportComponentProps {
     title: string;
 }
+
+const StyledDataGrid = styled(DataGrid)({
+  '&& .MuiDataGrid-columnHeaderTitleContainer .MuiDataGrid-columnHeaderTitle': {
+    fontWeight: 'bold',
+    fontSize: '1.2em'
+  }
+})
 
 const ReportComponent = ({ title }: ReportComponentProps) => {
   const [data, setData] = useState<{columns: GridColDef[], rows: GridRowsProp} | null>(null)
@@ -29,7 +37,7 @@ const ReportComponent = ({ title }: ReportComponentProps) => {
   return (
     <div style={{ height: 400, width: '100%' }}>
       <h2 className="text-lg font-semibold mb-4">{title}</h2>
-      <DataGrid
+      <StyledDataGrid
         {...({
           rows: data.rows,
           columns: data.columns,
