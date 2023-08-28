@@ -21,7 +21,7 @@ const StyledDataGrid = styled(MUIDataGrid)({
 const DataTableSummary = () => {
   const [data, setData] = useState(rows)
 
-  const [viewportWidth, setViewportWidth] = useState(null)
+  const [viewportWidth, setViewportWidth] = useState(1000)
 
   useEffect(() => {
     setViewportWidth(window.innerWidth)
