@@ -21,42 +21,27 @@ const StyledDataGrid = styled(MUIDataGrid)({
 const DataTableSummary = () => {
   const [data, setData] = useState(rows)
 
-  const [viewportWidth, setViewportWidth] = useState(1000)
-
-  useEffect(() => {
-    setViewportWidth(window.innerWidth)
-
-    const handleResize = () => {
-      setViewportWidth(window.innerWidth)
-    }
-
-    window.addEventListener('resize', handleResize)
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
-
   const columns = [
     {
       field: 'Title',
       headerName: 'Title',
-      flex: viewportWidth <= 480 ? 1 : 2,
+      flex: 2,
       id: 'title'
     },
     {
       field: 'Description',
       headerName: 'Description',
-      flex: viewportWidth <= 480 ? 2 : 2
+      flex: 2
     },
     {
       field: 'Pending',
       headerName: 'Pending',
-      flex: viewportWidth <= 480 ? 1 : 1
+      flex: 1
     },
     {
       field: 'Verified',
       headerName: 'Verified',
-      flex: viewportWidth <= 480 ? 1 : 0.5
+      flex: 0.5
     }
   ]
 

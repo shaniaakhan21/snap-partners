@@ -58,27 +58,12 @@ const rows = [
 
 const DataTableHistory = ({ onRowIdClick }) => {
   const [data, setData] = useState(rows)
-  const [viewportWidth, setViewportWidth] = useState(null)
-
-  useEffect(() => {
-    setViewportWidth(window.innerWidth)
-
-    const handleResize = () => {
-      setViewportWidth(window.innerWidth)
-    }
-
-    window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
   const columns = [
     {
       field: 'id',
       headerName: 'ID',
       id: 'id',
-      flex: viewportWidth <= 480 ? 0.4 : 5,
+      flex: 5,
       renderCell: (params) => {
         let color = 'black'
 
@@ -94,12 +79,12 @@ const DataTableHistory = ({ onRowIdClick }) => {
     {
       field: 'PayDate',
       headerName: 'Pay Date',
-      flex: viewportWidth <= 480 ? 0.4 : 2
+      flex: 2
     },
     {
       field: 'Amount',
       headerName: 'Amount',
-      flex: viewportWidth <= 480 ? 0.4 : 0.5
+      flex: 0.5
     }
   ]
 
