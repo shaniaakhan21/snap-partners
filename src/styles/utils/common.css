@@ -36,18 +36,6 @@
         }
 }
 
-.myDataGridSum {
-    @media screen and (max-width: 480px) {
-          width: 300%;
-        }
-}
-
-.myDataGridIT {
-    @media screen and (max-width: 480px) {
-          width: 600%;
-        }
-}
-
 .myDataGrid .MuiDataGrid-columnHeader {
     border-right: 'none!important';
     font-weight: 'bold!important';
