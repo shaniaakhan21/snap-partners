@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { DataGrid as MUIDataGrid } from '@mui/x-data-grid'
 import { styled } from '@mui/system'
-import rows from './DataTableSummary.json'
+import PropTypes from 'prop-types'
 
 const StyledDataGrid = styled(MUIDataGrid)({
   '&& .MuiDataGrid-columnHeaderTitleContainer .MuiDataGrid-columnHeaderTitle': {
@@ -18,15 +18,24 @@ const StyledDataGrid = styled(MUIDataGrid)({
   }
 })
 
-const DataTableSummary = () => {
-  const [data, setData] = useState(rows)
+interface DataRow {
+  Title: string;
+  Description: string;
+  Pending: string;
+  Verified: string;
+  id: string;
+}
+
+interface DataTableSummaryProps {
+  data: DataRow[];
+}
+
+const DataTableSummary = ({ data = [] }: DataTableSummaryProps) => {
+  const [rows, setRows] = useState(data)
 
   useEffect(() => {
-    fetch('/src/pages/commisson/DataTableSummary.json')
-      .then(response => response.json())
-      .then(data => setData(data))
-      .catch(error => console.error('Error loading data:', error))
-  }, [])
+    setRows(data)
+  }, [data])
 
   const columns = [
     {
@@ -69,6 +78,10 @@ const DataTableSummary = () => {
       </div>
     </div>
   )
+}
+
+DataTableSummary.propTypes = {
+  data: PropTypes.array.isRequired
 }
 
 export default DataTableSummary
