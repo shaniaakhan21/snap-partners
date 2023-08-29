@@ -53,6 +53,7 @@ const columns = [
 ]
 
 export default function DataTableSummary ({ data = [] }: DataTableSummaryProps) {
+  console.log('jsonData:', data)
   return (
     <div>
       <div className="font-semibold text-base text-center lg:text-left lg:text-2xl text-slate-700 mb-4 mt-4">
