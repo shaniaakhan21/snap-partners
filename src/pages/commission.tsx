@@ -5,7 +5,7 @@ import DashboardLayout from 'layouts/private/Dashboard'
 import CommissionDetails from './commission/CommissionDetails'
 import Notes from './commission/Notes'
 import VPCard from './commission/VPCard'
-import DataTableSummary from './commission/DataTableSummary'
+import DataTableSummary, { DataRow } from './commission/DataTableSummary'
 import DataTableHistory from './commission/DataTableHistory'
 import VerifiedDetail from './commission/VerifiedDetail'
 import { useEffect, useState } from 'react'
@@ -20,36 +20,40 @@ const commission: Page = () => {
   const [detailToShow, setDetailToShow] = useState<null | 'verified' | 'pending'>(null)
   const [showDetail, setShowDetail] = useState(false)
   const [showWallet, setShowWallet] = useState(false)
-  const jsonData = [
-    {
-      Title: 'Personal Income',
-      Description: 'Personal sales',
-      Pending: '$0.00',
-      Verified: '$ 214.00',
-      id: '1'
-    },
-    {
-      Title: 'Team Bonus',
-      Description: 'Downline one-time product sales',
-      Pending: '$0.00',
-      Verified: '$ 214.00',
-      id: '2'
-    },
-    {
-      Title: 'Team Residual',
-      Description: 'Downline residual services sales',
-      Pending: '$0.00',
-      Verified: '$ 214.00',
-      id: '3'
-    },
-    {
-      Title: 'CAB',
-      Description: 'Customer acquisition Bonus',
-      Pending: '$0.00',
-      Verified: '$ 214.00',
-      id: '4'
-    }
-  ]
+  const [jsonData, setJsonData] = useState<DataRow[]>([])
+
+  useEffect(() => {
+    setJsonData([
+      {
+        Title: 'Personal Income',
+        Description: 'Personal sales',
+        Pending: '$0.00',
+        Verified: '$ 214.00',
+        id: '1'
+      },
+      {
+        Title: 'Team Bonus',
+        Description: 'Downline one-time product sales',
+        Pending: '$0.00',
+        Verified: '$ 214.00',
+        id: '2'
+      },
+      {
+        Title: 'Team Residual',
+        Description: 'Downline residual services sales',
+        Pending: '$0.00',
+        Verified: '$ 214.00',
+        id: '3'
+      },
+      {
+        Title: 'CAB',
+        Description: 'Customer acquisition Bonus',
+        Pending: '$0.00',
+        Verified: '$ 214.00',
+        id: '4'
+      }
+    ])
+  }, [])
 
   if (showWallet) {
     return <MyWalletPage />

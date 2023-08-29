@@ -57,11 +57,11 @@ const CommissionDetails: FC<CommissionDetailsProps> = ({
       </div>
 
       <div className='mt-3'>
-        <div className='align-start lg:align-end'>
+        <div className='align-end lg:align-end'>
           <i className="fa fa-pencil mr-2 text-gray-400 text-xs" aria-hidden="true"></i>
           <span className='uppercase red-text text-sm font-bold'>Edit My Details</span>
         </div>
-        <div className='align-start lg:align-end'>
+        <div className='align-end lg:align-end'>
           <ul>
             <li className='mb-1'>Ana Parra Coll</li>
             <li className='mb-1'>D’pero  23 1-2 Pichincha</li>
