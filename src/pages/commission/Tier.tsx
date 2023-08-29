@@ -138,7 +138,7 @@ const rows = [
 const Tier = () => {
   const [data, setData] = useState(rows)
   return (
-    <div style={{ height: '100%', width: '100%', overflowX: 'auto' }}>
+    <div style={{ height: 405, width: '100%', overflowX: 'auto' }}>
       <StyledDataGrid
         rows={data}
         className="myDataGridSum"

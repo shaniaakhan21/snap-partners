@@ -93,7 +93,7 @@ const DataTableHistory = ({ onRowIdClick }) => {
       <div className="font-semibold text-base text-center lg:text-left lg:text-2xl text-slate-700 mb-4 mt-4">
         <h1>Commission History</h1>
       </div>
-      <div style={{ height: 320, width: '100%', overflowX: 'auto' }}>
+      <div style={{ height: 317, width: '100%', overflowX: 'auto' }}>
         <StyledDataGrid
           rows={data}
           className="myDataGrid"
