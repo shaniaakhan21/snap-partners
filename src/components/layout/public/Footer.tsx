@@ -4,7 +4,8 @@ import { APP_INFO } from 'config/appInfo'
 import { ROLES } from 'config/roles'
 import { GTMTrack } from 'lib/utils/gtm'
 import Link from 'next/link'
-import { useRef } from 'react'
+import { useRouter } from 'next/router'
+import { useEffect, useRef } from 'react'
 
 const { RRSS, LEGAL } = APP_INFO
 
@@ -13,15 +14,23 @@ export const FooterPublic = () => {
     { to: RRSS.FACEBOOK.link, icon: <FooterFacebook />, label: 'facebook' },
     { to: RRSS.YOUTUBE.link, icon: <FooterYoutube />, label: 'youtube' }
   ])
+  const router = useRouter()
+  const { referralCode } = router.query
+  useEffect(() => {
+    console.log(router.query)
+  }, [router.query])
 
-  const { current: joinUsLinks } = useRef([
+  const joinUsLinks = [
     { to: 'https://opportunity.snapdelivered.com/#about', label: 'About us' },
-    { to: `/auth/signup?role=${ROLES.DRIVER}`, label: 'Become a Driver' },
+    {
+      to: `/auth/signup${referralCode ? `?referralCode=${referralCode}` : ''}${ROLES.DRIVER ? `&role=${ROLES.DRIVER}` : ''}`,
+      label: 'Become a Driver'
+    },
     { to: `/auth/signup?role=${ROLES.MERCHANT}`, label: 'Become a Merchant Partner' },
     { to: `/auth/signup?role=${ROLES.CUSTOMER}`, label: 'Become a Customer' },
     { to: 'https://opportunity.snapdelivered.com/#contact', label: 'Careers' },
     { to: 'https://store.snapdelivered.com/', label: 'Merch Store' }
-  ])
+  ]
 
   // const { current: helpLinks } = useRef([
   //   { to: '#faqs', label: 'FAQs' },
