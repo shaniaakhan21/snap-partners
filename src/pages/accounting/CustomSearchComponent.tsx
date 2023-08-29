@@ -14,6 +14,9 @@ const StyledDataGrid = styled(DataGrid)({
   '&& .MuiDataGrid-columnHeaderTitleContainer .MuiDataGrid-columnHeaderTitle': {
     fontWeight: 'bold',
     fontSize: '1.2em'
+  },
+  '&& .MuiDataGrid-virtualScroller': {
+    overflowX: 'hidden'
   }
 })
 
@@ -29,7 +32,7 @@ const CustomSearchComponent = () => {
       const processedData = DataTable.map(row => ({
         ...row,
         dateChecked: Array(row.date.length).fill(true),
-        allSelected: false,
+        allSelected: true,
         total: row.amount.reduce((sum, amt) => sum + amt, 0)
       }))
 
@@ -179,21 +182,26 @@ const CustomDataGrid = ({ data, setData }) => {
     <div className='flex space-x-1'>
       <Checkbox
         className='p-0'
-        checked={cellData.row.dateChecked[index]}
+        checked={cellData.row.allSelected ? true : cellData.row.dateChecked[index]}
         onChange={(e) => {
           e.stopPropagation()
           const newChecks = [...cellData.row.dateChecked]
           newChecks[index] = !newChecks[index]
+          const allSelected = newChecks.every(val => val)
+          const anyUnchecked = newChecks.some(val => !val)
           const newData = data.map(row => {
             if (row.id === cellData.row.id) {
               return {
                 ...row,
-                dateChecked: newChecks
+                dateChecked: newChecks,
+                allSelected: !anyUnchecked
               }
             }
             return row
           })
           setData(newData)
+          console.log('Updated dateChecked state: ', newChecks)
+          console.log('Updated allSelected state: ', allSelected)
         }}
         color="default"
         style={{ color: '#E35C49' }}
@@ -216,7 +224,23 @@ const CustomDataGrid = ({ data, setData }) => {
       width: 110,
       renderCell: (cellData) => (
         <span>
-          <Checkbox checked={cellData.row.checked} />
+          <Checkbox
+            checked={cellData.row.allSelected}
+            onChange={() => {
+              const updatedData = data.map(row => {
+                if (row.id === cellData.row.id) {
+                  const newAllSelected = !row.allSelected
+                  return {
+                    ...row,
+                    allSelected: newAllSelected,
+                    dateChecked: Array(row.date.length).fill(newAllSelected)
+                  }
+                }
+                return row
+              })
+              setData(updatedData)
+            }}
+          />
           {cellData.row.id}
         </span>
       )

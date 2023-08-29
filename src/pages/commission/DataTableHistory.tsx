@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { DataGrid as MUIDataGrid } from '@mui/x-data-grid'
 import { styled } from '@mui/system'
 
@@ -57,7 +57,7 @@ const rows = [
 ]
 
 const DataTableHistory = ({ onRowIdClick }) => {
-  const [data, setData] = useState(rows)
+  const data = useState(rows)
   const columns = [
     {
       field: 'id',

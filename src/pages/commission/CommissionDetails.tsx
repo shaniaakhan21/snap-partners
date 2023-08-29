@@ -1,4 +1,5 @@
 import { FC, useState } from 'react'
+
 interface CommissionDetailsProps {
   commissionID: string;
   nextWeeklyPayRun: string;
@@ -14,7 +15,7 @@ const CommissionDetails: FC<CommissionDetailsProps> = ({
   rank,
   gfrank
 }) => {
-  const [isEditing, setIsEditing] = useState(false)
+  const isEditing = useState(false)
 
   return (
     <div className='flex flex-col lg:flex-row text-sm justify-between mt-4 p-4 bg-zinc-100'>
