@@ -16,7 +16,7 @@ const StyledDataGrid = styled(MUIDataGrid)({
   }
 })
 
-interface DataRow {
+export interface DataRow {
   Title: string;
   Description: string;
   Pending: string;
