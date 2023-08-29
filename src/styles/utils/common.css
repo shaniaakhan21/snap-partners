@@ -32,7 +32,7 @@
 
 .myDataGrid {
     @media screen and (max-width: 480px) {
-          width: 120%;
+          width: 140%;
         }
 }
 
@@ -48,11 +48,6 @@
         }
 }
 
-.myDataGridTB {
-    @media screen and (max-width: 480px) {
-          width: 900%;
-        }
-}
 .myDataGrid .MuiDataGrid-columnHeader {
     border-right: 'none!important';
     font-weight: 'bold!important';

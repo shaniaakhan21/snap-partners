@@ -77,7 +77,7 @@ export default function TeamBonusTable ({ rowData = [] }: TeamBonusTableProps) {
     <div style={{ height: 220, width: '100%', overflowX: 'auto' }}>
       <StyledDataGrid
         rows={rowData}
-        className="myDataGridTB"
+        className="myDataGrid"
         columns={columns}
       />
     </div>
