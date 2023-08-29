@@ -57,7 +57,7 @@ type OrdersDataItem = {
 
 type GrowthSummaryData = {
   volume: { direct?: number, manager?: number, director?: number, supervisor?: number, executive?: number },
-  newIBOs: { direct?: number, manager?: number, director?: number, supervisor?: number, executive?: number },
+  newIBOs: { direct?: number, manager?: number, director?: number, supervisor?: number, executive?: number, total?: number },
   newClientsData: { direct: ClientDataItem, manager: ClientDataItem, director: ClientDataItem, supervisor: ClientDataItem, executive: ClientDataItem },
   newOrdersData: { direct: OrdersDataItem, manager: OrdersDataItem, director: OrdersDataItem, supervisor: OrdersDataItem, executive: OrdersDataItem },
 }
@@ -108,13 +108,7 @@ export default function GrowthSummary () {
           newIBOs?.supervisor ?? 0,
           newIBOs?.director ?? 0,
           newIBOs?.executive ?? 0,
-          sum(
-            newIBOs?.direct,
-            newIBOs?.manager,
-            newIBOs?.director,
-            newIBOs?.supervisor,
-            newIBOs?.executive
-          )
+          newIBOs?.total
         ]
       ]
     case 1:
