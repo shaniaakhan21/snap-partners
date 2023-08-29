@@ -63,7 +63,7 @@ const DataTableHistory = ({ onRowIdClick }) => {
       field: 'id',
       headerName: 'ID',
       id: 'id',
-      flex: 5,
+      flex: 2,
       renderCell: (params) => {
         let color = 'black'
 
