@@ -84,7 +84,7 @@ const DataTableHistory = ({ onRowIdClick }) => {
     {
       field: 'Amount',
       headerName: 'Amount',
-      flex: 1
+      flex: 0.5
     }
   ]
 

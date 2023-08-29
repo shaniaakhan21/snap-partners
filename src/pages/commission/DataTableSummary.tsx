@@ -1,20 +1,27 @@
 import { DataGrid as MUIDataGrid } from '@mui/x-data-grid'
 import { styled } from '@mui/system'
 
-const StyledDataGrid = styled(MUIDataGrid)({
-  '&& .MuiDataGrid-columnHeaderTitleContainer .MuiDataGrid-columnHeaderTitle': {
-    fontWeight: 'bold',
-    fontSize: '1.2em'
-  },
-  '& .MuiDataGrid-cell': {
-    borderRight: 'none'
-  },
-  border: 'none',
-  boxShadow: 'none',
-  '& .MuiDataGrid-footerContainer': {
-    justifyContent: 'center'
-  }
-})
+const StyledDataGrid = styled(MUIDataGrid)(
+  ({ theme }) => ({
+    '&& .MuiDataGrid-columnHeaderTitleContainer .MuiDataGrid-columnHeaderTitle': {
+      fontWeight: 'bold',
+      fontSize: '1.2em'
+    },
+    '& .MuiDataGrid-cell': {
+      borderRight: 'none'
+    },
+    border: 'none',
+    boxShadow: 'none',
+    '& .MuiDataGrid-footerContainer': {
+      justifyContent: 'center'
+    },
+    '.myDataGridSum': {
+      [theme.breakpoints.down('sm')]: {
+        width: '200% !important'
+      }
+    }
+  })
+)
 
 export interface DataRow {
   Title: string;
