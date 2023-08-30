@@ -57,7 +57,8 @@ const rows = [
 ]
 
 const DataTableHistory = ({ onRowIdClick }) => {
-  const data = useState(rows)
+  const data = useState(rows)[0]
+
   const columns = [
     {
       field: 'id',
