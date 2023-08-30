@@ -42,8 +42,7 @@ const ReportComponent = ({ title }: ReportComponentProps) => {
           rows: data.rows,
           columns: data.columns,
           pageSize: 5,
-          rowsPerPageOptions: [5],
-          checkboxSelection: true
+          rowsPerPageOptions: [5]
         } as any)}
       />
     </div>

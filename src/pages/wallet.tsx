@@ -9,8 +9,9 @@ import { ModalContainer } from 'components/common/ModalContainer'
 import { useEffect, useState } from 'react'
 import { useAuthStore } from '../lib/stores'
 import { toast } from 'react-toastify'
+import BackButton from './accounting/BackButton'
 
-const MyWalletPage = () => {
+const MyWalletPage = ({ onBackClick }) => {
   const { transactions, loading, refresh } = useWallet()
   const { auth, setAuth, removeAuth } = useAuthStore()
   const [balance, setBalance] = useState('')
@@ -70,90 +71,93 @@ const MyWalletPage = () => {
   }
 
   return (
-    <div className='max-w-4xl w-full mx-auto'>
-      <div className={`relative w-full sm:rounded-lg ${!loading && 'overflow-x-auto'}`}> {/* Can be better */}
-        {
-          loading &&
+    <>
+      <BackButton onBackClick={onBackClick}/>
+      <div className='max-w-4xl w-full mx-auto'>
+        <div className={`relative w-full sm:rounded-lg ${!loading && 'overflow-x-auto'}`}> {/* Can be better */}
+          {
+            loading &&
             (
               <div className='w-full h-screen-80 flex justify-center items-center'>
                 <Spinner/>
               </div>
             )
-        }
-        <>
-          <div className='max-w-xl mx-auto w-full text-center mb-2'>
-            <Button disabled={!enableWithdraw} onClick={() => { fnOpenModalConfirmation() }} type='submit' classes=' mr-1 text-sm bg-primary-500'>
-                      Withdraw Available Balance
-            </Button>
-            <br/>
-            <span className='font-semibold text-lg'>Current Balance: ${balance}</span>
-            <br/>
-            <span className='font-semibold text-sm'>minimum balance to withdraw is $5.00</span>
-          </div>
-          {modalConfirmationIsOpen && (
-            <Overlay onClick={fnCloseModalConfirmation}>
-              <ModalContainer>
-
-                { loadingButton && (
-                  <div className='w-full flex justify-center items-center'>
-                    <Spinner />
-                  </div>
-                )}
-
-                {(!bank_information?.accountNumber && !loadingButton) && (
-                  <>
-                    <div className={'w-full referral-list--height rounded-sm bg-white p-4 overflow-y-auto scroll-primary lg:block'}>
-                      <div className='max-w-xl mx-auto w-full text-center mb-3'>
-                        <span className='font-semibold text-lg'>Withdraw Balance</span>
-                      </div>
-                              In order to withdraw your balance, please add your bank account in profile
-                    </div>
-                    <div className='max-w-xl mx-auto w-full text-center mb-1'>
-                      <Button onClick={() => { window.location.href = '/profile' }} classes=' mr-1 text-sm '>
-                                Go to Profile
-                      </Button>
-                      <Button onClick={() => { fnOpenModalConfirmationManually() }} style={{ backgroundColor: 'grey' }} classes=' mr-1 text-sm '>
-                                Cancel
-                      </Button>
-                    </div>
-                  </>
-                )}
-
-                {(bank_information?.accountNumber && !loadingButton) && (
-                  <>
-                    <div className={'w-full referral-list--height rounded-sm bg-white p-4 overflow-y-auto scroll-primary lg:block'}>
-                      <div className='max-w-xl mx-auto w-full text-center mb-3'>
-                        <span className='font-semibold text-lg'>Withdraw Balance</span>
-                      </div>
-                                Are you sure you want to withdraw ${balance} to your bank account ending in {bank_information?.accountNumber.substr(-4)}
-                    </div>
-                    <div className='max-w-xl mx-auto w-full text-center mb-1'>
-                      <Button onClick={() => { withdraw() }} classes=' mr-1 text-sm '>
-                                  Withdraw
-                      </Button>
-                      <Button onClick={() => { fnOpenModalConfirmationManually() }} style={{ backgroundColor: 'grey' }} classes=' mr-1 text-sm '>
-                                  Cancel
-                      </Button>
-                    </div>
-                  </>
-
-                )}
-              </ModalContainer>
-            </Overlay>
-          )}
-          { transactions.length === 0
-            ? (
-              <div className='flex justify-center items-center'>
-                <EmptyData label='No transactions found' />
-              </div>
-            )
-            : (
-              <TableTransactions transactions={transactions} />
-            )
           }
-        </>
+          <>
+            <div className='max-w-xl mx-auto w-full text-center mb-2'>
+              <Button disabled={!enableWithdraw} onClick={() => { fnOpenModalConfirmation() }} type='submit' classes=' mr-1 text-sm bg-primary-500'>
+                      Withdraw Available Balance
+              </Button>
+              <br/>
+              <span className='font-semibold text-lg'>Current Balance: ${balance}</span>
+              <br/>
+              <span className='font-semibold text-sm'>minimum balance to withdraw is $5.00</span>
+            </div>
+            {modalConfirmationIsOpen && (
+              <Overlay onClick={fnCloseModalConfirmation}>
+                <ModalContainer>
+
+                  { loadingButton && (
+                    <div className='w-full flex justify-center items-center'>
+                      <Spinner />
+                    </div>
+                  )}
+
+                  {(!bank_information?.accountNumber && !loadingButton) && (
+                    <>
+                      <div className={'w-full referral-list--height rounded-sm bg-white p-4 overflow-y-auto scroll-primary lg:block'}>
+                        <div className='max-w-xl mx-auto w-full text-center mb-3'>
+                          <span className='font-semibold text-lg'>Withdraw Balance</span>
+                        </div>
+                              In order to withdraw your balance, please add your bank account in profile
+                      </div>
+                      <div className='max-w-xl mx-auto w-full text-center mb-1'>
+                        <Button onClick={() => { window.location.href = '/profile' }} classes=' mr-1 text-sm '>
+                                Go to Profile
+                        </Button>
+                        <Button onClick={() => { fnOpenModalConfirmationManually() }} style={{ backgroundColor: 'grey' }} classes=' mr-1 text-sm '>
+                                Cancel
+                        </Button>
+                      </div>
+                    </>
+                  )}
+
+                  {(bank_information?.accountNumber && !loadingButton) && (
+                    <>
+                      <div className={'w-full referral-list--height rounded-sm bg-white p-4 overflow-y-auto scroll-primary lg:block'}>
+                        <div className='max-w-xl mx-auto w-full text-center mb-3'>
+                          <span className='font-semibold text-lg'>Withdraw Balance</span>
+                        </div>
+                                Are you sure you want to withdraw ${balance} to your bank account ending in {bank_information?.accountNumber.substr(-4)}
+                      </div>
+                      <div className='max-w-xl mx-auto w-full text-center mb-1'>
+                        <Button onClick={() => { withdraw() }} classes=' mr-1 text-sm '>
+                                  Withdraw
+                        </Button>
+                        <Button onClick={() => { fnOpenModalConfirmationManually() }} style={{ backgroundColor: 'grey' }} classes=' mr-1 text-sm '>
+                                  Cancel
+                        </Button>
+                      </div>
+                    </>
+
+                  )}
+                </ModalContainer>
+              </Overlay>
+            )}
+            { transactions.length === 0
+              ? (
+                <div className='flex justify-center items-center'>
+                  <EmptyData label='No transactions found' />
+                </div>
+              )
+              : (
+                <TableTransactions transactions={transactions} />
+              )
+            }
+          </>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

@@ -19,21 +19,26 @@
         {
             "field": "personal_income",
             "headerName": "Personal Income",
-            "width": 150
+            "width": 170
         },
         {
             "field": "team_bonus",
             "headerName": "Team Bonus",
-            "width": 110
+            "width": 150
         },
         {
             "field": "team_residual",
             "headerName": "Team Residual",
-            "width": 110
+            "width": 150
         },
         {
             "field": "cab_bonus",
             "headerName": "CAB Bonus",
+            "width": 110
+        },
+        {
+            "field": "total",
+            "headerName": "Total",
             "width": 110
         },
         {
@@ -79,12 +84,6 @@
         {
             "field": "country",
             "headerName": "Country",
-            "width": 110
-        },
-
-        {
-            "field": "total",
-            "headerName": "Total",
             "width": 110
         }
     ],
