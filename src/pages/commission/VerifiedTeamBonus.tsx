@@ -15,6 +15,10 @@ interface DataRow {
     lv5: string;
     lv6: string;
     sup1: string;
+    dir: string;
+    dir1: string;
+    exe: string;
+    exe1: string;
 }
 
 interface VerifiedTeamBonusProps {
