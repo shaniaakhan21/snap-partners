@@ -37,6 +37,13 @@
         }
 }
 
+.fixed-width{
+    width: 100%!important;
+    @media screen and (max-width: 480px) {
+        width: 200%;
+      }
+}
+
 .myDataGrid .MuiDataGrid-columnHeader {
     border-right: 'none!important';
     font-weight: 'bold!important';

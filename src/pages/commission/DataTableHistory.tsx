@@ -97,7 +97,7 @@ const DataTableHistory = ({ onRowIdClick }) => {
       <div style={{ height: 317, width: '100%', overflowX: 'auto' }}>
         <StyledDataGrid
           rows={data}
-          className="myDataGrid"
+          className="myDataGrid fixed-width"
           columns={columns}
           onRowClick={(event, row) => {
             onRowIdClick()
