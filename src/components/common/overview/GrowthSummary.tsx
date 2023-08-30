@@ -237,14 +237,20 @@ export default function GrowthSummary () {
             </tr>
           </thead>
           <tbody>
-            {showingData.map((row, idx) => {
-              return (
-                <tr key={idx} className='h-10'>
-                  <td className='text-xs font-normal'>{row[0]}</td>
-                  {row.slice(1).map((r, idx2) => <td key={`${idx}_${idx2}`} className='text-sm text-gray-500'>{r}</td>)}
-                </tr>
-              )
-            })}
+            {selectedTab === 0
+              ? showingData.map((row, idx) => {
+                return (
+                  <tr key={idx} className='h-10'>
+                    <td className='text-xs font-normal'>{row[0]}</td>
+                    {row.slice(1).map((r, idx2) => <td key={`${idx}_${idx2}`} className='text-sm text-gray-500'>{r}</td>)}
+                  </tr>
+                )
+              })
+              : <tr>
+                <td colSpan={6} style={{ textAlign: 'center', padding: '20px', color: '#e35c49' }}>
+                  Coming Soon
+                </td>
+              </tr>}
           </tbody>
         </table>
       </div>
