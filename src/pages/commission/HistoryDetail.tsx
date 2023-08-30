@@ -38,7 +38,11 @@ const HistoryDetail = ({ onBackClick }) => {
       lv4: '500',
       lv5: '500',
       lv6: '500',
-      sup1: '5.00'
+      sup1: '5.00',
+      dir: '5.00',
+      dir1: '5.00',
+      exe: '5.00',
+      exe1: '5.00'
     },
     {
 
@@ -56,7 +60,11 @@ const HistoryDetail = ({ onBackClick }) => {
       lv4: '500',
       lv5: '500',
       lv6: '500',
-      sup1: '5.00'
+      sup1: '5.00',
+      dir: '5.00',
+      dir1: '5.00',
+      exe: '5.00',
+      exe1: '5.00'
     },
     {
 
@@ -74,7 +82,11 @@ const HistoryDetail = ({ onBackClick }) => {
       lv4: '500',
       lv5: '500',
       lv6: '500',
-      sup1: '5.00'
+      sup1: '5.00',
+      dir: '5.00',
+      dir1: '5.00',
+      exe: '5.00',
+      exe1: '5.00'
     }
   ]
 

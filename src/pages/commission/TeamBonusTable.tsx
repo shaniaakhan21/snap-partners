@@ -36,6 +36,10 @@ interface DataRow {
   lv4: string;
   lv5: string
   sup1: string;
+  dir: string;
+  dir1: string;
+  exe: string;
+  exe1: string;
 }
 
 interface TeamBonusTableProps {
@@ -48,7 +52,7 @@ const columns = [
     headerName: 'Item ID',
     width: 100,
     headerClassName: 'datagrid-header text-slate-800',
-    flex: 1.2,
+    flex: 0.7,
     renderCell: (params) => {
       let color = 'black'
 
@@ -59,22 +63,26 @@ const columns = [
       return <span style={{ color, paddingLeft: '10%' }}>{params.value}</span>
     }
   },
-  { field: 'orderDate', headerName: 'Order Date', width: 130, headerClassName: 'datagrid-header text-slate-800', flex: 1.2, renderCell: (params) => <div className='pl-2'>{params.value}</div> },
-  { field: 'customer', headerName: 'Customer', width: 130, headerClassName: 'datagrid-header text-slate-800', flex: 1.2, renderCell: (params) => <div className='pl-2'>{params.value}</div> },
-  { field: 'product', headerName: 'Product', width: 150, headerClassName: 'datagrid-header text-slate-800', flex: 1.2, renderCell: (params) => <div className='pl-2'>{params.value}</div> },
-  { field: 'cv', headerName: 'CV', width: 100, headerClassName: 'datagrid-header text-slate-800', flex: 1, renderCell: (params) => <div className='pl-2'>{params.value}</div> },
+  { field: 'orderDate', headerName: 'Order Date', width: 130, headerClassName: 'datagrid-header text-slate-800', flex: 1, renderCell: (params) => <div className='pl-2'>{params.value}</div> },
+  { field: 'customer', headerName: 'Customer', width: 120, headerClassName: 'datagrid-header text-slate-800', flex: 1, renderCell: (params) => <div className='pl-2'>{params.value}</div> },
+  { field: 'product', headerName: 'Product', width: 120, headerClassName: 'datagrid-header text-slate-800', flex: 1, renderCell: (params) => <div className='pl-2'>{params.value}</div> },
+  { field: 'cv', headerName: 'CV', width: 100, headerClassName: 'datagrid-header text-slate-800', flex: 0.6, renderCell: (params) => <div className='pl-2'>{params.value}</div> },
   { field: 'total', headerName: 'Total', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-lime-200 border-r-2 border-black', flex: 1, renderCell: (params) => <div className='w-full h-full bg-lime-200 p-0 m-0 mt-0 flex flex-col justify-center align-center border-r-2 border-black text-slate-800 font-bold'>{params.value}</div> },
-  { field: 'lv1', headerName: 'LV 1', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-amber-200', flex: 1, renderCell: (params) => <div className='w-full h-full bg-amber-200 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> },
-  { field: 'lv2', headerName: 'LV 2', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-amber-200', flex: 1, renderCell: (params) => <div className='w-full h-full bg-amber-200 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> },
-  { field: 'lv3', headerName: 'LV 3', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-amber-200', flex: 1, renderCell: (params) => <div className='w-full h-full bg-amber-200 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> },
-  { field: 'lv4', headerName: 'LV 4', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-amber-200', flex: 1, renderCell: (params) => <div className='w-full h-full bg-amber-200 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> },
-  { field: 'lv5', headerName: 'LV 5', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-amber-200', flex: 1, renderCell: (params) => <div className='w-full h-full bg-amber-200 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> },
-  { field: 'sup1', headerName: 'Sup', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-red-400', flex: 1, renderCell: (params) => <div className='w-full h-full bg-red-400 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> }
+  { field: 'lv1', headerName: 'LV 1', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-amber-200', flex: 0.7, renderCell: (params) => <div className='w-full h-full bg-amber-200 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> },
+  { field: 'lv2', headerName: 'LV 2', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-amber-200', flex: 0.7, renderCell: (params) => <div className='w-full h-full bg-amber-200 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> },
+  { field: 'lv3', headerName: 'LV 3', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-amber-200', flex: 0.7, renderCell: (params) => <div className='w-full h-full bg-amber-200 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> },
+  { field: 'lv4', headerName: 'LV 4', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-amber-200', flex: 0.7, renderCell: (params) => <div className='w-full h-full bg-amber-200 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> },
+  { field: 'lv5', headerName: 'LV 5', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-amber-200', flex: 0.7, renderCell: (params) => <div className='w-full h-full bg-amber-200 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> },
+  { field: 'sup1', headerName: 'Sup', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-red-400', flex: 0.7, renderCell: (params) => <div className='w-full h-full bg-red-400 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> },
+  { field: 'dir', headerName: 'Dir', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-red-400', flex: 0.7, renderCell: (params) => <div className='w-full h-full bg-red-400 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> },
+  { field: 'dir1', headerName: 'Dir 1', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-red-400', flex: 0.7, renderCell: (params) => <div className='w-full h-full bg-red-400 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> },
+  { field: 'exe', headerName: 'Exe', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-red-400', flex: 0.7, renderCell: (params) => <div className='w-full h-full bg-red-400 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> },
+  { field: 'exe1', headerName: 'Exe 1', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-red-400', flex: 0.7, renderCell: (params) => <div className='w-full h-full bg-red-400 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> }
 ]
 
 export default function TeamBonusTable ({ rowData = [] }: TeamBonusTableProps) {
   return (
-    <div style={{ height: 220, width: '100%', overflowX: 'auto' }}>
+    <div style={{ height: 250, width: '100%', overflowX: 'scroll' }}>
       <StyledDataGrid
         rows={rowData}
         className="myDataGrid"
