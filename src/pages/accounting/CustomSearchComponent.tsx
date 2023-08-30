@@ -134,7 +134,7 @@ const CustomDataGrid = ({ data, setData }) => {
           const newAmount = row.amount.filter((_, index) => index !== indexToDelete)
           const newItemId = row.item_id.filter((_, index) => index !== indexToDelete)
           const newProductId = row.product_id.filter((_, index) => index !== indexToDelete)
-
+          const newDateChecked = row.dateChecked.filter((_, index) => index !== indexToDelete)
           return {
             ...row,
             date: newDate,
@@ -142,7 +142,7 @@ const CustomDataGrid = ({ data, setData }) => {
             amount: newAmount,
             item_id: newItemId,
             product_id: newProductId,
-            dateChecked: Array(newDate.length).fill(false)
+            dateChecked: newDateChecked
           }
         }
         return row
