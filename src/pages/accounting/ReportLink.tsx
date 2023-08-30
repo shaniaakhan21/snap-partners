@@ -25,6 +25,6 @@ const ReportLink = ({ linkText, setActiveReportDate, activeReportDate }: ReportL
   } else if (activeReportDate !== null) {
     return null
   }
-  return <a className="text-textAcent-500 font-bold" onClick={() => setActiveReportDate(linkText)}>{linkText}</a>
+  return <a className="text-textAcent-500 font-bold cursor-pointer" onClick={() => setActiveReportDate(linkText)}>{linkText}</a>
 }
 export default ReportLink
