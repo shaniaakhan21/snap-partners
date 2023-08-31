@@ -10,6 +10,7 @@ import UpdateUserLevelModal from './modalPopups/UpdateUserLevelModal'
 import EditProfileModal from './modalPopups/EditProfileModal'
 import UpdateGrandfatherModal from './modalPopups/UpdateGrandfatherModal'
 import SponsorUpdateModal from './modalPopups/SponsorUpdateModal'
+import UpdateSnapTypeModal from './modalPopups/UpdateSnapType'
 import InfoBanner from './InfoBanner'
 
 function IBOProfile ({ profileData, userLevel }) {
@@ -18,6 +19,7 @@ function IBOProfile ({ profileData, userLevel }) {
   const [editProfileModal, setEditProfileModal] = useState<boolean>(false)
   const [grandfatherModal, setGrandfatherModal] = useState<boolean>(false)
   const [sponsorUpdateModal, setSponsorUpdateModal] = useState<boolean>(false)
+  const [snapTypeModal, setSnapTypeModal] = useState<boolean>(false)
   const [newPassword, setNewPassword] = useState({
     password: ''
   })
@@ -39,6 +41,9 @@ function IBOProfile ({ profileData, userLevel }) {
   }
   const onCloseSponsorUpdateModal = () => {
     setSponsorUpdateModal(false)
+  }
+  const onCloseSnapTypeModal = () => {
+    setSnapTypeModal(false)
   }
   const style = {
     position: 'absolute' as 'absolute',
@@ -95,6 +100,9 @@ function IBOProfile ({ profileData, userLevel }) {
       <div className={`${cname}-container`}>
         <div className={`${cname}-header`}>
           <p className={`${cname}-header-text`}>User ID - {`${profileData[0]?.id}`}</p>
+          { mapping[userLevel] >= 600 &&
+          <p className={`${cname}-header-text ${cname}-midSection-mainInfo-text`} onClick={() => { setSnapTypeModal(true) }}>Edit Snap Type</p>
+          }
           { mapping[userLevel] >= 700 &&
           <p className={`${cname}-header-text ${cname}-midSection-mainInfo-text`} onClick={() => { setGrandfatherModal(true) }}>Edit Grandfather Rank</p>
           }
@@ -189,18 +197,11 @@ function IBOProfile ({ profileData, userLevel }) {
           </Box>
         </Modal>
 
-        {/* <Modal open={userLevelModal} onClose={onCloseUserLevelModal} className='resetPasswordModal'>
-          <Box sx={style}>
-          <SelectComponent label={'Reset User level'} name={'userLevel'} options={userLevelOptions}/>
-            {/* <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
-              <ButtonComponent title='submit' onClickFunction={ handleResetPassword } />
-            </div>
-          </Box>
-        </Modal> */}
         <UpdateUserLevelModal userLevelModal={userLevelModal} onCloseUserLevelModal={onCloseUserLevelModal} userId={profileData[0]?.id} />
         <EditProfileModal editProfileModal={editProfileModal} onCloseEditProfileModal={onCloseEditProfileModal} userId={profileData[0]?.id} profileData={profileData[0]} />
         <UpdateGrandfatherModal grandfatherModal={grandfatherModal} onCloseGrandfatherModal={onCloseGrandfatherModal} userId={profileData[0]?.id} profileData={profileData[0]} />
         <SponsorUpdateModal sponsorUpdateModal={sponsorUpdateModal} onCloseSponsorUpdateModal={onCloseSponsorUpdateModal} userId={profileData[0]?.id} />
+        <UpdateSnapTypeModal snapTypeModal={snapTypeModal} onCloseSnapTypeModal={onCloseSnapTypeModal} userId={profileData[0]?.id} userRoles={profileData[0]?.roles} />
       </div>
     </>
   )

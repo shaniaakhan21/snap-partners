@@ -276,3 +276,7 @@ flex-direction: row;
     max-height: 100px;
     overflow-y: scroll;
 }
+.resetPasswordModal-error-message
+{
+    color: red;
+}

@@ -20,6 +20,7 @@ import { getLocalStorage, setLocalStorage } from 'lib/utils/localStorage'
 import axios from 'axios'
 import Referrals from 'components/common/overview/Referrals'
 import { useAuthStore } from 'lib/stores'
+import GrowthSummary from "../components/common/overview/GrowthSummary";
 import TotalLeg from './backOfficeDashboard'
 
 const { SEO } = APP_INFO
@@ -105,12 +106,15 @@ const DashboardOverViewPage: Page = () => {
           <div className='mt-4'>
             <RewardsProgram />
           </div>
-          {/* <div className='mt-4 bg-white rounded-lg'> */}
-          {/*  <MonthlySubscription /> */}
-          {/* </div> */}
-          {/* <div className='mt-4 bg-white rounded-lg'> */}
-          {/*  <MonthlyProduction /> */}
-          {/* </div> */}
+          <div className='mt-4'>
+            <GrowthSummary />
+          </div>
+          <div className='mt-4 bg-white rounded-lg'>
+           <MonthlySubscription />
+          </div>
+          <div className='mt-4 bg-white rounded-lg'>
+           <MonthlyProduction />
+          </div>
         </div>
         <div className='ml-4'>
           <Event />
@@ -122,9 +126,9 @@ const DashboardOverViewPage: Page = () => {
           </div>
         </div>
       </div>
-      {/* <div className='col-span-12 mt-4'> */}
-      {/*  <Referrals rankData={rankData} /> */}
-      {/* </div> */}
+      <div className='col-span-12 mt-4'>
+       <Referrals rankData={rankData} />
+       </div>
     </>
   )
 }
