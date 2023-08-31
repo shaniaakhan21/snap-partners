@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import { useMemo, useState } from 'react'
 import { Tab, Tabs } from '@mui/material'
 import BarWithText from './BarWithText'
