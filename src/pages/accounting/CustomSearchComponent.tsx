@@ -101,7 +101,9 @@ const CustomDataGrid = ({ data, setData }) => {
           type: [...d.type, newRowData.type],
           amount: [...d.amount, parseFloat(newRowData.amount)],
           item_id: [...d.item_id, newRowData.item_id],
-          product_id: [...d.product_id, newRowData.product_id]
+          product_id: [...d.product_id, newRowData.product_id],
+          dateChecked: [...d.dateChecked, true],
+          total: [...d.amount, parseFloat(newRowData.amount)].reduce((sum, amt) => sum + amt, 0)
         }
       }
       return d
