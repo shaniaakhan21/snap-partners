@@ -1,4 +1,4 @@
-import { HTMLInputTypeAttribute } from 'react'
+import { HTMLInputTypeAttribute, CSSProperties } from 'react'
 import { FieldErrors, UseFormRegister } from 'react-hook-form'
 
 interface IInputFormProps {
@@ -21,6 +21,7 @@ interface IInputFormProps {
   disabled?: boolean
   readOnly?: boolean
   helpText?: string
+  style?: CSSProperties
 }
 
 export const InputForm = ({
@@ -42,7 +43,8 @@ export const InputForm = ({
   isNumberFloat,
   disabled,
   readOnly,
-  helpText
+  helpText,
+  style
 }: IInputFormProps) => {
   return (
     <div>
@@ -69,7 +71,7 @@ export const InputForm = ({
         step={isNumberFloat ? '0.01' : 'any'}
         disabled={disabled}
       />
-      {helpText && <div className='text-xs text-gray-600 font-normal -mt-1 mb-2'>{helpText}</div>}
+      {helpText && <div style={style} className='text-xs text-gray-600 font-normal -mt-1 mb-2'>{helpText}</div>}
     </div>
   )
 }

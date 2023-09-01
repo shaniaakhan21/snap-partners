@@ -28,13 +28,19 @@ function InfoBanner ({ profileData, userLevel }) {
 
   const snapType = (roles) => {
     let roleStr = ''
-   roles && Object.keys(roles)?.map((role) => {
+    roles && Object.keys(roles)?.map((role) => {
       if (roles[role]) {
-        roleStr = roleStr + ` ${role}`
+        if (role === 'integrousAssociate') {
+          roleStr = roleStr + ' IBO-Wellness'
+        } else if (role === 'integrousCustomer') {
+          roleStr = roleStr + ' Customer-Wellness'
+        } else {
+          roleStr = roleStr + ` ${role}`
+        }
       }
     })
 
-    return roleStr
+    return roleStr.trim().split(' ').join(' | ').split('-').join(' ')
   }
 
   const handleResendEmail2 = async () => {
