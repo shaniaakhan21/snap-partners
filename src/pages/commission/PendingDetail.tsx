@@ -40,7 +40,8 @@ const PendingDetail = ({ onBackClick }) => {
       dir: '5.00',
       dir1: '5.00',
       exe: '5.00',
-      exe1: '5.00'
+      exe1: '5.00',
+      exe2: '5.00'
     },
     {
 
@@ -62,7 +63,8 @@ const PendingDetail = ({ onBackClick }) => {
       dir: '5.00',
       dir1: '5.00',
       exe: '5.00',
-      exe1: '5.00'
+      exe1: '5.00',
+      exe2: '5.00'
     },
     {
 
@@ -84,7 +86,8 @@ const PendingDetail = ({ onBackClick }) => {
       dir: '5.00',
       dir1: '5.00',
       exe: '5.00',
-      exe1: '5.00'
+      exe1: '5.00',
+      exe2: '5.00'
     }
   ]
   return (

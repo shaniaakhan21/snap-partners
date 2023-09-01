@@ -77,7 +77,8 @@ const columns = [
   { field: 'dir', headerName: 'Dir', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-red-400', flex: 0.7, renderCell: (params) => <div className='w-full h-full bg-red-400 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> },
   { field: 'dir1', headerName: 'Dir 1', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-red-400', flex: 0.7, renderCell: (params) => <div className='w-full h-full bg-red-400 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> },
   { field: 'exe', headerName: 'Exe', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-red-400', flex: 0.7, renderCell: (params) => <div className='w-full h-full bg-red-400 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> },
-  { field: 'exe1', headerName: 'Exe 1', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-red-400', flex: 0.7, renderCell: (params) => <div className='w-full h-full bg-red-400 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> }
+  { field: 'exe1', headerName: 'Exe 1', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-red-400', flex: 0.7, renderCell: (params) => <div className='w-full h-full bg-red-400 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> },
+  { field: 'exe2', headerName: 'Exe 2', width: 110, headerClassName: 'datagrid-header text-slate-800 bg-red-400', flex: 0.7, renderCell: (params) => <div className='w-full h-full bg-red-400 p-0 m-0 mt-0 pl-4 flex flex-col justify-center text-slate-700'>{params.value}</div> }
 ]
 
 export default function TeamBonusTable ({ rowData = [] }: TeamBonusTableProps) {
