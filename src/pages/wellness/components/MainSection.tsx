@@ -23,7 +23,7 @@ const MainSection = () => {
             </div>
           </div>
           <div className='w-3/12'>
-            <img src="/static/snap_partners_logo.png" width="65%"></img>
+            <img src="/static/wellness/snap_wellness.svg" width="65%"></img>
           </div>
         </div>
         <div>

@@ -6,7 +6,7 @@
 .video-container {
     position: relative;
     width: 100%;
-    height: 80vh;
+    height: 90vh;
     overflow: hidden;
     background-color: #0000007d;
 }
@@ -31,6 +31,9 @@
     color: #FE0002!important;
 }
 
+.text-white-h{
+    color: white!important;
+} 
 .font-bold-it{
     font-weight: 900!important;
 }
@@ -41,4 +44,25 @@
 
 .pr-right{
     padding-right:30%;
+}
+
+.custom-text-none{
+    text-transform: none;
+}
+
+.custom-padding{
+    padding: 0px 2.3%;
+    margin: 0;
+}
+
+.shadow-custom{
+    box-shadow: 0px 0px 44px 0px rgba(0, 0, 0, 0.151);
+}
+
+.text-black-h{
+    color: black;
+}
+
+.shadow-md-custom{
+    box-shadow: 0px 4px 9px 0px rgba(0, 0, 0, 0.20);
 }
