@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { Grid } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import PropTypes from 'prop-types'
@@ -6,7 +5,7 @@ import { Button } from 'components/common/Button'
 
 const useStyles = makeStyles((theme) => ({
   footer: {
-    backgroundColor: '#2D2D2D'
+    backgroundColor: '#2D2D2D!important'
   },
   profileImage: {
     width: '70%',

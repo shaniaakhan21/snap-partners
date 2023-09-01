@@ -2,7 +2,7 @@ import { Button } from 'components/common/Button'
 import LoginOrSignBox from './LoginOrSignBox'
 import { Grid } from '@mui/material'
 
-const MainSection = () => {
+const MainSection = ({ handleButtonClick }) => {
   return (
     <div>
       <div className="video-container">
@@ -17,7 +17,10 @@ const MainSection = () => {
               <p className='text-white text-lg pt-4 font-light'>Take charge of your overall wellness with organic, high-quality wellness products backed by science that will be sure to make an impact in your everyday life.</p>
             </div>
             <div className='pt-10'>
-              <Button classes='text-lg bg-btn-color rounded-lg px-7'>
+              <Button
+                classes='text-lg bg-btn-color rounded-lg px-7'
+                onClick={handleButtonClick}
+              >
               OUR PRODUCTS
               </Button>
             </div>
