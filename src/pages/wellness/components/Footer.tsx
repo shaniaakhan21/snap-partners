@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { Button } from 'components/common/Button'
 
 const useStyles = makeStyles((theme) => ({
-  footer: {
+  footer1: {
     backgroundColor: '#2D2D2D!important'
   },
   profileImage: {
@@ -36,7 +36,7 @@ function Footer ({ userData }) {
   const classes = useStyles()
 
   return (
-    <footer className={`${classes.footer} px-10 pt-5 pb-5`}>
+    <footer className={`${classes.footer1} px-10 pt-5 pb-5`}>
       <Grid container>
         <Grid
           item
