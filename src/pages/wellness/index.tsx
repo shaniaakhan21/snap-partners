@@ -1,3 +1,4 @@
+import Footer from './components/Footer'
 import Header from './components/Header'
 import MainSection from './components/MainSection'
 import ProductTabs from './components/ProductTabs'
@@ -8,6 +9,7 @@ const Wellness = () => {
       <Header/>
       <MainSection/>
       <ProductTabs/>
+      <Footer/>
     </div>
   )
 }

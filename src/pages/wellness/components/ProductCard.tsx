@@ -17,7 +17,7 @@ interface ProductCardProps {
 const ProductCard = ({ products }: ProductCardProps) => {
   return (
     <div className="flex justify-start items-center">
-      {products.map((product, index) => (
+      {products?.map((product, index) => (
         <Card key={index} className="rounded-md bg-white shadow-md-custom w-1/4 ml-5">
           <CardMedia
             component="img"

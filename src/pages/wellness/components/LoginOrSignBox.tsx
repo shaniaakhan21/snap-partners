@@ -16,7 +16,7 @@ const LoginOrSignBox = () => {
         <br></br>
         <p className="text text-white text-2xl md:text-3xl font-light text-center">
           <Button classes='text-lg bg-btn-color rounded-lg px-7'>
-              LOG IN
+              LOG IN / SIGN UP
             <i className="fa fa-sign-in ml-2" aria-hidden="true"></i>
           </Button>
         </p>

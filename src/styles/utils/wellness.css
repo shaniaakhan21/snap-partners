@@ -66,3 +66,13 @@
 .shadow-md-custom{
     box-shadow: 0px 4px 9px 0px rgba(0, 0, 0, 0.20);
 }
+
+.customDarkGray{
+    border: 2px solid #4B4B4B;
+    background: #2D2D2D;
+}
+
+.customback{
+    border-radius: 5px 5px 0px 0px;
+    background: #4B4B4B;
+}
