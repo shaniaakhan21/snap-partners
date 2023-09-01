@@ -3,6 +3,7 @@ import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import { Button } from 'components/common/Button'
 import Typography from '@mui/material/Typography'
+import { useEffect } from 'react'
 
 interface ProductInfo {
   productName: string;
@@ -15,6 +16,12 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ products }: ProductCardProps) => {
+  useEffect(() => {
+    products.forEach((product) => {
+      const img = new Image()
+      img.src = product.productImage
+    })
+  }, [products])
   return (
     <div className="flex justify-start items-center">
       {products?.map((product, index) => (
