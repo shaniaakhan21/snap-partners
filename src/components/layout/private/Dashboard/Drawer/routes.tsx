@@ -166,7 +166,12 @@ export const globalRoutes = [
   {
     to: '/search/profile',
     label: 'Individual Profile'
+  },
+  {
+    to: '/wellness/wellness',
+    label: 'SNAP Wellness'
   }
+
 ]
 
 interface IDashboardPatname {
