@@ -117,6 +117,16 @@ const ReferralsPage: Page = () => {
         newUser={false}
         classes='col-span-1'
       /> */}
+
+        { auth.roles.customer && !isIntegrous && (
+          <ReferralCards
+            title='Refer a Wellness Customer'
+            ilustration={<CustomerIcon />}
+            link={`${auth.referralLinkWellness}&role=${ROLES.CUSTOMER}` || 'With Out Link'}
+            newUser={false}
+            classes='col-span-1'
+          />
+        )}
       </div>
     </div>
   )
