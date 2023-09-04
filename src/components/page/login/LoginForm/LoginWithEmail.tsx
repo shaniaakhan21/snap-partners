@@ -120,7 +120,7 @@ export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
   router.pathname === '/auth/login-integrous'
     ? `/auth/signup-integrous?referralCode=${referralCode}`
     : router.pathname === '/login-wellness'
-      ? '/auth/signup-wellness'
+      ? `/auth/signup-wellness?referralCode=${referralCode}`
       : '/auth/signup'
 
   return (
