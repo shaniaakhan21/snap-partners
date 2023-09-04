@@ -60,6 +60,15 @@ export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
       return
     }
 
+    const redirectToWellness = getLocalStorage('redirectToWellness')
+    const redirectToWellnessReferralCode = getLocalStorage('redirectToWellnessReferralCode')
+    if (redirectToWellness === true) {
+      removeLocalStorage('redirectToWellness')
+      removeLocalStorage('redirectToWellnessReferralCode')
+      window.location.href = `https://www.snapdelivered.com/wellness${redirectToWellnessReferralCode}?access_token=${dataLogin.token}`
+      return
+    }
+
     toast('Login Successful!', { type: 'success' })
     trackLoginHandle(false)
     setLoading(false)

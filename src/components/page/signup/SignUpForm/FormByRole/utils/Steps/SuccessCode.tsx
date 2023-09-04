@@ -70,6 +70,15 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
       return
     }
 
+    const redirectToWellness = getLocalStorage('redirectToWellness')
+    const redirectToWellnessReferralCode = getLocalStorage('redirectToWellnessReferralCode')
+    if (redirectToWellness === true) {
+      removeLocalStorage('redirectToWellness')
+      removeLocalStorage('redirectToWellnessReferralCode')
+      window.location.href = `https://www.snapdelivered.com/wellness${redirectToWellnessReferralCode}?access_token=${dataLogin.token}`
+      return
+    }
+
     toast('Login Successful!', { type: 'success' })
     setIsLoading(false)
     setAuth({
