@@ -23,7 +23,7 @@ interface IProps {
   trackLoginHandle: (beforeLogin) => void
 }
 
-export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
+export const  LoginWithEmail = ({ trackLoginHandle }: IProps) => {
   const { setAuth } = useAuthStore()
   const [isLoading, setLoading] = useState(false)
   const { handleSubmit, register, reset, formState: { errors } } = useForm<IDataForm>()
@@ -56,7 +56,7 @@ export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
     if (redirectToIntegrous === true) {
       removeLocalStorage('redirectToIntegrous')
       removeLocalStorage('redirectToIntegrousReferralCode')
-      window.location.href = `https://www.integrouswellness.com/${redirectToIntegrousReferralCode}?access_token=${dataLogin.token}`
+      window.location.href = `/wellness/${redirectToIntegrousReferralCode}?access_token=${dataLogin.token}`
       return
     }
 
