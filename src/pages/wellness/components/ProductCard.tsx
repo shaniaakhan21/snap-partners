@@ -23,9 +23,9 @@ const ProductCard = ({ products }: ProductCardProps) => {
     })
   }, [products])
   return (
-    <div className="flex justify-start items-center">
+    <div className="flex md:flex-row flex-col justify-start items-center">
       {products?.map((product, index) => (
-        <Card key={index} className="rounded-md bg-white shadow-md-custom w-1/4 ml-5">
+        <Card key={index} className="rounded-md bg-white shadow-md-custom w-full lg:w-1/4 ml-5 m-5 lg:m-1">
           <CardMedia
             component="img"
             alt={product.productName}

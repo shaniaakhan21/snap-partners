@@ -36,7 +36,7 @@ function Footer ({ userData }) {
   const classes = useStyles()
 
   return (
-    <footer className={`${classes.footer1} px-10 pt-5 pb-5`}>
+    <footer style={{ backgroundColor: '#2D2D2D!important' }} className={`${classes.footer1} px-10 pt-5 pb-5`}>
       <Grid container>
         <Grid
           item

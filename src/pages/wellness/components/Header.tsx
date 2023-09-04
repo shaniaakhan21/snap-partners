@@ -36,13 +36,13 @@ const Header = ({
   }
 
   return (
-    <header className="bgc-black text-white flex flex-row items-center w-full px-20">
-      <div className="justify-between items-center w-11/12 py-2">
+    <header className="bgc-black text-white flex flex-row items-center w-full px-5 md:px-10 lg:px-20">
+      <div className="justify-between items-center w-9/12 lg:w-11/12 py-2">
         <Link href={logoLink} className="text-2xl font-bold">
           <img src={logoSrc} alt={logoAlt} />
         </Link>
       </div>
-      <div className="w-2/12">
+      <div className="w-8/12 md:w-2/12">
         <div className="flex flex-row justify-end w-11/12 items-center">
           <div className="w-12 h-12 rounded-full overflow-hidden">
             <img
