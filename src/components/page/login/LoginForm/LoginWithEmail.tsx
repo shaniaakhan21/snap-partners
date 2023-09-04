@@ -23,7 +23,7 @@ interface IProps {
   trackLoginHandle: (beforeLogin) => void
 }
 
-export const  LoginWithEmail = ({ trackLoginHandle }: IProps) => {
+export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
   const { setAuth } = useAuthStore()
   const [isLoading, setLoading] = useState(false)
   const { handleSubmit, register, reset, formState: { errors } } = useForm<IDataForm>()
@@ -116,7 +116,12 @@ export const  LoginWithEmail = ({ trackLoginHandle }: IProps) => {
 
   const router = useRouter()
   const referralCode = router.query.referralCode || 'IntegrousWellness'
-  const signupURL = router.pathname === '/auth/login-integrous' ? `/auth/signup-integrous?referralCode=${referralCode}` : '/auth/signup'
+  const signupURL =
+  router.pathname === '/auth/login-integrous'
+    ? `/auth/signup-integrous?referralCode=${referralCode}`
+    : router.pathname === '/login-wellness'
+      ? '/auth/signup-wellness'
+      : '/auth/signup'
 
   return (
     <div className='flex flex-col justify-start items-start gap-x-2 my-2'>

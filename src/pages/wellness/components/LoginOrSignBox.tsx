@@ -5,9 +5,9 @@ import Router from 'next/router'
 
 const LoginOrSignBox = () => {
   const handleLogin = () => {
-    const referralCode = localStorage.getItem("referralCode") || "NoSponsor";
-    Router.push(`/auth/login-integrous?redirectToIntegrous=true&referralCode=${referralCode}`)
-   // window.location.replace(`https://snapdeliveredteam.com/auth/login-integrous?redirectToIntegrous=true&referralCode=${referralCode}`)
+    const referralCode = localStorage.getItem('referralCode') || 'NoSponsor'
+    Router.push(`/auth/login-wellness?redirectToWellness=true&referralCode=${referralCode}`)
+    // window.location.replace(`https://snapdeliveredteam.com/auth/login-integrous?redirectToIntegrous=true&referralCode=${referralCode}`)
   }
   return (
     <Card
