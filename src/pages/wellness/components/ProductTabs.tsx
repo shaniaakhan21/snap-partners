@@ -24,7 +24,7 @@ function TabPanel (props: TabPanelProps) {
   )
 }
 
-const ProductTabs = ({teaCoffeeProducts, generalProducts}) => {
+const ProductTabs = ({ teaCoffeeProducts, generalProducts }) => {
   const [value, setValue] = useState(0)
 
   const products = [

@@ -4,6 +4,7 @@ import CardMedia from '@mui/material/CardMedia'
 import { Button } from 'components/common/Button'
 import Typography from '@mui/material/Typography'
 import { useEffect } from 'react'
+import { Grid } from '@mui/joy'
 
 interface ProductInfo {
   productName: string;
@@ -23,7 +24,7 @@ const ProductCard = ({ products }) => {
     })
   }, [products])
   return (
-    <div className="flex md:flex-row flex-col justify-start items-center">
+    <Grid className="flex md:flex-row flex-col justify-start items-center">
       {products?.map((product, index) => (
         <Card key={index} className="rounded-md bg-white shadow-md-custom w-full lg:w-1/4 ml-5 m-5 lg:m-1">
           <CardMedia
@@ -48,7 +49,7 @@ const ProductCard = ({ products }) => {
           </CardContent>
         </Card>
       ))}
-    </div>
+    </Grid>
   )
 }
 
