@@ -1,12 +1,11 @@
-import { useEffect } from 'react'
 import { Grid } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import PropTypes from 'prop-types'
 import { Button } from 'components/common/Button'
 
 const useStyles = makeStyles((theme) => ({
-  footer: {
-    backgroundColor: '#2D2D2D'
+  footer1: {
+    backgroundColor: '#2D2D2D!important'
   },
   profileImage: {
     width: '70%',
@@ -37,7 +36,7 @@ function Footer ({ userData }) {
   const classes = useStyles()
 
   return (
-    <footer className={`${classes.footer} px-10 pt-5 pb-5`}>
+    <footer className={`${classes.footer1} px-10 pt-5 pb-5`}>
       <Grid container>
         <Grid
           item
