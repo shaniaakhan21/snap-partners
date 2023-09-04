@@ -118,7 +118,7 @@ export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
   const referralCode = router.query.referralCode || 'IntegrousWellness'
   const signupURL = router.pathname === '/auth/login-integrous'
     ? `/auth/signup-integrous?referralCode=${referralCode}`
-    : router.pathname === `/login-wellness?referralCode=${referralCode}`
+    : router.pathname === `/auth/login-wellness?referralCode=${referralCode}`
       ? '/auth/signup-wellness'
       : '/auth/signup'
 

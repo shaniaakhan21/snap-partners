@@ -23,6 +23,8 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
 
   const isSignupIntegrous = router.pathname === '/auth/signup-integrous'
   const isLoginIntegrous = router.pathname === '/auth/login-integrous'
+  const isSignupWellness = router.pathname === '/auth/signup-wellness'
+  const isLoginWellness = router.pathname === '/auth/login-wellness'
   let t1 = 'Snap Delivered'
   let t2 = 'Order-Eat-Repeat'
 
@@ -31,12 +33,12 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
     t2 = 'Employee Retention Credit Program'
   }
 
-  if (isLoginIntegrous) {
+  if (isLoginIntegrous || isLoginWellness) {
     t1 = 'Snap Partners'
     t2 = 'FREE Business Log In'
   }
 
-  if (isSignupIntegrous && (ROLES.integrousCustomer || ROLES.integrousAssociate)) {
+  if ((isSignupIntegrous && (ROLES.integrousCustomer || ROLES.integrousAssociate)) || (isSignupWellness && role === ROLES.CUSTOMER)) {
     t1 = 'Snap Partners'
     t2 = 'FREE Business Sign Up'
   }
@@ -77,6 +79,26 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
     </>
   )
 
+  const displayWellnessContent = (
+    <>
+      <div className='flex w-full justify-center items-end'>
+        <div className='mt-24 w-full'>
+          <h1 className='text-5xl font-bold 2xl:text-7xl'>{t1}</h1>
+          <p className='text-3xl font-bold mt-1'>{t2}</p>
+          <br />
+        </div>
+        <div className='w-1/3'>
+          <img className='w-full' src='/static/snap_partners_logo.png' />
+        </div>
+      </div>
+      <div className='z-1 relative w-[60%]'>
+        <div className='flex w-full justify-start'>
+          <img className='w-[21%]' src='/static/Snap Wellness Large.png' />
+        </div>
+      </div>
+    </>
+  )
+
   return (
     <>
       <div className='w-full'>
@@ -85,9 +107,11 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
             <img src='/static/authBg.svg' className='w-full h-screen object-cover absolute bottom-0 right-0 z-0' />
 
             <div className='absolute w-full h-full top-0 right-0 z-10 px-4 pb-8 md:px-12'>
-              {isLoginIntegrous || (isSignupIntegrous && (ROLES.integrousCustomer || ROLES.integrousAssociate))
+              {(isLoginIntegrous || (isSignupIntegrous && (ROLES.integrousCustomer || ROLES.integrousAssociate)))
                 ? displayIntegrousContent
-                : displayContent}
+                : (isLoginWellness || (isSignupWellness || role === ROLES.CUSTOMER))
+                  ? displayWellnessContent
+                  : displayContent}
 
               {role === ROLES.IBO && <div className='flex justify-end'><img width={200} height={200} src='/images/profile/referralPartner.png'/></div>}
 

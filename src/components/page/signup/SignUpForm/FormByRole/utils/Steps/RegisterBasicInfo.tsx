@@ -210,7 +210,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
   const router = useRouter()
   const loginURL = router.pathname === '/auth/signup-integrous'
     ? '/auth/login-integrous'
-    : router.pathname === '/signup-wellness'
+    : router.pathname === '/auth/signup-wellness'
       ? '/auth/login-wellness'
       : '/auth/login'
   return (

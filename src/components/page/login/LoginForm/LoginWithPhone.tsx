@@ -122,7 +122,7 @@ export const LoginWithPhone = ({ trackLoginHandle }: IProps) => {
   const signupURL =
   router.pathname === '/auth/login-integrous'
     ? `/auth/signup-integrous?referralCode=${referralCode}`
-    : router.pathname === '/login-wellness'
+    : router.pathname === '/auth/login-wellness'
       ? `/auth/signup-wellness?referralCode=${referralCode}`
       : '/auth/signup'
 
