@@ -2,8 +2,9 @@ import CardContent from '@mui/material/CardContent'
 import Card from '@mui/material/Card'
 import { Button } from 'components/common/Button'
 import Router from 'next/router'
+import { useEffect } from 'react'
 
-const LoginOrSignBox = () => {
+const LoginOrSignBox = ({isLoggedIn, userData}) => {
   const handleLogin = () => {
     const referralCode = localStorage.getItem('referralCode') || 'NoSponsor'
     Router.push(`/auth/login-wellness?redirectToWellness=true&referralCode=${referralCode}`)
@@ -14,7 +15,7 @@ const LoginOrSignBox = () => {
       sx={{ minWidth: 582, background: '#0000004f', border: '#0000004f 1px solid', boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)' }}
       className="px-2 py-4 md:px-8 md:py-2 rounded-2xl mt-28"
     >
-
+      { !isLoggedIn? 
       <CardContent>
         <h1 className="text text-white text-2xl md:text-3xl font-semibold-it font-normal text-center">
               Purchase <span className='text-red-h'>Now</span>
@@ -26,7 +27,13 @@ const LoginOrSignBox = () => {
             <i className="fa fa-sign-in ml-2" aria-hidden="true"></i>
           </Button>
         </p>
+      </CardContent> : 
+      <CardContent>
+        <h1 className="text text-white text-2xl md:text-3xl font-semibold-it font-normal text-center">
+          Welcome <span className='text-red-h'>{ userData? `${userData?.name} ${userData?.lastname}` : ''} </span>
+        </h1>
       </CardContent>
+      }
 
     </Card>
   )

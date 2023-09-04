@@ -15,7 +15,7 @@ interface ProductCardProps {
   products: ProductInfo[];
 }
 
-const ProductCard = ({ products }: ProductCardProps) => {
+const ProductCard = ({ products }) => {
   useEffect(() => {
     products.forEach((product) => {
       const img = new Image()
@@ -28,16 +28,16 @@ const ProductCard = ({ products }: ProductCardProps) => {
         <Card key={index} className="rounded-md bg-white shadow-md-custom w-1/4 ml-5">
           <CardMedia
             component="img"
-            alt={product.productName}
-            image={product.productImage}
+            alt={product.node.title}
+            image={product.node.variants.edges[0].node.image.src}
             className="object-cover"
           />
           <CardContent className="h-[40%] flex flex-col justify-between items-center">
             <Typography gutterBottom variant="h5" component="div" className='text-center text-xl font-bold'>
-              {product.productName}
+              {product.node.title}
             </Typography>
             <Typography variant="h6" component="div" className="text-red-500 font-bold mt-4">
-              {product.productPrice}
+              {`$${product.node.variants.edges[0].node.price.amount}`}
             </Typography>
             <div className='pt-1'>
               <Button classes='text-base bg-btn-color rounded-lg px-7 uppercase mt-2'>

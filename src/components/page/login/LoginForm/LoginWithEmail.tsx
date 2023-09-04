@@ -25,6 +25,7 @@ interface IProps {
 
 export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
   const { setAuth } = useAuthStore()
+  const router = useRouter()
   const [isLoading, setLoading] = useState(false)
   const { handleSubmit, register, reset, formState: { errors } } = useForm<IDataForm>()
 
@@ -51,21 +52,17 @@ export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
       return
     }
 
-    const redirectToIntegrous = getLocalStorage('redirectToIntegrous')
-    const redirectToIntegrousReferralCode = getLocalStorage('redirectToIntegrousReferralCode')
-    if (redirectToIntegrous === true) {
-      removeLocalStorage('redirectToIntegrous')
-      removeLocalStorage('redirectToIntegrousReferralCode')
-      window.location.href = `/wellness/${redirectToIntegrousReferralCode}?access_token=${dataLogin.token}`
-      return
-    }
-
-    const redirectToWellness = getLocalStorage('redirectToWellness')
-    const redirectToWellnessReferralCode = getLocalStorage('redirectToWellnessReferralCode')
-    if (redirectToWellness === true) {
-      removeLocalStorage('redirectToWellness')
-      removeLocalStorage('redirectToWellnessReferralCode')
-      window.location.href = `https://www.snapdelivered.com/wellness${redirectToWellnessReferralCode}?access_token=${dataLogin.token}`
+    // const redirectToIntegrous = getLocalStorage('redirectToIntegrous')
+    // const redirectToIntegrousReferralCode = getLocalStorage('redirectToIntegrousReferralCode')
+    // if (redirectToIntegrous === true) {
+    //   removeLocalStorage('redirectToIntegrous')
+    //   removeLocalStorage('redirectToIntegrousReferralCode')
+    //   window.location.href = `https://www.integrouswellness.com/${redirectToIntegrousReferralCode}?access_token=${dataLogin.token}`
+    //   return
+    // }
+    const {redirectToWellness,referralCode} = router.query
+    if ( redirectToWellness === 'true') {
+      window.location.href = `/wellness/${referralCode}?access_token=${dataLogin.token}`
       return
     }
 
@@ -114,12 +111,11 @@ export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
     )
   }
 
-  const router = useRouter()
   const referralCode = router.query.referralCode || 'IntegrousWellness'
   const signupURL =
   router.pathname === '/auth/login-integrous'
     ? `/auth/signup-integrous?referralCode=${referralCode}`
-    : router.pathname === '/auth//login-wellness'
+    : router.pathname === '/auth/login-wellness'
       ? `/auth/signup-wellness?referralCode=${referralCode}`
       : '/auth/signup'
 
