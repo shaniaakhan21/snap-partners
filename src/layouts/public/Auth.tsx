@@ -38,7 +38,7 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
     t2 = 'FREE Business Log In'
   }
 
-  if ((isSignupIntegrous && (ROLES.integrousCustomer || ROLES.integrousAssociate)) || (isSignupWellness && role === ROLES.CUSTOMER)) {
+  if ((isSignupIntegrous && (ROLES.integrousCustomer || ROLES.integrousAssociate)) || (isSignupWellness && (ROLES.CUSTOMER || ROLES.IBO))) {
     t1 = 'Snap Partners'
     t2 = 'FREE Business Sign Up'
   }
@@ -109,11 +109,11 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
             <div className='absolute w-full h-full top-0 right-0 z-10 px-4 pb-8 md:px-12'>
               {(isLoginIntegrous || (isSignupIntegrous && (ROLES.integrousCustomer || ROLES.integrousAssociate)))
                 ? displayIntegrousContent
-                : (isLoginWellness || (isSignupWellness || role === ROLES.CUSTOMER))
+                : (isLoginWellness || (isSignupWellness && (ROLES.CUSTOMER || ROLES.IBO)))
                   ? displayWellnessContent
                   : displayContent}
 
-              {role === ROLES.IBO && <div className='flex justify-end'><img width={200} height={200} src='/images/profile/referralPartner.png'/></div>}
+              {/* {role === ROLES.IBO && <div className='flex justify-end'><img width={200} height={200} src='/images/profile/referralPartner.png'/></div>} */}
 
               <ul className={`list-disc pl-6 ${role !== ROLES.IBO ? 'mt-20' : 'mt-5'} text-xl 2xl:text-2xl space-y-4`}>
                 <li>Get notified about company updates</li>

@@ -52,10 +52,15 @@ export const Navbar = () => {
             </button>
           </div> */}
         </section>
-        <section className='w-1/3 h-full flex justify-end items-center gap-x-5'>
+        <section className='w-full h-full flex justify-end items-center gap-x-5'>
           <a target="_blank" href={`https://mysnappartners.com/login/token=${auth.accessToken}`}>
             <Button classes='text-sm bg-primary-500'>
               Your Builder Website
+            </Button>
+          </a>
+          <a target="_blank" href={`/wellness/ibo/name=${auth.name}`}>
+            <Button classes='text-sm bg-primary-500'>
+              Your Snap Wellness Store
             </Button>
           </a>
         </section>

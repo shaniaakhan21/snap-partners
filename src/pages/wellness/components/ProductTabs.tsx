@@ -45,7 +45,7 @@ const ProductTabs = ({teaCoffeeProducts, generalProducts}) => {
   }
 
   return (
-    <div className='m-14'>
+    <div className='m-2 lg:m-14'>
       <Tabs value={value} onChange={handleChange as any} variant="scrollable" scrollButtons="auto" style={{ borderBottom: '3px solid red' }} TabIndicatorProps={{ style: { display: 'none' } }}>
         <Tab label="Weight Management" className={`
     ${value === 0 ? 'bg-btn-color text-white-h rounded-tl-lg rounded-tr-lg' : 'text-black-h'} 
@@ -61,12 +61,12 @@ const ProductTabs = ({teaCoffeeProducts, generalProducts}) => {
   `} />
       </Tabs>
       <TabPanel value={value} index={0} >
-        <div className='p-36  rounded-2xl bg-white shadow-custom'>
+        <div className='p-10 lg:p-36  rounded-2xl bg-white shadow-custom'>
           <div className='flex justify-center'>
             <img src="/static/wellness/unavailable.png" />
           </div>
           <div>
-            <h1 className='text-2xl text-center font-semibold'>No Products Available</h1>
+            <h1 className='text-base lg:text-2xl text-center font-semibold'>No Products Available</h1>
           </div>
         </div>
       </TabPanel>
