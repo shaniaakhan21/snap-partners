@@ -24,7 +24,7 @@ function TabPanel (props: TabPanelProps) {
   )
 }
 
-const ProductTabs = () => {
+const ProductTabs = ({teaCoffeeProducts, generalProducts}) => {
   const [value, setValue] = useState(0)
 
   const products = [
@@ -71,10 +71,10 @@ const ProductTabs = () => {
         </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ProductCard products={products} />
+        <ProductCard products={teaCoffeeProducts} />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <ProductCard products={gutproducts} />
+        <ProductCard products={generalProducts} />
       </TabPanel>
     </div>
   )

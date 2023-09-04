@@ -2,7 +2,7 @@ import { Button } from 'components/common/Button'
 import LoginOrSignBox from './LoginOrSignBox'
 import { Grid } from '@mui/material'
 
-const MainSection = ({ handleButtonClick }) => {
+const MainSection = ({ handleButtonClick, isLoggedIn, userData }) => {
   return (
     <div>
       <div className="video-container w-full md:h-50vh xl:h-75vh">
@@ -31,7 +31,7 @@ const MainSection = ({ handleButtonClick }) => {
         </div>
         <div>
           <Grid container item xs={12} lg={7} justifyContent="center" mx="auto">
-            <LoginOrSignBox/>
+            <LoginOrSignBox isLoggedIn={isLoggedIn} userData={userData}/>
           </Grid>
         </div>
       </div>

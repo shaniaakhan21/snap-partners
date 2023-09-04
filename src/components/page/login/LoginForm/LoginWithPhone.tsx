@@ -54,21 +54,18 @@ export const LoginWithPhone = ({ trackLoginHandle }: IProps) => {
       return
     }
 
-    const redirectToIntegrous = getLocalStorage('redirectToIntegrous')
-    const redirectToIntegrousReferralCode = getLocalStorage('redirectToIntegrousReferralCode')
-    if (redirectToIntegrous === true) {
-      removeLocalStorage('redirectToIntegrous')
-      removeLocalStorage('redirectToIntegrousReferralCode')
-      window.location.href = `https://www.integrouswellness.com/${redirectToIntegrousReferralCode}?access_token=${dataLogin.token}`
-      return
-    }
+    // const redirectToIntegrous = getLocalStorage('redirectToIntegrous')
+    // const redirectToIntegrousReferralCode = getLocalStorage('redirectToIntegrousReferralCode')
+    // if (redirectToIntegrous === true) {
+    //   removeLocalStorage('redirectToIntegrous')
+    //   removeLocalStorage('redirectToIntegrousReferralCode')
+    //   window.location.href = `https://www.integrouswellness.com/${redirectToIntegrousReferralCode}?access_token=${dataLogin.token}`
+    //   return
+    // }
 
-    const redirectToWellness = getLocalStorage('redirectToWellness')
-    const redirectToWellnessReferralCode = getLocalStorage('redirectToWellnessReferralCode')
-    if (redirectToWellness === true) {
-      removeLocalStorage('redirectToWellness')
-      removeLocalStorage('redirectToWellnessReferralCode')
-      window.location.href = `https://www.snapdelivered.com/wellness${redirectToWellnessReferralCode}?access_token=${dataLogin.token}`
+    const {redirectToWellness,referralCode} = router.query
+    if ( redirectToWellness === 'true') {
+      window.location.href = `/wellness/${referralCode}?access_token=${dataLogin.token}`
       return
     }
 
@@ -125,7 +122,6 @@ export const LoginWithPhone = ({ trackLoginHandle }: IProps) => {
     : router.pathname === '/auth/login-wellness'
       ? `/auth/signup-wellness?referralCode=${referralCode}`
       : '/auth/signup'
-
   return (
     <div className='flex flex-col justify-start items-start gap-x-2 mb-2 mt-3 w-full'>
       <form className='mt-2 w-full' onSubmit={handleSubmit(onSubmit)}>

@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Link, Menu, MenuItem, IconButton, IconButtonProps } from '@mui/material'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
+import Router from 'next/router'
 
 interface HeaderProps {
   logoSrc?: string;
@@ -8,6 +9,8 @@ interface HeaderProps {
   logoLink?: string;
   profilePic?: string;
   profileName?: string;
+  isLoggedIn?: boolean;
+  setIsLoggedIn?: any
   onLogout?: () => void;
 }
 
@@ -17,22 +20,35 @@ const Header = ({
   logoLink = '/wellness',
   profilePic = '/static/wellness/dp.png',
   profileName = 'Jason White',
-  onLogout = () => {}
+  onLogout = () => {},
+  isLoggedIn,
+  setIsLoggedIn
 }: HeaderProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const [userData,setUserData] = useState(null)
   const open = Boolean(anchorEl)
 
   const handleClick: IconButtonProps['onClick'] = (event) => {
     setAnchorEl(event.currentTarget)
   }
 
+ useEffect(() => {
+  if(isLoggedIn)
+  {
+    setUserData(JSON.parse(localStorage.getItem('userData')))
+  }
+ },[isLoggedIn])  
+
   const handleClose = () => {
     setAnchorEl(null)
   }
 
   const handleLogout = () => {
-    handleClose()
-    onLogout()
+    localStorage.removeItem("access_token")
+    localStorage.removeItem("userName")
+    localStorage.removeItem("userData")
+    setIsLoggedIn(false)
+    Router.push('/wellness')
   }
 
   return (
@@ -42,18 +58,19 @@ const Header = ({
           <img src={logoSrc} alt={logoAlt} />
         </Link>
       </div>
-      <div className="w-8/12 md:w-2/12">
+      <div className="w-2/12">
+        { isLoggedIn ?
         <div className="flex flex-row justify-end w-11/12 items-center">
           <div className="w-12 h-12 rounded-full overflow-hidden">
             <img
-              src={profilePic}
+              src={userData ? userData?.profileImage : ''}
               alt="Profile Picture"
               className="object-cover w-full h-full"
             />
           </div>
           <div>
             <IconButton color="inherit" onClick={handleClick}>
-              <span className="text-sm pr-1">{profileName}</span>
+              <span className="text-sm pr-1">{userData? `${userData?.name} ${userData?.lastname}`:''}</span>
               <ArrowDropDownIcon />
             </IconButton>
             <Menu
@@ -66,7 +83,9 @@ const Header = ({
               <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
           </div>
-        </div>
+        </div> :
+        <div>SignUp</div>
+        }
       </div>
     </header>
   )
