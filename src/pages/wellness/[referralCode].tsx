@@ -23,7 +23,7 @@ const Wellness = () => {
 
   useEffect(() => {
     async function Me () {
-      if (localStorage.getItem('access_token')) {
+      if (localStorage.getItem('access_token') || access_token) {
         try {
           const response = await axios.get('/api/user/me', {
             headers: {
