@@ -104,7 +104,6 @@ const Wellness = () => {
     <div>
       <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <MainSection isLoggedIn={isLoggedIn} handleButtonClick={handleButtonClick} userData={userData} />
-      <p>Welcome wellness User</p>
       <div ref={productTabsRef}>
         <ProductTabs teaCoffeeProducts={teaCoffeeProducts} generalProducts={generalProducts} />
       </div>

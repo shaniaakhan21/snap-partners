@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, Menu, MenuItem, IconButton, IconButtonProps } from '@mui/material'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import Router from 'next/router'
+import { Button } from 'components/common/Button';
 
 interface HeaderProps {
   logoSrc?: string;
@@ -18,7 +19,7 @@ const Header = ({
   logoSrc = '/static/wellness/wellness_logo.svg',
   logoAlt = 'Wellness Logo',
   logoLink = '/wellness',
-  profilePic = '/static/wellness/dp.png',
+  profilePic = '/static/wellness/pp-placeholder.png',
   profileName = 'Jason White',
   onLogout = () => {},
   isLoggedIn,
@@ -50,11 +51,16 @@ const Header = ({
     Router.push('/wellness')
   }
 
+  const handleLogin = () => {
+    const referralCode = localStorage.getItem('referralCode') || 'NoSponsor'
+    Router.push(`/auth/login-wellness?redirectToWellness=true&referralCode=${referralCode}`)
+  }
+
   return (
-    <header className="bgc-black text-white flex flex-row items-center w-full px-5 md:px-10 lg:px-20">
+    <header className="bgc-black text-white flex flex-row items-center w-full px-5 md:px-10 lg:px-20 2xl:px-48">
       <div className="justify-between items-center w-9/12 lg:w-11/12 py-2">
         <Link href={logoLink} className="text-2xl font-bold">
-          <img src={logoSrc} alt={logoAlt} />
+          <img src={logoSrc} alt={logoAlt} className='3xl:w-36'/>
         </Link>
       </div>
       <div className="w-2/12">
@@ -62,14 +68,14 @@ const Header = ({
           ? <div className="flex flex-row justify-end w-11/12 items-center">
             <div className="w-12 h-12 rounded-full overflow-hidden">
               <img
-                src={userData ? userData?.profileImage : ''}
+                src={userData ? userData?.profileImage : '/static/wellness/pp-placeholder.png'}
                 alt="Profile Picture"
                 className="object-cover w-full h-full"
               />
             </div>
             <div>
               <IconButton color="inherit" onClick={handleClick}>
-                <span className="text-sm pr-1">{userData ? `${userData?.name} ${userData?.lastname}` : ''}</span>
+                <span className="text-base pr-1 3xl:text-2xl capitalize">{userData ? `${userData?.name} ${userData?.lastname}` : ''}</span>
                 <ArrowDropDownIcon />
               </IconButton>
               <Menu
@@ -79,11 +85,17 @@ const Header = ({
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                <MenuItem onClick={handleLogout} className='3xl:text-2xl 3xl:px-9 py-0 text-sm'>Logout</MenuItem>
               </Menu>
             </div>
           </div>
-          : <div>SignUp</div>
+          : <div className='text-right'>
+            <Button onClick={() => { handleLogin() }}
+              classes='text-xs md:text-base 2xl:text-base 3xl:text-2xl font-bold bg-btn-color rounded-lg px-2 lg:px-5 3xl:px-7'
+            >
+              LOG IN
+            </Button>
+          </div>
         }
       </div>
     </header>

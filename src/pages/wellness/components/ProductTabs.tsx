@@ -47,20 +47,21 @@ const ProductTabs = ({ teaCoffeeProducts, generalProducts }) => {
   return (
     <div className='m-2 lg:m-14'>
       <Tabs value={value} onChange={handleChange as any} variant="scrollable" scrollButtons="auto" style={{ borderBottom: '3px solid red' }} TabIndicatorProps={{ style: { display: 'none' } }}>
-        <Tab label="Weight Management" className={`
-    ${value === 0 ? 'bg-btn-color text-white-h rounded-tl-lg rounded-tr-lg' : 'text-black-h'} 
-    custom-text-none custom-padding
-  `} />
+
         <Tab label="Coffee/Tea" className={`
-    ${value === 1 ? 'bg-btn-color text-white-h rounded-tl-lg rounded-tr-lg' : 'text-black-h'} 
+    ${value === 0 ? 'bg-btn-color text-white-h rounded-tl-lg rounded-tr-lg 3xl:text-xl' : 'text-black-h 3xl:text-xl'} 
     custom-text-none custom-padding
   `} />
         <Tab label="Gut Health" className={`
-    ${value === 2 ? 'bg-btn-color text-white-h rounded-tl-lg rounded-tr-lg' : 'text-black-h'} 
+    ${value === 1 ? 'bg-btn-color text-white-h rounded-tl-lg rounded-tr-lg 3xl:text-xl' : 'text-black-h 3xl:text-xl'} 
+    custom-text-none custom-padding
+  `} />
+        <Tab label="Weight Management" className={`
+    ${value === 2 ? 'bg-btn-color text-white-h rounded-tl-lg rounded-tr-lg 3xl:text-xl' : 'text-black-h 3xl:text-xl'} 
     custom-text-none custom-padding
   `} />
       </Tabs>
-      <TabPanel value={value} index={0} >
+      <TabPanel value={value} index={2} >
         <div className='p-10 lg:p-36  rounded-2xl bg-white shadow-custom'>
           <div className='flex justify-center'>
             <img src="/static/wellness/unavailable.png" />
@@ -70,10 +71,10 @@ const ProductTabs = ({ teaCoffeeProducts, generalProducts }) => {
           </div>
         </div>
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      <TabPanel value={value} index={0}>
         <ProductCard products={teaCoffeeProducts} />
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      <TabPanel value={value} index={1}>
         <ProductCard products={generalProducts} />
       </TabPanel>
     </div>
