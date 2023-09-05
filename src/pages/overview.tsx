@@ -35,7 +35,6 @@ const DashboardOverViewPage: Page = () => {
   const currentOverview = getLocalStorage('currentBackoffice') || ''
   const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
   const isIntegrousAssociate = auth.roles.integrousAssociate
-  const isIntegrousCustomer = auth.roles.integrousCustomer
 
   useEffect(() => {
     (async () => {
@@ -49,16 +48,6 @@ const DashboardOverViewPage: Page = () => {
       setRankData(response.data)
     })()
   }, [])
-
-  const becomeAffiliate = async () => {
-    const token = getLocalStorage('accessToken')
-    await axios.post('/api/integrous/upgradeToAffiliate', {}, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-    window.location.href = '/overview'
-  }
 
   if (isIntegrousAssociate && currentOverview === '') {
     return (
@@ -74,18 +63,6 @@ const DashboardOverViewPage: Page = () => {
         <h1 style={{ fontSize: 30 }}>Referral link to sign up IBO's (Affiliates) & Customers</h1>
         <a target='_blank' href={`https://www.integrouswellness.com/${auth.referralCode}`} style={{ fontSize: 30, textDecoration: 'underline' }}>https://www.integrouswellness.com/{auth.referralCode}</a>
         <br></br>
-      </>
-    )
-  }
-
-  if (isIntegrousCustomer && currentOverview === '') {
-    return (
-      <>
-        <h1 style={{ fontSize: 35 }}>To become an IBO (Affiliate) click below</h1>
-        <br />
-        <button onClick={() => { becomeAffiliate() }}style={{ fontSize: 20 }} className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-10 w-50  py-3 px-4 rounded-l-full rounded-r-full">
-          REGISTER NOW {'>'}
-        </button>
       </>
     )
   }
