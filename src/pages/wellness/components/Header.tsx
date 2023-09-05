@@ -63,7 +63,7 @@ const Header = ({
           <img src={logoSrc} alt={logoAlt} className='3xl:w-36'/>
         </Link>
       </div>
-      <div className="w-2/12">
+      <div className="w-4/12 lg:w-2/12">
         { isLoggedIn
           ? <div className="flex flex-row justify-end w-11/12 items-center">
             <div className="w-12 h-12 rounded-full overflow-hidden">

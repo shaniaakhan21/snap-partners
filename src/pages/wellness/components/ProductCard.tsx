@@ -44,14 +44,14 @@ const ProductCard = ({ products }) => {
   return (
     <Grid className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
       {products?.map((product, index) => (
-        <Card key={index} className="h-[fit-content] rounded-md bg-white shadow-md-custom w-11/12 ml-5 lg:m-4 3xl:m-4" >
+        <Card key={index} className="h-[fit-content] rounded-md bg-white shadow-md-custom w-11/12 ml-5 lg:m-4 3xl:m-4 mb-6 lg:mb-0" >
           <CardMedia
             component="img"
             alt={product.node.title}
             image={product.node.variants.edges[0].node.image.src}
             className="object-cover"
           />
-          <CardContent className="h-[fit-content] flex flex-col justify-between items-center">
+          <CardContent className="h-[fit-content] flex flex-col justify-between items-center ">
             <Typography gutterBottom variant="h5" component="div" className='text-center text-xl font-bold 3xl:text-2xl  3xl:mt-6'>
               {product.node.title}
             </Typography>
@@ -74,10 +74,9 @@ const ProductCard = ({ products }) => {
             border: '#0000004f 1px solid',
             boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
             position: 'absolute',
-            top: '20%',
-            left: '25%'
+            top: '20%'
           }}
-          className="md:px-20 md:py-10 rounded-2xl mt-1 3xl:mt-32 w-8/12 xl:w-6/12 3xl:w-5/12 backdrop-blur-4xl"
+          className="md:px-20 md:py-10 rounded-2xl mt-1 3xl:mt-32 w-8/12 xl:w-6/12 3xl:w-5/12 backdrop-blur-4xl left-16 lg:left-1/4"
         >
           <CardContent>
             <h1 className="text text-white text-2xl md:text-3xl 2xl:text-4xl 3xl:text-6xl font-semibold-it font-normal text-center mb-4 2xl:mb-5 3xl:mb-8">
