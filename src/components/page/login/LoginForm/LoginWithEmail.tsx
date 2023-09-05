@@ -60,8 +60,8 @@ export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
     //   window.location.href = `https://www.integrouswellness.com/${redirectToIntegrousReferralCode}?access_token=${dataLogin.token}`
     //   return
     // }
-    const {redirectToWellness,referralCode} = router.query
-    if ( redirectToWellness === 'true') {
+    const { redirectToWellness, referralCode } = router.query
+    if (redirectToWellness === 'true') {
       window.location.href = `/wellness/${referralCode}?access_token=${dataLogin.token}`
       return
     }

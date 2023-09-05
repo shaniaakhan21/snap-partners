@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, Menu, MenuItem, IconButton, IconButtonProps } from '@mui/material'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import Router from 'next/router'
-import { Button } from 'components/common/Button';
+import { Button } from 'components/common/Button'
 
 interface HeaderProps {
   logoSrc?: string;

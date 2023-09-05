@@ -15,6 +15,7 @@ export const Navbar = () => {
   const { toggleDrawer } = useDrawerStore()
   // const { toggleGenealogySearch } = useSearchModalStore()
   console.log('auth level is', auth)
+  const ibo = router.query
   return (
     <header className='dashboardLayout__navbar h-16'>
       <div className='w-full h-full px-6 py-3 flex justify-between items-center max-w-7xl mx-auto'>
@@ -58,7 +59,7 @@ export const Navbar = () => {
               Your Builder Website
             </Button>
           </a>
-          <a target="_blank" href={`/wellness/ibo/name=${auth.name}`}>
+          <a target="_blank" href={`/wellness/${auth.level}&access_token=${auth.accessToken}`}>
             <Button classes='text-sm bg-primary-500'>
               Your Snap Wellness Store
             </Button>
