@@ -59,7 +59,7 @@ const Wellness = () => {
       <Header/>
       <MainSection isLoggedIn={false} userData={null} handleButtonClick={handleButtonClick} />
       <div ref={productTabsRef}>
-        <ProductTabs teaCoffeeProducts={teaCoffeeProducts} generalProducts={generalProducts} />
+        <ProductTabs teaCoffeeProducts={teaCoffeeProducts} generalProducts={generalProducts} userId={null} isLoggedIn={false} />
       </div>
       <Footer/>
     </div>

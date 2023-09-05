@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import MainSection from './components/MainSection'
 import ProductTabs from './components/ProductTabs'
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import Client, {Config} from 'shopify-buy'
 
 const Wellness = () => {
   const router = useRouter()
@@ -16,11 +17,11 @@ const Wellness = () => {
   const [userData, setUserData] = useState(null)
   const [teaCoffeeProducts, setTeaCoffeeProducts] = useState([])
   const [generalProducts, setGeneralProducts] = useState([])
+  let ShopifyBuy: any
 
   if (access_token) {
     if (typeof access_token === 'string') { localStorage.setItem('access_token', access_token) }
   }
-
   useEffect(() => {
     async function Me () {
       if (localStorage.getItem('access_token') || access_token) {
@@ -105,7 +106,7 @@ const Wellness = () => {
       <Header isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <MainSection isLoggedIn={isLoggedIn} handleButtonClick={handleButtonClick} userData={userData} />
       <div ref={productTabsRef}>
-        <ProductTabs teaCoffeeProducts={teaCoffeeProducts} generalProducts={generalProducts} />
+        <ProductTabs teaCoffeeProducts={teaCoffeeProducts} generalProducts={generalProducts} userId={userId} isLoggedIn={isLoggedIn} />
       </div>
       <Footer/>
     </div>

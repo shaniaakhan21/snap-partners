@@ -2,6 +2,9 @@ import { Grid } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import PropTypes from 'prop-types'
 import { Button } from 'components/common/Button'
+import { useState } from 'react'
+import { SpinnerPageContent } from 'components/common/loaders/PageContent'
+import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
   footer1: {
@@ -34,6 +37,46 @@ const useStyles = makeStyles((theme) => ({
 
 function Footer ({ userData }) {
   const classes = useStyles()
+
+  const [formData, setFormData] = useState({
+    name:'',
+    customerEmail:'',
+    ownerEmail:'next100x98@gmail.com',
+    subject:'',
+    emailBody:''
+  })
+  const [loading, setLoading] = useState(false)
+
+  const handleStoreQuery = async() => {
+    if(!formData.name || !formData.customerEmail || !formData.subject || !formData.emailBody)
+    {
+      console.log('please fill the form completely')
+      return
+    }
+    setLoading(true)
+    await axios.post('/api/admin/email-to-store-owner',formData)
+    .then((response) => {
+      setLoading(false)
+      if(response.data === 'OK')
+      {
+        alert('email sent to store owner')
+        setFormData({
+          ...formData,
+          name:'',
+          customerEmail:'',
+          subject:'',
+          emailBody:''
+        })
+      }
+      else{
+        alert('error while sending email to store owner')
+      }
+    })
+    .catch((e) => {
+      setLoading(false)
+      console.log('error while sendiing email to owner',e)
+    })
+  }
 
   return (
     <footer style={{ backgroundColor: '#2D2D2D!important' }} className={`${classes.footer1} px-10 pt-5 pb-5`}>
@@ -77,28 +120,36 @@ function Footer ({ userData }) {
                 style={{ background: '#4B4B4B' }}
                 type="text"
                 placeholder="Your Name"
-                className="w-1/2 px-6 py-4 placeholder-white placeholder-opacity-60 border border-none rounded-3xl text-white font-light  mr-2 mb-3 3xl:text-2xl"
+                value={(formData.name)}
+                onChange={(e)=>{setFormData({...formData,name:e.target.value})}}
+                className="w-1/2 px-6 py-4 placeholder-white placeholder-opacity-60 border border-none rounded-3xl text-white font-light  mr-2 mb-3"
               />
               <input
                 style={{ background: '#4B4B4B' }}
                 type="text"
                 placeholder="Your Email"
-                className="w-1/2 px-6 py-4 placeholder-white placeholder-opacity-60 border border-none rounded-3xl text-white font-light mb-3 3xl:text-2xl"
+                value={(formData.customerEmail)}
+                onChange={(e)=>{setFormData({...formData,customerEmail:e.target.value})}}
+                className="w-1/2 px-6 py-4 placeholder-white placeholder-opacity-60 border border-none rounded-3xl text-white font-light mb-3"
               />
             </div>
             <input
               style={{ background: '#4B4B4B' }}
               type="text"
               placeholder="Let&rsquo;s Talk about it"
-              className="w-full px-6 py-4 border border-none rounded-3xl text-white font-light m-1 mb-3 3xl:text-2xl"
+              value={(formData.subject)}
+              onChange={(e)=>{setFormData({...formData, subject:e.target.value})}}
+              className="w-full px-6 py-4 border border-none rounded-3xl text-white font-light m-1 mb-3"
             />
             <textarea
               style={{ background: '#4B4B4B' }}
               placeholder="Type your message here"
-              className="w-full h-40 px-6 py-4 placeholder-white placeholder-opacity-60 border border-none rounded-3xl text-white font-light m-1 3xl:text-2xl"
+              value={(formData.emailBody)}
+              onChange={(e)=>{setFormData({...formData,emailBody:e.target.value})}}
+              className="w-full h-40 px-6 py-4 placeholder-white placeholder-opacity-60 border border-none rounded-3xl text-white font-light m-1"
             />
             <div className='w-full flex justify-end'>
-              <Button classes='text-base bg-btn-color rounded-lg w-36 uppercase mt-2 3xl:text-3xl 3xl:w-44 3xl:py-3'>
+              <Button disabled={!loading ? false : true} onClick={() => {handleStoreQuery()}} classes='text-base bg-btn-color rounded-lg w-36 uppercase mt-2'>
               SEND
               </Button>
             </div>
