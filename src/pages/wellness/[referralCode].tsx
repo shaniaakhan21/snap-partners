@@ -18,8 +18,8 @@ const Wellness = () => {
   const [userData, setUserData] = useState(null)
   const [teaCoffeeProducts, setTeaCoffeeProducts] = useState([])
   const [generalProducts, setGeneralProducts] = useState([])
+
   let ShopifyBuy: any
-  const path = router.pathname
 
   if (access_token) {
     if (typeof access_token === 'string') { localStorage.setItem('access_token', access_token) }
@@ -102,15 +102,22 @@ const Wellness = () => {
     }
     Shopify()
   }, [])
+//   const {referralCode} = router.query
 
-  useEffect(() => {
+  React.useEffect(() => {
     async function Owner () {
+      const path = window.location.pathname
       if (['/', '/logout'].includes(path)) {
         return
       }
       try {
         // we remove the first character of the path
-        const username = path.substring(1)
+        const username = path.split('/')[2]
+        console.log('path is ', username)
+        if(username === 'NoSponsor')
+        {
+            return
+        }
         if (username.length > 0) {
           const response = await axios.get(
             `/api/integrous/getReplicatedSite?username=${username}`
