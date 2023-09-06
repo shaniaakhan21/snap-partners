@@ -19,9 +19,12 @@ const Wellness = () => {
   const [teaCoffeeProducts, setTeaCoffeeProducts] = useState([])
   const [generalProducts, setGeneralProducts] = useState([])
   let ShopifyBuy: any
+  const path = window.location.pathname
 
   if (access_token) {
-    if (typeof access_token === 'string') { localStorage.setItem('access_token', access_token) }
+    if (typeof access_token === 'string') {
+      localStorage.setItem('access_token', access_token)
+    }
   }
   useEffect(() => {
     async function Me () {
@@ -32,6 +35,10 @@ const Wellness = () => {
               Authorization: `Bearer ${localStorage.getItem('access_token')}`
             }
           })
+          if (localStorage.getItem('userName') || localStorage.getItem('userData')) {
+            localStorage.removeItem('userName')
+            localStorage.removeItem('userData')
+          }
           localStorage.setItem('userName', response.data.data.user.name)
           console.log('user data is', response.data.data.user)
           localStorage.setItem('userData', JSON.stringify(response.data.data.user))
@@ -96,6 +103,29 @@ const Wellness = () => {
       // setProducts(response.data.data.node.products.edges);
     }
     Shopify()
+  }, [])
+
+  useEffect(() => {
+    async function Owner () {
+      if (['/', '/logout'].includes(path)) {
+        return
+      }
+      try {
+        // we remove the first character of the path
+        const username = path.substring(1)
+        if (username.length > 0) {
+          const response = await axios.get(
+            `/api/integrous/getReplicatedSite?username=${username}`
+          )
+          localStorage.setItem('referralCode', response.data.referralCode)
+          localStorage.setItem('ownerName', `${response.data.name} ${response.data.lastname}`)
+          setUserData(response.data)
+        }
+      } catch (error) {
+        //
+      }
+    }
+    Owner()
   }, [])
 
   const handleButtonClick = () => {
