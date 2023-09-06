@@ -16,8 +16,25 @@ export interface ITransaction {
   time: string;
 }
 
-export interface ITableTransactionsProps {
-  transactions: ITransaction[];
+export interface Client {
+  phase: number;
+  email: string;
+  client: number;
+  companyName: string;
+  phone: string;
+  aggrementSigned: boolean;
+  depositPaid: string;
+  docsCollected: string;
+  excelTeam: string;
+  docSentForSignature: string;
+  docForSignatureReturned: string;
+  quarters: {quarter: string, year: string}[];
+  signupDate: string
+}
+
+export interface ClientTableProps {
+  clients: Client[];
+  totalClientCount: number
   toggleModal: (toggle: boolean) => void;
 }
 
