@@ -60,8 +60,8 @@ export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
     //   window.location.href = `https://www.integrouswellness.com/${redirectToIntegrousReferralCode}?access_token=${dataLogin.token}`
     // }
 
-    const {redirectToWellness,referralCode} = router.query
-    if ( redirectToWellness === 'true') {
+    const { redirectToWellness, referralCode } = router.query
+    if (redirectToWellness === 'true') {
       window.location.href = `/wellness/${referralCode}?access_token=${dataLogin.token}`
       return
     }
@@ -114,8 +114,8 @@ export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
   const referralCode = router.query.referralCode || 'IntegrousWellness'
   const signupURL = router.pathname === '/auth/login-integrous'
     ? `/auth/signup-integrous?referralCode=${referralCode}`
-    : router.pathname === `/auth/login-wellness`
-    ? `/auth/signup-wellness?referralCode=${referralCode}`
+    : router.pathname === '/auth/login-wellness'
+      ? `/auth/signup-wellness?referralCode=${referralCode}`
       : '/auth/signup'
   return (
     <div className='flex flex-col justify-start items-start gap-x-2 my-2'>

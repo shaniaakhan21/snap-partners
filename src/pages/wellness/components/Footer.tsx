@@ -39,43 +39,40 @@ function Footer ({ userData }) {
   const classes = useStyles()
 
   const [formData, setFormData] = useState({
-    name:'',
-    customerEmail:'',
-    ownerEmail:'next100x98@gmail.com',
-    subject:'',
-    emailBody:''
+    name: '',
+    customerEmail: '',
+    ownerEmail: 'next100x98@gmail.com',
+    subject: '',
+    emailBody: ''
   })
   const [loading, setLoading] = useState(false)
 
-  const handleStoreQuery = async() => {
-    if(!formData.name || !formData.customerEmail || !formData.subject || !formData.emailBody)
-    {
+  const handleStoreQuery = async () => {
+    if (!formData.name || !formData.customerEmail || !formData.subject || !formData.emailBody) {
       console.log('please fill the form completely')
       return
     }
     setLoading(true)
-    await axios.post('/api/admin/email-to-store-owner',formData)
-    .then((response) => {
-      setLoading(false)
-      if(response.data === 'OK')
-      {
-        alert('email sent to store owner')
-        setFormData({
-          ...formData,
-          name:'',
-          customerEmail:'',
-          subject:'',
-          emailBody:''
-        })
-      }
-      else{
-        alert('error while sending email to store owner')
-      }
-    })
-    .catch((e) => {
-      setLoading(false)
-      console.log('error while sendiing email to owner',e)
-    })
+    await axios.post('/api/admin/email-to-store-owner', formData)
+      .then((response) => {
+        setLoading(false)
+        if (response.data === 'OK') {
+          alert('email sent to store owner')
+          setFormData({
+            ...formData,
+            name: '',
+            customerEmail: '',
+            subject: '',
+            emailBody: ''
+          })
+        } else {
+          alert('error while sending email to store owner')
+        }
+      })
+      .catch((e) => {
+        setLoading(false)
+        console.log('error while sendiing email to owner', e)
+      })
   }
 
   return (
@@ -121,7 +118,7 @@ function Footer ({ userData }) {
                 type="text"
                 placeholder="Your Name"
                 value={(formData.name)}
-                onChange={(e)=>{setFormData({...formData,name:e.target.value})}}
+                onChange={(e) => { setFormData({ ...formData, name: e.target.value }) }}
                 className="w-1/2 px-6 py-4 placeholder-white placeholder-opacity-60 border border-none rounded-3xl text-white font-light  mr-2 mb-3"
               />
               <input
@@ -129,7 +126,7 @@ function Footer ({ userData }) {
                 type="text"
                 placeholder="Your Email"
                 value={(formData.customerEmail)}
-                onChange={(e)=>{setFormData({...formData,customerEmail:e.target.value})}}
+                onChange={(e) => { setFormData({ ...formData, customerEmail: e.target.value }) }}
                 className="w-1/2 px-6 py-4 placeholder-white placeholder-opacity-60 border border-none rounded-3xl text-white font-light mb-3"
               />
             </div>
@@ -138,18 +135,18 @@ function Footer ({ userData }) {
               type="text"
               placeholder="Let&rsquo;s Talk about it"
               value={(formData.subject)}
-              onChange={(e)=>{setFormData({...formData, subject:e.target.value})}}
+              onChange={(e) => { setFormData({ ...formData, subject: e.target.value }) }}
               className="w-full px-6 py-4 border border-none rounded-3xl text-white font-light m-1 mb-3"
             />
             <textarea
               style={{ background: '#4B4B4B' }}
               placeholder="Type your message here"
               value={(formData.emailBody)}
-              onChange={(e)=>{setFormData({...formData,emailBody:e.target.value})}}
+              onChange={(e) => { setFormData({ ...formData, emailBody: e.target.value }) }}
               className="w-full h-40 px-6 py-4 placeholder-white placeholder-opacity-60 border border-none rounded-3xl text-white font-light m-1"
             />
             <div className='w-full flex justify-end'>
-              <Button disabled={!loading ? false : true} onClick={() => {handleStoreQuery()}} classes='text-base bg-btn-color rounded-lg w-36 uppercase mt-2'>
+              <Button disabled={!!loading} onClick={() => { handleStoreQuery() }} classes='text-base bg-btn-color rounded-lg w-36 uppercase mt-2'>
               SEND
               </Button>
             </div>

@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import React, { useEffect, useRef, useState } from 'react'
 import Footer from './components/Footer'
 import Header from './components/Header'
@@ -5,7 +6,7 @@ import MainSection from './components/MainSection'
 import ProductTabs from './components/ProductTabs'
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import Client, {Config} from 'shopify-buy'
+import Client, { Config } from 'shopify-buy'
 
 const Wellness = () => {
   const router = useRouter()

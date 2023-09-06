@@ -1,10 +1,12 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-constant-condition */
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import { Button } from 'components/common/Button'
 import Typography from '@mui/material/Typography'
 import React, { useEffect } from 'react'
-import Client, {Config, Cart} from 'shopify-buy'
+import Client, { Config, Cart } from 'shopify-buy'
 
 interface ProductInfo {
   productName: string;
@@ -16,9 +18,7 @@ interface ProductCardProps {
   products: ProductInfo[];
 }
 
-
-
-const ProductCard = ({ products, userId, collectionId,isLoggedIn}) => {
+const ProductCard = ({ products, userId, collectionId, isLoggedIn }) => {
   React.useEffect(() => {
     products.forEach((product) => {
       const img = new Image()
@@ -30,70 +30,70 @@ const ProductCard = ({ products, userId, collectionId,isLoggedIn}) => {
   let updatedCart:any
   let ShopifyBuy:any
   React.useEffect(() => {
-    //if (isLoggedIn && isAssociate !== null)
-    if (true) {
+    // if (isLoggedIn && isAssociate !== null)
+    if (isLoggedIn) {
       // Create and load the script
-      const script = document.createElement("script");
-      script.src = "https://www.integrouswellness.com/storefront.v1.js";
-      script.async = true;
+      const script = document.createElement('script')
+      script.src = 'https://www.integrouswellness.com/storefront.v1.js'
+      script.async = true
 
       script.onload = async () => {
-        ShopifyBuy = window.ShopifyBuy;
+        ShopifyBuy = window.ShopifyBuy
         const client = Client.buildClient({
-          domain: "0f4c5e-3.myshopify.com",
-          storefrontAccessToken: "e06de8605c8ed7c79a04d618e0b3eeb7",
+          domain: '0f4c5e-3.myshopify.com',
+          storefrontAccessToken: 'e06de8605c8ed7c79a04d618e0b3eeb7',
           apiVersion: '2022-07'
-        });
+        })
 
-        //let collectionId = "446876746030";
-        //let collectionId = "447611863342";
+        // let collectionId = "446876746030";
+        // let collectionId = "447611863342";
         // if (isAssociate) {
         //   collectionId = "447611863342";
         // }
-        let totalProducts = await client.product.fetchAll()
-        let tp = [];
-      let gp = []
-      // for(let i=0; i<totalProducts.length;i++)
-      // {
-      //   let product = totalProducts[i]
-      //   console.log('title is ', product.title)
-      //   if(product.title.includes('Tea') || product.title.includes('Coffee') || product.title.includes('Coffee/Tea') || product.title.includes('Tea/Coffee'))
-      //   {
-      //       console.log('in tea coffee')
-      //       tp.push(totalProducts[i])
-      //       setTeaCoffeeProducts(tp)
-      //   }
-      //   else{
-      //       console.log('in General')
-      //       gp.push(totalProducts[i])
-      //       setGeneralProducts(gp)
-      //   }
-      // }
-      // console.log('products from shopify are', totalProducts, teaCoffeeProducts,generalProducts);
+        const totalProducts = await client.product.fetchAll()
+        const tp = []
+        const gp = []
+        // for(let i=0; i<totalProducts.length;i++)
+        // {
+        //   let product = totalProducts[i]
+        //   console.log('title is ', product.title)
+        //   if(product.title.includes('Tea') || product.title.includes('Coffee') || product.title.includes('Coffee/Tea') || product.title.includes('Tea/Coffee'))
+        //   {
+        //       console.log('in tea coffee')
+        //       tp.push(totalProducts[i])
+        //       setTeaCoffeeProducts(tp)
+        //   }
+        //   else{
+        //       console.log('in General')
+        //       gp.push(totalProducts[i])
+        //       setGeneralProducts(gp)
+        //   }
+        // }
+        // console.log('products from shopify are', totalProducts, teaCoffeeProducts,generalProducts);
 
         ShopifyBuy.UI.onReady(client).then((ui) => {
-          ui.createComponent("collection", {
+          ui.createComponent('collection', {
             id: collectionId,
-            node: document.getElementById("collection-component-tabs"),
-            moneyFormat: "%24%7B%7Bamount%7D%7D",
+            node: document.getElementById('collection-component-tabs'),
+            moneyFormat: '%24%7B%7Bamount%7D%7D',
             options: {
               cart: {
-                customAttributes: [{ key: "UID", value: String(userId) }],
-                popup: false,
-              },
-            },
-          });
-        });
-      };
+                customAttributes: [{ key: 'UID', value: String(userId) }],
+                popup: false
+              }
+            }
+          })
+        })
+      }
 
-      document.body.appendChild(script);
+      document.body.appendChild(script)
 
       // Cleanup on unmount
       return () => {
-        document.body.removeChild(script);
-      };
+        document.body.removeChild(script)
+      }
     }
-  }, [collectionId, userId]); 
+  }, [collectionId, userId])
 
   // useEffect(() => {
   //   const cartUI = cart.createCart(client, updatedCart); // Pass the updated cart
@@ -102,24 +102,21 @@ const ProductCard = ({ products, userId, collectionId,isLoggedIn}) => {
   //   cartUI.render('.cart-container'); // Replace with your cart container element
   // }, [updatedCart])
 
-  
-
   // const handleAddToCart = async (product) => {
   //   const variantId = product.id;
   //   const quantity = 1; // Adjust the quantity as needed
-    
+
   //   const lineItemsToAdd = [{ variantId, quantity }];
-    
+
   //   updatedCart = await client.checkout.addLineItems(cart.id, lineItemsToAdd);
-    
-    
+
   //   console.log('updateCart',updatedCart)
   // }
   return (
     <div className="flex md:flex-row flex-col justify-start items-center">
-      { isLoggedIn ?
-      <div id='collection-component-tabs'></div>:
-      <></>
+      { isLoggedIn
+        ? <div id='collection-component-tabs'></div>
+        : <></>
       }
       {/* {products?.map((product, index) => (
         <Card key={index} className="rounded-md bg-white shadow-md-custom w-full lg:w-1/4 ml-5 m-5 lg:m-1">
@@ -140,7 +137,7 @@ const ProductCard = ({ products, userId, collectionId,isLoggedIn}) => {
               {/* <Button onClick={() => {}} classes='text-base bg-btn-color rounded-lg px-7 uppercase mt-2'>
                 <i className="fa fa-shopping-cart mr-5" aria-hidden="true"></i>
               Add to Cart
-              </Button> 
+              </Button>
             </div>
           </CardContent>
         </Card>
