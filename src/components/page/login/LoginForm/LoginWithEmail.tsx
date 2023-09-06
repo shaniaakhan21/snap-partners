@@ -62,7 +62,7 @@ export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
     // }
     const { redirectToWellness, referralCode } = router.query
     if (redirectToWellness === 'true') {
-      window.location.href = `/wellness/${referralCode}?access_token=${dataLogin.token}`
+      router.push(`/wellness/${referralCode}?access_token=${dataLogin.token}`)
       return
     }
 
