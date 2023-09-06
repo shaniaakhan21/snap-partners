@@ -57,7 +57,7 @@ const Header = ({
   }
 
   return (
-    <header className="bgc-black text-white flex flex-row items-center w-full px-5 md:px-10 lg:px-20 2xl:px-48">
+    <header className="bgc-black text-white flex flex-row items-center w-full px-5 md:px-10 lg:px-20 2xl:px-36 3xl:px-48">
       <div className="justify-between items-center w-9/12 lg:w-11/12 py-2">
         <Link href={logoLink} className="text-2xl font-bold">
           <img src={logoSrc} alt={logoAlt} className='3xl:w-36'/>

@@ -3,6 +3,7 @@ import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import Box from '@mui/material/Box'
 import ProductCard from './ProductCard'
+import WeightCare from './WeightCare'
 
 interface TabPanelProps {
     children: any;
@@ -45,7 +46,7 @@ const ProductTabs = ({ teaCoffeeProducts, generalProducts, userId, isLoggedIn, c
   }
 
   return (
-    <div className='m-2 lg:m-14'>
+    <div className='m-2 lg:m-14 pt-2'>
       <Tabs value={value} onChange={handleChange as any} variant="scrollable" scrollButtons="auto" style={{ borderBottom: '3px solid red' }} TabIndicatorProps={{ style: { display: 'none' } }}>
 
         <Tab label="Coffee/Tea" className={`
@@ -62,20 +63,21 @@ const ProductTabs = ({ teaCoffeeProducts, generalProducts, userId, isLoggedIn, c
   `} />
       </Tabs>
       <TabPanel value={value} index={2} >
-        <div className='p-10 lg:p-36  rounded-2xl bg-white shadow-custom'>
-          <div className='flex justify-center'>
-            <img src="/static/wellness/unavailable.png" />
-          </div>
+        <div className='p-10  rounded-2xl bg-white shadow-custom'>
           <div>
-            <h1 className='text-base lg:text-2xl text-center font-semibold'>No Products Available</h1>
+            <WeightCare/>
           </div>
         </div>
       </TabPanel>
       <TabPanel value={value} index={0}>
+      <div className='p-10  rounded-2xl bg-white shadow-custom'>
         <ProductCard products={teaCoffeeProducts} userId={userId} collectionId={collectionIdTea} isLoggedIn={isLoggedIn}/>
+        </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
+      <div className='p-10  rounded-2xl bg-white shadow-custom'>
         <ProductCard products={generalProducts} userId={userId} collectionId={collectionIdGut} isLoggedIn={isLoggedIn} />
+        </div>
       </TabPanel>
     </div>
   )
