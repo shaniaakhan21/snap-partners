@@ -10,6 +10,7 @@ export const useHandlerReferralLink = () => {
   const queryReferralCode = router.query.referralCode as string
   const queryRole = router.query.role as string
   const redirectToIntegrous = router.query.redirectToIntegrous as string
+  const redirectToWellness = router.query.redirectToWellness as string
   const [referralLink, setReferralLink] = useState<IReferralLink>({ code: null, role: null })
 
   const handlerIdentifyRole = () => {
@@ -27,6 +28,16 @@ export const useHandlerReferralLink = () => {
       removeLocalStorage('redirectToIntegrousReferralCode')
     }
   }, [redirectToIntegrous])
+
+  useEffect(() => {
+    if (redirectToWellness === 'true') {
+      setLocalStorage('redirectToWellness', true)
+      setLocalStorage('redirectToWellnessReferralCode', queryReferralCode || '')
+    } else {
+      removeLocalStorage('redirectToWellness')
+      removeLocalStorage('redirectToWellnessReferralCode')
+    }
+  }, [redirectToWellness])
 
   useEffect(() => {
     setReferralLink(prevState => ({
