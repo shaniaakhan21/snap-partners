@@ -19,7 +19,7 @@ const Wellness = () => {
   const [teaCoffeeProducts, setTeaCoffeeProducts] = useState([])
   const [generalProducts, setGeneralProducts] = useState([])
   let ShopifyBuy: any
-  const path = window.location.pathname
+  const path = router.pathname
 
   if (access_token) {
     if (typeof access_token === 'string') { localStorage.setItem('access_token', access_token) }
