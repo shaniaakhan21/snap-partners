@@ -124,7 +124,8 @@ const Wellness = () => {
           )
           localStorage.setItem('referralCode', response.data.referralCode)
           localStorage.setItem('ownerName', `${response.data.name} ${response.data.lastname}`)
-          setUserData(response.data)
+          localStorage.setItem('email', `${response.data.email}`)
+          //setUserData(response.data)
         }
       } catch (error) {
         //
