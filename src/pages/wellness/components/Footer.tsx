@@ -3,8 +3,12 @@ import { makeStyles } from '@mui/styles'
 import PropTypes from 'prop-types'
 import { Button } from 'components/common/Button'
 import { useState } from 'react'
-import { SpinnerPageContent } from 'components/common/loaders/PageContent'
+import Dialog from '@mui/material/Dialog'
+import DialogTitle from '@mui/material/DialogTitle'
+import DialogContent from '@mui/material/DialogContent'
+import DialogActions from '@mui/material/DialogActions'
 import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const useStyles = makeStyles((theme) => ({
   footer1: {
@@ -47,32 +51,53 @@ function Footer ({ userData }) {
   })
   const [loading, setLoading] = useState(false)
 
+  const [successDialogOpen, setSuccessDialogOpen] = useState(false)
+  const [errorDialogOpen, setErrorDialogOpen] = useState(false)
+
+  // Functions to open/close success and error dialogs
+  const openSuccessDialog = () => {
+    setSuccessDialogOpen(true)
+  }
+
+  const closeSuccessDialog = () => {
+    setSuccessDialogOpen(false)
+  }
+
+  const openErrorDialog = () => {
+    setErrorDialogOpen(true)
+  }
+
+  const closeErrorDialog = () => {
+    setErrorDialogOpen(false)
+  }
+
   const handleStoreQuery = async () => {
     if (!formData.name || !formData.customerEmail || !formData.subject || !formData.emailBody) {
       console.log('please fill the form completely')
       return
     }
     setLoading(true)
-    await axios.post('/api/admin/email-to-store-owner', formData)
-      .then((response) => {
-        setLoading(false)
-        if (response.data === 'OK') {
-          alert('email sent to store owner')
-          setFormData({
-            ...formData,
-            name: '',
-            customerEmail: '',
-            subject: '',
-            emailBody: ''
-          })
-        } else {
-          alert('error while sending email to store owner')
-        }
-      })
-      .catch((e) => {
-        setLoading(false)
-        console.log('error while sendiing email to owner', e)
-      })
+    try {
+      const response = await axios.post('/api/admin/email-to-store-owner', formData)
+
+      if (response.data === 'OK') {
+        openSuccessDialog()
+        setFormData({
+          ...formData,
+          name: '',
+          customerEmail: '',
+          subject: '',
+          emailBody: ''
+        })
+      } else {
+        openErrorDialog()
+      }
+    } catch (error) {
+      console.error('Error while sending email to store owner', error)
+      openErrorDialog()
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -120,10 +145,10 @@ function Footer ({ userData }) {
                 value={(formData.name)}
                 onChange={(e) => { setFormData({ ...formData, name: e.target.value }) }}
                 className="w-1/2 px-6 py-4 placeholder-white placeholder-opacity-60 border border-none rounded-3xl text-white font-light  mr-2 mb-3"
-              />
+                required />
               <input
                 style={{ background: '#4B4B4B' }}
-                type="text"
+                type="email"
                 placeholder="Your Email"
                 value={(formData.customerEmail)}
                 onChange={(e) => { setFormData({ ...formData, customerEmail: e.target.value }) }}
@@ -153,6 +178,39 @@ function Footer ({ userData }) {
           </form>
         </Grid>
       </Grid>
+      <Dialog open={successDialogOpen} onClose={closeSuccessDialog}>
+        <div className='bg-green-400 p-10 flex flex-row justify-center items-center'>
+          <div className="px-4 py-3 border-2 border-white rounded-full">
+            <i className="fa fa-check text-white text-center text-4xl" aria-hidden="true"></i>
+          </div>
+        </div>
+        <DialogTitle className='text-3xl font-bold text-center'>Thank You!</DialogTitle>
+        <DialogContent>
+        Email has been succesfully sent to store owner.
+        </DialogContent>
+        <DialogActions>
+          <Button classes='bg-btn-color' onClick={closeSuccessDialog}>
+          Close
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={errorDialogOpen} onClose={closeErrorDialog}>
+        <div className='bg-red-600 p-10 flex flex-row justify-center items-center'>
+          <div className="px-6 py-4 border-2 border-white rounded-full">
+            <i className="fa fa-xmark text-white text-center text-4xl" aria-hidden="true"></i>
+          </div>
+        </div>
+        <DialogTitle className='text-3xl font-bold text-center'>Try again, Later! </DialogTitle>
+        <DialogContent>
+        Error, while sending email to store owner
+        </DialogContent>
+        <DialogActions>
+          <Button classes='bg-btn-color' onClick={closeErrorDialog}>
+          Close
+          </Button>
+        </DialogActions>
+      </Dialog>
     </footer>
   )
 }
