@@ -5,11 +5,12 @@ import { removeLocalStorage, setLocalStorage } from 'lib/utils/localStorage'
 import { IReferralLink } from 'lib/types'
 import { ROLES } from 'config/roles'
 
-export const useHandlerReferralLink = () => {
+export const useHandlerReferralLinkWellness = () => {
   const router = useRouter()
   const queryReferralCode = router.query.referralCode as string
   const queryRole = router.query.role as string
-  const redirectToIntegrous = router.query.redirectToIntegrous as string
+  const redirectToWellness = router.query.redirectToWellness as string
+
   const [referralLink, setReferralLink] = useState<IReferralLink>({ code: null, role: null })
 
   const handlerIdentifyRole = () => {
@@ -19,14 +20,14 @@ export const useHandlerReferralLink = () => {
   }
 
   useEffect(() => {
-    if (redirectToIntegrous === 'true') {
-      setLocalStorage('redirectToIntegrous', true)
-      setLocalStorage('redirectToIntegrousReferralCode', queryReferralCode || '')
+    if (redirectToWellness === 'true') {
+      setLocalStorage('redirectToWellness', true)
+      setLocalStorage('redirectToWellnessReferralCode', queryReferralCode || '')
     } else {
-      removeLocalStorage('redirectToIntegrous')
-      removeLocalStorage('redirectToIntegrousReferralCode')
+      removeLocalStorage('redirectToWellness')
+      removeLocalStorage('redirectToWellnessReferralCode')
     }
-  }, [redirectToIntegrous])
+  }, [redirectToWellness])
 
   useEffect(() => {
     setReferralLink(prevState => ({

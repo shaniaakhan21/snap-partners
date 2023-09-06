@@ -10,7 +10,7 @@ const Wellness = () => {
   const router = useRouter()
   const { access_token } = router.query
   const productTabsRef = useRef(null)
-  const [isAssociate, setisAssociate] = useState(false)
+  const [isIbo, setisIbo] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [userId, setUserId] = useState(null)
   const [userData, setUserData] = useState(null)
@@ -33,10 +33,12 @@ const Wellness = () => {
           localStorage.setItem('userName', response.data.data.user.name)
           console.log('user data is', response.data.data.user)
           localStorage.setItem('userData', JSON.stringify(response.data.data.user))
-          if (response.data.data.user.roles.integrousAssociate) {
-            setisAssociate(true)
+          const iboValue = response.data.data.user.roles.ibo
+          console.log('IBO Value:', iboValue)
+          if (iboValue === true) {
+            setisIbo(true)
           } else {
-            setisAssociate(false)
+            setisIbo(false)
           }
           setIsLoggedIn(true)
           setUserId(response.data.data.user.id)
