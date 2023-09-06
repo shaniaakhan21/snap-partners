@@ -7,13 +7,13 @@ const WeightCare = () => {
         <div className='mx-20'>
             <div className='flex flex-row justify-between'>
                 <div className='mr-3 w-5/12 mt-2'>
-                    <img src='static/wellness/voucher.jpg' className='rounded-lg w-[100%] 3xl:w-[100%]'></img>
+                    <img src='/static/wellness/voucher.jpg' className='rounded-lg w-[100%] 3xl:w-[100%]'/>
                 </div>
                 <div className='w-7/12 ml-10 3xl:ml-10 3xl:mt-10'>
                     <div style={{
                         backgroundColor: '#1E306E'
                     }} className='w-3/12 py-1 px-2 rounded-xl'>
-                        <img src='static/wellness/WeightCare_LOGO_WHITE_1.png' className='rounded-lg'></img>
+                        <img src='/static/wellness/WeightCare_LOGO_WHITE_1.png' className='rounded-lg'/>
                     </div>
                     <div className='text-red-h text-lg md:text-2xl lg:text-3xl xl:text-3xl 2xl:text-4xl 3xl:text-8xl font-bold text-center md:text-left leading-relaxed mt-4'>
                         Semaglutide Weight Loss Program
@@ -101,26 +101,26 @@ const WeightCare = () => {
                 <div className='flex flex-row'>
                     <div className='rounded-xl bg-red-100 w-1/3 m-4 p-4 items-center'>
                         <div className='flex justify-center'> 
-                        <img src='static/wellness/1.png' className='px-4 py-6 m-4 w-[100%]'></img>
+                        <img src='/static/wellness/1.png' className='px-4 py-6 m-4 w-[100%]'/>
                         </div>
                         <h1 className='text-navy font-bold text-lg 3xl:text-5xl 3xl:text-center'>INITIAL TELEHEALTH VISIT</h1>
                     </div>
                     <div className='rounded-xl bg-red-100 w-1/3 m-4 p-4 items-center'>
                         <div className='flex justify-center'>
-                        <img src='static/wellness/2.png' className='px-4 py-6 m-4 w-[50%]'></img>
+                        <img src='/static/wellness/2.png' className='px-4 py-6 m-4 w-[50%]'/>
                         </div>
                         <h1 className='text-navy font-bold text-lg 3xl:text-5xl 3xl:text-center'>PRESCRIPTION + MEDICATION</h1>
                         <p className='text-navy text-center 3xl:text-2xl'>(if approved by a medical doctor)</p>
                     </div>
                     <div className='rounded-xl bg-red-100 w-1/3 m-4 p-4 items-center'>
                         <div className='flex justify-center'>
-                        <img src='static/wellness/3.png' className='px-4 py-6 m-4 w-[80%]'></img>
+                        <img src='/static/wellness/3.png' className='px-4 py-6 m-4 w-[80%]'/>
                         </div>
                         <h1 className='text-navy font-bold text-lg 3xl:text-5xl 3xl:text-center'>UNLIMITED TEXTING WITH YOUR PHYSICIAN</h1>
                     </div>
                     <div className='rounded-xl bg-red-100 w-1/3 m-4 p-4 items-center'>
                         <div className='flex justify-center'>
-                        <img src='static/wellness/4.png' className='px-4 py-6 m-4 w-[80%]'></img>
+                        <img src='/static/wellness/4.png' className='px-4 py-6 m-4 w-[80%]'/>
                         </div>
                         <h1 className='text-navy font-bold text-lg 3xl:text-5xl 3xl:text-center'>MONTHLY CHECK-INS WITH YOUR PHYSICIAN</h1>
                     </div>
