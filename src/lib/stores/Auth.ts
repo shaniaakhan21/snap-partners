@@ -143,7 +143,7 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
         deleted,
         nsurAccount,
         referralLink: referralCode ? `${SEO.URL_PAGE}/auth/signup?referralCode=${referralCode}` : null,
-        referralLinkWellness: referralCode ? `${SEO.URL_PAGE}/auth/signup-wellness?referralCode=${referralCode}` : null,
+        referralLinkWellness: referralCode ? `${SEO.URL_PAGE}/auth/signup-wellness?redirectToWellness=true&referralCode=${referralCode}` : null,
         bank_information,
         level,
         facebook_url,
