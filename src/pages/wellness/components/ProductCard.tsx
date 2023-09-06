@@ -1,12 +1,12 @@
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-constant-condition */
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import { Button } from 'components/common/Button'
 import Typography from '@mui/material/Typography'
-import { useEffect, useState } from 'react'
-import { Grid } from '@mui/joy'
-import { Modal } from '@mui/material'
-import Router from 'next/router'
+import React, { useEffect } from 'react'
+import Client, { Config, Cart } from 'shopify-buy'
 
 interface ProductInfo {
   productName: string;
@@ -18,82 +18,131 @@ interface ProductCardProps {
   products: ProductInfo[];
 }
 
-const ProductCard = ({ products }) => {
-  const [open, setOpen] = useState(false)
-  const handleLogin = () => {
-    const referralCode = localStorage.getItem('referralCode') || 'NoSponsor'
-    Router.push(`/auth/login-wellness?redirectToWellness=true&referralCode=${referralCode}`)
-  }
-  const handleOpen = () => {
-    setOpen(true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
-  }
-
-  const handleAddToCart = () => {
-    handleOpen()
-  }
-  useEffect(() => {
+const ProductCard = ({ products, userId, collectionId, isLoggedIn }) => {
+  React.useEffect(() => {
     products.forEach((product) => {
       const img = new Image()
       img.src = product.productImage
     })
   }, [products])
+  let cart:any
+  let client:any
+  let updatedCart:any
+  let ShopifyBuy:any
+  React.useEffect(() => {
+    // if (isLoggedIn && isAssociate !== null)
+    if (isLoggedIn) {
+      // Create and load the script
+      const script = document.createElement('script')
+      script.src = 'https://www.integrouswellness.com/storefront.v1.js'
+      script.async = true
+
+      script.onload = async () => {
+        ShopifyBuy = window.ShopifyBuy
+        const client = Client.buildClient({
+          domain: '0f4c5e-3.myshopify.com',
+          storefrontAccessToken: 'e06de8605c8ed7c79a04d618e0b3eeb7',
+          apiVersion: '2022-07'
+        })
+
+        // let collectionId = "446876746030";
+        // let collectionId = "447611863342";
+        // if (isAssociate) {
+        //   collectionId = "447611863342";
+        // }
+        const totalProducts = await client.product.fetchAll()
+        const tp = []
+        const gp = []
+        // for(let i=0; i<totalProducts.length;i++)
+        // {
+        //   let product = totalProducts[i]
+        //   console.log('title is ', product.title)
+        //   if(product.title.includes('Tea') || product.title.includes('Coffee') || product.title.includes('Coffee/Tea') || product.title.includes('Tea/Coffee'))
+        //   {
+        //       console.log('in tea coffee')
+        //       tp.push(totalProducts[i])
+        //       setTeaCoffeeProducts(tp)
+        //   }
+        //   else{
+        //       console.log('in General')
+        //       gp.push(totalProducts[i])
+        //       setGeneralProducts(gp)
+        //   }
+        // }
+        // console.log('products from shopify are', totalProducts, teaCoffeeProducts,generalProducts);
+
+        ShopifyBuy.UI.onReady(client).then((ui) => {
+          ui.createComponent('collection', {
+            id: collectionId,
+            node: document.getElementById('collection-component-tabs'),
+            moneyFormat: '%24%7B%7Bamount%7D%7D',
+            options: {
+              cart: {
+                customAttributes: [{ key: 'UID', value: String(userId) }],
+                popup: false
+              }
+            }
+          })
+        })
+      }
+
+      document.body.appendChild(script)
+
+      // Cleanup on unmount
+      return () => {
+        document.body.removeChild(script)
+      }
+    }
+  }, [collectionId, userId])
+
+  // useEffect(() => {
+  //   const cartUI = cart.createCart(client, updatedCart); // Pass the updated cart
+
+  //   // Render the cart UI
+  //   cartUI.render('.cart-container'); // Replace with your cart container element
+  // }, [updatedCart])
+
+  // const handleAddToCart = async (product) => {
+  //   const variantId = product.id;
+  //   const quantity = 1; // Adjust the quantity as needed
+
+  //   const lineItemsToAdd = [{ variantId, quantity }];
+
+  //   updatedCart = await client.checkout.addLineItems(cart.id, lineItemsToAdd);
+
+  //   console.log('updateCart',updatedCart)
+  // }
   return (
-    <Grid className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
-      {products?.map((product, index) => (
-        <Card key={index} className="h-[fit-content] rounded-md bg-white shadow-md-custom w-11/12 ml-5 lg:m-4 3xl:m-4 mb-6 lg:mb-0" >
+    <div className="flex md:flex-row flex-col justify-start items-center">
+      { isLoggedIn
+        ? <div id='collection-component-tabs'></div>
+        : <></>
+      }
+      {/* {products?.map((product, index) => (
+        <Card key={index} className="rounded-md bg-white shadow-md-custom w-full lg:w-1/4 ml-5 m-5 lg:m-1">
           <CardMedia
             component="img"
-            alt={product.node.title}
-            image={product.node.variants.edges[0].node.image.src}
+            alt={product?.title}
+            image={product?.variants[0]?.image?.src}
             className="object-cover"
           />
-          <CardContent className="h-[fit-content] flex flex-col justify-between items-center ">
-            <Typography gutterBottom variant="h5" component="div" className='text-center text-xl font-bold 3xl:text-2xl  3xl:mt-6'>
-              {product.node.title}
+          <CardContent className="h-[40%] flex flex-col justify-between items-center">
+            <Typography gutterBottom variant="h5" component="div" className='text-center text-xl font-bold'>
+              {product?.title}
             </Typography>
-            <Typography variant="h6" component="div" className="text-red-500 font-bold mt-4 3xl:text-3xl">
-              {`$${product.node.variants.edges[0].node.price.amount}`}
+            <Typography variant="h6" component="div" className="text-red-500 font-bold mt-4">
+              {`$${product?.variants[0]?.price?.amount}`}
             </Typography>
             <div className='pt-1'>
-              <Button classes='text-base bg-btn-color rounded-lg px-7 uppercase mt-2 3xl:text-xl 3xl:px-10 3xl:py-4' onClick={handleAddToCart}>
+              {/* <Button onClick={() => {}} classes='text-base bg-btn-color rounded-lg px-7 uppercase mt-2'>
                 <i className="fa fa-shopping-cart mr-5" aria-hidden="true"></i>
               Add to Cart
               </Button>
             </div>
           </CardContent>
         </Card>
-      ))}
-      <Modal open={open} onClose={handleClose}>
-        <Card
-          sx={{
-            background: '#000000e0',
-            border: '#0000004f 1px solid',
-            boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
-            position: 'absolute',
-            top: '20%'
-          }}
-          className="md:px-20 md:py-10 rounded-2xl mt-1 3xl:mt-32 w-8/12 xl:w-6/12 3xl:w-5/12 backdrop-blur-4xl left-16 lg:left-1/4"
-        >
-          <CardContent>
-            <h1 className="text text-white text-2xl md:text-3xl 2xl:text-4xl 3xl:text-6xl font-semibold-it font-normal text-center mb-4 2xl:mb-5 3xl:mb-8">
-              Purchase <span className='text-red-h'>Now</span>
-            </h1>
-            <p className="text text-white font-light text-center">
-              <Button onClick={() => { handleLogin() }} classes=' text-xs md:text-base lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-4xl bg-btn-color rounded-lg px-8 2xl:py-2 3xl:py-5'>
-              LOG IN / SIGN UP
-                <i className="fa fa-sign-in ml-2" aria-hidden="true"></i>
-              </Button>
-            </p>
-          </CardContent>
-
-        </Card>
-      </Modal>
-
-    </Grid>
+      ))} */}
+    </div>
   )
 }
 
