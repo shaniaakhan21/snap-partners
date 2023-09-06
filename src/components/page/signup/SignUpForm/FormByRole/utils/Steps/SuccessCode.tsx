@@ -75,7 +75,7 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
     if (redirectToWellness === true) {
       removeLocalStorage('redirectToWellness')
       removeLocalStorage('redirectToWellnessReferralCode')
-      window.location.href = `https://www.snapdelivered.com/wellness${redirectToWellnessReferralCode}?access_token=${dataLogin.token}`
+      window.location.href = `/wellness/${redirectToWellnessReferralCode}?access_token=${dataLogin.token}`
       return
     }
 
