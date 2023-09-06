@@ -2,7 +2,7 @@ import { Grid } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import PropTypes from 'prop-types'
 import { Button } from 'components/common/Button'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Dialog from '@mui/material/Dialog'
 import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
@@ -41,11 +41,19 @@ const useStyles = makeStyles((theme) => ({
 
 function Footer ({ userData }) {
   const classes = useStyles()
+  let ownerName:string
+  let ownerEmail:string
+
+  useEffect(() => {
+    ownerName = localStorage.getItem('ownerName')
+    ownerEmail = localStorage.getItem('ownerEmail')
+    setFormData({ ...formData, ownerEmail: ownerEmail })
+  }, [])
 
   const [formData, setFormData] = useState({
     name: '',
     customerEmail: '',
-    ownerEmail: 'next100x98@gmail.com',
+    ownerEmail: '',
     subject: '',
     emailBody: ''
   })
@@ -121,7 +129,7 @@ function Footer ({ userData }) {
               <h3 className="text-white text-base font-light text-center uppercase 3xl:text-2xl">Store Owner</h3>
 
               <h3 className="text-white text-2xl 3xl:text-4xl">
-                Ronan Thompson
+                {ownerName || ''}
               </h3>
             </div>
 
@@ -172,7 +180,7 @@ function Footer ({ userData }) {
             />
             <div className='w-full flex justify-end'>
               <Button disabled={!!loading} onClick={() => { handleStoreQuery() }} classes='text-base bg-btn-color rounded-lg w-36 uppercase mt-2'>
-              SEND
+              SUBMIT
               </Button>
             </div>
           </form>

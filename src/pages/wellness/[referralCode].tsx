@@ -102,7 +102,7 @@ const Wellness = () => {
     }
     Shopify()
   }, [])
-//   const {referralCode} = router.query
+  //   const {referralCode} = router.query
 
   React.useEffect(() => {
     async function Owner () {
@@ -114,9 +114,8 @@ const Wellness = () => {
         // we remove the first character of the path
         const username = path.split('/')[2]
         console.log('path is ', username)
-        if(username === 'NoSponsor')
-        {
-            return
+        if (username === 'NoSponsor') {
+          return
         }
         if (username.length > 0) {
           const response = await axios.get(
@@ -124,8 +123,8 @@ const Wellness = () => {
           )
           localStorage.setItem('referralCode', response.data.referralCode)
           localStorage.setItem('ownerName', `${response.data.name} ${response.data.lastname}`)
-          localStorage.setItem('email', `${response.data.email}`)
-          //setUserData(response.data)
+          localStorage.setItem('ownerEmail', `${response.data.email}`)
+          // setUserData(response.data)
         }
       } catch (error) {
         //
