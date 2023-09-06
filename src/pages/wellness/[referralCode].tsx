@@ -22,9 +22,7 @@ const Wellness = () => {
   const path = window.location.pathname
 
   if (access_token) {
-    if (typeof access_token === 'string') {
-      localStorage.setItem('access_token', access_token)
-    }
+    if (typeof access_token === 'string') { localStorage.setItem('access_token', access_token) }
   }
   useEffect(() => {
     async function Me () {
