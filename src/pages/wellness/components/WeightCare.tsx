@@ -31,7 +31,7 @@ const WeightCare = () => {
                                 </Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <Typography variant='body1 text-navy'>
+                                <Typography variant='body1' className='text-navy'>
                                     <p>Getting started with WeightCare is easy.</p><br></br>
 
                                     <p><b>STEP 1 |</b> Place your <b>order online</b>. and then complete your medical <b>intake form</b> about your health and weight loss goals.</p> <br></br>
@@ -57,7 +57,7 @@ const WeightCare = () => {
                                 </Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <Typography variant='body1 text-navy'>
+                                <Typography variant='body1' className='text-navy'>
                             
                                     <p>Medications like Semaglutide belong to a family of drugs called GLP-1 receptor agonists. These medications work by slowing down digestion (delaying gastric emptying.)</p> <br></br>
 
@@ -78,7 +78,7 @@ const WeightCare = () => {
                                 </Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <Typography variant='body1 text-navy'>
+                                <Typography variant='body1' className='text-navy'>
                                     <p>We are able to serve customers in all states except; AL, CA, HI, MI, MN, IN, LA, KS, AR, AK</p><br></br>
 
                                 </Typography>
