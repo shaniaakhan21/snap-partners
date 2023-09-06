@@ -46,6 +46,7 @@ function Footer ({ userData }) {
 
   useEffect(() => {
     ownerName = localStorage.getItem('ownerName')
+    setOwner(ownerName)
     ownerEmail = localStorage.getItem('ownerEmail')
     setFormData({ ...formData, ownerEmail: ownerEmail })
   }, [])
@@ -61,6 +62,7 @@ function Footer ({ userData }) {
 
   const [successDialogOpen, setSuccessDialogOpen] = useState(false)
   const [errorDialogOpen, setErrorDialogOpen] = useState(false)
+  const [owner, setOwner] = useState('')
 
   // Functions to open/close success and error dialogs
   const openSuccessDialog = () => {
@@ -129,7 +131,7 @@ function Footer ({ userData }) {
               <h3 className="text-white text-base font-light text-center uppercase 3xl:text-2xl">Store Owner</h3>
 
               <h3 className="text-white text-2xl 3xl:text-4xl">
-                {ownerName || ''}
+                {owner}
               </h3>
             </div>
 

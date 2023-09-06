@@ -31,7 +31,7 @@ const ProductCard = ({ products, userId, collectionId, isLoggedIn }) => {
   let ShopifyBuy:any
   React.useEffect(() => {
     // if (isLoggedIn && isAssociate !== null)
-    if (isLoggedIn) {
+    if (true) {
       // Create and load the script
       const script = document.createElement('script')
       script.src = 'https://www.integrouswellness.com/storefront.v1.js'
@@ -114,10 +114,7 @@ const ProductCard = ({ products, userId, collectionId, isLoggedIn }) => {
   // }
   return (
     <div className="flex md:flex-row flex-col justify-start items-center">
-      { isLoggedIn
-        ? <div id='collection-component-tabs'></div>
-        : <></>
-      }
+      <div id='collection-component-tabs'></div>
       {/* {products?.map((product, index) => (
         <Card key={index} className="rounded-md bg-white shadow-md-custom w-full lg:w-1/4 ml-5 m-5 lg:m-1">
           <CardMedia
