@@ -1,6 +1,6 @@
 import Head from 'next/head'
 
-import { useHandlerReferralLinkWellness } from 'lib/hooks/useHandlerReferralLinkWellness'
+import { useHandlerReferralLink } from 'lib/hooks/useHandlerReferralLink'
 import { APP_INFO } from 'config/appInfo'
 
 import { AuthPagesLayout } from 'layouts/public/Auth'
@@ -12,7 +12,7 @@ import { SignUpIBOForm } from 'components/page/signup/SignUpForm/FormByRole/ibo'
 const { SEO } = APP_INFO
 
 const WellnessSignUpPage = () => {
-  const { referralCode: code, role } = useHandlerReferralLinkWellness()
+  const { referralCode: code, role } = useHandlerReferralLink()
 
   if (role === ROLES.CUSTOMER) return <SignUpCustomerForm referralLink={{ code, role }} />
   if (role === ROLES.IBO) return <SignUpIBOForm referralLink={{ code, role }} />
