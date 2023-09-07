@@ -3,6 +3,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { Button } from 'components/common/Button'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import ProgramCardList from './ProgramCardList'
 
 const WeightCare = ({ isLoggedIn }) => {
   const [nmiVariables, setNmiVariables] = useState({
@@ -30,21 +31,29 @@ const WeightCare = ({ isLoggedIn }) => {
     getNmiVars()
   }, [isLoggedIn])
   return (
-    <div className='mx-20'>
+    <div className='mx-4 lg:mx-20'>
       <form method="POST" action="https://secure.networkmerchants.com/cart/cart.php">
-        <div className='flex flex-row justify-between'>
-          <div className='mr-3 w-5/12 mt-2'>
-            <img src='/static/wellness/voucher.jpg' className='rounded-lg w-[100%] 3xl:w-[100%]'/>
+        <div className='flex flex-col lg:flex-row justify-between'>
+          <div className='mr-3 w-full lg:w-5/12 mt-2'>
+            <img src='/static/wellness/voucher-blue-large.svg' className='rounded-lg w-[100%] 3xl:w-[100%]'/>
           </div>
-          <div className='w-7/12 ml-10 3xl:ml-10 3xl:mt-10'>
+          <div className='w-full lg:w-7/12 lg:ml-10 mt-2 3xl:ml-10 3xl:mt-10 '>
             <div style={{
               backgroundColor: '#1E306E'
-            }} className='w-3/12 py-1 px-2 rounded-xl'>
+            }} className='w-full lg:w-3/12 px-16 py-1 lg:py-1 lg:px-2 rounded-xl '>
               <img src='/static/wellness/WeightCare_LOGO_WHITE_1.png' className='rounded-lg'/>
             </div>
-            <div className='text-red-h text-lg md:text-2xl lg:text-3xl xl:text-3xl 2xl:text-4xl 3xl:text-8xl font-bold text-center md:text-left leading-relaxed mt-4'>
+            <div className='text-red-h text-base md:text-2xl lg:text-3xl xl:text-3xl 2xl:text-4xl 3xl:text-8xl font-bold text-center md:text-left lg:leading-relaxed mt-4'>
                         Semaglutide Weight Loss Program
             </div>
+            <br></br>
+            <div>
+              <Typography className='text-sm text-navy lg:text-2xl 3xl:text-3xl 3xl:leading-snug'>The most effective way to lose weight, backed by science. <br></br><b>ACCESSIBLE | AFFORDABLE | EFFECTIVE</b></Typography>
+            </div>
+            <div>
+              <p className='text-2xl text-red-h  font-bold'><s className='text-navy font-medium'>$ 399.00</s>&nbsp; $ 250.00</p>
+            </div>
+
             <div className='mt-4 3xl:mt-8'>
               <Accordion className='py-2'>
                 <AccordionSummary
@@ -58,7 +67,7 @@ const WeightCare = ({ isLoggedIn }) => {
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Typography variant='body1' className='text-navy'>
+                  <Typography variant='body1' className='3xl:text-3xl text-navy'>
                     <p>Getting started with WeightCare is easy.</p><br></br>
 
                     <p><b>STEP 1 |</b> Place your <b>order online</b>. and then complete your medical <b>intake form</b> about your health and weight loss goals.</p> <br></br>
@@ -83,7 +92,7 @@ const WeightCare = ({ isLoggedIn }) => {
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Typography variant='body1' className='text-navy'>
+                  <Typography variant='body1' className='3xl:text-3xl text-navy'>
 
                     <p>Medications like Semaglutide belong to a family of drugs called GLP-1 receptor agonists. These medications work by slowing down digestion (delaying gastric emptying.)</p> <br></br>
 
@@ -103,16 +112,16 @@ const WeightCare = ({ isLoggedIn }) => {
                   </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                  <Typography variant='body1' className='text-navy'>
+                  <Typography variant='body1' className='3xl:text-3xl text-navy'>
                     <p>We are able to serve customers in all states except; AL, CA, HI, MI, MN, IN, LA, KS, AR, AK</p><br></br>
 
                   </Typography>
                 </AccordionDetails>
               </Accordion>
 
-            </div><br></br>
+            </div>
             <Button
-              classes='text-xs md:text-base 2xl:text-xl 3xl:text-5xl font-semibold bg-btn-color px-2 lg:px-5 2xl:px-28 3xl:px-32 3xl:py-6 rounded mt-4'
+              classes='text-sm md:text-base 2xl:text-xl 3xl:text-4xl font-semibold bg-btn-color px-2 lg:px-5 2xl:px-28 3xl:px-32 3xl:py-6 rounded mt-3 3xl:mt-4'
               type='submit'
               disabled={!isLoggedIn}
             >
@@ -122,32 +131,39 @@ const WeightCare = ({ isLoggedIn }) => {
         </div>
         <div>
           <div>
-            <h1 className='mt-12 text-navy font-bold text-xs md:text-base lg:text-lg xl:text-xl 2xl:text-3xl 3xl:text-7xl px-4'>What does the program include?</h1>
+            <h1 className='mt-4 lg:mt-12 text-navy font-bold text-2xl md:text-base lg:text-lg xl:text-2xl 2xl:text-5xl 3xl:text-7xl px-0 lg:pr-4 text-center lg:text-left lg:mb-6'>The Weight Loss Program</h1>
+            <ProgramCardList/>
+          </div>
+        </div>
+        <div>
+          <div>
+            <h1 className='mt-4 lg:mt-12 text-navy font-bold text-xl md:text-base lg:text-lg xl:text-2xl 2xl:text-5xl 3xl:text-7xl px-0 lg:px-4'>What does the program include?</h1>
           </div>
           <br></br>
-          <div className='flex flex-row'>
-            <div className='rounded-xl bg-red-100 w-1/3 m-4 p-4 items-center'>
+          <div className='flex lg:flex-row flex-col'>
+            <div className='rounded-xl bg-blue-h-100 w-full lg:w-1/3 p-3 lg:m-4 lg:p-4 mb-4 lg:mb-0 items-center'>
+
               <div className='flex justify-center'>
-                <img src='/static/wellness/1.png' className='px-4 py-6 m-4 w-[100%]'/>
+                <img src='/static/wellness/1.png' className='px-4 py-6 m-4 w-[80%] 3xl:p-20'/>
               </div>
               <h1 className='text-navy font-bold text-lg 3xl:text-5xl 3xl:text-center'>INITIAL TELEHEALTH VISIT</h1>
             </div>
-            <div className='rounded-xl bg-red-100 w-1/3 m-4 p-4 items-center'>
+            <div className='rounded-xl bg-blue-h-100 w-full lg:w-1/3 p-3 lg:m-4 lg:p-4 mb-4 lg:mb-0 items-center'>
               <div className='flex justify-center'>
-                <img src='/static/wellness/2.png' className='px-4 py-6 m-4 w-[50%]'/>
+                <img src='/static/wellness/2.png' className='px-4 py-6 m-4 w-[50%] 3xl:p-20'/>
               </div>
-              <h1 className='text-navy font-bold text-lg 3xl:text-5xl 3xl:text-center'>PRESCRIPTION + MEDICATION</h1>
+              <h1 className='text-navy font-bold text-lg 3xl:text-5xl 3xl:text-center 3xl:pb-3'>PRESCRIPTION + MEDICATION</h1>
               <p className='text-navy text-center 3xl:text-2xl'>(if approved by a medical doctor)</p>
             </div>
-            <div className='rounded-xl bg-red-100 w-1/3 m-4 p-4 items-center'>
+            <div className='rounded-xl bg-blue-h-100 w-full lg:w-1/3 p-3 lg:m-4 lg:p-4 mb-4 lg:mb-0 items-center'>
               <div className='flex justify-center'>
-                <img src='/static/wellness/3.png' className='px-4 py-6 m-4 w-[80%]'/>
+                <img src='/static/wellness/3.png' className='px-4 py-6 m-4 w-[80%] 3xl:p-20'/>
               </div>
-              <h1 className='text-navy font-bold text-lg 3xl:text-5xl 3xl:text-center'>UNLIMITED TEXTING WITH YOUR PHYSICIAN</h1>
+              <h1 className='text-navy font-bold text-lg 3xl:text-5xl 3xl:text-center 3xl:mb-5'>UNLIMITED TEXTING WITH YOUR PHYSICIAN</h1>
             </div>
-            <div className='rounded-xl bg-red-100 w-1/3 m-4 p-4 items-center'>
+            <div className='rounded-xl bg-blue-h-100 w-full lg:w-1/3 p-3 lg:m-4 lg:p-4 mb-4 lg:mb-0 items-center'>
               <div className='flex justify-center'>
-                <img src='/static/wellness/4.png' className='px-4 py-6 m-4 w-[80%]'/>
+                <img src='/static/wellness/4.png' className='px-4 py-6 m-4 w-[80%] 3xl:p-20 '/>
               </div>
               <h1 className='text-navy font-bold text-lg 3xl:text-5xl 3xl:text-center'>MONTHLY CHECK-INS WITH YOUR PHYSICIAN</h1>
             </div>
