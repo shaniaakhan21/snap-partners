@@ -7,6 +7,7 @@ import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import { CardActionArea, Button, Modal, Box } from '@mui/material'
 import { styled } from '@mui/system'
+import Router from 'next/router'
 
 const ResponsiveCard = styled(Card)(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
@@ -21,8 +22,11 @@ const ResponsiveCard = styled(Card)(({ theme }) => ({
 
 export default function SingleItem ({ image, name, price, btnLabel, index }) {
   const [open, setOpen] = React.useState(false)
-  const referralCode = localStorage.getItem('referralCode') || 'NoSponsor'
 
+  const handleLogin = () => {
+    const referralCode = localStorage.getItem('referralCode') || 'NoSponsor'
+    Router.push(`/auth/login-wellness?redirectToWellness=true&referralCode=${referralCode}`)
+  }
   const handleOpen = () => {
     setOpen(true)
   }
@@ -35,8 +39,9 @@ export default function SingleItem ({ image, name, price, btnLabel, index }) {
     handleOpen()
   }
 
+
   return (
-    <ResponsiveCard sx={{ background: 'none', boxShadow: 'none' }}>
+    <ResponsiveCard className='m-4' sx={{ background: 'none', boxShadow: 'none', border: 'none' }}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -62,7 +67,7 @@ export default function SingleItem ({ image, name, price, btnLabel, index }) {
               width: '95%',
               ml: 1,
               alignItems: 'center',
-              backgroundColor: '#999999',
+              backgroundColor: '#00000021!important',
               color: 'black',
               '&:hover': {
                 backgroundColor: 'rgba(255, 255, 255, 0.2)',
@@ -86,47 +91,32 @@ export default function SingleItem ({ image, name, price, btnLabel, index }) {
         </CardContent>
       </CardActionArea>
       <Modal open={open} onClose={handleClose}>
-        <Box
-          className="px-8 py-4 md:px-20 md:py-10 rounded-2xl backdrop-blur-3xl"
+        <Card
           sx={{
+            background: '#000000e0',
+            border: '#0000004f 1px solid',
+            boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
             position: 'absolute',
-            top: '28%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            bgcolor: '',
-            boxShadow: 10,
-            border: '#ffffff52 1px solid',
-            borderRadius: '0.75rem',
-            textAlign: 'center',
-            zIndex: 5
+            top: '20%',
+            left: '25%'
           }}
+          className="md:px-20 md:py-10 rounded-2xl mt-1 3xl:mt-32 w-8/12 xl:w-6/12 3xl:w-5/12 backdrop-blur-4xl"
         >
           <CardContent>
-            <p className="text text-white text-2xl md:text-4xl font-normal text-center">
-              Purchase Now
+            <h1 className="text text-white text-2xl md:text-3xl 2xl:text-4xl 3xl:text-6xl font-semibold-it font-normal text-center mb-4 2xl:mb-5 3xl:mb-8">
+              Purchase <span className='text-red-h'>Now</span>
+            </h1>
+            <p className="text text-white font-light text-center">
+              <Button onClick={() => { handleLogin() }} className='text-white text-xs md:text-base lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-4xl bg-btn-color rounded-lg px-8 2xl:py-2 3xl:py-5'>
+              LOG IN / SIGN UP
+                <i className="fa fa-sign-in ml-2" aria-hidden="true"></i>
+              </Button>
             </p>
           </CardContent>
-          <span
-            className="text text-white text-sm md:text-xl font-light text-center mt-4"
-          >
-            {/* <a
-              href={`https://snapdeliveredteam.com/auth/login-integrous?redirectToIntegrous=true&referralCode=${referralCode}`}
-            >
-              <span className="underline"> Log In</span>
-            </a> */}
 
-            {/* {" "}
-            /{" "}
-            <a
-              href={`https://snapdeliveredteam.com/auth/signup-integrous?redirectToIntegrous=true&referralCode=${referralCode}`}
-              className="underline"
-            >
-              <span className="underline">Sign Up</span>
-            </a>{" "} */}{' '}
-            to Continue
-          </span>
-        </Box>
+        </Card>
       </Modal>
+
     </ResponsiveCard>
   )
 }

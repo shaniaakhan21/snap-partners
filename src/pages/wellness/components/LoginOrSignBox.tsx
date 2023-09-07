@@ -26,7 +26,7 @@ const LoginOrSignBox = ({ isLoggedIn, userData }) => {
           </p>
         </CardContent>
         : <CardContent>
-          <h1 className="text text-white text-2xl md:text-3xl 3xl:text-7xl font-semibold-it font-normal text-center 3xl:leading-tight">
+          <h1 className="text text-white text-2xl md:text-3xl 2xl:text-4xl 3xl:text-7xl font-semibold-it font-normal text-center 3xl:leading-tight">
             <span className='text-red-h capitalize'>{ userData ? `${userData?.name} ${userData?.lastname}` : ''} </span>, Welcome to Snap Wellness
           </h1>
         </CardContent>

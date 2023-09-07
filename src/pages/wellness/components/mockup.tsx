@@ -33,11 +33,10 @@ export default function MockUpItems ({ collectionId }) {
       sx={{
         p: 2,
         mx: { xs: 4, lg: 3 },
-        mt: 10,
-        mb: 15,
-        // backgroundColor: ({ palette: { white }, functions: { rgba } }) => rgba(white.main, 0.8),
-        backdropFilter: 'saturate(200%) blur(30px)'
-        // boxShadow: ({ boxShadows: { xxl } }) => xxl
+        mt: 2,
+        mb: 2,
+        border: 'none',
+        boxShadow: 'none'
       }}
     >
       <Grid container justifyContent="center" sx={{ textAlign: 'center' }}>

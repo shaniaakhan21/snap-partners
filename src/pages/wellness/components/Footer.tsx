@@ -130,7 +130,7 @@ function Footer ({ userData }) {
             <div className='customback w-full py-6'>
               <h3 className="text-white text-base font-light text-center uppercase 3xl:text-2xl">Store Owner</h3>
 
-              <h3 className="text-white text-2xl 3xl:text-4xl">
+              <h3 className="text-white text-2xl 3xl:text-4xl capitalize">
                 {owner}
               </h3>
             </div>

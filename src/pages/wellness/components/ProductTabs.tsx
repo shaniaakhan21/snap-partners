@@ -46,37 +46,45 @@ const ProductTabs = ({ teaCoffeeProducts, generalProducts, userId, isLoggedIn, c
   }
 
   return (
-    <div className='m-2 lg:m-14 pt-2'>
+    <div className='mx-5 md:mx-10 lg:mx-20 2xl:mx-24 pt-4'>
       <Tabs value={value} onChange={handleChange as any} variant="scrollable" scrollButtons="auto" style={{ borderBottom: '3px solid red' }} TabIndicatorProps={{ style: { display: 'none' } }}>
-
-        <Tab label="Coffee/Tea" className={`
+        <Tab label="All Products" className={`
     ${value === 0 ? 'bg-btn-color text-white-h rounded-tl-lg rounded-tr-lg 3xl:text-xl' : 'text-black-h 3xl:text-xl'} 
     custom-text-none custom-padding
   `} />
-        <Tab label="Gut Health" className={`
+        <Tab label="Coffee/Tea" className={`
     ${value === 1 ? 'bg-btn-color text-white-h rounded-tl-lg rounded-tr-lg 3xl:text-xl' : 'text-black-h 3xl:text-xl'} 
     custom-text-none custom-padding
   `} />
-        <Tab label="Weight Management" className={`
+        <Tab label="Gut Health" className={`
     ${value === 2 ? 'bg-btn-color text-white-h rounded-tl-lg rounded-tr-lg 3xl:text-xl' : 'text-black-h 3xl:text-xl'} 
     custom-text-none custom-padding
   `} />
+        <Tab label="Weight Management" className={`
+    ${value === 3 ? 'bg-btn-color text-white-h rounded-tl-lg rounded-tr-lg 3xl:text-xl' : 'text-black-h 3xl:text-xl'} 
+    custom-text-none custom-padding
+  `} />
       </Tabs>
-      <TabPanel value={value} index={2} >
+      <TabPanel value={value} index={3} >
         <div className='p-10  rounded-2xl bg-white shadow-custom'>
           <div>
             <WeightCare/>
           </div>
         </div>
       </TabPanel>
-      <TabPanel value={value} index={0}>
-      <div className='p-10  rounded-2xl bg-white shadow-custom'>
-        <ProductCard products={teaCoffeeProducts} userId={userId} collectionId={collectionIdTea} isLoggedIn={isLoggedIn}/>
+      <TabPanel value={value} index={1}>
+        <div className='p-10  rounded-2xl bg-white shadow-custom'>
+          <ProductCard products={teaCoffeeProducts} userId={userId} collectionId={collectionIdTea} isLoggedIn={isLoggedIn}/>
         </div>
       </TabPanel>
-      <TabPanel value={value} index={1}>
-      <div className='p-10  rounded-2xl bg-white shadow-custom'>
-        <ProductCard products={generalProducts} userId={userId} collectionId={collectionIdGut} isLoggedIn={isLoggedIn} />
+      <TabPanel value={value} index={2}>
+        <div className='p-10  rounded-2xl bg-white shadow-custom'>
+          <ProductCard products={generalProducts} userId={userId} collectionId={collectionIdGut} isLoggedIn={isLoggedIn} />
+        </div>
+      </TabPanel>
+      <TabPanel value={value} index={0}>
+        <div className='p-10  rounded-2xl bg-white shadow-custom'>
+          <ProductCard products={generalProducts} userId={userId} collectionId={collectionIdGut} isLoggedIn={isLoggedIn} />
         </div>
       </TabPanel>
     </div>
