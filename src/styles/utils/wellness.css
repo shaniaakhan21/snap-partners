@@ -99,6 +99,10 @@
     color: #1E306E;
 }
 
+.bg-blue-h-100{
+    background-color: #1e306e17;
+}
+
 @media screen and (max-width: 400px) {
     .video-container video {
         display: none;

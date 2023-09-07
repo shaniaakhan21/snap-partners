@@ -8,7 +8,6 @@ import DialogTitle from '@mui/material/DialogTitle'
 import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
 import axios from 'axios'
-import { toast } from 'react-toastify'
 
 const useStyles = makeStyles((theme) => ({
   footer1: {

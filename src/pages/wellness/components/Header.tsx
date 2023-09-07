@@ -66,16 +66,12 @@ const Header = ({
       <div className="w-4/12 lg:w-2/12">
         { isLoggedIn
           ? <div className="flex flex-row justify-end w-11/12 items-center">
-            <div className="w-12 h-12 rounded-full overflow-hidden">
-              <img
-                src={userData ? userData?.profileImage : '/static/wellness/pp-placeholder.png'}
-                alt="Profile Picture"
-                className="object-cover w-full h-full"
-              />
+            <div className="overflow-hidden pr-1 hidden xl:block">
+              <i className="fa fa-user text-white text-center text-2xl" aria-hidden="true"></i>
             </div>
             <div>
               <IconButton color="inherit" onClick={handleClick}>
-                <span className="text-base pr-1 3xl:text-2xl capitalize">{userData ? `${userData?.name} ${userData?.lastname}` : ''}</span>
+                <span className="text-xs lg:text-base pr-1 3xl:text-2xl capitalize">{userData ? `${userData?.name} ${userData?.lastname}` : ''}</span>
                 <ArrowDropDownIcon />
               </IconButton>
               <Menu

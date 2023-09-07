@@ -66,7 +66,7 @@ const ProductTabs = ({ userId, isLoggedIn, collectionIdTea, collectionIdGut, col
   `} />
       </Tabs>
       <TabPanel value={value} index={0}>
-        <div className='p-10  rounded-2xl bg-white shadow-custom'>
+        <div className='p-1 2xl:p-10  rounded-2xl bg-white shadow-custom'>
           <ProductCard userId={userId} collectionId={collectionIdAllProducts} isLoggedIn={isLoggedIn} />
         </div>
       </TabPanel>
