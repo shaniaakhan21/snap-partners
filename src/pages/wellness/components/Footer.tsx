@@ -138,7 +138,7 @@ function Footer ({ userData }) {
             <img
               className={classes.profileImage}
               src={
-                'https://snap-delivered.nyc3.digitaloceanspaces.com/integrous/Snap_Partners_Large.png'
+                '/static/wellness/wellness_logo.svg'
               }
               alt="{userData.name}"
             />
