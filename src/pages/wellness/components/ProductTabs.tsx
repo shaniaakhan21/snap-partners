@@ -65,11 +65,9 @@ const ProductTabs = ({ teaCoffeeProducts, generalProducts, userId, isLoggedIn, c
     custom-text-none custom-padding
   `} />
       </Tabs>
-      <TabPanel value={value} index={3} >
+      <TabPanel value={value} index={0}>
         <div className='p-10  rounded-2xl bg-white shadow-custom'>
-          <div>
-            <WeightCare/>
-          </div>
+          <ProductCard products={generalProducts} userId={userId} collectionId={collectionIdGut} isLoggedIn={isLoggedIn} />
         </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
@@ -82,9 +80,11 @@ const ProductTabs = ({ teaCoffeeProducts, generalProducts, userId, isLoggedIn, c
           <ProductCard products={generalProducts} userId={userId} collectionId={collectionIdGut} isLoggedIn={isLoggedIn} />
         </div>
       </TabPanel>
-      <TabPanel value={value} index={0}>
+      <TabPanel value={value} index={3} >
         <div className='p-10  rounded-2xl bg-white shadow-custom'>
-          <ProductCard products={generalProducts} userId={userId} collectionId={collectionIdGut} isLoggedIn={isLoggedIn} />
+          <div>
+            <WeightCare/>
+          </div>
         </div>
       </TabPanel>
     </div>
