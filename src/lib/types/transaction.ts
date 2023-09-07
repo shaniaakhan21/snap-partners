@@ -36,6 +36,7 @@ export interface ClientTableProps {
   clients: Client[];
   totalClientCount: number
   toggleModal: (toggle: boolean) => void;
+  onPageChange: (newPage:number) => void
 }
 
 export interface ITable2TransactionsProps {

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-use-before-define
 import React from 'react'
 import { TypePaginationProps } from '@inovua/reactdatagrid-community/types'
 
@@ -42,7 +43,7 @@ const PaginationToolbar = (props:PaginationToolbarProps) => {
     const ellipsisStart = currentPage - visiblePages > 1 ? '...' : ''
 
     const startPage = currentPage - visiblePages > 1 ? currentPage - visiblePages : 1
-    const endPage = currentPage + 1 < totalPages ? visiblePages : totalPages
+    const endPage = currentPage + 1 < totalPages ? currentPage + 1 : totalPages
 
     const pageItems = []
 

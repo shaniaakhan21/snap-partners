@@ -1,17 +1,19 @@
+// eslint-disable-next-line no-use-before-define
 import React, { useState } from 'react'
 import ReactDataGrid from '@inovua/reactdatagrid-community'
 import { ClientTableProps } from 'lib/types/transaction'
-import TableHeader from 'components/page/erc/TableHeader'
 import PaginationToolbar from './PaginationToolbar'
 
 const PersonalClientsTable: React.FC<ClientTableProps> = ({
   clients,
   totalClientCount,
-  toggleModal
+  toggleModal,
+  onPageChange
 }) => {
-  const [currentPage, setCurrentPage] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1)
 
-  const onPageChange = (page: number) => {
+  const _onPageChange = (page: number) => {
+    onPageChange(page)
     setCurrentPage(page)
   }
 
@@ -84,7 +86,7 @@ const PersonalClientsTable: React.FC<ClientTableProps> = ({
       defaultLimit={10}
       pagination
       showEmptyRows={false}
-      renderPaginationToolbar={(props) => <PaginationToolbar onPageChange={onPageChange} currentPage={currentPage} total={totalClientCount} {...props}/>}
+      renderPaginationToolbar={(props) => <PaginationToolbar onPageChange={_onPageChange} currentPage={currentPage} total={totalClientCount} {...props}/>}
     />
   )
 }
