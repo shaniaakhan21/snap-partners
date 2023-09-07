@@ -7,6 +7,7 @@ import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
 import { CardActionArea, Button, Modal, Box } from '@mui/material'
 import { styled } from '@mui/system'
+import { useState } from 'react'
 
 const ResponsiveCard = styled(Card)(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
@@ -21,7 +22,11 @@ const ResponsiveCard = styled(Card)(({ theme }) => ({
 
 export default function SingleItem ({ image, name, price, btnLabel, index }) {
   const [open, setOpen] = React.useState(false)
-  const referralCode = localStorage.getItem('referralCode') || 'NoSponsor'
+  const [referralCode, setReferralCode] = useState('')
+
+  React.useEffect(() => {
+    setReferralCode(localStorage.getItem('referralCode') || 'NoSponsor')
+  }, [])
 
   const handleOpen = () => {
     setOpen(true)
@@ -109,11 +114,11 @@ export default function SingleItem ({ image, name, price, btnLabel, index }) {
           <span
             className="text text-white text-sm md:text-xl font-light text-center mt-4"
           >
-            {/* <a
+            <a
               href={`https://snapdeliveredteam.com/auth/login-integrous?redirectToIntegrous=true&referralCode=${referralCode}`}
             >
               <span className="underline"> Log In</span>
-            </a> */}
+            </a>
 
             {/* {" "}
             /{" "}
