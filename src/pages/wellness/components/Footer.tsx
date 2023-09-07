@@ -136,9 +136,9 @@ function Footer ({ userData }) {
             </div>
 
             <img
-              className={classes.profileImage}
+              className={`${classes.profileImage} p-2`}
               src={
-                '/static/wellness/wellness_logo.svg'
+                '/static/wellness/snap_wellness.svg'
               }
               alt="{userData.name}"
             />
