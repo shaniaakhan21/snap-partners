@@ -35,25 +35,6 @@ function IndividualProfileHeader ({ body, setBody, profileData, userLevel }) {
     //   setLoading(false)
       return
     }
-
-    const redirectToIntegrous = getLocalStorage('redirectToIntegrous')
-    const redirectToIntegrousReferralCode = getLocalStorage('redirectToIntegrousReferralCode')
-    if (redirectToIntegrous === true) {
-      removeLocalStorage('redirectToIntegrous')
-      removeLocalStorage('redirectToIntegrousReferralCode')
-      window.location.href = `https://www.integrouswellness.com/${redirectToIntegrousReferralCode}?access_token=${dataLogin.token}`
-      return
-    }
-
-    const redirectToWellness = getLocalStorage('redirectToWellness')
-    const redirectToWellnessReferralCode = getLocalStorage('redirectToWellnessReferralCode')
-    if (redirectToWellness === true) {
-      removeLocalStorage('redirectToWellness')
-      removeLocalStorage('redirectToWellnessReferralCode')
-      window.location.href = `https://www.snapdelivered.com/wellness${redirectToWellnessReferralCode}?access_token=${dataLogin.token}`
-      return
-    }
-
     toast('Login Successful!', { type: 'success' })
     // trackLoginHandle(false)
     // setLoading(false)

@@ -82,12 +82,20 @@ function Footer ({ userData }) {
 
   const handleStoreQuery = async () => {
     if (!formData.name || !formData.customerEmail || !formData.subject || !formData.emailBody) {
-      console.log('please fill the form completely')
+      alert('please fill the form completely')
       return
     }
     setLoading(true)
     try {
-      const response = await axios.post('/api/admin/email-to-store-owner', formData)
+      const token = localStorage.getItem('access_token')
+      const response = await axios.post('/api/admin/email-to-store-owner', formData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        }
+
+      )
 
       if (response.data === 'OK') {
         openSuccessDialog()

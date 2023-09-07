@@ -51,17 +51,10 @@ export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
       setLoading(false)
       return
     }
-
-    // const redirectToIntegrous = getLocalStorage('redirectToIntegrous')
-    // const redirectToIntegrousReferralCode = getLocalStorage('redirectToIntegrousReferralCode')
-    // if (redirectToIntegrous === true) {
-    //   removeLocalStorage('redirectToIntegrous')
-    //   removeLocalStorage('redirectToIntegrousReferralCode')
-    //   window.location.href = `https://www.integrouswellness.com/${redirectToIntegrousReferralCode}?access_token=${dataLogin.token}`
-    // }
-
     const { redirectToWellness, referralCode } = router.query
     if (redirectToWellness === 'true') {
+      removeLocalStorage('redirectToIntegrous')
+      removeLocalStorage('redirectToIntegrousReferralCode')
       window.location.href = `/wellness/${referralCode}?access_token=${dataLogin.token}`
       return
     }
