@@ -23,7 +23,7 @@ const WeightCare = () => {
             <Typography className='text-lg text-navy 3xl:text-3xl 3xl:leading-snug'>The most effective way to lose weight, backed by science. <br></br><b>ACCESSIBLE | AFFORDABLE | EFFECTIVE</b></Typography>
           </div>
           <div>
-            <p className='text-2xl text-red-h  font-bold'><s className='text-navy font-medium'>$ 399.00</s>&nbsp; $ 250.00</p>
+            <p className='text-2xl text-red-h  font-bold 3xl:text-4xl 3xl:mt-3'><s className='text-navy font-medium'>$ 399.00</s>&nbsp; $ 250.00</p>
           </div>
           <div className='mt-4 3xl:mt-8'>
             <Accordion className='py-2'>
@@ -90,9 +90,9 @@ const WeightCare = () => {
               </AccordionDetails>
             </Accordion>
 
-          </div><br></br>
+          </div>
           <Button
-            classes='text-xs md:text-base 2xl:text-xl 3xl:text-4xl font-semibold bg-btn-color px-2 lg:px-5 2xl:px-28 3xl:px-32 3xl:py-6 rounded mt-4'
+            classes='text-xs md:text-base 2xl:text-xl 3xl:text-4xl font-semibold bg-btn-color px-2 lg:px-5 2xl:px-28 3xl:px-32 3xl:py-6 rounded mt-3 3xl:mt-4'
           >
               GET STARTED
           </Button>

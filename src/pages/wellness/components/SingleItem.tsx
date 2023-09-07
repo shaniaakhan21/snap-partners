@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography'
 import { CardActionArea, Button, Modal, Box } from '@mui/material'
 import { styled } from '@mui/system'
 import Router from 'next/router'
+import { useState } from 'react'
 
 const ResponsiveCard = styled(Card)(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
@@ -21,8 +22,7 @@ const ResponsiveCard = styled(Card)(({ theme }) => ({
 }))
 
 export default function SingleItem ({ image, name, price, btnLabel, index }) {
-  const [open, setOpen] = React.useState(false)
-
+  const [open, setOpen] = useState(false)
   const handleLogin = () => {
     const referralCode = localStorage.getItem('referralCode') || 'NoSponsor'
     Router.push(`/auth/login-wellness?redirectToWellness=true&referralCode=${referralCode}`)
@@ -38,7 +38,6 @@ export default function SingleItem ({ image, name, price, btnLabel, index }) {
   const handleAddToCart = () => {
     handleOpen()
   }
-
 
   return (
     <ResponsiveCard className='m-4' sx={{ background: 'none', boxShadow: 'none', border: 'none' }}>
@@ -113,7 +112,6 @@ export default function SingleItem ({ image, name, price, btnLabel, index }) {
               </Button>
             </p>
           </CardContent>
-
         </Card>
       </Modal>
 
