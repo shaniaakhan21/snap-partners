@@ -25,7 +25,7 @@ function TabPanel (props: TabPanelProps) {
   )
 }
 
-const ProductTabs = ({ teaCoffeeProducts, generalProducts, userId, isLoggedIn, collectionIdTea, collectionIdGut, collectionIdAllProducts }) => {
+const ProductTabs = ({ userId, isLoggedIn, collectionIdTea, collectionIdGut, collectionIdAllProducts }) => {
   const [value, setValue] = useState(0)
 
   const products = [
@@ -67,17 +67,17 @@ const ProductTabs = ({ teaCoffeeProducts, generalProducts, userId, isLoggedIn, c
       </Tabs>
       <TabPanel value={value} index={0}>
         <div className='p-10  rounded-2xl bg-white shadow-custom'>
-          <ProductCard products={generalProducts} userId={userId} collectionId={collectionIdAllProducts} isLoggedIn={isLoggedIn} />
+          <ProductCard userId={userId} collectionId={collectionIdAllProducts} isLoggedIn={isLoggedIn} />
         </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <div className='p-1 2xl:p-10  rounded-2xl bg-white shadow-custom'>
-          <ProductCard products={teaCoffeeProducts} userId={userId} collectionId={collectionIdTea} isLoggedIn={isLoggedIn}/>
+          <ProductCard userId={userId} collectionId={collectionIdTea} isLoggedIn={isLoggedIn}/>
         </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
         <div className='p-1 2xl:p-10  rounded-2xl bg-white shadow-custom'>
-          <ProductCard products={generalProducts} userId={userId} collectionId={collectionIdGut} isLoggedIn={isLoggedIn} />
+          <ProductCard userId={userId} collectionId={collectionIdGut} isLoggedIn={isLoggedIn} />
         </div>
       </TabPanel>
       <TabPanel value={value} index={3} >

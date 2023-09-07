@@ -83,7 +83,7 @@ function Footer ({ userData }) {
 
   const handleStoreQuery = async () => {
     if (!formData.name || !formData.customerEmail || !formData.subject || !formData.emailBody) {
-      console.log('please fill the form completely')
+      alert('please fill the form completely')
       return
     }
     setLoading(true)
