@@ -30,14 +30,7 @@ export default function MockUpItems ({ collectionId }) {
   }, [])
   return (
     <Card
-      sx={{
-        p: 2,
-        mx: { xs: 4, lg: 3 },
-        mt: 2,
-        mb: 2,
-        border: 'none',
-        boxShadow: 'none'
-      }}
+      className='p-2 mx-0 lg:mx-3 mt-2 mb-2 border-none shadow-none'
     >
       <Grid container justifyContent="center" sx={{ textAlign: 'center' }}>
         {products.map((product, index) => (

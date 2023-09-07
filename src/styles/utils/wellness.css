@@ -57,6 +57,7 @@
 
 .pr-right {
     padding-right: 20%;
+
     @media screen and (max-width: 400px) {
         padding-right: 0%;
     }
@@ -94,6 +95,24 @@
     background: #4B4B4B;
 }
 
-.text-navy{
+.text-navy {
     color: #1E306E;
+}
+
+@media screen and (max-width: 400px) {
+    .video-container video {
+        display: none;
+    }
+
+    .video-container {
+        background-image: url('../../../public/static/wellness/banner.jpg');
+        background-position-y: center;
+    }
+
+    .video-container .some-black-over {
+        background-color: rgba(0, 0, 0, 0.438);
+        height: 100%;
+        position: relative;
+        top: -5%;
+    }
 }

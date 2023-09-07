@@ -53,7 +53,7 @@ export default function SingleItem ({ image, name, price, btnLabel, index }) {
             gutterBottom
             variant="h5"
             component="div"
-            sx={{ textAlign: 'center', color: 'black', fontSize: '19px!important' }}
+            className='text-center text-black text-sm font-bold xl:text-base 2xl:text-xl'
           >
             {name}
           </Typography>

@@ -71,17 +71,17 @@ const ProductTabs = ({ teaCoffeeProducts, generalProducts, userId, isLoggedIn, c
         </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <div className='p-10  rounded-2xl bg-white shadow-custom'>
+        <div className='p-1 2xl:p-10  rounded-2xl bg-white shadow-custom'>
           <ProductCard products={teaCoffeeProducts} userId={userId} collectionId={collectionIdTea} isLoggedIn={isLoggedIn}/>
         </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <div className='p-10  rounded-2xl bg-white shadow-custom'>
+        <div className='p-1 2xl:p-10  rounded-2xl bg-white shadow-custom'>
           <ProductCard products={generalProducts} userId={userId} collectionId={collectionIdGut} isLoggedIn={isLoggedIn} />
         </div>
       </TabPanel>
       <TabPanel value={value} index={3} >
-        <div className='p-10  rounded-2xl bg-white shadow-custom'>
+        <div className='p-1 2xl:p-10  rounded-2xl bg-white shadow-custom'>
           <div>
             <WeightCare isLoggedIn={isLoggedIn}/>
           </div>
