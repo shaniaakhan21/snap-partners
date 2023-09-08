@@ -22,6 +22,7 @@ import Referrals from 'components/common/overview/Referrals'
 import { useAuthStore } from 'lib/stores'
 import GrowthSummary from "../components/common/overview/GrowthSummary";
 import TotalLeg from './backOfficeDashboard'
+import PVComponentSnap from 'components/common/dashBackOffice/PersonalVolumeSnap'
 
 const { SEO } = APP_INFO
 
@@ -79,6 +80,9 @@ const DashboardOverViewPage: Page = () => {
           </div>
           <div className='mt-4'>
             <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} />
+          </div>
+          <div className='mt-4'>
+            <PVComponentSnap />
           </div>
           <div className='mt-4'>
             <RewardsProgram />
