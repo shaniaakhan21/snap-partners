@@ -205,7 +205,7 @@ const WeightCare = ({ isLoggedIn }) => {
         <input type="hidden" name="action" value="process_fixed" />
         <input type="hidden" name="order_description" value={`${nmiVariables.order_description}`} />
         <input type="hidden" name="shipping" value="fixed|0.00" />
-        <input type="hidden" name="amount" value="1.00" />
+        <input type="hidden" name="amount" value="249.00" />
         <input type="hidden" name="hash" value={`${nmiVariables.hash}`} />
         {/* <input type="submit" value="Buy" /> */}
       </form>

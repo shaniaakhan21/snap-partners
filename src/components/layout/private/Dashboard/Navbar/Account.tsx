@@ -54,12 +54,12 @@ export const Account = ({ email, name, phone, photoUrl, signOut, rank, roles, le
         <div className='absolute -top-2 -right-4 h-5 w-5 bg-[#FF4343] rounded-full text-white text-sm font-semibold flex justify-center items-center'>
           <span>3</span>
         </div> */}
-        {isIntegrous && (
+        {/* {isIntegrous && (
           <a href={link} style={{ cursor: 'pointer', marginLeft: 10, width: 150, padding: 6, paddingLeft: 10, color: 'white' }} className="rounded-full bg-primary-500 bg-red-500 ">
             <i className="fa-solid fa-cart-shopping"></i>
             <span className='text-xs text-white font-medium p-2 uppercase'>Shopping Cart</span>
           </a>
-        )}
+        )} */}
       </div>
 
       <div className='flex justify-start items-center relative select-none'>
