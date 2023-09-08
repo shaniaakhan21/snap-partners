@@ -208,8 +208,11 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
   const showSSNField = referralLink.role !== 'CUSTOMER' && referralLink.role !== 'integrousCustomer'
 
   const router = useRouter()
-  const loginURL = router.pathname === '/auth/signup-integrous' ? '/auth/login-integrous' : '/auth/login'
-
+  const loginURL = router.pathname === '/auth/signup-integrous'
+    ? '/auth/login-integrous'
+    : router.pathname === '/auth/signup-wellness'
+      ? '/auth/login-wellness'
+      : '/auth/login'
   return (
     <>
       <div className='max-w-md mx-auto w-full'>

@@ -15,6 +15,7 @@ export interface INsurAccount {
 
 export interface IAuth extends IUserMe, INsurAccount {
   referralLink?: string
+  referralLinkWellness?: string
   accessToken: string
   deleted: boolean
   blocked: boolean
@@ -142,6 +143,7 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
         deleted,
         nsurAccount,
         referralLink: referralCode ? `${SEO.URL_PAGE}/auth/signup?referralCode=${referralCode}` : null,
+        referralLinkWellness: referralCode ? `${SEO.URL_PAGE}/auth/signup-wellness?redirectToWellness=true&referralCode=${referralCode}` : null,
         bank_information,
         level,
         facebook_url,
