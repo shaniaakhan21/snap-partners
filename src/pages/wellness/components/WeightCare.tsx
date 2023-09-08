@@ -38,8 +38,8 @@ const WeightCare = ({ isLoggedIn }) => {
             <img src='/static/wellness/voucher-blue-large.svg' className='rounded-lg w-[100%] 3xl:w-[100%]'/>
           </div>
           <div className='w-full lg:w-7/12 lg:ml-10 mt-2 3xl:ml-10 3xl:mt-10 '>
-            <div className='flex flex-row items-center'>
-                        <p className='mr-2 text-navy text-2xl'>Discount Voucher at</p>
+            <div className='flex flex-col lg:flex-row  items-center'>
+              <p className='mr-2 text-navy text-sm lg:text-2xl'>Discount Voucher at</p>
             <div style={{
               backgroundColor: '#1E306E'
             }} className='w-full lg:w-3/12 px-16 py-1 lg:py-1 lg:px-2 rounded-xl '>
