@@ -116,16 +116,16 @@ const WeightCare = ({ isLoggedIn }) => {
               </Accordion>
 
             </div>
-            <p className='text-sm text-navy lg:text-xl 3xl:text-3xl 3xl:leading-snug mt-4'>Buy our discounted 1st month Voucher for  only <s className='text-navy font-medium'>$ 399.00</s> $250.00.  Use this voucher/coupon on the WeightCare site to get your discounted 1st month supply at checkout.</p>
+            <p className='text-sm text-navy lg:text-xl 3xl:text-3xl 3xl:leading-snug mt-4'>Buy our discounted 1st month Voucher for  only <s className='text-navy font-medium'>$ 399.00</s> $249.00.  Use this voucher/coupon on the WeightCare site to get your discounted 1st month supply at checkout.</p>
             <div className='mt1 mb-1'>
-              <p className='lg:text-2xl text-red-h'>WeightCare <b>1st Month</b> ONLY <br></br><s className='text-navy font-medium text-center lg:ml-16'>$ 399.00</s>&nbsp; <b>$ 250.00</b></p>
+              <p className='lg:text-2xl text-red-h '>WeightCare <b>1st Month</b> ONLY <br></br><s className='text-navy font-medium text-center lg:ml-16'>$ 399.00</s>&nbsp; <b>$ 249.00</b></p>
             </div>
             <Button
-              classes='text-sm md:text-base 2xl:text-xl 3xl:text-4xl font-semibold bg-btn-color px-2 lg:px-5 2xl:px-28 3xl:px-32 3xl:py-6 rounded mt-0 3xl:mt-4'
+              classes='text-sm md:text-base 2xl:text-xl 3xl:text-4xl font-semibold bg-btn-color px-2 lg:px-5 2xl:px-16 3xl:px-32 3xl:py-6 rounded mt-0 3xl:mt-4'
               type='submit'
               disabled={!isLoggedIn}
             >
-              BUY NOW
+              BUY VOUCHER NOW
             </Button>
           </div>
         </div>
