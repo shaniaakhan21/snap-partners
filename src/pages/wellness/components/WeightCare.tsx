@@ -1,15 +1,32 @@
-import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material'
+import { Accordion, AccordionSummary, AccordionDetails, Typography, Modal } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { Button } from 'components/common/Button'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import ProgramCardList from './ProgramCardList'
+import Card from '@mui/material/Card'
+import CardContent from '@mui/material/CardContent'
+import Router from 'next/router'
 
 const WeightCare = ({ isLoggedIn }) => {
   const [nmiVariables, setNmiVariables] = useState({
     order_description: '',
     hash: ''
   })
+
+  const [open, setOpen] = useState(false)
+
+  const handleLogin = () => {
+    const referralCode = localStorage.getItem('referralCode') || 'NoSponsor'
+    Router.push(`/auth/login-wellness?redirectToWellness=true&referralCode=${referralCode}`)
+  }
+  const handleOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   useEffect(() => {
     const getNmiVars = async () => {
@@ -120,13 +137,23 @@ const WeightCare = ({ isLoggedIn }) => {
             <div className='mt1 mb-1'>
               <p className='lg:text-2xl text-red-h '>WeightCare <b>1st Month</b> ONLY <br></br><s className='text-navy font-medium text-center lg:ml-16'>$ 399.00</s>&nbsp; <b>$ 249.00</b></p>
             </div>
-            <Button
-              classes='text-sm md:text-base 2xl:text-xl 3xl:text-4xl font-semibold bg-btn-color px-2 lg:px-5 2xl:px-16 3xl:px-32 3xl:py-6 rounded mt-0 3xl:mt-4'
-              type='submit'
-              disabled={!isLoggedIn}
-            >
-              BUY VOUCHER NOW
-            </Button>
+            {
+              isLoggedIn
+                ? <Button
+                  classes='text-sm md:text-base 2xl:text-xl 3xl:text-4xl font-semibold bg-btn-color px-2 lg:px-5 2xl:px-16 3xl:px-32 3xl:py-6 rounded mt-0 3xl:mt-4'
+                  type='submit'
+                >BUY VOUCHER NOW
+
+                </Button>
+                : <Button
+                  classes='text-sm md:text-base 2xl:text-xl 3xl:text-4xl font-semibold bg-btn-color px-2 lg:px-5 2xl:px-16 3xl:px-32 3xl:py-6 rounded mt-0 3xl:mt-4'
+                  onClick={() => { handleOpen() }}
+                >
+            BUY VOUCHER NOW
+                </Button>
+
+            }
+
           </div>
         </div>
         <div>
@@ -175,10 +202,36 @@ const WeightCare = ({ isLoggedIn }) => {
         <input type="hidden" name="action" value="process_fixed" />
         <input type="hidden" name="order_description" value={`${nmiVariables.order_description}`} />
         <input type="hidden" name="shipping" value="fixed|0.00" />
-        <input type="hidden" name="amount" value="249.00" />
+        <input type="hidden" name="amount" value="1.00" />
         <input type="hidden" name="hash" value={`${nmiVariables.hash}`} />
         {/* <input type="submit" value="Buy" /> */}
       </form>
+
+      <Modal open={open} onClose={handleClose}>
+        <Card
+          sx={{
+            background: '#000000e0',
+            border: '#0000004f 1px solid',
+            boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
+            position: 'absolute',
+            top: '20%',
+            left: '25%'
+          }}
+          className="md:px-20 md:py-10 rounded-2xl mt-1 3xl:mt-32 w-8/12 xl:w-6/12 3xl:w-5/12 backdrop-blur-4xl"
+        >
+          <CardContent>
+            <h1 className="text text-white text-2xl md:text-3xl 2xl:text-4xl 3xl:text-6xl font-semibold-it font-normal text-center mb-4 2xl:mb-5 3xl:mb-8">
+              Purchase <span className='text-red-h'>Now</span>
+            </h1>
+            <p className="text text-white font-light text-center">
+              <Button onClick={() => { handleLogin() }} classes='text-white text-xs md:text-base lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-4xl bg-btn-color rounded-lg px-8 2xl:py-2 3xl:py-5'>
+              LOG IN / SIGN UP
+                <i className="fa fa-sign-in ml-2" aria-hidden="true"></i>
+              </Button>
+            </p>
+          </CardContent>
+        </Card>
+      </Modal>
     </div>
   )
 }
