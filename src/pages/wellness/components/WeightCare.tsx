@@ -38,12 +38,15 @@ const WeightCare = ({ isLoggedIn }) => {
             <img src='/static/wellness/voucher-blue-large.svg' className='rounded-lg w-[100%] 3xl:w-[100%]'/>
           </div>
           <div className='w-full lg:w-7/12 lg:ml-10 mt-2 3xl:ml-10 3xl:mt-10 '>
+            <div className='flex flex-row items-center'>
+                        <p className='mr-2 text-navy text-2xl'>Discount Voucher at</p>
             <div style={{
               backgroundColor: '#1E306E'
             }} className='w-full lg:w-3/12 px-16 py-1 lg:py-1 lg:px-2 rounded-xl '>
               <img src='/static/wellness/WeightCare_LOGO_WHITE_1.png' className='rounded-lg'/>
             </div>
-            <div className='text-red-h text-base md:text-2xl lg:text-3xl xl:text-3xl 2xl:text-4xl 3xl:text-8xl font-bold text-center md:text-left lg:leading-relaxed mt-0'>
+            </div>
+            <div className='text-red-h text-base md:text-2xl lg:text-3xl xl:text-3xl 2xl:text-4xl 3xl:text-7xl font-bold text-center md:text-left lg:leading-relaxed mt-0 mb-3'>
                         Semaglutide Weight Loss Program
             </div>
             <div>
@@ -116,7 +119,7 @@ const WeightCare = ({ isLoggedIn }) => {
               </Accordion>
 
             </div>
-            <p className='text-sm text-navy lg:text-xl 3xl:text-3xl 3xl:leading-snug mt-4'>Buy our discounted 1st month Voucher for  only <s className='text-navy font-medium'>$ 399.00</s> $249.00.  Use this voucher/coupon on the WeightCare site to get your discounted 1st month supply at checkout.</p>
+            <p className='text-sm text-navy lg:text-xl 3xl:text-3xl 3xl:leading-snug mt-4'>Buy our discounted 1st month Voucher for  only <s className='text-navy font-medium'>$ 399.00</s> $249.00.  Use this voucher/coupon on the WeightCare site to get your discounted 1st month supply at the WeightCare checkout on their site.</p>
             <div className='mt1 mb-1'>
               <p className='lg:text-2xl text-red-h '>WeightCare <b>1st Month</b> ONLY <br></br><s className='text-navy font-medium text-center lg:ml-16'>$ 399.00</s>&nbsp; <b>$ 249.00</b></p>
             </div>
