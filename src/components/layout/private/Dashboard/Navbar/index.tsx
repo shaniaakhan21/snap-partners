@@ -52,14 +52,14 @@ export const Navbar = () => {
             </button>
           </div> */}
         </section>
-        <section className='w-full h-full flex justify-end items-center gap-x-5'>
+        <section className='w-full h-full flex lg:flex-row flex-col justify-end lg:items-center gap-x-5 items-start'>
           <a target="_blank" href={`https://mysnappartners.com/login/token=${auth.accessToken}`}>
-            <Button classes='text-sm bg-primary-500'>
+            <Button classes='text-10 lg:text-sm bg-primary-500 py-1 lg:py-2 px-1 lg:px-4'>
               Your Builder Website
             </Button>
           </a>
           <a target="_blank" href={`/wellness/${auth.referralCode}?access_token=${auth.accessToken}`}>
-            <Button classes='text-sm bg-primary-500'>
+            <Button classes='text-10 lg:text-sm bg-primary-500 py-1 lg:py-2 px-1 lg:px-4'>
               Your Snap Wellness Store
             </Button>
           </a>

@@ -33,7 +33,7 @@ export const Account = ({ email, name, phone, photoUrl, signOut, rank, roles, le
   const isIntegrous = (_auth.roles.integrousAssociate || _auth.roles.integrousCustomer)
 
   return (
-    <section className='w-full h-full flex justify-end items-center gap-x-5'>
+    <section className='w-1/3 lg:w-full h-full flex justify-end items-center gap-x-5'>
       {mapping[level] >= 500
         ? <div className='admin-tools-container'>
           <div>
