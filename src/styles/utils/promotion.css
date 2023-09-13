@@ -1,0 +1,35 @@
+.light-bg-color {
+    background-color: #F8EFEF !important;
+}
+
+.light-border-bottom {
+    border-bottom: 1px solid #E9C7C7;
+}
+
+.bg-custom-green {
+    background-color: #6AB63C;
+}
+
+.bg-custom-red {
+    background-color: #DD4C37;
+}
+
+.border-it-green {
+    border: 1px solid #6AB63C;
+    border-radius: 5px;
+}
+
+.border-it-red {
+    border: 1px solid #DD4C37;
+    border-radius: 5px;
+}
+
+.border-bot-box {
+    border-bottom: 1px solid #E3E3E3;
+}
+
+.note-border {
+    border-radius: 5px;
+    border: 1px solid #E3E3E3;
+    background: #F8F8F8;
+}
