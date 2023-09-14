@@ -48,7 +48,7 @@ const ErcreferralsPage: Page = () => {
       setPersonalClientsLoading(true)
       const token = getLocalStorage('accessToken')
       // TODO
-      const res = await fetch(`/api/erc/getTable?limit=${CLIENT_PAGE_LIMIT}&offset=${page}`, {
+      const res = await fetch('/api/erc/getTable', {
         method: 'GET',
         headers: { Authorization: `Bearer ${token}` }
       })
@@ -57,6 +57,7 @@ const ErcreferralsPage: Page = () => {
       if (page === 1) setTotalClientCount(data.length)
     } catch (error) {
       // ignore
+      console.log('error on personal clients ', { error })
     } finally {
       setPersonalClientsLoading(false)
     }
@@ -81,6 +82,7 @@ const ErcreferralsPage: Page = () => {
       setTeamClients(data)
     } catch (e) {
       // ignore
+      console.log('error on team clients ', { error: e })
     } finally {
       setTeamClientsLoading(false)
     }
