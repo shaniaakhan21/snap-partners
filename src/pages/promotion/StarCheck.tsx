@@ -1,5 +1,5 @@
 import { Checkbox } from '@mui/material'
-import { useState } from 'react';
+import { useState } from 'react'
 
 interface StarCheckProps {
   backgroundColor: string;
