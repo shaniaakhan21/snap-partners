@@ -97,7 +97,7 @@ text-transform: uppercase;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 2%;
+    /* gap: 2%; */
     color: var(--info-600, #139ECF);
 
 /* Text Font/S2 Subtitle */
