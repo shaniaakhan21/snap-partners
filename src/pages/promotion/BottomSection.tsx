@@ -2,18 +2,17 @@ import StarCheck from './StarCheck'
 
 const BottomSection = () => {
   return (
-    <div className='px-8 py-10'>
-      <p className="text-2xl text-black font-semibold pl-1">Either</p>
-      <br></br>
-      <div className='flex flex-row items-center pl-2'>
-        <p className="text-lg text-black font-medium">a - Personally acquire an additional qualified ERC Client <span className='text-base text-gray-600'>(min 20 W-2's)</span></p>
+    <div className='p-2 lg:pl-8 lg:py-10'>
+      <p className="text-base lg:text-2xl text-black font-semibold p-2 lg:pl-1">Either</p>
+      <div className='flex flex-row items-center p-2 lg:pl-2'>
+        <p className="text-sm lg:text-lg text-black font-medium">a - Personally acquire an additional qualified ERC Client <span className='text-base text-gray-600'>(min 20 W-2's)</span></p>
       </div>
-      <div className='flex flex-row items-center pl-2'>
-        <p className="text-lg text-black font-medium">b - Help a unique IBO within your first two organization tiers acquire a qualified ERC Client <span className='text-base text-gray-600'>(min 20 W-2's)</span></p>
+      <div className='flex flex-row items-center p-2 lg:pl-2'>
+        <p className="text-sm lg:text-lg text-black font-medium">b - Help a unique IBO within your first two organization tiers acquire a qualified ERC Client <span className='text-base text-gray-600'>(min 20 W-2's)</span></p>
       </div>
       <br></br>
-      <div className='note-border ml-2'>
-        <p className="text-sm text-black font-medium p-3 text-center"><b className='uppercase'>Note - </b> Jump a STAR Level each time you accomplish letter 'a' or 'b' in this section</p>
+      <div className='note-border'>
+        <p className="text-xs lg:text-sm text-black font-medium p-2 text-center"><b className='uppercase'>Note - </b>Jump a STAR Level each time you accomplish letter 'a' or 'b' in this section</p>
       </div>
       <div className='w-full flex flex-row'>
         <div className='w-1/3 mt-8'>
