@@ -1,0 +1,69 @@
+[
+    {
+      "title": "1 Star Achievers",
+      "rows": [
+        {
+          "name": "Edwin Zam",
+          "date": "2023-05-21",
+          "id": 1
+        },
+        {
+          "name": "John Smith",
+          "date": "2023-05-21",
+          "id": 2
+        },
+        {
+          "name": "Richard Williams",
+          "date": "2023-05-21",
+          "id": 3
+        }
+      ],
+      "columns": [
+        {
+          "field": "name",
+          "headerName": "Name",
+          "flex": 1
+        },
+        {
+          "field": "date",
+          "headerName": "Date",
+          "type": "date",
+          "flex": 1
+        }
+      ]
+    },
+    {
+      "title": "2 Star Achievers",
+      "rows": [
+        {
+          "name": "Edwin Zam",
+          "date": "2023-05-21",
+          "id": 1
+        },
+        {
+          "name": "John Smith",
+          "date": "2023-05-21",
+          "id": 2
+        },
+        {
+          "name": "Richard Williams",
+          "date": "2023-05-21",
+          "id": 3
+        }
+      ],
+      "columns": [
+        {
+          "field": "name",
+          "headerName": "Name",
+          "flex": 1
+        },
+        {
+          "field": "date",
+          "headerName": "Date",
+          "type": "date",
+          "flex": 1
+        }
+      ]
+    }
+  ]
+  
