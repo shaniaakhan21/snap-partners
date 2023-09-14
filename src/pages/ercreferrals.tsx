@@ -1,112 +1,98 @@
-import Head from 'next/head';
-import { Page, ReactNode } from 'lib/types';
-import { APP_INFO } from 'config/appInfo';
-import { getLocalStorage } from 'lib/utils/localStorage';
-import DashboardLayout from 'layouts/private/Dashboard';
-import ReactDataGrid from '@inovua/reactdatagrid-community';
-import '@inovua/reactdatagrid-community/index.css';
-import { ITransaction, ITableTransactionsProps } from 'lib/types/transaction';
-import { useEffect, useState } from 'react';
-import ErcModal from 'lib/modals/ErcModal';
-import PersonalClientsTable from 'components/page/erc/PersonalClientsTable';
-import TeamClientsTable from 'components/page/erc/TeamClientsTable';
-import TableHeader from 'components/page/erc/TableHeader';
-import PersonListTable from 'components/page/erc/PersonListTable';
-import ShowDetailedTables from 'components/page/erc/ShowDetailedTables';
+import Head from 'next/head'
+import { Page, ReactNode } from 'lib/types'
+import { APP_INFO } from 'config/appInfo'
+import { getLocalStorage } from 'lib/utils/localStorage'
+import DashboardLayout from 'layouts/private/Dashboard'
+import '@inovua/reactdatagrid-community/index.css'
+import { useEffect, useState } from 'react'
+import ErcModal from 'lib/modals/ErcModal'
+import PersonalClientsTable from 'components/page/erc/PersonalClientsTable'
+import TeamClientsTable from 'components/page/erc/TeamClientsTable'
+import TableHeader from 'components/page/erc/TableHeader'
+import PersonListTable from 'components/page/erc/PersonListTable'
+import ShowDetailedTables from 'components/page/erc/ShowDetailedTables'
+import { Spinner } from 'components/common/loaders'
+import { Client, LevelledClient } from 'lib/types/transaction'
 
-const { SEO } = APP_INFO;
+const { SEO } = APP_INFO
+const CLIENT_PAGE_LIMIT = 10
 
 const ErcreferralsPage: Page = () => {
-  const [clients, setClients] = useState([])
+  const [personalClients, setPersonalClients] = useState<Client[]>([])
   const [totalClientCount, setTotalClientCount] = useState(0)
-  const [transactionsClient, setTransactionsClient] = useState([]);
-  const [monthSelected, setMonthSelected] = useState(new Date().getMonth());
-  const [yearSelected, setYearSelected] = useState(new Date().getFullYear());
-  const [personListOpen, setPersonListOpen] = useState(false);
-  const [showTables, setShowTables] = useState(false);
-  const [selectedClient, setSelectedClient] = useState(null);
+  const [personalClientsLoading, setPersonalClientsLoading] = useState(false)
+  const [teamClients, setTeamClients] = useState<LevelledClient[]>([])
+  const [teamClientsLoading, setTeamClientsLoading] = useState(false)
+  const [selectedLevel, setSelectedLevel] = useState(-1)
+  const [monthSelected, setMonthSelected] = useState(new Date().getMonth())
+  const [yearSelected, setYearSelected] = useState(new Date().getFullYear())
+  const [selectedIBO, setSelectedIBO] = useState<{
+    id: number;
+    name: string;
+    lastname: string;
+    clients: Client[];
+  }>(null)
+  const [selectedClient, setSelectedClient] = useState(null)
 
-  const toggleTables = (toggle: boolean) => {
-    setShowTables(toggle);
-  };
+  useEffect(() => {
+    setSelectedIBO(null)
+  }, [selectedLevel, monthSelected, yearSelected])
 
-  const years = [];
+  const years = []
   for (let i = new Date().getFullYear(); i >= 2022; i--) {
-    years.push(i);
+    years.push(i)
   }
 
-  const temporaryMap = (data) => {
-    const mapData = (d) => {
-      const quarterKeys = Object.keys(d).filter(key => key.startsWith("erc_2"))
-      const quarters = quarterKeys.map(key => ({
-        year: key.substring(4, key.indexOf('_', 4)),
-        quarter: key.substring(10).toUpperCase()
-      }))
-      const determinePhase = (d) => {
-        // TODO include phase 3
-        if (d.ready_for_doc_prep_date) {
-          return 2
-        }
-        return 1
-      }
-      return ({
-        phase: determinePhase(d),
-        email: d.Email,
-        client: d.client,
-        companyName: d.company_name,
-        phone: d.phone_number,
-        aggrementSigned: d['q&a'] === 'Yes',
-        depositPaid: d['deposit-amount'],
-        docsCollected: d.ready_for_doc_prep_date,
-        excelTeam: d.ready_for_calculation_date,
-        docSentForSignature: d.ready_for_filing_specialist,
-        docForSignatureReturned: d.client_sent_to_billing_date,
-        quarters,
-        signupDate: d['client-acquired-date']
+  const getPersonalClients = async (page = 1) => {
+    try {
+      setPersonalClientsLoading(true)
+      const token = getLocalStorage('accessToken')
+      // TODO
+      const res = await fetch(`/api/erc/getTable?limit=${CLIENT_PAGE_LIMIT}&offset=${page}`, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${token}` }
       })
+      const data = await res.json()
+      setPersonalClients(data)
+      if (page === 1) setTotalClientCount(data.length)
+    } catch (error) {
+      // ignore
+    } finally {
+      setPersonalClientsLoading(false)
     }
-    return data.map(mapData)
+  }
+
+  const getTeamClients = async () => {
+    try {
+      setSelectedIBO(null)
+      setSelectedLevel(-1)
+      setTeamClientsLoading(true)
+      const token = getLocalStorage('accessToken')
+      const res = await fetch(
+        `/api/erc/getTableClients?month=${
+          monthSelected + 1
+        }&year=${yearSelected}`,
+        {
+          method: 'GET',
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      )
+      const data = await res.json()
+      setTeamClients(data)
+    } catch (e) {
+      // ignore
+    } finally {
+      setTeamClientsLoading(false)
+    }
   }
 
   useEffect(() => {
-    (async function () {
-      try {
-        const token = getLocalStorage('accessToken');
-
-        // const res = await fetch('/api/erc/getTable', {
-        //   method: 'GET',
-        //   headers: { Authorization: `Bearer ${token}` },
-        // });
-        const res = await fetch('https://app.jornstax.com/api/referral-partner-clients?per_page=20&page=2&api_token=')
-
-        const data = await res.json();
-        setClients(temporaryMap(data.data))
-        setTotalClientCount(data.total)
-        // setTransactions(data);
-      } catch (e) {}
-    })()
+    getPersonalClients()
   }, [])
 
   useEffect(() => {
-    (async function () {
-      try {
-        const token = getLocalStorage('accessToken');
-        const res = await fetch(
-          `/api/erc/getTableClients?month=${
-            monthSelected + 1
-          }&year=${yearSelected}`,
-          {
-            method: 'GET',
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-
-        const data = await res.json();
-
-        setTransactionsClient(data);
-      } catch (e) {}
-    })();
-  }, [monthSelected, yearSelected]);
+    getTeamClients()
+  }, [monthSelected, yearSelected])
 
   return (
     <>
@@ -131,49 +117,54 @@ const ErcreferralsPage: Page = () => {
       </div>
       <ErcModal client={selectedClient} isOpen={Boolean(selectedClient)} onClose={() => setSelectedClient(null)} />
       <div id="table1erc" className="">
-        <div className="pb-2 text-lg font-sans font-semibold text-gray-800">
+        <div className="flex flex-row justify-between pb-2 text-lg font-sans font-semibold text-gray-800">
           Your Personal Clients
+          {
+            personalClientsLoading && <Spinner />
+          }
         </div>
         <PersonalClientsTable
-          clients={clients}
+          clients={personalClients}
           totalClientCount={totalClientCount}
           toggleModal={setSelectedClient}
         />
         <TableHeader
+          loading={teamClientsLoading}
           tableName="Your Team Clients"
           setMonthSelected={setMonthSelected}
           setYearSelected={setYearSelected}
         />
         <div className="text-center">
           <TeamClientsTable
-            transactions={transactionsClient}
-            toggleTable={toggleTables}
+            clients={teamClients}
+            onSelectLevel={setSelectedLevel}
+            // toggleTable={toggleTables}
           />
         </div>
       </div>
-      {showTables && (
+      {selectedLevel > -1 && (
         <div id="table1erc">
           <TableHeader
             tableName="Team Level Report"
             setMonthSelected={setMonthSelected}
             setYearSelected={setYearSelected}
           />
-          <ShowDetailedTables setPersonListOpen={setPersonListOpen} />
+          <ShowDetailedTables onSelectIBO={setSelectedIBO} levelledClient={teamClients[selectedLevel - 1]} />
         </div>
       )}
-      {personListOpen && (
+      {selectedIBO && (
         <div id="table1erc">
           <TableHeader
-            tableName="Bill Jones List"
+            tableName={selectedIBO?.name}
             setMonthSelected={setMonthSelected}
             setYearSelected={setYearSelected}
           />
-          <PersonListTable />
+          <PersonListTable ibo={selectedIBO} />
         </div>
       )}
     </>
-  );
-};
+  )
+}
 
 ErcreferralsPage.getLayout = (page: ReactNode) => (
   <DashboardLayout>
@@ -183,6 +174,6 @@ ErcreferralsPage.getLayout = (page: ReactNode) => (
 
     {page}
   </DashboardLayout>
-);
+)
 
-export default ErcreferralsPage;
+export default ErcreferralsPage

@@ -32,20 +32,31 @@ export interface Client {
   signupDate: string
 }
 
+export interface LevelledClient {
+  level: number;
+  ibos: {
+    id: number;
+    name: string;
+    lastname: string;
+    clients: Client[];
+  }[]
+}
+
 export interface ClientTableProps {
   clients: Client[];
   totalClientCount: number
   toggleModal: (toggle: boolean) => void;
-  onPageChange: (newPage:number) => void
 }
 
-export interface ITable2TransactionsProps {
-  transactions: ITransaction[];
-  toggleTable: (toggle: boolean) => void;
+export interface TeamClientsTableProps {
+  clients: LevelledClient[];
+  onSelectLevel: (level: number) => unknown
+  // toggleTable: (toggle: boolean) => void;
 }
 
 export interface TableHeaderProps {
   tableName: string;
+  loading?:boolean;
   setYearSelected: (prop: number) => void;
   setMonthSelected: (prop: number) => void;
 }

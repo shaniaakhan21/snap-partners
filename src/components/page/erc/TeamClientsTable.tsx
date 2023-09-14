@@ -1,12 +1,29 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
 import ReactDataGrid from '@inovua/reactdatagrid-community'
-import { ITable2TransactionsProps } from 'lib/types/transaction'
+import { TeamClientsTableProps } from 'lib/types/transaction'
 
-const TeamClientsTable: React.FC<ITable2TransactionsProps> = ({
-  transactions,
-  toggleTable
+const TeamClientsTable: React.FC<TeamClientsTableProps> = ({
+  clients,
+  onSelectLevel
 }) => {
+  const mappedClients = clients.map(data => ({
+    level: data.level,
+    totalClients: data.ibos.reduce((sum, curr) => sum + curr.clients.length, 0),
+    depositsPaid: data.ibos.reduce((total, group) => {
+      return total + group.clients.filter(client => client.depositPaid).length
+    }, 0),
+    phase1: data.ibos.reduce((total, group) => {
+      return total + group.clients.filter(client => client.phase === 1).length
+    }, 0),
+    phase2: data.ibos.reduce((total, group) => {
+      return total + group.clients.filter(client => client.phase === 2).length
+    }, 0),
+    phase3: data.ibos.reduce((total, group) => {
+      return total + group.clients.filter(client => client.phase === 3).length
+    }, 0)
+  }))
+
   const columnsClient = [
     { name: 'level', header: 'Level', defaultFlex: 1, minWidth: 150 },
     {
@@ -44,13 +61,13 @@ const TeamClientsTable: React.FC<ITable2TransactionsProps> = ({
       header: 'See more',
       defaultFlex: 1,
       minWidth: 150,
-      render: () => {
+      render: (args) => {
         return (
           <span>
             <button
               className="text-textAcent-500"
               onClick={() => {
-                toggleTable(true)
+                if (args.data.level) onSelectLevel(args.data.level)
               }}
             >
               Details
@@ -62,7 +79,8 @@ const TeamClientsTable: React.FC<ITable2TransactionsProps> = ({
   ]
 
   const gridStyle = {
-    minHeight: 350
+    minHeight: 350,
+    textAlign: 'center'
   }
 
   const filterValue = [
@@ -72,9 +90,10 @@ const TeamClientsTable: React.FC<ITable2TransactionsProps> = ({
   return (
     <div>
       <ReactDataGrid
-        idProperty="id"
+        key='team-clients-table'
+        // idProperty="level"
         columns={columnsClient}
-        dataSource={transactions}
+        dataSource={mappedClients}
         sortable={true}
         defaultFilterValue={filterValue}
         style={gridStyle}

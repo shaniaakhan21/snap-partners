@@ -7,13 +7,11 @@ import PaginationToolbar from './PaginationToolbar'
 const PersonalClientsTable: React.FC<ClientTableProps> = ({
   clients,
   totalClientCount,
-  toggleModal,
-  onPageChange
+  toggleModal
 }) => {
   const [currentPage, setCurrentPage] = useState(1)
 
   const _onPageChange = (page: number) => {
-    onPageChange(page)
     setCurrentPage(page)
   }
 
@@ -86,7 +84,8 @@ const PersonalClientsTable: React.FC<ClientTableProps> = ({
       defaultLimit={10}
       pagination
       showEmptyRows={false}
-      renderPaginationToolbar={(props) => <PaginationToolbar onPageChange={_onPageChange} currentPage={currentPage} total={totalClientCount} {...props}/>}
+      // skip={10}
+      // renderPaginationToolbar={(props) => <PaginationToolbar onPageChange={_onPageChange} currentPage={currentPage} total={totalClientCount} {...props}/>}
     />
   )
 }
