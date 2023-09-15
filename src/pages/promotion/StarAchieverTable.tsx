@@ -1,4 +1,4 @@
-import { DataGrid as MUIDataGrid, GridColDef, GridRowsProp } from '@mui/x-data-grid'
+import { DataGrid as MUIDataGrid } from '@mui/x-data-grid'
 import { styled } from '@mui/system'
 const StyledDataGrid = styled(MUIDataGrid)(() => ({
   '&& .MuiDataGrid-columnHeaderTitleContainer .MuiDataGrid-columnHeaderTitle': {
@@ -19,16 +19,42 @@ const StyledDataGrid = styled(MUIDataGrid)(() => ({
 
 }))
 
-interface StarAchieverTableProps {
-    title: string;
-    rows: GridRowsProp;
-    columns: GridColDef[];
+const rows = [
+  {
+    name: 'Edwin Zam',
+    date: new Date('2023-05-21'),
+    id: 1
+  },
+  {
+    name: 'John Smith',
+    date: new Date('2023-05-21'),
+    id: 2
+  },
+  {
+    name: 'Richard Williams',
+    date: new Date('2023-05-21'),
+    id: 3
   }
+]
 
-const StarAchieversTable = ({ title, rows, columns }: StarAchieverTableProps) => {
+const columns = [
+  {
+    field: 'name',
+    headerName: 'Name',
+    flex: 1
+  },
+  {
+    field: 'date',
+    headerName: 'Date',
+    type: 'date',
+    flex: 1
+  }
+]
+
+const StarAchieversTable = () => {
   return (
     <div className='w-full'>
-      <h1 className='text-xl font-semibold'>{title}</h1>
+      <h1 className='text-xl font-semibold'>1 Star Achievers</h1>
       <br></br>
       <div className="datagrid-container">
         <StyledDataGrid
