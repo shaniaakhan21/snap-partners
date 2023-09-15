@@ -37,4 +37,10 @@
 .datagrid-container {
     width: 100%;
     height: fit-content;
-  }
+}
+
+.info-box {
+    border-radius: 5px;
+    border: 1px solid #CAECB3;
+    background: #F5FFEE;
+}

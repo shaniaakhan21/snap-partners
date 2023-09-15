@@ -8,7 +8,8 @@ interface StarCheckProps {
   checkboxCheckedColor: string;
   text: string;
   textColor: string;
-  checked: boolean;
+  canToggle: boolean;
+  accepted: boolean;
 }
 
 const StarCheck = ({
@@ -18,13 +19,16 @@ const StarCheck = ({
   text,
   textColor,
   borderIt,
-  checked
-}:StarCheckProps) => {
-  const [isChecked, setChecked] = useState(checked)
-
+  canToggle,
+  accepted
+}: StarCheckProps) => {
+  const [isChecked, setChecked] = useState(accepted)
   const handleCheckboxChange = () => {
-    setChecked(!isChecked)
+    if (canToggle) {
+      setChecked(!isChecked)
+    }
   }
+
   return (
     <div className={`flex flex-row border-it ${borderIt}`}>
       <div className={`${backgroundColor} flex flex-row items-center w-1/2 justify-evenly p-1 lg:p-2`}>
@@ -35,6 +39,7 @@ const StarCheck = ({
         <Checkbox
           checked={isChecked}
           onChange={handleCheckboxChange}
+          disabled={!canToggle}
           sx={{
             '& .MuiSvgIcon-root': { fontSize: 30 },
             color: checkboxColor,
