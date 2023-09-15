@@ -8,6 +8,9 @@
     background-color: #FFFFFF;
     border-radius: 5px;
     box-shadow: 0 4px 5px 0 rgba(60, 75, 100, .14), 0 1px 10px 0 rgba(60, 75, 100, .12), 0 2px 4px -1px rgba(60, 75, 100, .20);
+    @media screen and (max-width: 400px) {
+        width:140px;
+    }
 }
 
 .menuItem{
