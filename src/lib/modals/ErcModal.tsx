@@ -55,19 +55,18 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
   const phase3StepCount = 8
   // phase 1
   let phase1Progress = 0
-  if (client.depositPaid) phase1Progress = 1
-  if (client.aggrementSigned) phase1Progress = 2
+  if (client.depositPaid) phase1Progress++
+  if (client.aggrementSigned) phase1Progress++
 
   // phase 2
   let phase2Progress = 0
-  if (client.docsCollected) phase2Progress = 1
-  if (client.excelTeam) phase2Progress = 2
-  if (client.docSentForSignature) phase2Progress = 3
-  if (client.docForSignatureReturned) phase2Progress = 4
-  if (client.quarters?.length > 0) phase2Progress = 5
+  if (client.docsCollected) phase2Progress++
+  if (client.excelTeam) phase2Progress++
+  if (client.docSentForSignature) phase2Progress++
+  if (client.docForSignatureReturned) phase2Progress++
+  if (client.quarters?.length > 0 && client.quarters.some(quarter => quarter.amount !== '')) phase2Progress++
 
   // if any step is done in phase 2, fill all phase1 steps
-  console.log({ client })
   if (phase2Progress > 0) phase1Progress = phase1StepCount
   return (
     <div>

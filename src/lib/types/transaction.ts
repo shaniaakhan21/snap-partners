@@ -28,7 +28,7 @@ export interface Client {
   excelTeam: string;
   docSentForSignature: string;
   docForSignatureReturned: string;
-  quarters: {quarter: string, year: string}[];
+  quarters: {quarter: string, year: string, amount: string}[];
   signupDate: string
 }
 
