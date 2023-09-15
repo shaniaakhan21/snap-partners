@@ -201,11 +201,11 @@ const WeightCare = ({ isLoggedIn }) => {
         </div>
         <input type="hidden" name="customer_receipt" value="true" />
         <input type="hidden" name="key_id" value="14205969" />
-        <input type="hidden" name="url_finish" value="http://example.org/finsh_url.html" />
+        <input type="hidden" name="url_finish" value="/wellness" />
         <input type="hidden" name="action" value="process_fixed" />
         <input type="hidden" name="order_description" value={`${nmiVariables.order_description}`} />
         <input type="hidden" name="shipping" value="fixed|0.00" />
-        <input type="hidden" name="amount" value="1.00" />
+        <input type="hidden" name="amount" value="249.00" />
         <input type="hidden" name="hash" value={`${nmiVariables.hash}`} />
         {/* <input type="submit" value="Buy" /> */}
       </form>

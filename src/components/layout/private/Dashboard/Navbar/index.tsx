@@ -10,7 +10,7 @@ import { Button } from '../../../../common/Button'
 export const Navbar = () => {
   const router = useRouter()
   // const { title, pathname } = useDashboardGetPathname()
-  const { title } = useDashboardGetPathname()
+  const title = useDashboardGetPathname()?.title
   const { auth, removeAuth } = useAuthStore()
   const { toggleDrawer } = useDrawerStore()
   // const { toggleGenealogySearch } = useSearchModalStore()
