@@ -64,6 +64,9 @@
     list-style: none;
     padding: 5px;
     box-shadow: 0 4px 5px 0 rgba(60, 75, 100, .14), 0 1px 10px 0 rgba(60, 75, 100, .12), 0 2px 4px -1px rgba(60, 75, 100, .20);
+    @media screen and (max-width: 400px) {
+        right: 145px;
+    }
 }
 
 .sub-list-items{
@@ -129,4 +132,8 @@ text-transform: uppercase;
     display: flex;
     flex-direction: row;
     gap:5px;
+
+    @media screen and (max-width: 400px) {
+        font-size: 12px!important;
+    }
 }
