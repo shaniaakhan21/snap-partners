@@ -26,12 +26,12 @@ const PromotionViewPage: Page = () => {
   }
 
   return (
-    <>
-      <p className='w-full text-xl text-center lg:text-left lg:text-3xl font-bold'>Sprint To Paradise Promotion Tracker</p> <br />
+    <><div className='w-[75%] sm:w-full'>
+      <p className='w-full text-lg text-center lg:text-left lg:text-3xl font-bold'>Sprint To Paradise Promotion Tracker</p> <br />
       <div className="w-full bg-white rounded-lg px-0 py-0 flex flex-row">
         <div className='w-full'>
           <div className='border-bot-box flex lg:flex-row flex-col'>
-            <div className='lg:w-1/6'>
+            <div className='w-full lg:w-1/6 light-bg-color'>
               <FirstCol
                 image="/static/promotion/star-one.svg"
                 text="1 Star"
@@ -48,7 +48,7 @@ const PromotionViewPage: Page = () => {
           </div>
 
           <div className='flex lg:flex-row flex-col'>
-            <div className='lg:w-1/6'>
+            <div className='lg:w-1/6 light-bg-color'>
               <FirstCol
                 image="/static/promotion/star-three.png"
                 text="Achieve More Stars!"
@@ -65,9 +65,10 @@ const PromotionViewPage: Page = () => {
           </div>
         </div>
       </div>
-      {modalOpen && selectedImage && (
-        <ImageModal src={selectedImage} onClose={closeModal} />
-      )}
+    </div>
+    {modalOpen && selectedImage && (
+      <ImageModal src={selectedImage} onClose={closeModal} />
+    )}
     </>
   )
 }

@@ -138,7 +138,7 @@ export const drawerRoutes = [
   {
     icon: <PromotionIcon />,
     to: '/promotion',
-    label: 'Promotion'
+    label: "Snap Promo's"
   }
 ]
 
