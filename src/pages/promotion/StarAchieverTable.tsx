@@ -21,7 +21,7 @@ const StyledDataGrid = styled(MUIDataGrid)(() => ({
 
 interface StarAchieverTableProps {
     title: string;
-    rows: GridRowsProp[];
+    rows: GridRowsProp;
     columns: GridColDef[];
   }
 
