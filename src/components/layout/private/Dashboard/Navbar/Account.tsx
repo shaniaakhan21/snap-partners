@@ -33,11 +33,11 @@ export const Account = ({ email, name, phone, photoUrl, signOut, rank, roles, le
   const isIntegrous = (_auth.roles.integrousAssociate || _auth.roles.integrousCustomer)
 
   return (
-    <section className='w-full h-full flex justify-end items-center gap-x-5'>
+    <section className='w-1/3 lg:w-full h-full flex justify-end items-center sm:gap-x-5'>
       {mapping[level] >= 500
         ? <div className='admin-tools-container'>
           <div>
-            <span className='text-l font-bold text-gray-700 whitespace-nowrap cursor-pointer'><a onClick={() => { setAdminTools(!adminTools) }} >Admin Tools</a></span>
+            <span className='text-l font-bold text-gray-700 whitespace-nowrap hidden sm:block cursor-pointer'><a onClick={() => { setAdminTools(!adminTools) }} >Admin Tools</a></span>
           </div>
           <ArrowDownIcon classes='cursor-pointer' onClick={() => { setAdminTools(!adminTools) }} />
           {
@@ -48,19 +48,19 @@ export const Account = ({ email, name, phone, photoUrl, signOut, rank, roles, le
         </div>
         : <></>
       }
-      <div className='relative'>
-        {/* <NotificationIcon classes='w-6 h-6' />
+      {/* <div className='relative'>
+         <NotificationIcon classes='w-6 h-6' />
 
         <div className='absolute -top-2 -right-4 h-5 w-5 bg-[#FF4343] rounded-full text-white text-sm font-semibold flex justify-center items-center'>
           <span>3</span>
-        </div> */}
-        {/* {isIntegrous && (
+        </div>
+        {isIntegrous && (
           <a href={link} style={{ cursor: 'pointer', marginLeft: 10, width: 150, padding: 6, paddingLeft: 10, color: 'white' }} className="rounded-full bg-primary-500 bg-red-500 ">
             <i className="fa-solid fa-cart-shopping"></i>
             <span className='text-xs text-white font-medium p-2 uppercase'>Shopping Cart</span>
           </a>
-        )} */}
-      </div>
+        )}
+      </div> */}
 
       <div className='flex justify-start items-center relative select-none'>
         <div className='relative'>
@@ -74,7 +74,7 @@ export const Account = ({ email, name, phone, photoUrl, signOut, rank, roles, le
             : (
               <AccountDefaultImage rank={rank} size={40} />
             )}
-            {name}
+          {name}
 
           {/* <div className='sm:hidden absolute -top-1 -right-2 h-3.5 w-3.5 bg-[#FF4343] rounded-full text-white flex justify-center items-center' /> */}
         </div>

@@ -26,7 +26,7 @@ const PromotionViewPage: Page = () => {
   }
 
   return (
-    <><div className='w-[75%] sm:w-full'>
+    <><div className='w-full'>
       <p className='w-full text-lg text-center lg:text-left lg:text-3xl font-bold'>Sprint To Paradise Promotion Tracker</p> <br />
       <div className="w-full bg-white rounded-lg px-0 py-0 flex flex-row">
         <div className='w-full'>

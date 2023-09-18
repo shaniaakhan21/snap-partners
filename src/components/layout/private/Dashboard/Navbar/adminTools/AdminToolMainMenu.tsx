@@ -54,7 +54,7 @@ function AdminToolMainMenu () {
           <ul>
             {
               menuData.map((menuItem, index) => (
-                <li className={`item-${index} menuItem`} onClick={() => {
+                <li className={`item-${index} menuItem text-sm sm:text-base`} onClick={() => {
                   setSubMenu(subMenu === menuItem.submenu ? 'none' : menuItem.submenu)
                 }}>{menuItem.title}</li>
               ))

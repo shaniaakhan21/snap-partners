@@ -37,7 +37,7 @@ const CheckboxItem = ({
         },
         '@media (max-width: 600px)': {
           '& .MuiSvgIcon-root': {
-            fontSize: 20
+            fontSize: 26
           }
         }
       }}
@@ -68,7 +68,7 @@ const TopSection = (
     setModalOpenIBO(false)
   }
   return (
-    <div className='p-2 lg:pl-8 lg:py-10 pb-11'>
+    <div className='p-2 lg:pl-8 lg:py-10 lg:pb-11'>
       <div className='info-box px-3 py-2'>
         <p><span className='font-bold'>Yellow - </span>Approved upon confirmation of min 20 W-2’s</p>
         <p><span className='font-bold'>Green - </span>Goal achieved</p>

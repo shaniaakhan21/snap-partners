@@ -9,17 +9,17 @@ const { SEO } = APP_INFO
 const StarAchiever: Page = () => {
   return (
     <>
-      <span className='text-3xl font-bold'>Sprint to Paradise Achievers Report</span><br /><br />
-      <div className="w-full bg-white rounded-lg px-10 py-10 flex flex-col">
-        <h1 className='text-xl font-semibold'>1 Star Achievers</h1>
+      <span className='text-lg sm:text-3xl font-bold'>Sprint to Paradise Achievers Report</span><br /><br />
+      <div className="w-full bg-white rounded-lg px-5 py-5 sm:px-10 sm:py-10 flex flex-col">
+        <h1 className='text-base sm:text-xl font-semibold'>1 Star Achievers</h1>
         <StarAchieversTable />
-        <h1 className='text-xl font-semibold'>2 Star Achievers</h1>
+        <h1 className='text-base sm:text-xl font-semibold'>2 Star Achievers</h1>
         <StarAchieversTable />
-        <h1 className='text-xl font-semibold'>3 Star Achievers</h1>
+        <h1 className='text-base sm:text-xl font-semibold'>3 Star Achievers</h1>
         <StarAchieversTable />
-        <h1 className='text-xl font-semibold'>4 Star Achievers</h1>
+        <h1 className='text-base sm:text-xl font-semibold'>4 Star Achievers</h1>
         <StarAchieversTable />
-        <h1 className='text-xl font-semibold'>5 Star Achievers</h1>
+        <h1 className='text-base sm:text-xl font-semibold'>5 Star Achievers</h1>
         <StarAchieversTable />
       </div>
     </>
