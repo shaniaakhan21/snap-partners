@@ -63,7 +63,7 @@ const rows = [
 ]
 
 const ERCClientsTable = () => {
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  const [windowWidth, setWindowWidth] = useState(0)
 
   useEffect(() => {
     const handleResize = () => {
