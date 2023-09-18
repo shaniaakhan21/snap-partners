@@ -8,12 +8,14 @@ import TopSection from './promotion/TopSection'
 import BottomSection from './promotion/BottomSection'
 import ImageModal from './promotion/ImageModal'
 import { useState } from 'react'
+import { useMediaQuery } from 'react-responsive'
 
 const { SEO } = APP_INFO
 
 const PromotionViewPage: Page = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedImage, setSelectedImage] = useState('')
+  const isMobile = useMediaQuery({ query: '(max-width: 500px)' })
 
   const openModal = (imageSrc: string) => {
     setSelectedImage(imageSrc)
@@ -42,7 +44,7 @@ const PromotionViewPage: Page = () => {
             </div>
             <div className='p-4 lg:py-10 lg:px-10'>
               <img src='/static/promotion/first-promo-rounded.svg'
-                onClick={() => openModal('/static/promotion/big-1-image.svg')}
+                onClick={() => !isMobile && openModal('/static/promotion/big-1-image.svg')}
               />
             </div>
           </div>
@@ -59,7 +61,7 @@ const PromotionViewPage: Page = () => {
             </div>
             <div className='p-4 lg:py-10 lg:px-10'>
               <img src='/static/promotion/second-promo-rounded.svg'
-                onClick={() => openModal('/static/promotion/big-2-image.svg')}
+                onClick={() => !isMobile && openModal('/static/promotion/big-2-image.svg')}
               />
             </div>
           </div>
