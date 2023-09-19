@@ -1,17 +1,21 @@
+
+.green-red-light-bg {
+    background-color: #ffdada80 !important;
+}
+
 .light-bg-color {
     background-color: #ffdada80 !important;
-    @media screen and (max-width: 630px) {
+}
+
+@media screen and (max-width: 630px) {
+    .green-red-light-bg {
+        background-color: #b1ffb4a1 !important;
+    }
+
+    .light-bg-color {
         background-color: #ffdada !important;
     }
 }
-
-.green-red-light-bg{
-    background-color: #ffdada80 !important;
-    @media screen and (max-width: 630px) {
-        background-color: #b1ffb4a1!important;
-    }
-}
-
 .light-border-bottom {
     border-bottom: 1px solid #E9C7C7;
 }
