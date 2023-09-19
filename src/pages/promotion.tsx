@@ -77,7 +77,7 @@ const PromotionViewPage: Page = () => {
               />
             </div>
             <div className='w-full sm:w-6/12'>
-              <BottomSection/>
+              <BottomSection sprintData={sprintData}/>
             </div>
             <div className='p-1 sm:py-10 sm:px-10'>
               <img src={isMobile ? '/static/promotion/big-2-image.svg' : '/static/promotion/second-promo-rounded.svg'}
