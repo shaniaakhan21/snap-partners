@@ -69,7 +69,6 @@ const TopSection = ({ sprintData }) => {
   const handleCloseModalIBO = () => {
     setModalOpenIBO(false)
   }
-  console.log('sprintData from dt', sprintData.personalFiveIbo)
   return (
     <div className='p-2 lg:pl-8 lg:py-10 lg:pb-11'>
       <div className='info-box px-3 py-2'>

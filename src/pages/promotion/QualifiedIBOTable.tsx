@@ -77,7 +77,7 @@ const QualifiedIBOTable = ({ sprintData }) => {
     {
       field: 'date',
       headerName: 'Start Date',
-      type: 'date',
+      type: 'string',
       flex: windowWidth <= 400 ? 0.9 : 0.5
     }
   ]

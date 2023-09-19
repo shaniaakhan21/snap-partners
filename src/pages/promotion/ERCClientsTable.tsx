@@ -100,7 +100,7 @@ const ERCClientsTable = ({sprintData}) => {
     {
       field: 'date',
       headerName: 'Date',
-      type: 'date',
+      type: 'string',
       flex: windowWidth <= 400 ? 1 : 1
     },
     {
