@@ -42,7 +42,7 @@ const PromotionViewPage: Page = () => {
             <div className='sm:w-6/12'>
               <TopSection/>
             </div>
-            <div className='p-5 sm:py-10 sm:px-10'>
+            <div className='p-1 sm:py-10 sm:px-10'>
               <img src={isMobile ? '/static/promotion/big-1-image.svg' : '/static/promotion/first-promo-rounded.svg'}
                 onClick={() => !isMobile && openModal('/static/promotion/big-1-image.svg')}
               />
@@ -59,7 +59,7 @@ const PromotionViewPage: Page = () => {
             <div className='w-full sm:w-6/12'>
               <BottomSection/>
             </div>
-            <div className='p-5 sm:py-10 sm:px-10'>
+            <div className='p-1 sm:py-10 sm:px-10'>
               <img src={isMobile ? '/static/promotion/big-2-image.svg' : '/static/promotion/second-promo-rounded.svg'}
                 onClick={() => !isMobile && openModal('/static/promotion/big-2-image.svg')}
               />
