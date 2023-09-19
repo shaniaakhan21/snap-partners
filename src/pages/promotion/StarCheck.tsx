@@ -31,9 +31,9 @@ const StarCheck = ({
 
   return (
     <div className={`flex flex-row border-it ${borderIt}`}>
-      <div className={`${backgroundColor} flex flex-row items-center w-1/2 justify-evenly p-1 lg:p-2`}>
-        <img className='w-1/2 pr-1' src='/static/promotion/white-star.svg' alt='Star' />
-        <p className={`text-xl ${textColor}`}>{text}</p>
+      <div className={`${backgroundColor} flex flex-row items-center w-1/2 justify-around lg:justify-evenly p-1 lg:p-2`}>
+        <img className='w-1/2 p-0 lg:pr-1' src='/static/promotion/white-star.svg' alt='Star' />
+        <p className={`text-sm lg:text-xl ${textColor}`}>{text}</p>
       </div>
       <div className='w-1/2'>
         <Checkbox
@@ -49,7 +49,7 @@ const StarCheck = ({
             },
             '@media (max-width: 600px)': {
               '& .MuiSvgIcon-root': {
-                fontSize: 20
+                fontSize: 26
               }
             }
           }}

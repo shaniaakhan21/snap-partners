@@ -38,7 +38,7 @@ const BottomSection = () => {
       </div>
       <div className='w-full flex flex-row'>
         <div className='w-1/3 mt-8'>
-          <div className='m-6 ml-3'>
+          <div className='m-2 xs:m-6 xs:ml-3'>
             <StarCheck
               backgroundColor='bg-custom-green'
               borderIt='border-it-green'
@@ -48,7 +48,7 @@ const BottomSection = () => {
               textColor='text-white' canToggle={false} accepted={true}/>
           </div>
 
-          <div className='m-6 ml-3'>
+          <div className='m-2 xs:m-6 xs:ml-3'>
             <StarCheck
               backgroundColor='bg-custom-red'
               borderIt='border-it-red'
@@ -58,7 +58,7 @@ const BottomSection = () => {
               textColor='text-white' canToggle={false} accepted={false} />
           </div>
 
-          <div className='m-6 ml-3'>
+          <div className='m-2 xs:m-6 xs:ml-3'>
             <StarCheck
               canToggle={false}
               backgroundColor='bg-custom-red'
@@ -70,7 +70,7 @@ const BottomSection = () => {
           </div>
         </div>
         <div className='w-1/3 mt-8 ml-3'>
-          <div className='m-6 ml-3'>
+          <div className='m-2 xs:m-6 xs:ml-3'>
             <StarCheck
               canToggle={false}
               backgroundColor='bg-custom-red'
@@ -81,7 +81,7 @@ const BottomSection = () => {
               textColor='text-white' accepted={false} />
           </div>
 
-          <div className='m-6 ml-3'>
+          <div className='m-2 xs:m-6 xs:ml-3'>
             <StarCheck
               canToggle={false}
               backgroundColor='bg-custom-red'
@@ -92,7 +92,7 @@ const BottomSection = () => {
               textColor='text-white' accepted={false} />
           </div>
 
-          <div className='m-6 ml-3'>
+          <div className='m-2 xs:m-6 xs:ml-3'>
             <StarCheck
               canToggle={false}
               backgroundColor='bg-custom-red'
@@ -104,7 +104,7 @@ const BottomSection = () => {
           </div>
         </div>
         <div className='w-1/3 mt-8 ml-3'>
-          <div className='m-6 ml-3'>
+          <div className='m-2 xs:m-6 xs:ml-3'>
             <StarCheck
               canToggle={false}
               backgroundColor='bg-custom-red'
@@ -115,7 +115,7 @@ const BottomSection = () => {
               textColor='text-white' accepted={false} />
           </div>
 
-          <div className='m-6 ml-3'>
+          <div className='m-2 xs:m-6 xs:ml-3'>
             <StarCheck
               canToggle={false}
               backgroundColor='bg-custom-red'
@@ -126,7 +126,7 @@ const BottomSection = () => {
               textColor='text-white' accepted={false} />
           </div>
 
-          <div className='m-6 ml-3'>
+          <div className='m-2 xs:m-6 xs:ml-3'>
             <StarCheck
               canToggle={false}
               backgroundColor='bg-custom-red'

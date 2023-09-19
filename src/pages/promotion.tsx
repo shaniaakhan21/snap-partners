@@ -9,6 +9,8 @@ import ImageModal from './promotion/ImageModal'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { getLocalStorage } from 'lib/utils/localStorage'
+import { useMediaQuery } from 'react-responsive'
+
 
 const { SEO } = APP_INFO
 
@@ -16,6 +18,7 @@ const PromotionViewPage: Page = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedImage, setSelectedImage] = useState('')
   const [sprintData, setSprintData] = useState({})
+  const isMobile = useMediaQuery({ query: '(max-width: 630px)' })
 
   const openModal = (imageSrc: string) => {
     setSelectedImage(imageSrc)
@@ -45,40 +48,40 @@ const PromotionViewPage: Page = () => {
   console.log('sprint Data is', sprintData)
 
   return (
-    <><div className='w-[75%] sm:w-full'>
-      <p className='w-full text-lg text-center lg:text-left lg:text-3xl font-bold'>Sprint To Paradise Promotion Tracker</p> <br />
+    <><div className='w-full'>
+      <p className='w-full text-lg text-center sm:text-left sm:text-3xl font-bold'>Sprint To Paradise Promotion Tracker</p> <br />
       <div className="w-full bg-white rounded-lg px-0 py-0 flex flex-row">
         <div className='w-full'>
-          <div className='border-bot-box flex lg:flex-row flex-col'>
-            <div className='w-full lg:w-1/6 light-bg-color'>
+          <div className='border-bot-box flex sm:flex-row flex-col'>
+            <div className='w-full sm:w-1/6 green-red-light-bg'>
               <FirstCol
-                image="/static/promotion/star-one.svg"
+                image={isMobile ? '/static/promotion/green-star-one.svg' : '/static/promotion/star-one.svg'}
                 text="1 Star"
               />
             </div>
-            <div className='lg:w-6/12'>
+            <div className='sm:w-6/12'>
               <TopSection sprintData={sprintData} />
             </div>
-            <div className='p-4 lg:py-10 lg:px-10'>
-              <img src='/static/promotion/first-promo-rounded.svg'
-                onClick={() => openModal('/static/promotion/big-1-image.svg')}
+            <div className='p-1 sm:py-10 sm:px-10'>
+              <img src={isMobile ? '/static/promotion/big-1-image.svg' : '/static/promotion/first-promo-rounded.svg'}
+                onClick={() => !isMobile && openModal('/static/promotion/big-1-image.svg')}
               />
             </div>
           </div>
 
-          <div className='flex lg:flex-row flex-col'>
-            <div className='lg:w-1/6 light-bg-color'>
+          <div className='flex sm:flex-row flex-col'>
+            <div className='sm:w-1/6 light-bg-color'>
               <FirstCol
                 image="/static/promotion/star-three.png"
                 text="Achieve More Stars!"
               />
             </div>
-            <div className='w-full lg:w-6/12'>
+            <div className='w-full sm:w-6/12'>
               <BottomSection/>
             </div>
-            <div className='p-4 lg:py-10 lg:px-10'>
-              <img src='/static/promotion/second-promo-rounded.svg'
-                onClick={() => openModal('/static/promotion/big-2-image.svg')}
+            <div className='p-1 sm:py-10 sm:px-10'>
+              <img src={isMobile ? '/static/promotion/big-2-image.svg' : '/static/promotion/second-promo-rounded.svg'}
+                onClick={() => !isMobile && openModal('/static/promotion/big-2-image.svg')}
               />
             </div>
           </div>

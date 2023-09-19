@@ -1,5 +1,6 @@
 import { DataGrid as MUIDataGrid } from '@mui/x-data-grid'
 import { styled } from '@mui/system'
+import { useEffect, useState } from 'react'
 const StyledDataGrid = styled(MUIDataGrid)(() => ({
   '&& .MuiDataGrid-columnHeaderTitleContainer .MuiDataGrid-columnHeaderTitle': {
     fontWeight: 'bold',
@@ -52,6 +53,7 @@ const rows = [
   }
 ]
 
+<<<<<<< HEAD
 const columns = [
   {
     field: 'name',
@@ -73,10 +75,42 @@ const columns = [
 ]
 
 const QualifiedIBOTable = ({ sprintData }) => {
+=======
+const QualifiedIBOTable = () => {
+  const [windowWidth, setWindowWidth] = useState(0)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  const columns = [
+    {
+      field: 'name',
+      headerName: 'Name',
+      flex: windowWidth <= 400 ? 0.9 : 2.5
+    },
+    {
+      field: 'date',
+      headerName: 'Start Date',
+      type: 'date',
+      flex: windowWidth <= 400 ? 0.9 : 0.5
+    }
+  ]
+
+>>>>>>> 76431477e4925e382f4fb5251c178021115b9d91
   return (
-    <div className='w-4/12 bg-white rounded-xl p-6  top-[-8%] relative'>
-      <h1 className='text-2xl font-bold'>Qualified IBO's</h1>
+    <div className='w-10/12 sm:w-4/12 bg-white rounded-xl p-6  top-[-8%] relative'>
+      <h1 className='text-lg sm:text-2xl font-bold'>Qualified IBO's</h1>
       <br></br>
+<<<<<<< HEAD
       <div className="datagrid-container">
         <StyledDataGrid
           rows={sprintData?.userFriendMap}
@@ -86,6 +120,19 @@ const QualifiedIBOTable = ({ sprintData }) => {
             borderColor: 'rgba(224, 224, 224, 0.5)!important'
           }}
         />
+=======
+      <div className="datagrid-container" style={{ overflowX: 'auto' }}>
+        <div style={{ minWidth: '300px' }}>
+          <StyledDataGrid
+            rows={rows}
+            columns={columns}
+            sx={{
+              height: '370px',
+              borderColor: 'rgba(224, 224, 224, 0.5)!important'
+            }}
+          />
+        </div>
+>>>>>>> 76431477e4925e382f4fb5251c178021115b9d91
       </div>
       <br></br>
     </div>
