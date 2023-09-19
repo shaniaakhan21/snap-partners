@@ -62,7 +62,7 @@ const rows = [
   }
 ]
 
-const ERCClientsTable = ({sprintData}) => {
+const ERCClientsTable = ({ sprintData }) => {
   const [windowWidth, setWindowWidth] = useState(0)
 
   useEffect(() => {

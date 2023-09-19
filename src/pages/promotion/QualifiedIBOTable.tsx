@@ -79,6 +79,12 @@ const QualifiedIBOTable = ({ sprintData }) => {
       headerName: 'Start Date',
       type: 'string',
       flex: windowWidth <= 400 ? 0.9 : 0.5
+    },
+    {
+      field: 'userFriends',
+      headerName: 'IBO count',
+      type: 'number',
+      flex: windowWidth <= 400 ? 0.9 : 0.5
     }
   ]
 
@@ -88,14 +94,17 @@ const QualifiedIBOTable = ({ sprintData }) => {
       <br></br>
       <div className="datagrid-container" style={{ overflowX: 'auto' }}>
         <div style={{ minWidth: '300px' }}>
-          <StyledDataGrid
-            rows={sprintData?.userFriendMap}
-            columns={columns}
-            sx={{
-              height: '370px',
-              borderColor: 'rgba(224, 224, 224, 0.5)!important'
-            }}
-          />
+          { sprintData?.userFriendMap.length > 0
+            ? <StyledDataGrid
+              rows={sprintData && sprintData?.userFriendMap}
+              columns={columns}
+              sx={{
+                height: '370px',
+                borderColor: 'rgba(224, 224, 224, 0.5)!important'
+              }}
+            />
+            : <></>
+          }
         </div>
       </div>
       <br></br>

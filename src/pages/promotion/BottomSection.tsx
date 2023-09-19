@@ -3,7 +3,7 @@ import ERCTableModal from './ERCTableModal'
 import IBOTableModal from './IBOTableModal'
 import StarCheck from './StarCheck'
 
-const BottomSection = ({sprintData}) => {
+const BottomSection = ({ sprintData }) => {
   const [isModalOpen, setModalOpen] = useState(false)
 
   const handleParagraphClick = () => {
