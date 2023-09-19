@@ -7,7 +7,7 @@ const StyledDataGrid = styled(MUIDataGrid)(() => ({
     fontSize: '1.2em'
   },
   '& .MuiDataGrid-cellContent': {
-    fontSize: '0.875rem'
+    fontSize: '1.2em'
   },
   '& .MuiDataGrid-cell': {
     borderColor: 'rgba(224, 224, 224, 0.5)!important'
@@ -81,18 +81,18 @@ const ERCClientsTable = () => {
     {
       field: 'company_name',
       headerName: 'Company',
-      flex: windowWidth <= 400 ? 1 : 2
+      flex: windowWidth <= 400 ? 1 : 1
     },
     {
       field: 'date',
       headerName: 'Date',
       type: 'date',
-      flex: windowWidth <= 400 ? 1 : 1.5
+      flex: windowWidth <= 400 ? 1 : 1
     },
     {
       field: 'status',
       headerName: 'Status',
-      flex: windowWidth <= 400 ? 1 : 0.7,
+      flex: windowWidth <= 400 ? 0.4 : 1,
       valueGetter: (params) => {
         if (params.row && typeof params.row.status === 'string') {
           return params.row.status
@@ -103,10 +103,10 @@ const ERCClientsTable = () => {
       renderCell: (params) => {
         const value = params.value
         const cellStyle = {
-          padding: '5% 20%',
+          padding: '3% 10%',
           borderRadius: '20px',
           color: 'white',
-          fontSize: '0.875rem',
+          fontSize: '1.2em',
           backgroundColor: value === 'Yellow' ? '#FFA800' : value === 'Green' ? '#6AB63C' : 'black'
         }
 
