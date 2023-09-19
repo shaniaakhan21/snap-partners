@@ -53,30 +53,7 @@ const rows = [
   }
 ]
 
-<<<<<<< HEAD
-const columns = [
-  {
-    field: 'name',
-    headerName: 'Name',
-    flex: 0.25
-  },
-  {
-    field: 'date',
-    headerName: 'Start Date',
-    type: 'string',
-    flex: 0.25
-  },
-  {
-    field: 'userFriends',
-    headerName: 'User Friends',
-    type: 'number',
-    flex: 0.25
-  }
-]
-
 const QualifiedIBOTable = ({ sprintData }) => {
-=======
-const QualifiedIBOTable = () => {
   const [windowWidth, setWindowWidth] = useState(0)
 
   useEffect(() => {
@@ -105,26 +82,14 @@ const QualifiedIBOTable = () => {
     }
   ]
 
->>>>>>> 76431477e4925e382f4fb5251c178021115b9d91
   return (
     <div className='w-10/12 sm:w-4/12 bg-white rounded-xl p-6  top-[-8%] relative'>
       <h1 className='text-lg sm:text-2xl font-bold'>Qualified IBO's</h1>
       <br></br>
-<<<<<<< HEAD
-      <div className="datagrid-container">
-        <StyledDataGrid
-          rows={sprintData?.userFriendMap}
-          columns={columns}
-          sx={{
-            height: '370px',
-            borderColor: 'rgba(224, 224, 224, 0.5)!important'
-          }}
-        />
-=======
       <div className="datagrid-container" style={{ overflowX: 'auto' }}>
         <div style={{ minWidth: '300px' }}>
           <StyledDataGrid
-            rows={rows}
+            rows={sprintData?.userFriendMap}
             columns={columns}
             sx={{
               height: '370px',
@@ -132,7 +97,6 @@ const QualifiedIBOTable = () => {
             }}
           />
         </div>
->>>>>>> 76431477e4925e382f4fb5251c178021115b9d91
       </div>
       <br></br>
     </div>

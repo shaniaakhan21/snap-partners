@@ -62,59 +62,7 @@ const rows = [
   }
 ]
 
-<<<<<<< HEAD
-const columns = [
-  {
-    field: 'company_name',
-    headerName: 'Company',
-    flex: 2
-  },
-  {
-    field: 'date',
-    headerName: 'Date',
-    type: 'string',
-    flex: 1.5
-  },
-  {
-    field: 'status',
-    headerName: 'Status',
-    flex: 0.5,
-    valueGetter: (params) => {
-      if (params.row && typeof params.row.status === 'string') {
-        return params.row.status
-      } else {
-        return ''
-      }
-    },
-    renderCell: (params) => {
-      const value = params.value
-      const cellStyle = {
-        padding: '5% 20%',
-        borderRadius: '20px',
-        color: 'white',
-        backgroundColor: value === 'Yellow' ? '#FFA800' : value === 'Green' ? '#6AB63C' : 'black'
-      }
-      return <div style={cellStyle}>{value}</div>
-    }
-  }
-]
-
-const ERCClientsTable = ({ sprintData }) => {
-  const rowdata = []
-  const [data, setData] = useState(rowdata)
-  useEffect(() => {
-    sprintData.personalQualifiedErcCompanies.map((data) => (
-      rowdata.push({
-        comapany_name: data?.comapnyName,
-        date: data['client-acquired-date'],
-        status: 'Green',
-        id: data?.client
-      })
-    ))
-    setData(rowdata)
-  }, [sprintData])
-=======
-const ERCClientsTable = () => {
+const ERCClientsTable = ({sprintData}) => {
   const [windowWidth, setWindowWidth] = useState(0)
 
   useEffect(() => {
@@ -128,6 +76,20 @@ const ERCClientsTable = () => {
       window.removeEventListener('resize', handleResize)
     }
   }, [])
+
+  const rowdata = []
+  const [data, setData] = useState(rowdata)
+  useEffect(() => {
+    sprintData.personalQualifiedErcCompanies.map((data) => (
+      rowdata.push({
+        comapany_name: data?.comapnyName,
+        date: data['client-acquired-date'],
+        status: 'Green',
+        id: data?.client
+      })
+    ))
+    setData(rowdata)
+  }, [sprintData])
 
   const columns = [
     {
@@ -166,26 +128,14 @@ const ERCClientsTable = () => {
       }
     }
   ]
->>>>>>> 76431477e4925e382f4fb5251c178021115b9d91
   return (
     <div className='w-10/12 sm:w-5/12 bg-white rounded-lg p-6  top-[-8%] relative'>
       <h1 className='text-lg sm:text-2xl font-bold'>ERC Clients</h1>
       <br></br>
-<<<<<<< HEAD
-      <div className="datagrid-container">
-        <StyledDataGrid
-          rows={data}
-          columns={columns}
-          sx={{
-            height: '370px',
-            borderColor: 'rgba(224, 224, 224, 0.5)!important'
-          }}
-        />
-=======
       <div className="datagrid-container" style={{ overflowX: 'auto' }}>
         <div style={{ minWidth: '500px' }}>
           <StyledDataGrid
-            rows={rows}
+            rows={data}
             columns={columns}
             sx={{
               height: '370px',
@@ -193,7 +143,6 @@ const ERCClientsTable = () => {
             }}
           />
         </div>
->>>>>>> 76431477e4925e382f4fb5251c178021115b9d91
       </div>
       <br></br>
     </div>
