@@ -56,24 +56,30 @@ const columns = [
   {
     field: 'name',
     headerName: 'Name',
-    flex: 2.5
+    flex: 0.25
   },
   {
     field: 'date',
     headerName: 'Start Date',
-    type: 'date',
-    flex: 0.5
+    type: 'string',
+    flex: 0.25
+  },
+  {
+    field: 'userFriends',
+    headerName: 'User Friends',
+    type: 'number',
+    flex: 0.25
   }
 ]
 
-const QualifiedIBOTable = () => {
+const QualifiedIBOTable = ({ sprintData }) => {
   return (
     <div className='w-4/12 bg-white rounded-xl p-6  top-[-8%] relative'>
       <h1 className='text-2xl font-bold'>Qualified IBO's</h1>
       <br></br>
       <div className="datagrid-container">
         <StyledDataGrid
-          rows={rows}
+          rows={sprintData?.userFriendMap}
           columns={columns}
           sx={{
             height: '370px',

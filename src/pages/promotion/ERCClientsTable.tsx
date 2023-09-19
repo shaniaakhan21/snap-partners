@@ -1,5 +1,6 @@
 import { DataGrid as MUIDataGrid } from '@mui/x-data-grid'
 import { styled } from '@mui/system'
+import { useEffect, useState } from 'react'
 const StyledDataGrid = styled(MUIDataGrid)(() => ({
   '&& .MuiDataGrid-columnHeaderTitleContainer .MuiDataGrid-columnHeaderTitle': {
     fontWeight: 'bold',
@@ -67,7 +68,7 @@ const columns = [
   {
     field: 'date',
     headerName: 'Date',
-    type: 'date',
+    type: 'string',
     flex: 1.5
   },
   {
@@ -94,14 +95,27 @@ const columns = [
   }
 ]
 
-const ERCClientsTable = () => {
+const ERCClientsTable = ({ sprintData }) => {
+  const rowdata = []
+  const [data, setData] = useState(rowdata)
+  useEffect(() => {
+    sprintData.personalQualifiedErcCompanies.map((data) => (
+      rowdata.push({
+        comapany_name: data?.comapnyName,
+        date: data['client-acquired-date'],
+        status: 'Green',
+        id: data?.client
+      })
+    ))
+    setData(rowdata)
+  }, [sprintData])
   return (
     <div className='w-5/12 bg-white rounded-lg p-6  top-[-8%] relative'>
       <h1 className='text-2xl font-bold'>ERC Clients</h1>
       <br></br>
       <div className="datagrid-container">
         <StyledDataGrid
-          rows={rows}
+          rows={data}
           columns={columns}
           sx={{
             height: '370px',
