@@ -1,5 +1,15 @@
 .light-bg-color {
-    background-color: #F8EFEF !important;
+    background-color: #ffdada80 !important;
+    @media screen and (max-width: 630px) {
+        background-color: #ffdada !important;
+    }
+}
+
+.green-red-light-bg{
+    background-color: #ffdada80 !important;
+    @media screen and (max-width: 630px) {
+        background-color: #b1ffb4a1!important;
+    }
 }
 
 .light-border-bottom {
