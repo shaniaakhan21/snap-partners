@@ -88,7 +88,7 @@ const ERCClientsTable = ({ sprintData }) => {
     //     id: data?.client
     //   })
     // ))
-    setData(sprintData.personalQualifiedErcCompanies)
+    setData(sprintData && sprintData?.personalQualifiedErcCompanies)
   }, [sprintData])
 
   console.log('data fro erc companies', data)
