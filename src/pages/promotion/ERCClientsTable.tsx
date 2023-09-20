@@ -80,16 +80,18 @@ const ERCClientsTable = ({ sprintData }) => {
   const rowdata = []
   const [data, setData] = useState(rowdata)
   useEffect(() => {
-    sprintData.personalQualifiedErcCompanies.map((data) => (
-      rowdata.push({
-        comapany_name: data?.comapnyName,
-        date: data['client-acquired-date'],
-        status: 'Green',
-        id: data?.client
-      })
-    ))
-    setData(rowdata)
+    // sprintData.personalQualifiedErcCompanies.map((data) => (
+    //   rowdata.push({
+    //     comapany_name: data?.comapnyName,
+    //     date: data['client-acquired-date'],
+    //     status: 'Green',
+    //     id: data?.client
+    //   })
+    // ))
+    setData(sprintData.personalQualifiedErcCompanies)
   }, [sprintData])
+
+  console.log('data fro erc companies', data)
 
   const columns = [
     {
