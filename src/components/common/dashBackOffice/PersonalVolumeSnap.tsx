@@ -48,6 +48,7 @@ export default function PVComponentSnap () {
     { field: 'createdAt', headerName: 'Order Date', minWidth: 130, flex: 1 },
     { field: 'name', headerName: 'Name', minWidth: 130, flex: 1 },
     { field: 'trackingNumber', headerName: 'Tracking Number', minWidth: 270, flex: 1 },
+    { field: 'cv', headerName: 'PV', maxWidth: 90, flex: 1 },
     { field: 'subtotal', headerName: 'Order Total', maxWidth: 90, flex: 1 }
   ]
 
