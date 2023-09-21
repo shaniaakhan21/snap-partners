@@ -88,21 +88,27 @@ const ERCClientsTable = ({ sprintData }) => {
     //     id: data?.client
     //   })
     // ))
-    setData(sprintData && sprintData?.personalQualifiedErcCompanies)
+    setData(sprintData && [...sprintData?.personalQualifiedErcCompanies, ...sprintData?.personalNonQualifiedErcCompanies])
   }, [sprintData])
 
   console.log('data fro erc companies', data)
 
   const columns = [
     {
-      field: 'company_name',
-      headerName: 'Company',
+      field: 'company_id',
+      headerName: 'Company ID',
       flex: windowWidth <= 400 ? 1 : 1
     },
     {
       field: 'date',
       headerName: 'Date',
       type: 'string',
+      flex: windowWidth <= 400 ? 1 : 1
+    },
+    {
+      field: 'min_w2',
+      headerName: 'Min_w2s',
+      type: 'boolean',
       flex: windowWidth <= 400 ? 1 : 1
     },
     {
