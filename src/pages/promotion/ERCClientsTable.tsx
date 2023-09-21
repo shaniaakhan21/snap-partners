@@ -107,7 +107,7 @@ const ERCClientsTable = ({ sprintData }) => {
     },
     {
       field: 'min_w2',
-      headerName: 'Min_w2s',
+      headerName: "Min_w2's",
       type: 'boolean',
       flex: windowWidth <= 400 ? 1 : 1
     },

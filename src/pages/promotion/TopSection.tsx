@@ -88,7 +88,7 @@ const TopSection = ({ sprintData }) => {
       <br></br>
       <p className="text-base lg:text-2xl text-black font-semibold p-2 lg:pl-2">Help a directly sponsored friend (IBO) do 5&1 </p>
       <div className='flex flex-row items-center  mt-2'>
-        <CheckboxItem checkboxColor={'#6AB63C'} checkboxCheckedColor={'#79CC47'} canToggle={false} accepted={sprintData?.friendQualifiedErc} />
+        <CheckboxItem checkboxColor={'#6AB63C'} checkboxCheckedColor={'#79CC47'} canToggle={false} accepted={sprintData?.friendQualifiedErc === true} />
         <a className="text-sm lg:text-lg text-black font-medium cursor-pointer" onClick={handleParagraphClick}><span className='font-bold' >Friend</span> - Acquires a qualified ERC Client <span className='text-xs lg:text-base text-gray-600'>(min 20 W-2's) </span> </a>
       </div>
       <div className='flex flex-row items-center'>
