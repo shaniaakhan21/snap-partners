@@ -109,7 +109,7 @@ const TopSection = ({ sprintData }) => {
           checkboxColor='#6AB63C'
           checkboxCheckedColor='#79CC47'
           text='1'
-          textColor='text-white' canToggle={false} accepted={sprintData?.starArray && sprintData?.starArray[0] === 1 ? true : false} />
+          textColor='text-white' canToggle={false} accepted={sprintData?.starArray && sprintData?.starArray[0] === 1} />
       </div>
       {isModalOpen && (
         <ERCTableModal open={isModalOpen} onClose={handleCloseModal} sprintData={sprintData} />

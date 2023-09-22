@@ -1,5 +1,5 @@
 import { Checkbox } from '@mui/material'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 interface StarCheckProps {
   backgroundColor: string;
@@ -23,6 +23,9 @@ const StarCheck = ({
   accepted
 }: StarCheckProps) => {
   const [isChecked, setChecked] = useState(accepted)
+  useEffect(() => {
+    setChecked(accepted)
+  }, [accepted])
   const handleCheckboxChange = () => {
     if (canToggle) {
       setChecked(!isChecked)
