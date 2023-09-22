@@ -89,7 +89,7 @@ const TopSection = ({ sprintData }) => {
       <br></br>
       <p className="text-base lg:text-2xl text-black font-semibold p-2 lg:pl-2">You do 5&1</p>
       <div className='flex flex-row items-center'>
-        <CheckboxItem checkboxColor={'#edd607'} checkboxCheckedColor={'#FFE500'} canToggle={false} accepted={sprintData?.personalQualifiedErc === true } />
+        <CheckboxItem checkboxColor={sprintData?.personalQualifiedErc === true ? '#6AB63C' : '#edd607'} checkboxCheckedColor={sprintData?.personalQualifiedErc === true ? '#79CC47' : '#FFE500'} canToggle={false} accepted={sprintData?.personalQualifiedErc === true } />
         <a className="text-sm lg:text-lg text-black font-medium cursor-pointer" onClick={() => handleParagraphClick([...sprintData?.personalQualifiedErcCompanies, ...sprintData?.personalNonQualifiedErcCompanies])}>Acquire a qualified ERC Client <span className='text-xs lg:text-base text-gray-600'>(min 20 W-2's) </span></a>
       </div>
       <div className='flex flex-row items-center'>

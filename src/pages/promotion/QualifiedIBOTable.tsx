@@ -71,7 +71,7 @@ const QualifiedIBOTable = ({ sprintData }) => {
   const columns = [
     {
       field: 'name',
-      headerName: 'Name',
+      headerName: 'Directly Sponsored IBO',
       flex: windowWidth <= 400 ? 0.9 : 2.5
     },
     {
@@ -82,7 +82,7 @@ const QualifiedIBOTable = ({ sprintData }) => {
     },
     {
       field: 'userFriends',
-      headerName: 'IBO count',
+      headerName: "Their Direct IBO's",
       type: 'number',
       flex: windowWidth <= 400 ? 0.9 : 0.5
     }
