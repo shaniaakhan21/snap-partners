@@ -1,3 +1,4 @@
+/* eslint-disable no-unneeded-ternary */
 import { Checkbox, Modal } from '@mui/material'
 import StarCheck from './StarCheck'
 import { useState, useEffect } from 'react'
@@ -108,7 +109,7 @@ const TopSection = ({ sprintData }) => {
           checkboxColor='#6AB63C'
           checkboxCheckedColor='#79CC47'
           text='1'
-          textColor='text-white' canToggle={false} accepted={sprintData?.starArray && sprintData?.starArray[0] === 1} />
+          textColor='text-white' canToggle={false} accepted={sprintData?.starArray && sprintData?.starArray[0] === 1 ? true : false} />
       </div>
       {isModalOpen && (
         <ERCTableModal open={isModalOpen} onClose={handleCloseModal} sprintData={sprintData} />
