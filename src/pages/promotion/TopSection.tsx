@@ -98,7 +98,7 @@ const TopSection = ({ sprintData }) => {
       <br></br>
       <p className="text-base lg:text-2xl text-black font-semibold p-2 lg:pl-2">Friend helps a directly sponsored Friend</p>
       <div className='flex flex-row align-start'>
-        <CheckboxItem checkboxColor={'#6AB63C'} checkboxCheckedColor={'#79CC47'} canToggle={false} accepted={sprintData?.friendOfFriendQualifiedErc} />
+        <CheckboxItem checkboxColor={'#6AB63C'} checkboxCheckedColor={'#79CC47'} canToggle={false} accepted={sprintData?.friendOfFriendQualifiedErc === true} />
         <p className="text-sm lg:text-lg text-black font-medium mt-2 cursor-pointer" onClick={handleParagraphClick}><span className='font-bold' >Friend</span> - Helps one of their personally sponsored IBO’s acquire a qualified ERC Client  <span className='text-xs lg:text-base text-gray-600'>(on your level 2)</span> </p>
       </div>
       <div className='w-1/4 mt-8 ml-3'>
@@ -108,7 +108,7 @@ const TopSection = ({ sprintData }) => {
           checkboxColor='#6AB63C'
           checkboxCheckedColor='#79CC47'
           text='1'
-          textColor='text-white' canToggle={false} accepted={true} />
+          textColor='text-white' canToggle={false} accepted={sprintData?.starArray && sprintData?.starArray[0] === 1} />
       </div>
       {isModalOpen && (
         <ERCTableModal open={isModalOpen} onClose={handleCloseModal} sprintData={sprintData} />
