@@ -62,7 +62,7 @@ const rows = [
   }
 ]
 
-const ERCClientsTable = ({ sprintData }) => {
+const ERCClientsTable = ({ sprintData, ercModalData }) => {
   const [windowWidth, setWindowWidth] = useState(0)
 
   useEffect(() => {
@@ -88,8 +88,8 @@ const ERCClientsTable = ({ sprintData }) => {
     //     id: data?.client
     //   })
     // ))
-    setData(sprintData && [...sprintData?.personalQualifiedErcCompanies, ...sprintData?.personalNonQualifiedErcCompanies])
-  }, [sprintData])
+    setData(ercModalData)
+  }, [ercModalData])
 
   console.log('data fro erc companies', data)
 

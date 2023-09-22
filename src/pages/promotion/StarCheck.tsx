@@ -31,7 +31,7 @@ const StarCheck = ({
       setChecked(!isChecked)
     }
   }
-console.log('is checked from starcheck  is', isChecked)
+console.log('is checked from starcheck  is', text, isChecked)
   return (
     <div className={`flex flex-row border-it ${borderIt}`}>
       <div className={`${backgroundColor} flex flex-row items-center w-1/2 justify-around lg:justify-evenly p-1 lg:p-2`}>
