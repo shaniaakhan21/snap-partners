@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { LoginWithEmail } from './LoginWithEmail'
 import { LoginWithPhone } from './LoginWithPhone'
 import { LoginWithUsername } from './LoginWithUsername'
+import { AuthRecover } from 'components/common/AuthRecover'
 
 export const LoginForm = () => {
   const [typeInput, setTypeInput] = useState<'phone' | 'email' | 'username'>('phone')
@@ -13,6 +14,7 @@ export const LoginForm = () => {
 
   return (
     <div className='max-w-md mx-auto w-full'>
+      <AuthRecover skipRedirect={true} redirectTo={"/overview"}/>
       <span className='hidden sm:block font-bold text-4xl text-[#18203F]'>Login</span>
       <p className='text-gray-500'>Welcome! Login to continue.</p>
 

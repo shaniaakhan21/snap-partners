@@ -57,7 +57,7 @@ export const LoginWithPhone = ({ trackLoginHandle }: IProps) => {
     if (redirectToWellness === 'true') {
       removeLocalStorage('redirectToIntegrous')
       removeLocalStorage('redirectToIntegrousReferralCode')
-      window.location.href = `/wellness/${referralCode}?access_token=${dataLogin.token}`
+      window.location.href = `/wellness?referralCode=${referralCode}`
       return
     }
 

@@ -3,13 +3,9 @@ import Card from '@mui/material/Card'
 import { Button } from 'components/common/Button'
 import Router from 'next/router'
 
-const LoginOrSignBox = ({ isLoggedIn, userData }) => {
+const LoginOrSignBox = ({ isLoggedIn, userData, referralCode }) => {
   const handleLogin = () => {
-    const referralCodeFromLocalStorage = localStorage.getItem('referralCode')
-    const queryParams = new URLSearchParams(window.location.search)
-    const referralCodeFromQuery = queryParams.get('referralCode')
-    const referralCode = referralCodeFromLocalStorage || referralCodeFromQuery || 'NoSponsor'
-    Router.push(`/auth/login-wellness?redirectToWellness=true&referralCode=${referralCode}`)
+    Router.push(`/auth/login-wellness?redirectToWellness=true&referralCode=${referralCode || 'NoSponsor'}`)
   }
   return (
     <Card

@@ -21,11 +21,10 @@ const ResponsiveCard = styled(Card)(({ theme }) => ({
   }
 }))
 
-export default function SingleItem ({ image, name, price, btnLabel, index }) {
+export default function SingleItem ({ image, name, price, btnLabel, index, referralCode }) {
   const [open, setOpen] = useState(false)
   const handleLogin = () => {
-    const referralCode = localStorage.getItem('referralCode') || 'NoSponsor'
-    Router.push(`/auth/login-wellness?redirectToWellness=true&referralCode=${referralCode}`)
+    Router.push(`/auth/login-wellness?redirectToWellness=true&referralCode=${referralCode || 'NoSponsor'}`)
   }
   const handleOpen = () => {
     setOpen(true)

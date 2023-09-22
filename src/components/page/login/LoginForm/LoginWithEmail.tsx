@@ -55,7 +55,7 @@ export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
     if (redirectToWellness === 'true') {
       removeLocalStorage('redirectToIntegrous')
       removeLocalStorage('redirectToIntegrousReferralCode')
-      router.push(`/wellness/${referralCode}?access_token=${dataLogin.token}`)
+      router.push(`/wellness?referralCode=${referralCode}`)
       return
     }
 

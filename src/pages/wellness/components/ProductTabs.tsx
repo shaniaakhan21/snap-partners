@@ -25,7 +25,7 @@ function TabPanel (props: TabPanelProps) {
   )
 }
 
-const ProductTabs = ({ userId, isLoggedIn, collectionIdTea, collectionIdGut, collectionIdAllProducts }) => {
+const ProductTabs = ({ userId, isLoggedIn, collectionIdTea, collectionIdGut, collectionIdAllProducts, referralCode, isIntegrous }) => {
   const [value, setValue] = useState(0)
 
   const products = [
@@ -60,33 +60,37 @@ const ProductTabs = ({ userId, isLoggedIn, collectionIdTea, collectionIdGut, col
     ${value === 2 ? 'bg-btn-color text-white-h rounded-tl-lg rounded-tr-lg 3xl:text-xl' : 'text-black-h 3xl:text-xl'} 
     custom-text-none custom-padding
   `} />
+  {!isIntegrous && (
         <Tab label="Weight Management" className={`
     ${value === 3 ? 'bg-btn-color text-white-h rounded-tl-lg rounded-tr-lg 3xl:text-xl' : 'text-black-h 3xl:text-xl'} 
     custom-text-none custom-padding
   `} />
+  )}
       </Tabs>
       <TabPanel value={value} index={0}>
         <div className='p-1 2xl:p-10  rounded-2xl bg-white shadow-custom'>
-          <ProductCard userId={userId} collectionId={collectionIdAllProducts} isLoggedIn={isLoggedIn} />
+          <ProductCard userId={userId} collectionId={collectionIdAllProducts} isLoggedIn={isLoggedIn} referralCode={referralCode} />
         </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
         <div className='p-1 2xl:p-10  rounded-2xl bg-white shadow-custom'>
-          <ProductCard userId={userId} collectionId={collectionIdTea} isLoggedIn={isLoggedIn}/>
+          <ProductCard userId={userId} collectionId={collectionIdTea} isLoggedIn={isLoggedIn} referralCode={referralCode}/>
         </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
         <div className='p-1 2xl:p-10  rounded-2xl bg-white shadow-custom'>
-          <ProductCard userId={userId} collectionId={collectionIdGut} isLoggedIn={isLoggedIn} />
+          <ProductCard userId={userId} collectionId={collectionIdGut} isLoggedIn={isLoggedIn} referralCode={referralCode}/>
         </div>
       </TabPanel>
+      {!isIntegrous && (
       <TabPanel value={value} index={3} >
         <div className='p-1 2xl:p-10  rounded-2xl bg-white shadow-custom'>
           <div>
-            <WeightCare isLoggedIn={isLoggedIn}/>
+            <WeightCare isLoggedIn={isLoggedIn} referralCode={referralCode}/>
           </div>
         </div>
       </TabPanel>
+      )}
     </div>
   )
 }
