@@ -8,7 +8,12 @@ import { handleFetchError } from 'lib/utils/handleFetchError'
 import { GTMTrack } from 'lib/utils/gtm'
 import { builderWebsiteFields } from '../../lib/types/user/profile'
 
-export const AuthRecover = ({ skipRedirect, redirectTo }) => {
+interface AuthRecoverProps {
+  skipRedirect?: boolean;
+  redirectTo?: string;
+}
+
+export const AuthRecover = ({ skipRedirect, redirectTo }: AuthRecoverProps) => {
   const router = useRouter()
   const { auth, setAuth } = useAuthStore()
 
