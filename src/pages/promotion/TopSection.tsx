@@ -103,8 +103,8 @@ const TopSection = ({ sprintData }) => {
       </div>
       <div className='w-1/4 mt-8 ml-3'>
         <StarCheck
-          backgroundColor='bg-custom-green'
-          borderIt='border-it-green'
+          backgroundColor={sprintData?.starArray && sprintData?.starArray[0] === 1 ? 'bg-custom-green' : 'bg-custom-red'}
+          borderIt={sprintData?.starArray && sprintData?.starArray[0] === 1 ? 'border-it-green' : 'border-it-red'}
           checkboxColor='#6AB63C'
           checkboxCheckedColor='#79CC47'
           text='1'

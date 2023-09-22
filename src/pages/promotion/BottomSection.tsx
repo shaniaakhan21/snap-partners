@@ -55,7 +55,7 @@ const BottomSection = ({ sprintData }) => {
               checkboxColor='#CC1D03'
               checkboxCheckedColor='#DD4C37'
               text='5'
-              textColor='text-white' canToggle={false} accepted={false} />
+              textColor='text-white' canToggle={false} accepted={true} />
           </div>
 
           <div className='m-2 xs:m-6 xs:ml-3'>
