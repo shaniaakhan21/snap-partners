@@ -48,7 +48,8 @@ function UpdateGrandfatherModal ({ grandfatherModal, onCloseGrandfatherModal, us
         gRank: grandfatherRank.rank,
         from: grandfatherRank.from,
         to: grandfatherRank.to,
-        id: profileData.gRanks[0].id
+        id: profileData.gRanks[0].id,
+        status: true
       }, {
         headers: {
           Authorization: `Bearer ${token}`
@@ -66,7 +67,8 @@ function UpdateGrandfatherModal ({ grandfatherModal, onCloseGrandfatherModal, us
         gRank: grandfatherRank.rank,
         from: grandfatherRank.from,
         to: grandfatherRank.to,
-        userId
+        userId,
+        status: true
       }, {
         headers: {
           Authorization: `Bearer ${token}`

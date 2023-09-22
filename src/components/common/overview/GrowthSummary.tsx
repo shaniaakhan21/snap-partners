@@ -181,7 +181,7 @@ export default function GrowthSummary () {
         TabIndicatorProps={{
           style: { display: 'none' }
         }}>
-        {['Downline', 'New Clients', 'Orders', 'Volume'].map((label, index) => (<Tab sx={tabStyle} color={index === selectedTab ? '#ffffff' : undefined} label={label} />))}
+        {["IBO's", 'New Clients', 'Orders', 'Volume'].map((label, index) => (<Tab sx={tabStyle} color={index === selectedTab ? '#ffffff' : undefined} label={label} />))}
       </Tabs>
       <div className="my-4 md:flex items-center">
         <h5 className="text-xl text-black font-bold flex-1">{['New IBOs', 'New Clients', 'New Orders', 'New Orders Volume'][selectedTab]}</h5>

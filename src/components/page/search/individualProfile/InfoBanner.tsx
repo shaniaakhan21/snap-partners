@@ -82,7 +82,7 @@ function InfoBanner ({ profileData, userLevel }) {
         <p className={`${cname}-midSection-mainInfo-text`}><span className={`${cname}-midSection-mainInfo-title`}>Snap Type -</span>{snapType(profileData[0]?.roles)}</p>
         <p className={`${cname}-midSection-mainInfo-text`}><span className={`${cname}-midSection-mainInfo-title`}>User Role -</span>{profileData[0]?.level}</p>
         { mapping[userLevel] >= 700 &&
-        <p className={`${cname}-midSection-mainInfo-text`}><span className={`${cname}-midSection-mainInfo-title`}>GrandfatherRank -</span>{profileData[0]?.gRanks[0]?.gRank} {profileData[0]?.gRanks ? <span>(till: {profileData[0]?.gRanks[0]?.to.split(" ")[0]})</span> : <></>} </p>
+        <p className={`${cname}-midSection-mainInfo-text`}><span className={`${cname}-midSection-mainInfo-title`}>GrandfatherRank -</span>{profileData[0]?.gRanks[0]?.status ? <span>{profileData[0]?.gRanks[0]?.gRank} {profileData[0]?.gRanks[0].gRank ? <span>(until: {profileData[0]?.gRanks[0]?.to.split(" ")[0]})</span> : <></>}</span> : <></>}</p>
         }
       </div>
     </>

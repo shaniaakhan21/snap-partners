@@ -37,7 +37,7 @@ export const Account = ({ email, name, phone, photoUrl, signOut, rank, roles, le
       {mapping[level] >= 500
         ? <div className='admin-tools-container'>
           <div>
-            <span className='text-l font-bold text-gray-700 whitespace-nowrap hidden sm:block'>Admin Tools</span>
+            <span className='text-l font-bold text-gray-700 whitespace-nowrap hidden sm:block cursor-pointer'><a onClick={() => { setAdminTools(!adminTools) }} >Admin Tools</a></span>
           </div>
           <ArrowDownIcon classes='cursor-pointer' onClick={() => { setAdminTools(!adminTools) }} />
           {

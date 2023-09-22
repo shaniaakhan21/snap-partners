@@ -10,6 +10,7 @@ import {
   CreditCardIcon,
   CubeIcon
 } from 'components/common/icons'
+import { PromotionIcon } from 'components/common/icons/Promotion'
 import { SnapPartnersIcon } from 'components/common/icons/SnapPartners'
 import { SnapWellnessIcon } from 'components/common/icons/SnapWellness'
 import { VidgoLogo } from 'components/common/illustrations'
@@ -133,6 +134,11 @@ export const drawerRoutes = [
     icon: <CompensationPlanIcon />,
     to: '/Documents',
     label: 'Documents'
+  },
+  {
+    icon: <PromotionIcon />,
+    to: '/promotion',
+    label: 'Snap Promos'
   }
 ]
 
