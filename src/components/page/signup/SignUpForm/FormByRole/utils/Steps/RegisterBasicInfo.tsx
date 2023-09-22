@@ -37,7 +37,7 @@ const capitalizeFirstLetter = (string) => {
 }
 
 const AskIfCorrect = (referralCode) => {
-// lets return a promise here
+  // lets return a promise here
   return new Promise((resolve, reject) => {
     let html = `
     You are signing up under <b>${referralCode}</b> is this correct?
@@ -208,11 +208,13 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
   const showSSNField = referralLink.role !== 'CUSTOMER' && referralLink.role !== 'integrousCustomer'
 
   const router = useRouter()
+
   const loginURL = router.pathname === '/auth/signup-integrous'
     ? '/auth/login-integrous'
     : router.pathname === '/auth/signup-wellness'
       ? '/auth/login-wellness'
       : '/auth/login'
+
   return (
     <>
       <div className='max-w-md mx-auto w-full'>
@@ -368,7 +370,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
               rulesForm={registerRulesConfig.ssn}
               isRequired={false}
               helpText='Optional field today but REQUIRED to receive commissions beyond $600'
-              style = {ssnHelptextDesign}
+              style={ssnHelptextDesign}
             />
           )}
 
@@ -413,7 +415,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             <BulletPagination stepToActivate='REGISTER_BASIC_INFO' />
 
             <Button type='submit' classes='w-full mt-4 text-sm bg-primary-500'>
-            Sign Up
+              Sign Up
             </Button>
 
             {role !== ROLES.IBO && <p className='mt-4'>

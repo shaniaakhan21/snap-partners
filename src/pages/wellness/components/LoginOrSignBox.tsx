@@ -5,7 +5,10 @@ import Router from 'next/router'
 
 const LoginOrSignBox = ({ isLoggedIn, userData }) => {
   const handleLogin = () => {
-    const referralCode = localStorage.getItem('referralCode') || 'NoSponsor'
+    const referralCodeFromLocalStorage = localStorage.getItem('referralCode')
+    const queryParams = new URLSearchParams(window.location.search)
+    const referralCodeFromQuery = queryParams.get('referralCode')
+    const referralCode = referralCodeFromLocalStorage || referralCodeFromQuery || 'NoSponsor'
     Router.push(`/auth/login-wellness?redirectToWellness=true&referralCode=${referralCode}`)
   }
   return (
