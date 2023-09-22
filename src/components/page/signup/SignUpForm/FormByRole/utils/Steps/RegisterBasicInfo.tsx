@@ -16,7 +16,7 @@ import { signUpStep1 } from 'lib/services/auth/signUp'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 import { GTMTrack } from 'lib/utils/gtm'
-import { useRouter } from 'next/router'
+import router, { useRouter } from 'next/router'
 import { ROLES } from './../../../../../../../config/roles'
 import Swal from 'sweetalert2'
 
@@ -207,11 +207,11 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
 
   const showSSNField = referralLink.role !== 'CUSTOMER' && referralLink.role !== 'integrousCustomer'
 
-  const router = useRouter()
+  const referralCode = router.query.referralCode || 'IntegrousWellness'
   const loginURL = router.pathname === '/auth/signup-integrous'
     ? '/auth/login-integrous'
     : router.pathname === '/auth/signup-wellness'
-      ? '/auth/login-wellness'
+      ? `/auth/login-wellness?referralCode=${referralCode}`
       : '/auth/login'
   return (
     <>

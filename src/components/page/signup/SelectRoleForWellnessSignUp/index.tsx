@@ -30,6 +30,13 @@ export const SelectRoleForWellnessSignUp = () => {
     router.push(role.link)
   }
 
+  const referralCode = router.query.referralCode || 'IntegrousWellness'
+  const loginURL = router.pathname === '/auth/signup-integrous'
+    ? '/auth/login-integrous'
+    : router.pathname === '/auth/signup-wellness'
+      ? `/auth/login-wellness?referralCode=${referralCode}`
+      : '/auth/login'
+
   return (
     <div className='text-center h-[85vh] flex flex-col justify-center items-center w-full'>
       <span className='text-3xl text-gray-800 font-bold'>Welcome To Snap Partners</span>
@@ -63,7 +70,7 @@ export const SelectRoleForWellnessSignUp = () => {
 
       <p>
         <span className='font-bold text-gray-800'>Already have an account?</span>
-        <Link href='/auth/login-wellness'>
+        <Link href={loginURL}>
           <a className='text-textAcent-500'> Login.</a>
         </Link>
       </p>
