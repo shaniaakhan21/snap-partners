@@ -5,12 +5,13 @@ import StarCheck from './StarCheck'
 
 const BottomSection = ({ sprintData }) => {
   const [ercModalData, setErcModalData] = useState(null)
+  const [personal, setPersonal] = useState(false)
 
   const refineData = (companies) => {
     if (companies.length > 0) {
       companies = [...companies.filter((element) => (element))].flat()
     }
-    console.log("qualifiied NC bottom section", companies)
+    console.log('qualifiied NC bottom section', companies)
     return companies
   }
   const [isModalOpen, setModalOpen] = useState(false)
@@ -37,10 +38,16 @@ const BottomSection = ({ sprintData }) => {
     <div className='p-2 lg:pl-8 lg:py-10'>
       <p className="text-base lg:text-2xl text-black font-semibold p-2 lg:pl-1">Either</p>
       <div className='flex flex-row items-center p-2 lg:pl-2'>
-        <p className="text-sm lg:text-lg text-black font-medium cursor-pointer" onClick={() => handleParagraphClick([...sprintData?.personalQualifiedErcCompanies.slice(1), ...sprintData?.personalNonQualifiedErcCompanies])}>a - Personally acquire an additional qualified ERC Client <span className='text-base text-gray-600'>(min 20 W-2's)</span></p>
+        <p className="text-sm lg:text-lg text-black font-medium cursor-pointer" onClick={() => {
+          handleParagraphClick([...sprintData?.personalQualifiedErcCompanies.slice(1), ...sprintData?.personalNonQualifiedErcCompanies])
+          setPersonal(true)
+        }}>a - Personally acquire an additional qualified ERC Client <span className='text-base text-gray-600'>(min 20 W-2's)</span></p>
       </div>
       <div className='flex flex-row items-center p-2 lg:pl-2'>
-        <p className="text-sm lg:text-lg text-black font-medium cursor-pointer" onClick={() => handleParagraphClick(refineData([...sprintData?.friendQualifiedErcArray.slice(1), ...sprintData?.friendNonQualifiedErcCompanies, ...sprintData?.friendOfFriendQualifiedErcArray.slice(1), ...sprintData?.friendOfFriendNonQualifiedErcCompanies]))}>b - Help a <b>unique IBO</b> within your first two organization tiers acquire a qualified ERC Client <span className='text-base text-gray-600'>(min 20 W-2's)</span></p>
+        <p className="text-sm lg:text-lg text-black font-medium cursor-pointer" onClick={() => {
+          handleParagraphClick(refineData([...sprintData?.friendQualifiedErcArray.slice(1), ...sprintData?.friendNonQualifiedErcCompanies, ...sprintData?.friendOfFriendQualifiedErcArray.slice(1), ...sprintData?.friendOfFriendNonQualifiedErcCompanies]))
+          setPersonal(false)
+        }}>b - Help a <b>unique IBO</b> within your first two organization tiers acquire a qualified ERC Client <span className='text-base text-gray-600'>(min 20 W-2's)</span></p>
       </div>
       <br></br>
       <div className='note-border'>
@@ -81,7 +88,7 @@ const BottomSection = ({ sprintData }) => {
         </div>
         <div className='w-1/3 mt-8 ml-3'>
           <div className='m-2 xs:m-6 xs:ml-3'>
-          <StarCheck
+            <StarCheck
               canToggle={false}
               backgroundColor={sprintData?.starArray && sprintData?.starArray[1] >= 2 ? 'bg-custom-green' : 'bg-custom-red'}
               borderIt= {sprintData?.starArray && sprintData?.starArray[1] >= 2 ? 'border-it-green' : 'border-it-red'}
@@ -92,7 +99,7 @@ const BottomSection = ({ sprintData }) => {
           </div>
 
           <div className='m-2 xs:m-6 xs:ml-3'>
-          <StarCheck
+            <StarCheck
               canToggle={false}
               backgroundColor={sprintData?.starArray && sprintData?.starArray[1] >= 5 ? 'bg-custom-green' : 'bg-custom-red'}
               borderIt= {sprintData?.starArray && sprintData?.starArray[1] >= 5 ? 'border-it-green' : 'border-it-red'}
@@ -103,7 +110,7 @@ const BottomSection = ({ sprintData }) => {
           </div>
 
           <div className='m-2 xs:m-6 xs:ml-3'>
-          <StarCheck
+            <StarCheck
               canToggle={false}
               backgroundColor={sprintData?.starArray && sprintData?.starArray[1] >= 8 ? 'bg-custom-green' : 'bg-custom-red'}
               borderIt= {sprintData?.starArray && sprintData?.starArray[1] >= 8 ? 'border-it-green' : 'border-it-red'}
@@ -115,7 +122,7 @@ const BottomSection = ({ sprintData }) => {
         </div>
         <div className='w-1/3 mt-8 ml-3'>
           <div className='m-2 xs:m-6 xs:ml-3'>
-          <StarCheck
+            <StarCheck
               canToggle={false}
               backgroundColor={sprintData?.starArray && sprintData?.starArray[1] >= 3 ? 'bg-custom-green' : 'bg-custom-red'}
               borderIt= {sprintData?.starArray && sprintData?.starArray[1] >= 3 ? 'border-it-green' : 'border-it-red'}
@@ -126,7 +133,7 @@ const BottomSection = ({ sprintData }) => {
           </div>
 
           <div className='m-2 xs:m-6 xs:ml-3'>
-          <StarCheck
+            <StarCheck
               canToggle={false}
               backgroundColor={sprintData?.starArray && sprintData?.starArray[1] >= 6 ? 'bg-custom-green' : 'bg-custom-red'}
               borderIt= {sprintData?.starArray && sprintData?.starArray[1] >= 6 ? 'border-it-green' : 'border-it-red'}
@@ -137,7 +144,7 @@ const BottomSection = ({ sprintData }) => {
           </div>
 
           <div className='m-2 xs:m-6 xs:ml-3'>
-          <StarCheck
+            <StarCheck
               canToggle={false}
               backgroundColor={sprintData?.starArray && sprintData?.starArray[1] >= 9 ? 'bg-custom-green' : 'bg-custom-red'}
               borderIt= {sprintData?.starArray && sprintData?.starArray[1] >= 9 ? 'border-it-green' : 'border-it-red'}
@@ -149,7 +156,7 @@ const BottomSection = ({ sprintData }) => {
         </div>
       </div>
       {isModalOpen && (
-        <ERCTableModal open={isModalOpen} onClose={handleCloseModal} sprintData={sprintData} ercModalData={ercModalData} />
+        <ERCTableModal open={isModalOpen} onClose={handleCloseModal} sprintData={sprintData} ercModalData={ercModalData} personal={personal} />
       )}
       {isModalOpenIBO && (
         <IBOTableModal open={isModalOpenIBO} onClose={handleCloseModalIBO} sprintData={sprintData} />
