@@ -20,14 +20,19 @@ import { getLocalStorage, setLocalStorage } from 'lib/utils/localStorage'
 import axios from 'axios'
 import Referrals from 'components/common/overview/Referrals'
 import { useAuthStore } from 'lib/stores'
-import GrowthSummary from "../components/common/overview/GrowthSummary";
+import GrowthSummary from '../components/common/overview/GrowthSummary'
 import TotalLeg from './backOfficeDashboard'
 import PVComponentSnap from 'components/common/dashBackOffice/PersonalVolumeSnap'
+import Modal from '@mui/material/Modal'
+import Button from '@mui/material/Button'
+import ContractModal from './wellness/components/ContractModal'
 
 const { SEO } = APP_INFO
 
 const DashboardOverViewPage: Page = () => {
   // const { loading } = useReports()
+  const [openModal, setOpenModal] = useState(false)
+  const [signedContract, setSignedContract] = useState(false)
   const [rankData, setRankData] = useState<RankData>(null)
   const [lastMonth, setLastMonth] = useState<boolean>(false)
   const store = useAuthStore()
@@ -36,6 +41,18 @@ const DashboardOverViewPage: Page = () => {
   const currentOverview = getLocalStorage('currentBackoffice') || ''
   const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
   const isIntegrousAssociate = auth.roles.integrousAssociate
+
+  useEffect(() => {
+    const hasSignedContract = false
+    setSignedContract(hasSignedContract)
+    if (!hasSignedContract) {
+      setOpenModal(true)
+    }
+  }, [])
+
+  const handleCloseModal = () => {
+    setOpenModal(false)
+  }
 
   useEffect(() => {
     (async () => {
@@ -91,10 +108,10 @@ const DashboardOverViewPage: Page = () => {
             <GrowthSummary />
           </div>
           <div className='mt-4 bg-white rounded-lg'>
-           <MonthlySubscription />
+            <MonthlySubscription />
           </div>
           <div className='mt-4 bg-white rounded-lg'>
-           <MonthlyProduction />
+            <MonthlyProduction />
           </div>
         </div>
         <div className='ml-4'>
@@ -108,8 +125,9 @@ const DashboardOverViewPage: Page = () => {
         </div>
       </div>
       <div className='col-span-12 mt-4'>
-       <Referrals rankData={rankData} />
-       </div>
+        <Referrals rankData={rankData} />
+      </div>
+      <ContractModal open={openModal} onClose={handleCloseModal} />
     </>
   )
 }
