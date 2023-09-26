@@ -6,7 +6,7 @@ import SingleItem from './SingleItem'
 import axios from 'axios'
 import { Grid } from '@mui/material'
 
-export default function MockUpItems ({ collectionId }) {
+export default function MockUpItems ({ collectionId, referralCode }) {
   const [products, setProducts] = React.useState([])
   React.useEffect(() => {
     async function Shopify () {
@@ -41,6 +41,7 @@ export default function MockUpItems ({ collectionId }) {
               price={`$${product.node.variants.edges[0].node.price.amount}`}
               btnLabel="Add to Cart"
               index={index}
+              referralCode={referralCode}
             />
           </Grid>
         ))}

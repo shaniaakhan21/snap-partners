@@ -121,7 +121,7 @@ const ReferralsPage: Page = () => {
         <ReferralCards
           title='Refer a Wellness Customer'
           ilustration={<img src={'/static/wellness/wellness_logo.svg'} width={100} />}
-          link={`${auth.referralLinkWellness}&role=${ROLES.CUSTOMER}` || 'With Out Link'}
+          link={`${auth.referralLinkWellness}` || 'With Out Link'}
           newUser={false}
           classes='col-span-1'
         />

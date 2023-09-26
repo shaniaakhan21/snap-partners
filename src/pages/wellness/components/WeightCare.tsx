@@ -8,7 +8,7 @@ import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Router from 'next/router'
 
-const WeightCare = ({ isLoggedIn }) => {
+const WeightCare = ({ isLoggedIn, referralCode }) => {
   const [nmiVariables, setNmiVariables] = useState({
     order_description: '',
     hash: ''
@@ -17,8 +17,7 @@ const WeightCare = ({ isLoggedIn }) => {
   const [open, setOpen] = useState(false)
 
   const handleLogin = () => {
-    const referralCode = localStorage.getItem('referralCode') || 'NoSponsor'
-    Router.push(`/auth/login-wellness?redirectToWellness=true&referralCode=${referralCode}`)
+    Router.push(`/auth/login-wellness?redirectToWellness=true&referralCode=${referralCode || 'NoSponsor'}`)
   }
   const handleOpen = () => {
     setOpen(true)

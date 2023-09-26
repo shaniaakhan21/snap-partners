@@ -14,7 +14,7 @@ interface ProductCardProps {
   products: ProductInfo[];
 }
 
-const ProductCard = ({ userId, collectionId, isLoggedIn }) => {
+const ProductCard = ({ userId, collectionId, isLoggedIn, referralCode }) => {
   let ShopifyBuy:any
   React.useEffect(() => {
     // if (isLoggedIn && isAssociate !== null)
@@ -58,7 +58,7 @@ const ProductCard = ({ userId, collectionId, isLoggedIn }) => {
     <div className="flex md:flex-row flex-col justify-start items-center">
       { isLoggedIn
         ? <div id='collection-component-tabs'></div>
-        : <MockUpItems collectionId={collectionId} />
+        : <MockUpItems collectionId={collectionId} referralCode={referralCode} />
       }
     </div>
   )

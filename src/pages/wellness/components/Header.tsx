@@ -3,6 +3,7 @@ import { Link, Menu, MenuItem, IconButton, IconButtonProps } from '@mui/material
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import Router from 'next/router'
 import { Button } from 'components/common/Button'
+import { useAuthStore } from 'lib/stores'
 
 interface HeaderProps {
   logoSrc?: string;
@@ -11,7 +12,7 @@ interface HeaderProps {
   profilePic?: string;
   profileName?: string;
   isLoggedIn?: boolean;
-  setIsLoggedIn?: any
+  userData?: any;
   onLogout?: () => void;
 }
 
@@ -23,36 +24,30 @@ const Header = ({
   profileName = 'Jason White',
   onLogout = () => {},
   isLoggedIn,
-  setIsLoggedIn
+  userData
 }: HeaderProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-  const [userData, setUserData] = useState(null)
+  const { removeAuth } = useAuthStore()
   const open = Boolean(anchorEl)
 
   const handleClick: IconButtonProps['onClick'] = (event) => {
     setAnchorEl(event.currentTarget)
   }
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      setUserData(JSON.parse(localStorage.getItem('userData')))
-    }
-  }, [isLoggedIn])
-
   const handleClose = () => {
     setAnchorEl(null)
   }
 
   const handleLogout = () => {
-    localStorage.removeItem('access_token')
-    localStorage.removeItem('userName')
-    localStorage.removeItem('userData')
-    setIsLoggedIn(false)
-    Router.push('/wellness')
+    removeAuth()
+    window.location.reload()
   }
 
   const handleLogin = () => {
-    const referralCode = localStorage.getItem('referralCode') || 'NoSponsor'
+    const referralCodeFromLocalStorage = localStorage.getItem('referralCode')
+    const queryParams = new URLSearchParams(window.location.search)
+    const referralCodeFromQuery = queryParams.get('referralCode')
+    const referralCode = referralCodeFromLocalStorage || referralCodeFromQuery || 'NoSponsor'
     Router.push(`/auth/login-wellness?redirectToWellness=true&referralCode=${referralCode}`)
   }
 

@@ -43,7 +43,8 @@ module.exports = {
           500: '#C54532'
         },
         textAcent: {
-          500: '#E35C49'
+          500: '#E35C49',
+          600: '#E74426'
         },
         textHint: '#8C92A9',
         gray: {
