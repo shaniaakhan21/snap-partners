@@ -62,7 +62,7 @@ const rows = [
   }
 ]
 
-const ERCClientsTable = ({ sprintData, ercModalData }) => {
+const ERCClientsTable = ({ sprintData, ercModalData, personal }) => {
   const [windowWidth, setWindowWidth] = useState(0)
 
   useEffect(() => {
@@ -99,6 +99,19 @@ const ERCClientsTable = ({ sprintData, ercModalData }) => {
       headerName: 'Company ID',
       flex: windowWidth <= 400 ? 1 : 1
     },
+    personal
+      ? {
+        field: 'company_name',
+        headerName: 'Company Name',
+        type: 'string',
+        flex: windowWidth <= 400 ? 1 : 1
+      }
+      : {
+        field: null,
+        headerName: null,
+        type: null,
+        flex: null
+      },
     {
       field: 'date',
       headerName: 'Date',
@@ -107,7 +120,7 @@ const ERCClientsTable = ({ sprintData, ercModalData }) => {
     },
     {
       field: 'min_w2',
-      headerName: "Min_w2's",
+      headerName: "Min 20 w2's",
       type: 'boolean',
       flex: windowWidth <= 400 ? 1 : 1
     },
@@ -138,7 +151,7 @@ const ERCClientsTable = ({ sprintData, ercModalData }) => {
   ]
   return (
     <div className='w-10/12 sm:w-5/12 bg-white rounded-lg p-6  top-[-8%] relative'>
-      <h1 className='text-lg sm:text-2xl font-bold'>ERC Clients</h1>
+      <h1 className='text-lg sm:text-2xl font-bold'>{personal ? 'Eligible Personal ERC Clients' : 'Eligible Team ERC Clients'}</h1>
       <br></br>
       <div className="datagrid-container" style={{ overflowX: 'auto' }}>
         <div style={{ minWidth: '500px' }}>

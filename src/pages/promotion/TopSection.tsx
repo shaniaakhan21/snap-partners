@@ -52,12 +52,13 @@ const CheckboxItem = ({
 const TopSection = ({ sprintData }) => {
   const [isModalOpen, setModalOpen] = useState(false)
   const [ercModalData, setErcModalData] = useState(null)
+  const [personal, setPersonal] = useState(false)
 
   const refineData = (companies) => {
     if (companies.length > 0) {
       companies = [...companies.filter((element) => (element))].flat()
     }
-    console.log("qualifiied NC", companies)
+    console.log('qualifiied NC', companies)
     return companies
   }
 
@@ -89,8 +90,11 @@ const TopSection = ({ sprintData }) => {
       <br></br>
       <p className="text-base lg:text-2xl text-black font-semibold p-2 lg:pl-2">You do 5&1</p>
       <div className='flex flex-row items-center'>
-        <CheckboxItem checkboxColor={sprintData?.personalQualifiedErc === true ? '#6AB63C' : '#edd607'} checkboxCheckedColor={sprintData?.personalQualifiedErc === true ? '#79CC47' : '#FFE500'} canToggle={false} accepted={sprintData?.personalQualifiedErc === true } />
-        <a className="text-sm lg:text-lg text-black font-medium cursor-pointer" onClick={() => handleParagraphClick([...sprintData?.personalQualifiedErcCompanies, ...sprintData?.personalNonQualifiedErcCompanies])}>Acquire a qualified ERC Client <span className='text-xs lg:text-base text-gray-600'>(min 20 W-2's) </span></a>
+        <CheckboxItem checkboxColor={sprintData?.personalQualifiedErc === true ? '#6AB63C' : '#6AB63C'} checkboxCheckedColor={sprintData?.personalQualifiedErc === true ? '#79CC47' : '#FFE500'} canToggle={false} accepted={sprintData?.personalQualifiedErc === true } />
+        <a className="text-sm lg:text-lg text-black font-medium cursor-pointer" onClick={() => {
+          handleParagraphClick([...sprintData?.personalQualifiedErcCompanies, ...sprintData?.personalNonQualifiedErcCompanies])
+          setPersonal(true)
+        }}>Acquire a qualified ERC Client <span className='text-xs lg:text-base text-gray-600'>(min 20 W-2's) </span></a>
       </div>
       <div className='flex flex-row items-center'>
         <CheckboxItem checkboxColor={'#6AB63C'} checkboxCheckedColor={'#79CC47'} canToggle={false} accepted={sprintData?.personalFiveIbo === true } />
@@ -100,7 +104,10 @@ const TopSection = ({ sprintData }) => {
       <p className="text-base lg:text-2xl text-black font-semibold p-2 lg:pl-2">Help a directly sponsored friend (IBO) do 5&1 </p>
       <div className='flex flex-row items-center  mt-2'>
         <CheckboxItem checkboxColor={'#6AB63C'} checkboxCheckedColor={'#79CC47'} canToggle={false} accepted={sprintData?.friendQualifiedErc === true} />
-        <a className="text-sm lg:text-lg text-black font-medium cursor-pointer" onClick={() => handleParagraphClick(refineData([...sprintData?.friendQualifiedErcArray, ...sprintData?.friendNonQualifiedErcCompanies]))}><span className='font-bold' >Friend</span> - Acquires a qualified ERC Client <span className='text-xs lg:text-base text-gray-600'>(min 20 W-2's) </span> </a>
+        <a className="text-sm lg:text-lg text-black font-medium cursor-pointer" onClick={() => {
+          handleParagraphClick(refineData([...sprintData?.friendQualifiedErcArray, ...sprintData?.friendNonQualifiedErcCompanies]))
+          setPersonal(false)
+        }}><span className='font-bold' >Friend</span> - Acquires a qualified ERC Client <span className='text-xs lg:text-base text-gray-600'>(min 20 W-2's) </span> </a>
       </div>
       <div className='flex flex-row items-center'>
         <CheckboxItem checkboxColor={'#6AB63C'} checkboxCheckedColor={'#79CC47'} canToggle={false} accepted={sprintData?.friendFiveIbo === true} />
@@ -110,7 +117,10 @@ const TopSection = ({ sprintData }) => {
       <p className="text-base lg:text-2xl text-black font-semibold p-2 lg:pl-2">Friend helps a directly sponsored Friend</p>
       <div className='flex flex-row align-start'>
         <CheckboxItem checkboxColor={'#6AB63C'} checkboxCheckedColor={'#79CC47'} canToggle={false} accepted={sprintData?.friendOfFriendQualifiedErc === true} />
-        <p className="text-sm lg:text-lg text-black font-medium mt-2 cursor-pointer" onClick={() => handleParagraphClick(refineData([...sprintData?.friendOfFriendQualifiedErcArray, ...sprintData?.friendOfFriendNonQualifiedErcCompanies]))}><span className='font-bold' >Friend</span> - Helps one of their personally sponsored IBO’s acquire a qualified ERC Client  <span className='text-xs lg:text-base text-gray-600'>(on your level 2)</span> </p>
+        <p className="text-sm lg:text-lg text-black font-medium mt-2 cursor-pointer" onClick={() => {
+          handleParagraphClick(refineData([...sprintData?.friendOfFriendQualifiedErcArray, ...sprintData?.friendOfFriendNonQualifiedErcCompanies]))
+          setPersonal(false)
+        }}><span className='font-bold' >Friend</span> - Helps one of their personally sponsored IBO’s acquire a qualified ERC Client  <span className='text-xs lg:text-base text-gray-600'>(on your level 2)</span> </p>
       </div>
       <div className='w-1/4 mt-8 ml-3'>
         <StarCheck
@@ -122,7 +132,7 @@ const TopSection = ({ sprintData }) => {
           textColor='text-white' canToggle={false} accepted={sprintData && sprintData.starArray?.length > 0 && sprintData?.starArray[0] === 1} />
       </div>
       {isModalOpen && (
-        <ERCTableModal open={isModalOpen} onClose={handleCloseModal} sprintData={sprintData} ercModalData={ercModalData} />
+        <ERCTableModal open={isModalOpen} onClose={handleCloseModal} sprintData={sprintData} ercModalData={ercModalData} personal={personal} />
       )}
       {isModalOpenIBO && (
         <IBOTableModal open={isModalOpenIBO} onClose={handleCloseModalIBO} sprintData={sprintData} />
