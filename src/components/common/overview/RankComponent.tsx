@@ -87,7 +87,7 @@ export default function RankComponent (props: RankComponentProps) {
                     You need 100 PVC
                   </strong>
                 </div>
-                <BarWithText progressColor={'#C99FFF'} value={+rankData.mng.commissionVol} variant={'determinate'} />
+                <BarWithText progressColor={'#C99FFF'} value={+rankData.mng.commissionVol > 100 ? 100 : +rankData.mng.commissionVol} variant={'determinate'} />
               </div>
               </>
             }
@@ -113,7 +113,7 @@ export default function RankComponent (props: RankComponentProps) {
                     You need 100 PVC
                   </strong>
                 </div>
-                <BarWithText progressColor={'#54A52C'} value={+rankData.sv.commissionVol} variant={'determinate'} />
+                <BarWithText progressColor={'#54A52C'} value={+rankData.sv.commissionVol > 100 ? 100 : +rankData.sv.commissionVol} variant={'determinate'} />
               </div>
 
               <div className="flex pt-2">
@@ -171,7 +171,7 @@ export default function RankComponent (props: RankComponentProps) {
                     You need 100 PVC
                   </strong>
                 </div>
-                <BarWithText progressColor={'#F18A00'} value={+rankData.dct.commissionVol} variant={'determinate'} />
+                <BarWithText progressColor={'#F18A00'} value={+rankData.dct.commissionVol > 100 ? 100 : +rankData.dct.commissionVol} variant={'determinate'} />
               </div>
               <div className="flex pt-2">
                 <span className="text-left text-10"><strong>{`You have ${rankData.dct.PSMRatio} PSM`}</strong></span>
@@ -228,7 +228,7 @@ export default function RankComponent (props: RankComponentProps) {
                     You need 100 PVC
                   </strong>
                 </div>
-                <BarWithText progressColor={'#000000'} value={+rankData.exec.commissionVol} variant={'determinate'} />
+                <BarWithText progressColor={'#000000'} value={+rankData.exec.commissionVol > 100 ? 100 : +rankData.exec.commissionVol} variant={'determinate'} />
               </div>
               <div className="flex pt-2">
                 <span className="text-left text-10"><strong>{`You have ${rankData.exec.PSMRatio} PSM`}</strong></span>
