@@ -64,10 +64,16 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
   if (client.excelTeam) phase2Progress++
   if (client.docSentForSignature) phase2Progress++
   if (client.docForSignatureReturned) phase2Progress++
-  if (client.quarters?.length > 0 && client.quarters.some(quarter => quarter.amount !== '')) phase2Progress++
+  const filedWithIRS = client.quarters?.length > 0 &&
+  client.quarters.filter(quarter => quarter.amount !== '')
+    .every(quarterWithAmount => quarterWithAmount.amount !== '0' ? !!quarterWithAmount.dateFiled : true)
+  if (filedWithIRS) phase2Progress++
 
   // if any step is done in phase 2, fill all phase1 steps
   if (phase2Progress > 0) phase1Progress = phase1StepCount
+
+  const totalCV = client.quarters.reduce((prev, curr) => Number(curr.amount ? curr.amount : 0) + prev, 0) * 0.1
+  const phase2CV = totalCV * 0.1
   return (
     <div>
       {isOpen && (
@@ -110,11 +116,11 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                 <div className="py-3 px-2.5">
                   <div className="flex justify-between text-lg font-semibold">
                     <div>Your Payment</div>
-                    <div>200$</div>
+                    <div>$200</div>
                   </div>
                   <div className="flex justify-between text-xs">
                     <div>10% of CV</div>
-                    <div>DD//MM//YYYY</div>
+                    <div>MM/DD/YYYY</div>
                   </div>
                 </div>
                 <div className="flex justify-center">
@@ -158,12 +164,16 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                 </div>
                 <div className="py-3 px-2.5">
                   <div className="flex justify-between text-lg font-semibold">
-                    <div>Your Payment</div>
-                    <div>200$</div>
+                    <span>Your Payment</span>
+                    <span>${phase2CV}</span>
                   </div>
                   <div className="flex justify-between text-xs">
-                    <div>10% of CV</div>
-                    <div>DD//MM//YYYY</div>
+                    <span>10% of CV</span>
+                    <span>MM/DD/YYYY</span>
+                  </div>
+                  <div className="flex justify-between text-xs font-bold">
+                    <span>Total CV for this account</span>
+                    <span>${totalCV}</span>
                   </div>
                 </div>
                 <div className="flex justify-center">
@@ -182,8 +192,8 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                 </div>
                 <Step
                   number={5}
-                  title='Filled With IRS Date'
-                  filled={client.quarters?.length > 0 || phase2Progress === phase2StepCount}
+                  title='Filed With IRS Date'
+                  filled={filedWithIRS || phase2Progress === phase2StepCount}
                   filledColor={'textAcent-100'}
                   color={'textAcent-100'}/>
                 <Step
@@ -235,11 +245,11 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                 <div className="py-3 px-2.5">
                   <div className="flex justify-between text-lg font-semibold">
                     <div>Your Payment</div>
-                    <div>200$</div>
+                    <div>$200</div>
                   </div>
                   <div className="flex justify-between text-xs">
                     <div>10% of CV</div>
-                    <div>DD//MM//YYYY</div>
+                    <div>MM/DD/YYYY</div>
                   </div>
                 </div>
                 <div className="flex justify-center">
