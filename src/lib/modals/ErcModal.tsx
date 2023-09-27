@@ -95,7 +95,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                 </div>
               </div>
               <div className="flex space-x-5 px-2.5 py-5 items-center">
-                <div className="text-sm">Signup Date: {dayjs(client.signupDate).format('MM/DD/YYYY')}</div>
+                <div className="text-sm">Signup Date: {dayjs(client.signupDate, 'MM-DD-YYYY hh:mm a').format('MM/DD/YYYY')}</div>
                 <div className="text-xs text-textAcent-500">{client.email}</div>
                 <div className="text-xs text-textAcent-500">{client.phone}</div>
               </div>
@@ -169,7 +169,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                 <div className="py-3 px-2.5">
                   <div className="flex justify-between text-lg font-semibold">
                     <span>Your Payment</span>
-                    <span>${phase2CV}</span>
+                    <span>${phase2CV.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-xs">
                     <span>10% of CV</span>
@@ -177,7 +177,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                   </div>
                   <div className="flex justify-between text-xs font-bold">
                     <span>Total CV for this account</span>
-                    <span>${totalCV}</span>
+                    <span>${totalCV.toFixed(2)}</span>
                   </div>
                 </div>
                 <div className="flex justify-center">
@@ -203,28 +203,28 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                 <Step
                   number={4}
                   title='Doc for signature returned'
-                  date={client.docForSignatureReturned ? dayjs(client.docForSignatureReturned).format('MM/DD/YYYY') : ''}
+                  date={client.docForSignatureReturned ? dayjs(client.docForSignatureReturned, 'MM-DD-YYYY hh:mm a').format('MM/DD/YYYY') : ''}
                   filled={client.docForSignatureReturned || phase2Progress === phase2StepCount}
                   filledColor={'textAcent-100'}
                   color={'textAcent-100'}/>
                 <Step
                   number={3}
                   title='Doc Sent for signature'
-                  date={client.docSentForSignature ? dayjs(client.docSentForSignature).format('MM/DD/YYYY') : ''}
+                  date={client.docSentForSignature ? dayjs(client.docSentForSignature, 'MM-DD-YYYY hh:mm a').format('MM/DD/YYYY') : ''}
                   filled={client.docSentForSignature || phase2Progress === phase2StepCount}
                   filledColor={'textAcent-100'}
                   color={'textAcent-100'}/>
                 <Step
                   number={2}
                   title='Excel Team'
-                  date={client.excelTeam ? dayjs(client.excelTeam).format('MM/DD/YYYY') : ''}
+                  date={client.excelTeam ? dayjs(client.excelTeam, 'MM-DD-YYYY hh:mm a').format('MM/DD/YYYY') : ''}
                   filled={client.excelTeam || phase2Progress === phase2StepCount}
                   filledColor={'textAcent-100'}
                   color={'textAcent-100'}/>
                 <Step
                   number={1}
                   title='Docs Collected'
-                  date={client.docsCollected ? dayjs(client.docsCollected).format('MM/DD/YYYY') : ''}
+                  date={client.docsCollected ? dayjs(client.docsCollected, 'MM-DD-YYYY hh:mm a').format('MM/DD/YYYY') : ''}
                   filled={client.docsCollected || phase2Progress === phase2StepCount}
                   filledColor={'textAcent-100'}
                   color={'textAcent-100'}/>
