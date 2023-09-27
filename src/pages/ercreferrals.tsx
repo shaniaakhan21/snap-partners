@@ -13,6 +13,9 @@ import PersonListTable from 'components/page/erc/PersonListTable'
 import ShowDetailedTables from 'components/page/erc/ShowDetailedTables'
 import { Spinner } from 'components/common/loaders'
 import { Client, LevelledClient } from 'lib/types/transaction'
+import dayjs from 'dayjs'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+dayjs.extend(customParseFormat) // Extend dayjs with the plugin. Required for Safari
 
 const { SEO } = APP_INFO
 const CLIENT_PAGE_LIMIT = 10
@@ -98,6 +101,7 @@ const ErcreferralsPage: Page = () => {
     getTeamClients()
   }, [monthSelected, yearSelected])
 
+  const a = "08-15-2023 09:32 am"
   return (
     <>
       <div id="cro-erc-process">

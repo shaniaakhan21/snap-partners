@@ -1,7 +1,9 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
 import dayjs from 'dayjs'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { Client } from 'lib/types/transaction'
+dayjs.extend(customParseFormat) // Extend dayjs with the plugin. Required for Safari
 
 type ErcModalProps = {
   client: Client
@@ -95,7 +97,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                 </div>
               </div>
               <div className="flex space-x-5 px-2.5 py-5 items-center">
-                <div className="text-sm">Signup Date: {dayjs(client.signupDate, 'MM-DD-YYYY hh:mm a').format('MM/DD/YYYY')}</div>
+                <div className="text-sm">Signup Date: {dayjs(client.signupDate, 'MM-DD-YYYY').format('MM/DD/YYYY')}</div>
                 <div className="text-xs text-textAcent-500">{client.email}</div>
                 <div className="text-xs text-textAcent-500">{client.phone}</div>
               </div>

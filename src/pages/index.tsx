@@ -2,8 +2,6 @@ import { useRouter } from 'next/router'
 import { toast } from 'react-toastify'
 import { useEffect } from 'react'
 import Head from 'next/head'
-import dayjs from 'dayjs'
-import customParseFormat from 'dayjs/plugin/customParseFormat'
 
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import { getLocalStorage } from 'lib/utils/localStorage'
@@ -19,7 +17,6 @@ import { ContentDesktop } from 'components/page/home/ContentDesktop'
 import { builderWebsiteFields } from '../lib/types/user/profile'
 
 const { SEO } = APP_INFO
-dayjs.extend(customParseFormat) // Extend dayjs with the plugin. Required for Safari
 
 const HomePage: Page = () => {
   const { auth, setAuth } = useAuthStore()
