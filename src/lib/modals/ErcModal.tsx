@@ -72,7 +72,11 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
   // if any step is done in phase 2, fill all phase1 steps
   if (phase2Progress > 0) phase1Progress = phase1StepCount
 
-  const totalCV = client.quarters.reduce((prev, curr) => Number(curr.amount ? curr.amount : 0) + prev, 0) * 0.1
+  const totalCV = client.quarters?.reduce((acc, curr) => {
+  // Remove dollar sign and convert to float, if amount is null then take 0
+    const amount = parseFloat(curr.amount ? curr.amount.replace('$', '') : '0')
+    return acc + amount
+  }, 0)
   const phase2CV = totalCV * 0.1
   return (
     <div>
