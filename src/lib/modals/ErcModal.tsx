@@ -80,6 +80,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
     return acc + amount
   }, 0)
   const phase2CV = totalCV * 0.1
+  const phase3CV = totalCV * 0.9
   return (
     <div>
       {isOpen && (
@@ -250,12 +251,16 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                 </div>
                 <div className="py-3 px-2.5">
                   <div className="flex justify-between text-lg font-semibold">
-                    <div>Your Payment</div>
-                    <div>$200</div>
+                    <span>Your Payment</span>
+                    <span>${phase3CV.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-xs">
-                    <div>10% of CV</div>
-                    <div>MM/DD/YYYY</div>
+                    <span>90% of CV</span>
+                    <span>MM/DD/YYYY</span>
+                  </div>
+                  <div className="flex justify-between text-xs font-bold">
+                    <span>Total CV for this account</span>
+                    <span>${totalCV.toFixed(2)}</span>
                   </div>
                 </div>
                 <div className="flex justify-center">
@@ -270,7 +275,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                   </svg>
                 </div>
                 <div className="py-3 px-2.5">
-                  <div>Next Step</div>
+                  <div>Coming Soon.</div>
                 </div>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
