@@ -54,7 +54,8 @@ interface IQueryUserMeReturn extends IQueryErrorReturn {
       accountNumber: string
       accountHolderName: string
     },
-    level?: string
+    level?: string,
+    isCertified?: boolean
   }
 }
 

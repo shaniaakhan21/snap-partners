@@ -31,24 +31,16 @@ const { SEO } = APP_INFO
 
 const DashboardOverViewPage: Page = () => {
   // const { loading } = useReports()
-  const [openModal, setOpenModal] = useState(false)
   const [signedContract, setSignedContract] = useState(false)
   const [rankData, setRankData] = useState<RankData>(null)
   const [lastMonth, setLastMonth] = useState<boolean>(false)
   const store = useAuthStore()
   const auth: any = store.auth
+  const [openModal, setOpenModal] = useState(!auth.isCertified)
 
   const currentOverview = getLocalStorage('currentBackoffice') || ''
   const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
   const isIntegrousAssociate = auth.roles.integrousAssociate
-
-  useEffect(() => {
-    const hasSignedContract = false
-    setSignedContract(hasSignedContract)
-    if (!hasSignedContract) {
-      setOpenModal(true)
-    }
-  }, [])
 
   const handleCloseModal = () => {
     setOpenModal(false)
