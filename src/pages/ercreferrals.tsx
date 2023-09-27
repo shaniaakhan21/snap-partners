@@ -54,6 +54,7 @@ const ErcreferralsPage: Page = () => {
       })
       const data = await res.json()
       setPersonalClients(data)
+      console.log({ clientsPersonal: data })
       if (page === 1) setTotalClientCount(data.length)
     } catch (error) {
       // ignore
@@ -79,6 +80,7 @@ const ErcreferralsPage: Page = () => {
         }
       )
       const data = await res.json()
+      console.log({ clientsTeam: data })
       setTeamClients(data)
     } catch (e) {
       // ignore

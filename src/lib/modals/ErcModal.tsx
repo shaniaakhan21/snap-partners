@@ -119,7 +119,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                     <div>$200</div>
                   </div>
                   <div className="flex justify-between text-xs">
-                    <div>10% of CV</div>
+                    <div>CV = $500</div>
                     <div>MM/DD/YYYY</div>
                   </div>
                 </div>
