@@ -123,7 +123,7 @@ export default function WeeklyBinary () {
               <Select onChange={(e) => timingStatusTracker(e)} className={classes.dropdown}>
                 <MenuItem value="">None</MenuItem>
                 {
-                  Array.from({ length: 10 }).map((item, index) => (
+                  Array.from({ length: 26 }).map((item, index) => (
                     <MenuItem value={index + 1}>{index + 1} Week ago</MenuItem>
                   ))
                 }
