@@ -38,8 +38,9 @@ const rows = [
   }
 ]
 
-const StarAchieversTable = () => {
+const StarAchieversTable = ({ userSprintData }) => {
   const [windowWidth, setWindowWidth] = useState(0)
+  const [sprintDataRow, setSprintDataRow] = useState(userSprintData)
 
   useEffect(() => {
     const handleResize = () => {
@@ -53,6 +54,11 @@ const StarAchieversTable = () => {
     }
   }, [])
 
+  useEffect(() => {
+    setSprintDataRow(userSprintData)
+  }, [userSprintData])
+
+  console.log('sprint data row is', sprintDataRow)
   const columns = [
     {
       field: 'name',
@@ -62,7 +68,7 @@ const StarAchieversTable = () => {
     {
       field: 'date',
       headerName: 'Date',
-      type: 'date',
+      type: 'string',
       flex: windowWidth <= 400 ? 0.5 : 1
     }
   ]
@@ -73,7 +79,7 @@ const StarAchieversTable = () => {
       <div className="datagrid-container"style={{ overflowX: 'auto' }}>
         <div style={{ minWidth: '300px' }}>
           <StyledDataGrid
-            rows={rows}
+            rows={sprintDataRow}
             columns={columns}
             sx={{
               height: '214px',
