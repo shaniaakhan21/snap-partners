@@ -3,49 +3,16 @@ import { Button } from 'components/common/Button'
 import { Close as CrossIcon } from '@mui/icons-material'
 import ContractTextHead from './ContractTextHead'
 import EastIcon from '@mui/icons-material/East'
-import { useState } from 'react'
-import axios from 'axios'
-import { useAuthStore } from 'lib/stores'
-import { getLocalStorage } from 'lib/utils/localStorage'
-
 
 interface ContractModalProps {
   open: boolean;
   onClose: () => void;
 }
 
-const ContractModal = ({ open, onClose }: ContractModalProps) => {
+const SignedCert = ({ open, onClose }: ContractModalProps) => {
   const logoSrc = '/static/wellness/wellness_logo.svg'
   const logoAlt = 'Wellness Logo'
-  const [checkedValue, setCheckedValue] = useState(false)
-  const { auth, setAuth } = useAuthStore()
 
-  const handleCertificateSubmit = () => {
-    const token = getLocalStorage('accessToken')
-    if (checkedValue) {
-      axios.post('/api/user/isCertified', { isCertified: checkedValue }, {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      })
-        .then((result) => {
-          if (result.data.result[0] === 1) {
-            setAuth({ ...auth, isCertified: checkedValue })
-            onClose()
-          } else {
-            alert('error while confirming certificate')
-            onClose()
-          }
-        })
-        .catch((e) => {
-          console.log('error while setting certification', e)
-          alert('error while confirming certificate')
-          onClose()
-        })
-    } else {
-      onClose()
-    }
-  }
   return (
     <Modal
       open={open}
@@ -162,30 +129,6 @@ const ContractModal = ({ open, onClose }: ContractModalProps) => {
               </div>
             </div>
           </div>
-          <div className='px-10 py-10 bg-gray-200 rounded-xl m-12 mt-0'>
-            <div className='border-b-2 border-slate-300 pb-5'>
-              <p>Violation of these terms will result in the immediate termination of your IBO Agreement and result in your full legal and civil liability with regard to any consumer complaints and/or lawsuits. Please contact <b>compliance@mysnappartners.com</b> with any questions</p>
-            </div>
-            <div className='flex flex-row items-center pt-5'>
-              <Checkbox checked={checkedValue} onChange={(e) => { setCheckedValue(!checkedValue) }} />
-              <p>By checking this box, I agree to be bound to the terms of the Snap Partners WeightCare Certification.</p>
-            </div>
-          </div>
-          <div className='text-center md:text-left flex justify-center items-center'>
-            <Button
-              classes='text-lg  bg-primary-500 rounded-lg px-2 px-7 py-3 w-[10%] flex flex-row justify-between'
-              onClick={() => {
-                handleCertificateSubmit()
-              }}
-            >
-              <div>
-                Okay
-              </div>
-              <div>
-                <EastIcon />
-              </div>
-            </Button>
-          </div>
         </div>
       </div>
 
@@ -193,4 +136,4 @@ const ContractModal = ({ open, onClose }: ContractModalProps) => {
   )
 }
 
-export default ContractModal
+export default SignedCert
