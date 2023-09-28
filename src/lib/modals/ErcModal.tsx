@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-use-before-define
-import React from 'react'
+import React, { useState } from 'react'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { Client } from 'lib/types/transaction'
@@ -11,9 +11,12 @@ type ErcModalProps = {
   onClose: () => void;
 };
 
-const Step = ({ number, title, date = undefined, filled, filledColor, color }) => {
+const Step = ({ number, title, date = undefined, filled, filledColor, color, clickable = false, onClick = null }) => {
   return (
-    <div className='flex flex-row items-center justify-between mb-4 ml-2'>
+    <div
+      onClick={onClick}
+      className='flex flex-row items-center justify-between mb-4 ml-2'
+      style={{ cursor: clickable ? 'pointer' : 'default' }}>
       <div className='flex flex-row items-center'>
         <div className={`${filled ? `bg-${filledColor}` : `border border-${color}`} mr-2 w-8 h-8 rounded-full flex justify-center items-center`}>
           {
@@ -41,7 +44,7 @@ const Step = ({ number, title, date = undefined, filled, filledColor, color }) =
               )
           }
         </div>
-        <span className={`text-${filled ? filledColor : color}`}>
+        <span className={`text-${filled ? filledColor : color}`} style={{ textDecoration: clickable ? 'underline' : 'default' }}>
           {title}
         </span>
       </div>
@@ -51,6 +54,7 @@ const Step = ({ number, title, date = undefined, filled, filledColor, color }) =
 }
 
 const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
+  const [quartersVisible, setQuartersVisible] = useState(false)
   if (!client) return null
   const phase1StepCount = 2
   const phase2StepCount = 5
@@ -202,7 +206,9 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                   title='Filed With IRS Date'
                   filled={filedWithIRS || phase2Progress === phase2StepCount}
                   filledColor={'textAcent-100'}
-                  color={'textAcent-100'}/>
+                  color={'textAcent-100'}
+                  clickable={client.quarters.length > 0 && totalCV > 0}
+                  onClick={() => setQuartersVisible(true)}/>
                 <Step
                   number={4}
                   title='Doc for signature returned'
@@ -282,8 +288,47 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
           </div>
         </div>
       )}
+      <QuarterModal quarters={client.quarters} isOpen={quartersVisible} onClose={() => setQuartersVisible(false)}/>
     </div>
   )
 }
 
 export default ErcModal
+
+const QuarterModal = ({ quarters, isOpen, onClose }: {quarters: Client['quarters'], isOpen: boolean, onClose: () => void}) => {
+  const renderQuarter = (item: {quarter: string, year: string, amount: string, dateFiled: string}) => {
+    const { quarter, year, amount, dateFiled } = item
+    return (
+      <div key={`${year}${quarter}`}>
+        <span>{year} - Q{quarter}: </span>
+        <span>{amount || '$0.00'}{' '}</span>
+        <span>{dateFiled ? dayjs(dateFiled, 'MM-DD-YYYY hh:mm a').format('MM/DD/YYYY') : ''}</span>
+      </div>
+    )
+  }
+
+  return (
+    <div>
+      {isOpen && (
+        <div className="absolute top-0 left-0 justify-center pl-44 flex  font-sans z-50 items-center h-screen w-screen bg-opacity-20">
+          <div className="bg-white w-[866px] h-[762px] rounded-lg max-h-[90vh] border border-black-500">
+            {/* header  */}
+            <div className="flex justify-between items-center px-2.5 pt-5 font-open-sans ">
+              <div className="font-semibold font-lg">Filed With IRS Quarters</div>
+              <div
+                className="cursor-pointer text-2xl w-8 h-8"
+                onClick={() => onClose()}
+              >
+                  x
+              </div>
+            </div>
+            {/* body */}
+            <div className='px-2.5'>
+              {quarters.map(renderQuarter)}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
