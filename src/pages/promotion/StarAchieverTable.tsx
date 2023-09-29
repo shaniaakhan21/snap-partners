@@ -58,7 +58,6 @@ const StarAchieversTable = ({ userSprintData }) => {
     setSprintDataRow(userSprintData)
   }, [userSprintData])
 
-  console.log('sprint data row is', sprintDataRow)
   const columns = [
     {
       field: 'name',
@@ -78,14 +77,16 @@ const StarAchieversTable = ({ userSprintData }) => {
       <br></br>
       <div className="datagrid-container"style={{ overflowX: 'auto' }}>
         <div style={{ minWidth: '300px' }}>
-          <StyledDataGrid
-            rows={sprintDataRow}
-            columns={columns}
-            sx={{
-              height: '214px',
-              borderColor: 'rgba(224, 224, 224, 0.5)!important'
-            }}
-          />
+          {sprintDataRow
+            ? <StyledDataGrid
+              rows={sprintDataRow && sprintDataRow}
+              columns={columns}
+              sx={{
+                height: '214px',
+                borderColor: 'rgba(224, 224, 224, 0.5)!important'
+              }}
+            />
+            : <></>}
         </div>
       </div>
       <br></br>
