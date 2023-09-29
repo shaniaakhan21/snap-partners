@@ -8,12 +8,13 @@ const PersonListTable = (props: {ibo: {name: string, clients: Client[]}}) => {
   const { clients } = props.ibo
   const mappedClients = clients.map(client => ({
     ercID: client.client,
-    dateAcquired: dayjs(client.signupDate, 'MM-DD-YYYY hh:mm a').format('MM/DD/YYYY'),
+    dateAcquired: dayjs(client.signupDate, 'MM-DD-YYYY').format('MM/DD/YYYY'),
     depositsPaid: client.depositPaid ? 'Yes' : 'No',
     completedPhase1: client.phase >= 1 ? 'Yes' : 'No',
     completedPhase2: client.phase >= 2 ? 'Yes' : 'No',
     completedPhase3: client.phase >= 3 ? 'Yes' : 'No'
   }))
+
   const gridStyle = {
     minHeight: 350
   }

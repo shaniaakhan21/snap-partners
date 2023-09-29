@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { Client } from 'lib/types/transaction'
+import ReactDataGrid from '@inovua/reactdatagrid-community'
 dayjs.extend(customParseFormat) // Extend dayjs with the plugin. Required for Safari
 
 type ErcModalProps = {
@@ -78,13 +79,18 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
   // if any step is done in phase 2, fill all phase1 steps
   if (phase2Progress > 0) phase1Progress = phase1StepCount
 
+  // phase 3
+  // eslint-disable-next-line prefer-const
+  let phase3Progress = 0
+
   const totalCV = client.quarters?.reduce((acc, curr) => {
   // Remove dollar sign and convert to float, if amount is null then take 0
     const amount = parseFloat(curr.amount ? curr.amount.replace('$', '') : '0')
     return acc + amount
-  }, 0)
-  const phase2CV = totalCV * 0.1
-  const phase3CV = totalCV * 0.9
+  }, 0) * 0.1
+  const PCV = totalCV * 0.4
+  const phase2CV = PCV * 0.1
+  const phase3CV = PCV * 0.9
   return (
     <div>
       {isOpen && (
@@ -93,7 +99,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
             {/* header  */}
             <div>
               <div className="flex justify-between items-center px-2.5 pt-5 font-open-sans ">
-                <div className="font-semibold font-lg">Company Name Detail</div>
+                <div className="font-semibold font-lg">{client.companyName}</div>
                 <div
                   className="cursor-pointer text-2xl w-8 h-8"
                   onClick={() => onClose()}
@@ -126,7 +132,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                 </div>
                 <div className="py-3 px-2.5">
                   <div className="flex justify-between text-lg font-semibold">
-                    <div>Your Payment</div>
+                    <div>Initial Payment</div>
                     <div>$200</div>
                   </div>
                   <div className="flex justify-between text-xs">
@@ -165,22 +171,24 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                         <div key={`phase2-progress-${idx}`} className={`${phase2Progress > idx ? 'bg-textAcent-100' : 'bg-white'} h-2 w-32 rounded-lg`} />
                       ))
                     }
-                    {/* <div className="bg-textAcent-100 h-2 w-32 rounded-lg"></div>
-                    <div className="bg-textAcent-100 h-2 w-32 rounded-lg"></div>
-                    <div className="bg-textAcent-100 h-2 w-32 rounded-lg"></div>
-                    <div className="bg-white h-2 w-32 rounded-lg"></div>
-                    <div className="bg-white h-2 w-32 rounded-lg"></div>
-                    <div className="bg-white h-2 w-32 rounded-lg"></div> */}
                   </div>
                 </div>
                 <div className="py-3 px-2.5">
                   <div className="flex justify-between text-lg font-semibold">
-                    <span>Your Payment</span>
-                    <span>${phase2CV.toFixed(2)}</span>
+                    <div className='flex flex-col'>
+                      <span>Advance Payment</span>
+                      <span className='text-xs font-normal italic'>
+                        10% of PCV
+                      </span>
+                    </div>
+                    <div className='flex flex-col'>
+                      <div style={{ flex: 1 }}> {phase2Progress === phase2StepCount ? `$${phase2CV.toFixed(2)}` : ''}</div>
+                      {/* <div className='text-xs font-normal'>MM/DD/YYYY</div> */}
+                    </div>
                   </div>
-                  <div className="flex justify-between text-xs">
-                    <span>10% of CV</span>
-                    <span>MM/DD/YYYY</span>
+                  <div className="flex justify-between text-xs mt-1">
+                    <span>Your PCV for this account</span>
+                    <span>${PCV.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-xs font-bold">
                     <span>Total CV for this account</span>
@@ -244,25 +252,38 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                 <div className="bg-phase-300 w-64 px-2.5 py-3 rounded-lg">
                   <div className="flex justify-between items-center">
                     <div>Phase 3 Progress</div>
-                    <div className="text-xs font-bold">0/6</div>
+                    <div className="text-xs font-bold">{phase3Progress}/{phase3StepCount}</div>
                   </div>
                   <div className="flex space-x-2 pt-2.5">
-                    <div className="bg-textAcent-200 h-2 w-32 rounded-lg"></div>
+                    {
+                      Array(phase3StepCount).fill(null).map((_, idx) => (
+                        <div key={`phase2-progress-${idx}`} className={`${phase3Progress > idx ? 'bg-textAcent-200' : 'bg-white'} h-2 w-32 rounded-lg`} />
+                      ))
+                    }
+                    {/* <div className="bg-white h-2 w-32 rounded-lg"></div>
                     <div className="bg-white h-2 w-32 rounded-lg"></div>
                     <div className="bg-white h-2 w-32 rounded-lg"></div>
                     <div className="bg-white h-2 w-32 rounded-lg"></div>
                     <div className="bg-white h-2 w-32 rounded-lg"></div>
-                    <div className="bg-white h-2 w-32 rounded-lg"></div>
+                    <div className="bg-white h-2 w-32 rounded-lg"></div> */}
                   </div>
                 </div>
                 <div className="py-3 px-2.5">
                   <div className="flex justify-between text-lg font-semibold">
-                    <span>Your Payment</span>
-                    <span>${phase3CV.toFixed(2)}</span>
+                    <div className='flex flex-col'>
+                      <span>Final Payment</span>
+                      <span className='text-xs font-normal italic'>
+                        90% of PCV
+                      </span>
+                    </div>
+                    <div className='flex flex-col'>
+                      <div style={{ flex: 1 }}> {phase3Progress === phase3StepCount ? `$${phase3CV.toFixed(2)}` : ''}</div>
+                      {/* <div className='text-xs font-normal'>MM/DD/YYYY</div> */}
+                    </div>
                   </div>
-                  <div className="flex justify-between text-xs">
-                    <span>90% of CV</span>
-                    <span>MM/DD/YYYY</span>
+                  <div className="flex justify-between text-xs mt-1">
+                    <span>Your PCV for this account</span>
+                    <span>${PCV.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-xs font-bold">
                     <span>Total CV for this account</span>
@@ -307,6 +328,39 @@ const QuarterModal = ({ quarters, isOpen, onClose }: {quarters: Client['quarters
     )
   }
 
+  const mappedQuarters = quarters.map(q => ({ ...q, quarter: `Q${q.quarter}`, amount: q.amount || '$0.00', dateFiled: q.dateFiled ? dayjs(q.dateFiled, 'MM-DD-YYYY hh:mm a').format('MM/DD/YYYY') : '' })).reverse()
+
+  const columns = [
+    {
+      name: 'year',
+      header: 'Year',
+      defaultFlex: 1,
+      minWidth: 150
+    },
+    {
+      name: 'quarter',
+      header: 'Quarter',
+      defaultFlex: 1,
+      minWidth: 150
+    },
+    {
+      name: 'amount',
+      header: 'ERC Amount',
+      defaultFlex: 1,
+      minWidth: 150
+    },
+    {
+      name: 'dateFiled',
+      header: 'Filed Date',
+      defaultFlex: 1,
+      minWidth: 150
+    }
+  ]
+
+  const gridStyle = {
+    minHeight: 400
+  }
+
   return (
     <div>
       {isOpen && (
@@ -314,7 +368,7 @@ const QuarterModal = ({ quarters, isOpen, onClose }: {quarters: Client['quarters
           <div className="bg-white w-[866px] h-[762px] rounded-lg max-h-[90vh] border border-black-500">
             {/* header  */}
             <div className="flex justify-between items-center px-2.5 pt-5 font-open-sans ">
-              <div className="font-semibold font-lg">Filed With IRS Quarters</div>
+              <div className="font-semibold font-lg">IRS filing progress by Quarter</div>
               <div
                 className="cursor-pointer text-2xl w-8 h-8"
                 onClick={() => onClose()}
@@ -322,9 +376,22 @@ const QuarterModal = ({ quarters, isOpen, onClose }: {quarters: Client['quarters
                   x
               </div>
             </div>
+            <span className='px-2.5'>
+              Note:  ERC amount will be known prior to date filed in the process.  Date filed triggers completion of this step.
+            </span>
             {/* body */}
-            <div className='px-2.5'>
-              {quarters.map(renderQuarter)}
+            <div className='px-2.5 mt-5'>
+              <ReactDataGrid
+                idProperty="id"
+                columns={columns}
+                dataSource={mappedQuarters}
+                sortable={true}
+                // defaultFilterValue={filterValue}
+                style={gridStyle}
+                defaultLimit={10}
+                pagination={false}
+              />
+              {/* {quarters.map(renderQuarter)} */}
             </div>
           </div>
         </div>

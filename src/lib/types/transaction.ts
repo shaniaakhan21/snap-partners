@@ -37,6 +37,8 @@ export interface LevelledClient {
   ibos: {
     id: number;
     name: string;
+    phoneNumber: string
+    email: string;
     lastname: string;
     clients: Client[];
   }[]
@@ -57,6 +59,6 @@ export interface TeamClientsTableProps {
 export interface TableHeaderProps {
   tableName: string;
   loading?:boolean;
-  setYearSelected: (prop: number) => void;
-  setMonthSelected: (prop: number) => void;
+  setYearSelected?: (prop: number) => void;
+  setMonthSelected?: (prop: number) => void;
 }

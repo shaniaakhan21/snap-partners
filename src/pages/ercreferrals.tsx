@@ -101,7 +101,6 @@ const ErcreferralsPage: Page = () => {
     getTeamClients()
   }, [monthSelected, yearSelected])
 
-  const a = "08-15-2023 09:32 am"
   return (
     <>
       <div id="cro-erc-process">
@@ -154,8 +153,6 @@ const ErcreferralsPage: Page = () => {
         <div id="table1erc">
           <TableHeader
             tableName="Team Level Report"
-            setMonthSelected={setMonthSelected}
-            setYearSelected={setYearSelected}
           />
           <ShowDetailedTables onSelectIBO={setSelectedIBO} levelledClient={teamClients[selectedLevel - 1]} />
         </div>
@@ -164,8 +161,6 @@ const ErcreferralsPage: Page = () => {
         <div id="table1erc">
           <TableHeader
             tableName={selectedIBO?.name}
-            setMonthSelected={setMonthSelected}
-            setYearSelected={setYearSelected}
           />
           <PersonListTable ibo={selectedIBO} />
         </div>

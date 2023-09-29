@@ -61,13 +61,13 @@ const TeamClientsTable: React.FC<TeamClientsTableProps> = ({
       header: 'See more',
       defaultFlex: 1,
       minWidth: 150,
-      render: (args) => {
+      render: ({ data }) => {
         return (
           <span>
             <button
               className="text-textAcent-500"
               onClick={() => {
-                if (args.data.level) onSelectLevel(args.data.level)
+                if (data.level) onSelectLevel(data.level)
               }}
             >
               Details
@@ -90,8 +90,7 @@ const TeamClientsTable: React.FC<TeamClientsTableProps> = ({
   return (
     <div>
       <ReactDataGrid
-        key='team-clients-table'
-        // idProperty="level"
+        idProperty="level"
         columns={columnsClient}
         dataSource={mappedClients}
         sortable={true}

@@ -67,14 +67,13 @@ const ShowDetailedTables: React.FC<ShowDetailedTablesProps> = ({
       header: 'See more',
       defaultFlex: 1,
       minWidth: 150,
-      render: (args) => {
+      render: ({ data }) => {
         return (
           <span>
             <button
               className="text-textAcent-500"
-              onClick={() => {
-                console.log({ args })
-                onSelectIBO(args.data)
+              onClick={(e) => {
+                onSelectIBO(data)
               }}
             >
               Details
@@ -88,7 +87,7 @@ const ShowDetailedTables: React.FC<ShowDetailedTablesProps> = ({
     <div>
       <ReactDataGrid
         idProperty="id"
-        key='detailed-table'
+        // key='detailed-table'
         columns={teamLevelReport}
         dataSource={mappedClients}
         sortable={true}
