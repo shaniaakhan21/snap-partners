@@ -117,8 +117,8 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
             <div className="flex space-x-5 justify-center">
               {/* phase 1  */}
               <div>
-                <div className="bg-phase-100 w-64 px-2.5 py-3 rounded-lg">
-                  <div className="flex justify-between items-center">
+                <div className="bg-phase-100 w-64 px-2.5 py-3 rounded-lg ml-2">
+                  <div className="flex justify-between items-center pl-2">
                     <div>Phase 1 Progress</div>
                     <div className="text-xs font-bold">{phase1Progress}/{phase1StepCount}</div>
                   </div>
@@ -137,7 +137,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                   </div>
                   <div className="flex justify-between text-xs">
                     <div>CV = $500</div>
-                    <div>MM/DD/YYYY</div>
+                    <div>{phase1Progress === phase1StepCount ? dayjs(client.signupDate, 'MM-DD-YYYY').format('MM/DD/YYYY') : ''}</div>
                   </div>
                 </div>
                 <div className="flex justify-center">
@@ -160,7 +160,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
 
               {/* phase 2  */}
               <div>
-                <div className="bg-phase-200 w-64 px-2.5 py-3 rounded-lg">
+                <div className="bg-phase-200 w-64 px-2.5 py-3 rounded-lg ml-2">
                   <div className="flex justify-between items-center">
                     <div>Phase 2 Progress</div>
                     <div className="text-xs font-bold">{phase2Progress}/{phase2StepCount}</div>
@@ -238,7 +238,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                 <Step
                   number={3}
                   title='Doc Sent for signature'
-                  date={client.docSentForSignature ? dayjs(client.docSentForSignature, 'MM-DD-YYYY hh:mm a').format('MM/DD/YYYY') : ''}
+                  date={client.docSentForSignature ? dayjs(client.docSentForSignature, 'MM-DD-YYYY').format('MM/DD/YYYY') : ''}
                   filled={client.docSentForSignature || phase2Progress === phase2StepCount}
                   filledColor={'textAcent-100'}
                   color={'textAcent-100'}/>
@@ -260,7 +260,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
 
               {/* phase 3  */}
               <div>
-                <div className="bg-phase-300 w-64 px-2.5 py-3 rounded-lg">
+                <div className="bg-phase-300 w-64 px-2.5 py-3 rounded-lg mr-4">
                   <div className="flex justify-between items-center">
                     <div>Phase 3 Progress</div>
                     <div className="text-xs font-bold">{phase3Progress}/{phase3StepCount}</div>
@@ -339,7 +339,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
 export default ErcModal
 
 const QuarterModal = ({ quarters, isOpen, onClose }: {quarters: Client['quarters'], isOpen: boolean, onClose: () => void}) => {
-  const mappedQuarters = quarters.map(q => ({ ...q, quarter: `Q${q.quarter}`, amount: q.amount || '$0.00', dateFiled: q.dateFiled ? dayjs(q.dateFiled, 'MM-DD-YYYY').format('MM/DD/YYYY') : '' })).reverse()
+  const mappedQuarters = quarters.map(q => ({ ...q, amount: q.amount ? 'Yes' : 'No', dateFiled: q.dateFiled ? dayjs(q.dateFiled, 'MM-DD-YYYY').format('MM/DD/YYYY') : 'Not Available' })).reverse()
 
   const columns = [
     {
