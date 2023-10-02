@@ -9,9 +9,10 @@ interface IProps {
   link: string
   newUser?: boolean
   classes?: string
+  isCertified?: boolean
 }
 
-export const ReferralCards = ({ title, ilustration, link, newUser = false, classes = '' }: IProps) => {
+export const ReferralCards = ({ title, ilustration, link, newUser = false, classes = '', isCertified }: IProps) => {
   const { copy } = useCopyToClipboard()
 
   const userType: string = useMemo(() => {

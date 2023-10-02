@@ -11,6 +11,9 @@ import { GTMTrack } from 'lib/utils/gtm'
 import Swal from 'sweetalert2'
 import { getLocalStorage } from 'lib/utils/localStorage'
 import axios from 'axios'
+import { Button } from 'components/common/Button'
+import { useState } from 'react'
+import SignedCert from 'pages/wellness/components/SignedCert'
 
 interface IAccountInfoProps {
   auth: IAuth
@@ -30,6 +33,11 @@ export const AccountInfo = ({ auth, setAuth, removeAuth, setNewWindow, setTypeUp
   const isIntegrous = (_auth.roles.integrousAssociate || _auth.roles.integrousCustomer)
   const isIntegrousCustomerAndAssociate = (_auth.roles.integrousAssociate && _auth.roles.integrousCustomer)
   const isIntegrousCustomer = (_auth.roles.integrousCustomer && !_auth.roles.integrousAssociate)
+  const isCertified = auth.isCertified
+  const [signedCertModalOpen, setSignedCertModalOpen] = useState(false)
+  const openSignedCertModal = () => {
+    setSignedCertModalOpen(true)
+  }
   const ConfirmRoleChange = (html) => {
     // lets return a promise here
     return new Promise((resolve, reject) => {
@@ -81,7 +89,23 @@ export const AccountInfo = ({ auth, setAuth, removeAuth, setNewWindow, setTypeUp
         <PhotoAccount photoURL={auth.profileImage} auth={auth} setAuth={setAuth}/>
         <Badges auth={auth} />
         <div className='flex-1' />
-        <h1 className='text-2xl mr-6'>IBO ID <span className='text-primary-500'>{_auth.id}</span></h1>
+        <div className='flex flex-col'>
+          <h1 className='text-2xl mr-6 mb-2'>IBO ID <span className='text-primary-500'>{_auth.id}</span></h1>
+          {isCertified && (
+
+            <Button
+              onClick={openSignedCertModal}
+              style={{ cursor: 'pointer', backgroundColor: '#32427A', padding: '2% 3%' }}
+            >
+              <div className='flex flex-col md:flex-row justify-between items-center'>
+                <img className='w-10' src='/static/wellness/weight-care-certified.png'/>
+                <span className='text-[12px] font-bold text-white'>WeightCare Certification</span>
+              </div>
+            </Button>
+
+          )}
+        </div>
+
       </div>
 
       <div className='mt-11'>
@@ -127,6 +151,7 @@ export const AccountInfo = ({ auth, setAuth, removeAuth, setNewWindow, setTypeUp
       </button>
 
       <TextContactCTA />
+      <SignedCert open={signedCertModalOpen} onClose={() => setSignedCertModalOpen(false)} />
     </div>
   )
 }

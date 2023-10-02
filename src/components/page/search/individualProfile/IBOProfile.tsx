@@ -125,6 +125,9 @@ function IBOProfile ({ profileData, userLevel }) {
                 { (profileData[0]?.roles?.integrousAssociate || profileData[0]?.roles?.integrousCustomer) &&
                 <img src='/static/badges/binary.png' style={{ width: '70px' }} />
                 }
+                {
+                  profileData[0]?.isCertified && <img className='w-10 cursor-pointer' src='/static/wellness/weight-care-certified.png' alt='WeightCare Certificate' title='WeightCare Certificate'/>
+                }
                 <img src='/images/icons/deliveryMan.png' />
                 <img src='/images/icons/Shopper.png' />
                 <img src='/images/icons/tray.png' />

@@ -16,6 +16,9 @@ const StyledDataGrid = styled(MUIDataGrid)(() => ({
   },
   '& .MuiDataGrid-footerContainer': {
     display: 'none'
+  },
+  '& .MuiDataGrid-virtualScroller': {
+     overflow: 'hidden'
   }
 
 }))
@@ -38,8 +41,9 @@ const rows = [
   }
 ]
 
-const StarAchieversTable = () => {
+const StarAchieversTable = ({ userSprintData }) => {
   const [windowWidth, setWindowWidth] = useState(0)
+  const [sprintDataRow, setSprintDataRow] = useState(userSprintData)
 
   useEffect(() => {
     const handleResize = () => {
@@ -53,6 +57,10 @@ const StarAchieversTable = () => {
     }
   }, [])
 
+  useEffect(() => {
+    setSprintDataRow(userSprintData)
+  }, [userSprintData])
+
   const columns = [
     {
       field: 'name',
@@ -62,7 +70,7 @@ const StarAchieversTable = () => {
     {
       field: 'date',
       headerName: 'Date',
-      type: 'date',
+      type: 'string',
       flex: windowWidth <= 400 ? 0.5 : 1
     }
   ]
@@ -70,16 +78,18 @@ const StarAchieversTable = () => {
   return (
     <div className='w-full'>
       <br></br>
-      <div className="datagrid-container"style={{ overflowX: 'auto' }}>
+      <div className="datagrid-container"style={{ overflowX: 'hidden', overflowY: 'hidden' }}>
         <div style={{ minWidth: '300px' }}>
-          <StyledDataGrid
-            rows={rows}
-            columns={columns}
-            sx={{
-              height: '214px',
-              borderColor: 'rgba(224, 224, 224, 0.5)!important'
-            }}
-          />
+          {sprintDataRow
+            ? <StyledDataGrid
+              rows={sprintDataRow && sprintDataRow}
+              columns={columns}
+              sx={{
+                minHeight: '214px',
+                borderColor: 'rgba(224, 224, 224, 0.5)!important'
+              }}
+            />
+            : <></>}
         </div>
       </div>
       <br></br>

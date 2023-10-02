@@ -91,6 +91,7 @@ export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
         myPoints: null
       },
       level: data?.level,
+      isCertified: data.isCertified,
       ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
     })
     reset()
