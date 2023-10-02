@@ -1,7 +1,8 @@
 import { CalendarIcon, CopyIcon } from 'components/common/icons'
 import { useCopyToClipboard } from 'lib/hooks/useCopyToClipboard'
 import { GTMTrack } from 'lib/utils/gtm'
-import { useMemo } from 'react'
+import SignedCert from 'pages/wellness/components/SignedCert'
+import { useMemo, useState } from 'react'
 
 interface IProps {
   title: string
@@ -13,6 +14,10 @@ interface IProps {
 }
 
 export const InactiveCards = ({ title, ilustration, link, newUser = false, classes = '', isCertified }: IProps) => {
+  const [signedCertModalOpen, setSignedCertModalOpen] = useState(false)
+  const openSignedCertModal = () => {
+    setSignedCertModalOpen(true)
+  }
   return (
     <div className={`w-full p-6 bg-white flex flex-col items-center justify-center rounded-sm shadow ${classes}`}>
 
@@ -37,10 +42,10 @@ export const InactiveCards = ({ title, ilustration, link, newUser = false, class
 
       <button
         className='lg:text-black inline-flex items-center justify-center transition-colors hover:text-gray-600'
-        disabled>
+        onClick={openSignedCertModal}>
         <span className='text-sm mr-2 text-gray-600 underline'>Accept WeightCare Certificate to get link</span>
       </button>
-
+      <SignedCert open={signedCertModalOpen} onClose={() => setSignedCertModalOpen(false)} />
     </div>
   )
 }
