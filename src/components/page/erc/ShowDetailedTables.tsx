@@ -14,7 +14,7 @@ const ShowDetailedTables: React.FC<ShowDetailedTablesProps> = ({
 }) => {
   const mappedClients = levelledClient.ibos.map(ibo => ({
     ...ibo,
-    IBO: ibo.name,
+    IBO: `${ibo.name} ${ibo.lastname}`,
     totalClients: ibo.clients.length,
     depositsPaid: ibo.clients.filter(client => client.depositPaid).length,
     phase1: ibo.clients.filter(client => client.phase === 1).length,
