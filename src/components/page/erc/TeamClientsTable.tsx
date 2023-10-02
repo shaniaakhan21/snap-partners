@@ -8,7 +8,7 @@ const TeamClientsTable: React.FC<TeamClientsTableProps> = ({
   onSelectLevel
 }) => {
   const mappedClients = clients.map(data => ({
-    level: data.level,
+    level: data.level === 6 ? data.level + ' +' : data.level,
     totalClients: data.ibos?.reduce((sum, curr) => sum + curr.clients.length, 0),
     depositsPaid: data.ibos?.reduce((total, group) => {
       return total + group.clients.filter(client => client.depositPaid).length
@@ -67,7 +67,7 @@ const TeamClientsTable: React.FC<TeamClientsTableProps> = ({
             <button
               className="text-textAcent-500"
               onClick={() => {
-                if (data.level) onSelectLevel(data.level)
+                if (data.level) onSelectLevel(Number(data.level.toString().substring(0, 1)))
               }}
             >
               Details
@@ -96,7 +96,7 @@ const TeamClientsTable: React.FC<TeamClientsTableProps> = ({
         sortable={true}
         defaultFilterValue={filterValue}
         style={gridStyle}
-        defaultLimit={6}
+        defaultLimit={10}
         pagination
       />
     </div>

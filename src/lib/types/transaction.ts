@@ -29,7 +29,8 @@ export interface Client {
   docSentForSignature: string;
   docForSignatureReturned: string;
   quarters: {quarter: string, year: string, amount: string, dateFiled: string}[];
-  signupDate: string
+  signupDate: string,
+  totalCV: number
 }
 
 export interface LevelledClient {

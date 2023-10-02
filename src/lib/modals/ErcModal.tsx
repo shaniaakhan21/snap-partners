@@ -15,7 +15,7 @@ type ErcModalProps = {
 const Step = ({ number, title, date = undefined, filled, filledColor, color, clickable = false, onClick = null }) => {
   return (
     <div
-      onClick={onClick}
+      onClick={clickable ? onClick : null}
       className='flex flex-row items-center justify-between mb-4 ml-2'
       style={{ cursor: clickable ? 'pointer' : 'default' }}>
       <div className='flex flex-row items-center'>
@@ -71,9 +71,8 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
   if (client.excelTeam) phase2Progress++
   if (client.docSentForSignature) phase2Progress++
   if (client.docForSignatureReturned) phase2Progress++
-  const filedWithIRS = client.quarters?.length > 0 &&
-  client.quarters.filter(quarter => quarter.amount !== '')
-    .every(quarterWithAmount => quarterWithAmount.amount !== '0' ? !!quarterWithAmount.dateFiled : true)
+  const quartersWithAmount = client.quarters?.filter(quarter => quarter.amount !== '')
+  const filedWithIRS = client.quarters?.length > 0 && quartersWithAmount.length > 0 && quartersWithAmount.every(quarterWithAmount => quarterWithAmount.amount !== '0' ? !!quarterWithAmount.dateFiled : true)
   if (filedWithIRS) phase2Progress++
 
   // if any step is done in phase 2, fill all phase1 steps
@@ -83,11 +82,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
   // eslint-disable-next-line prefer-const
   let phase3Progress = 0
 
-  const totalCV = client.quarters?.reduce((acc, curr) => {
-  // Remove dollar sign and convert to float, if amount is null then take 0
-    const amount = parseFloat(curr.amount ? curr.amount.replace('$', '') : '0')
-    return acc + amount
-  }, 0) * 0.1
+  const totalCV = client.totalCV
   const PCV = totalCV * 0.4
   const phase2CV = PCV * 0.1
   const phase3CV = PCV * 0.9

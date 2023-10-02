@@ -93,7 +93,7 @@ const ShowDetailedTables: React.FC<ShowDetailedTablesProps> = ({
         sortable={true}
         defaultFilterValue={filterValue}
         style={gridStyle}
-        defaultLimit={6}
+        defaultLimit={10}
         pagination
       />
     </div>
