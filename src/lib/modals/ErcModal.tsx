@@ -63,7 +63,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
   // phase 1
   let phase1Progress = 0
   if (client.depositPaid) phase1Progress++
-  if (client.aggrementSigned) phase1Progress++
+  if (client.agreementSigned) phase1Progress++
 
   // phase 2
   let phase2Progress = 0
@@ -94,7 +94,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
   return (
     <div>
       {isOpen && (
-        <div className="absolute top-0 left-0 justify-center pl-44 flex  font-sans z-50 items-center h-screen w-screen bg-slate-800 bg-opacity-20 ">
+        <div className="absolute top-0 left-0 justify-center pl-44 flex  font-sans z-50 items-center h-screen w-screen bg-slate-800 bg-opacity-20 overflow-scroll">
           <div className="bg-white w-[866px] h-[762px] rounded-lg max-h-[90vh] ">
             {/* header  */}
             <div>
@@ -154,8 +154,8 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                 <div className="py-3 px-2.5">
                   Next Step
                 </div>
-                <Step number={2} title='Deposit Pay' filled={client.depositPaid || phase1Progress === phase1StepCount} filledColor={'textAcent-500'} color={'textAcent-500'}/>
-                <Step number={1} title='Aggreement Signed' filled={client.aggrementSigned || phase1Progress === phase1StepCount} filledColor={'textAcent-500'} color={'textAcent-500'}/>
+                <Step number={2} title='Agreement Signed' filled={client.agreementSigned || phase1Progress === phase1StepCount} filledColor={'textAcent-500'} color={'textAcent-500'}/>
+                <Step number={1} title='Deposit Pay' filled={client.depositPaid || phase1Progress === phase1StepCount} filledColor={'textAcent-500'} color={'textAcent-500'}/>
               </div>
 
               {/* phase 2  */}
@@ -185,6 +185,17 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                       <div style={{ flex: 1 }}> {phase2Progress === phase2StepCount ? `$${phase2CV.toFixed(2)}` : ''}</div>
                       {/* <div className='text-xs font-normal'>MM/DD/YYYY</div> */}
                     </div>
+                  </div>
+                  <div className="flex justify-center mt-1">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="236"
+                      height="2"
+                      viewBox="0 0 256 2"
+                      fill="none"
+                    >
+                      <path d="M0 1H255.333" stroke="#DADADA" />
+                    </svg>
                   </div>
                   <div className="flex justify-between text-xs mt-1">
                     <span>Your PCV for this account</span>
@@ -281,6 +292,17 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                       {/* <div className='text-xs font-normal'>MM/DD/YYYY</div> */}
                     </div>
                   </div>
+                  <div className="flex justify-center mt-1">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="236"
+                      height="2"
+                      viewBox="0 0 256 2"
+                      fill="none"
+                    >
+                      <path d="M0 1H255.333" stroke="#DADADA" />
+                    </svg>
+                  </div>
                   <div className="flex justify-between text-xs mt-1">
                     <span>Your PCV for this account</span>
                     <span>${PCV.toFixed(2)}</span>
@@ -317,18 +339,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
 export default ErcModal
 
 const QuarterModal = ({ quarters, isOpen, onClose }: {quarters: Client['quarters'], isOpen: boolean, onClose: () => void}) => {
-  const renderQuarter = (item: {quarter: string, year: string, amount: string, dateFiled: string}) => {
-    const { quarter, year, amount, dateFiled } = item
-    return (
-      <div key={`${year}${quarter}`}>
-        <span>{year} - Q{quarter}: </span>
-        <span>{amount || '$0.00'}{' '}</span>
-        <span>{dateFiled ? dayjs(dateFiled, 'MM-DD-YYYY hh:mm a').format('MM/DD/YYYY') : ''}</span>
-      </div>
-    )
-  }
-
-  const mappedQuarters = quarters.map(q => ({ ...q, quarter: `Q${q.quarter}`, amount: q.amount || '$0.00', dateFiled: q.dateFiled ? dayjs(q.dateFiled, 'MM-DD-YYYY hh:mm a').format('MM/DD/YYYY') : '' })).reverse()
+  const mappedQuarters = quarters.map(q => ({ ...q, quarter: `Q${q.quarter}`, amount: q.amount || '$0.00', dateFiled: q.dateFiled ? dayjs(q.dateFiled, 'MM-DD-YYYY').format('MM/DD/YYYY') : '' })).reverse()
 
   const columns = [
     {

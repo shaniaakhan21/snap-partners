@@ -22,7 +22,7 @@ export interface Client {
   client: number;
   companyName: string;
   phone: string;
-  aggrementSigned: boolean;
+  agreementSigned: boolean;
   depositPaid: string;
   docsCollected: string;
   excelTeam: string;
