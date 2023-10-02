@@ -1,6 +1,7 @@
 import { CalendarIcon, CopyIcon } from 'components/common/icons'
 import { useCopyToClipboard } from 'lib/hooks/useCopyToClipboard'
 import { GTMTrack } from 'lib/utils/gtm'
+import ContractModal from 'pages/wellness/components/ContractModal'
 import SignedCert from 'pages/wellness/components/SignedCert'
 import { useMemo, useState } from 'react'
 
@@ -45,7 +46,7 @@ export const InactiveCards = ({ title, ilustration, link, newUser = false, class
         onClick={openSignedCertModal}>
         <span className='text-sm mr-2 text-gray-600 underline'>Accept WeightCare Certificate to get link</span>
       </button>
-      <SignedCert open={signedCertModalOpen} onClose={() => setSignedCertModalOpen(false)} />
+      <ContractModal open={signedCertModalOpen} onClose={() => setSignedCertModalOpen(false)} />
     </div>
   )
 }
