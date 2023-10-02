@@ -8,6 +8,9 @@ import DashboardLayout from 'layouts/private/Dashboard'
 import { ReferralCards } from 'components/page/referrals/Cards'
 import { CustomerIcon, DriverIcon, MerchantIcon, IBOIcon } from 'components/common/icons'
 import PartnerLogo from '../../public/images/profile/referralPartner.png'
+import { InactiveCards } from 'components/page/referrals/InactiveCards'
+import { useState } from 'react'
+import ContractModal from './wellness/components/ContractModal'
 
 const { SEO } = APP_INFO
 
@@ -17,6 +20,10 @@ const ReferralsPage: Page = () => {
   const _auth: any = auth
 
   const isIntegrous = (_auth.roles.integrousAssociate || _auth.roles.integrousCustomer)
+  const [openModal, setOpenModal] = useState(!auth.isCertified)
+  const handleCloseModal = () => {
+    setOpenModal(false)
+  }
 
   return (
     <div className='min-h-[80vh] flex justify-center items-center'>
@@ -125,9 +132,12 @@ const ReferralsPage: Page = () => {
             newUser={false}
             classes='col-span-1'
           />
-          : <></>
+          : <>
+            <InactiveCards title={'Refer a Wellness Customer'} ilustration={<img src={'/static/wellness/wellness_logo.svg'} width={100} />} link={''}/>
+          </>
         }
       </div>
+      <ContractModal open={openModal} onClose={handleCloseModal} />
     </div>
   )
 }
