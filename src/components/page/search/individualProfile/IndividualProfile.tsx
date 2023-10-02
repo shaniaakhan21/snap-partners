@@ -9,10 +9,11 @@ import CommissionsTab from './ComissionsTab'
 import Upline from './Upline'
 import InfoBanner from './InfoBanner'
 import { useAuthStore } from 'lib/stores'
+import Tickets from './Tickets'
 
 function IndividualProfile ({ profileData }) {
   const cname = 'profilePage-individualProfile'
-  const [body, setBody] = useState<'iboProfile' | 'order' | 'downline' | 'comissions' | 'upline'>('iboProfile')
+  const [body, setBody] = useState<'iboProfile' | 'order' | 'downline' | 'comissions' | 'upline' | 'tickets'>('iboProfile')
   const { auth } = useAuthStore()
   console.log('body is ', body)
   return (
@@ -49,6 +50,12 @@ function IndividualProfile ({ profileData }) {
             ? <Upline id={profileData[0]?.id} currentUserLevel={auth?.level}/>
             : <></>
         }
+        {
+          body === 'tickets'
+            ? <Tickets />
+            : <></>
+        }
+
 
       </Paper>
     </Container>
