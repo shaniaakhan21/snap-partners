@@ -10,6 +10,7 @@ import { CustomerIcon, DriverIcon, MerchantIcon, IBOIcon } from 'components/comm
 import PartnerLogo from '../../public/images/profile/referralPartner.png'
 import { ERCAgent } from 'components/common/icons/ERCAgent'
 import { ERCClient } from 'components/common/icons/ERCClient'
+import { Energy } from 'components/common/icons/Energy'
 
 const { SEO } = APP_INFO
 
@@ -82,7 +83,7 @@ const ReferralsPage: Page = () => {
         <ReferralCards
           title='Refer Vidgo'
           ilustration={(
-            <div>
+            <div className='h-[120px]  flex items-center'>
               <img src='/images/vidgo.png' alt='Vidgo logo'/>
             </div>
           )}
@@ -93,11 +94,8 @@ const ReferralsPage: Page = () => {
 
         <ReferralCards
           title='Refer Commercial Energy'
-          ilustration={(
-            <div className='h-[100px]'>
-              <img src='/images/energy.png' alt='USA Commercial Energy Logo' width={116}/>
-            </div>
-          )}
+          ilustration={
+            <Energy/>}
           link={`https://usaenergy.com/free-rate-analysis/?subid=${auth.id}` || 'With Out Link'}
           newUser={false}
           classes='col-span-1'
@@ -118,7 +116,7 @@ const ReferralsPage: Page = () => {
         <ReferralCards
           title='Refer a Wellness Customer'
           ilustration={(
-            <div className='h-[100px]'><img src={'/images/snap_wellness2.png'} /> </div>)}
+            <div className='h-[120px]  flex items-center'><img src={'/images/snap_wellness2.png'} /> </div>)}
           link={`${auth.referralLinkWellness}` || 'With Out Link'}
           newUser={false}
           classes='col-span-1'
