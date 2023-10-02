@@ -8,6 +8,8 @@ import DashboardLayout from 'layouts/private/Dashboard'
 import { ReferralCards } from 'components/page/referrals/Cards'
 import { CustomerIcon, DriverIcon, MerchantIcon, IBOIcon } from 'components/common/icons'
 import PartnerLogo from '../../public/images/profile/referralPartner.png'
+import { ERCAgent } from 'components/common/icons/ERCAgent'
+import { ERCClient } from 'components/common/icons/ERCClient'
 
 const { SEO } = APP_INFO
 
@@ -23,15 +25,36 @@ const ReferralsPage: Page = () => {
       <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-center justify-center justify-items-center gap-4'>
         <ReferralCards
           title='Sponsor a Snap IBO'
-          ilustration={<img src={'/images/profile/referralPartner.png'} width={100} />}
+          ilustration={(
+            <div className='h-[120px] flex items-center'><img src={'/images/referralPartner1.png'} />
+            </div>
+          )}
           link={`${auth.referralLink}&role=${ROLES.IBO}` || 'With Out Link'}
+          newUser={false}
+          classes='col-span-1'
+        />
+
+        {!isIntegrous && (
+          <ReferralCards
+            title='Refer ERC Agent'
+            ilustration={<ERCAgent/>}
+            link={`${auth.referralLink}&role=${ROLES.AGENT}` || 'With Out Link'}
+            newUser={false}
+            classes='col-span-1'
+          />
+        )}
+
+        <ReferralCards
+          title='Refer ERC Client'
+          ilustration={<ERCClient/>}
+          link={`https://www.jornscpa.com/snap/?refid=${auth.id}` || 'With Out Link'}
           newUser={false}
           classes='col-span-1'
         />
 
         {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
           <ReferralCards
-            title='Refer Customers'
+            title='Refer Delivery Customers'
             ilustration={<CustomerIcon />}
             link={`${auth.referralLink}&role=${ROLES.CUSTOMER}` || 'With Out Link'}
             newUser={false}
@@ -40,7 +63,7 @@ const ReferralsPage: Page = () => {
         )}
         {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
           <ReferralCards
-            title='Refer Driver'
+            title='Refer Delivery Driver'
             ilustration={<DriverIcon />}
             link={`${auth.referralLink}&role=${ROLES.DRIVER}` || 'With Out Link'}
             newUser={false}
@@ -49,7 +72,7 @@ const ReferralsPage: Page = () => {
         )}
         {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
           <ReferralCards
-            title='Refer Merchant/SK'
+            title='Refer Delivery Merchant/SK'
             ilustration={<MerchantIcon />}
             link={`${auth.referralLink}&role=${ROLES.MERCHANT}` || 'With Out Link'}
             newUser={false}
@@ -59,37 +82,11 @@ const ReferralsPage: Page = () => {
         <ReferralCards
           title='Refer Vidgo'
           ilustration={(
-            <div className='h-[100px]'>
-              <img src='/images/vidgo/vidgo-ilustration.jpg' alt='Vidgo logo' />
+            <div>
+              <img src='/images/vidgo.png' alt='Vidgo logo'/>
             </div>
           )}
           link={`https://www.vidgo.com/snap/?subpid=${auth.referralCode}` || 'With Out Link'}
-          newUser={false}
-          classes='col-span-1'
-        />
-
-        {!isIntegrous && (
-          <ReferralCards
-            title='Refer ERC Agent'
-            ilustration={(
-              <div className='h-[100px]'>
-                <img src='/images/agentv4.png' alt='Agent logo' />
-              </div>
-            )}
-            link={`${auth.referralLink}&role=${ROLES.AGENT}` || 'With Out Link'}
-            newUser={false}
-            classes='col-span-1'
-          />
-        )}
-
-        <ReferralCards
-          title='Refer ERC Client'
-          ilustration={(
-            <div className='h-[100px] w-5/6'>
-              <img src='/images/j-logo.png' alt='Refer ERC' />
-            </div>
-          )}
-          link={`https://www.jornscpa.com/snap/?refid=${auth.id}` || 'With Out Link'}
           newUser={false}
           classes='col-span-1'
         />
@@ -98,7 +95,7 @@ const ReferralsPage: Page = () => {
           title='Refer Commercial Energy'
           ilustration={(
             <div className='h-[100px]'>
-              <img src='/images/usaenergy/commercialenergy.png' alt='USA Commercial Energy Logo' />
+              <img src='/images/energy.png' alt='USA Commercial Energy Logo' width={116}/>
             </div>
           )}
           link={`https://usaenergy.com/free-rate-analysis/?subid=${auth.id}` || 'With Out Link'}
@@ -120,7 +117,8 @@ const ReferralsPage: Page = () => {
 
         <ReferralCards
           title='Refer a Wellness Customer'
-          ilustration={<img src={'/static/wellness/wellness_logo.svg'} width={100} />}
+          ilustration={(
+            <div className='h-[100px]'><img src={'/images/snap_wellness2.png'} /> </div>)}
           link={`${auth.referralLinkWellness}` || 'With Out Link'}
           newUser={false}
           classes='col-span-1'
