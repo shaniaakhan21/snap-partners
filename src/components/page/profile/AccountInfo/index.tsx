@@ -95,10 +95,11 @@ export const AccountInfo = ({ auth, setAuth, removeAuth, setNewWindow, setTypeUp
 
             <Button
               onClick={openSignedCertModal}
-              style={{ cursor: 'pointer' }}
+              style={{ cursor: 'pointer', backgroundColor: '#32427A', padding: '2% 3%' }}
             >
-              <div className='flex flex-col md:flex-row justify-center items-center'>
-                <span className='text-sm font-bold text-white'>WeightCare Certification</span>
+              <div className='flex flex-col md:flex-row justify-between items-center'>
+                <img className='w-10' src='/static/wellness/weight-care-certified.png'/>
+                <span className='text-[12px] font-bold text-white'>WeightCare Certification</span>
               </div>
             </Button>
 
