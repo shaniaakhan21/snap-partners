@@ -2,7 +2,7 @@ import { IIconsBasicProps } from 'lib/types'
 
 export const MerchantIcon = ({ classes = '', onClick }: IIconsBasicProps) => {
   return (
-    <svg onClick={onClick} width="116" height="116" viewBox="0 0 116 116" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg onClick={onClick} width="100%" height="116" viewBox="0 0 116 116" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="58" cy="58" r="57" fill="white" stroke="#E1E8EB" stroke-width="2"/>
       <path d="M71.6852 84.7503H34.8059C33.8916 84.7726 33.0056 84.4322 32.3414 83.8034C31.6772 83.1747 31.2888 82.3086 31.261 81.3945V51.1797" stroke="#4E636E" stroke-width="3.5"/>
       <path d="M78.5391 51.3805V64.3904" stroke="#4E636E" stroke-width="3.5"/>

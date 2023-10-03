@@ -30,7 +30,7 @@ export const ReferralCards = ({ title, ilustration, link, newUser = false, class
   }
 
   return (
-    <div className={`w-full p-6 bg-white flex flex-row items-center justify-center rounded-sm shadow ${classes}`}>
+    <div className={`w-full p-1 sm:p-6 bg-white flex flex-row items-center justify-center rounded-sm shadow ${classes}`}>
       {/* Es necesario refactorizar el newUser en un nuevo componente  */}
       {newUser
         ? (
@@ -63,7 +63,7 @@ export const ReferralCards = ({ title, ilustration, link, newUser = false, class
           onClick={onClick}
           className='lg:text-black inline-flex items-center transition-colors hover:text-black w-[90%]  border rounded bg-primary-500'
         >
-          <span className='text-sm text-black bg-white w-[80%] py-2'>Copy Referral Link</span>
+          <span className='text-xs sm:text-sm text-black bg-white w-[80%] py-2'>Copy Referral Link</span>
           <div className='w-[20%] flex align-center justify-center'>
             <CopyIcon />
           </div>
