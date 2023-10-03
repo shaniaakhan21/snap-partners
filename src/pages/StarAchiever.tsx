@@ -45,7 +45,7 @@ const StarAchiever: Page = () => {
       const imgHeight = (canvas.height * imgWidth) / canvas.width
 
       pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height)
-      pdf.save('my-document.pdf')
+      pdf.save('star-achiever-report.pdf')
     })
   }
   return (
