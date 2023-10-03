@@ -138,7 +138,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                 <div className="flex justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="236"
+                    width="256"
                     height="2"
                     viewBox="0 0 256 2"
                     fill="none"
@@ -184,7 +184,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                   <div className="flex justify-center mt-1">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="236"
+                      width="256"
                       height="2"
                       viewBox="0 0 256 2"
                       fill="none"
@@ -204,7 +204,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                 <div className="flex justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="236"
+                    width="256"
                     height="2"
                     viewBox="0 0 256 2"
                     fill="none"
@@ -290,7 +290,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                   <div className="flex justify-center mt-1">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      width="236"
+                      width="256"
                       height="2"
                       viewBox="0 0 256 2"
                       fill="none"
@@ -310,7 +310,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                 <div className="flex justify-center">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    width="236"
+                    width="256"
                     height="2"
                     viewBox="0 0 256 2"
                     fill="none"
@@ -351,7 +351,7 @@ const QuarterModal = ({ quarters, isOpen, onClose }: {quarters: Client['quarters
     },
     {
       name: 'amount',
-      header: 'ERC Amount',
+      header: 'ERC Amount Determined',
       defaultFlex: 1,
       minWidth: 150
     },

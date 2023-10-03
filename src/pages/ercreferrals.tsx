@@ -152,7 +152,7 @@ const ErcreferralsPage: Page = () => {
       {selectedLevel > -1 && (
         <div id="table1erc">
           <TableHeader
-            tableName={'Team Level Report' + (selectedLevel > 0 ? ` (level-${selectedLevel})` : '')}
+            tableName={'Team Level Report' + (selectedLevel > 0 ? ` (level-${selectedLevel === 6 ? '6+' : selectedLevel})` : '')}
           />
           <ShowDetailedTables onSelectIBO={setSelectedIBO} levelledClient={teamClients[selectedLevel - 1]} />
         </div>

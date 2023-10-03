@@ -79,7 +79,10 @@ const TableHeader: React.FC<TableHeaderProps> = ({
       </div>
       {
         loading && (
-          <Spinner />
+          <div className='flex flex-row items-center'>
+            <span className='mr-2 font-semibold'>This can take up to 1-2 minutes</span>
+            <Spinner />
+          </div>
         )
       }
     </div>
