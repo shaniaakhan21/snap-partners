@@ -31,7 +31,6 @@ const { SEO } = APP_INFO
 
 const DashboardOverViewPage: Page = () => {
   // const { loading } = useReports()
-  const [signedContract, setSignedContract] = useState(false)
   const [rankData, setRankData] = useState<RankData>(null)
   const [viewing, setViewing] = useState<string>('Aug')
   const store = useAuthStore()

@@ -16,6 +16,9 @@ const StyledDataGrid = styled(MUIDataGrid)(() => ({
   },
   '& .MuiDataGrid-footerContainer': {
     display: 'none'
+  },
+  '& .MuiDataGrid-virtualScroller': {
+     overflow: 'hidden'
   }
 
 }))
@@ -75,14 +78,14 @@ const StarAchieversTable = ({ userSprintData }) => {
   return (
     <div className='w-full'>
       <br></br>
-      <div className="datagrid-container"style={{ overflowX: 'auto' }}>
+      <div className="datagrid-container"style={{ overflowX: 'hidden', overflowY: 'hidden' }}>
         <div style={{ minWidth: '300px' }}>
           {sprintDataRow
             ? <StyledDataGrid
               rows={sprintDataRow && sprintDataRow}
               columns={columns}
               sx={{
-                height: '214px',
+                minHeight: '214px',
                 borderColor: 'rgba(224, 224, 224, 0.5)!important'
               }}
             />

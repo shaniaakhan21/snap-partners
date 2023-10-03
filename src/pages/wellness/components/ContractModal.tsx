@@ -8,7 +8,6 @@ import axios from 'axios'
 import { useAuthStore } from 'lib/stores'
 import { getLocalStorage } from 'lib/utils/localStorage'
 
-
 interface ContractModalProps {
   open: boolean;
   onClose: () => void;
@@ -53,25 +52,25 @@ const ContractModal = ({ open, onClose }: ContractModalProps) => {
       className='overflow-y-scroll'
     >
       <div className='w-full flex justify-center'>
-        <div className='bg-white rounded-xl p-10 w-9/12 my-20 ml-10'>
+        <div className='bg-white rounded-xl xs:p-10 xs:w-9/12 xs:my-20 xs:ml-10 mt-20 p-8 w-11/12'>
 
           <div className='flex flex-row justify-between'>
-            <div className='w-11/12'>
+            <div className='w-3/12 xs:w-11/12'>
               <img src={logoSrc} alt={logoAlt} className='w-32 3xl:w-36' />
             </div>
             <div>
-              <CrossIcon onClick={onClose} className='text-5xl cursor-pointer' />
+              <CrossIcon onClick={onClose} className='text-5xl' />
             </div>
           </div>
           <br></br>
           <div className='flex flex-row'>
             <div className='flex flex-row'>
-              <div className='flex w-[80%]'>
-                <div className='w-10 flex'>
+              <div className='flex w-full md:w-[80%]'>
+                <div className='w-10 hidden sm:flex'>
                   <img src='/static/wellness/line.png' className='' />
                 </div>
-                <div className='w-10/12  ml-6'>
-                  <div className='mb-28'>
+                <div className='w-11/12 xs:w-10/12  ml-6'>
+                  <div className='mb-4 xs:mb-28'>
                     <ContractTextHead
                       smallHeading="The Snap Wellness and WeightCare Partnership"
                       bigHeading="It is Weight Loss Simplified!"
@@ -98,7 +97,7 @@ const ContractModal = ({ open, onClose }: ContractModalProps) => {
                     </ul>
                   </div>
 
-                  <div className='mb-28'>
+                  <div className='mb-4 xs:mb-28'>
                     <ContractTextHead
                       smallHeading="The Snap Wellness and WeightCare Partnership"
                       bigHeading="It is Weight Loss Simplified!"
@@ -153,7 +152,7 @@ const ContractModal = ({ open, onClose }: ContractModalProps) => {
                   </div>
                 </div>
               </div>
-              <div className='flex w-[30%]'>
+              <div className='w-[30%] hidden md:flex'>
                 <div className='w-[100%] flex flex-col-reverse items-end justify-end mt-4'>
                   <img src='/static/wellness/contract-01.svg' className='mt-[30%]' />
                   <img src='/static/wellness/contract-02.svg' className='mt-[80%]' />
@@ -162,21 +161,35 @@ const ContractModal = ({ open, onClose }: ContractModalProps) => {
               </div>
             </div>
           </div>
-          <div className='px-10 py-10 bg-gray-200 rounded-xl m-12 mt-0'>
-            <div className='border-b-2 border-slate-300 pb-5'>
+          <div className='p-4 xs:px-10 xs:py-10 bg-gray-200 rounded-xl xs:m-12 mt-0'>
+            <div className='border-b-2 border-slate-300 pb-5 text-xs xs:text-sm'>
               <p>Violation of these terms will result in the immediate termination of your IBO Agreement and result in your full legal and civil liability with regard to any consumer complaints and/or lawsuits. Please contact <b>compliance@mysnappartners.com</b> with any questions</p>
             </div>
-            <div className='flex flex-row items-center pt-5'>
-              <Checkbox checked={checkedValue} onChange={(e) => { setCheckedValue(!checkedValue) }} />
+            <div className='flex flex-row items-center pt-5 text-xs xs:text-sm'>
+              <Checkbox checked={checkedValue} onChange={(e) => {
+                setCheckedValue(e.target.checked)
+              }} className='mr-2'
+              sx={{
+                '& .MuiSvgIcon-root': { fontSize: 24 },
+                '@media (max-width: 600px)': {
+                  '& .MuiSvgIcon-root': {
+                    fontSize: 34
+                  }
+                }
+              }}
+              />
               <p>By checking this box, I agree to be bound to the terms of the Snap Partners WeightCare Certification.</p>
             </div>
           </div>
           <div className='text-center md:text-left flex justify-center items-center'>
             <Button
-              classes='text-lg  bg-primary-500 rounded-lg px-2 px-7 py-3 w-[10%] flex flex-row justify-between'
+              classes={`text-lg  bg-primary-500 rounded-lg xs:px-2 xs:px-7 xs:py-3 xs:w-[10%] flex flex-row justify-between mt-6 xs:mt-0 ${
+                !checkedValue ? 'opacity-50 pointer-events-none' : ''
+              }`}
               onClick={() => {
                 handleCertificateSubmit()
               }}
+              disabled={!checkedValue}
             >
               <div>
                 Okay
