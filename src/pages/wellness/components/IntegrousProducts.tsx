@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-constant-condition */
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Client from 'shopify-buy'
 import MockUpItems from './mockup'
 
@@ -61,14 +61,14 @@ const IntegrousProducts = ({ userId, isLoggedIn, referralCode }) => {
     }
   }, [userId])
   return (
-    <div className="flex md:flex-row flex-col justify-start items-center">
+    <div className="flex md:flex-row flex-col justify-start items-center" >
       { isLoggedIn
-        ? <div className='w-full flex justify-center m-3 mt-20 xs:mt-32'>
+        ? <div className='w-full flex justify-center m-3 mt-20 xs:mt-32' id="productTabs">
           <div className='bg-gradient-to-b to-[#ce894b] from-[#e1d2c98a] xs:to-[#eda772ed] xs:from-[#fde8da7a] backdrop-blur-sm bg-opacity-10 flex w-9/12 p-2 xs:p-10 xs:rounded-lg shadow-orange-custom'>
             <div id='collection-component-tabs' className='border-1'></div>
           </div>
         </div>
-        : <div><MockUpItems collectionId={446876746030} referralCode={referralCode}/></div>
+        : <div id="productTabs"><MockUpItems collectionId={446876746030} referralCode={referralCode}/></div>
       }
     </div>
   )

@@ -13,7 +13,6 @@ import { url } from 'inspector'
 import IntegrousProducts from './wellness/components/IntegrousProducts'
 
 const IntegrousWellness = () => {
-  const productTabsRef = useRef(null)
   const router = useRouter()
   const { auth, setAuth } = useAuthStore()
   const [isLoggedIn, setIsLoggedIn] = React.useState(false)
@@ -22,9 +21,10 @@ const IntegrousWellness = () => {
   const [referralCode, setreferralCode] = React.useState(null)
   const [ownerEmail, setownerEmail] = React.useState(null)
   const [isIntegrous, setIsIntegrous] = React.useState(false)
-  const handleButtonClick = () => {
-    if (productTabsRef.current) {
-      productTabsRef.current.scrollIntoView({ behavior: 'smooth' })
+  const scrollToProductTabs = () => {
+    const productTabsElement = document.getElementById('productTabs') // Replace 'productTabs' with the actual ID of your IntegrousProducts component
+    if (productTabsElement) {
+      productTabsElement.scrollIntoView({ behavior: 'smooth' })
     }
   }
 
@@ -67,7 +67,7 @@ const IntegrousWellness = () => {
       <AuthRecover skipRedirect={true} />
       <Header isLoggedIn={isLoggedIn} userData={userData} />
       <div className='bg-cover bg-center' style={{ backgroundImage: 'url(\'/static/wellness/bg-integrous.jpeg\')' }}>
-        <MainSection referralCode={referralCode} isLoggedIn={isLoggedIn} userData={userData} handleButtonClick={handleButtonClick} />
+        <MainSection referralCode={referralCode} isLoggedIn={isLoggedIn} userData={userData} scrollToProductTabs={scrollToProductTabs} />
 
         <IntegrousProducts userId={userData?.id || 0} isLoggedIn={isLoggedIn}referralCode={referralCode}/>
         <Footer ownerName={ownerName} ownerEmail={ownerEmail} />

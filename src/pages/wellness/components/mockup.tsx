@@ -30,8 +30,8 @@ export default function MockUpItems ({ collectionId, referralCode }) {
   }, [])
   return (
     <div className='w-full flex justify-center m-3 mt-32'>
-      <Card
-        className='bg-gradient-to-b to-[#ffe4d2bf] from-[#efa675eb] xs:to-[#eda772ed] xs:from-[#fde8da7a] backdrop-blur-sm bg-opacity-10 flex w-9/12 p-2 xs:p-10 xs:rounded-lg shadow-orange-custom'
+      <div
+        className='bg-gradient-to-b to-[#ce894b] from-[#e1d2c98a] xs:to-[#eda772ed] xs:from-[#fde8da7a] backdrop-blur-sm bg-opacity-10 flex w-9/12 p-2 xs:p-10 xs:rounded-lg shadow-orange-custom'
       >
         <Grid container justifyContent="center" sx={{ textAlign: 'center' }}>
           {products.map((product, index) => (
@@ -47,7 +47,7 @@ export default function MockUpItems ({ collectionId, referralCode }) {
             </Grid>
           ))}
         </Grid>
-      </Card>
+      </div>
     </div>
   )
 }
