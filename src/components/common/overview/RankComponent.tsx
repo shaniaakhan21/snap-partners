@@ -6,6 +6,7 @@ import { styled } from '@mui/system'
 import BarWithText from './BarWithText'
 import { RankData } from 'lib/types/overview'
 import { RankSteps } from './RankSteps'
+import { Tooltip } from '@mui/material'
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -130,7 +131,7 @@ export default function RankComponent (props: RankComponentProps) {
                   {
                     rankData.sv.workingLegs && Object.values(rankData.sv.workingLegs).map((leg, index) => (
                       <div className='col-span-1'>
-                        {<BarWithText progressColor={'#54A52C'} value={leg.percentage} variant={'determinate'}/>}
+                        { <Tooltip title={'user'}><div><BarWithText progressColor={'#54A52C'} value={leg.percentage} variant={'determinate'}/></div></Tooltip> }
                       </div>
                     ))
                   }
@@ -187,7 +188,7 @@ export default function RankComponent (props: RankComponentProps) {
                   {
                     rankData.dct.workingLegs && Object.values(rankData.dct.workingLegs).map((leg, index) => (
                       <div className='col-span-1'>
-                        {<BarWithText progressColor={'#F18A00'} value={leg.percentage} variant={'determinate'}/>}
+                        { <Tooltip title={'user'}><div><BarWithText progressColor={'#F18A00'} value={leg.percentage} variant={'determinate'}/></div></Tooltip> }
                       </div>
                     ))
                   }
@@ -244,7 +245,7 @@ export default function RankComponent (props: RankComponentProps) {
                   {
                     rankData.exec.workingLegs && Object.values(rankData.exec.workingLegs).map((leg, index) => (
                       <div className='col-span-1'>
-                        {<BarWithText progressColor={'#000000'} value={leg.percentage} variant={'determinate'}/>}
+                        {<Tooltip title={'user'}><div><BarWithText progressColor={'#000000'} value={leg.percentage} variant={'determinate'}/></div></Tooltip>}
                       </div>
                     ))
                   }

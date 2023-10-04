@@ -54,6 +54,7 @@ const DashboardOverViewPage: Page = () => {
           Authorization: `Bearer ${token}`
         }
       })
+      console.log('rankData is', response.data)
       setRankData(response.data)
     })()
   }, [])
