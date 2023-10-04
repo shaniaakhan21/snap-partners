@@ -94,7 +94,7 @@ const DashboardOverViewPage: Page = () => {
             <TierTable />
           </div>
           <div className='mt-4'>
-            <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} />
+            <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} userId={null}/>
           </div>
           <div className='mt-4'>
             <PVComponentSnap />

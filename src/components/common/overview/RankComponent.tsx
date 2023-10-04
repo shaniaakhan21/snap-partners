@@ -131,7 +131,7 @@ export default function RankComponent (props: RankComponentProps) {
                   {
                     rankData.sv.workingLegs && Object.values(rankData.sv.workingLegs).map((leg, index) => (
                       <div className='col-span-1'>
-                        { <Tooltip title={'user'}><div><BarWithText progressColor={'#54A52C'} value={leg.percentage} variant={'determinate'}/></div></Tooltip> }
+                        { <Tooltip title={leg.name}><div><BarWithText progressColor={'#54A52C'} value={leg.percentage} variant={'determinate'}/></div></Tooltip> }
                       </div>
                     ))
                   }
@@ -188,7 +188,7 @@ export default function RankComponent (props: RankComponentProps) {
                   {
                     rankData.dct.workingLegs && Object.values(rankData.dct.workingLegs).map((leg, index) => (
                       <div className='col-span-1'>
-                        { <Tooltip title={'user'}><div><BarWithText progressColor={'#F18A00'} value={leg.percentage} variant={'determinate'}/></div></Tooltip> }
+                        { <Tooltip title={leg.name}><div><BarWithText progressColor={'#F18A00'} value={leg.percentage} variant={'determinate'}/></div></Tooltip> }
                       </div>
                     ))
                   }
@@ -245,7 +245,7 @@ export default function RankComponent (props: RankComponentProps) {
                   {
                     rankData.exec.workingLegs && Object.values(rankData.exec.workingLegs).map((leg, index) => (
                       <div className='col-span-1'>
-                        {<Tooltip title={'user'}><div><BarWithText progressColor={'#000000'} value={leg.percentage} variant={'determinate'}/></div></Tooltip>}
+                        {<Tooltip title={leg.name}><div><BarWithText progressColor={'#000000'} value={leg.percentage} variant={'determinate'}/></div></Tooltip>}
                       </div>
                     ))
                   }
