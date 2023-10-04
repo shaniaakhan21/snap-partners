@@ -63,8 +63,8 @@ const IntegrousProducts = ({ userId, isLoggedIn, referralCode }) => {
   return (
     <div className="flex md:flex-row flex-col justify-start items-center">
       { isLoggedIn
-        ? <div className='w-full flex justify-center m-3 mt-32'>
-          <div className='bg-gradient-to-b to-[#ffe4d2bf] from-[#efa675eb] xs:to-[#eda772ed] xs:from-[#fde8da7a] backdrop-blur-sm bg-opacity-10 flex w-9/12 p-2 xs:p-10 xs:rounded-lg shadow-orange-custom'>
+        ? <div className='w-full flex justify-center m-3 mt-20 xs:mt-32'>
+          <div className='bg-gradient-to-b to-[#ce894b] from-[#e1d2c98a] xs:to-[#eda772ed] xs:from-[#fde8da7a] backdrop-blur-sm bg-opacity-10 flex w-9/12 p-2 xs:p-10 xs:rounded-lg shadow-orange-custom'>
             <div id='collection-component-tabs' className='border-1'></div>
           </div>
         </div>

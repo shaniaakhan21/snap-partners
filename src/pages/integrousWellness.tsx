@@ -66,7 +66,7 @@ const IntegrousWellness = () => {
     <div>
       <AuthRecover skipRedirect={true} />
       <Header isLoggedIn={isLoggedIn} userData={userData} />
-      <div style={{ backgroundImage: 'url(\'/static/wellness/bg-integrous.jpeg\')', backgroundSize: 'cover' }}>
+      <div className='bg-cover bg-center' style={{ backgroundImage: 'url(\'/static/wellness/bg-integrous.jpeg\')' }}>
         <MainSection referralCode={referralCode} isLoggedIn={isLoggedIn} userData={userData} handleButtonClick={handleButtonClick} />
 
         <IntegrousProducts userId={userData?.id || 0} isLoggedIn={isLoggedIn}referralCode={referralCode}/>
