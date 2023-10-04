@@ -10,6 +10,7 @@ import { useRouter } from 'next/router'
 import { AuthRecover } from 'components/common/AuthRecover'
 import { useAuthStore } from 'lib/stores'
 import { url } from 'inspector'
+import IntegrousProducts from './wellness/components/IntegrousProducts'
 
 const IntegrousWellness = () => {
   const productTabsRef = useRef(null)
@@ -65,13 +66,13 @@ const IntegrousWellness = () => {
     <div>
       <AuthRecover skipRedirect={true} />
       <Header isLoggedIn={isLoggedIn} userData={userData} />
-      <div style={{ backgroundImage: 'url(\'/static/wellness/bg-integrous.jpeg\')' }}>
+      <div style={{ backgroundImage: 'url(\'/static/wellness/bg-integrous.jpeg\')', backgroundSize: 'cover' }}>
         <MainSection referralCode={referralCode} isLoggedIn={isLoggedIn} userData={userData} handleButtonClick={handleButtonClick} />
 
-        <ProductTabs isIntegrous={isIntegrous} referralCode={referralCode} userId={userData?.id || 0} isLoggedIn={isLoggedIn} collectionIdTea={459147018542} collectionIdGut={459147149614} collectionIdAllProducts={446876746030} />
-
+        <IntegrousProducts userId={userData?.id || 0} isLoggedIn={isLoggedIn}referralCode={referralCode}/>
+        <Footer ownerName={ownerName} ownerEmail={ownerEmail} />
       </div>
-      <Footer ownerName={ownerName} ownerEmail={ownerEmail} />
+
     </div>
   )
 }

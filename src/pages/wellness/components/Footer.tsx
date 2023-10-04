@@ -11,7 +11,7 @@ import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
   footer1: {
-    backgroundColor: '#2D2D2D!important'
+    backgroundColor: '#342c22c2!important'
   },
   profileImage: {
     width: '70%',
@@ -26,12 +26,12 @@ const useStyles = makeStyles((theme) => ({
   placeholderWhite: {
     '&::placeholder': {
       color: 'white',
-      border: '2px solid #7D7D7D'
+      border: '2px solid #342c22c2'
     },
     input: {
       color: 'white'
     },
-    border: '2px solid #7D7D7D'
+    border: '2px solid #342c22c2'
   },
   button: {
     alignSelf: 'flex-start'
@@ -108,7 +108,7 @@ function Footer ({ userData, ownerName, ownerEmail }) {
   }
 
   return (
-    <footer style={{ backgroundColor: '#2D2D2D!important' }} className={`${classes.footer1} px-10 pt-5 pb-5`}>
+    <footer style={{ backgroundColor: '#342c22c2!important' }} className={`${classes.footer1} px-10 pt-5 pb-5 backdrop-blur-sm bg-opacity-20`}>
       <Grid container>
         <Grid
           item
@@ -146,7 +146,7 @@ function Footer ({ userData, ownerName, ownerEmail }) {
           <form className={'$ {classes.form} pr-0 md:pr-24 pt-5'}>
             <div className="flex flex-row w-full m-1">
               <input
-                style={{ background: '#4B4B4B' }}
+                style={{ background: '#342c2277' }}
                 type="text"
                 placeholder="Your Name"
                 value={(formData.name)}
@@ -154,7 +154,7 @@ function Footer ({ userData, ownerName, ownerEmail }) {
                 className="w-1/2 px-6 py-4 placeholder-white placeholder-opacity-60 border border-none rounded-3xl text-white font-light  mr-2 mb-3"
                 required />
               <input
-                style={{ background: '#4B4B4B' }}
+                style={{ background: '#342c2277' }}
                 type="email"
                 placeholder="Your Email"
                 value={(formData.customerEmail)}
@@ -163,7 +163,7 @@ function Footer ({ userData, ownerName, ownerEmail }) {
               />
             </div>
             <input
-              style={{ background: '#4B4B4B' }}
+              style={{ background: '#342c2277' }}
               type="text"
               placeholder="Let&rsquo;s Talk about it"
               value={(formData.subject)}
@@ -171,14 +171,14 @@ function Footer ({ userData, ownerName, ownerEmail }) {
               className="w-full px-6 py-4 border border-none rounded-3xl text-white font-light m-1 mb-3"
             />
             <textarea
-              style={{ background: '#4B4B4B' }}
+              style={{ background: '#342c2277' }}
               placeholder="Type your message here"
               value={(formData.emailBody)}
               onChange={(e) => { setFormData({ ...formData, emailBody: e.target.value }) }}
               className="w-full h-40 px-6 py-4 placeholder-white placeholder-opacity-60 border border-none rounded-3xl text-white font-light m-1"
             />
             <div className='w-full flex justify-end'>
-              <Button disabled={!!loading} onClick={() => { handleStoreQuery() }} classes='text-base bg-btn-color rounded-lg w-36 uppercase mt-2'>
+              <Button disabled={!!loading} onClick={() => { handleStoreQuery() }} classes='text-base bg-[#945825] rounded-lg w-36 uppercase mt-2'>
               SUBMIT
               </Button>
             </div>
