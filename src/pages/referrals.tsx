@@ -18,7 +18,7 @@ const ReferralsPage: Page = () => {
   const { auth } = useAuthStore()
 
   const _auth: any = auth
-  const isCustomer = auth.roles.customer
+  const isCustomer = _auth.roles.customer || _auth.roles.integrousCustomer
 
   const isIntegrous = (_auth.roles.integrousAssociate || _auth.roles.integrousCustomer)
   const [openModal, setOpenModal] = useState(!auth.isCertified)
