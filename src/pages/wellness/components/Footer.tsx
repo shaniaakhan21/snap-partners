@@ -146,36 +146,36 @@ function Footer ({ userData, ownerName, ownerEmail }) {
           <form className={'$ {classes.form} pr-0 md:pr-24 pt-5'}>
             <div className="flex flex-row w-full m-1">
               <input
-                style={{ background: '#342c2277' }}
+                style={{ background: '#342c22' }}
                 type="text"
                 placeholder="Your Name"
                 value={(formData.name)}
                 onChange={(e) => { setFormData({ ...formData, name: e.target.value }) }}
-                className="w-1/2 px-6 py-4 placeholder-white placeholder-opacity-60 border border-none rounded-3xl text-white font-light  mr-2 mb-3"
+                className="w-1/2 px-6 py-4 placeholder-white border border-none rounded-3xl text-white font-light  mr-2 mb-3"
                 required />
               <input
-                style={{ background: '#342c2277' }}
+                style={{ background: '#342c22' }}
                 type="email"
                 placeholder="Your Email"
                 value={(formData.customerEmail)}
                 onChange={(e) => { setFormData({ ...formData, customerEmail: e.target.value }) }}
-                className="w-1/2 px-6 py-4 placeholder-white placeholder-opacity-60 border border-none rounded-3xl text-white font-light mb-3"
+                className="w-1/2 px-6 py-4 placeholder-white border border-none rounded-3xl text-white font-light mb-3"
               />
             </div>
             <input
-              style={{ background: '#342c2277' }}
+              style={{ background: '#342c22' }}
               type="text"
               placeholder="Let&rsquo;s Talk about it"
               value={(formData.subject)}
               onChange={(e) => { setFormData({ ...formData, subject: e.target.value }) }}
-              className="w-full px-6 py-4 border border-none rounded-3xl text-white font-light m-1 mb-3"
+              className="w-full px-6 py-4 border border-none rounded-3xl text-white placeholder-white font-light m-1 mb-3"
             />
             <textarea
-              style={{ background: '#342c2277' }}
+              style={{ background: '#342c22' }}
               placeholder="Type your message here"
               value={(formData.emailBody)}
               onChange={(e) => { setFormData({ ...formData, emailBody: e.target.value }) }}
-              className="w-full h-40 px-6 py-4 placeholder-white placeholder-opacity-60 border border-none rounded-3xl text-white font-light m-1"
+              className="w-full h-40 px-6 py-4 placeholder-white border border-none rounded-3xl text-white font-light m-1"
             />
             <div className='w-full flex justify-end'>
               <Button disabled={!!loading} onClick={() => { handleStoreQuery() }} classes='text-base bg-[#945825] rounded-lg w-36 uppercase mt-2'>
