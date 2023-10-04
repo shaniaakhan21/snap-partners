@@ -18,7 +18,7 @@ const ReferralsPage: Page = () => {
   const { auth } = useAuthStore()
 
   const _auth: any = auth
-  const isIBO = auth.roles.ibo
+  const isCustomer = auth.roles.customer
 
   const isIntegrous = (_auth.roles.integrousAssociate || _auth.roles.integrousCustomer)
   const [openModal, setOpenModal] = useState(!auth.isCertified)
@@ -125,29 +125,31 @@ const ReferralsPage: Page = () => {
         newUser={false}
         classes='col-span-1'
       /> */}
-        {isIBO && (
-          auth?.isCertified
-            ? <ReferralCards
+        {!isCustomer
+          ? (
+            auth?.isCertified
+              ? <ReferralCards
+                title='Refer a Wellness Customer'
+                ilustration={<img src={'/static/wellness/wellness_logo.svg'} width={100} />}
+                link={`${auth.referralLinkWellness}` || 'With Out Link'}
+                newUser={false}
+                classes='col-span-1'
+              />
+              : <>
+                <InactiveCards title={'Refer a Wellness Customer'} ilustration={<img src={'/static/wellness/wellness_logo.svg'} width={100} />} link={''}/>
+              </>
+
+          )
+          : (
+            <ReferralCards
               title='Refer a Wellness Customer'
               ilustration={<img src={'/static/wellness/wellness_logo.svg'} width={100} />}
               link={`${auth.referralLinkWellness}` || 'With Out Link'}
               newUser={false}
               classes='col-span-1'
             />
-            : <>
-              <InactiveCards title={'Refer a Wellness Customer'} ilustration={<img src={'/static/wellness/wellness_logo.svg'} width={100} />} link={''}/>
-            </>
+          )}
 
-        )}
-        {!isIBO && (
-          <ReferralCards
-            title='Refer a Wellness Customer'
-            ilustration={<img src={'/static/wellness/wellness_logo.svg'} width={100} />}
-            link={`${auth.referralLinkWellness}` || 'With Out Link'}
-            newUser={false}
-            classes='col-span-1'
-          />
-        )}
       </div>
       {isIBO && (
         <ContractModal open={openModal} onClose={handleCloseModal} />)
