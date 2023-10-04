@@ -29,7 +29,7 @@ export default function MockUpItems ({ collectionId, referralCode }) {
     Shopify()
   }, [])
   return (
-    <div className='w-full flex justify-center m-3 mt-32'>
+    <div className='w-full flex justify-center m-3 mt-20 xs:mt-32'>
       <div
         className='bg-gradient-to-b to-[#ce894b] from-[#e1d2c98a] xs:to-[#eda772ed] xs:from-[#fde8da7a] backdrop-blur-sm bg-opacity-10 flex w-9/12 p-2 xs:p-10 xs:rounded-lg shadow-orange-custom'
       >
