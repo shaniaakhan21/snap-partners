@@ -52,7 +52,7 @@ export default function SingleItem ({ image, name, price, btnLabel, index, refer
             gutterBottom
             variant="h5"
             component="div"
-            className='text-center text-black text-sm font-bold xl:text-base 2xl:text-xl'
+            className='text-center text-black-h text-sm font-bold xl:text-base 2xl:text-xl'
           >
             {name}
           </Typography>
@@ -65,19 +65,19 @@ export default function SingleItem ({ image, name, price, btnLabel, index, refer
               width: '95%',
               ml: 1,
               alignItems: 'center',
-              backgroundColor: '#00000021!important',
-              color: 'black',
+              backgroundColor: '#0000006b!important',
+              color: 'white',
               '&:hover': {
-                backgroundColor: 'rgba(255, 255, 255, 0.2)',
-                color: '#999999!important'
+                backgroundColor: '#4D655B!important',
+                color: 'white!important'
               },
               '&:active': {
-                backgroundColor: 'rgba(255, 255, 255, 0.2)!important',
-                color: '#999999!important'
+                backgroundColor: '#4D655B!important',
+                color: 'white!important'
               },
               '&:focus': {
-                backgroundColor: 'rgba(255, 255, 255, 0.2)!important',
-                color: '#999999!important'
+                backgroundColor: '#4D655B!important',
+                color: 'white!important'
               },
               mt: 1
             }}

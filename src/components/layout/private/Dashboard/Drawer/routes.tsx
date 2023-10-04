@@ -176,6 +176,10 @@ export const globalRoutes = [
   {
     to: '/wellness/wellness',
     label: 'SNAP Wellness'
+  },
+  {
+    to: '/integrousWellness',
+    label: 'Integrous Wellness'
   }
 
 ]

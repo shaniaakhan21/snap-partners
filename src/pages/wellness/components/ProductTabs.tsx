@@ -47,49 +47,35 @@ const ProductTabs = ({ userId, isLoggedIn, collectionIdTea, collectionIdGut, col
 
   return (
     <div className='mx-5 md:mx-10 lg:mx-20 2xl:mx-24 pt-4'>
-      <Tabs value={value} onChange={handleChange as any} variant="scrollable" scrollButtons="auto" style={{ borderBottom: '3px solid red' }} TabIndicatorProps={{ style: { display: 'none' } }}>
-        <Tab label="All Products" className={`
-    ${value === 0 ? 'bg-btn-color text-white-h rounded-tl-lg rounded-tr-lg 3xl:text-xl' : 'text-black-h 3xl:text-xl'} 
+      <Tabs value={value} onChange={handleChange as any} variant="scrollable" scrollButtons="auto" style={{ borderBottom: 'none' }} TabIndicatorProps={{ style: { display: 'none' } }}>
+        <Tab label="" className={`
+    ${value === 0 ? 'bg-btn-color text-white-h rounded-tl-lg rounded-tr-lg hidden 3xl:text-xl' : 'text-black-h 3xl:text-xl'} 
     custom-text-none custom-padding
   `} />
-        <Tab label="Coffee/Tea" className={`
-    ${value === 1 ? 'bg-btn-color text-white-h rounded-tl-lg rounded-tr-lg 3xl:text-xl' : 'text-black-h 3xl:text-xl'} 
-    custom-text-none custom-padding
-  `} />
-        <Tab label="Gut Health" className={`
-    ${value === 2 ? 'bg-btn-color text-white-h rounded-tl-lg rounded-tr-lg 3xl:text-xl' : 'text-black-h 3xl:text-xl'} 
-    custom-text-none custom-padding
-  `} />
-  {!isIntegrous && (
-        <Tab label="Weight Management" className={`
-    ${value === 3 ? 'bg-btn-color text-white-h rounded-tl-lg rounded-tr-lg 3xl:text-xl' : 'text-black-h 3xl:text-xl'} 
-    custom-text-none custom-padding
-  `} />
-  )}
       </Tabs>
       <TabPanel value={value} index={0}>
-        <div className='p-1 2xl:p-10  rounded-2xl bg-white shadow-custom'>
+        <div className='p-1 2xl:p-10'>
           <ProductCard userId={userId} collectionId={collectionIdAllProducts} isLoggedIn={isLoggedIn} referralCode={referralCode} />
         </div>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <div className='p-1 2xl:p-10  rounded-2xl bg-white shadow-custom'>
+        <div className='p-1 2xl:p-10'>
           <ProductCard userId={userId} collectionId={collectionIdTea} isLoggedIn={isLoggedIn} referralCode={referralCode}/>
         </div>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <div className='p-1 2xl:p-10  rounded-2xl bg-white shadow-custom'>
+        <div className='p-1 2xl:p-10'>
           <ProductCard userId={userId} collectionId={collectionIdGut} isLoggedIn={isLoggedIn} referralCode={referralCode}/>
         </div>
       </TabPanel>
       {!isIntegrous && (
-      <TabPanel value={value} index={3} >
-        <div className='p-1 2xl:p-10  rounded-2xl bg-white shadow-custom'>
-          <div>
-            <WeightCare isLoggedIn={isLoggedIn} referralCode={referralCode}/>
+        <TabPanel value={value} index={3} >
+          <div className='p-1 2xl:p-10'>
+            <div>
+              <WeightCare isLoggedIn={isLoggedIn} referralCode={referralCode}/>
+            </div>
           </div>
-        </div>
-      </TabPanel>
+        </TabPanel>
       )}
     </div>
   )
