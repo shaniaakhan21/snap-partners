@@ -68,7 +68,7 @@ const IntegrousProducts = ({ userId, isLoggedIn, referralCode }) => {
             <div id='collection-component-tabs' className='border-1'></div>
           </div>
         </div>
-        : <div></div>
+        : <div><MockUpItems collectionId={446876746030} referralCode={referralCode}/></div>
       }
     </div>
   )
