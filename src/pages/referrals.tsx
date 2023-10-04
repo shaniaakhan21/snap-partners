@@ -151,7 +151,7 @@ const ReferralsPage: Page = () => {
           )}
 
       </div>
-      {isIBO && (
+      {!isCustomer && (
         <ContractModal open={openModal} onClose={handleCloseModal} />)
       }
     </div>
