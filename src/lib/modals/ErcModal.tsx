@@ -4,6 +4,7 @@ import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { Client } from 'lib/types/transaction'
 import ReactDataGrid from '@inovua/reactdatagrid-community'
+import { NumberUtils } from 'lib/utils/number'
 dayjs.extend(customParseFormat) // Extend dayjs with the plugin. Required for Safari
 
 type ErcModalProps = {
@@ -177,7 +178,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                       </span>
                     </div>
                     <div className='flex flex-col'>
-                      <div style={{ flex: 1 }}> {phase2Progress === phase2StepCount ? `$${phase2CV.toFixed(2)}` : ''}</div>
+                      <div style={{ flex: 1 }}> {phase2Progress === phase2StepCount ? `$${NumberUtils.formatNumberWithCommas(phase2CV.toFixed(2))}` : ''}</div>
                       {/* <div className='text-xs font-normal'>MM/DD/YYYY</div> */}
                     </div>
                   </div>
@@ -194,11 +195,11 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                   </div>
                   <div className="flex justify-between text-xs mt-1">
                     <span>Your PCV for this account</span>
-                    <span>${PCV.toFixed(2)}</span>
+                    <span>${NumberUtils.formatNumberWithCommas(PCV.toFixed(2))}</span>
                   </div>
                   <div className="flex justify-between text-xs font-bold">
                     <span>Total CV for this account</span>
-                    <span>${totalCV.toFixed(2)}</span>
+                    <span>${NumberUtils.formatNumberWithCommas(totalCV.toFixed(2))}</span>
                   </div>
                 </div>
                 <div className="flex justify-center">
@@ -283,7 +284,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                       </span>
                     </div>
                     <div className='flex flex-col'>
-                      <div style={{ flex: 1 }}> {phase3Progress === phase3StepCount ? `$${phase3CV.toFixed(2)}` : ''}</div>
+                      <div style={{ flex: 1 }}> {phase3Progress === phase3StepCount ? `$${NumberUtils.formatNumberWithCommas(phase3CV.toFixed(2))}` : ''}</div>
                       {/* <div className='text-xs font-normal'>MM/DD/YYYY</div> */}
                     </div>
                   </div>
@@ -300,11 +301,11 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                   </div>
                   <div className="flex justify-between text-xs mt-1">
                     <span>Your PCV for this account</span>
-                    <span>${PCV.toFixed(2)}</span>
+                    <span>${NumberUtils.formatNumberWithCommas(PCV.toFixed(2))}</span>
                   </div>
                   <div className="flex justify-between text-xs font-bold">
                     <span>Total CV for this account</span>
-                    <span>${totalCV.toFixed(2)}</span>
+                    <span>${NumberUtils.formatNumberWithCommas(totalCV.toFixed(2))}</span>
                   </div>
                 </div>
                 <div className="flex justify-center">
