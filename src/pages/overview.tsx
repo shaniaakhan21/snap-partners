@@ -39,6 +39,7 @@ const DashboardOverViewPage: Page = () => {
 
   const currentOverview = getLocalStorage('currentBackoffice') || ''
   const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
+  const isCustomer = auth.roles.customer
   const isIntegrousAssociate = auth.roles.integrousAssociate
 
   const handleCloseModal = () => {
@@ -124,7 +125,9 @@ const DashboardOverViewPage: Page = () => {
       <div className='col-span-12 mt-4'>
         <Referrals rankData={rankData} />
       </div>
-      <ContractModal open={openModal} onClose={handleCloseModal} />
+      {!isCustomer && (
+        <ContractModal open={openModal} onClose={handleCloseModal} />)
+      }
     </>
   )
 }
