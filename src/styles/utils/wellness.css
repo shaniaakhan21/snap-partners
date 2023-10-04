@@ -6,9 +6,8 @@
 .video-container {
     position: relative;
     width: 100%;
-    height: 75vh;
+    height: 80vh;
     overflow: hidden;
-    background-color: #0000007d;
 
     @media screen and (max-width: 998px) {
         height: 65vh;
@@ -36,15 +35,15 @@
 }
 
 .bg-btn-color {
-    background-color: #FE0002 !important;
+    background-color: #4D655B!important;
 }
 
 .text-red-h {
-    color: #FE0002 !important;
+    color: #4D655B!important;
 }
 
 .text-white-h {
-    color: white !important;
+    color: black !important;
 }
 
 .font-bold-it {
@@ -119,4 +118,8 @@
         position: relative;
         top: -5%;
     }
+}
+
+.shopify-buy__product{
+    background-color: white!important;
 }
