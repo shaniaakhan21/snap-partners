@@ -77,6 +77,46 @@
     background-color: #1e306e17;
 }
 
+.cust-color{
+    color: #342c22;
+}
 
+.bg-customFooterbg{
+    background-color: #342c22c2;
+}
 
-  
+.bg-customfooterInputbg{
+    background-color: #342c22c2;
+}
+
+.border-customFooterBorder{
+    border-color: #342c22c2;
+}
+
+.bg-customFooterBoxbg{
+    background-color: #342c22c2;
+}
+
+.bg-blackCustom{
+    background-color: black;
+}
+
+.bg-customGray{
+    background-color: rgb(29, 29, 29);
+}
+
+.border-customGrayborder{
+    border-color: rgb(29, 29, 29);
+}
+
+.bg-submitBtnBg{
+    background-color: #945825;
+}
+
+.bg-black-900{
+    background-color: #342c22c2!important;
+}
+
+.bg-blue{
+    background-color: #1E306E;
+}

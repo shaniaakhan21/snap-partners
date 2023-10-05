@@ -3,7 +3,7 @@ import Card from '@mui/material/Card'
 import { Button } from 'components/common/Button'
 import Router from 'next/router'
 
-const LoginOrSignBox = ({ isLoggedIn, userData, referralCode }) => {
+const LoginOrSignBox = ({ isLoggedIn, userData, referralCode, h1Color, customColor, BgbtnColor }) => {
   const handleLogin = () => {
     Router.push(`/auth/login-wellness?redirectToWellness=true&referralCode=${referralCode || 'NoSponsor'}`)
   }
@@ -20,19 +20,19 @@ const LoginOrSignBox = ({ isLoggedIn, userData, referralCode }) => {
     >
       { !isLoggedIn
         ? <CardContent>
-          <h1 className="text text-[#342c22] text-2xl md:text-3xl 2xl:text-4xl 3xl:text-6xl font-semibold-it font-normal text-center mb-4 2xl:mb-5 3xl:mb-8">
-              Purchase <span className='text-red-h'>Now</span>
+          <h1 className={`text text-${customColor} text-2xl md:text-3xl 2xl:text-4xl 3xl:text-4xl font-semibold-it font-normal text-center mb-4 2xl:mb-5 3xl:mb-8`}>
+              Purchase <span className={`text-${h1Color}`}>Now</span>
           </h1>
-          <p className="text text-[#342c22] font-light text-center">
-            <Button onClick={() => { handleLogin() }} classes=' text-xs md:text-base lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-4xl bg-btn-color rounded-lg px-8 2xl:py-2 3xl:py-5'>
+          <p className={`text text-${customColor} font-light text-center`}>
+            <Button onClick={() => { handleLogin() }} classes={`text-xs md:text-base lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-2xl bg-${BgbtnColor} rounded-lg px-8 2xl:py-2 3xl:py-5`}>
               LOG IN / SIGN UP
               <i className="fa fa-sign-in ml-2" aria-hidden="true"></i>
             </Button>
           </p>
         </CardContent>
         : <CardContent>
-          <h1 className="text text-[#342c22] text-2xl md:text-3xl 2xl:text-4xl 3xl:text-7xl font-semibold-it font-normal text-center 3xl:leading-tight">
-            <span className='text-red-h capitalize'>{ userData ? `${userData?.name} ${userData?.lastname}` : ''} </span>, Welcome to Snap Wellness
+          <h1 className={`text text-${customColor} text-2xl md:text-3xl 2xl:text-4xl 3xl:text-5xl font-semibold-it font-normal text-center 3xl:leading-tight`}>
+            <span className={`text-${h1Color} capitalize`}>{ userData ? `${userData?.name} ${userData?.lastname}` : ''} </span>, Welcome to Snap Wellness
           </h1>
         </CardContent>
       }

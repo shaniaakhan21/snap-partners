@@ -10,9 +10,6 @@ import DialogActions from '@mui/material/DialogActions'
 import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
-  footer1: {
-    backgroundColor: '#342c22c2!important'
-  },
   profileImage: {
     width: '70%',
     marginLeft: '3%',
@@ -25,20 +22,18 @@ const useStyles = makeStyles((theme) => ({
   },
   placeholderWhite: {
     '&::placeholder': {
-      color: 'white',
-      border: '2px solid #342c22c2'
+      color: 'white'
     },
     input: {
       color: 'white'
-    },
-    border: '2px solid #342c22c2'
+    }
   },
   button: {
     alignSelf: 'flex-start'
   }
 }))
 
-function Footer ({ userData, ownerName, ownerEmail }) {
+function Footer ({ userData, ownerName, ownerEmail, customFooterBorder, submitBtnBg, customfooterInputbg, customFooterBoxbg, customFooterbg }) {
   const classes = useStyles()
 
   const [formData, setFormData] = useState({
@@ -53,7 +48,6 @@ function Footer ({ userData, ownerName, ownerEmail }) {
   const [successDialogOpen, setSuccessDialogOpen] = useState(false)
   const [errorDialogOpen, setErrorDialogOpen] = useState(false)
 
-  // Functions to open/close success and error dialogs
   const openSuccessDialog = () => {
     setSuccessDialogOpen(true)
   }
@@ -108,7 +102,7 @@ function Footer ({ userData, ownerName, ownerEmail }) {
   }
 
   return (
-    <footer style={{ backgroundColor: '#342c22c2!important' }} className={`${classes.footer1} px-10 pt-5 pb-5 backdrop-blur-sm bg-opacity-20`}>
+    <footer className={`bg-${customFooterbg} px-10 pt-5 pb-5 backdrop-blur-sm bg-opacity-20`}>
       <Grid container>
         <Grid
           item
@@ -123,8 +117,8 @@ function Footer ({ userData, ownerName, ownerEmail }) {
           }}
 
         >
-          <div className='flex flex-col items-center w-8/12 rounded-lg border-2 customDarkGray text-center'>
-            <div className='customback w-full py-6'>
+          <div className={`flex flex-col items-center w-8/12 rounded-lg border-2 border-${customFooterBorder} text-center`}>
+            <div className={`bg-${customFooterBoxbg} w-full py-6`}>
               <h3 className="text-white text-base font-light text-center uppercase 3xl:text-2xl">Store Owner</h3>
 
               <h3 className="text-white text-2xl 3xl:text-4xl capitalize">
@@ -146,39 +140,35 @@ function Footer ({ userData, ownerName, ownerEmail }) {
           <form className={'$ {classes.form} pr-0 md:pr-24 pt-5'}>
             <div className="flex flex-row w-full m-1">
               <input
-                style={{ background: '#342c22' }}
                 type="text"
                 placeholder="Your Name"
                 value={(formData.name)}
                 onChange={(e) => { setFormData({ ...formData, name: e.target.value }) }}
-                className="w-1/2 px-6 py-4 placeholder-white border border-none rounded-3xl text-white font-light  mr-2 mb-3"
+                className={`w-1/2 px-6 py-4 placeholder-white border border-none rounded-3xl text-white font-light  mr-2 mb-3 bg-${customfooterInputbg}`}
                 required />
               <input
-                style={{ background: '#342c22' }}
                 type="email"
                 placeholder="Your Email"
                 value={(formData.customerEmail)}
                 onChange={(e) => { setFormData({ ...formData, customerEmail: e.target.value }) }}
-                className="w-1/2 px-6 py-4 placeholder-white border border-none rounded-3xl text-white font-light mb-3"
+                className={`w-1/2 px-6 py-4 placeholder-white border border-none rounded-3xl text-white font-light mb-3 bg-${customfooterInputbg}`}
               />
             </div>
             <input
-              style={{ background: '#342c22' }}
               type="text"
               placeholder="Let&rsquo;s Talk about it"
               value={(formData.subject)}
               onChange={(e) => { setFormData({ ...formData, subject: e.target.value }) }}
-              className="w-full px-6 py-4 border border-none rounded-3xl text-white placeholder-white font-light m-1 mb-3"
+              className={`w-full px-6 py-4 border border-none rounded-3xl text-white placeholder-white font-light m-1 mb-3 bg-${customfooterInputbg}`}
             />
             <textarea
-              style={{ background: '#342c22' }}
               placeholder="Type your message here"
               value={(formData.emailBody)}
               onChange={(e) => { setFormData({ ...formData, emailBody: e.target.value }) }}
-              className="w-full h-40 px-6 py-4 placeholder-white border border-none rounded-3xl text-white font-light m-1"
+              className={`w-full h-40 px-6 py-4 placeholder-white border border-none rounded-3xl text-white font-light m-1 bg-${customfooterInputbg}`}
             />
             <div className='w-full flex justify-end'>
-              <Button disabled={!!loading} onClick={() => { handleStoreQuery() }} classes='text-base bg-[#945825] rounded-lg w-36 uppercase mt-2'>
+              <Button disabled={!!loading} onClick={() => { handleStoreQuery() }} classes={`text-base bg-${submitBtnBg} rounded-lg w-36 uppercase mt-2`}>
               SUBMIT
               </Button>
             </div>

@@ -180,6 +180,10 @@ export const globalRoutes = [
   {
     to: '/integrousWellness',
     label: 'Integrous Wellness'
+  },
+  {
+    to: '/WeightCare',
+    label: 'Weight Care'
   }
 
 ]

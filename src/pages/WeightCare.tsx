@@ -1,16 +1,14 @@
 /* eslint-disable no-use-before-define */
 
 import React, { useEffect, useRef } from 'react'
-import Footer from '../pages/wellness/components/Footer'
-import Header from '../pages/wellness/components/Header'
-import MainSection from '../pages/wellness/components/MainSection'
-import ProductTabs from '../pages/wellness/components/ProductTabs'
+import Footer from './wellness/components/Footer'
+import Header from './wellness/components/Header'
+import MainSection from './wellness/components/MainSection'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { AuthRecover } from 'components/common/AuthRecover'
 import { useAuthStore } from 'lib/stores'
-import { url } from 'inspector'
-import IntegrousProducts from './wellness/components/IntegrousProducts'
+import WeightCare from './wellness/components/WeightCare'
 
 const IntegrousWellness = () => {
   const router = useRouter()
@@ -65,21 +63,24 @@ const IntegrousWellness = () => {
   return (
     <div>
       <AuthRecover skipRedirect={true} />
-      <Header isLoggedIn={isLoggedIn} userData={userData} bgcblack='bgc-black' btnBG='black-900'/>
-      <div className='bg-cover bg-center' style={{ backgroundImage: 'url(\'/static/wellness/bg-integrous.jpeg\')' }}>
-        <MainSection referralCode={referralCode} isLoggedIn={isLoggedIn} userData={userData} scrollToProductTabs={scrollToProductTabs}
-          h1Color="#FF0000"
-          pColor="#00FF00"
-          textColor="red-h"
-          BgbuttonColor="btn-color"
-          imgSrc="/static/wellness/intLogo.svg"
-          Loginh1Color="red-h"
-          customColor="cust-color"
-        />
-
-        <IntegrousProducts userId={userData?.id || 0} isLoggedIn={isLoggedIn}referralCode={referralCode}/>
-        <Footer ownerName={ownerName} ownerEmail={ownerEmail} customFooterBorder="customFooterBorder" customfooterInputbg="customfooterInputbg" customFooterBoxbg="customFooterBoxbg" customFooterbg="customFooterBoxbg" submitBtnBg="btn-color" />
+      <div className='border-b-2 border-blue'>
+        <Header isLoggedIn={isLoggedIn} userData={userData} bgcblack='bg-blackCustom' btnBG='primary-500'/>
       </div>
+      <div className='bg-cover bg-center bg-gradient-to-b from-[black] to-white border-none pb-[10%]'>
+        <MainSection referralCode={referralCode} isLoggedIn={isLoggedIn} userData={userData} scrollToProductTabs={scrollToProductTabs}
+          h1Color="white"
+          pColor="white"
+          textColor="primary-500"
+          BgbuttonColor="primary-500"
+          imgSrc="/static/wellness/wellness_logo.svg"
+          Loginh1Color="primary-500"
+          customColor="white"
+        />
+      </div>
+      <div className=''>
+        <WeightCare isLoggedIn={isLoggedIn} referralCode={referralCode}/>
+      </div>
+      <Footer ownerName={ownerName} ownerEmail={ownerEmail} customFooterBorder="customGrayborder" customfooterInputbg="customGray" customFooterBoxbg="customGray" customFooterbg="blackCustom" submitBtnBg="primary-500" />
 
     </div>
   )

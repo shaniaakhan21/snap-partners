@@ -13,6 +13,8 @@ interface HeaderProps {
   profileName?: string;
   isLoggedIn?: boolean;
   userData?: any;
+  bgcblack?:string;
+  btnBG?:string;
   onLogout?: () => void;
 }
 
@@ -24,7 +26,9 @@ const Header = ({
   profileName = 'Jason White',
   onLogout = () => {},
   isLoggedIn,
-  userData
+  userData,
+  bgcblack,
+  btnBG
 }: HeaderProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const { removeAuth } = useAuthStore()
@@ -52,7 +56,7 @@ const Header = ({
   }
 
   return (
-    <header className="bgc-black text-white flex flex-row items-center w-full px-5 md:px-10 lg:px-20 2xl:px-24 3xl:px-48">
+    <header className={`${bgcblack} text-white flex flex-row items-center w-full px-5 md:px-10 lg:px-20 2xl:px-24 3xl:px-48`}>
       <div className="justify-between items-center w-9/12 lg:w-11/12 py-2">
         <Link href={logoLink} className="text-2xl font-bold">
           <img src={logoSrc} alt={logoAlt} className='3xl:w-36'/>
@@ -82,7 +86,7 @@ const Header = ({
           </div>
           : <div className='text-right'>
             <Button onClick={() => { handleLogin() }}
-              classes='text-xs md:text-base 2xl:text-base 3xl:text-2xl font-bold bg-btn-color rounded-lg px-2 lg:px-5 3xl:px-7'
+              classes={`text-xs md:text-base 2xl:text-base 3xl:text-2xl font-bold bg-${btnBG} rounded-lg px-2 lg:px-5 3xl:px-7`}
             >
               LOG IN
             </Button>

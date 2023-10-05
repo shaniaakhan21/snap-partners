@@ -18,6 +18,7 @@ const ReferralsPage: Page = () => {
   const { auth } = useAuthStore()
 
   const _auth: any = auth
+  const isCustomer = _auth.roles.customer || _auth.roles.integrousCustomer
 
   const isIntegrous = (_auth.roles.integrousAssociate || _auth.roles.integrousCustomer)
   const [openModal, setOpenModal] = useState(!auth.isCertified)
@@ -124,20 +125,35 @@ const ReferralsPage: Page = () => {
         newUser={false}
         classes='col-span-1'
       /> */}
-        { auth?.isCertified
-          ? <ReferralCards
-            title='Refer a Wellness Customer'
-            ilustration={<img src={'/static/wellness/wellness_logo.svg'} width={100} />}
-            link={`${auth.referralLinkWellness}` || 'With Out Link'}
-            newUser={false}
-            classes='col-span-1'
-          />
-          : <>
-            <InactiveCards title={'Refer a Wellness Customer'} ilustration={<img src={'/static/wellness/wellness_logo.svg'} width={100} />} link={''}/>
-          </>
-        }
+        {!isCustomer
+          ? (
+            auth?.isCertified
+              ? <ReferralCards
+                title='Refer a Wellness Customer'
+                ilustration={<img src={'/static/wellness/wellness_logo.svg'} width={100} />}
+                link={`${auth.referralLinkWellness}` || 'With Out Link'}
+                newUser={false}
+                classes='col-span-1'
+              />
+              : <>
+                <InactiveCards title={'Refer a Wellness Customer'} ilustration={<img src={'/static/wellness/wellness_logo.svg'} width={100} />} link={''}/>
+              </>
+
+          )
+          : (
+            <ReferralCards
+              title='Refer a Wellness Customer'
+              ilustration={<img src={'/static/wellness/wellness_logo.svg'} width={100} />}
+              link={`${auth.referralLinkWellness}` || 'With Out Link'}
+              newUser={false}
+              classes='col-span-1'
+            />
+          )}
+
       </div>
-      <ContractModal open={openModal} onClose={handleCloseModal} />
+      {!isCustomer && (
+        <ContractModal open={openModal} onClose={handleCloseModal} />)
+      }
     </div>
   )
 }
