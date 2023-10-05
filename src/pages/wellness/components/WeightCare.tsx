@@ -17,7 +17,20 @@ const WeightCare = ({ isLoggedIn, referralCode }) => {
   const [open, setOpen] = useState(false)
 
   const handleLogin = () => {
-    Router.push(`/auth/login-wellness?redirectToWellness=true&referralCode=${referralCode || 'NoSponsor'}`)
+    const referralCodeFromLocalStorage = localStorage.getItem('referralCode')
+    const queryParams = new URLSearchParams(window.location.search)
+    const referralCodeFromQuery = queryParams.get('referralCode')
+    const referralCode = referralCodeFromLocalStorage || referralCodeFromQuery || 'NoSponsor'
+
+    let loginRoute = '/auth/login-wellness?referralCode=' + referralCode
+
+    if (window.location.pathname.includes('integrousWellness')) {
+      loginRoute += '&redirectToIntegrousWellness=true'
+    } else if (window.location.pathname.includes('WeightCare')) {
+      loginRoute += '&redirectToWeightCare=true'
+    }
+
+    Router.push(loginRoute)
   }
   const handleOpen = () => {
     setOpen(true)
@@ -200,7 +213,7 @@ const WeightCare = ({ isLoggedIn, referralCode }) => {
         </div>
         <input type="hidden" name="customer_receipt" value="true" />
         <input type="hidden" name="key_id" value="14205969" />
-        <input type="hidden" name="url_finish" value="/wellness" />
+        <input type="hidden" name="url_finish" value="/WeightCare" />
         <input type="hidden" name="action" value="process_fixed" />
         <input type="hidden" name="order_description" value={`${nmiVariables.order_description}`} />
         <input type="hidden" name="shipping" value="fixed|0.00" />

@@ -66,7 +66,7 @@ const IntegrousWellness = () => {
       <div className='border-b-2 border-blue'>
         <Header isLoggedIn={isLoggedIn} userData={userData} bgcblack='bg-blackCustom' btnBG='primary-500'/>
       </div>
-      <div className='bg-cover bg-center bg-gradient-to-b from-[black] to-white border-none pb-[10%]'>
+      <div className='bg-cover bg-center bg-gradient-to-b from-[black] to-white border-none pb-[10%] 3xl:pb-[13%]'>
         <MainSection referralCode={referralCode} isLoggedIn={isLoggedIn} userData={userData} scrollToProductTabs={scrollToProductTabs}
           h1Color="white"
           pColor="white"
@@ -77,7 +77,7 @@ const IntegrousWellness = () => {
           customColor="white"
         />
       </div>
-      <div className=''>
+      <div>
         <WeightCare isLoggedIn={isLoggedIn} referralCode={referralCode}/>
       </div>
       <Footer ownerName={ownerName} ownerEmail={ownerEmail} customFooterBorder="customGrayborder" customfooterInputbg="customGray" customFooterBoxbg="customGray" customFooterbg="blackCustom" submitBtnBg="primary-500" />

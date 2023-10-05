@@ -51,11 +51,18 @@ export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
       setLoading(false)
       return
     }
-    const { redirectToWellness, referralCode } = router.query
-    if (redirectToWellness === 'true') {
-      removeLocalStorage('redirectToIntegrous')
+    const { redirectToIntegrousWellness, referralCode } = router.query
+    if (redirectToIntegrousWellness === 'true') {
+      removeLocalStorage('redirectToIntegrousWellness')
       removeLocalStorage('redirectToIntegrousReferralCode')
-      window.location.href = `/wellness?referralCode=${referralCode}`
+      window.location.href = `/integrousWellness?referralCode=${referralCode}`
+      return
+    }
+
+    const { redirectToWeightCare } = router.query
+    if (redirectToWeightCare === 'true') {
+      removeLocalStorage('redirectToWeightCare')
+      window.location.href = `/WeightCare?referralCode=${referralCode}`
       return
     }
     toast('Login Successful!', { type: 'success' })
@@ -106,10 +113,11 @@ export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
 
   const router = useRouter()
   const referralCode = router.query.referralCode || 'IntegrousWellness'
+  const redirectToWeightCare = router.query.redirectToWeightCare === 'true'
   const signupURL = router.pathname === '/auth/login-integrous'
     ? `/auth/signup-integrous?referralCode=${referralCode}`
-    : router.pathname === '/auth/login-wellness'
-      ? `/auth/signup-wellness?referralCode=${referralCode}`
+    : redirectToWeightCare // Use redirectToWeightCare directly here
+      ? `/auth/signup-wellness?referralCode=${referralCode}&redirectToWeightCare=true`
       : '/auth/signup'
   return (
     <div className='flex flex-col justify-start items-start gap-x-2 my-2'>

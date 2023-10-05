@@ -5,7 +5,20 @@ import Router from 'next/router'
 
 const LoginOrSignBox = ({ isLoggedIn, userData, referralCode, h1Color, customColor, BgbtnColor }) => {
   const handleLogin = () => {
-    Router.push(`/auth/login-wellness?redirectToWellness=true&referralCode=${referralCode || 'NoSponsor'}`)
+    const referralCodeFromLocalStorage = localStorage.getItem('referralCode')
+    const queryParams = new URLSearchParams(window.location.search)
+    const referralCodeFromQuery = queryParams.get('referralCode')
+    const referralCode = referralCodeFromLocalStorage || referralCodeFromQuery || 'NoSponsor'
+
+    let loginRoute = '/auth/login-wellness?referralCode=' + referralCode
+
+    if (window.location.pathname.includes('integrousWellness')) {
+      loginRoute += '&redirectToIntegrousWellness=true'
+    } else if (window.location.pathname.includes('WeightCare')) {
+      loginRoute += '&redirectToWeightCare=true'
+    }
+
+    Router.push(loginRoute)
   }
   return (
     <Card
@@ -20,7 +33,7 @@ const LoginOrSignBox = ({ isLoggedIn, userData, referralCode, h1Color, customCol
     >
       { !isLoggedIn
         ? <CardContent>
-          <h1 className={`text text-${customColor} text-2xl md:text-3xl 2xl:text-4xl 3xl:text-4xl font-semibold-it font-normal text-center mb-4 2xl:mb-5 3xl:mb-8`}>
+          <h1 className={`text text-${customColor} text-2xl md:text-3xl 2xl:text-4xl 3xl:text-5xl font-semibold-it font-normal text-center mb-4 2xl:mb-5 3xl:mb-8`}>
               Purchase <span className={`text-${h1Color}`}>Now</span>
           </h1>
           <p className={`text text-${customColor} font-light text-center`}>

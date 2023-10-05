@@ -21,7 +21,6 @@ interface HeaderProps {
 const Header = ({
   logoSrc = '/static/wellness/wellness_logo.svg',
   logoAlt = 'Wellness Logo',
-  logoLink = '/wellness',
   profilePic = '/static/wellness/pp-placeholder.png',
   profileName = 'Jason White',
   onLogout = () => {},
@@ -52,13 +51,22 @@ const Header = ({
     const queryParams = new URLSearchParams(window.location.search)
     const referralCodeFromQuery = queryParams.get('referralCode')
     const referralCode = referralCodeFromLocalStorage || referralCodeFromQuery || 'NoSponsor'
-    Router.push(`/auth/login-wellness?redirectToWellness=true&referralCode=${referralCode}`)
+
+    let loginRoute = '/auth/login-wellness?referralCode=' + referralCode
+
+    if (window.location.pathname.includes('integrousWellness')) {
+      loginRoute += '&redirectToIntegrousWellness=true'
+    } else if (window.location.pathname.includes('WeightCare')) {
+      loginRoute += '&redirectToWeightCare=true'
+    }
+
+    Router.push(loginRoute)
   }
 
   return (
     <header className={`${bgcblack} text-white flex flex-row items-center w-full px-5 md:px-10 lg:px-20 2xl:px-24 3xl:px-48`}>
       <div className="justify-between items-center w-9/12 lg:w-11/12 py-2">
-        <Link href={logoLink} className="text-2xl font-bold">
+        <Link className="text-2xl font-bold">
           <img src={logoSrc} alt={logoAlt} className='3xl:w-36'/>
         </Link>
       </div>

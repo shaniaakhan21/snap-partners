@@ -24,7 +24,20 @@ const ResponsiveCard = styled(Card)(({ theme }) => ({
 export default function SingleItem ({ image, name, price, btnLabel, index, referralCode }) {
   const [open, setOpen] = useState(false)
   const handleLogin = () => {
-    Router.push(`/auth/login-wellness?redirectToWellness=true&referralCode=${referralCode || 'NoSponsor'}`)
+    const referralCodeFromLocalStorage = localStorage.getItem('referralCode')
+    const queryParams = new URLSearchParams(window.location.search)
+    const referralCodeFromQuery = queryParams.get('referralCode')
+    const referralCode = referralCodeFromLocalStorage || referralCodeFromQuery || 'NoSponsor'
+
+    let loginRoute = '/auth/login-wellness?referralCode=' + referralCode
+
+    if (window.location.pathname.includes('integrousWellness')) {
+      loginRoute += '&redirectToIntegrousWellness=true'
+    } else if (window.location.pathname.includes('WeightCare')) {
+      loginRoute += '&redirectToWeightCare=true'
+    }
+
+    Router.push(loginRoute)
   }
   const handleOpen = () => {
     setOpen(true)
