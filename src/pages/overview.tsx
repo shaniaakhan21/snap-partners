@@ -55,6 +55,7 @@ const DashboardOverViewPage: Page = () => {
           Authorization: `Bearer ${token}`
         }
       })
+      console.log('rankData is', response.data)
       setRankData(response.data)
     })()
   }, [])
@@ -94,7 +95,7 @@ const DashboardOverViewPage: Page = () => {
             <TierTable />
           </div>
           <div className='mt-4'>
-            <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} />
+            <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} userId={null}/>
           </div>
           <div className='mt-4'>
             <PVComponentSnap />
@@ -103,13 +104,13 @@ const DashboardOverViewPage: Page = () => {
             <RewardsProgram />
           </div>
           <div className='mt-4'>
-            <GrowthSummary />
+            <GrowthSummary userId={null} />
           </div>
           <div className='mt-4 bg-white rounded-lg'>
-            <MonthlySubscription />
+            <MonthlySubscription userId={ null } />
           </div>
           <div className='mt-4 bg-white rounded-lg'>
-            <MonthlyProduction />
+            <MonthlyProduction userId={null} />
           </div>
         </div>
         <div className='ml-4'>
