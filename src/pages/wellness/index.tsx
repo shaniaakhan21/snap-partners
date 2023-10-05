@@ -1,9 +1,7 @@
 /* eslint-disable no-use-before-define */
 
 import React, { useEffect, useRef } from 'react'
-import Footer from './components/Footer'
 import Header from './components/Header'
-import MainSection from './components/MainSection'
 import ProductTabs from './components/ProductTabs'
 import axios from 'axios'
 import { useRouter } from 'next/router'
@@ -64,11 +62,9 @@ const Wellness = () => {
     <div>
       <AuthRecover skipRedirect={true} />
       <Header isLoggedIn={isLoggedIn} userData={userData} />
-      <MainSection referralCode={referralCode} isLoggedIn={isLoggedIn} userData={userData} scrollToProductTabs={handleButtonClick} />
       <div ref={productTabsRef}>
         <ProductTabs isIntegrous={isIntegrous} referralCode={referralCode} userId={userData?.id || 0} isLoggedIn={isLoggedIn} collectionIdTea={459147018542} collectionIdGut={459147149614} collectionIdAllProducts={446876746030} />
       </div>
-      <Footer ownerName={ownerName} ownerEmail={ownerEmail} />
     </div>
   )
 }
