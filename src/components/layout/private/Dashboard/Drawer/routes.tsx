@@ -10,6 +10,7 @@ import {
   CreditCardIcon,
   CubeIcon
 } from 'components/common/icons'
+import { PromotionIcon } from 'components/common/icons/Promotion'
 import { SnapPartnersIcon } from 'components/common/icons/SnapPartners'
 import { SnapWellnessIcon } from 'components/common/icons/SnapWellness'
 import { VidgoLogo } from 'components/common/illustrations'
@@ -85,6 +86,12 @@ export const drawerRoutes = [
     label: 'Tools'
   },
   {
+    icon: <AccountIcon />,
+    to: '/network-activity',
+    label: 'Network Activity',
+    integrous: true
+   },
+  {
     icon: <GenealogyIcon />,
     to: '/genealogy',
     label: 'Genealogy',
@@ -127,6 +134,11 @@ export const drawerRoutes = [
     icon: <CompensationPlanIcon />,
     to: '/Documents',
     label: 'Documents'
+  },
+  {
+    icon: <PromotionIcon />,
+    to: '/promotion',
+    label: 'Snap Promos'
   }
 ]
 
@@ -160,7 +172,12 @@ export const globalRoutes = [
   {
     to: '/search/profile',
     label: 'Individual Profile'
+  },
+  {
+    to: '/wellness/wellness',
+    label: 'SNAP Wellness'
   }
+
 ]
 
 interface IDashboardPatname {

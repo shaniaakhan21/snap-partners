@@ -40,11 +40,16 @@ const calculateCurrentRank = (currentLeftTot: number, currentRightTot: number, i
   let currentRole = ''
   const [initialKey, initialEntry] = entries[0]
   const [lastKey, lastEntry] = entries[entries.length - 1]
-  if (currentLeftTot < initialEntry?.qvNonPL || currentRightTot < initialEntry?.qvPL || !isActiveLeft || !isActiveRight || pvVal < 100) {
+
+
+  const minLeg = Math.min(currentLeftTot, currentRightTot)
+  const maxLeg = Math.max(currentLeftTot, currentRightTot)
+
+  if (minLeg < initialEntry?.qvNonPL || maxLeg < initialEntry?.qvPL || !isActiveLeft || !isActiveRight || pvVal < 100) {
     return currentRole
   }
 
-  if (currentLeftTot >= lastEntry?.qvNonPL && currentRightTot >= lastEntry?.qvPL && isActiveLeft && isActiveRight && pvVal >= 100) {
+  if (minLeg >= lastEntry?.qvNonPL && maxLeg >= lastEntry?.qvPL && isActiveLeft && isActiveRight && pvVal >= 100) {
     return lastKey
   }
 
@@ -53,7 +58,7 @@ const calculateCurrentRank = (currentLeftTot: number, currentRightTot: number, i
     const nextIndex = i + 1
     if (entries.length > nextIndex) {
       const [nextKey, nextCriteria] = entries[nextIndex]
-      if (currentLeftTot < nextCriteria?.qvNonPL || currentRightTot < nextCriteria?.qvPL) {
+      if (minLeg < nextCriteria?.qvNonPL || maxLeg < nextCriteria?.qvPL) {
         if (isActiveLeft && isActiveRight && pvVal >= 100) {
           currentRole = currentKey
         }

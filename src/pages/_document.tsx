@@ -47,9 +47,9 @@ export default class MyDocument extends Document {
           <link rel='apple-touch-startup-image' href='/static/images/apple_splash_750.png' sizes='750x1334' />
           <link rel='apple-touch-startup-image' href='/static/images/apple_splash_640.png' sizes='640x1136' /> */}
 
-          <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js" type="text/javascript"></script>
-          <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-map.min.js" type="text/javascript"></script>
-          <script src="https://cdn.anychart.com/releases/8.11.0/geodata/countries/united_states_of_america/united_states_of_america.js"></script>
+          {/*  <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-core.min.js" type="text/javascript"></script> */}
+          {/* <script src="https://cdn.anychart.com/releases/8.11.0/js/anychart-map.min.js" type="text/javascript"></script> */}
+          {/* <script src="https://cdn.anychart.com/releases/8.11.0/geodata/countries/united_states_of_america/united_states_of_america.js"></script> */}
 
           <script src="https://kit.fontawesome.com/e7056ca59d.js"></script>
           <link rel='preconnect' href='https://fonts.googleapis.com' />

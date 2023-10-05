@@ -10,7 +10,7 @@ import { Button } from '../../../../common/Button'
 export const Navbar = () => {
   const router = useRouter()
   // const { title, pathname } = useDashboardGetPathname()
-  const { title } = useDashboardGetPathname()
+  const title = useDashboardGetPathname()?.title
   const { auth, removeAuth } = useAuthStore()
   const { toggleDrawer } = useDrawerStore()
   // const { toggleGenealogySearch } = useSearchModalStore()
@@ -52,10 +52,15 @@ export const Navbar = () => {
             </button>
           </div> */}
         </section>
-        <section className='w-1/3 h-full flex justify-end items-center gap-x-5'>
+        <section className='w-full h-full flex lg:flex-row flex-col justify-end lg:items-center gap-x-5 items-start mt-2 lg:mt-0'>
           <a target="_blank" href={`https://mysnappartners.com/login/token=${auth.accessToken}`}>
-            <Button classes='text-sm bg-primary-500'>
+            <Button classes='text-10 lg:text-sm bg-primary-500 py-1 lg:py-2 px-1 lg:px-4'>
               Your Builder Website
+            </Button>
+          </a>
+          <a target="_blank" href={`/wellness?referralCode=${auth.referralCode}`}>
+            <Button classes='text-10 lg:text-sm bg-primary-500 py-1 lg:py-2 px-1 lg:px-4'>
+              Your Snap Wellness Store
             </Button>
           </a>
         </section>

@@ -28,7 +28,22 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
   const sendSMSCode = async () => {
     setIsVerifyingCode(true)
 
-    const { error } = await signUpStep1({ phoneNumber: userTrack.userInfo.phone })
+    const { error } = await signUpStep1({
+      phoneNumber: userTrack.userInfo.phone,
+      email: userTrack.userInfo.email,
+      roles: {
+        admin: userTrack.userInfo.roles.admin,
+        customer: userTrack.userInfo.roles.customer,
+        driver: userTrack.userInfo.roles.driver,
+        agent: userTrack.userInfo.roles.agent,
+        merchant: userTrack.userInfo.roles.merchant,
+        ibo: userTrack.userInfo.roles.ibo,
+        integrousCustomer: userTrack.userInfo.roles.integrousCustomer,
+        integrousAssociate: userTrack.userInfo.roles.integrousAssociate
+      },
+      username: userTrack.userInfo.username,
+      sponsorReferralCode: userTrack.userInfo.referralCode || null
+    })
 
     if (error) {
       handleFetchError(error.status, error.info)
@@ -44,7 +59,22 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
   const onSubmitUpdatePhone = async ({ phoneNumber }) => {
     setIsVerifyingCode(true)
 
-    const { error } = await signUpStep1({ phoneNumber: `+${phoneNumber}` })
+    const { error } = await signUpStep1({
+      phoneNumber: `+${phoneNumber}`,
+      email: userTrack.userInfo.email,
+      roles: {
+        admin: userTrack.userInfo.roles.admin,
+        customer: userTrack.userInfo.roles.customer,
+        driver: userTrack.userInfo.roles.driver,
+        agent: userTrack.userInfo.roles.agent,
+        merchant: userTrack.userInfo.roles.merchant,
+        ibo: userTrack.userInfo.roles.ibo,
+        integrousCustomer: userTrack.userInfo.roles.integrousCustomer,
+        integrousAssociate: userTrack.userInfo.roles.integrousAssociate
+      },
+      username: userTrack.userInfo.username,
+      sponsorReferralCode: userTrack.userInfo.referralCode || null
+    })
 
     if (error) {
       handleFetchError(error.status, error.info)
@@ -71,6 +101,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
           password: userTrack.userInfo.password,
           phoneNumber: userTrack.userInfo.phone,
           street: userTrack.userInfo.street,
+          city: userTrack.userInfo.city,
           state: userTrack.userInfo.state,
           zip: userTrack.userInfo.zip,
           ssn: userTrack.userInfo.ssn,
@@ -87,7 +118,8 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
             integrousAssociate: userTrack.userInfo.roles.integrousAssociate
           },
           code,
-          sponsorReferralCode: userTrack.userInfo.sponsorReferralCode
+          sponsorReferralCode: userTrack.userInfo.sponsorReferralCode,
+          level: userTrack.userInfo.level
         }
       }
       : {
@@ -99,12 +131,14 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
           password: userTrack.userInfo.password,
           phoneNumber: userTrack.userInfo.phoneNumber,
           idImage: userTrack.userInfo.idImage,
+          city: userTrack.userInfo.merchant.city,
           insuranceImage: userTrack.userInfo.insuranceImage,
           roles: {
             admin: userTrack.userInfo.roles.admin,
             customer: userTrack.userInfo.roles.customer,
             driver: userTrack.userInfo.roles.driver,
             merchant: userTrack.userInfo.roles.merchant,
+            ibo: userTrack.userInfo.roles.ibo,
             agent: userTrack.userInfo.roles.agent,
             integrousCustomer: userTrack.userInfo.roles.integrousCustomer,
             integrousAssociate: userTrack.userInfo.roles.integrousAssociate
@@ -125,7 +159,8 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
             name: userTrack.userInfo.merchant.name,
             password: userTrack.userInfo.merchant.password,
             save_on_snap: userTrack.userInfo.merchant.save_on_snap
-          }
+          },
+          level: userTrack.userInfo.level
         }
       }
 

@@ -6,7 +6,7 @@ import { updateUserPhone } from 'lib/services/user/updateUserPhone'
 import { Dispatch, SetStateAction } from 'lib/types/core/next-react'
 import { TAccountInfoToUpdate } from 'lib/types/user/profile'
 import { handleFetchError } from 'lib/utils/handleFetchError'
-import { signUpStep1 } from 'lib/services/auth/signUp'
+import { sendOTP } from 'lib/services/auth/sendOTP'
 import { IAuth, TSetAuth } from 'lib/stores/Auth'
 import { GTMTrack } from 'lib/utils/gtm'
 
@@ -39,7 +39,7 @@ export const EditPhone = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IFormUpd
       return
     }
 
-    const { error } = await signUpStep1({ phoneNumber })
+    const { error } = await sendOTP({ phoneNumber })
 
     if (error) {
       handleFetchError(error.status, error.info)
@@ -63,7 +63,7 @@ export const EditPhone = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IFormUpd
       return
     }
 
-    const { error } = await signUpStep1({ phoneNumber: `+${phoneNumber}` })
+    const { error } = await sendOTP({ phoneNumber: `+${phoneNumber}` })
 
     if (error) {
       handleFetchError(error.status, error.info)
@@ -108,7 +108,7 @@ export const EditPhone = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IFormUpd
       return
     }
 
-    const { error } = await signUpStep1({ phoneNumber: `+${phoneNumber}` })
+    const { error } = await sendOTP({ phoneNumber: `+${phoneNumber}` })
 
     if (error) {
       handleFetchError(error.status, error.info)

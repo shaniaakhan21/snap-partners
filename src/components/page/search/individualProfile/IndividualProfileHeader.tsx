@@ -35,16 +35,6 @@ function IndividualProfileHeader ({ body, setBody, profileData, userLevel }) {
     //   setLoading(false)
       return
     }
-
-    const redirectToIntegrous = getLocalStorage('redirectToIntegrous')
-    const redirectToIntegrousReferralCode = getLocalStorage('redirectToIntegrousReferralCode')
-    if (redirectToIntegrous === true) {
-      removeLocalStorage('redirectToIntegrous')
-      removeLocalStorage('redirectToIntegrousReferralCode')
-      window.location.href = `https://www.integrouswellness.com/${redirectToIntegrousReferralCode}?access_token=${dataLogin.token}`
-      return
-    }
-
     toast('Login Successful!', { type: 'success' })
     // trackLoginHandle(false)
     // setLoading(false)
@@ -77,6 +67,7 @@ function IndividualProfileHeader ({ body, setBody, profileData, userLevel }) {
         myPoints: null
       },
       level: data.level,
+      isCertified: data.isCertified,
       ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
     })
     window.location.href = '/overview'

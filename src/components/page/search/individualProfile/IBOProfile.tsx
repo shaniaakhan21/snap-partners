@@ -8,12 +8,18 @@ import { getLocalStorage } from 'lib/utils/localStorage'
 import { userLevelReverseMapping } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/formOptionData'
 import UpdateUserLevelModal from './modalPopups/UpdateUserLevelModal'
 import EditProfileModal from './modalPopups/EditProfileModal'
+import UpdateGrandfatherModal from './modalPopups/UpdateGrandfatherModal'
+import SponsorUpdateModal from './modalPopups/SponsorUpdateModal'
+import UpdateSnapTypeModal from './modalPopups/UpdateSnapType'
 import InfoBanner from './InfoBanner'
 
 function IBOProfile ({ profileData, userLevel }) {
   const [passwordResetModal, setPasswordResetModal] = useState<boolean>(false)
   const [userLevelModal, setUserLevelModal] = useState<boolean>(false)
   const [editProfileModal, setEditProfileModal] = useState<boolean>(false)
+  const [grandfatherModal, setGrandfatherModal] = useState<boolean>(false)
+  const [sponsorUpdateModal, setSponsorUpdateModal] = useState<boolean>(false)
+  const [snapTypeModal, setSnapTypeModal] = useState<boolean>(false)
   const [newPassword, setNewPassword] = useState({
     password: ''
   })
@@ -29,6 +35,15 @@ function IBOProfile ({ profileData, userLevel }) {
   }
   const onCloseEditProfileModal = () => {
     setEditProfileModal(false)
+  }
+  const onCloseGrandfatherModal = () => {
+    setGrandfatherModal(false)
+  }
+  const onCloseSponsorUpdateModal = () => {
+    setSponsorUpdateModal(false)
+  }
+  const onCloseSnapTypeModal = () => {
+    setSnapTypeModal(false)
   }
   const style = {
     position: 'absolute' as 'absolute',
@@ -71,12 +86,12 @@ function IBOProfile ({ profileData, userLevel }) {
   const formatDate = (dateString) => {
     console.log('date from format date ', dateString)
     if (dateString) {
-      const [date, time] = dateString?.split(' ')
+      const [date, time, meridiem] = dateString?.split(' ')
       const [day, month, year] = date?.split('/')
       const formattedDatestring = `${month}/${day}/${year}`
       const currentDate = new Date(formattedDatestring)
       console.log('date from format date ', currentDate)
-      return `${currentDate.getDate()}/${(currentDate.getMonth() + 1)}/${currentDate.getFullYear()}`
+      return `${currentDate.getMonth() + 1}/${(currentDate.getDate())}/${currentDate.getFullYear()} ${time} ${meridiem}`
     }
   }
 
@@ -85,6 +100,12 @@ function IBOProfile ({ profileData, userLevel }) {
       <div className={`${cname}-container`}>
         <div className={`${cname}-header`}>
           <p className={`${cname}-header-text`}>User ID - {`${profileData[0]?.id}`}</p>
+          { mapping[userLevel] >= 600 &&
+          <p className={`${cname}-header-text ${cname}-midSection-mainInfo-text`} onClick={() => { setSnapTypeModal(true) }}>Edit Snap Type</p>
+          }
+          { mapping[userLevel] >= 700 &&
+          <p className={`${cname}-header-text ${cname}-midSection-mainInfo-text`} onClick={() => { setGrandfatherModal(true) }}>Edit Grandfather Rank</p>
+          }
           { mapping[userLevel] >= 600 &&
           <p className={`${cname}-header-text ${cname}-midSection-mainInfo-text`} onClick={() => { setEditProfileModal(true) }}>Edit Profile<img src='/images/icons/edit.svg' style={{ width: '18px', height: '24px' }}/></p>
           }
@@ -95,11 +116,17 @@ function IBOProfile ({ profileData, userLevel }) {
           <div className={`${cname}-midSection-AdditionalInfo`}>
             <div>
               <p className={`${cname}-midSection-mainInfo-name adInfoText`}>Sponsered by <a href={`/search/profile/${profileData[0]?.sponsor?.id}`}>{profileData[0]?.sponsor?.name} {profileData[0]?.sponsor?.lastname}</a></p>
+              { mapping[userLevel] >= 700 &&
+                <p className={`${cname}-header-text ${cname}-midSection-mainInfo-text`} onClick={() => { setSponsorUpdateModal(true) }}>Edit Sponser</p>
+              }
             </div>
             <div>
               <div className={`${cname}-midSection-AdditionalInfo-icons`}>
                 { (profileData[0]?.roles?.integrousAssociate || profileData[0]?.roles?.integrousCustomer) &&
                 <img src='/static/badges/binary.png' style={{ width: '70px' }} />
+                }
+                {
+                  profileData[0]?.isCertified && <img className='w-10 cursor-pointer' src='/static/wellness/weight-care-certified.png' alt='WeightCare Certificate' title='WeightCare Certificate'/>
                 }
                 <img src='/images/icons/deliveryMan.png' />
                 <img src='/images/icons/Shopper.png' />
@@ -124,7 +151,7 @@ function IBOProfile ({ profileData, userLevel }) {
 
             <div>
               <h2 className={`${cname}-footer-heading`}>Start Date:</h2>
-              <p className={`${cname}-footer-text`}>{`${formatDate(profileData[0]?.createdAt)}`}</p>
+              <p className={`${cname}-footer-text`}>{`${profileData[0]?.createdAtUs}`}</p>
             </div>
 
             <div>
@@ -173,16 +200,11 @@ function IBOProfile ({ profileData, userLevel }) {
           </Box>
         </Modal>
 
-        {/* <Modal open={userLevelModal} onClose={onCloseUserLevelModal} className='resetPasswordModal'>
-          <Box sx={style}>
-          <SelectComponent label={'Reset User level'} name={'userLevel'} options={userLevelOptions}/>
-            {/* <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
-              <ButtonComponent title='submit' onClickFunction={ handleResetPassword } />
-            </div>
-          </Box>
-        </Modal> */}
         <UpdateUserLevelModal userLevelModal={userLevelModal} onCloseUserLevelModal={onCloseUserLevelModal} userId={profileData[0]?.id} />
         <EditProfileModal editProfileModal={editProfileModal} onCloseEditProfileModal={onCloseEditProfileModal} userId={profileData[0]?.id} profileData={profileData[0]} />
+        <UpdateGrandfatherModal grandfatherModal={grandfatherModal} onCloseGrandfatherModal={onCloseGrandfatherModal} userId={profileData[0]?.id} profileData={profileData[0]} />
+        <SponsorUpdateModal sponsorUpdateModal={sponsorUpdateModal} onCloseSponsorUpdateModal={onCloseSponsorUpdateModal} userId={profileData[0]?.id} />
+        <UpdateSnapTypeModal snapTypeModal={snapTypeModal} onCloseSnapTypeModal={onCloseSnapTypeModal} userId={profileData[0]?.id} userRoles={profileData[0]?.roles} />
       </div>
     </>
   )

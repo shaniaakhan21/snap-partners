@@ -18,6 +18,7 @@ import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 import { GTMTrack } from 'lib/utils/gtm'
 import { useRouter } from 'next/router'
 import { ROLES } from './../../../../../../../config/roles'
+import Swal from 'sweetalert2'
 
 interface IStepOpeProps {
   referralLink: IReferralLink,
@@ -27,8 +28,42 @@ interface IStepOpeProps {
 
 const maxFileSizeInMb = 5
 
+const ssnHelptextDesign = {
+  fontStyle: 'italic'
+}
+
 const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
+}
+
+const AskIfCorrect = (referralCode) => {
+  // lets return a promise here
+  return new Promise((resolve, reject) => {
+    let html = `
+    You are signing up under <b>${referralCode}</b> is this correct?
+    `
+    if (referralCode === 'undefined' || referralCode === 'null' || referralCode === null || referralCode === '') {
+      html = `
+      You are signing up <b>without a sponsor</b>, is this correct?
+      `
+    }
+
+    Swal.fire({
+      title: 'Important!',
+      html: html,
+      icon: 'warning',
+      confirmButtonText: 'Yes, Continue!',
+      showDenyButton: true,
+      denyButtonText: 'No, Cancel'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        resolve(true)
+      } else if (result.isDenied) {
+        resolve(false)
+      }
+    })
+  }
+  )
 }
 
 export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: IStepOpeProps) => {
@@ -37,28 +72,14 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
   const role = useRoleFromUrl()
 
   const onSubmit = async (dataForm: IDataForm) => {
-    setLoading(true)
-
     if (dataForm.confirmEmail !== dataForm.email) {
       setLoading(false)
       setError('confirmEmail', { message: 'The email does not match' })
-
-      if (dataForm.confirmPassword !== dataForm.password) {
-        return setError('confirmPassword', { message: 'The password does not match' })
-      }
-
       return
     }
 
     if (dataForm.confirmPassword !== dataForm.password) {
-      setError('confirmPassword', { message: 'The password does not match' })
-      setLoading(false)
-
-      if (dataForm.confirmEmail !== dataForm.email) {
-        return setError('confirmEmail', { message: 'The email does not match' })
-      }
-
-      return
+      return setError('confirmPassword', { message: 'The password does not match' })
     }
 
     if (dataForm.idImage && dataForm.idImage[0].size > (maxFileSizeInMb * 1000000)) {
@@ -73,9 +94,28 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       return
     }
 
-    const phoneNumber = `+${dataForm.phoneNumber}`
+    if (await AskIfCorrect(dataForm.referralCode) === false) {
+      return
+    }
 
-    const { error } = await signUpStep1({ phoneNumber })
+    setLoading(true)
+
+    const { error } = await signUpStep1({
+      phoneNumber: `+${dataForm.phoneNumber}`,
+      email: dataForm.email,
+      roles: {
+        admin: referralLink.role === 'ADMIN',
+        customer: referralLink.role === 'CUSTOMER',
+        driver: referralLink.role === 'DRIVER',
+        merchant: referralLink.role === 'MERCHANT',
+        agent: referralLink.role === 'AGENT',
+        ibo: referralLink.role === ROLES.IBO,
+        integrousAssociate: referralLink.role === 'integrousAssociate',
+        integrousCustomer: referralLink.role === 'integrousCustomer'
+      },
+      username: dataForm.username,
+      sponsorReferralCode: dataForm.referralCode || null
+    })
 
     if (error) {
       handleFetchError(error.status, error.info)
@@ -83,6 +123,23 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       return
     }
 
+    const setLevel = (referral) => {
+      let level = ''
+      if (referral === 'CUSTOMER' || referral === 'integrousCustomer') {
+        level = 'customer'
+      } else if (referral === 'integrousAssociate') {
+        level = 'iboWellness'
+      } else if (referral === 'AGENT') {
+        level = 'iboErc'
+      } else if (referral === 'DRIVER') {
+        level = 'driver'
+      } else if (referral === 'MERCHANT') {
+        level = 'merchant'
+      } else {
+        level = 'ibo'
+      }
+      return level
+    }
     handleUserInfo({
       email: dataForm.email,
       username: dataForm.username,
@@ -91,10 +148,11 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       password: dataForm.password,
       businessName: dataForm.businessName,
       street: dataForm.street,
+      city: dataForm.city,
       state: dataForm.state,
       zip: dataForm.zip,
       ssn: dataForm.ssn,
-      phone: phoneNumber,
+      phone: `+${dataForm.phoneNumber}`,
       sponsorReferralCode: dataForm.referralCode || null,
       idImage: null,
       insuranceImage: null,
@@ -107,7 +165,8 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
         ibo: referralLink.role === ROLES.IBO,
         integrousAssociate: referralLink.role === 'integrousAssociate',
         integrousCustomer: referralLink.role === 'integrousCustomer'
-      }
+      },
+      level: setLevel(referralLink.role)
     })
 
     setLoading(false)
@@ -149,225 +208,226 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
   const showSSNField = referralLink.role !== 'CUSTOMER' && referralLink.role !== 'integrousCustomer'
 
   const router = useRouter()
-  const loginURL = router.pathname === '/auth/signup-integrous' ? '/auth/login-integrous' : '/auth/login'
+
+  const loginURL = router.pathname === '/auth/signup-integrous'
+    ? '/auth/login-integrous'
+    : router.pathname === '/auth/signup-wellness'
+      ? '/auth/login-wellness'
+      : '/auth/login'
 
   return (
-    <div className='max-w-md mx-auto w-full'>
-      <p className='font-bold text-4xl text-[#18203F]'>{signUpas}{' '}
-        <span className='text-primary-500'>{roleText}</span>
-      </p>
-      <p className='text-[#18203F] font-bold text-md mb-2'>{subtext}</p>
-      <p className='text-gray-500'>Welcome! register to continue.</p>
+    <>
+      <div className='max-w-md mx-auto w-full'>
+        <p className='font-bold text-4xl text-[#18203F]'>{signUpas}{' '}
+          <span className='text-primary-500'>{roleText}</span>
+        </p>
+        <p className='text-[#18203F] font-bold text-md mb-2'>{subtext}</p>
+        <p className='text-gray-500'>Welcome! register to continue.</p>
 
-      <form className='mt-6 w-full' onSubmit={handleSubmit(onSubmit)}>
-        <InputForm
-          id='email'
-          name='email'
-          type='email'
-          label='Email'
-          registerId='email'
-          placeholder='Enter Email'
-          autoComplete='email'
-          errors={errors.email}
-          register={register}
-          rulesForm={registerRulesConfig.email}
-          isRequired
-        />
-
-        <InputForm
-          id='confirmEmail'
-          name='confirmEmail'
-          type='email'
-          label='Confirm Email'
-          registerId='confirmEmail'
-          placeholder='Confirm Email'
-          autoComplete='email'
-          errors={errors.confirmEmail}
-          register={register}
-          rulesForm={registerRulesConfig.confirmEmail}
-          isRequired
-        />
-
-        <InputForm
-          id='username'
-          name='username'
-          type='text'
-          label='Username'
-          registerId='username'
-          placeholder='Enter Username'
-          errors={errors.username}
-          register={register}
-          rulesForm={registerRulesConfig.username}
-          isRequired
-        />
-
-        <InputForm
-          id='name'
-          name='name'
-          type='text'
-          label={'First Name'}
-          registerId='name'
-          placeholder='Enter Name'
-          errors={errors.name}
-          register={register}
-          rulesForm={registerRulesConfig.name}
-          isRequired
-        />
-
-        <InputForm
-          id='lastname'
-          name='lastname'
-          type='text'
-          label='Last Name'
-          registerId='lastname'
-          placeholder='Enter Lastname'
-          errors={errors.lastname}
-          register={register}
-          rulesForm={registerRulesConfig.lastname}
-          isRequired
-        />
-
-        <InputForm
-          id='businessName'
-          name='businessName'
-          type='text'
-          label='Business Name (Optional)'
-          registerId='businessName'
-          placeholder='Enter Business Name'
-          errors={errors.businessName}
-          register={register}
-          rulesForm={registerRulesConfig.businessName}
-          isRequired={false}
-        />
-
-        <InputForm
-          id='street'
-          name='street'
-          type='text'
-          label='Street'
-          registerId='street'
-          placeholder='Enter Street Name'
-          errors={errors.street}
-          register={register}
-          rulesForm={registerRulesConfig.street}
-          isRequired
-        />
-
-        <InputForm
-          id='state'
-          name='state'
-          type='text'
-          label='State / Province'
-          registerId='state'
-          placeholder='Enter State / Province'
-          errors={errors.state}
-          register={register}
-          rulesForm={registerRulesConfig.state}
-          isRequired
-        />
-
-        <InputForm
-          id='zip'
-          name='zip'
-          type='text'
-          label='Zip'
-          registerId='zip'
-          placeholder='Enter Zip Code'
-          errors={errors.zip}
-          register={register}
-          rulesForm={registerRulesConfig.zip}
-          isRequired
-        />
-
-        {showSSNField && (
+        <form className='mt-6 w-full' onSubmit={handleSubmit(onSubmit)}>
           <InputForm
-            id='ssn'
-            name='ssn'
-            type='text'
-            label='Social Security Number'
-            registerId='ssn'
-            placeholder='Enter Social Security Number'
-            errors={errors.ssn}
+            id='email'
+            name='email'
+            type='email'
+            label='Email'
+            registerId='email'
+            placeholder='Enter Email'
+            autoComplete='email'
+            errors={errors.email}
             register={register}
-            rulesForm={registerRulesConfig.ssn}
-            isRequired={false}
-            helpText='* Required to receive commissions beyond $600'
+            rulesForm={registerRulesConfig.email}
+            isRequired
           />
-        )}
 
-        <InputPhone
-          label={'Phone'}
-          isRequired
-          register={register}
-          errors={errors}
-          withVerifyCode
-          control={control}
-        />
+          <InputForm
+            id='confirmEmail'
+            name='confirmEmail'
+            type='email'
+            label='Confirm Email'
+            registerId='confirmEmail'
+            placeholder='Confirm Email'
+            autoComplete='email'
+            errors={errors.confirmEmail}
+            register={register}
+            rulesForm={registerRulesConfig.confirmEmail}
+            isRequired
+          />
 
-        <RegisterPassword
-          errors={errors}
-          register={register}
-          rulesPasswordForm={registerRulesConfig.password}
-          rulesConfirmPasswordForm={registerRulesConfig.confirmPassword}
-        />
+          <InputForm
+            id='username'
+            name='username'
+            type='text'
+            label='Username'
+            registerId='username'
+            placeholder='Enter Username'
+            errors={errors.username}
+            register={register}
+            rulesForm={registerRulesConfig.username}
+            isRequired
+          />
 
-        <InputForm
-          id='referralCode'
-          name='referralCode'
-          type='text'
-          label='Referral Code'
-          registerId='referralCode'
-          placeholder='Referral Code'
-          defaultValue={referralLink.code}
-          errors={errors.referralCode}
-          register={register}
-          rulesForm={registerRulesConfig.referralCode}
-          isRequired={false}
-          readOnly={Boolean(referralLink.code)}
-        />
+          <InputForm
+            id='name'
+            name='name'
+            type='text'
+            label={'First Name'}
+            registerId='name'
+            placeholder='Enter Name'
+            errors={errors.name}
+            register={register}
+            rulesForm={registerRulesConfig.name}
+            isRequired
+          />
 
-        {/* {referralLink.role === 'DRIVER' && (
-          <>
-            <InputFile
+          <InputForm
+            id='lastname'
+            name='lastname'
+            type='text'
+            label='Last Name'
+            registerId='lastname'
+            placeholder='Enter Lastname'
+            errors={errors.lastname}
+            register={register}
+            rulesForm={registerRulesConfig.lastname}
+            isRequired
+          />
+
+          <InputForm
+            id='businessName'
+            name='businessName'
+            type='text'
+            label='Business Name (Optional)'
+            registerId='businessName'
+            placeholder='Enter Business Name'
+            errors={errors.businessName}
+            register={register}
+            rulesForm={registerRulesConfig.businessName}
+            isRequired={false}
+          />
+
+          <InputForm
+            id='street'
+            name='street'
+            type='text'
+            label='Street'
+            registerId='street'
+            placeholder='Enter Street Name'
+            errors={errors.street}
+            register={register}
+            rulesForm={registerRulesConfig.street}
+            isRequired
+          />
+
+          <InputForm
+            id='city'
+            name='city'
+            type='text'
+            label='city'
+            registerId='city'
+            placeholder='Enter City Name'
+            errors={errors.city}
+            register={register}
+            rulesForm={registerRulesConfig.city}
+            isRequired
+          />
+
+          <InputForm
+            id='state'
+            name='state'
+            type='text'
+            label='State / Province'
+            registerId='state'
+            placeholder='Enter State / Province'
+            errors={errors.state}
+            register={register}
+            rulesForm={registerRulesConfig.state}
+            isRequired
+          />
+
+          <InputForm
+            id='zip'
+            name='zip'
+            type='text'
+            label='Zip'
+            registerId='zip'
+            placeholder='Enter Zip Code'
+            errors={errors.zip}
+            register={register}
+            rulesForm={registerRulesConfig.zip}
+            isRequired
+          />
+
+          {showSSNField && (
+            <InputForm
+              id='ssn'
+              name='ssn'
+              type='text'
+              label='Social Security Number'
+              registerId='ssn'
+              placeholder='Enter Social Security Number'
+              errors={errors.ssn}
               register={register}
-              registerId='idImage'
-              isRequired
-              errors={errors.idImage}
-              rulesForm={registerRulesConfig.idImage}
-              label='ID image'
+              rulesForm={registerRulesConfig.ssn}
+              isRequired={false}
+              helpText='Optional field today but REQUIRED to receive commissions beyond $600'
+              style={ssnHelptextDesign}
             />
-            <InputFile
-              register={register}
-              registerId='insuranceImage'
-              isRequired
-              errors={errors.insuranceImage}
-              rulesForm={registerRulesConfig.insuranceImage}
-              label='Insurance image'
-            />
-          </>
-        )} */}
+          )}
 
-        <TermsAndConditions
-          errors={errors.termsAndConditions}
-          register={register}
-          rulesForm={registerRulesConfig.termsAndConditions}
-        />
+          <InputPhone
+            label={'Phone'}
+            isRequired
+            register={register}
+            errors={errors}
+            withVerifyCode
+            control={control}
+          />
 
-        <section className='mt-4'>
-          <BulletPagination stepToActivate='REGISTER_BASIC_INFO' />
+          <RegisterPassword
+            errors={errors}
+            register={register}
+            rulesPasswordForm={registerRulesConfig.password}
+            rulesConfirmPasswordForm={registerRulesConfig.confirmPassword}
+          />
 
-          <Button type='submit' classes='w-full mt-4 text-sm bg-primary-500'>
-            Sign Up
-          </Button>
+          <InputForm
+            id='referralCode'
+            name='referralCode'
+            type='text'
+            label='Referral Code'
+            registerId='referralCode'
+            placeholder='Referral Code'
+            defaultValue={referralLink.code}
+            errors={errors.referralCode}
+            register={register}
+            rulesForm={registerRulesConfig.referralCode}
+            isRequired={false}
+            readOnly={Boolean(referralLink.code)}
+          />
 
-          {role !== ROLES.IBO && <p className='mt-4'>
-            <span className='font-semibold'>Already have an account?</span>
-            <Link href={loginURL}>
-              <a className='text-textAcent-500 focus:underline'> Login.</a>
-            </Link>
-          </p>}
-        </section>
-      </form>
-    </div>
+          <TermsAndConditions
+            errors={errors.termsAndConditions}
+            register={register}
+            rulesForm={registerRulesConfig.termsAndConditions}
+          />
+
+          <section className='mt-4'>
+            <BulletPagination stepToActivate='REGISTER_BASIC_INFO' />
+
+            <Button type='submit' classes='w-full mt-4 text-sm bg-primary-500'>
+              Sign Up
+            </Button>
+
+            {role !== ROLES.IBO && <p className='mt-4'>
+              <span className='font-semibold'>Already have an account?</span>
+              <Link href={loginURL}>
+                <a className='text-textAcent-500 focus:underline'> Login.</a>
+              </Link>
+            </p>}
+          </section>
+        </form>
+      </div>
+    </>
+
   )
 }

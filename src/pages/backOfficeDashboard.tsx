@@ -32,13 +32,13 @@ const useStyles = makeStyles({
   }
 })
 
-const TotalLeg = ({ lastMonth }: { lastMonth: boolean}) => {
+const TotalLeg = ({ viewing }: { viewing: string}) => {
   const { auth } = useAuthStore()
   const classes = useStyles()
   const [personalVolData, setPersonalVolData] = useState<PersonalVolumeInfo>()
 
   useEffect(() => {
-    fetch(`/api/ibo/personal/pvInfo?lastMonth=${Number(lastMonth)}`, {
+    fetch(`/api/ibo/personal/pvInfo?viewing=${viewing}`, {
       method: 'GET',
       headers: { Authorization: `Bearer ${auth.accessToken}` }
     }).then((response) => {
@@ -46,11 +46,11 @@ const TotalLeg = ({ lastMonth }: { lastMonth: boolean}) => {
         setPersonalVolData(data.data)
       })
     })
-  }, [lastMonth])
+  }, [viewing])
 
   const [monthlyMilestoneData, setMonthlyMilestoneData] = useState<MonthlyMilestoneResponse>()
   useEffect(() => {
-    fetch('/api/ibo/personal/monthlyMilestones', {
+    fetch(`/api/ibo/personal/monthlyMilestones?viewing=${viewing}`, {
       method: 'GET',
       headers: { Authorization: `Bearer ${auth.accessToken}` }
     }).then((response) => {
@@ -58,12 +58,12 @@ const TotalLeg = ({ lastMonth }: { lastMonth: boolean}) => {
         setMonthlyMilestoneData(data.data)
       })
     })
-  }, [])
+  }, [viewing])
 
   const [data, setData] = useState()
   const [rows, setRows] = useState([])
   useEffect(() => {
-    fetch(`/api/ibo/customer/tracking?lastMonth=${Number(lastMonth)}`, {
+    fetch(`/api/ibo/customer/tracking?viewing=${viewing}`, {
       method: 'GET',
       headers: { Authorization: `Bearer ${auth.accessToken}` }
     }).then((response) => {
@@ -72,7 +72,7 @@ const TotalLeg = ({ lastMonth }: { lastMonth: boolean}) => {
         setRows(data.data.customers)
       })
     })
-  }, [lastMonth])
+  }, [viewing])
 
   return (
     <>

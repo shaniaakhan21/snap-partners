@@ -8,7 +8,7 @@ import { getLocalStorage } from 'lib/utils/localStorage'
 
 interface IProfileData {
     email?:string,
-    socialSecurityNumber?: number,
+    socialSecurityNumber?: string,
     username?: string,
     phoneNumber?: string,
     name?: string,
@@ -37,6 +37,7 @@ function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId, 
     })
   }, [profileData])
   const [editProfileData, setEditProfileData] = useState<IProfileData>(InitialValues)
+  const [errorMessage, setErrorMessage] = useState('')
   const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -56,7 +57,11 @@ function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId, 
     if (editProfileData.username !== profileData.username) {
       body = { ...body, username: editProfileData.username }
     }
-    if (editProfileData.socialSecurityNumber !== null && !Number.isNaN(editProfileData.socialSecurityNumber) && editProfileData.socialSecurityNumber !== profileData.socialSecurityNumber) {
+    if (editProfileData.socialSecurityNumber !== (null || '') && editProfileData.socialSecurityNumber !== profileData.socialSecurityNumber) {
+      if (!editProfileData.socialSecurityNumber.match(/^(?!666|000|9\d{2})\d{3}-(?!00)\d{2}-(?!0{4})\d{4}$|^(?!00)\d{2}(?!0{7})\d{7}$/)) {
+        setErrorMessage('Social Security Number not in correct format')
+        return
+      }
       body = { ...body, socialSecurityNumber: editProfileData.socialSecurityNumber }
     }
     if (editProfileData.name !== profileData.name) {
@@ -94,12 +99,14 @@ function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId, 
             window.location.reload()
           }
         })
+    } else {
+      setErrorMessage('No changes to update')
     }
   }
   const handleEditProfileUpdate = (event, param) => {
     if (param === 'email') { setEditProfileData({ ...editProfileData, email: event.target.value }) }
     if (param === 'username') { setEditProfileData({ ...editProfileData, username: event.target.value }) }
-    if (param === 'socialSecurityNumber') { setEditProfileData({ ...editProfileData, socialSecurityNumber: parseInt(event.target.value) }) }
+    if (param === 'socialSecurityNumber') { setEditProfileData({ ...editProfileData, socialSecurityNumber: event.target.value }) }
     if (param === 'name') { setEditProfileData({ ...editProfileData, name: event.target.value }) }
     if (param === 'lastname') { setEditProfileData({ ...editProfileData, lastname: event.target.value }) }
     if (param === 'phoneNumber') { setEditProfileData({ ...editProfileData, phoneNumber: event.target.value }) }
@@ -114,7 +121,7 @@ function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId, 
       <Box sx={style}>
         <InputComponent label='New Email' placeholder='New Email' value={editProfileData.email} onChangeFunction={handleEditProfileUpdate} param={'email'} />
         <InputComponent label='New UserName' placeholder='New userName' value={editProfileData.username} onChangeFunction={handleEditProfileUpdate} param={'username'} />
-        <InputComponent label='New Social Security Number' placeholder='New SSN' type={'number'} value={editProfileData.socialSecurityNumber} onChangeFunction={handleEditProfileUpdate} param={'socialSecurityNumber'} />
+        <InputComponent label='New Social Security Number' placeholder='New SSN' value={editProfileData.socialSecurityNumber} onChangeFunction={handleEditProfileUpdate} param={'socialSecurityNumber'} />
         <InputComponent label='Phone Number' placeholder='phone number' value={editProfileData.phoneNumber} onChangeFunction={handleEditProfileUpdate} param={'phoneNumber'} />
         <InputComponent label='Name' placeholder='name' value={editProfileData.name} onChangeFunction={handleEditProfileUpdate} param={'name'} />
         <InputComponent label='lastname' placeholder='Lastname' value={editProfileData.lastname} onChangeFunction={handleEditProfileUpdate} param={'lastname'} />
@@ -123,7 +130,10 @@ function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId, 
         <InputComponent label='city' placeholder='City' value={editProfileData.city} onChangeFunction={handleEditProfileUpdate} param={'city'} />
         <InputComponent label='state' placeholder='State' value={editProfileData.state} onChangeFunction={handleEditProfileUpdate} param={'state'} />
         <InputComponent label='zip' placeholder='Zip' value={editProfileData.zip} onChangeFunction={handleEditProfileUpdate} param={'zip'} />
-
+        {
+          errorMessage !== '' &&
+          <div className='resetPasswordModal-error-container'><p className='resetPasswordModal-error-message'>{errorMessage}</p></div>
+        }
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
           <ButtonComponent title='submit' onClickFunction={ handleEditProfile } />
         </div>

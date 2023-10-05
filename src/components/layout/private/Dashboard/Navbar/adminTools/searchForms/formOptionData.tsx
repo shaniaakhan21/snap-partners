@@ -93,3 +93,64 @@ export const userProfilePictureMapping = {
   supervisor: '/images/profile/supervisor.png',
   executive: '/images/profile/executive.png'
 }
+
+
+export const grandfatherRankOptions = [
+  {
+    name: 'Manager',
+    value: 'manager'
+  },
+  {
+    name: 'Supervisor',
+    value: 'supervisor'
+  },
+  {
+    name: 'Director',
+    value: 'director'
+  },
+  {
+    name: 'Executive',
+    value: 'executive'
+  }
+]
+
+export const userRoleOptions = [
+  {
+    name: 'Customer',
+    value: 'customer'
+  },
+  {
+    name: 'Agent',
+    value: 'agent'
+  },
+  {
+    name: 'Driver',
+    value: 'driver'
+  },
+  {
+    name: 'Merchant',
+    value: 'merchant'
+  },
+  {
+    name: 'IBO',
+    value: 'ibo'
+  },
+  {
+    name: 'Customer Wellness',
+    value: 'integrousCustomer'
+  },
+  {
+    name: 'IBO Wellness',
+    value: 'integrousAssociate'
+  }
+
+]
+
+export const userRoleMapping = {
+  customer: 100,
+  merchant: 200,
+  driver: 300,
+  agent: 400,
+  ibo: 500,
+  integrouAssociate: 600
+}

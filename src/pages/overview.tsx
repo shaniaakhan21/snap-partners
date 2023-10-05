@@ -20,21 +20,31 @@ import { getLocalStorage, setLocalStorage } from 'lib/utils/localStorage'
 import axios from 'axios'
 import Referrals from 'components/common/overview/Referrals'
 import { useAuthStore } from 'lib/stores'
+import GrowthSummary from '../components/common/overview/GrowthSummary'
 import TotalLeg from './backOfficeDashboard'
+import PVComponentSnap from 'components/common/dashBackOffice/PersonalVolumeSnap'
+import Modal from '@mui/material/Modal'
+import Button from '@mui/material/Button'
+import ContractModal from './wellness/components/ContractModal'
 
 const { SEO } = APP_INFO
 
 const DashboardOverViewPage: Page = () => {
   // const { loading } = useReports()
   const [rankData, setRankData] = useState<RankData>(null)
-  const [lastMonth, setLastMonth] = useState<boolean>(false)
+  const [viewing, setViewing] = useState<string>('Aug')
   const store = useAuthStore()
   const auth: any = store.auth
+  const [openModal, setOpenModal] = useState(!auth.isCertified)
 
   const currentOverview = getLocalStorage('currentBackoffice') || ''
   const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
+  const isCustomer = auth.roles.customer
   const isIntegrousAssociate = auth.roles.integrousAssociate
-  const isIntegrousCustomer = auth.roles.integrousCustomer
+
+  const handleCloseModal = () => {
+    setOpenModal(false)
+  }
 
   useEffect(() => {
     (async () => {
@@ -49,42 +59,26 @@ const DashboardOverViewPage: Page = () => {
     })()
   }, [])
 
-  const becomeAffiliate = async () => {
-    const token = getLocalStorage('accessToken')
-    await axios.post('/api/integrous/upgradeToAffiliate', {}, {
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-    window.location.href = '/overview'
-  }
-
   if (isIntegrousAssociate && currentOverview === '') {
     return (
       <>
-        <span className="text-sm text-gray-800 font-semibold text-center">Viewing {lastMonth ? 'Last' : 'Current'} Month Data</span>
-        <button onClick={() => { setLastMonth(!lastMonth) }} style={{ cursor: 'pointer', marginLeft: 10 }} className="rounded-full bg-primary-500 bg-red-500 text-gray-500">
-          <p className='text-xs text-white font-medium p-2 uppercase'>View {lastMonth ? 'Current' : 'Last'} Month</p>
+        <span className="text-sm text-gray-800 font-semibold text-center">Viewing {viewing} 2023</span>
+        <button onClick={() => { setViewing('June') }} style={{ cursor: 'pointer', marginLeft: 10 }} className="rounded-full bg-primary-500 bg-red-500 text-gray-500">
+          <p className='text-xs text-white font-medium p-2 uppercase'>June 2023</p>
+        </button>
+        <button onClick={() => { setViewing('July') }} style={{ cursor: 'pointer', marginLeft: 10 }} className="rounded-full bg-primary-500 bg-red-500 text-gray-500">
+          <p className='text-xs text-white font-medium p-2 uppercase'>July 2023</p>
+        </button>
+        <button onClick={() => { setViewing('Aug') }} style={{ cursor: 'pointer', marginLeft: 10 }} className="rounded-full bg-primary-500 bg-red-500 text-gray-500">
+          <p className='text-xs text-white font-medium p-2 uppercase'>Aug 2023</p>
         </button>
         <br/>
         <br/>
-        <TotalLeg lastMonth={lastMonth} />
-        <br />
+        <TotalLeg viewing={viewing} />
+        {/* <br />
         <h1 style={{ fontSize: 30 }}>Referral link to sign up IBO's (Affiliates) & Customers</h1>
         <a target='_blank' href={`https://www.integrouswellness.com/${auth.referralCode}`} style={{ fontSize: 30, textDecoration: 'underline' }}>https://www.integrouswellness.com/{auth.referralCode}</a>
-        <br></br>
-      </>
-    )
-  }
-
-  if (isIntegrousCustomer && currentOverview === '') {
-    return (
-      <>
-        <h1 style={{ fontSize: 35 }}>To become an IBO (Affiliate) click below</h1>
-        <br />
-        <button onClick={() => { becomeAffiliate() }}style={{ fontSize: 20 }} className="flex text-xs items-center bg-red-600 hover:bg-red-700 text-white font-bold h-10 w-50  py-3 px-4 rounded-l-full rounded-r-full">
-          REGISTER NOW {'>'}
-        </button>
+        <br></br> */}
       </>
     )
   }
@@ -103,14 +97,20 @@ const DashboardOverViewPage: Page = () => {
             <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} />
           </div>
           <div className='mt-4'>
+            <PVComponentSnap />
+          </div>
+          <div className='mt-4'>
             <RewardsProgram />
           </div>
-          {/* <div className='mt-4 bg-white rounded-lg'> */}
-          {/*  <MonthlySubscription /> */}
-          {/* </div> */}
-          {/* <div className='mt-4 bg-white rounded-lg'> */}
-          {/*  <MonthlyProduction /> */}
-          {/* </div> */}
+          <div className='mt-4'>
+            <GrowthSummary />
+          </div>
+          <div className='mt-4 bg-white rounded-lg'>
+            <MonthlySubscription />
+          </div>
+          <div className='mt-4 bg-white rounded-lg'>
+            <MonthlyProduction />
+          </div>
         </div>
         <div className='ml-4'>
           <Event />
@@ -122,9 +122,12 @@ const DashboardOverViewPage: Page = () => {
           </div>
         </div>
       </div>
-      {/* <div className='col-span-12 mt-4'> */}
-      {/*  <Referrals rankData={rankData} /> */}
-      {/* </div> */}
+      <div className='col-span-12 mt-4'>
+        <Referrals rankData={rankData} />
+      </div>
+      {!isCustomer && (
+        <ContractModal open={openModal} onClose={handleCloseModal} />)
+      }
     </>
   )
 }

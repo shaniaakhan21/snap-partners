@@ -102,8 +102,9 @@ export default function WeeklyBinary () {
   const columns = [
     { field: 'id', headerName: 'Point Id', maxWidth: 90, flex: 1, hide: true, sortable: false },
     { field: 'description', headerName: 'Description', minWidth: 150, flex: 1, sortable: false },
-    { field: 'left', headerName: 'left', maxWidth: 90, flex: 1, sortable: false },
-    { field: 'right', headerName: 'right', maxWidth: 90, flex: 1, sortable: false },
+    { field: 'left', headerName: 'Left CV', maxWidth: 90, flex: 1, sortable: false },
+    { field: 'right', headerName: 'Right CV', maxWidth: 90, flex: 1, sortable: false },
+    { field: 'historicalQV', headerName: 'Historical QV (Monthly)', minWidth: 150, flex: 1, sortable: false },
     { field: 'createdAt', headerName: 'Date', minWidth: 270, flex: 1, headerAlign: 'center', align: 'center', sortable: false }
   ]
 
@@ -122,7 +123,7 @@ export default function WeeklyBinary () {
               <Select onChange={(e) => timingStatusTracker(e)} className={classes.dropdown}>
                 <MenuItem value="">None</MenuItem>
                 {
-                  Array.from({ length: 10 }).map((item, index) => (
+                  Array.from({ length: 26 }).map((item, index) => (
                     <MenuItem value={index + 1}>{index + 1} Week ago</MenuItem>
                   ))
                 }

@@ -97,7 +97,7 @@ text-transform: uppercase;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    gap: 2%;
+    /* gap: 2%; */
     color: var(--info-600, #139ECF);
 
 /* Text Font/S2 Subtitle */
@@ -264,13 +264,19 @@ flex-direction: row;
     overflow-y: scroll;
 }
 
-/* .resetPasswordModal{
-    width:796px;
-    height:147px;
-    border-radius:30px;
-    background-color: #FFFFFF;
-    margin: 10% auto 10px auto;
+.sponsor-searchResult:hover
+{
+    cursor: pointer;
+    color: #FFFFFF;
+    background-color: #E35C49;
 }
-.resetPasswordModal > .css-i9fmh8-MuiBackdrop-root-MuiModal-backdrop {
-    background: transparent;
-} */
+
+.sponsor-searchResult-container
+{
+    max-height: 100px;
+    overflow-y: scroll;
+}
+.resetPasswordModal-error-message
+{
+    color: red;
+}

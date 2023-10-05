@@ -19,7 +19,8 @@ module.exports = {
       },
 
       screens: {
-        xs: "420px",
+        xs: '420px',
+        '3xl': '1921px'
       },
 
       height: {
@@ -50,7 +51,8 @@ module.exports = {
         textAcent: {
           100: "#FFAA00",
           200: "#2C7D0E",
-          500: "#E35C49",
+          500: '#E35C49',
+          600: '#E74426'
         },
         phase: {
           100: "#FFE7E7",

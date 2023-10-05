@@ -70,6 +70,15 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
       return
     }
 
+    const redirectToWellness = getLocalStorage('redirectToWellness')
+    const redirectToWellnessReferralCode = getLocalStorage('redirectToWellnessReferralCode')
+    if (redirectToWellness === true) {
+      removeLocalStorage('redirectToWellness')
+      removeLocalStorage('redirectToWellnessReferralCode')
+      window.location.href = `/wellness/${redirectToWellnessReferralCode}?access_token=${dataLogin.token}`
+      return
+    }
+
     toast('Login Successful!', { type: 'success' })
     setIsLoading(false)
     setAuth({
@@ -101,6 +110,7 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
       },
       bank_information: data.bank_information,
       level: data.level,
+      isCertified: data.isCertified,
       ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
     })
     // When change auth state, directly the app push the user to /overview path

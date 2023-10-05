@@ -2,6 +2,19 @@ import { IQueryErrorReturn } from 'lib/types/http/query'
 
 interface ISignUpDataBodyStep1 {
   phoneNumber: string
+  username: string
+  email: string
+  sponsorReferralCode: string
+  roles: {
+    admin: boolean
+    customer: boolean
+    driver: boolean
+    merchant: boolean
+    ibo: boolean
+    agent: boolean
+    integrousCustomer: boolean
+    integrousAssociate: boolean
+  },
 }
 
 interface ISignUpDataBodyStep2 extends ISignUpDataBodyStep1 {
@@ -18,12 +31,15 @@ interface ISignUpDataBodyStep2 extends ISignUpDataBodyStep1 {
     customer: boolean
     driver: boolean
     merchant: boolean
+    ibo: boolean
     agent: boolean
     integrousCustomer: boolean
     integrousAssociate: boolean
   },
   code: number
-  sponsorReferralCode: string
+  sponsorReferralCode: string,
+  level: string,
+  city: string
 }
 
 interface ISignUpDataBodyMerchant {
@@ -60,7 +76,8 @@ interface ISignUpDataBodyMerchant {
     pincode: '1234',
     'save_on_snap': true
   },
-  sponsorReferralCode: string
+  sponsorReferralCode: string,
+  level?: string
 }
 
 export const signUpStep1 = async (dataBody: ISignUpDataBodyStep1 | ISignUpDataBodyMerchant): Promise<IQueryErrorReturn> => {
@@ -69,7 +86,13 @@ export const signUpStep1 = async (dataBody: ISignUpDataBodyStep1 | ISignUpDataBo
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ phoneNumber: dataBody.phoneNumber })
+    body: JSON.stringify({
+      phoneNumber: dataBody.phoneNumber,
+      email: dataBody.email,
+      username: dataBody.username,
+      roles: dataBody.roles,
+      sponsorReferralCode: dataBody.sponsorReferralCode
+    })
   })
 
   const data = await res.json()
