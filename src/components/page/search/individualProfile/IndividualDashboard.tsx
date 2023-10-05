@@ -13,6 +13,7 @@ import RewardsProgram from 'components/common/overview/RewardsProgram'
 import GrowthSummary from 'components/common/overview/GrowthSummary'
 import MonthlySubscription from 'components/common/overview/MonthlySubscription'
 import MonthlyProduction from 'components/common/overview/MonthlyProduction'
+import PVComponentSnap from 'components/common/dashBackOffice/PersonalVolumeSnap'
 
 const IndividualDashboard = ({ userId }) => {
   const [rankData, setRankData] = useState<RankData>(null)
@@ -50,8 +51,8 @@ const IndividualDashboard = ({ userId }) => {
         <div className='mt-4'>
           <GrowthSummary userId={userId} />
         </div>
-        <div className='mt-4 bg-white rounded-lg'>
-          <MonthlySubscription userId={userId} />
+        <div className='mt-4'>
+          <PVComponentSnap />
         </div>
       </div>
       <div>
