@@ -20,6 +20,8 @@ const LoginOrSignBox = ({ isLoggedIn, userData, referralCode, h1Color, customCol
 
     Router.push(loginRoute)
   }
+
+  const handleGuestLogin = () => {}
   return (
     <Card
       sx={{
@@ -40,6 +42,15 @@ const LoginOrSignBox = ({ isLoggedIn, userData, referralCode, h1Color, customCol
             <Button onClick={() => { handleLogin() }} classes={`text-xs md:text-base lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-2xl bg-${BgbtnColor} rounded-lg px-8 2xl:py-2 3xl:py-5`}>
               LOG IN / SIGN UP
               <i className="fa fa-sign-in ml-2" aria-hidden="true"></i>
+            </Button>
+          </p>
+          <p className={`text-center text-xl md:text-2xl 2xl:text-3xl 3xl:text-4xl font-semibold-it font-normal my-3 text-${customColor}`}>
+            OR
+          </p>
+          <p className={`text text-${customColor} font-light text-center`}>
+            <Button onClick={() => { handleGuestLogin() }} classes={`text-xs md:text-base lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-2xl bg-${BgbtnColor} rounded-lg px-8 2xl:py-2 3xl:py-5`}>
+              <i className="fa fa-user mr-2" aria-hidden="true"></i>
+              Continue as a Guest
             </Button>
           </p>
         </CardContent>

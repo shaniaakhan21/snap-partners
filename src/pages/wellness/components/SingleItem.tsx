@@ -39,6 +39,8 @@ export default function SingleItem ({ image, name, price, btnLabel, index, refer
 
     Router.push(loginRoute)
   }
+
+  const handleGuestLogin = () => {}
   const handleOpen = () => {
     setOpen(true)
   }
@@ -121,6 +123,15 @@ export default function SingleItem ({ image, name, price, btnLabel, index, refer
               <Button onClick={() => { handleLogin() }} className='text-white text-xs md:text-base lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-4xl bg-btn-color rounded-lg px-8 2xl:py-2 3xl:py-5'>
               LOG IN / SIGN UP
                 <i className="fa fa-sign-in ml-2" aria-hidden="true"></i>
+              </Button>
+            </p>
+            <p className="text-center text-xl md:text-2xl 2xl:text-3xl 3xl:text-4xl font-semibold-it font-normal my-3 text-white ">
+            OR
+            </p>
+            <p className="text text-white font-light text-center">
+              <Button onClick={() => { handleGuestLogin() }} className='text-white text-xs md:text-base lg:text-md xl:text-lg 2xl:text-lg 3xl:text-3xl bg-btn-color rounded-lg px-8 2xl:py-2 3xl:py-5'>
+                <i className="fa fa-user mr-2" aria-hidden="true"></i>
+              Continue as a Guest
               </Button>
             </p>
           </CardContent>
