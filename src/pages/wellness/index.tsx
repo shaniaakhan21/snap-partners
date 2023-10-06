@@ -66,7 +66,7 @@ const Wellness = () => {
       <Header isLoggedIn={isLoggedIn} userData={userData} />
       <MainSection referralCode={referralCode} isLoggedIn={isLoggedIn} userData={userData} handleButtonClick={handleButtonClick} />
       <div ref={productTabsRef}>
-        <ProductTabs isIntegrous={isIntegrous} referralCode={referralCode} userId={userData?.id || 0} isLoggedIn={isLoggedIn} collectionIdTea={459147018542} collectionIdGut={459147149614} collectionIdAllProducts={446876746030} />
+        <ProductTabs isIntegrous={isIntegrous} referralCode={referralCode} userId={userData?.id || 0} isLoggedIn={isLoggedIn} collectionIdTea={459147018542} collectionIdGut={459147149614} collectionIdAllProducts={isIntegrous ? 447611863342 : 446876746030} />
       </div>
       <Footer ownerName={ownerName} ownerEmail={ownerEmail} />
     </div>
