@@ -81,7 +81,7 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
     const { redirectToWeightCare } = router.query
     if (redirectToWeightCare === 'true') {
       removeLocalStorage('redirectToWeightCare')
-      window.location.href = `/integrousWellness?referralCode=${referralCode}`
+      window.location.href = `/WeightCare?referralCode=${referralCode}`
       return
     }
 

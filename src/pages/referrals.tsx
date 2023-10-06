@@ -6,7 +6,7 @@ import { ROLES } from 'config/roles'
 
 import DashboardLayout from 'layouts/private/Dashboard'
 import { ReferralCards } from 'components/page/referrals/Cards'
-import { CustomerIcon, DriverIcon, MerchantIcon, IBOIcon } from 'components/common/icons'
+import { MerchantIcon, IBOIcon } from 'components/common/icons'
 import PartnerLogo from '../../public/images/profile/referralPartner.png'
 import { ERCAgent } from 'components/common/icons/ERCAgent'
 import { ERCClient } from 'components/common/icons/ERCClient'
@@ -14,6 +14,8 @@ import { Energy } from 'components/common/icons/Energy'
 import { InactiveCards } from 'components/page/referrals/InactiveCards'
 import { useState } from 'react'
 import ContractModal from './wellness/components/ContractModal'
+import { CustomerRefIcon } from 'components/common/icons/CustomerRefIcon'
+import { DriverRefIcon } from 'components/common/icons/DriverRefIcon'
 
 const { SEO } = APP_INFO
 
@@ -64,7 +66,7 @@ const ReferralsPage: Page = () => {
         {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
           <ReferralCards
             title='Refer Delivery Customers'
-            ilustration={<CustomerIcon />}
+            ilustration={<CustomerRefIcon />}
             link={`${auth.referralLink}&role=${ROLES.CUSTOMER}` || 'With Out Link'}
             newUser={false}
             classes='col-span-1'
@@ -73,7 +75,7 @@ const ReferralsPage: Page = () => {
         {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
           <ReferralCards
             title='Refer Delivery Driver'
-            ilustration={<DriverIcon />}
+            ilustration={<DriverRefIcon />}
             link={`${auth.referralLink}&role=${ROLES.DRIVER}` || 'With Out Link'}
             newUser={false}
             classes='col-span-1'
@@ -149,7 +151,7 @@ const ReferralsPage: Page = () => {
             <ReferralCards
               title='Refer a WeightCare Customer'
               ilustration={(
-                <div className='h-[120px]  flex items-center'><img src={'/images/link-weightcare.png'} /> </div>)}
+                <div className='h-[120px]  flex items-center'><img src={'/static/wellness/link-weightcare.png'} /> </div>)}
               link={`${auth.referralLinkWeightCare}` || 'With Out Link'}
               newUser={false}
               classes='col-span-1'

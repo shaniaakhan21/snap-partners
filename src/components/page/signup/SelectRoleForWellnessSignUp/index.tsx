@@ -1,20 +1,27 @@
-import { useRef } from 'react'
-import { IBOIcon, ArrowRightIcon } from 'components/common/icons'
+import { ArrowRightIcon } from 'components/common/icons'
 import { ROLES } from 'config/roles'
 import { GTMTrack } from 'lib/utils/gtm'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { AssociateIcon } from 'components/common/icons/Associate'
+import { CustomerIcon } from 'components/common/icons/Customer'
 
 export const SelectRoleForWellnessSignUp = () => {
   const router = useRouter()
   const queryReferralCode = router.query.referralCode as string
+
+  const isRedirectToIntegrousWellness = router.query.redirectToIntegrousWellness === 'true'
+  const isRedirectToWeightCare = router.query.redirectToWeightCare === 'true'
+
   const roles = [
     {
-      icon: <IBOIcon classes='w-14 h-14' />,
+      icon: <CustomerIcon classes='w-14 h-14' />,
       label: 'Register as a Customer',
       key: ROLES.CUSTOMER,
-      link: `/auth/signup-wellness?role=${ROLES.CUSTOMER}&referralCode=${queryReferralCode}`
+      link: isRedirectToIntegrousWellness
+        ? `/auth/signup-wellness?role=${ROLES.CUSTOMER}&referralCode=${queryReferralCode}&redirectToIntegrousWellness=true`
+        : isRedirectToWeightCare
+          ? `/auth/signup-wellness?role=${ROLES.CUSTOMER}&referralCode=${queryReferralCode}&redirectToWeightCare=true`
+          : `/auth/signup-wellness?role=${ROLES.CUSTOMER}&referralCode=${queryReferralCode}`
     }
   ]
 
