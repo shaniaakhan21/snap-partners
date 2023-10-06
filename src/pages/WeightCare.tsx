@@ -66,16 +66,26 @@ const IntegrousWellness = () => {
       <div className='border-b-2 border-blue'>
         <Header isLoggedIn={isLoggedIn} userData={userData} bgcblack='bg-blackCustom' btnBG='primary-500'/>
       </div>
-      <div className='bg-cover bg-center bg-gradient-to-b from-[black] to-white border-none pb-[10%] 3xl:pb-[13%]'>
-        <MainSection referralCode={referralCode} isLoggedIn={isLoggedIn} userData={userData} scrollToProductTabs={scrollToProductTabs}
-          h1Color="white"
-          pColor="white"
-          textColor="primary-500"
-          BgbuttonColor="primary-500"
-          imgSrc="/static/wellness/wellness_logo.svg"
-          Loginh1Color="primary-500"
-          customColor="white"
-        />
+      <div className='bg-cover bg-center bg-gradient-to-b from-[#00000026] to-[#ffffff1f] border-none'>
+        <div className="video-container w-full md:h-50vh xl:h-75vh">
+          <div className='some-black-over'>
+            <video autoPlay loop muted className="background-video">
+              <source src="/static/wellness/snap-wellness-bg-video.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+            </video>
+
+            <MainSection referralCode={referralCode} isLoggedIn={isLoggedIn} userData={userData} scrollToProductTabs={scrollToProductTabs}
+              h1Color="white"
+              pColor="white"
+              textColor="primary-500"
+              BgbuttonColor="primary-500"
+              imgSrc="/static/wellness/wellness_logo.svg"
+              Loginh1Color="primary-500"
+              customColor="white"
+              btnText='OUR VOUCHER'
+            />
+          </div>
+        </div>
       </div>
       <div>
         <WeightCare isLoggedIn={isLoggedIn} referralCode={referralCode}/>

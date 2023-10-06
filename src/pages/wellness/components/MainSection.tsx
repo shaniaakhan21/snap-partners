@@ -2,7 +2,7 @@ import { Button } from 'components/common/Button'
 import LoginOrSignBox from './LoginOrSignBox'
 import { Grid } from '@mui/material'
 
-const MainSection = ({ scrollToProductTabs, isLoggedIn, userData, referralCode, h1Color, pColor, imgSrc, BgbuttonColor, textColor, Loginh1Color, customColor }) => {
+const MainSection = ({ scrollToProductTabs, isLoggedIn, userData, referralCode, h1Color, pColor, imgSrc, BgbuttonColor, textColor, Loginh1Color, customColor, btnText }) => {
   return (
     <div>
       <div className="video-container w-full md:h-50vh xl:h-75vh">
@@ -18,7 +18,7 @@ const MainSection = ({ scrollToProductTabs, isLoggedIn, userData, referralCode, 
                   classes={`text-xs md:text-base lg:text-lg xl:text-lg 2xl:tex-lg 3xl:text-2xl bg-${BgbuttonColor} rounded-lg px-2 lg:px-7 2xl:px-5 3xl:px-10 2xl:py-3 3xl:py-5`}
                   onClick={scrollToProductTabs}
                 >
-                  OUR PRODUCTS
+                  {btnText}
                 </Button>
               </div>
             </div>

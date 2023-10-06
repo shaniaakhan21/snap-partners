@@ -72,9 +72,10 @@ const IntegrousWellness = () => {
           pColor="#00FF00"
           textColor="red-h"
           BgbuttonColor="btn-color"
-          imgSrc="/static/wellness/intLogo.svg"
+          imgSrc="/static/wellness/shadow-bg-no.png"
           Loginh1Color="red-h"
           customColor="cust-color"
+          btnText='OUR PRODUCTS'
         />
 
         <IntegrousProducts userId={userData?.id || 0} isLoggedIn={isLoggedIn}referralCode={referralCode}/>
