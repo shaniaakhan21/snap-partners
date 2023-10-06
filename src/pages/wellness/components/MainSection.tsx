@@ -5,7 +5,7 @@ import { Grid } from '@mui/material'
 const MainSection = ({ scrollToProductTabs, isLoggedIn, userData, referralCode, h1Color, pColor, imgSrc, BgbuttonColor, textColor, Loginh1Color, customColor, btnText }) => {
   return (
     <div>
-      <div className="video-container w-full md:h-50vh xl:h-75vh">
+      <div>
         <div className="content flex flex-col md:flex-row px-4 pt-20 lg:px-20 2xl:px-24 3xl:px-56 mb-2 lg:mb-0">
           <div className='flex flex-col md:w-5/6 lg:8/12 xl:9/12 2xl:w-10/12 pr-right'>
             <div>
