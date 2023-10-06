@@ -19,7 +19,7 @@ const Wellness = () => {
   const [ownerName, setownerName] = React.useState(null)
   const [referralCode, setreferralCode] = React.useState(null)
   const [ownerEmail, setownerEmail] = React.useState(null)
-  const [isIntegrous, setIsIntegrous] = React.useState(false)
+  const [isIntegrous, setIsIntegrous] = React.useState(null)
   const handleButtonClick = () => {
     if (productTabsRef.current) {
       productTabsRef.current.scrollIntoView({ behavior: 'smooth' })
@@ -35,7 +35,6 @@ const Wellness = () => {
 
   useEffect(() => {
     async function Owner () {
-      console.log('owneeeeeeeeeeer')
       try {
         const { referralCode } = router.query
         const username = referralCode
@@ -49,11 +48,14 @@ const Wellness = () => {
           setownerName(`${response.data.name} ${response.data.lastname}`)
           setownerEmail(`${response.data.email}`)
           const roles = JSON.parse(response.data.roles)
-          if(roles.integrousAssociate){
+          if (roles.integrousAssociate) {
             setIsIntegrous(true)
+          } else {
+            setIsIntegrous(false)
           }
         }
       } catch (error) {
+        setIsIntegrous(false)
         console.log(error)
       }
     }
@@ -66,7 +68,9 @@ const Wellness = () => {
       <Header isLoggedIn={isLoggedIn} userData={userData} />
       <MainSection referralCode={referralCode} isLoggedIn={isLoggedIn} userData={userData} handleButtonClick={handleButtonClick} />
       <div ref={productTabsRef}>
-        <ProductTabs isIntegrous={isIntegrous} referralCode={referralCode} userId={userData?.id || 0} isLoggedIn={isLoggedIn} collectionIdTea={459147018542} collectionIdGut={459147149614} collectionIdAllProducts={isIntegrous ? 447611863342 : 446876746030} />
+        { isIntegrous !== null && (
+          <ProductTabs isIntegrous={isIntegrous} referralCode={referralCode} userId={userData?.id || 0} isLoggedIn={isLoggedIn} collectionIdTea={459147018542} collectionIdGut={459147149614} collectionIdAllProducts={isIntegrous ? 447611863342 : 446876746030} />
+        )}
       </div>
       <Footer ownerName={ownerName} ownerEmail={ownerEmail} />
     </div>
