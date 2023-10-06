@@ -60,7 +60,7 @@ const WeightCare = ({ isLoggedIn, referralCode }) => {
     getNmiVars()
   }, [isLoggedIn])
   return (
-    <div className='mx-4 lg:mx-20 mt-20'>
+    <div className='mx-4 lg:mx-20 sm:mt-20'>
       <form method="POST" action="https://secure.networkmerchants.com/cart/cart.php" id="productTabs">
         <div className='flex flex-col lg:flex-row justify-between'>
           <div className='mr-3 w-full lg:w-6/12 mt-6'>

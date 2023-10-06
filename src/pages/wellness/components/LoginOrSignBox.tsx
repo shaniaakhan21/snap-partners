@@ -32,8 +32,8 @@ const LoginOrSignBox = ({ isLoggedIn, userData, referralCode, h1Color, customCol
       className="px-0 py-0 lg:px-8 lg:py-2 3xl:py-5 rounded-2xl mt-1 3xl:mt-32 w-8/12 xl:w-6/12 3xl:w-8/12"
     >
       { !isLoggedIn
-        ? <CardContent>
-          <h1 className={`text text-${customColor} text-2xl md:text-3xl 2xl:text-4xl 3xl:text-5xl font-semibold-it font-normal text-center mb-4 2xl:mb-5 3xl:mb-8`}>
+        ? <CardContent className='p-2 sm:p-4'>
+          <h1 className={`text text-${customColor} text-xl md:text-3xl 2xl:text-4xl 3xl:text-5xl font-semibold-it font-normal text-center mb-4 2xl:mb-5 3xl:mb-8`}>
               Purchase <span className={`text-${h1Color}`}>Now</span>
           </h1>
           <p className={`text text-${customColor} font-light text-center`}>
@@ -43,8 +43,8 @@ const LoginOrSignBox = ({ isLoggedIn, userData, referralCode, h1Color, customCol
             </Button>
           </p>
         </CardContent>
-        : <CardContent>
-          <h1 className={`text text-${customColor} text-2xl md:text-3xl 2xl:text-4xl 3xl:text-5xl font-semibold-it font-normal text-center 3xl:leading-tight`}>
+        : <CardContent className='p-2 sm:p-4'>
+          <h1 className={`text text-${customColor} text-lg md:text-3xl 2xl:text-4xl 3xl:text-5xl font-semibold-it font-normal text-center 3xl:leading-tight`}>
             <span className={`text-${h1Color} capitalize`}>{ userData ? `${userData?.name} ${userData?.lastname}` : ''} </span>, Welcome to Snap Wellness
           </h1>
         </CardContent>

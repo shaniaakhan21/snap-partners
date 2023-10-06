@@ -67,7 +67,7 @@ const IntegrousWellness = () => {
         <Header isLoggedIn={isLoggedIn} userData={userData} bgcblack='bg-blackCustom' btnBG='primary-500'/>
       </div>
       <div className='bg-cover bg-center bg-gradient-to-b from-[#00000026] to-[#ffffff1f] border-none'>
-        <div className="video-container w-full md:h-50vh xl:h-75vh">
+        <div className="video-container w-full">
           <div className='some-black-over'>
             <video autoPlay loop muted className="background-video">
               <source src="/static/wellness/snap-wellness-bg-video.mp4" type="video/mp4" />

@@ -8,19 +8,6 @@
     width: 100%;
     height: 35vw;
     overflow: hidden;
-    background-color: #0000007d;
-
-    @media screen and (max-width: 998px) {
-        height: 65vh;
-    }
-
-    @media screen and (max-width: 768px) {
-        height: 40vh;
-    }
-
-    @media screen and (max-width: 400px) {
-        height: 60vh;
-    }
 }
 
 .background-video {
@@ -148,3 +135,41 @@
     background-color: #1E306E;
 }
 
+@media screen and (max-width: 400px) {
+    .video-container video {
+        display: none;
+    }
+
+    .video-container {
+        background-image: url('../../../public/static/wellness/banner.jpg');
+        background-position-y: center;
+        height: 90vw;
+    }
+
+    .video-container .some-black-over {
+        background-color: rgba(0, 0, 0, 0.438);
+        position: relative;
+        top: -10%;
+        background-repeat: no-repeat;
+        height: 100vh;
+    }
+
+    .MuiCardContent-root:last-child {
+        padding-bottom: 0.5rem!important;
+    }
+}
+
+.disc-lines {
+    position: relative;
+  }
+  
+  .disc-lines::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 6px;
+    width: 3px;
+    height: 66px; 
+    background-color: white; 
+    transform: translateY(-50%); 
+  }

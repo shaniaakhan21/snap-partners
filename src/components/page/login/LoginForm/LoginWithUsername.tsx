@@ -114,11 +114,14 @@ export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
   const router = useRouter()
   const referralCode = router.query.referralCode || 'IntegrousWellness'
   const redirectToWeightCare = router.query.redirectToWeightCare === 'true'
+  const redirectToIntegrousWellness = router.query.redirectToIntegrousWellness === 'true'
   const signupURL = router.pathname === '/auth/login-integrous'
     ? `/auth/signup-integrous?referralCode=${referralCode}`
-    : redirectToWeightCare // Use redirectToWeightCare directly here
+    : redirectToWeightCare
       ? `/auth/signup-wellness?referralCode=${referralCode}&redirectToWeightCare=true`
-      : '/auth/signup'
+      : redirectToIntegrousWellness
+        ? `/auth/signup-wellness?referralCode=${referralCode}&redirectToIntegrousWellness=true`
+        : '/auth/signup'
   return (
     <div className='flex flex-col justify-start items-start gap-x-2 my-2'>
       <form className='w-full mt-2' onSubmit={handleSubmit(onSubmit)}>
@@ -157,7 +160,7 @@ export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
           <br /><br />
 
           <p>
-            <span className='font-semibold'>Don’t have an account?</span>
+            <span className='font-semibold text-gray-800'>Don’t have an account?</span>
             <Link href={signupURL}>
               <a className='text-textAcent-500'> Sign Up.</a>
             </Link>

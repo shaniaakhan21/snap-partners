@@ -15,13 +15,6 @@ export const SelectRoleForWellnessSignUp = () => {
       label: 'Register as a Customer',
       key: ROLES.CUSTOMER,
       link: `/auth/signup-wellness?role=${ROLES.CUSTOMER}&referralCode=${queryReferralCode}`
-    },
-
-    {
-      icon: <AssociateIcon classes='w-14 h-14' />,
-      label: 'Register as an Associate',
-      key: ROLES.IBO,
-      link: `/auth/signup-wellness?role=${ROLES.IBO}&referralCode=${queryReferralCode}`
     }
   ]
 
@@ -31,7 +24,7 @@ export const SelectRoleForWellnessSignUp = () => {
   }
 
   return (
-    <div className='text-center h-[85vh] flex flex-col justify-center items-center w-full'>
+    <div className='text-center h-[50vh] flex flex-col justify-center items-center w-full'>
       <span className='text-3xl text-gray-800 font-bold'>Welcome To Snap Partners</span>
       <p className='text-gray-600 font-semibold'>Please choose how you want to register, other rolls <br className='hidden sm:block' /> can be added once you log in </p>
 
