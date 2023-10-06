@@ -32,8 +32,6 @@ const WeightCare = ({ isLoggedIn, referralCode }) => {
 
     Router.push(loginRoute)
   }
-
-  const handleGuestLogin = () => {}
   const handleOpen = () => {
     setOpen(true)
   }
@@ -245,15 +243,6 @@ const WeightCare = ({ isLoggedIn, referralCode }) => {
               LOG IN / SIGN UP
                 <i className="fa fa-sign-in ml-2" aria-hidden="true"></i>
               </Button>
-              <p className={'text-center text-xl md:text-2xl 2xl:text-3xl 3xl:text-4xl font-semibold-it font-normal my-3 text-white'}>
-            OR
-              </p>
-              <p className={'text text-white font-light text-center'}>
-                <Button onClick={() => { handleGuestLogin() }} classes={'text-xs md:text-base lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-2xl bg-primary-500 rounded-lg px-8 2xl:py-2 3xl:py-5'}>
-                  <i className="fa fa-user mr-2" aria-hidden="true"></i>
-              Continue as a Guest
-                </Button>
-              </p>
             </p>
           </CardContent>
         </Card>

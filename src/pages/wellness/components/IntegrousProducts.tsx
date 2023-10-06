@@ -1,26 +1,13 @@
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-constant-condition */
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect } from 'react'
 import Client from 'shopify-buy'
 import MockUpItems from './mockup'
 
-interface ProductInfo {
-  productName: string;
-  productImage: string;
-  productPrice: string;
-}
-
-interface IntegrousProductsProps {
-  products: ProductInfo[];
-}
-
-const IntegrousProducts = ({ userId, isLoggedIn, referralCode }) => {
-  const [isIntegrous, setIsIntegrous] = useState(false)
+const IntegrousProducts = ({ userId, isLoggedIn, referralCode, userRole }) => {
   let ShopifyBuy:any
   useEffect(() => {
-    // if (isLoggedIn && isAssociate !== null)
     if (isLoggedIn) {
-      // Create and load the script
       const script = document.createElement('script')
       script.src = 'https://www.integrouswellness.com/storefront.v1.js'
       script.async = true
@@ -33,7 +20,7 @@ const IntegrousProducts = ({ userId, isLoggedIn, referralCode }) => {
           apiVersion: '2022-07'
         })
         let collectionId = '446876746030'
-        if (isIntegrous) {
+        if (userRole === true) {
           collectionId = '447611863342'
         }
 
@@ -63,7 +50,7 @@ const IntegrousProducts = ({ userId, isLoggedIn, referralCode }) => {
   return (
     <div className="flex md:flex-row flex-col justify-start items-center" >
       { isLoggedIn
-        ? <div className='w-full flex justify-center m-3 mt-20 xs:mt-32' id="productTabs">
+        ? <div className='w-full flex justify-center m-3 mt-20 xs:mt-10 3xl:mt-20' id="productTabs">
           <div className='bg-gradient-to-b to-[#ce894b] from-[#e1d2c98a] xs:to-[#eda772ed] xs:from-[#fde8da7a] backdrop-blur-sm bg-opacity-10 flex w-9/12 p-2 xs:p-10 xs:rounded-lg shadow-orange-custom'>
             <div id='collection-component-tabs' className='border-1'></div>
           </div>

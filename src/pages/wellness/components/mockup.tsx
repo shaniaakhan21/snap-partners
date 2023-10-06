@@ -1,7 +1,5 @@
 /* eslint-disable no-use-before-define */
 import * as React from 'react'
-import Card from '@mui/material/Card'
-// Material Kit 2 React components
 import SingleItem from './SingleItem'
 import axios from 'axios'
 import { Grid } from '@mui/material'

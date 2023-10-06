@@ -1,15 +1,13 @@
 /* eslint-disable no-use-before-define */
 
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import Footer from '../pages/wellness/components/Footer'
 import Header from '../pages/wellness/components/Header'
 import MainSection from '../pages/wellness/components/MainSection'
-import ProductTabs from '../pages/wellness/components/ProductTabs'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { AuthRecover } from 'components/common/AuthRecover'
 import { useAuthStore } from 'lib/stores'
-import { url } from 'inspector'
 import IntegrousProducts from './wellness/components/IntegrousProducts'
 
 const IntegrousWellness = () => {
@@ -20,9 +18,8 @@ const IntegrousWellness = () => {
   const [ownerName, setownerName] = React.useState(null)
   const [referralCode, setreferralCode] = React.useState(null)
   const [ownerEmail, setownerEmail] = React.useState(null)
-  const [isIntegrous, setIsIntegrous] = React.useState(false)
   const scrollToProductTabs = () => {
-    const productTabsElement = document.getElementById('productTabs') // Replace 'productTabs' with the actual ID of your IntegrousProducts component
+    const productTabsElement = document.getElementById('productTabs')
     if (productTabsElement) {
       productTabsElement.scrollIntoView({ behavior: 'smooth' })
     }
@@ -50,10 +47,6 @@ const IntegrousWellness = () => {
           setreferralCode(response.data.referralCode)
           setownerName(`${response.data.name} ${response.data.lastname}`)
           setownerEmail(`${response.data.email}`)
-          const roles = JSON.parse(response.data.roles)
-          if (roles.integrousAssociate) {
-            setIsIntegrous(true)
-          }
         }
       } catch (error) {
         console.log(error)
@@ -78,7 +71,7 @@ const IntegrousWellness = () => {
           btnText='OUR PRODUCTS'
         />
 
-        <IntegrousProducts userId={userData?.id || 0} isLoggedIn={isLoggedIn}referralCode={referralCode}/>
+        <IntegrousProducts userId={userData?.id || 0} isLoggedIn={isLoggedIn} referralCode={referralCode} userRole={userData?.roles.ibo}/>
         <Footer ownerName={ownerName} ownerEmail={ownerEmail} customFooterBorder="customFooterBorder" customfooterInputbg="customfooterInputbg" customFooterBoxbg="customFooterBoxbg" customFooterbg="customFooterBoxbg" submitBtnBg="btn-color" />
       </div>
 

@@ -1,9 +1,10 @@
 import CardContent from '@mui/material/CardContent'
 import Card from '@mui/material/Card'
 import { Button } from 'components/common/Button'
-import Router from 'next/router'
+import Router, { useRouter } from 'next/router'
 
 const LoginOrSignBox = ({ isLoggedIn, userData, referralCode, h1Color, customColor, BgbtnColor }) => {
+  const router = useRouter()
   const handleLogin = () => {
     const referralCodeFromLocalStorage = localStorage.getItem('referralCode')
     const queryParams = new URLSearchParams(window.location.search)
@@ -20,6 +21,7 @@ const LoginOrSignBox = ({ isLoggedIn, userData, referralCode, h1Color, customCol
 
     Router.push(loginRoute)
   }
+  const showGUESTLogin = router.asPath.includes('integrousWellness')
 
   const handleGuestLogin = () => {}
   return (
@@ -44,15 +46,19 @@ const LoginOrSignBox = ({ isLoggedIn, userData, referralCode, h1Color, customCol
               <i className="fa fa-sign-in ml-2" aria-hidden="true"></i>
             </Button>
           </p>
-          <p className={`text-center text-xl md:text-2xl 2xl:text-3xl 3xl:text-4xl font-semibold-it font-normal my-3 text-${customColor}`}>
-            OR
-          </p>
-          <p className={`text text-${customColor} font-light text-center`}>
-            <Button onClick={() => { handleGuestLogin() }} classes={`text-xs md:text-base lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-2xl bg-${BgbtnColor} rounded-lg px-8 2xl:py-2 3xl:py-5`}>
-              <i className="fa fa-user mr-2" aria-hidden="true"></i>
-              Continue as a Guest
-            </Button>
-          </p>
+          {showGUESTLogin && (
+            <>
+              <p className={`text-center text-xl md:text-2xl 2xl:text-3xl 3xl:text-4xl font-semibold-it font-normal my-3 text-${customColor}`}>
+                OR
+              </p>
+              <p className={`text text-${customColor} font-light text-center`}>
+                <Button onClick={() => { handleGuestLogin() }} classes={`text-xs md:text-base lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-2xl bg-${BgbtnColor} rounded-lg px-8 2xl:py-2 3xl:py-5`}>
+                  <i className="fa fa-user mr-2" aria-hidden="true"></i>
+                  Continue as a Guest
+                </Button>
+              </p>
+            </>
+          )}
         </CardContent>
         : <CardContent className='p-2 sm:p-4'>
           <h1 className={`text text-${customColor} text-lg md:text-3xl 2xl:text-4xl 3xl:text-5xl font-semibold-it font-normal text-center 3xl:leading-tight`}>
