@@ -18,6 +18,7 @@ const IntegrousWellness = () => {
   const [ownerName, setownerName] = React.useState(null)
   const [referralCode, setreferralCode] = React.useState(null)
   const [ownerEmail, setownerEmail] = React.useState(null)
+  const [isIntegrous, setIsIntegrous] = React.useState(null)
   const scrollToProductTabs = () => {
     const productTabsElement = document.getElementById('productTabs')
     if (productTabsElement) {
@@ -47,8 +48,15 @@ const IntegrousWellness = () => {
           setreferralCode(response.data.referralCode)
           setownerName(`${response.data.name} ${response.data.lastname}`)
           setownerEmail(`${response.data.email}`)
+          const roles = JSON.parse(response.data.roles)
+          if (roles.integrousAssociate) {
+            setIsIntegrous(true)
+          } else {
+            setIsIntegrous(false)
+          }
         }
       } catch (error) {
+        setIsIntegrous(false)
         console.log(error)
       }
     }
@@ -71,7 +79,9 @@ const IntegrousWellness = () => {
           btnText='OUR PRODUCTS'
         />
 
-        <IntegrousProducts userId={userData?.id || 0} isLoggedIn={isLoggedIn} referralCode={referralCode} userRole={userData?.roles.ibo}/>
+        { isIntegrous !== null && (<IntegrousProducts userId={userData?.id || 0} isLoggedIn={isLoggedIn} referralCode={referralCode} userRole={userData?.roles.ibo} collectionIdAllProducts={isIntegrous ? 447611863342 : 446876746030}/>
+        )}
+
         <Footer ownerName={ownerName} ownerEmail={ownerEmail} customFooterBorder="customFooterBorder" customfooterInputbg="customfooterInputbg" customFooterBoxbg="customFooterBoxbg" customFooterbg="customFooterBoxbg" submitBtnBg="btn-color" />
       </div>
 
