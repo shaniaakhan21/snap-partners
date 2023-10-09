@@ -140,19 +140,19 @@ const Header = ({
                 <div>
                   <div className='flex items-center justify-end'>
                     <Button onClick={() => { handleLogin() }}
-                      classes={`text-xs md:text-base 2xl:text-base 3xl:text-2xl font-bold bg-${btnBG} rounded-lg px-2 lg:px-5 3xl:px-7 mr-4`}
+                      classes={`text-xs md:text-base 2xl:text-base 3xl:text-xl font-bold bg-${btnBG} rounded-lg px-2 lg:px-5 3xl:px-4 mr-4`}
                     >
                     LOG IN
                     </Button>
                     {!isWeightCarePage && (
                       <>
-                        <p className='text-xs md:text-base 2xl:text-base 3xl:text-2xl font-bold mr-4'>OR</p><Button onClick={() => {
+                        <p className='text-xs md:text-base 2xl:text-base 3xl:text-xl font-bold mr-4'>OR</p><Button onClick={() => {
                           localStorage.setItem('isGuest', 'true')
                           window.location.reload()
                         } }
-                        classes={`text-xs md:text-base 2xl:text-base 3xl:text-2xl font-bold bg-${btnBG} rounded-lg px-2 lg:px-5 3xl:px-7`}
+                        classes={`text-xs md:text-base 2xl:text-base 3xl:text-xl font-bold bg-${btnBG} rounded-lg px-2 lg:px-5 3xl:px-4 `}
                         >
-                        Continue As a guest
+                        Continue as guest
                         </Button></>
                     )}
                   </div>

@@ -123,12 +123,12 @@ export default function SingleItem ({ image, name, price, btnLabel, index, refer
               Purchase <span className='text-red-h'>Now</span>
             </h1>
             <p className="text text-white font-light text-center">
-              <Button onClick={() => { handleLogin() }} className='text-white text-xs md:text-base lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-4xl bg-btn-color rounded-lg px-8 2xl:py-2 3xl:py-5'>
+              <Button onClick={() => { handleLogin() }} className='text-white text-xs md:text-base lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-2xl bg-btn-color rounded-lg px-8 2xl:py-2 3xl:py-5'>
               LOG IN / SIGN UP
                 <i className="fa fa-sign-in ml-2" aria-hidden="true"></i>
               </Button>
             </p>
-            <p className="text-center text-xl md:text-2xl 2xl:text-3xl 3xl:text-4xl font-semibold-it font-normal my-3 text-white ">
+            <p className="text-center text-xl md:text-2xl 2xl:text-3xl 3xl:text-2xl font-semibold-it font-normal my-3 text-white ">
             OR
             </p>
             <p className="text text-white font-light text-center">
@@ -137,7 +137,7 @@ export default function SingleItem ({ image, name, price, btnLabel, index, refer
                   onGuestLogin()
                   window.location.reload()
                 }
-              }} className='text-white text-xs md:text-base lg:text-md xl:text-lg 2xl:text-lg 3xl:text-3xl bg-btn-color rounded-lg px-8 2xl:py-2 3xl:py-5'>
+              }} className='text-white text-xs md:text-base lg:text-md xl:text-lg 2xl:text-lg 3xl:text-xl bg-btn-color rounded-lg px-8 2xl:py-2 3xl:py-5'>
                 <i className="fa fa-user mr-2" aria-hidden="true"></i>
               Continue as a Guest
               </Button>
