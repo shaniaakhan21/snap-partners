@@ -80,7 +80,7 @@ const IntegrousWellness = () => {
           btnText='OUR PRODUCTS'
         />
 
-        { isIntegrous !== null && (<IntegrousProducts userId={userData?.id || 0} isLoggedIn={isLoggedIn} referralCode={referralCode} userRole={userData?.roles.ibo} collectionIdAllProducts={isIntegrous ? 447611863342 : 446876746030}/>
+        { isIntegrous !== null && (<IntegrousProducts userId={userData?.id || 0} IboId={userData?.id || 0} isLoggedIn={isLoggedIn} referralCode={referralCode} userRole={userData?.roles.ibo} collectionIdAllProducts={isIntegrous ? 447611863342 : 446876746030} />
         )}
 
         <Footer ownerName={ownerName} ownerEmail={ownerEmail} customFooterBorder="customFooterBorder" customfooterInputbg="customfooterInputbg" customFooterBoxbg="customFooterBoxbg" customFooterbg="customFooterBoxbg" submitBtnBg="btn-color" />

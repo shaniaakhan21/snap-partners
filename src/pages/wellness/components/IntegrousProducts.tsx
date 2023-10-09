@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import Client from 'shopify-buy'
 import MockUpItems from './mockup'
 
-const IntegrousProducts = ({ userId, isLoggedIn, referralCode, userRole, collectionIdAllProducts }) => {
+const IntegrousProducts = ({ userId, isLoggedIn, referralCode, userRole, collectionIdAllProducts, IboId }) => {
   const isGuest = typeof localStorage !== 'undefined' && localStorage.getItem('isGuest') === 'true'
   let ShopifyBuy:any
   useEffect(() => {
@@ -23,7 +23,7 @@ const IntegrousProducts = ({ userId, isLoggedIn, referralCode, userRole, collect
         })
 
         const cartCustomAttributes = isGuest
-          ? [{ key: 'IBOID', value: String(userId) }]
+          ? [{ key: 'IBOID', value: String(IboId) }]
           : [{ key: 'UID', value: String(userId) }]
         ShopifyBuy.UI.onReady(client).then((ui) => {
           ui.createComponent('collection', {
@@ -47,7 +47,7 @@ const IntegrousProducts = ({ userId, isLoggedIn, referralCode, userRole, collect
         document.body.removeChild(script)
       }
     }
-  }, [userId])
+  }, [userId, IboId])
 
   return (
     <div className="flex md:flex-row flex-col justify-start items-center" >
