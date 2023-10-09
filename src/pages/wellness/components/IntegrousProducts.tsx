@@ -7,7 +7,7 @@ import MockUpItems from './mockup'
 const IntegrousProducts = ({ userId, isLoggedIn, referralCode, userRole, collectionIdAllProducts, isGuest }) => {
   let ShopifyBuy:any
   useEffect(() => {
-    if (isLoggedIn || isGuest) {
+    if (isLoggedIn) {
       const script = document.createElement('script')
       script.src = 'https://www.integrouswellness.com/storefront.v1.js'
       script.async = true
@@ -19,10 +19,6 @@ const IntegrousProducts = ({ userId, isLoggedIn, referralCode, userRole, collect
           storefrontAccessToken: 'e06de8605c8ed7c79a04d618e0b3eeb7',
           apiVersion: '2022-07'
         })
-        const isGuest = typeof localStorage !== 'undefined' && localStorage.getItem('isGuest') === 'true';
-        const cartCustomAttributes = isGuest
-          ? [{ key: 'IBOID', value: String(userId) }]
-          : [{ key: 'UID', value: String(userId) }]
         ShopifyBuy.UI.onReady(client).then((ui) => {
           ui.createComponent('collection', {
             id: collectionIdAllProducts,
@@ -30,7 +26,40 @@ const IntegrousProducts = ({ userId, isLoggedIn, referralCode, userRole, collect
             moneyFormat: '%24%7B%7Bamount%7D%7D',
             options: {
               cart: {
-                customAttributes: cartCustomAttributes,
+                customAttributes: [{ key: 'UID', value: String(userId) }],
+                popup: false
+              }
+            }
+          })
+        })
+      }
+
+      document.body.appendChild(script)
+
+      // Cleanup on unmount
+      return () => {
+        document.body.removeChild(script)
+      }
+    } else if (isGuest) {
+      const script = document.createElement('script')
+      script.src = 'https://www.integrouswellness.com/storefront.v1.js'
+      script.async = true
+
+      script.onload = async () => {
+        ShopifyBuy = window.ShopifyBuy
+        const client = Client.buildClient({
+          domain: '0f4c5e-3.myshopify.com',
+          storefrontAccessToken: 'e06de8605c8ed7c79a04d618e0b3eeb7',
+          apiVersion: '2022-07'
+        })
+        ShopifyBuy.UI.onReady(client).then((ui) => {
+          ui.createComponent('collection', {
+            id: collectionIdAllProducts,
+            node: document.getElementById('collection-component-tabs'),
+            moneyFormat: '%24%7B%7Bamount%7D%7D',
+            options: {
+              cart: {
+                customAttributes: [{ key: 'IBOID', value: String(userId) }],
                 popup: false
               }
             }
