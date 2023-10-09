@@ -20,7 +20,9 @@ const IntegrousProducts = ({ userId, isLoggedIn, referralCode, userRole, collect
           apiVersion: '2022-07'
         })
 
-
+        const cartCustomAttributes = isGuest
+          ? [{ key: 'IBOID', value: String(userId) }]
+          : [{ key: 'UID', value: String(userId) }]
         ShopifyBuy.UI.onReady(client).then((ui) => {
           ui.createComponent('collection', {
             id: collectionIdAllProducts,
@@ -28,7 +30,7 @@ const IntegrousProducts = ({ userId, isLoggedIn, referralCode, userRole, collect
             moneyFormat: '%24%7B%7Bamount%7D%7D',
             options: {
               cart: {
-                customAttributes: [{ key: 'UID', value: String(userId) }],
+                customAttributes: cartCustomAttributes,
                 popup: false
               }
             }
