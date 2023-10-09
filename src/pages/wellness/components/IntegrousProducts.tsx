@@ -7,6 +7,7 @@ import MockUpItems from './mockup'
 const IntegrousProducts = ({ userId, isLoggedIn, referralCode, userRole, collectionIdAllProducts }) => {
   let ShopifyBuy:any
   useEffect(() => {
+    const isGuest = typeof localStorage !== 'undefined' && localStorage.getItem('isGuest') === 'true'
     if (isLoggedIn || isGuest) {
       const script = document.createElement('script')
       script.src = 'https://www.integrouswellness.com/storefront.v1.js'
