@@ -174,7 +174,7 @@ export const globalRoutes = [
     label: 'Individual Profile'
   },
   {
-    to: '/integrousWellness',
+    to: '/wellness',
     label: 'Integrous Wellness'
   },
   {

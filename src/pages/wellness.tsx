@@ -1,16 +1,16 @@
 /* eslint-disable no-use-before-define */
 
 import React, { useEffect, useState } from 'react'
-import Footer from '../pages/wellness/components/Footer'
-import Header from '../pages/wellness/components/Header'
-import MainSection from '../pages/wellness/components/MainSection'
+import Footer from './wellness/components/Footer'
+import Header from './wellness/components/Header'
+import MainSection from './wellness/components/MainSection'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { AuthRecover } from 'components/common/AuthRecover'
 import { useAuthStore } from 'lib/stores'
 import IntegrousProducts from './wellness/components/IntegrousProducts'
 
-const IntegrousWellness = () => {
+const wellness = () => {
   const router = useRouter()
   const { auth, setAuth } = useAuthStore()
   const [isLoggedIn, setIsLoggedIn] = React.useState(false)
@@ -92,4 +92,4 @@ const IntegrousWellness = () => {
   )
 }
 
-export default IntegrousWellness
+export default wellness

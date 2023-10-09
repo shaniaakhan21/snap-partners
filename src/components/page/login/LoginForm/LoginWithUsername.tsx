@@ -55,7 +55,7 @@ export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
     if (redirectToIntegrousWellness === 'true') {
       removeLocalStorage('redirectToIntegrousWellness')
       removeLocalStorage('redirectToIntegrousReferralCode')
-      window.location.href = `/integrousWellness?referralCode=${referralCode}`
+      window.location.href = `/wellness?referralCode=${referralCode}`
       return
     }
 
