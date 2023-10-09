@@ -1,6 +1,4 @@
 import { Button } from 'components/common/Button'
-import LoginOrSignBox from './LoginOrSignBox'
-import { Grid } from '@mui/material'
 
 const MainSection = ({ scrollToProductTabs, isLoggedIn, userData, referralCode, h1Color, pColor, imgSrc, BgbuttonColor, textColor, Loginh1Color, customColor, btnText }) => {
   return (
@@ -24,11 +22,6 @@ const MainSection = ({ scrollToProductTabs, isLoggedIn, userData, referralCode, 
           <div className='hidden sm:flex md:w-3/6 lg:5/12 xl:4/12 2xl:w-3/12 justify-center'>
             <img src={imgSrc} className='w-0 md:w-3/6 2xl:w-4/6 xl:mt-0 mt-20'></img>
           </div>
-        </div>
-        <div>
-          <Grid container item xs={12} lg={7} justifyContent="center" mx="auto">
-            <LoginOrSignBox isLoggedIn={isLoggedIn} userData={userData} referralCode={referralCode} h1Color={Loginh1Color} customColor={customColor} BgbtnColor={BgbuttonColor}/>
-          </Grid>
         </div>
       </div>
     </div>

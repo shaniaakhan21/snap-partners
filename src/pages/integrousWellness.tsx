@@ -62,9 +62,9 @@ const IntegrousWellness = () => {
     }
     Owner()
   }, [router])
-
+  const isGuest = typeof localStorage !== 'undefined' && localStorage.getItem('isGuest') === 'true'
   return (
-    <div>
+    <div className='overflow-x-hidden'>
       <AuthRecover skipRedirect={true} />
       <Header isLoggedIn={isLoggedIn} userData={userData} bgcblack='bgc-black' btnBG='black-900'/>
       <div className='bg-cover bg-center' style={{ backgroundImage: 'url(\'/static/wellness/bg-integrous.jpeg\')' }}>
@@ -73,13 +73,13 @@ const IntegrousWellness = () => {
           pColor="#00FF00"
           textColor="red-h"
           BgbuttonColor="btn-color"
-          imgSrc="/static/wellness/shadow-bg-no.png"
+          imgSrc="/static/wellness/intLogo.svg"
           Loginh1Color="red-h"
           customColor="cust-color"
           btnText='OUR PRODUCTS'
         />
 
-        { isIntegrous !== null && (<IntegrousProducts userId={userData?.id || 0} isLoggedIn={isLoggedIn} referralCode={referralCode} userRole={userData?.roles.ibo} collectionIdAllProducts={isIntegrous ? 447611863342 : 446876746030}/>
+        { isIntegrous !== null && (<IntegrousProducts userId={userData?.id || 0} isLoggedIn={isLoggedIn || isGuest} referralCode={referralCode} userRole={userData?.roles.ibo} collectionIdAllProducts={isIntegrous ? 447611863342 : 446876746030}/>
         )}
 
         <Footer ownerName={ownerName} ownerEmail={ownerEmail} customFooterBorder="customFooterBorder" customfooterInputbg="customfooterInputbg" customFooterBoxbg="customFooterBoxbg" customFooterbg="customFooterBoxbg" submitBtnBg="btn-color" />

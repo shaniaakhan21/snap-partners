@@ -4,7 +4,7 @@ import React, { useEffect } from 'react'
 import Client from 'shopify-buy'
 import MockUpItems from './mockup'
 
-const IntegrousProducts = ({ userId, isLoggedIn, referralCode, userRole }) => {
+const IntegrousProducts = ({ userId, isLoggedIn, referralCode, userRole, collectionIdAllProducts }) => {
   let ShopifyBuy:any
   useEffect(() => {
     if (isLoggedIn) {
@@ -19,14 +19,11 @@ const IntegrousProducts = ({ userId, isLoggedIn, referralCode, userRole }) => {
           storefrontAccessToken: 'e06de8605c8ed7c79a04d618e0b3eeb7',
           apiVersion: '2022-07'
         })
-        let collectionId = '446876746030'
-        if (userRole === true) {
-          collectionId = '447611863342'
-        }
+
 
         ShopifyBuy.UI.onReady(client).then((ui) => {
           ui.createComponent('collection', {
-            id: collectionId,
+            id: collectionIdAllProducts,
             node: document.getElementById('collection-component-tabs'),
             moneyFormat: '%24%7B%7Bamount%7D%7D',
             options: {
@@ -47,15 +44,17 @@ const IntegrousProducts = ({ userId, isLoggedIn, referralCode, userRole }) => {
       }
     }
   }, [userId])
+
+  const isGuest = typeof localStorage !== 'undefined' && localStorage.getItem('isGuest') === 'true'
   return (
     <div className="flex md:flex-row flex-col justify-start items-center" >
-      { isLoggedIn
+      { isLoggedIn || isGuest
         ? <div className='w-full flex justify-center m-3 mt-20 xs:mt-10 3xl:mt-20' id="productTabs">
           <div className='bg-gradient-to-b to-[#ce894b] from-[#e1d2c98a] xs:to-[#eda772ed] xs:from-[#fde8da7a] backdrop-blur-sm bg-opacity-10 flex w-9/12 p-2 xs:p-10 xs:rounded-lg shadow-orange-custom'>
             <div id='collection-component-tabs' className='border-1'></div>
           </div>
         </div>
-        : <div id="productTabs"><MockUpItems collectionId={446876746030} referralCode={referralCode}/></div>
+        : <div id="productTabs"><MockUpItems collectionId={collectionIdAllProducts} referralCode={referralCode}/></div>
       }
     </div>
   )

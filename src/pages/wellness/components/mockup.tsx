@@ -26,6 +26,10 @@ export default function MockUpItems ({ collectionId, referralCode }) {
     }
     Shopify()
   }, [])
+  const handleGuestLogin = () => {
+    localStorage.setItem('isGuest', 'true')
+    window.location.reload()
+  }
   return (
     <div className='w-full flex justify-center m-3 mt-20 xs:mt-32'>
       <div
@@ -41,6 +45,7 @@ export default function MockUpItems ({ collectionId, referralCode }) {
                 btnLabel="Add to Cart"
                 index={index}
                 referralCode={referralCode}
+                onGuestLogin={handleGuestLogin}
               />
             </Grid>
           ))}

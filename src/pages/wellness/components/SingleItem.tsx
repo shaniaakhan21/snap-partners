@@ -21,9 +21,9 @@ const ResponsiveCard = styled(Card)(({ theme }) => ({
   }
 }))
 
-export default function SingleItem ({ image, name, price, btnLabel, index, referralCode }) {
+export default function SingleItem ({ image, name, price, btnLabel, index, referralCode, onGuestLogin }) {
   const [open, setOpen] = useState(false)
-  const handleLogin = () => {
+  const handleLogin = (isGuest: boolean = false) => {
     const referralCodeFromLocalStorage = localStorage.getItem('referralCode')
     const queryParams = new URLSearchParams(window.location.search)
     const referralCodeFromQuery = queryParams.get('referralCode')
@@ -38,9 +38,12 @@ export default function SingleItem ({ image, name, price, btnLabel, index, refer
     }
 
     Router.push(loginRoute)
+
+    if (isGuest) {
+      localStorage.setItem('isGuest', 'true')
+    }
   }
 
-  const handleGuestLogin = () => {}
   const handleOpen = () => {
     setOpen(true)
   }
@@ -129,7 +132,12 @@ export default function SingleItem ({ image, name, price, btnLabel, index, refer
             OR
             </p>
             <p className="text text-white font-light text-center">
-              <Button onClick={() => { handleGuestLogin() }} className='text-white text-xs md:text-base lg:text-md xl:text-lg 2xl:text-lg 3xl:text-3xl bg-btn-color rounded-lg px-8 2xl:py-2 3xl:py-5'>
+              <Button onClick={() => {
+                if (onGuestLogin) {
+                  onGuestLogin()
+                  window.location.reload()
+                }
+              }} className='text-white text-xs md:text-base lg:text-md xl:text-lg 2xl:text-lg 3xl:text-3xl bg-btn-color rounded-lg px-8 2xl:py-2 3xl:py-5'>
                 <i className="fa fa-user mr-2" aria-hidden="true"></i>
               Continue as a Guest
               </Button>
