@@ -4,7 +4,8 @@ import React, { useEffect } from 'react'
 import Client from 'shopify-buy'
 import MockUpItems from './mockup'
 
-const IntegrousProducts = ({ userId, isLoggedIn, referralCode, userRole, collectionIdAllProducts, isGuest }) => {
+const IntegrousProducts = ({ userId, isLoggedIn, referralCode, userRole, collectionIdAllProducts }) => {
+  const isGuest = typeof localStorage !== 'undefined' && localStorage.getItem('isGuest') === 'true'
   let ShopifyBuy:any
   useEffect(() => {
     if (isLoggedIn) {
