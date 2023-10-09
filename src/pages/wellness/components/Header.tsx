@@ -41,11 +41,13 @@ const Header = ({
   }
 
   const handleLogout = () => {
+    localStorage.clear()
     removeAuth()
     window.location.reload()
   }
 
   const handleGuestLogout = () => {
+    localStorage.clear()
     localStorage.setItem('isGuest', 'false')
     window.location.reload()
   }
