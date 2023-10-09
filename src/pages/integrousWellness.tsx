@@ -15,6 +15,7 @@ const IntegrousWellness = () => {
   const { auth, setAuth } = useAuthStore()
   const [isLoggedIn, setIsLoggedIn] = React.useState(false)
   const [userData, setuserData] = React.useState(null)
+  const [IboId, setIboId] = React.useState(0)
   const [ownerName, setownerName] = React.useState(null)
   const [referralCode, setreferralCode] = React.useState(null)
   const [ownerEmail, setownerEmail] = React.useState(null)
@@ -49,6 +50,7 @@ const IntegrousWellness = () => {
           setreferralCode(response.data.referralCode)
           setownerName(`${response.data.name} ${response.data.lastname}`)
           setownerEmail(`${response.data.email}`)
+          setIboId(Number(`${response.data.id}`))
           const roles = JSON.parse(response.data.roles)
           if (roles.integrousAssociate) {
             setIsIntegrous(true)
@@ -80,7 +82,7 @@ const IntegrousWellness = () => {
           btnText='OUR PRODUCTS'
         />
 
-        { isIntegrous !== null && (<IntegrousProducts userId={userData?.id || 0} IboId={userData?.id || 0} isLoggedIn={isLoggedIn} referralCode={referralCode} userRole={userData?.roles.ibo} collectionIdAllProducts={isIntegrous ? 447611863342 : 446876746030} />
+        { (isIntegrous !== null && IboId > 0) && (<IntegrousProducts userId={userData?.id || 0} IboId={IboId} isLoggedIn={isLoggedIn} referralCode={referralCode} userRole={userData?.roles.ibo} collectionIdAllProducts={isIntegrous ? 447611863342 : 446876746030} />
         )}
 
         <Footer ownerName={ownerName} ownerEmail={ownerEmail} customFooterBorder="customFooterBorder" customfooterInputbg="customfooterInputbg" customFooterBoxbg="customFooterBoxbg" customFooterbg="customFooterBoxbg" submitBtnBg="btn-color" />
