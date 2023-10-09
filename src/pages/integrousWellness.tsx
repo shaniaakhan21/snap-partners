@@ -19,6 +19,7 @@ const IntegrousWellness = () => {
   const [referralCode, setreferralCode] = React.useState(null)
   const [ownerEmail, setownerEmail] = React.useState(null)
   const [isIntegrous, setIsIntegrous] = React.useState(null)
+  const isGuest = typeof localStorage !== 'undefined' && localStorage.getItem('isGuest') === 'true'
   const scrollToProductTabs = () => {
     const productTabsElement = document.getElementById('productTabs')
     if (productTabsElement) {
@@ -61,8 +62,8 @@ const IntegrousWellness = () => {
       }
     }
     Owner()
-  }, [router])
-  const isGuest = typeof localStorage !== 'undefined' && localStorage.getItem('isGuest') === 'true'
+  }, [router, isGuest])
+
   return (
     <div className='overflow-x-hidden'>
       <AuthRecover skipRedirect={true} />
