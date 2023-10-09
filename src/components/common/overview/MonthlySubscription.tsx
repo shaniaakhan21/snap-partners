@@ -15,7 +15,7 @@ interface MonthlySubscriptionData {
   agents: CountData;
 }
 
-const MonthlySubscription = () => {
+const MonthlySubscription = ({ userId }) => {
   const [data, setData] = useState<MonthlySubscriptionData>()
 
   useEffect(() => {
@@ -24,7 +24,8 @@ const MonthlySubscription = () => {
       const response = await axios.get('/api/reports/getMonthlySubscription', {
         headers: {
           Authorization: `Bearer ${token}`
-        }
+        },
+        params: userId ? { userId } : {}
       })
       setData(response.data)
     })()

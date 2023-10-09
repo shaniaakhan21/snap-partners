@@ -1,96 +1,135 @@
+#cro-erc-process > div > div > ul:nth-child(1) > li:nth-child(1),
+#cro-erc-process > div > div > ul:nth-child(2) > li:nth-child(1),
+#cro-erc-process > div > div > ul:nth-child(3) > li:nth-child(1) {
+  color: white;
+  text-align: center;
+  font-weight: bold;
+}
 
-  #cro-erc-process > div > div > ul:nth-child(1) > li:nth-child(1),
-  #cro-erc-process > div > div > ul:nth-child(2) > li:nth-child(1),
-  #cro-erc-process > div > div > ul:nth-child(3) > li:nth-child(1)
-  {
-    color:white;
-    text-align: center;
-    font-weight: bold;
+/* #table1erc div:nth-child(1) > .InovuaReactDataGrid__column-header--unlockable,  */
+#cro-erc-process > div > div > ul:nth-child(1) > li:nth-child(1) {
+  color: white;
+  background-color: #dd4c37 !important;
+}
+/* #table1erc div:nth-child(10) > .InovuaReactDataGrid__column-header--unlockable, */
+#cro-erc-process > div > div > ul:nth-child(2) > li:nth-child(1) {
+  color: white;
+  background-color: #f4b400;
+}
+
+/* #table1erc div:nth-child(15) > .InovuaReactDataGrid__column-header--unlockable,*/
+#cro-erc-process > div > div > ul:nth-child(3) > li:nth-child(1) {
+  color: white;
+  background-color: #0f9d58;
+}
+
+#table1erc {
+  background-color: white;
+  padding: 0.5rem 1.25rem;
+  margin-bottom: 1rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 0.5rem;
+}
+
+#table1erc .InovuaReactDataGrid {
+  border: none;
+}
+
+#table1erc .InovuaReactDataGrid__row-active-borders {
+  display: none;
+}
+
+#table1erc .InovuaReactDataGrid__cell {
+  border: none;
+  padding: 0;
+  padding-right: 0.5rem;
+}
+
+/* #table1erc .inovua-react-scroll-container__wrapper {
+  border: 1px solid black;
+} */
+
+#table1erc .InovuaReactDataGrid__row-cell-wrap {
+  border: solid 1px black;
+  border-top: none;
+}
+
+#table1erc .InovuaReactDataGrid__box--ellipsis {
+  padding: 0.5rem 0;
+}
+
+/* #table1erc
+  .InovuaReactDataGrid__row-cell-wrap
+  .InovuaReactDataGrid__cell:first-child {
+  background-color: red;
+} */
+
+#table1erc
+  .InovuaReactDataGrid__column-header__resize-wrapper--show-border-left {
+  border: none;
+}
+
+#table1erc .InovuaReactDataGrid__header {
+  border-color: black;
+}
+
+#table1erc .InovuaReactDataGrid__column-header__filter-wrapper--empty {
+  display: none;
+}
+
+#cro-erc-process {
+  background-color: white;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  margin-left: 4rem;
+  margin-right: 4rem;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 0.5rem;
+}
+
+#cro-erc-process > div > h1 {
+  font-weight: bold;
+  padding: 1rem 0rem;
+}
+
+#cro-erc-process > div > div {
+  display: flex;
+}
+
+#cro-erc-process > div > div > ul {
+  width: 33.33%;
+}
+
+#cro-erc-process > div > div > ul > li:nth-child(2) {
+  text-align: center;
+  font-size: 0.7rem;
+  padding: 0.5rem 0rem 0rem 0rem;
+  font-weight: 600;
+}
+
+@media only screen and (min-width: 700px) {
+  #cro-erc-process > div > div > ul > li:nth-child(2) {
+    font-size: 1rem;
   }
 
-
-
-#table1erc div:nth-child(1) > .InovuaReactDataGrid__column-header--unlockable,
-#table1erc div:nth-child(2) > .InovuaReactDataGrid__column-header--unlockable,
-#table1erc div:nth-child(3) > .InovuaReactDataGrid__column-header--unlockable,
-#table1erc div:nth-child(4) > .InovuaReactDataGrid__column-header--unlockable,
-#table1erc div:nth-child(5) > .InovuaReactDataGrid__column-header--unlockable,
-#table1erc div:nth-child(6) > .InovuaReactDataGrid__column-header--unlockable,
-#table1erc div:nth-child(7) > .InovuaReactDataGrid__column-header--unlockable,
-#table1erc div:nth-child(8) > .InovuaReactDataGrid__column-header--unlockable,
-#table1erc div:nth-child(9) > .InovuaReactDataGrid__column-header--unlockable,
-#cro-erc-process > div > div > ul:nth-child(1) > li:nth-child(1)
-
-  {
-  color:white;
-  background-color: #DD4C37 !important;
-}
-  
-
-#table1erc div:nth-child(10) > .InovuaReactDataGrid__column-header--unlockable,
-#table1erc div:nth-child(11) > .InovuaReactDataGrid__column-header--unlockable,
-#table1erc div:nth-child(12) > .InovuaReactDataGrid__column-header--unlockable,
-#table1erc div:nth-child(13) > .InovuaReactDataGrid__column-header--unlockable,
-#table1erc div:nth-child(14) > .InovuaReactDataGrid__column-header--unlockable,
-#cro-erc-process > div > div > ul:nth-child(2) > li:nth-child(1){
-    color:white;
-  background-color: #F4B400;
-}
-
-#table1erc div:nth-child(15) > .InovuaReactDataGrid__column-header--unlockable,
-#table1erc div:nth-child(16) > .InovuaReactDataGrid__column-header--unlockable,
-#table1erc div:nth-child(17) > .InovuaReactDataGrid__column-header--unlockable,
-#table1erc div:nth-child(18) > .InovuaReactDataGrid__column-header--unlockable,
-#cro-erc-process > div > div > ul:nth-child(3) > li:nth-child(1){
-    color:white;
-  background-color: #0F9D58;
-}
-  
-  
   #cro-erc-process {
-    background-color: white;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  #cro-erc-process > div > h1 {
-    font-weight:bold;
-    padding: 1rem 0rem;
-  }
-  
-  #cro-erc-process > div > div {
-    display:flex;
-  }
-  
-  #cro-erc-process > div > div > ul {
-    width: 33.33%;
-}
-  
-  #cro-erc-process > div > div > ul > li:nth-child(2) {
-    text-align:center;
-    font-size: 0.7rem;
-    padding: 0.5rem 0rem 0rem 0rem;
-  }
-  
-  @media only screen and (min-width: 700px) {
-  #cro-erc-process > div > div > ul > li:nth-child(2) {
-   font-size: 1rem;
-  }
-    
-    #cro-erc-process {
     flex-direction: row;
-    }
-    
-    #cro-erc-process > img {
-      width: 20%;
-      height: 100%;
-    }
-    
-    #cro-erc-process > div {
-      width: 80%;
-      padding: 5rem 5rem 1rem 5rem;
+  }
+
+  #cro-erc-process > img {
+    width: 20%;
+    height: 100%;
+  }
+
+  #cro-erc-process > div {
+    width: 80%;
   }
 }
