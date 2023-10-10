@@ -29,6 +29,16 @@ export const SelectRoleForWellnessSignUp = () => {
     GTMTrack.signUp(role.key)
     router.push(role.link)
   }
+  const referralCode = router.query.referralCode || 'IntegrousWellness'
+  const redirectToWeightCare = router.query.redirectToWeightCare === 'true'
+  const redirectToIntegrousWellness = router.query.redirectToIntegrousWellness === 'true'
+  const loginURL = router.pathname === '/auth/login-integrous'
+    ? `/auth/login-integrous?referralCode=${referralCode}`
+    : redirectToWeightCare
+      ? `/auth/login-wellness?referralCode=${referralCode}&redirectToWeightCare=true`
+      : redirectToIntegrousWellness
+        ? `/auth/login-wellness?referralCode=${referralCode}&redirectToIntegrousWellness=true`
+        : '/auth/login'
 
   return (
     <div className='text-center h-[50vh] flex flex-col justify-center items-center w-full'>
@@ -63,7 +73,7 @@ export const SelectRoleForWellnessSignUp = () => {
 
       <p>
         <span className='font-bold text-gray-800'>Already have an account?</span>
-        <Link href='/auth/login-wellness'>
+        <Link href={loginURL}>
           <a className='text-textAcent-500'> Login.</a>
         </Link>
       </p>

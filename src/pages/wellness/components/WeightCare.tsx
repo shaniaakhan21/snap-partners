@@ -32,6 +32,24 @@ const WeightCare = ({ isLoggedIn, referralCode }) => {
 
     Router.push(loginRoute)
   }
+
+  const handleSignUp = () => {
+    const referralCodeFromLocalStorage = localStorage.getItem('referralCode')
+    const queryParams = new URLSearchParams(window.location.search)
+    const referralCodeFromQuery = queryParams.get('referralCode')
+    const referralCode = referralCodeFromLocalStorage || referralCodeFromQuery || 'NoSponsor'
+
+    let signupRoute = '/auth/signup-wellness?role=CUSTOMER&referralCode=' + referralCode
+
+    if (window.location.pathname.includes('integrousWellness')) {
+      signupRoute += '&redirectToIntegrousWellness=true'
+    } else if (window.location.pathname.includes('WeightCare')) {
+      signupRoute += '&redirectToWeightCare=true'
+    }
+
+    Router.push(signupRoute)
+  }
+
   const handleOpen = () => {
     setOpen(true)
   }
@@ -240,7 +258,14 @@ const WeightCare = ({ isLoggedIn, referralCode }) => {
             </h1>
             <p className="text text-white font-light text-center">
               <Button onClick={() => { handleLogin() }} classes='text-white text-xs md:text-base lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-4xl bg-primary-500 rounded-lg px-8 2xl:py-2 3xl:py-5'>
-              LOG IN / SIGN UP
+              LOG IN
+                <i className="fa fa-sign-in ml-2" aria-hidden="true"></i>
+              </Button>
+            </p>
+            <p className='text-white text-center font-bold text-xs md:text-base lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-4xl my-2'>OR</p>
+            <p className="text text-white font-light text-center">
+              <Button onClick={() => { handleSignUp() }} classes='text-white text-xs md:text-base lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-4xl bg-primary-500 rounded-lg px-8 2xl:py-2 3xl:py-5'>
+              SIGN UP
                 <i className="fa fa-sign-in ml-2" aria-hidden="true"></i>
               </Button>
             </p>

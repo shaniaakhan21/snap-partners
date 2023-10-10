@@ -208,11 +208,16 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
   const showSSNField = referralLink.role !== 'CUSTOMER' && referralLink.role !== 'integrousCustomer'
 
   const router = useRouter()
-  const loginURL = router.pathname === '/auth/signup-integrous'
-    ? '/auth/login-integrous'
-    : router.pathname === '/auth/signup-wellness'
-      ? '/auth/login-wellness'
-      : '/auth/login'
+  const referralCode = router.query.referralCode || 'IntegrousWellness'
+  const redirectToWeightCare = router.query.redirectToWeightCare === 'true'
+  const redirectToIntegrousWellness = router.query.redirectToIntegrousWellness === 'true'
+  const loginURL = router.pathname === '/auth/login-integrous'
+    ? `/auth/login-integrous?referralCode=${referralCode}`
+    : redirectToWeightCare
+      ? `/auth/login-wellness?referralCode=${referralCode}&redirectToWeightCare=true`
+      : redirectToIntegrousWellness
+        ? `/auth/login-wellness?referralCode=${referralCode}&redirectToIntegrousWellness=true`
+        : '/auth/login'
   const maxWClass = router.pathname === '/auth/signup-wellness' ? 'max-w-2xl' : 'max-w-md'
   return (
     <>
