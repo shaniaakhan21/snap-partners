@@ -13,18 +13,40 @@ import axios from 'axios'
 import { Grid, TextField } from '@mui/material'
 import { SearchIcon } from 'components/common/icons'
 import { Button } from '@material-ui/core'
-import { DataGrid } from '@mui/x-data-grid'
-
+import { DataGrid as MUIDataGrid } from '@mui/x-data-grid'
+import { styled } from '@mui/system'
 const { SEO } = APP_INFO
+const StyledDataGrid = styled(MUIDataGrid)(() => ({
+  '&& .MuiDataGrid-columnHeaderTitleContainer .MuiDataGrid-columnHeaderTitle': {
+    fontWeight: 'bold'
+  },
+  '& .MuiDataGrid-cell': {
+    borderColor: 'rgba(224, 224, 224, 0.5)!important'
+  },
+
+  '& .MuiDataGrid-columnHeaders': {
+    backgroundColor: '#dd4c3738',
+    borderColor: '#DD4C37!important'
+  },
+  '& .MuiDataGrid-footerContainer': {
+    display: 'none'
+  }
+
+}))
+
 const Table = (props) => {
   const rows = useMemo(() => props.rows, [props.rows])
   const columns = useMemo(() => props.columns, [props.columns])
   return (
-    <DataGrid
+    <StyledDataGrid
       rows={rows}
       autoHeight
       columns={columns}
       density="compact"
+      sx={{
+        backgroundColor: 'white',
+        border: '2px dashed #aaa'
+      }}
       initialState={{
         sorting: {
           sortModel: props.sortModel
@@ -45,7 +67,7 @@ const ComingSoon: PageNext = () => {
   const [currentUserId, setCurrentUserId] = useState(auth.id)
 
   const refreshComponent = () => {
-    setKey(prevKey => prevKey + 1); // incrementing key will cause the component to be recreated
+    setKey(prevKey => prevKey + 1) // incrementing key will cause the component to be recreated
   }
   useEffect(() => {
     (async () => {
@@ -71,15 +93,12 @@ const ComingSoon: PageNext = () => {
       headerName: 'View',
       flex: 1,
       minWidth: 170,
-      renderCell: (item) => {
-        if (item.row.placed) {
-          return <Button onClick={() => {
-            setUserId(item.row.id)
-            setCurrentUserId(item.row.id)
-          }} variant="contained" color={'primary'} size={'small'}>View User</Button>
-        }
-        return <>User not yet placed - In Holding Tank</>
-      }
+      renderCell: (item) => (
+        <Button className='bg-primary-500 px-[6px] py-[2px] text-sm' onClick={() => {
+          setUserId(item.row.id)
+          setCurrentUserId(item.row.id)
+        }} variant="contained" color={'primary'} size={'small'}>View User</Button>
+      )
     }
   ]
   const onGoBack = () => {
@@ -99,7 +118,7 @@ const ComingSoon: PageNext = () => {
 
   const search = async () => {
     const token = getLocalStorage('accessToken')
-    const response = await axios.get('/api/tree/searchUsers', {
+    const response = await axios.get('/api/reports/searchUsers', {
       params: { search: searchId },
       headers: {
         Authorization: `Bearer ${token}`
@@ -138,9 +157,10 @@ const ComingSoon: PageNext = () => {
         )}
       </div>
       <Grid justifyContent='flex-end' alignItems='center' style={{ display: 'flex' }}>
-        <TextField value={searchId} onChange={(e) => { setsearchId(e.target.value) }} size={'small'} variant="outlined" placeholder="Search by Name" InputProps={{ startAdornment: <SearchIcon /> }} />
-        <Button disabled={(searchId.length === 0)} onClick={() => { search() }} variant="contained" >Search</Button>
+        <TextField value={searchId} onChange={(e) => { setsearchId(e.target.value) }} size={'small'} variant="outlined" placeholder="Search by Name" InputProps={{ startAdornment: <SearchIcon/> }} />
+        <Button className='bg-primary-500 text-white font-bold ml-2' disabled={(searchId.length === 0)} onClick={() => { search() }} variant="contained" >Search</Button>
       </Grid>
+      <br></br>
       <Grid item container style={{ marginBottom: 30 }}>
         <Table columns={columns} rows={rows} sortModel={[{ field: 'name', sort: 'asc' }]} />
       </Grid>
@@ -149,7 +169,7 @@ const ComingSoon: PageNext = () => {
         datasource={tree}
         pan={true}
         NodeTemplate ={MyNode}
-        collapsible={false}
+        collapsible={true}
       />
     </>
   )
