@@ -118,7 +118,7 @@ const ComingSoon: PageNext = () => {
 
   const search = async () => {
     const token = getLocalStorage('accessToken')
-    const response = await axios.get('/api/reports/searchUsers', {
+    const response = await axios.get('/api/tree/searchUsers', {
       params: { search: searchId },
       headers: {
         Authorization: `Bearer ${token}`
