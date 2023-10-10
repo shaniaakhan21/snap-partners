@@ -169,7 +169,7 @@ const ComingSoon: PageNext = () => {
         datasource={tree}
         pan={true}
         NodeTemplate ={MyNode}
-        collapsible={true}
+        collapsible={false}
       />
     </>
   )
