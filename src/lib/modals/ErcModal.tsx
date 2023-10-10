@@ -109,7 +109,14 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                   <span className="text-xs text-textAcent-500">{client.email}</span>
                   <div className="text-xs text-textAcent-500">{client.phone}</div>
                 </div>
-                <span className={`text-xs ${client.status === 'active' ? 'text-success-600' : 'text-textAcent-500'}`}>{client.status === 'active' ? 'Active' : 'Refunded/Cancelled'}</span>
+                <div>
+                  <span className='text-black text-xs'>
+                    Account Status:
+                  </span>
+                  <span className={`text-xs ${client.status === 'active' ? 'text-success-600' : 'text-textAcent-500'} font-bold`}>
+                    {client.status === 'active' ? ' Active' : ' Refunded/Cancelled'}
+                  </span>
+                </div>
               </div>
             </div>
             {/* body  */}
