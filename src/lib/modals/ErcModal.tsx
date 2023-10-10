@@ -103,10 +103,13 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                   x
                 </div>
               </div>
-              <div className="flex space-x-5 px-2.5 py-5 items-center">
-                <div className="text-sm">Signup Date: {dayjs(client.signupDate, 'MM-DD-YYYY').format('MM/DD/YYYY')}</div>
-                <div className="text-xs text-textAcent-500">{client.email}</div>
-                <div className="text-xs text-textAcent-500">{client.phone}</div>
+              <div className="flex px-2.5 py-5 justify-between items-center">
+                <div className='flex items-center space-x-5'>
+                  <span className="text-sm">Signup Date: {dayjs(client.signupDate, 'MM-DD-YYYY').format('MM/DD/YYYY')}</span>
+                  <span className="text-xs text-textAcent-500">{client.email}</span>
+                  <div className="text-xs text-textAcent-500">{client.phone}</div>
+                </div>
+                <span className={`text-xs ${client.status === 'active' ? 'text-success-600' : 'text-textAcent-500'}`}>{client.status === 'active' ? 'Active' : 'Refunded/Cancelled'}</span>
               </div>
             </div>
             {/* body  */}
