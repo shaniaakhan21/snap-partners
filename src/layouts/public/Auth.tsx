@@ -148,8 +148,8 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
     <>
       <div className='w-full'>
         <div className='flex flex-col h-full md:flex-row justify-between items-center md:items-start'>
-          <section className={`sticky top-0 left-0  md:flex flex-col justify-start w-full bg-white md:bg-textAcent-500 text-white ${heightClass}`}>
-            <img src='/static/snap-bg.png' className={`w-full h-screen object-cover hidden sm:block absolute bottom-0 right-0 z-0 ${heightClass}`} />
+          <section className={`sticky top-0 left-0  md:flex flex-col justify-start w-full md:min-h-screen bg-white md:bg-textAcent-500 text-white ${heightClass}`}>
+            <img src='/static/snap-bg.png' className={`w-full object-cover hidden sm:block absolute bottom-0 right-0 z-0 ${heightClass}`} />
 
             <div className='hidden md:block absolute w-1/2 h-full top-0 z-10 px-4 pb-8 md:px-12 ml-10'>
               {displayWellnessContent}
