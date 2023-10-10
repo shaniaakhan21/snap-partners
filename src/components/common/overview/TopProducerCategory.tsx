@@ -6,7 +6,7 @@ import Tab from '@mui/material/Tab'
 import Box from '@mui/material/Box'
 import { TopProducers } from './TopProducers'
 import { topProducers } from './mock'
-import { Typography } from '@mui/material'
+import { Icon, MenuItem, Select, Typography } from '@mui/material'
 import { TabScrollButton, withStyles } from '@material-ui/core'
 import HiddenTabScrollButton from './HiddenTabScrollButton'
 import { getLocalStorage } from 'lib/utils/localStorage'
@@ -115,19 +115,12 @@ export default function TopProducerCategory () {
     })()
   }, [monthSelected, yearSelected])
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue)
-  }
-
   const handleSubcategoryChange = (event, newValue) => {
     setSubcategoryValue(newValue)
   }
 
-  function a11yProps (index) {
-    return {
-      id: `simple-tab-${index}`,
-      'aria-controls': `simple-tabpanel-${index}`
-    }
+  const handleCategoryChange = (event) => {
+    setValue(event.target.value)
   }
 
   return (
@@ -140,13 +133,13 @@ export default function TopProducerCategory () {
           <select
             id='legalType'
             name='legalType'
-            className='cursor-pointer outline-none appearance-none rounded-md border border-solid border-black py-2 pl-2 pr-12 text-sm sm:text-base'
+            className='cursor-pointer outline-none appearance-none rounded-md border border-solid border-primary-500 py-2 pl-2 pr-16 text-sm sm:text-base  bg-primary-500 text-white'
             placeholder='User Rank'
             onChange={(current) => { setYearSelected(parseInt(current.target.value)) }}
           >
             {years.map((y, i) => {
               return (
-                <option key={i} selected={(new Date().getFullYear() === y)} value={y}>
+                <option className='bg-white text-black' key={i} selected={(new Date().getFullYear() === y)} value={y}>
                   {y}
                 </option>
               )
@@ -156,7 +149,7 @@ export default function TopProducerCategory () {
           <select
             id='legalType'
             name='legalType'
-            className='ml-5 cursor-pointer outline-none appearance-none rounded-md border border-solid border-black py-2 pl-2 text-sm sm:text-base'
+            className='ml-5 cursor-pointer outline-none appearance-none rounded-md border border-solid border-primary-500 py-2 pl-2 pr-10 text-sm sm:text-base bg-primary-500 text-white'
             placeholder='User Rank'
             onChange={(current) => { setMonthSelected(parseInt(current.target.value)) }}
           >
@@ -171,30 +164,25 @@ export default function TopProducerCategory () {
           </select>
         </div>
       </div>
-      <Tabs
-        // disable the tab indicator because it doesn't work well with wrapped container
-        TabIndicatorProps={{ sx: { display: 'none' } }}
-        value={value}
-        onChange={handleChange}
-        aria-label="Top Producers Categories"
-        variant='scrollable'
-        ScrollButtonComponent={HiddenTabScrollButton}
-        sx={{ marginTop: '10px' }}
-      >
-        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="IBO" {...a11yProps(0)} />
-        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="ERC" {...a11yProps(1)} />
-        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Delivery Merchant" {...a11yProps(2)} />
-        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Delivery Customer" {...a11yProps(3)} />
-        <Tab sx={tabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Delivery Driver" {...a11yProps(4)} />
-      </Tabs>
+      <br></br>
       <Tabs
         TabIndicatorProps={{ sx: { display: 'none' } }}
         value={subctegoryValue}
         onChange={handleSubcategoryChange}
         aria-label="Top Producers SubCategories"
         variant='scrollable'
-        ScrollButtonComponent={HiddenTabScrollButton}
         className='border-b-4 border-primary-500'
+        ScrollButtonComponent={HiddenTabScrollButton}
+        sx={{
+          '.& MuiTabs-scroller': {
+            marginBottom: '0px!important',
+            height: '73%!important'
+          },
+          '.& MuiTabs-indicator': {
+            backgroundColor: 'transparent!important',
+            height: '14px!important'
+          }
+        }}
       >
         <Tab sx={subTabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Directly Sponsored" />
         <Tab sx={subTabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Manager" />
@@ -202,6 +190,32 @@ export default function TopProducerCategory () {
         <Tab sx={subTabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Director" />
         <Tab sx={subTabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Executive" />
       </Tabs>
+      <br></br>
+      <Select
+        value={value}
+        onChange={handleCategoryChange}
+        className='w-full text-white bg-primary-500'
+        sx={{
+          ...tabStyle,
+          '& .MuiSelect-select': {
+            paddingTop: '10px',
+            paddingBottom: '10px',
+            borderRadius: '8px',
+            backgroundColor: '#DD4C37!important',
+            color: 'white'
+          },
+          '& .MuiSvgIcon-root': {
+            color: 'white',
+            borderLeft: '1px solid white'
+          }
+        }}
+      >
+        <MenuItem value={0}>IBO</MenuItem>
+        <MenuItem value={1}>ERC</MenuItem>
+        <MenuItem value={2}>Delivery Merchant</MenuItem>
+        <MenuItem value={3}>Delivery Customer</MenuItem>
+        <MenuItem value={4}>Delivery Driver</MenuItem>
+      </Select>
       <TabPanel value={value} index={0}>
         <TopProducers monthSelected={monthSelected} yearSelected={yearSelected} data={topProducerData} value={subctegoryValue} typeLow='agent' type='topAgent' typeText='IBOs'/>
       </TabPanel>
