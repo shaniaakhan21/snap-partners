@@ -59,7 +59,7 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
 
   const heightClass =
   router.pathname === '/auth/signup-wellness' && router.query.role === 'CUSTOMER'
-    ? 'h-[210vh]'
+    ? 'h-[100vw]'
     : 'h-screen'
 
   const displayContent = (

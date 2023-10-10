@@ -24,7 +24,7 @@ const WeightCare = ({ isLoggedIn, referralCode }) => {
 
     let loginRoute = '/auth/login-wellness?referralCode=' + referralCode
 
-    if (window.location.pathname.includes('integrousWellness')) {
+    if (window.location.pathname.includes('wellness')) {
       loginRoute += '&redirectToIntegrousWellness=true'
     } else if (window.location.pathname.includes('WeightCare')) {
       loginRoute += '&redirectToWeightCare=true'
@@ -41,7 +41,7 @@ const WeightCare = ({ isLoggedIn, referralCode }) => {
 
     let signupRoute = '/auth/signup-wellness?role=CUSTOMER&referralCode=' + referralCode
 
-    if (window.location.pathname.includes('integrousWellness')) {
+    if (window.location.pathname.includes('wellness')) {
       signupRoute += '&redirectToIntegrousWellness=true'
     } else if (window.location.pathname.includes('WeightCare')) {
       signupRoute += '&redirectToWeightCare=true'

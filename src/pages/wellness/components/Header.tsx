@@ -59,7 +59,7 @@ const Header = ({
     const referralCode = referralCodeFromLocalStorage || referralCodeFromQuery || 'NoSponsor'
     let loginRoute = '/auth/login-wellness?referralCode=' + referralCode
 
-    if (window.location.pathname.includes('integrousWellness')) {
+    if (window.location.pathname.includes('wellness')) {
       loginRoute += '&redirectToIntegrousWellness=true'
     } else if (window.location.pathname.includes('WeightCare')) {
       loginRoute += '&redirectToWeightCare=true'
