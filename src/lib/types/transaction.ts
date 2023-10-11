@@ -30,7 +30,8 @@ export interface Client {
   docForSignatureReturned: string;
   quarters: {quarter: string, year: string, amount: string, dateFiled: string}[];
   signupDate: string,
-  totalCV: number
+  totalCV: number,
+  status: 'active' | 'cancelled'
 }
 
 export interface LevelledClient {
