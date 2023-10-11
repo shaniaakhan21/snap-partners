@@ -131,7 +131,7 @@ export default function SingleItem ({ image, name, price, btnLabel, index, refer
             boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
             position: 'absolute'
           }}
-          className="md:px-20 md:py-10 rounded-2xl mt-1 3xl:mt-32 w-full lg:w-10/12 xl:w-8/12 2xl:w-7/12 3xl:w-7/12 backdrop-blur-4xl left-[0%] top-[20%] sm:left-[0%] sm:top-[20%] lg:left-[9%] xl:left-[17%] 2xl:left-[22%] 3xl:left-[23%]"
+          className="md:px-20 md:py-10 rounded-2xl mt-1 3xl:mt-32 w-full lg:w-10/12 xl:w-8/12 2xl:w-6/12 3xl:w-7/12 backdrop-blur-4xl left-[0%] top-[20%] sm:left-[0%] sm:top-[20%] lg:left-[9%] xl:left-[17%] 2xl:left-[22%] 3xl:left-[23%]"
         >
           <CardContent>
             <h1 className="text text-white text-2xl md:text-3xl 2xl:text-4xl 3xl:text-5xl font-semibold-it font-normal text-center mb-4 2xl:mb-8 3xl:mb-8">
