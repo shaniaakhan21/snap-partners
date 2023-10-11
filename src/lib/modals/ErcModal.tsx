@@ -83,15 +83,18 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
   // eslint-disable-next-line prefer-const
   let phase3Progress = 0
 
-  const totalCV = client.totalCV
-  const PCV = totalCV * 0.4
-  const phase2CV = PCV * 0.1
-  const phase3CV = PCV * 0.9
+  const { totalCV, filedCV } = client
+  const totalPCV = totalCV * 0.4
+  const filedPCV = filedCV * 0.4
+  const phase3TotalPCV = filedPCV
+  const phase3FiledPCV = 0 // TODO will be implemented
+  const phase3TotalCV = filedCV
+  const phase3FiledCV = 0 // TODO will be implemented
   return (
     <div>
       {isOpen && (
         <div className="absolute top-0 left-0 justify-center pl-44 flex  font-sans z-50 items-center h-screen w-screen bg-slate-800 bg-opacity-20 overflow-scroll">
-          <div className="bg-white w-[866px] h-[762px] rounded-lg max-h-[90vh] ">
+          <div className="bg-white w-[900px] h-[762px] rounded-lg max-h-[90vh] ">
             {/* header  */}
             <div>
               <div className="flex justify-between items-center px-2.5 pt-5 font-open-sans ">
@@ -188,7 +191,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                       </span>
                     </div>
                     <div className='flex flex-col'>
-                      <div style={{ flex: 1 }}> {phase2Progress === phase2StepCount ? `$${NumberUtils.formatNumberWithCommas(phase2CV.toFixed(2))}` : ''}</div>
+                      <div style={{ flex: 1 }}> {phase2Progress === phase2StepCount ? `$${NumberUtils.formatNumberWithCommas(totalPCV.toFixed(2))}` : ''}</div>
                       {/* <div className='text-xs font-normal'>MM/DD/YYYY</div> */}
                     </div>
                   </div>
@@ -203,13 +206,22 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                       <path d="M0 1H255.333" stroke="#DADADA" />
                     </svg>
                   </div>
-                  <div className="flex justify-between text-xs mt-1">
-                    <span>Your PCV for this account</span>
-                    <span>${NumberUtils.formatNumberWithCommas(PCV.toFixed(2))}</span>
-                  </div>
-                  <div className="flex justify-between text-xs font-bold">
-                    <span>Total CV for this account</span>
-                    <span>${NumberUtils.formatNumberWithCommas(totalCV.toFixed(2))}</span>
+                  <div className='flex flex-col'>
+                    <div className='text-xs flex flex-row justify-between'>
+                      <div className='flex-1' />
+                      <span className='font-semibold flex-1 text-center'>Potential</span>
+                      <span className='font-semibold flex-1 text-right'>Filed</span>
+                    </div>
+                    <div className='text-xs flex flex-row justify-between'>
+                      <span className='font-semibold flex-1 text-left'>PCV</span>
+                      <span className='flex-1 text-center'>${NumberUtils.formatNumberWithCommas(totalPCV.toFixed(2))}</span>
+                      <span className='flex-1 text-right'>${NumberUtils.formatNumberWithCommas(filedPCV.toFixed(2))}</span>
+                    </div>
+                    <div className='text-xs flex flex-row justify-between'>
+                      <span className='font-semibold flex-1 text-left'>Total CV</span>
+                      <span className='flex-1 text-center'>${NumberUtils.formatNumberWithCommas(totalCV.toFixed(2))}</span>
+                      <span className='flex-1 text-right'>${NumberUtils.formatNumberWithCommas(filedCV.toFixed(2))}</span>
+                    </div>
                   </div>
                 </div>
                 <div className="flex justify-center">
@@ -277,12 +289,6 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                         <div key={`phase2-progress-${idx}`} className={`${phase3Progress > idx ? 'bg-textAcent-200' : 'bg-white'} h-2 w-32 rounded-lg`} />
                       ))
                     }
-                    {/* <div className="bg-white h-2 w-32 rounded-lg"></div>
-                    <div className="bg-white h-2 w-32 rounded-lg"></div>
-                    <div className="bg-white h-2 w-32 rounded-lg"></div>
-                    <div className="bg-white h-2 w-32 rounded-lg"></div>
-                    <div className="bg-white h-2 w-32 rounded-lg"></div>
-                    <div className="bg-white h-2 w-32 rounded-lg"></div> */}
                   </div>
                 </div>
                 <div className="py-3 px-2.5">
@@ -294,7 +300,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                       </span>
                     </div>
                     <div className='flex flex-col'>
-                      <div style={{ flex: 1 }}> {phase3Progress === phase3StepCount ? `$${NumberUtils.formatNumberWithCommas(phase3CV.toFixed(2))}` : ''}</div>
+                      <div style={{ flex: 1 }}> {phase3Progress === phase3StepCount ? `$${NumberUtils.formatNumberWithCommas(phase3TotalPCV.toFixed(2))}` : ''}</div>
                       {/* <div className='text-xs font-normal'>MM/DD/YYYY</div> */}
                     </div>
                   </div>
@@ -309,13 +315,22 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                       <path d="M0 1H255.333" stroke="#DADADA" />
                     </svg>
                   </div>
-                  <div className="flex justify-between text-xs mt-1">
-                    <span>Your PCV for this account</span>
-                    <span>${NumberUtils.formatNumberWithCommas(PCV.toFixed(2))}</span>
-                  </div>
-                  <div className="flex justify-between text-xs font-bold">
-                    <span>Total CV for this account</span>
-                    <span>${NumberUtils.formatNumberWithCommas(totalCV.toFixed(2))}</span>
+                  <div className='flex flex-col'>
+                    <div className='text-xs flex flex-row justify-between'>
+                      <div className='flex-1' />
+                      <span className='font-semibold flex-1 text-center'>Filed</span>
+                      <span className='font-semibold flex-1 text-right'>Received</span>
+                    </div>
+                    <div className='text-xs flex flex-row justify-between'>
+                      <span className='font-semibold flex-1 text-left'>PCV</span>
+                      <span className='flex-1 text-center'>${NumberUtils.formatNumberWithCommas(phase3TotalPCV.toFixed(2))}</span>
+                      <span className='flex-1 text-right'>${NumberUtils.formatNumberWithCommas(phase3FiledPCV.toFixed(2))}</span>
+                    </div>
+                    <div className='text-xs flex flex-row justify-between'>
+                      <span className='font-semibold flex-1 text-left'>Total CV</span>
+                      <span className='flex-1 text-center'>${NumberUtils.formatNumberWithCommas(phase3TotalCV.toFixed(2))}</span>
+                      <span className='flex-1 text-right'>${NumberUtils.formatNumberWithCommas(phase3FiledCV.toFixed(2))}</span>
+                    </div>
                   </div>
                 </div>
                 <div className="flex justify-center">
