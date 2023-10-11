@@ -13,6 +13,20 @@ type ErcModalProps = {
   onClose: () => void;
 };
 
+const SeparatorLine = () => (
+  <div className="flex justify-center">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="256"
+      height="2"
+      viewBox="0 0 256 2"
+      fill="none"
+    >
+      <path d="M0 1H255.333" stroke="#DADADA" />
+    </svg>
+  </div>
+)
+
 const Step = ({ number, title, date = undefined, filled, filledColor, color, clickable = false, onClick = null }) => {
   return (
     <div
@@ -144,21 +158,16 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                     <div>Initial Payment</div>
                     <div>$200</div>
                   </div>
-                  <div className="flex justify-between text-xs">
+                  <div className='mt-5'>
+                    <SeparatorLine />
+                  </div>
+                  <div className="flex justify-between text-xs mt-2">
                     <div>CV = $500</div>
                     <div>{phase1Progress === phase1StepCount ? dayjs(client.signupDate, 'MM-DD-YYYY').format('MM/DD/YYYY') : ''}</div>
                   </div>
                 </div>
-                <div className="flex justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="256"
-                    height="2"
-                    viewBox="0 0 256 2"
-                    fill="none"
-                  >
-                    <path d="M0 1H255.333" stroke="#DADADA" />
-                  </svg>
+                <div className='mt-8'>
+                  <SeparatorLine />
                 </div>
                 <div className="py-3 px-2.5">
                   Next Step
@@ -195,46 +204,29 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                       {/* <div className='text-xs font-normal'>MM/DD/YYYY</div> */}
                     </div>
                   </div>
-                  <div className="flex justify-center mt-1">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="256"
-                      height="2"
-                      viewBox="0 0 256 2"
-                      fill="none"
-                    >
-                      <path d="M0 1H255.333" stroke="#DADADA" />
-                    </svg>
+                  <div className="mt-1">
+                    <SeparatorLine />
                   </div>
                   <div className='flex flex-col'>
-                    <div className='text-xs flex flex-row justify-between'>
+                    <div className='text-xs flex flex-row justify-between mt-2'>
                       <div className='flex-1' />
-                      <span className='font-semibold flex-1 text-center'>Potential</span>
+                      <span className='font-semibold flex-1 text-right'>Potential</span>
                       <span className='font-semibold flex-1 text-right'>Filed</span>
                     </div>
                     <div className='text-xs flex flex-row justify-between'>
                       <span className='font-semibold flex-1 text-left'>PCV</span>
-                      <span className='flex-1 text-center'>${NumberUtils.formatNumberWithCommas(totalPCV.toFixed(2))}</span>
+                      <span className='flex-1 text-right'>${NumberUtils.formatNumberWithCommas(totalPCV.toFixed(2))}</span>
                       <span className='flex-1 text-right'>${NumberUtils.formatNumberWithCommas(filedPCV.toFixed(2))}</span>
                     </div>
                     <div className='text-xs flex flex-row justify-between'>
                       <span className='font-semibold flex-1 text-left'>Total CV</span>
-                      <span className='flex-1 text-center'>${NumberUtils.formatNumberWithCommas(totalCV.toFixed(2))}</span>
+                      <span className='flex-1 text-right'>${NumberUtils.formatNumberWithCommas(totalCV.toFixed(2))}</span>
                       <span className='flex-1 text-right'>${NumberUtils.formatNumberWithCommas(filedCV.toFixed(2))}</span>
                     </div>
                   </div>
                 </div>
-                <div className="flex justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="256"
-                    height="2"
-                    viewBox="0 0 256 2"
-                    fill="none"
-                  >
-                    <path d="M0 1H255.333" stroke="#DADADA" />
-                  </svg>
-                </div>
+                <SeparatorLine />
+
                 <div className="py-3 px-2.5">
                   Next Step
                 </div>
@@ -304,46 +296,29 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                       {/* <div className='text-xs font-normal'>MM/DD/YYYY</div> */}
                     </div>
                   </div>
-                  <div className="flex justify-center mt-1">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="256"
-                      height="2"
-                      viewBox="0 0 256 2"
-                      fill="none"
-                    >
-                      <path d="M0 1H255.333" stroke="#DADADA" />
-                    </svg>
+                  <div className=" mt-1">
+                    <SeparatorLine />
+
                   </div>
                   <div className='flex flex-col'>
-                    <div className='text-xs flex flex-row justify-between'>
+                    <div className='text-xs flex flex-row justify-between mt-2'>
                       <div className='flex-1' />
-                      <span className='font-semibold flex-1 text-center'>Filed</span>
+                      <span className='font-semibold flex-1 text-right'>Filed</span>
                       <span className='font-semibold flex-1 text-right'>Received</span>
                     </div>
                     <div className='text-xs flex flex-row justify-between'>
                       <span className='font-semibold flex-1 text-left'>PCV</span>
-                      <span className='flex-1 text-center'>${NumberUtils.formatNumberWithCommas(phase3TotalPCV.toFixed(2))}</span>
+                      <span className='flex-1 text-right'>${NumberUtils.formatNumberWithCommas(phase3TotalPCV.toFixed(2))}</span>
                       <span className='flex-1 text-right'>${NumberUtils.formatNumberWithCommas(phase3FiledPCV.toFixed(2))}</span>
                     </div>
                     <div className='text-xs flex flex-row justify-between'>
                       <span className='font-semibold flex-1 text-left'>Total CV</span>
-                      <span className='flex-1 text-center'>${NumberUtils.formatNumberWithCommas(phase3TotalCV.toFixed(2))}</span>
+                      <span className='flex-1 text-right'>${NumberUtils.formatNumberWithCommas(phase3TotalCV.toFixed(2))}</span>
                       <span className='flex-1 text-right'>${NumberUtils.formatNumberWithCommas(phase3FiledCV.toFixed(2))}</span>
                     </div>
                   </div>
                 </div>
-                <div className="flex justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="256"
-                    height="2"
-                    viewBox="0 0 256 2"
-                    fill="none"
-                  >
-                    <path d="M0 1H255.333" stroke="#DADADA" />
-                  </svg>
-                </div>
+                <SeparatorLine />
                 <div className="py-3 px-2.5">
                   <div>Coming Soon...</div>
                 </div>
@@ -397,7 +372,7 @@ const QuarterModal = ({ quarters, isOpen, onClose }: {quarters: Client['quarters
     <div>
       {isOpen && (
         <div className="absolute top-0 left-0 justify-center pl-44 flex  font-sans z-50 items-center h-screen w-screen bg-opacity-20">
-          <div className="bg-white w-[866px] h-[762px] rounded-lg max-h-[90vh] border border-black-500">
+          <div className="bg-white w-[900px] h-[762px] rounded-lg max-h-[90vh] border border-black-500">
             {/* header  */}
             <div className="flex justify-between items-center px-2.5 pt-5 font-open-sans ">
               <div className="font-semibold font-lg">IRS filing progress by Quarter</div>
