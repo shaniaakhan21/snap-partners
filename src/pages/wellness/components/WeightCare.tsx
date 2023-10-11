@@ -246,25 +246,23 @@ const WeightCare = ({ isLoggedIn, referralCode }) => {
             background: '#000000e0',
             border: '#0000004f 1px solid',
             boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
-            position: 'absolute',
-            top: '20%',
-            left: '25%'
+            position: 'absolute'
           }}
-          className="md:px-20 md:py-10 rounded-2xl mt-1 3xl:mt-32 w-8/12 xl:w-6/12 3xl:w-5/12 backdrop-blur-4xl"
+          className="md:px-20 md:py-10 rounded-2xl mt-1 3xl:mt-32 w-8/12 xl:w-6/12 3xl:w-5/12 backdrop-blur-4xl left-[15%] top-[20%] sm:left-[25%] sm:top-[20%]"
         >
           <CardContent>
-            <h1 className="text text-white text-2xl md:text-3xl 2xl:text-4xl 3xl:text-6xl font-semibold-it font-normal text-center mb-4 2xl:mb-5 3xl:mb-8">
+            <h1 className="text text-white text-2xl md:text-3xl 2xl:text-4xl 3xl:text-5xl font-semibold-it font-normal text-center mb-4 2xl:mb-5 3xl:mb-8">
               Purchase <span className='text-primary-500'>Now</span>
             </h1>
             <p className="text text-white font-light text-center">
-              <Button onClick={() => { handleLogin() }} classes='text-white text-xs md:text-base lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-4xl bg-primary-500 rounded-lg px-8 2xl:py-2 3xl:py-5'>
+              <Button onClick={() => { handleLogin() }} classes='text-white text-xs md:text-base lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-2xl bg-primary-500 rounded-lg px-8 2xl:py-2 3xl:py-5'>
               LOG IN
                 <i className="fa fa-sign-in ml-2" aria-hidden="true"></i>
               </Button>
             </p>
-            <p className='text-white text-center font-bold text-xs md:text-base lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-4xl my-2'>OR</p>
+            <p className='text-white text-center font-bold text-xs md:text-base lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-2xl my-2'>OR</p>
             <p className="text text-white font-light text-center">
-              <Button onClick={() => { handleSignUp() }} classes='text-white text-xs md:text-base lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-4xl bg-primary-500 rounded-lg px-8 2xl:py-2 3xl:py-5'>
+              <Button onClick={() => { handleSignUp() }} classes='text-white text-xs md:text-base lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-2xl bg-primary-500 rounded-lg px-8 2xl:py-2 3xl:py-5'>
               SIGN UP
                 <i className="fa fa-sign-in ml-2" aria-hidden="true"></i>
               </Button>
