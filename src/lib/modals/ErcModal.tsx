@@ -17,26 +17,40 @@ const SeparatorLine = () => (
   <div className="flex justify-center">
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="256"
+      width="280"
       height="2"
-      viewBox="0 0 256 2"
+      viewBox="0 0 280 2"
       fill="none"
     >
-      <path d="M0 1H255.333" stroke="#DADADA" />
+      <path d="M0 1H280" stroke="#DADADA" />
     </svg>
   </div>
 )
 
-const Step = ({ number, title, date = undefined, filled, filledColor, color, clickable = false, onClick = null }) => {
+interface StepProps {
+  number: number;
+  title: string;
+  date?: string,
+  filled: 'half' | 'full' | 'empty';
+  fillColor: string;
+  halfFillColor?: string
+  color: string;
+  clickable?: boolean;
+  onClick?: () => void
+}
+
+const Step = (props: StepProps) => {
+  const { number, title, date = undefined, filled, fillColor, halfFillColor, color, clickable = false, onClick = null } = props
+
   return (
     <div
       onClick={clickable ? onClick : null}
       className='flex flex-row items-center justify-between mb-4 ml-2'
       style={{ cursor: clickable ? 'pointer' : 'default' }}>
       <div className='flex flex-row items-center'>
-        <div className={`${filled ? `bg-${filledColor}` : `border border-${color}`} mr-2 w-8 h-8 rounded-full flex justify-center items-center`}>
+        <div className={`w-8 h-8 rounded-full flex justify-center items-center ${filled === 'full' ? `bg-${fillColor}` : filled === 'half' ? `bg-${halfFillColor}` : `border border-${color}`}`}>
           {
-            filled
+            filled === 'full'
               ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -54,13 +68,15 @@ const Step = ({ number, title, date = undefined, filled, filledColor, color, cli
                 </svg>
               )
               : (
-                <span>
-                  {number}
-                </span>
+                <div>
+                  <span>
+                    {number}
+                  </span>
+                </div>
               )
           }
         </div>
-        <span className={`text-${filled ? filledColor : color}`} style={{ textDecoration: clickable ? 'underline' : 'default' }}>
+        <span className={`text-${filled === 'full' ? fillColor : color} mx-2`} style={{ textDecoration: clickable ? 'underline' : 'default' }}>
           {title}
         </span>
       </div>
@@ -104,11 +120,13 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
   const phase3FiledPCV = 0 // TODO will be implemented
   const phase3TotalCV = filedCV
   const phase3FiledCV = 0 // TODO will be implemented
+  const IrsFilingStartedNotFinished = filedCV > 0 && filedCV !== totalCV
+
   return (
     <div>
       {isOpen && (
         <div className="absolute top-0 left-0 justify-center pl-44 flex  font-sans z-50 items-center h-screen w-screen bg-slate-800 bg-opacity-20 overflow-scroll">
-          <div className="bg-white w-[900px] h-[762px] rounded-lg max-h-[90vh] ">
+          <div className="bg-white w-[960px] h-[762px] rounded-lg max-h-[90vh] ">
             {/* header  */}
             <div>
               <div className="flex justify-between items-center px-2.5 pt-5 font-open-sans ">
@@ -137,7 +155,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
               </div>
             </div>
             {/* body  */}
-            <div className="flex space-x-5 justify-center">
+            <div className="flex space-x-2 justify-center">
               {/* phase 1  */}
               <div>
                 <div className="bg-phase-100 w-64 px-2.5 py-3 rounded-lg ml-2">
@@ -172,8 +190,8 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                 <div className="py-3 px-2.5">
                   Next Step
                 </div>
-                <Step number={2} title='Agreement Signed' filled={client.agreementSigned || phase1Progress === phase1StepCount} filledColor={'textAcent-500'} color={'textAcent-500'}/>
-                <Step number={1} title='Deposit Pay' filled={client.depositPaid || phase1Progress === phase1StepCount} filledColor={'textAcent-500'} color={'textAcent-500'}/>
+                <Step number={2} title='Agreement Signed' filled={(client.agreementSigned || phase1Progress === phase1StepCount) ? 'full' : 'empty'} fillColor={'textAcent-500'} color={'textAcent-500'}/>
+                <Step number={1} title='Deposit Pay' filled={(client.depositPaid || phase1Progress === phase1StepCount) ? 'full' : 'empty'} fillColor={'textAcent-500'} color={'textAcent-500'}/>
               </div>
 
               {/* phase 2  */}
@@ -233,8 +251,9 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                 <Step
                   number={5}
                   title='Filed With IRS Date'
-                  filled={filedWithIRS || phase2Progress === phase2StepCount}
-                  filledColor={'textAcent-100'}
+                  filled={(filedWithIRS || phase2Progress === phase2StepCount) ? 'full' : IrsFilingStartedNotFinished ? 'half' : 'empty'}
+                  fillColor={'textAcent-100'}
+                  halfFillColor='phase-200'
                   color={'textAcent-100'}
                   clickable={client.quarters.length > 0 && totalCV > 0}
                   onClick={() => setQuartersVisible(true)}/>
@@ -242,29 +261,29 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                   number={4}
                   title='Doc for signature returned'
                   date={client.docForSignatureReturned ? dayjs(client.docForSignatureReturned, 'MM-DD-YYYY hh:mm a').format('MM/DD/YYYY') : ''}
-                  filled={client.docForSignatureReturned || phase2Progress === phase2StepCount}
-                  filledColor={'textAcent-100'}
+                  filled={(client.docForSignatureReturned || phase2Progress === phase2StepCount) ? 'full' : 'empty'}
+                  fillColor={'textAcent-100'}
                   color={'textAcent-100'}/>
                 <Step
                   number={3}
                   title='Doc Sent for signature'
                   date={client.docSentForSignature ? dayjs(client.docSentForSignature, 'MM-DD-YYYY').format('MM/DD/YYYY') : ''}
-                  filled={client.docSentForSignature || phase2Progress === phase2StepCount}
-                  filledColor={'textAcent-100'}
+                  filled={(client.docSentForSignature || phase2Progress === phase2StepCount) ? 'full' : 'empty'}
+                  fillColor={'textAcent-100'}
                   color={'textAcent-100'}/>
                 <Step
                   number={2}
                   title='Excel Team'
                   date={client.excelTeam ? dayjs(client.excelTeam, 'MM-DD-YYYY hh:mm a').format('MM/DD/YYYY') : ''}
-                  filled={client.excelTeam || phase2Progress === phase2StepCount}
-                  filledColor={'textAcent-100'}
+                  filled={(client.excelTeam || phase2Progress === phase2StepCount) ? 'full' : 'empty'}
+                  fillColor={'textAcent-100'}
                   color={'textAcent-100'}/>
                 <Step
                   number={1}
                   title='Docs Collected'
                   date={client.docsCollected ? dayjs(client.docsCollected, 'MM-DD-YYYY hh:mm a').format('MM/DD/YYYY') : ''}
-                  filled={client.docsCollected || phase2Progress === phase2StepCount}
-                  filledColor={'textAcent-100'}
+                  filled={(client.docsCollected || phase2Progress === phase2StepCount) ? 'full' : 'empty'}
+                  fillColor={'textAcent-100'}
                   color={'textAcent-100'}/>
               </div>
 
@@ -372,7 +391,7 @@ const QuarterModal = ({ quarters, isOpen, onClose }: {quarters: Client['quarters
     <div>
       {isOpen && (
         <div className="absolute top-0 left-0 justify-center pl-44 flex  font-sans z-50 items-center h-screen w-screen bg-opacity-20">
-          <div className="bg-white w-[900px] h-[762px] rounded-lg max-h-[90vh] border border-black-500">
+          <div className="bg-white w-[960px] h-[762px] rounded-lg max-h-[90vh] border border-black-500">
             {/* header  */}
             <div className="flex justify-between items-center px-2.5 pt-5 font-open-sans ">
               <div className="font-semibold font-lg">IRS filing progress by Quarter</div>
