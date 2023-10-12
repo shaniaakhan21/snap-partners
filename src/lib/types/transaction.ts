@@ -31,6 +31,7 @@ export interface Client {
   quarters: {quarter: string, year: string, amount: string, dateFiled: string}[];
   signupDate: string,
   totalCV: number,
+  filedCV: number,
   status: 'active' | 'cancelled'
 }
 
