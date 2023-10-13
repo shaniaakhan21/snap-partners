@@ -114,12 +114,13 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
   let phase3Progress = 0
 
   const { totalCV, filedCV } = client
+  const { payouts } = client.payout
   const totalPCV = totalCV * 0.4
   const filedPCV = filedCV * 0.4
   const phase3TotalPCV = filedPCV
-  const phase3FiledPCV = 0 // TODO will be implemented
+  const phase3FiledCV = Array.isArray(payouts) ? payouts.reduce((prev, curr) => prev + curr.amount, 0) : 0
+  const phase3FiledPCV = phase3FiledCV * 0.4
   const phase3TotalCV = filedCV
-  const phase3FiledCV = 0 // TODO will be implemented
   const IrsFilingStartedNotFinished = filedCV > 0 && filedCV !== totalCV
 
   return (
@@ -312,7 +313,6 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                     </div>
                     <div className='flex flex-col'>
                       <div style={{ flex: 1 }}> {phase3Progress === phase3StepCount ? `$${NumberUtils.formatNumberWithCommas(phase3TotalPCV.toFixed(2))}` : ''}</div>
-                      {/* <div className='text-xs font-normal'>MM/DD/YYYY</div> */}
                     </div>
                   </div>
                   <div className=" mt-1">
@@ -339,7 +339,20 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                 </div>
                 <SeparatorLine />
                 <div className="py-3 px-2.5">
-                  <div>Coming Soon...</div>
+                  <p>Payouts</p>
+                  <div className='mt-2'>
+                    {
+                      Array.isArray(payouts) && payouts.map((payout, idx) =>
+                        <Step key={`phase3-payout-${idx}`}
+                          number={idx + 1}
+                          title={`$${NumberUtils.formatNumberWithCommas(payout.amount.toFixed(2))}`}
+                          filled={'full'}
+                          fillColor={'textAcent-200'}
+                          date={payout.date}
+                          color={''}
+                        />)
+                    }
+                  </div>
                 </div>
               </div>
             </div>

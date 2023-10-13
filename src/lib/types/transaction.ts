@@ -16,6 +16,11 @@ export interface ITransaction {
   time: string;
 }
 
+export interface Payout {
+  amount: number | null;
+  date: string | null
+}
+
 export interface Client {
   phase: number;
   email: string;
@@ -32,7 +37,12 @@ export interface Client {
   signupDate: string,
   totalCV: number,
   filedCV: number,
-  status: 'active' | 'cancelled'
+  status: 'active' | 'cancelled',
+  payout: {
+    clientId: number;
+    payouts: Payout[] | null;
+    remainingPayout: number | null;
+  }
 }
 
 export interface LevelledClient {
