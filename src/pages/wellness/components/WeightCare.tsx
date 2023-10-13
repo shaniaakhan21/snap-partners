@@ -61,7 +61,7 @@ const WeightCare = ({ isLoggedIn, referralCode }) => {
   useEffect(() => {
     const getNmiVars = async () => {
       if (isLoggedIn) {
-        const token = localStorage.getItem('access_token')
+        const token = localStorage.getItem('accessToken')
         axios.get('/api/snap/getWeightLossFields',
           {
             headers: {
