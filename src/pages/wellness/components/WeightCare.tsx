@@ -7,8 +7,10 @@ import ProgramCardList from './ProgramCardList'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import Router from 'next/router'
+import { useAuthStore } from 'lib/stores'
 
 const WeightCare = ({ isLoggedIn, referralCode }) => {
+  const { auth } = useAuthStore()
   const [nmiVariables, setNmiVariables] = useState({
     order_description: '',
     hash: ''
@@ -61,11 +63,10 @@ const WeightCare = ({ isLoggedIn, referralCode }) => {
   useEffect(() => {
     const getNmiVars = async () => {
       if (isLoggedIn) {
-        const token = localStorage.getItem('accessToken')
         axios.get('/api/snap/getWeightLossFields',
           {
             headers: {
-              Authorization: `Bearer ${token}`
+              Authorization: `Bearer ${auth.accessToken}`
             }
           })
           .then((result) => {
@@ -76,7 +77,7 @@ const WeightCare = ({ isLoggedIn, referralCode }) => {
       }
     }
     getNmiVars()
-  }, [isLoggedIn])
+  }, [isLoggedIn, auth])
   return (
     <div className='mx-4 lg:mx-20 sm:mt-20'>
       <form method="POST" action="https://secure.networkmerchants.com/cart/cart.php" id="productTabs">
