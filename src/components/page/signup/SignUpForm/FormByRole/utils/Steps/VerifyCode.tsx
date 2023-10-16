@@ -190,7 +190,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
     return (
       <div className='flex justify-center items-center h-[85vh]'>
         <form className='max-w-sm mt-6 text-center' onSubmit={handleSubmitPhone(onSubmitUpdatePhone)}>
-          <span className='text-4xl font-bold'>Verify Phone</span>
+          <span className='text-4xl font-bold text-gray-800'>Verify Phone</span>
           <p className='text-gray-500 mt-3'>
           Code is Sent to <span className='font-bold text-black'>{userTrack.userInfo.phone}</span>
           </p>
@@ -223,7 +223,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
   return (
     <div className='flex justify-center items-center h-[85vh]'>
       <form className='max-w-sm mt-6 text-center' onSubmit={handleSubmitVerifyCode(onSubmitVerifyCode)}>
-        <span className='text-4xl font-bold'>Verify Phone</span>
+        <span className='text-4xl font-bold text-gray-800'>Verify Phone</span>
         <p className='text-gray-500 mt-3'>
           Code is Sent to <span className='font-bold text-black'>{userTrack.userInfo.phone}</span>
         </p>
@@ -246,12 +246,12 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
         </div>
 
         <div className='mt-4'>
-          <p className='font-bold'>
+          <p className='font-bold text-gray-400'>
                 Didn’t recieve the code? {' '}
             <button
               type='button'
               onClick={sendSMSCode}
-              className='text-primary-500 font-medium'
+              className='text-primary-500 font-medium '
             > Send Again
             </button>
           </p>

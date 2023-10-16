@@ -3,146 +3,109 @@ import { Page, ReactNode } from 'lib/types'
 import { APP_INFO } from 'config/appInfo'
 import { getLocalStorage } from 'lib/utils/localStorage'
 import DashboardLayout from 'layouts/private/Dashboard'
-import ReactDataGrid from '@inovua/reactdatagrid-community'
 import '@inovua/reactdatagrid-community/index.css'
-import { ITransaction } from 'lib/types/transaction'
 import { useEffect, useState } from 'react'
+import ErcModal from 'lib/modals/ErcModal'
+import PersonalClientsTable from 'components/page/erc/PersonalClientsTable'
+import TeamClientsTable from 'components/page/erc/TeamClientsTable'
+import TableHeader from 'components/page/erc/TableHeader'
+import PersonListTable from 'components/page/erc/PersonListTable'
+import ShowDetailedTables from 'components/page/erc/ShowDetailedTables'
+import { Spinner } from 'components/common/loaders'
+import { Client, LevelledClient } from 'lib/types/transaction'
+import dayjs from 'dayjs'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+dayjs.extend(customParseFormat) // Extend dayjs with the plugin. Required for Safari
 
 const { SEO } = APP_INFO
-
-const columns = [
-  { name: 'id', header: 'ID', defaultFlex: 1, minWidth: 60 },
-  { name: 'createdAtUs', header: 'Signup Date', defaultFlex: 1, minWidth: 130 },
-  { name: 'business_name', header: 'Company', defaultFlex: 1, minWidth: 110 },
-  { name: 'name', header: 'Name', defaultFlex: 1, minWidth: 85 },
-  { name: 'email', header: 'Email', defaultFlex: 1, minWidth: 85 },
-  { name: 'phone', header: 'Phone', defaultFlex: 1, minWidth: 90 },
-  { name: 'signedAgreement', header: 'Signed Agreement', flex: 1, minWidth: 120 },
-  { name: 'depositPaid', header: 'Deposit Paid', flex: 1, minWidth: 110 },
-  { name: 'docCollection', header: 'Doc Collection', flex: 1, minWidth: 110 },
-  { name: 'excelTeam', header: 'Excel Team', flex: 1, minWidth: 110 },
-  { name: 'docsSentForSignature', header: 'Docs Sent For Signature', flex: 1, minWidth: 110 },
-  { name: 'docsSentForSignatureDateUs', header: 'Docs Sent For Signature Date', flex: 1, minWidth: 110 },
-  { name: 'filledWithIRS', header: 'Filed with IRS?', flex: 1, minWidth: 110 },
-  { name: 'filledWithIRSDateUs', header: 'Filed with IRS Date', flex: 1, minWidth: 110 },
-  { name: 'paid', header: 'Paid', flex: 1, minWidth: 80 },
-  { name: 'paidDateUs', header: 'Paid Date', flex: 1, minWidth: 120 },
-  { name: 'commission', header: 'Commision', flex: 1, minWidth: 130 }
-]
-
-const gridStyle = { minHeight: 550 }
-
-const filterValue = [
-  { name: 'description', operator: 'startsWith', type: 'string', value: '' },
-  { name: 'amount', operator: 'startsWith', type: 'string', value: '' }
-]
-
-interface ITableTransactionsProps {
-  transactions: ITransaction[]
-}
-
-export const TableTransactions = ({ transactions }: ITableTransactionsProps) => {
-  return (
-    <ReactDataGrid
-      idProperty="id"
-      columns={columns}
-      dataSource={transactions}
-      sortable={true}
-      defaultFilterValue={filterValue}
-      style={gridStyle}
-      defaultLimit={10}
-      pagination
-    />
-  )
-}
-
-const columnsClient = [
-  { name: 'level', header: 'Level', defaultFlex: 1, minWidth: 150 },
-  { name: 'totalClients', header: 'Total Clients', defaultFlex: 1, minWidth: 150 },
-  { name: 'registereds', header: '# Registered', defaultFlex: 1, minWidth: 150 },
-  { name: 'signedAgreements', header: '# Signed Agreements', defaultFlex: 1, minWidth: 220 },
-  { name: 'depositPaids', header: '# Deposits Paid', defaultFlex: 1, minWidth: 150 },
-  { name: 'docCollections', header: '# Doc Collections', defaultFlex: 1, minWidth: 150 },
-  { name: 'excelTeams', header: '# Excel Teams', flex: 1, minWidth: 200 },
-  { name: 'docsSentForSignatures', header: '# Docs Sent for Signature', flex: 1, minWidth: 220 },
-  { name: 'filleds', header: '# Filed', flex: 1, minWidth: 130 },
-  { name: 'paids', header: '# Paid?', flex: 1, minWidth: 220 },
-  { name: 'totalCommissions', header: 'Total Commission', flex: 1, minWidth: 220 }
-]
-
-export const TableClientTransactions = ({ transactions }: ITableTransactionsProps) => {
-  return (
-    <ReactDataGrid
-      idProperty="id"
-      columns={columnsClient}
-      dataSource={transactions}
-      sortable={true}
-      defaultFilterValue={filterValue}
-      style={gridStyle}
-      defaultLimit={10}
-      pagination
-    />
-  )
-}
+const CLIENT_PAGE_LIMIT = 10
 
 const ErcreferralsPage: Page = () => {
-  const [transactions, setTransactions] = useState([])
-  const [transactionsClient, setTransactionsClient] = useState([])
-  const [monthSelected, setMonthSelected] = useState(new Date().getMonth()) // 0-11
+  const [personalClients, setPersonalClients] = useState<Client[]>([])
+  const [totalClientCount, setTotalClientCount] = useState(0)
+  const [personalClientsLoading, setPersonalClientsLoading] = useState(false)
+  const [teamClients, setTeamClients] = useState<LevelledClient[]>([])
+  const [teamClientsLoading, setTeamClientsLoading] = useState(false)
+  const [selectedLevel, setSelectedLevel] = useState(-1)
+  const [monthSelected, setMonthSelected] = useState(new Date().getMonth())
   const [yearSelected, setYearSelected] = useState(new Date().getFullYear())
+  const [selectedIBO, setSelectedIBO] = useState<{
+    id: number;
+    name: string;
+    lastname: string;
+    clients: Client[];
+  }>(null)
+  const [selectedClient, setSelectedClient] = useState(null)
 
-  const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+  useEffect(() => {
+    setSelectedIBO(null)
+  }, [selectedLevel, monthSelected, yearSelected])
 
   const years = []
   for (let i = new Date().getFullYear(); i >= 2022; i--) {
     years.push(i)
   }
 
-  useEffect(() => {
-    (async function () {
-      try {
-        const token = getLocalStorage('accessToken')
+  const getPersonalClients = async (page = 1) => {
+    try {
+      setPersonalClientsLoading(true)
+      const token = getLocalStorage('accessToken')
+      // TODO
+      const res = await fetch('/api/erc/getTable', {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${token}` }
+      })
+      const data = await res.json()
+      setPersonalClients(data)
+      console.log({ clientsPersonal: data })
+      if (page === 1) setTotalClientCount(data.length)
+    } catch (error) {
+      // ignore
+      console.log('error on personal clients ', { error })
+    } finally {
+      setPersonalClientsLoading(false)
+    }
+  }
 
-        const res = await fetch('/api/erc/getTable', {
+  const getTeamClients = async () => {
+    try {
+      setSelectedIBO(null)
+      setSelectedLevel(-1)
+      setTeamClientsLoading(true)
+      const token = getLocalStorage('accessToken')
+      const res = await fetch(
+        `/api/erc/getTableClients?month=${
+          monthSelected + 1
+        }&year=${yearSelected}`,
+        {
           method: 'GET',
           headers: { Authorization: `Bearer ${token}` }
-        })
+        }
+      )
+      const data = await res.json()
+      console.log({ clientsTeam: data })
+      setTeamClients(data)
+    } catch (e) {
+      // ignore
+      console.log('error on team clients ', { error: e })
+    } finally {
+      setTeamClientsLoading(false)
+    }
+  }
 
-        const data = await res.json()
-
-        setTransactions(data)
-      } catch (e) {
-
-      }
-    })()
+  useEffect(() => {
+    getPersonalClients()
   }, [])
 
   useEffect(() => {
-    (async function () {
-      try {
-        const token = getLocalStorage('accessToken')
-        const res = await fetch(`/api/erc/getTableClients?month=${monthSelected + 1}&year=${yearSelected}`, {
-          method: 'GET',
-          headers: { Authorization: `Bearer ${token}` }
-        })
-
-        const data = await res.json()
-
-        setTransactionsClient(data)
-      } catch (e) {
-
-      }
-    })()
+    getTeamClients()
   }, [monthSelected, yearSelected])
 
   return (
     <>
-      <span className='text-2xl font-bold'>Your Personal Clients</span> <br /><br />
-
       <div id="cro-erc-process">
-        <img src="https://snapdeliveredteam.com/images/j-logo.png" />
-        <div>
-          <h1>The ERC Process has 3 Phases</h1>
+        <div className="">
+          <h1>The ERC Process has 3 Phases that trigger payout</h1>
           <div>
             <ul>
               <li>Phase 1</li>
@@ -159,51 +122,49 @@ const ErcreferralsPage: Page = () => {
           </div>
         </div>
       </div>
-
-      <div id="table1erc">
-        <TableTransactions transactions={transactions} />
+      <ErcModal client={selectedClient} isOpen={Boolean(selectedClient)} onClose={() => setSelectedClient(null)} />
+      <div id="table1erc" className="">
+        <div className="flex flex-row justify-between pb-2 text-lg font-sans font-semibold text-gray-800">
+          Your Personal Clients
+          {
+            personalClientsLoading && <Spinner />
+          }
+        </div>
+        <PersonalClientsTable
+          clients={personalClients}
+          totalClientCount={totalClientCount}
+          toggleModal={setSelectedClient}
+        />
+        <TableHeader
+          loading={teamClientsLoading}
+          tableName="Your Team Clients"
+          setMonthSelected={setMonthSelected}
+          setYearSelected={setYearSelected}
+        />
+        <div className="text-center">
+          <TeamClientsTable
+            clients={teamClients}
+            onSelectLevel={setSelectedLevel}
+            // toggleTable={toggleTables}
+          />
+        </div>
       </div>
-      <br /><br />
-      <span className='text-2xl font-bold'>Your Team Clients</span>
-
-      <select
-        id='legalType'
-        name='legalType'
-        className='ml-5 cursor-pointer relative xs:mr-2 pl-2 pr-12 py-0 xs:py-1 my-2 bg-[rgba(255,255,255,.13)] rounded-md border border-solid border-black outline-none appearance-none leading-8'
-        placeholder='User Rank'
-        onChange={(current) => { setMonthSelected(parseInt(current.target.value)) }}
-      >
-        {month.map((m, i) => {
-          return (
-            <option key={i} selected={(new Date().getMonth() === i)} value={i}>
-              {m}
-            </option>
-          )
-        })
-        }
-      </select>
-
-      <select
-        id='legalType'
-        name='legalType'
-        className='ml-5 cursor-pointer relative xs:mr-2 pl-2 pr-12 py-0 xs:py-1 my-2 bg-[rgba(255,255,255,.13)] rounded-md border border-solid border-black outline-none appearance-none leading-8'
-        placeholder='User Rank'
-        onChange={(current) => { setYearSelected(parseInt(current.target.value)) }}
-      >
-        {years.map((y, i) => {
-          return (
-            <option key={i} selected={(new Date().getFullYear() === y)} value={y}>
-              {y}
-            </option>
-          )
-        })
-        }
-      </select>
-
-      <br /><br />
-      <div className='text-center'>
-        <TableClientTransactions transactions={transactionsClient} />
-      </div>
+      {selectedLevel > -1 && (
+        <div id="table1erc">
+          <TableHeader
+            tableName={'Team Level Report' + (selectedLevel > 0 ? ` (level-${selectedLevel === 6 ? '6+' : selectedLevel})` : '')}
+          />
+          <ShowDetailedTables onSelectIBO={setSelectedIBO} levelledClient={teamClients[selectedLevel - 1]} />
+        </div>
+      )}
+      {selectedIBO && (
+        <div id="table1erc">
+          <TableHeader
+            tableName={`${selectedIBO?.name} ${selectedIBO?.lastname}`}
+          />
+          <PersonListTable ibo={selectedIBO} />
+        </div>
+      )}
     </>
   )
 }

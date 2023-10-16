@@ -22,6 +22,7 @@ export interface WorkingLegs {
   [key: string]: {
     rate: number;
     percentage: number;
+    name: string
   };
 }
 export interface GV {

@@ -18,7 +18,7 @@ interface MonthlyProductionData {
   erc: CountData;
 }
 
-const MonthlyProduction = () => {
+const MonthlyProduction = ({ userId }) => {
   const [data, setData] = useState<MonthlyProductionData>()
 
   useEffect(() => {
@@ -27,7 +27,8 @@ const MonthlyProduction = () => {
       const response = await axios.get('/api/reports/getMonthlyProduction', {
         headers: {
           Authorization: `Bearer ${token}`
-        }
+        },
+        params: userId ? { userId } : {}
       })
       setData(response.data)
     })()

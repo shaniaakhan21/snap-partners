@@ -42,10 +42,11 @@ const timelineMap = {
 
 interface CommissionsProps{
   currentRank: Rank
+  userId : number | null
 }
 
 export default function Commissions (props: CommissionsProps) {
-  const { currentRank } = props
+  const { currentRank, userId } = props
   let rankKey: keyof Commission = 'manager'
   switch (currentRank) {
   case 'Manager': {
@@ -77,7 +78,8 @@ export default function Commissions (props: CommissionsProps) {
       const response = await axios.get('/api/reports/getEstimatedCommissions', {
         headers: {
           Authorization: `Bearer ${token}`
-        }
+        },
+        params: userId ? { id: userId } : {}
       })
       setCommissionData(response.data)
     })()
@@ -132,10 +134,10 @@ export default function Commissions (props: CommissionsProps) {
           </thead>
           <tbody>
             <tr>
-              <td className='text-sm'>${selectedData.manager}</td>
-              <td className='text-sm'>${selectedData.supervisor}</td>
-              <td className='text-sm'>${selectedData.director}</td>
-              <td className='text-sm'>${selectedData.executive}</td>
+              <td className='text-sm'>${selectedData?.manager}</td>
+              <td className='text-sm'>${selectedData?.supervisor}</td>
+              <td className='text-sm'>${selectedData?.director}</td>
+              <td className='text-sm'>${selectedData?.executive}</td>
             </tr>
           </tbody>
         </table>
