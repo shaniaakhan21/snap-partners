@@ -70,12 +70,18 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
       return
     }
 
-    const redirectToWellness = getLocalStorage('redirectToWellness')
-    const redirectToWellnessReferralCode = getLocalStorage('redirectToWellnessReferralCode')
-    if (redirectToWellness === true) {
-      removeLocalStorage('redirectToWellness')
-      removeLocalStorage('redirectToWellnessReferralCode')
-      window.location.href = `/wellness/${redirectToWellnessReferralCode}?access_token=${dataLogin.token}`
+    const { redirectToIntegrousWellness, referralCode } = router.query
+    if (redirectToIntegrousWellness === 'true') {
+      removeLocalStorage('redirectToIntegrousWellness')
+      removeLocalStorage('redirectToIntegrousReferralCode')
+      window.location.href = `/wellness?referralCode=${referralCode}`
+      return
+    }
+
+    const { redirectToWeightCare } = router.query
+    if (redirectToWeightCare === 'true') {
+      removeLocalStorage('redirectToWeightCare')
+      window.location.href = `/WeightCare?referralCode=${referralCode}`
       return
     }
 

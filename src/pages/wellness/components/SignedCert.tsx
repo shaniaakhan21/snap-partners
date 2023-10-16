@@ -1,8 +1,6 @@
-import { Checkbox, Modal } from '@mui/material'
-import { Button } from 'components/common/Button'
+import { Modal } from '@mui/material'
 import { Close as CrossIcon } from '@mui/icons-material'
 import ContractTextHead from './ContractTextHead'
-import EastIcon from '@mui/icons-material/East'
 
 interface ContractModalProps {
   open: boolean;

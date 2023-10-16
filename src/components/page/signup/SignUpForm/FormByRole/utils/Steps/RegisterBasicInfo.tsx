@@ -37,7 +37,7 @@ const capitalizeFirstLetter = (string) => {
 }
 
 const AskIfCorrect = (referralCode) => {
-  // lets return a promise here
+// lets return a promise here
   return new Promise((resolve, reject) => {
     let html = `
     You are signing up under <b>${referralCode}</b> is this correct?
@@ -208,16 +208,20 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
   const showSSNField = referralLink.role !== 'CUSTOMER' && referralLink.role !== 'integrousCustomer'
 
   const router = useRouter()
-
-  const loginURL = router.pathname === '/auth/signup-integrous'
-    ? '/auth/login-integrous'
-    : router.pathname === '/auth/signup-wellness'
-      ? '/auth/login-wellness'
-      : '/auth/login'
-
+  const referralCode = router.query.referralCode || 'IntegrousWellness'
+  const redirectToWeightCare = router.query.redirectToWeightCare === 'true'
+  const redirectToIntegrousWellness = router.query.redirectToIntegrousWellness === 'true'
+  const loginURL = router.pathname === '/auth/login-integrous'
+    ? `/auth/login-integrous?referralCode=${referralCode}`
+    : redirectToWeightCare
+      ? `/auth/login-wellness?referralCode=${referralCode}&redirectToWeightCare=true`
+      : redirectToIntegrousWellness
+        ? `/auth/login-wellness?referralCode=${referralCode}&redirectToIntegrousWellness=true`
+        : '/auth/login'
+  const maxWClass = router.pathname === '/auth/signup-wellness' ? 'max-w-2xl' : 'max-w-md'
   return (
     <>
-      <div className='max-w-md mx-auto w-full'>
+      <div className={`mx-auto w-full ${maxWClass}`}>
         <p className='font-bold text-4xl text-[#18203F]'>{signUpas}{' '}
           <span className='text-primary-500'>{roleText}</span>
         </p>
@@ -370,7 +374,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
               rulesForm={registerRulesConfig.ssn}
               isRequired={false}
               helpText='Optional field today but REQUIRED to receive commissions beyond $600'
-              style={ssnHelptextDesign}
+              style = {ssnHelptextDesign}
             />
           )}
 
@@ -415,11 +419,11 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             <BulletPagination stepToActivate='REGISTER_BASIC_INFO' />
 
             <Button type='submit' classes='w-full mt-4 text-sm bg-primary-500'>
-              Sign Up
+            Sign Up
             </Button>
 
             {role !== ROLES.IBO && <p className='mt-4'>
-              <span className='font-semibold'>Already have an account?</span>
+              <span className='font-semibold text-[#18203F]'>Already have an account?</span>
               <Link href={loginURL}>
                 <a className='text-textAcent-500 focus:underline'> Login.</a>
               </Link>

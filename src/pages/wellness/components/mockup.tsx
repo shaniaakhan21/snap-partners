@@ -1,7 +1,5 @@
 /* eslint-disable no-use-before-define */
 import * as React from 'react'
-import Card from '@mui/material/Card'
-// Material Kit 2 React components
 import SingleItem from './SingleItem'
 import axios from 'axios'
 import { Grid } from '@mui/material'
@@ -28,24 +26,31 @@ export default function MockUpItems ({ collectionId, referralCode }) {
     }
     Shopify()
   }, [])
+  const handleGuestLogin = () => {
+    localStorage.setItem('isGuest', 'true')
+    window.location.reload()
+  }
   return (
-    <Card
-      className='p-2 mx-0 lg:mx-3 mt-2 mb-2 border-none shadow-none'
-    >
-      <Grid container justifyContent="center" sx={{ textAlign: 'center' }}>
-        {products.map((product, index) => (
-          <Grid key={product.id} item xs={12} md={3}>
-            <SingleItem
-              image={product.node.variants.edges[0].node.image.src}
-              name={product.node.title}
-              price={`$${product.node.variants.edges[0].node.price.amount}`}
-              btnLabel="Add to Cart"
-              index={index}
-              referralCode={referralCode}
-            />
-          </Grid>
-        ))}
-      </Grid>
-    </Card>
+    <div className='w-full flex justify-center m-3 mt-20 xs:mt-32'>
+      <div
+        className='bg-gradient-to-b to-[#ce894b] from-[#e1d2c98a] xs:to-[#eda772ed] xs:from-[#fde8da7a] backdrop-blur-sm bg-opacity-10 flex w-9/12 p-2 xs:p-10 xs:rounded-lg shadow-orange-custom'
+      >
+        <Grid container justifyContent="center" sx={{ textAlign: 'center' }}>
+          {products.map((product, index) => (
+            <Grid key={product.id} item xs={12} md={3}>
+              <SingleItem
+                image={product.node.variants.edges[0].node.image.src}
+                name={product.node.title}
+                price={`$${product.node.variants.edges[0].node.price.amount}`}
+                btnLabel="Add to Cart"
+                index={index}
+                referralCode={referralCode}
+                onGuestLogin={handleGuestLogin}
+              />
+            </Grid>
+          ))}
+        </Grid>
+      </div>
+    </div>
   )
 }

@@ -13,16 +13,44 @@ type ErcModalProps = {
   onClose: () => void;
 };
 
-const Step = ({ number, title, date = undefined, filled, filledColor, color, clickable = false, onClick = null }) => {
+const SeparatorLine = () => (
+  <div className="flex justify-center">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="280"
+      height="2"
+      viewBox="0 0 280 2"
+      fill="none"
+    >
+      <path d="M0 1H280" stroke="#DADADA" />
+    </svg>
+  </div>
+)
+
+interface StepProps {
+  number: number;
+  title: string;
+  date?: string,
+  filled: 'half' | 'full' | 'empty';
+  fillColor: string;
+  halfFillColor?: string
+  color: string;
+  clickable?: boolean;
+  onClick?: () => void
+}
+
+const Step = (props: StepProps) => {
+  const { number, title, date = undefined, filled, fillColor, halfFillColor, color, clickable = false, onClick = null } = props
+
   return (
     <div
       onClick={clickable ? onClick : null}
       className='flex flex-row items-center justify-between mb-4 ml-2'
       style={{ cursor: clickable ? 'pointer' : 'default' }}>
       <div className='flex flex-row items-center'>
-        <div className={`${filled ? `bg-${filledColor}` : `border border-${color}`} mr-2 w-8 h-8 rounded-full flex justify-center items-center`}>
+        <div className={`w-8 h-8 rounded-full flex justify-center items-center ${filled === 'full' ? `bg-${fillColor}` : filled === 'half' ? `bg-${halfFillColor}` : `border border-${color}`}`}>
           {
-            filled
+            filled === 'full'
               ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -40,13 +68,15 @@ const Step = ({ number, title, date = undefined, filled, filledColor, color, cli
                 </svg>
               )
               : (
-                <span>
-                  {number}
-                </span>
+                <div>
+                  <span>
+                    {number}
+                  </span>
+                </div>
               )
           }
         </div>
-        <span className={`text-${filled ? filledColor : color}`} style={{ textDecoration: clickable ? 'underline' : 'default' }}>
+        <span className={`text-${filled === 'full' ? fillColor : color} mx-2`} style={{ textDecoration: clickable ? 'underline' : 'default' }}>
           {title}
         </span>
       </div>
@@ -83,15 +113,20 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
   // eslint-disable-next-line prefer-const
   let phase3Progress = 0
 
-  const totalCV = client.totalCV
-  const PCV = totalCV * 0.4
-  const phase2CV = PCV * 0.1
-  const phase3CV = PCV * 0.9
+  const { totalCV, filedCV } = client
+  const totalPCV = totalCV * 0.4
+  const filedPCV = filedCV * 0.4
+  const phase3TotalPCV = filedPCV
+  const phase3FiledPCV = 0 // TODO will be implemented
+  const phase3TotalCV = filedCV
+  const phase3FiledCV = 0 // TODO will be implemented
+  const IrsFilingStartedNotFinished = filedCV > 0 && filedCV !== totalCV
+
   return (
     <div>
       {isOpen && (
         <div className="absolute top-0 left-0 justify-center pl-44 flex  font-sans z-50 items-center h-screen w-screen bg-slate-800 bg-opacity-20 overflow-scroll">
-          <div className="bg-white w-[866px] h-[762px] rounded-lg max-h-[90vh] ">
+          <div className="bg-white w-[960px] h-[762px] rounded-lg max-h-[90vh] ">
             {/* header  */}
             <div>
               <div className="flex justify-between items-center px-2.5 pt-5 font-open-sans ">
@@ -120,10 +155,10 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
               </div>
             </div>
             {/* body  */}
-            <div className="flex space-x-5 justify-center">
+            <div className="flex space-x-2 justify-center">
               {/* phase 1  */}
               <div>
-                <div className="bg-phase-100 w-64 px-2.5 py-3 rounded-lg ml-2">
+                <div className="bg-phase-100 w-72 px-2.5 py-3 rounded-lg ml-2">
                   <div className="flex justify-between items-center pl-2">
                     <div>Phase 1 Progress</div>
                     <div className="text-xs font-bold">{phase1Progress}/{phase1StepCount}</div>
@@ -141,32 +176,27 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                     <div>Initial Payment</div>
                     <div>$200</div>
                   </div>
-                  <div className="flex justify-between text-xs">
+                  <div className='mt-5'>
+                    <SeparatorLine />
+                  </div>
+                  <div className="flex justify-between text-xs mt-2">
                     <div>CV = $500</div>
                     <div>{phase1Progress === phase1StepCount ? dayjs(client.signupDate, 'MM-DD-YYYY').format('MM/DD/YYYY') : ''}</div>
                   </div>
                 </div>
-                <div className="flex justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="256"
-                    height="2"
-                    viewBox="0 0 256 2"
-                    fill="none"
-                  >
-                    <path d="M0 1H255.333" stroke="#DADADA" />
-                  </svg>
+                <div className='mt-8'>
+                  <SeparatorLine />
                 </div>
                 <div className="py-3 px-2.5">
                   Next Step
                 </div>
-                <Step number={2} title='Agreement Signed' filled={client.agreementSigned || phase1Progress === phase1StepCount} filledColor={'textAcent-500'} color={'textAcent-500'}/>
-                <Step number={1} title='Deposit Pay' filled={client.depositPaid || phase1Progress === phase1StepCount} filledColor={'textAcent-500'} color={'textAcent-500'}/>
+                <Step number={2} title='Agreement Signed' filled={(client.agreementSigned || phase1Progress === phase1StepCount) ? 'full' : 'empty'} fillColor={'textAcent-500'} color={'textAcent-500'}/>
+                <Step number={1} title='Deposit Pay' filled={(client.depositPaid || phase1Progress === phase1StepCount) ? 'full' : 'empty'} fillColor={'textAcent-500'} color={'textAcent-500'}/>
               </div>
 
               {/* phase 2  */}
               <div>
-                <div className="bg-phase-200 w-64 px-2.5 py-3 rounded-lg ml-2">
+                <div className="bg-phase-200 w-72 px-2.5 py-3 rounded-lg ml-2">
                   <div className="flex justify-between items-center">
                     <div>Phase 2 Progress</div>
                     <div className="text-xs font-bold">{phase2Progress}/{phase2StepCount}</div>
@@ -188,49 +218,42 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                       </span>
                     </div>
                     <div className='flex flex-col'>
-                      <div style={{ flex: 1 }}> {phase2Progress === phase2StepCount ? `$${NumberUtils.formatNumberWithCommas(phase2CV.toFixed(2))}` : ''}</div>
+                      <div style={{ flex: 1 }}> {phase2Progress === phase2StepCount ? `$${NumberUtils.formatNumberWithCommas(totalPCV.toFixed(2))}` : ''}</div>
                       {/* <div className='text-xs font-normal'>MM/DD/YYYY</div> */}
                     </div>
                   </div>
-                  <div className="flex justify-center mt-1">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="256"
-                      height="2"
-                      viewBox="0 0 256 2"
-                      fill="none"
-                    >
-                      <path d="M0 1H255.333" stroke="#DADADA" />
-                    </svg>
+                  <div className="mt-1">
+                    <SeparatorLine />
                   </div>
-                  <div className="flex justify-between text-xs mt-1">
-                    <span>Your PCV for this account</span>
-                    <span>${NumberUtils.formatNumberWithCommas(PCV.toFixed(2))}</span>
-                  </div>
-                  <div className="flex justify-between text-xs font-bold">
-                    <span>Total CV for this account</span>
-                    <span>${NumberUtils.formatNumberWithCommas(totalCV.toFixed(2))}</span>
+                  <div className='flex flex-col'>
+                    <div className='text-xs flex flex-row justify-between mt-2'>
+                      <div className='flex-1' />
+                      <span className='font-semibold flex-1 text-right'>Potential</span>
+                      <span className='font-semibold flex-1 text-right'>Filed</span>
+                    </div>
+                    <div className='text-xs flex flex-row justify-between'>
+                      <span className='font-semibold flex-1 text-left'>PCV</span>
+                      <span className='flex-1 text-right'>${NumberUtils.formatNumberWithCommas(totalPCV.toFixed(2))}</span>
+                      <span className='flex-1 text-right'>${NumberUtils.formatNumberWithCommas(filedPCV.toFixed(2))}</span>
+                    </div>
+                    <div className='text-xs flex flex-row justify-between'>
+                      <span className='font-semibold flex-1 text-left'>Total CV</span>
+                      <span className='flex-1 text-right'>${NumberUtils.formatNumberWithCommas(totalCV.toFixed(2))}</span>
+                      <span className='flex-1 text-right'>${NumberUtils.formatNumberWithCommas(filedCV.toFixed(2))}</span>
+                    </div>
                   </div>
                 </div>
-                <div className="flex justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="256"
-                    height="2"
-                    viewBox="0 0 256 2"
-                    fill="none"
-                  >
-                    <path d="M0 1H255.333" stroke="#DADADA" />
-                  </svg>
-                </div>
+                <SeparatorLine />
+
                 <div className="py-3 px-2.5">
                   Next Step
                 </div>
                 <Step
                   number={5}
                   title='Filed With IRS Date'
-                  filled={filedWithIRS || phase2Progress === phase2StepCount}
-                  filledColor={'textAcent-100'}
+                  filled={(filedWithIRS || phase2Progress === phase2StepCount) ? 'full' : IrsFilingStartedNotFinished ? 'half' : 'empty'}
+                  fillColor={'textAcent-100'}
+                  halfFillColor='phase-200'
                   color={'textAcent-100'}
                   clickable={client.quarters.length > 0 && totalCV > 0}
                   onClick={() => setQuartersVisible(true)}/>
@@ -238,35 +261,35 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                   number={4}
                   title='Doc for signature returned'
                   date={client.docForSignatureReturned ? dayjs(client.docForSignatureReturned, 'MM-DD-YYYY hh:mm a').format('MM/DD/YYYY') : ''}
-                  filled={client.docForSignatureReturned || phase2Progress === phase2StepCount}
-                  filledColor={'textAcent-100'}
+                  filled={(client.docForSignatureReturned || phase2Progress === phase2StepCount) ? 'full' : 'empty'}
+                  fillColor={'textAcent-100'}
                   color={'textAcent-100'}/>
                 <Step
                   number={3}
                   title='Doc Sent for signature'
                   date={client.docSentForSignature ? dayjs(client.docSentForSignature, 'MM-DD-YYYY').format('MM/DD/YYYY') : ''}
-                  filled={client.docSentForSignature || phase2Progress === phase2StepCount}
-                  filledColor={'textAcent-100'}
+                  filled={(client.docSentForSignature || phase2Progress === phase2StepCount) ? 'full' : 'empty'}
+                  fillColor={'textAcent-100'}
                   color={'textAcent-100'}/>
                 <Step
                   number={2}
                   title='Excel Team'
                   date={client.excelTeam ? dayjs(client.excelTeam, 'MM-DD-YYYY hh:mm a').format('MM/DD/YYYY') : ''}
-                  filled={client.excelTeam || phase2Progress === phase2StepCount}
-                  filledColor={'textAcent-100'}
+                  filled={(client.excelTeam || phase2Progress === phase2StepCount) ? 'full' : 'empty'}
+                  fillColor={'textAcent-100'}
                   color={'textAcent-100'}/>
                 <Step
                   number={1}
                   title='Docs Collected'
                   date={client.docsCollected ? dayjs(client.docsCollected, 'MM-DD-YYYY hh:mm a').format('MM/DD/YYYY') : ''}
-                  filled={client.docsCollected || phase2Progress === phase2StepCount}
-                  filledColor={'textAcent-100'}
+                  filled={(client.docsCollected || phase2Progress === phase2StepCount) ? 'full' : 'empty'}
+                  fillColor={'textAcent-100'}
                   color={'textAcent-100'}/>
               </div>
 
               {/* phase 3  */}
               <div>
-                <div className="bg-phase-300 w-64 px-2.5 py-3 rounded-lg mr-4">
+                <div className="bg-phase-300 w-72 px-2.5 py-3 rounded-lg mr-4">
                   <div className="flex justify-between items-center">
                     <div>Phase 3 Progress</div>
                     <div className="text-xs font-bold">{phase3Progress}/{phase3StepCount}</div>
@@ -277,12 +300,6 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                         <div key={`phase2-progress-${idx}`} className={`${phase3Progress > idx ? 'bg-textAcent-200' : 'bg-white'} h-2 w-32 rounded-lg`} />
                       ))
                     }
-                    {/* <div className="bg-white h-2 w-32 rounded-lg"></div>
-                    <div className="bg-white h-2 w-32 rounded-lg"></div>
-                    <div className="bg-white h-2 w-32 rounded-lg"></div>
-                    <div className="bg-white h-2 w-32 rounded-lg"></div>
-                    <div className="bg-white h-2 w-32 rounded-lg"></div>
-                    <div className="bg-white h-2 w-32 rounded-lg"></div> */}
                   </div>
                 </div>
                 <div className="py-3 px-2.5">
@@ -294,41 +311,33 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                       </span>
                     </div>
                     <div className='flex flex-col'>
-                      <div style={{ flex: 1 }}> {phase3Progress === phase3StepCount ? `$${NumberUtils.formatNumberWithCommas(phase3CV.toFixed(2))}` : ''}</div>
+                      <div style={{ flex: 1 }}> {phase3Progress === phase3StepCount ? `$${NumberUtils.formatNumberWithCommas(phase3TotalPCV.toFixed(2))}` : ''}</div>
                       {/* <div className='text-xs font-normal'>MM/DD/YYYY</div> */}
                     </div>
                   </div>
-                  <div className="flex justify-center mt-1">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="256"
-                      height="2"
-                      viewBox="0 0 256 2"
-                      fill="none"
-                    >
-                      <path d="M0 1H255.333" stroke="#DADADA" />
-                    </svg>
+                  <div className=" mt-1">
+                    <SeparatorLine />
+
                   </div>
-                  <div className="flex justify-between text-xs mt-1">
-                    <span>Your PCV for this account</span>
-                    <span>${NumberUtils.formatNumberWithCommas(PCV.toFixed(2))}</span>
-                  </div>
-                  <div className="flex justify-between text-xs font-bold">
-                    <span>Total CV for this account</span>
-                    <span>${NumberUtils.formatNumberWithCommas(totalCV.toFixed(2))}</span>
+                  <div className='flex flex-col'>
+                    <div className='text-xs flex flex-row justify-between mt-2'>
+                      <div className='flex-1' />
+                      <span className='font-semibold flex-1 text-right'>Filed</span>
+                      <span className='font-semibold flex-1 text-right'>Received</span>
+                    </div>
+                    <div className='text-xs flex flex-row justify-between'>
+                      <span className='font-semibold flex-1 text-left'>PCV</span>
+                      <span className='flex-1 text-right'>${NumberUtils.formatNumberWithCommas(phase3TotalPCV.toFixed(2))}</span>
+                      <span className='flex-1 text-right'>${NumberUtils.formatNumberWithCommas(phase3FiledPCV.toFixed(2))}</span>
+                    </div>
+                    <div className='text-xs flex flex-row justify-between'>
+                      <span className='font-semibold flex-1 text-left'>Total CV</span>
+                      <span className='flex-1 text-right'>${NumberUtils.formatNumberWithCommas(phase3TotalCV.toFixed(2))}</span>
+                      <span className='flex-1 text-right'>${NumberUtils.formatNumberWithCommas(phase3FiledCV.toFixed(2))}</span>
+                    </div>
                   </div>
                 </div>
-                <div className="flex justify-center">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="256"
-                    height="2"
-                    viewBox="0 0 256 2"
-                    fill="none"
-                  >
-                    <path d="M0 1H255.333" stroke="#DADADA" />
-                  </svg>
-                </div>
+                <SeparatorLine />
                 <div className="py-3 px-2.5">
                   <div>Coming Soon...</div>
                 </div>
@@ -382,7 +391,7 @@ const QuarterModal = ({ quarters, isOpen, onClose }: {quarters: Client['quarters
     <div>
       {isOpen && (
         <div className="absolute top-0 left-0 justify-center pl-44 flex  font-sans z-50 items-center h-screen w-screen bg-opacity-20">
-          <div className="bg-white w-[866px] h-[762px] rounded-lg max-h-[90vh] border border-black-500">
+          <div className="bg-white w-[960px] h-[762px] rounded-lg max-h-[90vh] border border-black-500">
             {/* header  */}
             <div className="flex justify-between items-center px-2.5 pt-5 font-open-sans ">
               <div className="font-semibold font-lg">IRS filing progress by Quarter</div>
