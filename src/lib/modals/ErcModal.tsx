@@ -378,8 +378,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
 export default ErcModal
 
 const QuarterModal = ({ companyName, quarters, isOpen, onClose }: {companyName: string, quarters: Client['quarters'], isOpen: boolean, onClose: () => void}) => {
-  const mappedQuarters = quarters.map(q => ({ ...q, amount: q.amount ? 'Yes' : 'No', dateFiled: q.dateFiled ? dayjs(q.dateFiled, 'MM-DD-YYYY').format('MM/DD/YYYY') : 'Not yet available' })).reverse()
-
+  const mappedQuarters = quarters.map(q => ({ ...q, quarter: `Q${q.quarter}`, amount: q.amount ? 'Yes' : 'No', dateFiled: q.dateFiled ? dayjs(q.dateFiled, 'MM-DD-YYYY').format('MM/DD/YYYY') : 'Not yet available' }))
   const columns = [
     {
       name: 'year',
