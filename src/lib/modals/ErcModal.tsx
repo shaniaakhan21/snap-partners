@@ -443,6 +443,11 @@ const QuarterModal = ({ companyName, quarters, isOpen, onClose }: {companyName: 
               />
               {/* {quarters.map(renderQuarter)} */}
             </div>
+            <div className='mt-2'>
+              <p>
+                Note:  For privacy reasons, we are prohibited to share specific ERC amounts
+              </p>
+            </div>
           </div>
         </div>
       )}
