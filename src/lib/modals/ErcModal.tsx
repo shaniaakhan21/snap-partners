@@ -89,7 +89,8 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
   const [quartersVisible, setQuartersVisible] = useState(false)
   if (!client) return null
   const { totalCV, filedCV } = client
-  const { payouts, remainingPayout } = client.payout
+  const { payouts, remainingPayout, upfrontPayment } = client.payout
+  const initialPayment = 200
 
   const phase1StepCount = 2
   const phase2StepCount = 5
@@ -115,19 +116,22 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
   // eslint-disable-next-line prefer-const
   let phase3Progress = 0
 
-  const phase1AdvancePayment = 500
+  const phase1AdvanceCV = 500
 
   const totalPCV = totalCV * 0.4
   const filedPCV = filedCV * 0.4
   const phase3TotalPCV = filedPCV
-  const phase3FiledCV = Array.isArray(payouts) ? payouts.reduce((prev, curr) => prev + curr.amount, 0) : 0
+  const phase3FiledCV = Array.isArray(payouts) && payouts.length > 0 ? payouts.reduce((prev, curr) => prev + curr.amount, 0) + upfrontPayment + phase1AdvanceCV : 0
   const phase3FiledPCV = phase3FiledCV * 0.4
   const phase3TotalCV = filedCV
   const IrsFilingStartedNotFinished = filedCV > 0 && filedCV !== totalCV
+  const phase2Payment = filedPCV * 0.1
+  const phase3Payment = phase3FiledPCV * 0.9
 
+  // calculate phase 3 progress
   if (payouts.length > 0) {
     // if remaining amount is phase 1 advance payment then everything is paid
-    if (remainingPayout.toFixed(0) === phase1AdvancePayment.toString()) {
+    if (remainingPayout.toFixed(0) === phase1AdvanceCV.toString()) {
       phase3StepCount = payouts.length
     } else {
       phase3StepCount = payouts.length + 1
@@ -135,6 +139,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
   }
   phase3Progress = payouts.length
 
+  const allPhasesAreDone = phase3Progress === phase3StepCount && phase3Progress > 0
   return (
     <div>
       {isOpen && (
@@ -153,16 +158,25 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
               </div>
               <div className="flex px-2.5 py-5 justify-between items-center">
                 <div className='flex items-center space-x-5'>
-                  <span className="text-sm">Signup Date: {dayjs(client.signupDate, 'MM-DD-YYYY').format('MM/DD/YYYY')}</span>
-                  <span className="text-xs text-textAcent-500">{client.email}</span>
-                  <div className="text-xs text-textAcent-500">{client.phone}</div>
+                  <p className="text-sm">Signup Date: {dayjs(client.signupDate, 'MM-DD-YYYY').format('MM/DD/YYYY')}</p>
+                  <p className="text-xs text-textAcent-500">{client.email}</p>
+                  <p className="text-xs text-textAcent-500">{client.phone}</p>
+                  {
+                    allPhasesAreDone && (
+                      <p className='text-sm'>
+                        <span className='font-bold'>Final Payment: </span>
+                        ${NumberUtils.formatNumberWithCommas((initialPayment + phase2Payment + phase3Payment - initialPayment).toFixed(2))}
+                      </p>
+
+                    )
+                  }
                 </div>
                 <div>
                   <span className='text-black text-xs'>
                     Account Status:
                   </span>
                   <span className={`text-xs ${client.status === 'active' ? 'text-success-600' : 'text-textAcent-500'} font-bold`}>
-                    {client.status === 'active' ? ' Active' : ' Refunded/Cancelled'}
+                    {allPhasesAreDone ? 'Completed' : client.status === 'active' ? ' Active' : ' Refunded/Cancelled'}
                   </span>
                 </div>
               </div>
@@ -187,13 +201,13 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                 <div className="py-3 px-2.5">
                   <div className="flex justify-between text-lg font-semibold">
                     <div>Initial Payment</div>
-                    <div>$200</div>
+                    <div>${initialPayment}</div>
                   </div>
                   <div className='mt-5'>
                     <SeparatorLine />
                   </div>
                   <div className="flex justify-between text-xs mt-2">
-                    <div>CV = ${phase1AdvancePayment}</div>
+                    <div>CV = ${phase1AdvanceCV}</div>
                     <div>{phase1Progress === phase1StepCount ? dayjs(client.signupDate, 'MM-DD-YYYY').format('MM/DD/YYYY') : ''}</div>
                   </div>
                 </div>
@@ -231,7 +245,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                       </span>
                     </div>
                     <div className='flex flex-col'>
-                      <div style={{ flex: 1 }}> {phase2Progress === phase2StepCount ? `$${NumberUtils.formatNumberWithCommas((totalPCV * 0.1).toFixed(2))}` : ''}</div>
+                      <div style={{ flex: 1 }}> {phase2Progress === phase2StepCount ? `$${NumberUtils.formatNumberWithCommas((phase2Payment).toFixed(2))}` : ''}</div>
                     </div>
                   </div>
                   <div className="mt-1">
@@ -317,18 +331,17 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                 <div className="py-3 px-2.5">
                   <div className="flex justify-between text-lg font-semibold">
                     <div className='flex flex-col'>
-                      <span>Final Payment</span>
+                      <span>Phase 3 Payment</span>
                       <span className='text-xs font-normal italic'>
                         90% of PCV
                       </span>
                     </div>
                     <div className='flex flex-col'>
-                      <div style={{ flex: 1 }}> {phase3Progress === phase3StepCount ? `$${NumberUtils.formatNumberWithCommas((phase3FiledPCV * 0.9).toFixed(2))}` : ''}</div>
+                      <div style={{ flex: 1 }}> {phase3Progress === phase3StepCount ? `$${NumberUtils.formatNumberWithCommas((phase3Payment).toFixed(2))}` : ''}</div>
                     </div>
                   </div>
                   <div className=" mt-1">
                     <SeparatorLine />
-
                   </div>
                   <div className='flex flex-col'>
                     <div className='text-xs flex flex-row justify-between mt-2'>
@@ -436,12 +449,10 @@ const QuarterModal = ({ companyName, quarters, isOpen, onClose }: {companyName: 
                 columns={columns}
                 dataSource={mappedQuarters}
                 sortable={true}
-                // defaultFilterValue={filterValue}
                 style={gridStyle}
                 defaultLimit={10}
                 pagination={false}
               />
-              {/* {quarters.map(renderQuarter)} */}
             </div>
             <div className='mt-2'>
               <p>

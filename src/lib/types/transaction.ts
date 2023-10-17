@@ -42,6 +42,7 @@ export interface Client {
     clientId: number;
     payouts: Payout[] | null;
     remainingPayout: number | null;
+    upfrontPayment: number
   }
 }
 
