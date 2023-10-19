@@ -5,7 +5,7 @@ import InsuranceHeader from './insurance/insurance-header'
 import {
   Button
 } from '@mui/material'
-import states from './states'
+import states from '../data/states'
 import RegistrationForm from './insurance/registrationForm'
 const insurance = () => {
   const [selectedState, setSelectedState] = React.useState('')
