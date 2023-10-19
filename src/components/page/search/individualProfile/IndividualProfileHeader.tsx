@@ -81,7 +81,8 @@ function IndividualProfileHeader ({ body, setBody, profileData, userLevel }) {
         <li className={body === 'comissions' ? `${cname}-header-listItems listItems-active listItems-midItem` : `${cname}-header-listItems listItems-midItem`}
           onClick={() => { setBody('comissions') }}>comissions</li>
 
-        <li className={`${cname}-header-listItems listItems-midItem`}>transactions</li>
+        <li className={body === 'reports' ? `${cname}-header-listItems listItems-active listItems-midItem` : `${cname}-header-listItems listItems-midItem`}
+          onClick={() => { setBody('reports') }}>Reports</li>
 
         <li className={body === 'order' ? `${cname}-header-listItems listItems-active listItems-midItem` : `${cname}-header-listItems listItems-midItem`}
           onClick={() => setBody('order')}>Order</li>
