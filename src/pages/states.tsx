@@ -1,4 +1,4 @@
-const states = [
+const states: string[] = [
   'Alabama (Not Available)',
   'Alaska',
   'Arizona',
