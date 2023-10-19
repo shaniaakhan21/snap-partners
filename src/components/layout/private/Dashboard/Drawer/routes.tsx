@@ -178,6 +178,10 @@ export const globalRoutes = [
     label: 'Integrous Wellness'
   },
   {
+    to: '/snap-health-insurance',
+    label: 'Snap Health Insurance'
+  },
+  {
     to: '/WeightCare',
     label: 'Weight Care'
   }

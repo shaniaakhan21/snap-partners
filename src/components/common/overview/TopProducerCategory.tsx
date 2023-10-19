@@ -6,7 +6,7 @@ import Tab from '@mui/material/Tab'
 import Box from '@mui/material/Box'
 import { TopProducers } from './TopProducers'
 import { topProducers } from './mock'
-import { Icon, MenuItem, Select, Typography } from '@mui/material'
+import { MenuItem, Select, Typography } from '@mui/material'
 import { TabScrollButton, withStyles } from '@material-ui/core'
 import HiddenTabScrollButton from './HiddenTabScrollButton'
 import { getLocalStorage } from 'lib/utils/localStorage'
@@ -123,9 +123,16 @@ export default function TopProducerCategory () {
     setValue(event.target.value)
   }
 
+  function a11yProps (index) {
+    return {
+      id: `simple-tab-${index}`,
+      'aria-controls': `simple-tabpanel-${index}`
+    }
+  }
+
   return (
     <Box sx={{ width: '100%', padding: '10px' }}>
-      <div className='flex flex-row justify-between items-center'>
+      <div className='flex flex-row justify-between items-center mb-4'>
         <span className='text-sm sm:text-lg md:text-lg'>
           Global SNAP Top Producers
         </span>
@@ -133,13 +140,14 @@ export default function TopProducerCategory () {
           <select
             id='legalType'
             name='legalType'
-            className='cursor-pointer outline-none appearance-none rounded-md border border-solid border-primary-500 py-2 pl-2 pr-16 text-sm sm:text-base  bg-primary-500 text-white'
+            className='cursor-pointer outline-none appearance-none rounded-md border border-solid border-primary-600 py-2 pl-2 pr-14 text-sm sm:text-base bg-primary-500 text-white'
             placeholder='User Rank'
             onChange={(current) => { setYearSelected(parseInt(current.target.value)) }}
+            style={{ backgroundImage: 'linear-gradient(45deg, transparent 50%, #ffffff 50%), linear-gradient(135deg, #ffffff 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc' }}
           >
             {years.map((y, i) => {
               return (
-                <option className='bg-white text-black' key={i} selected={(new Date().getFullYear() === y)} value={y}>
+                <option className='text-black bg-white' key={i} selected={(new Date().getFullYear() === y)} value={y}>
                   {y}
                 </option>
               )
@@ -149,13 +157,14 @@ export default function TopProducerCategory () {
           <select
             id='legalType'
             name='legalType'
-            className='ml-5 cursor-pointer outline-none appearance-none rounded-md border border-solid border-primary-500 py-2 pl-2 pr-10 text-sm sm:text-base bg-primary-500 text-white'
+            className='ml-5 cursor-pointer outline-none appearance-none rounded-md border border-solid border-primary-600 bg-primary-500 text-white py-2 pl-2 pr-8 text-sm sm:text-base'
             placeholder='User Rank'
             onChange={(current) => { setMonthSelected(parseInt(current.target.value)) }}
+            style={{ backgroundImage: 'linear-gradient(45deg, transparent 50%, #ffffff 50%), linear-gradient(135deg, #ffffff 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc' }}
           >
             {month.map((m, i) => {
               return (
-                <option key={i} selected={(new Date().getMonth() === i)} value={i}>
+                <option className='text-black bg-white' key={i} selected={(new Date().getMonth() === i)} value={i}>
                   {m}
                 </option>
               )
@@ -164,7 +173,6 @@ export default function TopProducerCategory () {
           </select>
         </div>
       </div>
-      <br></br>
       <Tabs
         TabIndicatorProps={{ sx: { display: 'none' } }}
         value={subctegoryValue}
@@ -194,7 +202,7 @@ export default function TopProducerCategory () {
       <Select
         value={value}
         onChange={handleCategoryChange}
-        className='w-full text-white bg-primary-500'
+        className='w-full text-white bg-primary-500 border-primary-500'
         sx={{
           ...tabStyle,
           '& .MuiSelect-select': {
@@ -202,7 +210,8 @@ export default function TopProducerCategory () {
             paddingBottom: '10px',
             borderRadius: '8px',
             backgroundColor: '#DD4C37!important',
-            color: 'white'
+            color: 'white',
+            borderColor: '#DD4C37!important'
           },
           '& .MuiSvgIcon-root': {
             color: 'white',

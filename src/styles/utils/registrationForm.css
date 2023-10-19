@@ -1,0 +1,13 @@
+
+.custom-placeholder::placeholder {
+  color: black;
+}
+
+
+.bg-customred {
+  background-color: red!important;
+}
+
+.text-customred {
+  color: red;
+}
