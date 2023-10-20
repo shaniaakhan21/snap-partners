@@ -25,12 +25,13 @@
 
 .icon-input {
     position: relative;
+    left: 1%;
 }
 
 .icon-input input {
     padding-left: 30px;
     background: url('../../../public/static/ssn.png') no-repeat left center;
-    background-size: 20px 20px;
+
 }
 
 .icon-input-address {

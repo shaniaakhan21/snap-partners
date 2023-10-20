@@ -13,7 +13,11 @@ interface TINPopupProps {
 const TINPopup = ({ open, onClose }: TINPopupProps) => {
   const [certified, setCertified] = useState(false)
   const [socialSecurity, setSocialSecurity] = useState('')
+  const [dateOfBirth, setDateOfBirth] = useState<Date | null>(null)
+  const [address, setAddress] = useState('')
   const [socialSecurityError, setSocialSecurityError] = useState('')
+  const [dateOfBirthError, setDateOfBirthError] = useState('')
+  const [addressError, setAddressError] = useState('')
 
   const handleSocialSecurityChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
@@ -27,6 +31,41 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
     }
 
     setSocialSecurity(value)
+  }
+
+  const handleDateOfBirthChange = (date: Date | null) => {
+    setDateOfBirth(date)
+    setDateOfBirthError('')
+  }
+
+  const handleSubmit = () => {
+    // Validate all fields
+    let hasErrors = false
+
+    if (!socialSecurity || socialSecurity === '123456789') {
+      setSocialSecurityError('Please enter a valid Social Security number')
+      hasErrors = true
+    } else {
+      setSocialSecurityError('')
+    }
+
+    if (!dateOfBirth) {
+      setDateOfBirthError('Date of Birth is required')
+      hasErrors = true
+    } else {
+      setDateOfBirthError('')
+    }
+
+    if (!address) {
+      setAddressError('Address is required')
+      hasErrors = true
+    } else {
+      setAddressError('')
+    }
+
+    if (!hasErrors) {
+      onClose()
+    }
   }
   return (
     <Modal
@@ -51,19 +90,24 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
           </div>
           <br />
           <div className='flex flex-row w-full justify-between'>
-            <div className='w-[48%] p-4 border-2 rounded-lg border-slate-200 icon-input'>
-              <input
-                className="w-full outline-none"
-                placeholder="Social Security"
-                value={socialSecurity}
-                onChange={handleSocialSecurityChange}
-              />
-              {socialSecurityError && <div className="text-red-500">{socialSecurityError}</div>}
+            <div className='w-[48%] '>
+              <div className='p-4 border-2 rounded-lg border-slate-200 icon-input'>
+                <input
+                  className="w-full outline-none"
+                  placeholder="Social Security"
+                  value={socialSecurity}
+                  onChange={handleSocialSecurityChange}
+                  required
+                />
+              </div>
+              {socialSecurityError && <div className="ml-1 text-red-500">{socialSecurityError}</div>}
             </div>
             <div className='w-[48%] p-0 m-0 border-0 rounded-lg border-slate-200 outline-none'>
               <div className="calendar-input outline-none">
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DatePicker label="Date of Birth" className='outline-none'/>
+                  <DatePicker label="Date of Birth" value={dateOfBirth}
+                    onChange={handleDateOfBirthChange} className='outline-none'/>
+                  {dateOfBirthError && <div className="text-red-500">{dateOfBirthError}</div>}
                 </LocalizationProvider>
               </div>
             </div>
@@ -71,8 +115,14 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
           <br/>
           <div className='flex flex-row w-full justify-between p-4 border-2 rounded-lg border-slate-200'>
             <FmdGoodOutlinedIcon className='text-[#9196A0] mr-2'/>
-            <textarea className='w-full outline-none h-[150px]' placeholder='Address'></textarea>
+            <textarea
+              className="w-full outline-none h-[150px]"
+              placeholder="Address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            ></textarea>
           </div>
+          {addressError && <div className="text-red-500">{addressError}</div>}
           <br />
           <div className='w-full'>
             <FormControlLabel
@@ -93,6 +143,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
                   : 'bg-grey text-blackCustom'
               }`}
               disabled={!certified}
+              onClick={handleSubmit}
             >
                     Submit
               <East className='ml-1'/>
