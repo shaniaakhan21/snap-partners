@@ -104,7 +104,7 @@ const ErcReport = ({ userId }) => {
 
   return (
     <>
-      <div id="cro-erc-process">
+      <div id="cro-erc-process" style={{ marginLeft: 0, marginRight: 0 }}>
         <div className="">
           <h1>The ERC Process has 3 Phases that trigger payout</h1>
           <div>
@@ -124,7 +124,7 @@ const ErcReport = ({ userId }) => {
         </div>
       </div>
       <ErcModal client={selectedClient} isOpen={Boolean(selectedClient)} onClose={() => setSelectedClient(null)} />
-      <div id="table1erc" className="">
+      <div id="table1erc" className="" style={{ marginLeft: 0, marginRight: 0 }}>
         <div className="flex flex-row justify-between pb-2 text-lg font-sans font-semibold text-gray-800">
           Your Personal Clients
           {
@@ -151,7 +151,7 @@ const ErcReport = ({ userId }) => {
         </div>
       </div>
       {selectedLevel > -1 && (
-        <div id="table1erc">
+        <div id="table1erc" style={{ marginLeft: 0, marginRight: 0 }}>
           <TableHeader
             tableName={'Team Level Report' + (selectedLevel > 0 ? ` (level-${selectedLevel === 6 ? '6+' : selectedLevel})` : '')}
           />
@@ -159,7 +159,7 @@ const ErcReport = ({ userId }) => {
         </div>
       )}
       {selectedIBO && (
-        <div id="table1erc">
+        <div id="table1erc" style={{ marginLeft: 0, marginRight: 0 }}>
           <TableHeader
             tableName={`${selectedIBO?.name} ${selectedIBO?.lastname}`}
           />
