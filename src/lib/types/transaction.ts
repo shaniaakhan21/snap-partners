@@ -16,6 +16,11 @@ export interface ITransaction {
   time: string;
 }
 
+export interface Payout {
+  amount: number | null;
+  date: string | null
+}
+
 export interface Client {
   phase: number;
   email: string;
@@ -28,11 +33,17 @@ export interface Client {
   excelTeam: string;
   docSentForSignature: string;
   docForSignatureReturned: string;
-  quarters: {quarter: string, year: string, amount: string, dateFiled: string}[];
+  quarters: {quarter: number, year: number, amount: string, dateFiled: string}[];
   signupDate: string,
   totalCV: number,
   filedCV: number,
-  status: 'active' | 'cancelled'
+  status: 'active' | 'cancelled',
+  payout: {
+    clientId: number;
+    payouts: Payout[] | null;
+    remainingPayout: number | null;
+    upfrontPayment: number
+  }
 }
 
 export interface LevelledClient {

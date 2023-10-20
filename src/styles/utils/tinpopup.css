@@ -1,0 +1,43 @@
+.calendar-input {
+    width: 100%;
+}
+
+.calendar-input .MuiTextField-root {
+    width: 100%;
+}
+
+.calendar-input .MuiInputBase-formControl {
+    display: flex;
+}
+
+
+.calendar-input .MuiInputBase-formControl:hover {
+    border: none!important;
+}
+
+.calendar-input fieldset {
+    border: 2px solid rgb(226 232 240);
+}
+
+.calendar-input label{
+    color: #9196a09e;
+}
+
+.icon-input {
+    position: relative;
+}
+
+.icon-input input {
+    padding-left: 30px;
+    background: url('../../../public/static/ssn.png') no-repeat left center;
+    background-size: 20px 20px;
+}
+
+.icon-input-address {
+    position: relative;
+}
+
+.icon-input-address textarea {
+    padding-left: 30px;
+    background: url('../../../public/static/address.png') no-repeat left center;
+}
