@@ -149,6 +149,14 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
             <div>
               <div className="flex justify-between items-center px-2.5 pt-5 font-open-sans ">
                 <p className="font-semibold font-lg">{client.companyName}</p>
+                {
+                  allPhasesAreDone && (
+                    <p className='text-lg'>
+                      <span className='font-bold'>Final Payment: </span>
+                        ${NumberUtils.formatNumberWithCommas((phase2Payment + phase3Payment).toFixed(2))}
+                    </p>
+                  )
+                }
                 <div
                   className="cursor-pointer text-2xl w-8 h-8"
                   onClick={() => onClose()}
@@ -161,15 +169,6 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                   <p className="text-sm">Signup Date: {dayjs(client.signupDate, 'MM-DD-YYYY').format('MM/DD/YYYY')}</p>
                   <p className="text-xs text-textAcent-500">{client.email}</p>
                   <p className="text-xs text-textAcent-500">{client.phone}</p>
-                  {
-                    allPhasesAreDone && (
-                      <p className='text-sm'>
-                        <span className='font-bold'>Final Payment: </span>
-                        ${NumberUtils.formatNumberWithCommas((initialPayment + phase2Payment + phase3Payment - initialPayment).toFixed(2))}
-                      </p>
-
-                    )
-                  }
                 </div>
                 <div>
                   <span className='text-black text-xs'>
