@@ -5,14 +5,14 @@ import { ChangeEvent, useState } from 'react'
 import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs'
 import { IAuth } from 'lib/stores/Auth'
 interface TINPopupProps {
-    auth: IAuth
+    // auth: IAuth
     open: boolean;
-    showSuccessPop: () => (success: boolean) => void;
-    showFailedPop: () => void;
+    // showSuccessPop: () => (success: boolean) => void;
+    // showFailedPop: () => void;
     onClose: () => void;
 }
 
-const TINPopup = ({ open, onClose, showSuccessPop, showFailedPop, auth }: TINPopupProps) => {
+const TINPopup = ({ open, onClose }: TINPopupProps) => {
   const getSSN = '123654752'
   const [certified, setCertified] = useState(false)
   const [socialSecurity, setSocialSecurity] = useState('')
@@ -95,9 +95,9 @@ const TINPopup = ({ open, onClose, showSuccessPop, showFailedPop, auth }: TINPop
 
     if (!hasErrors) {
       onClose()
-      if (socialSecurity !== getSSN) {
-        showFailedPop()
-      }
+      // if (socialSecurity !== getSSN) {
+      //   showFailedPop()
+      // }
     }
   }
   return (

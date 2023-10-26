@@ -98,55 +98,57 @@ const DashboardOverViewPage: Page = () => {
 
   return (
     <>
-      <>
-        <div className="grid grid-cols-1 lg:grid-cols-2">
+      <div className="grid grid-cols-1 lg:grid-cols-2">
+        <div>
           <div>
-            <div>
-              <RankComponent data={rankData} />
-            </div>
-            <div className='mt-4'>
-              <TierTable />
-            </div>
-            <div className='mt-4'>
-              <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} userId={null}/>
-            </div>
-            <div className='mt-4'>
-              <PVComponentSnap />
-            </div>
-            <div className='mt-4'>
-              <RewardsProgram />
-            </div>
-            <div className='mt-4'>
-              <GrowthSummary userId={null} />
-            </div>
-            <div className='mt-4 bg-white rounded-lg'>
-              <MonthlySubscription userId={ null } />
-            </div>
-            <div className='mt-4 bg-white rounded-lg'>
-              <MonthlyProduction userId={null} />
-            </div>
+            <RankComponent data={rankData} />
           </div>
-          <div className='ml-4'>
-            <Event />
-            <div className='mt-4 bg-white rounded-lg'>
-              <TopProducerCategory />
-            </div>
-            <div className='mt-4'>
-              <Certification />
-            </div>
+          <div className='mt-4'>
+            <TierTable />
+          </div>
+          <div className='mt-4'>
+            <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} userId={null}/>
+          </div>
+          <div className='mt-4'>
+            <PVComponentSnap />
+          </div>
+          <div className='mt-4'>
+            <RewardsProgram />
+          </div>
+          <div className='mt-4'>
+            <GrowthSummary userId={null} />
+          </div>
+          <div className='mt-4 bg-white rounded-lg'>
+            <MonthlySubscription userId={ null } />
+          </div>
+          <div className='mt-4 bg-white rounded-lg'>
+            <MonthlyProduction userId={null} />
           </div>
         </div>
-        <div className='col-span-12 mt-4'>
-          <Referrals rankData={rankData} />
+        <div className='ml-4'>
+          <Event />
+          <div className='mt-4 bg-white rounded-lg'>
+            <TopProducerCategory />
+          </div>
+          <div className='mt-4'>
+            <Certification />
+          </div>
         </div>
-      </>
+      </div>
+      <div className='col-span-12 mt-4'>
+        <Referrals rankData={rankData} />
+      </div>
       {!isCustomer && (
         <ContractModal open={openModal} onClose={handleCloseModal} />)
       }
-      <TINPopup open={openModalTIN} onClose={handleCloseModalTIN} showFailedPop={() => setShowFailedPop(false)} auth={undefined} showSuccessPop={function (): (success: boolean) => void {
-        throw new Error('Function not implemented.')
-      } } />
-
+      <TINPopup open={openModalTIN} onClose={handleCloseModalTIN}/>
+      <CommonPopup
+        image="/static/success.svg"
+        title="Success"
+        description="Snap has updated your profile"
+        buttonText="Back to Home"
+        svgId="popupImage-success"
+        onClose={handleClose} open={open} />
       <CommonPopup
         image="/static/error.svg"
         title="Failed"
