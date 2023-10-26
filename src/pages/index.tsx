@@ -72,6 +72,10 @@ const HomePage: Page = () => {
           bank_information: data.bank_information,
           level: data?.level,
           isCertified: data.isCertified,
+          street: data.street,
+          city: data.city,
+          state: data.state,
+          zip: data.zip,
           ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
         })
         router.push('/overview')
@@ -98,7 +102,11 @@ const HomePage: Page = () => {
         referralCode,
         updatedAt,
         referralLink,
-        level
+        level,
+        street,
+        state,
+        city,
+        zip
       } = auth
 
       GTMTrack.userInfo({
@@ -120,7 +128,11 @@ const HomePage: Page = () => {
         referralCode,
         updatedAt,
         referralLink,
-        level
+        level,
+        street,
+        state,
+        city,
+        zip
       })
     } else {
       GTMTrack.userInfo()

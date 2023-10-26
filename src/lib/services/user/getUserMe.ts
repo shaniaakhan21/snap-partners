@@ -20,6 +20,10 @@ interface IQueryUserMeReturn extends IQueryErrorReturn {
     idImage: string
     insuranceImage: string
     profileImage: string
+    street: string
+    city: string
+    state: string
+    zip: string
     roles: {
       admin: boolean
       customer: boolean

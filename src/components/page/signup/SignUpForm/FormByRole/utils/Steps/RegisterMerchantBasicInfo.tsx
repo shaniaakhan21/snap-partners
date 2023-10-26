@@ -15,6 +15,7 @@ import { IHandleStep } from '../types'
 import { STEPS } from '.'
 import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 import { GTMTrack } from 'lib/utils/gtm'
+import { DatePickerForm } from '../DatePicker'
 
 export interface dataFormSignUpMerchant {
   'city' : string
@@ -25,8 +26,13 @@ export interface dataFormSignUpMerchant {
   'mobile_no' : string
   'name': string
   'password': string
+  'city_' : string
+  'street': string
+  'state_name': string
+  'zip': string
   'save_on_snap': boolean
   ownerName: string
+  dateOfBirth: Date
 
   username: string
   confirmEmail: string
@@ -47,6 +53,12 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
   const { handleSubmit, register, reset, formState: { errors }, setError, control } = useForm<dataFormSignUpMerchant>()
   const [isLoading, setLoading] = useState(false)
   const role = useRoleFromUrl()
+  const [dateOfBirth, setDateOfBirth] = useState<Date | null>(null)
+  const [dateOfBirthError, setDateOfBirthError] = useState('')
+  const handleDateOfBirthChange = (date: Date | null) => {
+    setDateOfBirth(date)
+    setDateOfBirthError('')
+  }
 
   const onSubmit = async (dataForm: dataFormSignUpMerchant) => {
     setLoading(true)
@@ -102,7 +114,10 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
       phoneNumber,
       idImage: null,
       insuranceImage: null,
-      city: dataForm.city,
+      street: dataForm.street,
+      city: dataForm.city_,
+      state: dataForm.state_name,
+      zip: dataForm.zip,
       roles: {
         admin: false,
         customer: false,
@@ -240,6 +255,19 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
           errors={errors}
           withVerifyCode={false}
           control={control}
+        />
+
+        <DatePickerForm
+          id='dateOfBirth'
+          name='dateOfBirth'
+          label='Date of Birth'
+          register={register}
+          registerId='dateOfBirth'
+          errors={errors.dateOfBirth}
+          defaultValue={dateOfBirth}
+          isRequired={true}
+          onChange={handleDateOfBirthChange}
+          errorText={dateOfBirthError}
         />
 
         <RegisterPassword

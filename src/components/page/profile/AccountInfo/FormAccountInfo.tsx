@@ -43,30 +43,54 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
           </div>
         </li>
       </div>
+      <div className='flex flex-col sm:flex-row justify-start items-start gap-y-2 gap-x-2'>
+        <li className='rounded-xl bg-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center w-1/2'>
+          <div>
+            <label htmlFor='email' className='text-sm'>Email</label>
+            <br />
+            <input
+              id='email'
+              name='email'
+              type='email'
+              value={auth.email}
+              disabled={true}
+              className='w-full bg-transparent text-lg truncate'
+            />
+          </div>
 
-      <li className='rounded-xl bg-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center'>
-        <div>
-          <label htmlFor='email' className='text-sm'>Email</label>
-          <br />
-          <input
-            id='email'
-            name='email'
-            type='email'
-            value={auth.email}
-            disabled={true}
-            className='w-full bg-transparent text-lg truncate'
-          />
-        </div>
-
-        <div>
-          <button
-            onClick={() => setTypeUpdate('email')}
-            className='bg-primary-500 hover:bg-opacity-80 rounded-full px-4 py-1 text-white font-bold uppercase'
-          >
+          <div>
+            <button
+              onClick={() => setTypeUpdate('email')}
+              className='bg-primary-500 hover:bg-opacity-80 rounded-full px-4 py-1 text-white font-bold uppercase'
+            >
             Edit
-          </button>
-        </div>
-      </li>
+            </button>
+          </div>
+        </li>
+        <li className='rounded-xl w-1/2 bg-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center'>
+          <div>
+            <label htmlFor='dateofbirth' className='text-sm'>Date of Birth</label>
+            <br />
+            <input
+              id='dateofbirth'
+              name='dateofbirth'
+              type='date'
+              value={auth.dateOfBirth ? auth.dateOfBirth.toISOString().split('T')[0] : ''}
+              disabled={true}
+              className='w-full bg-transparent text-lg truncate'
+            />
+          </div>
+
+          <div>
+            <button
+              onClick={() => setTypeUpdate('dateOfBirth')}
+              className='bg-primary-500 hover:bg-opacity-80 rounded-full px-4 py-1 text-white font-bold uppercase'
+            >
+            Edit
+            </button>
+          </div>
+        </li>
+      </div>
 
       {isIntegrous && (
         <li className='rounded-xl bg-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center'>
@@ -119,6 +143,104 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
           </button>
         </div>
       </li>
+
+      <div className='flex flex-col sm:flex-row justify-start items-start gap-y-2 gap-x-2'>
+        <li className='rounded-xl bg-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center w-1/2'>
+          <div>
+            <label htmlFor='street' className='text-sm'>STREET</label>
+            <br />
+            <input
+              id='street'
+              name='street'
+              type='text'
+              value={auth.street}
+              disabled={true}
+              className='w-full bg-transparent text-lg truncate'
+            />
+          </div>
+
+          <div>
+            <button
+              onClick={() => setTypeUpdate('street')}
+              className='bg-primary-500 hover:bg-opacity-80 rounded-full px-4 py-1 text-white font-bold uppercase'
+            >
+            Edit
+            </button>
+          </div>
+        </li>
+        <li className='rounded-xl w-1/2 bg-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center'>
+          <div>
+            <label htmlFor='city' className='text-sm'>CITY</label>
+            <br />
+            <input
+              id='city'
+              name='city'
+              type='text'
+              value={auth.city}
+              disabled={true}
+              className='w-full bg-transparent text-lg truncate'
+            />
+          </div>
+
+          <div>
+            <button
+              onClick={() => setTypeUpdate('city')}
+              className='bg-primary-500 hover:bg-opacity-80 rounded-full px-4 py-1 text-white font-bold uppercase'
+            >
+            Edit
+            </button>
+          </div>
+        </li>
+      </div>
+
+      <div className='flex flex-col sm:flex-row justify-start items-start gap-y-2 gap-x-2'>
+        <li className='rounded-xl bg-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center w-1/2'>
+          <div>
+            <label htmlFor='state' className='text-sm'>STATE / PROVINCE</label>
+            <br />
+            <input
+              id='state'
+              name='state'
+              type='text'
+              value={auth.state}
+              disabled={true}
+              className='w-full bg-transparent text-lg truncate'
+            />
+          </div>
+
+          <div>
+            <button
+              onClick={() => setTypeUpdate('state')}
+              className='bg-primary-500 hover:bg-opacity-80 rounded-full px-4 py-1 text-white font-bold uppercase'
+            >
+            Edit
+            </button>
+          </div>
+        </li>
+        <li className='rounded-xl w-1/2 bg-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center'>
+          <div>
+            <label htmlFor='zip' className='text-sm'>Zipcode</label>
+            <br />
+            <input
+              id='zip'
+              name='zip'
+              type='text'
+              value={auth.zip}
+              disabled={true}
+              className='w-full bg-transparent text-lg truncate'
+            />
+          </div>
+
+          <div>
+            <button
+              onClick={() => setTypeUpdate('zip')}
+              className='bg-primary-500 hover:bg-opacity-80 rounded-full px-4 py-1 text-white font-bold uppercase'
+            >
+            Edit
+            </button>
+          </div>
+        </li>
+      </div>
 
       <li className='rounded-xl bg-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center'>
         <div>

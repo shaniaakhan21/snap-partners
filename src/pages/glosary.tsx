@@ -70,6 +70,10 @@ const GlosaryPage: Page = () => {
           bank_information: data.bank_information,
           level: data.level,
           isCertified: data.isCertified,
+          street: data.street,
+          city: data.city,
+          state: data.state,
+          zip: data.zip,
           ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
         })
       }

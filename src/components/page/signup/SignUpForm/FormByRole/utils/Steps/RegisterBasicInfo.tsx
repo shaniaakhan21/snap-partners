@@ -19,6 +19,9 @@ import { GTMTrack } from 'lib/utils/gtm'
 import { useRouter } from 'next/router'
 import { ROLES } from './../../../../../../../config/roles'
 import Swal from 'sweetalert2'
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers-pro'
+import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs'
+import { DatePickerForm } from '../DatePicker'
 
 interface IStepOpeProps {
   referralLink: IReferralLink,
@@ -70,6 +73,12 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
   const { handleSubmit, register, reset, formState: { errors }, setError, control } = useForm<IDataForm>()
   const [isLoading, setLoading] = useState(false)
   const role = useRoleFromUrl()
+  const [dateOfBirth, setDateOfBirth] = useState<Date | null>(null)
+  const [dateOfBirthError, setDateOfBirthError] = useState('')
+  const handleDateOfBirthChange = (date: Date | null) => {
+    setDateOfBirth(date)
+    setDateOfBirthError('')
+  }
 
   const onSubmit = async (dataForm: IDataForm) => {
     if (dataForm.confirmEmail !== dataForm.email) {
@@ -219,6 +228,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
         ? `/auth/login-wellness?referralCode=${referralCode}&redirectToIntegrousWellness=true`
         : '/auth/login'
   const maxWClass = router.pathname === '/auth/signup-wellness' ? 'max-w-2xl' : 'max-w-md'
+
   return (
     <>
       <div className={`mx-auto w-full ${maxWClass}`}>
@@ -289,11 +299,24 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             type='text'
             label='Last Name'
             registerId='lastname'
-            placeholder='Enter Lastname'
+            placeholder='Enter Last Name'
             errors={errors.lastname}
             register={register}
             rulesForm={registerRulesConfig.lastname}
             isRequired
+          />
+
+          <DatePickerForm
+            id='dateOfBirth'
+            name='dateOfBirth'
+            label='Date of Birth'
+            register={register}
+            registerId='dateOfBirth'
+            errors={errors.dateOfBirth}
+            defaultValue={dateOfBirth}
+            isRequired={true}
+            onChange={handleDateOfBirthChange}
+            errorText={dateOfBirthError}
           />
 
           <InputForm

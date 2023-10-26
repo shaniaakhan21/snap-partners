@@ -75,6 +75,10 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         bank_information: data.bank_information,
         level: data.level,
         isCertified: data.isCertified,
+        street: data.street,
+        city: data.city,
+        state: data.state,
+        zip: data.zip,
         ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
       })
     })()
@@ -102,6 +106,10 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         blocked,
         deleted,
         isCertified,
+        street,
+        state,
+        city,
+        zip,
         nsurAccount,
         referralLink
       } = auth
@@ -128,6 +136,10 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         blocked,
         deleted,
         isCertified,
+        street,
+        state,
+        city,
+        zip,
         nsurAccount
       })
     } else {

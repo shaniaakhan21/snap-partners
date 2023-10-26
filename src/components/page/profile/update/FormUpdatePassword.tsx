@@ -98,6 +98,10 @@ export const FormUpdatePassword = ({ auth, setAuth, typeUpdate, setTypeUpdate }:
       bank_information: userData.bank_information,
       level: userData?.level,
       isCertified: userData.isCertified,
+      street: userData.street,
+      city: userData.city,
+      state: userData.state,
+      zip: userData.zip,
       ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: userData[field] }), {}) as any)
     })
     GTMTrack.editProfile(typeUpdate)

@@ -6,6 +6,7 @@ export interface IUserToSignUp {
   businessName: string
   phone: string
   password: string
+  dateOfBirth: Date
   referralCode?: string | null
   idImage?: any
   insuranceImage?: any
@@ -67,7 +68,7 @@ export interface IRegisterFormProps {
   role: string
 }
 
-export type registerFormIds = 'referralCode' | 'email' | 'username' | 'name' | 'lastname' | 'phoneExt' | 'phoneNumber' | 'confirmEmail' | 'password' | 'confirmPassword' | 'rememberMe' | 'termsAndConditions'
+export type registerFormIds = 'referralCode' | 'email' | 'username' | 'name' | 'lastname' | 'phoneExt' | 'phoneNumber' | 'confirmEmail' | 'password' | 'confirmPassword' | 'rememberMe' | 'termsAndConditions' | 'dateOfBirth'
 export type registerFormMerchantIds = | 'phoneExt' | 'phoneNumber' | 'email' | 'confirmEmail' | 'city' | 'street_name' | 'state' | 'country_code' | 'delivery_fees' | 'deliverykm' | 'email' | 'maxdeliverytime' | 'mobile_no' | 'name' | 'password' | 'pincode' | 'save_on_snap'
 
 export interface IFormConfig {

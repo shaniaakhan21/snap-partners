@@ -27,6 +27,7 @@ import Modal from '@mui/material/Modal'
 import Button from '@mui/material/Button'
 import ContractModal from './wellness/components/ContractModal'
 import TINPopup from './commonPopup'
+import CommonPopup from './commonPopup/common/index'
 
 const { SEO } = APP_INFO
 
@@ -37,14 +38,20 @@ const DashboardOverViewPage: Page = () => {
   const store = useAuthStore()
   const auth: any = store.auth
   const [openModal, setOpenModal] = useState(!auth.isCertified)
-
+  const [openModalTIN, setOpenModalTIN] = useState(true)
+  const [showSuccessPop, setShowSuccessPop] = useState(true)
+  const [showFailedPop, setShowFailedPop] = useState(false)
   const currentOverview = getLocalStorage('currentBackoffice') || ''
   const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
   const isCustomer = auth.roles.customer
   const isIntegrousAssociate = auth.roles.integrousAssociate
-
+  const [open, setOpen] = useState(true)
   const handleCloseModal = () => {
     setOpenModal(false)
+  }
+
+  const handleCloseModalTIN = () => {
+    setOpenModalTIN(false)
   }
 
   useEffect(() => {
@@ -60,6 +67,10 @@ const DashboardOverViewPage: Page = () => {
       setRankData(response.data)
     })()
   }, [])
+
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   if (isIntegrousAssociate && currentOverview === '') {
     return (
@@ -130,7 +141,17 @@ const DashboardOverViewPage: Page = () => {
       {!isCustomer && (
         <ContractModal open={openModal} onClose={handleCloseModal} />)
       }
-      <TINPopup open={openModal} onClose={handleCloseModal}/>
+      <TINPopup open={openModalTIN} onClose={handleCloseModalTIN} showFailedPop={() => setShowFailedPop(false)} auth={undefined} showSuccessPop={function (): (success: boolean) => void {
+        throw new Error('Function not implemented.')
+      } } />
+
+      <CommonPopup
+        image="/static/error.svg"
+        title="Failed"
+        description="Snap would like you to complete Document verification to move forward."
+        buttonText="Verify Documents"
+        svgId="popupImage-error"
+        onClose={handleClose} open={open} />
     </>
   )
 }
