@@ -117,6 +117,7 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
       bank_information: data.bank_information,
       level: data.level,
       isCertified: data.isCertified,
+      isValidated: data.isValidated,
       street: data.street,
       city: data.city,
       state: data.state,

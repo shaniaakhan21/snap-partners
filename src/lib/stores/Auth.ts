@@ -22,6 +22,7 @@ export interface IAuth extends IUserMe, INsurAccount {
   blocked: boolean
   level?:string
   isCertified?: boolean
+  isValidated?: boolean
   socialSecurityNumber: string
   dateOfBirth?: Date
 }
@@ -51,6 +52,7 @@ export type TSetAuth = ({
   bank_information,
   level,
   isCertified,
+  isValidated,
   street,
   state,
   city,
@@ -86,6 +88,7 @@ interface IAuthAtom {
     bank_information,
     level,
     isCertified,
+    isValidated,
     facebook_url,
     twitter_url,
     linkedin_url,
@@ -129,6 +132,7 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
     bank_information,
     level,
     isCertified,
+    isValidated,
     facebook_url,
     twitter_url,
     linkedin_url,
@@ -170,6 +174,7 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
         bank_information,
         level,
         isCertified,
+        isValidated,
         facebook_url,
         twitter_url,
         linkedin_url,

@@ -72,6 +72,7 @@ const HomePage: Page = () => {
           bank_information: data.bank_information,
           level: data?.level,
           isCertified: data.isCertified,
+          isValidated: data.isValidated,
           street: data.street,
           city: data.city,
           state: data.state,
@@ -106,7 +107,8 @@ const HomePage: Page = () => {
         street,
         state,
         city,
-        zip
+        zip,
+        isValidated
       } = auth
 
       GTMTrack.userInfo({
@@ -132,7 +134,8 @@ const HomePage: Page = () => {
         street,
         state,
         city,
-        zip
+        zip,
+        isValidated
       })
     } else {
       GTMTrack.userInfo()

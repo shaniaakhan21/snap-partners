@@ -33,14 +33,13 @@ export const FormEditStreet = ({
     setIsLoading(true)
 
     try {
-      await axios.post('/api/user/update-username', {
+      await axios.post('/api/user/update-address', {
         street: dataForm.newStreet
       }, {
         headers: {
           Authorization: `Bearer ${auth.accessToken}`
         }
-      }
-      )
+      })
 
       setAuth({ ...auth, street: dataForm.newStreet })
 
@@ -49,9 +48,9 @@ export const FormEditStreet = ({
       setTypeUpdate(null)
       setIsLoading(false)
     } catch (error) {
-      toast('please try another one', { type: 'error' })
+      toast('Please try another one', { type: 'error' })
+      setIsLoading(false)
     }
-    setIsLoading(false)
   }
 
   if (isLoading) {

@@ -60,6 +60,7 @@ interface IQueryUserMeReturn extends IQueryErrorReturn {
     },
     level?: string,
     isCertified?: boolean
+    isValidated?: boolean
   }
 }
 

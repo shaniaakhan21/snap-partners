@@ -99,6 +99,7 @@ export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
       },
       level: data?.level,
       isCertified: data.isCertified,
+      isValidated: data.isValidated,
       street: data?.street,
       state: data?.state,
       city: data?.city,

@@ -3,9 +3,9 @@ import { Close as CrossIcon, East } from '@mui/icons-material'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers-pro'
 import { ChangeEvent, useState } from 'react'
 import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs'
-import { IAuth } from 'lib/stores/Auth'
+import { IAuth, useAuthStore } from 'lib/stores/Auth'
+import axios from 'axios'
 interface TINPopupProps {
-    // auth: IAuth
     open: boolean;
     // showSuccessPop: () => (success: boolean) => void;
     // showFailedPop: () => void;
@@ -14,6 +14,7 @@ interface TINPopupProps {
 
 const TINPopup = ({ open, onClose }: TINPopupProps) => {
   const getSSN = '123654752'
+  const { auth } = useAuthStore()
   const [certified, setCertified] = useState(false)
   const [socialSecurity, setSocialSecurity] = useState('')
   const [dateOfBirth, setDateOfBirth] = useState<Date | null>(null)
@@ -24,6 +25,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
   const [city, setCity] = useState('') // Define city state
   const [state, setState] = useState('') // Define state state
   const [zip, setZipCode] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const handleSocialSecurityChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
@@ -68,7 +70,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
     setZipCode(value)
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // Validate all fields
     let hasErrors = false
 
@@ -95,11 +97,30 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
 
     if (!hasErrors) {
       onClose()
-      // if (socialSecurity !== getSSN) {
-      //   showFailedPop()
-      // }
+      try {
+        // Make an API request to update the address
+        const response = await axios.post('/api/user/update-address', {
+          state: state,
+          street: street,
+          city: city,
+          zip: zip
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${auth.accessToken}`
+          }
+        })
+        setCity('')
+        console.log('API Response:', response.data)
+        setIsLoading(false)
+        window.location.reload()
+      } catch (error) {
+        console.error('API Error:', error)
+        setIsLoading(false)
+      }
     }
   }
+
   return (
     <>
       <Modal

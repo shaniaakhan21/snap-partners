@@ -38,7 +38,8 @@ const DashboardOverViewPage: Page = () => {
   const store = useAuthStore()
   const auth: any = store.auth
   const [openModal, setOpenModal] = useState(!auth.isCertified)
-  const [openModalTIN, setOpenModalTIN] = useState(true)
+  const [openModalTIN, setOpenModalTIN] = useState(!auth.isValidated)
+  console.log('validation', auth.isValidated)
   const [showSuccessPop, setShowSuccessPop] = useState(true)
   const [showFailedPop, setShowFailedPop] = useState(false)
   const currentOverview = getLocalStorage('currentBackoffice') || ''
@@ -142,7 +143,7 @@ const DashboardOverViewPage: Page = () => {
         <ContractModal open={openModal} onClose={handleCloseModal} />)
       }
       <TINPopup open={openModalTIN} onClose={handleCloseModalTIN}/>
-      <CommonPopup
+      {/* <CommonPopup
         image="/static/success.svg"
         title="Success"
         description="Snap has updated your profile"
@@ -155,7 +156,7 @@ const DashboardOverViewPage: Page = () => {
         description="Snap would like you to complete Document verification to move forward."
         buttonText="Verify Documents"
         svgId="popupImage-error"
-        onClose={handleClose} open={open} />
+        onClose={handleClose} open={open} /> */}
     </>
   )
 }

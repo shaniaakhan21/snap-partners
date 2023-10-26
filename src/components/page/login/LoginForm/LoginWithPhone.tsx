@@ -101,6 +101,7 @@ export const LoginWithPhone = ({ trackLoginHandle }: IProps) => {
       bank_information: data.bank_information,
       level: data.level,
       isCertified: data.isCertified,
+      isValidated: data.isValidated,
       street: data?.street,
       state: data?.state,
       city: data?.city,

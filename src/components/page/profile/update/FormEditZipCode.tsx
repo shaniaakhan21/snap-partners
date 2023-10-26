@@ -33,14 +33,13 @@ export const FormEditZipCode = ({
     setIsLoading(true)
 
     try {
-      await axios.post('/api/user/update-username', {
+      await axios.post('/api/user/update-address', {
         zip: dataForm.newZip
       }, {
         headers: {
           Authorization: `Bearer ${auth.accessToken}`
         }
-      }
-      )
+      })
 
       setAuth({ ...auth, zip: dataForm.newZip })
 
@@ -49,9 +48,9 @@ export const FormEditZipCode = ({
       setTypeUpdate(null)
       setIsLoading(false)
     } catch (error) {
-      toast('please try another one', { type: 'error' })
+      toast('Please try another one', { type: 'error' })
+      setIsLoading(false)
     }
-    setIsLoading(false)
   }
 
   if (isLoading) {

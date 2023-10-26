@@ -98,6 +98,7 @@ export const FormUpdatePassword = ({ auth, setAuth, typeUpdate, setTypeUpdate }:
       bank_information: userData.bank_information,
       level: userData?.level,
       isCertified: userData.isCertified,
+      isValidated: userData.isValidated,
       street: userData.street,
       city: userData.city,
       state: userData.state,
