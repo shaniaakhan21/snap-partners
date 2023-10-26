@@ -18,7 +18,7 @@ const StyledDataGrid = styled(MUIDataGrid)(() => ({
     display: 'none'
   },
   '& .MuiDataGrid-virtualScroller': {
-     overflow: 'hidden'
+    overflow: 'hidden'
   }
 
 }))
@@ -97,4 +97,78 @@ const StarAchieversTable = ({ userSprintData }) => {
   )
 }
 
+export const AllAchieverTable = ({ allAchieverArray }) => {
+  const [windowWidth, setWindowWidth] = useState(0)
+  const [sprintDataRow, setSprintDataRow] = useState([])
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  useEffect(() => {
+    setSprintDataRow([])
+  })
+
+  const columns = [
+    {
+      field: 'name',
+      headerName: 'Name',
+      flex: windowWidth <= 400 ? 0.5 : 1
+    },
+    {
+      field: 'box1',
+      headerName: 'Box 1',
+      flex: windowWidth <= 400 ? 0.5 : 1
+    },
+    {
+      field: 'box2',
+      headerName: 'Box 2',
+      flex: windowWidth <= 400 ? 0.5 : 1
+    },
+    {
+      field: 'box3',
+      headerName: 'Box 3',
+      flex: windowWidth <= 400 ? 0.5 : 1
+    },
+    {
+      field: 'box4',
+      headerName: 'Box 4',
+      flex: windowWidth <= 400 ? 0.5 : 1
+    },
+    {
+      field: 'box5',
+      headerName: 'Box 5',
+      flex: windowWidth <= 400 ? 0.5 : 1
+    }
+  ]
+
+  return (
+    <div className='w-full'>
+      <br></br>
+      <div className="datagrid-container"style={{ overflowX: 'hidden', overflowY: 'hidden' }}>
+        <div style={{ minWidth: '300px' }}>
+          {sprintDataRow
+            ? <StyledDataGrid
+              rows={allAchieverArray && allAchieverArray}
+              columns={columns}
+              sx={{
+                minHeight: '214px',
+                borderColor: 'rgba(224, 224, 224, 0.5)!important'
+              }}
+            />
+            : <></>}
+        </div>
+      </div>
+      <br></br>
+    </div>
+  )
+}
 export default StarAchieversTable
