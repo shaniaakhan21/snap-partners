@@ -98,46 +98,48 @@ const DashboardOverViewPage: Page = () => {
 
   return (
     <>
-      <div className="grid grid-cols-1 lg:grid-cols-2">
-        <div>
+      <>
+        <div className="grid grid-cols-1 lg:grid-cols-2">
           <div>
-            <RankComponent data={rankData} />
+            <div>
+              <RankComponent data={rankData} />
+            </div>
+            <div className='mt-4'>
+              <TierTable />
+            </div>
+            <div className='mt-4'>
+              <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} userId={null}/>
+            </div>
+            <div className='mt-4'>
+              <PVComponentSnap />
+            </div>
+            <div className='mt-4'>
+              <RewardsProgram />
+            </div>
+            <div className='mt-4'>
+              <GrowthSummary userId={null} />
+            </div>
+            <div className='mt-4 bg-white rounded-lg'>
+              <MonthlySubscription userId={ null } />
+            </div>
+            <div className='mt-4 bg-white rounded-lg'>
+              <MonthlyProduction userId={null} />
+            </div>
           </div>
-          <div className='mt-4'>
-            <TierTable />
-          </div>
-          <div className='mt-4'>
-            <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} userId={null}/>
-          </div>
-          <div className='mt-4'>
-            <PVComponentSnap />
-          </div>
-          <div className='mt-4'>
-            <RewardsProgram />
-          </div>
-          <div className='mt-4'>
-            <GrowthSummary userId={null} />
-          </div>
-          <div className='mt-4 bg-white rounded-lg'>
-            <MonthlySubscription userId={ null } />
-          </div>
-          <div className='mt-4 bg-white rounded-lg'>
-            <MonthlyProduction userId={null} />
+          <div className='ml-4'>
+            <Event />
+            <div className='mt-4 bg-white rounded-lg'>
+              <TopProducerCategory />
+            </div>
+            <div className='mt-4'>
+              <Certification />
+            </div>
           </div>
         </div>
-        <div className='ml-4'>
-          <Event />
-          <div className='mt-4 bg-white rounded-lg'>
-            <TopProducerCategory />
-          </div>
-          <div className='mt-4'>
-            <Certification />
-          </div>
+        <div className='col-span-12 mt-4'>
+          <Referrals rankData={rankData} />
         </div>
-      </div>
-      <div className='col-span-12 mt-4'>
-        <Referrals rankData={rankData} />
-      </div>
+      </>
       {!isCustomer && (
         <ContractModal open={openModal} onClose={handleCloseModal} />)
       }
