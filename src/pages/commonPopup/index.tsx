@@ -112,15 +112,15 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
             Authorization: `Bearer ${auth.accessToken}`
           }
         })
-        // const formattedDateOfBirth = format(dateOfBirth, 'dd-mm-yyyy')
-        // const updateDOBRequest = axios.post('/api/user/update-dob', {
-        //   dateOfBirth: formattedDateOfBirth
-        // }, {
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //     Authorization: `Bearer ${auth.accessToken}`
-        //   }
-        // })
+        const formattedDateOfBirth = format(dateOfBirth, 'dd-mm-yyyy')
+        const updateDOBRequest = axios.post('/api/user/update-dob', {
+          dateOfBirth: formattedDateOfBirth
+        }, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${auth.accessToken}`
+          }
+        })
         const updateAddressRequest = await axios.post('/api/user/update-address', {
           state: state,
           street: street,
@@ -139,7 +139,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
         setDateOfBirth(null)
 
         console.log('After state updates')
-        await axios.all([updateSSNRequest, updateAddressRequest])
+        await axios.all([updateSSNRequest, updateAddressRequest, updateDOBRequest])
         setIsLoading(false)
         window.location.reload()
       } catch (error) {
