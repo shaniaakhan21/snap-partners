@@ -124,29 +124,89 @@ export const AllAchieverTable = ({ allAchieverArray }) => {
       flex: windowWidth <= 400 ? 0.5 : 1
     },
     {
-      field: 'box1',
-      headerName: 'Box 1',
-      flex: windowWidth <= 400 ? 0.5 : 1
+      field: 'personalFiveIbo',
+      headerName: 'Personal IBOs',
+      flex: windowWidth <= 400 ? 0.5 : 1,
+      renderCell: (params) => {
+        const value = params.value
+        const cellStyle = {
+          padding: '3% 10%',
+          borderRadius: '20px',
+          color: 'white',
+          fontSize: '1.2em',
+          backgroundColor: value === false ? '#DD4C37' : value === true ? '#6AB63C' : 'black'
+        }
+
+        return <div style={cellStyle}>{`${value}`}</div>
+      }
     },
     {
-      field: 'box2',
-      headerName: 'Box 2',
-      flex: windowWidth <= 400 ? 0.5 : 1
+      field: 'personalQualifiedErc',
+      headerName: 'Personal ERC',
+      flex: windowWidth <= 400 ? 0.5 : 1,
+      renderCell: (params) => {
+        const value = params.value
+        const cellStyle = {
+          padding: '3% 10%',
+          borderRadius: '20px',
+          color: 'white',
+          fontSize: '1.2em',
+          backgroundColor: value === false ? '#DD4C37' : value === true ? '#6AB63C' : 'black'
+        }
+
+        return <div style={cellStyle}>{`${value}`}</div>
+      }
     },
     {
-      field: 'box3',
-      headerName: 'Box 3',
-      flex: windowWidth <= 400 ? 0.5 : 1
+      field: 'friendFiveIbo',
+      headerName: 'Friend IBOs',
+      flex: windowWidth <= 400 ? 0.5 : 1,
+      renderCell: (params) => {
+        const value = params.value
+        const cellStyle = {
+          padding: '3% 10%',
+          borderRadius: '20px',
+          color: 'white',
+          fontSize: '1.2em',
+          backgroundColor: value === false ? '#DD4C37' : value === true ? '#6AB63C' : 'black'
+        }
+
+        return <div style={cellStyle}>{`${value}`}</div>
+      }
     },
     {
-      field: 'box4',
-      headerName: 'Box 4',
-      flex: windowWidth <= 400 ? 0.5 : 1
+      field: 'friendQualifiedErc',
+      headerName: 'Friend ERC',
+      flex: windowWidth <= 400 ? 0.5 : 1,
+      renderCell: (params) => {
+        const value = params.value
+        const cellStyle = {
+          padding: '3% 10%',
+          borderRadius: '20px',
+          color: 'white',
+          fontSize: '1.2em',
+          backgroundColor: value === false ? '#DD4C37' : value === true ? '#6AB63C' : 'black'
+        }
+
+        return <div style={cellStyle}>{`${value}`}</div>
+      }
     },
     {
-      field: 'box5',
-      headerName: 'Box 5',
-      flex: windowWidth <= 400 ? 0.5 : 1
+      field: 'friendOfFriendQualifiedErc',
+      headerName: 'Friend of Friend ERC',
+      flex: windowWidth <= 400 ? 0.5 : 1,
+      renderCell: (params) => {
+        const value = params.value
+        const cellStyle = {
+          padding: '3% 10%',
+          borderRadius: '20px',
+          color: 'white',
+          fontSize: '1.2em',
+          backgroundColor: value === false ? '#DD4C37' : value === true ? '#6AB63C' : 'black'
+        }
+
+        return <div style={cellStyle}>{`${value}`}</div>
+      }
     }
   ]
 

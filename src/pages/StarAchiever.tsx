@@ -34,14 +34,12 @@ const StarAchiever: Page = () => {
           allAchieverData.push({
             id: element.id,
             name: element.name,
-            box1: boxes.personalFiveIbo,
-            box2: boxes.personalQualifiedErc,
-            box3: boxes.friendFiveIbo,
-            box4: boxes.friendQualifiedErc,
-            box5: boxes.friendOfFriendQualifiedErc
+            count: Object.values(boxes).filter(value => value === true).length,
+            ...boxes
 
           })
         })
+        allAchieverData.sort((a, b) => b.count - a.count)
         setAllAchieverArray(allAchieverData)
       })
       .catch((e) => {
