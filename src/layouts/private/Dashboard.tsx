@@ -56,6 +56,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         roles: data.roles,
         id: data.id,
         username: data.username,
+        dateOfBirth: data.dateOfBirth,
         referralCode: data.referralCode,
         driver_status: data.driver_status,
         idImage: data.idImage,
@@ -112,6 +113,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         state,
         city,
         zip,
+        dateOfBirth,
         nsurAccount,
         referralLink
       } = auth
@@ -143,6 +145,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         state,
         city,
         zip,
+        dateOfBirth,
         nsurAccount
       })
     } else {

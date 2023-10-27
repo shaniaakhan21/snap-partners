@@ -103,6 +103,7 @@ export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
       state: data?.state,
       city: data?.city,
       zip: data?.zip,
+      dateOfBirth: data.dateOfBirth,
       ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
     })
     reset()

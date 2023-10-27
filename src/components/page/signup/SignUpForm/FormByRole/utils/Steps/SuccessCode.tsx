@@ -95,6 +95,7 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
       phoneNumber: data.phoneNumber,
       accessToken: dataLogin.token,
       lastname: data.lastname,
+      dateOfBirth: data.dateOfBirth,
       roles: data.roles,
       id: dataLogin.userId,
       username: data.username,

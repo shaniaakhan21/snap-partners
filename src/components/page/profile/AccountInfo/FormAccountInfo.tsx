@@ -10,6 +10,7 @@ interface IFormAccountInfoProps {
 export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) => {
   const _auth :any = auth
   const isIntegrous = (_auth.roles.integrousAssociate || _auth.roles.integrousCustomer)
+  console.log('date dtae', auth.dateOfBirth)
   return (
     <ul className='w-full h-full rounded-lg'>
       <div className='flex flex-col sm:flex-row justify-start items-start gap-y-2 gap-x-2'>
@@ -74,8 +75,8 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
             <input
               id='dateofbirth'
               name='dateofbirth'
-              type='date'
-              value={auth.dateOfBirth ? auth.dateOfBirth.toISOString().split('T')[0] : ''}
+              type='text'
+              value={auth.dateOfBirth}
               disabled={true}
               className='w-full bg-transparent text-lg truncate'
             />

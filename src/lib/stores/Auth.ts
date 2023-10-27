@@ -24,7 +24,6 @@ export interface IAuth extends IUserMe, INsurAccount {
   isCertified?: boolean
   isValidated?: boolean
   socialSecurityNumber: string
-  dateOfBirth?: Date
 }
 
 export type TSetAuth = ({

@@ -29,6 +29,7 @@ export interface IUserCommonData {
   city: string
   state: string
   zip: string
+  dateOfBirth: Date
   bank_information: {
     city: string,
     state: string

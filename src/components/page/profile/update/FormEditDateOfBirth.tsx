@@ -17,7 +17,7 @@ interface FormEditDateOfBirthProps {
 }
 
 interface IDataForm {
-    newDateOfBirth: string
+    newdateOfBirth: Date
   }
 
 export const FormEditDateOfBirth = ({
@@ -33,7 +33,7 @@ export const FormEditDateOfBirth = ({
     setIsLoading(true)
 
     try {
-      const newDateOfBirth = new Date(dataForm.newDateOfBirth)
+      const newDateOfBirth = new Date(dataForm.newdateOfBirth)
       await axios.post('/api/user/update-username', {
         dateOfBirth: newDateOfBirth
       }, {
@@ -62,7 +62,7 @@ export const FormEditDateOfBirth = ({
   return (
 <div className='max-w-3xl mx-auto'>
       <section>
-        <h3 className='text-xl font-bold'>Change Username</h3>
+        <h3 className='text-xl font-bold'>Change Date of Birth</h3>
       </section>
 
       <br />
@@ -71,15 +71,15 @@ export const FormEditDateOfBirth = ({
         <InputProfile
           disabled
           inputId='dateOfBirth'
-          inputType='dateOfBirth'
+          inputType='text'
           labelFor='dateOfBirth'
           labelName='Current Date Of Birth'
-          value={auth.dateOfBirth ? auth.dateOfBirth.toISOString().split('T')[0] : ''}
+          value={auth.dateOfBirth}
         />
 
         <InputProfile
           inputId='newDateOfBirth'
-          inputType='text'
+          inputType='date'
           labelFor='newDateOfBirth'
           labelName='New Date of Birth'
           placeholder='Insert the new Date of Birth'
@@ -91,7 +91,7 @@ export const FormEditDateOfBirth = ({
               message: 'Date of Birth must have at least 5 characters *'
             }
           }}
-          error={errors.newDateOfBirth}
+          error={errors.newdateOfBirth}
         />
         <br />
         <div className='flex items-center'>

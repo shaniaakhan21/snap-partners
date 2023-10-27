@@ -75,6 +75,7 @@ export const AuthRecover = ({ skipRedirect, redirectTo }: AuthRecoverProps) => {
         city: data.city,
         state: data.state,
         zip: data.zip,
+        dateOfBirth: data.dateOfBirth,
         ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
       })
     })()
@@ -106,7 +107,8 @@ export const AuthRecover = ({ skipRedirect, redirectTo }: AuthRecoverProps) => {
         street,
         state,
         city,
-        zip
+        zip,
+        dateOfBirth
       } = auth
 
       GTMTrack.userInfo({
@@ -134,7 +136,8 @@ export const AuthRecover = ({ skipRedirect, redirectTo }: AuthRecoverProps) => {
         street,
         state,
         city,
-        zip
+        zip,
+        dateOfBirth
       })
 
       if (redirectTo) {

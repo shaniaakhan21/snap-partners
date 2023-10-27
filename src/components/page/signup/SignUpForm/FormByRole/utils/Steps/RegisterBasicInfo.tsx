@@ -73,12 +73,6 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
   const { handleSubmit, register, reset, formState: { errors }, setError, control } = useForm<IDataForm>()
   const [isLoading, setLoading] = useState(false)
   const role = useRoleFromUrl()
-  const [dateOfBirth, setDateOfBirth] = useState<Date | null>(null)
-  const [dateOfBirthError, setDateOfBirthError] = useState('')
-  const handleDateOfBirthChange = (date: Date | null) => {
-    setDateOfBirth(date)
-    setDateOfBirthError('')
-  }
 
   const onSubmit = async (dataForm: IDataForm) => {
     if (dataForm.confirmEmail !== dataForm.email) {
@@ -154,6 +148,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       username: dataForm.username,
       name: dataForm.name,
       lastname: dataForm.lastname,
+      dateOfBirth: dataForm.dateOfBirth,
       password: dataForm.password,
       businessName: dataForm.businessName,
       street: dataForm.street,
@@ -313,10 +308,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             register={register}
             registerId='dateOfBirth'
             errors={errors.dateOfBirth}
-            defaultValue={dateOfBirth}
             isRequired={true}
-            onChange={handleDateOfBirthChange}
-            errorText={dateOfBirthError}
           />
 
           <InputForm

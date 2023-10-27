@@ -49,6 +49,7 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
       password: data.password,
       phoneNumber: data.phoneNumber,
       accessToken: dataLogin.token,
+      dateOfBirth: data.dateOfBirth,
       lastname: data.lastname,
       roles: data.roles,
       id: dataLogin.userId,

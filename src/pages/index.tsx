@@ -76,6 +76,7 @@ const HomePage: Page = () => {
           street: data.street,
           city: data.city,
           state: data.state,
+          dateOfBirth: data.dateOfBirth,
           zip: data.zip,
           ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
         })
@@ -108,6 +109,7 @@ const HomePage: Page = () => {
         state,
         city,
         zip,
+        dateOfBirth,
         isValidated
       } = auth
 
@@ -135,6 +137,7 @@ const HomePage: Page = () => {
         state,
         city,
         zip,
+        dateOfBirth,
         isValidated
       })
     } else {

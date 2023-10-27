@@ -26,13 +26,8 @@ export interface dataFormSignUpMerchant {
   'mobile_no' : string
   'name': string
   'password': string
-  'city_' : string
-  'street': string
-  'state_name': string
-  'zip': string
   'save_on_snap': boolean
   ownerName: string
-  dateOfBirth: Date
 
   username: string
   confirmEmail: string
@@ -41,6 +36,7 @@ export interface dataFormSignUpMerchant {
   termsAndConditions: boolean
   // phoneExt: string
   phoneNumber: string
+  dateOfBirth: Date
 }
 
 interface IRegisterMerchantBasicInfoProps {
@@ -53,12 +49,6 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
   const { handleSubmit, register, reset, formState: { errors }, setError, control } = useForm<dataFormSignUpMerchant>()
   const [isLoading, setLoading] = useState(false)
   const role = useRoleFromUrl()
-  const [dateOfBirth, setDateOfBirth] = useState<Date | null>(null)
-  const [dateOfBirthError, setDateOfBirthError] = useState('')
-  const handleDateOfBirthChange = (date: Date | null) => {
-    setDateOfBirth(date)
-    setDateOfBirthError('')
-  }
 
   const onSubmit = async (dataForm: dataFormSignUpMerchant) => {
     setLoading(true)
@@ -108,16 +98,14 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
     const dataToSend = {
       name: dataForm.name,
       lastname: 'Merchant',
+      dateOfBirth: dataForm.dateOfBirth,
       email: dataForm.email,
       username: dataForm.username,
       password: dataForm.password,
       phoneNumber,
       idImage: null,
       insuranceImage: null,
-      street: dataForm.street,
-      city: dataForm.city_,
-      state: dataForm.state_name,
-      zip: dataForm.zip,
+      city: dataForm.city,
       roles: {
         admin: false,
         customer: false,
@@ -256,7 +244,6 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
           withVerifyCode={false}
           control={control}
         />
-
         <DatePickerForm
           id='dateOfBirth'
           name='dateOfBirth'
@@ -264,12 +251,8 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
           register={register}
           registerId='dateOfBirth'
           errors={errors.dateOfBirth}
-          defaultValue={dateOfBirth}
           isRequired={true}
-          onChange={handleDateOfBirthChange}
-          errorText={dateOfBirthError}
         />
-
         <RegisterPassword
           errors={errors}
           register={register}

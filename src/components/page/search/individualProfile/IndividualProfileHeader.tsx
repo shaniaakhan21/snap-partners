@@ -72,6 +72,7 @@ function IndividualProfileHeader ({ body, setBody, profileData, userLevel }) {
       city: data.city,
       state: data.state,
       zip: data.zip,
+      dateOfBirth: data.dateOfBirth,
       ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
     })
     window.location.href = '/overview'

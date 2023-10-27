@@ -74,6 +74,7 @@ const GlosaryPage: Page = () => {
           street: data.street,
           city: data.city,
           state: data.state,
+          dateOfBirth: data.dateOfBirth,
           zip: data.zip,
           ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
         })

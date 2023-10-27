@@ -9,10 +9,7 @@ interface IDatePickerProps {
   registerId?: any;
   register?: UseFormRegister<any>;
   errors?: FieldErrors;
-  defaultValue?: Date | null;
   isRequired: boolean;
-  onChange: (date: Date | null) => void;
-  errorText?: string;
 }
 
 export const DatePickerForm = ({
@@ -22,10 +19,7 @@ export const DatePickerForm = ({
   register,
   registerId,
   errors,
-  defaultValue,
-  isRequired,
-  onChange,
-  errorText
+  isRequired
 }: IDatePickerProps) => {
   return (
     <div>
@@ -36,13 +30,10 @@ export const DatePickerForm = ({
 
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker
-          value={defaultValue}
-          onChange={onChange}
           className='w-full my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
         />
       </LocalizationProvider>
 
-      {errorText && <p className='text-sm text-red-400'>{errorText}</p>}
     </div>
   )
 }

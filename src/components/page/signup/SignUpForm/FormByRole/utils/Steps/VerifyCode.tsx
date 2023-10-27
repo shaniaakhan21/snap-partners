@@ -96,6 +96,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
         data: {
           name: userTrack.userInfo.name,
           lastname: userTrack.userInfo.lastname,
+          dateOfBirth: userTrack.userInfo.dateOfBirth,
           email: userTrack.userInfo.email,
           username: userTrack.userInfo.username,
           password: userTrack.userInfo.password,
@@ -129,6 +130,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
           email: userTrack.userInfo.email,
           username: userTrack.userInfo.username,
           password: userTrack.userInfo.password,
+          dateOfBirth: userTrack.userInfo.dateOfBirth,
           phoneNumber: userTrack.userInfo.phoneNumber,
           idImage: userTrack.userInfo.idImage,
           city_merchant: userTrack.userInfo.merchant.city,

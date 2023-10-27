@@ -26,6 +26,7 @@ export interface IDataForm extends IUserToSignUp {
   zip: string
   ssn: string
   level: string
+  dateOfBirth: Date
 
   //   "name": "CustomerName",
   //   "lastname": "CustomerLastName",
