@@ -63,7 +63,15 @@ const ReferralsPage: Page = () => {
           classes='col-span-1'
         />
 
-        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
+        <ReferralCards
+          title='Refer SETC/FFCRA Client'
+          ilustration={<ERCClient/>}
+          link={`https://www.jornscpa.com/snap-ffcra/?refid=${auth.id}` || 'With Out Link'}
+          newUser={false}
+          classes='col-span-1'
+        />
+
+        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant || auth.roles.ibo) && !isIntegrous && (
           <ReferralCards
             title='Refer Delivery Customers'
             ilustration={<CustomerRefIcon />}
@@ -72,7 +80,7 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />
         )}
-        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
+        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant || auth.roles.ibo) && !isIntegrous && (
           <ReferralCards
             title='Refer Delivery Driver'
             ilustration={<DriverRefIcon />}
@@ -81,7 +89,7 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />
         )}
-        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
+        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant || auth.roles.ibo) && !isIntegrous && (
           <ReferralCards
             title='Refer Delivery Merchant/SK'
             ilustration={<MerchantIcon />}
