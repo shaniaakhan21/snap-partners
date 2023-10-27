@@ -76,7 +76,7 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
               id='dateofbirth'
               name='dateofbirth'
               type='text'
-              value={auth.dateOfBirth}
+              value={(auth.dateOfBirth).toLocaleDateString()}
               disabled={true}
               className='w-full bg-transparent text-lg truncate'
             />
