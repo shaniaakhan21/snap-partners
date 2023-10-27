@@ -74,7 +74,11 @@ export const FormEditDateOfBirth = ({
           inputType='text'
           labelFor='dateOfBirth'
           labelName='Current Date Of Birth'
-          value={(auth.dateOfBirth).toLocaleDateString()}
+          value={
+            auth.dateOfBirth
+              ? new Date(auth.dateOfBirth).toLocaleDateString()
+              : ''
+          }
         />
 
         <InputProfile

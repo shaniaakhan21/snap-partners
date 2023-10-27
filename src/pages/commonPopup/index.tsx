@@ -5,6 +5,7 @@ import { ChangeEvent, useState } from 'react'
 import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs'
 import { IAuth, useAuthStore } from 'lib/stores/Auth'
 import axios from 'axios'
+import { format } from 'date-fns'
 interface TINPopupProps {
     open: boolean;
     // showSuccessPop: () => (success: boolean) => void;
@@ -22,8 +23,8 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
   const [dateOfBirthError, setDateOfBirthError] = useState('')
   const [addressError, setAddressError] = useState('')
   const [street, setStreet] = useState('')
-  const [city, setCity] = useState('') // Define city state
-  const [state, setState] = useState('') // Define state state
+  const [city, setCity] = useState('')
+  const [state, setState] = useState('')
   const [zip, setZipCode] = useState('')
   const [isLoading, setIsLoading] = useState(false)
 
@@ -42,8 +43,13 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
   }
 
   const handleDateOfBirthChange = (date: Date | null) => {
-    setDateOfBirth(date)
-    setDateOfBirthError('')
+    if (date) {
+      setDateOfBirth(date)
+      setDateOfBirthError('')
+    } else {
+      setDateOfBirth(new Date())
+      setDateOfBirthError('Date of Birth is required')
+    }
   }
 
   const handleStreetChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -98,8 +104,24 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
     if (!hasErrors) {
       onClose()
       try {
-        // Make an API request to update the address
-        const response = await axios.post('/api/user/update-address', {
+        const updateSSNRequest = axios.post('/api/user/update-social-security-number', {
+          socialSecurityNumber: socialSecurity
+        }, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${auth.accessToken}`
+          }
+        })
+        // const formattedDateOfBirth = format(dateOfBirth, 'dd-mm-yyyy')
+        // const updateDOBRequest = axios.post('/api/user/update-dob', {
+        //   dateOfBirth: formattedDateOfBirth
+        // }, {
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //     Authorization: `Bearer ${auth.accessToken}`
+        //   }
+        // })
+        const updateAddressRequest = await axios.post('/api/user/update-address', {
           state: state,
           street: street,
           city: city,
@@ -110,8 +132,14 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
             Authorization: `Bearer ${auth.accessToken}`
           }
         })
+        console.log('After API requests')
+
         setCity('')
-        console.log('API Response:', response.data)
+        setSocialSecurity('')
+        setDateOfBirth(null)
+
+        console.log('After state updates')
+        await axios.all([updateSSNRequest, updateAddressRequest])
         setIsLoading(false)
         window.location.reload()
       } catch (error) {
