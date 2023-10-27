@@ -6,6 +6,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs'
 import { IAuth, useAuthStore } from 'lib/stores/Auth'
 import axios from 'axios'
 import { format } from 'date-fns'
+import states from 'data/states'
 interface TINPopupProps {
     open: boolean;
     // showSuccessPop: () => (success: boolean) => void;
@@ -64,7 +65,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
     setCity(value)
   }
 
-  const handleStateChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleStateChange = (event: ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value
     setAddressError('')
     setState(value)
@@ -112,15 +113,15 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
             Authorization: `Bearer ${auth.accessToken}`
           }
         })
-        const formattedDateOfBirth = format(dateOfBirth, 'dd-mm-yyyy')
-        const updateDOBRequest = axios.post('/api/user/update-dob', {
-          dateOfBirth: formattedDateOfBirth
-        }, {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${auth.accessToken}`
-          }
-        })
+        // const formattedDateOfBirth = format(dateOfBirth, 'dd-mm-yyyy')
+        // const updateDOBRequest = axios.post('/api/user/update-dob', {
+        //   dateOfBirth: formattedDateOfBirth
+        // }, {
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //     Authorization: `Bearer ${auth.accessToken}`
+        //   }
+        // })
         const updateAddressRequest = await axios.post('/api/user/update-address', {
           state: state,
           street: street,
@@ -139,7 +140,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
         setDateOfBirth(null)
 
         console.log('After state updates')
-        await axios.all([updateSSNRequest, updateAddressRequest, updateDOBRequest])
+        await axios.all([updateSSNRequest, updateAddressRequest])
         setIsLoading(false)
         window.location.reload()
       } catch (error) {
@@ -223,13 +224,21 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
               <div className='flex flex-row w-full justify-between '>
                 {/* <FmdGoodOutlinedIcon className='text-[#9196A0] mr-2'/> */}
                 <div className='p-4 border-2 w-[48%] rounded-lg border-slate-200 bg-[#F9F9FA]'>
-                  <input
-                    className="w-full outline-none bg-[#F9F9FA]"
-                    placeholder="STATE / PROVINCE"
+                  <select
+                    id='state-select'
                     value={state}
                     onChange={handleStateChange}
-                    required
-                  />
+                    className='rounded-none rounded-tl-xl rounded-bl-xl border-0 appearance-none w-full uppercase bg-[#F9F9FA] text-[#b9b3ba]'
+                    style={{ backgroundImage: 'none' }}
+                  >
+                    <option value=''>Select a state</option>
+                    {states.map((state) => (
+                      <option key={state} value={state}>
+                        {state}
+                      </option>
+                    ))}
+                  </select>
+
                 </div>
                 <div className='p-4 border-2 w-[48%] rounded-lg border-slate-200 bg-[#F9F9FA]'>
                   <input
