@@ -5,9 +5,7 @@ import Tabs from '@mui/material/Tabs'
 import Tab from '@mui/material/Tab'
 import Box from '@mui/material/Box'
 import { TopProducers } from './TopProducers'
-import { topProducers } from './mock'
-import { Icon, MenuItem, Select, Typography } from '@mui/material'
-import { TabScrollButton, withStyles } from '@material-ui/core'
+import { MenuItem, Select } from '@mui/material'
 import HiddenTabScrollButton from './HiddenTabScrollButton'
 import { getLocalStorage } from 'lib/utils/localStorage'
 import axios from 'axios'
@@ -125,7 +123,7 @@ export default function TopProducerCategory () {
 
   return (
     <Box sx={{ width: '100%', padding: '10px' }}>
-      <div className='flex flex-row justify-between items-center'>
+      <div className='flex flex-row justify-between items-center mb-4'>
         <span className='text-sm sm:text-lg md:text-lg'>
           Global SNAP Top Producers
         </span>
@@ -136,6 +134,7 @@ export default function TopProducerCategory () {
             className='cursor-pointer outline-none appearance-none rounded-md border border-solid border-primary-500 py-2 pl-2 pr-16 text-sm sm:text-base  bg-primary-500 text-white'
             placeholder='User Rank'
             onChange={(current) => { setYearSelected(parseInt(current.target.value)) }}
+            style={{ backgroundImage: 'linear-gradient(45deg, transparent 50%, #ffffff 50%), linear-gradient(135deg, #ffffff 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc' }}
           >
             {years.map((y, i) => {
               return (
@@ -149,13 +148,14 @@ export default function TopProducerCategory () {
           <select
             id='legalType'
             name='legalType'
-            className='ml-5 cursor-pointer outline-none appearance-none rounded-md border border-solid border-primary-500 py-2 pl-2 pr-10 text-sm sm:text-base bg-primary-500 text-white'
+            className='ml-5 cursor-pointer outline-none appearance-none rounded-md border border-solid border-primary-600 bg-primary-500 text-white py-2 pl-2 pr-8 text-sm sm:text-base'
             placeholder='User Rank'
             onChange={(current) => { setMonthSelected(parseInt(current.target.value)) }}
+            style={{ backgroundImage: 'linear-gradient(45deg, transparent 50%, #ffffff 50%), linear-gradient(135deg, #ffffff 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc' }}
           >
             {month.map((m, i) => {
               return (
-                <option key={i} selected={(new Date().getMonth() === i)} value={i}>
+                <option className='text-black bg-white' key={i} selected={(new Date().getMonth() === i)} value={i}>
                   {m}
                 </option>
               )
@@ -216,6 +216,7 @@ export default function TopProducerCategory () {
         <MenuItem value={3}>Delivery Customer</MenuItem>
         <MenuItem value={4}>Delivery Driver</MenuItem>
       </Select>
+
       <TabPanel value={value} index={0}>
         <TopProducers monthSelected={monthSelected} yearSelected={yearSelected} data={topProducerData} value={subctegoryValue} typeLow='agent' type='topAgent' typeText='IBOs'/>
       </TabPanel>

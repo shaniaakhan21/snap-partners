@@ -45,15 +45,13 @@ const ReferralsPage: Page = () => {
           classes='col-span-1'
         />
 
-        {!isIntegrous && (
-          <ReferralCards
-            title='Refer ERC Agent'
-            ilustration={<ERCAgent/>}
-            link={`${auth.referralLink}&role=${ROLES.AGENT}` || 'With Out Link'}
-            newUser={false}
-            classes='col-span-1'
-          />
-        )}
+        <ReferralCards
+          title='Refer ERC Agent'
+          ilustration={<ERCAgent/>}
+          link={`${auth.referralLink}&role=${ROLES.AGENT}` || 'With Out Link'}
+          newUser={false}
+          classes='col-span-1'
+        />
 
         <ReferralCards
           title='Refer ERC Client'
@@ -63,33 +61,30 @@ const ReferralsPage: Page = () => {
           classes='col-span-1'
         />
 
-        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
-          <ReferralCards
-            title='Refer Delivery Customers'
-            ilustration={<CustomerRefIcon />}
-            link={`${auth.referralLink}&role=${ROLES.CUSTOMER}` || 'With Out Link'}
-            newUser={false}
-            classes='col-span-1'
-          />
-        )}
-        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
-          <ReferralCards
-            title='Refer Delivery Driver'
-            ilustration={<DriverRefIcon />}
-            link={`${auth.referralLink}&role=${ROLES.DRIVER}` || 'With Out Link'}
-            newUser={false}
-            classes='col-span-1'
-          />
-        )}
-        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
-          <ReferralCards
-            title='Refer Delivery Merchant/SK'
-            ilustration={<MerchantIcon />}
-            link={`${auth.referralLink}&role=${ROLES.MERCHANT}` || 'With Out Link'}
-            newUser={false}
-            classes='col-span-1'
-          />
-        )}
+        <ReferralCards
+          title='Refer SETC/FFCRA Client'
+          ilustration={<ERCClient/>}
+          link={`https://www.jornscpa.com/snap-ffcra/?refid=${auth.id}` || 'With Out Link'}
+          newUser={false}
+          classes='col-span-1'
+        />
+
+        <ReferralCards
+          title='Refer Delivery Customers'
+          ilustration={<CustomerRefIcon />}
+          link={`${auth.referralLink}&role=${ROLES.CUSTOMER}` || 'With Out Link'}
+          newUser={false}
+          classes='col-span-1'
+        />
+
+        <ReferralCards
+          title='Refer Delivery Merchant/SK'
+          ilustration={<MerchantIcon />}
+          link={`${auth.referralLink}&role=${ROLES.MERCHANT}` || 'With Out Link'}
+          newUser={false}
+          classes='col-span-1'
+        />
+
         <ReferralCards
           title='Refer Vidgo'
           ilustration={(
