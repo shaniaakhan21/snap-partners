@@ -141,9 +141,9 @@ const DashboardOverViewPage: Page = () => {
       {!isCustomer && (
         <ContractModal open={openModal} onClose={handleCloseModal} />)
       }
-      {!isCustomer && (
-        <TINPopup open={openModalTIN} onClose={handleCloseModalTIN}/>)
-      }
+
+      <TINPopup open={openModalTIN} onClose={handleCloseModalTIN}/>
+
       {/* <CommonPopup
         image="/static/success.svg"
         title="Success"
