@@ -34,6 +34,10 @@
 
 }
 
+.text-yellow1{
+    color: yellow!important;
+}
+
 .icon-input-address {
     position: relative;
 }
@@ -50,6 +54,11 @@
 .css-1u3bzj6-MuiFormControl-root-MuiTextField-root input{
     background-color: #F9F9FA!important;
 }
+
+.placeholder-option{
+    color: #B6B6B6;
+}
+
 
 
 @keyframes successAnimation {

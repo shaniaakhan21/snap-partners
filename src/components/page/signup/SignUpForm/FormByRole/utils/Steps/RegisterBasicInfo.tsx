@@ -22,6 +22,7 @@ import Swal from 'sweetalert2'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers-pro'
 import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs'
 import { DatePickerForm } from '../DatePicker'
+import states from 'data/states'
 
 interface IStepOpeProps {
   referralLink: IReferralLink,
@@ -349,19 +350,24 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             rulesForm={registerRulesConfig.city}
             isRequired
           />
-
-          <InputForm
+          <label className='font-bold text-gray-700 uppercase text-sm'>
+          STATE / PROVINCE {' '}
+            <span className='text-red-500'>*</span>
+          </label>
+          <select
+            className='w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
             id='state'
             name='state'
-            type='text'
-            label='State / Province'
-            registerId='state'
-            placeholder='Enter State / Province'
-            errors={errors.state}
-            register={register}
-            rulesForm={registerRulesConfig.state}
-            isRequired
-          />
+            style={{ backgroundImage: 'none' }}
+            {...register('state', { required: 'State is required *' })}
+          >
+            <option value=''>Select a state</option>
+            {states.map((state) => (
+              <option key={state} value={state}>
+                {state}
+              </option>
+            ))}
+          </select>
 
           <InputForm
             id='zip'

@@ -7,6 +7,7 @@ import { IAuth, useAuthStore } from 'lib/stores/Auth'
 import axios from 'axios'
 import { format } from 'date-fns'
 import states from 'data/states'
+import CommonPopup from './common'
 interface TINPopupProps {
     open: boolean;
     // showSuccessPop: () => (success: boolean) => void;
@@ -16,8 +17,8 @@ interface TINPopupProps {
 
 const TINPopup = ({ open, onClose }: TINPopupProps) => {
   const getSSN = '123654752'
-  const { auth } = useAuthStore()
-  const [certified, setCertified] = useState(false)
+  const { auth, setAuth } = useAuthStore()
+  const [validated, setValidated] = useState(false)
   const [socialSecurity, setSocialSecurity] = useState('')
   const [dateOfBirth, setDateOfBirth] = useState<Date | null>(null)
   const [socialSecurityError, setSocialSecurityError] = useState('')
@@ -28,7 +29,10 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
   const [state, setState] = useState('')
   const [zip, setZipCode] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false)
+  const handleCloseSuccessPopup = () => {
+    setShowSuccessPopup(false)
+  }
   const handleSocialSecurityChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
     // Define the regular expression pattern for Social Security
@@ -78,7 +82,6 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
   }
 
   const handleSubmit = async () => {
-    // Validate all fields
     let hasErrors = false
 
     if (!socialSecurity) {
@@ -113,15 +116,15 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
             Authorization: `Bearer ${auth.accessToken}`
           }
         })
-        // const formattedDateOfBirth = format(dateOfBirth, 'dd-mm-yyyy')
-        // const updateDOBRequest = axios.post('/api/user/update-dob', {
-        //   dateOfBirth: formattedDateOfBirth
-        // }, {
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //     Authorization: `Bearer ${auth.accessToken}`
-        //   }
-        // })
+
+        const updateDOBRequest = axios.post('/api/user/update-dob', {
+          dateOfBirth: dateOfBirth
+        }, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${auth.accessToken}`
+          }
+        })
         const updateAddressRequest = await axios.post('/api/user/update-address', {
           state: state,
           street: street,
@@ -133,16 +136,40 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
             Authorization: `Bearer ${auth.accessToken}`
           }
         })
+
+        axios.post('/api/user/isValidated', { isValidated: true }, {
+          headers: {
+            Authorization: `Bearer ${auth.accessToken}`
+          }
+        })
+          .then((result) => {
+            if (result.data.result[0] === 1) {
+              setAuth({ ...auth, isValidated: true })
+              onClose()
+            } else {
+              alert('Error while confirming validation')
+              onClose()
+            }
+          })
+          .catch((e) => {
+            console.log('Error while setting validation', e)
+            alert('Error while confirming validation')
+            onClose()
+          })
+
         console.log('After API requests')
 
-        setCity('')
-        setSocialSecurity('')
-        setDateOfBirth(null)
+        setCity(city)
+        setState(state)
+        setStreet(street)
+        setZipCode(zip)
+        setSocialSecurity(socialSecurity)
+        setDateOfBirth(dateOfBirth)
 
         console.log('After state updates')
-        await axios.all([updateSSNRequest, updateAddressRequest])
+        await axios.all([updateSSNRequest, updateAddressRequest, updateDOBRequest])
         setIsLoading(false)
-        window.location.reload()
+        setShowSuccessPopup(true)
       } catch (error) {
         console.error('API Error:', error)
         setIsLoading(false)
@@ -228,12 +255,12 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
                     id='state-select'
                     value={state}
                     onChange={handleStateChange}
-                    className='rounded-none rounded-tl-xl rounded-bl-xl border-0 appearance-none w-full uppercase bg-[#F9F9FA] text-[#b9b3ba]'
+                    className={`rounded-none rounded-tl-xl rounded-bl-xl border-0 appearance-none w-full uppercase bg-[#F9F9FA] ${state === '' ? 'placeholder-option' : ''}`}
                     style={{ backgroundImage: 'none' }}
                   >
                     <option value=''>Select a state</option>
                     {states.map((state) => (
-                      <option key={state} value={state}>
+                      <option key={state} value={state} >
                         {state}
                       </option>
                     ))}
@@ -256,7 +283,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
             <div className='w-full'>
               <FormControlLabel
                 className='items-start italic text-[#4A4A4A]'
-                control={<Checkbox checked={certified} onChange={() => setCertified(!certified)} color="default" className='pl-3 pr-1 pt-1' />}
+                control={<Checkbox checked={validated} onChange={() => setValidated(!validated)} color="default" className='pl-3 pr-1 pt-1' />}
                 label="Under penalties of perjury, I certify that: 1. The number shown on this form is my correct taxpayer identification number (or I am waiting for a number to be issued to me); and 2. I am not subject to backup withholding because: (a) I am exempt from backup withholding, or (b) I have not been notified by the Internal Revenue Service (IRS) that I am subject to backup withholding as a result of a failure to report all interest or dividends, or (c) the IRS has notified me that I am no longer subject to backup withholding; and 3. I am a U.S. citizen or other U.S. person (defined below); and 4. The FATCA code(s) entered on this form (if any) indicating that I am exempt from FATCA reporting is correct."
               />
             </div>
@@ -267,11 +294,11 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
                 type="submit"
                 variant="contained"
                 className={`send-button text-xl rounded-xl text-center  px-16 capitalize py-4 text-base ${
-                  certified
+                  validated
                     ? 'bg-primary-500 text-white'
                     : 'bg-grey text-blackCustom'
                 }`}
-                disabled={!certified}
+                disabled={!validated}
                 onClick={handleSubmit}
               >
                     Submit
@@ -282,7 +309,17 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
         </div>
 
       </Modal>
-
+      {showSuccessPopup && (
+        <CommonPopup
+          image="/static/success.svg"
+          title="Success"
+          description="Snap has updated your profile"
+          buttonText="Back To Home"
+          svgId="popupImage-success"
+          open={showSuccessPopup}
+          onClose={handleCloseSuccessPopup}
+        />
+      )}
     </>
   )
 }

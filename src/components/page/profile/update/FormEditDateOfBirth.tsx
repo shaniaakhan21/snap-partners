@@ -1,13 +1,13 @@
 import { useForm } from 'react-hook-form'
 import { Dispatch, SetStateAction, useState } from 'react'
-import { IAuth, TSetAuth } from 'lib/stores/Auth';
-import { TAccountInfoToUpdate } from 'lib/types/user/profile';
-import axios from 'axios';
-import { GTMTrack } from 'lib/utils/gtm';
-import { toast } from 'react-toastify';
-import { SpinnerPageContent } from 'components/common/loaders/PageContent';
-import { InputProfile } from '../commons/InputProfile';
-import { Button } from 'components/common/Button';
+import { IAuth, TSetAuth } from 'lib/stores/Auth'
+import { TAccountInfoToUpdate } from 'lib/types/user/profile'
+import axios from 'axios'
+import { GTMTrack } from 'lib/utils/gtm'
+import { toast } from 'react-toastify'
+import { SpinnerPageContent } from 'components/common/loaders/PageContent'
+import { InputProfile } from '../commons/InputProfile'
+import { Button } from 'components/common/Button'
 
 interface FormEditDateOfBirthProps {
   auth: IAuth;
@@ -17,7 +17,7 @@ interface FormEditDateOfBirthProps {
 }
 
 interface IDataForm {
-    newdateOfBirth: Date
+    newDateOfBirth: Date
   }
 
 export const FormEditDateOfBirth = ({
@@ -33,8 +33,9 @@ export const FormEditDateOfBirth = ({
     setIsLoading(true)
 
     try {
-      const newDateOfBirth = new Date(dataForm.newdateOfBirth)
-      await axios.post('/api/user/update-username', {
+      const newDateOfBirth = dataForm.newDateOfBirth
+      console.log('Request Data:', { dateOfBirth: newDateOfBirth })
+      await axios.post('/api/user/update-dob', {
         dateOfBirth: newDateOfBirth
       }, {
         headers: {
@@ -42,6 +43,14 @@ export const FormEditDateOfBirth = ({
         }
       }
       )
+      console.log('API Response:', await axios.post('/api/user/update-dob', {
+        dateOfBirth: newDateOfBirth
+      }, {
+        headers: {
+          Authorization: `Bearer ${auth.accessToken}`
+        }
+      }
+      ))
 
       setAuth({ ...auth, dateOfBirth: newDateOfBirth })
 
@@ -60,7 +69,7 @@ export const FormEditDateOfBirth = ({
   }
 
   return (
-<div className='max-w-3xl mx-auto'>
+    <div className='max-w-3xl mx-auto'>
       <section>
         <h3 className='text-xl font-bold'>Change Date of Birth</h3>
       </section>
@@ -88,14 +97,8 @@ export const FormEditDateOfBirth = ({
           labelName='New Date of Birth'
           placeholder='Insert the new Date of Birth'
           register={register}
-          rules={{
-            required: { value: true, message: 'Date of Birth is required *' },
-            minLength: {
-              value: 5,
-              message: 'Date of Birth must have at least 5 characters *'
-            }
-          }}
-          error={errors.newdateOfBirth}
+          rules={{ required: { value: true, message: 'Date of Birth is required *' } }}
+          error={errors.newDateOfBirth}
         />
         <br />
         <div className='flex items-center'>

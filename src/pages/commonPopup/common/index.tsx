@@ -1,5 +1,6 @@
 import { Button, Modal } from '@mui/material'
 import { Close as CrossIcon } from '@mui/icons-material'
+import Link from 'next/link';
 
 interface PopupProps {
   open: boolean;
@@ -34,8 +35,12 @@ const CommonPopup = ({ open, onClose, image, title, description, buttonText, svg
               type="submit"
               variant="contained"
               className='send-button text-xl rounded-xl text-center px-8 capitalize py-4 text-base bg-primary-500'
-            >
-              {buttonText}
+              onClick={() => {
+                window.location.reload()
+              }}
+            ><Link href='/' >
+                {buttonText}
+              </Link>
             </Button>
           </div>
         </div>

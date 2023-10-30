@@ -8,6 +8,7 @@ import { toast } from 'react-toastify'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { InputProfile } from '../commons/InputProfile'
 import { Button } from 'components/common/Button'
+import states from 'data/states'
 
 interface FormEditStateProps {
   auth: IAuth;
@@ -73,23 +74,20 @@ export const FormEditState = ({
         labelName='Current State'
         value={auth.state}
       />
-
-      <InputProfile
-        inputId='newState'
-        inputType='text'
-        labelFor='newState'
-        labelName='New State'
-        placeholder='Insert the new State'
-        register={register}
-        rules={{
-          required: { value: true, message: 'State is required *' },
-          minLength: {
-            value: 2,
-            message: 'State must have at least 2 characters *'
-          }
-        }}
-        error={errors.newState}
-      />
+      <select
+        className='relative rounded-xl bg-white w-full px-4 py-3 border-y-2 border-y-gray-200 flex flex-col justify-between'
+        id='newState'
+        name='newState'
+        style={{ backgroundImage: 'none' }}
+        {...register('newState', { required: 'State is required *' })}
+      >
+        <option value=''>Select a state</option>
+        {states.map((state) => (
+          <option key={state} value={state}>
+            {state}
+          </option>
+        ))}
+      </select>
       <br />
       <div className='flex items-center'>
         <Button type='submit' classes='mr-2'>Save</Button>
