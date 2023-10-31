@@ -115,10 +115,6 @@ export const AccountInfo = ({ auth, setAuth, removeAuth, setNewWindow, setTypeUp
         />
       </div>
 
-      {!isIntegrous && (
-        <BecomeRoles auth={auth} />
-      )}
-
       {isIntegrousCustomer && (
         <div className='w-full mt-3'>
           <div className='w-full flex flex-col md:flex-row justify-between items-start gap-y-10 gap-x-10 mt-3'>
