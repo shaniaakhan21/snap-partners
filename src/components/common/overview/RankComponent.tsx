@@ -124,7 +124,7 @@ export default function RankComponent (props: RankComponentProps) {
               <BarWithText progressColor={'#54A52C'} value={+rankData.sv.PSMPercentage} variant={'determinate'}/>
               <div className="flex pt-2">
                 <span className="text-left text-10"><strong>You need</strong></span>
-                <span className="text-right ml-auto text-10"><strong>3 Working Legs, 2500 V. Each</strong></span>
+                <span className="text-right ml-auto text-10"><strong>3 Working Legs, 500 V. Each</strong></span>
               </div>
               <div>
                 <div className='grid grid-cols-2 sm:grid-cols-5 md:grid-cols-5 gap-2'>
@@ -181,7 +181,7 @@ export default function RankComponent (props: RankComponentProps) {
               <BarWithText progressColor={'#F18A00'} value={+rankData.dct.PSMPercentage} variant={'determinate'}/>
               <div className="flex pt-2">
                 <span className="text-left text-10"><strong>You need</strong></span>
-                <span className="text-right ml-auto text-10"><strong>4 Working Legs, 2500 V. Each</strong></span>
+                <span className="text-right ml-auto text-10"><strong>4 Working Legs, 5000 V. Each</strong></span>
               </div>
               <div>
                 <div className='grid grid-cols-2 sm:grid-cols-6 md:grid-cols-6 gap-2'>
@@ -238,7 +238,7 @@ export default function RankComponent (props: RankComponentProps) {
               <BarWithText progressColor={'#000000'} value={+rankData.exec.PSMPercentage} variant={'determinate'}/>
               <div className="flex pt-2">
                 <span className="text-left text-10"><strong>You need</strong></span>
-                <span className="text-right ml-auto text-10"><strong>5 Working Legs, 2500 V. Each</strong></span>
+                <span className="text-right ml-auto text-10"><strong>5 Working Legs, 10000 V. Each</strong></span>
               </div>
               <div>
                 <div className='grid grid-cols-2 sm:grid-cols-6 md:grid-cols-6 gap-2'>
