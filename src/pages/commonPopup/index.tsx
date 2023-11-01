@@ -79,13 +79,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
     const value = event.target.value
     const truncatedValue = value.slice(0, 5)
     setZipCode(truncatedValue)
-  }
-
-  const handleZipCodeBlur = () => {
-    const value = zip // Get the current value from state
-
-    // Check if the zip code is exactly 5 characters long and consists of digits only
-    if (value.length === 5 && /^\d+$/.test(value)) {
+    if (truncatedValue.length === 5 && /^\d+$/.test(truncatedValue)) {
       setAddressError('')
     } else {
       setAddressError('Zip code must be exactly 5 digits')

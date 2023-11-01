@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction } from 'lib/types/core/next-react'
 import { builderWebsiteFields, TAccountInfoToUpdate } from 'lib/types/user/profile'
 import { IAuth } from 'lib/stores/Auth'
+import { useEffect, useState } from 'react'
 
 interface IFormAccountInfoProps {
   auth: IAuth
@@ -11,6 +12,37 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
   const _auth :any = auth
   const isIntegrous = (_auth.roles.integrousAssociate || _auth.roles.integrousCustomer)
   console.log('date dtae', auth.dateOfBirth)
+  const [decryptedSSN, setDecryptedSSN] = useState<string | undefined>('Loading...')
+  function formatSSN (ssn: string | undefined): string {
+    if (ssn && ssn.length === 9) {
+      return `XXX-XX-XX-${ssn.substring(7)}`
+    }
+    return ssn || ''
+  }
+
+  async function fetchDecryptedSSN () {
+    try {
+      const requestOptions = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${auth.accessToken}`
+        }
+      }
+
+      const response = await fetch('/api/user/get-decrypted-ssn', requestOptions)
+      const data = await response.json()
+      return data.decryptedSocialSecurityNumber || ''
+    } catch (error) {
+      console.error('Failed to fetch decrypted SSN:', error)
+      return ''
+    }
+  }
+  useEffect(() => {
+    fetchDecryptedSSN().then((decrypted) => setDecryptedSSN(decrypted))
+  }, [])
+
+  const maskedSSN = formatSSN(decryptedSSN)
   return (
     <ul className='w-full h-full rounded-lg'>
       <div className='flex flex-col sm:flex-row justify-start items-start gap-y-2 gap-x-2'>
@@ -279,7 +311,7 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
             id='password'
             name='text'
             type='text'
-            value={auth.socialSecurityNumber}
+            value={maskedSSN}
             disabled={true}
             className='w-full bg-transparent text-lg truncate'
           />

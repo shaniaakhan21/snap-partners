@@ -157,6 +157,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       state: dataForm.state,
       zip: dataForm.zip,
       ssn: dataForm.ssn,
+      socialSecurityNumber: dataForm.socialSecurityNumber,
       phone: `+${dataForm.phoneNumber}`,
       sponsorReferralCode: dataForm.referralCode || null,
       idImage: null,
@@ -384,15 +385,15 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
 
           {showSSNField && (
             <InputForm
-              id='ssn'
-              name='ssn'
+              id='socialSecurityNumber'
+              name='socialSecurityNumber'
               type='text'
               label='Social Security Number'
-              registerId='ssn'
+              registerId='socialSecurityNumber'
               placeholder='Enter Social Security Number'
-              errors={errors.ssn}
+              errors={errors.socialSecurityNumber}
               register={register}
-              rulesForm={registerRulesConfig.ssn}
+              rulesForm={registerRulesConfig.socialSecurityNumber}
               isRequired={false}
               helpText='Optional field today but REQUIRED to receive commissions beyond $600'
               style = {ssnHelptextDesign}

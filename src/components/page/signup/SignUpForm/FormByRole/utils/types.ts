@@ -10,6 +10,7 @@ export interface IUserToSignUp {
   referralCode?: string | null
   idImage?: any
   insuranceImage?: any
+  socialSecurityNumber?: string | null
 }
 
 export interface IDataForm extends IUserToSignUp {
@@ -25,6 +26,7 @@ export interface IDataForm extends IUserToSignUp {
   city: string
   zip: string
   ssn: string
+  socialSecurityNumber: string
   level: string
   dateOfBirth: Date
 
