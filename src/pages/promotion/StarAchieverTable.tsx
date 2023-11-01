@@ -18,7 +18,7 @@ const StyledDataGrid = styled(MUIDataGrid)(() => ({
     display: 'none'
   },
   '& .MuiDataGrid-virtualScroller': {
-     overflow: 'hidden'
+    overflow: 'hidden'
   }
 
 }))
@@ -97,4 +97,138 @@ const StarAchieversTable = ({ userSprintData }) => {
   )
 }
 
+export const AllAchieverTable = ({ allAchieverArray }) => {
+  const [windowWidth, setWindowWidth] = useState(0)
+  const [sprintDataRow, setSprintDataRow] = useState([])
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [])
+
+  useEffect(() => {
+    setSprintDataRow([])
+  })
+
+  const columns = [
+    {
+      field: 'name',
+      headerName: 'Name',
+      flex: windowWidth <= 400 ? 0.5 : 1
+    },
+    {
+      field: 'personalFiveIbo',
+      headerName: 'Personal IBOs',
+      flex: windowWidth <= 400 ? 0.5 : 1,
+      renderCell: (params) => {
+        const value = params.value
+        const cellStyle = {
+          padding: '3% 10%',
+          borderRadius: '20px',
+          color: 'white',
+          fontSize: '1.2em',
+          backgroundColor: value === false ? '#DD4C37' : value === true ? '#6AB63C' : 'black'
+        }
+
+        return <div style={cellStyle}>{`${value}`}</div>
+      }
+    },
+    {
+      field: 'personalQualifiedErc',
+      headerName: 'Personal ERC',
+      flex: windowWidth <= 400 ? 0.5 : 1,
+      renderCell: (params) => {
+        const value = params.value
+        const cellStyle = {
+          padding: '3% 10%',
+          borderRadius: '20px',
+          color: 'white',
+          fontSize: '1.2em',
+          backgroundColor: value === false ? '#DD4C37' : value === true ? '#6AB63C' : 'black'
+        }
+
+        return <div style={cellStyle}>{`${value}`}</div>
+      }
+    },
+    {
+      field: 'friendFiveIbo',
+      headerName: 'Friend IBOs',
+      flex: windowWidth <= 400 ? 0.5 : 1,
+      renderCell: (params) => {
+        const value = params.value
+        const cellStyle = {
+          padding: '3% 10%',
+          borderRadius: '20px',
+          color: 'white',
+          fontSize: '1.2em',
+          backgroundColor: value === false ? '#DD4C37' : value === true ? '#6AB63C' : 'black'
+        }
+
+        return <div style={cellStyle}>{`${value}`}</div>
+      }
+    },
+    {
+      field: 'friendQualifiedErc',
+      headerName: 'Friend ERC',
+      flex: windowWidth <= 400 ? 0.5 : 1,
+      renderCell: (params) => {
+        const value = params.value
+        const cellStyle = {
+          padding: '3% 10%',
+          borderRadius: '20px',
+          color: 'white',
+          fontSize: '1.2em',
+          backgroundColor: value === false ? '#DD4C37' : value === true ? '#6AB63C' : 'black'
+        }
+
+        return <div style={cellStyle}>{`${value}`}</div>
+      }
+    },
+    {
+      field: 'friendOfFriendQualifiedErc',
+      headerName: 'Friend of Friend ERC',
+      flex: windowWidth <= 400 ? 0.5 : 1,
+      renderCell: (params) => {
+        const value = params.value
+        const cellStyle = {
+          padding: '3% 10%',
+          borderRadius: '20px',
+          color: 'white',
+          fontSize: '1.2em',
+          backgroundColor: value === false ? '#DD4C37' : value === true ? '#6AB63C' : 'black'
+        }
+
+        return <div style={cellStyle}>{`${value}`}</div>
+      }
+    }
+  ]
+
+  return (
+    <div className='w-full'>
+      <br></br>
+      <div className="datagrid-container"style={{ overflowX: 'hidden', overflowY: 'hidden' }}>
+        <div style={{ minWidth: '300px' }}>
+          {sprintDataRow
+            ? <StyledDataGrid
+              rows={allAchieverArray && allAchieverArray}
+              columns={columns}
+              sx={{
+                minHeight: '214px',
+                borderColor: 'rgba(224, 224, 224, 0.5)!important'
+              }}
+            />
+            : <></>}
+        </div>
+      </div>
+      <br></br>
+    </div>
+  )
+}
 export default StarAchieversTable
