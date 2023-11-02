@@ -1,4 +1,4 @@
-export type TAccountInfoToUpdate = 'email' | 'phone' | 'password' | 'bankaccount' | 'socialsecurity' | 'username' | 'builderInfo' | 'street' | 'city' | 'state' | 'zip' | 'dateOfBirth'
+export type TAccountInfoToUpdate = 'email' | 'phone' | 'password' | 'bankaccount' | 'socialSecurityNumber' | 'username' | 'builderInfo' | 'street' | 'city' | 'state' | 'zip' | 'dateOfBirth'
 
 export enum BuilderWebsiteField {
   facebook_url = 'facebook_url',

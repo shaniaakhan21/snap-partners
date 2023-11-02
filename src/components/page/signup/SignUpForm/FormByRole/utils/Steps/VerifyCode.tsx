@@ -106,7 +106,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
           state: userTrack.userInfo.state,
           zip: userTrack.userInfo.zip,
           ssn: userTrack.userInfo.ssn,
-          socialSecurityNumber: userTrack.userInfo.ssn,
+          socialSecurityNumber: userTrack.userInfo.socialSecurityNumber,
           idImage: userTrack.userInfo.idImage,
           insuranceImage: userTrack.userInfo.insuranceImage,
           roles: {
@@ -140,6 +140,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
           state: userTrack.userInfo.state,
           zip: userTrack.userInfo.zip,
           insuranceImage: userTrack.userInfo.insuranceImage,
+          socialSecurityNumber: userTrack.userInfo.socialSecurityNumber,
           roles: {
             admin: userTrack.userInfo.roles.admin,
             customer: userTrack.userInfo.roles.customer,

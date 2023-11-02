@@ -70,7 +70,7 @@ const ProfilePage = ({ email, tokenExist }: { email: string, tokenExist: boolean
   if (typeUpdate === 'phone') return <EditPhone auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
   if (typeUpdate === 'password') return <FormUpdatePassword auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
   if (typeUpdate === 'bankaccount') return <FormUpdateBankAccount auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
-  if (typeUpdate === 'socialsecurity') return <FormUpdateSocialSecurity auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
+  if (typeUpdate === 'socialSecurityNumber') return <FormUpdateSocialSecurity auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
   if (typeUpdate === 'builderInfo') return <FormUpdateBuilderInfo auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
   if (typeUpdate === 'dateOfBirth') return <FormEditDateOfBirth auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
   if (typeUpdate === 'street') return <FormEditStreet auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />

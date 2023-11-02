@@ -59,6 +59,13 @@
     color: #B6B6B6;
 }
 
+.hovercustom:hover{
+    background: transparent;
+}
+
+.hoverit:hover{
+    background: #DD4C37;
+}
 
 
 @keyframes successAnimation {
@@ -91,3 +98,4 @@
     animation: shake 1s linear 1;
   }
   
+

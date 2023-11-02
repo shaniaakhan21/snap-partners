@@ -18,7 +18,7 @@ const StyledDataGrid = styled(MUIDataGrid)(() => ({
     display: 'none'
   },
   '& .MuiDataGrid-virtualScroller': {
-     overflow: 'hidden'
+    overflow: 'hidden'
   }
 
 }))

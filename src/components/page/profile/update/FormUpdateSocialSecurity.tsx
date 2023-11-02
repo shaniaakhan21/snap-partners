@@ -28,37 +28,6 @@ export const FormUpdateSocialSecurity = ({ auth, setAuth, typeUpdate, setTypeUpd
   const { handleSubmit, register, reset, formState: { errors }, setError } = useForm<IDataForm>()
 
   const [isLoading, setIsLoading] = useState(false)
-  const [decryptedSSN, setDecryptedSSN] = useState<string | undefined>('Loading...')
-  function formatSSN (ssn: string | undefined): string {
-    if (ssn && ssn.length === 9) {
-      return `XXX-XX-XX-${ssn.substring(7)}`
-    }
-    return ssn || ''
-  }
-
-  async function fetchDecryptedSSN () {
-    try {
-      const requestOptions = {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${auth.accessToken}`
-        }
-      }
-
-      const response = await fetch('/api/user/get-decrypted-ssn', requestOptions)
-      const data = await response.json()
-      return data.decryptedSocialSecurityNumber || ''
-    } catch (error) {
-      console.error('Failed to fetch decrypted SSN:', error)
-      return ''
-    }
-  }
-  useEffect(() => {
-    fetchDecryptedSSN().then((decrypted) => setDecryptedSSN(decrypted))
-  }, [])
-
-  const maskedSSN = formatSSN(decryptedSSN)
   const onSubmit = async (dataForm: IDataForm) => {
     setIsLoading(true)
 
@@ -100,7 +69,7 @@ export const FormUpdateSocialSecurity = ({ auth, setAuth, typeUpdate, setTypeUpd
           inputType='email'
           labelFor='email'
           labelName='Current Social Security Number'
-          value={maskedSSN}
+          value={auth.socialSecurityNumber}
         />
 
         <InputProfile

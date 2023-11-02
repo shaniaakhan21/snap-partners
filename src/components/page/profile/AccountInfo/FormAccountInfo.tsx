@@ -12,37 +12,6 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
   const _auth :any = auth
   const isIntegrous = (_auth.roles.integrousAssociate || _auth.roles.integrousCustomer)
   console.log('date dtae', auth.dateOfBirth)
-  const [decryptedSSN, setDecryptedSSN] = useState<string | undefined>('Loading...')
-  function formatSSN (ssn: string | undefined): string {
-    if (ssn && ssn.length === 9) {
-      return `XXX-XX-XX-${ssn.substring(7)}`
-    }
-    return ssn || ''
-  }
-
-  async function fetchDecryptedSSN () {
-    try {
-      const requestOptions = {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${auth.accessToken}`
-        }
-      }
-
-      const response = await fetch('/api/user/get-decrypted-ssn', requestOptions)
-      const data = await response.json()
-      return data.decryptedSocialSecurityNumber || ''
-    } catch (error) {
-      console.error('Failed to fetch decrypted SSN:', error)
-      return ''
-    }
-  }
-  useEffect(() => {
-    fetchDecryptedSSN().then((decrypted) => setDecryptedSSN(decrypted))
-  }, [])
-
-  const maskedSSN = formatSSN(decryptedSSN)
   return (
     <ul className='w-full h-full rounded-lg'>
       <div className='flex flex-col sm:flex-row justify-start items-start gap-y-2 gap-x-2'>
@@ -102,11 +71,11 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
         </li>
         <li className='rounded-xl w-1/2 bg-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center'>
           <div>
-            <label htmlFor='dateofbirth' className='text-sm'>Date of Birth</label>
+            <label htmlFor='dateOfBirth' className='text-sm'>Date of Birth</label>
             <br />
             <input
-              id='dateofbirth'
-              name='dateofbirth'
+              id='dateOfBirth'
+              name='dateOfBirth'
               type='text'
               value={
                 auth.dateOfBirth
@@ -311,7 +280,7 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
             id='password'
             name='text'
             type='text'
-            value={maskedSSN}
+            value={auth.socialSecurityNumber}
             disabled={true}
             className='w-full bg-transparent text-lg truncate'
           />
@@ -319,7 +288,7 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
 
         <div>
           <button
-            onClick={() => setTypeUpdate('socialsecurity')}
+            onClick={() => setTypeUpdate('socialSecurityNumber')}
             className='bg-primary-500 hover:bg-opacity-80 rounded-full px-4 py-1 text-white font-bold uppercase'
           >
             Edit
