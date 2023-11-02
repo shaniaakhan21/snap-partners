@@ -260,7 +260,7 @@ export default function RankComponent (props: RankComponentProps) {
               <div className='col-span-3 text-xs pt-5'>
                 <div className='flex flex-row justify-between'>
                   <strong className='text-10'>
-                    You have {rankData.exec.commissionVol} PVC
+                    You have {formatNumberToLocale(rankData.exec.commissionVol, 0)} PVC
                   </strong>
                   <strong className='text-10'>
                     You need 100 PVC
