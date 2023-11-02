@@ -97,7 +97,7 @@ const StarAchieversTable = ({ userSprintData }) => {
   )
 }
 
-export const AllAchieverTable = ({ allAchieverArray }) => {
+export const AllAchieverTable = ({ allAchieverArray, refreshFunc }) => {
   const [windowWidth, setWindowWidth] = useState(0)
   const [sprintDataRow, setSprintDataRow] = useState([])
 
@@ -115,7 +115,7 @@ export const AllAchieverTable = ({ allAchieverArray }) => {
 
   useEffect(() => {
     setSprintDataRow([])
-  })
+  }, [])
 
   const columns = [
     {
@@ -206,6 +206,29 @@ export const AllAchieverTable = ({ allAchieverArray }) => {
         }
 
         return <div style={cellStyle}>{`${value}`}</div>
+      }
+    },
+    {
+      field: 'date',
+      headerName: 'Updated AT',
+      type: 'string',
+      flex: windowWidth <= 400 ? 0.5 : 1
+    },
+    {
+      field: 'userId',
+      headerName: '',
+      flex: windowWidth <= 400 ? 0.5 : 1,
+      renderCell: (params) => {
+        const value = params.value
+        const cellStyle = {
+          padding: '3% 10%',
+          borderRadius: '20px',
+          color: 'white',
+          fontSize: '1.2em',
+          backgroundColor: value === false ? '#DD4C37' : value === true ? '#6AB63C' : 'black'
+        }
+
+        return <button style={cellStyle} onClick={() => { refreshFunc(value) }}>Refresh</button>
       }
     }
   ]
