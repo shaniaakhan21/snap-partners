@@ -88,8 +88,7 @@ export const drawerRoutes = [
   {
     icon: <AccountIcon />,
     to: '/network-activity',
-    label: 'Network Activity',
-    integrous: true
+    label: 'Network Activity'
    },
   {
     icon: <GenealogyIcon />,
