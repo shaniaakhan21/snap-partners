@@ -26,12 +26,10 @@ const StarAchiever: Page = () => {
       }
     })
       .then((result) => {
-        console.log('result is', result)
         setSprintDataArray(result?.data?.userSprintData)
         const arr = result.data.userSprintData.filter((user) => user.boxes !== null)
         const allAchieverData = []
         arr.map((element) => {
-          console.log('elements are', element)
           const boxes = JSON.parse(element.boxes)
           allAchieverData.push({
             id: element.id,
@@ -52,7 +50,6 @@ const StarAchiever: Page = () => {
   }, [refreshFlag])
 
   const refreshFunc = (userId) => {
-    console.log('userId from table', userId)
     const getSprintData = async () => {
       const token = getLocalStorage('accessToken')
       await axios.get('/api/sprint-to-paradise', {
