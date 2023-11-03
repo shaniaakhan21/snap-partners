@@ -98,6 +98,7 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />
         )}
+        {/*
         <ReferralCards
           title='Refer Vidgo'
           ilustration={(
@@ -109,6 +110,7 @@ const ReferralsPage: Page = () => {
           newUser={false}
           classes='col-span-1'
         />
+        */}
 
         <ReferralCards
           title='Refer Commercial Energy'
