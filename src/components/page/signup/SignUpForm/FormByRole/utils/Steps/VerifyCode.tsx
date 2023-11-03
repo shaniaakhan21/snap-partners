@@ -96,6 +96,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
         data: {
           name: userTrack.userInfo.name,
           lastname: userTrack.userInfo.lastname,
+          dateOfBirth: userTrack.userInfo.dateOfBirth,
           email: userTrack.userInfo.email,
           username: userTrack.userInfo.username,
           password: userTrack.userInfo.password,
@@ -105,6 +106,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
           state: userTrack.userInfo.state,
           zip: userTrack.userInfo.zip,
           ssn: userTrack.userInfo.ssn,
+          socialSecurityNumber: userTrack.userInfo.socialSecurityNumber,
           idImage: userTrack.userInfo.idImage,
           insuranceImage: userTrack.userInfo.insuranceImage,
           roles: {
@@ -129,10 +131,16 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
           email: userTrack.userInfo.email,
           username: userTrack.userInfo.username,
           password: userTrack.userInfo.password,
+          dateOfBirth: userTrack.userInfo.dateOfBirth,
           phoneNumber: userTrack.userInfo.phoneNumber,
           idImage: userTrack.userInfo.idImage,
-          city: userTrack.userInfo.merchant.city,
+          city_merchant: userTrack.userInfo.merchant.city,
+          street: userTrack.userInfo.street,
+          city: userTrack.userInfo.city,
+          state: userTrack.userInfo.state,
+          zip: userTrack.userInfo.zip,
           insuranceImage: userTrack.userInfo.insuranceImage,
+          socialSecurityNumber: userTrack.userInfo.socialSecurityNumber,
           roles: {
             admin: userTrack.userInfo.roles.admin,
             customer: userTrack.userInfo.roles.customer,

@@ -14,7 +14,11 @@ function AccountingReportsSubMenu () {
           }}
 
           style={{ cursor: 'pointer' }}>Field Promotions</li></Link>
-          <li className='sub-list-items font-xs sm:font-base'>Item 2</li>
+          <Link href='/1099-report' passHref><li className='sub-list-items font-xs sm:font-base' onClick={() => {
+            setMenuOpen(false)
+          }}
+
+          style={{ cursor: 'pointer' }}>1099's</li></Link>
           <li className='sub-list-items font-xs sm:font-base'>Item 3</li>
           <li className='sub-list-items font-xs sm:font-base'>Item 4</li>
         </ul>

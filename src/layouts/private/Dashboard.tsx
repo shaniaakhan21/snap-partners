@@ -56,6 +56,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         roles: data.roles,
         id: data.id,
         username: data.username,
+        dateOfBirth: data.dateOfBirth,
         referralCode: data.referralCode,
         driver_status: data.driver_status,
         idImage: data.idImage,
@@ -75,6 +76,11 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         bank_information: data.bank_information,
         level: data.level,
         isCertified: data.isCertified,
+        isValidated: data.isValidated,
+        street: data.street,
+        city: data.city,
+        state: data.state,
+        zip: data.zip,
         ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
       })
     })()
@@ -102,6 +108,12 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         blocked,
         deleted,
         isCertified,
+        isValidated,
+        street,
+        state,
+        city,
+        zip,
+        dateOfBirth,
         nsurAccount,
         referralLink
       } = auth
@@ -128,6 +140,12 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         blocked,
         deleted,
         isCertified,
+        isValidated,
+        street,
+        state,
+        city,
+        zip,
+        dateOfBirth,
         nsurAccount
       })
     } else {

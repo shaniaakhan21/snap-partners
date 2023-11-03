@@ -19,6 +19,10 @@ import { GTMTrack } from 'lib/utils/gtm'
 import { useRouter } from 'next/router'
 import { ROLES } from './../../../../../../../config/roles'
 import Swal from 'sweetalert2'
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers-pro'
+import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs'
+import { DatePickerForm } from '../DatePicker'
+import states from 'data/states'
 
 interface IStepOpeProps {
   referralLink: IReferralLink,
@@ -145,6 +149,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       username: dataForm.username,
       name: dataForm.name,
       lastname: dataForm.lastname,
+      dateOfBirth: dataForm.dateOfBirth,
       password: dataForm.password,
       businessName: dataForm.businessName,
       street: dataForm.street,
@@ -152,6 +157,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       state: dataForm.state,
       zip: dataForm.zip,
       ssn: dataForm.ssn,
+      socialSecurityNumber: dataForm.socialSecurityNumber,
       phone: `+${dataForm.phoneNumber}`,
       sponsorReferralCode: dataForm.referralCode || null,
       idImage: null,
@@ -219,6 +225,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
         ? `/auth/login-wellness?referralCode=${referralCode}&redirectToIntegrousWellness=true`
         : '/auth/login'
   const maxWClass = router.pathname === '/auth/signup-wellness' ? 'max-w-2xl' : 'max-w-md'
+
   return (
     <>
       <div className={`mx-auto w-full ${maxWClass}`}>
@@ -289,10 +296,20 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             type='text'
             label='Last Name'
             registerId='lastname'
-            placeholder='Enter Lastname'
+            placeholder='Enter Last Name'
             errors={errors.lastname}
             register={register}
             rulesForm={registerRulesConfig.lastname}
+            isRequired
+          />
+
+          <DatePickerForm
+            id='dateOfBirth'
+            name='dateOfBirth'
+            label='Date of Birth'
+            register={register}
+            registerId='dateOfBirth'
+            errors={errors.dateOfBirth}
             isRequired
           />
 
@@ -334,19 +351,24 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             rulesForm={registerRulesConfig.city}
             isRequired
           />
-
-          <InputForm
+          <label className='font-bold text-gray-700 uppercase text-sm'>
+          STATE / PROVINCE {' '}
+            <span className='text-red-500'>*</span>
+          </label>
+          <select
+            className='w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
             id='state'
             name='state'
-            type='text'
-            label='State / Province'
-            registerId='state'
-            placeholder='Enter State / Province'
-            errors={errors.state}
-            register={register}
-            rulesForm={registerRulesConfig.state}
-            isRequired
-          />
+            style={{ backgroundImage: 'none' }}
+            {...register('state', { required: 'State is required *' })}
+          >
+            <option value=''>Select a state</option>
+            {states.map((state) => (
+              <option key={state} value={state}>
+                {state}
+              </option>
+            ))}
+          </select>
 
           <InputForm
             id='zip'
@@ -363,15 +385,15 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
 
           {showSSNField && (
             <InputForm
-              id='ssn'
-              name='ssn'
+              id='socialSecurityNumber'
+              name='socialSecurityNumber'
               type='text'
               label='Social Security Number'
-              registerId='ssn'
+              registerId='socialSecurityNumber'
               placeholder='Enter Social Security Number'
-              errors={errors.ssn}
+              errors={errors.socialSecurityNumber}
               register={register}
-              rulesForm={registerRulesConfig.ssn}
+              rulesForm={registerRulesConfig.socialSecurityNumber}
               isRequired={false}
               helpText='Optional field today but REQUIRED to receive commissions beyond $600'
               style = {ssnHelptextDesign}

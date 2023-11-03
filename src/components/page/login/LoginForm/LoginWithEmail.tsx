@@ -99,6 +99,12 @@ export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
       },
       level: data?.level,
       isCertified: data.isCertified,
+      isValidated: data.isValidated,
+      street: data?.street,
+      state: data?.state,
+      city: data?.city,
+      zip: data?.zip,
+      dateOfBirth: data.dateOfBirth,
       ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
     })
     reset()

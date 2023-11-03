@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { sendEmailToConfirm } from 'lib/services/user/updateUserEmail'
 import { Dispatch, SetStateAction } from 'lib/types/core/next-react'
@@ -21,33 +21,46 @@ interface IFormUpdatePhoneProps {
 }
 
 interface IDataForm {
-  newEmail: string
+  newSocialSecurityNumber: string
 }
 
 export const FormUpdateSocialSecurity = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IFormUpdatePhoneProps) => {
   const { handleSubmit, register, reset, formState: { errors }, setError } = useForm<IDataForm>()
 
   const [isLoading, setIsLoading] = useState(false)
-
   const onSubmit = async (dataForm: IDataForm) => {
     setIsLoading(true)
 
-    await fetch('/api/user/update-social-security-number', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${auth.accessToken}`
-      },
-      body: JSON.stringify({
-        socialSecurityNumber: dataForm.newEmail
+    try {
+      const response = await fetch('/api/user/update-social-security-number', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${auth.accessToken}`
+        },
+        body: JSON.stringify({
+          socialSecurityNumber: dataForm.newSocialSecurityNumber
+        })
       })
-    })
 
-    setAuth({ ...auth, socialSecurityNumber: dataForm.newEmail })
+      if (response.status === 200) {
+        // Update the social security number in the UI
+        setAuth({ ...auth, socialSecurityNumber: dataForm.newSocialSecurityNumber })
+        GTMTrack.editProfile(typeUpdate)
+        reset()
+        setTypeUpdate(null)
+      } else {
+        // Handle any error response from the API
+        // For example, you can display an error message to the user.
+        // You can access the error response using response.json()
+        const errorResponse = await response.json()
+        setError('newSocialSecurityNumber', { message: errorResponse.message })
+      }
+    } catch (error) {
+      console.error('API Request Error:', error)
+      setError('newSocialSecurityNumber', { message: 'An error occurred while updating the social security number.' })
+    }
 
-    GTMTrack.editProfile(typeUpdate)
-    reset()
-    setTypeUpdate(null)
     setIsLoading(false)
   }
 
@@ -66,17 +79,17 @@ export const FormUpdateSocialSecurity = ({ auth, setAuth, typeUpdate, setTypeUpd
       <form onSubmit={handleSubmit(onSubmit)}>
         <InputProfile
           disabled
-          inputId='email'
-          inputType='email'
-          labelFor='email'
+          inputId='socialSecurityNumber'
+          inputType='text'
+          labelFor='socialSecurityNumber'
           labelName='Current Social Security Number'
           value={auth.socialSecurityNumber}
         />
 
         <InputProfile
-          inputId='newEmail'
+          inputId='newSocialSecurityNumber'
           inputType='text'
-          labelFor='newEmail'
+          labelFor='newSocialSecurityNumber'
           labelName='New Social Security Number'
           placeholder='Insert the new Social Security Number'
           register={register}
@@ -88,7 +101,7 @@ export const FormUpdateSocialSecurity = ({ auth, setAuth, typeUpdate, setTypeUpd
               message: 'Enter a valid Social Security Number *'
             }
           }}
-          error={errors.newEmail}
+          error={errors.newSocialSecurityNumber}
         />
         <br />
         <div className='flex items-center'>

@@ -7,6 +7,7 @@ interface IAuthorizations {
 
 interface IQueryUserMeReturn extends IQueryErrorReturn {
   data: {
+    dateOfBirth: Date
     socialSecurityNumber: string
     createdAt: string
     id: number
@@ -20,6 +21,10 @@ interface IQueryUserMeReturn extends IQueryErrorReturn {
     idImage: string
     insuranceImage: string
     profileImage: string
+    street: string
+    city: string
+    state: string
+    zip: string
     roles: {
       admin: boolean
       customer: boolean
@@ -56,6 +61,7 @@ interface IQueryUserMeReturn extends IQueryErrorReturn {
     },
     level?: string,
     isCertified?: boolean
+    isValidated?: boolean
   }
 }
 

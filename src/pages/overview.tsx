@@ -26,6 +26,9 @@ import PVComponentSnap from 'components/common/dashBackOffice/PersonalVolumeSnap
 import Modal from '@mui/material/Modal'
 import Button from '@mui/material/Button'
 import ContractModal from './wellness/components/ContractModal'
+import TINPopup from './commonPopup'
+import CommonPopup from './commonPopup/common/index'
+import { useRouter } from 'next/router'
 
 const { SEO } = APP_INFO
 
@@ -33,17 +36,22 @@ const DashboardOverViewPage: Page = () => {
   // const { loading } = useReports()
   const [rankData, setRankData] = useState<RankData>(null)
   const [viewing, setViewing] = useState<string>('Aug')
-  const store = useAuthStore()
-  const auth: any = store.auth
+  const { auth, setAuth } = useAuthStore()
+  const router = useRouter()
   const [openModal, setOpenModal] = useState(!auth.isCertified)
-
+  const [openModalTIN, setOpenModalTIN] = useState(!auth.isValidated)
+  console.log('validation', auth.isValidated)
   const currentOverview = getLocalStorage('currentBackoffice') || ''
   const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
   const isCustomer = auth.roles.customer
   const isIntegrousAssociate = auth.roles.integrousAssociate
-
+  const [open, setOpen] = useState(true)
   const handleCloseModal = () => {
     setOpenModal(false)
+  }
+
+  const handleCloseModalTIN = () => {
+    setOpenModalTIN(false)
   }
 
   useEffect(() => {
@@ -59,6 +67,10 @@ const DashboardOverViewPage: Page = () => {
       setRankData(response.data)
     })()
   }, [])
+
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   if (isIntegrousAssociate && currentOverview === '') {
     return (
@@ -129,6 +141,23 @@ const DashboardOverViewPage: Page = () => {
       {!isCustomer && (
         <ContractModal open={openModal} onClose={handleCloseModal} />)
       }
+
+      <TINPopup open={openModalTIN} onClose={handleCloseModalTIN}/>
+
+      {/* <CommonPopup
+        image="/static/success.svg"
+        title="Success"
+        description="Snap has updated your profile"
+        buttonText="Back to Home"
+        svgId="popupImage-success"
+        onClose={handleClose} open={open} />
+      <CommonPopup
+        image="/static/error.svg"
+        title="Failed"
+        description="Snap would like you to complete Document verification to move forward."
+        buttonText="Verify Documents"
+        svgId="popupImage-error"
+        onClose={handleClose} open={open} /> */}
     </>
   )
 }
