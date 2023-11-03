@@ -21,6 +21,12 @@ export const DatePickerForm = ({
   errors,
   isRequired
 }: IDatePickerProps) => {
+  const handleDateChange = (date: Date | null) => {
+    register(name, {
+      value: date,
+      required: isRequired ? 'Date is required' : false
+    })
+  }
   return (
     <div>
       <label htmlFor={id} className='font-bold text-gray-700 uppercase text-sm'>
@@ -31,6 +37,7 @@ export const DatePickerForm = ({
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker
           className='w-full my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
+          onChange={handleDateChange}
         />
       </LocalizationProvider>
 

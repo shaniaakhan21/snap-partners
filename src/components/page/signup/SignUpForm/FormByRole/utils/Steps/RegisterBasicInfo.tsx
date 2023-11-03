@@ -310,7 +310,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             register={register}
             registerId='dateOfBirth'
             errors={errors.dateOfBirth}
-            isRequired={true}
+            isRequired
           />
 
           <InputForm
