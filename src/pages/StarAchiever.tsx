@@ -17,6 +17,7 @@ const { SEO } = APP_INFO
 const StarAchiever: Page = () => {
   const [sprintDataArray, setSprintDataArray] = useState([])
   const [allAchieverArray, setAllAchieverArray] = useState([])
+  const [refreshFlag, setRefreshFlag] = useState(false)
   useEffect(() => {
     const token = getLocalStorage('accessToken')
     axios.get('/api/sprint-to-paradise/all', {
@@ -25,7 +26,6 @@ const StarAchiever: Page = () => {
       }
     })
       .then((result) => {
-        console.log('result is', result)
         setSprintDataArray(result?.data?.userSprintData)
         const arr = result.data.userSprintData.filter((user) => user.boxes !== null)
         const allAchieverData = []
@@ -35,6 +35,8 @@ const StarAchiever: Page = () => {
             id: element.id,
             name: element.name,
             count: Object.values(boxes).filter(value => value === true).length,
+            date: element.date,
+            userId: element.userId,
             ...boxes
 
           })
@@ -45,7 +47,25 @@ const StarAchiever: Page = () => {
       .catch((e) => {
         console.log('error occoured while getting reports')
       })
-  }, [])
+  }, [refreshFlag])
+
+  const refreshFunc = (userId) => {
+    const getSprintData = async () => {
+      const token = getLocalStorage('accessToken')
+      await axios.get('/api/sprint-to-paradise', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        params: {
+          userId: userId
+        }
+      })
+        .then((result) => {
+          setRefreshFlag(!refreshFlag)
+        })
+    }
+    getSprintData()
+  }
 
   const downloadStarAchieverReport = async () => {
     // const doc = new jsPDF();
@@ -79,8 +99,8 @@ const StarAchiever: Page = () => {
         <StarAchieversTable userSprintData={sprintDataArray?.filter((data) => data?.starCount === 4) || []} />
         <h1 className='text-base sm:text-xl font-semibold'>5 Star Achievers</h1>
         <StarAchieversTable userSprintData={sprintDataArray?.filter((data) => data?.starCount === 5) || []} />
-        <h1 className='text-base sm:text-xl font-semibold'>All users</h1>
-        <AllAchieverTable allAchieverArray = {allAchieverArray} />
+        <h1 className='text-base sm:text-xl font-semibold'>IBO Progress to 1-Star</h1>
+        <AllAchieverTable allAchieverArray = {allAchieverArray} refreshFunc = {refreshFunc} />
       </div>
     </>
   )
