@@ -87,6 +87,42 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
     }
   }
 
+  const updateSocialSecurity = async (socialSecurity) => {
+    try {
+      const response = await axios.post('/api/user/update-social-security-number', {
+        socialSecurityNumber: socialSecurity
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${auth.accessToken}`
+        }
+      })
+      if (response.status === 200) {
+        console.log('Social Security Number updated successfully')
+      }
+    } catch (error) {
+      console.error('Error updating Social Security Number', error)
+    }
+  }
+
+  const reviewSSN = async (socialSecurity) => {
+    try {
+      const response = await axios.post('/api/user/reviewSSN', {
+        newSSN: socialSecurity
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${auth.accessToken}`
+        }
+      })
+      if (response.status === 200) {
+        console.log('Social Security Number is under review')
+      }
+    } catch (error) {
+      console.error('Error reviewing Social Security Number', error)
+    }
+  }
+
   const handleSubmit = async () => {
     let hasErrors = false
 
@@ -133,19 +169,17 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
             Authorization: `Bearer ${auth.accessToken}`
           }
         })
+        const lastTwoDigitsInSSN = socialSecurity.substring(-2)
+        const lastTwoDigitsInAuthSSN = auth.socialSecurityNumber.substring(-2)
 
-        const response = await axios.post('/api/user/reviewSSN', {
-          newSSN: socialSecurity
-        }, {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${auth.accessToken}`
-          }
-        })
-        if (response.data.message === 'Social Security Number is the same as the previous one') {
+        if ((auth.socialSecurityNumber === null) || (lastTwoDigitsInAuthSSN === lastTwoDigitsInSSN)) {
+          updateSocialSecurity(socialSecurity)
           setShowSuccessPopup(true)
-        } else {
+        } else if (lastTwoDigitsInAuthSSN !== lastTwoDigitsInSSN) {
+          reviewSSN(socialSecurity)
           setShowFailedPopup(true)
+        } else {
+          setShowSuccessPopup(true)
         }
 
         axios.post('/api/user/isValidated', { isValidated: true }, {
@@ -163,22 +197,18 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
             }
           })
           .catch((e) => {
-            console.log('Error while setting validation', e)
             alert('Error while confirming validation')
             onClose()
           })
-
-        console.log('After API requests')
 
         setCity(city)
         setState(state)
         setStreet(street)
         setZipCode(zip)
         setDateOfBirth(dateOfBirth)
-        await axios.all([updateAddressRequest, updateDOBRequest, response])
+        await axios.all([updateAddressRequest, updateDOBRequest])
         setIsLoading(false)
       } catch (error) {
-        console.error('API Error:', error)
         setIsLoading(false)
       }
     }
@@ -213,6 +243,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
                   <input
                     className="w-full outline-none"
                     placeholder="Social Security"
+                    type='text'
                     value={socialSecurity}
                     onChange={handleSocialSecurityChange}
                     required
