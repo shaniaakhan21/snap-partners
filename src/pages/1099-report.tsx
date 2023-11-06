@@ -8,6 +8,7 @@ import { Button, Dialog, DialogContent, DialogTitle, IconButton } from '@mui/mat
 import { styled } from '@mui/system'
 import { useEffect, useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
+import axios from 'axios'
 
 const { SEO } = APP_INFO
 
@@ -41,9 +42,10 @@ const StyledDataGrid = styled(MUIDataGrid)(() => ({
 
 const Report: Page = () => {
   const [windowWidth, setWindowWidth] = useState(0)
-  const [ssnCheckboxes, setSsnCheckboxes] = useState({})
+  const [ssnCheckboxes, setSsnCheckboxes] = useState([])
   const [imageOpen, setImageOpen] = useState(false)
   const [imageSrc, setImageSrc] = useState('')
+  const [report1099, setReport1099] = useState(null)
 
   useEffect(() => {
     const handleResize = () => {
@@ -57,6 +59,27 @@ const Report: Page = () => {
     }
   }, [])
 
+  const get1099ReportData = async () => {
+    await axios.get('/api/admin/1099-report')
+      .then(async (response) => {
+        console.log('response from 1099 is', response.data.result)
+        const newArr: any[] = []
+        await response.data.result.map((res) => newArr.push({
+          ...res,
+          name: `${res.name} ${res.lastname}`,
+          email: res.email,
+          oldSSN: res.socialSecurityNumber,
+          newSSN: res.newSSN,
+          document: res.SSNDocURL
+        }))
+        setReport1099(newArr)
+      })
+  }
+
+  useEffect(() => {
+    get1099ReportData()
+  }, [])
+
   const handleCheckboxChange = (rowId, column) => {
     setSsnCheckboxes((prevCheckboxes) => ({
       ...prevCheckboxes,
@@ -67,8 +90,9 @@ const Report: Page = () => {
     }))
   }
   const handleViewDocument = (imageUrl) => {
-    setImageSrc(imageUrl)
-    setImageOpen(true)
+    console.log('1099 doc url is', imageUrl)
+    // setImageSrc(imageUrl)
+    // setImageOpen(true)
   }
   const handleCloseImageDialog = () => {
     setImageOpen(false)
@@ -123,13 +147,13 @@ const Report: Page = () => {
       headerName: 'Documents',
       flex: windowWidth <= 400 ? 0.5 : 1,
       renderCell: (params) => (
-        <Button
+        <a href = {params.value ? `${params.value}` : '#'} target='_blank'><Button
           variant="contained"
           className='bg-[#FA4616] hoverit'
-          onClick={() => handleViewDocument(params.row.document.imageUrl)}
+          // onClick={() => handleViewDocument(params.value)}
         >
           View Document
-        </Button>)
+        </Button></a>)
     }
   ]
 
@@ -246,7 +270,9 @@ const Report: Page = () => {
         <h1 className='text-base sm:text-xl font-semibold'>The Following users need additional verification:</h1>
         <br></br>
         <div>
-          <StyledDataGrid columns={columns} rows={rows}/>
+          {
+            report1099 ? <StyledDataGrid columns={columns} rows={report1099}/> : <></>
+          }
         </div>
         <br></br>
         <div className='w-full flex justify-end'>
