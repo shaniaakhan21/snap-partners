@@ -22,6 +22,7 @@ interface PopupProps {
 
 const CommonPopup = ({ open, onClose, image, title, docURL, description, auth, setAuth, buttonText, svgId, showDocumentUpload }: PopupProps) => {
   const [document, setDocument] = useState(docURL)
+  const [filename, setFilename] = useState('')
   useEffect(() => {
     setDocument(document)
   }, [docURL])
@@ -32,6 +33,7 @@ const CommonPopup = ({ open, onClose, image, title, docURL, description, auth, s
     if (files?.length > 0) {
       try {
         const file = files[0]
+        setFilename(file.name)
         await addVerificationDocuments(auth.accessToken, { image: file })
         const url = URL.createObjectURL(file)
         setDocument(url)
@@ -60,7 +62,7 @@ const CommonPopup = ({ open, onClose, image, title, docURL, description, auth, s
             <h5 className='font-semibold text-[#878787]'>{description}</h5>
           </div>
           {showDocumentUpload && (
-            <div className='w-full flex justify-center'>
+            <div className='w-full flex flex-col justify-center items-center'>
               <input
                 type="file"
                 accept=".pdf, .png, .jpg, .jpeg"
@@ -74,7 +76,7 @@ const CommonPopup = ({ open, onClose, image, title, docURL, description, auth, s
                   <CloudUpload /> Upload Document
                 </div>
               </label>
-              <br/>
+              <div className="text-[#878787] text-sm mb-2">{filename}</div>
             </div>
           )}
           <div className='w-full flex justify-center'>
@@ -85,6 +87,7 @@ const CommonPopup = ({ open, onClose, image, title, docURL, description, auth, s
               onClick={() => {
                 if (buttonText === 'Proceed with document verification') {
                   toast('Document Uploaded Successfully!', { type: 'success' })
+                  onClose()
                 } else {
                   window.location.reload()
                 }

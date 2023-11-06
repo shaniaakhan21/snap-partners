@@ -169,17 +169,13 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
             Authorization: `Bearer ${auth.accessToken}`
           }
         })
-        const lastTwoDigitsInSSN = socialSecurity.substr(-2)
-        const lastTwoDigitsInAuthSSN = auth.socialSecurityNumber.substr(-2)
+        const lastTwoDigitsInSSN = socialSecurity.substring(-2)
+        const lastTwoDigitsInAuthSSN = auth.socialSecurityNumber.substring(-2)
 
         if ((lastTwoDigitsInAuthSSN === null) || (lastTwoDigitsInAuthSSN === lastTwoDigitsInSSN)) {
-          console.log('OLD', lastTwoDigitsInAuthSSN)
-          console.log('entered', socialSecurity)
           updateSocialSecurity(socialSecurity)
           setShowSuccessPopup(true)
         } else if (lastTwoDigitsInAuthSSN !== lastTwoDigitsInSSN) {
-          console.log('OLD', lastTwoDigitsInAuthSSN)
-          console.log('entered', socialSecurity)
           reviewSSN(socialSecurity)
           setShowFailedPopup(true)
         } else {
@@ -201,12 +197,9 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
             }
           })
           .catch((e) => {
-            console.log('Error while setting validation', e)
             alert('Error while confirming validation')
             onClose()
           })
-
-        console.log('After API requests')
 
         setCity(city)
         setState(state)
@@ -216,7 +209,6 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
         await axios.all([updateAddressRequest, updateDOBRequest])
         setIsLoading(false)
       } catch (error) {
-        console.error('API Error:', error)
         setIsLoading(false)
       }
     }
