@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
-import { Client } from 'lib/types/transaction'
+import { Client, Payout } from 'lib/types/transaction'
 import ReactDataGrid from '@inovua/reactdatagrid-community'
 import { NumberUtils } from 'lib/utils/number'
 dayjs.extend(customParseFormat) // Extend dayjs with the plugin. Required for Safari
@@ -89,7 +89,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
   const [quartersVisible, setQuartersVisible] = useState(false)
   if (!client) return null
   const { totalCV, filedCV } = client
-  const { payouts, remainingPayout, upfrontPayment } = client.payout
+  const { payouts, remainingPayout, upfrontPayment } = client.payout || { payouts: [] as Payout[], remainingPayout: -1, upfrontPayment: -1 }
   const initialPayment = 200
 
   const phase1StepCount = 2
