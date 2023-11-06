@@ -87,42 +87,6 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
     }
   }
 
-  const updateSocialSecurity = async (socialSecurity) => {
-    try {
-      const response = await axios.post('/api/user/update-social-security-number', {
-        socialSecurityNumber: socialSecurity
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${auth.accessToken}`
-        }
-      })
-      if (response.status === 200) {
-        console.log('Social Security Number updated successfully')
-      }
-    } catch (error) {
-      console.error('Error updating Social Security Number', error)
-    }
-  }
-
-  const reviewSSN = async (socialSecurity) => {
-    try {
-      const response = await axios.post('/api/user/reviewSSN', {
-        newSSN: socialSecurity
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${auth.accessToken}`
-        }
-      })
-      if (response.status === 200) {
-        console.log('Social Security Number is under review')
-      }
-    } catch (error) {
-      console.error('Error reviewing Social Security Number', error)
-    }
-  }
-
   const handleSubmit = async () => {
     let hasErrors = false
 
@@ -169,17 +133,56 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
             Authorization: `Bearer ${auth.accessToken}`
           }
         })
-        const lastTwoDigitsInSSN = socialSecurity.substring(-2)
-        const lastTwoDigitsInAuthSSN = auth.socialSecurityNumber.substring(-2)
 
-        if ((auth.socialSecurityNumber === null) || (lastTwoDigitsInAuthSSN === lastTwoDigitsInSSN)) {
+        const updateSocialSecurity = async (socialSecurity) => {
+          try {
+            const response = await axios.post('/api/user/update-social-security-number', {
+              socialSecurityNumber: socialSecurity
+            }, {
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${auth.accessToken}`
+              }
+            })
+            if (response.status === 200) {
+              console.log('Social Security Number updated successfully')
+            }
+          } catch (error) {
+            console.error('Error updating Social Security Number', error)
+          }
+        }
+
+        const reviewSSN = async (socialSecurity) => {
+          try {
+            const response = await axios.post('/api/user/reviewSSN', {
+              newSSN: socialSecurity
+            }, {
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${auth.accessToken}`
+              }
+            })
+            if (response.status === 200) {
+              console.log('Social Security Number is under review')
+            }
+          } catch (error) {
+            console.error('Error reviewing Social Security Number', error)
+          }
+        }
+        const lastTwoDigitsInSSN = socialSecurity.substring(socialSecurity.length - 2)
+        console.log('chekekk', auth.socialSecurityNumber)
+        if (auth.socialSecurityNumber === null || auth.socialSecurityNumber === '') {
           updateSocialSecurity(socialSecurity)
           setShowSuccessPopup(true)
-        } else if (lastTwoDigitsInAuthSSN !== lastTwoDigitsInSSN) {
-          reviewSSN(socialSecurity)
-          setShowFailedPopup(true)
         } else {
-          setShowSuccessPopup(true)
+          const lastTwoDigitsInAuthSSN = auth.socialSecurityNumber.substring(auth.socialSecurityNumber.length - 2)
+
+          if (lastTwoDigitsInAuthSSN !== lastTwoDigitsInSSN) {
+            reviewSSN(socialSecurity)
+            setShowFailedPopup(true)
+          } else if (lastTwoDigitsInAuthSSN === lastTwoDigitsInSSN) {
+            setShowSuccessPopup(true)
+          }
         }
 
         axios.post('/api/user/isValidated', { isValidated: true }, {
