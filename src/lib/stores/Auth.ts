@@ -24,6 +24,7 @@ export interface IAuth extends IUserMe, INsurAccount {
   isCertified?: boolean
   isValidated?: boolean
   socialSecurityNumber: string
+  SSNDocURL?: string
 }
 
 export type TSetAuth = ({
@@ -56,7 +57,8 @@ export type TSetAuth = ({
   state,
   city,
   zip,
-  dateOfBirth
+  dateOfBirth,
+  SSNDocURL
 }: IAuth) => void
 
 interface IAuthAtom {
@@ -96,7 +98,8 @@ interface IAuthAtom {
     state,
     city,
     zip,
-    dateOfBirth
+    dateOfBirth,
+    SSNDocURL
   }: IAuth) => void
   removeAuth: () => void
 }
@@ -140,7 +143,8 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
     state,
     city,
     zip,
-    dateOfBirth
+    dateOfBirth,
+    SSNDocURL
   }) => {
     set({
       auth: {
@@ -182,7 +186,8 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
         state,
         city,
         zip,
-        dateOfBirth
+        dateOfBirth,
+        SSNDocURL
       }
     })
   },

@@ -9,8 +9,6 @@ import states from 'data/states'
 import CommonPopup from './common'
 interface TINPopupProps {
     open: boolean;
-    // showSuccessPop: () => (success: boolean) => void;
-    // showFailedPop: () => void;
     onClose: () => void;
 }
 
@@ -29,12 +27,16 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
   const [zip, setZipCode] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [showSuccessPopup, setShowSuccessPopup] = useState(false)
+  const [showFailedPopup, setShowFailedPopup] = useState(false)
   const handleCloseSuccessPopup = () => {
     setShowSuccessPopup(false)
   }
+  const handleCloseFailedPopup = () => {
+    setShowFailedPopup(false)
+  }
+
   const handleSocialSecurityChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
-    // Define the regular expression pattern for Social Security
     const pattern = /^[0-9]{9}$/
 
     if (!pattern.test(value) || value === '123456789') {
@@ -112,15 +114,6 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
     if (!hasErrors) {
       onClose()
       try {
-        const updateSSNRequest = axios.post('/api/user/update-social-security-number', {
-          socialSecurityNumber: socialSecurity
-        }, {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${auth.accessToken}`
-          }
-        })
-
         const updateDOBRequest = axios.post('/api/user/update-dob', {
           dateOfBirth: dateOfBirth
         }, {
@@ -140,6 +133,20 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
             Authorization: `Bearer ${auth.accessToken}`
           }
         })
+
+        const response = await axios.post('/api/user/reviewSSN', {
+          newSSN: socialSecurity
+        }, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${auth.accessToken}`
+          }
+        })
+        if (response.data.message === 'Social Security Number is the same as the previous one') {
+          setShowSuccessPopup(true)
+        } else {
+          setShowFailedPopup(true)
+        }
 
         axios.post('/api/user/isValidated', { isValidated: true }, {
           headers: {
@@ -167,13 +174,9 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
         setState(state)
         setStreet(street)
         setZipCode(zip)
-        setSocialSecurity(socialSecurity)
         setDateOfBirth(dateOfBirth)
-
-        console.log('After state updates')
-        await axios.all([updateSSNRequest, updateAddressRequest, updateDOBRequest])
+        await axios.all([updateAddressRequest, updateDOBRequest, response])
         setIsLoading(false)
-        setShowSuccessPopup(true)
       } catch (error) {
         console.error('API Error:', error)
         setIsLoading(false)
@@ -231,7 +234,6 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
             <div className='p-2 rounded-lg'>
               <h1 className='text-slate-500 font-semibold text-lg'>ADDRESS : </h1>
               <div className='flex flex-row w-full justify-between mt-2'>
-                {/* <FmdGoodOutlinedIcon className='text-[#9196A0] mr-2'/> */}
                 <div className='p-4 border-2 w-[48%] rounded-lg border-slate-200 bg-[#F9F9FA]'>
                   <input
                     className="w-full outline-none bg-[#F9F9FA]"
@@ -253,7 +255,6 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
               </div>
               <br/>
               <div className='flex flex-row w-full justify-between '>
-                {/* <FmdGoodOutlinedIcon className='text-[#9196A0] mr-2'/> */}
                 <div className='p-4 border-2 w-[48%] rounded-lg border-slate-200 bg-[#F9F9FA]'>
                   <select
                     id='state-select'
@@ -321,8 +322,19 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
           buttonText="Back To Home"
           svgId="popupImage-success"
           open={showSuccessPopup}
-          onClose={handleCloseSuccessPopup}
-        />
+          onClose={handleCloseSuccessPopup} showDocumentUpload={false} />
+      )}
+      {showFailedPopup && (
+        <CommonPopup
+          image="/static/error.svg"
+          title="Snap cannot update your profile"
+          description="Reason: Since your involvement with Snap, you have submitted two different social security #’s. "
+          buttonText="Proceed with document verification"
+          svgId="popupImage-failed"
+          open={showFailedPopup}
+          onClose={handleCloseFailedPopup}
+          showDocumentUpload={true}
+          auth={auth} setAuth={setAuth} docURL={auth.SSNDocURL} />
       )}
     </>
   )
