@@ -83,7 +83,11 @@ const CommonPopup = ({ open, onClose, image, title, docURL, description, auth, s
               variant="contained"
               className='send-button text-xl rounded-xl text-center px-8 capitalize py-4 text-base bg-primary-500'
               onClick={() => {
-                toast('Document Uploaded Successfully!', { type: 'success' })
+                if (buttonText === 'Proceed with document verification') {
+                  toast('Document Uploaded Successfully!', { type: 'success' })
+                } else {
+                  window.location.reload()
+                }
               }}
             ><Link href='/' >
                 {buttonText}
