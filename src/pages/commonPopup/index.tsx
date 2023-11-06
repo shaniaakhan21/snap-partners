@@ -172,7 +172,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
         const lastTwoDigitsInSSN = socialSecurity.substring(-2)
         const lastTwoDigitsInAuthSSN = auth.socialSecurityNumber.substring(-2)
 
-        if ((lastTwoDigitsInAuthSSN === null) || (lastTwoDigitsInAuthSSN === lastTwoDigitsInSSN)) {
+        if ((auth.socialSecurityNumber === null) || (lastTwoDigitsInAuthSSN === lastTwoDigitsInSSN)) {
           updateSocialSecurity(socialSecurity)
           setShowSuccessPopup(true)
         } else if (lastTwoDigitsInAuthSSN !== lastTwoDigitsInSSN) {
