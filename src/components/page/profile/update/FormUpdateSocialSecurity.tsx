@@ -12,6 +12,7 @@ import { GTMTrack } from 'lib/utils/gtm'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { InputProfile } from '../commons/InputProfile'
 import { Button } from 'components/common/Button'
+import { useRouter } from 'next/router'
 
 interface IFormUpdatePhoneProps {
   auth: IAuth
@@ -20,53 +21,8 @@ interface IFormUpdatePhoneProps {
   setTypeUpdate: Dispatch<SetStateAction<TAccountInfoToUpdate>>
 }
 
-interface IDataForm {
-  newSocialSecurityNumber: string
-}
-
-export const FormUpdateSocialSecurity = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IFormUpdatePhoneProps) => {
-  const { handleSubmit, register, reset, formState: { errors }, setError } = useForm<IDataForm>()
-
-  const [isLoading, setIsLoading] = useState(false)
-  const onSubmit = async (dataForm: IDataForm) => {
-    setIsLoading(true)
-
-    try {
-      const response = await fetch('/api/user/update-social-security-number', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${auth.accessToken}`
-        },
-        body: JSON.stringify({
-          socialSecurityNumber: dataForm.newSocialSecurityNumber
-        })
-      })
-
-      if (response.status === 200) {
-        // Update the social security number in the UI
-        setAuth({ ...auth, socialSecurityNumber: dataForm.newSocialSecurityNumber })
-        GTMTrack.editProfile(typeUpdate)
-        reset()
-        setTypeUpdate(null)
-      } else {
-        // Handle any error response from the API
-        // For example, you can display an error message to the user.
-        // You can access the error response using response.json()
-        const errorResponse = await response.json()
-        setError('newSocialSecurityNumber', { message: errorResponse.message })
-      }
-    } catch (error) {
-      console.error('API Request Error:', error)
-      setError('newSocialSecurityNumber', { message: 'An error occurred while updating the social security number.' })
-    }
-
-    setIsLoading(false)
-  }
-
-  if (isLoading) {
-    return <SpinnerPageContent />
-  }
+export const FormUpdateSocialSecurity = ({ auth }: IFormUpdatePhoneProps) => {
+  const router = useRouter()
 
   return (
     <div className='max-w-3xl mx-auto'>
@@ -76,7 +32,7 @@ export const FormUpdateSocialSecurity = ({ auth, setAuth, typeUpdate, setTypeUpd
 
       <br />
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form >
         <InputProfile
           disabled
           inputId='socialSecurityNumber'
@@ -85,30 +41,13 @@ export const FormUpdateSocialSecurity = ({ auth, setAuth, typeUpdate, setTypeUpd
           labelName='Current Social Security Number'
           value={auth.socialSecurityNumber}
         />
+        <div className='relative rounded-xl bg-red-200 w-full px-4 py-3 border-y-2 border-y-gray-200 flex flex-col justify-between mt-2'>
+          <p className='text-lg font-bold'>Please raise health ticket to update your Social Security Number. </p>
+        </div>
 
-        <InputProfile
-          inputId='newSocialSecurityNumber'
-          inputType='text'
-          labelFor='newSocialSecurityNumber'
-          labelName='New Social Security Number'
-          placeholder='Insert the new Social Security Number'
-          register={register}
-          rules={{ // TODO: REFACTOR - It is the same as the login with email
-            required: { value: true, message: 'Social Security Number *' },
-            pattern: {
-              value:
-              /^(?!666|000|9\d{2})\d{3}-(?!00)\d{2}-(?!0{4})\d{4}$|^(?!00)\d{2}(?!0{7})\d{7}$/,
-              message: 'Enter a valid Social Security Number *'
-            }
-          }}
-          error={errors.newSocialSecurityNumber}
-        />
         <br />
         <div className='flex items-center'>
-          <Button type='submit' classes='mr-2'>Save</Button>
-          <Button onClick={() => setTypeUpdate(null)}>
-            Cancel
-          </Button>
+          <Button type='submit' classes='mr-2' onClick={() => router.push('/profile')}>Go BACK</Button>
         </div>
       </form>
     </div>
