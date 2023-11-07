@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable new-cap */
 import Head from 'next/head'
 import { DataGrid as MUIDataGrid } from '@mui/x-data-grid'
@@ -46,6 +47,7 @@ const Report: Page = () => {
   const [imageOpen, setImageOpen] = useState(false)
   const [imageSrc, setImageSrc] = useState('')
   const [report1099, setReport1099] = useState(null)
+  const [reportDataFlag, setReportDataFlag] = useState(false)
 
   useEffect(() => {
     const handleResize = () => {
@@ -78,16 +80,17 @@ const Report: Page = () => {
 
   useEffect(() => {
     get1099ReportData()
-  }, [])
+  }, [reportDataFlag])
 
-  const handleCheckboxChange = (rowId, column) => {
-    setSsnCheckboxes((prevCheckboxes) => ({
+  const handleRadioChange = (rowId, column, value) => {
+    setSsnCheckboxes((prevCheckboxes) => ([
       ...prevCheckboxes,
-      [rowId]: {
-        oldSSN: column === 'oldSSN',
-        newSSN: column === 'newSSN'
+      {
+        id: rowId,
+        oldSSN: column === 'oldSSN' ? value : '',
+        newSSN: column === 'newSSN' ? value : ''
       }
-    }))
+    ]))
   }
   const handleViewDocument = (imageUrl) => {
     console.log('1099 doc url is', imageUrl)
@@ -96,6 +99,33 @@ const Report: Page = () => {
   }
   const handleCloseImageDialog = () => {
     setImageOpen(false)
+  }
+
+  const handleSSNChangeSubmit = async () => {
+    const SSNArray = []
+    await ssnCheckboxes.map((box) => {
+      if (box.oldSSN) {
+        SSNArray.push({ id: box.id, newSSN: box.oldSSN })
+      } else if (box.newSSN) {
+        SSNArray.push({ id: box.id, socialSecurityNumber: box.newSSN })
+      }
+    })
+
+    if (SSNArray.length > 0) {
+      axios.post('/api/user/ssnBulkUpdate', {
+        updateArray: SSNArray
+      })
+        .then((result) => {
+          setReportDataFlag(!reportDataFlag)
+          alert('SSN Updated')
+        })
+        .catch((e) => {
+          console.log('error while updating SSN')
+          alert('Error while updating SSN')
+        })
+    }
+
+    closeConfirmationDialog()
   }
   const columns = [
     {
@@ -118,9 +148,9 @@ const Report: Page = () => {
       renderCell: (params) => (
         <div>
           <input
-            type="checkbox"
+            type="radio"
             checked={ssnCheckboxes[params.row.id]?.oldSSN}
-            onChange={() => handleCheckboxChange(params.row.id, 'oldSSN')}
+            onChange={() => handleRadioChange(params.row.id, 'oldSSN', params.value)}
             className='mr-1'
           />
           {params.value}
@@ -134,9 +164,9 @@ const Report: Page = () => {
       renderCell: (params) => (
         <div>
           <input
-            type="checkbox"
+            type="radio"
             checked={ssnCheckboxes[params.row.id]?.newSSN}
-            onChange={() => handleCheckboxChange(params.row.id, 'newSSN')}
+            onChange={() => handleRadioChange(params.row.id, 'newSSN', params.value)}
             className='mr-1'
           />
           {params.value}
@@ -245,7 +275,7 @@ const Report: Page = () => {
             variant="contained"
             className='bg-[#FA4616] hoverit p-0 m-0'
             onClick={() => {
-              closeConfirmationDialog()
+              handleSSNChangeSubmit()
             }}
           >
           yes
@@ -265,7 +295,7 @@ const Report: Page = () => {
 
   return (
     <>
-      <span className='text-lg sm:text-3xl font-bold'>1099's Report</span><br /><br />
+      <span className='text-lg sm:text-3xl font-bold'>1099 Exception Report</span><br /><br />
       <div className="w-full bg-white rounded-lg px-5 py-5 sm:px-10 sm:py-10 flex flex-col" id='html-content'>
         <h1 className='text-base sm:text-xl font-semibold'>The Following users need additional verification:</h1>
         <br></br>
