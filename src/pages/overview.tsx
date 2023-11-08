@@ -16,19 +16,16 @@ import TierTable from 'components/common/overview/TierTable'
 import RewardsProgram from 'components/common/overview/RewardsProgram'
 import { useEffect, useState } from 'react'
 import { Rank, RankData } from 'lib/types/overview'
-import { getLocalStorage, setLocalStorage } from 'lib/utils/localStorage'
+import { getLocalStorage } from 'lib/utils/localStorage'
 import axios from 'axios'
 import Referrals from 'components/common/overview/Referrals'
 import { useAuthStore } from 'lib/stores'
 import GrowthSummary from '../components/common/overview/GrowthSummary'
 import TotalLeg from './backOfficeDashboard'
 import PVComponentSnap from 'components/common/dashBackOffice/PersonalVolumeSnap'
-import Modal from '@mui/material/Modal'
-import Button from '@mui/material/Button'
 import ContractModal from './wellness/components/ContractModal'
 import TINPopup from './commonPopup'
-import CommonPopup from './commonPopup/common/index'
-import { useRouter } from 'next/router'
+
 
 const { SEO } = APP_INFO
 
@@ -36,16 +33,13 @@ const DashboardOverViewPage: Page = () => {
   // const { loading } = useReports()
   const [rankData, setRankData] = useState<RankData>(null)
   const [viewing, setViewing] = useState<string>('Aug')
-  const { auth, setAuth } = useAuthStore()
-  const router = useRouter()
+  const { auth } = useAuthStore()
   const [openModal, setOpenModal] = useState(!auth.isCertified)
   const [openModalTIN, setOpenModalTIN] = useState(!auth.isValidated)
-  console.log('validation', auth.isValidated)
   const currentOverview = getLocalStorage('currentBackoffice') || ''
   const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
   const isCustomer = auth.roles.customer
   const isIntegrousAssociate = auth.roles.integrousAssociate
-  const [open, setOpen] = useState(true)
   const [showPopup, setShowPopup] = useState(false)
 
   useEffect(() => {
@@ -87,10 +81,6 @@ const DashboardOverViewPage: Page = () => {
       setRankData(response.data)
     })()
   }, [])
-
-  const handleClose = () => {
-    setOpen(false)
-  }
 
   if (isIntegrousAssociate && currentOverview === '') {
     return (

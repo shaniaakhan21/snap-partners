@@ -64,7 +64,6 @@ const Report: Page = () => {
   const get1099ReportData = async () => {
     await axios.get('/api/admin/1099-report')
       .then(async (response) => {
-        console.log('response from 1099 is', response.data.result)
         const newArr: any[] = []
         await response.data.result.map((res) => newArr.push({
           ...res,
@@ -92,14 +91,6 @@ const Report: Page = () => {
       }
     ]))
   }
-  const handleViewDocument = (imageUrl) => {
-    console.log('1099 doc url is', imageUrl)
-    // setImageSrc(imageUrl)
-    // setImageOpen(true)
-  }
-  const handleCloseImageDialog = () => {
-    setImageOpen(false)
-  }
 
   const handleSSNChangeSubmit = async () => {
     const SSNArray = []
@@ -120,7 +111,6 @@ const Report: Page = () => {
           alert('SSN Updated')
         })
         .catch((e) => {
-          console.log('error while updating SSN')
           alert('Error while updating SSN')
         })
     }
@@ -180,78 +170,9 @@ const Report: Page = () => {
         <a href = {params.value ? `${params.value}` : '#'} target='_blank'><Button
           variant="contained"
           className='bg-[#FA4616] hoverit'
-          // onClick={() => handleViewDocument(params.value)}
         >
           View Document
         </Button></a>)
-    }
-  ]
-
-  const rows = [
-    {
-      name: 'Edwin Zam',
-      email: 'edwinzam@gamil.com',
-      oldSSN: '235689784',
-      newSSN: '232323568',
-      document: {
-        type: 'png',
-        imageUrl: '/static/document.png'
-      },
-      id: 1
-    },
-    {
-      name: 'John Smith',
-      email: 'John22@gamil.com',
-      oldSSN: '235634584',
-      newSSN: '232325358',
-      document: {
-        type: 'png',
-        imageUrl: '/static/document.png'
-      },
-      id: 2
-    },
-    {
-      name: 'Richard Williams',
-      email: 'richard@gamil.com',
-      oldSSN: '235217841',
-      newSSN: '232323533',
-      document: {
-        type: 'png',
-        imageUrl: '/static/document.png'
-      },
-      id: 3
-    },
-    {
-      name: 'Edwin Zam',
-      email: 'edwinzam@gamil.com',
-      oldSSN: '235689784',
-      newSSN: '232323568',
-      document: {
-        type: 'png'
-      },
-      id: 4
-    },
-    {
-      name: 'John Smith',
-      email: 'John22@gamil.com',
-      oldSSN: '235634584',
-      newSSN: '232325358',
-      document: {
-        type: 'png',
-        imageUrl: '/static/document.png'
-      },
-      id: 5
-    },
-    {
-      name: 'Richard Williams',
-      email: 'richard@gamil.com',
-      oldSSN: '235217841',
-      newSSN: '232323533',
-      document: {
-        type: 'png',
-        imageUrl: '/static/document.png'
-      },
-      id: 6
     }
   ]
 
