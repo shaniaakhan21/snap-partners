@@ -14,7 +14,7 @@ import CertificationTile from './CertificationTile'
 import { certification } from './mock'
 import axios from 'axios'
 
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
+// const AutoPlaySwipeableViews = autoPlay(SwipeableViews)
 
 interface ICertification {
   title: string;
@@ -90,7 +90,7 @@ function Certification () {
           }}
         >Certifications</Typography>
       </Paper>
-      <AutoPlaySwipeableViews
+      <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={activeStep}
         onChangeIndex={handleStepChange}
@@ -109,7 +109,7 @@ function Certification () {
               : null}
           </div>
         ))}
-      </AutoPlaySwipeableViews>
+      </SwipeableViews>
       <MobileStepper
         steps={maxSteps}
         position="static"

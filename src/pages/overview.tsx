@@ -35,7 +35,7 @@ const DashboardOverViewPage: Page = () => {
   const [viewing, setViewing] = useState<string>('Aug')
   const store = useAuthStore()
   const auth: any = store.auth
-  const [openModal, setOpenModal] = useState(!auth.isCertified)
+  const [openModal, setOpenModal] = useState(false)
 
   const currentOverview = getLocalStorage('currentBackoffice') || ''
   const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
