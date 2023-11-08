@@ -46,7 +46,7 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />)}
 
-        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo) && (
+        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.agent) && (
           <ReferralCards
             title='Refer ERC Agent'
             ilustration={<ERCAgent/>}
@@ -55,7 +55,7 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />
         )}
-        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo) && (
+        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.agent) && (
           <ReferralCards
             title='Refer ERC Client'
             ilustration={<ERCClient/>}
@@ -64,7 +64,7 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />
         )}
-        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo) && (
+        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.agent) && (
           <ReferralCards
             title='Refer SETC/FFCRA Client'
             ilustration={<ERCClient/>}
@@ -144,7 +144,7 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />
         )}
-        {!isCustomer
+        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo)
           ? (
             auth?.isCertified
               ? (
@@ -177,7 +177,6 @@ const ReferralsPage: Page = () => {
               />
             )
             : <>
-              <h3>No Links available </h3>
             </>}
 
       </div>
