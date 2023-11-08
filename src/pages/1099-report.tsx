@@ -230,15 +230,17 @@ const Report: Page = () => {
             )}
         </div>
         <br></br>
-        <div className='w-full flex justify-end'>
-          <Button
-            variant="contained"
-            onClick={openConfirmationDialog}
-            className='w-[10%] bg-[#FA4616] hoverit'
-          >
-        Submit
-          </Button>
-        </div>
+        {report1099 && report1099.length > 0 && (
+          <div className='w-full flex justify-end'>
+            <Button
+              variant="contained"
+              onClick={openConfirmationDialog}
+              className='w-[10%] bg-[#FA4616] hoverit'
+            >
+              Submit
+            </Button>
+          </div>
+        )}
       </div>
       {ConfirmationDialog}
       <ImageViewer open={imageOpen} onClose={() => setImageOpen(false)} imageUrl={imageSrc} />
