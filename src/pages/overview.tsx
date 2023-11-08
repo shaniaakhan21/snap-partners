@@ -26,7 +26,6 @@ import PVComponentSnap from 'components/common/dashBackOffice/PersonalVolumeSnap
 import ContractModal from './wellness/components/ContractModal'
 import TINPopup from './commonPopup'
 
-
 const { SEO } = APP_INFO
 
 const DashboardOverViewPage: Page = () => {
@@ -152,7 +151,7 @@ const DashboardOverViewPage: Page = () => {
         <ContractModal open={openModal} onClose={handleCloseModal} />)
       }
 
-      <TINPopup open={openModalTIN} onClose={handleCloseModalTIN}/>
+      {showPopup && <TINPopup open={openModalTIN} onClose={handleCloseModalTIN}/>}
     </>
   )
 }
