@@ -46,6 +46,26 @@ const DashboardOverViewPage: Page = () => {
   const isCustomer = auth.roles.customer
   const isIntegrousAssociate = auth.roles.integrousAssociate
   const [open, setOpen] = useState(true)
+  const [showPopup, setShowPopup] = useState(false)
+
+  useEffect(() => {
+    fetch('/api/snap/getYearlyCommission', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${auth.accessToken}`
+      }
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.total > 500) {
+          setShowPopup(true)
+        } else {
+          setShowPopup(false)
+        }
+      })
+      .catch((error) => console.error('Error fetching data: ', error))
+  }, [])
   const handleCloseModal = () => {
     setOpenModal(false)
   }
@@ -142,22 +162,7 @@ const DashboardOverViewPage: Page = () => {
         <ContractModal open={openModal} onClose={handleCloseModal} />)
       }
 
-      <TINPopup open={openModalTIN} onClose={handleCloseModalTIN}/>
-
-      {/* <CommonPopup
-        image="/static/success.svg"
-        title="Success"
-        description="Snap has updated your profile"
-        buttonText="Back to Home"
-        svgId="popupImage-success"
-        onClose={handleClose} open={open} />
-      <CommonPopup
-        image="/static/error.svg"
-        title="Failed"
-        description="Snap would like you to complete Document verification to move forward."
-        buttonText="Verify Documents"
-        svgId="popupImage-error"
-        onClose={handleClose} open={open} /> */}
+      {showPopup && <TINPopup open={openModalTIN} onClose={handleCloseModalTIN}/>}
     </>
   )
 }
