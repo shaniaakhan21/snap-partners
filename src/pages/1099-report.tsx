@@ -221,9 +221,13 @@ const Report: Page = () => {
         <h1 className='text-base sm:text-xl font-semibold'>The Following users need additional verification:</h1>
         <br></br>
         <div>
-          {
-            report1099 ? <StyledDataGrid columns={columns} rows={report1099}/> : <></>
-          }
+          {report1099 && report1099.length > 0
+            ? (
+              <StyledDataGrid columns={columns} rows={report1099} />
+            )
+            : (
+              <p>No data available</p>
+            )}
         </div>
         <br></br>
         <div className='w-full flex justify-end'>
