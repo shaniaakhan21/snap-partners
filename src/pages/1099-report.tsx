@@ -139,6 +139,7 @@ const Report: Page = () => {
         <div>
           <input
             type="radio"
+            name="checkRadio"
             checked={ssnCheckboxes[params.row.id]?.oldSSN}
             onChange={() => handleRadioChange(params.row.id, 'oldSSN', params.value)}
             className='mr-1'
@@ -155,6 +156,7 @@ const Report: Page = () => {
         <div>
           <input
             type="radio"
+            name="checkRadio"
             checked={ssnCheckboxes[params.row.id]?.newSSN}
             onChange={() => handleRadioChange(params.row.id, 'newSSN', params.value)}
             className='mr-1'
