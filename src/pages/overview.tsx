@@ -152,7 +152,7 @@ const DashboardOverViewPage: Page = () => {
         <ContractModal open={openModal} onClose={handleCloseModal} />)
       }
 
-      {showPopup && <TINPopup open={openModalTIN} onClose={handleCloseModalTIN}/>}
+      <TINPopup open={openModalTIN} onClose={handleCloseModalTIN}/>
     </>
   )
 }
