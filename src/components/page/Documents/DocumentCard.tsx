@@ -14,7 +14,6 @@ const DocumentCard = (props:cardData) => {
   const { file } = props
   const [loading, setLoading] = useState(false)
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
-  // pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
   return (
     <>
       <Grid item xs={6} md={2} lg={2}>
@@ -37,7 +36,7 @@ const DocumentCard = (props:cardData) => {
                 <p style={{
                   fontWeight: '600',
                   fontSize: '12px'
-                }}>{file?.fileName}</p>
+                }}>{file?.title}</p>
                 <p style={{
                   fontWeight: '400',
                   fontSize: '12px'
