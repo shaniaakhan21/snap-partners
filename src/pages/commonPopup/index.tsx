@@ -170,7 +170,6 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
           }
         }
         const lastTwoDigitsInSSN = socialSecurity.substring(socialSecurity.length - 2)
-        console.log('chekekk', auth.socialSecurityNumber)
         if (auth.socialSecurityNumber === null || auth.socialSecurityNumber === '') {
           updateSocialSecurity(socialSecurity)
           setShowSuccessPopup(true)

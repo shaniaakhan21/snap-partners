@@ -34,7 +34,6 @@ export const FormEditDateOfBirth = ({
 
     try {
       const newDateOfBirth = dataForm.newDateOfBirth
-      console.log('Request Data:', { dateOfBirth: newDateOfBirth })
       await axios.post('/api/user/update-dob', {
         dateOfBirth: newDateOfBirth
       }, {
@@ -43,14 +42,6 @@ export const FormEditDateOfBirth = ({
         }
       }
       )
-      console.log('API Response:', await axios.post('/api/user/update-dob', {
-        dateOfBirth: newDateOfBirth
-      }, {
-        headers: {
-          Authorization: `Bearer ${auth.accessToken}`
-        }
-      }
-      ))
 
       setAuth({ ...auth, dateOfBirth: newDateOfBirth })
 
