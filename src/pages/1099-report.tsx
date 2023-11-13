@@ -10,6 +10,7 @@ import { styled } from '@mui/system'
 import { useEffect, useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
 import axios from 'axios'
+import { getLocalStorage } from 'lib/utils/localStorage'
 
 const { SEO } = APP_INFO
 
@@ -103,8 +104,14 @@ const Report: Page = () => {
     })
 
     if (SSNArray.length > 0) {
+      const token = getLocalStorage('accessToken')
       axios.post('/api/user/ssnBulkUpdate', {
         updateArray: SSNArray
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       })
         .then((result) => {
           setReportDataFlag(!reportDataFlag)
