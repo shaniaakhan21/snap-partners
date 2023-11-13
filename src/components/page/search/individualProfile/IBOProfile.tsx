@@ -155,6 +155,11 @@ function IBOProfile ({ profileData, userLevel }) {
             </div>
 
             <div>
+              <h2 className={`${cname}-footer-heading`}>Last Login:</h2>
+              <p className={`${cname}-footer-text`}>{`${profileData[0]?.lastLogin}`}</p>
+            </div>
+
+            <div>
               <h2 className={`${cname}-footer-heading`}>Activity Log :</h2>
               { profileData[0]?.activityLog?.length > 0
                 ? <div className={`${cname}-activityLog-table-container`}>
