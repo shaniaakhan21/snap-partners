@@ -1,5 +1,5 @@
 const states: string[] = [
-  'Alabama (Not Available)',
+  'Alabama',
   'Alaska',
   'Arizona',
   'Arkansas',
