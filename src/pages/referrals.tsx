@@ -26,7 +26,7 @@ const ReferralsPage: Page = () => {
   const isCustomer = _auth.roles.customer || _auth.roles.integrousCustomer
 
   const isIntegrous = (_auth.roles.integrousAssociate || _auth.roles.integrousCustomer)
-  const [openModal, setOpenModal] = useState(!auth.isCertified)
+  const [openModal, setOpenModal] = useState(false)
   const handleCloseModal = () => {
     setOpenModal(false)
   }
@@ -98,6 +98,7 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />
         )}
+        {/*
         <ReferralCards
           title='Refer Vidgo'
           ilustration={(
@@ -109,6 +110,7 @@ const ReferralsPage: Page = () => {
           newUser={false}
           classes='col-span-1'
         />
+        */}
 
         <ReferralCards
           title='Refer Commercial Energy'
