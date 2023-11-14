@@ -11,3 +11,11 @@
 .text-customred {
   color: red;
 }
+
+.main-class .MuiFormControlLabel-label{
+  font-size: 12px!important;
+  @media screen and (min-width: 768px) {
+      font-size: 1rem !important;
+    }
+
+}
