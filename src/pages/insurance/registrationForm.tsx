@@ -3,9 +3,10 @@ import {
   Checkbox,
   FormControlLabel
 } from '@mui/material'
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import ConfirmationComponent from './confirmationComponent'
 import { useForm } from 'react-hook-form'
+import PhoneInput from 'react-phone-input-2'
 
 export default function RegistrationForm ({ onGoBack }) {
   const {
@@ -17,6 +18,19 @@ export default function RegistrationForm ({ onGoBack }) {
   const onSubmit = (data) => {
     if (isCheckboxChecked) {
       setShowConfirmation(true)
+    }
+  }
+
+  const [postalCodeError, setPostalCodeError] = useState('')
+  const [postalCode, setPostalCode] = useState('')
+  const handlePostalCodeChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value
+    const truncatedValue = value.slice(0, 5)
+    setPostalCode(truncatedValue)
+    if (truncatedValue.length === 5 && /^\d+$/.test(truncatedValue)) {
+      setPostalCodeError('')
+    } else {
+      setPostalCodeError('Postal code must be exactly 5 digits')
     }
   }
 
@@ -63,27 +77,32 @@ export default function RegistrationForm ({ onGoBack }) {
                 />
                 <br />
                 <br />
-                <input
-                  name="phone"
-                  placeholder="Phone"
-                  className="w-full xs:w-11/12 md:w-10/12 bg-[#F5F5F5] p-3 custom-placeholder"
-                  required
-                />
-                <br />
+                <PhoneInput country={'us'}
+                  inputProps={{
+                    autoComplete: 'on',
+                    className: 'w-full xs:w-11/12 md:w-10/12 bg-[#F5F5F5] p-3 custom-placeholder pl-12'
+                  }}/>
                 <br />
                 <input
                   name="postalCode"
-                  placeholder="Postal Code"
+                  value={postalCode}
+                  onChange={handlePostalCodeChange}
                   className="w-full xs:w-11/12 md:w-10/12 bg-[#F5F5F5] p-3 custom-placeholder"
                   required
                 />
+                {postalCodeError && <div className="text-red-500">{postalCodeError}</div>}
                 <br />
                 <br />
                 <input
                   name="annualHousehold"
-                  placeholder="Annual Household"
+                  type="text"
+                  inputMode="numeric"
+                  pattern="[0-9]*"
+                  placeholder="Annual Household Income"
                   className="w-full xs:w-11/12 md:w-10/12 bg-[#F5F5F5] p-3 custom-placeholder"
                   required
+                  onInvalid={(e) => (e.target as HTMLInputElement).setCustomValidity('Please provide income in numbers')}
+                  onInput={(e) => (e.target as HTMLInputElement).setCustomValidity('')}
                 />
                 <br />
                 <br />

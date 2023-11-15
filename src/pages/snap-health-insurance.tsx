@@ -49,7 +49,7 @@ const insurance = () => {
                     id='state-select'
                     value={selectedState}
                     onChange={handleStateChange}
-                    className='px-5 mt-1 sm:mt-3 rounded-none rounded-tl-xl rounded-bl-xl border-0 appearance-none font-medium w-full text-sm sm:text-lg  text-[#707070] bg-[#efefef]'
+                    className='px-5 mt-1 sm:mt-4 rounded-none rounded-tl-xl rounded-bl-xl border-0 appearance-none font-medium w-full text-sm sm:text-lg  text-[#707070] bg-[#efefef]'
                     style={{ backgroundImage: 'none' }}
                   >
                     <option value=''>Select a state</option>
