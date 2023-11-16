@@ -5,32 +5,39 @@ import {
 } from '@mui/material'
 import { ChangeEvent, useState } from 'react'
 import ConfirmationComponent from './confirmationComponent'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import PhoneInput from 'react-phone-input-2'
 
-export default function RegistrationForm ({ onGoBack }) {
+export default function RegistrationForm ({ state }) {
   const {
-    handleSubmit
+    handleSubmit,
+    control
   } = useForm()
   const [showConfirmation, setShowConfirmation] = useState(false)
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false)
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    const requestData = { ...data, state }
     if (isCheckboxChecked) {
-      setShowConfirmation(true)
-    }
-  }
+      try {
+        const response = await fetch('/api/snap-insurance/setlead', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(requestData)
+        })
 
-  const [postalCodeError, setPostalCodeError] = useState('')
-  const [postalCode, setPostalCode] = useState('')
-  const handlePostalCodeChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value
-    const truncatedValue = value.slice(0, 5)
-    setPostalCode(truncatedValue)
-    if (truncatedValue.length === 5 && /^\d+$/.test(truncatedValue)) {
-      setPostalCodeError('')
-    } else {
-      setPostalCodeError('Postal code must be exactly 5 digits')
+        if (response.ok) {
+          const result = await response.json()
+          console.log('Lead created successfully:', result)
+          setShowConfirmation(true)
+        } else {
+          console.error('Error creating lead:', response.statusText)
+        }
+      } catch (error) {
+        console.error('Error creating lead:', error)
+      }
     }
   }
 
@@ -38,7 +45,7 @@ export default function RegistrationForm ({ onGoBack }) {
     <div>
       {showConfirmation
         ? (
-          <ConfirmationComponent onGoBack={onGoBack} />
+          <ConfirmationComponent />
         )
         : (
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -52,66 +59,116 @@ export default function RegistrationForm ({ onGoBack }) {
                 <h1 className='text-blackCustom font-bold text-xl sm:text-3xl 2xl:text-4xl 2xl:text-5xl'>Step 2</h1>
                 <br />
                 <br />
-                <input
+                <Controller
+                  control={control}
                   name="firstName"
-                  placeholder="First Name"
-                  className="w-full xs:w-11/12 md:w-10/12 bg-[#F5F5F5] p-3 custom-placeholder"
-                  required
+                  render={({ field }) => (
+                    <input
+                      {...field}
+                      name="firstName"
+                      placeholder="First Name"
+                      className="w-full xs:w-11/12 md:w-10/12 bg-[#F5F5F5] p-3 custom-placeholder"
+                      required
+                    />
+                  )}
                 />
                 <br />
                 <br />
-                <input
+                <Controller
+                  control={control}
                   name="lastName"
-                  placeholder="Last Name"
-                  className="w-full xs:w-11/12 md:w-10/12 bg-[#F5F5F5] p-3 custom-placeholder"
-                  required
+                  render={({ field }) => (
+                    <input
+                      {...field}
+                      name="lastName"
+                      placeholder="Last Name"
+                      className="w-full xs:w-11/12 md:w-10/12 bg-[#F5F5F5] p-3 custom-placeholder"
+                      required
+                    />
+                  )}
                 />
                 <br />
                 <br />
-                <input
+                <Controller
+                  control={control}
                   name="email"
-                  type="email"
-                  placeholder="Email"
-                  className="w-full xs:w-11/12 md:w-10/12 bg-[#F5F5F5] p-3 custom-placeholder"
-                  required
+                  render={({ field }) => (
+                    <input
+                      {...field}
+                      name='email'
+                      type="email"
+                      placeholder="Email"
+                      className="w-full xs:w-11/12 md:w-10/12 bg-[#F5F5F5] p-3 custom-placeholder"
+                      required
+                    />
+                  )}
                 />
                 <br />
                 <br />
-                <PhoneInput country={'us'}
-                  inputProps={{
-                    autoComplete: 'on',
-                    className: 'w-full xs:w-11/12 md:w-10/12 bg-[#F5F5F5] p-3 custom-placeholder pl-12'
-                  }}/>
+                <Controller
+                  control={control}
+                  name='phoneNumber'
+                  render={({ field }) => (
+                    <PhoneInput country={'us'}
+                      {...field}
+                      inputProps={{
+                        autoComplete: 'on',
+                        className: 'w-full xs:w-11/12 md:w-10/12 bg-[#F5F5F5] p-3 custom-placeholder pl-12'
+                      }}/>)}
+                />
                 <br />
-                <input
+                <Controller
+                  control={control}
                   name="postalCode"
-                  value={postalCode}
-                  onChange={handlePostalCodeChange}
-                  className="w-full xs:w-11/12 md:w-10/12 bg-[#F5F5F5] p-3 custom-placeholder"
-                  required
+                  render={({ field }) => (
+                    <input
+                      {...field}
+                      name="postalCode"
+                      type='text'
+                      placeholder="Postal code"
+                      className="w-full xs:w-11/12 md:w-10/12 bg-[#F5F5F5] p-3 custom-placeholder"
+                      required
+                      pattern="\d{5}"
+                      onInvalid={(e) => (e.target as HTMLInputElement).setCustomValidity('Please enter a valid five-digit postal code.')}
+                      onInput={(e) => (e.target as HTMLInputElement).setCustomValidity('')}
+                    />
+                  )}
                 />
-                {postalCodeError && <div className="text-red-500">{postalCodeError}</div>}
                 <br />
                 <br />
-                <input
+                <Controller
+                  control={control}
                   name="annualHousehold"
-                  type="text"
-                  inputMode="numeric"
-                  pattern="[0-9]*"
-                  placeholder="Annual Household Income"
-                  className="w-full xs:w-11/12 md:w-10/12 bg-[#F5F5F5] p-3 custom-placeholder"
-                  required
-                  onInvalid={(e) => (e.target as HTMLInputElement).setCustomValidity('Please provide income in numbers')}
-                  onInput={(e) => (e.target as HTMLInputElement).setCustomValidity('')}
+                  render={({ field }) => (
+                    <input
+                      {...field}
+                      name="annualHousehold"
+                      type="text"
+                      inputMode="numeric"
+                      pattern="[0-9]*"
+                      placeholder="Annual Household Income"
+                      className="w-full xs:w-11/12 md:w-10/12 bg-[#F5F5F5] p-3 custom-placeholder"
+                      required
+                      onInvalid={(e) => (e.target as HTMLInputElement).setCustomValidity('Please provide income in numbers')}
+                      onInput={(e) => (e.target as HTMLInputElement).setCustomValidity('')}
+                    />
+                  )}
                 />
                 <br />
                 <br />
-                <input
+                <Controller
+                  control={control}
                   name="familySize"
-                  type="number"
-                  placeholder="Family Size"
-                  className="w-full xs:w-11/12 md:w-10/12 bg-[#F5F5F5] p-3 custom-placeholder"
-                  required
+                  render={({ field }) => (
+                    <input
+                      {...field}
+                      name="familySize"
+                      type="number"
+                      placeholder="Family Size"
+                      className="w-full xs:w-11/12 md:w-10/12 bg-[#F5F5F5] p-3 custom-placeholder"
+                      required
+                    />
+                  )}
                 />
                 <br />
                 <br />

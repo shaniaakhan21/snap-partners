@@ -7,7 +7,7 @@ import {
 import states from '../data/states'
 import RegistrationForm from './insurance/registrationForm'
 const insurance = () => {
-  const [selectedState, setSelectedState] = React.useState('')
+  const [state, setSelectedState] = React.useState('')
   const [showRegistrationForm, setShowRegistrationForm] = React.useState(false)
 
   const handleStateChange = (event) => {
@@ -15,20 +15,17 @@ const insurance = () => {
   }
 
   const handleContinueClick = () => {
-    if (!selectedState.includes('(Not Available)')) {
+    if (!state.includes('(Not Available)')) {
       setShowRegistrationForm(true)
     }
   }
 
-  const handleGoBack = () => {
-    setShowRegistrationForm(false)
-  }
   return (
     <>
       <InsuranceHeader />
       {showRegistrationForm
         ? (
-          <RegistrationForm onGoBack={handleGoBack} />
+          <RegistrationForm state={state} />
         )
         : (
           <div className='flex flex-col sm:flex-row'>
@@ -47,7 +44,7 @@ const insurance = () => {
                 <div className='rounded-none rounded-tl-xl rounded-bl-xl border-0 w-[70%] sm:w-[40%] p-0 border-0  bg-[#efefef]'>
                   <select
                     id='state-select'
-                    value={selectedState}
+                    value={state}
                     onChange={handleStateChange}
                     className='px-5 mt-1 sm:mt-4 rounded-none rounded-tl-xl rounded-bl-xl border-0 appearance-none font-medium w-full text-sm sm:text-lg  text-[#707070] bg-[#efefef]'
                     style={{ backgroundImage: 'none' }}
@@ -64,8 +61,8 @@ const insurance = () => {
                   variant='contained'
                   onClick={handleContinueClick}
                   className={`px-2 py-1 sm:px-10 sm:py-4 rounded-none shadow-none rounded-tr-xl rounded-br-xl text-sm sm:text-lg
-                  ${selectedState && !selectedState.includes('(Not Available)') ? 'bg-customred text-white' : 'bg-grey text-blackCustom'}`}
-                  disabled={!selectedState || selectedState.includes('(Not Available)')}
+                  ${state && !state.includes('(Not Available)') ? 'bg-customred text-white' : 'bg-grey text-blackCustom'}`}
+                  disabled={!state || state.includes('(Not Available)')}
                 >
             Continue
                 </Button>
