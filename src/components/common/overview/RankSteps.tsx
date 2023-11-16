@@ -10,6 +10,13 @@ interface RankStepsProps {
 export const RankSteps = (props: RankStepsProps) => {
   const { currentRank, onRankPress } = props
 
+  const convertName = (name) => {
+    if (name === 'Free Member') {
+      return 'IBO'
+    }
+    return name
+  }
+
   const renderRank = (rank: Rank, idx: number) => {
     const selected = idx === currentRank
     return (
@@ -19,7 +26,7 @@ export const RankSteps = (props: RankStepsProps) => {
             {selected ? <CheckMarkGreenIcon color='#FFFFFF' /> : <p className='text-xs font-bold text-gray-500'>{idx + 1}</p>}
           </div>
           <p className='text-xs align text-center mt-2' style={{ color: selected ? '#E35C49' : '#DADADA' }}>
-            {rank}
+            {convertName(rank)}
           </p>
         </div>
         {idx !== Ranks.length - 1 && <div className='flex-1 h-px bg-gray-300 absolute top-35 left-20' style={{ marginTop: -12, height: 5 }} /> }

@@ -78,21 +78,39 @@ export default function RankComponent (props: RankComponentProps) {
     })
   }
 
+  const convertName = (name) => {
+    if (name === 'Free Member') {
+      return 'IBO'
+    }
+    return name
+  }
+
   return (
     <div>
       <Box sx={{ '& .Mui-selected': { color: 'black', bgcolor: 'white' }, '& .MuiTabs-indicator': { backgroundColor: 'transparent' } }}>
 
         {currentRank && (
           <div className='bg-white p-2.5 rounded-lg mb-4'>
-            <div>
-              <div className='col-span-3 text-xs pt-2 pb-2 pl-5'>
-                <span className="text-15">Your current rank is:</span>
+            <div style={{ display: 'inline-block', width: '50%' }} >
+              <div className='col-span-1 text-xs pt-2 pb-2 pl-5'>
+                <span className="text-15">Your current Qualified rank is:</span>
               </div>
               <div className="col-span-2 flex items-center pt-2 pb-2 pl-5">
                 <StyledBox backgroundColor={rankColors.get(rankData.currentRank)}>
                   <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: rankColors.get(rankData.currentRank) }} />
                 </StyledBox>
-                <h1 className="text-2xl text-black font-bold pl-2">{rankData.currentRank}</h1>
+                <h1 className="text-2xl text-black font-bold pl-2">{convertName(rankData.currentRank)}</h1>
+              </div>
+            </div>
+            <div style={{ display: 'inline-block', width: '50%' }} >
+              <div className='col-span-1 text-xs pt-2 pb-2 pl-5'>
+                <span className="text-15">Highest Achieved Rank:</span>
+              </div>
+              <div className="col-span-2 flex items-center pt-2 pb-2 pl-5">
+                <StyledBox backgroundColor={rankColors.get(rankData.highestRank)}>
+                  <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: rankColors.get(rankData.highestRank) }} />
+                </StyledBox>
+                <h1 className="text-2xl text-black font-bold pl-2">{convertName(rankData.highestRank)}</h1>
               </div>
             </div>
           </div>
@@ -106,7 +124,7 @@ export default function RankComponent (props: RankComponentProps) {
                 <StyledBox backgroundColor={'#DD4C37'}>
                   <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: '#DD4C37' }} />
                 </StyledBox>
-                <h1 className="text-2xl text-black font-bold pl-2">Free Member</h1>
+                <h1 className="text-2xl text-black font-bold pl-2">IBO</h1>
               </div>
               </>
             }
