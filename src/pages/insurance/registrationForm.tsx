@@ -11,10 +11,12 @@ import PhoneInput from 'react-phone-input-2'
 export default function RegistrationForm ({ state }) {
   const {
     handleSubmit,
-    control
+    control,
+    formState: { errors }
   } = useForm()
   const [showConfirmation, setShowConfirmation] = useState(false)
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false)
+  const [apiError, setApiError] = useState('')
 
   const onSubmit = async (data) => {
     const requestData = { ...data, state }
@@ -33,7 +35,12 @@ export default function RegistrationForm ({ state }) {
           console.log('Lead created successfully:', result)
           setShowConfirmation(true)
         } else {
-          console.error('Error creating lead:', response.statusText)
+          const result = await response.json()
+          if (result.error && result.error.includes('Email is already in use')) {
+            setApiError('This email is already in use.')
+          } else {
+            console.error('Error creating lead:', result.error)
+          }
         }
       } catch (error) {
         console.error('Error creating lead:', error)
@@ -103,6 +110,13 @@ export default function RegistrationForm ({ state }) {
                     />
                   )}
                 />
+
+                <br />
+                {apiError && (
+                  <span className='text-red-500'>
+                    {apiError}
+                  </span>
+                )}
                 <br />
                 <br />
                 <Controller
