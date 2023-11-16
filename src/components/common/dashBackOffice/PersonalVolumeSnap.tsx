@@ -25,7 +25,7 @@ const Table = (props) => {
   )
 }
 
-export default function PVComponentSnap () {
+export default function PVComponentSnap ({ userId }) {
   const [open, setOpen] = useState(false)
   const [data, setData] = useState(undefined)
 
@@ -33,6 +33,7 @@ export default function PVComponentSnap () {
     (async () => {
       const token = getLocalStorage('accessToken')
       const response = await axios.get('/api/snap/WellnessWidget', {
+        params: userId ? { userId } : {},
         headers: {
           Authorization: `Bearer ${token}`
         }
