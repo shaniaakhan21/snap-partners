@@ -167,6 +167,7 @@ export default function RegistrationForm ({ state }) {
                       placeholder="Family Size"
                       className="w-full xs:w-11/12 md:w-10/12 bg-[#F5F5F5] p-3 custom-placeholder"
                       required
+                      min="0"
                     />
                   )}
                 />
