@@ -57,6 +57,14 @@ const SetcClientSubmissionsPage: Page = () => {
       <div className='mt-4'>
         <PersonalClientSubmissionTable clients={personalClients}/>
       </div>
+      <div className='mt-4'>
+        <p>Note: </p>
+        <ul className='pl-4 list-disc'>
+          <li className='text-sm'>We’re in the process of building out a robust SETC report similar to what you see in the ERC report showcasing your personal clients and your team clients. This report is only designed to show your personal submission clients.</li>
+          <li className='text-sm'>A Submission is anyone that filled out the SETC form.  This does NOT necessarily mean they also paid</li>
+          <li className='text-sm'>Order Paid Status will reflect if the client also paid the deposit and is coming soon</li>
+        </ul>
+      </div>
     </div>
   )
 }
