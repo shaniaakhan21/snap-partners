@@ -157,8 +157,16 @@ const ReferralsPage: Page = () => {
               classes='col-span-1'
             />
           )}
-
+        <ReferralCards
+          title='Refer a Snap Insurance Customer'
+          ilustration={(
+            <div className='h-[120px]  flex items-center'><img src={'/images/referralPartner1.png'}/> </div>)}
+          link={`${auth.referralLinkInsurance}` || 'With Out Link'}
+          newUser={false}
+          classes='col-span-1'
+        />
       </div>
+
       {!isCustomer && (
         <ContractModal open={openModal} onClose={handleCloseModal} />)
       }

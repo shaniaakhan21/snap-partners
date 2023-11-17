@@ -8,7 +8,7 @@ import ConfirmationComponent from './confirmationComponent'
 import { Controller, useForm } from 'react-hook-form'
 import PhoneInput from 'react-phone-input-2'
 
-export default function RegistrationForm ({ state }) {
+export default function RegistrationForm ({ state, ownerName, IboId }) {
   const {
     handleSubmit,
     control,
@@ -19,7 +19,12 @@ export default function RegistrationForm ({ state }) {
   const [apiError, setApiError] = useState('')
 
   const onSubmit = async (data) => {
-    const requestData = { ...data, state }
+    const requestData = {
+      ...data,
+      state,
+      iboId: IboId,
+      iboName: ownerName
+    }
     if (isCheckboxChecked) {
       try {
         const response = await fetch('/api/snap-insurance/setlead', {
@@ -46,6 +51,23 @@ export default function RegistrationForm ({ state }) {
         console.error('Error creating lead:', error)
       }
     }
+  }
+
+  const formatCurrency = (value) => {
+    const floatValue = parseFloat(value.replace(/[^\d.]/g, ''))
+
+    if (isNaN(floatValue)) {
+      return ''
+    }
+
+    const formattedValue = floatValue.toLocaleString('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    })
+
+    return formattedValue
   }
 
   return (
@@ -158,13 +180,14 @@ export default function RegistrationForm ({ state }) {
                       {...field}
                       name="annualHousehold"
                       type="text"
-                      inputMode="numeric"
-                      pattern="[0-9]*"
                       placeholder="Annual Household Income"
                       className="w-full xs:w-11/12 md:w-10/12 bg-[#F5F5F5] p-3 custom-placeholder"
                       required
-                      onInvalid={(e) => (e.target as HTMLInputElement).setCustomValidity('Please provide income in numbers')}
-                      onInput={(e) => (e.target as HTMLInputElement).setCustomValidity('')}
+                      onChange={(e) => {
+                        const inputValue = e.target.value
+                        const formattedValue = formatCurrency(inputValue)
+                        field.onChange(formattedValue)
+                      }}
                     />
                   )}
                 />
