@@ -8,11 +8,11 @@ export default function ConfirmationComponent () {
             <img className='w-full'src='/static/ThirdOneImg.png' alt="Happy family" />
           </div>
         </div>
-        <div className='w-[95%] lg:w-[35%] m-4 mt-4 md:mt-16 xl:mt-40 relative right-0 lg:right-[10%] lg:right-[12%] xl:right-[7%]'>
-          <div className='w-full flex justify-center mb-1 2xl:mb-10'>
-            <img className='w-[20%]' src='/images/success-tick.svg' />
+        <div className='w-[95%] lg:w-[35%] m-4 relative right-0 lg:right-[10%] lg:right-[12%] xl:right-[7%]'>
+          <div className='w-full flex justify-center mt-8 2xl:mt-20'>
+            <img className='w-[24%]' src='/images/success-tick.png' />
           </div>
-          <h1 className='text-blackCustom font-bold text-lg lg:text-2xl 2xl:text-3xl 3xl:text-4xl leading-snug mb-0 xl:mb-10'>
+          <h1 className='mt-4 md:mt-8 xl:mt-12  text-blackCustom font-bold text-lg lg:text-2xl 2xl:text-3xl 3xl:text-4xl leading-snug mb-0 xl:mb-10'>
           We're delighted to confirm that your information has been successfully saved in our system. Thank you for entrusting us with your valuable data.
           </h1>
           <br></br>
