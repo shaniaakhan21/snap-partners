@@ -59,7 +59,7 @@ export default function RankComponent (props: RankComponentProps) {
 
   useEffect(() => {
     if (rankData) {
-      setValue(rankData.currentRankLevel)
+      setValue(Math.min(rankData.currentRankLevel + 1, 4))
       setCurrentRank(rankData.currentRank)
     }
   }, [rankData])
