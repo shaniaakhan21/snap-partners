@@ -35,7 +35,7 @@ const DashboardOverViewPage: Page = () => {
   const [viewing, setViewing] = useState<string>('Aug')
   const store = useAuthStore()
   const auth: any = store.auth
-  const [openModal, setOpenModal] = useState(!auth.isCertified)
+  const [openModal, setOpenModal] = useState(false)
 
   const currentOverview = getLocalStorage('currentBackoffice') || ''
   const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
@@ -98,7 +98,7 @@ const DashboardOverViewPage: Page = () => {
             <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} userId={null}/>
           </div>
           <div className='mt-4'>
-            <PVComponentSnap />
+            <PVComponentSnap userId={null} />
           </div>
           <div className='mt-4'>
             <RewardsProgram />

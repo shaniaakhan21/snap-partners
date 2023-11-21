@@ -202,7 +202,7 @@ export default function TopProducerCategory () {
       <Select
         value={value}
         onChange={handleCategoryChange}
-        className='w-full text-white bg-primary-500 border-primary-500'
+        className='w-full text-white bg-primary-500 border-primary-500 my-custom-select'
         sx={{
           ...tabStyle,
           '& .MuiSelect-select': {
@@ -216,14 +216,18 @@ export default function TopProducerCategory () {
           '& .MuiSvgIcon-root': {
             color: 'white',
             borderLeft: '1px solid white'
+          },
+          '& .MuiButtonBase-root': {
+            minHeight: 'none!important'
           }
         }}
       >
-        <MenuItem value={0}>IBO</MenuItem>
-        <MenuItem value={1}>ERC</MenuItem>
-        <MenuItem value={2}>Delivery Merchant</MenuItem>
-        <MenuItem value={3}>Delivery Customer</MenuItem>
-        <MenuItem value={4}>Delivery Driver</MenuItem>
+        <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={0}>IBO</MenuItem>
+        <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={1}>ERC</MenuItem>
+        <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={2}>SETC</MenuItem>
+        <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={3}>Delivery Merchant</MenuItem>
+        <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={4}>Delivery Customer</MenuItem>
+        <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={5}>Delivery Driver</MenuItem>
       </Select>
       <TabPanel value={value} index={0}>
         <TopProducers monthSelected={monthSelected} yearSelected={yearSelected} data={topProducerData} value={subctegoryValue} typeLow='agent' type='topAgent' typeText='IBOs'/>
@@ -232,12 +236,15 @@ export default function TopProducerCategory () {
         <TopProducers monthSelected={monthSelected} yearSelected={yearSelected} data={topProducerData} value={subctegoryValue} typeLow='erc' type='topErc' typeText='ERCs'/>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <TopProducers monthSelected={monthSelected} yearSelected={yearSelected} data={topProducerData} value={subctegoryValue} typeLow='merchant' type='topMerchant' typeText='Merchants'/>
+        <TopProducers monthSelected={monthSelected} yearSelected={yearSelected} data={topProducerData} value={subctegoryValue} typeLow='setc' type='topSetc' typeText='SETCs'/>
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <TopProducers monthSelected={monthSelected} yearSelected={yearSelected} data={topProducerData} value={subctegoryValue} typeLow='customer' type='topCustomer' typeText='Customers'/>
+        <TopProducers monthSelected={monthSelected} yearSelected={yearSelected} data={topProducerData} value={subctegoryValue} typeLow='merchant' type='topMerchant' typeText='Merchants'/>
       </TabPanel>
       <TabPanel value={value} index={4}>
+        <TopProducers monthSelected={monthSelected} yearSelected={yearSelected} data={topProducerData} value={subctegoryValue} typeLow='customer' type='topCustomer' typeText='Customers'/>
+      </TabPanel>
+      <TabPanel value={value} index={5}>
         <TopProducers monthSelected={monthSelected} yearSelected={yearSelected} data={topProducerData} value={subctegoryValue} typeLow='driver' type='topDriver' typeText='Drivers'/>
       </TabPanel>
     </Box>

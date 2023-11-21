@@ -70,9 +70,13 @@ export const drawerRoutes = [
         to: '/ercreferrals'
       },
       {
+        label: 'SETC',
+        to: '/setcsubmissions'
+      }
+      /* {
         label: 'Vidgo',
         to: '/vidgo-reporting'
-      }
+     } */
     ]
   },
   {
@@ -88,9 +92,8 @@ export const drawerRoutes = [
   {
     icon: <AccountIcon />,
     to: '/network-activity',
-    label: 'Network Activity',
-    integrous: true
-   },
+    label: 'Network Activity'
+  },
   {
     icon: <GenealogyIcon />,
     to: '/genealogy',
@@ -102,12 +105,12 @@ export const drawerRoutes = [
     to: '/tree',
     label: 'Tree'
   },
-   {
+  {
     icon: <GenealogyIcon />,
     to: '/binarytree',
     label: 'Binary Tree',
     integrous: true
-   },
+  },
   {
     icon: <CompensationPlanIcon />,
     to: '/compensation-plan',

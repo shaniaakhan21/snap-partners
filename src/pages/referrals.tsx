@@ -26,7 +26,7 @@ const ReferralsPage: Page = () => {
   const isCustomer = _auth.roles.customer || _auth.roles.integrousCustomer
 
   const isIntegrous = (_auth.roles.integrousAssociate || _auth.roles.integrousCustomer)
-  const [openModal, setOpenModal] = useState(!auth.isCertified)
+  const [openModal, setOpenModal] = useState(false)
   const handleCloseModal = () => {
     setOpenModal(false)
   }
@@ -63,7 +63,15 @@ const ReferralsPage: Page = () => {
           classes='col-span-1'
         />
 
-        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
+        <ReferralCards
+          title='Refer SETC/FFCRA Client'
+          ilustration={<ERCClient/>}
+          link={`https://www.jornscpa.com/snap-ffcra/?refid=${auth.id}` || 'With Out Link'}
+          newUser={false}
+          classes='col-span-1'
+        />
+
+        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant || auth.roles.ibo) && !isIntegrous && (
           <ReferralCards
             title='Refer Delivery Customers'
             ilustration={<CustomerRefIcon />}
@@ -72,7 +80,7 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />
         )}
-        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
+        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant || auth.roles.ibo) && !isIntegrous && (
           <ReferralCards
             title='Refer Delivery Driver'
             ilustration={<DriverRefIcon />}
@@ -81,7 +89,7 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />
         )}
-        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant) && !isIntegrous && (
+        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant || auth.roles.ibo) && !isIntegrous && (
           <ReferralCards
             title='Refer Delivery Merchant/SK'
             ilustration={<MerchantIcon />}
@@ -90,6 +98,7 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />
         )}
+        {/*
         <ReferralCards
           title='Refer Vidgo'
           ilustration={(
@@ -101,6 +110,7 @@ const ReferralsPage: Page = () => {
           newUser={false}
           classes='col-span-1'
         />
+        */}
 
         <ReferralCards
           title='Refer Commercial Energy'

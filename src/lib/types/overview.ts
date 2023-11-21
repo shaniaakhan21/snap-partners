@@ -44,6 +44,8 @@ export interface Post {
 export interface RankData {
   currentRank: string,
   currentRankLevel: number,
+  highestRank: string,
+  highestRankLevel: number,
   mng: Post,
   sv: Post,
   dct: Post,

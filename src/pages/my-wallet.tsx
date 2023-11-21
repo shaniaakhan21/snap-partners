@@ -15,6 +15,7 @@ import { ModalContainer } from 'components/common/ModalContainer'
 import { useEffect, useState } from 'react'
 import { useAuthStore } from '../lib/stores'
 import { toast } from 'react-toastify'
+import { GrandfatherRankHr } from 'components/common/overview/GrandfatherRankHr'
 
 const { SEO } = APP_INFO
 
@@ -79,6 +80,7 @@ const MyWalletPage: Page = () => {
 
   return (
     <div className='max-w-4xl w-full mx-auto'>
+      <GrandfatherRankHr/>
       <div className={`relative w-full sm:rounded-lg ${!loading && 'overflow-x-auto'}`}> {/* Can be better */}
         {
           loading &&
@@ -89,7 +91,8 @@ const MyWalletPage: Page = () => {
             )
         }
         <>
-          <div className='max-w-xl mx-auto w-full text-center mb-2'>
+          <h2 style={{ color: 'red', textAlign: 'center' }}>Withdrawals may take up to 5 to 7 business days depending on your bank</h2>
+          <div className='max-w-xl mx-auto w-full text-center mb-2 mt-1'>
             <Button disabled={!enableWithdraw} onClick={() => { fnOpenModalConfirmation() }} type='submit' classes=' mr-1 text-sm bg-primary-500'>
                       Withdraw Available Balance
             </Button>

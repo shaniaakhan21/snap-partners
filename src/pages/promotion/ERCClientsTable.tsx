@@ -107,10 +107,10 @@ const ERCClientsTable = ({ sprintData, ercModalData, personal }) => {
         flex: windowWidth <= 400 ? 1 : 1
       }
       : {
-        field: null,
-        headerName: null,
-        type: null,
-        flex: null
+        field: 'userName',
+        headerName: 'IBO Name',
+        type: 'string',
+        flex: windowWidth <= 400 ? 1 : 1
       },
     {
       field: 'date',
