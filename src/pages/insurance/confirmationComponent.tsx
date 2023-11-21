@@ -9,10 +9,11 @@ export default function ConfirmationComponent () {
           </div>
         </div>
         <div className='w-[95%] lg:w-[35%] m-4 relative right-0 lg:right-[10%] lg:right-[12%] xl:right-[7%]'>
-          <div className='w-full flex justify-center mt-8 2xl:mt-20'>
-            <img className='w-[24%]' src='/images/success-tick.png' />
+          <div className='w-full flex flex-col items-center align-center justify-center mt-8 2xl:mt-20'>
+            <img className='w-[24%]' src='/images/success-tick.svg' />
+            <h1 className='w-1/3 text-center text-lg lg:text-2xl 2xl:text-3xl 3xl:text-4xl font-bold text-[#75BA55] mt-1 xl:mt-6'>SUCCESS</h1>
           </div>
-          <h1 className='mt-4 md:mt-8 xl:mt-12  text-blackCustom font-bold text-lg lg:text-2xl 2xl:text-3xl 3xl:text-4xl leading-snug mb-0 xl:mb-10'>
+          <h1 className='mt-2 md:mt-2 xl:mt-1  text-blackCustom font-bold text-lg lg:text-2xl 2xl:text-3xl 3xl:text-4xl leading-snug mb-0 xl:mb-10'>
           We're delighted to confirm that your information has been successfully saved in our system. Thank you for entrusting us with your valuable data.
           </h1>
           <br></br>
