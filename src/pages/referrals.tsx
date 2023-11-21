@@ -34,18 +34,23 @@ const ReferralsPage: Page = () => {
   return (
     <div className='min-h-[80vh] flex justify-center items-center'>
       <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-center justify-center justify-items-center gap-4'>
-        <ReferralCards
-          title='Sponsor a Snap IBO'
-          ilustration={(
-            <div className='h-[120px] flex items-center'><img src={'/images/referralPartner1.png'} />
-            </div>
-          )}
-          link={`${auth.referralLink}&role=${ROLES.IBO}` || 'With Out Link'}
-          newUser={false}
-          classes='col-span-1'
-        />
 
-        {!isIntegrous && (
+        {(auth.roles.customer && !auth.roles.admin) && (
+          <h3> No Links Available</h3>
+        )}
+        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate) && (
+          <ReferralCards
+            title='Sponsor a Snap IBO'
+            ilustration={(
+              <div className='h-[120px] flex items-center'><img src={'/images/referralPartner1.png'} />
+              </div>
+            )}
+            link={`${auth.referralLink}&role=${ROLES.IBO}` || 'With Out Link'}
+            newUser={false}
+            classes='col-span-1'
+          />)}
+
+        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate || auth.roles.agent) && (
           <ReferralCards
             title='Refer ERC Agent'
             ilustration={<ERCAgent/>}
@@ -54,24 +59,25 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />
         )}
+        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate || auth.roles.agent) && (
+          <ReferralCards
+            title='Refer ERC Client'
+            ilustration={<ERCClient/>}
+            link={`https://www.jornscpa.com/snap/?refid=${auth.id}` || 'With Out Link'}
+            newUser={false}
+            classes='col-span-1'
+          />
+        )}
+        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate || auth.roles.agent) && (
+          <ReferralCards
+            title='Refer SETC/FFCRA Client'
+            ilustration={<ERCClient/>}
+            link={`https://www.jornscpa.com/snap-ffcra/?refid=${auth.id}` || 'With Out Link'}
+            newUser={false}
+            classes='col-span-1'
+          />)}
 
-        <ReferralCards
-          title='Refer ERC Client'
-          ilustration={<ERCClient/>}
-          link={`https://www.jornscpa.com/snap/?refid=${auth.id}` || 'With Out Link'}
-          newUser={false}
-          classes='col-span-1'
-        />
-
-        <ReferralCards
-          title='Refer SETC/FFCRA Client'
-          ilustration={<ERCClient/>}
-          link={`https://www.jornscpa.com/snap-ffcra/?refid=${auth.id}` || 'With Out Link'}
-          newUser={false}
-          classes='col-span-1'
-        />
-
-        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant || auth.roles.ibo) && !isIntegrous && (
+        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate) && (
           <ReferralCards
             title='Refer Delivery Customers'
             ilustration={<CustomerRefIcon />}
@@ -80,7 +86,7 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />
         )}
-        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant || auth.roles.ibo) && !isIntegrous && (
+        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate) && (
           <ReferralCards
             title='Refer Delivery Driver'
             ilustration={<DriverRefIcon />}
@@ -89,7 +95,7 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />
         )}
-        {(auth.roles.customer || auth.roles.driver || auth.roles.merchant || auth.roles.ibo) && !isIntegrous && (
+        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate) && (
           <ReferralCards
             title='Refer Delivery Merchant/SK'
             ilustration={<MerchantIcon />}
@@ -111,15 +117,15 @@ const ReferralsPage: Page = () => {
           classes='col-span-1'
         />
         */}
-
-        <ReferralCards
-          title='Refer Commercial Energy'
-          ilustration={
-            <Energy/>}
-          link={`https://usaenergy.com/free-rate-analysis/?subid=${auth.id}` || 'With Out Link'}
-          newUser={false}
-          classes='col-span-1'
-        />
+        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate) && (
+          <ReferralCards
+            title='Refer Commercial Energy'
+            ilustration={
+              <Energy/>}
+            link={`https://usaenergy.com/free-rate-analysis/?subid=${auth.id}` || 'With Out Link'}
+            newUser={false}
+            classes='col-span-1'
+          />)}
 
         {/* <ReferralCards
         title='Refer Snap Kitchens'
@@ -132,42 +138,50 @@ const ReferralsPage: Page = () => {
         newUser={false}
         classes='col-span-1'
       /> */}
-
-        <ReferralCards
-          title='Refer a Integrous Wellness Customer'
-          ilustration={(
-            <div className='h-[120px]  flex items-center'><img src={'/static/wellness/int-link-logo.png'} /> </div>)}
-          link={`${auth.referralLinkWellness}` || 'With Out Link'}
-          newUser={false}
-          classes='col-span-1'
-        />
-        {!isCustomer
+        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate) && (
+          <ReferralCards
+            title='Refer a Integrous Wellness Customer'
+            ilustration={(
+              <div className='h-[120px]  flex items-center'><img src={'/static/wellness/int-link-logo.png'} /> </div>)}
+            link={`${auth.referralLinkWellness}` || 'With Out Link'}
+            newUser={false}
+            classes='col-span-1'
+          />
+        )}
+        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate)
           ? (
             auth?.isCertified
-              ? <ReferralCards
+              ? (
+                <ReferralCards
+                  title='Refer a WeightCare Customer'
+                  ilustration={(
+                    <div className='h-[120px] flex items-center'><img src={'/static/wellness/link-weightcare.png'} />
+                    </div>
+                  )}
+                  link={`${auth.referralLinkWeightCare}` || 'With Out Link'}
+                  newUser={false}
+                  classes='col-span-1'
+                />
+              )
+              : (
+                <InactiveCards title={'Refer a WeightCare Customer'} ilustration={<img src={'/static/wellness/link-weightcare.png'} width={100} />} link={''} />
+              )
+          )
+          : (auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate)
+            ? (
+              <ReferralCards
                 title='Refer a WeightCare Customer'
                 ilustration={(
-                  <div className='h-[120px]  flex items-center'><img src={'/static/wellness/link-weightcare.png'} /> </div>)}
+                  <div className='h-[120px] flex items-center'><img src={'/static/wellness/link-weightcare.png'} />
+                  </div>
+                )}
                 link={`${auth.referralLinkWeightCare}` || 'With Out Link'}
                 newUser={false}
                 classes='col-span-1'
               />
-              : <>
-                <InactiveCards title={'Refer a WeightCare Customer'} ilustration={<img src={'/static/wellness/link-weightcare.png'} width={100} />} link={''}/>
-              </>
-
-          )
-          : (
-            <ReferralCards
-              title='Refer a WeightCare Customer'
-              ilustration={(
-                <div className='h-[120px]  flex items-center'><img src={'/static/wellness/link-weightcare.png'} /> </div>)}
-              link={`${auth.referralLinkWeightCare}` || 'With Out Link'}
-              newUser={false}
-              classes='col-span-1'
-            />
-          )}
-
+            )
+            : <>
+            </>}
       </div>
       {!isCustomer && (
         <ContractModal open={openModal} onClose={handleCloseModal} />)

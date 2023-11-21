@@ -179,8 +179,18 @@ export default function TopProducerCategory () {
         onChange={handleSubcategoryChange}
         aria-label="Top Producers SubCategories"
         variant='scrollable'
-        ScrollButtonComponent={HiddenTabScrollButton}
         className='border-b-4 border-primary-500'
+        ScrollButtonComponent={HiddenTabScrollButton}
+        sx={{
+          '.& MuiTabs-scroller': {
+            marginBottom: '0px!important',
+            height: '73%!important'
+          },
+          '.& MuiTabs-indicator': {
+            backgroundColor: 'transparent!important',
+            height: '14px!important'
+          }
+        }}
       >
         <Tab sx={subTabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Directly Sponsored" />
         <Tab sx={subTabStyle} style={{ borderTopLeftRadius: 8, borderTopRightRadius: 8 }} label="Manager" />
