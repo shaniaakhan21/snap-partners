@@ -1,15 +1,22 @@
 /* eslint-disable no-use-before-define */
-import React from 'react'
+import React, { useEffect } from 'react'
 import InsuranceHeader from './insurance/insurance-header'
 import {
   Button
 } from '@mui/material'
 import states from '../data/states'
 import RegistrationForm from './insurance/registrationForm'
+import axios from 'axios'
+import { useRouter } from 'next/router'
+import InsuranceFooter from './insurance/insurance-footer'
+
 const insurance = () => {
+  const router = useRouter()
   const [state, setSelectedState] = React.useState('')
   const [showRegistrationForm, setShowRegistrationForm] = React.useState(false)
-
+  const [IboId, setIboId] = React.useState(0)
+  const [ownerName, setownerName] = React.useState(null)
+  const [referralCode, setreferralCode] = React.useState(null)
   const handleStateChange = (event) => {
     setSelectedState(event.target.value)
   }
@@ -20,12 +27,34 @@ const insurance = () => {
     }
   }
 
+  useEffect(() => {
+    async function Owner () {
+      console.log('owneeeeeeeeeeer')
+      try {
+        const { referralCode } = router.query
+        const username = referralCode
+        if (!username) return
+        if (username === 'NoSponsor') return
+        if (username.length > 0) {
+          const response = await axios.get(
+            `/api/integrous/getReplicatedSite?username=${username}`
+          )
+          setreferralCode(response.data.referralCode)
+          setownerName(`${response.data.name} ${response.data.lastname}`)
+          setIboId(Number(`${response.data.id}`))
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    Owner()
+  }, [router])
   return (
     <>
       <InsuranceHeader />
       {showRegistrationForm
         ? (
-          <RegistrationForm state={state} />
+          <RegistrationForm state={state} ownerName={ownerName} IboId={IboId} />
         )
         : (
           <div className='flex flex-col sm:flex-row'>
@@ -75,6 +104,7 @@ const insurance = () => {
             </div>
           </div>
         )}
+      <InsuranceFooter ownerName={ownerName}/>
     </>
   )
 }
