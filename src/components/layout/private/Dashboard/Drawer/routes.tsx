@@ -68,6 +68,10 @@ export const drawerRoutes = [
       {
         label: 'ERC',
         to: '/ercreferrals'
+      },
+      {
+        label: 'SETC',
+        to: '/setcsubmissions'
       }
       /* {
         label: 'Vidgo',
