@@ -34,7 +34,7 @@ const ReferralsPage: Page = () => {
   return (
     <div className='min-h-[80vh] flex justify-center items-center'>
       <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-center justify-center justify-items-center gap-4'>
-        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate) && (
+        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate || auth.level === 'owner') && (
           <ReferralCards
             title='Sponsor a Snap IBO'
             ilustration={(
@@ -46,7 +46,7 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />)}
 
-        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate || auth.roles.agent) && (
+        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate || auth.roles.agent || auth.level === 'owner') && (
           <ReferralCards
             title='Refer ERC Agent'
             ilustration={<ERCAgent/>}
@@ -55,7 +55,7 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />
         )}
-        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate || auth.roles.agent) && (
+        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate || auth.roles.agent || auth.level === 'owner') && (
           <ReferralCards
             title='Refer ERC Client'
             ilustration={<ERCClient/>}
@@ -64,7 +64,7 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />
         )}
-        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate || auth.roles.agent) && (
+        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate || auth.roles.agent || auth.level === 'owner') && (
           <ReferralCards
             title='Refer SETC/FFCRA Client'
             ilustration={<ERCClient/>}
@@ -73,7 +73,7 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />)}
 
-        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate) && (
+        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate || auth.level === 'owner') && (
           <ReferralCards
             title='Refer Delivery Customers'
             ilustration={<CustomerRefIcon />}
@@ -82,7 +82,7 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />
         )}
-        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate) && (
+        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate || auth.level === 'owner') && (
           <ReferralCards
             title='Refer Delivery Driver'
             ilustration={<DriverRefIcon />}
@@ -91,7 +91,7 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />
         )}
-        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate) && (
+        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate || auth.level === 'owner') && (
           <ReferralCards
             title='Refer Delivery Merchant/SK'
             ilustration={<MerchantIcon />}
@@ -113,7 +113,7 @@ const ReferralsPage: Page = () => {
           classes='col-span-1'
         />
         */}
-        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate) && (
+        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate || auth.level === 'owner') && (
           <ReferralCards
             title='Refer Commercial Energy'
             ilustration={
@@ -134,7 +134,7 @@ const ReferralsPage: Page = () => {
         newUser={false}
         classes='col-span-1'
       /> */}
-        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate) && (
+        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate || auth.level === 'owner') && (
           <ReferralCards
             title='Refer a Integrous Wellness Customer'
             ilustration={(
@@ -144,7 +144,7 @@ const ReferralsPage: Page = () => {
             classes='col-span-1'
           />
         )}
-        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate)
+        {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate || auth.level === 'owner')
           ? (
             auth?.isCertified
               ? (
@@ -163,7 +163,7 @@ const ReferralsPage: Page = () => {
                 <InactiveCards title={'Refer a WeightCare Customer'} ilustration={<img src={'/static/wellness/link-weightcare.png'} width={100} />} link={''} />
               )
           )
-          : (auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate)
+          : (auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate || auth.level === 'owner')
             ? (
               <ReferralCards
                 title='Refer a WeightCare Customer'
