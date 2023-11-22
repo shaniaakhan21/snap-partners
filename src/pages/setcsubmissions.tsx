@@ -7,16 +7,26 @@ import { Page, ReactNode } from 'lib/types'
 import { APP_INFO } from 'config/appInfo'
 import { getLocalStorage } from 'lib/utils/localStorage'
 import DashboardLayout from 'layouts/private/Dashboard'
-import { SetcClientSubmission } from 'lib/types/setc'
-import PersonalClientSubmissionTable from 'components/page/setc/PersonalClientSubmissionTable'
+import { LevelledSetcClient, SetcClient } from 'lib/types/setc'
+import PersonalSetcClientsTable from 'components/page/setc/PersonalSetcClientsTable'
 import { Spinner } from 'components/common/loaders'
+import TableHeader from 'components/page/erc/TableHeader'
+import TeamSetcClientsTable from 'components/page/setc/TeamSetcClientsTable'
+import SetcLevelClientsTable from 'components/page/setc/SetcLevelClientsTable'
+import SingleIboSetcs from 'components/page/setc/SingleIboSetcs'
 dayjs.extend(customParseFormat) // Extend dayjs with the plugin. Required for Safari
 
 const { SEO } = APP_INFO
 
-const SetcClientSubmissionsPage: Page = () => {
-  const [personalClients, setPersonalClients] = useState<SetcClientSubmission[]>([])
+const SetcClientsPage: Page = () => {
+  const [personalClients, setPersonalClients] = useState<SetcClient[]>([])
   const [personalClientsLoading, setPersonalClientsLoading] = useState(false)
+  const [teamClients, setTeamClients] = useState<LevelledSetcClient[]>([])
+  const [teamClientsLoading, setTeamClientsLoading] = useState(false)
+  const [monthSelected, setMonthSelected] = useState(new Date().getMonth())
+  const [yearSelected, setYearSelected] = useState(new Date().getFullYear())
+  const [selectedLevel, setSelectedLevel] = useState(-1)
+  const [selectedIBO, setSelectedIbo] = useState<SetcClient &{clients: SetcClient[]}>(null)
 
   const years = []
   for (let i = new Date().getFullYear(); i >= 2022; i--) {
@@ -40,9 +50,37 @@ const SetcClientSubmissionsPage: Page = () => {
     }
   }
 
+  const getTeamClients = async () => {
+    try {
+      setSelectedIbo(null)
+      setSelectedLevel(-1)
+      setTeamClientsLoading(true)
+      const token = getLocalStorage('accessToken')
+      const res = await fetch(
+        `/api/ffcra/team-clients?month=${
+          monthSelected
+        }&year=${yearSelected}`,
+        {
+          method: 'GET',
+          headers: { Authorization: `Bearer ${token}` }
+        }
+      )
+      const data = await res.json()
+      setTeamClients(data)
+    } catch (e) {
+      // ignore
+    } finally {
+      setTeamClientsLoading(false)
+    }
+  }
+
   useEffect(() => {
     getPersonalClients()
   }, [])
+
+  useEffect(() => {
+    getTeamClients()
+  }, [monthSelected, yearSelected])
 
   return (
     <div className='bg-white rounded-lg px-8 py-12'>
@@ -55,8 +93,41 @@ const SetcClientSubmissionsPage: Page = () => {
         }
       </div>
       <div className='mt-4'>
-        <PersonalClientSubmissionTable clients={personalClients}/>
+        <PersonalSetcClientsTable clients={personalClients}/>
       </div>
+      <div className='mt-8'>
+        <TableHeader
+          loading={teamClientsLoading}
+          tableName="Your Team Clients"
+          setMonthSelected={setMonthSelected}
+          setYearSelected={setYearSelected}
+        />
+        <TeamSetcClientsTable
+          clients={teamClients}
+          onSelectLevel={setSelectedLevel}
+        />
+      </div>
+      {selectedLevel > -1 && (
+        <div className='mt-8'>
+          <TableHeader
+            tableName={'Team Level Report' + (selectedLevel > 0 ? ` (level-${selectedLevel === 6 ? '6+' : selectedLevel})` : '')}
+          />
+          <SetcLevelClientsTable
+            onSelectIbo={setSelectedIbo}
+            levelledClient={teamClients[selectedLevel - 1]}
+          />
+        </div>
+      )}
+      {selectedIBO && (
+        <div className='mt-8'>
+          <TableHeader
+            tableName={`${selectedIBO?.name} ${selectedIBO.lastname}`}
+          />
+          <div className='mt-4'>
+            <SingleIboSetcs ibo={selectedIBO} />
+          </div>
+        </div>
+      )}
       <div className='mt-4'>
         <p>Note: </p>
         <ul className='pl-4 list-disc'>
@@ -69,7 +140,7 @@ const SetcClientSubmissionsPage: Page = () => {
   )
 }
 
-SetcClientSubmissionsPage.getLayout = (page: ReactNode) => (
+SetcClientsPage.getLayout = (page: ReactNode) => (
   <DashboardLayout>
     <Head>
       <title>{SEO.TITLE_PAGE} - SETC Client Submission</title>
@@ -79,4 +150,4 @@ SetcClientSubmissionsPage.getLayout = (page: ReactNode) => (
   </DashboardLayout>
 )
 
-export default SetcClientSubmissionsPage
+export default SetcClientsPage

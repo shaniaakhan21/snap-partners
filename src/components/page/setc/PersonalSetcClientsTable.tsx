@@ -1,15 +1,15 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useMemo } from 'react'
 import ReactDataGrid from '@inovua/reactdatagrid-community'
-import { SetcClientSubmission } from 'lib/types/setc'
+import { SetcClient } from 'lib/types/setc'
 import { TypeColumn } from '@inovua/reactdatagrid-community/types'
 import dayjs from 'dayjs'
 
-interface PersonalClientSubmissionTableProps{
-  clients: SetcClientSubmission[]
+interface PersonalSetcClientsTableProps{
+  clients: SetcClient[]
 }
 
-const PersonalClientSubmissionTable: React.FC<PersonalClientSubmissionTableProps> = ({
+const PersonalSetcClientsTable: React.FC<PersonalSetcClientsTableProps> = ({
   clients
 }) => {
   const mappedClients = useMemo(() => clients.map(c => ({ ...c, createdAt: dayjs(c.createdAt).format('MM/DD/YYYY') })), [clients])
@@ -46,4 +46,4 @@ const PersonalClientSubmissionTable: React.FC<PersonalClientSubmissionTableProps
   )
 }
 
-export default PersonalClientSubmissionTable
+export default PersonalSetcClientsTable
