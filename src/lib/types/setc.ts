@@ -1,15 +1,17 @@
+import { IUserData } from './user'
+
 export interface SetcClient {
   id: number;
+  orderDate: string;
   name: string;
-  lastname: string;
   email: string;
   phone: string;
-  createdAt: string;
-  paid_status: number;
-  filingCompleted: boolean
+  paidStatus: boolean;
+  paidAmount: number;
+  irsFiledDate: string
 }
 
 export interface LevelledSetcClient{
   level: number;
-  ibos: (SetcClient &{clients: SetcClient[]})[]
+  ibos: (IUserData & {clients: SetcClient[]})[]
 }

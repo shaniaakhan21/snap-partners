@@ -2,10 +2,11 @@
 import React from 'react'
 import ReactDataGrid from '@inovua/reactdatagrid-community'
 import { LevelledSetcClient, SetcClient } from 'lib/types/setc'
+import { IUserData } from 'lib/types'
 
 type SetcLevelClientsTableProps = {
   levelledClient: LevelledSetcClient
-  onSelectIbo: (client: SetcClient & {clients: SetcClient[]}) => void;
+  onSelectIbo: (client: IUserData & {clients: SetcClient[]}) => void;
 };
 
 const SetcLevelClientsTable: React.FC<SetcLevelClientsTableProps> = ({
@@ -14,10 +15,10 @@ const SetcLevelClientsTable: React.FC<SetcLevelClientsTableProps> = ({
 }) => {
   const mappedClients = levelledClient.ibos.map(client => ({
     ...client,
-    client: `${client.name}`,
+    ibo: `${client.name} ${client.lastname}`,
     totalClients: client.clients.length,
-    depositsPaid: client.clients.filter(client => client.paid_status).length,
-    filingCompleted: client.clients.filter(client => client.filingCompleted).length
+    paidClients: client.clients.filter(client => client.paidStatus).length,
+    filingCompleted: client.clients.filter(client => !!client.irsFiledDate).length
   }))
 
   const gridStyle = {
@@ -25,7 +26,7 @@ const SetcLevelClientsTable: React.FC<SetcLevelClientsTableProps> = ({
   }
 
   const teamLevelReport = [
-    { name: 'client', header: 'Client', defaultFlex: 1, minWidth: 150 },
+    { name: 'ibo', header: 'IBO', defaultFlex: 1, minWidth: 150 },
     {
       name: 'totalClients',
       header: 'Total Clients',
@@ -33,8 +34,8 @@ const SetcLevelClientsTable: React.FC<SetcLevelClientsTableProps> = ({
       minWidth: 150
     },
     {
-      name: 'depositsPaid',
-      header: 'Deposits Paid',
+      name: 'paidClients',
+      header: 'Paid status',
       defaultFlex: 1,
       minWidth: 150
     },

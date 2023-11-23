@@ -15,11 +15,11 @@ const TeamSetcClientsTable: React.FC<TeamSetcClientsTableProps> = ({
   const mappedClients = clients.map(data => ({
     level: data.level === 6 ? data.level + ' +' : data.level,
     totalClients: data.ibos?.reduce((sum, curr) => sum + curr.clients.length, 0),
-    depositsPaid: data.ibos?.reduce((total, group) => {
-      return total + group.clients.filter(client => !!client.paid_status).length
+    paidClients: data.ibos?.reduce((total, group) => {
+      return total + group.clients.filter(client => client.paidStatus).length
     }, 0),
     filingCompleted: data.ibos?.reduce((total, group) => {
-      return total + group.clients.filter(client => client.filingCompleted).length
+      return total + group.clients.filter(client => !!client.irsFiledDate).length
     }, 0)
   }))
 
@@ -32,8 +32,8 @@ const TeamSetcClientsTable: React.FC<TeamSetcClientsTableProps> = ({
       minWidth: 150
     },
     {
-      name: 'depositsPaid',
-      header: 'Deposits Paid',
+      name: 'paidClients',
+      header: 'Paid Clients',
       defaultFlex: 1,
       minWidth: 150
     },

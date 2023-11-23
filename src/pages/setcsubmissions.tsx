@@ -3,7 +3,7 @@ import '@inovua/reactdatagrid-community/index.css'
 import dayjs from 'dayjs'
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import Head from 'next/head'
-import { Page, ReactNode } from 'lib/types'
+import { IUserData, Page, ReactNode } from 'lib/types'
 import { APP_INFO } from 'config/appInfo'
 import { getLocalStorage } from 'lib/utils/localStorage'
 import DashboardLayout from 'layouts/private/Dashboard'
@@ -26,7 +26,7 @@ const SetcClientsPage: Page = () => {
   const [monthSelected, setMonthSelected] = useState(new Date().getMonth())
   const [yearSelected, setYearSelected] = useState(new Date().getFullYear())
   const [selectedLevel, setSelectedLevel] = useState(-1)
-  const [selectedIBO, setSelectedIbo] = useState<SetcClient &{clients: SetcClient[]}>(null)
+  const [selectedIBO, setSelectedIbo] = useState<IUserData &{clients: SetcClient[]}>(null)
 
   const years = []
   for (let i = new Date().getFullYear(); i >= 2022; i--) {

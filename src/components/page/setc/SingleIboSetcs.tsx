@@ -3,15 +3,15 @@ import React from 'react'
 import ReactDataGrid from '@inovua/reactdatagrid-community'
 import dayjs from 'dayjs'
 import { SetcClient } from 'lib/types/setc'
+import { IUserData } from 'lib/types'
 
-const SingleIboSetcsTable = (props: {ibo: SetcClient & {clients: SetcClient[]}}) => {
+const SingleIboSetcsTable = (props: {ibo: IUserData & {clients: SetcClient[]}}) => {
   const { clients } = props.ibo
-  console.log({ props: props.ibo })
   const mappedClients = clients.map(client => ({
     setcId: client.id,
-    dateAcquired: dayjs(client.createdAt).format('MM/DD/YYYY'),
-    depositsPaid: client.paid_status ? 'Yes' : 'No',
-    filingCompleted: client.filingCompleted ? 'Yes' : 'No'
+    dateAcquired: dayjs(client.orderDate).format('MM/DD/YYYY'),
+    paidStatus: client.paidStatus ? 'Paid' : 'Not Paid',
+    filingCompleted: client.irsFiledDate ? 'Yes' : 'No'
   }))
 
   const gridStyle = {
@@ -31,8 +31,8 @@ const SingleIboSetcsTable = (props: {ibo: SetcClient & {clients: SetcClient[]}})
       minWidth: 150
     },
     {
-      name: 'depositsPaid',
-      header: 'Deposits Paid',
+      name: 'paidStatus',
+      header: 'Paid Status',
       defaultFlex: 1,
       minWidth: 150
     },
