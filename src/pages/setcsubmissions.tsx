@@ -56,10 +56,7 @@ const SetcClientsPage: Page = () => {
       setSelectedLevel(-1)
       setTeamClientsLoading(true)
       const token = getLocalStorage('accessToken')
-      const res = await fetch(
-        `/api/ffcra/team-clients?month=${
-          monthSelected
-        }&year=${yearSelected}`,
+      const res = await fetch(`/api/ffcra/team-clients?month=${monthSelected}&year=${yearSelected}`,
         {
           method: 'GET',
           headers: { Authorization: `Bearer ${token}` }
