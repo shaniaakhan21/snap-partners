@@ -7,13 +7,15 @@ import Order from './Order'
 import Downline from './Downline'
 import CommissionsTab from './ComissionsTab'
 import Upline from './Upline'
+import IndividualDashboard from './IndividualDashboard'
 import InfoBanner from './InfoBanner'
+import Reports from './reports/Reports'
 import { useAuthStore } from 'lib/stores'
 import Tickets from './Tickets'
 
 function IndividualProfile ({ profileData }) {
   const cname = 'profilePage-individualProfile'
-  const [body, setBody] = useState<'iboProfile' | 'order' | 'downline' | 'comissions' | 'upline' | 'tickets'>('iboProfile')
+  const [body, setBody] = useState<'iboProfile' | 'order' | 'downline' | 'comissions' | 'upline' | 'tickets' |'dashboard' | 'reports'>('iboProfile')
   const { auth } = useAuthStore()
   console.log('body is ', body)
   return (
@@ -46,6 +48,11 @@ function IndividualProfile ({ profileData }) {
             : <></>
         }
         {
+          body === 'dashboard'
+            ? <IndividualDashboard userId={profileData[0]?.id} />
+            : <></>
+        }
+        {
           body === 'upline'
             ? <Upline id={profileData[0]?.id} currentUserLevel={auth?.level}/>
             : <></>
@@ -56,6 +63,12 @@ function IndividualProfile ({ profileData }) {
             : <></>
         }
 
+        {
+
+          body === 'reports'
+            ? <Reports userId={profileData[0]?.id}/>
+            : <></>
+        }
 
       </Paper>
     </Container>

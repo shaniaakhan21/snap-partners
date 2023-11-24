@@ -14,6 +14,7 @@ import axios from 'axios'
 import { Button } from 'components/common/Button'
 import { useState } from 'react'
 import SignedCert from 'pages/wellness/components/SignedCert'
+import { GrandfatherRankHr } from 'components/common/overview/GrandfatherRankHr'
 
 interface IAccountInfoProps {
   auth: IAuth
@@ -108,16 +109,14 @@ export const AccountInfo = ({ auth, setAuth, removeAuth, setNewWindow, setTypeUp
 
       </div>
 
+      <GrandfatherRankHr/>
+
       <div className='mt-11'>
         <FormAccountInfo
           auth={auth}
           setTypeUpdate={setTypeUpdate}
         />
       </div>
-
-      {!isIntegrous && (
-        <BecomeRoles auth={auth} />
-      )}
 
       {isIntegrousCustomer && (
         <div className='w-full mt-3'>

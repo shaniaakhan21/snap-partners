@@ -35,10 +35,11 @@ const DashboardOverViewPage: Page = () => {
   const [viewing, setViewing] = useState<string>('Aug')
   const store = useAuthStore()
   const auth: any = store.auth
-  const [openModal, setOpenModal] = useState(!auth.isCertified)
+  const [openModal, setOpenModal] = useState(false)
 
   const currentOverview = getLocalStorage('currentBackoffice') || ''
   const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
+  const isCustomer = auth.roles.customer
   const isIntegrousAssociate = auth.roles.integrousAssociate
 
   const handleCloseModal = () => {
@@ -54,6 +55,7 @@ const DashboardOverViewPage: Page = () => {
           Authorization: `Bearer ${token}`
         }
       })
+      console.log('rankData is', response.data)
       setRankData(response.data)
     })()
   }, [])
@@ -93,22 +95,22 @@ const DashboardOverViewPage: Page = () => {
             <TierTable />
           </div>
           <div className='mt-4'>
-            <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} />
+            <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} userId={null}/>
           </div>
           <div className='mt-4'>
-            <PVComponentSnap />
+            <PVComponentSnap userId={null} />
           </div>
           <div className='mt-4'>
             <RewardsProgram />
           </div>
           <div className='mt-4'>
-            <GrowthSummary />
+            <GrowthSummary userId={null} />
           </div>
           <div className='mt-4 bg-white rounded-lg'>
-            <MonthlySubscription />
+            <MonthlySubscription userId={ null } />
           </div>
           <div className='mt-4 bg-white rounded-lg'>
-            <MonthlyProduction />
+            <MonthlyProduction userId={null} />
           </div>
         </div>
         <div className='ml-4'>
@@ -124,7 +126,9 @@ const DashboardOverViewPage: Page = () => {
       <div className='col-span-12 mt-4'>
         <Referrals rankData={rankData} />
       </div>
-      <ContractModal open={openModal} onClose={handleCloseModal} />
+      {!isCustomer && (
+        <ContractModal open={openModal} onClose={handleCloseModal} />)
+      }
     </>
   )
 }

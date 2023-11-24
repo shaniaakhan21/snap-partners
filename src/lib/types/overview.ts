@@ -22,6 +22,7 @@ export interface WorkingLegs {
   [key: string]: {
     rate: number;
     percentage: number;
+    name: string
   };
 }
 export interface GV {
@@ -43,6 +44,8 @@ export interface Post {
 export interface RankData {
   currentRank: string,
   currentRankLevel: number,
+  highestRank: string,
+  highestRankLevel: number,
   mng: Post,
   sv: Post,
   dct: Post,

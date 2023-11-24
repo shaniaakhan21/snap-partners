@@ -65,7 +65,7 @@ type GrowthSummaryData = {
 
 const sum = (...args: (number | undefined)[]) => args.reduce((a, b) => a + (parseFloat(b?.toString() ?? '0')), 0)
 
-export default function GrowthSummary () {
+export default function GrowthSummary ({ userId }) {
   const [monthSelected, setMonthSelected] = React.useState(new Date().getMonth()) // 0-11
   const [yearSelected, setYearSelected] = React.useState(new Date().getFullYear())
 
@@ -84,10 +84,16 @@ export default function GrowthSummary () {
     (async () => {
       const token = getLocalStorage('accessToken')
       const response = await axios.get('/api/reports/getGrowthSummary', {
-        params: {
-          monthSelected,
-          yearSelected
-        },
+        params: userId
+          ? {
+            monthSelected,
+            yearSelected,
+            userId
+          }
+          : {
+            monthSelected,
+            yearSelected
+          },
         headers: {
           Authorization: `Bearer ${token}`
         }

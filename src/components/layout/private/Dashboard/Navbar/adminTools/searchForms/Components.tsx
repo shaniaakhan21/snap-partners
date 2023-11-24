@@ -47,6 +47,18 @@ export const InputComponent = (props:IInputComponent) => {
   )
 }
 
+export const TextArea = (props:IInputComponent) => {
+  const { label, placeholder, onChangeFunction, param, value, type } = props
+  return (
+    <div>
+      <label className='search-form-label'>{label}</label>
+      <div>
+        <textarea className='search-form-input search-form-box' placeholder={placeholder}></textarea>
+      </div>
+    </div>
+  )
+}
+
 export const SelectComponent = (props:ISelectComponent) => {
   const { label, options, name, onChangeFunction, param, value } = props
   return (

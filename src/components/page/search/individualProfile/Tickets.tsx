@@ -1,6 +1,8 @@
 /* eslint-disable no-use-before-define */
 import axios from 'axios'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import ZendeskTicketCreation from './modalPopups/zendesk/ZendeskTicketCreation'
+import { ButtonComponent, InputComponent, SelectComponent } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/Components'
 // import Zendesk from 'react-zendesk'
 const ZENDESK_KEY = '324987dc-ca53-451c-b524-096403f15e91'
 
@@ -13,16 +15,23 @@ const Tickets = () => {
     }
   })
 
+  const [zendeskTicketModal, setZendeskTicketModal] = useState(false)
+
   // Example: Fetch all tickets
   const getZendeskData = () => {
-  zendeskAPI.get('/tickets.json')
-    .then((response) => {
-      console.log('Tickets:', response.data)
-    })
-    .catch((error) => {
-      console.error('Error fetching tickets:', error)
-    })
+    zendeskAPI.get('/tickets.json')
+      .then((response) => {
+        console.log('Tickets:', response.data)
+      })
+      .catch((error) => {
+        console.error('Error fetching tickets:', error)
+      })
   }
+
+  const onZendeskTicketModalClose = () => {
+    setZendeskTicketModal(false)
+  }
+
   const setting = {
     color: {
       theme: '#000'
@@ -40,10 +49,32 @@ const Tickets = () => {
   }
   return (
     <div>
+      <div className='flex flex-row justify-between'>
+        <div className='flex flex-row gap-2'>
+          <img src='/images/message-circle.svg' style={{ width: '50px', height: '50px' }} />
+          <span className='mt-3 text-[#E35C49] font-open-sans text-xl font-semibold leading-6'>Help Tickets</span>
+        </div>
+        <div>
+          <button onClick = {() => { setZendeskTicketModal(true) }} className= {'bg-[#2C7D0E] text-white px-3 py-2'}><span className='text-[#FFF] text-center font-open-sans text-sm font-bold leading-4 uppercase'>CREATE NEW TICKET</span></button>
+        </div>
+      </div>
+      <div className='flex flex-row justify-evenly mt-10 gap-3'>
+        <div className='searchForm-inputContainer'>
+          <InputComponent label={'search ticket'} placeholder={'ID, Name, Status'} />
+        </div>
+        <div className='searchForm-ButtonContainer'>
+          <ButtonComponent title={'search'} />
+        </div>
+      </div>
+      <div>
+        <p className='text-[#404040] font-open-sans text-xl font-semibold leading-6 mt-10'>Friday, June 21, 2019</p>
+      </div>
       <div>
         {/* Your React component content */}
         <button onClick={() => { getZendeskData() }}>click here</button>
       </div>
+
+      <ZendeskTicketCreation zendeskTicketModal={zendeskTicketModal} closeModal = {onZendeskTicketModalClose} />
     </div>
   )
 }

@@ -70,9 +70,13 @@ export const drawerRoutes = [
         to: '/ercreferrals'
       },
       {
+        label: 'SETC',
+        to: '/setcsubmissions'
+      }
+      /* {
         label: 'Vidgo',
         to: '/vidgo-reporting'
-      }
+     } */
     ]
   },
   {
@@ -88,9 +92,8 @@ export const drawerRoutes = [
   {
     icon: <AccountIcon />,
     to: '/network-activity',
-    label: 'Network Activity',
-    integrous: true
-   },
+    label: 'Network Activity'
+  },
   {
     icon: <GenealogyIcon />,
     to: '/genealogy',
@@ -102,12 +105,12 @@ export const drawerRoutes = [
     to: '/tree',
     label: 'Tree'
   },
-   {
+  {
     icon: <GenealogyIcon />,
     to: '/binarytree',
     label: 'Binary Tree',
     integrous: true
-   },
+  },
   {
     icon: <CompensationPlanIcon />,
     to: '/compensation-plan',
@@ -174,8 +177,12 @@ export const globalRoutes = [
     label: 'Individual Profile'
   },
   {
-    to: '/wellness/wellness',
-    label: 'SNAP Wellness'
+    to: '/wellness',
+    label: 'Integrous Wellness'
+  },
+  {
+    to: '/WeightCare',
+    label: 'Weight Care'
   }
 
 ]

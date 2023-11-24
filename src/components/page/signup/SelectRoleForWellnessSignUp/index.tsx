@@ -1,27 +1,27 @@
-import { useRef } from 'react'
-import { IBOIcon, ArrowRightIcon } from 'components/common/icons'
+import { ArrowRightIcon } from 'components/common/icons'
 import { ROLES } from 'config/roles'
 import { GTMTrack } from 'lib/utils/gtm'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { AssociateIcon } from 'components/common/icons/Associate'
+import { CustomerIcon } from 'components/common/icons/Customer'
 
 export const SelectRoleForWellnessSignUp = () => {
   const router = useRouter()
   const queryReferralCode = router.query.referralCode as string
+
+  const isRedirectToIntegrousWellness = router.query.redirectToIntegrousWellness === 'true'
+  const isRedirectToWeightCare = router.query.redirectToWeightCare === 'true'
+
   const roles = [
     {
-      icon: <IBOIcon classes='w-14 h-14' />,
+      icon: <CustomerIcon classes='w-14 h-14' />,
       label: 'Register as a Customer',
       key: ROLES.CUSTOMER,
-      link: `/auth/signup-wellness?role=${ROLES.CUSTOMER}&referralCode=${queryReferralCode}`
-    },
-
-    {
-      icon: <AssociateIcon classes='w-14 h-14' />,
-      label: 'Register as an Associate',
-      key: ROLES.IBO,
-      link: `/auth/signup-wellness?role=${ROLES.IBO}&referralCode=${queryReferralCode}`
+      link: isRedirectToIntegrousWellness
+        ? `/auth/signup-wellness?role=${ROLES.CUSTOMER}&referralCode=${queryReferralCode}&redirectToIntegrousWellness=true`
+        : isRedirectToWeightCare
+          ? `/auth/signup-wellness?role=${ROLES.CUSTOMER}&referralCode=${queryReferralCode}&redirectToWeightCare=true`
+          : `/auth/signup-wellness?role=${ROLES.CUSTOMER}&referralCode=${queryReferralCode}`
     }
   ]
 
@@ -29,9 +29,19 @@ export const SelectRoleForWellnessSignUp = () => {
     GTMTrack.signUp(role.key)
     router.push(role.link)
   }
+  const referralCode = router.query.referralCode || 'IntegrousWellness'
+  const redirectToWeightCare = router.query.redirectToWeightCare === 'true'
+  const redirectToIntegrousWellness = router.query.redirectToIntegrousWellness === 'true'
+  const loginURL = router.pathname === '/auth/login-integrous'
+    ? `/auth/login-integrous?referralCode=${referralCode}`
+    : redirectToWeightCare
+      ? `/auth/login-wellness?referralCode=${referralCode}&redirectToWeightCare=true`
+      : redirectToIntegrousWellness
+        ? `/auth/login-wellness?referralCode=${referralCode}&redirectToIntegrousWellness=true`
+        : '/auth/login'
 
   return (
-    <div className='text-center h-[85vh] flex flex-col justify-center items-center w-full'>
+    <div className='text-center h-[50vh] flex flex-col justify-center items-center w-full'>
       <span className='text-3xl text-gray-800 font-bold'>Welcome To Snap Partners</span>
       <p className='text-gray-600 font-semibold'>Please choose how you want to register, other rolls <br className='hidden sm:block' /> can be added once you log in </p>
 
@@ -63,7 +73,7 @@ export const SelectRoleForWellnessSignUp = () => {
 
       <p>
         <span className='font-bold text-gray-800'>Already have an account?</span>
-        <Link href='/auth/login-wellness'>
+        <Link href={loginURL}>
           <a className='text-textAcent-500'> Login.</a>
         </Link>
       </p>
