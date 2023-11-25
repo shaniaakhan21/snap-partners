@@ -14,6 +14,7 @@ import TableHeader from 'components/page/erc/TableHeader'
 import TeamSetcClientsTable from 'components/page/setc/TeamSetcClientsTable'
 import SetcLevelClientsTable from 'components/page/setc/SetcLevelClientsTable'
 import SingleIboSetcs from 'components/page/setc/SingleIboSetcs'
+import SetcModal from 'lib/modals/SetcModal'
 dayjs.extend(customParseFormat) // Extend dayjs with the plugin. Required for Safari
 
 const { SEO } = APP_INFO
@@ -27,6 +28,7 @@ const SetcClientsPage: Page = () => {
   const [yearSelected, setYearSelected] = useState(new Date().getFullYear())
   const [selectedLevel, setSelectedLevel] = useState(-1)
   const [selectedIBO, setSelectedIbo] = useState<IUserData &{clients: SetcClient[]}>(null)
+  const [selectedClient, setSelectedClient] = useState<SetcClient>();
 
   const years = []
   for (let i = new Date().getFullYear(); i >= 2022; i--) {
@@ -89,8 +91,9 @@ const SetcClientsPage: Page = () => {
           )
         }
       </div>
+      <SetcModal client={selectedClient} isOpen={Boolean(selectedClient)} onClose={() => setSelectedClient(null)} />
       <div className='mt-4'>
-        <PersonalSetcClientsTable clients={personalClients}/>
+        <PersonalSetcClientsTable clients={personalClients} onClickDetails={setSelectedClient}/>
       </div>
       <div className='mt-8'>
         <TableHeader

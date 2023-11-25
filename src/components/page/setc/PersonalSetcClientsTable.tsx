@@ -7,10 +7,12 @@ import dayjs from 'dayjs'
 
 interface PersonalSetcClientsTableProps{
   clients: SetcClient[]
+  onClickDetails: (client: SetcClient) => unknown
 }
 
 const PersonalSetcClientsTable: React.FC<PersonalSetcClientsTableProps> = ({
-  clients
+  clients,
+  onClickDetails
 }) => {
   const mappedClients = useMemo(() => clients.map(c => ({ ...c, createdAt: dayjs(c.orderDate).format('MM/DD/YYYY'), paidStatus: c.paidStatus ? 'Paid' : 'Not Paid', irsFiledDate: c.irsFiledDate ? dayjs(c.irsFiledDate).format('MM/DD/YYYY') : 'N/A' })), [clients])
   const columns:TypeColumn[] = [
@@ -21,7 +23,25 @@ const PersonalSetcClientsTable: React.FC<PersonalSetcClientsTableProps> = ({
     { name: 'phone', header: 'Phone', defaultFlex: 1, minWidth: 90 },
     { name: 'paidStatus', header: 'Paid Status', defaultFlex: 1, minWidth: 90 },
     { name: 'paidAmount', header: 'Paid Amount', defaultFlex: 1, minWidth: 90 },
-    { name: 'irsFiledDate', header: 'Filing with IRS', defaultFlex: 1, minWidth: 90 }
+    { name: 'irsFiledDate', header: 'Filing with IRS', defaultFlex: 1, minWidth: 90 },
+    {
+      name: 'details',
+      header: 'See More',
+      defaultFlex: 1,
+      minWidth: 90,
+      render: ({ data }) => {
+        return (
+          <span>
+            <button
+              className="text-textAcent-500"
+              onClick={() => onClickDetails(data)}
+            >
+              Details
+            </button>
+          </span>
+        )
+      }
+    }
   ]
 
   const gridStyle = {

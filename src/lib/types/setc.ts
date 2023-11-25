@@ -9,6 +9,13 @@ export interface SetcClient {
   paidStatus: boolean;
   paidAmount: number;
   irsFiledDate: string
+  agreementSignedDate: string;
+  taxpayerQualified2020: boolean;
+  taxpayerQualified2021: boolean;
+  childCareQualified2020: boolean;
+  childCareQualified2021: boolean;
+  caregiverQualified2020: boolean;
+  caregiverQualified2021: boolean;
 }
 
 export interface LevelledSetcClient{
