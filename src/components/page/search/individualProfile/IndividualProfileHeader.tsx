@@ -93,8 +93,6 @@ function IndividualProfileHeader ({ body, setBody, profileData, userLevel }) {
         <li className={body === 'dashboard' ? `${cname}-header-listItems listItems-active listItems-midItem` : `${cname}-header-listItems listItems-midItem`}
           onClick={() => setBody('dashboard')}>Dashboard</li>
 
-        <li className={`${cname}-header-listItems listItems-midItem`}>tickets</li>
-
         <li className={body === 'upline' ? `${cname}-header-listItems listItems-active listItems-midItem` : `${cname}-header-listItems listItems-midItem`}
           onClick={() => setBody('upline')}>upline</li>
         {/* <li className={`${cname}-header-listItems`}
