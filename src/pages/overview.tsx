@@ -25,7 +25,7 @@ import TotalLeg from './backOfficeDashboard'
 import PVComponentSnap from 'components/common/dashBackOffice/PersonalVolumeSnap'
 import Modal from '@mui/material/Modal'
 import Button from '@mui/material/Button'
-import ContractModal from './wellness/components/ContractModal'
+import ContractModal from './WeightCare/ContractModal'
 
 const { SEO } = APP_INFO
 
@@ -98,7 +98,7 @@ const DashboardOverViewPage: Page = () => {
             <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} userId={null}/>
           </div>
           <div className='mt-4'>
-            <PVComponentSnap />
+            <PVComponentSnap userId={null} />
           </div>
           <div className='mt-4'>
             <RewardsProgram />

@@ -91,10 +91,9 @@ const MyWalletPage: Page = () => {
             )
         }
         <>
-          <h2 style={{ color: 'red', textAlign: 'center' }}>We are currently upgrading the wallet system, please try again later</h2>
+          <h2 style={{ color: 'red', textAlign: 'center' }}>Withdrawals may take up to 5 to 7 business days depending on your bank</h2>
           <div className='max-w-xl mx-auto w-full text-center mb-2 mt-1'>
-            {/* !enableWithdraw */}
-            <Button disabled={true} onClick={() => { fnOpenModalConfirmation() }} type='submit' classes=' mr-1 text-sm bg-primary-500'>
+            <Button disabled={!enableWithdraw} onClick={() => { fnOpenModalConfirmation() }} type='submit' classes=' mr-1 text-sm bg-primary-500'>
                       Withdraw Available Balance
             </Button>
             <br/>

@@ -1,14 +1,14 @@
 /* eslint-disable no-use-before-define */
 
 import React, { useEffect, useRef } from 'react'
-import Footer from './wellness/components/Footer'
-import Header from './wellness/components/Header'
-import MainSection from './wellness/components/MainSection'
+import Header from './WeightCare/WcHeader'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { AuthRecover } from 'components/common/AuthRecover'
 import { useAuthStore } from 'lib/stores'
-import WeightCare from './wellness/components/WeightCare'
+import WeightCare from './WeightCare/WeightCare'
+import MainSection from './WeightCare/Msection'
+import Footer from './WeightCare/WcFooter'
 
 const IntegrousWellness = () => {
   const router = useRouter()
@@ -19,6 +19,7 @@ const IntegrousWellness = () => {
   const [referralCode, setreferralCode] = React.useState(null)
   const [ownerEmail, setownerEmail] = React.useState(null)
   const [isIntegrous, setIsIntegrous] = React.useState(false)
+  const [ownerProfileImage, setownerProfileImage] = React.useState(null)
   const scrollToProductTabs = () => {
     const productTabsElement = document.getElementById('productTabs') // Replace 'productTabs' with the actual ID of your IntegrousProducts component
     if (productTabsElement) {
@@ -48,6 +49,7 @@ const IntegrousWellness = () => {
           setreferralCode(response.data.referralCode)
           setownerName(`${response.data.name} ${response.data.lastname}`)
           setownerEmail(`${response.data.email}`)
+          setownerProfileImage(`${response.data.profileImage}`)
           const roles = JSON.parse(response.data.roles)
           if (roles.integrousAssociate) {
             setIsIntegrous(true)
@@ -90,7 +92,7 @@ const IntegrousWellness = () => {
       <div>
         <WeightCare isLoggedIn={isLoggedIn} referralCode={referralCode}/>
       </div>
-      <Footer ownerName={ownerName} ownerEmail={ownerEmail} customFooterBorder="customGrayborder" customfooterInputbg="customGray" customFooterBoxbg="customGray" customFooterbg="blackCustom" submitBtnBg="primary-500" />
+      <Footer ownerName={ownerName} ownerEmail={ownerEmail} ownerProfileImage={ownerProfileImage} customFooterBorder="customGrayborder" customfooterInputbg="customGray" customFooterBoxbg="customGray" customFooterbg="blackCustom" submitBtnBg="primary-500" />
 
     </div>
   )

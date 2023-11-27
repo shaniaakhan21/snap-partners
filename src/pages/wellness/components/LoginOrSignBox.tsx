@@ -1,48 +1,90 @@
 import CardContent from '@mui/material/CardContent'
 import Card from '@mui/material/Card'
+import { Button } from 'components/common/Button'
+import Router from 'next/router'
 
 const LoginOrSignBox = ({ isLoggedIn, userData, referralCode, h1Color, customColor, BgbtnColor }) => {
   const isGuest = typeof localStorage !== 'undefined' && localStorage.getItem('isGuest') === 'true'
+  const handleLogin = (isGuest: boolean = false) => {
+    const referralCodeFromLocalStorage = localStorage.getItem('referralCode')
+    const queryParams = new URLSearchParams(window.location.search)
+    const referralCodeFromQuery = queryParams.get('referralCode')
+    const referralCode = referralCodeFromLocalStorage || referralCodeFromQuery || 'NoSponsor'
+
+    let loginRoute = '/auth/login-wellness?referralCode=' + referralCode
+
+    if (window.location.pathname.includes('wellness')) {
+      loginRoute += '&redirectToIntegrousWellness=true'
+    } else if (window.location.pathname.includes('WeightCare')) {
+      loginRoute += '&redirectToWeightCare=true'
+    }
+
+    Router.push(loginRoute)
+
+    if (isGuest) {
+      localStorage.setItem('isGuest', 'true')
+    }
+  }
   return (
     <div className='w-full flex items-center justify-center'>
       {isLoggedIn
         ? (
           <Card
             sx={{
-              background: 'transparent',
-              border: '#ffffff29 0.5px solid',
-              boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.16)',
-              filter: 'drop-shadow(0px 17px 34px rgba(0, 0, 0, 0.15))',
-              backdropFilter: 'blur(17px)'
+              background: '#bb4947cf',
+              border: '#ffffff29 0.5px solid'
             }}
-            className="px-0 py-0 lg:px-8 lg:py-2 3xl:py-5 rounded-2xl mt-1 3xl:mt-32 w-8/12 xl:w-6/12 3xl:w-8/12"
+
+            className="px-0 py-0 lg:px-8 lg:py-2 3xl:py-5 rounded-none mt-1 3xl:mt-32 w-8/12 xl:w-6/12 3xl:w-8/12"
           >
             <CardContent className='p-2 sm:p-4'>
               <h1 className={`text text-${customColor} text-lg md:text-3xl 2xl:text-4xl 3xl:text-5xl font-semibold-it font-normal text-center 3xl:leading-tight`}>
-                <span className={`text-${h1Color} capitalize`}>{userData ? `${userData?.name} ${userData?.lastname}` : ''} </span>, Welcome to Snap Wellness
+                <span className={'text-white capitalize'}>{userData ? `${userData?.name} ${userData?.lastname}` : ''} </span>, Welcome to Snap Vitality
               </h1>
             </CardContent>
           </Card>
         )
         : (
-          isGuest && (
-            <Card
-              sx={{
-                background: 'transparent',
-                border: '#ffffff29 0.5px solid',
-                boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.16)',
-                filter: 'drop-shadow(0px 17px 34px rgba(0, 0, 0, 0.15))',
-                backdropFilter: 'blur(17px)'
-              }}
-              className="px-0 py-0 lg:px-8 lg:py-2 3xl:py-5 rounded-2xl mt-1 3xl:mt-32 w-8/12 xl:w-6/12 3xl:w-8/12"
-            >
-              <CardContent className='p-2 sm:p-4'>
-                <h1 className={`text text-${customColor} text-lg md:text-3xl 2xl:text-4xl 3xl:text-5xl font-semibold-it font-normal text-center 3xl:leading-tight`}>
-                Welcome to Snap Wellness
-                </h1>
-              </CardContent>
-            </Card>
-          )
+          isGuest
+            ? (
+              <Card
+                sx={{
+                  background: '#bb4947cf',
+                  border: '#ffffff29 0.5px solid'
+                }}
+                className="px-0 py-0 lg:px-8 lg:py-2 3xl:py-5 rounded-none mt-1 3xl:mt-32 w-8/12 xl:w-6/12 3xl:w-8/12"
+              >
+                <CardContent className='p-2 sm:p-4'>
+                  <h1 className={'text text-white text-lg md:text-3xl 2xl:text-4xl 3xl:text-5xl font-semibold-it font-normal text-center 3xl:leading-tight'}>
+                Welcome to Snap Vitality
+                  </h1>
+                </CardContent>
+              </Card>
+            )
+            : (
+              <>
+                <Card
+                  sx={{
+                    background: '#bb4947cf',
+                    border: '#ffffff29 0.5px solid'
+                  }}
+                  className="rounded-none"
+                >
+                  <CardContent className='flex flex-col md:flex-row w-full justify-around items-center p-10 sm:p-4 md:p-6 2xl:p-8 force-padding'>
+                    <div className='mr-0 md:mr-10 w-[100%] md:w-4/3'>
+                      <h1 className={'text text-white text-lg md:text-2xl 2xl:text-2xl 3xl:text-5xl font-normal font-normal text-center 3xl:leading-tight'}>
+                    Purchase Now
+                      </h1>
+                    </div>
+                    <div className='w-[100%] md:w-1/3'><Button onClick={() => { handleLogin() }}
+                      classes={'w-[100%] md:w-full text-xs md:text-base lg:text-lg xl:text-lg 2xl:text-lg rounded-none 3xl:text-2xl px-12 py-2 bg-white text-not-white'}
+                    >
+                      Log in
+                    </Button></div>
+                  </CardContent>
+                </Card>
+              </>
+            )
         )}
     </div>
   )

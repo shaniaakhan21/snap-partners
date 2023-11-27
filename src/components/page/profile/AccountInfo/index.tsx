@@ -13,7 +13,7 @@ import { getLocalStorage } from 'lib/utils/localStorage'
 import axios from 'axios'
 import { Button } from 'components/common/Button'
 import { useState } from 'react'
-import SignedCert from 'pages/wellness/components/SignedCert'
+import SignedCert from 'pages/WeightCare/SignedCert'
 import { GrandfatherRankHr } from 'components/common/overview/GrandfatherRankHr'
 
 interface IAccountInfoProps {

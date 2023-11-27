@@ -4,7 +4,14 @@ import React, { useEffect } from 'react'
 import Client from 'shopify-buy'
 import MockUpItems from './mockup'
 
-const IntegrousProducts = ({ userId, isLoggedIn, referralCode, userRole, collectionIdAllProducts, IboId }) => {
+const IntegrousProducts = ({ products, userId, isLoggedIn, userRole, collectionId, IboId }) => {
+  React.useEffect(() => {
+    products.forEach((product) => {
+      const img = new Image()
+      img.src = product.productImage
+    })
+  }, [products])
+
   const isGuest = typeof localStorage !== 'undefined' && localStorage.getItem('isGuest') === 'true'
   let ShopifyBuy:any
   useEffect(() => {
@@ -27,7 +34,7 @@ const IntegrousProducts = ({ userId, isLoggedIn, referralCode, userRole, collect
           : [{ key: 'IBOID', value: String(IboId) }]
         ShopifyBuy.UI.onReady(client).then((ui) => {
           ui.createComponent('collection', {
-            id: collectionIdAllProducts,
+            id: collectionId,
             node: document.getElementById('collection-component-tabs'),
             moneyFormat: '%24%7B%7Bamount%7D%7D',
             options: {
@@ -41,24 +48,21 @@ const IntegrousProducts = ({ userId, isLoggedIn, referralCode, userRole, collect
       }
 
       document.body.appendChild(script)
-
-      // Cleanup on unmount
       return () => {
         document.body.removeChild(script)
       }
     }
   }, [userId, IboId])
-  console.log("corronchito1")
 
   return (
-    <div className="flex md:flex-row flex-col justify-start items-center" >
+    <div className="flex md:flex-row flex-col justify-start items-start" >
       { isLoggedIn || isGuest
-        ? <div className='w-full flex justify-center m-3 mt-20 xs:mt-10 3xl:mt-20' id="productTabs">
-          <div className='bg-gradient-to-b to-[#ce894b] from-[#e1d2c98a] xs:to-[#eda772ed] xs:from-[#fde8da7a] backdrop-blur-sm bg-opacity-10 flex w-9/12 p-2 xs:p-10 xs:rounded-lg shadow-orange-custom'>
+        ? <div className='w-full flex justify-center m-3 mt-20 xs:mt-10 3xl:mt-20 mb-16' id="productTabs">
+          <div className=' flex w-9/12 p-2 xs:p-10 xs:rounded-lg bg-[#ECECEC]'>
             <div id='collection-component-tabs' className='border-1'></div>
           </div>
         </div>
-        : <div id="productTabs"><MockUpItems collectionId={collectionIdAllProducts} referralCode={referralCode}/></div>
+        : <div id="productTabs"><MockUpItems collectionId={collectionId} /></div>
       }
     </div>
   )

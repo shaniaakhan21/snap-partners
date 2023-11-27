@@ -1,6 +1,24 @@
+.main-section p, .main-section h1, .main-section button{
+ font-family: inter!important;
+}
+
+.main-section .force-padding{
+    padding-bottom: 2.5rem!important;
+    @media (max-width: 768px) {
+        padding-bottom: 0.5rem!important;
+    }
+    @media (max-width: 700px) {
+        padding-bottom: 2.5rem!important;
+    }
+}
+
+.main-section .text-not-white{
+ color: #BB4947!important;
+}
+
 .bgc-black {
     --tw-bg-opacity: 1;
-    background-color: #4D655B
+    background-color: #BB4947!important;
 }
 
 .video-container {
@@ -24,11 +42,11 @@
 
 
 .bg-btn-color {
-    background-color: #4D655B!important;
+    background-color: #BB4947!important;
 }
 
 .text-red-h {
-    color: #4D655B!important;
+    color: #BB4947!important;
 }
 
 .text-white-h {
@@ -154,9 +172,6 @@
         height: 100vh;
     }
 
-    .MuiCardContent-root:last-child {
-        padding-bottom: 0.5rem!important;
-    }
 }
 
 .disc-lines {

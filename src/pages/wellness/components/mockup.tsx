@@ -4,7 +4,7 @@ import SingleItem from './SingleItem'
 import axios from 'axios'
 import { Grid } from '@mui/material'
 
-export default function MockUpItems ({ collectionId, referralCode }) {
+export default function MockUpItems ({ collectionId }) {
   const [products, setProducts] = React.useState([])
   React.useEffect(() => {
     async function Shopify () {
@@ -31,20 +31,19 @@ export default function MockUpItems ({ collectionId, referralCode }) {
     window.location.reload()
   }
   return (
-    <div className='w-full flex justify-center m-3 mt-20 xs:mt-32'>
+    <div className='w-full flex justify-center mb-10'>
       <div
-        className='bg-gradient-to-b to-[#ce894b] from-[#e1d2c98a] xs:to-[#eda772ed] xs:from-[#fde8da7a] backdrop-blur-sm bg-opacity-10 flex w-9/12 p-2 xs:p-10 xs:rounded-lg shadow-orange-custom'
+        className='w-9/12 p-4 xs:p-10'
       >
-        <Grid container justifyContent="center" sx={{ textAlign: 'center' }}>
+        <Grid container justifyContent="flex-start" sx={{ textAlign: 'center' }}>
           {products.map((product, index) => (
-            <Grid key={product.id} item xs={12} md={3}>
+            <Grid key={product.id} item xs={12} md={4}>
               <SingleItem
                 image={product.node.variants.edges[0].node.image.src}
                 name={product.node.title}
                 price={`$${product.node.variants.edges[0].node.price.amount}`}
                 btnLabel="Add to Cart"
                 index={index}
-                referralCode={referralCode}
                 onGuestLogin={handleGuestLogin}
               />
             </Grid>

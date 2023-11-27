@@ -9,33 +9,7 @@ import DialogContent from '@mui/material/DialogContent'
 import DialogActions from '@mui/material/DialogActions'
 import axios from 'axios'
 
-const useStyles = makeStyles((theme) => ({
-  profileImage: {
-    width: '70%',
-    marginLeft: '3%',
-    borderRadius: '50%'
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'flex-start'
-  },
-  placeholderWhite: {
-    '&::placeholder': {
-      color: 'white'
-    },
-    input: {
-      color: 'white'
-    }
-  },
-  button: {
-    alignSelf: 'flex-start'
-  }
-}))
-
-function Footer ({ userData, ownerName, ownerEmail, customFooterBorder, submitBtnBg, customfooterInputbg, customFooterBoxbg, customFooterbg }) {
-  const classes = useStyles()
-
+function Footer ({ userData, ownerName, ownerEmail, ownerProfileImage, customFooterBorder, submitBtnBg, customfooterInputbg, customFooterBoxbg, customFooterbg }) {
   const [formData, setFormData] = useState({
     name: '',
     customerEmail: '',
@@ -102,83 +76,72 @@ function Footer ({ userData, ownerName, ownerEmail, customFooterBorder, submitBt
   }
 
   return (
-    <footer className={`bg-${customFooterbg} px-10 pt-5 pb-5 backdrop-blur-sm bg-opacity-20`}>
+    <footer className={'bg-[#F0F0F0] px-10 pt-5 pb-5 '}>
       <Grid container>
-        <Grid
-          item
-          xs={12}
-          md={3}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'left',
-            flexDirection: 'column',
-            padding: '1% 0 1% 0'
-          }}
-
-        >
-          <div className={`flex flex-col items-center w-8/12 rounded-lg border-2 border-${customFooterBorder} text-center`}>
-            <div className={`bg-${customFooterBoxbg} w-full py-6`}>
-              <h3 className="text-white text-base font-light text-center uppercase 3xl:text-2xl">Store Owner</h3>
-
-              <h3 className="text-white text-2xl 3xl:text-4xl capitalize">
-                {ownerName}
-              </h3>
+        <Grid item xs={12} md={12} className='flex justify-center'>
+          <div className='flex flex-col justify-around w-9/12 relative -top-[12%]'>
+            <div className={'flex flex-row-reverse items-center'}>
+              <div className={'w-full py-0'}>
+                <h3 className="text-[#404040] font-semibold text-2xl 3xl:text-4xl capitalize">
+                  {ownerName}' store
+                </h3>
+              </div>
+              <div className="block relative mr-6">
+                <img
+                  className='h-36 w-40 rounded-full object-cover'
+                  src={ownerProfileImage || '/static/wellness/snap_wellness.svg'}
+                  alt="{userData.name}"
+                />
+              </div>
             </div>
-
-            <img
-              className={`${classes.profileImage} p-2`}
-              src={
-                '/static/wellness/snap_wellness.svg'
-              }
-              alt="{userData.name}"
-            />
-          </div>
-
-        </Grid>
-        <Grid item xs={12} md={9}>
-          <form className={'$ {classes.form} pr-0 md:pr-24 pt-5'}>
-            <div className="flex flex-row w-full m-1">
+            <form className={'$ {classes.form} pt-5'}>
+              <div className="flex flex-row w-full m-1">
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  value={(formData.name)}
+                  onChange={(e) => { setFormData({ ...formData, name: e.target.value }) }}
+                  className={'w-1/2 px-6 py-6 placeholder-[#404040] border border-none text-black font-normal  mr-2 mb-3 bg-white'}
+                  required />
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  value={(formData.customerEmail)}
+                  onChange={(e) => { setFormData({ ...formData, customerEmail: e.target.value }) }}
+                  className={'w-1/2 px-6 py-6 placeholder-[#404040] border border-none text-black font-normal mb-3 bg-white'}
+                />
+              </div>
               <input
                 type="text"
-                placeholder="Your Name"
-                value={(formData.name)}
-                onChange={(e) => { setFormData({ ...formData, name: e.target.value }) }}
-                className={`w-1/2 px-6 py-4 placeholder-white border border-none rounded-3xl text-white font-light  mr-2 mb-3 bg-${customfooterInputbg}`}
-                required />
-              <input
-                type="email"
-                placeholder="Your Email"
-                value={(formData.customerEmail)}
-                onChange={(e) => { setFormData({ ...formData, customerEmail: e.target.value }) }}
-                className={`w-1/2 px-6 py-4 placeholder-white border border-none rounded-3xl text-white font-light mb-3 bg-${customfooterInputbg}`}
+                placeholder="Let&rsquo;s Talk about it"
+                value={(formData.subject)}
+                onChange={(e) => { setFormData({ ...formData, subject: e.target.value }) }}
+                className={'w-full px-6 py-6 border border-none text-black placeholder-[#404040] font-normal m-1 mb-3 bg-white'}
               />
-            </div>
-            <input
-              type="text"
-              placeholder="Let&rsquo;s Talk about it"
-              value={(formData.subject)}
-              onChange={(e) => { setFormData({ ...formData, subject: e.target.value }) }}
-              className={`w-full px-6 py-4 border border-none rounded-3xl text-white placeholder-white font-light m-1 mb-3 bg-${customfooterInputbg}`}
-            />
-            <textarea
-              placeholder="Type your message here"
-              value={(formData.emailBody)}
-              onChange={(e) => { setFormData({ ...formData, emailBody: e.target.value }) }}
-              className={`w-full h-40 px-6 py-4 placeholder-white border border-none rounded-3xl text-white font-light m-1 bg-${customfooterInputbg}`}
-            />
-            <div className='w-full flex justify-end'>
-              <Button disabled={!!loading} onClick={() => { handleStoreQuery() }} classes={`text-base bg-${submitBtnBg} rounded-lg w-36 uppercase mt-2`}>
+              <textarea
+                placeholder="Type your message here"
+                value={(formData.emailBody)}
+                onChange={(e) => { setFormData({ ...formData, emailBody: e.target.value }) }}
+                className={'w-full h-40 px-6 py-6 placeholder-[#404040] border border-none text-black font-normal m-1 bg-white'}
+              />
+              <div className='w-full flex justify-between mt-8'>
+                <img
+                  src={
+                    '/static/footer_logo.png'
+                  }
+                />
+                <Button disabled={!!loading} onClick={() => { handleStoreQuery() }} classes={'text-base bgc-black rounded-none w-36 uppercase mt-2'}>
               SUBMIT
-              </Button>
-            </div>
-          </form>
+                </Button>
+              </div>
+            </form>
+          </div>
         </Grid>
       </Grid>
       <Dialog open={successDialogOpen} onClose={closeSuccessDialog}>
         <div className='bg-green-400 p-10 flex flex-row justify-center items-center'>
           <div className="px-4 py-3 border-2 border-white rounded-full">
-            <i className="fa fa-check text-white text-center text-4xl" aria-hidden="true"></i>
+            <i className="fa fa-check text-black text-center text-4xl" aria-hidden="true"></i>
           </div>
         </div>
         <DialogTitle className='text-3xl font-bold text-center'>Thank You!</DialogTitle>
@@ -195,7 +158,7 @@ function Footer ({ userData, ownerName, ownerEmail, customFooterBorder, submitBt
       <Dialog open={errorDialogOpen} onClose={closeErrorDialog}>
         <div className='bg-red-600 p-10 flex flex-row justify-center items-center'>
           <div className="px-6 py-4 border-2 border-white rounded-full">
-            <i className="fa fa-xmark text-white text-center text-4xl" aria-hidden="true"></i>
+            <i className="fa fa-xmark text-black text-center text-4xl" aria-hidden="true"></i>
           </div>
         </div>
         <DialogTitle className='text-3xl font-bold text-center'>Try again, Later! </DialogTitle>

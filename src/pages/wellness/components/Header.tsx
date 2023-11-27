@@ -19,11 +19,8 @@ interface HeaderProps {
 }
 
 const Header = ({
-  logoSrc = '/static/wellness/wellness_logo.svg',
+  logoSrc = '/static/vitality.png',
   logoAlt = 'Wellness Logo',
-  profilePic = '/static/wellness/pp-placeholder.png',
-  profileName = 'Jason White',
-  onLogout = () => {},
   isLoggedIn,
   userData,
   bgcblack,
@@ -78,9 +75,9 @@ const Header = ({
   const isWeightCarePage = typeof window !== 'undefined' && window.location.pathname.includes('WeightCare')
   return (
     <header className={`${bgcblack} text-white flex flex-row items-center w-[100%] px-5 md:px-10 lg:px-20 2xl:px-24 3xl:px-48`}>
-      <div className="justify-between items-center w-[30%] lg:w-9/12 py-2">
+      <div className="justify-between items-center w-[30%] lg:w-9/12 py-6">
         <Link className="text-2xl font-bold">
-          <img src={logoSrc} alt={logoAlt} className='3xl:w-36'/>
+          <img src={logoSrc} alt={logoAlt} className='w-36 3xl:w-36'/>
         </Link>
       </div>
 
@@ -139,22 +136,23 @@ const Header = ({
               : (
                 <div>
                   <div className='flex items-center justify-end'>
-                    <Button onClick={() => { handleLogin() }}
-                      classes={`text-xs md:text-base 2xl:text-base 3xl:text-xl font-bold bg-${btnBG} rounded-lg px-2 lg:px-5 3xl:px-4 mr-4`}
-                    >
-                    LOG IN
-                    </Button>
                     {!isWeightCarePage && (
                       <>
-                        <p className='text-xs md:text-base 2xl:text-base 3xl:text-xl font-bold mr-4'>OR</p><Button onClick={() => {
+                        <Button onClick={() => {
                           localStorage.setItem('isGuest', 'true')
                           window.location.reload()
                         } }
-                        classes={`text-xs md:text-base 2xl:text-base 3xl:text-xl font-bold bg-${btnBG} rounded-lg px-2 lg:px-5 3xl:px-4 `}
+                        classes={'text-xs md:text-base 2xl:text-base 3xl:text-xl font-bold bgc-black rounded-lg  mr-4 uppercase underline'}
                         >
                         Continue as guest
                         </Button></>
                     )}
+                    <Button onClick={() => { handleLogin() }}
+                      classes={'text-xs md:text-base 2xl:text-base 3xl:text-xl font-bold bg-white text-red-h rounded-2xl  mr-4'}
+                    >
+                    LOG IN
+                    </Button>
+
                   </div>
                 </div>
               )}
