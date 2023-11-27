@@ -71,13 +71,13 @@ const LoginOrSignBox = ({ isLoggedIn, userData, referralCode, h1Color, customCol
                   className="rounded-none"
                 >
                   <CardContent className='flex flex-col md:flex-row w-full justify-around items-center p-10 sm:p-4 md:p-6 2xl:p-8 force-padding'>
-                    <div className='mr-0 md:mr-10 w-[100%] md:w-4/3'>
+                    <div className='mr-0 md:mr-10'>
                       <h1 className={'text text-white text-lg md:text-2xl 2xl:text-2xl 3xl:text-5xl font-normal font-normal text-center 3xl:leading-tight'}>
                     Purchase Now
                       </h1>
                     </div>
-                    <div className='w-[100%] md:w-1/3'><Button onClick={() => { handleLogin() }}
-                      classes={'w-[100%] md:w-full text-xs md:text-base lg:text-lg xl:text-lg 2xl:text-lg rounded-none 3xl:text-2xl px-12 py-2 bg-white text-not-white'}
+                    <div className=''><Button onClick={() => { handleLogin() }}
+                      classes={'text-xs md:text-base lg:text-lg xl:text-lg 2xl:text-lg rounded-none 3xl:text-2xl px-12 py-2 bg-white text-not-white'}
                     >
                       Log in
                     </Button></div>
