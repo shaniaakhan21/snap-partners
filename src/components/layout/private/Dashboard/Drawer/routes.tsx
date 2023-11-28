@@ -177,8 +177,8 @@ export const globalRoutes = [
     label: 'Individual Profile'
   },
   {
-    to: '/wellness',
-    label: 'Integrous Wellness'
+    to: '/vitality',
+    label: 'Snap Vitality'
   },
   {
     to: '/WeightCare',

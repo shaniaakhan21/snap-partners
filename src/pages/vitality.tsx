@@ -8,7 +8,6 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import { AuthRecover } from 'components/common/AuthRecover'
 import { useAuthStore } from 'lib/stores'
-import IntegrousProducts from './wellness/components/IntegrousProducts'
 import ProductTabs from './wellness/components/ProductTabs'
 
 const wellness = () => {
@@ -86,7 +85,6 @@ const wellness = () => {
 
   useEffect(() => {
     async function Owner () {
-      console.log('owneeeeeeeeeeer')
       try {
         const { referralCode } = router.query
         const username = referralCode

@@ -11,9 +11,9 @@ const LoginOrSignBox = ({ isLoggedIn, userData, referralCode, h1Color, customCol
     const referralCodeFromQuery = queryParams.get('referralCode')
     const referralCode = referralCodeFromLocalStorage || referralCodeFromQuery || 'NoSponsor'
 
-    let loginRoute = '/auth/login-wellness?referralCode=' + referralCode
+    let loginRoute = '/auth/login-vitality?referralCode=' + referralCode
 
-    if (window.location.pathname.includes('wellness')) {
+    if (window.location.pathname.includes('vitality')) {
       loginRoute += '&redirectToIntegrousWellness=true'
     } else if (window.location.pathname.includes('WeightCare')) {
       loginRoute += '&redirectToWeightCare=true'

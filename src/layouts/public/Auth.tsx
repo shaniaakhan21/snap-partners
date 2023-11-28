@@ -23,8 +23,8 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
 
   const isSignupIntegrous = router.pathname === '/auth/signup-integrous'
   const isLoginIntegrous = router.pathname === '/auth/login-integrous'
-  const isSignupWellness = router.pathname === '/auth/signup-wellness'
-  const isLoginWellness = router.pathname === '/auth/login-wellness'
+  const isSignupWellness = router.pathname === '/auth/signup-vitality'
+  const isLoginWellness = router.pathname === '/auth/login-vitality'
   let t1 = 'Snap Delivered'
   let t2 = 'Order-Eat-Repeat'
 
@@ -58,7 +58,7 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
   }
 
   const heightClass =
-  router.pathname === '/auth/signup-wellness' && router.query.role === 'CUSTOMER'
+  router.pathname === '/auth/signup-vitality' && router.query.role === 'CUSTOMER'
     ? 'h-[100vw]'
     : 'h-screen'
 

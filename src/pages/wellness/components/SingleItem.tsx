@@ -29,9 +29,9 @@ export default function SingleItem ({ image, name, price, btnLabel, index, onGue
     const referralCodeFromQuery = queryParams.get('referralCode')
     const referralCode = referralCodeFromLocalStorage || referralCodeFromQuery || 'NoSponsor'
 
-    let loginRoute = '/auth/login-wellness?referralCode=' + referralCode
+    let loginRoute = '/auth/login-vitality?referralCode=' + referralCode
 
-    if (window.location.pathname.includes('wellness')) {
+    if (window.location.pathname.includes('vitality')) {
       loginRoute += '&redirectToIntegrousWellness=true'
     } else if (window.location.pathname.includes('WeightCare')) {
       loginRoute += '&redirectToWeightCare=true'
@@ -50,9 +50,9 @@ export default function SingleItem ({ image, name, price, btnLabel, index, onGue
     const referralCodeFromQuery = queryParams.get('referralCode')
     const referralCode = referralCodeFromLocalStorage || referralCodeFromQuery || 'NoSponsor'
 
-    let signupRoute = '/auth/signup-wellness?role=CUSTOMER&referralCode=' + referralCode
+    let signupRoute = '/auth/signup-vitality?role=CUSTOMER&referralCode=' + referralCode
 
-    if (window.location.pathname.includes('wellness')) {
+    if (window.location.pathname.includes('vitality')) {
       signupRoute += '&redirectToIntegrousWellness=true'
     } else if (window.location.pathname.includes('WeightCare')) {
       signupRoute += '&redirectToWeightCare=true'

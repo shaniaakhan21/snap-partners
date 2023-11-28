@@ -214,11 +214,11 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
   const loginURL = router.pathname === '/auth/login-integrous'
     ? `/auth/login-integrous?referralCode=${referralCode}`
     : redirectToWeightCare
-      ? `/auth/login-wellness?referralCode=${referralCode}&redirectToWeightCare=true`
+      ? `/auth/login-vitality?referralCode=${referralCode}&redirectToWeightCare=true`
       : redirectToIntegrousWellness
-        ? `/auth/login-wellness?referralCode=${referralCode}&redirectToIntegrousWellness=true`
+        ? `/auth/login-vitality?referralCode=${referralCode}&redirectToIntegrousWellness=true`
         : '/auth/login'
-  const maxWClass = router.pathname === '/auth/signup-wellness' ? 'max-w-2xl' : 'max-w-md'
+  const maxWClass = router.pathname === '/auth/signup-vitality' ? 'max-w-2xl' : 'max-w-md'
   return (
     <>
       <div className={`mx-auto w-full ${maxWClass}`}>

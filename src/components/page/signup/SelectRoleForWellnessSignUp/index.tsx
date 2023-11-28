@@ -18,10 +18,10 @@ export const SelectRoleForWellnessSignUp = () => {
       label: 'Register as a Customer',
       key: ROLES.CUSTOMER,
       link: isRedirectToIntegrousWellness
-        ? `/auth/signup-wellness?role=${ROLES.CUSTOMER}&referralCode=${queryReferralCode}&redirectToIntegrousWellness=true`
+        ? `/auth/signup-vitality?role=${ROLES.CUSTOMER}&referralCode=${queryReferralCode}&redirectToIntegrousWellness=true`
         : isRedirectToWeightCare
-          ? `/auth/signup-wellness?role=${ROLES.CUSTOMER}&referralCode=${queryReferralCode}&redirectToWeightCare=true`
-          : `/auth/signup-wellness?role=${ROLES.CUSTOMER}&referralCode=${queryReferralCode}`
+          ? `/auth/signup-vitality?role=${ROLES.CUSTOMER}&referralCode=${queryReferralCode}&redirectToWeightCare=true`
+          : `/auth/signup-vitality?role=${ROLES.CUSTOMER}&referralCode=${queryReferralCode}`
     }
   ]
 
@@ -35,9 +35,9 @@ export const SelectRoleForWellnessSignUp = () => {
   const loginURL = router.pathname === '/auth/login-integrous'
     ? `/auth/login-integrous?referralCode=${referralCode}`
     : redirectToWeightCare
-      ? `/auth/login-wellness?referralCode=${referralCode}&redirectToWeightCare=true`
+      ? `/auth/login-vitality?referralCode=${referralCode}&redirectToWeightCare=true`
       : redirectToIntegrousWellness
-        ? `/auth/login-wellness?referralCode=${referralCode}&redirectToIntegrousWellness=true`
+        ? `/auth/login-vitality?referralCode=${referralCode}&redirectToIntegrousWellness=true`
         : '/auth/login'
 
   return (

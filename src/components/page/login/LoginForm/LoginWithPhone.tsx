@@ -57,7 +57,7 @@ export const LoginWithPhone = ({ trackLoginHandle }: IProps) => {
     if (redirectToIntegrousWellness === 'true') {
       removeLocalStorage('redirectToIntegrousWellness')
       removeLocalStorage('redirectToIntegrousReferralCode')
-      window.location.href = `/wellness?referralCode=${referralCode}`
+      window.location.href = `/vitality?referralCode=${referralCode}`
       return
     }
 
@@ -121,9 +121,9 @@ export const LoginWithPhone = ({ trackLoginHandle }: IProps) => {
   const signupURL = router.pathname === '/auth/login-integrous'
     ? `/auth/signup-integrous?referralCode=${referralCode}`
     : redirectToWeightCare
-      ? `/auth/signup-wellness?referralCode=${referralCode}&redirectToWeightCare=true`
+      ? `/auth/signup-vitality?referralCode=${referralCode}&redirectToWeightCare=true`
       : redirectToIntegrousWellness
-        ? `/auth/signup-wellness?referralCode=${referralCode}&redirectToIntegrousWellness=true`
+        ? `/auth/signup-vitality?referralCode=${referralCode}&redirectToIntegrousWellness=true`
         : '/auth/signup'
   return (
     <div className='flex flex-col justify-start items-start gap-x-2 mb-2 mt-3 w-full'>

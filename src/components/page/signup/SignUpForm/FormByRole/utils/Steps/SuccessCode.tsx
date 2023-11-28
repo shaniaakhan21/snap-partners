@@ -74,7 +74,7 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
     if (redirectToIntegrousWellness === 'true') {
       removeLocalStorage('redirectToIntegrousWellness')
       removeLocalStorage('redirectToIntegrousReferralCode')
-      window.location.href = `/wellness?referralCode=${referralCode}`
+      window.location.href = `/vitality?referralCode=${referralCode}`
       return
     }
 

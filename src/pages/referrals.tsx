@@ -140,7 +140,7 @@ const ReferralsPage: Page = () => {
       /> */}
         {(auth.roles.driver || auth.roles.admin || auth.roles.merchant || auth.roles.ibo || auth.roles.integrousAssociate) && (
           <ReferralCards
-            title='Refer a Integrous Wellness Customer'
+            title='Refer a Snap Vitality Customer'
             ilustration={(
               <div className='h-[120px]  flex items-center'><img src={'/static/wellness/int-link-logo.png'} /> </div>)}
             link={`${auth.referralLinkWellness}` || 'With Out Link'}
