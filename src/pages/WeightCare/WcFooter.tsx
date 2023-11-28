@@ -101,11 +101,19 @@ function Footer ({ userData, ownerName, ownerEmail, ownerProfileImage, customFoo
             </div>
 
             <div className="block relative p-2">
-              <img
-                className='h-40 w-40 rounded-full object-cover'
-                src={ownerProfileImage || '/static/wellness/snap_wellness.svg'}
-                alt="{userData.name}"
-              />
+              {ownerProfileImage === 'null'
+                ? (
+                  <img
+                    className='h-22 w-40 rounded-full object-cover'
+                    src='/static/snap_partners_logo.png'
+                  />
+                )
+                : (
+                  <img
+                    className='h-20 w-34 sm:h-36 sm:w-40 rounded-full object-cover'
+                    src={ownerProfileImage}
+                  />
+                )}
             </div>
           </div>
 

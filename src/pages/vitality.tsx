@@ -21,16 +21,10 @@ const wellness = () => {
   const [ownerEmail, setownerEmail] = React.useState(null)
   const [isIntegrous, setIsIntegrous] = React.useState(null)
   const isGuest = typeof localStorage !== 'undefined' && localStorage.getItem('isGuest') === 'true'
-  const productTabsRef = useRef(null)
   const [teaCoffeeProducts, setTeaCoffeeProducts] = useState([])
   const [generalProducts, setGeneralProducts] = useState([])
   const [AllProducts, setProducts] = useState([])
   const [ownerProfileImage, setownerProfileImage] = React.useState(null)
-  const handleButtonClick = () => {
-    if (productTabsRef.current) {
-      productTabsRef.current.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
 
   const scrollToProductTabs = () => {
     const productTabsElement = document.getElementById('productTabs')
