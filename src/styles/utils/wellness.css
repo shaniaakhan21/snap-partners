@@ -1,7 +1,3 @@
-.main-section p, .main-section h1, .main-section button{
- font-family: inter!important;
-}
-
 .main-section .force-padding{
     padding-bottom: 2.5rem!important;
     @media (max-width: 768px) {
