@@ -74,7 +74,7 @@ export default function SingleItem ({ image, name, price, btnLabel, index, onGue
   }
 
   return (
-    <ResponsiveCard className='m-6 bg-[#ECECEC] p-16 rounded-none' sx={{ background: 'none', boxShadow: 'none', border: 'none' }}>
+    <ResponsiveCard className='m-1 sm:m-6 bg-[#ECECEC] p-4 xs:p-16 md:p-6 xl:p-16 rounded-none' sx={{ background: 'none', boxShadow: 'none', border: 'none' }}>
       <CardActionArea>
         <CardMedia
           component="img"
@@ -83,21 +83,21 @@ export default function SingleItem ({ image, name, price, btnLabel, index, onGue
           className="object-cover"
         />
         <CardContent>
-          <Typography className='text-center mb-2 text-[#BB4947] text-lg uppercase font-bold xl:text-base 2xl:text-2xl' variant="body2" sx={{ textAlign: 'center', color: 'black' }}>
+          <Typography className='text-center mb-2 text-[#BB4947] text-sm xs:text-lg uppercase font-bold xl:text-base 2xl:text-2xl' variant="body2" sx={{ textAlign: 'center', color: 'black' }}>
             {price}
           </Typography>
           <Typography
             gutterBottom
             variant="h5"
             component="div"
-            className='text-center text-black-h text-lg uppercase xl:text-base 2xl:text-xl'
+            className='text-center text-black-h text-sm xs:text-lg uppercase xl:text-base 2xl:text-xl'
           >
             {name}
           </Typography>
 
           <Button
             variant="contained"
-            className='py-5 text-lg rounded-none'
+            className='py-5 text-sm xs:text-lg rounded-none'
             sx={{
               width: '80%',
               ml: 1,
@@ -132,7 +132,7 @@ export default function SingleItem ({ image, name, price, btnLabel, index, onGue
             boxShadow: '0px 4px 4px 0px rgba(0, 0, 0, 0.25)',
             position: 'absolute'
           }}
-          className="md:px-20 md:py-10 rounded-none mt-1 3xl:mt-32 w-full lg:w-10/12 xl:w-8/12 2xl:w-6/12 3xl:w-7/12 backdrop-blur-4xl left-[0%] top-[20%] sm:left-[0%] sm:top-[20%] lg:left-[9%] xl:left-[17%] 2xl:left-[22%] 3xl:left-[23%]"
+          className="w-[90%] md:w-full md:px-20 m-5 md:m-0 md:py-10 rounded-none mt-1 3xl:mt-32 lg:w-10/12 xl:w-8/12 2xl:w-6/12 3xl:w-7/12 backdrop-blur-4xl left-[0%] top-[20%] sm:left-[0%] sm:top-[20%] lg:left-[9%] xl:left-[17%] 2xl:left-[22%] 3xl:left-[23%]"
         >
           <CardContent>
             <h1 className="text text-[#BB4947] rounded-none text-2xl md:text-3xl 2xl:text-4xl 3xl:text-5xl font-semibold-it font-normal text-center mb-4 2xl:mb-12 3xl:mb-8">

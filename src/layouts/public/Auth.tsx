@@ -39,7 +39,7 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
   }
 
   if (isLoginWellness) {
-    t1 = 'Snap Wellness'
+    t1 = 'Snap Vitality'
     t2 = 'Welcome to a healthier you'
   }
   if ((isSignupIntegrous && (ROLES.integrousCustomer || ROLES.integrousAssociate)) || (isSignupWellness && (ROLES.CUSTOMER || ROLES.IBO))) {
@@ -48,7 +48,7 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
   }
 
   if ((isSignupWellness && (ROLES.CUSTOMER || ROLES.IBO))) {
-    t1 = 'Snap Wellness'
+    t1 = 'Snap Vitality'
     t2 = 'Welcome to a healthier you'
   }
 
@@ -97,7 +97,7 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
     <>
       <div className='flex w-full flex-col justify-center items-end mt-24'>
         <div className='w-full'>
-          <img className='w-1/6' src='/static/wellness/SnapWellnessLarge.svg' />
+          <img className='w-4/12 mb-10' src='/static/vitality.png' />
         </div>
         <div className='w-full'>
           <h1 className='text-5xl font-bold 2xl:text-7xl'>{t1}</h1>

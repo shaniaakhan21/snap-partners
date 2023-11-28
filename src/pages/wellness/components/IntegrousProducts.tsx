@@ -57,8 +57,8 @@ const IntegrousProducts = ({ products, userId, isLoggedIn, userRole, collectionI
   return (
     <div className="flex md:flex-row flex-col justify-start items-start" >
       { isLoggedIn || isGuest
-        ? <div className='w-full flex justify-center m-3 mt-20 xs:mt-10 3xl:mt-20 mb-16' id="productTabs">
-          <div className=' flex w-9/12 p-2 xs:p-10 xs:rounded-lg bg-[#ECECEC]'>
+        ? <div className='w-full flex justify-center m-3 mt-2 xs:mt-10 3xl:mt-20 mb-16' id="productTabs">
+          <div className=' flex w-full sm:w-9/12 p-2 xs:p-10 xs:rounded-lg bg-[#ECECEC]'>
             <div id='collection-component-tabs' className='border-1'></div>
           </div>
         </div>

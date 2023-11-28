@@ -1,9 +1,19 @@
 import { useState, useEffect } from 'react'
-import { Link, Menu, MenuItem, IconButton, IconButtonProps } from '@mui/material'
+import { Link, Menu, MenuItem, IconButton, IconButtonProps, Drawer, List, ListItem, ListItemText } from '@mui/material'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import Router from 'next/router'
 import { Button } from 'components/common/Button'
 import { useAuthStore } from 'lib/stores'
+import MenuIcon from '@mui/icons-material/Menu'
+import { styled } from '@mui/system'
+import CloseIcon from '@mui/icons-material/Close'
+
+const StyledDrawer = styled(Drawer)(({ theme }) => ({
+  '& .MuiPaper-root': {
+    backgroundColor: '#BB4947', // Set the background color
+    color: 'white' // Set the text color
+  }
+}))
 
 interface HeaderProps {
   logoSrc?: string;
@@ -26,6 +36,7 @@ const Header = ({
   bgcblack,
   btnBG
 }: HeaderProps) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const { removeAuth } = useAuthStore()
   const open = Boolean(anchorEl)
@@ -34,6 +45,15 @@ const Header = ({
   }
 
   const handleClose = () => {
+    setAnchorEl(null)
+  }
+
+  const handleMenuOpen = () => {
+    setMobileMenuOpen(true)
+  }
+
+  const handleMenuClose = () => {
+    setMobileMenuOpen(false)
     setAnchorEl(null)
   }
 
@@ -53,6 +73,7 @@ const Header = ({
     const referralCodeFromLocalStorage = localStorage.getItem('referralCode')
     const queryParams = new URLSearchParams(window.location.search)
     const referralCodeFromQuery = queryParams.get('referralCode')
+    setMobileMenuOpen(false)
     const referralCode = referralCodeFromLocalStorage || referralCodeFromQuery || 'NoSponsor'
     let loginRoute = '/auth/login-wellness?referralCode=' + referralCode
 
@@ -77,7 +98,7 @@ const Header = ({
     <header className={`${bgcblack} text-white flex flex-row items-center w-[100%] px-5 md:px-10 lg:px-20 2xl:px-24 3xl:px-48`}>
       <div className="justify-between items-center w-[30%] lg:w-9/12 py-6">
         <Link className="text-2xl font-bold">
-          <img src={logoSrc} alt={logoAlt} className='w-36 3xl:w-36'/>
+          <img src={logoSrc} alt={logoAlt} className='w-36 xl:w-60'/>
         </Link>
       </div>
 
@@ -107,7 +128,7 @@ const Header = ({
           </div>
         )
         : (
-          <div className={`w-[70%] lg:w-3/12 ${isGuest ? 'w-[70%] lg:w-2/12' : ''}`}>
+          <div className={`w-[70%] lg:w-5/12 ${isGuest ? 'w-[70%] lg:w-2/12' : ''}`}>
             {isGuest
               ? (
                 <div>
@@ -117,7 +138,7 @@ const Header = ({
                     </div>
                     <div>
                       <IconButton color="inherit" onClick={handleClick}>
-                        <span className="text-xs lg:text-base pr-1 3xl:text-2xl capitalize">I'm a Guest</span>
+                        <span className="text-xs lg:text-base pr-1 3xl:text-2xl capitalize">I'm Guest</span>
                         <ArrowDropDownIcon />
                       </IconButton>
                       <Menu
@@ -142,18 +163,36 @@ const Header = ({
                           localStorage.setItem('isGuest', 'true')
                           window.location.reload()
                         } }
-                        classes={'text-xs md:text-base 2xl:text-base 3xl:text-xl font-bold bgc-black rounded-lg  mr-4 uppercase underline'}
+                        classes={'hidden sm:block  text-[10px] sm:text-xs md:text-base 2xl:text-base 3xl:text-xl font-bold bgc-black rounded-lg  mr-0 sm:mr-4 uppercase underline'}
                         >
                         Continue as guest
                         </Button></>
                     )}
                     <Button onClick={() => { handleLogin() }}
-                      classes={'text-xs md:text-base 2xl:text-base 3xl:text-xl font-bold bg-white text-red-h rounded-2xl  mr-4'}
+                      classes={'hidden sm:block text-[10px] md:text-base 2xl:text-base 3xl:text-xl font-bold bg-white text-red-h rounded-2xl  mr-0 sm:mr-4'}
                     >
                     LOG IN
                     </Button>
-
+                    <MenuIcon className='block sm:hidden' onClick={handleMenuOpen} />
                   </div>
+                  <StyledDrawer anchor="right" open={mobileMenuOpen} onClose={handleMenuClose} >
+                    <IconButton className="flex justify-end text-white  mt-2" onClick={handleMenuClose}>
+                      <CloseIcon />
+                    </IconButton>
+                    <List className='bg-[#BB4947]'>
+                      <ListItem onClick={() => { handleLogin() }}>
+                        <ListItemText className='text-end' primary="Log In" />
+                      </ListItem>
+                      {!isWeightCarePage && (
+                        <ListItem onClick={() => {
+                          localStorage.setItem('isGuest', 'true')
+                          window.location.reload()
+                        }}>
+                          <ListItemText className='underline text-end' primary="Continue as Guest" />
+                        </ListItem>
+                      )}
+                    </List>
+                  </StyledDrawer>
                 </div>
               )}
           </div>

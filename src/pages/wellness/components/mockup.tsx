@@ -33,7 +33,7 @@ export default function MockUpItems ({ collectionId }) {
   return (
     <div className='w-full flex justify-center mb-10'>
       <div
-        className='w-9/12 p-4 xs:p-10'
+        className='w-full sm:w-9/12 p-2 sm:p-10'
       >
         <Grid container justifyContent="flex-start" sx={{ textAlign: 'center' }}>
           {products.map((product, index) => (

@@ -44,7 +44,21 @@ const ProductTabs = ({ teaCoffeeProducts, userData, generalProducts, userId, isL
           },
           color: '#404040',
           fontWeight: '300',
-          '& .Mui-selected': { color: '#404040!important', fontWeight: '600', fontSize: '16px' }
+          '& .Mui-selected': { color: '#404040!important', fontWeight: '600', fontSize: '16px' },
+          '@media (max-width: 600px)': {
+            '& .MuiTabs-flexContainer': {
+              justifyContent: 'flex-start',
+              flexWrap: 'wrap'
+            },
+            '& .MuiTabs-indicator': {
+              display: 'none'
+            },
+            '& .Mui-selected': {
+              backgroundColor: '#bb4947cf',
+              color: 'white!important',
+              padding: '2%'
+            }
+          }
         }}
       >
         <Tab label="All Products" className={`

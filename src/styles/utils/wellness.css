@@ -5,10 +5,7 @@
 .main-section .force-padding{
     padding-bottom: 2.5rem!important;
     @media (max-width: 768px) {
-        padding-bottom: 0.5rem!important;
-    }
-    @media (max-width: 700px) {
-        padding-bottom: 2.5rem!important;
+        padding-bottom: 1rem!important;
     }
 }
 

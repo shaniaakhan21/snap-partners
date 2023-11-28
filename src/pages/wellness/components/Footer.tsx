@@ -76,39 +76,39 @@ function Footer ({ userData, ownerName, ownerEmail, ownerProfileImage, customFoo
   }
 
   return (
-    <footer className={'bg-[#F0F0F0] px-10 pt-5 pb-5 '}>
+    <footer className={'bg-none sm:bg-[#F0F0F0] px-2 pt-1 pb-1 sm:px-10 sm:pt-5 sm:pb-5 '}>
       <Grid container>
         <Grid item xs={12} md={12} className='flex justify-center'>
-          <div className='flex flex-col justify-around w-9/12 relative -top-[12%]'>
+          <div className='flex flex-col justify-around m-1 sm:m-0 w-full sm:w-9/12 relative -top-[0%] sm:-top-[12%]'>
             <div className={'flex flex-row-reverse items-center'}>
               <div className={'w-full py-0'}>
-                <h3 className="text-[#404040] font-semibold text-2xl 3xl:text-4xl capitalize">
+                <h3 className="text-[#404040] font-semibold text-base sm:text-2xl 3xl:text-4xl capitalize">
                   {ownerName}' store
                 </h3>
               </div>
               <div className="block relative mr-6">
                 <img
-                  className='h-36 w-40 rounded-full object-cover'
+                  className='h-20 w-34 sm:h-36 sm:w-40 rounded-full object-cover'
                   src={ownerProfileImage || '/static/wellness/snap_wellness.svg'}
                   alt="{userData.name}"
                 />
               </div>
             </div>
             <form className={'$ {classes.form} pt-5'}>
-              <div className="flex flex-row w-full m-1">
+              <div className="flex flex-col sm:flex-row w-full m-1">
                 <input
                   type="text"
                   placeholder="Your Name"
                   value={(formData.name)}
                   onChange={(e) => { setFormData({ ...formData, name: e.target.value }) }}
-                  className={'w-1/2 px-6 py-6 placeholder-[#404040] border border-none text-black font-normal  mr-2 mb-3 bg-white'}
+                  className={'w-full sm:w-1/2 px-6 py-6 placeholder-[#404040] border border-none text-black font-normal  mr-2 mb-3 bg-[#F0F0F0] sm:bg-white'}
                   required />
                 <input
                   type="email"
                   placeholder="Your Email"
                   value={(formData.customerEmail)}
                   onChange={(e) => { setFormData({ ...formData, customerEmail: e.target.value }) }}
-                  className={'w-1/2 px-6 py-6 placeholder-[#404040] border border-none text-black font-normal mb-3 bg-white'}
+                  className={'w-full sm:w-1/2 px-6 py-6 placeholder-[#404040] border border-none text-black font-normal mb-3 bg-[#F0F0F0] sm:bg-white'}
                 />
               </div>
               <input
@@ -116,21 +116,22 @@ function Footer ({ userData, ownerName, ownerEmail, ownerProfileImage, customFoo
                 placeholder="Let&rsquo;s Talk about it"
                 value={(formData.subject)}
                 onChange={(e) => { setFormData({ ...formData, subject: e.target.value }) }}
-                className={'w-full px-6 py-6 border border-none text-black placeholder-[#404040] font-normal m-1 mb-3 bg-white'}
+                className={'w-full px-6 py-6 border border-none text-black placeholder-[#404040] font-normal m-1 mb-3 bg-[#F0F0F0] sm:bg-white'}
               />
               <textarea
                 placeholder="Type your message here"
                 value={(formData.emailBody)}
                 onChange={(e) => { setFormData({ ...formData, emailBody: e.target.value }) }}
-                className={'w-full h-40 px-6 py-6 placeholder-[#404040] border border-none text-black font-normal m-1 bg-white'}
+                className={'w-full h-40 px-6 py-6 placeholder-[#404040] border border-none text-black font-normal m-1 bg-[#F0F0F0] sm:bg-white'}
               />
-              <div className='w-full flex justify-between mt-8'>
+              <div className='w-full flex flex-col-reverse sm:flex-row justify-between mt-1 sm:mt-8'>
                 <img
+                  className='px-10 sm:px-0'
                   src={
                     '/static/footer_logo.png'
                   }
                 />
-                <Button disabled={!!loading} onClick={() => { handleStoreQuery() }} classes={'text-base bgc-black rounded-none w-36 uppercase mt-2'}>
+                <Button disabled={!!loading} onClick={() => { handleStoreQuery() }} classes={'text-base bgc-black rounded-none w-full sm:w-36 uppercase mt-2 mb-4 sm:mb-0'}>
               SUBMIT
                 </Button>
               </div>
