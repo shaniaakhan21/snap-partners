@@ -11,7 +11,7 @@ const IntegrousProducts = ({ userId, isLoggedIn, referralCode, userRole, collect
     const isGuest = typeof localStorage !== 'undefined' && localStorage.getItem('isGuest') === 'true'
     if (isLoggedIn || isGuest) {
       const script = document.createElement('script')
-      script.src = 'https://www.integrouswellness.com/storefront.v1.js'
+      script.src = '/static/storefront.v1.js'
       script.async = true
 
       script.onload = async () => {
@@ -48,6 +48,7 @@ const IntegrousProducts = ({ userId, isLoggedIn, referralCode, userRole, collect
       }
     }
   }, [userId, IboId])
+  console.log("corronchito1")
 
   return (
     <div className="flex md:flex-row flex-col justify-start items-center" >

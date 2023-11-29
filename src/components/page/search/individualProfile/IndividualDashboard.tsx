@@ -52,7 +52,7 @@ const IndividualDashboard = ({ userId }) => {
           <GrowthSummary userId={userId} />
         </div>
         <div className='mt-4'>
-          <PVComponentSnap />
+          <PVComponentSnap userId={userId} />
         </div>
       </div>
       <div>
