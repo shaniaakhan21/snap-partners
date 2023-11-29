@@ -1,4 +1,4 @@
-import { Button, Checkbox, FormControlLabel, Modal } from '@mui/material'
+import { Button, Checkbox, FormControlLabel, Modal, Radio } from '@mui/material'
 import { Close as CrossIcon, East } from '@mui/icons-material'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers-pro'
 import { ChangeEvent, useState } from 'react'
@@ -7,6 +7,8 @@ import { IAuth, useAuthStore } from 'lib/stores/Auth'
 import axios from 'axios'
 import states from 'data/states'
 import CommonPopup from './common'
+import InFields from './common/individualFields'
+import BussFields from './common/bussinessFields'
 interface TINPopupProps {
     open: boolean;
     onClose: () => void;
@@ -16,6 +18,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
   const getSSN = '123654752'
   const { auth, setAuth } = useAuthStore()
   const [validated, setValidated] = useState(false)
+  const [filed, setFiled] = useState(false)
   const [socialSecurity, setSocialSecurity] = useState('')
   const [dateOfBirth, setDateOfBirth] = useState<Date | null>(null)
   const [socialSecurityError, setSocialSecurityError] = useState('')
@@ -28,6 +31,13 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
   const [isLoading, setIsLoading] = useState(false)
   const [showSuccessPopup, setShowSuccessPopup] = useState(false)
   const [showFailedPopup, setShowFailedPopup] = useState(false)
+  const [selectedOption, setSelectedOption] = useState<'Individual' | 'Business'| null>(null)
+  const [businessType, setBusinessType] = useState('')
+
+  const handleOptionChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSelectedOption(event.target.value as 'Individual' | 'Business')
+    setFiled(true)
+  }
   const handleCloseSuccessPopup = () => {
     setShowSuccessPopup(false)
   }
@@ -85,6 +95,11 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
     } else {
       setAddressError('Zip code must be exactly 5 digits')
     }
+  }
+
+  const handleTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value
+    setBusinessType(value)
   }
 
   const handleSubmit = async () => {
@@ -238,34 +253,43 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
             <div className='p-4 rounded-lg bg-[#edfbe0]'>
               <h2 className='text-xl font-normal'><span className='text-2xl text-[#FA4616] font-medium'>Purpose</span> To generate a 1099 at end of year</h2>
             </div>
-            <br />
-            <div className='flex flex-row w-full justify-between'>
-              <div className='w-[48%] '>
-                <div className='p-4 border-2 rounded-lg border-slate-200 icon-input bg-[#F9F9FA]'>
-                  <input
-                    className="w-full outline-none"
-                    placeholder="Social Security"
-                    type='text'
-                    value={socialSecurity}
-                    onChange={handleSocialSecurityChange}
-                    required
-                  />
-                </div>
-                {socialSecurityError && <div className="ml-1 text-red-500">{socialSecurityError}</div>}
-              </div>
-              <div className='w-[48%] p-0 m-0 border-0 rounded-lg border-slate-200 outline-none'>
-                <div className="calendar-input outline-none">
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker label="Date of Birth" value={dateOfBirth}
-                      onChange={handleDateOfBirthChange} className='outline-none' />
-                    {dateOfBirthError && <div className="text-red-500">{dateOfBirthError}</div>}
-                  </LocalizationProvider>
-                </div>
-              </div>
+            <div className='flex flex-row w-full justify-between mt-4 p-4 rounded-lg bg-[#F8F8F8] border-[#E8EDE3] border-2 items-center mb-2'>
+              <h2 className='text-xl font-semibold'>I want to file as an</h2>
+              <FormControlLabel
+                value="Individual"
+                control={<Radio checked={selectedOption === 'Individual'} onChange={handleOptionChange} />}
+                label="Individual"
+              />
+              <FormControlLabel
+                value="Business"
+                control={<Radio checked={selectedOption === 'Business'} onChange={handleOptionChange} />}
+                label="Business"
+              />
             </div>
-            <br/>
+
+            {selectedOption === 'Individual' && (
+              <InFields
+                socialSecurity={socialSecurity}
+                handleSocialSecurityChange={handleSocialSecurityChange}
+                socialSecurityError={socialSecurityError}
+                dateOfBirth={dateOfBirth}
+                handleDateOfBirthChange={handleDateOfBirthChange}
+                dateOfBirthError={dateOfBirthError}
+              />
+            )}
+
+            {selectedOption === 'Business' && (
+              <BussFields
+                ein={socialSecurity}
+                handleEINChange={handleSocialSecurityChange}
+                einError={socialSecurityError}
+                dateOfStart={dateOfBirth}
+                handleDateOfStartChange={handleDateOfBirthChange}
+                dateOfStartError={dateOfBirthError} businessType={businessType} handleTypeChange={handleTypeChange} />
+            )}
+
             <div className='p-2 rounded-lg'>
-              <h1 className='text-slate-500 font-semibold text-lg'>ADDRESS : </h1>
+              <h1 className='font-semibold text-lg'>ADDRESS : </h1>
               <div className='flex flex-row w-full justify-between mt-2'>
                 <div className='p-4 border-2 w-[48%] rounded-lg border-slate-200 bg-[#F9F9FA]'>
                   <input
@@ -336,7 +360,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
                     ? 'bg-primary-500 text-white'
                     : 'bg-grey text-blackCustom'
                 }`}
-                disabled={!validated}
+                disabled={!validated || !filed}
                 onClick={handleSubmit}
               >
                     Submit

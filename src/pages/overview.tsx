@@ -39,7 +39,7 @@ const DashboardOverViewPage: Page = () => {
   const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
   const isCustomer = auth.roles.customer
   const isIntegrousAssociate = auth.roles.integrousAssociate
-  const [showPopup, setShowPopup] = useState(false)
+  const [showPopup, setShowPopup] = useState(true)
 
   useEffect(() => {
     fetch('/api/snap/getYearlyCommission', {
@@ -54,7 +54,7 @@ const DashboardOverViewPage: Page = () => {
         if (data.total > 500) {
           setShowPopup(true)
         } else {
-          setShowPopup(false)
+          setShowPopup(true)
         }
       })
       .catch((error) => console.error('Error fetching data: ', error))
