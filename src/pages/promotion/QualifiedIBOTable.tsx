@@ -91,6 +91,7 @@ const QualifiedIBOTable = ({ sprintData }) => {
   return (
     <div className='w-10/12 sm:w-4/12 bg-white rounded-xl p-6  top-[-8%] relative'>
       <h1 className='text-lg sm:text-2xl font-bold'>Qualified IBO's</h1>
+      <p>(Both the <em>Directly Sponsored IBO</em> and their <em>Direct IBO's</em> columns reflect those who have a stard date from <em>9/1/23</em> on)</p>
       <br></br>
       <div className="datagrid-container" style={{ overflowX: 'auto' }}>
         <div style={{ minWidth: '300px' }}>
