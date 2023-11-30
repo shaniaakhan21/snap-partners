@@ -29,6 +29,16 @@ const Info = ({ img, noOfCustomers, name, nameValue }) => {
         <img className="w-10 h-10 rounded-full" src={img} alt="Profile picture" />
       </div>
       <div className='col-span-3 pt-1 pl-2'>
+      <div>
+          <Typography variant="body1"
+            sx={{
+              fontSize: '12px',
+              color: '#222020'
+            }}
+          >
+            {name}
+          </Typography>
+        </div>
         <div>
           <Typography variant="body1"
             sx={{
@@ -37,16 +47,6 @@ const Info = ({ img, noOfCustomers, name, nameValue }) => {
             }}
           >
             + {noOfCustomers} {noOfCustomers === 1 ? nameValue.slice(0, -1).toLowerCase() : nameValue.toLowerCase()}
-          </Typography>
-        </div>
-        <div>
-          <Typography variant="body1"
-            sx={{
-              fontSize: '12px',
-              color: '#222020'
-            }}
-          >
-            {name}
           </Typography>
         </div>
       </div>
