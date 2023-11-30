@@ -173,14 +173,14 @@ const SetcModal: React.FC<SetcModalProps> = ({ isOpen, client, onClose }) => {
                 <Step
                   number={2}
                   title='Signed Agreement'
-                  date={agreementSignedDate ? dayjs(agreementSignedDate).format('MM/DD/YYYY') : ''}
+                  date={agreementSignedDate ? dayjs(agreementSignedDate, 'MM-DD-YYYY').format('MM/DD/YYYY') : ''}
                   filled={(!!agreementSignedDate || phase1Progress === phase1StepCount) ? 'full' : 'empty'}
                   fillColor={'textAcent-500'}
                   color={'textAcent-500'}/>
                 <Step
                   number={1}
                   title='Submission Date'
-                  date={orderDate ? dayjs(orderDate).format('MM/DD/YYYY') : ''}
+                  date={orderDate ? dayjs(orderDate, 'MM-DD-YYYY').format('MM/DD/YYYY') : ''}
                   filled={(!!orderDate || phase1Progress === phase1StepCount) ? 'full' : 'empty'}
                   fillColor={'textAcent-500'}
                   color={'textAcent-500'}/>
@@ -227,7 +227,7 @@ const SetcModal: React.FC<SetcModalProps> = ({ isOpen, client, onClose }) => {
                   <Step
                     number={5}
                     title='Invoice Paid'
-                    date={client.paidDate ? dayjs(client.paidDate).format('MM/DD/YYYY') : ''}
+                    date={client.paidDate ? dayjs(client.paidDate, 'MM-DD-YYYY').format('MM/DD/YYYY') : ''}
                     filled={client.paidDate ? 'full' : 'empty'}
                     fillColor={'textAcent-100'}
                     color={'textAcent-100'}/>
@@ -286,7 +286,7 @@ const SetcModal: React.FC<SetcModalProps> = ({ isOpen, client, onClose }) => {
                 <Step
                   number={1}
                   title='Filed with IRS'
-                  date={filedWithIRS ? dayjs(irsFiledDate).format('MM/DD/YYYY') : ''}
+                  date={filedWithIRS ? dayjs(irsFiledDate, 'MM-DD-YYYY').format('MM/DD/YYYY') : ''}
                   filled={filedWithIRS ? 'full' : 'empty'}
                   fillColor={'textAcent-200'}
                   color={''} />
