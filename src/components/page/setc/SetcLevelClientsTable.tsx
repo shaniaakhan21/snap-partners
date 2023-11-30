@@ -17,7 +17,7 @@ const SetcLevelClientsTable: React.FC<SetcLevelClientsTableProps> = ({
     ...client,
     ibo: `${client.name} ${client.lastname}`,
     totalClients: client.clients.length,
-    paidClients: client.clients.filter(client => client.paidStatus).length,
+    paidClients: client.clients.filter(client => client.paidDate).length,
     filingCompleted: client.clients.filter(client => !!client.irsFiledDate).length
   }))
 

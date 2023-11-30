@@ -16,7 +16,7 @@ const PersonalSetcClientsTable: React.FC<PersonalSetcClientsTableProps> = ({
   clients,
   onClickDetails
 }) => {
-  const mappedClients = useMemo(() => clients.map(c => ({ ...c, createdAt: dayjs(c.orderDate, 'MM-DD-YYYY').format('MM/DD/YYYY'), paidStatus: c.paidStatus ? 'Paid' : 'Not Paid', irsFiledDate: c.irsFiledDate ? dayjs(c.irsFiledDate).format('MM/DD/YYYY') : 'N/A' })), [clients])
+  const mappedClients = useMemo(() => clients.map(c => ({ ...c, createdAt: dayjs(c.orderDate, 'MM-DD-YYYY').format('MM/DD/YYYY'), paidStatus: c.paidDate ? 'Paid' : 'Not Paid', irsFiledDate: c.irsFiledDate ? dayjs(c.irsFiledDate).format('MM/DD/YYYY') : 'N/A' })), [clients])
   const columns:TypeColumn[] = [
     { name: 'id', header: 'Order #', defaultFlex: 0.75, minWidth: 60 },
     { name: 'createdAt', header: 'Order Date', defaultFlex: 1, minWidth: 110 },
@@ -24,7 +24,6 @@ const PersonalSetcClientsTable: React.FC<PersonalSetcClientsTableProps> = ({
     { name: 'email', header: 'Email', defaultFlex: 2, minWidth: 85 },
     { name: 'phone', header: 'Phone', defaultFlex: 1, minWidth: 90 },
     { name: 'paidStatus', header: 'Paid Status', defaultFlex: 1, minWidth: 90 },
-    { name: 'paidAmount', header: 'Paid Amount', defaultFlex: 1, minWidth: 90 },
     { name: 'irsFiledDate', header: 'Filing with IRS', defaultFlex: 1, minWidth: 90 },
     {
       name: 'details',

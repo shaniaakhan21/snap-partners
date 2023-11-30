@@ -16,7 +16,7 @@ const TeamSetcClientsTable: React.FC<TeamSetcClientsTableProps> = ({
     level: data.level === 6 ? data.level + ' +' : data.level,
     totalClients: data.ibos?.reduce((sum, curr) => sum + curr.clients.length, 0),
     paidClients: data.ibos?.reduce((total, group) => {
-      return total + group.clients.filter(client => client.paidStatus).length
+      return total + group.clients.filter(client => client.paidDate).length
     }, 0),
     filingCompleted: data.ibos?.reduce((total, group) => {
       return total + group.clients.filter(client => !!client.irsFiledDate).length

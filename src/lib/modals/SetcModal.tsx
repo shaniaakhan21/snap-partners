@@ -111,6 +111,10 @@ const SetcModal: React.FC<SetcModalProps> = ({ isOpen, client, onClose }) => {
   // eslint-disable-next-line prefer-const
   let phase3Progress = 0
   if (filedWithIRS) phase3Progress++
+
+  const totalCV = (client.paidAmount || 0) / 2
+  const commission = totalCV * 0.4
+
   return (
     <div>
       {isOpen && (
@@ -203,7 +207,7 @@ const SetcModal: React.FC<SetcModalProps> = ({ isOpen, client, onClose }) => {
                         Commission
                     </span>
                     <span>
-                        $50
+                      {client.paidAmount ? `$${commission}` : 'TBD'}
                     </span>
                   </div>
                   <div className="flex justify-between text-sm">
@@ -211,7 +215,7 @@ const SetcModal: React.FC<SetcModalProps> = ({ isOpen, client, onClose }) => {
                         Total CV
                     </span>
                     <span>
-                        $250
+                      {client.paidAmount ? `$${totalCV}` : 'TBD'}
                     </span>
                   </div>
                   <div className='mt-2'>
@@ -220,6 +224,13 @@ const SetcModal: React.FC<SetcModalProps> = ({ isOpen, client, onClose }) => {
                   <div className="py-3 px-2.5">
                     Next Step
                   </div>
+                  <Step
+                    number={5}
+                    title='Invoice Paid'
+                    date={client.paidDate ? dayjs(client.paidDate).format('MM/DD/YYYY') : ''}
+                    filled={client.paidDate ? 'full' : 'empty'}
+                    fillColor={'textAcent-100'}
+                    color={'textAcent-100'}/>
                   <Step
                     number={4}
                     title='Taxpayer Qualified 2020'
