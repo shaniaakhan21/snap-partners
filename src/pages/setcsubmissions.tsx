@@ -28,7 +28,7 @@ const SetcClientsPage: Page = () => {
   const [yearSelected, setYearSelected] = useState(new Date().getFullYear())
   const [selectedLevel, setSelectedLevel] = useState(-1)
   const [selectedIBO, setSelectedIbo] = useState<IUserData &{clients: SetcClient[]}>(null)
-  const [selectedClient, setSelectedClient] = useState<SetcClient>();
+  const [selectedClient, setSelectedClient] = useState<SetcClient>()
 
   const years = []
   for (let i = new Date().getFullYear(); i >= 2022; i--) {
@@ -129,12 +129,14 @@ const SetcClientsPage: Page = () => {
         </div>
       )}
       <div className='mt-4'>
-        <p>Note: </p>
-        <ul className='pl-4 list-disc'>
-          <li className='text-sm'>We’re in the process of building out a robust SETC report similar to what you see in the ERC report showcasing your personal clients and your team clients. This report is only designed to show your personal submission clients.</li>
-          <li className='text-sm'>A Submission is anyone that filled out the SETC form.  This does NOT necessarily mean they also paid</li>
-          <li className='text-sm'>Order Paid Status will reflect if the client also paid the deposit and is coming soon</li>
-        </ul>
+        <p>Key: <br />
+        Paid Clients: Reflects those clients that have paid the invoice amount with a value of "1" if paid a ”0” if not paid yet
+        </p>
+      </div>
+      <div className='mt-4'>
+        <p>Note: <br />
+        Commissions are only earned on clients that have paid their invoice which is determined in Phase 2 of the filing process.
+        </p>
       </div>
     </div>
   )
