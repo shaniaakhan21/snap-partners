@@ -4,6 +4,8 @@ import ReactDataGrid from '@inovua/reactdatagrid-community'
 import { SetcClient } from 'lib/types/setc'
 import { TypeColumn } from '@inovua/reactdatagrid-community/types'
 import dayjs from 'dayjs'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+dayjs.extend(customParseFormat) // Extend dayjs with the plugin. Required for Safari
 
 interface PersonalSetcClientsTableProps{
   clients: SetcClient[]
@@ -14,7 +16,7 @@ const PersonalSetcClientsTable: React.FC<PersonalSetcClientsTableProps> = ({
   clients,
   onClickDetails
 }) => {
-  const mappedClients = useMemo(() => clients.map(c => ({ ...c, createdAt: dayjs(c.orderDate).format('MM/DD/YYYY'), paidStatus: c.paidStatus ? 'Paid' : 'Not Paid', irsFiledDate: c.irsFiledDate ? dayjs(c.irsFiledDate).format('MM/DD/YYYY') : 'N/A' })), [clients])
+  const mappedClients = useMemo(() => clients.map(c => ({ ...c, createdAt: dayjs(c.orderDate, 'MM-DD-YYYY').format('MM/DD/YYYY'), paidStatus: c.paidStatus ? 'Paid' : 'Not Paid', irsFiledDate: c.irsFiledDate ? dayjs(c.irsFiledDate).format('MM/DD/YYYY') : 'N/A' })), [clients])
   const columns:TypeColumn[] = [
     { name: 'id', header: 'Order #', defaultFlex: 0.75, minWidth: 60 },
     { name: 'createdAt', header: 'Order Date', defaultFlex: 1, minWidth: 110 },
