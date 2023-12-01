@@ -127,27 +127,27 @@ const SetcClientsPage: Page = () => {
             onSelectLevel={setSelectedLevel}
           />
         </div>
-        {selectedLevel > -1 && (
-          <div id="table1setc">
-            <TableHeader
-              tableName={'Team Level Report' + (selectedLevel > 0 ? ` (level-${selectedLevel === 6 ? '6+' : selectedLevel})` : '')}
-            />
-            <SetcLevelClientsTable
-              onSelectIbo={setSelectedIbo}
-              levelledClient={teamClients[selectedLevel - 1]}
-            />
-          </div>
-        )}
-        {selectedIBO && (
-          <div id="table1setc">
-            <TableHeader
-              tableName={`${selectedIBO?.name} ${selectedIBO.lastname}`}
-            />
-            <div className='mt-4'>
-              <SingleIboSetcs ibo={selectedIBO} />
-            </div>
-          </div>
-        )}
+      </div>
+      {selectedLevel > -1 && (
+        <div id="table1setc">
+          <TableHeader
+            tableName={'Team Level Report' + (selectedLevel > 0 ? ` (level-${selectedLevel === 6 ? '6+' : selectedLevel})` : '')}
+          />
+          <SetcLevelClientsTable
+            onSelectIbo={setSelectedIbo}
+            levelledClient={teamClients[selectedLevel - 1]}
+          />
+        </div>
+      )}
+      {selectedIBO && (
+        <div id="table1setc">
+          <TableHeader
+            tableName={`${selectedIBO?.name} ${selectedIBO.lastname}`}
+          />
+          <SingleIboSetcs ibo={selectedIBO} />
+        </div>
+      )}
+      <div id="table1setc">
         <div className='mt-4'>
           <p>Key: <br />
         Paid Clients: Reflects those clients that have paid the invoice amount with a value of "1" if paid a ”0” if not paid yet
