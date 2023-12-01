@@ -142,7 +142,6 @@ const ErcreferralsPage: Page = () => {
           <TeamClientsTable
             clients={teamClients}
             onSelectLevel={setSelectedLevel}
-            // toggleTable={toggleTables}
           />
         </div>
       </div>

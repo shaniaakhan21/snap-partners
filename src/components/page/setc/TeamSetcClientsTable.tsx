@@ -15,11 +15,17 @@ const TeamSetcClientsTable: React.FC<TeamSetcClientsTableProps> = ({
   const mappedClients = clients.map(data => ({
     level: data.level === 6 ? data.level + ' +' : data.level,
     totalClients: data.ibos?.reduce((sum, curr) => sum + curr.clients.length, 0),
-    paidClients: data.ibos?.reduce((total, group) => {
-      return total + group.clients.filter(client => client.paidDate).length
-    }, 0),
     filingCompleted: data.ibos?.reduce((total, group) => {
       return total + group.clients.filter(client => !!client.irsFiledDate).length
+    }, 0),
+    phase1: data.ibos?.reduce((total, group) => {
+      return total + group.clients.filter(client => client.phase === 1).length
+    }, 0),
+    phase2: data.ibos?.reduce((total, group) => {
+      return total + group.clients.filter(client => client.phase === 2).length
+    }, 0),
+    phase3: data.ibos?.reduce((total, group) => {
+      return total + group.clients.filter(client => client.phase === 3).length
     }, 0)
   }))
 
@@ -32,14 +38,20 @@ const TeamSetcClientsTable: React.FC<TeamSetcClientsTableProps> = ({
       minWidth: 150
     },
     {
-      name: 'paidClients',
-      header: 'Paid Clients',
+      name: 'phase1',
+      header: 'Phase 1',
       defaultFlex: 1,
       minWidth: 150
     },
     {
-      name: 'filingCompleted',
-      header: 'Filing Completed',
+      name: 'phase2',
+      header: 'Phase 2',
+      defaultFlex: 1,
+      minWidth: 150
+    },
+    {
+      name: 'phase3',
+      header: 'Phase 3',
       defaultFlex: 1,
       minWidth: 150
     },

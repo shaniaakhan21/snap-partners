@@ -83,7 +83,7 @@ const SetcClientsPage: Page = () => {
 
   return (
     <div>
-      <div id="cro-erc-process">
+      <div id="cro-setc-process">
         <div className="">
           <h1>The SETC Process triggers commission upon completion of Phase 2</h1>
           <div>
@@ -102,7 +102,7 @@ const SetcClientsPage: Page = () => {
           </div>
         </div>
       </div>
-      <div id='table1erc'>
+      <div id="table1setc">
         <div className='flex flex-row justify-between items-center'>
           <p className='text-lg font-sans font-semibold text-gray-800'>Your Personal SETC Client Submissions</p>
           {
@@ -128,7 +128,7 @@ const SetcClientsPage: Page = () => {
           />
         </div>
         {selectedLevel > -1 && (
-          <div className='mt-8'>
+          <div id="table1setc">
             <TableHeader
               tableName={'Team Level Report' + (selectedLevel > 0 ? ` (level-${selectedLevel === 6 ? '6+' : selectedLevel})` : '')}
             />
@@ -139,7 +139,7 @@ const SetcClientsPage: Page = () => {
           </div>
         )}
         {selectedIBO && (
-          <div className='mt-8'>
+          <div id="table1setc">
             <TableHeader
               tableName={`${selectedIBO?.name} ${selectedIBO.lastname}`}
             />

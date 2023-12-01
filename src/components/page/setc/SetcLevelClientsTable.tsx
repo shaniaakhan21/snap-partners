@@ -18,7 +18,10 @@ const SetcLevelClientsTable: React.FC<SetcLevelClientsTableProps> = ({
     ibo: `${client.name} ${client.lastname}`,
     totalClients: client.clients.length,
     paidClients: client.clients.filter(client => client.paidDate).length,
-    filingCompleted: client.clients.filter(client => !!client.irsFiledDate).length
+    filingCompleted: client.clients.filter(client => !!client.irsFiledDate).length,
+    phase1: client.clients.filter(client => client.phase === 1).length,
+    phase2: client.clients.filter(client => client.phase === 2).length,
+    phase3: client.clients.filter(client => client.phase === 3).length
   }))
 
   const gridStyle = {
@@ -34,14 +37,20 @@ const SetcLevelClientsTable: React.FC<SetcLevelClientsTableProps> = ({
       minWidth: 150
     },
     {
-      name: 'paidClients',
-      header: 'Paid status',
+      name: 'phase1',
+      header: 'Phase 1',
       defaultFlex: 1,
       minWidth: 150
     },
     {
-      name: 'filingCompleted',
-      header: 'Filing Completed',
+      name: 'phase2',
+      header: 'Phase 2',
+      defaultFlex: 1,
+      minWidth: 150
+    },
+    {
+      name: 'phase3',
+      header: 'Phase 3',
       defaultFlex: 1,
       minWidth: 150
     },

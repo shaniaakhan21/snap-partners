@@ -16,6 +16,7 @@ export interface SetcClient {
   childCareQualified2021: boolean;
   caregiverQualified2020: boolean;
   caregiverQualified2021: boolean;
+  phase: number
 }
 
 export interface LevelledSetcClient{

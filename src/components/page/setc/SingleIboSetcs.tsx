@@ -9,7 +9,7 @@ const SingleIboSetcsTable = (props: {ibo: IUserData & {clients: SetcClient[]}}) 
   const { clients } = props.ibo
   const mappedClients = clients.map(client => ({
     setcId: client.id,
-    dateAcquired: dayjs(client.orderDate).format('MM/DD/YYYY'),
+    dateAcquired: dayjs(client.orderDate, 'MM-DD-YYYY').format('MM/DD/YYYY'),
     paidStatus: client.paidDate ? 'Paid' : 'Not Paid',
     filingCompleted: client.irsFiledDate ? 'Yes' : 'No'
   }))
