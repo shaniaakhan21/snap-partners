@@ -211,7 +211,11 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                     )
                   }
                   <div className='mt-5'>
-                    <SeparatorLine />
+                    {
+                      isClientOld && (
+                        <SeparatorLine />
+                      )
+                    }
                   </div>
                   <div className="flex justify-between text-xs mt-2">
                     {
@@ -224,7 +228,7 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                     }
                   </div>
                 </div>
-                <div className='mt-8'>
+                <div className={isClientOld ? 'mt-8' : 'mt-[86px]'}>
                   <SeparatorLine />
                 </div>
                 <div className="py-3 px-2.5">
