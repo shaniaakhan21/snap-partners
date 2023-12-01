@@ -21,10 +21,8 @@ const PersonalSetcClientsTable: React.FC<PersonalSetcClientsTableProps> = ({
     { name: 'id', header: 'Order #', defaultFlex: 0.75, minWidth: 60 },
     { name: 'createdAt', header: 'Order Date', defaultFlex: 1, minWidth: 110 },
     { name: 'name', header: 'Name', defaultFlex: 1, minWidth: 85 },
-    { name: 'email', header: 'Email', defaultFlex: 2, minWidth: 85 },
+    { name: 'email', header: 'Email', defaultFlex: 1.5, minWidth: 85 },
     { name: 'phone', header: 'Phone', defaultFlex: 1, minWidth: 90 },
-    { name: 'paidStatus', header: 'Paid Status', defaultFlex: 1, minWidth: 90 },
-    { name: 'irsFiledDate', header: 'Filing with IRS', defaultFlex: 1, minWidth: 90 },
     {
       name: 'details',
       header: 'See More',

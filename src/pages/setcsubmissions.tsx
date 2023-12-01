@@ -82,61 +82,82 @@ const SetcClientsPage: Page = () => {
   }, [monthSelected, yearSelected])
 
   return (
-    <div className='bg-white rounded-lg px-8 py-12'>
-      <div className='flex flex-row justify-between items-center'>
-        <p className='text-lg font-sans font-semibold text-gray-800'>Your Personal SETC Client Submissions</p>
-        {
-          personalClientsLoading && (
-            <Spinner />
-          )
-        }
-      </div>
-      <SetcModal client={selectedClient} isOpen={Boolean(selectedClient)} onClose={() => setSelectedClient(null)} />
-      <div className='mt-4'>
-        <PersonalSetcClientsTable clients={personalClients} onClickDetails={setSelectedClient}/>
-      </div>
-      <div className='mt-8'>
-        <TableHeader
-          loading={teamClientsLoading}
-          tableName="Your Team Clients"
-          setMonthSelected={setMonthSelected}
-          setYearSelected={setYearSelected}
-        />
-        <TeamSetcClientsTable
-          clients={teamClients}
-          onSelectLevel={setSelectedLevel}
-        />
-      </div>
-      {selectedLevel > -1 && (
-        <div className='mt-8'>
-          <TableHeader
-            tableName={'Team Level Report' + (selectedLevel > 0 ? ` (level-${selectedLevel === 6 ? '6+' : selectedLevel})` : '')}
-          />
-          <SetcLevelClientsTable
-            onSelectIbo={setSelectedIbo}
-            levelledClient={teamClients[selectedLevel - 1]}
-          />
-        </div>
-      )}
-      {selectedIBO && (
-        <div className='mt-8'>
-          <TableHeader
-            tableName={`${selectedIBO?.name} ${selectedIBO.lastname}`}
-          />
-          <div className='mt-4'>
-            <SingleIboSetcs ibo={selectedIBO} />
+    <div>
+      <div id="cro-erc-process">
+        <div className="">
+          <h1>The SETC Process triggers commission upon completion of Phase 2</h1>
+          <div>
+            <ul>
+              <li>Phase 1</li>
+              <li>Client Engagement</li>
+            </ul>
+            <ul>
+              <li>Phase 2</li>
+              <li> Qualification & Invoice</li>
+            </ul>
+            <ul>
+              <li>Phase 3</li>
+              <li>Filed With IRS</li>
+            </ul>
           </div>
         </div>
-      )}
-      <div className='mt-4'>
-        <p>Key: <br />
-        Paid Clients: Reflects those clients that have paid the invoice amount with a value of "1" if paid a ”0” if not paid yet
-        </p>
       </div>
-      <div className='mt-4'>
-        <p>Note: <br />
+      <div id='table1erc'>
+        <div className='flex flex-row justify-between items-center'>
+          <p className='text-lg font-sans font-semibold text-gray-800'>Your Personal SETC Client Submissions</p>
+          {
+            personalClientsLoading && (
+              <Spinner />
+            )
+          }
+        </div>
+        <SetcModal client={selectedClient} isOpen={Boolean(selectedClient)} onClose={() => setSelectedClient(null)} />
+        <div className='mt-4'>
+          <PersonalSetcClientsTable clients={personalClients} onClickDetails={setSelectedClient}/>
+        </div>
+        <div className='mt-8'>
+          <TableHeader
+            loading={teamClientsLoading}
+            tableName="Your Team Clients"
+            setMonthSelected={setMonthSelected}
+            setYearSelected={setYearSelected}
+          />
+          <TeamSetcClientsTable
+            clients={teamClients}
+            onSelectLevel={setSelectedLevel}
+          />
+        </div>
+        {selectedLevel > -1 && (
+          <div className='mt-8'>
+            <TableHeader
+              tableName={'Team Level Report' + (selectedLevel > 0 ? ` (level-${selectedLevel === 6 ? '6+' : selectedLevel})` : '')}
+            />
+            <SetcLevelClientsTable
+              onSelectIbo={setSelectedIbo}
+              levelledClient={teamClients[selectedLevel - 1]}
+            />
+          </div>
+        )}
+        {selectedIBO && (
+          <div className='mt-8'>
+            <TableHeader
+              tableName={`${selectedIBO?.name} ${selectedIBO.lastname}`}
+            />
+            <div className='mt-4'>
+              <SingleIboSetcs ibo={selectedIBO} />
+            </div>
+          </div>
+        )}
+        <div className='mt-4'>
+          <p>Key: <br />
+        Paid Clients: Reflects those clients that have paid the invoice amount with a value of "1" if paid a ”0” if not paid yet
+          </p>
+        </div>
+        <div className='mt-4'>
+          <p>Note: <br />
         Commissions are only earned on clients that have paid their invoice which is determined in Phase 2 of the filing process.
-        </p>
+          </p>
+        </div>
       </div>
     </div>
   )
