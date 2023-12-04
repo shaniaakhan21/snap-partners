@@ -55,7 +55,7 @@ const ReferralsPage: Page = () => {
               <div className='h-[120px] flex items-center'><img src={'/images/sizzle.png'} />
               </div>
             )}
-            link={`https://mysnappartners.com/sizzle/${auth.username}` || 'With Out Link'}
+            link={`https://mysnappartners.com/referral-code/${auth.referralCode}/${auth.id}/sizzle/` || 'With Out Link'}
             newUser={false}
             classes='col-span-1'
           />
@@ -65,7 +65,7 @@ const ReferralsPage: Page = () => {
               <div className='h-[120px] flex items-center'><img src={'/images/erc-sizzle.png'} />
               </div>
             )}
-            link={`https://mysnappartners.com/erc-sizzle/${auth.username}` || 'With Out Link'}
+            link={`https://mysnappartners.com/referral-code/${auth.referralCode}/${auth.id}/erc-sizzle/` || 'With Out Link'}
             newUser={false}
             classes='col-span-1'
           />
