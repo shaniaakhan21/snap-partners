@@ -1,4 +1,4 @@
-import { DataGrid as MUIDataGrid } from '@mui/x-data-grid'
+import { GridSortDirection, DataGrid as MUIDataGrid } from '@mui/x-data-grid'
 import { styled } from '@mui/system'
 import { useEffect, useState } from 'react'
 const StyledDataGrid = styled(MUIDataGrid)(() => ({
@@ -55,6 +55,7 @@ const rows = [
 
 const QualifiedIBOTable = ({ sprintData }) => {
   const [windowWidth, setWindowWidth] = useState(0)
+  const [sortModel, setSortModel] = useState([{ field: 'userFriends', sort: "desc" as GridSortDirection }])
 
   useEffect(() => {
     const handleResize = () => {
@@ -99,6 +100,8 @@ const QualifiedIBOTable = ({ sprintData }) => {
             ? <StyledDataGrid
               rows={sprintData && sprintData?.userFriendMap}
               columns={columns}
+              sortModel={sortModel}
+              onSortModelChange={(model) => setSortModel(model)}
               sx={{
                 height: '370px',
                 borderColor: 'rgba(224, 224, 224, 0.5)!important'
