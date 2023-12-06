@@ -11,6 +11,7 @@ import axios from 'axios'
 import { getLocalStorage } from 'lib/utils/localStorage'
 import { useMediaQuery } from 'react-responsive'
 import { Spinner } from 'components/common/loaders'
+import { AllAchieverTable } from './promotion/StarAchieverTable'
 
 const { SEO } = APP_INFO
 
@@ -85,6 +86,9 @@ const PromotionViewPage: Page = () => {
                   onClick={() => !isMobile && openModal('/static/promotion/big-2-image.svg')}
                 />
               </div>
+            </div>
+            <div className='flex sm:flex-row flex-col'>
+              <AllAchieverTable allAchieverArray={[]} refreshFunc={() => {}} />
             </div>
           </div>
         </div>
