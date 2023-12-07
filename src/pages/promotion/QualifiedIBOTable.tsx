@@ -1,4 +1,4 @@
-import { DataGrid as MUIDataGrid } from '@mui/x-data-grid'
+import { GridSortDirection, DataGrid as MUIDataGrid } from '@mui/x-data-grid'
 import { styled } from '@mui/system'
 import { useEffect, useState } from 'react'
 const StyledDataGrid = styled(MUIDataGrid)(() => ({
@@ -55,6 +55,7 @@ const rows = [
 
 const QualifiedIBOTable = ({ sprintData }) => {
   const [windowWidth, setWindowWidth] = useState(0)
+  const [sortModel, setSortModel] = useState([{ field: 'userFriends', sort: "desc" as GridSortDirection }])
 
   useEffect(() => {
     const handleResize = () => {
@@ -91,6 +92,7 @@ const QualifiedIBOTable = ({ sprintData }) => {
   return (
     <div className='w-10/12 sm:w-4/12 bg-white rounded-xl p-6  top-[-8%] relative'>
       <h1 className='text-lg sm:text-2xl font-bold'>Qualified IBO's</h1>
+      <p>(Both the <strong>Directly Sponsored IBO</strong> and their <strong>Direct IBO's</strong> columns reflect those who have a started date from <strong>9/1/23</strong> on)</p>
       <br></br>
       <div className="datagrid-container" style={{ overflowX: 'auto' }}>
         <div style={{ minWidth: '300px' }}>
@@ -98,6 +100,8 @@ const QualifiedIBOTable = ({ sprintData }) => {
             ? <StyledDataGrid
               rows={sprintData && sprintData?.userFriendMap}
               columns={columns}
+              sortModel={sortModel}
+              onSortModelChange={(model) => setSortModel(model)}
               sx={{
                 height: '370px',
                 borderColor: 'rgba(224, 224, 224, 0.5)!important'

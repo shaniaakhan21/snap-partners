@@ -3,7 +3,7 @@ export const APP_INFO = {
     AUTHOR: 'Snap Partners',
     TITLE_PAGE: 'Delivering what matters most',
     DESCRIPTION_PAGE: '… In a SNAP!',
-    URL_PAGE: 'https://snapdeliveredteam.com/',
+    URL_PAGE: 'https://snappartners.com/',
     KEYWORDS_PAGE: [
       'Snap Partners',
       'Snap Partners'
