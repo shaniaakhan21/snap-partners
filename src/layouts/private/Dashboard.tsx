@@ -81,6 +81,10 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         city: data.city,
         state: data.state,
         zip: data.zip,
+        TINstatus: data.TINstatus,
+        SSNDocURL: data.SSNDocURL,
+        doc_irs: data.doc_irs,
+        doc_b_structure: data.doc_b_structure,
         ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
       })
     })()
@@ -115,7 +119,11 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         zip,
         dateOfBirth,
         nsurAccount,
-        referralLink
+        referralLink,
+        TINstatus,
+        SSNDocURL,
+        doc_irs,
+        doc_b_structure
       } = auth
 
       GTMTrack.userInfo({
@@ -146,7 +154,11 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         city,
         zip,
         dateOfBirth,
-        nsurAccount
+        nsurAccount,
+        TINstatus,
+        SSNDocURL,
+        doc_irs,
+        doc_b_structure
       })
     } else {
       GTMTrack.userInfo()

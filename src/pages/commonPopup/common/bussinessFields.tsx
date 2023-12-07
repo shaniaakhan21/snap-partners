@@ -10,10 +10,16 @@ interface BussinessInfoSectionProps {
   handleDateOfStartChange: (date: Date | null) => void;
   dateOfStartError: string;
   businessType: string;
+  businessName: string;
+  firstname: string;
+  lastname: string;
   handleTypeChange: (event: ChangeEvent<HTMLSelectElement>) => void;
+  handleBusinessNameChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  handleLastNameChange:(event: ChangeEvent<HTMLInputElement>) => void;
+  handleFirstNameChange:(event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const BussFields = ({ ein, handleEINChange, einError, dateOfStart, handleDateOfStartChange, dateOfStartError, businessType, handleTypeChange }: BussinessInfoSectionProps) => {
+const BussFields = ({ ein, handleEINChange, einError, dateOfStart, handleDateOfStartChange, handleFirstNameChange, handleLastNameChange, handleBusinessNameChange, businessName, firstname, lastname, dateOfStartError, businessType, handleTypeChange }: BussinessInfoSectionProps) => {
   return (
     <>
       <div className='flex flex-row w-full justify-between mt-5'>
@@ -23,12 +29,11 @@ const BussFields = ({ ein, handleEINChange, einError, dateOfStart, handleDateOfS
               className="w-full outline-none bg-[#F9F9FA]"
               placeholder="Business Name"
               type='text'
-              value={ein}
-              onChange={handleEINChange}
+              value={businessName}
+              onChange={handleBusinessNameChange}
               required
             />
           </div>
-          {einError && <div className="ml-1 text-red-500">{einError}</div>}
         </div>
         <div className='p-4 border-2 w-[48%] rounded-lg border-slate-200 bg-[#F9F9FA]'>
           <select
@@ -39,11 +44,11 @@ const BussFields = ({ ein, handleEINChange, einError, dateOfStart, handleDateOfS
             style={{ backgroundImage: 'none' }}
           >
             <option value=''>Business Type</option>
-            <option value="volvo">Individual/sole proprietor or LLC</option>
-            <option value="saab">C Corporation</option>
-            <option value="mercedes">S Corporation</option>
-            <option value="audi">Partnership</option>
-            <option value="audiq">Trust/estate</option>
+            <option value="Individual/sole proprietor or LLC">Individual/sole proprietor or LLC</option>
+            <option value="C Corporation">C Corporation</option>
+            <option value="S Corporation">S Corporation</option>
+            <option value="Partnership">Partnership</option>
+            <option value="Trust/estate">Trust/estate</option>
           </select>
         </div>
       </div>
@@ -78,12 +83,11 @@ const BussFields = ({ ein, handleEINChange, einError, dateOfStart, handleDateOfS
               className="w-full outline-none bg-[#F9F9FA]"
               placeholder="Owner First Name"
               type='text'
-              value={ein}
-              onChange={handleEINChange}
+              value={firstname}
+              onChange={handleFirstNameChange}
               required
             />
           </div>
-          {einError && <div className="ml-1 text-red-500">{einError}</div>}
         </div>
         <div className='w-[48%] '>
           <div className='p-4 border-2 rounded-lg border-slate-200 bg-[#F9F9FA]'>
@@ -91,12 +95,11 @@ const BussFields = ({ ein, handleEINChange, einError, dateOfStart, handleDateOfS
               className="w-full outline-none bg-[#F9F9FA]"
               placeholder="Owner Last Name"
               type='text'
-              value={ein}
-              onChange={handleEINChange}
+              value={lastname}
+              onChange={handleLastNameChange}
               required
             />
           </div>
-          {einError && <div className="ml-1 text-red-500">{einError}</div>}
         </div>
       </div>
       <br/>

@@ -1,10 +1,11 @@
 import { Button, Modal } from '@mui/material'
 import { Close as CrossIcon, East, CloudUpload } from '@mui/icons-material'
 import Link from 'next/link'
-import { ChangeEvent, useEffect, useState } from 'react'
+import { MouseEvent, ChangeEvent, useEffect, useState, useRef } from 'react'
 import { addVerificationDocuments } from 'lib/services/user/addVerificationDocuments'
 import { IAuth, TSetAuth } from 'lib/stores/Auth'
 import { toast } from 'react-toastify'
+import axios from 'axios'
 
 interface PopupProps {
   open: boolean;
@@ -23,27 +24,60 @@ interface PopupProps {
 const CommonPopup = ({ open, onClose, image, title, docURL, description, auth, setAuth, buttonText, svgId, showDocumentUpload }: PopupProps) => {
   const [document, setDocument] = useState(docURL)
   const [filename, setFilename] = useState('')
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const [documentChangeComplete, setDocumentChangeComplete] = useState(false)
+
   useEffect(() => {
     setDocument(document)
   }, [docURL])
 
-  const handleDocumentChange = async (event: ChangeEvent<HTMLInputElement>) => {
+  const handleLoadFile = async (event: ChangeEvent<HTMLInputElement>) => {
     const input = event.nativeEvent.target as HTMLInputElement
     const files = input.files
+
+    if (files?.length > 0) {
+      const file = files[0]
+      setFilename(file.name)
+      const url = URL.createObjectURL(file)
+      setDocument(url)
+    }
+  }
+
+  const handleDocumentChange = async (event: ChangeEvent<HTMLInputElement>) => {
+    const input = fileInputRef.current
+    const files = input?.files
     if (files?.length > 0) {
       try {
         const file = files[0]
-        setFilename(file.name)
         await addVerificationDocuments(auth.accessToken, { image: file })
         const url = URL.createObjectURL(file)
         setDocument(url)
         setAuth({ ...auth, SSNDocURL: url })
-        toast('Loading the Document!', { type: 'success' })
+        toast('Document Uploaded Successfully!', { type: 'success' })
+        setDocumentChangeComplete(true)
       } catch (error) {
         toast('Document could not be Uploaded!', { type: 'error' })
+        setDocumentChangeComplete(false)
       }
     }
   }
+
+  const handleButtonClick = (event: ChangeEvent<HTMLInputElement>) => {
+    if (buttonText === 'Proceed with document verification') {
+      handleDocumentChange(event as ChangeEvent<HTMLInputElement>)
+      setTimeout(() => {
+        onClose()
+      }, 2500)
+    } else {
+      window.location.reload()
+    }
+  }
+
+  useEffect(() => {
+    if (documentChangeComplete) {
+      onClose()
+    }
+  }, [documentChangeComplete, onClose])
 
   return (
     <Modal open={open} onClose={onClose} className='overflow-y-scroll'>
@@ -66,9 +100,10 @@ const CommonPopup = ({ open, onClose, image, title, docURL, description, auth, s
               <input
                 type="file"
                 accept=".pdf, .png, .jpg, .jpeg"
-                onChange={handleDocumentChange}
+                onChange={handleLoadFile}
                 className="hidden"
                 id="document-upload-input"
+                ref={fileInputRef}
               />
               <br/>
               <label htmlFor="document-upload-input">
@@ -84,14 +119,7 @@ const CommonPopup = ({ open, onClose, image, title, docURL, description, auth, s
               type="submit"
               variant="contained"
               className='send-button text-xl rounded-xl text-center px-8 capitalize py-4 text-base bg-primary-500'
-              onClick={() => {
-                if (buttonText === 'Proceed with document verification') {
-                  toast('Document Uploaded Successfully!', { type: 'success' })
-                  onClose()
-                } else {
-                  window.location.reload()
-                }
-              }}
+              onClick={(event: MouseEvent<HTMLButtonElement>) => handleButtonClick(event as any)}
             ><Link href='/' >
                 {buttonText}
               </Link>

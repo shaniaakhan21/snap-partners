@@ -78,6 +78,10 @@ const HomePage: Page = () => {
           state: data.state,
           dateOfBirth: data.dateOfBirth,
           zip: data.zip,
+          TINstatus: data.TINstatus,
+          SSNDocURL: data.SSNDocURL,
+          doc_irs: data.doc_irs,
+          doc_b_structure: data.doc_b_structure,
           ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
         })
         router.push('/overview')

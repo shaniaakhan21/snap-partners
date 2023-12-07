@@ -76,6 +76,9 @@ const GlosaryPage: Page = () => {
           state: data.state,
           dateOfBirth: data.dateOfBirth,
           zip: data.zip,
+          SSNDocURL: data.SSNDocURL,
+          doc_irs: data.doc_irs,
+          doc_b_structure: data.doc_b_structure,
           ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
         })
       }

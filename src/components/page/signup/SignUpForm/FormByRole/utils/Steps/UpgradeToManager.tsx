@@ -78,6 +78,7 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
       city: data.city,
       state: data.state,
       zip: data.zip,
+      TINstatus: data.TINstatus,
       ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
     })
     // When change auth state, directly the app push the user to /overview path

@@ -25,14 +25,17 @@ import TotalLeg from './backOfficeDashboard'
 import PVComponentSnap from 'components/common/dashBackOffice/PersonalVolumeSnap'
 import ContractModal from './wellness/components/ContractModal'
 import TINPopup from './commonPopup'
+import AlertWidget from 'components/common/overview/1099Alert'
 
 const { SEO } = APP_INFO
 
 const DashboardOverViewPage: Page = () => {
-  // const { loading } = useReports()
-  const [rankData, setRankData] = useState<RankData>(null)
-  const [viewing, setViewing] = useState<string>('Aug')
   const { auth } = useAuthStore()
+  const [rankData, setRankData] = useState<RankData>(null)
+  if (!auth) {
+    return <SpinnerPageContent />
+  }
+  const [viewing, setViewing] = useState<string>('Aug')
   const [openModal, setOpenModal] = useState(!auth.isCertified)
   const [openModalTIN, setOpenModalTIN] = useState(!auth.isValidated)
   const currentOverview = getLocalStorage('currentBackoffice') || ''
@@ -40,6 +43,13 @@ const DashboardOverViewPage: Page = () => {
   const isCustomer = auth.roles.customer
   const isIntegrousAssociate = auth.roles.integrousAssociate
   const [showPopup, setShowPopup] = useState(true)
+  const SSnURL = auth.SSNDocURL
+  const doc_b_structure = auth.doc_b_structure
+  const doc_irs = auth.doc_irs
+  const TinStatus = auth.TINstatus
+  const showAlert =
+  (TinStatus === 'individual' && (SSnURL === null)) ||
+  (TinStatus === 'business' && (doc_b_structure === null || doc_irs === null))
 
   useEffect(() => {
     fetch('/api/snap/getYearlyCommission', {
@@ -106,52 +116,54 @@ const DashboardOverViewPage: Page = () => {
   }
 
   return (
-    <>
-      <div className="grid grid-cols-1 lg:grid-cols-2">
+    <>{showAlert && auth?.isValidated && (
+      <AlertWidget />
+    )}
+    <div className="grid grid-cols-1 lg:grid-cols-2">
+      <div>
         <div>
-          <div>
-            <RankComponent data={rankData} />
-          </div>
-          <div className='mt-4'>
-            <TierTable />
-          </div>
-          <div className='mt-4'>
-            <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} userId={null}/>
-          </div>
-          <div className='mt-4'>
-            <PVComponentSnap userId={null} />
-          </div>
-          <div className='mt-4'>
-            <RewardsProgram />
-          </div>
-          <div className='mt-4'>
-            <GrowthSummary userId={null} />
-          </div>
-          <div className='mt-4 bg-white rounded-lg'>
-            <MonthlySubscription userId={ null } />
-          </div>
-          <div className='mt-4 bg-white rounded-lg'>
-            <MonthlyProduction userId={null} />
-          </div>
+          <RankComponent data={rankData} />
         </div>
-        <div className='ml-4'>
-          <Event />
-          <div className='mt-4 bg-white rounded-lg'>
-            <TopProducerCategory />
-          </div>
-          <div className='mt-4'>
-            <Certification />
-          </div>
+        <div className='mt-4'>
+          <TierTable />
+        </div>
+        <div className='mt-4'>
+          <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} userId={null}/>
+        </div>
+        <div className='mt-4'>
+          <PVComponentSnap userId={null} />
+        </div>
+        <div className='mt-4'>
+          <RewardsProgram />
+        </div>
+        <div className='mt-4'>
+          <GrowthSummary userId={null} />
+        </div>
+        <div className='mt-4 bg-white rounded-lg'>
+          <MonthlySubscription userId={ null } />
+        </div>
+        <div className='mt-4 bg-white rounded-lg'>
+          <MonthlyProduction userId={null} />
         </div>
       </div>
-      <div className='col-span-12 mt-4'>
-        <Referrals rankData={rankData} />
+      <div className='ml-4'>
+        <Event />
+        <div className='mt-4 bg-white rounded-lg'>
+          <TopProducerCategory />
+        </div>
+        <div className='mt-4'>
+          <Certification />
+        </div>
       </div>
-      {!isCustomer && (
-        <ContractModal open={openModal} onClose={handleCloseModal} />)
-      }
+    </div>
+    <div className='col-span-12 mt-4'>
+      <Referrals rankData={rankData} />
+    </div>
+    {!isCustomer && (
+      <ContractModal open={openModal} onClose={handleCloseModal} />)
+    }
 
-      {showPopup && <TINPopup open={openModalTIN} onClose={handleCloseModalTIN}/>}
+    {showPopup && <TINPopup open={openModalTIN} onClose={handleCloseModalTIN}/>}
     </>
   )
 }

@@ -1,31 +1,71 @@
 /* eslint-disable no-use-before-define */
-import React, { useState } from 'react'
-import Link from 'next/link'
+import React, { useEffect, useState } from 'react'
+import router from 'next/router'
+import ReportsSubMenu from './1099ReportsSubMenu'
 
-function AccountingReportsSubMenu () {
+function AdminToolMainMenu () {
+  const [subMenu, setSubMenu] = useState('none')
   const [menuOpen, setMenuOpen] = useState(true)
+  const menuData = [
+    {
+      icon: '',
+      title: 'Field Promotions',
+      page: '/StarAchiever'
+    },
+    {
+      icon: '',
+      title: '1099 Resolution',
+      submenu: 'reports1099'
+    }
+  ]
+
+  useEffect(() => {
+    router.events.on('routeChangeStart', closeMenu)
+    return () => {
+      router.events.off('routeChangeStart', closeMenu)
+    }
+  }, [])
+
+  const closeMenu = () => {
+    setMenuOpen(false)
+  }
+
+  const handleMenuClick = (menuItem) => {
+    setSubMenu(subMenu === menuItem.submenu ? 'none' : menuItem.submenu)
+    router.push(menuItem.page)
+  }
 
   return (
     <>
       {menuOpen && (
-        <ul className='subItem'>
-          <Link href='/StarAchiever' passHref><li className='sub-list-items font-xs sm:font-base' onClick={() => {
-            setMenuOpen(false)
-          }}
+        <div className='admin-tool-sub-container'>
 
-          style={{ cursor: 'pointer' }}>Field Promotions</li></Link>
-          <Link href='/1099-report' passHref><li className='sub-list-items font-xs sm:font-base' onClick={() => {
-            setMenuOpen(false)
-          }}
+          <ul>
+            {
+              menuData.map((menuItem, index) => (
+                <li
+                  key={index}
+                  className={`item-${index} menuItem text-sm sm:text-base`}
+                  onClick={() => handleMenuClick(menuItem)}
+                  style={{ cursor: 'pointer' }}
+                >
+                  {menuItem.title}
+                </li>
+              ))
+            }
+          </ul>
 
-          style={{ cursor: 'pointer' }}>1099's</li></Link>
-          <li className='sub-list-items font-xs sm:font-base'>Item 3</li>
-          <li className='sub-list-items font-xs sm:font-base'>Item 4</li>
-        </ul>
+          {subMenu && subMenu === 'fieldpromotion' ? <></> : <></>}
+          {
+            subMenu && subMenu === 'reports1099'
+              ? <ReportsSubMenu />
+              : <></>
+          }
+        </div>
       )
       }
     </>
   )
 }
 
-export default AccountingReportsSubMenu
+export default AdminToolMainMenu

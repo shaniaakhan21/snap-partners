@@ -7,6 +7,7 @@ interface IAuthorizations {
 
 interface IQueryUserMeReturn extends IQueryErrorReturn {
   data: {
+    TINstatus?: string
     dateOfBirth: Date
     socialSecurityNumber: string
     createdAt: string
@@ -62,6 +63,9 @@ interface IQueryUserMeReturn extends IQueryErrorReturn {
     level?: string,
     isCertified?: boolean
     isValidated?: boolean
+    SSNDocURL?: string
+    doc_irs?: string
+    doc_b_structure?: string
   }
 }
 

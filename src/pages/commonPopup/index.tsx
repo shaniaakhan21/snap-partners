@@ -1,7 +1,7 @@
 import { Button, Checkbox, FormControlLabel, Modal, Radio } from '@mui/material'
 import { Close as CrossIcon, East } from '@mui/icons-material'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers-pro'
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, useEffect, useRef, useState } from 'react'
 import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs'
 import { IAuth, useAuthStore } from 'lib/stores/Auth'
 import axios from 'axios'
@@ -9,20 +9,23 @@ import states from 'data/states'
 import CommonPopup from './common'
 import InFields from './common/individualFields'
 import BussFields from './common/bussinessFields'
+import { parseISO } from 'date-fns'
+import BusinessDocPopup from './common/businessDoc'
 interface TINPopupProps {
     open: boolean;
     onClose: () => void;
 }
 
 const TINPopup = ({ open, onClose }: TINPopupProps) => {
-  const getSSN = '123654752'
   const { auth, setAuth } = useAuthStore()
   const [validated, setValidated] = useState(false)
   const [filed, setFiled] = useState(false)
   const [socialSecurity, setSocialSecurity] = useState('')
   const [dateOfBirth, setDateOfBirth] = useState<Date | null>(null)
   const [socialSecurityError, setSocialSecurityError] = useState('')
+  const [einError, setEINError] = useState('')
   const [dateOfBirthError, setDateOfBirthError] = useState('')
+  const [bStartDateError, setBStartDateError] = useState('')
   const [addressError, setAddressError] = useState('')
   const [street, setStreet] = useState('')
   const [city, setCity] = useState('')
@@ -32,17 +35,39 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
   const [showSuccessPopup, setShowSuccessPopup] = useState(false)
   const [showFailedPopup, setShowFailedPopup] = useState(false)
   const [selectedOption, setSelectedOption] = useState<'Individual' | 'Business'| null>(null)
-  const [businessType, setBusinessType] = useState('')
+  const [business_type, setBusinessType] = useState('')
+  const [ein, setEin] = useState('')
+  const [businessName, setBusinessName] = useState('')
+  const [b_start_date, setBStartDate] = useState<Date | null>(null)
+  const [firstname, setFirstName] = useState('')
+  const [lastname, setLastName] = useState('')
+  const [showBDocPopup, setShowBdocPopup] = useState(false)
+  const isMounted = useRef(true)
+
+  useEffect(() => {
+    return () => {
+      isMounted.current = false
+    }
+  }, [])
 
   const handleOptionChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setSelectedOption(event.target.value as 'Individual' | 'Business')
+    setSelectedOption((prevOption) => {
+      console.log('Previous Selected Option:', prevOption)
+      return event.target.value as 'Individual' | 'Business'
+    })
     setFiled(true)
+    console.log('Selected Option:', event.target.value)
   }
+
   const handleCloseSuccessPopup = () => {
     setShowSuccessPopup(false)
   }
   const handleCloseFailedPopup = () => {
     setShowFailedPopup(false)
+  }
+
+  const handleBDOcClosePopup = () => {
+    setShowBdocPopup(false)
   }
 
   const handleSocialSecurityChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -56,6 +81,28 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
     }
 
     setSocialSecurity(value)
+  }
+
+  const handleEINChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value
+    const pattern = /^[0-9]{9}$/
+
+    if (!pattern.test(value) || value === '123456789') {
+      setEINError('Please enter a valid EIN')
+    } else {
+      setEINError('')
+    }
+
+    setEin(value)
+  }
+
+  const handleBStartDateChange = (date: Date | null) => {
+    if (date) {
+      setBStartDate(date)
+      setBStartDateError('')
+    } else {
+      setBStartDateError('Date of Start is required')
+    }
   }
 
   const handleDateOfBirthChange = (date: Date | null) => {
@@ -102,7 +149,20 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
     setBusinessType(value)
   }
 
-  const handleSubmit = async () => {
+  const handleBusinessNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value
+    setBusinessName(value)
+  }
+  const handleLastNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value
+    setLastName(value)
+  }
+  const handleFirstNameChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value
+    setFirstName(value)
+  }
+
+  const handleSubmitForIndividual = async () => {
     let hasErrors = false
 
     if (!socialSecurity) {
@@ -128,109 +188,224 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
 
     if (!hasErrors) {
       onClose()
+
       try {
-        const updateDOBRequest = axios.post('/api/user/update-dob', {
-          dateOfBirth: dateOfBirth
-        }, {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${auth.accessToken}`
-          }
-        })
-        const updateAddressRequest = await axios.post('/api/user/update-address', {
-          state: state,
-          street: street,
-          city: city,
-          zip: zip
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${auth.accessToken}`
-          }
-        })
-
-        const updateSocialSecurity = async (socialSecurity) => {
-          try {
-            const response = await axios.post('/api/user/update-social-security-number', {
-              socialSecurityNumber: socialSecurity
-            }, {
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${auth.accessToken}`
-              }
-            })
-            if (response.status === 200) {
-              console.log('Social Security Number updated successfully')
+        if (isMounted.current) {
+          await axios.post('/api/user/update-tin-status', { TINstatus: 'individual' }, {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${auth.accessToken}`
             }
-          } catch (error) {
-            console.error('Error updating Social Security Number', error)
-          }
-        }
-
-        const reviewSSN = async (socialSecurity) => {
-          try {
-            const response = await axios.post('/api/user/reviewSSN', {
-              newSSN: socialSecurity
-            }, {
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${auth.accessToken}`
-              }
-            })
-            if (response.status === 200) {
-              console.log('Social Security Number is under review')
+          })
+          const updateDOBRequest = axios.post('/api/user/update-dob', {
+            dateOfBirth: dateOfBirth
+          }, {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${auth.accessToken}`
             }
-          } catch (error) {
-            console.error('Error reviewing Social Security Number', error)
-          }
-        }
-        const lastTwoDigitsInSSN = socialSecurity.substring(socialSecurity.length - 2)
-        if (auth.socialSecurityNumber === null || auth.socialSecurityNumber === '') {
-          updateSocialSecurity(socialSecurity)
-          setShowSuccessPopup(true)
-        } else {
-          const lastTwoDigitsInAuthSSN = auth.socialSecurityNumber.substring(auth.socialSecurityNumber.length - 2)
+          })
 
-          if (lastTwoDigitsInAuthSSN !== lastTwoDigitsInSSN) {
-            reviewSSN(socialSecurity)
-            setShowFailedPopup(true)
-          } else if (lastTwoDigitsInAuthSSN === lastTwoDigitsInSSN) {
+          const updateSocialSecurity = async (socialSecurity) => {
+            try {
+              const response = await axios.post('/api/user/update-social-security-number', {
+                socialSecurityNumber: socialSecurity
+              }, {
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: `Bearer ${auth.accessToken}`
+                }
+              })
+              if (response.status === 200) {
+                console.log('Social Security Number updated successfully')
+              }
+            } catch (error) {
+              console.error('Error updating Social Security Number', error)
+            }
+          }
+
+          const reviewSSN = async (socialSecurity) => {
+            try {
+              const response = await axios.post('/api/user/reviewSSN', {
+                newSSN: socialSecurity
+              }, {
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: `Bearer ${auth.accessToken}`
+                }
+              })
+              if (response.status === 200) {
+                console.log('Social Security Number is under review')
+              }
+            } catch (error) {
+              console.error('Error reviewing Social Security Number', error)
+            }
+          }
+          const lastTwoDigitsInSSN = socialSecurity.substring(socialSecurity.length - 2)
+          if (auth.socialSecurityNumber === null || auth.socialSecurityNumber === '') {
+            updateSocialSecurity(socialSecurity)
             setShowSuccessPopup(true)
-          }
-        }
+          } else {
+            const lastTwoDigitsInAuthSSN = auth.socialSecurityNumber.substring(auth.socialSecurityNumber.length - 2)
 
-        axios.post('/api/user/isValidated', { isValidated: true }, {
-          headers: {
-            Authorization: `Bearer ${auth.accessToken}`
+            if (lastTwoDigitsInAuthSSN !== lastTwoDigitsInSSN) {
+              reviewSSN(socialSecurity)
+              setShowFailedPopup(true)
+            } else if (lastTwoDigitsInAuthSSN === lastTwoDigitsInSSN) {
+              setShowSuccessPopup(true)
+            }
           }
-        })
-          .then((result) => {
-            if (result.data.result[0] === 1) {
-              setAuth({ ...auth, isValidated: true })
-              onClose()
-            } else {
+          await axios.all([updateDOBRequest])
+
+          const updateAddressRequest = await axios.post('/api/user/update-address', {
+            state: state,
+            street: street,
+            city: city,
+            zip: zip
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${auth.accessToken}`
+            }
+          })
+
+          axios.post('/api/user/isValidated', { isValidated: true }, {
+            headers: {
+              Authorization: `Bearer ${auth.accessToken}`
+            }
+          })
+            .then((result) => {
+              if (result.data.result[0] === 1) {
+                setAuth({ ...auth, isValidated: true })
+                onClose()
+              } else {
+                alert('Error while confirming validation')
+                onClose()
+              }
+            })
+            .catch((e) => {
               alert('Error while confirming validation')
               onClose()
-            }
-          })
-          .catch((e) => {
-            alert('Error while confirming validation')
-            onClose()
-          })
-
-        setCity(city)
-        setState(state)
-        setStreet(street)
-        setZipCode(zip)
-        setDateOfBirth(dateOfBirth)
-        await axios.all([updateAddressRequest, updateDOBRequest])
-        setIsLoading(false)
+            })
+          setCity(city)
+          setState(state)
+          setStreet(street)
+          setZipCode(zip)
+          setDateOfBirth(dateOfBirth)
+          setBStartDate(b_start_date)
+          setBusinessName(businessName)
+          setBusinessType(business_type)
+          setEin(ein)
+          setFirstName(firstname)
+          setLastName(lastname)
+          await axios.all([updateAddressRequest])
+        }
       } catch (error) {
         setIsLoading(false)
       }
     }
   }
 
+  const handleSubmitForBusiness = async () => {
+    let hasErrors = false
+
+    if (!ein) {
+      setEINError('Please enter a valid EIN')
+      hasErrors = true
+    } else {
+      setEINError('')
+    }
+
+    if (!b_start_date) {
+      setDateOfBirthError('Start Date of Business is required')
+      hasErrors = true
+    } else {
+      setDateOfBirthError('')
+    }
+
+    if (!street || !city || !state || !zip) {
+      setAddressError('Please fill all the Address Fields')
+      hasErrors = true
+    } else {
+      setAddressError('')
+    }
+
+    if (!hasErrors) {
+      onClose()
+      try {
+        if (isMounted.current) {
+          await axios.post('/api/user/update-tin-status', {
+            TINstatus: 'business'
+          }, {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${auth.accessToken}`
+            }
+          })
+          const updateBusinessFields = await axios.post('/api/user/update-business-fields', {
+            businessName: businessName,
+            ein: ein,
+            b_start_date: b_start_date,
+            business_type: business_type,
+            name: firstname,
+            lastname: lastname
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${auth.accessToken}`
+            }
+          })
+          console.log('Update Address Response:', updateBusinessFields.data) // Log the response from update-address
+          await axios.all([updateBusinessFields])
+          const updateAddressRequest = await axios.post('/api/user/update-address', {
+            state: state,
+            street: street,
+            city: city,
+            zip: zip
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${auth.accessToken}`
+            }
+          })
+          axios.post('/api/user/isValidated', { isValidated: true }, {
+            headers: {
+              Authorization: `Bearer ${auth.accessToken}`
+            }
+          })
+            .then((result) => {
+              if (result.data.result[0] === 1) {
+                setAuth({ ...auth, isValidated: true })
+                onClose()
+              } else {
+                alert('Error while confirming validation')
+                onClose()
+              }
+            })
+            .catch((e) => {
+              alert('Error while confirming validation')
+              onClose()
+            })
+          setCity(city)
+          setState(state)
+          setStreet(street)
+          setZipCode(zip)
+          setDateOfBirth(dateOfBirth)
+          setIsLoading(false)
+          setBStartDate(b_start_date)
+          setBusinessName(businessName)
+          setBusinessType(business_type)
+          setEin(ein)
+          setFirstName(firstname)
+          setLastName(lastname)
+          await axios.all([updateAddressRequest])
+          setShowBdocPopup(true)
+        }
+      } catch (error) {
+        setIsLoading(false)
+      }
+    }
+  }
   return (
     <>
       <Modal
@@ -253,8 +428,8 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
             <div className='p-4 rounded-lg bg-[#edfbe0]'>
               <h2 className='text-xl font-normal'><span className='text-2xl text-[#FA4616] font-medium'>Purpose</span> To generate a 1099 at end of year</h2>
             </div>
-            <div className='flex flex-row w-full justify-between mt-4 p-4 rounded-lg bg-[#F8F8F8] border-[#E8EDE3] border-2 items-center mb-2'>
-              <h2 className='text-xl font-semibold'>I want to file as an</h2>
+            <div className='flex flex-row w-full justify-between mt-4 p-4 rounded-lg bg-[#dd4c3733] border-[#DD4C37] border-2 items-center mb-2'style={{ boxShadow: '0px 0px 6px 2px #ff200045' }}>
+              <h2 className='text-xl font-semibold'><span className='underline'>Step 1</span> : I want to file as an?</h2>
               <FormControlLabel
                 value="Individual"
                 control={<Radio checked={selectedOption === 'Individual'} onChange={handleOptionChange} />}
@@ -280,12 +455,20 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
 
             {selectedOption === 'Business' && (
               <BussFields
-                ein={socialSecurity}
-                handleEINChange={handleSocialSecurityChange}
-                einError={socialSecurityError}
-                dateOfStart={dateOfBirth}
-                handleDateOfStartChange={handleDateOfBirthChange}
-                dateOfStartError={dateOfBirthError} businessType={businessType} handleTypeChange={handleTypeChange} />
+                ein={ein}
+                handleEINChange={handleEINChange}
+                einError={einError}
+                dateOfStart={b_start_date}
+                handleDateOfStartChange={handleBStartDateChange}
+                dateOfStartError={bStartDateError}
+                businessType={business_type}
+                handleTypeChange={handleTypeChange}
+                businessName={businessName}
+                firstname={firstname}
+                lastname={lastname}
+                handleBusinessNameChange={handleBusinessNameChange}
+                handleLastNameChange={handleLastNameChange}
+                handleFirstNameChange={handleFirstNameChange} />
             )}
 
             <div className='p-2 rounded-lg'>
@@ -346,7 +529,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
               <FormControlLabel
                 className='items-start italic text-[#4A4A4A]'
                 control={<Checkbox checked={validated} onChange={() => setValidated(!validated)} color="default" className='pl-3 pr-1 pt-1' />}
-                label="Under penalties of perjury, I certify that: 1. The number shown on this form is my correct taxpayer identification number (or I am waiting for a number to be issued to me); and 2. I am not subject to backup withholding because: (a) I am exempt from backup withholding, or (b) I have not been notified by the Internal Revenue Service (IRS) that I am subject to backup withholding as a result of a failure to report all interest or dividends, or (c) the IRS has notified me that I am no longer subject to backup withholding; and 3. I am a U.S. citizen or other U.S. person (defined below); and 4. The FATCA code(s) entered on this form (if any) indicating that I am exempt from FATCA reporting is correct."
+                label="Under penalties of perjury, I certify that: 1. The number shown on this form is my correct taxpayer identification number (or I am waiting for a number to be issued to me); and 2. I am not subject to backup withholding because: (a) I am exempt from backup withholding, or (b) I have not been notified by the Internal Revenue Service (IRS) that I am subject to backup withholding as a result of a failure to report all interest or dividends, or (c) the IRS has notified me that I am no longer subject to backup withholding; and 3. I am a U.S. citizen or other U.S. person."
               />
             </div>
             <br />
@@ -361,7 +544,13 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
                     : 'bg-grey text-blackCustom'
                 }`}
                 disabled={!validated || !filed}
-                onClick={handleSubmit}
+                onClick={() => {
+                  if (selectedOption === 'Individual') {
+                    handleSubmitForIndividual()
+                  } else if (selectedOption === 'Business') {
+                    handleSubmitForBusiness()
+                  }
+                }}
               >
                     Submit
                 <East className='ml-1'/>
@@ -392,6 +581,9 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
           onClose={handleCloseFailedPopup}
           showDocumentUpload={true}
           auth={auth} setAuth={setAuth} docURL={auth.SSNDocURL} />
+      )}
+      {showBDocPopup && (
+        <BusinessDocPopup open={showBDocPopup} onClose={handleBDOcClosePopup} auth={auth} setAuth={setAuth} docIrsURL={auth.doc_irs} docFormURL={auth.doc_b_structure}/>
       )}
     </>
   )

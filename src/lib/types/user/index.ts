@@ -64,6 +64,9 @@ export interface IUserCommonData {
   twitter_url: string
   linkedin_url: string
   instagram_url: string
+  SSNDocURL?: string
+  doc_irs?: string
+  doc_b_structure?: string
 }
 
 export interface IUserById extends IUserCommonData {

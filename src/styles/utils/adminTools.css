@@ -13,6 +13,20 @@
     }
 }
 
+.admin-tool-sub-container{
+    width:100%;
+    padding:10px;
+    position: absolute;
+    top:4px;
+    right:252px;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    box-shadow: 0 4px 5px 0 rgba(60, 75, 100, .14), 0 1px 10px 0 rgba(60, 75, 100, .12), 0 2px 4px -1px rgba(60, 75, 100, .20);
+    @media screen and (max-width: 647px) {
+        width:140px;
+    } 
+}
+
 .menuItem{
     padding: 5px;
 }

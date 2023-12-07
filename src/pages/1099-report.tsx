@@ -260,7 +260,7 @@ const Report: Page = () => {
 Report.getLayout = (page: ReactNode) => (
   <DashboardLayout>
     <Head>
-      <title>{SEO.TITLE_PAGE} - Achievers Report</title>
+      <title>{SEO.TITLE_PAGE} -1099 Individual Report</title>
     </Head>
 
     {page}
