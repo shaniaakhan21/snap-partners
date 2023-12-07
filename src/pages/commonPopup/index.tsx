@@ -9,7 +9,6 @@ import states from 'data/states'
 import CommonPopup from './common'
 import InFields from './common/individualFields'
 import BussFields from './common/bussinessFields'
-import { parseISO } from 'date-fns'
 import BusinessDocPopup from './common/businessDoc'
 interface TINPopupProps {
     open: boolean;
