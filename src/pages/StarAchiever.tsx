@@ -100,7 +100,7 @@ const StarAchiever: Page = () => {
         <h1 className='text-base sm:text-xl font-semibold'>5 Star Achievers</h1>
         <StarAchieversTable userSprintData={sprintDataArray?.filter((data) => data?.starCount === 5) || []} />
         <h1 className='text-base sm:text-xl font-semibold'>IBO Progress to 1-Star</h1>
-        <AllAchieverTable allAchieverArray = {allAchieverArray} refreshFunc = {refreshFunc} />
+        <AllAchieverTable allAchieverArray = {allAchieverArray} refreshFunc = {refreshFunc} isPersonal={false} />
       </div>
     </>
   )

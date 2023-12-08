@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import Head from 'next/head'
 import type { Page, ReactNode } from 'lib/types'
 import { APP_INFO } from 'config/appInfo'
@@ -19,6 +20,7 @@ const PromotionViewPage: Page = () => {
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedImage, setSelectedImage] = useState('')
   const [sprintData, setSprintData] = useState({})
+  const [tableRows, setTableRows] = useState([])
   const isMobile = useMediaQuery({ query: '(max-width: 630px)' })
 
   const openModal = (imageSrc: string) => {
@@ -41,6 +43,32 @@ const PromotionViewPage: Page = () => {
       })
         .then((result) => {
           setSprintData(result.data)
+        })
+    }
+    const getTeamProgressData = async () => {
+      const token = getLocalStorage('accessToken')
+      await axios.get('/api/sprint-to-paradise/user', {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+        .then((result) => {
+          const arr = result.data.users.filter((user) => user.boxes !== null)
+          const allAchieverData = []
+          arr.map((element) => {
+            const boxes = JSON.parse(element.boxes)
+            allAchieverData.push({
+              id: element.id,
+              name: element.name,
+              count: Object.values(boxes).filter(value => value === true).length,
+              date: element.date,
+              userId: element.userId,
+              ...boxes
+
+            })
+          })
+          allAchieverData.sort((a, b) => b.count - a.count)
+          setTableRows(allAchieverData)
         })
     }
     getSprintData()
@@ -87,8 +115,9 @@ const PromotionViewPage: Page = () => {
                 />
               </div>
             </div>
-            <div className='flex sm:flex-row flex-col'>
-              <AllAchieverTable allAchieverArray={[]} refreshFunc={() => {}} />
+            <div className='mt-10'>
+              <p className='w-full text-md text-center sm:text-left sm:text-xl  font-bold'>My Team's Progress to 1-Star</p>
+              <AllAchieverTable allAchieverArray={tableRows} refreshFunc={() => {}} isPersonal= {true} />
             </div>
           </div>
         </div>
