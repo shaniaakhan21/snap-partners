@@ -204,7 +204,7 @@ const SetcModal: React.FC<SetcModalProps> = ({ isOpen, client, onClose }) => {
                         Commission
                     </span>
                     <span>
-                      {client.paidAmount ? `$${commission}` : 'TBD'}
+                      { status !== 'active' ? 'N/A' : client.paidAmount ? `$${commission}` : 'TBD'}
                     </span>
                   </div>
                   <div className="flex justify-between text-sm">
@@ -212,7 +212,7 @@ const SetcModal: React.FC<SetcModalProps> = ({ isOpen, client, onClose }) => {
                         Total CV
                     </span>
                     <span>
-                      {client.paidAmount ? `$${totalCV}` : 'TBD'}
+                      {status !== 'active' ? 'N/A' : client.paidAmount ? `$${totalCV}` : 'TBD'}
                     </span>
                   </div>
                   <div className='mt-2'>
