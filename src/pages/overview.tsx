@@ -48,6 +48,7 @@ const DashboardOverViewPage: Page = () => {
   const doc_irs = auth.doc_irs
   const TinStatus = auth.TINstatus
   const showAlert =
+  (TinStatus === 'individual' && (!auth.newSSN === null)) ||
   (TinStatus === 'individual' && (SSnURL === null)) ||
   (TinStatus === 'business' && (doc_b_structure === null || doc_irs === null))
 

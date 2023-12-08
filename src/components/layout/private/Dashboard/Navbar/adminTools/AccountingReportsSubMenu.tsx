@@ -31,8 +31,10 @@ function AdminToolMainMenu () {
   }
 
   const handleMenuClick = (menuItem) => {
-    setSubMenu(subMenu === menuItem.submenu ? 'none' : menuItem.submenu)
-    router.push(menuItem.page)
+    if (router) {
+      setSubMenu(subMenu === menuItem.submenu ? 'none' : menuItem.submenu)
+      router.push(menuItem.page)
+    }
   }
 
   return (

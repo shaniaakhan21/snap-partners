@@ -28,6 +28,7 @@ export interface IAuth extends IUserMe, INsurAccount {
   doc_irs?: string
   doc_b_structure?: string
   TINstatus?: string
+  newSSN?: string
 }
 
 export type TSetAuth = ({
@@ -64,7 +65,8 @@ export type TSetAuth = ({
   SSNDocURL,
   doc_irs,
   doc_b_structure,
-  TINstatus
+  TINstatus,
+  newSSN
 }: IAuth) => void
 
 interface IAuthAtom {
@@ -108,7 +110,8 @@ interface IAuthAtom {
     SSNDocURL,
     doc_irs,
     doc_b_structure,
-    TINstatus
+    TINstatus,
+    newSSN
   }: IAuth) => void
   removeAuth: () => void
 }
@@ -156,7 +159,8 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
     SSNDocURL,
     doc_irs,
     doc_b_structure,
-    TINstatus
+    TINstatus,
+    newSSN
   }) => {
     set({
       auth: {
@@ -202,7 +206,8 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
         SSNDocURL,
         doc_irs,
         doc_b_structure,
-        TINstatus
+        TINstatus,
+        newSSN
       }
     })
   },

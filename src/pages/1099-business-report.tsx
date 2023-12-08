@@ -5,7 +5,7 @@ import { DataGrid as MUIDataGrid } from '@mui/x-data-grid'
 import type { Page, ReactNode } from 'lib/types'
 import { APP_INFO } from 'config/appInfo'
 import DashboardLayout from 'layouts/private/Dashboard'
-import { Button, Dialog, DialogContent, IconButton } from '@mui/material'
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton } from '@mui/material'
 import { styled } from '@mui/system'
 import { useEffect, useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
@@ -18,8 +18,33 @@ import IRSDocUpload from './commonPopup/common/individualDocs/IRSDocUpload'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
 import CancelIcon from '@material-ui/icons/Cancel'
 import DocumentDetailView from './commonPopup/common/DocumentDetailView'
+import { getLocalStorage } from 'lib/utils/localStorage'
 
 const { SEO } = APP_INFO
+
+const ApprovalDialog = ({ open, onClose, onConfirm }) => {
+  const handleConfirm = () => {
+    onConfirm()
+
+    onClose()
+  }
+  return (
+    <Dialog open={open} onClose={onClose}>
+      <DialogTitle>Confirm Approval</DialogTitle>
+      <DialogContent>
+        Are you sure you want to approve this user?
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onClose} color="primary">
+          Cancel
+        </Button>
+        <Button onClick={handleConfirm} color="primary">
+          Approve
+        </Button>
+      </DialogActions>
+    </Dialog>
+  )
+}
 
 const ImageViewer = ({ open, onClose, imageUrl }) => {
   return (
@@ -62,6 +87,7 @@ const BusinessReport: Page = () => {
   const [IRSdocModalOpen, setIRSdocModalOpen] = useState(false)
   const [selectedDocumentInfo, setSelectedDocumentInfo] = useState(null)
   const [documentDetailModalOpen, setDocumentDetailModalOpen] = useState(false)
+  const [approvalDialogOpen, setApprovalDialogOpen] = useState(false)
 
   const handleRowClick = (params) => {
     const documentInfo = report1099.find((item) => item.id === params.id)
@@ -108,6 +134,30 @@ const BusinessReport: Page = () => {
   useEffect(() => {
     get1099ReportData()
   }, [])
+
+  const handleApproveClick = (userId) => {
+    setSelectedDocumentInfo(userId) // Store the user ID for approval
+    setApprovalDialogOpen(true)
+  }
+
+  const handleApproveAndReload = async () => {
+    const token = getLocalStorage('accessToken')
+    const body = { userId: selectedDocumentInfo, business_approved: 1 } // Assuming 1 is for approval
+
+    try {
+      await axios.put(`/api/admin/1099-business-approval/${selectedDocumentInfo}`, body, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
+
+      // Close the approval dialog and reload the page
+      setApprovalDialogOpen(false)
+      window.location.reload()
+    } catch (error) {
+      console.error('Error while approving user:', error)
+    }
+  }
 
   const columns = [
     {
@@ -171,7 +221,7 @@ const BusinessReport: Page = () => {
       type: 'string',
       flex: windowWidth <= 400 ? 0.5 : 1,
       renderCell: (params) => (
-        <span>{params.value === 1 ? <CheckCircleIcon style={{ color: '#02c91e', cursor: 'pointer' }}/> : <CancelIcon style={{ color: '#f10606', cursor: 'pointer' }}/>}</span>
+        <span>{params.value === 1 ? <CheckCircleIcon style={{ color: '#37D034', cursor: 'pointer' }}/> : <CancelIcon style={{ color: '#D03434', cursor: 'pointer' }}/>}</span>
       )
     },
     {
@@ -183,15 +233,10 @@ const BusinessReport: Page = () => {
           ? (
             <>
               <VisibilityIcon
-                style={{ color: '#FA4616', cursor: 'pointer' }}
+                style={{ color: '#5E828D', cursor: 'pointer' }}
                 onClick={() => {
                   setImageSrc(params.value)
                   setImageOpen(true)
-                }}
-              />
-              <EditIcon style={{ color: '#FA4616', cursor: 'pointer' }}
-                onClick={() => {
-                  setIRSdocModalOpen(true)
                 }}
               />
               <ImageViewer
@@ -202,11 +247,7 @@ const BusinessReport: Page = () => {
             </>
           )
           : (
-            <><EditIcon style={{ color: '#FA4616', cursor: 'pointer' }}
-              onClick={() => {
-                setIRSdocModalOpen(true)
-              }}
-            /><span>No Data</span></>
+            <><span>No Data</span></>
           )
       )
     },
@@ -219,15 +260,10 @@ const BusinessReport: Page = () => {
           ? (
             <>
               <VisibilityIcon
-                style={{ color: '#FA4616', cursor: 'pointer' }}
+                style={{ color: '#5E828D', cursor: 'pointer' }}
                 onClick={() => {
                   setImageSrc(params.value)
                   setImageOpen(true)
-                }}
-              />
-              <EditIcon style={{ color: '#FA4616', cursor: 'pointer' }}
-                onClick={() => {
-                  setBStructureModalOpen(true)
                 }}
               />
               <ImageViewer
@@ -240,11 +276,7 @@ const BusinessReport: Page = () => {
           : (
             <>
               <div className='flex flex-row justify-between'>
-                <EditIcon style={{ color: '#FA4616', cursor: 'pointer' }}
-                  onClick={() => {
-                    setBStructureModalOpen(true)
-                  }}
-                /><span>No Data</span>
+                <span>No Data</span>
               </div></>
           )
       )
@@ -255,7 +287,12 @@ const BusinessReport: Page = () => {
       type: 'string',
       flex: windowWidth <= 400 ? 0.5 : 1,
       renderCell: (params) => (
-        <span>{params.value === 1 ? <CheckCircleIcon style={{ color: '#02c91e', cursor: 'pointer' }}/> : <CancelIcon style={{ color: '#f10606', cursor: 'pointer' }}/>}</span>
+        <span>{params.value === 1
+          ? <><CheckCircleIcon style={{ color: '#37D034', cursor: 'pointer' }} /></>
+          : <><CancelIcon style={{ color: '#D03434', cursor: 'pointer' }} /><EditIcon
+            style={{ cursor: 'pointer' }}
+            onClick={() => handleApproveClick(params.row.id)}
+          /></>}</span>
       )
     },
     {
@@ -270,7 +307,7 @@ const BusinessReport: Page = () => {
     <>
       <span className='text-lg sm:text-3xl font-bold'>Admin Report</span><br /><br />
       <div className="w-full bg-white rounded-lg px-5 py-5 sm:px-10 sm:py-10 flex flex-col" id='html-content'>
-        <h1 className='text-base sm:text-xl font-semibold'>The Following needs additional verification:</h1>
+        <h1 className='text-base sm:text-xl font-semibold'>The Following IBOs need additional verification:</h1>
         <br></br>
         <div>
           {report1099 && report1099.length > 0
@@ -282,16 +319,6 @@ const BusinessReport: Page = () => {
             )}
         </div>
         <br></br>
-        {report1099 && report1099.length > 0 && (
-          <div className='w-full flex justify-end'>
-            <Button
-              variant="contained"
-              className='w-[10%] bg-[#FA4616] hoverit'
-            >
-              Submit
-            </Button>
-          </div>
-        )}
       </div>
       <ImageViewer open={imageOpen} onClose={() => setImageOpen(false)} imageUrl={imageSrc} />
       {bStructureModalOpen && (
@@ -315,6 +342,9 @@ const BusinessReport: Page = () => {
         onClose={() => setDocumentDetailModalOpen(false)}
         documentInfo={selectedDocumentInfo}
       />
+      <ApprovalDialog
+        open={approvalDialogOpen}
+        onClose={() => setApprovalDialogOpen(false)} onConfirm={handleApproveAndReload} />
     </>
   )
 }
