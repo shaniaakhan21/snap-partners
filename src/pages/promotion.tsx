@@ -72,6 +72,7 @@ const PromotionViewPage: Page = () => {
         })
     }
     getSprintData()
+    getTeamProgressData()
   }, [])
 
   console.log('sprint Data is', sprintData)
