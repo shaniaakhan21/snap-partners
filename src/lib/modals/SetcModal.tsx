@@ -82,7 +82,7 @@ const Step = (props: StepProps) => {
 
 const SetcModal: React.FC<SetcModalProps> = ({ isOpen, client, onClose }) => {
   if (!client) return null
-  const { email, phone, orderDate, agreementSignedDate, taxpayerQualified2020, taxpayerQualified2021, caregiverQualified2020, caregiverQualified2021, childCareQualified2020, childCareQualified2021, irsFiledDate, paidAmount } = client
+  const { email, phone, orderDate, agreementSignedDate, taxpayerQualified2020, taxpayerQualified2021, caregiverQualified2020, caregiverQualified2021, childCareQualified2020, childCareQualified2021, irsFiledDate, paidAmount, isPersonalClient } = client
   const status = paidAmount < 0 ? 'inactive' : 'active'
   const filedWithIRS = irsFiledDate && irsFiledDate !== 'N/A'
   //   const initialPayment = 200
@@ -120,7 +120,11 @@ const SetcModal: React.FC<SetcModalProps> = ({ isOpen, client, onClose }) => {
             {/* header  */}
             <div>
               <div className="flex justify-between items-center px-2.5 pt-5 font-open-sans ">
-                <p className="font-semibold font-lg">{client.name}</p>
+                <p className="font-semibold text-lg">{client.name}</p>
+                <span>
+                  <p className='text-sm text-warning-900'>PERSONAL SETC CLIENT RULE APPLIES ON THIS ACCOUNT</p>
+                  <p className='text-xs'>If the IBO signs themselves up for SETC, the volume credit is given to the IBO while the PCV commission is given to the sponsor</p>
+                </span>
                 <div
                   className="cursor-pointer text-2xl w-8 h-8"
                   onClick={() => onClose()}
