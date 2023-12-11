@@ -128,6 +128,11 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
   const phase2Payment = filedPCV * 0.1
   const phase3Payment = phase3FiledPCV * 0.9
 
+  let filedWithIRSDate = ''
+  if (filedWithIRS || phase2Progress === phase2StepCount) {
+    filedWithIRSDate = client.quarters.find(q => !!q.dateFiled)?.dateFiled || ''
+  }
+
   // calculate phase 3 progress
   if (payouts.length > 0) {
     // if remaining amount is phase 1 advance payment then everything is paid
@@ -298,6 +303,8 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                 <Step
                   number={5}
                   title='Filed With IRS Date'
+                  // date={filedWithIRSDate ? }
+                  date={filedWithIRSDate ? dayjs(filedWithIRSDate, 'MM-DD-YYYY').format('MM/DD/YYYY') : ''}
                   filled={(filedWithIRS || phase2Progress === phase2StepCount) ? 'full' : IrsFilingStartedNotFinished ? 'half' : 'empty'}
                   fillColor={'textAcent-100'}
                   halfFillColor='phase-200'

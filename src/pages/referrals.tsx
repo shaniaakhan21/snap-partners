@@ -69,6 +69,16 @@ const ReferralsPage: Page = () => {
             newUser={false}
             classes='col-span-1'
           />
+          <ReferralCards
+            title='SETC Sizzle Video'
+            ilustration={(
+              <div className='h-[120px] flex items-center'><img src={'/images/setc.png'} />
+              </div>
+            )}
+            link={`https://mysnappartners.com/referral-code/${auth.referralCode}/${auth.id}/setc-sizzle/` || 'With Out Link'}
+            newUser={false}
+            classes='col-span-1'
+          />
         </div>
       </div>
       <h1 style={{ fontWeight: 'bold', marginBottom: 10 }}>Referal Pages</h1>
@@ -80,7 +90,7 @@ const ReferralsPage: Page = () => {
               <div className='h-[120px] flex items-center'><img src={'/images/referralPartner1.png'} />
               </div>
             )}
-            link={`${auth.referralLink}&role=${ROLES.IBO}` || 'With Out Link'}
+            link={`https://mysnappartners.com/referral-code/${auth.referralCode}/${auth.id}/the-opportunity/` || 'With Out Link'}
             newUser={false}
             classes='col-span-1'
           />
@@ -95,14 +105,14 @@ const ReferralsPage: Page = () => {
           <ReferralCards
             title='Refer ERC Client'
             ilustration={<ERCClient/>}
-            link={`https://www.jornscpa.com/snap/?refid=${auth.id}` || 'With Out Link'}
+            link={`https://mysnappartners.com/referral-code/${auth.referralCode}/${auth.id}/snap-financial/erc/` || 'With Out Link'}
             newUser={false}
             classes='col-span-1'
           />
           <ReferralCards
             title='Refer SETC/FFCRA Client'
             ilustration={<ERCClient/>}
-            link={`https://www.jornscpa.com/snap-ffcra/?refid=${auth.id}` || 'With Out Link'}
+            link={`https://mysnappartners.com/referral-code/${auth.referralCode}/${auth.id}/snap-financial/setc/` || 'With Out Link'}
             newUser={false}
             classes='col-span-1'
           />
