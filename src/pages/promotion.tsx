@@ -118,6 +118,12 @@ const PromotionViewPage: Page = () => {
             </div>
             <div className='mt-10'>
               <p className='w-full text-md text-center sm:text-left sm:text-xl  font-bold'>My Team's Progress to 1-Star</p>
+              <div className='text-xs text-red-500 '>Note:
+                <ul>
+                  <li>Team Members ONLY show if they click on their Snap Promos link in their back office</li>
+                  <li>“Last Updated” field only changes when the IBO visits this same page in their back office</li>
+                </ul>
+              </div>
               <AllAchieverTable allAchieverArray={tableRows} refreshFunc={() => {}} isPersonal= {true} />
             </div>
           </div>
