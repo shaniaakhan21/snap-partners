@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 import React, { useEffect, useState } from 'react'
-import router from 'next/router'
+import { useRouter } from 'next/router';
 import ReportsSubMenu from './1099ReportsSubMenu'
 
 function AdminToolMainMenu () {
@@ -18,7 +18,7 @@ function AdminToolMainMenu () {
       submenu: 'reports1099'
     }
   ]
-
+  const router = useRouter();
   useEffect(() => {
     router.events.on('routeChangeStart', closeMenu)
     return () => {

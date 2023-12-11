@@ -1,9 +1,7 @@
 import { Button, Checkbox, FormControlLabel, Modal, Radio } from '@mui/material'
 import { Close as CrossIcon, East } from '@mui/icons-material'
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers-pro'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
-import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs'
-import { IAuth, useAuthStore } from 'lib/stores/Auth'
+import { useAuthStore } from 'lib/stores/Auth'
 import axios from 'axios'
 import states from 'data/states'
 import CommonPopup from './common'
@@ -413,31 +411,53 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
         className='overflow-y-scroll'
       >
         <div className='w-full flex justify-center'>
-          <div className='bg-white rounded-xl p-4 px-10 pb-10 w-6/12 my-20 ml-10'>
+          <div className='bg-white rounded-xl p-2 md:p-4 md:px-10 md:pb-10 w-9/12 md:w-6/12 my-8 md:my-20 md:ml-10'>
 
             <div className='flex flex-row justify-end'>
               <div>
-                <CrossIcon onClick={onClose} className='text-5xl cursor-pointer' />
+                <CrossIcon onClick={onClose} className='text-base md:text-2xl 2xl:text-5xl cursor-pointer' />
               </div>
             </div>
-            <div className='w-11/12'>
-              <h1 className='text-3xl font-semibold'>Request for Taxpayer Identification Number (W-9)</h1>
+            <div className='w-full lg:w-11/12'>
+              <h1 className='text-base md:text-2xl 2xl:text-3xl font-semibold'>Request for Taxpayer Identification Number (W-9)</h1>
             </div>
             <br />
             <div className='p-4 rounded-lg bg-[#edfbe0]'>
-              <h2 className='text-xl font-normal'><span className='text-2xl text-[#FA4616] font-medium'>Purpose</span> To generate a 1099 at end of year</h2>
+              <h2 className='text-sm md:text-lg 2xl:text-xl font-normal'><span className='text-base lg:text-xl 2xl:text-2xl text-[#FA4616] font-medium'>Purpose</span> To generate a 1099 at end of year</h2>
             </div>
-            <div className='flex flex-row w-full justify-between mt-4 p-4 rounded-lg bg-[#dd4c3733] border-[#DD4C37] border-2 items-center mb-2'style={{ boxShadow: '0px 0px 6px 2px #ff200045' }}>
-              <h2 className='text-xl font-semibold'><span className='underline'>Step 1</span> : I want to file as an?</h2>
+            <div className='flex flex-col lg:flex-row w-full justify-between mt-4 p-4 rounded-lg bg-[#dd4c3733] border-[#DD4C37] border-2 items-center mb-2'style={{ boxShadow: '0px 0px 6px 2px #ff200045' }}>
+              <h2 className='text-sm md:text-lg 2xl:text-xl font-semibold'><span className='underline'>Step 1</span> : I want to file as an?</h2>
               <FormControlLabel
                 value="Individual"
                 control={<Radio checked={selectedOption === 'Individual'} onChange={handleOptionChange} />}
                 label="Individual"
+                sx={{
+                  '@media (max-width:600px)': {
+                    '.MuiFormControlLabel-label': {
+                      fontSize: '0.8rem'
+                    },
+                    '.MuiSvgIcon-root': {
+                      width: '16px',
+                      height: '16px'
+                    }
+                  }
+                }}
               />
               <FormControlLabel
                 value="Business"
                 control={<Radio checked={selectedOption === 'Business'} onChange={handleOptionChange} />}
                 label="Business"
+                sx={{
+                  '@media (max-width:600px)': {
+                    '.MuiFormControlLabel-label': {
+                      fontSize: '0.8rem'
+                    },
+                    '.MuiSvgIcon-root': {
+                      width: '16px',
+                      height: '16px'
+                    }
+                  }
+                }}
               />
             </div>
 
@@ -471,9 +491,9 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
             )}
 
             <div className='p-2 rounded-lg'>
-              <h1 className='font-semibold text-lg'>ADDRESS : </h1>
-              <div className='flex flex-row w-full justify-between mt-2'>
-                <div className='p-4 border-2 w-[48%] rounded-lg border-slate-200 bg-[#F9F9FA]'>
+              <h1 className='font-semibold text-base md:text-base 2xl:text-lg'>ADDRESS : </h1>
+              <div className='flex flex-col md:flex-row w-full justify-between mt-2'>
+                <div className='p-2 md:p-4 border-2 w-full md:w-[48%] rounded-lg border-slate-200 bg-[#F9F9FA]  mb-2 md:mb-0'>
                   <input
                     className="w-full outline-none bg-[#F9F9FA]"
                     placeholder="STREET"
@@ -482,7 +502,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
                     required
                   />
                 </div>
-                <div className='p-4 border-2 w-[48%] rounded-lg border-slate-200 bg-[#F9F9FA]'>
+                <div className='p-2 md:p-4 border-2 w-full md:w-[48%] rounded-lg border-slate-200 bg-[#F9F9FA]'>
                   <input
                     className="w-full outline-none bg-[#F9F9FA]"
                     placeholder="CITY"
@@ -493,8 +513,8 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
                 </div>
               </div>
               <br/>
-              <div className='flex flex-row w-full justify-between '>
-                <div className='p-4 border-2 w-[48%] rounded-lg border-slate-200 bg-[#F9F9FA]'>
+              <div className='flex flex-col md:flex-row w-full justify-between '>
+                <div className='p-2 md:p-4 border-2 w-full md:w-[48%] rounded-lg border-slate-200 bg-[#F9F9FA] mb-2 md:mb-0'>
                   <select
                     id='state-select'
                     value={state}
@@ -511,7 +531,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
                   </select>
 
                 </div>
-                <div className='p-4 border-2 w-[48%] rounded-lg border-slate-200 bg-[#F9F9FA]'>
+                <div className='p-2 md:p-4 border-2 w-full md:w-[48%] rounded-lg border-slate-200 bg-[#F9F9FA]'>
                   <input
                     className="w-full outline-none bg-[#F9F9FA]"
                     placeholder="ZIPCODE"
@@ -529,15 +549,22 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
                 className='items-start italic text-[#4A4A4A]'
                 control={<Checkbox checked={validated} onChange={() => setValidated(!validated)} color="default" className='pl-3 pr-1 pt-1' />}
                 label="Under penalties of perjury, I certify that: 1. The number shown on this form is my correct taxpayer identification number (or I am waiting for a number to be issued to me); and 2. I am not subject to backup withholding because: (a) I am exempt from backup withholding, or (b) I have not been notified by the Internal Revenue Service (IRS) that I am subject to backup withholding as a result of a failure to report all interest or dividends, or (c) the IRS has notified me that I am no longer subject to backup withholding; and 3. I am a U.S. citizen or other U.S. person."
+                sx={{
+                  '@media (max-width:600px)': {
+                    '.MuiFormControlLabel-label': {
+                      fontSize: '0.6rem'
+                    }
+                  }
+                }}
               />
             </div>
             <br />
-            <br />
+
             <div className='w-full flex justify-center'>
               <Button
                 type="submit"
                 variant="contained"
-                className={`send-button text-xl rounded-xl text-center  px-16 capitalize py-4 text-base ${
+                className={`send-button text-sm md:text-xl rounded-xl text-center  px-4 md:px-16 capitalize py-2 md:py-4 ${
                   validated
                     ? 'bg-primary-500 text-white'
                     : 'bg-grey text-blackCustom'

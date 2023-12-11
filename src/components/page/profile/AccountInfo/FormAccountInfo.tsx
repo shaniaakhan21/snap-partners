@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction } from 'lib/types/core/next-react'
-import { builderWebsiteFields, TAccountInfoToUpdate } from 'lib/types/user/profile'
+import { TAccountInfoToUpdate } from 'lib/types/user/profile'
 import { IAuth } from 'lib/stores/Auth'
-import { useEffect, useState } from 'react'
 
 interface IFormAccountInfoProps {
   auth: IAuth

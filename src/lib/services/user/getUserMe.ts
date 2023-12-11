@@ -66,6 +66,10 @@ interface IQueryUserMeReturn extends IQueryErrorReturn {
     SSNDocURL?: string
     doc_irs?: string
     doc_b_structure?: string
+    ein?: string
+    businessName?: string
+    business_type?: string
+    b_start_date?: Date
   }
 }
 

@@ -66,7 +66,11 @@ export type TSetAuth = ({
   doc_irs,
   doc_b_structure,
   TINstatus,
-  newSSN
+  newSSN,
+  ein,
+  businessName,
+  business_type,
+  b_start_date
 }: IAuth) => void
 
 interface IAuthAtom {
@@ -111,7 +115,11 @@ interface IAuthAtom {
     doc_irs,
     doc_b_structure,
     TINstatus,
-    newSSN
+    newSSN,
+    ein,
+    businessName,
+    business_type,
+    b_start_date
   }: IAuth) => void
   removeAuth: () => void
 }
@@ -160,7 +168,11 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
     doc_irs,
     doc_b_structure,
     TINstatus,
-    newSSN
+    newSSN,
+    ein,
+    businessName,
+    business_type,
+    b_start_date
   }) => {
     set({
       auth: {
@@ -207,7 +219,11 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
         doc_irs,
         doc_b_structure,
         TINstatus,
-        newSSN
+        newSSN,
+        ein,
+        businessName,
+        business_type,
+        b_start_date
       }
     })
   },

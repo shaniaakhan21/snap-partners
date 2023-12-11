@@ -14,9 +14,9 @@ interface PersonalInfoSectionProps {
 const InFields = ({ socialSecurity, handleSocialSecurityChange, socialSecurityError, dateOfBirth, handleDateOfBirthChange, dateOfBirthError }: PersonalInfoSectionProps) => {
   return (
     <>
-      <div className='flex flex-row w-full justify-between mt-5'>
-        <div className='w-[48%] '>
-          <div className='p-4 border-2 rounded-lg border-slate-200 icon-input bg-[#F9F9FA]'>
+      <div className='flex flex-col md:flex-row w-full justify-between mt-5'>
+        <div className='w-full md:w-[48%] mb-4 md:mb-0'>
+          <div className='p-2 md:p-4 border-2 rounded-lg border-slate-200 icon-input bg-[#F9F9FA]'>
             <input
               className="w-full outline-none"
               placeholder="Social Security"
@@ -28,7 +28,7 @@ const InFields = ({ socialSecurity, handleSocialSecurityChange, socialSecurityEr
           </div>
           {socialSecurityError && <div className="ml-1 text-red-500">{socialSecurityError}</div>}
         </div>
-        <div className='w-[48%] p-0 m-0 border-0 rounded-lg border-slate-200 outline-none'>
+        <div className='w-full md:w-[48%] p-0 m-0 border-0 rounded-lg border-slate-200 outline-none'>
           <div className="calendar-input outline-none">
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker label="Date of Birth" value={dateOfBirth}

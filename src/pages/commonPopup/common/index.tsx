@@ -82,17 +82,17 @@ const CommonPopup = ({ open, onClose, image, title, docURL, description, auth, s
   return (
     <Modal open={open} onClose={onClose} className='overflow-y-scroll'>
       <div className='w-full flex justify-center outline-none'>
-        <div className='bg-white rounded-xl p-4 px-10 pb-10 w-6/12 my-20 ml-10'>
+        <div className='bg-white rounded-xl p-2 md:p-4 md:px-10 md:pb-10 w-9/12 md:w-6/12 my-8 md:my-20 md:ml-10'>
           <div className='flex flex-row justify-end'>
             <div>
-              <CrossIcon onClick={onClose} className='text-5xl cursor-pointer' />
+              <CrossIcon onClick={onClose} className='text-base md:text-2xl 2xl:text-5xl cursor-pointer' />
             </div>
           </div>
           <div className='flex flex-col justify-center text-center'>
             <div className='flex w-full justify-center m-1'>
               <img src={image} alt="Popup Image" id={svgId} />
             </div>
-            <h3 className='text-2xl font-semibold mt-2'>{title}</h3>
+            <h3 className='text-xl md:text-2xl font-semibold mt-2'>{title}</h3>
             <h5 className='font-semibold text-[#878787]'>{description}</h5>
           </div>
           {showDocumentUpload && (
@@ -107,7 +107,7 @@ const CommonPopup = ({ open, onClose, image, title, docURL, description, auth, s
               />
               <br/>
               <label htmlFor="document-upload-input">
-                <div className='send-button text-xl rounded-xl text-center px-16 capitalize py-4 text-base border-2 border-gray cursor-pointer my-4 shadow-md'>
+                <div className='send-button text-base md:text-xl rounded-xl text-center px-16 capitalize py-4 text-base border-2 border-gray cursor-pointer my-4 shadow-md'>
                   <CloudUpload /> Upload Document
                 </div>
               </label>
@@ -118,7 +118,7 @@ const CommonPopup = ({ open, onClose, image, title, docURL, description, auth, s
             <Button
               type="submit"
               variant="contained"
-              className='send-button text-xl rounded-xl text-center px-8 capitalize py-4 text-base bg-primary-500'
+              className='send-button text-sm md:text-xl rounded-xl text-center  px-4 md:px-16 capitalize py-2 md:py-4  bg-primary-500'
               onClick={(event: MouseEvent<HTMLButtonElement>) => handleButtonClick(event as any)}
             ><Link href='/' >
                 {buttonText}

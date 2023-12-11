@@ -82,6 +82,10 @@ const HomePage: Page = () => {
           SSNDocURL: data.SSNDocURL,
           doc_irs: data.doc_irs,
           doc_b_structure: data.doc_b_structure,
+          ein: data.ein,
+          businessName: data.businessName,
+          business_type: data.business_type,
+          b_start_date: data.b_start_date,
           ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
         })
         router.push('/overview')

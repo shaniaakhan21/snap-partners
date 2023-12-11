@@ -80,6 +80,10 @@ export const AuthRecover = ({ skipRedirect, redirectTo }: AuthRecoverProps) => {
         SSNDocURL: data.SSNDocURL,
         doc_irs: data.doc_irs,
         doc_b_structure: data.doc_b_structure,
+        ein: data.ein,
+        businessName: data.businessName,
+        business_type: data.business_type,
+        b_start_date: data.b_start_date,
         ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
       })
     })()
@@ -116,7 +120,11 @@ export const AuthRecover = ({ skipRedirect, redirectTo }: AuthRecoverProps) => {
         TINstatus,
         SSNDocURL,
         doc_irs,
-        doc_b_structure
+        doc_b_structure,
+        ein,
+        businessName,
+        business_type,
+        b_start_date
       } = auth
 
       GTMTrack.userInfo({
@@ -149,7 +157,11 @@ export const AuthRecover = ({ skipRedirect, redirectTo }: AuthRecoverProps) => {
         TINstatus,
         SSNDocURL,
         doc_irs,
-        doc_b_structure
+        doc_b_structure,
+        ein,
+        businessName,
+        business_type,
+        b_start_date
       })
 
       if (redirectTo) {

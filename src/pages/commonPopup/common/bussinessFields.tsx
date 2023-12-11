@@ -22,9 +22,9 @@ interface BussinessInfoSectionProps {
 const BussFields = ({ ein, handleEINChange, einError, dateOfStart, handleDateOfStartChange, handleFirstNameChange, handleLastNameChange, handleBusinessNameChange, businessName, firstname, lastname, dateOfStartError, businessType, handleTypeChange }: BussinessInfoSectionProps) => {
   return (
     <>
-      <div className='flex flex-row w-full justify-between mt-5'>
-        <div className='w-[48%] '>
-          <div className='p-4 border-2 rounded-lg border-slate-200 bg-[#F9F9FA]'>
+      <div className='flex flex-col md:flex-row w-full justify-between mt-5'>
+        <div className='w-full md:w-[48%]'>
+          <div className='p-2 md:p-4 border-2 rounded-lg border-slate-200 bg-[#F9F9FA] mb-2 md:mb-0'>
             <input
               className="w-full outline-none bg-[#F9F9FA]"
               placeholder="Business Name"
@@ -35,7 +35,7 @@ const BussFields = ({ ein, handleEINChange, einError, dateOfStart, handleDateOfS
             />
           </div>
         </div>
-        <div className='p-4 border-2 w-[48%] rounded-lg border-slate-200 bg-[#F9F9FA]'>
+        <div className='p-2 md:p-4 border-2 w-full md:w-[48%] rounded-lg border-slate-200 bg-[#F9F9FA]'>
           <select
             id='state-select'
             value={businessType}
@@ -52,9 +52,9 @@ const BussFields = ({ ein, handleEINChange, einError, dateOfStart, handleDateOfS
           </select>
         </div>
       </div>
-      <div className='flex flex-row w-full justify-between mt-5'>
-        <div className='w-[48%] '>
-          <div className='p-4 border-2 rounded-lg border-slate-200 icon-input bg-[#F9F9FA]'>
+      <div className='flex flex-col md:flex-row w-full justify-between mt-5'>
+        <div className='w-full md:w-[48%] '>
+          <div className='p-2 md:p-4 border-2 rounded-lg border-slate-200 icon-input bg-[#F9F9FA]  mb-2 md:mb-0'>
             <input
               className="w-full outline-none"
               placeholder="EIN"
@@ -66,7 +66,7 @@ const BussFields = ({ ein, handleEINChange, einError, dateOfStart, handleDateOfS
           </div>
           {einError && <div className="ml-1 text-red-500">{einError}</div>}
         </div>
-        <div className='w-[48%] p-0 m-0 border-0 rounded-lg border-slate-200 outline-none'>
+        <div className='w-full md:w-[48%] p-0 m-0 border-0 rounded-lg border-slate-200 outline-none'>
           <div className="calendar-input outline-none">
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker label="Start of business" value={dateOfStart}
@@ -76,9 +76,9 @@ const BussFields = ({ ein, handleEINChange, einError, dateOfStart, handleDateOfS
           </div>
         </div>
       </div>
-      <div className='flex flex-row w-full justify-between mt-5'>
-        <div className='w-[48%] '>
-          <div className='p-4 border-2 rounded-lg border-slate-200 bg-[#F9F9FA]'>
+      <div className='flex flex-col md:flex-row w-full justify-between mt-5'>
+        <div className='w-full md:w-[48%]  mb-2 md:mb-0'>
+          <div className='p-2 md:p-4 border-2 rounded-lg border-slate-200 bg-[#F9F9FA]'>
             <input
               className="w-full outline-none bg-[#F9F9FA]"
               placeholder="Owner First Name"
@@ -89,8 +89,8 @@ const BussFields = ({ ein, handleEINChange, einError, dateOfStart, handleDateOfS
             />
           </div>
         </div>
-        <div className='w-[48%] '>
-          <div className='p-4 border-2 rounded-lg border-slate-200 bg-[#F9F9FA]'>
+        <div className='w-full md:w-[48%] '>
+          <div className='p-2 md:p-4 border-2 rounded-lg border-slate-200 bg-[#F9F9FA]'>
             <input
               className="w-full outline-none bg-[#F9F9FA]"
               placeholder="Owner Last Name"

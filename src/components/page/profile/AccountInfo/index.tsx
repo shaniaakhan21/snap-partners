@@ -15,6 +15,8 @@ import { Button } from 'components/common/Button'
 import { useState } from 'react'
 import SignedCert from 'pages/wellness/components/SignedCert'
 import { GrandfatherRankHr } from 'components/common/overview/GrandfatherRankHr'
+import { FormControlLabel, FormGroup, Switch } from '@mui/material'
+import { BusinessFields } from './BusinessFields'
 
 interface IAccountInfoProps {
   auth: IAuth
@@ -36,6 +38,11 @@ export const AccountInfo = ({ auth, setAuth, removeAuth, setNewWindow, setTypeUp
   const isIntegrousCustomer = (_auth.roles.integrousCustomer && !_auth.roles.integrousAssociate)
   const isCertified = auth.isCertified
   const [signedCertModalOpen, setSignedCertModalOpen] = useState(false)
+  const [isSwitchOn, setIsSwitchOn] = useState(false)
+
+  const handleSwitchChange = () => {
+    setIsSwitchOn((prev) => !prev)
+  }
   const openSignedCertModal = () => {
     setSignedCertModalOpen(true)
   }
@@ -106,11 +113,32 @@ export const AccountInfo = ({ auth, setAuth, removeAuth, setNewWindow, setTypeUp
 
           )}
         </div>
+        {auth.TINstatus === 'business' && (
+          <div className='flex flex-col'>
+            <h1 className='text-2xl mr-6 mb-2'>Business Info</h1>
+            <div className='flex justify-center flex-row-reverse rounded-full p-1 bg-white border-2 border-white shadow-md'>
+
+              <FormGroup>
+                <FormControlLabel
+                  control={<Switch checked={isSwitchOn} onChange={handleSwitchChange} color="warning"/>}
+                  label={isSwitchOn ? 'Hide' : 'Show'}
+                  className='font-bold uppercase'
+                />
+              </FormGroup>
+            </div>
+
+          </div>
+
+        )}
 
       </div>
 
       <GrandfatherRankHr/>
-
+      {isSwitchOn && (
+        <div className='mt-11'>
+          <BusinessFields auth={auth} setTypeUpdate={setTypeUpdate}/>
+        </div>
+      )}
       <div className='mt-11'>
         <FormAccountInfo
           auth={auth}
