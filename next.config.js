@@ -9,7 +9,7 @@ const nextConfig = {
         {
           source: '/api/:path*',
           // destination: `http://localhost:8080/:path*`
-          //  destination: 'https://snap459.snap.devopsteam.info/api/:path*'
+          // destination: 'https://snapdeliveredteam.com/api/:path*'
           destination: 'https://snap1099.snap.devopsteam.info/api/:path*'
         }
       ]

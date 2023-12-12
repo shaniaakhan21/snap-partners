@@ -1,11 +1,13 @@
 /* eslint-disable no-use-before-define */
 import React, { useEffect, useState } from 'react'
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/router'
 import ReportsSubMenu from './1099ReportsSubMenu'
+import { useAuthStore } from 'lib/stores'
 
 function AdminToolMainMenu () {
   const [subMenu, setSubMenu] = useState('none')
   const [menuOpen, setMenuOpen] = useState(true)
+  const auth = useAuthStore()
   const menuData = [
     {
       icon: '',
@@ -18,7 +20,7 @@ function AdminToolMainMenu () {
       submenu: 'reports1099'
     }
   ]
-  const router = useRouter();
+  const router = useRouter()
   useEffect(() => {
     router.events.on('routeChangeStart', closeMenu)
     return () => {
@@ -32,11 +34,15 @@ function AdminToolMainMenu () {
 
   const handleMenuClick = (menuItem) => {
     if (router) {
-      setSubMenu(subMenu === menuItem.submenu ? 'none' : menuItem.submenu)
-      router.push(menuItem.page)
+      if (menuItem.page !== undefined) {
+        router.push(menuItem.page)
+      } else if (menuItem.submenu) {
+        setSubMenu(subMenu === menuItem.submenu ? 'none' : menuItem.submenu)
+      } else {
+        console.warn('No page or submenu defined for this menu item')
+      }
     }
   }
-
   return (
     <>
       {menuOpen && (
