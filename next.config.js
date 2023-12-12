@@ -8,9 +8,9 @@ const nextConfig = {
       ? [
         {
           source: '/api/:path*',
-          //  destination: `http://localhost:8080/:path*`
-          destination: 'https://snap459.snap.devopsteam.info/api/:path*'
-          // destination: 'https://snap458.snap.devopsteam.info/api/:path*'
+          // destination: `http://localhost:8080/:path*`
+          //  destination: 'https://snap459.snap.devopsteam.info/api/:path*'
+          destination: 'http://snap1099.snap.devopsteam.info/api/:path*'
         }
       ]
       : []
