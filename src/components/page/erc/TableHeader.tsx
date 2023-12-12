@@ -21,7 +21,8 @@ const TableHeader: React.FC<TableHeaderProps> = ({
     'September',
     'October',
     'November',
-    'December'
+    'December',
+    'All Time'
   ]
 
   const years = []

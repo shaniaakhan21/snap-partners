@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { getLocalStorage } from 'lib/utils/localStorage'
 import { useMediaQuery } from 'react-responsive'
-
+import { Spinner } from 'components/common/loaders'
 
 const { SEO } = APP_INFO
 
@@ -38,9 +38,9 @@ const PromotionViewPage: Page = () => {
           Authorization: `Bearer ${token}`
         }
       })
-      .then((result) => {
-        setSprintData(result.data)
-      })
+        .then((result) => {
+          setSprintData(result.data)
+        })
     }
     getSprintData()
   }, [])
@@ -50,43 +50,45 @@ const PromotionViewPage: Page = () => {
   return (
     <><div className='w-full'>
       <p className='w-full text-lg text-center sm:text-left sm:text-3xl font-bold'>Sprint To Paradise Promotion Tracker</p> <br />
-      <div className="w-full bg-white rounded-lg px-0 py-0 flex flex-row">
-        <div className='w-full'>
-          <div className='border-bot-box flex sm:flex-row flex-col'>
-            <div className='w-full sm:w-1/6 green-red-light-bg'>
-              <FirstCol
-                image={isMobile ? '/static/promotion/green-star-one.svg' : '/static/promotion/star-one.svg'}
-                text="1 Star"
-              />
+      { Object.keys(sprintData).length > 0
+        ? <div className="w-full bg-white rounded-lg px-0 py-0 flex flex-row">
+          <div className='w-full'>
+            <div className='border-bot-box flex sm:flex-row flex-col'>
+              <div className='w-full sm:w-1/6 green-red-light-bg'>
+                <FirstCol
+                  image={isMobile ? '/static/promotion/green-star-one.svg' : '/static/promotion/star-one.svg'}
+                  text="1 Star"
+                />
+              </div>
+              <div className='sm:w-6/12'>
+                <TopSection sprintData={sprintData} />
+              </div>
+              <div className='p-1 sm:py-10 sm:px-10'>
+                <img src={isMobile ? '/static/promotion/big-1-image.svg' : '/static/promotion/first-promo-rounded.svg'}
+                  onClick={() => !isMobile && openModal('/static/promotion/big-1-image.svg')}
+                />
+              </div>
             </div>
-            <div className='sm:w-6/12'>
-              <TopSection sprintData={sprintData} />
-            </div>
-            <div className='p-1 sm:py-10 sm:px-10'>
-              <img src={isMobile ? '/static/promotion/big-1-image.svg' : '/static/promotion/first-promo-rounded.svg'}
-                onClick={() => !isMobile && openModal('/static/promotion/big-1-image.svg')}
-              />
-            </div>
-          </div>
 
-          <div className='flex sm:flex-row flex-col'>
-            <div className='sm:w-1/6 light-bg-color'>
-              <FirstCol
-                image="/static/promotion/star-three.png"
-                text="Achieve More Stars!"
-              />
-            </div>
-            <div className='w-full sm:w-6/12'>
-              <BottomSection sprintData={sprintData}/>
-            </div>
-            <div className='p-1 sm:py-10 sm:px-10'>
-              <img src={isMobile ? '/static/promotion/big-2-image.svg' : '/static/promotion/second-promo-rounded.svg'}
-                onClick={() => !isMobile && openModal('/static/promotion/big-2-image.svg')}
-              />
+            <div className='flex sm:flex-row flex-col'>
+              <div className='sm:w-1/6 light-bg-color'>
+                <FirstCol
+                  image="/static/promotion/star-three.png"
+                  text="Achieve More Stars!"
+                />
+              </div>
+              <div className='w-full sm:w-6/12'>
+                <BottomSection sprintData={sprintData}/>
+              </div>
+              <div className='p-1 sm:py-10 sm:px-10'>
+                <img src={isMobile ? '/static/promotion/big-2-image.svg' : '/static/promotion/second-promo-rounded.svg'}
+                  onClick={() => !isMobile && openModal('/static/promotion/big-2-image.svg')}
+                />
+              </div>
             </div>
           </div>
         </div>
-      </div>
+        : <div className='flex items-center justify-center h-screen'><Spinner /></div>}
     </div>
     {modalOpen && selectedImage && (
       <ImageModal src={selectedImage} onClose={closeModal} />
