@@ -13,29 +13,28 @@ export const LoginForm = () => {
 
   return (
     <div>
-      <span className='hidden sm:block font-bold text-4xl text-[#18203F]'>Login</span>
-      <p className='text-gray-500'>Welcome! Login to continue.</p>
-      <br></br>
-
-      <div className='w-full flex justify-between items-center mt-3 text-[#18203F]'>
+      <span className='hidden sm:block font-extrabold text-4xl mb-2 text-[#18203F] mt-4'>Sign In</span>
+      <p className='font-medium text-gray-600'>Welcome! Login to continue.</p>
+      
+      <div className='w-full flex justify-between items-center mt-3 text-[#18203F] border-2 rounded-3xl overflow-hidden mt-6 font-semibold text-primary-500'>
         <button
           type='button'
           onClick={() => { setTypeInput('phone') }}
-          className={`${typeInput === 'phone' && 'border-primary-500 border-b-2 text-primary-500'} px-4 sm:px-10 py-1 font-semibold select-none`}
+          className={`${typeInput === 'phone' && 'bg-primary-500 text-white'} px-2 py-3 select-none w-full`}
         >
         Phone
         </button>
         <button
           type='button'
           onClick={() => { setTypeInput('email') }}
-          className={`${typeInput === 'email' && 'border-primary-500 border-b-2 text-primary-500'} px-4 sm:px-10 py-1 font-semibold select-none`}
+          className={`${typeInput === 'email' && 'bg-primary-500 text-white'} px-2 py-3 select-none w-full`}
         >
         Email
         </button>
         <button
           type='button'
           onClick={() => { setTypeInput('username') }}
-          className={`${typeInput === 'username' && 'border-primary-500 border-b-2 text-primary-500'} px-4 sm:px-10 py-1 font-semibold select-none`}
+          className={`${typeInput === 'username' && 'bg-primary-500 text-white'} px-2 py-3 select-none w-full`}
         >
         Username
         </button>
