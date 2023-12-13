@@ -62,6 +62,7 @@ const Tickets = () => {
     }
 
     window.addEventListener('resize', handleResize)
+    getZendeskData()
 
     return () => {
       window.removeEventListener('resize', handleResize)
