@@ -13,7 +13,7 @@ export const LoginForm = () => {
 
   return (
     <div>
-      <span className='hidden sm:block font-extrabold text-4xl mb-2 text-[#18203F] mt-4'>Sign In</span>
+      <span className='sm:block font-bold text-3xl md:font-extrabold md:text-4xl mb-2 text-[#18203F] mt-4'>Sign In</span>
       <p className='font-medium text-gray-600'>Welcome! Login to continue.</p>
       
       <div className='w-full flex justify-between items-center mt-3 text-[#18203F] border-2 rounded-3xl overflow-hidden mt-6 font-semibold text-primary-500'>

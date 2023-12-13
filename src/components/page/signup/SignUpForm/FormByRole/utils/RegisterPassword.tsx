@@ -15,7 +15,7 @@ export const RegisterPassword = ({ register, errors, rulesPasswordForm, rulesCon
   return (
     <>
       <div className='w-full'>
-        <label htmlFor='password' className='font-bold text-gray-700 uppercase text-sm'>
+        <label htmlFor='password' className='font-semibold text-gray-600 text-md'>
           Password <span className='text-red-500'>*</span>
         </label>
         {errors.password && <p className='text-sm text-red-400'>{errors.password.message}</p>}
@@ -27,20 +27,20 @@ export const RegisterPassword = ({ register, errors, rulesPasswordForm, rulesCon
             name='password'
             type={`${showPassword ? 'text' : 'password'}`}
             autoComplete='current-password'
-            className='w-full pl-3 pr-14 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
+            className='w-full pl-3 pr-14 py-1 my-2 text-base text-black border-2 border-gray-200 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-10 transition-colors duration-200 ease-in-out'
             placeholder='Enter Password'
           />
           <div
             onClick={() => setShowPassword((prevState) => !prevState)}
-            className='cursor-pointer absolute right-4 mr-0.5 top-3.5 mt-0.5'
+            className='cursor-pointer absolute right-4 mr-0.5 top-3.5 mt-1.5'
           >
             {showPassword ? <EyeHiddenIcon /> : <EyeVisibleIcon />}
           </div>
         </div>
       </div>
 
-      <div className='w-full'>
-        <label htmlFor='confirmPassword' className='font-bold text-gray-700 uppercase text-sm'>
+      <div className='w-full mt-3'>
+        <label htmlFor='confirmPassword' className='font-semibold text-gray-600 text-md'>
           Confirm Password <span className='text-red-500'>*</span>
         </label>
         {errors.confirmPassword && <p className='text-sm text-red-400'>{errors.confirmPassword.message}</p>}
@@ -52,12 +52,12 @@ export const RegisterPassword = ({ register, errors, rulesPasswordForm, rulesCon
             name='confirmPassword'
             type={`${showPassword ? 'text' : 'password'}`}
             autoComplete='current-password'
-            className='w-full pl-3 pr-14 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
+            className='w-full pl-3 pr-14 py-1 my-2 text-base text-black border-2 border-gray-200 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-10 transition-colors duration-200 ease-in-out'
             placeholder='Confirm Password'
           />
           <div
             onClick={() => setShowPassword((prevState) => !prevState)}
-            className='cursor-pointer absolute right-4 mr-0.5 top-3.5 mt-0.5'
+            className='cursor-pointer absolute right-4 mr-0.5 top-3.5 mt-1.5'
           >
             {showPassword ? <EyeHiddenIcon /> : <EyeVisibleIcon />}
           </div>

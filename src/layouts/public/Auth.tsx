@@ -112,12 +112,12 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
     <>
       <div className='m-0 w-full p-4 sm:p-6 lg:p-8 max-w-full md:mx-auto md:w-11/12'>
         <div className='flex flex-col h-full md:flex-row justify-between items-center md:items-start'>
-          <section className='sticky top-0 left-0 h-screen hidden md:flex flex-col justify-start w-1/2 md:min-h-screen text-white'>
+          <section className='sticky top-0 left-0 h-screen hidden xl:flex flex-col justify-start w-1/2 md:min-h-screen text-white'>
             {/* <img src='/static/authBg.svg' className='w-full h-screen object-fit absolute bottom-0 right-0 z-0' /> */}
-            <img src='/static/authBg.svg' className='w-full h-screen object-fit absolute bottom-0 right-0 z-0' />
+            <img src='/static/authBg.svg' className='w-full h-screen absolute bottom-0 top-0 mb-6 right-0 z-0' />
 
-            <div className='absolute w-full h-full top-0 right-0 z-10 pl-4 pb-8 md:pl-24 pr-12 mt-20'>
-              <div><img src='/static/snap_partners_logo.png' className='w-36' /></div>
+            <div className='absolute w-full top-0 right-0 z-10 pl-4 pb-8 md:pl-24 pr-12 mt-32 md:mt-24'>
+              <div><img src='/static/snap_partners_logo.png' className='lg:w-28 w-36' /></div>
               {(isLoginIntegrous || (isSignupIntegrous && (ROLES.integrousCustomer || ROLES.integrousAssociate)))
                 ? displayIntegrousContent
                 : displayContent}
@@ -132,8 +132,8 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
             <div className='absolute w-full text-center bottom-5 text-sm text-gray-500'>© 2023 Snap Delivered. All rights reserved.</div>
           </section>
 
-          <section className='w-full md:w-1/2 h-full md:min-h-screen flex justify-center items-center'>
-            <div className='max-w-xl mx-auto w-full bg-white rounded-3xl p-12 shadow-xl relative my-16'>
+          <section className='w-full mx-auto xl:mx-0 md:w-full lg:w-1/2 h-full md:min-h-screen flex justify-center items-center'>
+            <div className='max-w-xl pt-16 mx-auto w-full bg-white rounded-3xl p-4 sm:p-6 md:p-8 lg:p-12 shadow-xl relative my-16'>
               
               <div className='absolute -top-10 -mt-10 left-0 w-full'>
                 {role !== ROLES.IBO && <img src='/images/logo-orange.png' className='mx-auto' />}

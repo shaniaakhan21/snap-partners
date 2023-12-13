@@ -19,7 +19,7 @@ interface IInputFormProps {
 export const InputForm = ({ id, name, label, autoComplete, type, classes, placeholder, defaultValue, register, registerId, errors, rulesForm }: IInputFormProps) => {
   return (
     <div className='mb-2'>
-      <label htmlFor={id} className='font-semibold text-gray-600 text-md'>{label}</label>
+      <label htmlFor={id} className='font-semibold text-gray-600 capitalize text-md'>{label}</label>
       {errors && <p className='text-sm text-red-400'>{errors.message}</p>}
 
       <input
