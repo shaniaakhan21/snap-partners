@@ -55,6 +55,7 @@ const rows = [
 
 const Tickets = () => {
   const [windowWidth, setWindowWidth] = useState(0)
+  const [tickets, setTickets] = useState([])
 
   useEffect(() => {
     const handleResize = () => {
@@ -62,11 +63,13 @@ const Tickets = () => {
     }
 
     window.addEventListener('resize', handleResize)
-    getZendeskData()
 
     return () => {
       window.removeEventListener('resize', handleResize)
     }
+  }, [])
+  useEffect(() => {
+    getZendeskData()
   }, [])
 
   const columns = [
@@ -80,7 +83,7 @@ const Tickets = () => {
           padding: '3% 10%',
           color: 'white',
           fontSize: '1.2em',
-          backgroundColor: value === 'open' ? '#FFB7AD' : value === 'closed' ? '#A2E85D' : 'black'
+          backgroundColor: value === 'open' ? '#FFB7AD' : value === 'solved' ? '#A2E85D' : 'black'
         }
 
         return <div style={cellStyle}>{`${value}`}</div>
@@ -125,10 +128,10 @@ const Tickets = () => {
   ]
 
   const zendeskAPI = axios.create({
-    baseURL: 'https://dyrani.zendesk.com/api/v2', // Replace with your Zendesk subdomain
+    baseURL: 'https://amirco7782.zendesk.com/api/v2', // Replace with your Zendesk subdomain
     auth: {
-      username: 'amiralirang98@gmail.com', // Replace with your API token or email/password
-      password: 'Amiralirang@123'
+      username: 'next100x98@gmail.com', // Replace with your API token or email/password
+      password: 'Amirali@123'
     }
   })
 
@@ -136,9 +139,24 @@ const Tickets = () => {
 
   // Example: Fetch all tickets
   const getZendeskData = () => {
-    zendeskAPI.get('/tickets.json')
-      .then((response) => {
+    axios.get('/api/zendesk/ticket')
+      .then(async (response) => {
         console.log('Tickets:', response.data)
+        setTickets(await Promise.all(response.data.response.tickets.map(async (ticket) => {
+          const requesterData = await axios.get('/api/zendesk/requester', { params: { requester_id: ticket.requester_id } })
+          const requesterName = await requesterData.data.response.user.name
+          return {
+            clientName: requesterName,
+            status: ticket.status,
+            subject: ticket.raw_subject,
+            dayCreated: ticket.created_at,
+            lastUpdated: ticket.updated_at,
+            lastResponse: 'Anndre M',
+            comments: ticket.comment_count,
+            id: ticket.id
+          }
+        }))
+      )
       })
       .catch((error) => {
         console.error('Error fetching tickets:', error)
@@ -164,6 +182,7 @@ const Tickets = () => {
       ]
     }
   }
+  console.log('all tickets are', tickets)
   return (
     <div>
       <div className='flex flex-row justify-between'>
@@ -187,7 +206,7 @@ const Tickets = () => {
         <p className='text-[#404040] font-open-sans text-xl font-semibold leading-6 mt-10'>Friday, June 21, 2019</p>
       </div>
       <div className='mt-10'>
-        <StyledDataGrid rows={rows}
+        <StyledDataGrid rows={tickets && tickets}
           columns={columns}
           sx={{
             minHeight: '214px',
