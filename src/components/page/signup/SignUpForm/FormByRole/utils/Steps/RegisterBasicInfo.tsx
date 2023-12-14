@@ -373,7 +373,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
               register={register}
               rulesForm={registerRulesConfig.ssn}
               isRequired={false}
-              helpText='Optional field today but REQUIRED to receive commissions beyond $600'
+              helpText='You are not required to enter your social security number today. Please note that Snap Partners will require your social security number once you earn a total of $600 in commissions'
               style = {ssnHelptextDesign}
             />
           )}
