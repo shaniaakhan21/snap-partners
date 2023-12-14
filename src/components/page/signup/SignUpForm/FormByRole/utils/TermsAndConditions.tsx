@@ -10,7 +10,7 @@ interface IInputFormProps {
 
 export const TermsAndConditions = ({ register, errors, rulesForm }: IInputFormProps) => {
   return (
-    <section className='space-y-2 mt-4 text-gray-800'>
+    <section className='space-y-2 font-semibold text-gray-600 text-sm sm:text-base'>
       <div className='flex items-center justify-start'>
         <input
           {...register('termsAndConditions', rulesForm)}
@@ -21,10 +21,10 @@ export const TermsAndConditions = ({ register, errors, rulesForm }: IInputFormPr
           className='accent-primary-500'
         />
 
-        <label htmlFor='termsAndConditions' className='ml-2 text-xs'>
+        <label htmlFor='termsAndConditions' className='ml-2 text-md'>
         Agree to {' '}
           <Link href='/legal/terms-of-use'>
-            <a className='text-textAcent-500 font-semibold focus:underline'>Terms and Conditions</a>
+            <a className='text-primary-500 font-semibold underline decoration-1 text-left text-sm sm:text-base'>Terms and Conditions</a>
           </Link>
         </label>
       </div>
