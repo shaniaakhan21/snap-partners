@@ -16,9 +16,9 @@ export const Navbar = () => {
   // const { toggleGenealogySearch } = useSearchModalStore()
   console.log('auth level is', auth)
   return (
-    <header className='dashboardLayout__navbar h-16'>
-      <div className='w-full h-full px-6 py-3 flex justify-between items-center max-w-7xl mx-auto'>
-        <section className='w-1/3 h-full flex justify-between items-center gap-x-5'>
+    <header className='dashboardLayout__navbar h-16 mx-14 my-4  border-b-2 border-[#D4DFE9]'>
+      <div className='w-full h-full py-3 flex justify-between items-center max-w-full'>
+        <section className='w-20 h-full flex justify-between items-center gap-x-0'>
           <div className='lg:hidden cursor-pointer' onClick={toggleDrawer}>
             <MoarOptionsVerticalIcon />
           </div>
@@ -31,7 +31,7 @@ export const Navbar = () => {
               <ArrowLeftIcon classes='mt-1 w-7 h-7' isHovered />
             </button>
 
-            <span className='text-2xl font-bold text-gray-700 whitespace-nowrap'>{title}</span>
+            <span className='text-2xl font-bold text-[#000000] whitespace-nowrap'>{title}</span>
           </div>
 
           {/* <div className='w-full flex justify-start items-center'>
@@ -52,14 +52,14 @@ export const Navbar = () => {
             </button>
           </div> */}
         </section>
-        <section className='w-full h-full flex lg:flex-row flex-col justify-end lg:items-center gap-x-5 items-start mt-2 lg:mt-0'>
+        <section className='w-full h-full flex lg:flex-row flex-col justify-end lg:items-center gap-x-3 items-start mt-2 lg:mt-0'>
           <a target="_blank" href={`https://mysnappartners.com/login/token=${auth.accessToken}`}>
-            <Button classes='text-10 lg:text-sm bg-primary-500 py-1 lg:py-2 px-1 lg:px-4'>
+            <Button classes='text-10 lg:text-sm border-[#C9DAE8] border-2 bg-new py-1 lg:py-2 px-1 lg:px-8 text-black shadow-md'>
               Your Builder Website
             </Button>
           </a>
           <a target="_blank" href={`/wellness?referralCode=${auth.referralCode}`}>
-            <Button classes='text-10 lg:text-sm bg-primary-500 py-1 lg:py-2 px-1 lg:px-4'>
+            <Button classes='text-10 lg:text-sm border-[#C9DAE8] border-2 bg-new py-1 lg:py-2 px-1 lg:px-8 text-black shadow-md'>
               Your Snap Wellness Store
             </Button>
           </a>

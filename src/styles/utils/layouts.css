@@ -1,3 +1,7 @@
+body{
+  background-color: #EDF4FA!important;
+}
+
 .dashboardLayout {
   @apply grid w-full h-full min-h-screen fixed;
   grid-template-columns: 1fr;
@@ -8,24 +12,28 @@
 }
 
 .dashboardLayout__navbar {
-  @apply w-full bg-white z-30;
+  @apply w-[94%] bg-[#EDF4FA] z-30;
   grid-area: navbar;
 }
 
 .dashboardLayout__drawer {
-  @apply sticky top-0 left-0 h-full bg-primary-500 z-20 w-[260px] lg:w-full overflow-y-auto hidden lg:block lg:z-40;
+  @apply sticky top-0 left-0 h-full bg-white z-20 w-[260px] lg:w-full overflow-y-auto hidden lg:block lg:z-40;
   grid-area: drawer;
+}
+
+.z-index-max{
+  z-index: 10000!important;
 }
 
 .dashboardLayout__content {
   @apply font-body overflow-y-auto;
   grid-area: content;
-  background-color: #ececec;
+  background-color: #EDF4FA;
 }
 
 @media screen(lg) {
   .dashboardLayout {
-    grid-template-columns: 260px 1fr;
+    grid-template-columns: 280px 1fr;
     grid-template-rows: 64px 1fr;
     grid-template-areas:
       "drawer navbar"
@@ -172,4 +180,12 @@
 
 .oc-view{
   cursor: pointer;
+}
+
+.text-black{
+  color: black!important;
+}
+
+.bg-new{
+  background-color: #E1EBF3!important;
 }

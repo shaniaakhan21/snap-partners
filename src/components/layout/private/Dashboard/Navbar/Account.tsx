@@ -33,11 +33,11 @@ export const Account = ({ email, name, phone, photoUrl, signOut, rank, roles, le
   const isIntegrous = (_auth.roles.integrousAssociate || _auth.roles.integrousCustomer)
 
   return (
-    <section className='w-1/3 lg:w-full h-full flex justify-end items-center sm:gap-x-5'>
+    <section className='w-1/3 lg:w-96 h-full flex justify-end items-center sm:gap-x-5'>
       {mapping[level] >= 500
-        ? <div className='admin-tools-container'>
+        ? <div className='admin-tools-container rounded-2xl border-2 border-[#E74426] px-4 flex flex-row justify-between bg-white items-center shadow-md'>
           <div>
-            <span className='text-l font-bold text-gray-700 whitespace-nowrap hidden sm:block cursor-pointer'><a onClick={() => { setAdminTools(!adminTools) }} >Admin Tools</a></span>
+            <span className='text-l font-semibold text-[#E74426] whitespace-nowrap hidden sm:block cursor-pointer py-1'><a onClick={() => { setAdminTools(!adminTools) }} >Admin Tools</a></span>
           </div>
           <ArrowDownIcon classes='cursor-pointer' onClick={() => { setAdminTools(!adminTools) }} />
           {
@@ -62,17 +62,17 @@ export const Account = ({ email, name, phone, photoUrl, signOut, rank, roles, le
         )}
       </div> */}
 
-      <div className='flex justify-start items-center relative select-none'>
-        <div className='relative'>
+      <div className='flex justify-start items-center relative select-none flex-row'>
+        <div className='relative flex flex-row items-center  gap-x-2'>
           {photoUrl
             ? (
               <img
                 src={photoUrl}
-                className='ml-3 w-10 h-10 rounded-3xl'
+                className='ml-3 w-10 h-10 rounded-3xl shadow-md'
               />
             )
             : (
-              <AccountDefaultImage rank={rank} size={40} />
+              <AccountDefaultImage rank={rank} size={42} />
             )}
           {name}
 
