@@ -1,6 +1,10 @@
 import { Ranks } from 'lib/constants/variables'
 import { Rank } from 'lib/types/overview'
-import { CheckMarkGreenIcon } from '../icons'
+import { IBORankIcon } from '../icons/IBORankIcon'
+import { Manager } from '../icons/Manager'
+import { Supervisor } from '../icons/Supervisor'
+import { Director } from '../icons/Director'
+import { Executive } from '../icons/Executive'
 
 interface RankStepsProps {
     currentRank: number;
@@ -19,13 +23,22 @@ export const RankSteps = (props: RankStepsProps) => {
 
   const renderRank = (rank: Rank, idx: number) => {
     const selected = idx === currentRank
+    const rankIcons = {
+      IBO: <IBORankIcon strokeColor={ selected ? '#E74426' : '#515151'}/>,
+      Manager: <Manager strokeColor={ selected ? '#E74426' : '#515151'} />,
+      Supervisor: <Supervisor strokeColor={ selected ? '#E74426' : '#515151'}/>,
+      Executive: <Executive strokeColor={ selected ? '#E74426' : '#515151'}/>,
+      Director: <Director strokeColor={ selected ? '#E74426' : '#515151'}/>
+
+    }
+    const icon = rankIcons[convertName(rank)]
     return (
-      <button key={rank} className='flex flex-1 flex-row relative' onClick={() => onRankPress(idx)} style={{ minHeight: 70 }}>
+      <button key={rank} className='flex flex-1 flex-row relative mt-2' onClick={() => onRankPress(idx)} style={{ minHeight: 70 }}>
         <div className='flex flex-col items-center' style={{ minWidth: 59 }}>
-          <div className='flex items-center justify-center' style={{ borderRadius: 16, height: 32, width: 32, backgroundColor: selected ? '#DD4C37' : '#19191914', borderWidth: 1, borderColor: '#9D9D9D' }}>
-            {selected ? <CheckMarkGreenIcon color='#FFFFFF' /> : <p className='text-xs font-bold text-gray-500'>{idx + 1}</p>}
+          <div className='flex items-center justify-center bg-none p-4 rounded-full text-red' style={{ borderWidth: 1, borderColor: selected ? '#E74426' : '#9D9D9D' }}>
+            {icon}
           </div>
-          <p className='text-xs align text-center mt-2' style={{ color: selected ? '#E35C49' : '#DADADA' }}>
+          <p className='text-xs align text-center mt-2 font-semibold' style={{ color: selected ? '#E74426' : '#9D9D9D' }}>
             {convertName(rank)}
           </p>
         </div>

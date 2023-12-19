@@ -133,12 +133,12 @@ export default function RankComponent (props: RankComponentProps) {
         <div className='grid grid-cols-3 gap-4'>
           {currentRank && (
             <div className='bg-white rounded-3xl flex flex-col justify-between' >
-              <div className='bg-[#fff] rounded-t-3xl py-4'>
+              <div className='bg-[#fff] rounded-t-3xl py-8'>
                 <div className='flex justify-between'>
                   <div className='flex flex-col justify-center ml-[10%]'>
                     <h1 className="text-xl font-bold">Your current </h1><span className='text-base font-normal text-gray-500'>Qualified rank is:</span>
                   </div>
-                  <div className="flex items-center flex-col p-[6px] rounded-full border-2 border-[#D1D1D1] w-4/12  mr-[6%]">
+                  <div className="flex items-center flex-col p-[12px] rounded-full border-2 border-[#D1D1D1] w-4/12  mr-[6%]">
                     <StyledBox backgroundColor={'white'}>
                       {/* <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: rankColors.get(rankData.currentRank) }} /> */}
                       <StarTrophyIcon/>
@@ -147,12 +147,12 @@ export default function RankComponent (props: RankComponentProps) {
                   </div>
                 </div>
               </div>
-              <div className='bg-[#000000] rounded-b-3xl py-4'>
+              <div className='bg-[#000000] rounded-b-3xl py-8'>
                 <div className='flex flex-row justify-between' >
                   <div className='flex flex-col justify-center ml-[10%]'>
                     <h1 className="text-xl text-white font-bold">Highest </h1><span className='text-base font-normal text-gray-500'>Achieved Rank:</span>
                   </div>
-                  <div className="flex items-center flex-col p-[6px] rounded-full border-2 border-[#D1D1D1] w-4/12 mr-[6%] bg-[#fff]">
+                  <div className="flex items-center flex-col p-[12px] rounded-full border-2 border-[#D1D1D1] w-4/12 mr-[6%] bg-[#fff]">
                     <StyledBox backgroundColor={'white'}>
                       {/* <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: rankColors.get(rankData.highestRank) }} /> */}
                       <StarSuccessIcon/>
@@ -163,15 +163,19 @@ export default function RankComponent (props: RankComponentProps) {
               </div>
             </div>
           )}
-          <div className='bg-white rounded-lg col-span-2'>
+          <div className='bg-white rounded-lg col-span-2 p-4'>
+            <h1 className='text-xl font-bold'>Rank Progress</h1>
             <RankSteps currentRank={value} onRankPress={setValue}/>
             <TabPanel value={value} index={0}>
               {/* Free Member */}
               {
-                rankData && <><div className="col-span-2 flex items-center">
-                  <StyledBox backgroundColor={'#DD4C37'}>
-                    <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: '#DD4C37' }} />
-                  </StyledBox>
+                rankData && <><div className="col-span-2 flex items-center justify-center rounded-2xl bg-[#F7F8F9] border-2 border-[#D6E2ED] py-2">
+                  <div className='w-[15%] py-4 rounded-full border-2 border-[#D1D1D1] flex justify-center bg-white'>
+                    <StyledBox backgroundColor={'white'}>
+                      {/* <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: rankColors.get(rankData.highestRank) }} /> */}
+                      <StarSuccessIcon/>
+                    </StyledBox>
+                  </div>
                   <h1 className="text-2xl text-black font-bold pl-2">IBO</h1>
                 </div>
                 </>
@@ -179,29 +183,30 @@ export default function RankComponent (props: RankComponentProps) {
             </TabPanel>
             <TabPanel value={value} index={1}>
               {/* Manager */}
-              {
-                rankData && <><div className="col-span-2 flex items-center">
-                  <StyledBox backgroundColor={'#C99FFF'}>
-                    <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: '#C99FFF' }} />
-                  </StyledBox>
-                  <h1 className="text-2xl text-black font-bold pl-2">Manager</h1>
-                </div>
-                <div className='col-span-3 text-xs pt-5'>
-                  <span className="text-15">To be a <strong>Manager</strong> you'll need</span>
-                </div>
-                <div className='col-span-3 text-xs pt-5'>
-                  <div className='flex flex-row justify-between'>
-                    <strong className='text-10'>
-                    You have {formatNumberToLocale(rankData.mng.commissionVol, 0)} PVC
-                    </strong>
-                    <strong className='text-10'>
-                    You need 100 PVC
-                    </strong>
+              <div className='flex flex-row'>
+                {
+                  rankData && <><div className="w-5/12  flex flex-col items-start justify-between border-r-2 border-[#D1D1D1]">
+                    <h1 className="text-2xl text-black font-bold">Manager</h1>
+                    <div className='text-xs pt-2'>
+                      <span className="text-14">To be a <strong>Manager</strong> you'll need</span>
+                    </div>
                   </div>
-                  <BarWithText progressColor={'#C99FFF'} value={+rankData.mng.commissionVol > 100 ? 100 : +rankData.mng.commissionVol} variant={'determinate'} />
-                </div>
-                </>
-              }
+
+                  <div className='w-7/12 text-xs pt-4 pl-8'>
+                    <div className='flex flex-row justify-between'>
+                      <strong className='text-10'>
+                    You have {formatNumberToLocale(rankData.mng.commissionVol, 0)} PVC
+                      </strong>
+                      <strong className='text-10'>
+                    You need 100 PVC
+                      </strong>
+                    </div>
+                    <BarWithText progressColor={'#C99FFF'} value={+rankData.mng.commissionVol > 100 ? 100 : +rankData.mng.commissionVol} variant={'determinate'} />
+                  </div>
+
+                  </>
+                }
+              </div>
             </TabPanel>
             <TabPanel value={value} index={2}>
               {/* Supervisor */}

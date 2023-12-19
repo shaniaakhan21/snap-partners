@@ -9,9 +9,9 @@ interface BorderLinearProgressProps {
 const BorderLinearProgress = styled(LinearProgress)<BorderLinearProgressProps>(
   ({ theme, progressColor }) => ({
     height: 20,
-    borderRadius: 15,
+    borderRadius: 0,
     [`&.${linearProgressClasses.colorPrimary}`]: {
-      backgroundColor: '#D2D2D2'
+      backgroundColor: '#DCE5ED'
     },
     [`& .${linearProgressClasses.bar}`]: {
       borderRadius: 5,
@@ -25,7 +25,7 @@ const BarWithText = ({ value, variant, progressColor }) => {
     <div style={{ position: 'relative' }}>
       <BorderLinearProgress className='mt-1' variant={variant} value={value} progressColor={progressColor} />
       <div style={{ position: 'absolute', top: '0px', left: '5px', width: `${value}%`, height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', paddingLeft: '5px' }}>
-        <span style={{ color: 'white', fontSize: '10px', fontWeight: 'bold' }}>{value}%</span>
+        <span style={{ color: 'grey', fontSize: '10px', fontWeight: 'bold' }}>{value}%</span>
       </div>
     </div>
   )
