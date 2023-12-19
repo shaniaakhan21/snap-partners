@@ -12,13 +12,14 @@ body{
 }
 
 .dashboardLayout__navbar {
-  @apply w-[94%] bg-[#EDF4FA] z-30;
+  @apply w-[100%] bg-[#EDF4FA] z-30;
   grid-area: navbar;
 }
 
 .dashboardLayout__drawer {
-  @apply sticky top-0 left-0 h-full bg-white z-20 w-[260px] lg:w-full overflow-y-auto hidden lg:block lg:z-40;
+  @apply sticky top-0 left-0 h-[94%] bg-white z-20 lg:w-[260px] lg:w-full overflow-y-auto hidden lg:block lg:z-40;
   grid-area: drawer;
+  max-width: 240px;
 }
 
 .z-index-max{
