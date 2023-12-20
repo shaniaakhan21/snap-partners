@@ -26,6 +26,7 @@ import PVComponentSnap from 'components/common/dashBackOffice/PersonalVolumeSnap
 import Modal from '@mui/material/Modal'
 import Button from '@mui/material/Button'
 import ContractModal from './wellness/components/ContractModal'
+import NetworkActivity from 'components/common/overview/NetworkActivity'
 
 const { SEO } = APP_INFO
 
@@ -95,7 +96,8 @@ const DashboardOverViewPage: Page = () => {
             <TierTable />
           </div>
           <div className='mt-4'>
-            <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} userId={null}/>
+            {/* <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} userId={null}/> */}
+            <NetworkActivity />
           </div>
           <div className='mt-4'>
             <PVComponentSnap userId={null} />
