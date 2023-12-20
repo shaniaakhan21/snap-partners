@@ -190,3 +190,34 @@ body{
 .bg-new{
   background-color: #E1EBF3!important;
 }
+
+.FullWidthOuter .LeftMenuText{
+  display: none;
+  transition-duration: 500ms;
+}
+.FullWidthOuter .logo-outer{
+  padding-left: 0!important;
+  padding-right: 0!important;
+}
+.FullWidthOuter .logo-outer img{
+  margin: 0 auto; transition-duration: 500ms;
+  width: 49px; height: 49px;
+}
+.FullWidthOuter .logoName{
+  display: none; transition-duration: 500ms;
+}
+.NavArrow{
+  position: absolute;
+  left:256px; top:95px;  
+}
+.FullWidthOuter .NavArrow{
+  left:94px; top:95px;
+}
+.NavArrow .MuiSvgIcon-root{
+  transform:unset!important;
+  cursor: pointer;
+  margin-left:8px;
+}
+.FullWidthOuter .NavArrow .MuiSvgIcon-root{
+  margin-left:5px;
+}

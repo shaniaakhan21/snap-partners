@@ -12,6 +12,10 @@ export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { i
   const [arrowPosition, setArrowPosition] = useState(40)
 
   const increaseWidth = () => {
+    const menuIcon = document.getElementsByClassName('dashboardLayout')[0]
+      if (menuIcon) {
+        menuIcon.classList.remove('FullWidthOuter')
+    }
     setDrawerWidth((prevWidth) => {
       const newWidth = Math.min(prevWidth + 220, 260)
       setArrowPosition(40)
@@ -19,8 +23,21 @@ export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { i
     })
   }
 
+  const addClassExpand = () => {
+    const navArrow = document.getElementsByClassName('NavArrow')[0]
+    if (navArrow.classList.contains('FullWidthOuter')) {
+      navArrow.classList.remove('FullWidthOuter')
+    } else {
+      navArrow.classList.add('FullWidthOuter')
+    }
+  }
+
   const decreaseWidth = () => {
     setDrawerWidth((prevWidth) => {
+      const menuIcon = document.getElementsByClassName('dashboardLayout')[0]
+      if (menuIcon) {
+        menuIcon.classList.add('FullWidthOuter')
+      }
       const newWidth = Math.max(prevWidth - 240, 20)
       setArrowPosition(newWidth === 40 ? 40 : -150)
       return newWidth
@@ -60,13 +77,15 @@ export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { i
 
   return (
     <>
-      <div className='duration-500 hidden lg:block absolute left-16 top-16 mt-1 rounded-full w-8 h-8 z-50 bg-white'>
+    <div className='shadow-lg duration-500 hidden lg:block rounded-full w-8 h-8 z-50 bg-white NavArrow' onClick={addClassExpand}>
         {renderArrowIcon()}
       </div>
+      
       <aside className={`relative dashboardLayout__drawer scroll-primary rounded-[20px] shadow-xl w-${drawerWidth} duration-500`}>
-        <section className='sticky top-0 z-10 pl-8 pr-5 py-4 flex justify-start items-center gap-x-4 bg-blackCustom'>
-          <img src='/static/logo-white.svg' />
-          <h1 className='text-white font-semibold text-2xl'>SNAP</h1>
+      
+        <section className='sticky top-0 z-10 pl-8 pr-5 py-4 flex justify-start items-center gap-x-4 bg-blackCustom logo-outer'>
+          <img src='/static/logo-white.svg' className='duration-500' />
+          <h1 className='text-white font-semibold text-2xl logoName duration-500'>SNAP</h1>
         </section>
         <ul className='text-[#000000]'>
           {
@@ -115,8 +134,8 @@ export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { i
                         if (route.subItems) toggleSubmenu(index)
                       }}
                     >
-                      <div className='LeftMenuIcon'>{route.icon}</div>
-                      <div className='LeftMenuText'>{route.label}</div>
+                      <div className='LeftMenuIcon duration-500'>{route.icon}</div>
+                      <div className='LeftMenuText duration-500'>{route.label}</div>
                     </a>,
                     !!route.subItems,
                     route.label.includes('Shopping Cart') ? `https://www.integrouswellness.com/${auth.referralCode}?access_token=${auth.accessToken}` : route.to
