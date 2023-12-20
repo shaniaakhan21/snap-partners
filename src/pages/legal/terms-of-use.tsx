@@ -24,7 +24,7 @@ const TermsOfUsePage: Page = () => {
       <br />
 
       <p>
-      *By entering my SSN on this Application, I certify that this number is my correct taxpayer identification number. I have not been affiliated with Snap Partners nor any of its affiliates in any way within the past year. If I have not provided a SSN/EIN I understand that I will not be eligible for commission disbursements until I provide this information to Snap Partners. I understand that any intentional misrepresentation of any information I provide on this Application may result in action by Snap Partners, up to and including termination of this Application and/or Agreement.    
+      *By entering my SSN on this Application, I certify that this number is my correct taxpayer identification number. I have not been affiliated with Snap Partners nor any of its affiliates in any way within the past year. If I have not provided a SSN/EIN I understand that I will not be eligible for commission disbursements until I provide this information to Snap Partners. I understand that any intentional misrepresentation of any information I provide on this Application may result in action by Snap Partners, up to and including termination of this Application and/or Agreement.
       </p>
 
       <p className="text-xl my-6">
@@ -33,9 +33,9 @@ const TermsOfUsePage: Page = () => {
       <br />
       <h6 className='text-3xl font-bold mt-4'>
       READ AND SCROLL ALL THE WAY DOWN TO SUBMIT
-      </h6> 
+      </h6>
       <p>
-      I understand that there is no requirement beyond filing of this application and no purchase of sales or training materials are required to become an Independent Business Owner (IBO). My ability to earn commissions from Snap Partners is based upon the acquisition of customers, I understand that no commissions or bonuses will be paid to me without first acquiring such customers. I acknowledge that any purchase of sales aids, training materials or training is strictly voluntary. 
+      I understand that there is no requirement beyond filing of this application and no purchase of sales or training materials are required to become an Independent Business Owner (IBO). My ability to earn commissions from Snap Partners is based upon the acquisition of customers, I understand that no commissions or bonuses will be paid to me without first acquiring such customers. I acknowledge that any purchase of sales aids, training materials or training is strictly voluntary.
       </p>
 
       <h6 className='text-xl font-bold mt-6'>TERMS & CONDITIONS</h6>
@@ -63,7 +63,7 @@ const TermsOfUsePage: Page = () => {
         I understand that Snap Partners offers various services in different markets and, based on business conditions, certain services or the markets where the services are offered may change from time to time without notice. Further, I understand that Snap Partners strongly recommends the marketing of all available services by Independent Business Owners to their prospective customers.
         </li>
         <li className='mb-3'>
-        The term of this Agreement is one year (subject to prior cancellation pursuant to the Policies and Procedures) and may be renewed for successive one-year terms. The Independent Business Owner can obtain a renewal application from the Snap Partners website. Renewal application must be received by Snap Partners no later than 90 days after the Independent Business Owner's anniversary date or deactivation of the Independent Business Owner’s agreement will occur, resulting in the forfeiture of bonuses, commissions or other payments from Snap Partners. 
+        The term of this Agreement is one year (subject to prior cancellation pursuant to the Policies and Procedures) and may be renewed for successive one-year terms. The Independent Business Owner can obtain a renewal application from the Snap Partners website. Renewal application must be received by Snap Partners no later than 90 days after the Independent Business Owner's anniversary date or deactivation of the Independent Business Owner’s agreement will occur, resulting in the forfeiture of bonuses, commissions or other payments from Snap Partners.
         </li>
         <li className='mb-3'>
         I acknowledge that my Independent Business Owner relationship is with Snap Partners and not with any carrier, supplier, or service provider with whom Snap Partners transacts or conducts business.
@@ -125,18 +125,16 @@ const TermsOfUsePage: Page = () => {
       </ul>
 
       <h6 className='text-xl font-bold mt-6'>NOTICE OF CANCELLATION</h6>
-      
+
       <p>
-      I may cancel this transaction, without penalty or obligation. I understand that if I cancel after ten (10) days from the date of this Agreement, exclusive of the date of signing or if processed electronically the date this Agreement is submitted to Snap Partners for processing, I am not entitled to a refund of any kind. If I cancel within ten (10) days from the date of this Agreement, any payments made by me under this Agreement and any instrument executed by me will be returned within ten (10) days following receipt by Snap Partners of my Cancellation Notice. In the event that I cancel this transaction after having redeemed any store credits associated with this transaction, the credit amount redeemed will be deducted from any refund issued. Refund of any credits redeemed will then be determined by the return policy(s) of the products or services on which the credits were redeemed. To cancel this Agreement, I must e-mail, mail (return receipt requested), fax, or deliver personally a signed, dated copy of this Notice of Cancellation to Snap Partners <b>&lt;Insert Address&gt;</b>.
+      I may cancel this transaction, without penalty or obligation. I understand that if I cancel after ten (10) days from the date of this Agreement, exclusive of the date of signing or if processed electronically the date this Agreement is submitted to Snap Partners for processing, I am not entitled to a refund of any kind. If I cancel within ten (10) days from the date of this Agreement, any payments made by me under this Agreement and any instrument executed by me will be returned within ten (10) days following receipt by Snap Partners of my Cancellation Notice. In the event that I cancel this transaction after having redeemed any store credits associated with this transaction, the credit amount redeemed will be deducted from any refund issued. Refund of any credits redeemed will then be determined by the return policy(s) of the products or services on which the credits were redeemed. To cancel this Agreement, I must e-mail, mail (return receipt requested), fax, or deliver personally a signed, dated copy of this Notice of Cancellation to Snap Partners <b> 820 Indiantown Rd., Suite 105 Jupiter, FL 33458</b>.
       </p>
-
-
 
       <br />
 
       <div className='w-full text-right'>
         <span className='font-bold text-sm'>
-          Last updated: October 2023
+          Last updated: December 2023
         </span>
       </div>
     </div>
