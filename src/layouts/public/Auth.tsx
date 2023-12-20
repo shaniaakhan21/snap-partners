@@ -1,10 +1,11 @@
 import { useAuthStore } from 'lib/stores'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { FooterPublic } from 'components/layout/public/Footer'
 import { useHandlerReferralLink } from '../../lib/hooks/useHandlerReferralLink'
 import { getLocalStorage } from 'lib/utils/localStorage'
 import { ROLES } from '../../config/roles'
+import { GTMTrack } from 'lib/utils/gtm'
 
 export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Page
   const { referralCode: code, role } = useHandlerReferralLink()
@@ -25,8 +26,8 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
   const isLoginIntegrous = router.pathname === '/auth/login-integrous'
   const isSignupWellness = router.pathname === '/auth/signup-wellness'
   const isLoginWellness = router.pathname === '/auth/login-wellness'
-  let t1 = 'Snap Delivered'
-  let t2 = 'Order-Eat-Repeat'
+  let t1 = 'Snap Partners'
+  let t2 = 'Delivering what matters most in a SNAP!'
 
   if (role === ROLES.AGENT) {
     t1 = 'Snap Financial'

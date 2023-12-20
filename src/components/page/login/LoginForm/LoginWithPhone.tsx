@@ -191,7 +191,7 @@ export const LoginWithPhone = ({ trackLoginHandle }: IProps) => {
 
           <div className='mt-8 text-center'>
             <span className='font-semibold text-gray-600 text-sm sm:text-base'>Don’t have an account?</span>
-            <Link href={signupURL}>
+            <Link href={'/auth/signup?role=IBO'}>
               <a className='text-primary-500 font-semibold text-xl underline decoration-1 ml-2 hover:text-black'>Sign Up</a>
             </Link>
           </div>
