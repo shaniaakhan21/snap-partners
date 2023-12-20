@@ -35,7 +35,7 @@ export const RankSteps = (props: RankStepsProps) => {
     return (
       <button key={rank} className='flex flex-1 flex-row relative mt-2' onClick={() => onRankPress(idx)} style={{ minHeight: 70 }}>
         <div className='flex flex-col items-center' style={{ minWidth: 59 }}>
-          <div className='flex items-center justify-center bg-none p-4 rounded-full text-red' style={{ borderWidth: 1, borderColor: selected ? '#E74426' : '#9D9D9D' }}>
+          <div className='flex items-center justify-center bg-none p-4 rounded-full text-red ' style={{ borderWidth: 2, borderColor: selected ? '#E74426' : '#EFEFEF' }}>
             {icon}
           </div>
           <p className='text-xs align text-center mt-2 font-semibold' style={{ color: selected ? '#E74426' : '#9D9D9D' }}>
