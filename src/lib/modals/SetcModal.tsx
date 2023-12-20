@@ -82,8 +82,8 @@ const Step = (props: StepProps) => {
 
 const SetcModal: React.FC<SetcModalProps> = ({ isOpen, client, onClose }) => {
   if (!client) return null
-  const { email, phone, orderDate, agreementSignedDate, taxpayerQualified2020, taxpayerQualified2021, caregiverQualified2020, caregiverQualified2021, childCareQualified2020, childCareQualified2021, irsFiledDate } = client
-  const status = 'active'
+  const { email, phone, orderDate, agreementSignedDate, taxpayerQualified2020, taxpayerQualified2021, caregiverQualified2020, caregiverQualified2021, childCareQualified2020, childCareQualified2021, irsFiledDate, paidAmount, isPersonalClient } = client
+  const status = paidAmount < 0 ? 'inactive' : 'active'
   const filedWithIRS = irsFiledDate && irsFiledDate !== 'N/A'
   //   const initialPayment = 200
   const familyQualified2020 = childCareQualified2020 || caregiverQualified2020
@@ -110,7 +110,7 @@ const SetcModal: React.FC<SetcModalProps> = ({ isOpen, client, onClose }) => {
   if (filedWithIRS) phase3Progress++
 
   const totalCV = (client.paidAmount || 0) / 2
-  const commission = totalCV * 0.4
+  const commission = isPersonalClient ? 0 : totalCV * 0.4
 
   return (
     <div>
@@ -120,7 +120,16 @@ const SetcModal: React.FC<SetcModalProps> = ({ isOpen, client, onClose }) => {
             {/* header  */}
             <div>
               <div className="flex justify-between items-center px-2.5 pt-5 font-open-sans ">
-                <p className="font-semibold font-lg">{client.name}</p>
+                <p className="font-semibold text-lg">{client.name}</p>
+                {
+                  isPersonalClient && (
+                    <span>
+                      <p className='text-sm text-warning-900'>PERSONAL SETC CLIENT RULE APPLIES ON THIS ACCOUNT</p>
+                      <p className='text-xs'>If the IBO signs themselves up for SETC, the volume credit is given to the IBO while the PCV commission is given to the sponsor</p>
+                    </span>
+
+                  )
+                }
                 <div
                   className="cursor-pointer text-2xl w-8 h-8"
                   onClick={() => onClose()}
@@ -204,7 +213,7 @@ const SetcModal: React.FC<SetcModalProps> = ({ isOpen, client, onClose }) => {
                         Commission
                     </span>
                     <span>
-                      {client.paidAmount ? `$${commission}` : 'TBD'}
+                      { status !== 'active' ? 'N/A' : client.paidAmount ? `$${commission}` : 'TBD'}
                     </span>
                   </div>
                   <div className="flex justify-between text-sm">
@@ -212,7 +221,7 @@ const SetcModal: React.FC<SetcModalProps> = ({ isOpen, client, onClose }) => {
                         Total CV
                     </span>
                     <span>
-                      {client.paidAmount ? `$${totalCV}` : 'TBD'}
+                      {status !== 'active' ? 'N/A' : client.paidAmount ? `$${totalCV}` : 'TBD'}
                     </span>
                   </div>
                   <div className='mt-2'>
@@ -231,29 +240,29 @@ const SetcModal: React.FC<SetcModalProps> = ({ isOpen, client, onClose }) => {
                   <Step
                     number={4}
                     title='Taxpayer Qualified 2020'
-                    date={taxpayerQualified2020 ? ' Yes' : client.paidDate ? 'No' : 'TBD'}
-                    filled={(taxpayerQualified2020 || client.paidDate) ? 'full' : 'empty'}
+                    date={client.paidDate ? taxpayerQualified2020 ? ' Yes' : 'No' : 'TBD'}
+                    filled={client.paidDate ? taxpayerQualified2020 ? 'full' : 'empty' : 'empty'}
                     fillColor={'textAcent-100'}
                     color={'textAcent-100'}/>
                   <Step
                     number={3}
                     title='Taxpayer Qualified 2021'
-                    date={taxpayerQualified2021 ? ' Yes' : client.paidDate ? 'No' : 'TBD'}
-                    filled={(taxpayerQualified2021 || client.paidDate) ? 'full' : 'empty'}
+                    date={client.paidDate ? taxpayerQualified2021 ? ' Yes' : 'No' : 'TBD'}
+                    filled={client.paidDate ? taxpayerQualified2021 ? 'full' : 'empty' : 'empty'}
                     fillColor={'textAcent-100'}
                     color={'textAcent-100'}/>
                   <Step
                     number={2}
                     title='Family Qualified 2020'
-                    date={familyQualified2020 ? 'Yes' : client.paidDate ? 'No' : 'TBD'}
-                    filled={(familyQualified2020 || client.paidDate) ? 'full' : 'empty'}
+                    date={client.paidDate ? familyQualified2020 ? 'Yes' : 'No' : 'TBD'}
+                    filled={client.paidDate ? familyQualified2020 ? 'full' : 'empty' : 'empty'}
                     fillColor={'textAcent-100'}
                     color={'textAcent-100'}/>
                   <Step
                     number={1}
                     title='Family Qualified 2021'
-                    date={familyQualified2021 ? 'Yes' : client.paidDate ? 'No' : 'TBD'}
-                    filled={(familyQualified2021 || client.paidDate) ? 'full' : 'empty'}
+                    date={client.paidDate ? familyQualified2021 ? 'Yes' : 'No' : 'TBD'}
+                    filled={client.paidDate ? familyQualified2021 ? 'full' : 'empty' : 'empty'}
                     fillColor={'textAcent-100'}
                     color={'textAcent-100'}/>
                 </div>
