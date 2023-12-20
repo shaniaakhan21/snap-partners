@@ -53,7 +53,7 @@ export const TextArea = (props:IInputComponent) => {
     <div>
       <label className='search-form-label'>{label}</label>
       <div>
-        <textarea className='search-form-input search-form-box' placeholder={placeholder}></textarea>
+        <textarea className='search-form-input search-form-box' placeholder={placeholder} onChange={(event) => { onChangeFunction(event, param) } } value={value}></textarea>
       </div>
     </div>
   )

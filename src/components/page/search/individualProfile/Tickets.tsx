@@ -56,6 +56,7 @@ const rows = [
 const Tickets = () => {
   const [windowWidth, setWindowWidth] = useState(0)
   const [tickets, setTickets] = useState([])
+  const [ticketFlag, setTicketFlag] = useState(false)
 
   useEffect(() => {
     const handleResize = () => {
@@ -70,7 +71,7 @@ const Tickets = () => {
   }, [])
   useEffect(() => {
     getZendeskData()
-  }, [])
+  }, [ticketFlag])
 
   const columns = [
     {
@@ -217,7 +218,7 @@ const Tickets = () => {
         <button onClick={() => { getZendeskData() }}>click here</button>
       </div> */}
 
-      <ZendeskTicketCreation zendeskTicketModal={zendeskTicketModal} closeModal = {onZendeskTicketModalClose} />
+      <ZendeskTicketCreation zendeskTicketModal={zendeskTicketModal} closeModal = {onZendeskTicketModalClose} ticketFlag={ticketFlag} setTicketFlag={setTicketFlag} />
     </div>
   )
 }
