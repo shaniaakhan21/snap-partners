@@ -131,8 +131,7 @@ const HomePage: Page = () => {
 
 
     <div className='w-full h-full m-0 p-4 sm:p-6 lg:p-8 max-w-full md:mx-auto md:w-full xl:w-11/12 2xl:w-11/12'>
-
-      <div className='block lg:flex'>
+      <div className='block lg:flex items-center'>
           <div className='hidden lg:block w-full pt-8 ml-auto'>
             <div className='float-right'>
                   <div className='flex'>
@@ -163,6 +162,7 @@ const HomePage: Page = () => {
             <ContentDesktop />
           </div>
       </div>
+      <div className='pt-6 text-center text-gray-400'>© 2024 Snap Partners. All rights reserved.</div> 
     </div>
   )
 }
