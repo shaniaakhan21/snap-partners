@@ -91,10 +91,10 @@ export default function PVComponentSnap ({ userId }) {
             </div>
           </div>
         </div> */}
-        <div className={mainDivHeight > 390 ? 'show' : 'hidden'}>
-          <p className="text-sm text-white font-normal ">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled</p>
+        <div>
+          <p className="text-sm text-white font-normal ">Use this widget to track your personal store orders and to compare your stores monthly growth.</p>
         </div>
-        <div className='flex flex-row items-center justify-around py-2'>
+        {/* <div className='flex flex-row items-center justify-around py-2'>
           <div>
             <h1 className="text-base text-white font-normal ">My Growth</h1>
           </div>
@@ -109,7 +109,7 @@ export default function PVComponentSnap ({ userId }) {
           <div>
             <h1 className="text-base text-white font-normal ">Total Orders</h1>
           </div>
-        </div>
+        </div> */}
         <div className='flex flex-row w-full'>
           <div className='flex flex-col w-full'>
             <div className='mt-18'>
