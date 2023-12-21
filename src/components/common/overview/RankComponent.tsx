@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState, CSSProperties, FlexDirection } from 'react'
+import { ReactNode, useEffect, useState, CSSProperties } from 'react'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import StarIcon from '@material-ui/icons/Star'
@@ -9,6 +9,7 @@ import { RankSteps } from './RankSteps'
 import { Tooltip } from '@mui/material'
 import { StarTrophyIcon } from '../icons/StarTrophyIcon'
 import { StarSuccessIcon } from '../icons/StarSuccessIcon'
+import PVComponentSnap from '../dashBackOffice/PersonalVolumeSnap'
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -55,7 +56,6 @@ interface RankComponentProps{
 }
 
 interface CustomStyles extends CSSProperties {
-  flexDirection: FlexDirection;
   justifyContent?: string;
   // Add other style properties as needed
 }
@@ -130,47 +130,47 @@ export default function RankComponent (props: RankComponentProps) {
   return (
     <div>
       <Box sx={{ '& .Mui-selected': { color: 'black', bgcolor: 'white' }, '& .MuiTabs-indicator': { backgroundColor: 'transparent' } }}>
-        <div className='grid grid-cols-3 gap-4'>
+        <div className='grid grid-cols-4 gap-4'>
           {currentRank && (
-            <div className='bg-white rounded-3xl flex flex-col justify-between' >
-              <div className='bg-[#fff] rounded-t-3xl py-8'>
+            <div className='bg-white rounded-3xl flex flex-col justify-between shadow-xl' >
+              <div className='bg-[#fff] rounded-t-3xl py-8  h-full w-full flex flex-col justify-center'>
                 <div className='flex justify-between'>
                   <div className='flex flex-col justify-center ml-[10%]'>
                     <h1 className="text-xl font-bold">Your current </h1><span className='text-base font-normal text-gray-500 '>Qualified rank is:</span>
                   </div>
-                  <div className="flex items-center flex-col p-[14px] rounded-full border-2 border-[#EFEFEF] w-4/12  mr-[6%]">
+                  <div className="flex items-center flex-col p-[5%] rounded-full border-2 border-[#EFEFEF] w-3/12  mr-[6%]">
                     <StyledBox backgroundColor={'white'}>
                       {/* <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: rankColors.get(rankData.currentRank) }} /> */}
                       <StarTrophyIcon/>
                     </StyledBox>
-                    <h1 className="text-sm text-black-h font-semibold">{convertName(rankData.currentRank)}</h1>
+                    <h1 className="text-base text-black-h font-semibold">{convertName(rankData.currentRank)}</h1>
                   </div>
                 </div>
               </div>
-              <div className='bg-[#000000] rounded-b-3xl py-8'>
+              <div className='bg-[#000000] rounded-b-3xl py-8 shadow-xl h-full w-full flex flex-col justify-center'>
                 <div className='flex flex-row justify-between' >
                   <div className='flex flex-col justify-center ml-[10%]'>
                     <h1 className="text-xl text-white font-bold">Highest </h1><span className='text-base font-normal text-gray-500'>Achieved Rank:</span>
                   </div>
-                  <div className="flex items-center flex-col p-[14px] rounded-full border-2 border-[#EFEFEF] w-4/12 mr-[6%] bg-[#fff]">
+                  <div className="flex items-center flex-col p-[5%] rounded-full border-2 border-[#EFEFEF] w-3/12 mr-[6%] bg-[#fff]">
                     <StyledBox backgroundColor={'white'}>
                       {/* <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: rankColors.get(rankData.highestRank) }} /> */}
                       <StarSuccessIcon/>
                     </StyledBox>
-                    <h1 className="text-sm text-black-h font-semibold ">{convertName(rankData.highestRank)}</h1>
+                    <h1 className="text-base text-black-h font-semibold ">{convertName(rankData.highestRank)}</h1>
                   </div>
                 </div>
               </div>
             </div>
           )}
-          <div className='bg-white rounded-lg col-span-2 p-4'>
+          <div className='bg-white rounded-3xl col-span-2 p-4 shadow-xl'>
             <h1 className='text-xl font-bold'>Rank Progress</h1>
             <RankSteps currentRank={value} onRankPress={setValue}/>
             <TabPanel value={value} index={0}>
               {/* Free Member */}
               {
                 rankData && <><div className="col-span-2 flex items-center justify-center rounded-2xl bg-[#F7F8F9] border-2 border-[#D6E2ED] py-2">
-                  <div className='w-[15%] py-4 rounded-full border-2 border-[#D1D1D1] flex justify-center bg-white'>
+                  <div className='w-[10%] py-4 rounded-full border-2 border-[#D1D1D1] flex justify-center bg-white'>
                     <StyledBox backgroundColor={'white'}>
                       {/* <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: rankColors.get(rankData.highestRank) }} /> */}
                       <StarSuccessIcon/>
@@ -201,7 +201,7 @@ export default function RankComponent (props: RankComponentProps) {
                     You need 100 PVC
                       </strong>
                     </div>
-                    <BarWithText progressColor={'#71BF74'} value={+rankData.mng.commissionVol > 100 ? 100 : +rankData.mng.commissionVol} variant={'determinate'} />
+                    <BarWithText value={+rankData.mng.commissionVol > 100 ? 100 : +rankData.mng.commissionVol} variant={'determinate'} />
                   </div>
 
                   </>
@@ -229,7 +229,7 @@ export default function RankComponent (props: RankComponentProps) {
                     You need 100 PVC
                         </strong>
                       </div>
-                      <BarWithText progressColor={'#71BF74'} value={+rankData.sv.commissionVol > 100 ? 100 : +rankData.sv.commissionVol} variant={'determinate'} />
+                      <BarWithText value={+rankData.sv.commissionVol > 100 ? 100 : +rankData.sv.commissionVol} variant={'determinate'} />
                     </div>
                   </div>
 
@@ -237,7 +237,7 @@ export default function RankComponent (props: RankComponentProps) {
                     <span className="text-left text-10"><strong>{`You have ${rankData.sv.PSMRatio} PSM`}</strong></span>
                     <span className="text-right ml-auto text-10"><strong>You need 3 Active PSM</strong></span>
                   </div>
-                  <BarWithText progressColor={'#71BF74'} value={+rankData.sv.PSMPercentage} variant={'determinate'}/>
+                  <BarWithText value={+rankData.sv.PSMPercentage} variant={'determinate'}/>
                   <div className="flex pt-2">
                     <span className="text-left text-10"><strong>You need</strong></span>
                     <span className="text-right ml-auto text-10"><strong>3 Working Legs, 500 V. Each</strong></span>
@@ -247,7 +247,7 @@ export default function RankComponent (props: RankComponentProps) {
                       {
                         rankData.sv.workingLegs && Object.values(rankData.sv.workingLegs).map((leg, index) => (
                           <div className='col-span-1'>
-                            { <Tooltip title={leg.name}><div><BarWithText progressColor={'#71BF74'} value={leg.percentage} variant={'determinate'}/></div></Tooltip> }
+                            { <Tooltip title={leg.name}><div><BarWithText value={leg.percentage} variant={'determinate'}/></div></Tooltip> }
                           </div>
                         ))
                       }
@@ -258,7 +258,7 @@ export default function RankComponent (props: RankComponentProps) {
                     <span className="text-right ml-auto text-10"><strong>You need 5,000</strong></span>
                   </div>
                   <div className='col-span-1'>
-                    <BarWithText progressColor={'#71BF74'} value={+rankData.sv.gv.percentage} variant={'determinate'}/>
+                    <BarWithText value={+rankData.sv.gv.percentage} variant={'determinate'}/>
                   </div>
                 </>
               }
@@ -283,14 +283,14 @@ export default function RankComponent (props: RankComponentProps) {
                     You need 100 PVC
                       </strong>
                     </div>
-                    <BarWithText progressColor={'#71BF74'} value={+rankData.dct.commissionVol > 100 ? 100 : +rankData.dct.commissionVol} variant={'determinate'} />
+                    <BarWithText value={+rankData.dct.commissionVol > 100 ? 100 : +rankData.dct.commissionVol} variant={'determinate'} />
                   </div>
                 </div>
                 <div className="flex pt-2">
                   <span className="text-left text-10"><strong>{`You have ${rankData.dct.PSMRatio} PSM`}</strong></span>
                   <span className="text-right ml-auto text-10"><strong>You need 4 Active PSM</strong></span>
                 </div>
-                <BarWithText progressColor={'#71BF74'} value={+rankData.dct.PSMPercentage} variant={'determinate'}/>
+                <BarWithText value={+rankData.dct.PSMPercentage} variant={'determinate'}/>
                 <div className="flex pt-2">
                   <span className="text-left text-10"><strong>You need</strong></span>
                   <span className="text-right ml-auto text-10"><strong>4 Working Legs, 5,000 V. Each</strong></span>
@@ -300,7 +300,7 @@ export default function RankComponent (props: RankComponentProps) {
                     {
                       rankData.dct.workingLegs && Object.values(rankData.dct.workingLegs).map((leg, index) => (
                         <div className='col-span-1'>
-                          { <Tooltip title={leg.name}><div><BarWithText progressColor={'#71BF74'} value={leg.percentage} variant={'determinate'}/></div></Tooltip> }
+                          { <Tooltip title={leg.name}><div><BarWithText value={leg.percentage} variant={'determinate'}/></div></Tooltip> }
                         </div>
                       ))
                     }
@@ -311,7 +311,7 @@ export default function RankComponent (props: RankComponentProps) {
                   <span className="text-right ml-auto text-10"><strong>You need 50,000</strong></span>
                 </div>
                 <div className='col-span-1'>
-                  <BarWithText progressColor={'#71BF74'} value={+rankData.dct.gv.percentage} variant={'determinate'}/>
+                  <BarWithText value={+rankData.dct.gv.percentage} variant={'determinate'}/>
                 </div>
 
                 </>
@@ -338,14 +338,14 @@ export default function RankComponent (props: RankComponentProps) {
                     You need 100 PVC
                         </strong>
                       </div>
-                      <BarWithText progressColor={'#71BF74'} value={+rankData.exec.commissionVol > 100 ? 100 : +rankData.exec.commissionVol} variant={'determinate'} />
+                      <BarWithText value={+rankData.exec.commissionVol > 100 ? 100 : +rankData.exec.commissionVol} variant={'determinate'} />
                     </div>
                   </div>
                   <div className="flex pt-2">
                     <span className="text-left text-10"><strong>{`You have ${rankData.exec.PSMRatio} PSM`}</strong></span>
                     <span className="text-right ml-auto text-10"><strong>You need 5 Active PSM</strong></span>
                   </div>
-                  <BarWithText progressColor={'#71BF74'} value={+rankData.exec.PSMPercentage} variant={'determinate'}/>
+                  <BarWithText value={+rankData.exec.PSMPercentage} variant={'determinate'}/>
                   <div className="flex pt-2">
                     <span className="text-left text-10"><strong>You need</strong></span>
                     <span className="text-right ml-auto text-10"><strong>5 Working Legs, 10,000 V. Each</strong></span>
@@ -355,7 +355,7 @@ export default function RankComponent (props: RankComponentProps) {
                       {
                         rankData.exec.workingLegs && Object.values(rankData.exec.workingLegs).map((leg, index) => (
                           <div className='col-span-1'>
-                            {<Tooltip title={leg.name}><div><BarWithText progressColor={'#71BF74'} value={leg.percentage} variant={'determinate'}/></div></Tooltip>}
+                            {<Tooltip title={leg.name}><div><BarWithText value={leg.percentage} variant={'determinate'}/></div></Tooltip>}
                           </div>
                         ))
                       }
@@ -366,11 +366,14 @@ export default function RankComponent (props: RankComponentProps) {
                     <span className="text-right ml-auto text-10"><strong>You need 100,000</strong></span>
                   </div>
                   <div className='col-span-1'>
-                    <BarWithText progressColor={'#71BF74'} value={+rankData.exec.gv.percentage} variant={'determinate'}/>
+                    <BarWithText value={+rankData.exec.gv.percentage} variant={'determinate'}/>
                   </div>
                 </>
               }
             </TabPanel>
+          </div>
+          <div className='col-span-1'>
+            <PVComponentSnap userId={null} />
           </div>
         </div>
       </Box>

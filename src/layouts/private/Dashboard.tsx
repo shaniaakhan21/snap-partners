@@ -201,7 +201,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
       <Drawer />
 
       <main className='dashboardLayout__content scroll-primary'>
-        <div className='mx-auto min-h-[89vh] h-fit px-5 pt-5 pb-20 max-w-7xl'>
+        <div className='mx-auto min-h-[89vh] h-fit px-5 pt-5 pb-20'>
           {auth.roles.driver && auth.driver_status === null && (
             <>
               <Alert severity="warning">Your driver documents are being reviewed by our team, your account will be activated soon.</Alert><br/>
