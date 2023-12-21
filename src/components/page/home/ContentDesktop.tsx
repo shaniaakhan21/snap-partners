@@ -15,7 +15,7 @@ export const ContentDesktop = () => {
           </div>
           <div className='text-center mt-6'>
             <Link href='/auth/signup?role=IBO'>
-                <a className='px-10 py-3.5 disabled:opacity-50 disabled:cursor-not-allowed -primary text-white bg-primary-500 rounded-full font-semibold focus:outline-none focus:ring focus:ring-primary-300 focus:opacity-90 hover:opacity-90 w-auto text-mg bg-primary-500 font-semibold uppercase mx-auto'>Sign In</a>
+                <a className='px-10 py-3.5 disabled:opacity-50 disabled:cursor-not-allowed -primary text-white bg-primary-500 rounded-full font-semibold focus:outline-none focus:ring focus:ring-primary-300 focus:opacity-90 hover:opacity-90 w-auto text-mg bg-primary-500 font-semibold uppercase mx-auto'>Sign Up</a>
             </Link>
           </div>
 
@@ -24,7 +24,7 @@ export const ContentDesktop = () => {
           <div className="mt-8 mb-4 text-center">
               <span className="font-semibold text-gray-600 text-sm sm:text-base">Already have an account?</span>
               <Link href='/auth/login'>
-                  <a className="text-primary-500 font-semibold text-xl underline decoration-1 ml-2 hover:text-black" href="/auth/signup?role=IBO">Sign Up</a>
+                  <a className="text-primary-500 font-semibold text-xl underline decoration-1 ml-2 hover:text-black" href="/auth/signup?role=IBO">Log in</a>
               </Link>
           </div>
       </div>
