@@ -19,7 +19,6 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle'
 import CancelIcon from '@material-ui/icons/Cancel'
 import DocumentDetailView from './commonPopup/common/DocumentDetailView'
 import { getLocalStorage } from 'lib/utils/localStorage'
-import PDFViewer from 'components/page/compensation-plan/PDFViewer'
 
 const { SEO } = APP_INFO
 
@@ -47,36 +46,14 @@ const ApprovalDialog = ({ open, onClose, onConfirm }) => {
   )
 }
 
-const ImageViewer = ({ open, onClose, contentUrl }) => {
-  const getFileExtension = (filename) => {
-    return filename.slice((filename.lastIndexOf('.') - 1 >>> 0) + 2)
-  }
-
-  const renderContent = () => {
-    const fileExtension = getFileExtension(contentUrl)
-
-    switch (fileExtension.toLowerCase()) {
-    case 'jpg':
-    case 'jpeg':
-    case 'png':
-    case 'gif':
-      return <img src={contentUrl} alt="Image" style={{ width: '80%' }} />
-    case 'pdf':
-      return (
-        <PDFViewer
-          fileData={contentUrl} setFileData={undefined} />
-      )
-    default:
-      return <p>Unsupported Content Type</p>
-    }
-  }
+const ImageViewer = ({ open, onClose, imageUrl }) => {
   return (
-    <Dialog open={open} onClose={onClose} fullWidth maxWidth="md">
+    <Dialog open={open} onClose={onClose} fullWidth maxWidth="md" >
       <IconButton aria-label="close" onClick={onClose} className='justify-end hovercustom'>
         <CloseIcon className='w-[10%] text-black' />
       </IconButton>
       <DialogContent>
-        {renderContent()}
+        <img src={imageUrl} alt="Document" style={{ width: '80%' }} />
       </DialogContent>
     </Dialog>
   )
@@ -265,7 +242,8 @@ const BusinessReport: Page = () => {
               <ImageViewer
                 open={imageOpen}
                 onClose={() => setImageOpen(false)}
-                contentUrl={imageSrc} />
+                imageUrl={imageSrc}
+              />
             </>
           )
           : (
@@ -291,7 +269,7 @@ const BusinessReport: Page = () => {
               <ImageViewer
                 open={imageOpen}
                 onClose={() => setImageOpen(false)}
-                contentUrl={imageSrc}
+                imageUrl={imageSrc}
               />
             </>
           )
@@ -327,7 +305,7 @@ const BusinessReport: Page = () => {
 
   return (
     <>
-      <span className='text-lg sm:text-3xl font-bold'>1099 Business Verification Report</span><br /><br />
+      <span className='text-lg sm:text-3xl font-bold'>Admin Report</span><br /><br />
       <div className="w-full bg-white rounded-lg px-5 py-5 sm:px-10 sm:py-10 flex flex-col" id='html-content'>
         <h1 className='text-base sm:text-xl font-semibold'>The Following IBOs need additional verification:</h1>
         <br></br>
@@ -342,7 +320,7 @@ const BusinessReport: Page = () => {
         </div>
         <br></br>
       </div>
-      <ImageViewer open={imageOpen} onClose={() => setImageOpen(false)} contentUrl={imageSrc} />
+      <ImageViewer open={imageOpen} onClose={() => setImageOpen(false)} imageUrl={imageSrc} />
       {bStructureModalOpen && (
         <BStructureDocUpload
           onClose={() => setBStructureModalOpen(false)}
