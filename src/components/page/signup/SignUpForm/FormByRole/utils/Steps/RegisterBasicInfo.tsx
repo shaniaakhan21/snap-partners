@@ -378,7 +378,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
               register={register}
               rulesForm={registerRulesConfig.ssn}
               isRequired={false}
-              helpText='Optional field today but REQUIRED to receive commissions beyond $600'
+              helpText='You are not required to enter your social security number today. Please note that Snap Partners will require your social security number once you earn a total of $600 in commissions'
               style = {ssnHelptextDesign}
             />
           )}
@@ -414,14 +414,12 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             readOnly={Boolean(referralLink.code)}
           />
 
-          <div className='sm:flex mt-5 items-center'>
-              <TermsAndConditions
-                errors={errors.termsAndConditions}
-                register={register}
-                rulesForm={registerRulesConfig.termsAndConditions}
-              />
-            <Button type='submit' classes='mt-4 sm:mt-0 w-full sm:w-auto text-mg bg-primary-500 font-semibold uppercase ml-auto'>Sign Up</Button>
-          </div>
+          <TermsAndConditions
+            errors={errors.termsAndConditions}
+            register={register}
+            rulesForm={registerRulesConfig.termsAndConditions}
+            referralLink = {referralLink}
+          />
 
           
           <BulletPagination stepToActivate='REGISTER_BASIC_INFO' />
