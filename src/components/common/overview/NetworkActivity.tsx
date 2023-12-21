@@ -5,7 +5,7 @@ import ReactDataGrid from '@inovua/reactdatagrid-community'
 import '@inovua/reactdatagrid-community/index.css'
 
 const columns = [
-  { name: 'description', header: 'Description', defaultFlex: 3 },
+    { name: 'description', header: 'Activity Description', defaultFlex: 3 },
   {
     name: 'date',
     header: 'Date',
