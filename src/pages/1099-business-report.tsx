@@ -19,7 +19,7 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle'
 import CancelIcon from '@material-ui/icons/Cancel'
 import DocumentDetailView from './commonPopup/common/DocumentDetailView'
 import { getLocalStorage } from 'lib/utils/localStorage'
-import FileViewer from 'react-file-viewer'
+import PDFViewer from 'components/page/compensation-plan/PDFViewer'
 
 const { SEO } = APP_INFO
 
@@ -63,18 +63,8 @@ const ImageViewer = ({ open, onClose, contentUrl }) => {
       return <img src={contentUrl} alt="Image" style={{ width: '80%' }} />
     case 'pdf':
       return (
-        <FileViewer
-          fileType="pdf"
-          filePath={contentUrl}
-        />
-      )
-    case 'doc':
-    case 'docx':
-      return (
-        <FileViewer
-          fileType="docx"
-          filePath={contentUrl}
-        />
+        <PDFViewer
+          fileData={contentUrl} setFileData={undefined} />
       )
     default:
       return <p>Unsupported Content Type</p>
