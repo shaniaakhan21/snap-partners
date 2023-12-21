@@ -38,7 +38,7 @@ export const AccountInfo = ({ auth, setAuth, removeAuth, setNewWindow, setTypeUp
   const isIntegrousCustomer = (_auth.roles.integrousCustomer && !_auth.roles.integrousAssociate)
   const isCertified = auth.isCertified
   const [signedCertModalOpen, setSignedCertModalOpen] = useState(false)
-  const [isSwitchOn, setIsSwitchOn] = useState(false)
+  const [isSwitchOn, setIsSwitchOn] = useState(true)
 
   const handleSwitchChange = () => {
     setIsSwitchOn((prev) => !prev)
