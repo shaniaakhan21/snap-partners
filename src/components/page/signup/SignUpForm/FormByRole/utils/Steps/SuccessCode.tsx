@@ -139,7 +139,7 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
   }
 
   return (
-    <div className='flex flex-col justify-center items-center w-full'>      
+    <div className='flex flex-col justify-center items-center w-full'>
       <div className='rounded-full w-36 h-36 border-4 border-lime-500 p-8 text-center flex items-center'>
         <CheckSuccess />
       </div>

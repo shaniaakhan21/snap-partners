@@ -7,8 +7,8 @@ import { useRouter } from 'next/router'
 
 export const SelectRoleToSignUp = () => {
   const router = useRouter()
- 
-  const { current: Apps } = useRef([    
+
+  const { current: Apps } = useRef([
     { to: '/download-app?device=APPLE', icon: <img src='/images/app-store.png' className='inline-block mb-4 sm:mb-0 w-40' /> },
     { to: '/download-app?device=ANDROID', icon: <img src='/images/gplay.png' className='inline-block mb-4 sm:mb-0 w-40' /> }
   ])
@@ -53,18 +53,18 @@ export const SelectRoleToSignUp = () => {
                   onClick={() => onRoleClick(role)}
                   className='w-full py-4 px-4 sm:flex justify-between items-center gap-x-4'
                 >
-                      <div className=' '>
-                        <div className='w-28 h-28 mx-auto sm:mx-inherit border-2 border-gray-200 rounded-full inline-block bg-white p-3 flex items-center text-center'>
-                            <span className='mx-auto'>{role.icon}</span>
-                        </div>
-                      </div>
+                  <div className=' '>
+                    <div className='w-28 h-28 mx-auto sm:mx-inherit border-2 border-gray-200 rounded-full inline-block bg-white p-3 flex items-center text-center'>
+                      <span className='mx-auto'>{role.icon}</span>
+                    </div>
+                  </div>
 
-                      <div className='flex items-center w-full ml-0 text-center sm:ml-2'>
-                        <span className='flex mx-auto sm:mx-0'>
-                          <span className='text-gray-700 text-lg font-semibold Capitalise text-back'>{role.label}</span>
-                          <ArrowRightIcon classes='mt-0.5 ml-4' />
-                        </span>
-                      </div>
+                  <div className='flex items-center w-full ml-0 text-center sm:ml-2'>
+                    <span className='flex mx-auto sm:mx-0'>
+                      <span className='text-gray-700 text-lg font-semibold Capitalise text-back'>{role.label}</span>
+                      <ArrowRightIcon classes='mt-0.5 ml-4' />
+                    </span>
+                  </div>
                 </button>
               </li>
             )
@@ -83,20 +83,17 @@ export const SelectRoleToSignUp = () => {
         </Link>
       </div>
 
-      
-    <div className='mt-8 text-center items-center'>
-    {Apps.map(app => (
-        <Link key={app.to} href={app.to}>
-          <a className='mx-2'>
-            {app.icon}
-          </a>
-        </Link>
-    ))}
-    </div>
+      <div className='mt-8 text-center items-center'>
+        {Apps.map(app => (
+          <Link key={app.to} href={app.to}>
+            <a className='mx-2'>
+              {app.icon}
+            </a>
+          </Link>
+        ))}
+      </div>
 
     </div>
-
-    
 
   )
 }

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button } from 'components/common/Button'
-import { Spinner } from 'components/common/loaders' 
+import { Spinner } from 'components/common/loaders'
 import { InputForm } from '../Input'
 import { InputPhone } from '../InputPhone'
 import { registerMerchantRulesConfig } from '../formRules'
@@ -47,8 +47,8 @@ interface IRegisterMerchantBasicInfoProps {
 export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handleStep }: IRegisterMerchantBasicInfoProps) => {
   const { handleSubmit, register, reset, formState: { errors }, setError, control } = useForm<dataFormSignUpMerchant>()
   const [isLoading, setLoading] = useState(false)
-  const role = useRoleFromUrl() 
-  const { current: Apps } = useRef([    
+  const role = useRoleFromUrl()
+  const { current: Apps } = useRef([
     { to: '/download-app?device=APPLE', icon: <img src='/images/app-store.png' className='inline-block mb-4 sm:mb-0 w-40' /> },
     { to: '/download-app?device=ANDROID', icon: <img src='/images/gplay.png' className='inline-block mb-4 sm:mb-0 w-40' /> }
   ])
@@ -311,44 +311,41 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
         />
 
         <div className='sm:flex mt-5 items-center'>
-            <TermsAndConditions
-              errors={errors.termsAndConditions}
-              register={register}
-              rulesForm={registerMerchantRulesConfig.termsAndConditions}
-            />
-            <Button type='submit' classes='mt-4 sm:mt-0 w-full sm:w-auto text-mg bg-primary-500 font-semibold uppercase ml-auto'>Sign Up</Button>
+          <TermsAndConditions
+            errors={errors.termsAndConditions}
+            register={register}
+            rulesForm={registerMerchantRulesConfig.termsAndConditions}
+          />
+          <Button type='submit' classes='mt-4 sm:mt-0 w-full sm:w-auto text-mg bg-primary-500 font-semibold uppercase ml-auto'>Sign Up</Button>
         </div>
-        
-          <section className='my-4'>
-            <p className='mt-8 text-center mt-12'>
-              <span className='font-semibold text-gray-600 text-sm sm:text-base'>Already have an account?</span>
 
-              <Link href='/auth/login'>
-                <a className='text-primary-500 font-semibold text-xl underline decoration-1 ml-2 hover:text-black'>Sign In</a>
-              </Link>
-            </p>
-          </section>
+        <section className='my-4'>
+          <p className='mt-8 text-center mt-12'>
+            <span className='font-semibold text-gray-600 text-sm sm:text-base'>Already have an account?</span>
 
+            <Link href='/auth/login'>
+              <a className='text-primary-500 font-semibold text-xl underline decoration-1 ml-2 hover:text-black'>Sign In</a>
+            </Link>
+          </p>
+        </section>
 
-          <div className='mt-8 text-center items-center'>
-              {Apps.map(app => (
-                   <Link key={app.to} href={app.to}>
-                    <a className='mx-2'>
-                      {app.icon}
-                    </a>
-                  </Link>
-               ))}
-          </div>
+        <div className='mt-8 text-center items-center'>
+          {Apps.map(app => (
+            <Link key={app.to} href={app.to}>
+              <a className='mx-2'>
+                {app.icon}
+              </a>
+            </Link>
+          ))}
+        </div>
 
-
-
-          {/* <div className='mt-8 text-center items-center'>
+        {/* <div className='mt-8 text-center items-center'>
               {Apps.map(app => (
                 <a className='mx-2' key={app.to}>
                   <Link key={app.to} href={app.to}>
-                    
+
                       {app.icon}
-                    
+
                   </Link>
                 </a>
               ))}
