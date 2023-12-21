@@ -6,7 +6,7 @@ interface IInputFormProps {
   register: UseFormRegister<any>,
   errors: any,
   rulesForm: FieldErrors,
-  referralLink: any
+  referralLink?: any
 }
 
 export const TermsAndConditions = ({ register, errors, rulesForm, referralLink }: IInputFormProps) => {
