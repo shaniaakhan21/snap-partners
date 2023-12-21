@@ -5,11 +5,11 @@ import ReactDataGrid from '@inovua/reactdatagrid-community'
 import '@inovua/reactdatagrid-community/index.css'
 
 const columns = [
-    { name: 'description', header: 'Activity Description', defaultFlex: 3 },
+    { name: 'description', header: 'Activity Description', defaultWidth: 470 },
   {
     name: 'date',
     header: 'Date',
-    defaultFlex: 1
+    defaultWidth: 170
   }
 ]
 
@@ -21,6 +21,7 @@ const filterValue = [
 
 const TableNotifications = ({ notifications }) => {
   return (
+    <div style={{ overflow: 'auto' }}>
     <ReactDataGrid
       columns={columns}
       dataSource={notifications}
@@ -29,7 +30,9 @@ const TableNotifications = ({ notifications }) => {
       style={gridStyle}
       defaultLimit={10}
       pagination
+      enableColumnAutosize = {true}
     />
+    </div>
   )
 }
 
