@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
@@ -70,6 +70,11 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
   const { handleSubmit, register, reset, formState: { errors }, setError, control } = useForm<IDataForm>()
   const [isLoading, setLoading] = useState(false)
   const role = useRoleFromUrl()
+  
+  const { current: Apps } = useRef([    
+    { to: '/download-app?device=APPLE', icon: <img src='/images/app-store.png' className='inline-block mb-4 sm:mb-0 w-40' /> },
+    { to: '/download-app?device=ANDROID', icon: <img src='/images/gplay.png' className='inline-block mb-4 sm:mb-0 w-40' /> }
+  ])
 
   const onSubmit = async (dataForm: IDataForm) => {
     if (dataForm.confirmEmail !== dataForm.email) {
@@ -222,11 +227,11 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
   return (
     <>
       <div className={`mx-auto w-full ${maxWClass}`}>
-        <p className='font-bold text-4xl text-[#18203F]'>{signUpas}{' '}
+        <p className='sm:block font-bold text-3xl md:font-extrabold md:text-4xl mb-2 text-[#000] mt-4'>{signUpas}{' '}
           <span className='text-primary-500'>{roleText}</span>
         </p>
         <p className='text-[#18203F] font-bold text-md mb-2'>{subtext}</p>
-        <p className='text-gray-500'>Welcome! register to continue.</p>
+        <p className='font-medium text-gray-600'>Welcome! register to continue.</p>
 
         <form className='mt-6 w-full' onSubmit={handleSubmit(onSubmit)}>
           <InputForm
@@ -416,20 +421,26 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             referralLink = {referralLink}
           />
 
-          <section className='mt-4'>
-            <BulletPagination stepToActivate='REGISTER_BASIC_INFO' />
+          
+          <BulletPagination stepToActivate='REGISTER_BASIC_INFO' />
 
-            <Button type='submit' classes='w-full mt-4 text-sm bg-primary-500'>
-            Sign Up
-            </Button>
-
-            {role !== ROLES.IBO && <p className='mt-4'>
-              <span className='font-semibold text-[#18203F]'>Already have an account?</span>
+          <section className='my-4'>
+            {role !== ROLES.IBO && <p className='mt-12 text-center'>
+              <span className='font-semibold text-gray-600 text-sm sm:text-base'>Already have an account?</span>
               <Link href={loginURL}>
-                <a className='text-textAcent-500 focus:underline'> Login.</a>
+                <a className='text-primary-500 font-semibold text-xl underline decoration-1 ml-2 hover:text-black'>Sign In</a>
               </Link>
             </p>}
           </section>
+          <div className='mt-8 text-center items-center'>
+              {Apps.map(app => (
+                   <Link key={app.to} href={app.to}>
+                    <a className='mx-2'>
+                      {app.icon}
+                    </a>
+                  </Link>
+               ))}
+          </div>
         </form>
       </div>
     </>
