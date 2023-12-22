@@ -24,7 +24,7 @@ export const InputPhone = ({ errors, register, classes, isRequired, withVerifyCo
           }
         </label>
         {
-          withVerifyCode && <span className='text-xs text-gray-600 font-normal'>(Verified with SMS code)</span>
+          withVerifyCode && <span className='text-sm text-gray-600 font-normal'>(Verified with SMS code)</span>
         }
       </div>
 
@@ -46,7 +46,7 @@ export const InputPhone = ({ errors, register, classes, isRequired, withVerifyCo
               countryCodeEditable={false}
               inputProps={{
                 autoComplete: 'on',
-                className: 'w-full py-1 pl-12 text-base text-gray-700 border-2 border-gray-200 rounded-lg outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-10 transition-colors duration-200 ease-in-out'
+                className: 'w-full py-1 pl-12 text-base text-black bg-white border-2 border-gray-200 rounded-lg outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-10 transition-colors duration-200 ease-in-out placeholder:text-black'
               }}
             />
           )}

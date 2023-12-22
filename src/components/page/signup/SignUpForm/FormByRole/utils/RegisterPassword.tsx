@@ -27,7 +27,7 @@ export const RegisterPassword = ({ register, errors, rulesPasswordForm, rulesCon
             name='password'
             type={`${showPassword ? 'text' : 'password'}`}
             autoComplete='current-password'
-            className='w-full pl-3 pr-14 py-1 my-2 text-base text-black border-2 border-gray-200 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-10 transition-colors duration-200 ease-in-out'
+            className='w-full pl-3 pr-14 py-1 my-2 text-base text-black bg-white border-2 border-gray-200 rounded-lg outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-10 transition-colors duration-200 ease-in-out placeholder:text-black'
             placeholder='Enter Password'
           />
           <div
@@ -52,7 +52,7 @@ export const RegisterPassword = ({ register, errors, rulesPasswordForm, rulesCon
             name='confirmPassword'
             type={`${showPassword ? 'text' : 'password'}`}
             autoComplete='current-password'
-            className='w-full pl-3 pr-14 py-1 my-2 text-base text-black border-2 border-gray-200 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-10 transition-colors duration-200 ease-in-out'
+            className='w-full pl-3 pr-14 py-1 my-2 text-base text-black bg-white border-2 border-gray-200 rounded-lg outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-10 transition-colors duration-200 ease-in-out placeholder:text-black'
             placeholder='Confirm Password'
           />
           <div
