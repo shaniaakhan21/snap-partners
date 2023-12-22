@@ -87,11 +87,16 @@ const DashboardOverViewPage: Page = () => {
 
   return (
     <>
+      <div className='grid grid-cols-3 gap-4'>
+        <div className='col-span-2'>
+          <RankComponent data={rankData} />
+        </div>
+        <div>
+          <PVComponentSnap userId={null} />
+        </div>
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-2">
         <div>
-          <div>
-            <RankComponent data={rankData} />
-          </div>
           <div className='mt-4'>
             <TierTable />
           </div>
@@ -116,7 +121,6 @@ const DashboardOverViewPage: Page = () => {
           </div>
         </div>
         <div className='ml-4'>
-          <Event />
           <div className='mt-4 bg-white rounded-lg'>
             <TopProducerCategory />
           </div>
