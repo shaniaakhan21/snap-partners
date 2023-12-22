@@ -102,9 +102,9 @@ const DashboardOverViewPage: Page = () => {
             {/* <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} userId={null}/> */}
             <NetworkActivity />
           </div>
-          <div className='mt-4'>
+          {/* <div className='mt-4'>
             <PVComponentSnap userId={null} />
-          </div>
+          </div> */}
           <div className='mt-4'>
             <RewardsProgram />
           </div>

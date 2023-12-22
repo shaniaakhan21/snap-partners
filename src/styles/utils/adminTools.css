@@ -1,12 +1,12 @@
 
 .admin-tool-main-menu-container{
     width:200%;
-    padding:10px;
+    padding:10px 10px;
     position: absolute;
-    top:30px;
+    top:58px;
     right:0;
     background-color: #FFFFFF;
-    border-radius: 5px;
+    border-radius:0 0 15px 15px;
     box-shadow: 0 4px 5px 0 rgba(60, 75, 100, .14), 0 1px 10px 0 rgba(60, 75, 100, .12), 0 2px 4px -1px rgba(60, 75, 100, .20);
     @media screen and (max-width: 647px) {
         width:140px;
@@ -14,7 +14,7 @@
 }
 
 .menuItem{
-    padding: 5px;
+    padding:12px 20px; margin:10px 0;
 }
 .admin-tools-container{
     position:relative;
@@ -137,3 +137,30 @@ text-transform: uppercase;
         font-size: 12px!important;
     }
 }
+
+.login-admin-tool-main-menu-container{    
+    width:180px;
+    padding:10px 10px;
+    position: absolute;
+    top:69px;
+    right:0;
+    background-color: #FFFFFF;
+    border-radius:0 0 15px 15px;
+    box-shadow: 0 4px 5px 0 rgba(60, 75, 100, .14), 0 1px 10px 0 rgba(60, 75, 100, .12), 0 2px 4px -1px rgba(60, 75, 100, .20);
+    @media screen and (max-width: 647px) {
+        width:140px;
+    }
+    }
+    .login-admin-tool-main-menu-container ul{
+    padding: 0;
+    }
+    .login-admin-tool-main-menu-container ul li{
+    padding: 0;
+    }
+    .login-admin-tool-main-menu-container ul li button{
+    text-align: left;
+    padding:10px 15px 10px 25px;
+    }
+    .login-admin-tool-main-menu-container ul li button:hover{
+        background: #fff; 
+    }

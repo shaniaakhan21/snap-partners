@@ -3,12 +3,15 @@
 .linkWrapper__activate::before {
   content: " ";
   position: absolute;
-  left: -25px;
-  bottom: 27px;
-  transform: rotate(90deg);
-  width: 60px;
-  height: 5px;
-  background: white;
+  left:13px;
+  top:19px;
+  width:7px;
+  height:28px;
+  background:#E74426;
+  border-radius: 10px;
+}
+.dashboardLayout__drawer ul li a svg{
+  max-width: 22px; margin-right: 10px;
 }
 
 /* SignUp - Upgrade To Manager - List Benefits */

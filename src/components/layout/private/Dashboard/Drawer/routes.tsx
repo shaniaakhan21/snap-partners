@@ -10,7 +10,10 @@ import {
   CreditCardIcon,
   CubeIcon
 } from 'components/common/icons'
+import { DocumentsIcon } from 'components/common/icons/DocumentsIcon'
+import { PersonIcon } from 'components/common/icons/PersonIcon'
 import { PromotionIcon } from 'components/common/icons/Promotion'
+import { ReportstIcon } from 'components/common/icons/ReportstIcon'
 import { SnapPartnersIcon } from 'components/common/icons/SnapPartners'
 import { SnapWellnessIcon } from 'components/common/icons/SnapWellness'
 import { VidgoLogo } from 'components/common/illustrations'
@@ -45,7 +48,7 @@ export const drawerRoutes = [
     label: 'Marketing Tools'
   },
   {
-    icon: <CompensationPlanIcon />,
+    icon: <ReportstIcon />,
     to: '/reports',
     label: 'Reports',
     subItems: [
@@ -95,7 +98,7 @@ export const drawerRoutes = [
     label: 'Network Activity'
   },
   {
-    icon: <GenealogyIcon />,
+    icon: <PersonIcon />,
     to: '/genealogy',
     label: 'Genealogy',
     integrous: true
@@ -134,7 +137,7 @@ export const drawerRoutes = [
     label: 'My Wallet'
   },
   {
-    icon: <CompensationPlanIcon />,
+    icon: <DocumentsIcon />,
     to: '/Documents',
     label: 'Documents'
   },
