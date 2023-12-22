@@ -87,13 +87,11 @@ const DashboardOverViewPage: Page = () => {
 
   return (
     <>
-      <div className='grid grid-cols-3 gap-4'>
-        <div className='col-span-2'>
+      <div className=''>
+        <div className=''>
           <RankComponent data={rankData} />
         </div>
-        <div>
-          <PVComponentSnap userId={null} />
-        </div>
+
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2">
         <div>
