@@ -14,8 +14,8 @@ export const RegisterPassword = ({ register, errors, rulesPasswordForm, rulesCon
 
   return (
     <>
-      <div className='w-full mb-2'>
-        <label htmlFor='password' className='font-semibold text-gray-600 capitalize text-md'>
+      <div className='w-full'>
+        <label htmlFor='password' className='font-semibold text-gray-600 text-md'>
           Password <span className='text-red-500'>*</span>
         </label>
         {errors.password && <p className='text-sm text-red-400'>{errors.password.message}</p>}
@@ -32,15 +32,15 @@ export const RegisterPassword = ({ register, errors, rulesPasswordForm, rulesCon
           />
           <div
             onClick={() => setShowPassword((prevState) => !prevState)}
-            className='cursor-pointer absolute right-4 mr-0 top-3 mt-2'
+            className='cursor-pointer absolute right-4 mr-0.5 top-3.5 mt-1.5'
           >
             {showPassword ? <EyeHiddenIcon /> : <EyeVisibleIcon />}
           </div>
         </div>
       </div>
 
-      <div className='w-full mb-2'>
-        <label htmlFor='confirmPassword' className='font-semibold text-gray-600 capitalize text-md'>
+      <div className='w-full mt-3'>
+        <label htmlFor='confirmPassword' className='font-semibold text-gray-600 text-md'>
           Confirm Password <span className='text-red-500'>*</span>
         </label>
         {errors.confirmPassword && <p className='text-sm text-red-400'>{errors.confirmPassword.message}</p>}
@@ -57,7 +57,7 @@ export const RegisterPassword = ({ register, errors, rulesPasswordForm, rulesCon
           />
           <div
             onClick={() => setShowPassword((prevState) => !prevState)}
-            className='cursor-pointer absolute right-4 mr-0 top-3 mt-2'
+            className='cursor-pointer absolute right-4 mr-0.5 top-3.5 mt-1.5'
           >
             {showPassword ? <EyeHiddenIcon /> : <EyeVisibleIcon />}
           </div>

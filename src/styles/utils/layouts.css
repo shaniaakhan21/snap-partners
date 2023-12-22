@@ -124,7 +124,9 @@
   @apply bg-primary-300 border-primary-500 border border-solid rounded-md;
   grid-area: topOrderline;
 } */
-
+body{
+  background:#F4F8FB;
+}
 .mui-table-bg-header {
   background-color: #DD4C37;
   color: white

@@ -47,8 +47,8 @@ export const InputForm = ({
   style
 }: IInputFormProps) => {
   return (
-    <div className='mb-2'>
-      <label htmlFor={id} className='font-semibold text-gray-600 capitalize text-md'>
+    <div className='w-full'>
+      <label htmlFor={id} className='font-semibold text-gray-600 text-md'>
         {label} {' '}
         {
           isRequired && <span className='text-red-500'>*</span>
