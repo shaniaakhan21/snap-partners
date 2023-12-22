@@ -37,6 +37,7 @@ export const AccountInfo = ({ auth, setAuth, removeAuth, setNewWindow, setTypeUp
   const isIntegrousCustomerAndAssociate = (_auth.roles.integrousAssociate && _auth.roles.integrousCustomer)
   const isIntegrousCustomer = (_auth.roles.integrousCustomer && !_auth.roles.integrousAssociate)
   const isCertified = auth.isCertified
+  const isValidated = auth.isValidated
   const [signedCertModalOpen, setSignedCertModalOpen] = useState(false)
   const [isSwitchOn, setIsSwitchOn] = useState(true)
 
@@ -134,7 +135,7 @@ export const AccountInfo = ({ auth, setAuth, removeAuth, setNewWindow, setTypeUp
       </div>
 
       <GrandfatherRankHr/>
-      {isSwitchOn && (
+      {isSwitchOn && auth.TINstatus === 'business' && isValidated && (
         <div className='mt-11'>
           <BusinessFields auth={auth} setTypeUpdate={setTypeUpdate}/>
         </div>

@@ -42,14 +42,13 @@ const DashboardOverViewPage: Page = () => {
   const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
   const isCustomer = auth.roles.customer
   const isIntegrousAssociate = auth.roles.integrousAssociate
-  const [showPopup, setShowPopup] = useState(true)
+  const [showPopup, setShowPopup] = useState(false)
   const SSnURL = auth.SSNDocURL
   const doc_b_structure = auth.doc_b_structure
   const doc_irs = auth.doc_irs
   const TinStatus = auth.TINstatus
   const showAlert =
-  (TinStatus === 'individual' && (!auth.newSSN === null)) ||
-  (TinStatus === 'individual' && (SSnURL === null)) ||
+  (TinStatus === 'individual' && (!(auth.newSSN === null) && (SSnURL === null))) ||
   (TinStatus === 'business' && (doc_b_structure === null || doc_irs === null))
 
   useEffect(() => {

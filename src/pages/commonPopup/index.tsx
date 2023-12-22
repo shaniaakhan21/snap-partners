@@ -8,6 +8,7 @@ import CommonPopup from './common'
 import InFields from './common/individualFields'
 import BussFields from './common/bussinessFields'
 import BusinessDocPopup from './common/businessDoc'
+
 interface TINPopupProps {
     open: boolean;
     onClose: () => void;
@@ -49,11 +50,9 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
 
   const handleOptionChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSelectedOption((prevOption) => {
-      console.log('Previous Selected Option:', prevOption)
       return event.target.value as 'Individual' | 'Business'
     })
     setFiled(true)
-    console.log('Selected Option:', event.target.value)
   }
 
   const handleCloseSuccessPopup = () => {
@@ -158,6 +157,30 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
     const value = event.target.value
     setFirstName(value)
   }
+  const validateUser = async () => {
+    try {
+      const response = await axios.post(
+        '/api/user/isValidated',
+        { isValidated: true },
+        {
+          headers: {
+            Authorization: `Bearer ${auth.accessToken}`
+          }
+        }
+      )
+
+      if (response.data.result[0] === 1) {
+        setAuth({ ...auth, isValidated: true })
+        onClose()
+      } else {
+        alert('Error while confirming validation')
+        onClose()
+      }
+    } catch (error) {
+      alert('Error while confirming validation')
+      onClose()
+    }
+  }
 
   const handleSubmitForIndividual = async () => {
     let hasErrors = false
@@ -242,6 +265,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
           if (auth.socialSecurityNumber === null || auth.socialSecurityNumber === '') {
             updateSocialSecurity(socialSecurity)
             setShowSuccessPopup(true)
+            await validateUser()
           } else {
             const lastTwoDigitsInAuthSSN = auth.socialSecurityNumber.substring(auth.socialSecurityNumber.length - 2)
 
@@ -251,6 +275,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
             } else if (lastTwoDigitsInAuthSSN === lastTwoDigitsInSSN) {
               setShowSuccessPopup(true)
             }
+            await validateUser()
           }
           await axios.all([updateDOBRequest])
 
@@ -266,24 +291,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
             }
           })
 
-          axios.post('/api/user/isValidated', { isValidated: true }, {
-            headers: {
-              Authorization: `Bearer ${auth.accessToken}`
-            }
-          })
-            .then((result) => {
-              if (result.data.result[0] === 1) {
-                setAuth({ ...auth, isValidated: true })
-                onClose()
-              } else {
-                alert('Error while confirming validation')
-                onClose()
-              }
-            })
-            .catch((e) => {
-              alert('Error while confirming validation')
-              onClose()
-            })
+          await validateUser()
           setCity(city)
           setState(state)
           setStreet(street)
@@ -365,24 +373,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
               Authorization: `Bearer ${auth.accessToken}`
             }
           })
-          axios.post('/api/user/isValidated', { isValidated: true }, {
-            headers: {
-              Authorization: `Bearer ${auth.accessToken}`
-            }
-          })
-            .then((result) => {
-              if (result.data.result[0] === 1) {
-                setAuth({ ...auth, isValidated: true })
-                onClose()
-              } else {
-                alert('Error while confirming validation')
-                onClose()
-              }
-            })
-            .catch((e) => {
-              alert('Error while confirming validation')
-              onClose()
-            })
+          await validateUser()
           setCity(city)
           setState(state)
           setStreet(street)
