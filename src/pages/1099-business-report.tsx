@@ -305,7 +305,7 @@ const BusinessReport: Page = () => {
 
   return (
     <>
-      <span className='text-lg sm:text-3xl font-bold'>Admin Report</span><br /><br />
+      <span className='text-lg sm:text-3xl font-bold'>1099 Business Verification Report</span><br /><br />
       <div className="w-full bg-white rounded-lg px-5 py-5 sm:px-10 sm:py-10 flex flex-col" id='html-content'>
         <h1 className='text-base sm:text-xl font-semibold'>The Following IBOs need additional verification:</h1>
         <br></br>
