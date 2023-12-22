@@ -130,34 +130,34 @@ export default function RankComponent (props: RankComponentProps) {
   return (
     <div>
       <Box sx={{ '& .Mui-selected': { color: 'black', bgcolor: 'white' }, '& .MuiTabs-indicator': { backgroundColor: 'transparent' } }}>
-        <div className='grid grid-cols-4 gap-4'>
+        <div className='grid grid-cols-1 md:grid-cols-4 gap-2 md:gap-4 '>
           {currentRank && (
             <div className='bg-white rounded-3xl flex flex-col justify-between shadow-xl' >
               <div className='bg-[#fff] rounded-t-3xl py-8  h-full w-full flex flex-col justify-center'>
                 <div className='flex justify-between'>
                   <div className='flex flex-col justify-center ml-[10%]'>
-                    <h1 className="text-xl font-bold">Your current </h1><span className='text-base font-normal text-gray-500 '>Qualified rank is:</span>
+                    <h1 className="text-sm lg:text-xl font-bold">Your current </h1><span className='text-xs lg:text-base font-normal text-gray-500 '>Qualified rank is:</span>
                   </div>
-                  <div className="flex items-center flex-col p-[5%] rounded-full border-2 border-[#EFEFEF] w-3/12  mr-[6%]">
+                  <div className="flex items-center flex-col p-[5%] rounded-full border-2 border-[#EFEFEF] w-4/12 lg:w-3/12  mr-[6%]">
                     <StyledBox backgroundColor={'white'}>
                       {/* <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: rankColors.get(rankData.currentRank) }} /> */}
                       <StarTrophyIcon/>
                     </StyledBox>
-                    <h1 className="text-base text-black-h font-semibold">{convertName(rankData.currentRank)}</h1>
+                    <h1 className="text-xs lg:text-base text-black-h font-semibold">{convertName(rankData.currentRank)}</h1>
                   </div>
                 </div>
               </div>
               <div className='bg-[#000000] rounded-b-3xl py-8 shadow-xl h-full w-full flex flex-col justify-center'>
                 <div className='flex flex-row justify-between' >
                   <div className='flex flex-col justify-center ml-[10%]'>
-                    <h1 className="text-xl text-white font-bold">Highest </h1><span className='text-base font-normal text-gray-500'>Achieved Rank:</span>
+                    <h1 className="text-sm lg:text-xl text-white font-bold">Highest </h1><span className='text-xs lg:text-base font-normal text-gray-500'>Achieved Rank:</span>
                   </div>
-                  <div className="flex items-center flex-col p-[5%] rounded-full border-2 border-[#EFEFEF] w-3/12 mr-[6%] bg-[#fff]">
+                  <div className="flex items-center flex-col p-[5%] rounded-full border-2 border-[#EFEFEF] w-4/12 lg:w-3/12 mr-[6%] bg-[#fff]">
                     <StyledBox backgroundColor={'white'}>
                       {/* <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: rankColors.get(rankData.highestRank) }} /> */}
                       <StarSuccessIcon/>
                     </StyledBox>
-                    <h1 className="text-base text-black-h font-semibold ">{convertName(rankData.highestRank)}</h1>
+                    <h1 className="text-xs lg:text-base text-black-h font-semibold ">{convertName(rankData.highestRank)}</h1>
                   </div>
                 </div>
               </div>
@@ -170,13 +170,13 @@ export default function RankComponent (props: RankComponentProps) {
               {/* Free Member */}
               {
                 rankData && <><div className="col-span-2 flex items-center justify-center rounded-2xl bg-[#F7F8F9] border-2 border-[#D6E2ED] py-2">
-                  <div className='w-[10%] py-4 rounded-full border-2 border-[#D1D1D1] flex justify-center bg-white'>
+                  <div className='w-[20%] lg:w-[10%] py-4 rounded-full border-2 border-[#D1D1D1] flex justify-center bg-white'>
                     <StyledBox backgroundColor={'white'}>
                       {/* <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: rankColors.get(rankData.highestRank) }} /> */}
                       <StarSuccessIcon/>
                     </StyledBox>
                   </div>
-                  <h1 className="text-2xl text-black-h font-semibold pl-2">IBO</h1>
+                  <h1 className="text-xl lg:text-2xl text-black-h font-semibold pl-2">IBO</h1>
                 </div>
                 </>
               }
@@ -186,13 +186,13 @@ export default function RankComponent (props: RankComponentProps) {
               <div className='flex flex-row'>
                 {
                   rankData && <><div className="w-5/12  flex flex-col items-start justify-between border-r-2 border-[#D1D1D1]">
-                    <h1 className="text-2xl text-black-h font-semibold">Manager</h1>
-                    <div className='text-xs pt-2'>
-                      <span className="text-14">To be a <strong>Manager</strong> you'll need</span>
+                    <h1 className="text-lg lg:text-2xl text-black-h font-semibold">Manager</h1>
+                    <div className='pt-2'>
+                      <span className="text-[9px] lg:text-14">To be a <strong>Manager</strong> you'll need</span>
                     </div>
                   </div>
 
-                  <div className='w-7/12 text-xs pt-4 pl-8'>
+                  <div className='w-7/12 text-xs pt-0 lg:pt-4 pl-8'>
                     <div className='flex flex-row justify-between'>
                       <strong className='text-10'>
                     You have {formatNumberToLocale(rankData.mng.commissionVol, 0)} PVC
@@ -214,13 +214,14 @@ export default function RankComponent (props: RankComponentProps) {
                 rankData && <>
                   <div className='flex flex-row'>
                     <div className="w-5/12  flex flex-col items-start justify-between border-r-2 border-[#D1D1D1]">
-                      <h1 className="text-2xl text-black-h font-semibold">Supervisor</h1>
-                      <div className='text-xs pt-2'>
-                        <span className="text-14">To be <strong>Supervisor</strong> you'll need</span>
+                      <h1 className="text-lg lg:text-2xl text-black-h font-semibold">Supervisor</h1>
+                      <div className='pt-2'>
+                        <span className="text-[9px] lg:text-14">To be <strong>Supervisor</strong> you'll need</span>
+
                       </div>
                     </div>
 
-                    <div className='w-7/12  text-xs pt-5 pl-4'>
+                    <div className='w-7/12  text-xs pt-0 lg:pt-5 pl-4'>
                       <div className='flex flex-row justify-between'>
                         <strong className='text-10'>
                     You have {formatNumberToLocale(rankData.sv.commissionVol, 0)} PVC
@@ -268,13 +269,14 @@ export default function RankComponent (props: RankComponentProps) {
               {
                 rankData && <>                  <div className='flex flex-row'>
                   <div className="w-5/12  flex flex-col items-start justify-between border-r-2 border-[#D1D1D1]">
-                    <h1 className="text-2xl text-black-h font-semibold">Director</h1>
-                    <div className='text-xs pt-5'>
-                      <span className="text-14">To be a <strong>Director</strong> you'll need</span>
+                    <h1 className="text-lg lg:text-2xl text-black-h font-semibold">Director</h1>
+                    <div className='pt-2 lg:pt-5'>
+                      <span className="text-[9px] lg:text-14">To be a <strong>Director</strong> you'll need</span>
+
                     </div>
                   </div>
 
-                  <div className='w-7/12  text-xs pt-5 pl-4'>
+                  <div className='w-7/12  text-xs pt-0 lg:pt-5 pl-4'>
                     <div className='flex flex-row justify-between'>
                       <strong className='text-10'>
                     You have {formatNumberToLocale(rankData.dct.commissionVol, 0)} PVC
@@ -323,13 +325,14 @@ export default function RankComponent (props: RankComponentProps) {
                 rankData && <>
                   <div className='flex flex-row'>
                     <div className="w-5/12  flex flex-col items-start justify-between border-r-2 border-[#D1D1D1]">
-                      <h1 className="text-2xl text-black-h font-semibold">Executive</h1>
-                      <div className='col-span-3 text-xs pt-5'>
-                        <span className="text-14">To be a <strong>Executive</strong> you need</span>
+                      <h1 className="text-lg lg:text-2xltext-black-h font-semibold">Executive</h1>
+                      <div className='col-span-3 text-xs pt-2 lg:pt-5'>
+                        <span className="text-[9px] lg:text-14">To be a <strong>Executive</strong> you need</span>
+
                       </div>
                     </div>
 
-                    <div className='w-7/12  text-xs pt-5 pl-4'>
+                    <div className='w-7/12  text-xs pt-0 lg:pt-5 pl-4'>
                       <div className='flex flex-row justify-between'>
                         <strong className='text-10'>
                     You have {formatNumberToLocale(rankData.exec.commissionVol, 0)} PVC

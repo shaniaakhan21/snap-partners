@@ -74,7 +74,7 @@ export default function PVComponentSnap ({ userId }) {
   return (
     <>
       <div ref={showDivRef} className="mainDiv w-full max-w-full py-4 px-6 space-y-2 h-full rounded-3xl shadow-xl flex flex-col justify-around" style={{ background: 'linear-gradient(231deg, #E74426 2.25%, #BD3F27 92.77%)' }}>
-        <h1 className="text-lg text-white font-semibold ">Your Store Orders</h1>
+        <h1 className="text-base lg:text-lg text-white font-semibold ">Your Store Orders</h1>
         {/* <div className="p-0 flex flex-row items-start">
           <div className="flex flex-col items-center w-1/2 h-3/5">
             <button onClick={() => { setOpen(true) }} style={{ cursor: 'pointer' }} className="rounded-full bg-primary-500 w-full flex flex-row items-center justify-center bg-red-500 text-gray-500">
@@ -92,7 +92,7 @@ export default function PVComponentSnap ({ userId }) {
           </div>
         </div> */}
         <div>
-          <p className="text-sm text-white font-normal ">Use this widget to track your personal store orders and to compare your stores monthly growth.</p>
+          <p className="text-xs lg:text-sm text-white font-normal ">Use this widget to track your personal store orders and to compare your stores monthly growth.</p>
         </div>
         {/* <div className='flex flex-row items-center justify-around py-2'>
           <div>
@@ -113,12 +113,12 @@ export default function PVComponentSnap ({ userId }) {
         <div className='flex flex-row w-full'>
           <div className='flex flex-col w-full'>
             <div className='mt-18'>
-              <button onClick={() => { setOpen(true) }} style={{ cursor: 'pointer' }} className="rounded-full bg-none w-8/12 flex flex-row items-center justify-center text-white border-[2px] border-white">
-                <p className='text-sm text-white font-medium p-1 uppercase'>Order History</p>
+              <button onClick={() => { setOpen(true) }} style={{ cursor: 'pointer' }} className="rounded-full bg-none w-full lg:w-8/12 flex flex-row items-center justify-center text-white border-[2px] border-white">
+                <p className='text-xs lg:text-sm text-white font-medium p-1 uppercase'>Order History</p>
               </button>
             </div>
             <div className='flex flex-row items-center py-4'>
-              <h1 className="text-xs text-white font-medium ">Current Month PCV</h1><p className="text-xl text-white font-bold p-2">{data?.cv || 0}</p>
+              <h1 className="text-[10px] lg:text-xs  text-white font-medium ">Current Month PCV</h1><p className="text-xl text-white font-bold p-2">{data?.cv || 0}</p>
             </div>
           </div>
           <div className='w-6/12'>

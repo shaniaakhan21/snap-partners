@@ -33,9 +33,9 @@ export const RankSteps = (props: RankStepsProps) => {
     }
     const icon = rankIcons[convertName(rank)]
     return (
-      <button key={rank} className='flex flex-1 flex-row relative mt-2' onClick={() => onRankPress(idx)} style={{ minHeight: 70 }}>
-        <div className='flex flex-col items-center' style={{ minWidth: 59 }}>
-          <div className='flex items-center justify-center bg-none p-4 rounded-full text-red ' style={{ borderWidth: 2, borderColor: selected ? '#E74426' : '#EFEFEF' }}>
+      <button key={rank} className='flex flex-1 md:flex-2 flex-row relative mt-2' onClick={() => onRankPress(idx)} style={{ minHeight: 70 }}>
+        <div className='flex flex-col items-center ' style={{ minWidth: 59 }}>
+          <div className='flex items-center justify-center bg-none py-0 px-[6px] md:py-0 md:px-2 lg:p-4 rounded-full text-red w-9/12 lg:w-full' style={{ borderWidth: 2, borderColor: selected ? '#E74426' : '#EFEFEF' }}>
             {icon}
           </div>
           <p className='text-xs align text-center mt-2 font-semibold' style={{ color: selected ? '#E74426' : '#9D9D9D' }}>
@@ -47,7 +47,7 @@ export const RankSteps = (props: RankStepsProps) => {
     )
   }
   return (
-    <div className='flex flex-row justify-between items-center'>
+    <div className='flex flex-row justify-center md:justify-between items-center'>
       {Ranks.map(renderRank)}
     </div>
   )
