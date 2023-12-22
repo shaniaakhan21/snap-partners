@@ -165,7 +165,7 @@ export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
           <p>
             <span className='font-semibold text-gray-800'>Don’t have an account?</span>
             <Link href={signupURL}>
-              <a className='text-textAcent-500'> Sign Up.</a>
+              <a className='text-textAcent-500'>Sign Up</a>
             </Link>
           </p>
         </section>
