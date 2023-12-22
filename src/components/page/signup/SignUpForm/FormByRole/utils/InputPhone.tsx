@@ -16,7 +16,7 @@ export const InputPhone = ({ errors, register, classes, isRequired, withVerifyCo
   return (
     <div className='flex flex-col justify-start items-start gap-x-2 my-2'>
       <div className='flex gap-x-2 justify-start items-center w-full'>
-        <label htmlFor='phone' className='font-semibold text-gray-600 capitalize text-md'>
+        <label htmlFor='phone' className='font-semibold text-gray-600 text-md'>
           {
             label
               ? <p>{label} {isRequired && <span className='text-red-500'>*</span>}</p>

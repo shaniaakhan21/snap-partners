@@ -2,7 +2,11 @@ import { IIconsBasicProps } from 'lib/types'
 
 export const EyeHiddenIcon = ({ classes = '', onClick }: IIconsBasicProps) => {
   return (
-    <svg onClick={onClick} className={`w-7 h-7 fill-[#585858] hover:fill-[#6b6666] ${classes}`} viewBox='0 0 64 64' fill='currentColor' xmlns='http://www.w3.org/2000/svg'>
+
+ 
+
+
+    <svg onClick={onClick} className={`w-7 h-7 fill-[#8D8D8D] hover:fill-[#8D8D8D] ${classes}`} viewBox='0 0 64 64' fill='#8D8D8D' xmlns='http://www.w3.org/2000/svg'>
       <g id='Icons1'>
         <g id='Strike'></g>
         <g id='H1'></g>

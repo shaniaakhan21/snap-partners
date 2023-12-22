@@ -1,10 +1,11 @@
 import { useAuthStore } from 'lib/stores'
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { FooterPublic } from 'components/layout/public/Footer'
 import { useHandlerReferralLink } from '../../lib/hooks/useHandlerReferralLink'
 import { getLocalStorage } from 'lib/utils/localStorage'
 import { ROLES } from '../../config/roles'
+import { GTMTrack } from 'lib/utils/gtm'
 
 export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Page
   const { referralCode: code, role } = useHandlerReferralLink()
@@ -25,8 +26,8 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
   const isLoginIntegrous = router.pathname === '/auth/login-integrous'
   const isSignupWellness = router.pathname === '/auth/signup-wellness'
   const isLoginWellness = router.pathname === '/auth/login-wellness'
-  let t1 = 'Snap Delivered'
-  let t2 = 'Order-Eat-Repeat'
+  let t1 = 'Snap Partners'
+  let t2 = 'Delivering what matters most in a SNAP!'
 
   if (role === ROLES.AGENT) {
     t1 = 'Snap Financial'
@@ -63,8 +64,8 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
     : 'h-screen'
 
   const displayContent = (
-    <div className='mt-24 max-w-2xl'>
-      <h1 className='text-5xl font-bold 2xl:text-7xl'>{t1}</h1>
+    <div className='mt-12 max-w-2xl'>
+      <h1 className='text-5xl font-extrabold 2xl:text-5xl mb-5'>{t1}</h1>
       <p className='text-3xl font-bold mt-1'>{t2}</p>
       <br />
     </div>
@@ -74,7 +75,7 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
     <>
       <div className='flex w-full justify-center items-end'>
         <div className='mt-24 w-full'>
-          <h1 className='text-5xl font-bold 2xl:text-7xl'>{t1}</h1>
+          <h1 className='text-5xl font-extrabold 2xl:text-5xl mb-5'>{t1}</h1>
           <p className='text-3xl font-bold mt-1'>{t2}</p>
           <br />
         </div>
@@ -100,7 +101,7 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
           <img className='w-1/6' src='/static/wellness/SnapWellnessLarge.svg' />
         </div>
         <div className='w-full'>
-          <h1 className='text-5xl font-bold 2xl:text-7xl'>{t1}</h1>
+          <h1 className='text-5xl font-extrabold 2xl:text-5xl mb-5'>{t1}</h1>
           <p className='text-3xl font-bold mt-3'>{t2}</p>
           <br />
         </div>
@@ -110,37 +111,43 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
 
   const snapPartnersDesign = (
     <>
-      <div className='w-full'>
+      <div className='m-0 w-full p-4 sm:p-6 lg:p-8 max-w-full md:mx-auto md:w-11/12'>
         <div className='flex flex-col h-full md:flex-row justify-between items-center md:items-start'>
-          <section className='sticky top-0 left-0 h-screen hidden md:flex flex-col justify-start w-1/2 md:min-h-screen bg-textAcent-500 text-white'>
-            <img src='/static/authBg.svg' className='w-full h-screen object-cover absolute bottom-0 right-0 z-0' />
+          <section className='sticky top-0 left-0 h-screen hidden xl:flex flex-col justify-start w-1/2 md:min-h-screen text-white'>
+            {/* <img src='/static/authBg.svg' className='w-full h-screen object-fit absolute bottom-0 right-0 z-0' /> */}
+            <img src='/static/authBg.svg' className='w-full h-screen absolute bottom-0 top-0 mb-6 right-0 z-0' />
 
-            <div className='absolute w-full h-full top-0 right-0 z-10 px-4 pb-8 md:px-12'>
+            <div className='absolute w-full top-0 right-0 z-10 pl-4 pb-8 md:pl-24 pr-12 mt-32 md:mt-24'>
+              <div><img src='/static/snap_partners_logo.png' className='lg:w-28 w-36' /></div>
               {(isLoginIntegrous || (isSignupIntegrous && (ROLES.integrousCustomer || ROLES.integrousAssociate)))
                 ? displayIntegrousContent
                 : displayContent}
-              <ul className={`list-none pl-6 ${role !== ROLES.IBO ? 'mt-20' : 'mt-5'} text-xl 2xl:text-2xl space-y-4`}>
-                <li>Get notified about company updates</li>
-                <li>Access to company training</li>
-                <li>Get synced</li>
-                <li>Track your team</li>
+              <ul className={`list-none pl-2 ${role !== ROLES.IBO ? 'mt-5' : 'mt-5'} font-base text-xl 2xl:text-lg space-y-8`}>
+                <li className='relative pl-8 before:absolute before:left-1 before:top-2.5 before:bg-white before:content before:w-0.5 before:h-16 after:absolute after:left-0 after:top-2.5 after:bg-white after:rounded-full after:content after:w-2.5 after:h-2.5'>Get notified about company updates</li>
+                <li className='relative pl-8 before:absolute before:left-1 before:top-2.5 before:bg-white before:content before:w-0.5 before:h-16 after:absolute after:left-0 after:top-2.5 after:bg-white after:rounded-full after:content after:w-2.5 after:h-2.5'>Access to company training</li>
+                <li className='relative pl-8 before:absolute before:left-1 before:top-2.5 before:bg-white before:content before:w-0.5 before:h-16 after:absolute after:left-0 after:top-2.5 after:bg-white after:rounded-full after:content after:w-2.5 after:h-2.5'>Get synced</li>
+                <li className='relative pl-8 after:absolute after:left-0 after:top-2.5 after:bg-white after:rounded-full after:content after:w-2.5 after:h-2.5'>Track your team</li>
               </ul>
-
-              <div className='absolute bottom-10 left-12 flex items-center gap-x-4'>
-                {role !== ROLES.IBO && <img src='/images/logo-dark.png' />}
-              </div>
+ 
             </div>
+            <div className='absolute w-full text-center bottom-5 text-sm text-gray-500'>© 2023 Snap Delivered. All rights reserved.</div>
           </section>
 
-          <section className='w-full md:w-1/2 h-full md:min-h-screen bg-white px-4 py-10 flex justify-center items-center'>
-            <div className='max-w-md mx-auto w-full'>
+          <section className='w-full mx-auto xl:mx-0 md:w-full lg:w-1/2 h-full md:min-h-screen flex justify-center items-center'>
+            <div className='max-w-xl pt-16 mx-auto w-full bg-white rounded-3xl p-4 sm:p-6 md:p-8 lg:p-12 shadow-xl relative my-16'>
+              
+              <div className='absolute -top-10 -mt-10 left-0 w-full'>
+                {role !== ROLES.IBO && <img src='/images/logo-orange.png' className='mx-auto' />}
+              </div>
+
+
               {children}
             </div>
           </section>
         </div>
       </div>
 
-      {role !== ROLES.IBO && <FooterPublic />}
+      {/* {role !== ROLES.IBO && <FooterPublic />} */}
     </>
   )
 
@@ -149,7 +156,7 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
       <div className='w-full'>
         <div className='flex flex-col h-full md:flex-row justify-between items-center md:items-start'>
           <section className={`sticky top-0 left-0  md:flex flex-col justify-start w-full md:min-h-screen bg-white md:bg-textAcent-500 text-white ${heightClass}`}>
-            <img src='/static/snap-bg.png' className={`w-full object-cover hidden sm:block absolute bottom-0 right-0 z-0 ${heightClass}`} />
+            <img src='/static/snap-bg.png' className={`w-full object-cover hidden sm:block absolute bottom-0 right-0 z-0 t ${heightClass}`} />
 
             <div className='hidden md:block absolute w-1/2 h-full top-0 z-10 px-4 pb-8 md:px-12 ml-10'>
               {displayWellnessContent}

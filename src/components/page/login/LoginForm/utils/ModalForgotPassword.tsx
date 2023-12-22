@@ -108,7 +108,7 @@ export const ModalForgotPassword = () => {
 
   if (isLoading) {
     return (
-      <div className='min-h-[564px] flex items-center justify-center md:p-8'>
+      <div className='flex items-center justify-center'>
         <Spinner />
       </div>
     )
@@ -116,19 +116,18 @@ export const ModalForgotPassword = () => {
 
   if (identifier === 'phone') {
     return (
-      <div className="w-full min-h-[564px] flex flex-col items-center justify-center md:p-8">
-        <h3 className='text-3xl font-semibold text-gray-700'>Account Recovery</h3>
-        <br />
-        <div className='w-28'>
+      <div className="w-full flex flex-col items-center justify-center">
+        <div className='w-40'>
           {phoneSent
             ? <Image src={successImgSrc} placeholder='blur' className='w-full h-full' />
             : <Image src={failedImgSrc} placeholder='blur' />
           }
         </div>
+        <h3 className='text-3xl font-bold text-black'>Account Recovery</h3>
         {
           phoneSent && (
-            <p className='text-gray-500 mt-3'>
-              Code is Sent to <span className='font-bold text-black'>{phone}</span>
+            <p className='text-gray-600 mt-3'>
+              Code is Sent to <span className='font-bold text-primary-500'>{phone}</span>
             </p>
           )
         }
@@ -145,12 +144,12 @@ export const ModalForgotPassword = () => {
                 control={control}
               />
 
-              <Button type='submit' classes='w-full text-sm bg-primary-500'>
+              <Button type='submit' classes='w-auto text-sm bg-primary-500 uppercase float-right mt-2'>
                 Send
               </Button>
             </form>
 
-            : <form onSubmit={handleSubmit(onSubmitResetPasswordWithPhone)} className='mt-4 flex flex-col justify-center items-center'>
+            : <form onSubmit={handleSubmit(onSubmitResetPasswordWithPhone)} className='w-full mt-4 flex flex-col justify-center items-center'>
               <ReactCodeInput
                 fields={6}
                 className='custom__reactCodeInput'
@@ -167,7 +166,7 @@ export const ModalForgotPassword = () => {
                 />
               </div>
 
-              <Button type='submit' classes='w-full mt-4'>
+              <Button type='submit' classes='mt-4 w-auto text-mg bg-primary-500 font-semibold uppercase ml-auto'>
                 Send
               </Button>
             </form>
@@ -179,71 +178,65 @@ export const ModalForgotPassword = () => {
 
   if (identifier === 'email') {
     return (
-      <div className="w-full min-h-[564px] flex flex-col items-center justify-center md:p-8">
-        <h3 className='text-3xl font-semibold text-gray-700'>Account Recovery</h3>
-        <br />
-        <div className='w-28'>
+      <div className="w-full flex flex-col items-center justify-center">
+        <div className='w-40'>
           {emailSent
             ? <Image src={successImgSrc} placeholder='blur' className='w-full h-full' />
             : <Image src={failedImgSrc} placeholder='blur' />
           }
         </div>
-        <br />
+        <h3 className='text-3xl font-bold text-black'>Account Recovery</h3>
         {emailSent
           ? (
-            <p className='text-2xl font-semibold text-gray-700 text-center'>
+            <p className='text-base font-semibold text-center text-gray-600 mb-4 mt-1'>
               We have sent you an email, please{' '}
-              <br className='hidden sm:block' />
-              check your email address.
+               check your email address.
             </p>
           )
           : (
-            <p className='text-2xl font-semibold text-gray-700 text-center'>
+            <p className='text-base font-semibold text-center text-gray-600 mb-4 mt-1'>
               Enter the email address{' '}
-              <br className='hidden sm:block' />
-              associated with your account.
+               associated with your account.
             </p>
           )
         }
         {emailSent
           ? (
-            <span className='text-xl text-gray-400 text-center my-2'>
+            <span className='w-full text-base text-gray-700 text-center my-2 rounded-lg p-3 border border-gray-300 bg-gray-50 mb-8'>
               You will have a link that will allow you{' '}
-              <br className='hidden sm:block' />
               to reset your password.
             </span>
           )
           : (
-            <span className='text-xl text-gray-400 text-center my-2'>
+            <span className='w-full text-base text-gray-800 text-center rounded-lg p-3 bg-gray-100 mt-4 mb-4'>
               We will email you a link to reset{' '}
-              <br className='hidden sm:block' />
+              <br/>
               your password.
             </span>
           )
         }
-
+  
         {!emailSent && (
           <>
-            <InputForm
-              id='email'
-              name='email'
-              type='email'
-              label='Email'
-              registerId='email'
-              placeholder='Enter Email'
-              autoComplete='email'
-              errors={errors.email}
-              register={register}
-              rulesForm={ruleEmail}
-              isRequired
-            />
-            <br />
-            <Button
-              classes='w-full mt-4 text-sm bg-primary-500'
-              onClick={handleSubmit(onSubmitEmail)}
-            >
-              Send
-            </Button>
+                <InputForm
+                  id='email'
+                  name='email'
+                  type='email'
+                  label='Email'
+                  registerId='email'
+                  placeholder='Enter Email'
+                  autoComplete='email'
+                  errors={errors.email}
+                  register={register}
+                  rulesForm={ruleEmail}
+                  isRequired
+                />
+                <Button
+                  classes='w-auto text-mg bg-primary-500 font-semibold uppercase ml-auto mt-4'
+                  onClick={handleSubmit(onSubmitEmail)}
+                >
+                  Send
+                </Button>
           </>
         )}
       </div>
@@ -251,35 +244,32 @@ export const ModalForgotPassword = () => {
   }
 
   return (
-    <div className="w-full min-h-[564px] flex flex-col items-center justify-center md:p-8">
-      <h3 className='text-3xl font-semibold text-gray-700'>Account Recovery</h3>
-      <br />
-      <div className='w-28'>
+    <div className="w-full flex flex-col items-center justify-center">
+      <div className='w-40'>
         {emailSent
           ? <Image src={successImgSrc} placeholder='blur' className='w-full h-full' />
           : <Image src={failedImgSrc} placeholder='blur' />
         }
       </div>
-
-      <p className='mt-2'>
+      <h3 className='text-3xl font-bold text-black'>Account Recovery</h3>
+      <p className='text-base font-semibold text-center text-gray-600 mb-4 mt-1'>
         To help keep your account safe, SNAP wants to make sure it’s really you trying to sign
       </p>
 
-      <br />
-      <p className='font-semibold'>Get a verification code via</p>
+      <p className='w-full text-base text-gray-800 text-center rounded-lg p-3 bg-gray-100 mt-4 mb-8'>Get a verification code via</p>
 
-      <br />
+
 
       <div className='w-full flex justify-center items-center'>
         <Button
           onClick={() => setIdentifier('phone')}
-          classes='mr-4 w-full'
+          classes='w-full mr-4 text-mg bg-primary-500 font-semibold uppercase ml-auto'
         >
           Phone
         </Button>
 
         <Button
-          classes='w-full'
+          classes='w-full text-mg bg-primary-500 font-semibold uppercase ml-auto'
           onClick={() => setIdentifier('email')}
         >
           Email
