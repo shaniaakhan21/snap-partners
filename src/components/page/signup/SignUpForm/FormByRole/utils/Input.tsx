@@ -68,11 +68,10 @@ export const InputForm = ({
         placeholder={placeholder}
         defaultValue={defaultValue}
         onKeyPress={onKeyPress}
-        step={isNumberFloat ? '0.01' : 'any'} 
+        step={isNumberFloat ? '0.01' : 'any'}
         disabled={disabled}
       />
       {helpText && <div style={style} className='text-xs text-gray-700 font-semibold -mt-1 mb-2 p-3 bg-gray-100 rounded mb-4 text-center'>{helpText}</div>}
     </div>
   )
 }
- 

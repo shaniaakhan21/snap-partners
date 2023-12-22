@@ -2,14 +2,14 @@ import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
 import { login } from 'lib/services/auth/login'
 import { getUserMe } from 'lib/services/user/getUserMe'
-import { useAuthStore } from 'lib/stores'
+import { useAuthStore, useModalStore, MODALS_ID } from 'lib/stores'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import Link from 'next/link'
 import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { InputForm } from './utils/Input'
-import { useModalStore, MODALS_ID } from 'lib/stores'
+
 import { RegisterPassword } from './utils/RegisterPassword'
 import { useRouter } from 'next/router'
 import { getLocalStorage, removeLocalStorage } from 'lib/utils/localStorage'
@@ -26,18 +26,16 @@ interface IProps {
 }
 
 export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
-  
   const { current: Apps } = useRef([
     { to: '/download-app?device=APPLE', icon: <img src='/images/app-store.png' className='inline-block mb-4 sm:mb-0 w-40' /> },
     { to: '/download-app?device=ANDROID', icon: <img src='/images/gplay.png' className='inline-block mb-4 sm:mb-0 w-40' /> }
 
   ])
-  
-  
+
   const { setAuth } = useAuthStore()
   const [isLoading, setLoading] = useState(false)
   const { handleSubmit, register, reset, formState: { errors } } = useForm<IDataForm>()
-  
+
   const { openModal, addModal } = useModalStore()
 
   const onSubmit = async (dataForm: IDataForm) => {
@@ -48,7 +46,6 @@ export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
       username: dataForm.username,
       password: dataForm.password
     })
-    
 
     if (errorLogin) {
       handleFetchError(errorLogin.status, errorLogin.info)
@@ -165,18 +162,18 @@ export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
         /> */}
 
         <section className='mt-5 sm:text-left'>
-        <div className='flex'>
+          <div className='flex'>
             <button
-                type='button'
-                className='text-primary-500 font-semibold underline decoration-1 text-left text-sm sm:text-base' 
-                onClick={() => openModal(MODALS_ID.MODAL_FORGOT_PASSWORD_ID)}
-              >
+              type='button'
+              className='text-primary-500 font-semibold underline decoration-1 text-left text-sm sm:text-base'
+              onClick={() => openModal(MODALS_ID.MODAL_FORGOT_PASSWORD_ID)}
+            >
                   Forgot Password?
-              </button>
-              
-              <Button type='submit' classes='w-auto text-mg bg-primary-500 font-semibold uppercase ml-auto'>
+            </button>
+
+            <Button type='submit' classes='w-auto text-mg bg-primary-500 font-semibold uppercase ml-auto'>
                 Sign in
-              </Button>
+            </Button>
           </div>
 
           <div className='mt-8 text-center'>
@@ -185,17 +182,15 @@ export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
               <a className='text-primary-500 font-semibold text-xl underline decoration-1 ml-2 hover:text-black'>Sign Up</a>
             </Link>
           </div>
-          
 
-          
           <div className='mt-8 text-center items-center'>
-              {Apps.map(app => (
-                   <Link key={app.to} href={app.to}>
-                    <a className='mx-2'>
-                      {app.icon}
-                    </a>
-                  </Link>
-               ))}
+            {Apps.map(app => (
+              <Link key={app.to} href={app.to}>
+                <a className='mx-2'>
+                  {app.icon}
+                </a>
+              </Link>
+            ))}
           </div>
 
         </section>

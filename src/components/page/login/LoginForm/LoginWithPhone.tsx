@@ -2,7 +2,7 @@ import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
 import { login } from 'lib/services/auth/login'
 import { getUserMe } from 'lib/services/user/getUserMe'
-import { useAuthStore } from 'lib/stores'
+import { useAuthStore, useModalStore, MODALS_ID } from 'lib/stores'
 import { handleFetchError } from 'lib/utils/handleFetchError'
 import Link from 'next/link'
 import { useEffect, useRef, useState } from 'react'
@@ -13,7 +13,7 @@ import { RegisterPassword } from './utils/RegisterPassword'
 import { useRouter } from 'next/router'
 import { getLocalStorage, removeLocalStorage } from 'lib/utils/localStorage'
 import { builderWebsiteFields } from '../../../../lib/types/user/profile'
-import { useModalStore, MODALS_ID } from 'lib/stores'
+
 import { ModalForgotPassword } from './utils/ModalForgotPassword'
 import { FooterApple } from 'components/common/icons'
 import { FooterAndroid } from 'components/common/icons/FooterAndroid'
@@ -176,17 +176,17 @@ export const LoginWithPhone = ({ trackLoginHandle }: IProps) => {
 
         <section className='mt-5 sm:text-left'>
           <div className='flex'>
-          <button
-            type='button'
-            className='text-primary-500 font-semibold underline decoration-1 text-left text-sm sm:text-base' 
-            onClick={() => openModal(MODALS_ID.MODAL_FORGOT_PASSWORD_ID)}
-          >
+            <button
+              type='button'
+              className='text-primary-500 font-semibold underline decoration-1 text-left text-sm sm:text-base'
+              onClick={() => openModal(MODALS_ID.MODAL_FORGOT_PASSWORD_ID)}
+            >
               Forgot Password?
-          </button>
-          
-          <Button type='submit' classes='w-auto text-mg bg-primary-500 font-semibold uppercase ml-auto'>
+            </button>
+
+            <Button type='submit' classes='w-auto text-mg bg-primary-500 font-semibold uppercase ml-auto'>
             Sign in
-          </Button>
+            </Button>
           </div>
 
           <div className='mt-8 text-center'>
@@ -196,17 +196,15 @@ export const LoginWithPhone = ({ trackLoginHandle }: IProps) => {
             </Link>
           </div>
 
-          
           <div className='mt-8 text-center items-center'>
-              {Apps.map(app => (
-                   <Link key={app.to} href={app.to}>
-                    <a className='mx-2'>
-                      {app.icon}
-                    </a>
-                  </Link>
-               ))}
+            {Apps.map(app => (
+              <Link key={app.to} href={app.to}>
+                <a className='mx-2'>
+                  {app.icon}
+                </a>
+              </Link>
+            ))}
           </div>
-
 
         </section>
       </form>

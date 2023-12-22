@@ -33,9 +33,9 @@ export const RegisterPassword = ({ register, errors }: IInputFormProps) => {
         </div>
         {/* <button
           type='button'
-          className='text-textAcent-500' 
+          className='text-textAcent-500'
           onClick={() => openModal(MODALS_ID.MODAL_FORGOT_PASSWORD_ID)}
-          
+
         >
             Forgot Password?
         </button> */}

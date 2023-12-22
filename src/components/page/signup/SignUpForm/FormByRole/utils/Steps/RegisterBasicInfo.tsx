@@ -413,23 +413,23 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             isRequired={false}
             readOnly={Boolean(referralLink.code)}
           />
-            <div className='block sm:flex w-full'>
-              <div className='mt-7'>
-                <TermsAndConditions
-                  errors={errors.termsAndConditions}
-                  register={register}
-                  rulesForm={registerRulesConfig.termsAndConditions}
-                  referralLink = {referralLink}
-                />
-              </div>
-              <div className='w-auto ml-auto'>
-                <Button type='submit' classes=' w-full mt-4 text-sm bg-primary-500 font-semibold uppercase ml-auto'>Sign Up</Button>
+          <div className='block sm:flex w-full'>
+            <div className='mt-7'>
+              <TermsAndConditions
+                errors={errors.termsAndConditions}
+                register={register}
+                rulesForm={registerRulesConfig.termsAndConditions}
+                referralLink = {referralLink}
+              />
             </div>
+            <div className='w-auto ml-auto'>
+              <Button type='submit' classes=' w-full mt-4 text-sm bg-primary-500 font-semibold uppercase ml-auto'>Sign Up</Button>
             </div>
+          </div>
 
           <BulletPagination stepToActivate='REGISTER_BASIC_INFO' />
           <section className='my-4'>
-          
+
             {role !== ROLES.IBO && <p className='mt-12 text-center'>
               <span className='font-semibold text-gray-600 text-sm sm:text-base'>Already have an account?</span>
               <Link href={loginURL}>

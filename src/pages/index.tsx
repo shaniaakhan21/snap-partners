@@ -129,40 +129,39 @@ const HomePage: Page = () => {
 
   return (
 
-
     <div className='w-full h-full m-0 p-4 sm:p-6 lg:p-8 max-w-full md:mx-auto md:w-full xl:w-11/12 2xl:w-11/12'>
       <div className='block lg:flex items-center'>
-          <div className='hidden lg:block w-full pt-8 ml-auto'>
-            <div className='float-right'>
-                  <div className='flex'>
-                    <div className='mr-4 lg:mr-4 xl:mr-7 2xl:mr-12'>
-                        <div className='inline-block w-auto bg-primary-500 rounded-xl p-5 shadow-lg'>
-                            <img src='/static/snap_partners_logo.png' className='w-36 overflow-hidden rounded-full border-4 border-white' />
-                        </div>
-                      </div>
-                      <div className='mb-8'>
-                          <div className=' '>
-                              <h1 className='font-extrabold text-4xl 2xl:text-5xl'>Snap Partners</h1>
-                              <p className='text-xl 2xl:text-2xl font-bold mt-3'>Delivering what matters most in a SNAP!</p>
-                          </div>
-                          <ul className='list-none pl-2 mt-12 font-base font-semibold text-xl 2xl:text-xl space-y-6'>
-                            <li className='relative pl-8 before:absolute before:left-1 before:top-2.5 before:bg-black before:content before:w-0.5 before:h-32 after:absolute after:left-0 after:top-2.5 after:bg-black after:rounded-full after:content after:w-2.5 after:h-2.5'>Get notified about company updates</li>
-                            <li className='relative pl-8 before:absolute before:left-1 before:top-2.5 before:bg-black before:content before:w-0.5 before:h-20 after:absolute after:left-0 after:top-2.5 after:bg-black after:rounded-full after:content after:w-2.5 after:h-2.5'>Access to company training</li>
-                            <li className='relative pl-8 before:absolute before:left-1 before:top-2.5 before:bg-black before:content before:w-0.5 before:h-14 after:absolute after:left-0 after:top-2.5 after:bg-black after:rounded-full after:content after:w-2.5 after:h-2.5'>Get synced</li>
-                            <li className='relative pl-8 after:absolute after:left-0 after:top-2.5 after:bg-black after:rounded-full after:content after:w-2.5 after:h-2.5'>Track your team</li>
-                          </ul>
-                      </div>    
-                  </div>
-                  
-                  <img src='/static/landingpage-img.svg' className='-ml-7' />
+        <div className='hidden lg:block w-full pt-8 ml-auto'>
+          <div className='float-right'>
+            <div className='flex'>
+              <div className='mr-4 lg:mr-4 xl:mr-7 2xl:mr-12'>
+                <div className='inline-block w-auto bg-primary-500 rounded-xl p-5 shadow-lg'>
+                  <img src='/static/snap_partners_logo.png' className='w-36 overflow-hidden rounded-full border-4 border-white' />
+                </div>
               </div>
+              <div className='mb-8'>
+                <div className=' '>
+                  <h1 className='font-extrabold text-4xl 2xl:text-5xl'>Snap Partners</h1>
+                  <p className='text-xl 2xl:text-2xl font-bold mt-3'>Delivering what matters most in a SNAP!</p>
+                </div>
+                <ul className='list-none pl-2 mt-12 font-base font-semibold text-xl 2xl:text-xl space-y-6'>
+                  <li className='relative pl-8 before:absolute before:left-1 before:top-2.5 before:bg-black before:content before:w-0.5 before:h-32 after:absolute after:left-0 after:top-2.5 after:bg-black after:rounded-full after:content after:w-2.5 after:h-2.5'>Get notified about company updates</li>
+                  <li className='relative pl-8 before:absolute before:left-1 before:top-2.5 before:bg-black before:content before:w-0.5 before:h-20 after:absolute after:left-0 after:top-2.5 after:bg-black after:rounded-full after:content after:w-2.5 after:h-2.5'>Access to company training</li>
+                  <li className='relative pl-8 before:absolute before:left-1 before:top-2.5 before:bg-black before:content before:w-0.5 before:h-14 after:absolute after:left-0 after:top-2.5 after:bg-black after:rounded-full after:content after:w-2.5 after:h-2.5'>Get synced</li>
+                  <li className='relative pl-8 after:absolute after:left-0 after:top-2.5 after:bg-black after:rounded-full after:content after:w-2.5 after:h-2.5'>Track your team</li>
+                </ul>
+              </div>
+            </div>
+
+            <img src='/static/landingpage-img.svg' className='-ml-7' />
           </div>
-          <div className='w-full'>              
-            {/* <ContentMobile /> */}
-            <ContentDesktop />
-          </div>
+        </div>
+        <div className='w-full'>
+          {/* <ContentMobile /> */}
+          <ContentDesktop />
+        </div>
       </div>
-      <div className='pt-6 text-center text-gray-400'>© 2024 Snap Partners. All rights reserved.</div> 
+      <div className='pt-6 text-center text-gray-400'>© 2024 Snap Partners. All rights reserved.</div>
     </div>
   )
 }

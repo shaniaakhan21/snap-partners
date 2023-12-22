@@ -215,28 +215,28 @@ export const ModalForgotPassword = () => {
             </span>
           )
         }
-  
+
         {!emailSent && (
           <>
-                <InputForm
-                  id='email'
-                  name='email'
-                  type='email'
-                  label='Email'
-                  registerId='email'
-                  placeholder='Enter Email'
-                  autoComplete='email'
-                  errors={errors.email}
-                  register={register}
-                  rulesForm={ruleEmail}
-                  isRequired
-                />
-                <Button
-                  classes='w-auto text-mg bg-primary-500 font-semibold uppercase ml-auto mt-4'
-                  onClick={handleSubmit(onSubmitEmail)}
-                >
+            <InputForm
+              id='email'
+              name='email'
+              type='email'
+              label='Email'
+              registerId='email'
+              placeholder='Enter Email'
+              autoComplete='email'
+              errors={errors.email}
+              register={register}
+              rulesForm={ruleEmail}
+              isRequired
+            />
+            <Button
+              classes='w-auto text-mg bg-primary-500 font-semibold uppercase ml-auto mt-4'
+              onClick={handleSubmit(onSubmitEmail)}
+            >
                   Send
-                </Button>
+            </Button>
           </>
         )}
       </div>
@@ -257,8 +257,6 @@ export const ModalForgotPassword = () => {
       </p>
 
       <p className='w-full text-base text-gray-800 text-center rounded-lg p-3 bg-gray-100 mt-4 mb-8'>Get a verification code via</p>
-
-
 
       <div className='w-full flex justify-center items-center'>
         <Button
