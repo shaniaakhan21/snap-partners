@@ -25,12 +25,6 @@ interface IProps {
 }
 
 export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
-  const { current: Apps } = useRef([
-    { to: '/download-app?device=APPLE', icon: <img src='/images/app-store.png' className='inline-block mb-4 sm:mb-0 w-40' /> },
-    { to: '/download-app?device=ANDROID', icon: <img src='/images/gplay.png' className='inline-block mb-4 sm:mb-0 w-40' /> }
-
-  ])
-
   const { setAuth } = useAuthStore()
   const router = useRouter()
   const [isLoading, setLoading] = useState(false)
@@ -185,7 +179,7 @@ export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
               <a className='text-primary-500 font-semibold text-xl underline decoration-1 ml-2 hover:text-black'>Sign Up</a>
             </Link>
           </div>
-
+          {/*
           <div className='mt-8 text-center items-center'>
             {Apps.map(app => (
               <Link key={app.to} href={app.to}>
@@ -194,7 +188,7 @@ export const LoginWithEmail = ({ trackLoginHandle }: IProps) => {
                 </a>
               </Link>
             ))}
-          </div>
+          </div> */}
 
         </section>
       </form>

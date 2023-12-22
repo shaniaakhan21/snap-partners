@@ -128,18 +128,17 @@ export const AuthPagesLayout = ({ children }) => { // Should be use in SignIn Pa
                 <li className='relative pl-8 before:absolute before:left-1 before:top-2.5 before:bg-white before:content before:w-0.5 before:h-16 after:absolute after:left-0 after:top-2.5 after:bg-white after:rounded-full after:content after:w-2.5 after:h-2.5'>Get synced</li>
                 <li className='relative pl-8 after:absolute after:left-0 after:top-2.5 after:bg-white after:rounded-full after:content after:w-2.5 after:h-2.5'>Track your team</li>
               </ul>
- 
+
             </div>
-            <div className='absolute w-full text-center bottom-5 text-sm text-gray-500'>© 2023 Snap Delivered. All rights reserved.</div>
+            <div className='absolute w-full text-center bottom-5 text-sm text-gray-500'>© 2024 Snap Partners. All rights reserved.</div>
           </section>
 
           <section className='w-full mx-auto xl:mx-0 md:w-full lg:w-1/2 h-full md:min-h-screen flex justify-center items-center'>
             <div className='max-w-xl pt-16 mx-auto w-full bg-white rounded-3xl p-4 sm:p-6 md:p-8 lg:p-12 shadow-xl relative my-16'>
-              
+
               <div className='absolute -top-10 -mt-10 left-0 w-full'>
                 {role !== ROLES.IBO && <img src='/images/logo-orange.png' className='mx-auto' />}
               </div>
-
 
               {children}
             </div>

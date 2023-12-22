@@ -43,11 +43,6 @@ export const LoginWithPhone = ({ trackLoginHandle }: IProps) => {
     })
   }, [])
 
-  const { current: Apps } = useRef([
-    { to: '/download-app?device=APPLE', icon: <img src='/images/app-store.png' className='inline-block mb-4 sm:mb-0 w-40' /> },
-    { to: '/download-app?device=ANDROID', icon: <img src='/images/gplay.png' className='inline-block mb-4 sm:mb-0 w-40' /> }
-
-  ])
   const onSubmit = async (dataForm: IDataForm) => {
     trackLoginHandle(true)
     setLoading(true)
@@ -196,7 +191,7 @@ export const LoginWithPhone = ({ trackLoginHandle }: IProps) => {
             </Link>
           </div>
 
-          <div className='mt-8 text-center items-center'>
+          {/* <div className='mt-8 text-center items-center'>
             {Apps.map(app => (
               <Link key={app.to} href={app.to}>
                 <a className='mx-2'>
@@ -204,7 +199,7 @@ export const LoginWithPhone = ({ trackLoginHandle }: IProps) => {
                 </a>
               </Link>
             ))}
-          </div>
+          </div> */}
 
         </section>
       </form>
