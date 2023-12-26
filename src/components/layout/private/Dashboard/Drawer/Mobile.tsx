@@ -49,7 +49,7 @@ export const DrawerMobile = ({ isCurrentlyPage, auth, isManager, isAdmin }: { is
               drawerRoutes.map((route, index) => {
                 if ((isAdmin || isManager) && route.to === '/upgrade-to-manager') return <Fragment key={route.label} />
                 const isSnap = (auth.roles.customer || auth.roles.driver || auth.roles.merchant)
-                if (route.snap && !isSnap) return <Fragment key={route.label} />
+                if (!isSnap) return <Fragment key={route.label} />
 
                 if (!['/overview', '/profile'].includes(route.to) && isIntegrousCustomer) return <Fragment key={route.label} />
 

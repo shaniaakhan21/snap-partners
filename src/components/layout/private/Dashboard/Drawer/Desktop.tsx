@@ -9,18 +9,22 @@ import { drawerRoutes } from './routes'
 export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { isCurrentlyPage: (route: string) => boolean, auth:any, isManager: boolean, isAdmin: boolean }) => {
   const [activeSubmenu, setActiveSubmenu] = useState(null)
   const [drawerWidth, setDrawerWidth] = useState(180)
+  const [iconPadding, setIconPadding] = useState(8)
+  const [positionIcon, setPositionIcon] = useState('start')
   const [arrowPosition, setArrowPosition] = useState(40)
 
   const increaseWidth = () => {
     const menuIcon = document.getElementsByClassName('dashboardLayout')[0]
-      if (menuIcon) {
-        menuIcon.classList.remove('FullWidthOuter')
+    if (menuIcon) {
+      menuIcon.classList.remove('FullWidthOuter')
     }
     setDrawerWidth((prevWidth) => {
       const newWidth = Math.min(prevWidth + 220, 260)
       setArrowPosition(40)
       return newWidth
     })
+    setIconPadding(8)
+    setPositionIcon('start')
   }
 
   const addClassExpand = () => {
@@ -42,6 +46,8 @@ export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { i
       setArrowPosition(newWidth === 40 ? 40 : -150)
       return newWidth
     })
+    setIconPadding(2)
+    setPositionIcon('center')
   }
 
   const renderArrowIcon = () => {
@@ -77,12 +83,12 @@ export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { i
 
   return (
     <>
-    <div className='shadow-lg duration-500 hidden lg:block rounded-full w-8 h-8 z-50 bg-white NavArrow' onClick={addClassExpand}>
+      <div className='shadow-lg duration-500 hidden lg:block rounded-full w-8 h-8 z-50 bg-white NavArrow' onClick={addClassExpand}>
         {renderArrowIcon()}
       </div>
-      
-      <aside className={`relative dashboardLayout__drawer scroll-primary rounded-[20px] shadow-xl w-${drawerWidth} duration-500`}>
-      
+
+      <aside className={`relative dashboardLayout__drawer scroll-primary rounded-[20px] shadow-xl overflow-x-hidden w-${drawerWidth} duration-500`}>
+
         <section className='sticky top-0 z-10 pl-8 pr-5 py-4 flex justify-start items-center gap-x-4 bg-blackCustom logo-outer'>
           <img src='/static/logo-white.svg' className='duration-500' />
           <h1 className='text-white font-semibold text-2xl logoName duration-500'>SNAP</h1>
@@ -93,7 +99,7 @@ export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { i
               if ((isAdmin || isManager) && route.to === '/upgrade-to-manager') return <Fragment key={route.label} />
 
               const isSnap = (auth.roles.customer || auth.roles.driver || auth.roles.merchant)
-              if (route.snap && !isSnap) return <Fragment key={route.label} />
+              if (!isSnap) return <Fragment key={route.label} />
 
               if (!['/overview', '/profile'].includes(route.to) && isIntegrousCustomer) return <Fragment key={route.label} />
 
@@ -119,8 +125,8 @@ export const DrawerDesktop = ({ isCurrentlyPage, auth, isManager, isAdmin }: { i
                     <a
                       target={route.to.includes('https') ? '_blank' : '_self'}
                       rel='noopener noreferrer'
-                      className={`w-full relative ${isCurrentlyPage(route.to) && 'linkWrapper__activate'} relative cursor-pointer w-full flex justify-start items-center gap-x-2 py-5 hover:bg-slate-100 pl-8 duration-500 font-semibold text-base `}
-                      
+                      className={`w-full relative ${isCurrentlyPage(route.to) && 'linkWrapper__activate'} relative cursor-pointer w-full flex justify-${positionIcon} items-center gap-x-2 py-5 hover:bg-slate-100 pl-${iconPadding} duration-500 font-semibold text-base `}
+
                       onClick={() => {
                         if (route.label.includes('Visit Snap Partners')) {
                           setLocalStorage('currentBackoffice', 'partners')

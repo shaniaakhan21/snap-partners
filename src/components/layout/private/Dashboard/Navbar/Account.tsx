@@ -1,8 +1,8 @@
 import AccountDefaultImage from 'components/common/AccountDefaultImage'
-import { ArrowDownIcon } from 'components/common/icons'
-import { ArrowDownDark } from 'components/common/icons' 
+import { ArrowDownIcon, ArrowDownDark } from 'components/common/icons'
+
 import { useClickOutsideElement } from 'lib/hooks/useClickOutsideElement'
-import { useAuthStore } from 'lib/stores' 
+import { useAuthStore } from 'lib/stores'
 import { GTMTrack } from 'lib/utils/gtm'
 import { useState, useRef, useEffect } from 'react'
 import AdminToolMainMenu from './adminTools/AdminToolMainMenu'
@@ -86,7 +86,7 @@ export const Account = ({ email, name, phone, photoUrl, signOut, rank, roles, le
         {/* </div> */}
 
         <div className='sm:block' ref={userMenuRef}>
-          <ArrowDownDark  classes='cursor-pointer'/>
+          <ArrowDownDark classes='cursor-pointer' />
         </div>
 
         <div

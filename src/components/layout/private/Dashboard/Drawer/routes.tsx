@@ -20,13 +20,13 @@ import { VidgoLogo } from 'components/common/illustrations'
 
 export const drawerRoutes = [
   {
-    icon: <SnapPartnersIcon />,
+    icon: <SnapPartnersIcon classes='w-[70px] '/>,
     to: '/overview#snap-partners',
     label: 'Visit Snap Partners Backoffice',
     integrous: true
   },
   {
-    icon: <SnapWellnessIcon />,
+    icon: <SnapWellnessIcon classes='w-[70px] '/>,
     to: '/overview#snap-wellness',
     label: 'Visit Snap Wellness Backoffice',
     integrous: true
@@ -93,11 +93,6 @@ export const drawerRoutes = [
     label: 'Tools'
   },
   {
-    icon: <AccountIcon />,
-    to: '/network-activity',
-    label: 'Network Activity'
-  },
-  {
     icon: <PersonIcon />,
     to: '/genealogy',
     label: 'Genealogy',
@@ -124,12 +119,6 @@ export const drawerRoutes = [
     to: '/profile',
     label: 'Profile',
     integrous: true
-  },
-  {
-    icon: <CubeIcon />,
-    to: '/my-points',
-    label: 'My Points',
-    snap: true
   },
   {
     icon: <CreditCardIcon />,

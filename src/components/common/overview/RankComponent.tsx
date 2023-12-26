@@ -140,21 +140,19 @@ export default function RankComponent (props: RankComponentProps) {
                   </div>
                   <div className="flex items-center flex-col p-[5%] rounded-full border-2 border-[#EFEFEF] w-4/12 lg:w-3/12  mr-[6%]">
                     <StyledBox backgroundColor={'white'}>
-                      {/* <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: rankColors.get(rankData.currentRank) }} /> */}
                       <StarTrophyIcon/>
                     </StyledBox>
                     <h1 className="text-xs lg:text-base text-black-h font-semibold">{convertName(rankData.currentRank)}</h1>
                   </div>
                 </div>
               </div>
-              <div className='bg-[#000000] rounded-b-3xl py-8 shadow-xl h-full w-full flex flex-col justify-center'>
+              <div className='bg-[#000000] rounded-b-3xl py-8 h-full w-full flex flex-col justify-center'>
                 <div className='flex flex-row justify-between' >
                   <div className='flex flex-col justify-center ml-[10%]'>
                     <h1 className="text-sm lg:text-xl text-white font-bold">Highest </h1><span className='text-xs lg:text-base font-normal text-gray-500'>Achieved Rank:</span>
                   </div>
                   <div className="flex items-center flex-col p-[5%] rounded-full border-2 border-[#EFEFEF] w-4/12 lg:w-3/12 mr-[6%] bg-[#fff]">
                     <StyledBox backgroundColor={'white'}>
-                      {/* <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: rankColors.get(rankData.highestRank) }} /> */}
                       <StarSuccessIcon/>
                     </StyledBox>
                     <h1 className="text-xs lg:text-base text-black-h font-semibold ">{convertName(rankData.highestRank)}</h1>
@@ -172,7 +170,6 @@ export default function RankComponent (props: RankComponentProps) {
                 rankData && <><div className="col-span-2 flex items-center justify-center rounded-2xl bg-[#F7F8F9] border-2 border-[#D6E2ED] py-2">
                   <div className='w-[20%] lg:w-[10%] py-4 rounded-full border-2 border-[#D1D1D1] flex justify-center bg-white'>
                     <StyledBox backgroundColor={'white'}>
-                      {/* <StarIcon style={{ color: '#fff', fontSize: 20, backgroundColor: rankColors.get(rankData.highestRank) }} /> */}
                       <StarSuccessIcon/>
                     </StyledBox>
                   </div>

@@ -75,41 +75,9 @@ export default function PVComponentSnap ({ userId }) {
     <>
       <div ref={showDivRef} className="mainDiv w-full max-w-full py-4 px-6 space-y-2 h-full rounded-3xl shadow-xl flex flex-col justify-around" style={{ background: 'linear-gradient(231deg, #E74426 2.25%, #BD3F27 92.77%)' }}>
         <h1 className="text-base lg:text-lg text-white font-semibold ">Your Store Orders</h1>
-        {/* <div className="p-0 flex flex-row items-start">
-          <div className="flex flex-col items-center w-1/2 h-3/5">
-            <button onClick={() => { setOpen(true) }} style={{ cursor: 'pointer' }} className="rounded-full bg-primary-500 w-full flex flex-row items-center justify-center bg-red-500 text-gray-500">
-              <img className='w-1/14' src='/images/icons/order-details.svg' alt="Current profile photo" />
-              <p className='text-xs text-white font-medium p-2 uppercase'>Order History</p>
-            </button>
-          </div>
-          <div className="flex flex-col items-center w-1/2 items-center">
-            <div>
-              <p className="text-xl text-white pb-6">Current Month CV</p>
-            </div>
-            <div>
-              <p className="text-xl text-white font-bold p-2">{data?.cv || 0}</p>
-            </div>
-          </div>
-        </div> */}
         <div>
           <p className="text-xs lg:text-sm text-white font-normal ">Use this widget to track your personal store orders and to compare your stores monthly growth.</p>
         </div>
-        {/* <div className='flex flex-row items-center justify-around py-2'>
-          <div>
-            <h1 className="text-base text-white font-normal ">My Growth</h1>
-          </div>
-          <div className='flex flex-row bg-white rounded-full px-2 py-1 items-center'>
-            <div className='px-1 py-[2px] rounded-full bg-[#B6E5AE]'>
-              <ArrowUpwardIcon sx={{ color: '#169A00' }}/>
-            </div>
-            <div className='ml-2 font-semibold'>
-              <span>15%</span>
-            </div>
-          </div>
-          <div>
-            <h1 className="text-base text-white font-normal ">Total Orders</h1>
-          </div>
-        </div> */}
         <div className='flex flex-row w-full'>
           <div className='flex flex-col w-full'>
             <div className='mt-18'>
