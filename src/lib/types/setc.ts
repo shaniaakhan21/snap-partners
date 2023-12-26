@@ -7,6 +7,8 @@ export interface SetcClient {
   email: string;
   phone: string;
   paidDate: string;
+  sentDate: string;
+  DNP: string;
   paidAmount: number;
   irsFiledDate: string
   agreementSignedDate: string;
