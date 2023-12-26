@@ -55,44 +55,6 @@ interface RankComponentProps{
   data: RankData | null
 }
 
-interface CustomStyles extends CSSProperties {
-  justifyContent?: string;
-  // Add other style properties as needed
-}
-
-const rowStyle: CustomStyles = {
-  flexDirection: 'row'
-}
-
-const colStyle: CustomStyles = {
-  flexDirection: 'column'
-}
-
-const widerStyle = {
-  justifyContent: 'space-between'
-}
-
-const normalStyle = {
-  justifyContent: 'space-evenly'
-}
-
-const textStyle = {
-  width: '66.66667%'
-}
-
-const newTextStyle = {
-  textAlign: 'center',
-  width: '100%',
-  marginTop: '4%'
-}
-
-const iconStyle = {
-  marginRight: '6%'
-}
-
-const newIconStyle = {
-  margin: '12px 35%'
-}
 export default function RankComponent (props: RankComponentProps) {
   const { data: rankData } = props
   const [value, setValue] = useState(0)
