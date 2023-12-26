@@ -71,10 +71,10 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
   const [isLoading, setLoading] = useState(false)
   const role = useRoleFromUrl()
 
-  const { current: Apps } = useRef([
-    { to: '/download-app?device=APPLE', icon: <img src='/images/app-store.png' className='inline-block mb-4 sm:mb-0 w-40' /> },
-    { to: '/download-app?device=ANDROID', icon: <img src='/images/gplay.png' className='inline-block mb-4 sm:mb-0 w-40' /> }
-  ])
+  // const { current: Apps } = useRef([
+  //   { to: '/download-app?device=APPLE', icon: <img src='/images/app-store.png' className='inline-block mb-4 sm:mb-0 w-40' /> },
+  //   { to: '/download-app?device=ANDROID', icon: <img src='/images/gplay.png' className='inline-block mb-4 sm:mb-0 w-40' /> }
+  // ])
 
   const onSubmit = async (dataForm: IDataForm) => {
     if (dataForm.confirmEmail !== dataForm.email) {
@@ -413,25 +413,31 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             isRequired={false}
             readOnly={Boolean(referralLink.code)}
           />
-
-          <TermsAndConditions
-            errors={errors.termsAndConditions}
-            register={register}
-            rulesForm={registerRulesConfig.termsAndConditions}
-            referralLink = {referralLink}
-          />
+          <div className='block sm:flex w-full'>
+            <div className='mt-7'>
+              <TermsAndConditions
+                errors={errors.termsAndConditions}
+                register={register}
+                rulesForm={registerRulesConfig.termsAndConditions}
+                referralLink = {referralLink}
+              />
+            </div>
+            <div className='w-auto ml-auto'>
+              <Button type='submit' classes=' w-full mt-4 text-sm bg-primary-500 font-semibold uppercase ml-auto'>Sign Up</Button>
+            </div>
+          </div>
 
           <BulletPagination stepToActivate='REGISTER_BASIC_INFO' />
-
           <section className='my-4'>
-            {role !== ROLES.IBO && <p className='mt-12 text-center'>
+
+            <p className='mt-12 text-center'>
               <span className='font-semibold text-gray-600 text-sm sm:text-base'>Already have an account?</span>
               <Link href={loginURL}>
                 <a className='text-primary-500 font-semibold text-xl underline decoration-1 ml-2 hover:text-black'>Sign In</a>
               </Link>
-            </p>}
+            </p>
           </section>
-          <div className='mt-8 text-center items-center'>
+          {/* <div className='mt-8 text-center items-center'>
             {Apps.map(app => (
               <Link key={app.to} href={app.to}>
                 <a className='mx-2'>
@@ -439,7 +445,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
                 </a>
               </Link>
             ))}
-          </div>
+          </div> */}
         </form>
       </div>
     </>
