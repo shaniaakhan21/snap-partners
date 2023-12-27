@@ -1,5 +1,6 @@
 export { AdjuntIcon } from './Adjunt'
 export { ArrowDownIcon } from './ArrowDown'
+export { ArrowDownDark } from './ArrowDownDark'
 export { ArrowHeadRightIcon } from './ArrowHeadRight'
 export { ArrowRightIcon } from './ArrowRight'
 export { CalendarIcon } from './Calendar'
