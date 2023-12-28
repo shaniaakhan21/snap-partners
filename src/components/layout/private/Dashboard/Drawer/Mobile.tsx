@@ -44,12 +44,12 @@ export const DrawerMobile = ({ isCurrentlyPage, auth, isManager, isAdmin }: { is
           <section className='mt-32 pl-10'>
           </section>
 
-          <ul className='mt-10 mb-20 text-white'>
+          <ul className='mb-20 text-black'>
             {
               drawerRoutes.map((route, index) => {
                 if ((isAdmin || isManager) && route.to === '/upgrade-to-manager') return <Fragment key={route.label} />
                 const isSnap = (auth.roles.customer || auth.roles.driver || auth.roles.merchant)
-                if (route.snap && !isSnap) return <Fragment key={route.label} />
+                if (!isSnap) return <Fragment key={route.label} />
 
                 if (!['/overview', '/profile'].includes(route.to) && isIntegrousCustomer) return <Fragment key={route.label} />
 
@@ -68,13 +68,13 @@ export const DrawerMobile = ({ isCurrentlyPage, auth, isManager, isAdmin }: { is
 
                 return (
                   <li
-                    className={`w-full relative ${isCurrentlyPage(route.to) && 'linkWrapper__activate bg-[#19191914]'}`}
+                    className={`w-full relative ${isCurrentlyPage(route.to) && 'linkWrapper__activate bg-[#fff]'}`}
                     key={route.label}
                   >
                     {renderMenuItem(
                       <a
                         target={route.to.includes('https') ? '_blank' : '_self'}
-                        className='cursor-pointer w-full flex justify-start items-center gap-x-2 py-4 hover:bg-[#19191914] pl-10'
+                        className='cursor-pointer w-full flex justify-start items-center gap-x-2 py-4 hover:bg-[#EDF4FA] pl-8 pr-4 duration-500'
                         onClick={(e) => {
                           if (route.label.includes('Visit Snap Partners')) {
                             setLocalStorage('currentBackoffice', 'partners')

@@ -1,37 +1,29 @@
 import Head from 'next/head'
 
 import type { Page, ReactNode } from 'lib/types'
-import { useReports } from 'lib/hooks/useReports'
 import { APP_INFO } from 'config/appInfo'
 import RankComponent from 'components/common/overview/RankComponent'
 import MonthlySubscription from 'components/common/overview/MonthlySubscription'
 import MonthlyProduction from 'components/common/overview/MonthlyProduction'
-import Event from 'components/common/overview/Event'
 import DashboardLayout from 'layouts/private/Dashboard'
-import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import Certification from 'components/common/overview/Certification'
 import TopProducerCategory from 'components/common/overview/TopProducerCategory'
-import Commissions from 'components/common/overview/Comissions'
 import TierTable from 'components/common/overview/TierTable'
 import RewardsProgram from 'components/common/overview/RewardsProgram'
 import { useEffect, useState } from 'react'
-import { Rank, RankData } from 'lib/types/overview'
-import { getLocalStorage, setLocalStorage } from 'lib/utils/localStorage'
+import { RankData } from 'lib/types/overview'
+import { getLocalStorage } from 'lib/utils/localStorage'
 import axios from 'axios'
 import Referrals from 'components/common/overview/Referrals'
 import { useAuthStore } from 'lib/stores'
 import GrowthSummary from '../components/common/overview/GrowthSummary'
 import TotalLeg from './backOfficeDashboard'
-import PVComponentSnap from 'components/common/dashBackOffice/PersonalVolumeSnap'
-import Modal from '@mui/material/Modal'
-import Button from '@mui/material/Button'
 import ContractModal from './wellness/components/ContractModal'
 import NetworkActivity from 'components/common/overview/NetworkActivity'
 
 const { SEO } = APP_INFO
 
 const DashboardOverViewPage: Page = () => {
-  // const { loading } = useReports()
   const [rankData, setRankData] = useState<RankData>(null)
   const [viewing, setViewing] = useState<string>('Aug')
   const store = useAuthStore()
@@ -87,20 +79,19 @@ const DashboardOverViewPage: Page = () => {
 
   return (
     <>
+      <div className=''>
+        <div className=''>
+          <RankComponent data={rankData} />
+        </div>
+
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-2">
         <div>
-          <div>
-            <RankComponent data={rankData} />
-          </div>
           <div className='mt-4'>
             <TierTable />
           </div>
           <div className='mt-4'>
-            {/* <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} userId={null}/> */}
             <NetworkActivity />
-          </div>
-          <div className='mt-4'>
-            <PVComponentSnap userId={null} />
           </div>
           <div className='mt-4'>
             <RewardsProgram />
@@ -116,7 +107,6 @@ const DashboardOverViewPage: Page = () => {
           </div>
         </div>
         <div className='ml-4'>
-          <Event />
           <div className='mt-4 bg-white rounded-lg'>
             <TopProducerCategory />
           </div>
