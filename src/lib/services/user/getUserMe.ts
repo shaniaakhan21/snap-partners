@@ -56,6 +56,7 @@ interface IQueryUserMeReturn extends IQueryErrorReturn {
     },
     level?: string,
     isCertified?: boolean
+    zendesk_id?: string
   }
 }
 

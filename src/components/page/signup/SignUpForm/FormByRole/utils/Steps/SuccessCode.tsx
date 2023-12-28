@@ -117,6 +117,7 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
       bank_information: data.bank_information,
       level: data.level,
       isCertified: data.isCertified,
+      zendesk_id: data.zendesk_id,
       ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
     })
     // When change auth state, directly the app push the user to /overview path
