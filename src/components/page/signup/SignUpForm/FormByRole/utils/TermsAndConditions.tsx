@@ -11,7 +11,7 @@ interface IInputFormProps {
 export const TermsAndConditions = ({ register, errors, rulesForm }: IInputFormProps) => {
   const router = useRouter()
   const { role } = router.query
-  const termsLink = role === 'IBO'
+  const termsLink = role === 'IBO' || role === 'AGENT'
     ? '/legal/terms-of-use-ibo'
     : '/legal/terms-of-use'
 
