@@ -20,6 +20,7 @@ import GrowthSummary from '../components/common/overview/GrowthSummary'
 import TotalLeg from './backOfficeDashboard'
 import ContractModal from './wellness/components/ContractModal'
 import NetworkActivity from 'components/common/overview/NetworkActivity'
+import Event from 'components/common/overview/Event'
 
 const { SEO } = APP_INFO
 
@@ -93,30 +94,31 @@ const DashboardOverViewPage: Page = () => {
           <div className='mt-4'>
             <NetworkActivity />
           </div>
-          <div className='mt-4'>
-            <RewardsProgram />
-          </div>
+
           <div className='mt-4'>
             <GrowthSummary userId={null} />
-          </div>
-          <div className='mt-4 bg-white rounded-lg'>
-            <MonthlySubscription userId={ null } />
-          </div>
-          <div className='mt-4 bg-white rounded-lg'>
-            <MonthlyProduction userId={null} />
-          </div>
-        </div>
-        <div className='ml-4'>
-          <div className='mt-4 bg-white rounded-lg'>
-            <TopProducerCategory />
           </div>
           <div className='mt-4'>
             <Certification />
           </div>
+          {/* <div className='mt-4 bg-white rounded-lg'>
+            <MonthlySubscription userId={ null } />
+          </div>
+          <div className='mt-4 bg-white rounded-lg'>
+            <MonthlyProduction userId={null} />
+          </div> */}
+        </div>
+        <div className='ml-4 mt-4 '>
+          <Event />
+          <div className='mt-4 bg-white rounded-lg'>
+            <TopProducerCategory />
+          </div>
+
         </div>
       </div>
       <div className='col-span-12 mt-4'>
-        <Referrals rankData={rankData} />
+        {/* <Referrals rankData={rankData} /> */}
+        <RewardsProgram />
       </div>
       {!isCustomer && (
         <ContractModal open={openModal} onClose={handleCloseModal} />)

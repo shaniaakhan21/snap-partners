@@ -121,12 +121,6 @@ export const drawerRoutes = [
     integrous: true
   },
   {
-    icon: <CubeIcon />,
-    to: '/my-points',
-    label: 'My Points',
-    snap: true
-  },
-  {
     icon: <CreditCardIcon />,
     to: '/my-wallet',
     label: 'My Wallet'
