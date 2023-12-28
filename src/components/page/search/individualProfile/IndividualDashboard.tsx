@@ -59,7 +59,7 @@ const IndividualDashboard = ({ userId }) => {
         <div className='mt-4'>
           <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} userId={userId} />
         </div>
-  
+
         <div className='mt-4 bg-white rounded-lg'>
           <MonthlyProduction userId={userId} />
         </div>
