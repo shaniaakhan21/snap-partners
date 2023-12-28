@@ -419,7 +419,6 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
                 errors={errors.termsAndConditions}
                 register={register}
                 rulesForm={registerRulesConfig.termsAndConditions}
-                referralLink = {referralLink}
               />
             </div>
             <div className='w-auto ml-auto'>
