@@ -88,7 +88,7 @@ const DashboardOverViewPage: Page = () => {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2">
         <div>
-          <div className='mt-4'>
+          <div className='mt-4 mr-4'>
             <TierTable />
           </div>
           <div className='mt-4'>

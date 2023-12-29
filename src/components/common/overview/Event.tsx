@@ -79,7 +79,7 @@ function Event () {
   }
 
   return (
-    <Box sx={{ maxWidth: '100%', flexGrow: 1 }}>
+    <Box sx={{ maxWidth: '100%', flexGrow: 1 }} className='bg-white rounded-3xl shadow-lg m-2'>
       <Paper
         square
         elevation={0}
@@ -88,7 +88,8 @@ function Event () {
           alignItems: 'center',
           height: 50,
           pl: 2,
-          bgcolor: 'background.default'
+          bgcolor: 'background.default',
+          borderRadius: '1.5rem'
         }}
       >
         <Typography
@@ -119,6 +120,9 @@ function Event () {
       </AutoPlaySwipeableViews>
       <MobileStepper
         steps={maxSteps}
+        sx={{
+          borderRadius: '1.5rem'
+        }}
         position="static"
         activeStep={activeStep}
         nextButton={
@@ -126,6 +130,10 @@ function Event () {
             size="small"
             onClick={handleNext}
             disabled={activeStep === maxSteps - 1}
+            sx={{
+              borderRadius: '50px',
+              borderColor: 'grey'
+            }}
           >
             {theme.direction === 'rtl'
               ? (
