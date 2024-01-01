@@ -139,7 +139,7 @@ export const drawerRoutes = [
   {
     icon: <PromotionIcon />,
     to: '/tickets',
-    label: 'Tickets'
+    label: 'Help Team'
   },
   {
     icon: <PromotionIcon />,

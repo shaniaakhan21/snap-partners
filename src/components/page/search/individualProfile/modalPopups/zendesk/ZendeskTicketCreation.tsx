@@ -4,7 +4,7 @@ import axios from 'axios'
 import { ButtonComponent, InputComponent, TextArea } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/Components'
 import React, { useEffect, useState } from 'react'
 
-const ZendeskTicketCreation = ({ zendeskTicketModal, closeModal, setTicketFlag, ticketFlag }) => {
+const ZendeskTicketCreation = ({ zendeskTicketModal, closeModal, setTicketFlag, ticketFlag, zendesk_id, name, email }) => {
   const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -19,7 +19,10 @@ const ZendeskTicketCreation = ({ zendeskTicketModal, closeModal, setTicketFlag, 
   const [ticketBody, setTicketBody] = useState({
     subject: '',
     description: '',
-    attachment: null
+    attachment: null,
+    zendesk_id,
+    name,
+    email
 
   })
   const handleEditProfileUpdate = (event, param) => {
@@ -52,6 +55,7 @@ const ZendeskTicketCreation = ({ zendeskTicketModal, closeModal, setTicketFlag, 
   return (
     <Modal open={ zendeskTicketModal } onClose={closeModal} >
       <Box sx={style}>
+        <h2>Create Ticket For Your Issue</h2>
         <InputComponent label='Subject' placeholder='Subject of your Issue' value={ticketBody.subject} param={'subject'} onChangeFunction={handleEditProfileUpdate} />
         <label>Ticket Attaachment</label> <br/>
         <input type='file' name='zendeskAttachment' onChange={(e) => { setTicketBody({ ...ticketBody, attachment: e.target.files[0] }) }} />

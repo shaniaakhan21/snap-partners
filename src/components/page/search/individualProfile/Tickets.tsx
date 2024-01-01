@@ -53,7 +53,7 @@ const rows = [
   }
 ]
 
-const Tickets = () => {
+const Tickets = ({ zendesk_id, name, email }) => {
   const [windowWidth, setWindowWidth] = useState(0)
   const [tickets, setTickets] = useState([])
   const [ticketFlag, setTicketFlag] = useState(false)
@@ -218,7 +218,7 @@ const Tickets = () => {
         <button onClick={() => { getZendeskData() }}>click here</button>
       </div> */}
 
-      <ZendeskTicketCreation zendeskTicketModal={zendeskTicketModal} closeModal = {onZendeskTicketModalClose} ticketFlag={ticketFlag} setTicketFlag={setTicketFlag} />
+      <ZendeskTicketCreation zendeskTicketModal={zendeskTicketModal} closeModal = {onZendeskTicketModalClose} ticketFlag={ticketFlag} setTicketFlag={setTicketFlag} zendesk_id={zendesk_id} name= {name} email= {email} />
     </div>
   )
 }

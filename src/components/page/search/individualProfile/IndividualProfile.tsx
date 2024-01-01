@@ -59,7 +59,7 @@ function IndividualProfile ({ profileData }) {
         }
         {
           body === 'tickets'
-            ? <Tickets />
+            ? <Tickets zendesk_id = {profileData[0]?.zendesk_id} name = {profileData[0]?.name} email = {profileData[0].email} />
             : <></>
         }
 

@@ -150,7 +150,11 @@ const TicketsPage: Page = () => {
 
   // Example: Fetch all tickets
   const getZendeskData = () => {
-    axios.get('/api/zendesk/ticket')
+    axios.get('/api/zendesk/ticket', {
+      params: {
+        zendesk_id: auth?.zendesk_id
+      }
+    })
       .then(async (response) => {
         console.log('Tickets:', response.data)
         setTickets(await Promise.all(response.data.response.tickets.map(async (ticket) => {
@@ -228,7 +232,7 @@ const TicketsPage: Page = () => {
         <button onClick={() => { getZendeskData() }}>click here</button>
       </div> */}
 
-      <ZendeskTicketCreation zendeskTicketModal={zendeskTicketModal} closeModal = {onZendeskTicketModalClose} ticketFlag={ticketFlag} setTicketFlag={setTicketFlag} />
+      <ZendeskTicketCreation zendeskTicketModal={zendeskTicketModal} closeModal = {onZendeskTicketModalClose} ticketFlag={ticketFlag} setTicketFlag={setTicketFlag} zendesk_id={auth.zendesk_id} name= {auth.name} email= {auth.email} />
     </div>
   )
 }
