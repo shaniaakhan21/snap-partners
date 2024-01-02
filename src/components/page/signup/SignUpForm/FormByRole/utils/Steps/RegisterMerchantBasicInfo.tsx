@@ -16,6 +16,8 @@ import { STEPS } from '.'
 import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 import { GTMTrack } from 'lib/utils/gtm'
 import { FooterApple } from 'components/common/icons'
+import { DatePickerForm } from '../DatePicker'
+import states from 'data/states'
 
 export interface dataFormSignUpMerchant {
   'city' : string

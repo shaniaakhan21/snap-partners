@@ -23,6 +23,7 @@ import TINPopup from './commonPopup'
 import AlertWidget from 'components/common/overview/1099Alert'
 import NetworkActivity from 'components/common/overview/NetworkActivity'
 import Event from 'components/common/overview/Event'
+import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 
 const { SEO } = APP_INFO
 
