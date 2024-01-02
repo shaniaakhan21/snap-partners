@@ -5,7 +5,7 @@ import ReactDataGrid from '@inovua/reactdatagrid-community'
 import '@inovua/reactdatagrid-community/index.css'
 
 const columns = [
-    { name: 'description', header: 'Filter list by typing description', defaultWidth: 470 },
+    { name: 'description', header: 'Filter list by typing description', defaultWidth: 500 },
   {
     name: 'date',
     header: 'Date',
