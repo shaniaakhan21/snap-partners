@@ -1,25 +1,22 @@
 import { DataGrid as MUIDataGrid } from '@mui/x-data-grid'
 import { styled } from '@mui/system'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
+import Paper from '@mui/material/Paper'
 
-const StyledDataGrid = styled(MUIDataGrid)(() => ({
-  '& .MuiDataGrid-columnHeaderTitleContainer .MuiDataGrid-columnHeaderTitle': {
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  '&.MuiTableCell-head': {
     fontWeight: 'bold',
-    fontSize: '1.2em'
-  },
-
-  '& .MuiDataGrid-columnHeaders': {
+    fontSize: '1em',
     backgroundColor: '#F0F4F8',
-    borderTopLeftRadius: '1.5rem!important',
-    borderTopRightRadius: '1.5rem!important'
-  },
-  '& .MuiDataGrid-footerContainer': {
-    display: 'none'
-  },
-  '& .MuiDataGrid-virtualScroller': {
-    overflow: 'hidden'
+    textAlign: 'center'
   }
-
 }))
+
 interface TierTableRow {
   title: string;
   manager: string;
@@ -96,7 +93,7 @@ const rows: TierTableRow[] = [
   }
 ]
 
-export default function TierTable () {
+export default function BasicTable () {
   const columns = [
     { field: 'title', headerName: 'Team', flex: 2 },
     { field: 'manager', headerName: 'Manager', flex: 2 },
@@ -106,15 +103,33 @@ export default function TierTable () {
   ]
 
   return (
-    <div style={{ height: '100%', width: '100%' }} className='bg-white rounded-3xl shadow-lg m-2'>
-      <StyledDataGrid
-        rows={rows}
-        columns={columns}
-        sx={{
-          borderColor: 'rgba(224, 224, 224, 0)!important',
-          borderRadius: '1.5rem!important'
-        }}
-      />
-    </div>
+    <>
+      <div className='bg-white rounded-3xl shadow-lg p-6'>
+        <h1 className='font-bold mb-4 text-xl'>
+      Team Override Compensation
+        </h1>
+        <TableContainer component={Paper}>
+          <Table sx={{ minWidth: 600 }} aria-label="basic table">
+            <TableHead>
+              <TableRow>
+                {columns.map((column) => (
+                  <StyledTableCell key={column.field}>{column.headerName}</StyledTableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map((row) => (
+                <TableRow key={row.id}>
+                  {columns.map((column) => (
+                    <StyledTableCell key={column.field} align="center">
+                      {row[column.field]}
+                    </StyledTableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div></>
   )
 }

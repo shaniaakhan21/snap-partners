@@ -9,25 +9,25 @@ import Link from 'next/link'
 
 export default function EventTile ({ title, description, image, redirectUrl }) {
   return (
-    <Card sx={{ maxWidth: '100%', padding: '10px' }}>
+    <Card sx={{ maxWidth: '100%' }} className='rounded-t-3xl rounded-b-none'>
       <CardMedia
-        className="border-t border-l border-r border-gray-400"
         sx={{ height: 225, backgroundSize: 'contain' }}
         image={image}
         title="green iguana"
       />
-      <CardContent className="border-l border-r border-gray-400" >
+      <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           <b>{title}</b>
         </Typography>
-        <Typography variant="body2">
+        <Typography variant="body2" className='text-[#7B7B7B]'>
           {description}
         </Typography>
       </CardContent>
-      <CardActions className="border border-gray-400 flex justify-center" >
+      <CardActions className="flex justify-center" >
         <Link href={redirectUrl} passHref>
           <div role='button'>
             <Typography variant="body1"
+              className='text-[#E74426]  font-semibold'
               sx={{
                 fontSize: '15px'
               }}
@@ -38,7 +38,7 @@ export default function EventTile ({ title, description, image, redirectUrl }) {
         </Link>
         <div className='pl-5'>
           <Link href='/#'>
-            <button className="flex text-sm items-center bg-red-600 hover:bg-red-700 text-white font-bold h-8 w-30 py-3 px-4 rounded-l-sm rounded-r-sm">ADD TO CALENDER</button>
+            <button className="flex text-sm items-center bg-[#E74426] hover:bg-red-700 text-white font-bold h-8 w-30 py-3 px-4 rounded-3xl">ADD TO CALENDER</button>
           </Link>
         </div>
       </CardActions>
