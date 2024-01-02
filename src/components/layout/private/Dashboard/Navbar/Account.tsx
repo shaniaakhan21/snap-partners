@@ -49,22 +49,10 @@ export const Account = ({ email, name, phone, photoUrl, signOut, rank, roles, le
         </div>
         : <></>
       }
-      {/* <div className='relative'>
-         <NotificationIcon classes='w-6 h-6' />
 
-        <div className='absolute -top-2 -right-4 h-5 w-5 bg-[#FF4343] rounded-full text-white text-sm font-semibold flex justify-center items-center'>
-          <span>3</span>
-        </div>
-        {isIntegrous && (
-          <a href={link} style={{ cursor: 'pointer', marginLeft: 10, width: 150, padding: 6, paddingLeft: 10, color: 'white' }} className="rounded-full bg-primary-500 bg-red-500 ">
-            <i className="fa-solid fa-cart-shopping"></i>
-            <span className='text-xs text-white font-medium p-2 uppercase'>Shopping Cart</span>
-          </a>
-        )}
-      </div> */}
 
       <div className='flex justify-start items-center relative select-none flex-row '>
-        <div className='relative flex flex-row items-center gap-x-2 cursor-pointer' onClick={handleShowOptions} >
+        <div className='relative flex flex-row items-center gap-x-2 cursor-pointer' ref={userMenuRef} onClick={handleShowOptions} >
           {photoUrl
             ? (
               <img
@@ -76,17 +64,8 @@ export const Account = ({ email, name, phone, photoUrl, signOut, rank, roles, le
               <AccountDefaultImage rank={rank} size={42} />
             )}
           <span className='font-semibold whitespace-nowrap mr-2'>{name}</span>
-
-          {/* <div className='sm:hidden absolute -top-1 -right-2 h-3.5 w-3.5 bg-[#FF4343] rounded-full text-white flex justify-center items-center' /> */}
-        </div>
-
-        {/* <div className='ml-3 hidden sm:block leading-3'> */}
-        {/* <span className='text-sm'>User name</span> <br /> */}
-        {/* <span className='whitespace-nowrap font-medium text-gray-700'>Cameron Williamson</span> */}
-        {/* </div> */}
-
-        <div className='sm:block' ref={userMenuRef}>
           <ArrowDownDark classes='cursor-pointer' />
+
         </div>
 
         <div
