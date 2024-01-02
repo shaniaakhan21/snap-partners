@@ -214,7 +214,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
                 control={control}
               />
 
-              <Button type='submit' classes='w-full text-sm bg-primary-500'>
+              <Button type='submit' classes='text-sm bg-primary-500'>
                   Update Phone
               </Button>
             </div>

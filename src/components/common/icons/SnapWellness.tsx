@@ -1,13 +1,13 @@
 import { IIconsBasicProps } from 'lib/types'
 
-export const SnapWellnessIcon = ({ classes = 'w-7 h-7', onClick }: IIconsBasicProps) => {
+export const SnapWellnessIcon = ({ classes = '', onClick }: IIconsBasicProps) => {
   return (
-    <svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+    <svg onClick={onClick} className={`${classes}`} version="1.0" xmlns="http://www.w3.org/2000/svg"
       width="100" height="100" viewBox="0 0 1280.000000 1280.000000"
       preserveAspectRatio="xMidYMid meet">
 
       <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)"
-        fill="#ffffff" stroke="none">
+        fill="#E74426" stroke="none">
         <path d="M6105 11560 c-981 -53 -1943 -397 -2745 -980 -410 -298 -841 -727
 -1133 -1130 -603 -830 -935 -1769 -988 -2795 -38 -742 90 -1499 372 -2203 66
 -166 239 -515 330 -667 242 -407 471 -699 808 -1036 336 -334 611 -552 986

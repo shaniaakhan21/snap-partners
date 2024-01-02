@@ -43,30 +43,28 @@ const IndividualDashboard = ({ userId }) => {
     })()
   }, [])
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2">
+    <><div>
+      <RankComponent data={rankData} />
+    </div><div className="grid grid-cols-1 lg:grid-cols-2">
       <div>
-        <div>
-          <RankComponent data={rankData} />
-        </div>
+
         <div className='mt-4'>
           <GrowthSummary userId={userId} />
         </div>
         <div className='mt-4'>
-          <PVComponentSnap userId={userId} />
+          <RewardsProgram />
         </div>
       </div>
       <div>
         <div className='mt-4'>
           <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} userId={userId} />
         </div>
-        <div className='mt-4'>
-          <RewardsProgram />
-        </div>
+
         <div className='mt-4 bg-white rounded-lg'>
           <MonthlyProduction userId={userId} />
         </div>
       </div>
-    </div>
+    </div></>
   )
 }
 

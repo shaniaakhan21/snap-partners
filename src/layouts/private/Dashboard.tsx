@@ -16,7 +16,7 @@ import { handleFetchError } from 'lib/utils/handleFetchError'
 import { GTMTrack } from 'lib/utils/gtm'
 import { FormBecomeDriver } from '../../components/page/become-role/FormBecomeDriver'
 import Alert from '@material-ui/lab/Alert'
-import { builderWebsiteFields } from "../../lib/types/user/profile";
+import { builderWebsiteFields } from '../../lib/types/user/profile'
 
 const DashboardLayout = ({ children }: { children: ReactNode }) => {
   const router = useRouter()
@@ -225,8 +225,8 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         <Navbar/>
         <Drawer/>
 
-        <main className='dashboardLayout__content scroll-primary'>
-          <div className='mx-auto min-h-[89vh] h-fit px-5 pt-5 pb-20 max-w-7xl'>
+        <main className='dashboardLayout__content scroll-primary px-8'>
+          <div className='min-h-[89vh] h-fit px-5 pt-5 pb-20  max-w-full ml-10 mr-4 mt-4'>
             <Alert severity="warning">Please upload your documents to activate your driver account</Alert><br/>
             <FormBecomeDriver userAuth={auth} userSetAuth={setAuth}/>
           </div>
@@ -238,12 +238,12 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <div className='dashboardLayout'>
-      <Navbar />
-      <Drawer />
+    <div className='dashboardLayout pt-3 sm:pt-4 lg:pt-6 xl:pt-8 pl-3 sm:pl-4 lg:pl-6 xl:pl-8 flex'>
 
-      <main className='dashboardLayout__content scroll-primary'>
-        <div className='mx-auto min-h-[89vh] h-fit px-5 pt-5 pb-20 max-w-7xl'>
+      <Drawer />
+      <main className='dashboardLayout__content scroll-primary w-full pr-3 sm:pr-4 lg:pr-6 xl:pr-8 pl-0 sm:pl-0 lg:pl-6 xl:pl-8'>
+        <Navbar />
+        <div className='min-h-[89vh] h-fit pt-5 pb-10 max-w-full mt-14 md:mt-4'>
           {auth.roles.driver && auth.driver_status === null && (
             <>
               <Alert severity="warning">Your driver documents are being reviewed by our team, your account will be activated soon.</Alert><br/>

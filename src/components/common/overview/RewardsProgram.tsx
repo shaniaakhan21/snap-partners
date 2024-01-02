@@ -65,7 +65,7 @@ export default function RewardsProgram () {
         <td className='text-sm'>{row.reward}</td>
         <td className='text-sm'>${row.cash}</td>
         <td>
-          <BarWithText value={row.progress} variant={'determinate'} progressColor={'#E35C49'}/>
+          <BarWithText value={row.progress} variant={'determinate'}/>
         </td>
         {
           row.progress === 100 && (

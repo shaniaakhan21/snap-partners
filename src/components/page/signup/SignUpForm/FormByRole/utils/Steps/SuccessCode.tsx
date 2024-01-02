@@ -146,14 +146,14 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
   }
 
   return (
-    <div className='flex flex-col justify-center items-center max-w-xl mx-auto'>
-      <br />
-      <span className='text-4xl font-bold text-primary-500'>Registration Done!</span>
-      <CheckSuccess classes='my-10' />
-
+    <div className='flex flex-col justify-center items-center w-full'>
+      <div className='rounded-full w-36 h-36 border-4 border-lime-500 p-8 text-center flex items-center'>
+        <CheckSuccess />
+      </div>
+      <span className='sm:block font-bold text-2xl md:font-semibold mb-2 text-lime-600 mt-4 mb-12'>Registration Done!</span>
       {userTrack.userInfo.roles.integrousAssociate
         ? (<>
-          <span className='text-xl text-primary-500'>Select your welcome pack!</span>
+          <span className='font-medium text-gray-600'>Select your welcome pack!</span>
           <Card
             sx={{
               p: 2,
@@ -172,11 +172,11 @@ export const SuccessCode = ({ userTrack, handleStep, referralLink }: { userTrack
         )
         : (
           <>
-            <span className='text-xl text-primary-500'>Welcome!</span>
-            <span className='text-4xl text-primary-500 font-bold'>
+            <span className='font-medium text-gray-600'>Welcome!</span>
+            <span className='text-3xl text-black font-bold uppercase'>
               {userTrack.userInfo.name ? userTrack.userInfo.name : userTrack.userInfo.merchant.name}
             </span>
-            <Button onClick={handleSkip} classes='w-full mt-10'>CONTINUE</Button>
+            <Button onClick={handleSkip} classes=' mt-6'>CONTINUE</Button>
           </>
         )}
 
