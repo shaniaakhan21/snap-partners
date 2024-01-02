@@ -88,19 +88,16 @@ const DashboardOverViewPage: Page = () => {
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2">
         <div>
-          <div className='mt-4 mr-4'>
+          <div className='mt-8 mr-4'>
             <TierTable />
           </div>
-          <div className='mt-4'>
+          <div className='mt-8'>
             <NetworkActivity />
           </div>
-
-          <div className='mt-4'>
-            <GrowthSummary userId={null} />
-          </div>
-          <div className='mt-4'>
+          <div className='mt-8'>
             <Certification />
           </div>
+
           {/* <div className='mt-4 bg-white rounded-lg'>
             <MonthlySubscription userId={ null } />
           </div>
@@ -110,16 +107,21 @@ const DashboardOverViewPage: Page = () => {
         </div>
         <div className='ml-4 mt-4 '>
           <Event />
-          <div className='mt-4 bg-white rounded-lg'>
+          <div className='mt-4'>
             <TopProducerCategory />
+          </div>
+
+          <div className='mt-4'>
+            <GrowthSummary userId={null} />
+          </div>
+          <div className='mt-4'>
+            {/* <Referrals rankData={rankData} /> */}
+            <RewardsProgram />
           </div>
 
         </div>
       </div>
-      <div className='col-span-12 mt-4'>
-        {/* <Referrals rankData={rankData} /> */}
-        <RewardsProgram />
-      </div>
+
       {!isCustomer && (
         <ContractModal open={openModal} onClose={handleCloseModal} />)
       }

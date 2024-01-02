@@ -5,7 +5,7 @@ import ReactDataGrid from '@inovua/reactdatagrid-community'
 import '@inovua/reactdatagrid-community/index.css'
 
 const columns = [
-    { name: 'description', header: 'Filter list by typing description', defaultWidth: 500 },
+  { name: 'description', header: 'Filter list by typing description', defaultWidth: 500 },
   {
     name: 'date',
     header: 'Date',
@@ -22,16 +22,16 @@ const filterValue = [
 const TableNotifications = ({ notifications }) => {
   return (
     <div style={{ overflow: 'auto' }}>
-    <ReactDataGrid
-      columns={columns}
-      dataSource={notifications}
-      sortable={false}
-      defaultFilterValue={filterValue}
-      style={gridStyle}
-      defaultLimit={10}
-      pagination
-      enableColumnAutosize = {true}
-    />
+      <ReactDataGrid
+        columns={columns}
+        dataSource={notifications}
+        sortable={false}
+        defaultFilterValue={filterValue}
+        style={gridStyle}
+        defaultLimit={10}
+        pagination
+        enableColumnAutosize = {true}
+      />
     </div>
   )
 }
@@ -65,11 +65,11 @@ const NetworkActivity = () => {
   }, [])
 
   return (
-    <div className='max-w-4xl w-full mx-auto bg-white rounded-lg px-2.5 py-3'>
+    <div className='max-w-4xl w-full mx-auto bg-white rounded-3xl shadow-lg p-4'>
       <div>
-        <span className='text-xl text-black font-bold'>Network Activity</span>
+        <span className='text-xl text-black font-bold '>Network Activity</span>
       </div>
-      <div className={`relative w-full sm:rounded-lg ${!loading && 'overflow-x-auto'}`}> {/* Can be better */}
+      <div className={`relative w-full sm:rounded-sm  mt-4 ${!loading && 'overflow-x-auto'}`}> {/* Can be better */}
         {
           loading &&
             (

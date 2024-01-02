@@ -72,7 +72,7 @@ function Certification () {
   }
 
   return (
-    <Box sx={{ maxWidth: '100%', flexGrow: 1 }}>
+    <Box sx={{ maxWidth: '100%', flexGrow: 1 }} className="bg-white rounded-3xl p-6 shadow-lg">
       <Paper
         square
         elevation={0}
@@ -85,9 +85,7 @@ function Certification () {
         }}
       >
         <Typography
-          sx={{
-            fontSize: '20px'
-          }}
+          className='font-bold text-xl'
         >Certifications</Typography>
       </Paper>
       <SwipeableViews

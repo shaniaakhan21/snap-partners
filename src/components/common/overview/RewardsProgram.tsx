@@ -79,9 +79,9 @@ export default function RewardsProgram () {
   }
 
   return (
-    <div className="bg-white rounded-lg px-2.5 py-3">
+    <div className="bg-white rounded-3xl shadow-lg p-6">
       <div>
-        <span className='text-lg text-semibold'>Rewards Program</span>
+        <span className='text-xl font-bold'>Rewards Program</span>
       </div>
       <Tabs value={selectedRank}
         onChange={(_, value) => setSelectedRank(value)}
