@@ -35,7 +35,7 @@ interface ITopProducerCategory {
 
 const tabStyle = {
   '&.Mui-selected': {
-    backgroundColor: '#FF998B',
+    backgroundColor: '#E74426',
     color: 'white'
   },
   fontSize: '13px',
@@ -50,7 +50,11 @@ const subTabStyle = {
   },
   fontSize: '13px',
   textTransform: 'none',
-  width: '20%'
+  width: '20%',
+  '@media (max-width: 567px)': {
+    fontSize: '10px',
+    padding: '1px!important'
+  }
 }
 
 function TabPanel (props) {
@@ -123,16 +127,16 @@ export default function TopProducerCategory () {
   }
 
   return (
-    <Box sx={{ width: '100%', padding: '10px' }} className=' bg-white rounded-3xl shadow-lg p-6'>
-      <div className='flex flex-row justify-between items-center mb-4'>
-        <span className='text-sm sm:text-lg md:text-xl font-bold'>
+    <Box sx={{ width: '100%', padding: '10px' }} className=' bg-white rounded-3xl shadow-lg p-4 lg:p-6'>
+      <div className='flex flex-col lg:flex-row justify-between items-center mb-4'>
+        <span className='text-sm sm:text-lg md:text-xl font-bold mb-4 lg:mb-0'>
           Global SNAP Top Producers
         </span>
         <div className='flex flex-row items-center'>
           <select
             id='legalType'
             name='legalType'
-            className='cursor-pointer outline-none appearance-none rounded-3xl border border-solid py-2 pl-4 pr-14 text-sm sm:text-base bg-[#E74426] text-white'
+            className='cursor-pointer outline-none appearance-none rounded-3xl border border-solid py-2 pl-4 pr-14 text-xs lg:text-sm sm:text-base bg-[#E74426] text-white'
             placeholder='User Rank'
             onChange={(current) => { setYearSelected(parseInt(current.target.value)) }}
             style={{ backgroundImage: 'linear-gradient(45deg, transparent 50%, #ffffff 50%), linear-gradient(135deg, #ffffff 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc' }}
@@ -149,7 +153,7 @@ export default function TopProducerCategory () {
           <select
             id='legalType'
             name='legalType'
-            className='ml-5 cursor-pointer outline-none appearance-none rounded-3xl border border-solid bg-[#E74426] text-white py-2 pl-4 pr-8 text-sm sm:text-base'
+            className='ml-5 cursor-pointer outline-none appearance-none rounded-3xl border border-solid bg-[#E74426] text-white py-2 pl-4 pr-8 text-xs lg:text-sm sm:text-base'
             placeholder='User Rank'
             onChange={(current) => { setMonthSelected(parseInt(current.target.value)) }}
             style={{ backgroundImage: 'linear-gradient(45deg, transparent 50%, #ffffff 50%), linear-gradient(135deg, #ffffff 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc' }}
@@ -214,12 +218,12 @@ export default function TopProducerCategory () {
           }
         }}
       >
-        <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={0}>IBO</MenuItem>
-        <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={1}>ERC</MenuItem>
-        <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={2}>SETC</MenuItem>
-        <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={3}>Delivery Merchant</MenuItem>
-        <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={4}>Delivery Customer</MenuItem>
-        <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={5}>Delivery Driver</MenuItem>
+        <MenuItem className='flex flex-col lg:flex-row text-xs sm:text-sm lg:text-base' value={0}>IBO</MenuItem>
+        <MenuItem className='flex flex-col lg:flex-row text-xs sm:text-sm lg:text-base' value={1}>ERC</MenuItem>
+        <MenuItem className='flex flex-col lg:flex-row text-xs sm:text-sm lg:text-base' value={2}>SETC</MenuItem>
+        <MenuItem className='flex flex-col lg:flex-row text-xs sm:text-sm lg:text-base' value={3}>Delivery Merchant</MenuItem>
+        <MenuItem className='flex flex-col lg:flex-row text-xs sm:text-sm lg:text-base' value={4}>Delivery Customer</MenuItem>
+        <MenuItem className='flex flex-col lg:flex-row text-xs sm:text-sm lg:text-base' value={5}>Delivery Driver</MenuItem>
       </Select>
       <TabPanel value={value} index={0}>
         <TopProducers monthSelected={monthSelected} yearSelected={yearSelected} data={topProducerData} value={subctegoryValue} typeLow='agent' type='topAgent' typeText='IBOs'/>

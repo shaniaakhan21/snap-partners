@@ -29,14 +29,15 @@ const downLineData: DownLineRow[] = [
 ]
 
 const tabStyle = {
-  color: 'black',
-  backgroundColoR: '#FFFFFF',
   fontWeight: '600',
   fontSize: 14,
   width: '25%',
   '&.Mui-selected': {
-    backgroundColor: '#E35C49',
-    color: '#FFFFFF'
+    backgroundColor: '#E74426!important',
+    color: '#FFFFFF!important'
+  },
+  '@media (max-width:567px)': {
+    fontSize: '10px'
   }
 }
 
@@ -173,9 +174,9 @@ export default function GrowthSummary ({ userId }) {
   }, [selectedTab, growthSummaryData])
 
   return (
-    <div className="bg-white rounded-3xl p-6 shadow-lg">
+    <div className="w-fit lg:w-full bg-white rounded-3xl p-6 shadow-lg">
       <div>
-        <span className='text-xl text-black-h font-bold'>Growth Summary</span>
+        <span className='text-sm lg:text-xl text-black-h font-bold'>Growth Summary</span>
       </div>
       <Tabs value={selectedTab}
         onChange={(_, value) => setSelectedTab(value)}
@@ -191,12 +192,12 @@ export default function GrowthSummary ({ userId }) {
         {["IBO's", 'New Clients', 'Orders', 'Volume'].map((label, index) => (<Tab sx={tabStyle} color={index === selectedTab ? '#ffffff' : undefined} label={label} />))}
       </Tabs>
       <div className="my-4 md:flex items-center">
-        <h5 className="text-xl text-black-h font-bold flex-1">{['New IBOs', 'New Clients', 'New Orders', 'New Orders Volume'][selectedTab]}</h5>
-        <div className='flex flex-row items-center border-2 border-[#DCE5ED] rounded-3xl text-black-h'>
+        <h5 className="text-sm mb-2 lg:mb-0 lg:text-xl text-black-h font-bold flex-1">{['New IBOs', 'New Clients', 'New Orders', 'New Orders Volume'][selectedTab]}</h5>
+        <div className='w-fit flex flex-row items-center border-2 border-[#DCE5ED] rounded-3xl text-black-h '>
           <select
             id='legalType'
             name='legalType'
-            className='cursor-pointer outline-none appearance-none py-2 pl-2 pr-12 text-sm sm:text-base rounded-l-3xl border-r-2 border-[#DCE5ED] text-black-h font-semibold'
+            className='cursor-pointer outline-none appearance-none py-2 pl-2 pr-12 text-xs sm:text-sm sm:text-base rounded-l-3xl border-r-2 border-[#DCE5ED] text-black-h font-semibold'
             placeholder='User Rank'
             onChange={(current) => { setYearSelected(parseInt(current.target.value)) }}
             style={{ backgroundImage: 'linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%)' }}
@@ -213,7 +214,7 @@ export default function GrowthSummary ({ userId }) {
           <select
             id='legalType'
             name='legalType'
-            className='ml-5 cursor-pointer outline-none appearance-none py-2 pl-2 text-sm sm:text-base rounded-3xl text-black-h font-semibold border-0'
+            className='ml-5 cursor-pointer outline-none appearance-none py-2 pl-2 text-xs sm:text-sm sm:text-base rounded-3xl text-black-h font-semibold border-0'
             placeholder='User Rank'
             onChange={(current) => { setMonthSelected(parseInt(current.target.value)) }}
             style={{ outline: 'none!important', backgroundImage: 'linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%)' }}
@@ -230,20 +231,20 @@ export default function GrowthSummary ({ userId }) {
         </div>
       </div>
       <div>
-        <table className="mt-4 w-full text-center rounded-3xl border-2 border-[#DCE5ED] p-2">
+        <table className="mt-4 w-fit lg:w-full text-center rounded-3xl border-2 border-[#DCE5ED] p-2">
           <thead className='bg-[#DCE5ED] text-black-h my-4'>
             <tr>
-              <th className='text-sm font-semibold'>&nbsp;</th>
-              {selectedTab !== 3 && <th className='text-sm font-semibold p-4'>Direct</th>}
-              <th className='text-sm font-semibold hidden xs:table-cell'>O-L Manager</th>
-              <th className='text-sm font-semibold xs:hidden'>O-L Mngr.</th>
-              <th className='text-sm font-semibold hidden xs:table-cell'>O-L Supervisor</th>
-              <th className='text-sm font-semibold xs:hidden'>O-L Supv.</th>
-              <th className='text-sm font-semibold hidden xs:table-cell'>O-L Director</th>
-              <th className='text-sm font-semibold xs:hidden'>O-L Dire.</th>
-              <th className='text-sm font-semibold hidden xs:table-cell'>O-L Executive</th>
-              <th className='text-sm font-semibold xs:hidden'>O-L Exec.</th>
-              <th className='text-sm font-semibold pr-4'>Total</th>
+              <th className='text-xs lg:text-sm font-semibold'>&nbsp;</th>
+              {selectedTab !== 3 && <th className='text-xs lg:text-sm font-semibold p-4'>Direct</th>}
+              <th className='text-xs lg:text-sm font-semibold hidden xs:table-cell'>O-L Manager</th>
+              <th className='text-xs lg:text-sm font-semibold xs:hidden'>O-L Mngr.</th>
+              <th className='text-xs lg:text-sm font-semibold hidden xs:table-cell'>O-L Supervisor</th>
+              <th className='text-xs lg:text-sm font-semibold xs:hidden'>O-L Supv.</th>
+              <th className='text-xs lg:text-sm font-semibold hidden xs:table-cell'>O-L Director</th>
+              <th className='text-xs lg:text-sm font-semibold xs:hidden'>O-L Dire.</th>
+              <th className='text-xs lg:text-sm font-semibold hidden xs:table-cell'>O-L Executive</th>
+              <th className='text-xs lg:text-sm font-semibold xs:hidden'>O-L Exec.</th>
+              <th className='text-xs lg:text-sm font-semibold pr-4'>Total</th>
             </tr>
           </thead>
           <tbody>
@@ -257,7 +258,7 @@ export default function GrowthSummary ({ userId }) {
                 )
               })
               : <tr>
-                <td colSpan={6} style={{ textAlign: 'center', padding: '20px', color: '#e35c49' }}>
+                <td colSpan={6} style={{ textAlign: 'center', padding: '20px', color: '#E74426' }}>
                   Coming Soon
                 </td>
               </tr>}

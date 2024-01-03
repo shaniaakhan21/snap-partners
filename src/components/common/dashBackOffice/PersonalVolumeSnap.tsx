@@ -73,7 +73,7 @@ export default function PVComponentSnap ({ userId }) {
 
   return (
     <>
-      <div ref={showDivRef} className="mainDiv w-full max-w-full py-4 px-6 space-y-2 h-full rounded-3xl shadow-xl flex flex-col justify-around" style={{ background: 'linear-gradient(231deg, #E74426 2.25%, #BD3F27 92.77%)' }}>
+      <div ref={showDivRef} className="mainDiv w-full max-w-full py-4 px-6 space-y-2 h-full rounded-3xl shadow-xl flex flex-col justify-around" style={{ background: '#E74426' }}>
         <h1 className="text-base lg:text-lg text-white font-semibold ">Your Store Orders</h1>
         <div>
           <p className="text-xs lg:text-sm text-white font-normal ">Use this widget to track your personal store orders and to compare your stores monthly growth.</p>

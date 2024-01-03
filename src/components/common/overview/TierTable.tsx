@@ -1,4 +1,3 @@
-import { DataGrid as MUIDataGrid } from '@mui/x-data-grid'
 import { styled } from '@mui/system'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -13,7 +12,15 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontWeight: 'bold',
     fontSize: '1em',
     backgroundColor: '#F0F4F8',
-    textAlign: 'center'
+    textAlign: 'center',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '0.8em'
+    }
+  },
+  '&.MuiTableCell-sizeMedium': {
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '0.7em'
+    }
   }
 }))
 
@@ -105,7 +112,7 @@ export default function BasicTable () {
   return (
     <>
       <div className='bg-white rounded-3xl shadow-lg p-6'>
-        <h1 className='font-bold mb-4 text-xl'>
+        <h1 className='font-bold mb-4 text-sm lg:text-xl'>
       Team Override Compensation
         </h1>
         <TableContainer component={Paper}>

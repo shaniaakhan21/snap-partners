@@ -105,21 +105,22 @@ const DashboardOverViewPage: Page = () => {
             <MonthlyProduction userId={null} />
           </div> */}
         </div>
-        <div className='ml-4 mt-4 '>
+        <div className='ml-4 mt-8 '>
           <Event />
-          <div className='mt-4'>
+          <div className='mt-8'>
             <TopProducerCategory />
           </div>
 
-          <div className='mt-4'>
+          <div className='mt-8'>
             <GrowthSummary userId={null} />
-          </div>
-          <div className='mt-4'>
-            {/* <Referrals rankData={rankData} /> */}
-            <RewardsProgram />
           </div>
 
         </div>
+
+      </div>
+      <div className='col-span-12 mt-8'>
+        {/* <Referrals rankData={rankData} /> */}
+        <RewardsProgram />
       </div>
 
       {!isCustomer && (
