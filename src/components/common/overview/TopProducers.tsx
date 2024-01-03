@@ -29,7 +29,7 @@ const Info = ({ img, noOfCustomers, name, nameValue }) => {
         <img className="w-10 h-10 rounded-full" src={img} alt="Profile picture" />
       </div>
       <div className='col-span-3 pt-1 pl-2'>
-      <div>
+        <div>
           <Typography variant="body1"
             sx={{
               fontSize: '12px',
@@ -134,7 +134,7 @@ export const TopProducers: React.FC<any> = ({ data, value, type, typeLow, typeTe
               <div className='pb-3'>
                 <Divider color="primary"/>
               </div>
-              <div className="grid grid-cols-2 gap-0">
+              <div className="flex flex-col lg:grid grid-cols-2 gap-0">
                 {
                   data[`${typeLow}_${levelToRank.get(index)}`].map((itm) => {
                     return (<div>
