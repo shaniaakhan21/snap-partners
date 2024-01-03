@@ -214,7 +214,7 @@ export default function GrowthSummary ({ userId }) {
           <select
             id='legalType'
             name='legalType'
-            className='ml-5 cursor-pointer outline-none appearance-none py-2 pl-2 text-xs sm:text-sm sm:text-base rounded-3xl text-black-h font-semibold border-0'
+            className='ml-0 lg:ml-5 cursor-pointer outline-none appearance-none py-2 pl-2 text-xs sm:text-sm sm:text-base rounded-3xl text-black-h font-semibold border-0'
             placeholder='User Rank'
             onChange={(current) => { setMonthSelected(parseInt(current.target.value)) }}
             style={{ outline: 'none!important', backgroundImage: 'linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%)' }}
