@@ -95,7 +95,7 @@ const DashboardOverViewPage: Page = () => {
             <NetworkActivity />
           </div>
           <div className='mt-8'>
-            <Certification />
+            <GrowthSummary userId={null} />
           </div>
 
           {/* <div className='mt-4 bg-white rounded-lg'>
@@ -112,7 +112,7 @@ const DashboardOverViewPage: Page = () => {
           </div>
 
           <div className='mt-8'>
-            <GrowthSummary userId={null} />
+            <Certification />
           </div>
 
         </div>
