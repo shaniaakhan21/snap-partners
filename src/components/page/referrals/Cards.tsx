@@ -50,17 +50,17 @@ export const ReferralCards = ({ title, ilustration, link, newUser = false, class
           : (
             <div className='h-4' />
           )}
-        <div className='w-1/4'>
+        <div className='w-1/4 h-[71px] sm:h-full'>
           {ilustration}
         </div>
         <div className='flex flex-col w-3/4 ml-0'>
-          <h3 className={`w-full text-base lg:text-2xl font-semibold text-start ${newUser ? 'my-4' : 'mb-4'}`}>{title}</h3>
+          <h3 className={`w-full text-lg sm:text-2xl font-semibold text-start ${newUser ? 'my-4' : 'mb-4'}`}>{title}</h3>
         </div>
       </div>
       <div>
         <button
           onClick={onClick}
-          className='p-10 lg:text-black inline-flex items-center transition-colors hover:text-black w-full bg-[#F0F4F8] rounded-b-3xl'
+          className='p-6 lg:p-10 lg:text-black inline-flex items-center transition-colors hover:text-black w-full bg-[#F0F4F8] rounded-b-3xl'
         >
           <div className='flex flex-row w-full rounded-md '>
             <span className='rounded-l-md border-l-2 border-t-2 border-b-2 border-[#E1E8EB] text-xs sm:text-sm text-black bg-white w-[80%] py-2 text-start px-4 font-semibold'>Copy Referral Link</span>

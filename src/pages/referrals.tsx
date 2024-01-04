@@ -54,7 +54,7 @@ const ReferralsPage: Page = () => {
           <ReferralCards
             title='IBO Sizzle Video'
             ilustration={(
-              <div className='h-[120px] flex items-center shadow-2xl rounded-full relative -top-12 right-1'><img src={'/images/sizzle.png'} />
+              <div className='h-[120px] flex items-center 2xl:shadow-2xl rounded-full relative -top-12 right-1'><img src={'/images/sizzle.png'} />
               </div>
             )}
             link={`https://mysnappartners.com/referral-code/${auth.referralCode.trim()}/${auth.id}/sizzle/` || 'With Out Link'}
@@ -64,7 +64,7 @@ const ReferralsPage: Page = () => {
           <ReferralCards
             title='ERC Sizzle Video'
             ilustration={(
-              <div className='h-[120px] flex items-center shadow-2xl rounded-full  relative -top-12 right-1'><img src={'/images/erc-sizzle.png'} />
+              <div className='h-[120px] flex items-center 2xl:shadow-2xl rounded-full  relative -top-12 right-1'><img src={'/images/erc-sizzle.png'} />
               </div>
             )}
             link={`https://mysnappartners.com/referral-code/${auth.referralCode.trim()}/${auth.id}/erc-sizzle/` || 'With Out Link'}
@@ -74,7 +74,7 @@ const ReferralsPage: Page = () => {
           <ReferralCards
             title='SETC Sizzle Video'
             ilustration={(
-              <div className='h-[120px] flex items-center shadow-2xl rounded-full relative -top-12 right-1'><img src={'/images/setc.png'} />
+              <div className='h-[120px] flex items-center 2xl:shadow-2xl rounded-full relative -top-12 right-1'><img src={'/images/setc.png'} />
               </div>
             )}
             link={`https://mysnappartners.com/referral-code/${auth.referralCode.trim()}/${auth.id}/setc-sizzle/` || 'With Out Link'}
@@ -84,11 +84,11 @@ const ReferralsPage: Page = () => {
         </div>
       </div>
       <h1 className='text-base lg:text-2xl font-bold'>Referal Pages</h1>
-      <div className='min-h-[80vh] flex justify-center items-center mt-14'>
-        <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-center justify-center justify-items-center gap-8'>
+      <div className='w-full flex justify-center items-center mt-14'>
+        <div className='w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-center justify-center justify-items-center gap-8'>
           <ReferralCards
             title='Sponsor a Snap IBO'
-            ilustration={(<div className=' relative -top-10 right-1'><SnapPartnersRefIcon /></div>)}
+            ilustration={(<div className='relative -top-10 right-1 w-[70px] sm:w-[100px] lg:w-[114px]'><SnapPartnersRefIcon /></div>)}
             link={`https://mysnappartners.com/referral-code/${auth.referralCode.trim()}/${auth.id}/the-opportunity/` || 'With Out Link'}
             newUser={false}
             classes='col-span-1'
@@ -173,7 +173,7 @@ const ReferralsPage: Page = () => {
           <ReferralCards
             title='Refer a Integrous Wellness Customer'
             ilustration={(
-              <div className='h-[120px] w-[114px]  flex items-center relative -top-10 right-1'><img src={'/static/wellness/int-link-logo.png'} /> </div>)}
+              <div className='h-[120px] w-[70px] sm:w-[100px] lg:w-[114px]  flex items-center relative -top-10 right-1'><img src={'/static/wellness/int-link-logo.png'} /> </div>)}
             link={`${auth.referralLinkWellness}` || 'With Out Link'}
             newUser={false}
             classes='col-span-1'
@@ -192,7 +192,7 @@ const ReferralsPage: Page = () => {
               />
             )
             : (
-              <InactiveCards title={'Refer a WeightCare Customer'} ilustration={<img src={'/static/wellness/link-weightcare.png'} width={100} />} link={''} />
+              <InactiveCards title={'Refer a WeightCare Customer'} ilustration={<div className='h-[120px] w-[70px] sm:w-[100px] lg:w-[114px]  flex items-center relative -top-10 right-1'><img src={'/static/wellness/link-weightcare.png'}/></div>} link={''} />
             )}
         </div>
         {!isCustomer && (
