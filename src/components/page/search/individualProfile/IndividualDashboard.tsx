@@ -44,7 +44,7 @@ const IndividualDashboard = ({ userId }) => {
   }, [])
   return (
     <><div>
-      <RankComponent data={rankData} />
+      <RankComponent data={rankData} userId={userId} />
     </div><div className="grid grid-cols-1 lg:grid-cols-2">
       <div>
 

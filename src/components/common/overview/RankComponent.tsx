@@ -56,6 +56,7 @@ const StyledBox = styled(Box)<StyledBoxProps>((props) => ({
 
 interface RankComponentProps{
   data: RankData | null
+  userId?: string
 }
 
 export default function RankComponent (props: RankComponentProps) {
@@ -116,10 +117,14 @@ export default function RankComponent (props: RankComponentProps) {
       return
     }
     const token = getLocalStorage('accessToken')
+    const params:any = {
+      effective_day: month
+    }
+    if (props.userId) {
+      params.userId = props.userId
+    }
     const response = await axios.get('/api/snap/getHistoricalRank', {
-      params: {
-        effective_day: month
-      },
+      params,
       headers: {
         Authorization: `Bearer ${token}`
       }
