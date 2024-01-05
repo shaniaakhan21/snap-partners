@@ -183,7 +183,7 @@ const ReferralsPage: Page = () => {
               <ReferralCards
                 title='Refer a WeightCare Customer'
                 ilustration={(
-                  <div className='h-[120px] flex items-center relative -top-12 right-1'><img src={'/static/wellness/link-weightcare.png'} />
+                  <div className='h-[120px] w-[70px] sm:w-[100px] w-[114px] flex items-center relative -top-12 right-1'><img src={'/static/wellness/link-weightcare.png'} />
                   </div>
                 )}
                 link={`${auth.referralLinkWeightCare}` || 'With Out Link'}
@@ -192,7 +192,7 @@ const ReferralsPage: Page = () => {
               />
             )
             : (
-              <InactiveCards title={'Refer a WeightCare Customer'} ilustration={<div className='h-[120px] w-[70px] sm:w-[100px] lg:w-[114px]  flex items-center relative -top-10 right-1'><img src={'/static/wellness/link-weightcare.png'}/></div>} link={''} />
+              <InactiveCards title={'Refer a WeightCare Customer'} ilustration={<div className='h-[120px] w-[70px] sm:w-[100px] w-[114px]  flex items-center relative -top-10 right-1'><img src={'/static/wellness/link-weightcare.png'}/></div>} link={''} />
             )}
         </div>
         {!isCustomer && (
