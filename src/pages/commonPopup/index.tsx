@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import { Button, Checkbox, FormControlLabel, Modal, Radio } from '@mui/material'
 import { Close as CrossIcon, East } from '@mui/icons-material'
 import { ChangeEvent, useEffect, useRef, useState } from 'react'
@@ -234,7 +235,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
               Authorization: `Bearer ${auth.accessToken}`
             }
           })
-          const updateDOBRequest = axios.post('/api/user/update-dob', {
+          const updateDOBRequest = await axios.post('/api/user/update-dob', {
             dateOfBirth: dateOfBirth
           }, {
             headers: {
@@ -330,6 +331,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
 
   const handleSubmitForBusiness = async () => {
     let hasErrors = false
+    setIsLoading(true)
 
     if (!ein) {
       setEINError('Please enter a valid EIN')
@@ -353,58 +355,87 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
     }
 
     if (!hasErrors) {
-      onClose()
       try {
         if (isMounted.current) {
-          await axios.post('/api/user/update-tin-status', {
-            TINstatus: 'business'
-          }, {
+          await axios.get('/api/user/validateTIN', {
             headers: {
               'Content-Type': 'application/json',
               Authorization: `Bearer ${auth.accessToken}`
+            },
+            params: {
+              TIN: ein,
+              LName: businessName
             }
           })
-          const updateBusinessFields = await axios.post('/api/user/update-business-fields', {
-            businessName: businessName,
-            ein: ein,
-            b_start_date: b_start_date,
-            business_type: business_type,
-            name: firstname,
-            lastname: lastname
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${auth.accessToken}`
-            }
-          })
-          console.log('Update Address Response:', updateBusinessFields.data)
-          await axios.all([updateBusinessFields])
-          const updateAddressRequest = await axios.post('/api/user/update-address', {
-            state: state,
-            street: street,
-            city: city,
-            zip: zip
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${auth.accessToken}`
-            }
-          })
-          await validateUser()
-          setCity(city)
-          setState(state)
-          setStreet(street)
-          setZipCode(zip)
-          setDateOfBirth(dateOfBirth)
-          setIsLoading(false)
-          setBStartDate(b_start_date)
-          setBusinessName(businessName)
-          setBusinessType(business_type)
-          setEin(ein)
-          setFirstName(firstname)
-          setLastName(lastname)
-          await axios.all([updateAddressRequest])
-          setShowBdocPopup(true)
+            .then(async (response) => {
+              console.log('response from tin validation is', response.data.responseCode)
+              if (response.data.responseCode == '1' || response.data.responseCode == '6' || response.data.responseCode == '7' || response.data.responseCode == '8') {
+                await axios.post('/api/user/verifyBusiness', {
+                  businessValidationStatus: true
+                }, {
+                  headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${auth.accessToken}`
+                  }
+                })
+
+                await axios.post('/api/user/update-tin-status', {
+                  TINstatus: 'business'
+                }, {
+                  headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${auth.accessToken}`
+                  }
+                })
+                const updateBusinessFields = await axios.post('/api/user/update-business-fields', {
+                  businessName: businessName,
+                  ein: ein,
+                  b_start_date: b_start_date,
+                  business_type: business_type,
+                  name: firstname,
+                  lastname: lastname
+                },
+                {
+                  headers: {
+                    Authorization: `Bearer ${auth.accessToken}`
+                  }
+                })
+                console.log('Update Address Response:', updateBusinessFields.data) // Log the response from update-address
+                await axios.all([updateBusinessFields])
+                const updateAddressRequest = await axios.post('/api/user/update-address', {
+                  state: state,
+                  street: street,
+                  city: city,
+                  zip: zip
+                },
+                {
+                  headers: {
+                    Authorization: `Bearer ${auth.accessToken}`
+                  }
+                })
+                await validateUser()
+                setCity(city)
+                setState(state)
+                setStreet(street)
+                setZipCode(zip)
+                setDateOfBirth(dateOfBirth)
+                setIsLoading(false)
+                setBStartDate(b_start_date)
+                setBusinessName(businessName)
+                setBusinessType(business_type)
+                setEin(ein)
+                setFirstName(firstname)
+                setLastName(lastname)
+                await axios.all([updateAddressRequest])
+                setShowBdocPopup(true)
+                onClose()
+                setIsLoading(false)
+              } else {
+                alert('error while validating TIN number')
+                setIsLoading(false)
+                onClose()
+              }
+            })
         }
       } catch (error) {
         setIsLoading(false)
@@ -582,7 +613,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
                     ? 'bg-primary-500 text-white'
                     : 'bg-grey text-blackCustom'
                 }`}
-                disabled={!validated || !filed}
+                disabled={!validated || !filed || isLoading}
                 onClick={() => {
                   if (selectedOption === 'Individual') {
                     handleSubmitForIndividual()
