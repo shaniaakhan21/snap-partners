@@ -42,6 +42,8 @@ export interface Post {
   gv: GV
 }
 export interface RankData {
+  realRank: string,
+  realRankLevel: number,
   currentRank: string,
   currentRankLevel: number,
   highestRank: string,
