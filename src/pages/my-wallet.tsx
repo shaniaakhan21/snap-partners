@@ -93,7 +93,7 @@ const MyWalletPage: Page = () => {
           }
           <>
             <div className='flex flex-col lg:flex-row gap-x-6'>
-              <div className='shadow-xl bg-white rounded-3xl h-fit w-full lg:w-5/12'>
+              <div className='shadow-xl mb-4 bg-white rounded-3xl h-fit w-full lg:w-5/12'>
                 <div className='m-2 p-4 bg-[#E1EBF3] rounded-t-3xl'>
                   <h2 className='text-xs lg:text-lg text-center mb-4 text-red-500'>Withdrawals may take up to 5 to 7 business days depending on your bank</h2>
                   <div className='max-w-xl mx-auto w-full text-center mb-0'>
@@ -101,7 +101,7 @@ const MyWalletPage: Page = () => {
                     <span className='font-normal text-xs lg:text-base'>Minimum balance to withdraw is <br/> <span className='text-2xl font-bold text-[#E74426]'>$5.00</span></span>
                   </div>
                 </div>
-                <div className='flex flex-col justify-center items-center mt-6'>
+                <div className='flex flex-col justify-center items-center mt-6 mb-6'>
                   <Button disabled={!enableWithdraw} onClick={() => { fnOpenModalConfirmation() }} type='submit' classes=' mr-1 text-sm bg-[#E74426]'>
                       Withdraw Available Balance
                   </Button>
@@ -161,7 +161,7 @@ const MyWalletPage: Page = () => {
               )}
               { transactions.length === 0
                 ? (
-                  <div className='flex justify-center items-center'>
+                  <div className='flex justify-center items-center bg-white w-full lg:w-7/12 p-10 rounded-3xl shadow-lg mb-8 mt-6 lg:mt-0'>
                     <EmptyData label='No transactions found' />
                   </div>
                 )
