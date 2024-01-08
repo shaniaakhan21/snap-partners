@@ -31,45 +31,44 @@ export const ReferralCards = ({ title, ilustration, link, newUser = false, class
   }
 
   return (
-    <div className={`w-full p-1 sm:p-6 bg-white flex flex-row items-center justify-center rounded-sm shadow ${classes}`}>
-      {/* Es necesario refactorizar el newUser en un nuevo componente  */}
-      {newUser
-        ? (
-          <div className='w-full flex items-center justify-between'>
-            <div className='flex items-center justify-center'>
-              <div className='h-4 w-4 rounded-sm bg-primary-500 mr-2 last:mr-0' />
-              <div className='h-4 w-4 rounded-sm bg-primary-500 mr-2 last:mr-0' />
-            </div>
+    <div className='bg-white w-full rounded-3xl shadow-lg mb-8'>
+      <div className={`w-full p-1 flex flex-row items-center justify-center ${classes}`}>
+        {newUser
+          ? (
+            <div className='w-full flex items-center justify-between'>
+              <div className='flex items-center justify-center'>
+                <div className='h-4 w-4 rounded-sm bg-primary-500 mr-2 last:mr-0' />
+                <div className='h-4 w-4 rounded-sm bg-primary-500 mr-2 last:mr-0' />
+              </div>
 
-            <div className='inline-flex items-center'>
-              {/* <span className='text-textAcent-500 font-bold text-xs mr-2'>NEW USER!</span> */}
-              <span className='text-textHint font-bold text-xs mr-2'>17.08.20</span>
-              <CalendarIcon classes='w-4 h-4' />
+              <div className='inline-flex items-center'>
+                <span className='text-textHint font-bold text-xs mr-2'>17.08.20</span>
+                <CalendarIcon classes='w-4 h-4' />
+              </div>
             </div>
-          </div>
-        )
-        : (
-          <div className='h-4' />
-        )}
-      {/* el div con height imita la altura del anterior componente, si se modifica dicha altura, también se debe modificar el valor */}
-      <div className='w-1/3'>
-        {ilustration}
+          )
+          : (
+            <div className='h-4' />
+          )}
+        <div className='w-1/4 h-[71px] sm:h-full'>
+          {ilustration}
+        </div>
+        <div className='flex flex-col w-3/4 ml-0'>
+          <h3 className={`w-full text-lg sm:text-2xl font-semibold text-start ${newUser ? 'my-4' : 'mb-4'}`}>{title}</h3>
+        </div>
       </div>
-      <div className='flex flex-col w-3/4 ml-4'>
-        <h3 className={`w-full text-base font-semibold text-start ${newUser ? 'my-4' : 'mb-4'}`}>{title}</h3>
-
-        {/* <hr className='w-full my-4 mx-auto border-t border-gray-300' /> */}
-
+      <div>
         <button
           onClick={onClick}
-          className='lg:text-black inline-flex items-center transition-colors hover:text-black w-[90%]  border rounded bg-primary-500'
+          className='p-6 lg:p-10 lg:text-black inline-flex items-center transition-colors hover:text-black w-full bg-[#F0F4F8] rounded-b-3xl'
         >
-          <span className='text-xs sm:text-sm text-black bg-white w-[80%] py-2'>Copy Referral Link</span>
-          <div className='w-[20%] flex align-center justify-center'>
-            <CopyIcon />
+          <div className='flex flex-row w-full rounded-md '>
+            <span className='rounded-l-md border-l-2 border-t-2 border-b-2 border-[#E1E8EB] text-xs sm:text-sm text-black bg-white w-[80%] py-2 text-start px-4 font-semibold'>Copy Referral Link</span>
+            <div className='rounded-r-md w-[20%] flex align-center justify-center bg-[#E74426] p-2'>
+              <CopyIcon />
+            </div>
           </div>
         </button>
-
       </div>
     </div>
   )

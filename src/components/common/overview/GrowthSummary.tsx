@@ -175,8 +175,44 @@ export default function GrowthSummary ({ userId }) {
 
   return (
     <div className="w-fit lg:w-full bg-white rounded-3xl p-6 shadow-lg">
-      <div>
+      <div className='flex flex-col lg:flex-row justify-between items-center'>
         <span className='text-sm lg:text-xl text-black-h font-bold'>Growth Summary</span>
+        <div className='flex flex-row items-center'>
+          <select
+            id='legalType'
+            name='legalType'
+            className='cursor-pointer outline-none appearance-none rounded-3xl border border-solid py-2 pl-4 pr-14 text-xs lg:text-sm sm:text-base bg-[#E74426] text-white'
+            placeholder='User Rank'
+            onChange={(current) => { setYearSelected(parseInt(current.target.value)) }}
+            style={{ backgroundImage: 'linear-gradient(45deg, transparent 50%, #ffffff 50%), linear-gradient(135deg, #ffffff 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc' }}
+          >
+            {years.map((y, i) => {
+              return (
+                <option key={i} selected={(new Date().getFullYear() === y)} value={y}>
+                  {y}
+                </option>
+              )
+            })
+            }
+          </select>
+          <select
+            id='legalType'
+            name='legalType'
+            className='ml-5 cursor-pointer outline-none appearance-none rounded-3xl border border-solid bg-[#E74426] text-white py-2 pl-4 pr-8 text-xs lg:text-sm sm:text-base'
+            placeholder='User Rank'
+            onChange={(current) => { setMonthSelected(parseInt(current.target.value)) }}
+            style={{ backgroundImage: 'linear-gradient(45deg, transparent 50%, #ffffff 50%), linear-gradient(135deg, #ffffff 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc' }}
+          >
+            {month.map((m, i) => {
+              return (
+                <option key={i} selected={(new Date().getMonth() === i)} value={i}>
+                  {m}
+                </option>
+              )
+            })
+            }
+          </select>
+        </div>
       </div>
       <Tabs value={selectedTab}
         onChange={(_, value) => setSelectedTab(value)}
@@ -193,42 +229,6 @@ export default function GrowthSummary ({ userId }) {
       </Tabs>
       <div className="my-4 md:flex items-center">
         <h5 className="text-sm mb-2 lg:mb-0 lg:text-xl text-black-h font-bold flex-1">{['New IBOs', 'New Clients', 'New Orders', 'New Orders Volume'][selectedTab]}</h5>
-        <div className='w-fit flex flex-row items-center border-2 border-[#DCE5ED] rounded-3xl text-black-h '>
-          <select
-            id='legalType'
-            name='legalType'
-            className='cursor-pointer outline-none appearance-none py-2 pl-2 pr-12 text-xs sm:text-sm sm:text-base rounded-l-3xl border-r-2 border-[#DCE5ED] text-black-h font-semibold'
-            placeholder='User Rank'
-            onChange={(current) => { setYearSelected(parseInt(current.target.value)) }}
-            style={{ backgroundImage: 'linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%)' }}
-          >
-            {years.map((y, i) => {
-              return (
-                <option key={i} selected={(new Date().getFullYear() === y)} value={y}>
-                  {y}
-                </option>
-              )
-            })
-            }
-          </select>
-          <select
-            id='legalType'
-            name='legalType'
-            className='ml-0 lg:ml-5 cursor-pointer outline-none appearance-none py-2 pl-2 text-xs sm:text-sm sm:text-base rounded-r-3xl text-black-h font-semibold border-0'
-            placeholder='User Rank'
-            onChange={(current) => { setMonthSelected(parseInt(current.target.value)) }}
-            style={{ outline: 'none!important', backgroundImage: 'linear-gradient(45deg, transparent 50%, gray 50%), linear-gradient(135deg, gray 50%, transparent 50%)' }}
-          >
-            {month.map((m, i) => {
-              return (
-                <option key={i} selected={(new Date().getMonth() === i)} value={i}>
-                  {m}
-                </option>
-              )
-            })
-            }
-          </select>
-        </div>
       </div>
       <div>
         <table className="mt-4 w-fit lg:w-full text-center rounded-3xl border-2 border-[#DCE5ED] p-2">
