@@ -62,7 +62,7 @@ const DashboardOverViewPage: Page = () => {
         if (data.total > 600) {
           setShowPopup(true)
         } else {
-          setShowPopup(false)
+          setShowPopup(true)
         }
       })
       .catch((error) => console.error('Error fetching data: ', error))
