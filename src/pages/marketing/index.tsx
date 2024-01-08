@@ -51,7 +51,7 @@ const MarketingPage: Page = () => {
   return (
     <>
       <div className='flex flex-col lg:flex-row mx-2 lg:mx-20 gap-x-6'>
-        <div className='text-center  h-fit w-full lg:w-1/2 rounded-3xl border-4 border-white m-4 shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)] pt-8 lg:pt-14 pb-12 lg:pb-28 px-4 lg:px-20 bg-[#E1EBF3] mt-4 lg:mt-20'>
+        <div className='text-center  h-fit w-full lg:w-1/2 rounded-3xl border-4 border-white m-4 shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)] pt-8 lg:pt-14 pb-12 lg:pb-28 px-4 lg:px-20 bg-[#E1EBF3] '>
           <div className='w-full flex justify-center py-4'>
             <img src='/images/tools.png'/>
           </div>
