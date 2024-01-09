@@ -8,7 +8,7 @@ function ReportsSubMenu () {
   return (
     <>
       {menuOpen && (
-        <ul className='admin-tool-sub-container'>
+        <ul className='admin-tool-sub-container right-[101%]'>
           <Link href='/1099-report' passHref><li className='item-0 sub-list-items font-xs sm:font-base' onClick={() => {
             setMenuOpen(false)
           }}

@@ -46,7 +46,7 @@ function AdminToolMainMenu () {
   return (
     <>
       {menuOpen && (
-        <div className='admin-tool-sub-container'>
+        <div className='admin-tool-sub-container right-[101%]'>
 
           <ul>
             {
