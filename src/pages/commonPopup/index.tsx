@@ -9,6 +9,7 @@ import CommonPopup from './common'
 import InFields from './common/individualFields'
 import BussFields from './common/bussinessFields'
 import BusinessDocPopup from './common/businessDoc'
+import CustomHelpModal from './common/AlertPop'
 
 interface TINPopupProps {
     open: boolean;
@@ -42,6 +43,22 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
   const [lastname, setLastName] = useState('')
   const [showBDocPopup, setShowBdocPopup] = useState(false)
   const isMounted = useRef(true)
+  const [showHelpPopup, setShowHelpPopup] = useState(false)
+  const deadlineDate = new Date('2024-01-15')
+
+  const handleClosePopup = () => {
+    const currentDate = new Date()
+
+    if (currentDate >= deadlineDate) {
+      setShowHelpPopup(true)
+    } else {
+      onClose()
+    }
+  }
+
+  const handleHelpPopupClose = () => {
+    setShowHelpPopup(false)
+  }
 
   useEffect(() => {
     return () => {
@@ -438,15 +455,20 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
 
             <div className='flex flex-row justify-end'>
               <div>
-                <CrossIcon onClick={onClose} className='text-base md:text-2xl 2xl:text-5xl cursor-pointer' />
+                <CrossIcon onClick={handleClosePopup} className='text-base md:text-2xl 2xl:text-5xl cursor-pointer' />
+                {showHelpPopup && (
+                  <CustomHelpModal isOpen={showHelpPopup} onClose={handleHelpPopupClose} />
+                )}
               </div>
             </div>
             <div className='w-full lg:w-11/12'>
               <h1 className='text-base md:text-2xl 2xl:text-3xl font-semibold'>Request for Taxpayer Identification Number (W-9)</h1>
             </div>
-            <br />
+            <div className='font-semibold py-4'>
+              <p>By law Snap is required to generate 1099's by Jan 31. If you don't complete this process by Jan 15, you won't be able to exit out and your account will be frozen for further back office access until complete.</p>
+            </div>
             <div className='p-4 rounded-lg bg-[#edfbe0]'>
-              <h2 className='text-sm md:text-lg 2xl:text-xl font-normal'><span className='text-base lg:text-xl 2xl:text-2xl text-[#FA4616] font-medium'>Purpose</span> To generate a 1099 at end of year</h2>
+              <h2 className='text-sm md:text-lg 2xl:text-xl font-normal'><span className='text-base lg:text-xl 2xl:text-2xl text-[#FA4616] font-medium'>Purpose</span> Required to generate a 1099 for the 2023 tax year</h2>
             </div>
             <div className='flex flex-col lg:flex-row w-full justify-between mt-4 p-4 rounded-lg bg-[#dd4c3733] border-[#DD4C37] border-2 items-center mb-2'style={{ boxShadow: '0px 0px 6px 2px #ff200045' }}>
               <h2 className='text-sm md:text-lg 2xl:text-xl font-semibold'><span className='underline'>Step 1</span> : I want to file as an?</h2>

@@ -20,13 +20,13 @@ export default function AlertWidget () {
 
   return (
     <>
-      <div className='bg-[#ff523978] p-2.5 px-6 rounded-lg mb-4'>
-        <h1 className="font-bold text-lg uppercase mb-4">Please upload the documents for 1099 verification:</h1>
+      <div className='bg-white p-4 px-6 rounded-lg mb-4 border-2 border-[#000000] shadow-lg'>
+        <h1 className="font-bold text-sm lg:text-lg uppercase mb-4">Please upload the documents for 1099 verification:</h1>
         <Button
           type="submit"
           variant="contained"
           onClick={handleClick}
-          className='bg-white text-black font-bold'
+          className='bg-[#E74426] text-white font-bold text-xs lg:text-sm p-2 lg:p-2 rounded-lg'
         >
                     Upload Documents
         </Button>
