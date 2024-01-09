@@ -218,6 +218,11 @@ const BusinessReport: Page = () => {
           style={{ textAlign: 'center', width: '100%', border: '1px solid #E35C49' }}
           value={editedData[fieldName] || ''}
           onChange={(e) => handleInputChange(fieldName, e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === ' ') {
+              e.stopPropagation()
+            }
+          }}
           placeholder='Type here...'
         />
       )
