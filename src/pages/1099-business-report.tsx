@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable array-callback-return */
 /* eslint-disable new-cap */
 import Head from 'next/head'
@@ -93,15 +94,90 @@ const BusinessReport: Page = () => {
   const [approvalDialogOpen, setApprovalDialogOpen] = useState(false)
   const [activeEditRowId, setActiveEditRowId] = useState(null)
   const [editableRowId, setEditableRowId] = useState(null)
-  const [editedData, setEditedData] = useState({})
+  const [editedData, setEditedData] = useState({
+    ein: '',
+    businessName: '',
+    business_type: '',
+    firstname: '',
+    lastname: '',
+    b_start_date: null
+
+  })
 
   const makeRowEditable = (rowId) => {
     setEditableRowId(rowId)
-    setEditedData({})
+    setEditedData({
+      ein: '',
+      businessName: '',
+      business_type: '',
+      firstname: '',
+      lastname: '',
+      b_start_date: null
+    })
+  }
+  const validateUser = async () => {
+    try {
+      const response = await axios.post(
+        '/api/user/isValidated',
+        { isValidated: true },
+        {
+          headers: {
+            Authorization: `Bearer ${auth.accessToken}`
+          }
+        }
+      )
+
+      if (response.data.result[0] === 1) {
+        setAuth({ ...auth, isValidated: true })
+      } else {
+        alert('Error while confirming validation')
+      }
+    } catch (error) {
+      alert('Error while confirming validation')
+    }
   }
 
-  const handleSaveClick = (rowId) => {
+  const handleSaveClick = async (rowId) => {
     setEditableRowId(null)
+    console.log('editedData xis', editedData)
+    await axios.get('/api/user/validateTIN', {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${auth.accessToken}`
+      },
+      params: {
+        TIN: editedData.ein,
+        LName: editedData.businessName
+      }
+    })
+      .then(async (response) => {
+        console.log('response from tincheck api', response)
+
+        if (response.data.responseCode == '1' || response.data.responseCode == '6' || response.data.responseCode == '7' || response.data.responseCode == '8') {
+          await axios.post('/api/user/verifyBusiness', {
+            businessValidationStatus: true
+          }, {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${auth.accessToken}`
+            }
+          })
+          await axios.post('/api/user/update-business-fields', {
+            businessName: editedData.businessName,
+            ein: editedData.ein,
+            b_start_date: editedData.b_start_date,
+            business_type: editedData.business_type,
+            name: editedData.firstname,
+            lastname: editedData.lastname
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${auth.accessToken}`
+            }
+          })
+          await validateUser()
+        }
+      })
   }
 
   const handleRowClick = (params) => {
