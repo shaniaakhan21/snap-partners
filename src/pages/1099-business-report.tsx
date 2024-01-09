@@ -19,6 +19,8 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle'
 import CancelIcon from '@material-ui/icons/Cancel'
 import DocumentDetailView from './commonPopup/common/DocumentDetailView'
 import { getLocalStorage } from 'lib/utils/localStorage'
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers-pro'
+import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs'
 
 const { SEO } = APP_INFO
 
@@ -61,7 +63,8 @@ const ImageViewer = ({ open, onClose, imageUrl }) => {
 const StyledDataGrid = styled(MUIDataGrid)(() => ({
   '&& .MuiDataGrid-columnHeaderTitleContainer .MuiDataGrid-columnHeaderTitle': {
     fontWeight: 'bold',
-    fontSize: '1em'
+    fontSize: '1em',
+    textAlign: 'center'
   },
   '& .MuiDataGrid-cell': {
     borderColor: 'rgba(224, 224, 224, 0.5)!important',
@@ -88,6 +91,18 @@ const BusinessReport: Page = () => {
   const [selectedDocumentInfo, setSelectedDocumentInfo] = useState(null)
   const [documentDetailModalOpen, setDocumentDetailModalOpen] = useState(false)
   const [approvalDialogOpen, setApprovalDialogOpen] = useState(false)
+  const [activeEditRowId, setActiveEditRowId] = useState(null)
+  const [editableRowId, setEditableRowId] = useState(null)
+  const [editedData, setEditedData] = useState({})
+
+  const makeRowEditable = (rowId) => {
+    setEditableRowId(rowId)
+    setEditedData({})
+  }
+
+  const handleSaveClick = (rowId) => {
+    setEditableRowId(null)
+  }
 
   const handleRowClick = (params) => {
     const documentInfo = report1099.find((item) => item.id === params.id)
@@ -107,6 +122,14 @@ const BusinessReport: Page = () => {
       window.removeEventListener('resize', handleResize)
     }
   }, [])
+
+  const handleExpandClick = (rowId) => {
+    if (activeEditRowId === rowId) {
+      setActiveEditRowId(null)
+    } else {
+      setActiveEditRowId(rowId)
+    }
+  }
 
   const get1099ReportData = async () => {
     await axios.get('/api/admin/1099-business-report')
@@ -136,7 +159,7 @@ const BusinessReport: Page = () => {
   }, [])
 
   const handleApproveClick = (userId) => {
-    setSelectedDocumentInfo(userId) // Store the user ID for approval
+    setSelectedDocumentInfo(userId)
     setApprovalDialogOpen(true)
   }
 
@@ -159,6 +182,63 @@ const BusinessReport: Page = () => {
     }
   }
 
+  const handleInputChange = (field, value) => {
+    setEditedData((prevData) => ({ ...prevData, [field]: value }))
+  }
+
+  const renderCellContent = (params, fieldName) => {
+    if (editableRowId === params.row.id) {
+      if (fieldName === 'b_start_date') {
+        return (
+          <div>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                value={editedData[fieldName] || null}
+                onChange={(date) => handleInputChange(fieldName, date)}
+                sx={{
+                  '.MuiInputBase-input, .MuiOutlinedInput-input ': {
+                    padding: '4px!important',
+                    fontSize: '12px!important'
+                  },
+                  '.MuiOutlinedInput-root ': {
+                    borderRadius: '0px!important',
+                    border: '1px solid #E35C49'
+                  }
+                }}
+                className='text-sm p-0'
+              />
+            </LocalizationProvider>
+          </div>
+        )
+      }
+
+      return (
+        <input
+          type="text"
+          style={{ textAlign: 'center', width: '100%', border: '1px solid #E35C49' }}
+          value={editedData[fieldName] || ''}
+          onChange={(e) => handleInputChange(fieldName, e.target.value)}
+          placeholder='Type here...'
+        />
+      )
+    }
+
+    if (fieldName === 'b_start_date') {
+      return (
+        <span>
+          {params.value ? new Date(params.value).toLocaleDateString('en-US') : ''}
+        </span>
+      )
+    }
+
+    return (
+      <span
+      >
+        {params.value}
+      </span>
+    )
+  }
+
   const columns = [
     {
       field: 'id',
@@ -175,45 +255,87 @@ const BusinessReport: Page = () => {
       )
     },
     {
+      field: 'edit',
+      headerName: '',
+      padding: 2,
+      margin: 2,
+      sortable: false,
+      width: 10,
+      disableClickEventBubbling: true,
+      renderCell: (cellData) => (
+        <>
+          {editableRowId === cellData.row.id
+            ? (
+              <IconButton
+                onClick={() => handleSaveClick(cellData.row.id)}
+                style={{
+                  color: 'white',
+                  borderRadius: 0,
+                  borderBottom: 'none',
+                  fontSize: '12px',
+                  backgroundColor: '#E35C49'
+                }}
+              >
+            Save
+              </IconButton>
+            )
+            : (
+              <IconButton
+                onClick={() => makeRowEditable(cellData.row.id)}
+                style={{
+                  display: activeEditRowId === cellData.row.id ? 'none' : 'block',
+                  color: '#E35C49',
+                  borderRadius: 0,
+                  borderBottom: 'none'
+                }}
+              >
+                <EditIcon />
+              </IconButton>
+            )}
+        </>
+      )
+    },
+    {
       field: 'businessName',
       headerName: 'Business Name',
       type: 'string',
-      flex: windowWidth <= 400 ? 1 : 1
+      flex: windowWidth <= 400 ? 1 : 1.5,
+      renderCell: (params) => renderCellContent(params, 'businessName')
     },
     {
       field: 'business_type',
       headerName: 'Business Type',
       type: 'string',
-      flex: windowWidth <= 400 ? 1 : 1
+      flex: windowWidth <= 400 ? 1 : 2,
+      renderCell: (params) => renderCellContent(params, 'business_type')
     },
     {
       field: 'ein',
       headerName: 'EIN',
       type: 'string',
-      flex: windowWidth <= 400 ? 0.5 : 1
+      flex: windowWidth <= 400 ? 0.5 : 1,
+      renderCell: (params) => renderCellContent(params, 'ein')
     },
     {
       field: 'b_start_date',
       headerName: 'Start Date',
       type: 'string',
       flex: windowWidth <= 400 ? 0.7 : 1,
-      renderCell: (params) => (
-        <span>
-          {params.value ? new Date(params.value).toLocaleDateString('en-US') : ''}
-        </span>
-      )
+      renderCell: (params) => renderCellContent(params, 'b_start_date')
     },
     {
       field: 'firstname',
       headerName: 'Owner First Name',
       type: 'string',
-      flex: windowWidth <= 400 ? 0.5 : 1
+      flex: windowWidth <= 400 ? 0.5 : 1.2,
+      renderCell: (params) => renderCellContent(params, 'firstname')
     },
     {
       field: 'lastname',
       headerName: 'Owner Last Name',
       type: 'string',
-      flex: windowWidth <= 400 ? 0.5 : 1
+      flex: windowWidth <= 400 ? 0.5 : 1.2,
+      renderCell: (params) => renderCellContent(params, 'lastname')
     },
     {
       field: 'business_verified',
