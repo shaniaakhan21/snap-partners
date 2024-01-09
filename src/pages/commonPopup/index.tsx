@@ -379,6 +379,8 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
                   Authorization: `Bearer ${auth.accessToken}`
                 }
               })
+              setEin(ein)
+              setBusinessName(businessName)
               if (response.data.responseCode == '1' || response.data.responseCode == '6' || response.data.responseCode == '7' || response.data.responseCode == '8') {
                 await axios.post('/api/user/verifyBusiness', {
                   businessValidationStatus: true
@@ -422,9 +424,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
                 setDateOfBirth(dateOfBirth)
                 setIsLoading(false)
                 setBStartDate(b_start_date)
-                setBusinessName(businessName)
                 setBusinessType(business_type)
-                setEin(ein)
                 setFirstName(firstname)
                 setLastName(lastname)
                 await axios.all([updateAddressRequest])
