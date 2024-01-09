@@ -432,7 +432,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
                 onClose()
                 setIsLoading(false)
               } else {
-                alert('error while validating TIN number')
+                alert('ERROR: TIN number not validated')
                 setIsLoading(false)
                 onClose()
               }
