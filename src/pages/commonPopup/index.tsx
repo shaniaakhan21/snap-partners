@@ -352,6 +352,16 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
           })
             .then(async (response) => {
               console.log('response from tin validation is', response.data.responseCode)
+              await axios.post('/api/user/update-tin-status', {
+                TINstatus: 'business',
+                ein: ein,
+                businessName: businessName
+              }, {
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: `Bearer ${auth.accessToken}`
+                }
+              })
               if (response.data.responseCode == '1' || response.data.responseCode == '6' || response.data.responseCode == '7' || response.data.responseCode == '8') {
                 await axios.post('/api/user/verifyBusiness', {
                   businessValidationStatus: true
@@ -361,18 +371,9 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
                     Authorization: `Bearer ${auth.accessToken}`
                   }
                 })
-
-                await axios.post('/api/user/update-tin-status', {
-                  TINstatus: 'business'
-                }, {
-                  headers: {
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${auth.accessToken}`
-                  }
-                })
                 const updateBusinessFields = await axios.post('/api/user/update-business-fields', {
-                  businessName: businessName,
-                  ein: ein,
+                  // businessName: businessName,
+                  // ein: ein,
                   b_start_date: b_start_date,
                   business_type: business_type,
                   name: firstname,
