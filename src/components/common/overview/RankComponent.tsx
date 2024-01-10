@@ -16,6 +16,7 @@ import { getLocalStorage } from 'lib/utils/localStorage'
 import { ReferralCards } from 'components/page/referrals/Cards'
 import { ERCClient } from '../icons/ERCClient'
 import { useAuthStore } from 'lib/stores'
+import { SnapPartnersRefIcon } from '../icons/SnapPartnersRef'
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -409,6 +410,13 @@ export default function RankComponent (props: RankComponentProps) {
             )}
           </div>
           <div className='col-span-1'>
+            <ReferralCards
+              title='Sponsor a Snap IBO'
+              ilustration={(<div className='relative -top-10 right-1 w-[70px] sm:w-[100px] lg:w-[114px]'><SnapPartnersRefIcon /></div>)}
+              link={`https://mysnappartners.com/referral-code/${auth.referralCode.trim()}/${auth.id}/the-opportunity/` || 'With Out Link'}
+              newUser={false}
+              classes='col-span-1'
+            />
             <ReferralCards
               title='Refer ERC Client'
               ilustration={<ERCClient/>}
