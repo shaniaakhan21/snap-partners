@@ -10,8 +10,8 @@ export const ListArticles = ({ children } /* Should be Article Component */) => 
   return (
     <Masonry
       breakpointCols={breakpointLayout}
-      className='my-masonry-grid mt-10'
-      columnClassName='my-masonry-grid_column mx-4'
+      className='my-masonry-grid mt-10  gap-x-8 flex'
+      columnClassName='my-masonry-grid_column'
     >
       {children}
     </Masonry>
