@@ -42,7 +42,7 @@ export const FormUpdateSocialSecurity = ({ auth }: IFormUpdatePhoneProps) => {
           value={auth.socialSecurityNumber}
         />
         <div className='relative rounded-xl bg-red-200 w-full px-4 py-3 border-y-2 border-y-gray-200 flex flex-col justify-between mt-2'>
-          <p className='text-lg font-bold'>Please raise health ticket to update your Social Security Number. </p>
+          <p className='text-lg font-bold'>Please open a help ticket to update your social security number. </p>
         </div>
 
         <br />
