@@ -2,7 +2,7 @@ import { Button, Modal } from '@mui/material'
 import { Close as CrossIcon, CloudUpload } from '@mui/icons-material'
 import Link from 'next/link'
 import { ChangeEvent, ChangeEventHandler, useEffect, useState } from 'react'
-import { IAuth, TSetAuth } from 'lib/stores/Auth'
+import { IAuth, TSetAuth, useAuthStore } from 'lib/stores/Auth'
 import { toast } from 'react-toastify'
 import { addBStructureDoc } from 'lib/services/user/addBStructureDoc'
 import { addIRSDocs } from 'lib/services/user/addIRSDoc'
@@ -17,11 +17,12 @@ interface PopupProps {
   docFormURL?: string;
 }
 
-const BusinessDocPopup = ({ open, onClose, docIrsURL, docFormURL, auth, setAuth }: PopupProps) => {
+const BusinessDocPopup = ({ open, onClose, docIrsURL, docFormURL }: PopupProps) => {
   const [documentIRS, setDocumentIRS] = useState(docIrsURL)
   const [documentForm, setDocumentBStructure] = useState(docFormURL)
   const [filenameIRS, setFilenameIRS] = useState('')
   const [filenameForm, setFilenameForm] = useState('')
+  const { auth, setAuth } = useAuthStore()
   useEffect(() => {
     setDocumentIRS(documentIRS)
   }, [docIrsURL])
@@ -41,6 +42,7 @@ const BusinessDocPopup = ({ open, onClose, docIrsURL, docFormURL, auth, setAuth 
         const url = URL.createObjectURL(file)
         setDocumentBStructure(url)
         setAuth({ ...auth, doc_b_structure: url })
+        console.log('auth after structure doc', auth)
       } catch (error) {
         toast('Document could not be Uploaded!', { type: 'error' })
       }
@@ -58,6 +60,7 @@ const BusinessDocPopup = ({ open, onClose, docIrsURL, docFormURL, auth, setAuth 
         const url = URL.createObjectURL(file)
         setDocumentIRS(url)
         setAuth({ ...auth, doc_irs: url })
+        console.log('auth after irs doc', auth)
         toast('Documents Uploaded Successfully!', { type: 'success' })
         setTimeout(() => {
           onClose()

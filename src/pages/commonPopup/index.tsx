@@ -372,7 +372,9 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
               await axios.post('/api/user/update-tin-status', {
                 TINstatus: 'business',
                 ein: ein,
-                businessName: businessName
+                businessName: businessName,
+                b_start_date: b_start_date,
+                business_type: business_type
               }, {
                 headers: {
                   'Content-Type': 'application/json',
@@ -381,6 +383,9 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
               })
               setEin(ein)
               setBusinessName(businessName)
+              setBStartDate(b_start_date)
+              setBusinessType(business_type)
+              setAuth({ ...auth, TINstatus: 'business', ein: ein, businessName: businessName, b_start_date: b_start_date, business_type: business_type })
               if (response.data.responseCode == '1' || response.data.responseCode == '6' || response.data.responseCode == '7' || response.data.responseCode == '8') {
                 await axios.post('/api/user/verifyBusiness', {
                   businessValidationStatus: true
@@ -393,8 +398,8 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
                 const updateBusinessFields = await axios.post('/api/user/update-business-fields', {
                   // businessName: businessName,
                   // ein: ein,
-                  b_start_date: b_start_date,
-                  business_type: business_type,
+                  // b_start_date: b_start_date,
+                  // business_type: business_type,
                   name: firstname,
                   lastname: lastname
                 },
@@ -423,18 +428,17 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
                 setZipCode(zip)
                 setDateOfBirth(dateOfBirth)
                 setIsLoading(false)
-                setBStartDate(b_start_date)
-                setBusinessType(business_type)
                 setFirstName(firstname)
                 setLastName(lastname)
                 await axios.all([updateAddressRequest])
-                setShowBdocPopup(true)
+                // setShowBdocPopup(true)
                 onClose()
                 setIsLoading(false)
               } else {
                 alert('ERROR: TIN number not validated')
                 setIsLoading(false)
-                onClose()
+                setEINError('Please enter a valid EIN')
+                // onClose()
               }
             })
         }
@@ -654,7 +658,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
           auth={auth} setAuth={setAuth} docURL={auth.SSNDocURL} />
       )}
       {showBDocPopup && (
-        <BusinessDocPopup open={showBDocPopup} onClose={handleBDOcClosePopup} auth={auth} setAuth={setAuth} docIrsURL={auth.doc_irs} docFormURL={auth.doc_b_structure}/>
+        <BusinessDocPopup open={showBDocPopup} onClose={handleBDOcClosePopup} docIrsURL={auth.doc_irs} docFormURL={auth.doc_b_structure}/>
       )}
     </>
   )

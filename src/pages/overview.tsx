@@ -47,7 +47,7 @@ const DashboardOverViewPage: Page = () => {
   const TinStatus = auth.TINstatus
   const showAlert =
   (TinStatus === 'individual' && (!(auth.newSSN === null) && (SSnURL === null))) ||
-  (TinStatus === 'business' && (doc_b_structure === null || doc_irs === null))
+  (TinStatus === 'business' && (doc_b_structure === null || doc_irs === null) && !auth.isValidated)
 
   useEffect(() => {
     fetch('/api/snap/getYearlyCommission', {
@@ -59,7 +59,7 @@ const DashboardOverViewPage: Page = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.total > 600) {
+        if (data.total > 600 && (doc_b_structure === null || doc_irs === null)) {
           setShowPopup(true)
         } else {
           setShowPopup(true)
@@ -115,7 +115,7 @@ const DashboardOverViewPage: Page = () => {
 
   return (
     <>
-      {showAlert && auth?.isValidated && (
+      {showAlert && (
         <AlertWidget />
       )}
       <div className=''>
