@@ -6,9 +6,9 @@ import { DataGrid as MUIDataGrid } from '@mui/x-data-grid'
 import type { Page, ReactNode } from 'lib/types'
 import { APP_INFO } from 'config/appInfo'
 import DashboardLayout from 'layouts/private/Dashboard'
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton } from '@mui/material'
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, MenuItem, Select } from '@mui/material'
 import { styled } from '@mui/system'
-import { useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
 import axios from 'axios'
 import VisibilityIcon from '@material-ui/icons/Visibility'
@@ -109,6 +109,7 @@ const BusinessReport: Page = () => {
   const [approvalDialogOpen, setApprovalDialogOpen] = useState(false)
   const [activeEditRowId, setActiveEditRowId] = useState(null)
   const [editableRowId, setEditableRowId] = useState(null)
+  const [business_type, setBusinessType] = useState('')
   const [editedData, setEditedData] = useState({
     ein: '',
     businessName: '',
@@ -277,6 +278,10 @@ const BusinessReport: Page = () => {
     setEditedData((prevData) => ({ ...prevData, [field]: value }))
   }
 
+  const handleTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value
+    setBusinessType(value)
+  }
   const renderCellContent = (params, fieldName) => {
     if (editableRowId === params.row.id) {
       if (fieldName === 'b_start_date') {
@@ -301,38 +306,54 @@ const BusinessReport: Page = () => {
             </LocalizationProvider>
           </div>
         )
+      } else if (fieldName === 'business_type') {
+        return (
+          <select
+            id='state-select'
+            onChange={(e) => handleInputChange(fieldName, e.target.value)}
+            className={'rounded-none rounded-tl-xl rounded-bl-xl border-0 appearance-none w-full bg-[#F9F9FA]'}
+            style={{ backgroundImage: 'none' }}
+            value={editedData[fieldName] || ''}
+          >
+            <option value=''>Select Type</option>
+            <option value="Individual/sole proprietor or LLC">Individual/sole proprietor or LLC</option>
+            <option value="C Corporation">C Corporation</option>
+            <option value="S Corporation">S Corporation</option>
+            <option value="Partnership">Partnership</option>
+            <option value="Trust/estate">Trust/estate</option>
+          </select>
+        )
+      } else {
+        return (
+          <input
+            type="text"
+            style={{ textAlign: 'center', width: '100%', border: '1px solid #E35C49' }}
+            value={editedData[fieldName] || ''}
+            onChange={(e) => handleInputChange(fieldName, e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === ' ') {
+                e.stopPropagation()
+              }
+            }}
+            placeholder='Type here...'
+          />
+        )
+      }
+    } else {
+      if (fieldName === 'b_start_date') {
+        return (
+          <span>
+            {params.value ? new Date(params.value).toLocaleDateString('en-US') : ''}
+          </span>
+        )
       }
 
       return (
-        <input
-          type="text"
-          style={{ textAlign: 'center', width: '100%', border: '1px solid #E35C49' }}
-          value={editedData[fieldName] || ''}
-          onChange={(e) => handleInputChange(fieldName, e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === ' ') {
-              e.stopPropagation()
-            }
-          }}
-          placeholder='Type here...'
-        />
-      )
-    }
-
-    if (fieldName === 'b_start_date') {
-      return (
         <span>
-          {params.value ? new Date(params.value).toLocaleDateString('en-US') : ''}
+          {params.value}
         </span>
       )
     }
-
-    return (
-      <span
-      >
-        {params.value}
-      </span>
-    )
   }
 
   const columns = [
