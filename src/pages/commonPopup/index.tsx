@@ -98,16 +98,18 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
   }
 
   const handleEINChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value
-    const pattern = /^[0-9]{9}$/
+    const value = event.target.value.replace(/[^0-9]/g, '')
+    const formattedValue = value.replace(/(\d{2})(\d{7})/, '$1-$2')
 
-    if (!pattern.test(value) || value === '123456789') {
+    setEin(formattedValue)
+
+    const pattern = /^[0-9]{2}-[0-9]{7}$/
+
+    if (!pattern.test(formattedValue) || formattedValue === '12-3456789') {
       setEINError('Please enter a valid EIN')
     } else {
       setEINError('')
     }
-
-    setEin(value)
   }
 
   const handleBStartDateChange = (date: Date | null) => {
