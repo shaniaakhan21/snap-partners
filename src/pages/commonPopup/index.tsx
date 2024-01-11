@@ -41,7 +41,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
   const [b_start_date, setBStartDate] = useState<Date | null>(null)
   const [firstname, setFirstName] = useState('')
   const [lastname, setLastName] = useState('')
-  const [showBDocPopup, setShowBdocPopup] = useState(false)
+  const [showBDocPopup, setShowBdocPopup] = useState(true)
   const isMounted = useRef(true)
   const [showHelpPopup, setShowHelpPopup] = useState(false)
   const deadlineDate = new Date('2024-01-15')
@@ -452,7 +452,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
       <Modal
         open={open}
         onClose={onClose}
-        className='overflow-y-scroll'
+        className='overflow-y-scroll z-[10000]'
       >
         <div className='w-full flex justify-center'>
           <div className='bg-white rounded-xl p-2 md:p-4 md:px-10 md:pb-10 w-9/12 md:w-6/12 my-8 md:my-20 md:ml-10'>
@@ -660,6 +660,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
       {showBDocPopup && (
         <BusinessDocPopup open={showBDocPopup} onClose={handleBDOcClosePopup} docIrsURL={auth.doc_irs} docFormURL={auth.doc_b_structure}/>
       )}
+
     </>
   )
 }
