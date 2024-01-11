@@ -2,7 +2,7 @@ import { Button, Dialog, DialogContent, IconButton } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 
 const DocumentViewer = ({ documentUrl }) => {
-  const isPdf = documentUrl.endsWith('.pdf')
+  const isPdf = documentUrl && documentUrl.endsWith('.pdf')
 
   const openPdfInNewTab = () => {
     window.open(documentUrl, '_blank')
