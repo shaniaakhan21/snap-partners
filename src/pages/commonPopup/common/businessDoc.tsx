@@ -29,7 +29,6 @@ const BusinessDocPopup = ({ open, onClose, docIrsURL, docFormURL }: PopupProps) 
 
   const handleTryAgain = () => {
     setIsTINPopupOpen(true)
-    onClose()
   }
   useEffect(() => {
     setDocumentIRS(documentIRS)
