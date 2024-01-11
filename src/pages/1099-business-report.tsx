@@ -249,7 +249,7 @@ const BusinessReport: Page = () => {
       // Close the approval dialog and reload the page
       await validateUser()
       setApprovalDialogOpen(false)
-      // window.location.reload()
+      window.location.reload()
     } catch (error) {
       console.error('Error while approving user:', error)
     }
