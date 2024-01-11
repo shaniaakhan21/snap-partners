@@ -14,7 +14,7 @@ export const ImageSkeleton = ({ src, height, width }: IImageWithLoaderProps) => 
       src={src ?? '/static/no-img.webp' }
       height={height}
       width={width}
-      className={`rounded-t-[4px] w-full bg-gray-300 ${loading && 'animate-pulse'}`}
+      className={`rounded-t-2xl w-full bg-gray-300 ${loading && 'animate-pulse'}`}
       onLoad={() => setLoading(false)}
       loading='lazy'
     />

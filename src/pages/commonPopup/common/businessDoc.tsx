@@ -1,12 +1,11 @@
 import { Button, Modal } from '@mui/material'
 import { Close as CrossIcon, CloudUpload } from '@mui/icons-material'
 import Link from 'next/link'
-import { ChangeEvent, ChangeEventHandler, useEffect, useState } from 'react'
+import { ChangeEvent, useEffect, useState } from 'react'
 import { IAuth, TSetAuth, useAuthStore } from 'lib/stores/Auth'
 import { toast } from 'react-toastify'
 import { addBStructureDoc } from 'lib/services/user/addBStructureDoc'
 import { addIRSDocs } from 'lib/services/user/addIRSDoc'
-import axios from 'axios'
 
 interface PopupProps {
   open: boolean;
@@ -23,6 +22,9 @@ const BusinessDocPopup = ({ open, onClose, docIrsURL, docFormURL }: PopupProps) 
   const [filenameIRS, setFilenameIRS] = useState('')
   const [filenameForm, setFilenameForm] = useState('')
   const { auth, setAuth } = useAuthStore()
+  const [storedBStructureDocument, setStoredBStructureDocument] = useState(null)
+  const [storedIRSDocument, setStoredIRSDocument] = useState(null)
+
   useEffect(() => {
     setDocumentIRS(documentIRS)
   }, [docIrsURL])
@@ -34,42 +36,56 @@ const BusinessDocPopup = ({ open, onClose, docIrsURL, docFormURL }: PopupProps) 
   const handleBStructureDocChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const input = event.nativeEvent.target as HTMLInputElement
     const files = input.files
+    const bStructureDocumentData = files[0]
     if (files?.length > 0) {
       try {
-        const file = files[0]
-        setFilenameForm(file.name)
-        await addBStructureDoc(auth.accessToken, { doc_b_structure: file })
-        const url = URL.createObjectURL(file)
+        setFilenameForm(bStructureDocumentData.name)
+        setStoredBStructureDocument(files[0])
+        const url = URL.createObjectURL(bStructureDocumentData)
         setDocumentBStructure(url)
-        setAuth({ ...auth, doc_b_structure: url })
         console.log('auth after structure doc', auth)
       } catch (error) {
         toast('Document could not be Uploaded!', { type: 'error' })
       }
     }
   }
-
   const handleIRSDocChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const input = event.nativeEvent.target as HTMLInputElement
     const files = input.files
+    const irsDocumentData = files[0]
     if (files?.length > 0) {
       try {
-        const file = files[0]
-        setFilenameIRS(file.name)
-        await addIRSDocs(auth.accessToken, { doc_irs: file })
-        const url = URL.createObjectURL(file)
+        setFilenameIRS(irsDocumentData.name)
+        setStoredIRSDocument(files[0])
+        const url = URL.createObjectURL(irsDocumentData)
         setDocumentIRS(url)
-        setAuth({ ...auth, doc_irs: url })
-        console.log('auth after irs doc', auth)
-        toast('Documents Uploaded Successfully!', { type: 'success' })
-        setTimeout(() => {
-          onClose()
-        }, 2500)
+        console.log('auth after IRS doc', auth)
       } catch (error) {
         toast('Document could not be Uploaded!', { type: 'error' })
       }
     }
   }
+
+  const handleProceedWithVerification = async () => {
+    try {
+      const bStructureDocumentData = storedBStructureDocument
+      const irsDocumentData = storedIRSDocument
+
+      await addBStructureDoc(auth.accessToken, { doc_b_structure: bStructureDocumentData })
+      await addIRSDocs(auth.accessToken, { doc_irs: irsDocumentData })
+
+      setAuth({
+        ...auth,
+        doc_b_structure: storedBStructureDocument,
+        doc_irs: storedIRSDocument
+      })
+      toast('Documents Uploaded Successfully!', { type: 'success' })
+    } catch (error) {
+      toast('Document could not be Uploaded, Try again later!', { type: 'error' })
+    }
+  }
+
+  const isProceedEnabled = storedBStructureDocument && storedIRSDocument
 
   return (
     <Modal open={open} onClose={onClose} className='overflow-y-scroll'>
@@ -122,7 +138,7 @@ const BusinessDocPopup = ({ open, onClose, docIrsURL, docFormURL }: PopupProps) 
               <div className='text-center'>
                 <span className='text-sm md:text-lg font-semibold '>Proof of IRS EIN / Business Formation Documents</span>
                 <label className='w-full flex justify-center' htmlFor="document-upload-input-irs">
-                  <div className='md:w-10/12 text-base md:text-xl rounded-xl text-center px-8 md:px-16 capitalize py-4 text-base border-2 border-gray cursor-pointer my-4 shadow-md'>
+                  <div className='md:w-10/12 text-base md:text-xl rounded-xl text-center px-8 md:px-14 capitalize py-4 text-base border-2 border-gray cursor-pointer my-4 shadow-md'>
                     <CloudUpload /> Upload Document
                   </div>
                 </label>
@@ -135,7 +151,11 @@ const BusinessDocPopup = ({ open, onClose, docIrsURL, docFormURL }: PopupProps) 
             <Button
               type="submit"
               variant="contained"
-              className='text-sm text-white md:text-xl rounded-xl text-center px-8 capitalize py-4 text-base bg-primary-500'
+              onClick={handleProceedWithVerification}
+              className={`text-sm text-white md:text-xl rounded-xl text-center px-8 capitalize py-4 text-base ${
+                isProceedEnabled ? 'bg-primary-500' : 'bg-gray-300 cursor-not-allowed'
+              }`}
+              disabled={!isProceedEnabled}
             ><Link href='/' >
                 Proceed With Documents Verification
               </Link>

@@ -13,7 +13,11 @@ const CustomHelpModal = ({ isOpen, onClose }) => (
         fontSize: '37px!important'
       }
     }}severity="error">
-      <p>
+      <h1 className='font-bold text-xl uppercase mb-2'>Back Office Access Frozen</h1>
+      <p className='underline w-fit font-semibold'>
+      You are now required to fill out this form before proceeding to your back office.
+      </p>
+      <p className='mt-2'>
     Please open a help ticket by emailing{' '}
         <a className='font-bold' href="mailto:support@snappartners.com">support@snappartners.com</a> for any reason
         that prohibits your ability to complete this form.

@@ -1,5 +1,30 @@
-import { Dialog, DialogContent, IconButton } from '@mui/material'
+import { Button, Dialog, DialogContent, IconButton } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
+
+const DocumentViewer = ({ documentUrl }) => {
+  const isPdf = documentUrl.endsWith('.pdf')
+
+  const openPdfInNewTab = () => {
+    window.open(documentUrl, '_blank')
+  }
+
+  return (
+    <div className='p-4 mb-6'>
+      {isPdf
+        ? (
+          <>
+            <h1 className='text-xl font-bold mb-4'>A PDF was Uploaded </h1>
+            <Button variant="contained" color="primary" onClick={openPdfInNewTab} className='text-white border-2 border-black outline bg-[#E74426]'>
+            Open PDF in Browser
+            </Button>
+          </>
+        )
+        : (
+          <img src={documentUrl} alt="Document" style={{ width: '100%', maxHeight: '500px', objectFit: 'contain' }} />
+        )}
+    </div>
+  )
+}
 
 const DocumentDetailView = ({ open, onClose, documentInfo }) => {
   if (!documentInfo) {
@@ -31,13 +56,7 @@ const DocumentDetailView = ({ open, onClose, documentInfo }) => {
         </div>
         <p className='font-bold text-xl'>IRS Doc: </p>
         <div className='border-2 border-[#DDDDDD] rounded-xl p-4 bg-[#F6F6F6]  mb-6'>
-          {documentInfo.doc_irs
-            ? (
-              <img src={documentInfo.doc_irs} alt="IRS Document" style={{ width: '100%', maxHeight: '500px', objectFit: 'contain' }} />
-            )
-            : (
-              <p>No IRS Document available</p>
-            )}
+          <DocumentViewer documentUrl={documentInfo.doc_irs} />
         </div>
         <p className='font-bold text-xl'>Business Intity Form: </p>
         <div className='border-2 border-[#DDDDDD] rounded-xl p-4 bg-[#F6F6F6]'>

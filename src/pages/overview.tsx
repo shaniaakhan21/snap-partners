@@ -23,6 +23,7 @@ import TINPopup from './commonPopup'
 import AlertWidget from 'components/common/overview/1099Alert'
 import NetworkActivity from 'components/common/overview/NetworkActivity'
 import Event from 'components/common/overview/Event'
+import PVComponentSnap from 'components/common/dashBackOffice/PersonalVolumeSnap'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 
 const { SEO } = APP_INFO
@@ -136,12 +137,9 @@ const DashboardOverViewPage: Page = () => {
             <GrowthSummary userId={null} />
           </div>
 
-          {/* <div className='mt-4 bg-white rounded-lg'>
-            <MonthlySubscription userId={ null } />
+          <div className='mt-8'>
+            <PVComponentSnap userId={null} />
           </div>
-          <div className='mt-4 bg-white rounded-lg'>
-            <MonthlyProduction userId={null} />
-          </div> */}
         </div>
         <div className='ml-4 mt-8 '>
           <Event />

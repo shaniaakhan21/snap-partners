@@ -42,7 +42,7 @@ export const Article = ({ linkToShare, id, imageId, title, subtitle, caption, ha
   }
 
   return (
-    <li key={id} className='bg-white max-w-sm w-full rounded-[4px]'>
+    <li key={id} className='bg-white w-full rounded-2xl shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)]'>
       {/* <section className='flex justify-between items-center px-5 py-4 w-full'>
         <div className='flex items-center justify-start'>
           <div className='w-5 h-5 rounded-full bg-[#19191929] border border-solid border-gray-500 mr-2'></div>
@@ -67,22 +67,29 @@ export const Article = ({ linkToShare, id, imageId, title, subtitle, caption, ha
       />
       {/* </section> */}
 
-      <section className='w-full px-5 py-3'>
-        <span className='font-bold text-lg'>{title}</span> <br />
+      <li className='relative -top-[4%] -right-[2%] w-full flex justify-end'>
+        <div className='bg-[#E74426] w-fit p-2 rounded-full shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)]'>
+          <a href={imageId} download onClick={trackDownload}>
+            <DownloadIcon />
+          </a>
+        </div>
+      </li>
+      <section className='w-full px-5 py-0 text-center'>
+        <span className='font-bold text-sm lg:text-2xl'>{title}</span>
         <span className='text-sm'>{subtitle}</span>
       </section>
 
-      <section className='w-full border-t border-gray-400 px-5 py-3'>
-        <p>{caption}</p>
+      <section className='w-full px-5 py-3'>
+        <p className=' text-[#5A748A] text-xs lg:text-lg text-center'>{caption}</p>
       </section>
 
       {
         hashtags[0] && (
-          <ul className='w-full border-t border-gray-400 px-5 py-3 flex flex-wrap text-sm'>
+          <ul className='w-full px-5 py-3 flex flex-wrap justify-center text-xs lg:text-sm lg:text-xl bg-[#EEF4F8] rounded-b-2xl'>
             {
               hashtags.map(hashtag => (
                 <li key={hashtag} className='mr-1.5'>
-                  <span className='text-blue-500 select-none'>
+                  <span className=' text-[#E74426] text-center select-none'>
                   #{hashtag}
                   </span>
                 </li>
@@ -91,56 +98,6 @@ export const Article = ({ linkToShare, id, imageId, title, subtitle, caption, ha
           </ul>
         )
       }
-
-      <ul className='w-full border-t border-gray-400 px-5 py-4 flex justify-between items-start -mb-2'>
-        {/* <li>
-          <button onClick={() => { trackShare('copyLink'); copy(linkToShare, 'Copy Link') }}>
-            <ShareRRSSIcon />
-          </button>
-        </li>
-
-        <li>
-          <FacebookShareButton url={linkToShare} onClick={() => trackShare('Facebook')}>
-            <FacebookIcon borderRadius={999} size={28} />
-          </FacebookShareButton>
-        </li>
-
-        <li>
-          <TwitterShareButton hashtags={hashtags} url={linkToShare} onClick={() => trackShare('Twitter')}>
-            <TwitterIcon borderRadius={999} size={28} />
-          </TwitterShareButton>
-        </li>
-
-        <li>
-          <WhatsappShareButton url={linkToShare} onClick={() => trackShare('Whatsapp')}>
-            <WhatsappIcon borderRadius={999} size={28} />
-          </WhatsappShareButton>
-        </li>
-
-        <li>
-          <TelegramShareButton url={linkToShare} onClick={() => trackShare('Telegram')}>
-            <TelegramIcon borderRadius={999} size={28} />
-          </TelegramShareButton>
-        </li>
-
-        <li>
-          <RedditShareButton url={linkToShare} onClick={() => trackShare('Reddit')}>
-            <RedditIcon borderRadius={999} size={28} />
-          </RedditShareButton>
-        </li> */}
-
-        {/* <li>
-          <EmailShareButton url='https://snapdeliveredteam.com/invite' onClick={() => trackShare('Email')}>
-            <EmailIcon borderRadius={999} size={28} />
-          </EmailShareButton>
-        </li> */}
-
-        <li>
-          <a href={imageId} download onClick={trackDownload}>
-            <DownloadIcon />
-          </a>
-        </li>
-      </ul>
     </li>
   )
 }

@@ -49,18 +49,33 @@ const ApprovalDialog = ({ open, onClose, onConfirm }) => {
   )
 }
 
-const ImageViewer = ({ open, onClose, imageUrl }) => {
+export const ImageViewer = ({ open, onClose, imageUrl }) => {
+  const isPdf = imageUrl.endsWith('.pdf')
+  const openPdfInNewTab = () => {
+    window.open(imageUrl, '_blank')
+  }
+
   return (
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="md" >
       <IconButton aria-label="close" onClick={onClose} className='justify-end hovercustom'>
         <CloseIcon className='w-[10%] text-black' />
       </IconButton>
       <DialogContent>
-        <img src={imageUrl} alt="Document" style={{ width: '80%' }} />
+        {isPdf
+          ? (
+            <><h1 className='text-xl font-bold mb-4'>A Pdf was Uploaded </h1><Button variant="contained" color="primary" onClick={openPdfInNewTab} className='text-white border-2 border-black outline bg-[#E74426]'>
+              Open PDF in Browser
+            </Button></>
+
+          )
+          : (
+            <img src={imageUrl} alt="Document" style={{ width: '80%' }} />
+          )}
       </DialogContent>
     </Dialog>
   )
 }
+
 const StyledDataGrid = styled(MUIDataGrid)(() => ({
   '&& .MuiDataGrid-columnHeaderTitleContainer .MuiDataGrid-columnHeaderTitle': {
     fontWeight: 'bold',
