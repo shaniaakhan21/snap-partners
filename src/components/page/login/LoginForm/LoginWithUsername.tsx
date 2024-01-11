@@ -101,6 +101,20 @@ export const LoginWithUsername = ({ trackLoginHandle }: IProps) => {
       bank_information: data.bank_information,
       level: data.level,
       isCertified: data.isCertified,
+      isValidated: data.isValidated,
+      street: data?.street,
+      state: data?.state,
+      city: data?.city,
+      zip: data?.zip,
+      dateOfBirth: data.dateOfBirth,
+      TINstatus: data.TINstatus,
+      SSNDocURL: data.SSNDocURL,
+      doc_irs: data.doc_irs,
+      doc_b_structure: data.doc_b_structure,
+      ein: data.ein,
+      businessName: data.businessName,
+      business_type: data.business_type,
+      b_start_date: data.b_start_date,
       ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
     })
     reset()

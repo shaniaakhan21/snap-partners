@@ -17,6 +17,7 @@ interface IProfileData {
     state?: string,
     zip?: string,
     city?: string
+    dateOfBirth?: Date
 }
 
 function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId, profileData }) {
@@ -33,7 +34,8 @@ function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId, 
       street: profileData?.street,
       state: profileData?.state,
       zip: profileData?.zip,
-      city: profileData?.city
+      city: profileData?.city,
+      dateOfBirth: profileData?.dateOfBirth
     })
   }, [profileData])
   const [editProfileData, setEditProfileData] = useState<IProfileData>(InitialValues)
@@ -85,6 +87,9 @@ function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId, 
     if (editProfileData.city !== profileData.city) {
       body = { ...body, city: editProfileData.city }
     }
+    if (editProfileData.dateOfBirth !== profileData.dateOfBirth) {
+      body = { ...body, dateOfBirth: editProfileData.dateOfBirth }
+    }
 
     if (Object.keys(body).length !== 0) {
       const token = getLocalStorage('accessToken')
@@ -114,6 +119,7 @@ function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId, 
     if (param === 'state') { setEditProfileData({ ...editProfileData, state: event.target.value }) }
     if (param === 'zip') { setEditProfileData({ ...editProfileData, zip: event.target.value }) }
     if (param === 'city') { setEditProfileData({ ...editProfileData, city: event.target.value }) }
+    if (param === 'dateOfBirth') { setEditProfileData({ ...editProfileData, dateOfBirth: event.target.value }) }
   }
   console.log('edit profile data', editProfileData, profileData)
   return (
@@ -125,6 +131,7 @@ function EditProfileModal ({ editProfileModal, onCloseEditProfileModal, userId, 
         <InputComponent label='Phone Number' placeholder='phone number' value={editProfileData.phoneNumber} onChangeFunction={handleEditProfileUpdate} param={'phoneNumber'} />
         <InputComponent label='Name' placeholder='name' value={editProfileData.name} onChangeFunction={handleEditProfileUpdate} param={'name'} />
         <InputComponent label='lastname' placeholder='Lastname' value={editProfileData.lastname} onChangeFunction={handleEditProfileUpdate} param={'lastname'} />
+        <InputComponent label='dateOfBirth' placeholder='Update DOB' value={editProfileData.dateOfBirth} onChangeFunction={handleEditProfileUpdate} param={'dateOfBirth'} />
         <hr />
         <InputComponent label='street' placeholder='Street' value={editProfileData.street} onChangeFunction={handleEditProfileUpdate} param={'street'} />
         <InputComponent label='city' placeholder='City' value={editProfileData.city} onChangeFunction={handleEditProfileUpdate} param={'city'} />

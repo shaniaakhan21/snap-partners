@@ -56,6 +56,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         roles: data.roles,
         id: data.id,
         username: data.username,
+        dateOfBirth: data.dateOfBirth,
         referralCode: data.referralCode,
         driver_status: data.driver_status,
         idImage: data.idImage,
@@ -75,6 +76,19 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         bank_information: data.bank_information,
         level: data.level,
         isCertified: data.isCertified,
+        isValidated: data.isValidated,
+        street: data.street,
+        city: data.city,
+        state: data.state,
+        zip: data.zip,
+        TINstatus: data.TINstatus,
+        SSNDocURL: data.SSNDocURL,
+        doc_irs: data.doc_irs,
+        doc_b_structure: data.doc_b_structure,
+        ein: data.ein,
+        businessName: data.businessName,
+        business_type: data.business_type,
+        b_start_date: data.b_start_date,
         ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
       })
     })()
@@ -102,8 +116,22 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         blocked,
         deleted,
         isCertified,
+        isValidated,
+        street,
+        state,
+        city,
+        zip,
+        dateOfBirth,
         nsurAccount,
-        referralLink
+        referralLink,
+        TINstatus,
+        SSNDocURL,
+        doc_irs,
+        doc_b_structure,
+        ein,
+        businessName,
+        business_type,
+        b_start_date
       } = auth
 
       GTMTrack.userInfo({
@@ -128,7 +156,21 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         blocked,
         deleted,
         isCertified,
-        nsurAccount
+        isValidated,
+        street,
+        state,
+        city,
+        zip,
+        dateOfBirth,
+        nsurAccount,
+        TINstatus,
+        SSNDocURL,
+        doc_irs,
+        doc_b_structure,
+        ein,
+        businessName,
+        business_type,
+        b_start_date
       })
     } else {
       GTMTrack.userInfo()
