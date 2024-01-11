@@ -454,7 +454,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
       <Modal
         open={open}
         onClose={onClose}
-        className='overflow-y-scroll z-[1200]'
+        className='overflow-y-scroll z-[1800]'
       >
         <div className='w-full flex justify-center'>
           <div className='bg-white rounded-xl p-2 md:p-4 md:px-10 md:pb-10 w-9/12 md:w-6/12 my-8 md:my-20 md:ml-10'>
