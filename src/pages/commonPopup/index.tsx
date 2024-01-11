@@ -434,7 +434,6 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
                 setFirstName(firstname)
                 setLastName(lastname)
                 await axios.all([updateAddressRequest])
-                setShowBdocPopup(true)
                 onClose()
                 setIsLoading(false)
                 setShowSuccessPopup(true)
