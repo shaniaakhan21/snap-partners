@@ -60,7 +60,7 @@ const DashboardOverViewPage: Page = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.total > 600 && ((doc_b_structure === null || doc_irs === null) && (auth.TINstatus === null || auth.TINstatus === ''))) {
+        if (((doc_b_structure === null || doc_irs === null) && (auth.TINstatus === null || auth.TINstatus === ''))) {
           setShowPopup(true)
         } else {
           setShowPopup(false)
