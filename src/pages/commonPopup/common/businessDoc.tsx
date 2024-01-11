@@ -48,7 +48,7 @@ const BusinessDocPopup = ({ open, onClose, docIrsURL, docFormURL }: PopupProps) 
         setStoredBStructureDocument(files[0])
         const url = URL.createObjectURL(bStructureDocumentData)
         setDocumentBStructure(url)
-        console.log('auth after structure doc', auth)
+        setAuth({ ...auth, doc_b_structure: url })
       } catch (error) {
         toast('Document could not be Uploaded!', { type: 'error' })
       }
@@ -71,7 +71,8 @@ const BusinessDocPopup = ({ open, onClose, docIrsURL, docFormURL }: PopupProps) 
     }
   }
 
-  const handleProceedWithVerification = async () => {
+  const handleProceedWithVerification = async (e) => {
+    e.preventDefault()
     try {
       const bStructureDocumentData = storedBStructureDocument
       const irsDocumentData = storedIRSDocument
@@ -157,7 +158,7 @@ const BusinessDocPopup = ({ open, onClose, docIrsURL, docFormURL }: PopupProps) 
               <Button
                 type="submit"
                 variant="contained"
-                onClick={handleProceedWithVerification}
+                onClick={(e) => handleProceedWithVerification(e)}
                 className={`text-sm text-white md:text-xl rounded-xl text-center px-8 capitalize py-4 text-base ${
                   isProceedEnabled ? 'bg-primary-500' : 'bg-gray-300 cursor-not-allowed'
                 }`}

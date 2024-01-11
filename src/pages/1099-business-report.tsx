@@ -154,46 +154,22 @@ const BusinessReport: Page = () => {
   }
 
   const handleSaveClick = async (rowId) => {
-    setEditableRowId(null)
-    console.log('editedData xis', editedData)
-    await axios.get('/api/user/validateTIN', {
+    await axios.post('/api/user/update-business-fields', {
+      businessName: editedData.businessName,
+      ein: editedData.ein,
+      b_start_date: editedData.b_start_date,
+      business_type: editedData.business_type,
+      name: editedData.firstname,
+      lastname: editedData.lastname,
+      userId: editableRowId
+    },
+    {
       headers: {
-        'Content-Type': 'application/json',
         Authorization: `Bearer ${auth.accessToken}`
-      },
-      params: {
-        TIN: editedData.ein,
-        LName: editedData.businessName
       }
     })
-      .then(async (response) => {
-        console.log('response from tincheck api', response)
-
-        if (response.data.responseCode == '1' || response.data.responseCode == '6' || response.data.responseCode == '7' || response.data.responseCode == '8') {
-          await axios.post('/api/user/verifyBusiness', {
-            businessValidationStatus: true
-          }, {
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${auth.accessToken}`
-            }
-          })
-          await axios.post('/api/user/update-business-fields', {
-            businessName: editedData.businessName,
-            ein: editedData.ein,
-            b_start_date: editedData.b_start_date,
-            business_type: editedData.business_type,
-            name: editedData.firstname,
-            lastname: editedData.lastname
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${auth.accessToken}`
-            }
-          })
-          await validateUser()
-        }
-      })
+    setEditableRowId(null)
+    window.location.reload()
   }
 
   const handleRowClick = (params) => {
@@ -260,13 +236,19 @@ const BusinessReport: Page = () => {
     const body = { userId: selectedDocumentInfo, business_approved: 1 } // Assuming 1 is for approval
 
     try {
-      await axios.put(`/api/admin/1099-business-approval/${selectedDocumentInfo}`, body, {
+      await axios.post('/api/user/verifyBusiness', {
+        businessValidationStatus: true,
+        businessApproveStatus: true,
+        userId: selectedDocumentInfo
+      }, {
         headers: {
-          Authorization: `Bearer ${token}`
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${auth.accessToken}`
         }
       })
 
       // Close the approval dialog and reload the page
+      await validateUser()
       setApprovalDialogOpen(false)
       window.location.reload()
     } catch (error) {
