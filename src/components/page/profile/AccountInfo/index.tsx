@@ -15,8 +15,9 @@ import { Button } from 'components/common/Button'
 import { useState } from 'react'
 import SignedCert from 'pages/wellness/components/SignedCert'
 import { GrandfatherRankHr } from 'components/common/overview/GrandfatherRankHr'
-import { FormControlLabel, FormGroup, Switch } from '@mui/material'
+import { FormControlLabel, FormGroup } from '@mui/material'
 import { BusinessFields } from './BusinessFields'
+import Switch from '@mui/material/Switch'
 
 interface IAccountInfoProps {
   auth: IAuth
@@ -117,15 +118,13 @@ export const AccountInfo = ({ auth, setAuth, removeAuth, setNewWindow, setTypeUp
         {auth.TINstatus === 'business' && (
           <div className='flex flex-col'>
             <h1 className='text-2xl mr-6 mb-2'>Business Info</h1>
-            <div className='flex justify-center flex-row-reverse rounded-full p-1 bg-white border-2 border-white shadow-md'>
+            <div className='flex justify-center flex-row-reverse rounded-full p-1 bg-white border-2 border-white shadow-md items-center justify-evenly'>
+              <span className='font-bold uppercase'>{isSwitchOn ? 'Hide' : 'Show'}</span>
+              <label className='switch'>
+                <input type='checkbox' checked={isSwitchOn} onChange={handleSwitchChange} />
+                <span className='slider'></span>
+              </label>
 
-              <FormGroup>
-                <FormControlLabel
-                  control={<Switch checked={isSwitchOn} onChange={handleSwitchChange} color="warning"/>}
-                  label={isSwitchOn ? 'Hide' : 'Show'}
-                  className='font-bold uppercase'
-                />
-              </FormGroup>
             </div>
 
           </div>

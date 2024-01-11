@@ -60,7 +60,7 @@ const DashboardOverViewPage: Page = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        if (data.total > 600 && (doc_b_structure === null || doc_irs === null)) {
+        if (data.total > 600 && (doc_b_structure === null || doc_irs === null) && auth.roles.ibo) {
           setShowPopup(true)
         } else {
           setShowPopup(true)
