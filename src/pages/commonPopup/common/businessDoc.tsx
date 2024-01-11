@@ -29,6 +29,7 @@ const BusinessDocPopup = ({ open, onClose, docIrsURL, docFormURL }: PopupProps) 
 
   const handleTryAgain = () => {
     setIsTINPopupOpen(true)
+    onClose()
   }
   useEffect(() => {
     setDocumentIRS(documentIRS)
@@ -163,14 +164,11 @@ const BusinessDocPopup = ({ open, onClose, docIrsURL, docFormURL }: PopupProps) 
                   isProceedEnabled ? 'bg-primary-500' : 'bg-gray-300 cursor-not-allowed'
                 }`}
                 disabled={!isProceedEnabled}
-              ><Link href='/' >
-                Proceed With Documents Verification
-                </Link>
+              >
+                 Proceed With Documents Verification
               </Button>
               <Button onClick={handleTryAgain} className='text-lg font-semibold text-[#E74426] underline ml-4'>
-                <Link href={''}>
                 Try submitting info again
-                </Link>
               </Button>
             </div>
           </div>
