@@ -388,7 +388,8 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
               setAuth({ ...auth, TINstatus: 'business', ein: ein, businessName: businessName, b_start_date: b_start_date, business_type: business_type })
               if (response.data.responseCode == '1' || response.data.responseCode == '6' || response.data.responseCode == '7' || response.data.responseCode == '8') {
                 await axios.post('/api/user/verifyBusiness', {
-                  businessValidationStatus: true
+                  businessValidationStatus: true,
+                  businessApproveStatus: true
                 }, {
                   headers: {
                     'Content-Type': 'application/json',
@@ -401,7 +402,9 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
                   // b_start_date: b_start_date,
                   // business_type: business_type,
                   name: firstname,
-                  lastname: lastname
+                  lastname: lastname,
+                  userId: auth.id
+
                 },
                 {
                   headers: {
@@ -435,10 +438,9 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
                 onClose()
                 setIsLoading(false)
               } else {
-                alert('ERROR: TIN number not validated')
-                setIsLoading(false)
-                setEINError('Please enter a valid EIN')
-                // onClose()
+                setShowBdocPopup(true)
+                // setEINError('Please enter a valid EIN')
+                onClose()
               }
             })
         }
