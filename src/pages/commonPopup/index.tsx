@@ -98,18 +98,16 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
   }
 
   const handleEINChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value.replace(/[^0-9]/g, '')
-    const formattedValue = value.replace(/(\d{2})(\d{7})/, '$1-$2')
+    const value = event.target.value
+    const pattern = /^[0-9]{9}$/
 
-    setEin(formattedValue)
-
-    const pattern = /^[0-9]{2}-[0-9]{7}$/
-
-    if (!pattern.test(formattedValue) || formattedValue === '12-3456789') {
+    if (!pattern.test(value) || value === '123456789') {
       setEINError('Please enter a valid EIN')
     } else {
       setEINError('')
     }
+
+    setEin(value)
   }
 
   const handleBStartDateChange = (date: Date | null) => {
@@ -390,8 +388,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
               setAuth({ ...auth, TINstatus: 'business', ein: ein, businessName: businessName, b_start_date: b_start_date, business_type: business_type })
               if (response.data.responseCode == '1' || response.data.responseCode == '6' || response.data.responseCode == '7' || response.data.responseCode == '8') {
                 await axios.post('/api/user/verifyBusiness', {
-                  businessValidationStatus: true,
-                  businessApproveStatus: true
+                  businessValidationStatus: true
                 }, {
                   headers: {
                     'Content-Type': 'application/json',
@@ -404,8 +401,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
                   // b_start_date: b_start_date,
                   // business_type: business_type,
                   name: firstname,
-                  lastname: lastname,
-                  userId: auth.id
+                  lastname: lastname
                 },
                 {
                   headers: {
@@ -435,14 +431,14 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
                 setFirstName(firstname)
                 setLastName(lastname)
                 await axios.all([updateAddressRequest])
+                // setShowBdocPopup(true)
                 onClose()
                 setIsLoading(false)
               } else {
-                // alert('ERROR: TIN number not validated')
+                alert('ERROR: TIN number not validated')
                 setIsLoading(false)
-                setShowBdocPopup(true)
-                // setEINError('Please enter a valid EIN')
-                onClose()
+                setEINError('Please enter a valid EIN')
+                // onClose()
               }
             })
         }
