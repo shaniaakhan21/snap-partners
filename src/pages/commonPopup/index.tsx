@@ -437,6 +437,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
                 // setShowBdocPopup(true)
                 onClose()
                 setIsLoading(false)
+                setShowSuccessPopup(true)
               } else {
                 setShowBdocPopup(true)
                 // setEINError('Please enter a valid EIN')
