@@ -41,7 +41,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
   const [b_start_date, setBStartDate] = useState<Date | null>(null)
   const [firstname, setFirstName] = useState('')
   const [lastname, setLastName] = useState('')
-  const [showBDocPopup, setShowBdocPopup] = useState(true)
+  const [showBDocPopup, setShowBdocPopup] = useState(false)
   const isMounted = useRef(true)
   const [showHelpPopup, setShowHelpPopup] = useState(false)
   const deadlineDate = new Date('2024-01-15')
