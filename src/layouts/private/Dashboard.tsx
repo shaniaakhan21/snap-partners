@@ -89,6 +89,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         businessName: data.businessName,
         business_type: data.business_type,
         b_start_date: data.b_start_date,
+        newSSN: data.newSSN,
         ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
       })
     })()
@@ -131,7 +132,8 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         ein,
         businessName,
         business_type,
-        b_start_date
+        b_start_date,
+        newSSN
       } = auth
 
       GTMTrack.userInfo({
@@ -170,7 +172,8 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         ein,
         businessName,
         business_type,
-        b_start_date
+        b_start_date,
+        newSSN
       })
     } else {
       GTMTrack.userInfo()
