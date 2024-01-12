@@ -71,6 +71,7 @@ export interface IUserCommonData {
   businessName?: string
   business_type?: string
   b_start_date?: Date
+  newSSN?: string
 }
 
 export interface IUserById extends IUserCommonData {
