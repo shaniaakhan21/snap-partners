@@ -11,10 +11,10 @@ export const BusinessFields = ({ auth, setTypeUpdate }: IBusinessFieldsProps) =>
   return (
     <div >
       <ul className='w-full h-full rounded-lg '>
-        <div className='flex flex-col sm:flex-row justify-start items-start gap-y-2 gap-x-2'>
-          <li className='rounded-xl bg-[#E05E4B] text-white w-full sm:w-1/2 px-4 py-3 border-y-2 border-y-gray-200 flex justify-between items-center'>
+        <div className='flex flex-col justify-start items-start gap-y-2 gap-x-2'>
+          <li className='rounded-xl bg-[#F5F9FD] text-[#E05E4B] w-full px-4 py-3 border-2 border-[#E5EDF3] flex justify-between items-center'>
             <div className='w-full'>
-              <label htmlFor='name' className='text-sm font-bold'>Business Name</label>
+              <label htmlFor='name' className='text-sm font-bold text-[#3A4B59]'>Business Name</label>
               <br />
               <input
                 id='businessName'
@@ -27,9 +27,9 @@ export const BusinessFields = ({ auth, setTypeUpdate }: IBusinessFieldsProps) =>
             </div>
           </li>
 
-          <li className='rounded-xl bg-[#E05E4B] text-white w-full sm:w-1/2 px-4 py-3 border-y-2 border-y-gray-200 flex justify-between items-center'>
+          <li className='rounded-xl bg-[#F5F9FD] text-[#E05E4B]  w-full px-4 py-3 border-[#E5EDF3] border-2 flex justify-between items-center'>
             <div className='w-full'>
-              <label htmlFor='business_type' className='text-sm font-bold'>Business Type</label>
+              <label htmlFor='business_type' className='text-sm font-bold text-[#3A4B59]'>Business Type</label>
               <br />
               <input
                 id='business_type'
@@ -42,10 +42,10 @@ export const BusinessFields = ({ auth, setTypeUpdate }: IBusinessFieldsProps) =>
             </div>
           </li>
         </div>
-        <div className='flex flex-col sm:flex-row justify-start items-start gap-y-2 gap-x-2'>
-          <li className='rounded-xl bg-[#E05E4B] text-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center w-1/2'>
+        <div className='flex flex-col justify-start items-start gap-y-2 gap-x-2'>
+          <li className='rounded-xl bg-[#F5F9FD] text-[#E05E4B]  px-4 py-3 mt-2 border-[#E5EDF3] border-2 flex justify-between items-center w-full'>
             <div>
-              <label htmlFor='ein' className='text-sm font-bold'>EIN</label>
+              <label htmlFor='ein' className='text-sm font-bold text-[#3A4B59]'>EIN</label>
               <br />
               <input
                 id='ein'
@@ -57,9 +57,9 @@ export const BusinessFields = ({ auth, setTypeUpdate }: IBusinessFieldsProps) =>
               />
             </div>
           </li>
-          <li className='rounded-xl w-1/2 bg-[#E05E4B] text-white px-4 py-3 mt-2 border-y-2 border-y-gray-200 flex justify-between items-center'>
+          <li className='rounded-xl bg-[#F5F9FD] text-[#E05E4B]  px-4 py-3 mt-2 border-[#E5EDF3] border-2 flex justify-between items-center w-full'>
             <div>
-              <label htmlFor='b_start_date' className='text-sm font-bold'>Business Start Date</label>
+              <label htmlFor='b_start_date' className='text-sm font-bold text-[#3A4B59]'>Business Start Date</label>
               <br />
               <input
                 id='b_start_date'
