@@ -13,6 +13,11 @@ import PVComponentSnap from '../dashBackOffice/PersonalVolumeSnap'
 import moment from 'moment'
 import axios from 'axios'
 import { getLocalStorage } from 'lib/utils/localStorage'
+import { ReferralCards } from 'components/page/referrals/Cards'
+import { ERCClient } from '../icons/ERCClient'
+import { useAuthStore } from 'lib/stores'
+import { SnapPartnersRefIcon } from '../icons/SnapPartnersRef'
+import { DashReferralCards } from 'components/page/referrals/DashboardCards'
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -60,6 +65,7 @@ interface RankComponentProps{
 }
 
 export default function RankComponent (props: RankComponentProps) {
+  const { auth } = useAuthStore()
   const { data } = props
   const [value, setValue] = useState(0)
   const [currentRank, setCurrentRank] = useState(undefined)
@@ -405,7 +411,27 @@ export default function RankComponent (props: RankComponentProps) {
             )}
           </div>
           <div className='col-span-1'>
-            <PVComponentSnap userId={null} />
+            <DashReferralCards
+              title='Sponsor a Snap IBO'
+              ilustration={(<SnapPartnersRefIcon />)}
+              link={`https://mysnappartners.com/referral-code/${auth.referralCode.trim()}/${auth.id}/the-opportunity/` || 'With Out Link'}
+              newUser={false}
+              classes='col-span-1'
+            />
+            <DashReferralCards
+              title='Refer ERC Client'
+              ilustration={<ERCClient/>}
+              link={`https://mysnappartners.com/referral-code/${auth.referralCode.trim()}/${auth.id}/snap-financial/erc/` || 'With Out Link'}
+              newUser={false}
+              classes='col-span-1'
+            />
+            <DashReferralCards
+              title='Refer SETC/FFCRA Client'
+              ilustration={<ERCClient/>}
+              link={`https://mysnappartners.com/referral-code/${auth.referralCode.trim()}/${auth.id}/snap-financial/setc/` || 'With Out Link'}
+              newUser={false}
+              classes='col-span-1'
+            />
           </div>
         </div>
       </Box>

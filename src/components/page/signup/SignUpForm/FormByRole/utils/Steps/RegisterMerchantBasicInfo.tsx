@@ -16,6 +16,8 @@ import { STEPS } from '.'
 import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 import { GTMTrack } from 'lib/utils/gtm'
 import { FooterApple } from 'components/common/icons'
+import { DatePickerForm } from '../DatePicker'
+import states from 'data/states'
 
 export interface dataFormSignUpMerchant {
   'city' : string
@@ -36,6 +38,7 @@ export interface dataFormSignUpMerchant {
   termsAndConditions: boolean
   // phoneExt: string
   phoneNumber: string
+  dateOfBirth: Date
 }
 
 interface IRegisterMerchantBasicInfoProps {
@@ -96,6 +99,7 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
     const dataToSend = {
       name: dataForm.name,
       lastname: 'Merchant',
+      dateOfBirth: dataForm.dateOfBirth,
       email: dataForm.email,
       username: dataForm.username,
       password: dataForm.password,
@@ -241,7 +245,15 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
           withVerifyCode={false}
           control={control}
         />
-
+        <DatePickerForm
+          id='dateOfBirth'
+          name='dateOfBirth'
+          label='Date of Birth'
+          register={register}
+          registerId='dateOfBirth'
+          errors={errors.dateOfBirth}
+          isRequired={true}
+        />
         <RegisterPassword
           errors={errors}
           register={register}
@@ -277,19 +289,24 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
           isRequired
         />
 
-        <InputForm
+        <label className='font-bold text-gray-700 uppercase text-sm'>
+          STATE {' '}
+          <span className='text-red-500'>*</span>
+        </label>
+        <select
+          className='w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
           id='state'
           name='state'
-          type='text'
-          label='State'
-          registerId='state'
-          placeholder='Enter State'
-          autoComplete='state'
-          errors={errors.state}
-          register={register}
-          rulesForm={registerMerchantRulesConfig.state}
-          isRequired
-        />
+          style={{ backgroundImage: 'none' }}
+          {...register('state', { required: 'State is required *' })}
+        >
+          <option value=''>Select a state</option>
+          {states.map((state) => (
+            <option key={state} value={state}>
+              {state}
+            </option>
+          ))}
+        </select>
 
         <InputForm
           id='referralCode'

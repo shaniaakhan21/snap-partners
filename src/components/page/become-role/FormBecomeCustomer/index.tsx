@@ -33,6 +33,7 @@ export const FormBecomeCustomer = ({ userAuth, userSetAuth }) => {
       email: dataForm.email,
       username: dataForm.username,
       phoneNumber: dataForm.phoneNumber,
+      dateOfBirth: userAuth.dateOfBirth,
       roles: {
         admin: userAuth.roles.admin,
         customer: userAuth.roles.customer,

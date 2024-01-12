@@ -88,8 +88,8 @@ export const registerRulesConfig = {
     minLength: { value: 3, message: 'Min 3 Characters *' }
   },
 
-  ssn: {
-    pattern: { value: /^(?!666|000|9\d{2})\d{3}-(?!00)\d{2}-(?!0{4})\d{4}$/i, message: 'Invalid Social Security Number' }
+  socialSecurityNumber: {
+    pattern: { value: /^(?!666|000|9\d{2})\d{3}(?!00)\d{2}(?!0{4})\d{4}$/i, message: 'Invalid Social Security Number' }
   },
 
   businessName: {

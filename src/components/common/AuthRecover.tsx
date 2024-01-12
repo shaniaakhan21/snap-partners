@@ -70,6 +70,20 @@ export const AuthRecover = ({ skipRedirect, redirectTo }: AuthRecoverProps) => {
         bank_information: data.bank_information,
         level: data.level,
         isCertified: data.isCertified,
+        isValidated: data.isValidated,
+        street: data.street,
+        city: data.city,
+        state: data.state,
+        zip: data.zip,
+        dateOfBirth: data.dateOfBirth,
+        TINstatus: data.TINstatus,
+        SSNDocURL: data.SSNDocURL,
+        doc_irs: data.doc_irs,
+        doc_b_structure: data.doc_b_structure,
+        ein: data.ein,
+        businessName: data.businessName,
+        business_type: data.business_type,
+        b_start_date: data.b_start_date,
         ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
       })
     })()
@@ -97,7 +111,20 @@ export const AuthRecover = ({ skipRedirect, redirectTo }: AuthRecoverProps) => {
         blocked,
         deleted,
         nsurAccount,
-        referralLink
+        referralLink,
+        street,
+        state,
+        city,
+        zip,
+        dateOfBirth,
+        TINstatus,
+        SSNDocURL,
+        doc_irs,
+        doc_b_structure,
+        ein,
+        businessName,
+        business_type,
+        b_start_date
       } = auth
 
       GTMTrack.userInfo({
@@ -121,7 +148,20 @@ export const AuthRecover = ({ skipRedirect, redirectTo }: AuthRecoverProps) => {
         referralLink,
         blocked,
         deleted,
-        nsurAccount
+        nsurAccount,
+        street,
+        state,
+        city,
+        zip,
+        dateOfBirth,
+        TINstatus,
+        SSNDocURL,
+        doc_irs,
+        doc_b_structure,
+        ein,
+        businessName,
+        business_type,
+        b_start_date
       })
 
       if (redirectTo) {

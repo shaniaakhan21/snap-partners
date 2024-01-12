@@ -49,6 +49,7 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
       password: data.password,
       phoneNumber: data.phoneNumber,
       accessToken: dataLogin.token,
+      dateOfBirth: data.dateOfBirth,
       lastname: data.lastname,
       roles: data.roles,
       id: dataLogin.userId,
@@ -72,6 +73,12 @@ export const UpgradeToManager = ({ userTrack, handleStep, referralLink }: { user
       bank_information: data.bank_information,
       level: data.level,
       isCertified: data.isCertified,
+      isValidated: data.isValidated,
+      street: data.street,
+      city: data.city,
+      state: data.state,
+      zip: data.zip,
+      TINstatus: data.TINstatus,
       ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
     })
     // When change auth state, directly the app push the user to /overview path
