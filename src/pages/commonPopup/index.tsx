@@ -645,7 +645,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
           buttonText="Back To Home"
           svgId="popupImage-success"
           open={showSuccessPopup}
-          onClose={handleCloseSuccessPopup} showDocumentUpload={false} />
+          onClose={handleCloseSuccessPopup} showDocumentUpload={false}/>
       )}
       {showFailedPopup && (
         <CommonPopup
@@ -657,7 +657,8 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
           open={showFailedPopup}
           onClose={handleCloseFailedPopup}
           showDocumentUpload={true}
-          auth={auth} setAuth={setAuth} docURL={auth.SSNDocURL} />
+          auth={auth} setAuth={setAuth} docURL={auth.SSNDocURL}
+          uploadbtnText="Upload Social Security Card"/>
       )}
       {showBDocPopup && (
         <BusinessDocPopup open={showBDocPopup} onClose={handleBDOcClosePopup} docIrsURL={auth.doc_irs} docFormURL={auth.doc_b_structure}/>
