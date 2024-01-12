@@ -91,7 +91,7 @@ export const AccountInfo = ({ auth, setAuth, removeAuth, setNewWindow, setTypeUp
   }
 
   return (
-    <div className='max-w-full mx-56 flex flex-row gap-x-8'>
+    <div className='max-w-full mx-20 flex flex-row gap-x-8'>
       <div className='flex flex-col justify-start items-center select-none w-1/3 rounded-2xl border-4 border-white h-fit bg-[#E1EBF3] pt-8  shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)]'>
         <PhotoAccount photoURL={auth.profileImage} auth={auth} setAuth={setAuth}/>
         <Badges auth={auth} />
