@@ -35,11 +35,9 @@ const DashboardOverViewPage: Page = () => {
     return <SpinnerPageContent />
   }
   const [viewing, setViewing] = useState<string>('Aug')
-  const [openModal, setOpenModal] = useState(!auth.isCertified)
   const [openModalTIN, setOpenModalTIN] = useState(!auth.isValidated)
   const currentOverview = getLocalStorage('currentBackoffice') || ''
   const isIntegrous = (auth.roles.integrousAssociate || auth.roles.integrousCustomer)
-  const isCustomer = auth.roles.customer
   const isIntegrousAssociate = auth.roles.integrousAssociate
   const [showPopup, setShowPopup] = useState(false)
   const SSnURL = auth.SSNDocURL
@@ -68,9 +66,6 @@ const DashboardOverViewPage: Page = () => {
       })
       .catch((error) => console.error('Error fetching data: ', error))
   }, [])
-  const handleCloseModal = () => {
-    setOpenModal(false)
-  }
 
   const handleCloseModalTIN = () => {
     setOpenModalTIN(false)
@@ -158,10 +153,6 @@ const DashboardOverViewPage: Page = () => {
         {/* <Referrals rankData={rankData} /> */}
         <RewardsProgram />
       </div>
-
-      {!isCustomer && (
-        <ContractModal open={openModal} onClose={handleCloseModal} />)
-      }
 
       {showPopup && <TINPopup open={openModalTIN} onClose={handleCloseModalTIN}/>}
 
