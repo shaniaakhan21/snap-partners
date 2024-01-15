@@ -84,6 +84,7 @@ export const AuthRecover = ({ skipRedirect, redirectTo }: AuthRecoverProps) => {
         businessName: data.businessName,
         business_type: data.business_type,
         b_start_date: data.b_start_date,
+        business_approved: data.business_approved,
         ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
       })
     })()
@@ -124,7 +125,8 @@ export const AuthRecover = ({ skipRedirect, redirectTo }: AuthRecoverProps) => {
         ein,
         businessName,
         business_type,
-        b_start_date
+        b_start_date,
+        business_approved
       } = auth
 
       GTMTrack.userInfo({
@@ -161,7 +163,8 @@ export const AuthRecover = ({ skipRedirect, redirectTo }: AuthRecoverProps) => {
         ein,
         businessName,
         business_type,
-        b_start_date
+        b_start_date,
+        business_approved
       })
 
       if (redirectTo) {

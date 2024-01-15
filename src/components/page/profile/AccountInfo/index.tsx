@@ -40,6 +40,7 @@ export const AccountInfo = ({ auth, setAuth, removeAuth, setNewWindow, setTypeUp
   const isIntegrousCustomerAndAssociate = (_auth.roles.integrousAssociate && _auth.roles.integrousCustomer)
   const isIntegrousCustomer = (_auth.roles.integrousCustomer && !_auth.roles.integrousAssociate)
   const isCertified = auth.isCertified
+  const isVerified = auth.business_approved
   const [signedCertModalOpen, setSignedCertModalOpen] = useState(false)
 
   const openSignedCertModal = () => {
@@ -91,86 +92,103 @@ export const AccountInfo = ({ auth, setAuth, removeAuth, setNewWindow, setTypeUp
   }
 
   return (
-    <div className='max-w-full mx-20 flex flex-row gap-x-8'>
-      <div className='flex flex-col justify-start items-center select-none w-1/3 rounded-2xl border-4 border-white h-fit bg-[#E1EBF3] pt-8  shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)]'>
-        <PhotoAccount photoURL={auth.profileImage} auth={auth} setAuth={setAuth}/>
-        <Badges auth={auth} />
-        <span className='text-sm font-medium text-[#E74426] mt-2'>{auth.email}</span>
-        <div className='w-10/12 h-[2px] mx-10 bg-[#C6D3DD] my-6'></div>
-        <div className='flex flex-col  w-full h-full text-center'>
-          <h1 className='text-2xl  font-bold mb-6'>IBO ID <span className='text-primary-500'>{_auth.id}</span></h1>
-          <div className='bg-white pb-10'>
-            <GrandfatherRankHr containerStyles='border-0 w-full mx-0 p-4 font-semibold'
-              textStyles='text-[#687886] font-bold text-base'/>
-            {isCertified && (
+    <div className='flex justify-center'>
+      <div className='max-w-5xl w-full flex flex-col md:flex-row gap-x-8 '>
+        <div className='flex flex-col justify-start items-center select-none mb-4 w-full md:w-1/3 rounded-2xl border-4 border-white h-fit bg-[#E1EBF3] pt-8  md:shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)]'>
+          <PhotoAccount photoURL={auth.profileImage} auth={auth} setAuth={setAuth}/>
+          <Badges auth={auth} />
+          <span className='text-sm font-medium text-[#E74426] mt-2'>{auth.email}</span>
+          <div className='w-10/12 h-[2px] mx-10 bg-[#C6D3DD] my-6'></div>
+          <div className='flex flex-col  w-full h-full text-center'>
+            <h1 className='text-2xl  font-bold mb-6'>IBO ID <span className='text-primary-500'>{_auth.id}</span></h1>
+            <div className='bg-white md:pb-4'>
+              <GrandfatherRankHr containerStyles='border-0 w-full mx-0 p-4 font-semibold'
+                textStyles='text-[#687886] font-bold text-base'/>
+              {isCertified && (
 
-              <Button
-                onClick={openSignedCertModal}
-                classes='w-[62%]'
-                style={{ cursor: 'pointer', backgroundColor: '#32427A', padding: '2% 2%', borderRadius: '14px' }}
-              >
-                <div className='flex flex-col md:flex-row justify-between items-center'>
-                  <img className='w-10' src='/static/wellness/weight-care-certified.png'/>
-                  <span className='text-[12px] font-semibold text-white'>WeightCare Certification</span>
+                <Button
+                  onClick={openSignedCertModal}
+                  classes='w-[62%] mb-2'
+                  style={{ cursor: 'pointer', backgroundColor: '#32427A', padding: '2% 2%', borderRadius: '50px' }}
+                >
+                  <div className='flex flex-row justify-start items-center'>
+                    <img className='w-10' src='/static/wellness/weight-care-certified.png'/>
+                    <span className='text-[12px] font-semibold text-white ml-1'>WeightCare Certification</span>
+                  </div>
+                </Button>
+
+              )}
+
+              {isVerified && (
+
+                <Button
+                  onClick={openSignedCertModal}
+                  classes='w-[62%] mb-2'
+                  style={{ cursor: 'pointer', backgroundColor: '#E74426', padding: '2% 2%', borderRadius: '50px' }}
+                >
+                  <div className='flex flex-row justify-start items-center'>
+                    <img className='w-10' src='/images/b_cert.png'/>
+                    <span className='text-[12px] font-semibold text-white ml-2'>Business Verified</span>
+                  </div>
+                </Button>
+
+              )}
+            </div>
+
+          </div>
+
+        </div>
+
+        <div className='w-full md:w-2/3 bg-white md:shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)] rounded-2xl pt-0 md:pt-2'>
+          <div className='pt-2 p-6 md:p-10 md:pt-10 md:pb-0'>
+            <div className='mt-2'>
+              <FormAccountInfo
+                auth={auth}
+                setTypeUpdate={setTypeUpdate}
+              />
+            </div>
+            <div className='w-full h-[2px] bg-[#C6D3DD] my-6'></div>
+            <div className='mt-2'>
+              <CustomisedAlerts/>
+            </div>
+
+            {isIntegrousCustomer && (
+              <div className='w-full mt-3'>
+                <div className='w-full flex flex-col md:flex-row justify-between items-start gap-y-10 gap-x-10 mt-3'>
+                  <a onClick={() => { BecomeAssociate() }} style={{ cursor: 'pointer' }} className='bg-white hover:bg-primary-300 hover:bg-opacity-30 rounded-md p-4 w-full'>
+                    <div className='flex flex-col md:flex-row justify-center items-center'>
+                      <span className='text-2xl font-bold text-gray-800 mr-10'>Become an IBO (Affiliate)</span>
+                    </div>
+                  </a>
                 </div>
-              </Button>
+              </div>
+            )}
 
+            {isIntegrousCustomerAndAssociate && (
+              <div className='w-full mt-3'>
+                <div className='w-full flex flex-col md:flex-row justify-between items-start gap-y-10 gap-x-10 mt-3'>
+                  <a onClick={() => { BecomeCustomer() }} style={{ cursor: 'pointer' }} className='bg-white hover:bg-primary-300 hover:bg-opacity-30 rounded-md p-4 w-full'>
+                    <div className='flex flex-col md:flex-row justify-center items-center'>
+                      <span className='text-2xl font-bold text-gray-800 mr-10'>Become a Customer</span>
+                    </div>
+                  </a>
+                </div>
+              </div>
             )}
           </div>
 
-        </div>
-
-      </div>
-
-      <div className='w-2/3 bg-white shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)] rounded-2xl pt-2'>
-        <div className='p-10 pb-0'>
-          <div className='mt-2'>
-            <FormAccountInfo
-              auth={auth}
-              setTypeUpdate={setTypeUpdate}
-            />
-          </div>
-          <div className='w-full h-[2px] bg-[#C6D3DD] my-6'></div>
-          <div className='mt-2'>
-            <CustomisedAlerts/>
-          </div>
-
-          {isIntegrousCustomer && (
-            <div className='w-full mt-3'>
-              <div className='w-full flex flex-col md:flex-row justify-between items-start gap-y-10 gap-x-10 mt-3'>
-                <a onClick={() => { BecomeAssociate() }} style={{ cursor: 'pointer' }} className='bg-white hover:bg-primary-300 hover:bg-opacity-30 rounded-md p-4 w-full'>
-                  <div className='flex flex-col md:flex-row justify-center items-center'>
-                    <span className='text-2xl font-bold text-gray-800 mr-10'>Become an IBO (Affiliate)</span>
-                  </div>
-                </a>
-              </div>
-            </div>
-          )}
-
-          {isIntegrousCustomerAndAssociate && (
-            <div className='w-full mt-3'>
-              <div className='w-full flex flex-col md:flex-row justify-between items-start gap-y-10 gap-x-10 mt-3'>
-                <a onClick={() => { BecomeCustomer() }} style={{ cursor: 'pointer' }} className='bg-white hover:bg-primary-300 hover:bg-opacity-30 rounded-md p-4 w-full'>
-                  <div className='flex flex-col md:flex-row justify-center items-center'>
-                    <span className='text-2xl font-bold text-gray-800 mr-10'>Become a Customer</span>
-                  </div>
-                </a>
-              </div>
-            </div>
-          )}
-        </div>
-
-        <div className='bg-[#E1EBF3] p-12 rounded-b-2xl'>
-          <button
-            className='block text-white bg-[#E74426] mx-auto font-bold text-lg rounded-full py-2 px-8 mb-4'
-            onClick={handleClickLogout}
-          >
-            <LogoutOutlinedIcon/>
+          <div className='bg-[#E1EBF3] p-12 rounded-b-2xl'>
+            <button
+              className='block text-white bg-[#E74426] mx-auto font-bold text-lg rounded-full py-2 px-8 mb-4'
+              onClick={handleClickLogout}
+            >
+              <LogoutOutlinedIcon/>
         Logout
-          </button>
+            </button>
 
-          <TextContactCTA />
-          <SignedCert open={signedCertModalOpen} onClose={() => setSignedCertModalOpen(false)} />
+            <TextContactCTA />
+            <SignedCert open={signedCertModalOpen} onClose={() => setSignedCertModalOpen(false)} />
+          </div>
         </div>
       </div>
     </div>

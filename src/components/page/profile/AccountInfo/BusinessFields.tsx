@@ -22,7 +22,7 @@ export const BusinessFields = ({ auth, setTypeUpdate }: IBusinessFieldsProps) =>
                 type='text'
                 value={auth.businessName ?? ''}
                 disabled={true}
-                className='w-full bg-transparent text-lg'
+                className='w-full bg-transparent text-sm md:text-lg'
               />
             </div>
           </li>
@@ -37,7 +37,7 @@ export const BusinessFields = ({ auth, setTypeUpdate }: IBusinessFieldsProps) =>
                 type='text'
                 value={auth.business_type ?? ''}
                 disabled={true}
-                className='w-full bg-transparent text-lg truncate'
+                className='w-full bg-transparent  text-sm md:text-lg truncate'
               />
             </div>
           </li>
@@ -53,7 +53,7 @@ export const BusinessFields = ({ auth, setTypeUpdate }: IBusinessFieldsProps) =>
                 type='text'
                 value={auth.ein}
                 disabled={true}
-                className='w-full bg-transparent text-lg truncate'
+                className='w-full bg-transparent  text-sm md:text-lg truncate'
               />
             </div>
           </li>
@@ -71,7 +71,7 @@ export const BusinessFields = ({ auth, setTypeUpdate }: IBusinessFieldsProps) =>
                     : ''
                 }
                 disabled={true}
-                className='w-full bg-transparent text-lg truncate'
+                className='w-full bg-transparent  text-sm md:text-lg truncate'
               />
             </div>
           </li>

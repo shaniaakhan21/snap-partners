@@ -21,10 +21,9 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
   return (
     <ul className='w-full h-full rounded-lg'>
       {auth.TINstatus === 'business' && (
-        <div className='flex flex-row justify-between items-center'>
-          <h1 className='text-2xl leading-3'>Business Info</h1>
-          <div className='flex justify-center flex-row-reverse rounded-full w-[30%] m-[6px] bg-blue-200 p-[8px] border-2 border-white shadow-md items-center justify-evenly'>
-            <span className='font-bold uppercase'>{isSwitchOn ? 'Hide' : 'Show'}</span>
+        <div className='flex flex-row justify-start items-center'>
+          <h1 className='text-xl md:text-2xl leading-3'>Business Info</h1>
+          <div className='flex justify-center flex-row-reverse rounded-full m-[6px] p-[8px] items-center justify-start'>
             <label className='switch'>
               <input type='checkbox' checked={isSwitchOn} onChange={handleSwitchChange} />
               <span className='slider'></span>
@@ -52,7 +51,7 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
               type='text'
               value={`${auth.name || ''} ${auth.lastname || ''}`}
               disabled={true}
-              className='w-full bg-transparent text-lg font-semibold'
+              className='w-full bg-transparent  text-sm md:text-lg font-semibold'
             />
           </div>
         </li>
@@ -68,7 +67,7 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
               type='email'
               value={auth.email}
               disabled={true}
-              className='w-full bg-transparent text-lg font-semibold'
+              className='w-full bg-transparent text-sm md:text-lg font-semibold'
             />
           </div>
 
@@ -97,7 +96,7 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
                 : ''
             }
             disabled={true}
-            className='w-full bg-transparent text-lg truncate'
+            className='w-full bg-transparent text-sm md:text-lg truncate'
           />
         </div>
 
@@ -122,7 +121,7 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
               type='text'
               value={auth.username}
               disabled={true}
-              className='w-full bg-transparent text-lg font-semibold'
+              className='w-full bg-transparent text-sm md:text-lg font-semibold'
             />
           </div>
 
@@ -148,7 +147,7 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
             type='tel'
             value={auth.phoneNumber}
             disabled={true}
-            className='w-full bg-transparent text-lg font-semibold'
+            className='w-full bg-transparent text-sm md:text-lg font-semibold'
             autoComplete='off'
           />
         </div>
@@ -174,7 +173,7 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
             type='text'
             value={auth.street}
             disabled={true}
-            className='w-full bg-transparent text-lg truncate'
+            className='w-full bg-transparent text-sm md:text-lg truncate'
           />
         </div>
 
@@ -197,7 +196,7 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
             type='text'
             value={auth.city}
             disabled={true}
-            className='w-full bg-transparent text-lg truncate'
+            className='w-full bg-transparent text-sm md:text-lg truncate'
           />
         </div>
 
@@ -223,7 +222,7 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
             type='text'
             value={auth.state}
             disabled={true}
-            className='w-full bg-transparent text-lg truncate'
+            className='w-full bg-transparent text-sm md:text-lg truncate'
           />
         </div>
 
@@ -246,7 +245,7 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
             type='text'
             value={auth.zip}
             disabled={true}
-            className='w-full bg-transparent text-lg truncate'
+            className='w-full bg-transparent text-sm md:text-lg truncate'
           />
         </div>
 
@@ -259,105 +258,6 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
           </button>
         </div>
       </li>
-      {/* </div> */}
-
-      {/* <div className='flex flex-col sm:flex-row justify-start items-start gap-y-2 gap-x-2'>
-        <li className='rounded-xl bg-white px-4 py-3 mt-2 flex justify-between items-center'>
-          <div>
-            <label htmlFor='street' className='text-sm'>STREET</label>
-            <br />
-            <input
-              id='street'
-              name='street'
-              type='text'
-              value={auth.street}
-              disabled={true}
-              className='w-full bg-transparent text-lg truncate'
-            />
-          </div>
-
-          <div>
-            <button
-              onClick={() => setTypeUpdate('street')}
-              className='bg-[#F5FBFF] hover:bg-opacity-80 rounded-full p-2 text-white font-bold uppercase border-2 border-[#C9DAE8]'
-            >
-              <EditOutlinedIcon sx={{ color: '#688FB1' }}/>
-            </button>
-          </div>
-        </li>
-        <li className='rounded-xl bg-white px-4 py-3 mt-2 flex justify-between items-center'>
-          <div>
-            <label htmlFor='city' className='text-sm'>CITY</label>
-            <br />
-            <input
-              id='city'
-              name='city'
-              type='text'
-              value={auth.city}
-              disabled={true}
-              className='w-full bg-transparent text-lg truncate'
-            />
-          </div>
-
-          <div>
-            <button
-              onClick={() => setTypeUpdate('city')}
-              className='bg-[#F5FBFF] hover:bg-opacity-80 rounded-full p-2 text-white font-bold uppercase border-2 border-[#C9DAE8]'
-            >
-              <EditOutlinedIcon sx={{ color: '#688FB1' }}/>
-            </button>
-          </div>
-        </li>
-      </div>
-
-      <div className='flex flex-col sm:flex-row justify-start items-start gap-y-2 gap-x-2'>
-        <li className='rounded-xl bg-white px-4 py-3 mt-2 flex justify-between items-center'>
-          <div>
-            <label htmlFor='state' className='text-sm'>STATE / PROVINCE</label>
-            <br />
-            <input
-              id='state'
-              name='state'
-              type='text'
-              value={auth.state}
-              disabled={true}
-              className='w-full bg-transparent text-lg truncate'
-            />
-          </div>
-
-          <div>
-            <button
-              onClick={() => setTypeUpdate('state')}
-              className='bg-[#F5FBFF] hover:bg-opacity-80 rounded-full p-2 text-white font-bold uppercase border-2 border-[#C9DAE8]'
-            >
-              <EditOutlinedIcon sx={{ color: '#688FB1' }}/>
-            </button>
-          </div>
-        </li>
-        <li className='rounded-xl bg-white px-4 py-3 mt-2 flex justify-between items-center'>
-          <div>
-            <label htmlFor='zip' className='text-sm'>Zipcode</label>
-            <br />
-            <input
-              id='zip'
-              name='zip'
-              type='text'
-              value={auth.zip}
-              disabled={true}
-              className='w-full bg-transparent text-lg truncate'
-            />
-          </div>
-
-          <div>
-            <button
-              onClick={() => setTypeUpdate('zip')}
-              className='bg-[#F5FBFF] hover:bg-opacity-80 rounded-full p-2 text-white font-bold uppercase border-2 border-[#C9DAE8]'
-            >
-              <EditOutlinedIcon sx={{ color: '#688FB1' }}/>
-            </button>
-          </div>
-        </li> */}
-      {/* </div> */}
 
       <li className='rounded-xl bg-white px-4 py-3 mt-2 flex justify-between items-center'>
         <div>
@@ -369,7 +269,7 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
             type='password'
             value='12345678'
             disabled={true}
-            className='w-full bg-transparent text-lg font-semibold'
+            className='w-full bg-transparent text-sm md:text-lg font-semibold'
           />
         </div>
 
@@ -393,7 +293,7 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
             type='text'
             value={auth.socialSecurityNumber}
             disabled={true}
-            className='w-full bg-transparent text-lg font-semibold'
+            className='w-full bg-transparent text-sm md:text-lg font-semibold'
           />
         </div>
 
@@ -417,7 +317,7 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
             type='password'
             value=''
             disabled={true}
-            className='w-full bg-transparent text-lg font-semibold'
+            className='w-full bg-transparent text-sm md:text-lg font-semibold'
           />
         </div>
 
@@ -430,34 +330,6 @@ export const FormAccountInfo = ({ auth, setTypeUpdate }: IFormAccountInfoProps) 
           </button>
         </div>
       </li>
-
-      {/* <li className='rounded-xl bg-white px-4 py-3 mt-2 flex justify-between items-center'> */}
-      {/*  <div> */}
-      {/*    <h2 className='text-lg mb-4 font-bold'>Builder Website Info</h2> */}
-      {/*    {builderWebsiteFields.map((item, index) => (<> */}
-      {/*      <label htmlFor='password' className='text-sm capitalize'>{item.replace('_url', '')} URL</label> */}
-      {/*      <br /> */}
-      {/*      <input */}
-      {/*        id={item} */}
-      {/*        name={item} */}
-      {/*        type='text' */}
-      {/*        value={auth[item] ?? ''} */}
-      {/*        disabled={true} */}
-      {/*        className='w-full bg-transparent text-lg mb-3 ml-4' */}
-      {/*      /> */}
-      {/*    </>))} */}
-      {/*  </div> */}
-
-      {/*  <div> */}
-      {/*    <button */}
-      {/*      onClick={() => setTypeUpdate('builderInfo')} */}
-      {/*      className='bg-primary-500 hover:bg-opacity-80 rounded-full px-4 py-1 text-white font-bold uppercase' */}
-      {/*    > */}
-      {/*      Edit */}
-      {/*    </button> */}
-      {/*  </div> */}
-      {/* </li> */}
-
     </ul>
   )
 }

@@ -10,7 +10,7 @@ export const FormSendPhone = ({
   errors
 }) => {
   return (
-    <form onSubmit={handleSubmitPhone(onSubmitPhone)} className='w-full'>
+    <form onSubmit={handleSubmitPhone(onSubmitPhone)} className='w-full pt-3'>
       <InputPhone
         label='Phone'
         isRequired
@@ -20,12 +20,12 @@ export const FormSendPhone = ({
         control={control}
       />
 
-      <div className='mt-4 flex items-center'>
-        <Button type='submit' classes='text-sm mr-2'>
+      <div className='flex items-center bg-[#DCE5ED] rounded-b-2xl justify-end py-4 px-2 border-2 border-[#DCE5ED] '>
+        <Button type='submit' classes='mr-4 bg-[#E74426]'>
           Send
         </Button>
 
-        <Button onClick={() => setTypeUpdate(null)} classes='text-sm'>
+        <Button classes='text-black bg-white text-sm' onClick={() => setTypeUpdate(null)}>
           Cancel
         </Button>
       </div>

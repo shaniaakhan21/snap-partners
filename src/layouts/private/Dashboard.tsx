@@ -89,6 +89,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         businessName: data.businessName,
         business_type: data.business_type,
         b_start_date: data.b_start_date,
+        business_approved: data.business_approved,
         ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
       })
     })()
@@ -131,7 +132,8 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         ein,
         businessName,
         business_type,
-        b_start_date
+        b_start_date,
+        business_approved
       } = auth
 
       GTMTrack.userInfo({
@@ -170,7 +172,8 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         ein,
         businessName,
         business_type,
-        b_start_date
+        b_start_date,
+        business_approved
       })
     } else {
       GTMTrack.userInfo()
@@ -243,7 +246,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
       <Drawer />
       <main className='dashboardLayout__content scroll-primary w-full pr-3 sm:pr-4 lg:pr-6 xl:pr-8 pl-0 sm:pl-0 lg:pl-6 xl:pl-8'>
         <Navbar />
-        <div className='min-h-[89vh] h-fit pt-5 pb-10 max-w-full mt-14 md:mt-4'>
+        <div className='min-h-[89vh] h-fit pt-5 pb-10 max-w-full mt-14 lg:mt-4 '>
           {auth.roles.driver && auth.driver_status === null && (
             <>
               <Alert severity="warning">Your driver documents are being reviewed by our team, your account will be activated soon.</Alert><br/>
