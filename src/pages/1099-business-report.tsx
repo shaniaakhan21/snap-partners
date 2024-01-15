@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable eqeqeq */
 /* eslint-disable array-callback-return */
 /* eslint-disable new-cap */
@@ -8,7 +9,7 @@ import { APP_INFO } from 'config/appInfo'
 import DashboardLayout from 'layouts/private/Dashboard'
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, IconButton, MenuItem, Select } from '@mui/material'
 import { styled } from '@mui/system'
-import { ChangeEvent, useEffect, useState } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 import CloseIcon from '@mui/icons-material/Close'
 import axios from 'axios'
 import VisibilityIcon from '@material-ui/icons/Visibility'
@@ -154,6 +155,31 @@ const BusinessReport: Page = () => {
   }
 
   const handleSaveClick = async (rowId) => {
+    await axios.get('/api/user/validateTIN', {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${auth.accessToken}`
+      },
+      params: {
+        TIN: editedData.ein,
+        LName: editedData.businessName,
+        userId: editableRowId,
+        byUser: `${auth.name}` + ` ${auth.lastname}`
+      }
+    })
+      .then(async (response) => {
+        if (response.data.responseCode == '1' || response.data.responseCode == '6' || response.data.responseCode == '7' || response.data.responseCode == '8') {
+          await axios.post('/api/user/verifyBusiness', {
+            businessValidationStatus: true,
+            userId: editableRowId
+          }, {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${auth.accessToken}`
+            }
+          })
+        }
+      })
     await axios.post('/api/user/update-business-fields', {
       businessName: editedData.businessName,
       ein: editedData.ein,
@@ -237,7 +263,6 @@ const BusinessReport: Page = () => {
 
     try {
       await axios.post('/api/user/verifyBusiness', {
-        businessValidationStatus: true,
         businessApproveStatus: true,
         userId: selectedDocumentInfo
       }, {
