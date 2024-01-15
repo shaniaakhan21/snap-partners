@@ -454,7 +454,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
       <Modal
         open={open}
         onClose={onClose}
-        className='overflow-y-scroll z-[1800]'
+        className='overflow-y-scroll'
       >
         <div className='w-full flex justify-center'>
           <div className='bg-white rounded-xl p-2 md:p-4 md:px-10 md:pb-10 w-9/12 md:w-6/12 my-8 md:my-20 md:ml-10'>
@@ -645,7 +645,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
           buttonText="Back To Home"
           svgId="popupImage-success"
           open={showSuccessPopup}
-          onClose={handleCloseSuccessPopup} showDocumentUpload={false} />
+          onClose={handleCloseSuccessPopup} showDocumentUpload={false}/>
       )}
       {showFailedPopup && (
         <CommonPopup
@@ -657,7 +657,8 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
           open={showFailedPopup}
           onClose={handleCloseFailedPopup}
           showDocumentUpload={true}
-          auth={auth} setAuth={setAuth} docURL={auth.SSNDocURL} />
+          auth={auth} setAuth={setAuth} docURL={auth.SSNDocURL}
+          uploadbtnText="Upload Social Security Card"/>
       )}
       {showBDocPopup && (
         <BusinessDocPopup open={showBDocPopup} onClose={handleBDOcClosePopup} docIrsURL={auth.doc_irs} docFormURL={auth.doc_b_structure}/>

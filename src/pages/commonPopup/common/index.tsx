@@ -13,6 +13,7 @@ interface PopupProps {
   image: string;
   title: string;
   description: string;
+  uploadbtnText?: string;
   buttonText: string;
   svgId: string;
   showDocumentUpload: boolean;
@@ -21,7 +22,7 @@ interface PopupProps {
   docURL?: string;
 }
 
-const CommonPopup = ({ open, onClose, image, title, docURL, description, auth, setAuth, buttonText, svgId, showDocumentUpload }: PopupProps) => {
+const CommonPopup = ({ open, onClose, image, title, docURL, description, auth, setAuth, buttonText, svgId, showDocumentUpload, uploadbtnText }: PopupProps) => {
   const [document, setDocument] = useState(docURL)
   const [filename, setFilename] = useState('')
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -108,7 +109,7 @@ const CommonPopup = ({ open, onClose, image, title, docURL, description, auth, s
               <br/>
               <label htmlFor="document-upload-input">
                 <div className='send-button text-base md:text-xl rounded-xl text-center px-16 capitalize py-4 text-base border-2 border-gray cursor-pointer my-4 shadow-md'>
-                  <CloudUpload /> Upload Document
+                  <CloudUpload /> {uploadbtnText}
                 </div>
               </label>
               <div className="text-[#878787] text-sm mb-2">{filename}</div>

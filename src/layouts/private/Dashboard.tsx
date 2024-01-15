@@ -89,6 +89,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         businessName: data.businessName,
         business_type: data.business_type,
         b_start_date: data.b_start_date,
+        newSSN: data.newSSN,
         business_approved: data.business_approved,
         ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
       })
@@ -133,6 +134,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         businessName,
         business_type,
         b_start_date,
+        newSSN,
         business_approved
       } = auth
 
@@ -173,6 +175,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
         businessName,
         business_type,
         b_start_date,
+        newSSN,
         business_approved
       })
     } else {

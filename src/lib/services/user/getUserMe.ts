@@ -70,6 +70,7 @@ interface IQueryUserMeReturn extends IQueryErrorReturn {
     businessName?: string
     business_type?: string
     b_start_date?: Date
+    newSSN?: string
     business_approved?: boolean
   }
 }
