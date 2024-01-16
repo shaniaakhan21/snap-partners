@@ -101,7 +101,7 @@ export const AccountInfo = ({ auth, setAuth, removeAuth, setNewWindow, setTypeUp
           <div className='w-10/12 h-[2px] mx-10 bg-[#C6D3DD] my-6'></div>
           <div className='flex flex-col  w-full h-full text-center'>
             <h1 className='text-2xl  font-bold mb-6'>IBO ID <span className='text-primary-500'>{_auth.id}</span></h1>
-            <div className='bg-white md:pb-4'>
+            <div className='bg-white md:pb-4 pt-4'>
               <GrandfatherRankHr containerStyles='border-0 w-full mx-0 p-4 font-semibold'
                 textStyles='text-[#687886] font-bold text-base'/>
               {isCertified && (
@@ -122,7 +122,6 @@ export const AccountInfo = ({ auth, setAuth, removeAuth, setNewWindow, setTypeUp
               {isVerified && (
 
                 <Button
-                  onClick={openSignedCertModal}
                   classes='w-[62%] mb-2'
                   style={{ cursor: 'pointer', backgroundColor: '#E74426', padding: '2% 2%', borderRadius: '50px' }}
                 >
