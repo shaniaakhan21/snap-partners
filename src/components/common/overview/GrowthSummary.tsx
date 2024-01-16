@@ -29,13 +29,15 @@ const downLineData: DownLineRow[] = [
 ]
 
 const tabStyle = {
-  color: '#777777',
-  backgroundColoR: '#FFFFFF',
-  fontSize: 12,
+  fontWeight: '600',
+  fontSize: 14,
   width: '25%',
   '&.Mui-selected': {
-    backgroundColor: '#E35C49',
-    color: '#FFFFFF'
+    backgroundColor: '#E74426!important',
+    color: '#FFFFFF!important'
+  },
+  '@media (max-width:567px)': {
+    fontSize: '10px'
   }
 }
 
@@ -172,32 +174,17 @@ export default function GrowthSummary ({ userId }) {
   }, [selectedTab, growthSummaryData])
 
   return (
-    <div className="bg-white rounded-lg px-2.5 py-3">
-      <div>
-        <span className='text-xl text-black font-bold'>Growth Summary</span>
-      </div>
-      <Tabs value={selectedTab}
-        onChange={(_, value) => setSelectedTab(value)}
-        centered
-        className='mt-2.5 border-b-4 border-textAcent-500'
-        textColor="inherit"
-        indicatorColor="secondary"
-        variant='scrollable'
-        ScrollButtonComponent={HiddenTabScrollButton}
-        TabIndicatorProps={{
-          style: { display: 'none' }
-        }}>
-        {["IBO's", 'New Clients', 'Orders', 'Volume'].map((label, index) => (<Tab sx={tabStyle} color={index === selectedTab ? '#ffffff' : undefined} label={label} />))}
-      </Tabs>
-      <div className="my-4 md:flex items-center">
-        <h5 className="text-xl text-black font-bold flex-1">{['New IBOs', 'New Clients', 'New Orders', 'New Orders Volume'][selectedTab]}</h5>
+    <div className="w-fit lg:w-full bg-white rounded-3xl p-6 shadow-lg">
+      <div className='flex flex-col lg:flex-row justify-between items-center'>
+        <span className='text-sm lg:text-xl text-black-h font-bold'>Growth Summary</span>
         <div className='flex flex-row items-center'>
           <select
             id='legalType'
             name='legalType'
-            className='cursor-pointer outline-none appearance-none rounded-md border border-solid border-black py-2 pl-2 pr-12 text-sm sm:text-base'
+            className='cursor-pointer outline-none appearance-none rounded-3xl border border-solid py-2 pl-4 pr-14 text-xs lg:text-sm sm:text-base bg-[#E74426] text-white'
             placeholder='User Rank'
             onChange={(current) => { setYearSelected(parseInt(current.target.value)) }}
+            style={{ backgroundImage: 'linear-gradient(45deg, transparent 50%, #ffffff 50%), linear-gradient(135deg, #ffffff 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc' }}
           >
             {years.map((y, i) => {
               return (
@@ -211,9 +198,10 @@ export default function GrowthSummary ({ userId }) {
           <select
             id='legalType'
             name='legalType'
-            className='ml-5 cursor-pointer outline-none appearance-none rounded-md border border-solid border-black py-2 pl-2 text-sm sm:text-base'
+            className='ml-5 cursor-pointer outline-none appearance-none rounded-3xl border border-solid bg-[#E74426] text-white py-2 pl-4 pr-8 text-xs lg:text-sm sm:text-base'
             placeholder='User Rank'
             onChange={(current) => { setMonthSelected(parseInt(current.target.value)) }}
+            style={{ backgroundImage: 'linear-gradient(45deg, transparent 50%, #ffffff 50%), linear-gradient(135deg, #ffffff 50%, transparent 50%), linear-gradient(to right, #ccc, #ccc' }}
           >
             {month.map((m, i) => {
               return (
@@ -226,21 +214,37 @@ export default function GrowthSummary ({ userId }) {
           </select>
         </div>
       </div>
+      <Tabs value={selectedTab}
+        onChange={(_, value) => setSelectedTab(value)}
+        centered
+        className='mt-2.5 border-2 border-[#DCE5ED] rounded-3xl text-black-h'
+        textColor="inherit"
+        indicatorColor="secondary"
+        variant='scrollable'
+        ScrollButtonComponent={HiddenTabScrollButton}
+        TabIndicatorProps={{
+          style: { display: 'none' }
+        }}>
+        {["IBO's", 'New Clients', 'Orders', 'Volume'].map((label, index) => (<Tab sx={tabStyle} color={index === selectedTab ? '#ffffff' : undefined} label={label} />))}
+      </Tabs>
+      <div className="my-4 md:flex items-center">
+        <h5 className="text-sm mb-2 lg:mb-0 lg:text-xl text-black-h font-bold flex-1">{['New IBOs', 'New Clients', 'New Orders', 'New Orders Volume'][selectedTab]}</h5>
+      </div>
       <div>
-        <table className="mt-4 w-full text-center">
-          <thead>
+        <table className="mt-4 w-fit lg:w-full text-center rounded-3xl border-2 border-[#DCE5ED] p-2">
+          <thead className='bg-[#DCE5ED] text-black-h my-4'>
             <tr>
-              <th className='text-xs font-normal'>&nbsp;</th>
-              {selectedTab !== 3 && <th className='text-xs font-normal'>Direct</th>}
-              <th className='text-xs font-normal hidden xs:table-cell'>O-L Manager</th>
-              <th className='text-xs font-normal xs:hidden'>O-L Mngr.</th>
-              <th className='text-xs font-normal hidden xs:table-cell'>O-L Supervisor</th>
-              <th className='text-xs font-normal xs:hidden'>O-L Supv.</th>
-              <th className='text-xs font-normal hidden xs:table-cell'>O-L Director</th>
-              <th className='text-xs font-normal xs:hidden'>O-L Dire.</th>
-              <th className='text-xs font-normal hidden xs:table-cell'>O-L Executive</th>
-              <th className='text-xs font-normal xs:hidden'>O-L Exec.</th>
-              <th className='text-xs font-normal'>Total</th>
+              <th className='text-xs lg:text-sm font-semibold'>&nbsp;</th>
+              {selectedTab !== 3 && <th className='text-xs lg:text-sm font-semibold p-4'>Direct</th>}
+              <th className='text-xs lg:text-sm font-semibold hidden xs:table-cell'>O-L Manager</th>
+              <th className='text-xs lg:text-sm font-semibold xs:hidden'>O-L Mngr.</th>
+              <th className='text-xs lg:text-sm font-semibold hidden xs:table-cell'>O-L Supervisor</th>
+              <th className='text-xs lg:text-sm font-semibold xs:hidden'>O-L Supv.</th>
+              <th className='text-xs lg:text-sm font-semibold hidden xs:table-cell'>O-L Director</th>
+              <th className='text-xs lg:text-sm font-semibold xs:hidden'>O-L Dire.</th>
+              <th className='text-xs lg:text-sm font-semibold hidden xs:table-cell'>O-L Executive</th>
+              <th className='text-xs lg:text-sm font-semibold xs:hidden'>O-L Exec.</th>
+              <th className='text-xs lg:text-sm font-semibold pr-4'>Total</th>
             </tr>
           </thead>
           <tbody>
@@ -248,13 +252,13 @@ export default function GrowthSummary ({ userId }) {
               ? showingData.map((row, idx) => {
                 return (
                   <tr key={idx} className='h-10'>
-                    <td className='text-xs font-normal'>{row[0]}</td>
+                    <td className='text-sm font-normal pl-4 py-4'>{row[0]}</td>
                     {row.slice(1).map((r, idx2) => <td key={`${idx}_${idx2}`} className='text-sm text-gray-500'>{r}</td>)}
                   </tr>
                 )
               })
               : <tr>
-                <td colSpan={6} style={{ textAlign: 'center', padding: '20px', color: '#e35c49' }}>
+                <td colSpan={6} style={{ textAlign: 'center', padding: '20px', color: '#E74426' }}>
                   Coming Soon
                 </td>
               </tr>}

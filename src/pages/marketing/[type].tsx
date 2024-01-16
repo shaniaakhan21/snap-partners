@@ -60,18 +60,19 @@ const MarketingArticlePage = ({ typeMarketing }: { typeMarketing: TMarketingType
 
   return (
     <>
-      <div className='text-center'>
-        <span className='text-3xl font-bold'>
+      <div className='text-center bg-white rounded-2xl py-4 lg:py-10 shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)] px-2 lg:px-0'>
+        <span className='text-xl lg:text-3xl font-bold'>
           {
             typeMarketing !== 'ibo'
               ? <span className='capitalize'> {typeMarketing}s</span>
               : ' IBOs'
           }
-        </span> <br /><br />
-        <span className='font-bold text-2xl text-primary-500'>Building your Business with a Few Clicks</span>
-
-        <div className='mt-6'>
-          <span className='font-semibold text-gray-800'>Now choose the arts you want to share</span>
+        </span> <br />
+        <div className='lg:mt-4'>
+          <span className='font-bold text-lg lg:text-2xl text-primary-500'>Building your Business with a Few Clicks</span>
+        </div>
+        <div className='lg:mt-2'>
+          <span className='font-semibold text-xs lg:text-lg text-gray-800'>Now choose the arts you want to share</span>
         </div>
 
         {/* {
@@ -112,10 +113,6 @@ const MarketingArticlePage = ({ typeMarketing }: { typeMarketing: TMarketingType
           }
           )
         }
-      </ListArticles>
-
-      <ListArticles>
-
       </ListArticles>
     </>
   )

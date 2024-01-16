@@ -21,6 +21,11 @@ import { EditPhone } from 'components/page/profile/update/EditPhone'
 import { AccountInfo } from 'components/page/profile/AccountInfo'
 import { FormUpdateUsename } from 'components/page/profile/update/FormUpdateUsename'
 import { FormUpdateBuilderInfo } from '../components/page/profile/update/FormUpdateBuilderInfo'
+import { FormEditDateOfBirth } from 'components/page/profile/update/FormEditDateOfBirth'
+import { FormEditStreet } from 'components/page/profile/update/FormEditStreet'
+import { FormEditState } from 'components/page/profile/update/FormEditState'
+import { FormEditCity } from 'components/page/profile/update/FormEditCity'
+import { FormEditZipCode } from 'components/page/profile/update/FormEditZipCode'
 
 const { SEO } = APP_INFO
 
@@ -65,8 +70,13 @@ const ProfilePage = ({ email, tokenExist }: { email: string, tokenExist: boolean
   if (typeUpdate === 'phone') return <EditPhone auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
   if (typeUpdate === 'password') return <FormUpdatePassword auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
   if (typeUpdate === 'bankaccount') return <FormUpdateBankAccount auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
-  if (typeUpdate === 'socialsecurity') return <FormUpdateSocialSecurity auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
+  if (typeUpdate === 'socialSecurityNumber') return <FormUpdateSocialSecurity auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
   if (typeUpdate === 'builderInfo') return <FormUpdateBuilderInfo auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
+  if (typeUpdate === 'dateOfBirth') return <FormEditDateOfBirth auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
+  if (typeUpdate === 'street') return <FormEditStreet auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
+  if (typeUpdate === 'state') return <FormEditState auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
+  if (typeUpdate === 'city') return <FormEditCity auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
+  if (typeUpdate === 'zip') return <FormEditZipCode auth={auth} setAuth={setAuth} typeUpdate={typeUpdate} setTypeUpdate={setTypeUpdate} />
 
   return (
     <AccountInfo

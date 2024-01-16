@@ -21,11 +21,11 @@ export const GrandfatherRankHr = () => {
     })()
   }, [])
 
-  if(data === undefined) return (<></>)
+  if (data === undefined) return (<></>)
 
   return (
-    <div className='w-full h-full mt-7 mb-7 px-6 py-3 flex justify-between items-center max-w-7xl mx-auto' style={{ backgroundColor: 'white' }}>
-      <span className='text-lg'>Grandfathered Pay Rank: <span className='font-semibold text-lg'>{data.gRankUpperCase}</span> until {data.till}</span>
+    <div className='w-9/12 text-center rounded-lg bg-white border-2 border-[#E74426] h-fit mx-4 mt-4 mb-7  px-2 py-1 flex justify-center items-center'>
+      <span className='text-xs lg:text-sm'>Grandfathered Pay Rank: <br/><span className='font-semibold text-sm lg:text-lg text-[#E74426]'>{data.gRankUpperCase}</span> until <span className='font-semibold text-lg text-[#E74426]'>{data.till}</span></span>
     </div>
   )
 }

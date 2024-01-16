@@ -5,15 +5,18 @@ import ReactDataGrid from '@inovua/reactdatagrid-community'
 import '@inovua/reactdatagrid-community/index.css'
 
 const columns = [
-    { name: 'description', header: 'Filter list by typing description', defaultWidth: 470 },
+  { name: 'description', header: 'Filter list by typing description', defaultWidth: 500, flex: 2 },
   {
     name: 'date',
     header: 'Date',
-    defaultWidth: 170
+    defaultWidth: 400,
+    flex: 1
   }
 ]
 
-const gridStyle = { minHeight: 525 }
+const gridStyle = {
+  minHeight: 600
+}
 
 const filterValue = [
   { name: 'description', operator: 'contains', type: 'string', value: '' }
@@ -21,17 +24,20 @@ const filterValue = [
 
 const TableNotifications = ({ notifications }) => {
   return (
-    <div style={{ overflow: 'auto' }}>
-    <ReactDataGrid
-      columns={columns}
-      dataSource={notifications}
-      sortable={false}
-      defaultFilterValue={filterValue}
-      style={gridStyle}
-      defaultLimit={10}
-      pagination
-      enableColumnAutosize = {true}
-    />
+    <div>
+      <style>
+
+      </style>
+      <ReactDataGrid
+        columns={columns}
+        dataSource={notifications}
+        sortable={false}
+        defaultFilterValue={filterValue}
+        style={gridStyle}
+        defaultLimit={10}
+        pagination
+        enableColumnAutosize = {false}
+      />
     </div>
   )
 }
@@ -65,11 +71,11 @@ const NetworkActivity = () => {
   }, [])
 
   return (
-    <div className='max-w-4xl w-full mx-auto bg-white rounded-lg px-2.5 py-3'>
+    <div className='w-fit lg:w-full mx-auto bg-white rounded-3xl shadow-lg p-6'>
       <div>
-        <span className='text-xl text-black font-bold'>Network Activity</span>
+        <span className='text-sm lg:text-xl text-black font-bold '>Network Activity</span>
       </div>
-      <div className={`relative w-full sm:rounded-lg ${!loading && 'overflow-x-auto'}`}> {/* Can be better */}
+      <div className={`relative w-[834px] lg:w-full sm:rounded-sm  mt-4 ${!loading && 'overflow-x-auto'}`}>
         {
           loading &&
             (

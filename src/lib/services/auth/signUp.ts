@@ -26,6 +26,8 @@ interface ISignUpDataBodyStep2 extends ISignUpDataBodyStep1 {
   idImage: string
   insuranceImage: string
   ownerName?: string
+  dateOfBirth: Date,
+  socialSecurityNumber?: string,
   roles: {
     admin: boolean
     customer: boolean
@@ -51,6 +53,8 @@ interface ISignUpDataBodyMerchant {
   phoneNumber,
   idImage: null,
   insuranceImage: null,
+  dateOfBirth: Date,
+  socialSecurityNumber?: string,
   roles: {
     admin: false,
     customer: false,
@@ -110,6 +114,7 @@ export const signUpStep1 = async (dataBody: ISignUpDataBodyStep1 | ISignUpDataBo
 }
 
 export const signUpStep2 = async (dataBody: ISignUpDataBodyStep2, isJsonFetch: boolean = true): Promise<IQueryErrorReturn> => {
+  console.log(dataBody)
   let res: Response
 
   if (isJsonFetch) {

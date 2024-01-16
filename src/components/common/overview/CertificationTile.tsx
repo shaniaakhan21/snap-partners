@@ -8,26 +8,28 @@ import { Link } from '@material-ui/core'
 
 export default function CertificationTile ({ title, description, image, redirectUrl }) {
   return (
-    <Link href={redirectUrl}>
-      <Card sx={{ maxWidth: '100%', padding: '10px' }} role='button'>
-        <CardContent sx={{ borderTop: '5px solid #fe0002' }} className="border-l border-r border-gray-400" >
-          <div className='pl-5'>
-            <Typography gutterBottom variant="h5" component="div">
-              <b>{title}</b>
-            </Typography>
-          </div>
-          <div className='pl-5 pb-5'>
-            <Typography variant="body2">
-              {description}
-            </Typography>
-          </div>
-        </CardContent>
+    <Link href={redirectUrl} className='hover:underline hover:text-red-500'>
+      <Card sx={{ maxWidth: '100%' }} role='button' className='rounded-t-3xl rounded-b-none bg-none'>
         <CardMedia
-          className="border-t border-l border-r border-b border-gray-400"
           sx={{ height: 225, backgroundSize: 'contain' }}
           image={image}
           title="green iguana"
         />
+        <CardContent>
+          <div className='pl-5'>
+            <Typography gutterBottom variant="h5" component="div" className='text-sm lg:text-2xl'>
+              <b>Certifications</b>
+            </Typography>
+          </div>
+          <div className='pl-5 pb-0 flex flex-row justify-between'>
+            <Typography variant="h6" className='text-sm lg:text-xl font-semibold'>
+              {title}
+            </Typography>
+            <Typography variant="body2" className='text-xs lg:text-sm font-normal'>
+              {description}
+            </Typography>
+          </div>
+        </CardContent>
       </Card>
     </Link>
   )
