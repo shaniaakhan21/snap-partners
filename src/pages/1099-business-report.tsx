@@ -23,6 +23,7 @@ import DocumentDetailView from './commonPopup/common/DocumentDetailView'
 import { getLocalStorage } from 'lib/utils/localStorage'
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers-pro'
 import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs'
+import moment from 'moment'
 
 const { SEO } = APP_INFO
 
@@ -110,7 +111,6 @@ const BusinessReport: Page = () => {
   const [approvalDialogOpen, setApprovalDialogOpen] = useState(false)
   const [activeEditRowId, setActiveEditRowId] = useState(null)
   const [editableRowId, setEditableRowId] = useState(null)
-  const [business_type, setBusinessType] = useState('')
   const [editedData, setEditedData] = useState({
     ein: '',
     businessName: '',
@@ -121,17 +121,6 @@ const BusinessReport: Page = () => {
 
   })
 
-  const makeRowEditable = (rowId) => {
-    setEditableRowId(rowId)
-    setEditedData({
-      ein: '',
-      businessName: '',
-      business_type: '',
-      firstname: '',
-      lastname: '',
-      b_start_date: null
-    })
-  }
   const validateUser = async () => {
     try {
       const response = await axios.post(
@@ -217,14 +206,6 @@ const BusinessReport: Page = () => {
     }
   }, [])
 
-  const handleExpandClick = (rowId) => {
-    if (activeEditRowId === rowId) {
-      setActiveEditRowId(null)
-    } else {
-      setActiveEditRowId(rowId)
-    }
-  }
-
   const get1099ReportData = async () => {
     await axios.get('/api/admin/1099-business-report')
       .then(async (response) => {
@@ -285,10 +266,6 @@ const BusinessReport: Page = () => {
     setEditedData((prevData) => ({ ...prevData, [field]: value }))
   }
 
-  const handleTypeChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    const value = event.target.value
-    setBusinessType(value)
-  }
   const renderCellContent = (params, fieldName) => {
     if (editableRowId === params.row.id) {
       if (fieldName === 'b_start_date') {
@@ -296,7 +273,7 @@ const BusinessReport: Page = () => {
           <div>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
-                value={editedData[fieldName] || null}
+                value={moment(editedData.b_start_date)}
                 onChange={(date) => handleInputChange(fieldName, date)}
                 sx={{
                   '.MuiInputBase-input, .MuiOutlinedInput-input ': {
@@ -318,8 +295,8 @@ const BusinessReport: Page = () => {
           <select
             id='state-select'
             onChange={(e) => handleInputChange(fieldName, e.target.value)}
-            className={'rounded-none rounded-tl-xl rounded-bl-xl border-0 appearance-none w-full bg-[#F9F9FA]'}
-            style={{ backgroundImage: 'none' }}
+            className={' border-0 appearance-none w-full bg-[#F9F9FA]'}
+            style={{ backgroundImage: 'none', border: '1px solid #E35C49' }}
             value={editedData[fieldName] || ''}
           >
             <option value=''>Select Type</option>
@@ -342,7 +319,6 @@ const BusinessReport: Page = () => {
                 e.stopPropagation()
               }
             }}
-            placeholder='Type here...'
           />
         )
       }
@@ -361,6 +337,25 @@ const BusinessReport: Page = () => {
         </span>
       )
     }
+  }
+
+  const makeRowEditable = (rowId) => {
+    setEditableRowId(rowId)
+    const editedRow = report1099.find((item) => item.id === rowId)
+    setEditedData({
+      ein: editedRow.ein,
+      businessName: editedRow.businessName,
+      business_type: editedRow.business_type,
+      firstname: editedRow.firstname,
+      lastname: editedRow.lastname,
+      b_start_date: moment(editedRow.b_start_date)
+    })
+  }
+
+  const onCancel = () => {
+    // Add your cancellation logic here
+    // For example, you can reset the edited data and close any open modals
+    setEditableRowId(null)
   }
 
   const columns = [
@@ -390,18 +385,11 @@ const BusinessReport: Page = () => {
         <>
           {editableRowId === cellData.row.id
             ? (
-              <IconButton
+              <><a
                 onClick={() => handleSaveClick(cellData.row.id)}
-                style={{
-                  color: 'white',
-                  borderRadius: 0,
-                  borderBottom: 'none',
-                  fontSize: '12px',
-                  backgroundColor: '#E35C49'
-                }}
               >
-            Save
-              </IconButton>
+                <CheckCircleIcon style={{ color: '#37D034', cursor: 'pointer' }}/>
+              </a><CancelIcon style={{ color: '#D03434', cursor: 'pointer' }} onClick={onCancel} /></>
             )
             : (
               <IconButton
