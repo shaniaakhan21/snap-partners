@@ -86,6 +86,7 @@ const HomePage: Page = () => {
           businessName: data.businessName,
           business_type: data.business_type,
           b_start_date: data.b_start_date,
+          zendesk_id: data.zendesk_id,
           ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
         })
         router.push('/overview')

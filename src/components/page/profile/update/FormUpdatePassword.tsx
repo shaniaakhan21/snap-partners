@@ -105,6 +105,7 @@ export const FormUpdatePassword = ({ auth, setAuth, typeUpdate, setTypeUpdate }:
       zip: userData.zip,
       dateOfBirth: userData.dateOfBirth,
       TINstatus: userData.TINstatus,
+      zendesk_id: userData.zendesk_id,
       ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: userData[field] }), {}) as any)
     })
     GTMTrack.editProfile(typeUpdate)

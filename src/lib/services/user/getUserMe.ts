@@ -71,6 +71,7 @@ interface IQueryUserMeReturn extends IQueryErrorReturn {
     business_type?: string
     b_start_date?: Date
     newSSN?: string
+    zendesk_id?: string
   }
 }
 

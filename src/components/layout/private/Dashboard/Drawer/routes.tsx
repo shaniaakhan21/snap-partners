@@ -132,6 +132,11 @@ export const drawerRoutes = [
   },
   {
     icon: <PromotionIcon />,
+    to: '/tickets',
+    label: 'Help Team'
+  },
+  {
+    icon: <PromotionIcon />,
     to: '/promotion',
     label: 'Snap Promos'
   }

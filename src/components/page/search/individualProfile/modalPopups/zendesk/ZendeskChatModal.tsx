@@ -6,7 +6,7 @@ import { ButtonComponent, InputComponent, TextArea } from 'components/layout/pri
 import React, { useEffect, useState } from 'react'
 import { useAuthStore } from 'lib/stores'
 
-const ZendeskTicketCreation = ({ zendeskTicketModal, closeModal, setTicketFlag, ticketFlag, zendesk_id, name, email }) => {
+const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, setTicketFlag, ticketFlag, zendesk_id, name, email }) => {
   const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -53,7 +53,7 @@ const ZendeskTicketCreation = ({ zendeskTicketModal, closeModal, setTicketFlag, 
             setAuth({ ...auth, zendesk_id: res.data.zendesk_id })
           }
           setTicketFlag(!ticketFlag)
-          closeModal()
+          closeChatModal()
         } else {
           alert('ticket Creation Unsuccessful')
         }
@@ -63,7 +63,7 @@ const ZendeskTicketCreation = ({ zendeskTicketModal, closeModal, setTicketFlag, 
       })
   }
   return (
-    <Modal open={ zendeskTicketModal } onClose={closeModal} >
+    <Modal open={ zendeskChatModal } onClose={closeChatModal} >
       <Box sx={style}>
         <h2>Create Ticket For Your Issue</h2>
         <InputComponent label='Subject' placeholder='Subject of your Issue' value={ticketBody.subject} param={'subject'} onChangeFunction={handleEditProfileUpdate} />
@@ -78,4 +78,4 @@ const ZendeskTicketCreation = ({ zendeskTicketModal, closeModal, setTicketFlag, 
   )
 }
 
-export default ZendeskTicketCreation
+export default ZendeskChatModal

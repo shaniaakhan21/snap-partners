@@ -74,6 +74,7 @@ function IndividualProfileHeader ({ body, setBody, profileData, userLevel }) {
       zip: data.zip,
       dateOfBirth: data.dateOfBirth,
       TINstatus: data.TINstatus,
+      zendesk_id: data.zendesk_id,
       ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
     })
     window.location.href = '/overview'

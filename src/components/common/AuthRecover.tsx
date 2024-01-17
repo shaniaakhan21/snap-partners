@@ -85,6 +85,7 @@ export const AuthRecover = ({ skipRedirect, redirectTo }: AuthRecoverProps) => {
         business_type: data.business_type,
         b_start_date: data.b_start_date,
         newSSN: data.newSSN,
+        zendesk_id: data.zendesk_id,
         ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
       })
     })()

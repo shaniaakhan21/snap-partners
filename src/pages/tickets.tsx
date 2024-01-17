@@ -1,10 +1,17 @@
+/* eslint-disable @next/next/no-document-import-in-page */
 /* eslint-disable no-use-before-define */
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import ZendeskTicketCreation from './modalPopups/zendesk/ZendeskTicketCreation'
+import ZendeskTicketCreation from 'components/page/search/individualProfile/modalPopups/zendesk/ZendeskTicketCreation'
+import ZendeskChatModal from 'components/page/search/individualProfile/modalPopups/zendesk/ZendeskChatModal'
 import { ButtonComponent, InputComponent, SelectComponent } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/Components'
 import { DataGrid as MUIDataGrid } from '@mui/x-data-grid'
 import { styled } from '@mui/system'
+import DashboardLayout from 'layouts/private/Dashboard'
+import { Head } from 'next/document'
+import type { Page, ReactNode } from 'lib/types'
+import { APP_INFO } from 'config/appInfo'
+import { useAuthStore } from 'lib/stores'
 // import Zendesk from 'react-zendesk'
 const ZENDESK_KEY = '324987dc-ca53-451c-b524-096403f15e91'
 
@@ -29,6 +36,7 @@ const StyledDataGrid = styled(MUIDataGrid)(() => ({
   }
 
 }))
+const { SEO } = APP_INFO
 
 const rows = [
   {
@@ -53,10 +61,13 @@ const rows = [
   }
 ]
 
-const Tickets = ({ zendesk_id, name, email }) => {
+const TicketsPage: Page = () => {
   const [windowWidth, setWindowWidth] = useState(0)
   const [tickets, setTickets] = useState([])
   const [ticketFlag, setTicketFlag] = useState(false)
+  const { auth } = useAuthStore()
+
+  console.log('auth is', auth)
 
   useEffect(() => {
     const handleResize = () => {
@@ -137,10 +148,15 @@ const Tickets = ({ zendesk_id, name, email }) => {
   })
 
   const [zendeskTicketModal, setZendeskTicketModal] = useState(false)
+  const [zendeskChatOpen, setZendeskChatOpen] = useState(false)
 
   // Example: Fetch all tickets
   const getZendeskData = () => {
-    axios.get('/api/zendesk/ticket')
+    axios.get('/api/zendesk/ticket', {
+      params: {
+        zendesk_id: auth?.zendesk_id
+      }
+    })
       .then(async (response) => {
         console.log('Tickets:', response.data)
         setTickets(await Promise.all(response.data.response.tickets.map(async (ticket) => {
@@ -167,6 +183,10 @@ const Tickets = ({ zendesk_id, name, email }) => {
   const onZendeskTicketModalClose = () => {
     setZendeskTicketModal(false)
   }
+  const onZendeskChatModalClose = () => {
+    setZendeskChatOpen(false)
+  }
+
 
   const setting = {
     color: {
@@ -183,7 +203,10 @@ const Tickets = ({ zendesk_id, name, email }) => {
       ]
     }
   }
-  console.log('all tickets are', tickets)
+
+  const handleTicketSelect = (params) => {
+    console.log('selection params', params)
+  }
   return (
     <div>
       <div className='flex flex-row justify-between'>
@@ -212,15 +235,28 @@ const Tickets = ({ zendesk_id, name, email }) => {
           sx={{
             minHeight: '214px',
             borderColor: 'rgba(224, 224, 224, 0.5)!important'
-          }}/>
+          }}
+          onCellClick={handleTicketSelect}
+          />
       </div>
       {/* <div>
         <button onClick={() => { getZendeskData() }}>click here</button>
       </div> */}
 
-      <ZendeskTicketCreation zendeskTicketModal={zendeskTicketModal} closeModal = {onZendeskTicketModalClose} ticketFlag={ticketFlag} setTicketFlag={setTicketFlag} zendesk_id={zendesk_id} name= {name} email= {email} />
+      <ZendeskTicketCreation zendeskTicketModal={zendeskTicketModal} closeModal = {onZendeskTicketModalClose} ticketFlag={ticketFlag} setTicketFlag={setTicketFlag} zendesk_id={auth.zendesk_id} name= {auth.name} email= {auth.email} />
+      <ZendeskChatModal zendeskChatModal={zendeskChatOpen} closeChatModal = {onZendeskChatModalClose} ticketFlag={ticketFlag} setTicketFlag={setTicketFlag} zendesk_id={auth.zendesk_id} name= {auth.name} email= {auth.email} />
     </div>
   )
 }
 
-export default Tickets
+TicketsPage.getLayout = (page: ReactNode) => (
+  <DashboardLayout>
+    {/* <Head>
+      <title>{SEO.TITLE_PAGE} - My Wallet</title>
+    </Head> */}
+
+    {page}
+  </DashboardLayout>
+)
+
+export default TicketsPage
