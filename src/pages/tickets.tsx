@@ -64,6 +64,7 @@ const rows = [
 const TicketsPage: Page = () => {
   const [windowWidth, setWindowWidth] = useState(0)
   const [tickets, setTickets] = useState([])
+  const [singleTicket, setSingleTicket] = useState()
   const [ticketFlag, setTicketFlag] = useState(false)
   const { auth } = useAuthStore()
 
@@ -206,6 +207,8 @@ const TicketsPage: Page = () => {
 
   const handleTicketSelect = (params) => {
     console.log('selection params', params)
+    setSingleTicket(params.row)
+    setZendeskChatOpen(true)
   }
   return (
     <div>
@@ -244,7 +247,7 @@ const TicketsPage: Page = () => {
       </div> */}
 
       <ZendeskTicketCreation zendeskTicketModal={zendeskTicketModal} closeModal = {onZendeskTicketModalClose} ticketFlag={ticketFlag} setTicketFlag={setTicketFlag} zendesk_id={auth.zendesk_id} name= {auth.name} email= {auth.email} />
-      <ZendeskChatModal zendeskChatModal={zendeskChatOpen} closeChatModal = {onZendeskChatModalClose} ticketFlag={ticketFlag} setTicketFlag={setTicketFlag} zendesk_id={auth.zendesk_id} name= {auth.name} email= {auth.email} />
+      <ZendeskChatModal zendeskChatModal={zendeskChatOpen} closeChatModal = {onZendeskChatModalClose} ticket={singleTicket} ticketFlag={ticketFlag} setTicketFlag={setTicketFlag}/>
     </div>
   )
 }
