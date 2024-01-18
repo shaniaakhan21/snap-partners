@@ -29,13 +29,13 @@ module.exports = {
 
       colors: {
         black: {
-          DEFAULT: "#18203F",
+          DEFAULT: "#000000",
         },
         primary: {
           100: "#f4b400",
           200: "#0f9d58",
           300: "#FF998B",
-          500: "#DD4C37",
+          500: "#E74426",
         },
         transparentPrimary: {
           "8%": "#E35C4914",

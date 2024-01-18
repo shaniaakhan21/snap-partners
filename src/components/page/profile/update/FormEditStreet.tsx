@@ -57,9 +57,9 @@ export const FormEditStreet = ({
     return <SpinnerPageContent />
   }
 
-  return (<div className='max-w-3xl mx-auto'>
-    <section>
-      <h3 className='text-xl font-bold'>Change Username</h3>
+  return (<div className='max-w-2xl mx-auto rounded-2xl bg-white md:shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)] pt-4'>
+    <section className='px-4 pt-3 '>
+      <h3 className='text-base md:text-xl font-bold'>Change Street Name</h3>
     </section>
 
     <br />
@@ -70,7 +70,7 @@ export const FormEditStreet = ({
         inputId='Street'
         inputType='Street'
         labelFor='Street'
-        labelName='Current Street'
+        labelName='Current Street:'
         value={auth.street}
       />
 
@@ -78,7 +78,7 @@ export const FormEditStreet = ({
         inputId='newStreet'
         inputType='text'
         labelFor='newStreet'
-        labelName='New Street'
+        labelName='New Street:'
         placeholder='Insert the new Street'
         register={register}
         rules={{
@@ -91,9 +91,9 @@ export const FormEditStreet = ({
         error={errors.newStreet}
       />
       <br />
-      <div className='flex items-center'>
+      <div className='flex items-center bg-[#DCE5ED] rounded-b-2xl justify-end py-4 px-2 border-2 border-[#DCE5ED] '>
         <Button type='submit' classes='mr-2'>Save</Button>
-        <Button onClick={() => setTypeUpdate(null)}>
+        <Button classes='text-black bg-white' onClick={() => setTypeUpdate(null)}>
             Cancel
         </Button>
       </div>

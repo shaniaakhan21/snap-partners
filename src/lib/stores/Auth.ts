@@ -29,6 +29,7 @@ export interface IAuth extends IUserMe, INsurAccount {
   doc_b_structure?: string
   TINstatus?: string
   newSSN?: string
+  business_approved?: boolean
 }
 
 export type TSetAuth = ({
@@ -70,7 +71,8 @@ export type TSetAuth = ({
   ein,
   businessName,
   business_type,
-  b_start_date
+  b_start_date,
+  business_approved
 }: IAuth) => void
 
 interface IAuthAtom {
@@ -119,7 +121,8 @@ interface IAuthAtom {
     ein,
     businessName,
     business_type,
-    b_start_date
+    b_start_date,
+    business_approved
   }: IAuth) => void
   removeAuth: () => void
 }
@@ -172,7 +175,8 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
     ein,
     businessName,
     business_type,
-    b_start_date
+    b_start_date,
+    business_approved
   }) => {
     set({
       auth: {
@@ -223,7 +227,8 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
         ein,
         businessName,
         business_type,
-        b_start_date
+        b_start_date,
+        business_approved
       }
     })
   },
