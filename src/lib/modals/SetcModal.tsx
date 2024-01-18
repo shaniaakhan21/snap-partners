@@ -145,7 +145,7 @@ const SetcModal: React.FC<SetcModalProps> = ({ isOpen, client, onClose }) => {
   const familyQualified2021 = childCareQualified2021 || caregiverQualified2021
 
   const phase1StepCount = 2
-  const phase2StepCount = 6
+  const phase2StepCount = 2
   const phase3StepCount = 1
   // phase 1
   let phase1Progress = 0
@@ -289,45 +289,17 @@ const SetcModal: React.FC<SetcModalProps> = ({ isOpen, client, onClose }) => {
                     Next Step
                   </div>
                   <Step
-                    number={6}
+                    number={2}
                     title='Invoice Paid'
                     date={client.paidDate ? dayjs(client.paidDate, 'MM-DD-YYYY').format('MM/DD/YYYY') : ''}
                     filled={client.paidDate ? 'full' : 'empty'}
                     fillColor={'textAcent-100'}
                     color={'textAcent-100'}/>
                   <Step
-                    number={5}
+                    number={1}
                     title='Invoice Sent'
                     date={client.sentDate ? dayjs(client.sentDate, 'MM-DD-YYYY').format('MM/DD/YYYY') : ''}
                     filled={client.sentDate ? 'full' : 'empty'}
-                    fillColor={'textAcent-100'}
-                    color={'textAcent-100'}/>
-                  <Step
-                    number={4}
-                    title='Taxpayer Qualified 2020'
-                    date={invoiceProgressed ? taxpayerQualified2020 ? ' Yes' : 'No' : 'TBD'}
-                    filled={invoiceProgressed ? taxpayerQualified2020 ? 'full' : 'empty' : 'empty'}
-                    fillColor={'textAcent-100'}
-                    color={'textAcent-100'}/>
-                  <Step
-                    number={3}
-                    title='Taxpayer Qualified 2021'
-                    date={invoiceProgressed ? taxpayerQualified2021 ? ' Yes' : 'No' : 'TBD'}
-                    filled={invoiceProgressed ? taxpayerQualified2021 ? 'full' : 'empty' : 'empty'}
-                    fillColor={'textAcent-100'}
-                    color={'textAcent-100'}/>
-                  <Step
-                    number={2}
-                    title='Family Qualified 2020'
-                    date={invoiceProgressed ? familyQualified2020 ? 'Yes' : 'No' : 'TBD'}
-                    filled={invoiceProgressed ? familyQualified2020 ? 'full' : 'empty' : 'empty'}
-                    fillColor={'textAcent-100'}
-                    color={'textAcent-100'}/>
-                  <Step
-                    number={1}
-                    title='Family Qualified 2021'
-                    date={invoiceProgressed ? familyQualified2021 ? 'Yes' : 'No' : 'TBD'}
-                    filled={invoiceProgressed ? familyQualified2021 ? 'full' : 'empty' : 'empty'}
                     fillColor={'textAcent-100'}
                     color={'textAcent-100'}/>
                 </div>
