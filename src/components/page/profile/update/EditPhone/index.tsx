@@ -144,13 +144,13 @@ export const EditPhone = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IFormUpd
   }
 
   return (
-    <div className='max-w-3xl mx-auto flex flex-col justify-center items-start w-full'>
+    <div className='max-w-2xl mx-auto rounded-2xl bg-white md:shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)] pt-4'>
       {
         !phoneSent && (
-          <section className='text-gray-800'>
-            <h3 className='font-bold text-2xl'>Change Your Phone</h3>
-            <span>It should be different from last Phone</span>
-            <p className='text-sm'>Your current phone is: <span className='font-bold'>{auth.phoneNumber}</span></p>
+          <section className='text-black px-4 pt-3'>
+            <h3 className='font-semibold text-xl md:text-2xl'>Change Your Phone</h3>
+            <span className='font-semibold'>It should be different from last Phone</span>
+            <p className='text-sm text-[#708292] mt-7'>Your current phone is: <span className='font-semibold text-black'>{auth.phoneNumber}</span></p>
           </section>
         )
       }

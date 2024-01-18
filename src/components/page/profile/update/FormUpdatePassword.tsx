@@ -105,6 +105,7 @@ export const FormUpdatePassword = ({ auth, setAuth, typeUpdate, setTypeUpdate }:
       zip: userData.zip,
       dateOfBirth: userData.dateOfBirth,
       TINstatus: userData.TINstatus,
+      business_approved: userData.business_approved,
       ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: userData[field] }), {}) as any)
     })
     GTMTrack.editProfile(typeUpdate)
@@ -119,9 +120,9 @@ export const FormUpdatePassword = ({ auth, setAuth, typeUpdate, setTypeUpdate }:
   }
 
   return (
-    <div className='max-w-3xl mx-auto'>
-      <section>
-        <h3 className='text-xl font-bold'>Change password</h3>
+    <div className='max-w-2xl mx-auto rounded-2xl bg-white md:shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)] pt-4'>
+      <section className='px-4 pt-3 '>
+        <h3 className='text-lg md:text-xl font-bold'>Change password</h3>
         <p className='text-gray-800'>It should be different from last password</p>
       </section>
 
@@ -166,9 +167,9 @@ export const FormUpdatePassword = ({ auth, setAuth, typeUpdate, setTypeUpdate }:
 
         <br />
 
-        <div className='flex items-center'>
-          <Button type='submit' classes='mr-2'>Save</Button>
-          <Button onClick={() => setTypeUpdate(null)}>
+        <div className='flex items-center bg-[#DCE5ED] rounded-b-2xl justify-end py-4 px-2 border-2 border-[#DCE5ED] '>
+          <Button type='submit' classes='mr-4 bg-[#E74426]'>Save</Button>
+          <Button classes='text-black bg-white' onClick={() => setTypeUpdate(null)}>
             Cancel
           </Button>
         </div>

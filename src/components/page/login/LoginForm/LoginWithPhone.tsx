@@ -129,6 +129,7 @@ export const LoginWithPhone = ({ trackLoginHandle }: IProps) => {
       business_type: data.business_type,
       b_start_date: data.b_start_date,
       newSSN: data.newSSN,
+      business_approved: data.business_approved,
       ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
     })
     reset()

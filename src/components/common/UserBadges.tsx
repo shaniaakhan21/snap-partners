@@ -18,7 +18,7 @@ export const UserBadges = ({ userRank, userRoles }: IUserBadgesProps) => {
     <>
       {(userRank === 'referralPartner' && userRoles.customer) && (
         <Tippy content='Referral Partner'>
-          <li>
+          <li className='h-fit w-7'>
             <img src='/static/badges/FreeMemberCustomer.png' />
           </li>
         </Tippy>
@@ -26,7 +26,7 @@ export const UserBadges = ({ userRank, userRoles }: IUserBadgesProps) => {
       {(userRank === 'referralPartner' && userRoles.driver) && (
         <Tippy content='Referral Partner'>
           <li>
-            <img src='/static/badges/FreeMemberDriver.png' />
+            <img src='/static/badges/FreeMemberDriver.png'/>
           </li>
         </Tippy>
       )}

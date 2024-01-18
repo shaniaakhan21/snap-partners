@@ -61,10 +61,10 @@ export const FormUpdateEmail = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IF
   }
 
   return (
-    <div className='max-w-3xl mx-auto'>
-      <section>
-        <h3 className='text-xl font-bold'>Change email</h3>
-        <p className='text-gray-800'>It should be different from last email</p>
+    <div className='max-w-2xl mx-auto rounded-2xl bg-white md:shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)] pt-4'>
+      <section className='px-4 pt-3 '>
+        <h3 className='text-base md:text-xl font-semibold'>Change Your E-mail</h3>
+        <p className='font-semibold'>It should be different from last e-mail</p>
       </section>
 
       <br />
@@ -75,7 +75,7 @@ export const FormUpdateEmail = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IF
           inputId='email'
           inputType='email'
           labelFor='email'
-          labelName='Current Email'
+          labelName='Your Current Email is :'
           value={auth.email}
         />
 
@@ -84,7 +84,7 @@ export const FormUpdateEmail = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IF
           inputType='text'
           labelFor='newEmail'
           labelName='New Email'
-          placeholder='Insert the new email'
+          placeholder='Insert the new e-mail:'
           register={register}
           rules={{ // TODO: REFACTOR - It is the same as the login with email
             required: { value: true, message: 'Email Required *' },
@@ -97,9 +97,9 @@ export const FormUpdateEmail = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IF
           error={errors.newEmail}
         />
         <br />
-        <div className='flex items-center'>
-          <Button type='submit' classes='mr-2'>Save</Button>
-          <Button onClick={() => setTypeUpdate(null)}>
+        <div className='flex items-center bg-[#DCE5ED] rounded-b-2xl justify-end py-4 px-2 border-2 border-[#DCE5ED] '>
+          <Button type='submit' classes='mr-4 bg-[#E74426]'>Save</Button>
+          <Button classes='text-black bg-white' onClick={() => setTypeUpdate(null)}>
             Cancel
           </Button>
         </div>

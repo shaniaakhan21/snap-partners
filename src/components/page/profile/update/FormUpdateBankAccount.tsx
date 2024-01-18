@@ -330,9 +330,9 @@ export const FormUpdateBankAccount = ({ auth, setAuth, typeUpdate, setTypeUpdate
   }
 
   return (
-    <div className='max-w-3xl mx-auto'>
-      <section>
-        <h3 className='text-xl font-bold'>Set or update your payout details</h3>
+    <div className='max-w-2xl mx-auto rounded-2xl bg-white md:shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)] pt-4'>
+      <section className='px-4 pt-3 '>
+        <h3 className='text-base md:text-xl font-bold'>Set or update your payout details</h3>
       </section>
 
       {errorMessage && (
@@ -358,7 +358,7 @@ export const FormUpdateBankAccount = ({ auth, setAuth, typeUpdate, setTypeUpdate
         />
 
         <div
-          className='relative rounded-xl bg-white w-full px-4 py-3 border-y-2 border-y-gray-200 flex flex-col justify-between'>
+          className='relative rounded-xl bg-white w-full px-4 py-3 border-0 flex flex-col justify-between'>
           <label htmlFor="test1" className='text-sm mb-2'>Recipient Type</label>
           <div className="relative">
             <select
@@ -383,7 +383,7 @@ export const FormUpdateBankAccount = ({ auth, setAuth, typeUpdate, setTypeUpdate
         </div>
 
         <div
-          className='relative rounded-xl bg-white w-full px-4 py-3 border-y-2 border-y-gray-200 flex flex-col justify-between'>
+          className='relative rounded-xl bg-white w-full px-4 py-3 border-0 flex flex-col justify-between'>
           <label htmlFor="test1" className='text-sm mb-2'>Account Type</label>
           <div className="relative">
             <select
@@ -451,7 +451,7 @@ export const FormUpdateBankAccount = ({ auth, setAuth, typeUpdate, setTypeUpdate
         />
 
         <div
-          className='relative rounded-xl bg-white w-full px-4 py-3 border-y-2 border-y-gray-200 flex flex-col justify-between'>
+          className='relative rounded-xl bg-white w-full px-4 py-3 border-0 flex flex-col justify-between'>
           <label htmlFor="test1" className='text-sm mb-2'>State</label>
           <div className="relative">
             <select
@@ -495,9 +495,9 @@ export const FormUpdateBankAccount = ({ auth, setAuth, typeUpdate, setTypeUpdate
           </>
         )}
 
-        <div className='flex items-center'>
-          <Button type='submit' classes='mr-2'>Save</Button>
-          <Button onClick={() => setTypeUpdate(null)}>
+        <div className='flex items-center bg-[#DCE5ED] rounded-b-2xl justify-end py-4 px-2 border-2 border-[#DCE5ED] '>
+          <Button type='submit' classes='mr-4 bg-[#E74426]'>Save</Button>
+          <Button classes='text-black bg-white' onClick={() => setTypeUpdate(null)}>
               Cancel
           </Button>
         </div>
