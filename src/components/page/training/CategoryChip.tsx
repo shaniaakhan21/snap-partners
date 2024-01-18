@@ -17,7 +17,7 @@ export const CategoryChip = ({ id, onClick, categorySelected, children, classNam
       <button
         id={id}
         className={`
-          px-10 py-2 transition-colors w-full md:w-fit
+          px-6 py-2 transition-colors w-full md:w-fit
           ${selected ? 'bg-primary-500' : 'bg-white'}
           ${selected ? 'text-white' : 'text-[#515151]'}
           ${className || ''}`
