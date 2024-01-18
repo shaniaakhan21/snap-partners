@@ -37,6 +37,52 @@ interface StepProps {
   onClick?: () => void
 }
 
+const definitionsMap = new Map()
+definitionsMap.set('Waiting on a signed Engagement Letter', `We are waiting for the client to sign the Engagement Letter. Once the Engagement Letter is signed, the client will be assigned a Client Identification
+Number and will be progressed to the Account Manager Department where they will be assigned an Account Manager and the client's customer
+journey will begin.`)
+definitionsMap.set('Unresponsive', 'This trigger will automatically flag after 12 business days of no document upload dates in the system or contact dates from the Client.')
+definitionsMap.set('In process waiting on documents', `This is the first touch from the Account Manager. A welcome email has been sent, we will check the client's documents as they are uploaded, we
+continue to communicate with the client to make sure they upload all of the documents that we need in order to progress the client forward within our
+department to the next step.`)
+definitionsMap.set('In process with Account Manager', `The client has uploaded all of their required documents. The Account Manager begins their final review process, if all is well, the client will progress
+to the SETC Doc Prep Department. If there is anything outstanding and/or any other issues, we will revert the client to the status of "In process
+waiting on documents" and we will wait until the client provides the necessary information we need in order to move the file forward.`)
+definitionsMap.set('In process waiting on additional information', 'The client has uploaded documents, but the Account Manager is still waiting on additional information. (See notes in the client\'s profile for details).')
+definitionsMap.set('In process waiting on client response', 'We have contacted the client and we are waiting for the client to respond to our communication.')
+definitionsMap.set('In progress with Doc Specialist', 'A Document Specialist has been assigned a new client, work has started on calculations and qualifications.')
+definitionsMap.set('Further documentation needed', `The client needs to be regressed back to the Account Manager for additional documentation and/or clarification needed on the current set of
+documents.`)
+definitionsMap.set('In review', `The client's File is being reviewed for final approval, once completed the client will be moved to the filing dept. Here is where the amended return
+has been prepared and the amount that the client qualified for in 2020, 2021, or both, will be added into the software`)
+definitionsMap.set('Waiting to be Assigned', 'The client file has been progressed to the Filing Dept and is waiting to be assigned to a Filing Specialist')
+definitionsMap.set('Waiting to be Invoiced', 'The client\'s file has been assigned to a Filing Specialist and the client is waiting to be sent an invoice.')
+definitionsMap.set('Invoice Sent', `An invoice has been sent to the client. This invoice contains information on what they qualify for and the cost associated with each year/qualification.
+In the email that contains the invoice, the client is also informed as to the total amount they qualify for. At this point, we are waiting for the client to
+pay the invoice so that we may progress the file forward to the next step which is to send out the 1040X forms for signature.`)
+definitionsMap.set('1040X Sent', `The client invoice has been paid. We sent the client their 1040X documents for review and signature along with signing instructions. Once we
+receive the signed 1040X documents, the client has reached the end of their journey with the Filing Department, and the file is progressed to the
+SETC CPA Department.`)
+definitionsMap.set('Client Call Requested', 'The client has requested a call and we have emailed them to find out what their specific questions are and/or to schedule the call.')
+definitionsMap.set('Hold File Per Client Request', `The client has requested that we do not follow up with them for a certain period of time. (Review the note marked "URGENT" in the client's profile for
+details).`)
+definitionsMap.set('Hold File per Internal Request', `An internal Jorns associate has requested that we place the file on hold for a particular reason. (Review the note marked "URGENT" in the client's
+profile for details).`)
+definitionsMap.set('Working with Another Department', `We need some additional information and/or documentation related to this client. We are actively working with one or more of the other departments
+in order to satisfy anything outstanding before we can take the necessary next steps either within our department or to progress the client to the next
+department. (Review notes in the client's profile for additional details).`)
+definitionsMap.set('Final Review and Document Filing', `The client's file has moved into the SETC CPA Department. A CPA has been assigned where they will perform a final review of all the documents
+and figures associated with the amended return that has been prepared. Once this is completed, we will file the 1040X documents with the IRS.`)
+definitionsMap.set('Filed with IRS', 'The filing CPA has sent the 1040X return(s) to the IRS. There is a tracking number added for our records. The file has now been completed.')
+definitionsMap.set('DNP ( Do Not Process)', 'A refund or stop process has been initiated. (See notes in the client\'s profile for details).')
+definitionsMap.set('Unresponsive Account Management', `The client has been moved to the Unresponsive Department, the department they were moved from is Account Management. (See notes in the
+  client's profile for details).`)
+definitionsMap.set('Unresponsive Doc Prep', `The client has been moved to the Unresponsive Department, the department they were moved from is Doc Prep. (See notes in the client's profile for
+details).`)
+definitionsMap.set('Unresponsive Filing', `The client has been moved to the Unresponsive Department, the department they were moved from is Filing. (See notes in the client's profile for
+details).`)
+definitionsMap.set('Client Complete', 'The client has been filed with the IRS, the referral agent has been paid, and the file is now complete.')
+
 const Step = (props: StepProps) => {
   const { number, title, date = undefined, filled, fillColor, halfFillColor, color } = props
 
@@ -128,7 +174,7 @@ const SetcModal: React.FC<SetcModalProps> = ({ isOpen, client, onClose }) => {
     <div>
       {isOpen && (
         <div className="absolute top-0 left-0 justify-center pl-44 flex  font-sans z-50 items-center h-screen w-screen bg-slate-800 bg-opacity-20 overflow-scroll">
-          <div className="bg-white w-[960px] h-[762px] rounded-lg max-h-[90vh] ">
+          <div style={{ paddingBottom: 30 }} className="bg-white w-[960px]  rounded-lg ">
             {/* header  */}
             <div>
               <div className="flex justify-between items-center px-2.5 pt-5 font-open-sans ">
@@ -160,7 +206,7 @@ const SetcModal: React.FC<SetcModalProps> = ({ isOpen, client, onClose }) => {
                     Account Status:
                   </span>
                   <span className={`text-xs ${status === 'active' ? 'text-success-600' : 'text-textAcent-500'} font-bold`}>
-                    {" "}{accountStatus}
+                    {' '}{accountStatus}
                   </span>
                 </div>
               </div>
@@ -316,6 +362,19 @@ const SetcModal: React.FC<SetcModalProps> = ({ isOpen, client, onClose }) => {
                   fillColor={'textAcent-200'}
                   color={''} />
               </div>
+            </div>
+            <div style={{ marginLeft: 20 }}>
+              <span style={{ fontWeight: 'bold' }}>Current Department: </span>  <span>{client.current_department}</span><br/><br/>
+              <span style={{ fontWeight: 'bold' }}>Current Status: </span>  <span>{client.current_status}</span><br/><br/>
+              <span style={{ fontWeight: 'bold' }}>Status Definition: </span>  <span>{definitionsMap.get(client.current_status)}</span>
+
+              {client?.unresponsive_note.note && (
+                <>
+                  <br/><br/>
+                  <span style={{ fontWeight: 'bold' }}>Action Needed: </span> <span style={{ padding: '0px 5px 2px 5px', fontSize: 20, backgroundColor: 'f2f2f2', border: '2px solid black' }}>{client?.unresponsive_note.note || ''} </span>
+                </>
+              )}
+
             </div>
           </div>
         </div>
