@@ -53,7 +53,7 @@ function ProfileSearchForm ({ children }) {
           </div>
           <form className={`${cname}`} onSubmit={(e) => handleSubmit(e, profileSearchForm)}>
             <div className='searchForm-inputContainer'>
-              <InputComponent label={'profile search'} placeholder={'repID, Name or Email'} value={profileSearchForm.profileSearchString} onChangeFunction={setProfileSearchInput} param={'profileSearchString'} />
+              <InputComponent label={'profile search'} placeholder={'PhoneNum(use +),ID,Name,Email'} value={profileSearchForm.profileSearchString} onChangeFunction={setProfileSearchInput} param={'profileSearchString'} />
             </div>
             <div className='searchForm-inputContainer'>
               <SelectComponent label={'user level'} name={'userLevel'} options={userLevelOptions} value={profileSearchForm.userLevel} onChangeFunction={setProfileSearchInput} param={'userLevel'} />

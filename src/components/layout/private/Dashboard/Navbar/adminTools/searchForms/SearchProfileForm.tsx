@@ -36,7 +36,7 @@ function SearchProfileForm () {
 
   return (
     <form onSubmit={(e) => handleSubmit(e, profileSearchForm)}>
-      <InputComponent label={'Profile Search'} placeholder={'RepID, Name or Email '} value={profileSearchForm.profileSearchString} onChangeFunction={setProfileSearchInput} param={'profileSearchString'}/>
+      <InputComponent label={'Profile Search'} placeholder={'PhoneNum(use +),ID,Name,Email'} value={profileSearchForm.profileSearchString} onChangeFunction={setProfileSearchInput} param={'profileSearchString'}/>
       <SelectComponent label={'User Level'} name={'userLevel'} options={userLevelOptions} onChangeFunction={setProfileSearchInput} param={'userLevel'} />
       <ButtonComponent title={'submit'} />
     </form>
