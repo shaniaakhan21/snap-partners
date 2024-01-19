@@ -1,27 +1,28 @@
-/* eslint-disable no-use-before-define */
-import React, { useEffect, useState } from 'react'
+// Submenu_1099
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import ReportsSubMenu from './1099SubMenu'
 import { useAuthStore } from 'lib/stores'
-import Submenu_1099 from './1099SubMenu'
+import ReportsSubMenu from './1099ReportsSubMenu'
+import ResolutionSubMenu from './1099ResolutionSubMenu'
 
-function AdminToolMainMenu () {
+function Submenu_1099 () {
   const [subMenu, setSubMenu] = useState('none')
   const [menuOpen, setMenuOpen] = useState(true)
   const auth = useAuthStore()
   const menuData = [
     {
       icon: '',
-      title: 'Field Promotions',
-      page: '/StarAchiever'
+      title: 'Resolution',
+      submenu: 'resolutions1099'
     },
     {
       icon: '',
-      title: '1099',
+      title: 'Reports',
       submenu: 'reports1099'
     }
   ]
   const router = useRouter()
+
   useEffect(() => {
     router.events.on('routeChangeStart', closeMenu)
     return () => {
@@ -44,37 +45,31 @@ function AdminToolMainMenu () {
       }
     }
   }
+
   return (
     <>
       {menuOpen && (
         <div className='admin-tool-sub-container right-[101%]'>
-
           <ul>
-            {
-              menuData.map((menuItem, index) => (
-                <li
-                  key={index}
-                  className={`item-${index} menuItem text-sm sm:text-base`}
-                  onClick={() => handleMenuClick(menuItem)}
-                  style={{ cursor: 'pointer' }}
-                >
-                  {menuItem.title}
-                </li>
-              ))
-            }
+            {menuData.map((menuItem, index) => (
+              <li
+                key={index}
+                className={`item-${index} menuItem text-sm sm:text-base ${
+                  subMenu === menuItem.submenu ? 'active' : ''
+                }`}
+                onClick={() => handleMenuClick(menuItem)}
+                style={{ cursor: 'pointer' }}
+              >
+                {menuItem.title}
+              </li>
+            ))}
           </ul>
-
-          {subMenu && subMenu === 'fieldpromotion' ? <></> : <></>}
-          {
-            subMenu && subMenu === 'reports1099'
-              ? <Submenu_1099 />
-              : <></>
-          }
+          <ReportsSubMenu isVisible={subMenu === 'reports1099'} />
+          <ResolutionSubMenu isVisible={subMenu === 'resolutions1099'} />
         </div>
-      )
-      }
+      )}
     </>
   )
 }
 
-export default AdminToolMainMenu
+export default Submenu_1099
