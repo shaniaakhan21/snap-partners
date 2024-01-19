@@ -47,7 +47,7 @@ const BusinessReportExport: Page = () => {
 
   const get1099ReportData = async () => {
     try {
-      const response = await axios.get('/api/reports/get1099BusinessReport ')
+      const response = await axios.get('/api/reports/get1099BusinessReport')
 
       const newArr = response.data.users.map((res, index) => ({
         serialNumber: index + 1,
