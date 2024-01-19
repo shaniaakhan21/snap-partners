@@ -136,7 +136,7 @@ const BusinessReportExport: Page = () => {
       <div className='w-full bg-white rounded-lg px-5 py-5 sm:px-10 sm:py-10 flex flex-col' id='html-content'>
         <div className='w-full flex justify-between'>
           <span className='text-lg sm:text-3xl font-bold'>1099 Business Report</span>
-          <button className='flex border w-[12%] p-2 border-[#E05E4B] bg-white text-sm rounded-full text-primary-500 items-center shadow-md justify-between font-bold' onClick={handleExportExcel}>
+          <button className='flex border w-[14%] p-2 border-[#E05E4B] bg-white text-sm rounded-full text-primary-500 items-center shadow-md justify-between font-bold' onClick={handleExportExcel}>
             <CloudDownloadIcon classes='text-black'/>Export Report</button>
         </div>
         <br />
