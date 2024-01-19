@@ -49,6 +49,7 @@ const TrainingPage: Page = () => {
             id='all'
             categorySelected={category}
             onClick={handleChangeCategory}
+            className='md:rounded-l-3xl'
           >
           All
           </CategoryChip>
@@ -102,6 +103,7 @@ const TrainingPage: Page = () => {
           id='agent'
           categorySelected={category}
           onClick={handleChangeCategory}
+          className='md:rounded-r-3xl'
         >
           Agent Training
         </CategoryChip>

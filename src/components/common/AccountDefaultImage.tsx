@@ -6,7 +6,7 @@ interface AccountDefaultImageProps {
   size?: number | string
 }
 export default function AccountDefaultImage (props: AccountDefaultImageProps) {
-  const { rank, size = '80px' } = props
+  const { rank, size = '140px' } = props
   const imgPath = `/images/profile/${rank}.png`
 
   return <img src={imgPath} style={{ width: size, height: size, borderRadius: size }}/>

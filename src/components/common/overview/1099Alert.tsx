@@ -43,6 +43,7 @@ export default function AlertWidget () {
           onClose={() => setShowFailedPopup(false)}
           showDocumentUpload={true}
           auth={auth} setAuth={setAuth} docURL={auth.SSNDocURL}
+          uploadbtnText="Upload Social Security Card"
         />
       )}
 

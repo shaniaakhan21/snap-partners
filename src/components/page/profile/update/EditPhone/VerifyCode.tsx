@@ -10,8 +10,8 @@ export const VerifyCode = ({
   isLoading
 }) => {
   return (
-    <form onSubmit={handleSubmit(onSubmitUpdatePhone)} className='w-full'>
-      <div className='flex flex-col justify-center items-center mt-10'>
+    <form onSubmit={handleSubmit(onSubmitUpdatePhone)} className='w-full pb-6'>
+      <div className='flex flex-col justify-center items-center mt-2'>
         <section className='text-center'>
           <span className='text-2xl font-bold'>Verify Phone</span>
           <p className='text-gray-500 mt-3'>
