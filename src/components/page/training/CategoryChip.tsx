@@ -1,3 +1,4 @@
+import { CSSProperties } from '@mui/styles'
 import { MouseEvent, ReactNode } from 'react'
 
 interface IProps {
@@ -5,9 +6,10 @@ interface IProps {
   onClick: (e: MouseEvent<HTMLButtonElement>) => void
   categorySelected: string
   children: ReactNode
+  className?: string
 }
 
-export const CategoryChip = ({ id, onClick, categorySelected, children }: IProps) => {
+export const CategoryChip = ({ id, onClick, categorySelected, children, className }: IProps) => {
   const selected = id === categorySelected
 
   return (
@@ -15,11 +17,11 @@ export const CategoryChip = ({ id, onClick, categorySelected, children }: IProps
       <button
         id={id}
         className={`
-          border rounded-3xl m-2 px-5 py-1 transition-colors
-          ${selected ? 'border-primary-500 ' : 'border-gray-600 bg-opacity-10'} 
-          ${selected ? 'bg-primary-500' : 'bg-gray-600'}
-          ${selected ? 'text-white' : 'text-gray-600'}
-        `}
+          px-6 py-2 transition-colors w-full md:w-fit
+          ${selected ? 'bg-primary-500' : 'bg-white'}
+          ${selected ? 'text-white' : 'text-[#515151]'}
+          ${className || ''}`
+        }
         onClick={onClick}
       >
         {children}

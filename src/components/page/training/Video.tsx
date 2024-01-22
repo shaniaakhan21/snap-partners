@@ -20,7 +20,7 @@ export const Video = ({ id, category, title, subtitle, caption, url }: IProps) =
   }
 
   return (
-    <li className='max-w-xs w-full h-min bg-white rounded-t-lg overflow-hidden pb-4'>
+    <li className='max-w-full w-full h-min bg-white rounded-2xl overflow-hidden shadow-lg md:shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)]'>
       <div className='relative w-full'>
         <button onClick={handleClickIFrameVideo} className='absolute top-0 bottom-0 left-0 right-0 z-10' />
         <iframe
@@ -35,9 +35,9 @@ export const Video = ({ id, category, title, subtitle, caption, url }: IProps) =
         />
       </div>
 
-      <div>
+      <div className='bg-[#F0F4F8]  pb-4 '>
         <div className='px-6 pt-4'>
-          <h3 className='text-gray-1000 font-bold text-lg'>{title}</h3>
+          <h3 className='text-black font-semibold text-lg text-center'>{title}</h3>
           <span>{subtitle}</span>
         </div>
 
