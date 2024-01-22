@@ -8,6 +8,7 @@ import ResolutionSubMenu from './1099ResolutionSubMenu'
 function Submenu_1099 () {
   const [subMenu, setSubMenu] = useState('none')
   const [menuOpen, setMenuOpen] = useState(true)
+  const [clickedMenus, setClickedMenu] = useState([])
   const auth = useAuthStore()
   const menuData = [
     {
@@ -40,6 +41,7 @@ function Submenu_1099 () {
         router.push(menuItem.page)
       } else if (menuItem.submenu) {
         setSubMenu(subMenu === menuItem.submenu ? 'none' : menuItem.submenu)
+        setClickedMenu(menuItem.submenu)
       } else {
         console.warn('No page or submenu defined for this menu item')
       }
@@ -54,11 +56,15 @@ function Submenu_1099 () {
             {menuData.map((menuItem, index) => (
               <li
                 key={index}
-                className={`item-${index} menuItem text-sm sm:text-base ${
+                className={`item-${index} menuItem rounded-3xl text-sm sm:text-base ${
                   subMenu === menuItem.submenu ? 'active' : ''
                 }`}
                 onClick={() => handleMenuClick(menuItem)}
-                style={{ cursor: 'pointer' }}
+                style={{
+                  backgroundColor: clickedMenus.includes(menuItem.submenu) ? '#E74426' : '',
+                  cursor: 'pointer',
+                  color: clickedMenus.includes(menuItem.submenu) ? '#ffffff' : ''
+                }}
               >
                 {menuItem.title}
               </li>
