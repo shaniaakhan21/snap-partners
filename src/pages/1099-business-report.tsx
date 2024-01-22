@@ -353,8 +353,6 @@ const BusinessReport: Page = () => {
   }
 
   const onCancel = () => {
-    // Add your cancellation logic here
-    // For example, you can reset the edited data and close any open modals
     setEditableRowId(null)
   }
 
