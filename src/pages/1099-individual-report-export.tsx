@@ -29,7 +29,7 @@ const StyledDataGrid = styled(MUIDataGrid)(() => ({
   }
 }))
 
-const BusinessReportExport: Page = () => {
+const IndividualReportExport: Page = () => {
   const [windowWidth, setWindowWidth] = useState(0)
   const [report1099, setReport1099] = useState(null)
 
@@ -47,16 +47,16 @@ const BusinessReportExport: Page = () => {
 
   const get1099ReportData = async () => {
     try {
-      const response = await axios.get('/api/reports/get1099BusinessReport')
+      const response = await axios.get('/api/reports/get1099IndividualReport')
 
       const newArr = response.data.users.map((res, index) => ({
         serialNumber: index + 1,
         id: res.id,
-        businessName: res.businessName,
+        name: `${res.name} ${res.lastname}`,
         address: `${res.street}, ${res.city}, ${res.state}, ${res.zip}`,
         totalCompensation: res.total_compensation_2023,
-        taxClassification: res.tax_classification,
-        ein: res.ein
+        taxClassification: 'Individual/sole proprietor or LLC',
+        socialSecurityNumber: res.socialSecurityNumber
       }))
 
       setReport1099(newArr)
@@ -85,8 +85,8 @@ const BusinessReportExport: Page = () => {
       flex: windowWidth <= 400 ? 0.4 : 1
     },
     {
-      field: 'businessName',
-      headerName: 'Business Name',
+      field: 'name',
+      headerName: 'Full Name',
       type: 'string',
       flex: windowWidth <= 400 ? 0.6 : 1
     },
@@ -109,8 +109,8 @@ const BusinessReportExport: Page = () => {
       flex: windowWidth <= 400 ? 1 : 1
     },
     {
-      field: 'ein',
-      headerName: 'EIN',
+      field: 'socialSecurityNumber',
+      headerName: 'Social Security Number',
       type: 'string',
       flex: windowWidth <= 400 ? 0.5 : 1
     }
@@ -124,7 +124,7 @@ const BusinessReportExport: Page = () => {
       const worksheet = XLSX.utils.aoa_to_sheet([headers, ...data])
       const workbook = XLSX.utils.book_new()
       XLSX.utils.book_append_sheet(workbook, worksheet, 'Sheet1')
-      XLSX.writeFile(workbook, '1099_business_report_2023.xlsx')
+      XLSX.writeFile(workbook, '1099_indiviidual_report_2023.xlsx')
     } else {
       console.error('No data available to export')
     }
@@ -134,7 +134,7 @@ const BusinessReportExport: Page = () => {
     <>
       <div className='w-full bg-white rounded-lg px-5 py-5 sm:px-10 sm:py-10 flex flex-col' id='html-content'>
         <div className='w-full flex justify-between'>
-          <span className='text-lg sm:text-3xl font-bold'>1099 Business Report</span>
+          <span className='text-lg sm:text-3xl font-bold'>1099 Individual Report</span>
           <button className='flex border w-[18%] xl:w-[14%] p-2 border-[#E05E4B] bg-white lg:text-sm rounded-full text-primary-500 items-center shadow-md justify-around font-bold' onClick={handleExportExcel}>
             <CloudDownloadIcon classes='text-black'/>Export Report</button>
         </div>
@@ -154,14 +154,14 @@ const BusinessReportExport: Page = () => {
   )
 }
 
-BusinessReportExport.getLayout = (page: ReactNode) => (
+IndividualReportExport.getLayout = (page: ReactNode) => (
   <DashboardLayout>
     <Head>
-      <title>{SEO.TITLE_PAGE} - Business Report</title>
+      <title>{SEO.TITLE_PAGE} - Individual Report</title>
     </Head>
 
     {page}
   </DashboardLayout>
 )
 
-export default BusinessReportExport
+export default IndividualReportExport
