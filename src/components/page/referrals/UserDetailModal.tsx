@@ -39,23 +39,10 @@ interface IProps extends IUserData {
 export const ReferralsUserDetailModal = ({ id, name, lastname, createdAt, email, phone, sponsor, rank, onClick, openNewUserInfo, levels, auth, roles, closeModalManually }: IProps) => {
   const { copy } = useCopyToClipboard()
   const getLevelColor = (level: number) => {
-    const baseColor = '#EDF5FD'
+    const baseColor1 = '#EDF5FD'
+    const baseColor2 = '#A1D0FD'
 
-    const darknessFactor = level * 0.09
-
-    const darkenColor = (color: string, factor: number) => {
-      const [hue, saturation, lightness] = color
-        .replace(/^#/, '')
-        .match(/.{1,2}/g)!
-        .map((hex) => parseInt(hex, 16) / 255)
-
-      const darkenedLightness = Math.max(lightness - factor, 0)
-      const darkenedColor = `hsl(${hue * 225}, ${saturation * 100}%, ${darkenedLightness * 100}%)`
-
-      return darkenedColor
-    }
-
-    return level === 1 ? baseColor : darkenColor(baseColor, darknessFactor)
+    return level % 2 === 0 ? baseColor2 : baseColor1
   }
 
   return (
@@ -145,9 +132,9 @@ export const ReferralsUserDetailModal = ({ id, name, lastname, createdAt, email,
         {
           levels && levels.length > 0 &&
             levels.map(level => level.users.map((user: ILevelUser) => (
-              <li key={user.id} className='w-[96%] mb-4 last:mb-0 border border-[#CFDFEC] mx-2 rounded-lg' style={{ backgroundColor: getLevelColor(level.level) }}>
+              <li key={user.id} className='w-[96%] mb-4 last:mb-0 border border-[#CFDFEC] mx-2 rounded-lg hover:border-[#000000]' style={{ backgroundColor: getLevelColor(level.level) }}>
                 <button
-                  className='w-full h-16 text-xs sm:text-sm flex gap-x-2 items-center justify-between transition-colors hover:bg-gray-200 md:px-2'
+                  className='w-full h-16 text-xs sm:text-sm flex gap-x-2 items-center justify-between md:px-2'
                   onClick={() => openNewUserInfo(user.id)}
                 >
                   <div className='relative w-12 h-12 sm:w-16 sm:h-13 border border-solid rounded-full bg-white border-[#CFDFEC] mr-2'>
