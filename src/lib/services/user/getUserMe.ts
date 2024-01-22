@@ -72,6 +72,7 @@ interface IQueryUserMeReturn extends IQueryErrorReturn {
     b_start_date?: Date
     newSSN?: string
     zendesk_id?: string
+    business_approved?: boolean
   }
 }
 

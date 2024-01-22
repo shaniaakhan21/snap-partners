@@ -12,6 +12,7 @@ import { Head } from 'next/document'
 import type { Page, ReactNode } from 'lib/types'
 import { APP_INFO } from 'config/appInfo'
 import { useAuthStore } from 'lib/stores'
+import { Spinner } from 'components/common/loaders'
 // import Zendesk from 'react-zendesk'
 const ZENDESK_KEY = '324987dc-ca53-451c-b524-096403f15e91'
 
@@ -150,9 +151,11 @@ const TicketsPage: Page = () => {
 
   const [zendeskTicketModal, setZendeskTicketModal] = useState(false)
   const [zendeskChatOpen, setZendeskChatOpen] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   // Example: Fetch all tickets
   const getZendeskData = () => {
+    setLoading(true)
     axios.get('/api/zendesk/ticket', {
       params: {
         zendesk_id: auth?.zendesk_id
@@ -163,20 +166,24 @@ const TicketsPage: Page = () => {
         setTickets(await Promise.all(response.data.response.tickets.map(async (ticket) => {
           const requesterData = await axios.get('/api/zendesk/requester', { params: { requester_id: ticket.requester_id } })
           const requesterName = await requesterData.data.response.user.name
+          const dayCreated = new Date(ticket.created_at)
+          const lastUpdated = new Date(ticket.updated_at)
           return {
             clientName: requesterName,
             status: ticket.status,
             subject: ticket.raw_subject,
-            dayCreated: ticket.created_at,
-            lastUpdated: ticket.updated_at,
-            lastResponse: 'Anndre M',
+            dayCreated: `${dayCreated.getMonth()}/${dayCreated.getDate()}/${dayCreated.getFullYear()}`,
+            lastUpdated: `${lastUpdated.getMonth()}/${lastUpdated.getDate()}/${lastUpdated.getFullYear()}`,
+            lastResponse: ticket.lastRespondentName,
             comments: ticket.comment_count,
             id: ticket.id
           }
         }))
-      )
+        )
+        setLoading(false)
       })
       .catch((error) => {
+        setLoading(false)
         console.error('Error fetching tickets:', error)
       })
   }
@@ -187,7 +194,6 @@ const TicketsPage: Page = () => {
   const onZendeskChatModalClose = () => {
     setZendeskChatOpen(false)
   }
-
 
   const setting = {
     color: {
@@ -233,14 +239,16 @@ const TicketsPage: Page = () => {
         <p className='text-[#404040] font-open-sans text-xl font-semibold leading-6 mt-10'>Friday, June 21, 2019</p>
       </div>
       <div className='mt-10'>
-        <StyledDataGrid rows={tickets && tickets}
-          columns={columns}
-          sx={{
-            minHeight: '214px',
-            borderColor: 'rgba(224, 224, 224, 0.5)!important'
-          }}
-          onCellClick={handleTicketSelect}
+        {!loading
+          ? <StyledDataGrid rows={tickets && tickets}
+            columns={columns}
+            sx={{
+              minHeight: '214px',
+              borderColor: 'rgba(224, 224, 224, 0.5)!important'
+            }}
+            onCellClick={handleTicketSelect}
           />
+          : <Spinner />}
       </div>
       {/* <div>
         <button onClick={() => { getZendeskData() }}>click here</button>

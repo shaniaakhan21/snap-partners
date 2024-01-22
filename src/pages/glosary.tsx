@@ -85,6 +85,7 @@ const GlosaryPage: Page = () => {
           b_start_date: data.b_start_date,
           newSSN: data.newSSN,
           zendesk_id: data.zendesk_id,
+          business_approved: data.business_approved,
           ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
         })
       }

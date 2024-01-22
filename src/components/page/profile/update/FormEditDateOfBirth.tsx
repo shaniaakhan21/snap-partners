@@ -60,9 +60,9 @@ export const FormEditDateOfBirth = ({
   }
 
   return (
-    <div className='max-w-3xl mx-auto'>
-      <section>
-        <h3 className='text-xl font-bold'>Change Date of Birth</h3>
+    <div className='max-w-2xl mx-auto rounded-2xl bg-white md:shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)] pt-4'>
+      <section className='px-4 pt-3 '>
+        <h3 className='text-base md:text-xl font-bold'>Change Date of Birth</h3>
       </section>
 
       <br />
@@ -73,7 +73,7 @@ export const FormEditDateOfBirth = ({
           inputId='dateOfBirth'
           inputType='text'
           labelFor='dateOfBirth'
-          labelName='Current Date Of Birth'
+          labelName='Current Date Of Birth:'
           value={
             auth.dateOfBirth
               ? new Date(auth.dateOfBirth).toLocaleDateString()
@@ -85,16 +85,16 @@ export const FormEditDateOfBirth = ({
           inputId='newDateOfBirth'
           inputType='date'
           labelFor='newDateOfBirth'
-          labelName='New Date of Birth'
+          labelName='New Date of Birth:'
           placeholder='Insert the new Date of Birth'
           register={register}
           rules={{ required: { value: true, message: 'Date of Birth is required *' } }}
           error={errors.newDateOfBirth}
         />
         <br />
-        <div className='flex items-center'>
-          <Button type='submit' classes='mr-2'>Save</Button>
-          <Button onClick={() => setTypeUpdate(null)}>
+        <div className='flex items-center bg-[#DCE5ED] rounded-b-2xl justify-end py-4 px-2 border-2 border-[#DCE5ED] '>
+          <Button type='submit' classes='mr-4 bg-[#E74426]'>Save</Button>
+          <Button classes='text-black bg-white' onClick={() => setTypeUpdate(null)}>
             Cancel
           </Button>
         </div>

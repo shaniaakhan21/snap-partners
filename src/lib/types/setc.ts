@@ -20,6 +20,9 @@ export interface SetcClient {
   caregiverQualified2021: boolean;
   phase: number;
   isPersonalClient: boolean
+  current_status: string;
+  current_department: string;
+  unresponsive_note: any;
 }
 
 export interface LevelledSetcClient{

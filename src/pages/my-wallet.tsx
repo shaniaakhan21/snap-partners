@@ -105,7 +105,7 @@ const MyWalletPage: Page = () => {
                   <Button disabled={!enableWithdraw} onClick={() => { fnOpenModalConfirmation() }} type='submit' classes=' mr-1 text-sm bg-[#E74426]'>
                       Withdraw Available Balance
                   </Button>
-                  <GrandfatherRankHr/>
+                  <GrandfatherRankHr containerStyles='w-9/12 rounded-lg bg-white border-2 border-[#E74426]  mx-4 mt-4 mb-7  px-2 py-1 ' textStyles='font-semibold text-sm lg:text-lg text-[#E74426]'/>
                 </div>
               </div>
               {modalConfirmationIsOpen && (

@@ -21,13 +21,13 @@ interface IFormUpdatePhoneProps {
   setTypeUpdate: Dispatch<SetStateAction<TAccountInfoToUpdate>>
 }
 
-export const FormUpdateSocialSecurity = ({ auth }: IFormUpdatePhoneProps) => {
+export const FormUpdateSocialSecurity = ({ auth, setTypeUpdate }: IFormUpdatePhoneProps) => {
   const router = useRouter()
 
   return (
-    <div className='max-w-3xl mx-auto'>
-      <section>
-        <h3 className='text-xl font-bold'>Change Social Security Number</h3>
+    <div className='max-w-2xl mx-auto rounded-2xl bg-white md:shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)] pt-4'>
+      <section className='px-4 pt-3 '>
+        <h3 className='text-base md:text-xl font-bold'>Change Social Security Number</h3>
       </section>
 
       <br />
@@ -38,16 +38,16 @@ export const FormUpdateSocialSecurity = ({ auth }: IFormUpdatePhoneProps) => {
           inputId='socialSecurityNumber'
           inputType='text'
           labelFor='socialSecurityNumber'
-          labelName='Current Social Security Number'
+          labelName='Current SSN:'
           value={auth.socialSecurityNumber}
         />
-        <div className='relative rounded-xl bg-red-200 w-full px-4 py-3 border-y-2 border-y-gray-200 flex flex-col justify-between mt-2'>
-          <p className='text-lg font-bold'>Please open a help ticket to update your social security number. </p>
+        <div className='relative rounded-xl bg-red-200 w-[95%] mx-4 px-4 py-3 border-y-2 border-y-gray-200 flex flex-col justify-between mt-2'>
+          <p className='text-sm md:text-lg font-bold'>Please open a help ticket to update your social security number. </p>
         </div>
 
         <br />
-        <div className='flex items-center'>
-          <Button type='submit' classes='mr-2' onClick={() => router.push('/profile')}>Go BACK</Button>
+        <div className='flex items-center bg-[#DCE5ED] rounded-b-2xl justify-end py-4 px-2 border-2 border-[#DCE5ED] '>
+          <Button type='submit' classes='mr-2' onClick={() => setTypeUpdate(null)}>Go BACK</Button>
         </div>
       </form>
     </div>
