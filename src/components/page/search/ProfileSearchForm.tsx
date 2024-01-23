@@ -21,7 +21,23 @@ function ProfileSearchForm ({ children }) {
 
   const router = useRouter()
   const setProfileSearchInput = (event, param) => {
-    if (param === 'profileSearchString') { setProfileSearchForm({ ...profileSearchForm, profileSearchString: event.target.value }) }
+    if (param === 'profileSearchString') {
+      const val = event.target.value as string
+      if (val.match(/\+\d+/)) {
+        if (val.length === 5) {
+          console.log('in this')
+          setProfileSearchForm({ ...profileSearchForm, profileSearchString: val.replace(/(\+\d{1})(\d{3})/, '$1($2)') })
+        }else if (val.length === 11) {
+          console.log('in that')
+          setProfileSearchForm({ ...profileSearchForm, profileSearchString: val.replace(/(.{7})(\d{4})/, '$1-$2-') })
+        } else {
+          setProfileSearchForm({ ...profileSearchForm, profileSearchString: event.target.value })
+        }
+        // setProfileSearchForm({ ...profileSearchForm, profileSearchString: val.replace(/(\d{3})(\d{4})(\d{3})/, '($1)-$2-$3') })
+      } else {
+        setProfileSearchForm({ ...profileSearchForm, profileSearchString: event.target.value })
+      }
+    }
     if (param === 'userLevel') { setProfileSearchForm({ ...profileSearchForm, userLevel: event.target.value }) }
   }
 
@@ -29,8 +45,8 @@ function ProfileSearchForm ({ children }) {
     e.preventDefault()
     if (value.profileSearchString !== '' && value.userLevel === '') {
       console.log('clkd')
-      window.location.href = `/search/${value.profileSearchString}/noLevel`
-      // router.push()
+      const plainSearchString = value.profileSearchString.replace(/[()-]/g, '')
+      window.location.href = `/search/${plainSearchString}/noLevel`
     } else if (value.userLevel !== '' && value.profileSearchString === '') {
       window.location.href = `/search/noName/${value.userLevel}`
     } else if (value.userLevel === '' && value.profileSearchString === '') {
