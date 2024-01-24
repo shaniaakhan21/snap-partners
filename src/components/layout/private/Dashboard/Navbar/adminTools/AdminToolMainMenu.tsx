@@ -7,6 +7,8 @@ import router from 'next/router'
 function AdminToolMainMenu () {
   const [subMenu, setSubMenu] = useState('none')
   const [menuOpen, setMenuOpen] = useState(true)
+  const [clickedMenu, setClickedMenu] = useState(null)
+
   const menuData = [
     {
       icon: '',
@@ -50,29 +52,49 @@ function AdminToolMainMenu () {
     <>
       {menuOpen && (
         <div className='admin-tool-main-menu-container'>
-
           <ul>
-            {
-              menuData.map((menuItem, index) => (
-                <li className={`item-${index} menuItem text-sm sm:text-base duration-500 rounded-3xl font-semibold`} onClick={() => {
-                  setSubMenu(subMenu === menuItem.submenu ? 'none' : menuItem.submenu)
-                }}>{menuItem.title}</li>
-              ))
-            }
+            {menuData.map((menuItem, index) => (
+              <li
+                key={index}
+                className={`item-${index} menuItem text-sm sm:text-base duration-500 rounded-3xl font-semibold`}
+                onClick={() => {
+                  setSubMenu(
+                    subMenu === menuItem.submenu ? 'none' : menuItem.submenu
+                  )
+                  setClickedMenu(menuItem.submenu)
+                  if (!menuItem.submenu) {
+                    setClickedMenu(null)
+                  }
+                }}
+                style={{
+                  backgroundColor:
+                    clickedMenu === menuItem.submenu ? '#E74426' : '',
+                  color:
+                    clickedMenu === menuItem.submenu ? '#ffffff' : '',
+                  cursor: 'pointer'
+                }}
+              >
+                {menuItem.title}
+              </li>
+            ))}
           </ul>
 
-          { subMenu && subMenu === 'advanceSearch'
-            ? <AdvanceSearchSubMenu />
-            : <></>
-          }
-          {
-            subMenu && subMenu === 'accountingReports'
-              ? <AccountingReportsSubMenu />
-              : <></>
-          }
+          {subMenu && subMenu === 'advanceSearch'
+            ? (
+              <AdvanceSearchSubMenu />
+            )
+            : (
+              <></>
+            )}
+          {subMenu && subMenu === 'accountingReports'
+            ? (
+              <AccountingReportsSubMenu />
+            )
+            : (
+              <></>
+            )}
         </div>
-      )
-      }
+      )}
     </>
   )
 }

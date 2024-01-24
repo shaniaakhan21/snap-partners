@@ -1,12 +1,13 @@
 /* eslint-disable no-use-before-define */
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import ReportsSubMenu from './1099ReportsSubMenu'
 import { useAuthStore } from 'lib/stores'
+import Submenu_1099 from './1099SubMenu'
 
 function AdminToolMainMenu () {
   const [subMenu, setSubMenu] = useState('none')
   const [menuOpen, setMenuOpen] = useState(true)
+  const [clickedMenus, setClickedMenu] = useState([])
   const auth = useAuthStore()
   const menuData = [
     {
@@ -16,7 +17,7 @@ function AdminToolMainMenu () {
     },
     {
       icon: '',
-      title: '1099 Resolution',
+      title: '1099',
       submenu: 'reports1099'
     }
   ]
@@ -37,7 +38,10 @@ function AdminToolMainMenu () {
       if (menuItem.page !== undefined) {
         router.push(menuItem.page)
       } else if (menuItem.submenu) {
-        setSubMenu(subMenu === menuItem.submenu ? 'none' : menuItem.submenu)
+        setSubMenu(
+          subMenu === menuItem.submenu ? 'none' : menuItem.submenu
+        )
+        setClickedMenu(menuItem.submenu)
       } else {
         console.warn('No page or submenu defined for this menu item')
       }
@@ -53,9 +57,13 @@ function AdminToolMainMenu () {
               menuData.map((menuItem, index) => (
                 <li
                   key={index}
-                  className={`item-${index} menuItem text-sm sm:text-base`}
+                  className={`item-${index} menuItem rounded-3xl text-sm sm:text-base`}
                   onClick={() => handleMenuClick(menuItem)}
-                  style={{ cursor: 'pointer' }}
+                  style={{
+                    backgroundColor: clickedMenus.includes(menuItem.submenu) ? '#E74426' : '',
+                    cursor: 'pointer',
+                    color: clickedMenus.includes(menuItem.submenu) ? '#ffffff' : ''
+                  }}
                 >
                   {menuItem.title}
                 </li>
@@ -66,7 +74,7 @@ function AdminToolMainMenu () {
           {subMenu && subMenu === 'fieldpromotion' ? <></> : <></>}
           {
             subMenu && subMenu === 'reports1099'
-              ? <ReportsSubMenu />
+              ? <Submenu_1099 />
               : <></>
           }
         </div>

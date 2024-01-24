@@ -59,11 +59,11 @@ export const Navbar = () => {
                 Your Builder Website
               </Button>
             </a> */}
-            <a target="_blank" href={`/wellness?referralCode=${auth.referralCode}`}>
+            {/* <a target="_blank" href={`/wellness?referralCode=${auth.referralCode}`}>
               <Button classes='text-xs lg:text-sm xl:text-sm border-[#C9DAE8] border-2 bg-new py-0 sm:py-2 lg:py-2 px-1 lg:px-4 xl:px-8 text-black shadow-md'>
                 Your Snap Wellness Store
               </Button>
-            </a>
+            </a> */}
           </div>
 
           {auth && <Account
