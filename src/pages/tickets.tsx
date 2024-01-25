@@ -172,8 +172,8 @@ const TicketsPage: Page = () => {
             clientName: requesterName,
             status: ticket.status,
             subject: ticket.raw_subject,
-            dayCreated: `${dayCreated.getMonth()}/${dayCreated.getDate()}/${dayCreated.getFullYear()}`,
-            lastUpdated: `${lastUpdated.getMonth()}/${lastUpdated.getDate()}/${lastUpdated.getFullYear()}`,
+            dayCreated: `${dayCreated.getMonth() + 1}/${dayCreated.getDate()}/${dayCreated.getFullYear()}`,
+            lastUpdated: `${lastUpdated.getMonth() + 1}/${lastUpdated.getDate()}/${lastUpdated.getFullYear()}`,
             lastResponse: ticket.lastRespondentName,
             comments: ticket.comment_count,
             id: ticket.id

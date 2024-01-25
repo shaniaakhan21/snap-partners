@@ -1,0 +1,5 @@
+.zendesk_chatbox_comment {
+    max-width: 600px;
+    overflow-x: auto;
+    overflow-y: hidden;
+}

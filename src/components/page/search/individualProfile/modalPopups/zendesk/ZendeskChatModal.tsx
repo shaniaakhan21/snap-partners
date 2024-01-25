@@ -23,7 +23,13 @@ const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag
   }
   const { auth, setAuth } = useAuthStore()
   const [comments, setComments] = useState([])
-  const [commentBody, setCommentBody] = useState('')
+  const [commentBody, setCommentBody] = useState({
+    author_id: auth?.zendesk_id,
+    comment_body: '',
+    attachment: null
+
+  })
+  const [commentFile, setCommentFile] = useState(null)
   const [user, setUser] = useState({})
   const [commentFlag, setCommentFlag] = useState(false)
   const getComments = async (ticketId: number) => {
@@ -67,19 +73,25 @@ const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag
   }, [comments, commentFlag])
 
   const handleCommentValue = (event) => {
-    setCommentBody(event.target.value)
+    setCommentBody({ ...commentBody, comment_body: event.target.value })
   }
 
   const handlePostComment = async () => {
     console.log('comment body is', commentBody)
-    await axios.post('/api/zendesk/comments', {
-      ticket_id: ticket.id,
-      author_id: auth?.zendesk_id,
-      comment_body: commentBody
+    const zendeskCommentData = new FormData()
+    zendeskCommentData.append('ticket_id', ticket?.id)
+
+    Object.entries(commentBody).forEach(([key, value]) => {
+      zendeskCommentData.append(key, value)
+    })
+    await axios.post('/api/zendesk/comments', zendeskCommentData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
     })
       .then((res) => {
         if (res.data?.response?.ticket) {
-          setCommentBody('')
+          setCommentBody({ ...commentBody, comment_body: '', attachment: null })
           setCommentFlag(!commentFlag)
         } else {
           alert('adding comment failed')
@@ -93,25 +105,42 @@ const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag
         <div>
           <h2 style={{ marginTop: 16, height: 10 }}>Ticket #{ticket?.id} abc</h2>
         </div>
-        <div >
+        <div style={{ maxHeight: 600, overflowX: 'hidden', overflowY: 'auto' }}>
           {
             comments?.map((comment) =>
-              <div style={ { display: 'flex', flexDirection: 'row', alignItems: 'end', marginTop: 20, marginLeft: comment.author_id == auth?.zendesk_id ? '50%' : 0, marginRight: comment.author_id != auth?.zendesk_id ? '50%' : 0 } }>
+              <div style={ {
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'end',
+                marginTop: 20,
+                marginLeft: comment.author_id == auth?.zendesk_id ? '50%' : 0,
+                marginRight: comment.author_id != auth?.zendesk_id ? '50%' : 0
+              } }>
                 <div style={{ marginLeft: comment.author_id == auth?.zendesk_id ? 'auto' : 0, marginRight: comment.author_id != auth?.zendesk_id ? 'auto' : 0 }}>
                   <h2 style={{ marginBottom: 10, textAlign: comment?.author_id == auth?.zendesk_id ? 'right' : 'left' }}>
                     <strong>{user && user[comment.author_id]?.name }</strong>
                   </h2>
-                  <p style={{ paddingTop: 16, paddingLeft: 16, paddingRight: 16, paddingBottom: 16, backgroundColor: comment?.author_id == auth?.zendesk_id ? '#ECECEC' : '#FF998B', borderRadius: 4 }}>
+                  <p className='zendesk_chatbox_comment' style={{
+                    paddingTop: 16,
+                    paddingLeft: 16,
+                    paddingRight: 16,
+                    paddingBottom: 16,
+                    backgroundColor: comment?.author_id == auth?.zendesk_id ? '#ECECEC' : '#FF998B',
+                    borderRadius: 4
+                  }}>
                     {comment.body}
                   </p>
+                  {
+                    comment.attachments.length > 0 ? <a style={{ color: 'blue' }} href={`${comment.attachments[0].content_url}`} target='_blank'>file Attachment</a> : <></>
+                  }
                 </div>
               </div>
             )}
         </div>
-        {/* <InputComponent label='Subject' placeholder='Subject of your Issue' value={ticketBody.subject} param={'subject'} onChangeFunction={handleEditProfileUpdate} />
-        <label>Ticket Attaachment</label> <br/>
-        <input type='file' name='zendeskAttachment' onChange={(e) => { setTicketBody({ ...ticketBody, attachment: e.target.files[0] }) }} /> */}
-        <TextArea label='Write Comment' placeholder='Type your comment here' param={'description'} value={commentBody} onChangeFunction={handleCommentValue}/>
+        {/* <InputComponent label='Subject' placeholder='Subject of your Issue' value={ticketBody.subject} param={'subject'} onChangeFunction={handleEditProfileUpdate} /> */}
+        <TextArea label='Write Comment' placeholder='Type your comment here' param={'description'} value={commentBody.comment_body} onChangeFunction={handleCommentValue}/>
+        <label>File Attachment(optional)</label> <br/>
+        <input type='file' name='zendeskCommentAttachment' onChange={(e) => { setCommentBody({ ...commentBody, attachment: e.target.files[0] }) }} />
         <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
           <ButtonComponent title={'Send'} onClickFunction={handlePostComment} />
         </div>
