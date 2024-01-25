@@ -2,7 +2,39 @@
 import React from 'react'
 import ReactDataGrid from '@inovua/reactdatagrid-community'
 import { TeamClientsTableProps } from 'lib/types/transaction'
+import styled from '@emotion/styled'
 
+const StyledDataGrid = styled.div`
+  && {
+    .InovuaReactDataGrid__column-header__resize-wrapper{
+      font-weight: 700;
+      font-size: 1.2em;
+      color: #000000;
+      padding-left: 8px;
+    }
+
+    .InovuaReactDataGrid__header{
+      background-color: #F0F4F8;
+      border-radius: 18px 18px 0px 0px;
+    }
+
+    .InovuaReactDataGrid__cell {
+      background-color: white;
+    }
+
+    .InovuaReactDataGrid__header {
+      border-color:rgba(224, 224, 224, 0.5) !important;
+    }
+
+  .InovuaReactDataGrid__row-cell-wrap, .InovuaReactDataGrid__body {
+      border: 1px solid  rgba(224, 224, 224, 0.5) !important;
+    }
+
+    .InovuaReactDataGrid__body {
+      border-radius: 18px!important;
+    }
+  }
+`
 const TeamClientsTable: React.FC<TeamClientsTableProps> = ({
   clients,
   onSelectLevel
@@ -88,7 +120,7 @@ const TeamClientsTable: React.FC<TeamClientsTableProps> = ({
     { name: 'amount', operator: 'startsWith', type: 'string', value: '' }
   ]
   return (
-    <div>
+    <StyledDataGrid>
       <ReactDataGrid
         idProperty="level"
         columns={columnsClient}
@@ -99,7 +131,7 @@ const TeamClientsTable: React.FC<TeamClientsTableProps> = ({
         defaultLimit={10}
         pagination
       />
-    </div>
+    </StyledDataGrid>
   )
 }
 
