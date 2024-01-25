@@ -20,6 +20,7 @@ const StyledDataGrid = styled.div`
 
     .InovuaReactDataGrid__cell {
       background-color: white;
+      padding-left: 8px!important;
     }
 
     .InovuaReactDataGrid__header {
@@ -111,8 +112,7 @@ const TeamClientsTable: React.FC<TeamClientsTableProps> = ({
   ]
 
   const gridStyle = {
-    minHeight: 350,
-    textAlign: 'center'
+    minHeight: 350
   }
 
   const filterValue = [
