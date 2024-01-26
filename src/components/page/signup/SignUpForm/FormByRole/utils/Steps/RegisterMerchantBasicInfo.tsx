@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
@@ -15,6 +15,9 @@ import { IHandleStep } from '../types'
 import { STEPS } from '.'
 import { useRoleFromUrl } from 'lib/hooks/useRoleFromUrl'
 import { GTMTrack } from 'lib/utils/gtm'
+import { FooterApple } from 'components/common/icons'
+import { DatePickerForm } from '../DatePicker'
+import states from 'data/states'
 
 export interface dataFormSignUpMerchant {
   'city' : string
@@ -35,6 +38,7 @@ export interface dataFormSignUpMerchant {
   termsAndConditions: boolean
   // phoneExt: string
   phoneNumber: string
+  dateOfBirth: Date
 }
 
 interface IRegisterMerchantBasicInfoProps {
@@ -47,7 +51,6 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
   const { handleSubmit, register, reset, formState: { errors }, setError, control } = useForm<dataFormSignUpMerchant>()
   const [isLoading, setLoading] = useState(false)
   const role = useRoleFromUrl()
-
   const onSubmit = async (dataForm: dataFormSignUpMerchant) => {
     setLoading(true)
 
@@ -96,6 +99,7 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
     const dataToSend = {
       name: dataForm.name,
       lastname: 'Merchant',
+      dateOfBirth: dataForm.dateOfBirth,
       email: dataForm.email,
       username: dataForm.username,
       password: dataForm.password,
@@ -160,10 +164,10 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
 
   return (
     <div className='max-w-md mx-auto w-full'>
-      <p className='font-bold text-4xl text-[#18203F]'>Sign up as a{' '}
+      <p className='sm:block font-bold text-3xl md:font-extrabold md:text-4xl mb-2 text-[#000] mt-4'>Sign up as a{' '}
         <span className='text-primary-500'>Merchant</span>
       </p>
-      <p className='text-gray-500'>Welcome! register to continue.</p>
+      <p className='font-medium text-gray-600'>Welcome! register to continue.</p>
 
       <form className='mt-6' onSubmit={handleSubmit(onSubmit)}>
         <InputForm
@@ -241,7 +245,15 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
           withVerifyCode={false}
           control={control}
         />
-
+        <DatePickerForm
+          id='dateOfBirth'
+          name='dateOfBirth'
+          label='Date of Birth'
+          register={register}
+          registerId='dateOfBirth'
+          errors={errors.dateOfBirth}
+          isRequired={true}
+        />
         <RegisterPassword
           errors={errors}
           register={register}
@@ -277,19 +289,24 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
           isRequired
         />
 
-        <InputForm
+        <label className='font-bold text-gray-700 uppercase text-sm'>
+          STATE {' '}
+          <span className='text-red-500'>*</span>
+        </label>
+        <select
+          className='w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
           id='state'
           name='state'
-          type='text'
-          label='State'
-          registerId='state'
-          placeholder='Enter State'
-          autoComplete='state'
-          errors={errors.state}
-          register={register}
-          rulesForm={registerMerchantRulesConfig.state}
-          isRequired
-        />
+          style={{ backgroundImage: 'none' }}
+          {...register('state', { required: 'State is required *' })}
+        >
+          <option value=''>Select a state</option>
+          {states.map((state) => (
+            <option key={state} value={state}>
+              {state}
+            </option>
+          ))}
+        </select>
 
         <InputForm
           id='referralCode'
@@ -306,25 +323,36 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
           readOnly={Boolean(referralLink.code)}
         />
 
-        <TermsAndConditions
-          errors={errors.termsAndConditions}
-          register={register}
-          rulesForm={registerMerchantRulesConfig.termsAndConditions}
-        />
+        <div className='sm:flex mt-5 items-center'>
+          <TermsAndConditions
+            errors={errors.termsAndConditions}
+            register={register}
+            rulesForm={registerMerchantRulesConfig.termsAndConditions}
+          />
+          <Button type='submit' classes='mt-4 sm:mt-0 w-full sm:w-auto text-mg bg-primary-500 font-semibold uppercase ml-auto'>Sign Up</Button>
+        </div>
 
-        <section className='mt-4'>
-          <Button type='submit' classes='w-full mt-4 text-sm bg-primary-500'>
-            Sign Up
-          </Button>
-
-          <p className='mt-4'>
-            <span className='font-semibold'>Already have an account?</span>
+        <section className='my-4'>
+          <p className='mt-8 text-center mt-12'>
+            <span className='font-semibold text-gray-600 text-sm sm:text-base'>Already have an account?</span>
 
             <Link href='/auth/login'>
-              <a className='text-textAcent-500 focus:underline'> Login.</a>
+              <a className='text-primary-500 font-semibold text-xl underline decoration-1 ml-2 hover:text-black'>Sign In</a>
             </Link>
           </p>
         </section>
+
+        {/* <div className='mt-8 text-center items-center'>
+              {Apps.map(app => (
+                <a className='mx-2' key={app.to}>
+                  <Link key={app.to} href={app.to}>
+
+                      {app.icon}
+
+                  </Link>
+                </a>
+              ))}
+          </div> */}
       </form>
     </div>
   )

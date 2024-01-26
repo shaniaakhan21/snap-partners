@@ -38,6 +38,8 @@ export const FormBecomeMerchant = ({ userAuth, userSetAuth }: { userAuth: IAuth,
       email: userAuth.email,
       username: userAuth.username,
       phoneNumber: userAuth.phoneNumber,
+      socialSecurityNumber: userAuth.socialSecurityNumber,
+      dateOfBirth: userAuth.dateOfBirth,
       roles: {
         admin: userAuth.roles.admin,
         customer: userAuth.roles.customer,

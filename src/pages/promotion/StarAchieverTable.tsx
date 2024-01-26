@@ -97,7 +97,7 @@ const StarAchieversTable = ({ userSprintData }) => {
   )
 }
 
-export const AllAchieverTable = ({ allAchieverArray, refreshFunc }) => {
+export const AllAchieverTable = ({ allAchieverArray, refreshFunc, isPersonal }) => {
   const [windowWidth, setWindowWidth] = useState(0)
   const [sprintDataRow, setSprintDataRow] = useState([])
 
@@ -233,6 +233,105 @@ export const AllAchieverTable = ({ allAchieverArray, refreshFunc }) => {
     }
   ]
 
+  const newColumns = [
+    {
+      field: 'name',
+      headerName: 'Name',
+      flex: windowWidth <= 400 ? 0.5 : 1
+    },
+    {
+      field: 'personalFiveIbo',
+      headerName: 'Personal IBOs',
+      flex: windowWidth <= 400 ? 0.5 : 1,
+      renderCell: (params) => {
+        const value = params.value
+        const cellStyle = {
+          padding: '3% 10%',
+          borderRadius: '20px',
+          color: 'white',
+          fontSize: '1.2em',
+          backgroundColor: value === false ? '#DD4C37' : value === true ? '#6AB63C' : 'black'
+        }
+
+        return <div style={cellStyle}>{`${value}`}</div>
+      }
+    },
+    {
+      field: 'personalQualifiedErc',
+      headerName: 'Personal ERC',
+      flex: windowWidth <= 400 ? 0.5 : 1,
+      renderCell: (params) => {
+        const value = params.value
+        const cellStyle = {
+          padding: '3% 10%',
+          borderRadius: '20px',
+          color: 'white',
+          fontSize: '1.2em',
+          backgroundColor: value === false ? '#DD4C37' : value === true ? '#6AB63C' : 'black'
+        }
+
+        return <div style={cellStyle}>{`${value}`}</div>
+      }
+    },
+    {
+      field: 'friendFiveIbo',
+      headerName: 'Friend IBOs',
+      flex: windowWidth <= 400 ? 0.5 : 1,
+      renderCell: (params) => {
+        const value = params.value
+        const cellStyle = {
+          padding: '3% 10%',
+          borderRadius: '20px',
+          color: 'white',
+          fontSize: '1.2em',
+          backgroundColor: value === false ? '#DD4C37' : value === true ? '#6AB63C' : 'black'
+        }
+
+        return <div style={cellStyle}>{`${value}`}</div>
+      }
+    },
+    {
+      field: 'friendQualifiedErc',
+      headerName: 'Friend ERC',
+      flex: windowWidth <= 400 ? 0.5 : 1,
+      renderCell: (params) => {
+        const value = params.value
+        const cellStyle = {
+          padding: '3% 10%',
+          borderRadius: '20px',
+          color: 'white',
+          fontSize: '1.2em',
+          backgroundColor: value === false ? '#DD4C37' : value === true ? '#6AB63C' : 'black'
+        }
+
+        return <div style={cellStyle}>{`${value}`}</div>
+      }
+    },
+    {
+      field: 'friendOfFriendQualifiedErc',
+      headerName: 'Friend of Friend ERC',
+      flex: windowWidth <= 400 ? 0.5 : 1,
+      renderCell: (params) => {
+        const value = params.value
+        const cellStyle = {
+          padding: '3% 10%',
+          borderRadius: '20px',
+          color: 'white',
+          fontSize: '1.2em',
+          backgroundColor: value === false ? '#DD4C37' : value === true ? '#6AB63C' : 'black'
+        }
+
+        return <div style={cellStyle}>{`${value}`}</div>
+      }
+    },
+    {
+      field: 'date',
+      headerName: 'Last Updated',
+      type: 'string',
+      flex: windowWidth <= 400 ? 0.5 : 1
+    }
+  ]
+
   return (
     <div className='w-full'>
       <br></br>
@@ -241,7 +340,7 @@ export const AllAchieverTable = ({ allAchieverArray, refreshFunc }) => {
           {sprintDataRow
             ? <StyledDataGrid
               rows={allAchieverArray && allAchieverArray}
-              columns={columns}
+              columns={!isPersonal ? columns : newColumns}
               sx={{
                 minHeight: '214px',
                 borderColor: 'rgba(224, 224, 224, 0.5)!important'

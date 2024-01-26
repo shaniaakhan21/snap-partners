@@ -44,19 +44,28 @@ const mockData: RewardProgramRow[] = [
 ]
 
 const tabStyle = {
-  color: '#777777',
-  backgroundColoR: '#FFFFFF',
-  fontSize: 12,
+  color: '#00000',
+  backgroundColor: '#FFFFFF',
+  fontSize: 14,
+  fontWeight: '600',
   width: '33.33%',
   '&.Mui-selected': {
-    backgroundColor: '#E35C49',
+    backgroundColor: '#E74426',
     color: '#FFFFFF'
+  },
+  '@media (max-width:567px)': {
+    fontSize: '10px'
+  }
+}
+
+const fulltabStyle = {
+  '& .MuiTabs-flexContainer': {
+    justifyContent: 'space-between!important'
   }
 }
 
 export default function RewardsProgram () {
   const [selectedRank, setSelectedRank] = useState(0)
-
   const renderRow = (row:RewardProgramRow) => {
     return (
       <tr key={row.reward}>
@@ -65,7 +74,7 @@ export default function RewardsProgram () {
         <td className='text-sm'>{row.reward}</td>
         <td className='text-sm'>${row.cash}</td>
         <td>
-          <BarWithText value={row.progress} variant={'determinate'} progressColor={'#E35C49'}/>
+          <BarWithText value={row.progress} variant={'determinate'}/>
         </td>
         {
           row.progress === 100 && (
@@ -79,17 +88,18 @@ export default function RewardsProgram () {
   }
 
   return (
-    <div className="bg-white rounded-lg px-2.5 py-3">
+    <div className="w-fit lg:w-full bg-white rounded-3xl shadow-lg p-6">
       <div>
-        <span className='text-lg text-semibold'>Rewards Program</span>
+        <span className='text-sm lg:text-xl font-bold'>Rewards Program</span>
       </div>
       <Tabs value={selectedRank}
         onChange={(_, value) => setSelectedRank(value)}
         centered
-        className='mt-2.5 border-b-4 border-textAcent-500'
+        className='w-full mt-2.5 border-2 border-[#DCE5ED] rounded-3xl text-black-h justify-between'
         textColor="inherit"
         indicatorColor="secondary"
         variant='scrollable'
+        sx={fulltabStyle}
         ScrollButtonComponent={HiddenTabScrollButton}
         TabIndicatorProps={{
           style: { display: 'none' }
@@ -98,19 +108,24 @@ export default function RewardsProgram () {
         <Tab sx={tabStyle} label="Supervisor" />
         <Tab sx={tabStyle} label="Executive" />
       </Tabs>
-      <table className="mt-4 table-auto w-full ml-2 text-center">
-        <thead>
+      <table className="mt-4 w-fit lg:w-full text-center rounded-3xl border-2 border-[#DCE5ED] p-2">
+        <thead className='bg-[#DCE5ED] text-black-h my-4'>
           <tr>
-            <th className='text-xs font-normal'>RV</th>
-            <th className='text-xs font-normal'>Months</th>
-            <th className='text-xs font-normal'>Reward</th>
-            <th className='text-xs font-normal'>Cash</th>
-            <th className='text-xs font-normal'>Progress</th>
-            <th className='text-xs font-normal'>Redeem</th>
+            <th className='text-xs lg:text-sm font-semibold p-4'>RV</th>
+            <th className='text-xs lg:text-sm font-semibold'>Months</th>
+            <th className='text-xs lg:text-sm font-semibold'>Reward</th>
+            <th className='text-xs lg:text-sm font-semibold'>Cash</th>
+            <th className='text-xs lg:text-sm font-semibold'>Progress</th>
+            <th className='text-xs lg:text-sm font-semibold'>Redeem</th>
           </tr>
         </thead>
         <tbody>
-          {mockData.map(renderRow)}
+
+          <tr>
+            <td colSpan={6} style={{ textAlign: 'center', padding: '20px', color: '#E74426' }}>
+                  Coming Soon
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

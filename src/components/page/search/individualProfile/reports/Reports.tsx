@@ -3,12 +3,12 @@ import React, { useState } from 'react'
 import ErcReport from './ErcReport'
 import WellnessReport from './WellnessReport'
 import VidgoReport from './VidgoReport'
-import InsuranceReport from './InsuranceReport'
+import SetcReport from './SetcReport'
 import { Paper, MenuItem, Select, Typography } from '@mui/material'
 
 const Reports = ({ userId }) => {
   const cname = 'profilePage-individualProfile'
-  const [reportBody, setReportBody] = useState<'erc' | 'wellness' | 'vidgo' | 'insurance'>('erc')
+  const [reportBody, setReportBody] = useState<'erc' | 'wellness' | 'vidgo' | 'setc'>('erc')
   const handleCategoryChange = (event) => {
     setReportBody(event.target.value)
   }
@@ -53,7 +53,7 @@ const Reports = ({ userId }) => {
         <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={'erc'}>ERC</MenuItem>
         <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={'wellness'}>Wellness</MenuItem>
         <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={'vidgo'}>Vidgo</MenuItem>
-        <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={'insurance'}>Insurance</MenuItem>
+        <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={'setc'}>SETC</MenuItem>
       </Select>
       <div className='reportBodyContainer'>
         {
@@ -72,8 +72,8 @@ const Reports = ({ userId }) => {
             : <></>
         }
         {
-          reportBody === 'insurance'
-            ? <InsuranceReport/>
+          reportBody === 'setc'
+            ? <SetcReport userId={userId}/>
             : <></>
         }
       </div>

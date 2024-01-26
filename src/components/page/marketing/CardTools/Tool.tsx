@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { GTMTrack } from 'lib/utils/gtm'
+import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt'
 
 export const MarketingTool = ({ title, subtitle, icon, description, to }) => {
   const onClick = () => {
@@ -8,31 +9,31 @@ export const MarketingTool = ({ title, subtitle, icon, description, to }) => {
 
   return (
     <Link href={to} key={title}>
-      <a className='relative h-[400px] flex flex-col max-w-[248px] w-full rounded-t-sm bg-white m-0 text-left mt-5' onClick={onClick}>
+      <a className='relative h-fit flex flex-wrap max-w-full lg:max-w-[48%] w-full bg-white text-left rounded-2xl border-[1px] border-[#D4DCE3]' onClick={onClick}>
         <li>
-          <div className='absolute w-full h-1 bg-primary-300 top-0 left-0 rounded-t-[4px]'></div>
-
           <section className='px-6 pb-4 pt-5'>
-            <div className='text-center w-full'>
-              <span className='font-bold text-xl '>
-                {title} <br /> Marketing
-              </span>
+            <div className='text-center w-full flex justify-center'>
+              <div className='w-fit'>
+                {icon}
+              </div>
 
             </div>
             {/* <p>{subtitle}</p> */}
           </section>
 
-          <section className='px-6 flex flex-col justify-center items-center border-t-2 border-solid pt-2 pb-4'>
-            <div className='w-fit'>
-              {icon}
-            </div>
+          <section className='px-6 flex flex-col justify-center items-center pt-2 pb-4'>
 
-            <p className='mt-6 leading-5 text-sm'>{description}</p>
+            <span className='font-bold text-xl '>
+              {title} Marketing
+            </span>
+
+            <p className='mt-2 leading-5 text-center text-sm'>{description}</p>
           </section>
 
-          <section className='w-full border-t-2 border-solid flex justify-center items-center py-5'>
-            <button className='uppercase text-white bg-primary-500 px-4 py-1.5 rounded-full font-semibold hover:opacity-80'>
+          <section className='w-full flex justify-center items-center pb-5'>
+            <button className='uppercase text-[#E74426] px-4 py-1.5 font-semibold hover:opacity-80 flex items-center'>
               See More
+              <ArrowRightAltIcon/>
             </button>
           </section>
         </li>

@@ -11,6 +11,7 @@
 @import "./utils/referral-list.css";
 @import "./utils/masonry.css";
 @import "./erc.css";
+@import "./setc.css";
 @import "./utils/pdfViewer.css";
 @import "./utils/documents.css";
 @import "./utils/adminTools.css";
@@ -19,3 +20,4 @@
 @import "./utils/wellness.css";
 @import "./utils/promotion.css";
 @import "./utils/integrousWellness.css";
+@import "./utils/tinpopup.css";

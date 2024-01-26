@@ -1,3 +1,7 @@
+body{
+  background-color: #EDF4FA!important;
+}
+
 .dashboardLayout {
   @apply grid w-full h-full min-h-screen fixed;
   grid-template-columns: 1fr;
@@ -8,24 +12,29 @@
 }
 
 .dashboardLayout__navbar {
-  @apply w-full bg-white z-30;
+  @apply w-[100%] bg-[#EDF4FA] z-30;
   grid-area: navbar;
 }
 
 .dashboardLayout__drawer {
-  @apply sticky top-0 left-0 h-full bg-primary-500 z-20 w-[260px] lg:w-full overflow-y-auto hidden lg:block lg:z-40;
+  @apply sticky top-0 left-0 h-[94%] bg-white z-20 lg:w-[260px] lg:w-full overflow-y-auto hidden lg:block lg:z-40;
   grid-area: drawer;
+  max-width: 240px;
+}
+
+.z-index-max{
+  z-index: 10000!important;
 }
 
 .dashboardLayout__content {
   @apply font-body overflow-y-auto;
   grid-area: content;
-  background-color: #ececec;
+  background-color: #EDF4FA;
 }
 
 @media screen(lg) {
   .dashboardLayout {
-    grid-template-columns: 260px 1fr;
+    grid-template-columns: 280px 1fr;
     grid-template-rows: 64px 1fr;
     grid-template-areas:
       "drawer navbar"
@@ -124,7 +133,9 @@
   @apply bg-primary-300 border-primary-500 border border-solid rounded-md;
   grid-area: topOrderline;
 } */
-
+body{
+  background:#F4F8FB;
+}
 .mui-table-bg-header {
   background-color: #DD4C37;
   color: white
@@ -172,4 +183,43 @@
 
 .oc-view{
   cursor: pointer;
+}
+
+.text-black{
+  color: black!important;
+}
+
+.bg-new{
+  background-color: #E1EBF3!important;
+}
+
+.FullWidthOuter .LeftMenuText{
+  display: none;
+  transition-duration: 500ms;
+}
+.FullWidthOuter .logo-outer{
+  padding-left: 0!important;
+  padding-right: 0!important;
+}
+.FullWidthOuter .logo-outer img{
+  margin: 0 auto; transition-duration: 500ms;
+  width: 49px; height: 49px;
+}
+.FullWidthOuter .logoName{
+  display: none; transition-duration: 500ms;
+}
+.NavArrow{
+  position: absolute;
+  left:256px; top:95px;  
+}
+.FullWidthOuter .NavArrow{
+  left:94px; top:95px;
+}
+.NavArrow .MuiSvgIcon-root{
+  transform:unset!important;
+  cursor: pointer;
+  margin-left:8px;
+}
+.FullWidthOuter .NavArrow .MuiSvgIcon-root{
+  margin-left:5px;
 }

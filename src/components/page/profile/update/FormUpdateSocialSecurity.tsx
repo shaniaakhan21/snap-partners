@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { sendEmailToConfirm } from 'lib/services/user/updateUserEmail'
 import { Dispatch, SetStateAction } from 'lib/types/core/next-react'
@@ -12,6 +12,7 @@ import { GTMTrack } from 'lib/utils/gtm'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { InputProfile } from '../commons/InputProfile'
 import { Button } from 'components/common/Button'
+import { useRouter } from 'next/router'
 
 interface IFormUpdatePhoneProps {
   auth: IAuth
@@ -20,82 +21,33 @@ interface IFormUpdatePhoneProps {
   setTypeUpdate: Dispatch<SetStateAction<TAccountInfoToUpdate>>
 }
 
-interface IDataForm {
-  newEmail: string
-}
-
-export const FormUpdateSocialSecurity = ({ auth, setAuth, typeUpdate, setTypeUpdate }: IFormUpdatePhoneProps) => {
-  const { handleSubmit, register, reset, formState: { errors }, setError } = useForm<IDataForm>()
-
-  const [isLoading, setIsLoading] = useState(false)
-
-  const onSubmit = async (dataForm: IDataForm) => {
-    setIsLoading(true)
-
-    await fetch('/api/user/update-social-security-number', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${auth.accessToken}`
-      },
-      body: JSON.stringify({
-        socialSecurityNumber: dataForm.newEmail
-      })
-    })
-
-    setAuth({ ...auth, socialSecurityNumber: dataForm.newEmail })
-
-    GTMTrack.editProfile(typeUpdate)
-    reset()
-    setTypeUpdate(null)
-    setIsLoading(false)
-  }
-
-  if (isLoading) {
-    return <SpinnerPageContent />
-  }
+export const FormUpdateSocialSecurity = ({ auth, setTypeUpdate }: IFormUpdatePhoneProps) => {
+  const router = useRouter()
 
   return (
-    <div className='max-w-3xl mx-auto'>
-      <section>
-        <h3 className='text-xl font-bold'>Change Social Security Number</h3>
+    <div className='max-w-2xl mx-auto rounded-2xl bg-white md:shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)] pt-4'>
+      <section className='px-4 pt-3 '>
+        <h3 className='text-base md:text-xl font-bold'>Change Social Security Number</h3>
       </section>
 
       <br />
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form >
         <InputProfile
           disabled
-          inputId='email'
-          inputType='email'
-          labelFor='email'
-          labelName='Current Social Security Number'
+          inputId='socialSecurityNumber'
+          inputType='text'
+          labelFor='socialSecurityNumber'
+          labelName='Current SSN:'
           value={auth.socialSecurityNumber}
         />
+        <div className='relative rounded-xl bg-red-200 w-[95%] mx-4 px-4 py-3 border-y-2 border-y-gray-200 flex flex-col justify-between mt-2'>
+          <p className='text-sm md:text-lg font-bold'>Please open a help ticket to update your social security number. </p>
+        </div>
 
-        <InputProfile
-          inputId='newEmail'
-          inputType='text'
-          labelFor='newEmail'
-          labelName='New Social Security Number'
-          placeholder='Insert the new Social Security Number'
-          register={register}
-          rules={{ // TODO: REFACTOR - It is the same as the login with email
-            required: { value: true, message: 'Social Security Number *' },
-            pattern: {
-              value:
-              /^(?!666|000|9\d{2})\d{3}-(?!00)\d{2}-(?!0{4})\d{4}$|^(?!00)\d{2}(?!0{7})\d{7}$/,
-              message: 'Enter a valid Social Security Number *'
-            }
-          }}
-          error={errors.newEmail}
-        />
         <br />
-        <div className='flex items-center'>
-          <Button type='submit' classes='mr-2'>Save</Button>
-          <Button onClick={() => setTypeUpdate(null)}>
-            Cancel
-          </Button>
+        <div className='flex items-center bg-[#DCE5ED] rounded-b-2xl justify-end py-4 px-2 border-2 border-[#DCE5ED] '>
+          <Button type='submit' classes='mr-2' onClick={() => setTypeUpdate(null)}>Go BACK</Button>
         </div>
       </form>
     </div>

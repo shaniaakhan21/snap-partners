@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
@@ -19,6 +19,10 @@ import { GTMTrack } from 'lib/utils/gtm'
 import { useRouter } from 'next/router'
 import { ROLES } from './../../../../../../../config/roles'
 import Swal from 'sweetalert2'
+import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers-pro'
+import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs'
+import { DatePickerForm } from '../DatePicker'
+import states from 'data/states'
 
 interface IStepOpeProps {
   referralLink: IReferralLink,
@@ -70,6 +74,11 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
   const { handleSubmit, register, reset, formState: { errors }, setError, control } = useForm<IDataForm>()
   const [isLoading, setLoading] = useState(false)
   const role = useRoleFromUrl()
+
+  // const { current: Apps } = useRef([
+  //   { to: '/download-app?device=APPLE', icon: <img src='/images/app-store.png' className='inline-block mb-4 sm:mb-0 w-40' /> },
+  //   { to: '/download-app?device=ANDROID', icon: <img src='/images/gplay.png' className='inline-block mb-4 sm:mb-0 w-40' /> }
+  // ])
 
   const onSubmit = async (dataForm: IDataForm) => {
     if (dataForm.confirmEmail !== dataForm.email) {
@@ -145,6 +154,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       username: dataForm.username,
       name: dataForm.name,
       lastname: dataForm.lastname,
+      dateOfBirth: dataForm.dateOfBirth,
       password: dataForm.password,
       businessName: dataForm.businessName,
       street: dataForm.street,
@@ -152,6 +162,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       state: dataForm.state,
       zip: dataForm.zip,
       ssn: dataForm.ssn,
+      socialSecurityNumber: dataForm.socialSecurityNumber,
       phone: `+${dataForm.phoneNumber}`,
       sponsorReferralCode: dataForm.referralCode || null,
       idImage: null,
@@ -219,14 +230,15 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
         ? `/auth/login-wellness?referralCode=${referralCode}&redirectToIntegrousWellness=true`
         : '/auth/login'
   const maxWClass = router.pathname === '/auth/signup-wellness' ? 'max-w-2xl' : 'max-w-md'
+
   return (
     <>
       <div className={`mx-auto w-full ${maxWClass}`}>
-        <p className='font-bold text-4xl text-[#18203F]'>{signUpas}{' '}
+        <p className='sm:block font-bold text-3xl md:font-extrabold md:text-4xl mb-2 text-[#000] mt-4'>{signUpas}{' '}
           <span className='text-primary-500'>{roleText}</span>
         </p>
         <p className='text-[#18203F] font-bold text-md mb-2'>{subtext}</p>
-        <p className='text-gray-500'>Welcome! register to continue.</p>
+        <p className='font-medium text-gray-600'>Welcome! register to continue.</p>
 
         <form className='mt-6 w-full' onSubmit={handleSubmit(onSubmit)}>
           <InputForm
@@ -289,10 +301,20 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             type='text'
             label='Last Name'
             registerId='lastname'
-            placeholder='Enter Lastname'
+            placeholder='Enter Last Name'
             errors={errors.lastname}
             register={register}
             rulesForm={registerRulesConfig.lastname}
+            isRequired
+          />
+
+          <DatePickerForm
+            id='dateOfBirth'
+            name='dateOfBirth'
+            label='Date of Birth'
+            register={register}
+            registerId='dateOfBirth'
+            errors={errors.dateOfBirth}
             isRequired
           />
 
@@ -334,19 +356,24 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             rulesForm={registerRulesConfig.city}
             isRequired
           />
-
-          <InputForm
+          <label className='font-bold text-gray-700 uppercase text-sm'>
+          STATE / PROVINCE {' '}
+            <span className='text-red-500'>*</span>
+          </label>
+          <select
+            className='w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
             id='state'
             name='state'
-            type='text'
-            label='State / Province'
-            registerId='state'
-            placeholder='Enter State / Province'
-            errors={errors.state}
-            register={register}
-            rulesForm={registerRulesConfig.state}
-            isRequired
-          />
+            style={{ backgroundImage: 'none' }}
+            {...register('state', { required: 'State is required *' })}
+          >
+            <option value=''>Select a state</option>
+            {states.map((state) => (
+              <option key={state} value={state}>
+                {state}
+              </option>
+            ))}
+          </select>
 
           <InputForm
             id='zip'
@@ -363,17 +390,17 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
 
           {showSSNField && (
             <InputForm
-              id='ssn'
-              name='ssn'
+              id='socialSecurityNumber'
+              name='socialSecurityNumber'
               type='text'
               label='Social Security Number'
-              registerId='ssn'
+              registerId='socialSecurityNumber'
               placeholder='Enter Social Security Number'
-              errors={errors.ssn}
+              errors={errors.socialSecurityNumber}
               register={register}
-              rulesForm={registerRulesConfig.ssn}
+              rulesForm={registerRulesConfig.socialSecurityNumber}
               isRequired={false}
-              helpText='Optional field today but REQUIRED to receive commissions beyond $600'
+              helpText='You are not required to enter your social security number today. Please note that Snap Partners will require your social security number once you earn a total of $600 in commissions'
               style = {ssnHelptextDesign}
             />
           )}
@@ -408,27 +435,38 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             isRequired={false}
             readOnly={Boolean(referralLink.code)}
           />
+          <div className='block sm:flex w-full'>
+            <div className='mt-7'>
+              <TermsAndConditions
+                errors={errors.termsAndConditions}
+                register={register}
+                rulesForm={registerRulesConfig.termsAndConditions}
+              />
+            </div>
+            <div className='w-auto ml-auto'>
+              <Button type='submit' classes=' w-full mt-4 text-sm bg-primary-500 font-semibold uppercase ml-auto'>Sign Up</Button>
+            </div>
+          </div>
 
-          <TermsAndConditions
-            errors={errors.termsAndConditions}
-            register={register}
-            rulesForm={registerRulesConfig.termsAndConditions}
-          />
+          <BulletPagination stepToActivate='REGISTER_BASIC_INFO' />
+          <section className='my-4'>
 
-          <section className='mt-4'>
-            <BulletPagination stepToActivate='REGISTER_BASIC_INFO' />
-
-            <Button type='submit' classes='w-full mt-4 text-sm bg-primary-500'>
-            Sign Up
-            </Button>
-
-            {role !== ROLES.IBO && <p className='mt-4'>
-              <span className='font-semibold text-[#18203F]'>Already have an account?</span>
+            <p className='mt-12 text-center'>
+              <span className='font-semibold text-gray-600 text-sm sm:text-base'>Already have an account?</span>
               <Link href={loginURL}>
-                <a className='text-textAcent-500 focus:underline'> Login.</a>
+                <a className='text-primary-500 font-semibold text-xl underline decoration-1 ml-2 hover:text-black'>Sign In</a>
               </Link>
-            </p>}
+            </p>
           </section>
+          {/* <div className='mt-8 text-center items-center'>
+            {Apps.map(app => (
+              <Link key={app.to} href={app.to}>
+                <a className='mx-2'>
+                  {app.icon}
+                </a>
+              </Link>
+            ))}
+          </div> */}
         </form>
       </div>
     </>

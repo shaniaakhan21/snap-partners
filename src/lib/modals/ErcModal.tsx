@@ -128,6 +128,11 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
   const phase2Payment = filedPCV * 0.1
   const phase3Payment = phase3FiledPCV * 0.9
 
+  let filedWithIRSDate = ''
+  if (filedWithIRS || phase2Progress === phase2StepCount) {
+    filedWithIRSDate = client.quarters.find(q => !!q.dateFiled)?.dateFiled || ''
+  }
+
   // calculate phase 3 progress
   if (payouts.length > 0) {
     // if remaining amount is phase 1 advance payment then everything is paid
@@ -140,6 +145,9 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
   phase3Progress = payouts.length
 
   const allPhasesAreDone = phase3Progress === phase3StepCount && phase3Progress > 0
+
+  // check if client is created before December 1, 2023
+  const isClientOld = dayjs(client.signupDate, 'MM-DD-YYYY').isBefore('12-01-2023')
   return (
     <div>
       {isOpen && (
@@ -198,26 +206,45 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                   </div>
                 </div>
                 <div className="py-3 px-2.5">
-                  <div className="flex justify-between text-lg font-semibold">
-                    <div>Initial Payment</div>
-                    <div>${initialPayment}</div>
-                  </div>
+                  {
+                    isClientOld && (
+                      <div className="flex justify-between text-lg font-semibold">
+                        <div>Initial Payment</div>
+                        <div>${initialPayment}</div>
+                      </div>
+
+                    )
+                  }
                   <div className='mt-5'>
-                    <SeparatorLine />
+                    {
+                      isClientOld && (
+                        <SeparatorLine />
+                      )
+                    }
                   </div>
                   <div className="flex justify-between text-xs mt-2">
-                    <div>CV = ${phase1AdvanceCV}</div>
-                    <div>{phase1Progress === phase1StepCount ? dayjs(client.signupDate, 'MM-DD-YYYY').format('MM/DD/YYYY') : ''}</div>
+                    {
+                      isClientOld && (
+                        <>
+                          <div>CV = ${phase1AdvanceCV}</div>
+                          <div>{phase1Progress === phase1StepCount ? dayjs(client.signupDate, 'MM-DD-YYYY').format('MM/DD/YYYY') : ''}</div>
+                        </>
+                      )
+                    }
                   </div>
                 </div>
-                <div className='mt-8'>
+                <div className={isClientOld ? 'mt-8' : 'mt-[86px]'}>
                   <SeparatorLine />
                 </div>
                 <div className="py-3 px-2.5">
                   Next Step
                 </div>
-                <Step number={2} title='Agreement Signed' filled={(client.agreementSigned || phase1Progress === phase1StepCount) ? 'full' : 'empty'} fillColor={'textAcent-500'} color={'textAcent-500'}/>
-                <Step number={1} title='Deposit Pay' filled={(client.depositPaid || phase1Progress === phase1StepCount) ? 'full' : 'empty'} fillColor={'textAcent-500'} color={'textAcent-500'}/>
+                <Step number={isClientOld ? 2 : 1} title='Agreement Signed' filled={(client.agreementSigned || phase1Progress === phase1StepCount) ? 'full' : 'empty'} fillColor={'textAcent-500'} color={'textAcent-500'}/>
+                {
+                  isClientOld && (
+                    <Step number={1} title='Deposit Pay' filled={(client.depositPaid || phase1Progress === phase1StepCount) ? 'full' : 'empty'} fillColor={'textAcent-500'} color={'textAcent-500'}/>
+                  )
+                }
               </div>
 
               {/* phase 2  */}
@@ -276,6 +303,8 @@ const ErcModal: React.FC<ErcModalProps> = ({ isOpen, client, onClose }) => {
                 <Step
                   number={5}
                   title='Filed With IRS Date'
+                  // date={filedWithIRSDate ? }
+                  date={filedWithIRSDate ? dayjs(filedWithIRSDate, 'MM-DD-YYYY').format('MM/DD/YYYY') : ''}
                   filled={(filedWithIRS || phase2Progress === phase2StepCount) ? 'full' : IrsFilingStartedNotFinished ? 'half' : 'empty'}
                   fillColor={'textAcent-100'}
                   halfFillColor='phase-200'

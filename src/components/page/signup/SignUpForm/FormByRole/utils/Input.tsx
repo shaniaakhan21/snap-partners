@@ -47,8 +47,8 @@ export const InputForm = ({
   style
 }: IInputFormProps) => {
   return (
-    <div>
-      <label htmlFor={id} className='font-bold text-gray-700 uppercase text-sm'>
+    <div className='w-full'>
+      <label htmlFor={id} className='font-semibold text-gray-600 text-md'>
         {label} {' '}
         {
           isRequired && <span className='text-red-500'>*</span>
@@ -64,14 +64,14 @@ export const InputForm = ({
         type={type}
         readOnly={readOnly}
         autoComplete={autoComplete}
-        className={`w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out ${classes}`}
+        className={`w-full px-3 py-1 my-2 text-base text-black border-2 border-gray-200 rounded-lg outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-10 transition-colors duration-200 ease-in-out placeholder:text-black ${classes}`}
         placeholder={placeholder}
         defaultValue={defaultValue}
         onKeyPress={onKeyPress}
         step={isNumberFloat ? '0.01' : 'any'}
         disabled={disabled}
       />
-      {helpText && <div style={style} className='text-xs text-gray-600 font-normal -mt-1 mb-2'>{helpText}</div>}
+      {helpText && <div style={style} className='text-xs text-gray-700 font-semibold -mt-1 mb-2 p-3 bg-gray-100 rounded mb-4 text-center'>{helpText}</div>}
     </div>
   )
 }

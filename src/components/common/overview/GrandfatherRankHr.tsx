@@ -2,7 +2,7 @@ import axios from 'axios'
 import { getLocalStorage } from 'lib/utils/localStorage'
 import { useEffect, useState } from 'react'
 
-export const GrandfatherRankHr = () => {
+export const GrandfatherRankHr = ({ containerStyles, textStyles }) => {
   const [data, setData] = useState(undefined)
 
   useEffect(() => {
@@ -21,11 +21,11 @@ export const GrandfatherRankHr = () => {
     })()
   }, [])
 
-  if(data === undefined) return (<></>)
+  if (data === undefined) return (<></>)
 
   return (
-    <div className='w-full h-full mt-7 mb-7 px-6 py-3 flex justify-between items-center max-w-7xl mx-auto' style={{ backgroundColor: 'white' }}>
-      <span className='text-lg'>Grandfathered Pay Rank: <span className='font-semibold text-lg'>{data.gRankUpperCase}</span> until {data.till}</span>
+    <div className={` text-center h-fit flex justify-center items-center ${containerStyles}`}>
+      <span className='text-xs lg:text-sm' >Grandfathered Pay Rank: <br/><span className={`${textStyles}`}>{data.gRankUpperCase}</span> until <span className='font-bold text-lg text-[#E74426]'>{data.till}</span></span>
     </div>
   )
 }

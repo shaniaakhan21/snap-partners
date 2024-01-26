@@ -22,6 +22,14 @@ export interface IAuth extends IUserMe, INsurAccount {
   blocked: boolean
   level?:string
   isCertified?: boolean
+  isValidated?: boolean
+  socialSecurityNumber: string
+  SSNDocURL?: string
+  doc_irs?: string
+  doc_b_structure?: string
+  TINstatus?: string
+  newSSN?: string
+  business_approved?: boolean
 }
 
 export type TSetAuth = ({
@@ -48,7 +56,23 @@ export type TSetAuth = ({
   blocked,
   bank_information,
   level,
-  isCertified
+  isCertified,
+  isValidated,
+  street,
+  state,
+  city,
+  zip,
+  dateOfBirth,
+  SSNDocURL,
+  doc_irs,
+  doc_b_structure,
+  TINstatus,
+  newSSN,
+  ein,
+  businessName,
+  business_type,
+  b_start_date,
+  business_approved
 }: IAuth) => void
 
 interface IAuthAtom {
@@ -79,10 +103,26 @@ interface IAuthAtom {
     bank_information,
     level,
     isCertified,
+    isValidated,
     facebook_url,
     twitter_url,
     linkedin_url,
-    instagram_url
+    instagram_url,
+    street,
+    state,
+    city,
+    zip,
+    dateOfBirth,
+    SSNDocURL,
+    doc_irs,
+    doc_b_structure,
+    TINstatus,
+    newSSN,
+    ein,
+    businessName,
+    business_type,
+    b_start_date,
+    business_approved
   }: IAuth) => void
   removeAuth: () => void
 }
@@ -117,10 +157,26 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
     bank_information,
     level,
     isCertified,
+    isValidated,
     facebook_url,
     twitter_url,
     linkedin_url,
-    instagram_url
+    instagram_url,
+    street,
+    state,
+    city,
+    zip,
+    dateOfBirth,
+    SSNDocURL,
+    doc_irs,
+    doc_b_structure,
+    TINstatus,
+    newSSN,
+    ein,
+    businessName,
+    business_type,
+    b_start_date,
+    business_approved
   }) => {
     set({
       auth: {
@@ -153,10 +209,26 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
         bank_information,
         level,
         isCertified,
+        isValidated,
         facebook_url,
         twitter_url,
         linkedin_url,
-        instagram_url
+        instagram_url,
+        street,
+        state,
+        city,
+        zip,
+        dateOfBirth,
+        SSNDocURL,
+        doc_irs,
+        doc_b_structure,
+        TINstatus,
+        newSSN,
+        ein,
+        businessName,
+        business_type,
+        b_start_date,
+        business_approved
       }
     })
   },

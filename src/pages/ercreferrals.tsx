@@ -18,7 +18,6 @@ import customParseFormat from 'dayjs/plugin/customParseFormat'
 dayjs.extend(customParseFormat) // Extend dayjs with the plugin. Required for Safari
 
 const { SEO } = APP_INFO
-const CLIENT_PAGE_LIMIT = 10
 
 const ErcreferralsPage: Page = () => {
   const [personalClients, setPersonalClients] = useState<Client[]>([])
@@ -74,9 +73,7 @@ const ErcreferralsPage: Page = () => {
       setTeamClientsLoading(true)
       const token = getLocalStorage('accessToken')
       const res = await fetch(
-        `/api/erc/getTableClients?month=${
-          monthSelected + 1
-        }&year=${yearSelected}`,
+        `/api/erc/getTableClients?month=${monthSelected}&year=${yearSelected}`,
         {
           method: 'GET',
           headers: { Authorization: `Bearer ${token}` }
@@ -145,7 +142,6 @@ const ErcreferralsPage: Page = () => {
           <TeamClientsTable
             clients={teamClients}
             onSelectLevel={setSelectedLevel}
-            // toggleTable={toggleTables}
           />
         </div>
       </div>

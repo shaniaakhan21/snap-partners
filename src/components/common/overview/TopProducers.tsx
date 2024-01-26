@@ -32,21 +32,21 @@ const Info = ({ img, noOfCustomers, name, nameValue }) => {
         <div>
           <Typography variant="body1"
             sx={{
-              fontSize: '10px',
-              color: '#828282'
-            }}
-          >
-            + {noOfCustomers} {noOfCustomers === 1 ? nameValue.slice(0, -1).toLowerCase() : nameValue.toLowerCase()}
-          </Typography>
-        </div>
-        <div>
-          <Typography variant="body1"
-            sx={{
               fontSize: '12px',
               color: '#222020'
             }}
           >
             {name}
+          </Typography>
+        </div>
+        <div>
+          <Typography variant="body1"
+            sx={{
+              fontSize: '10px',
+              color: '#828282'
+            }}
+          >
+            + {noOfCustomers} {noOfCustomers === 1 ? nameValue.slice(0, -1).toLowerCase() : nameValue.toLowerCase()}
           </Typography>
         </div>
       </div>
@@ -134,7 +134,7 @@ export const TopProducers: React.FC<any> = ({ data, value, type, typeLow, typeTe
               <div className='pb-3'>
                 <Divider color="primary"/>
               </div>
-              <div className="grid grid-cols-2 gap-0">
+              <div className="flex flex-col lg:grid grid-cols-2 gap-0">
                 {
                   data[`${typeLow}_${levelToRank.get(index)}`].map((itm) => {
                     return (<div>

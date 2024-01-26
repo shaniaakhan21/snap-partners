@@ -94,6 +94,7 @@ export const VerifyCodeToMerchants = ({ userTrack, handleStep, referralLink, han
       password: userTrack.userInfo.password,
       phoneNumber: userTrack.userInfo.phoneNumber,
       idImage: userTrack.userInfo.idImage,
+      dateOfBirth: userTrack.userInfo.dateOfBirth,
       insuranceImage: userTrack.userInfo.insuranceImage,
       roles: {
         admin: userTrack.userInfo.roles.admin,

@@ -24,14 +24,14 @@ export const InputProfile = ({ inputId, inputType, value, disabled = false, labe
   const [showPassword, setShowPassword] = useState(false)
 
   return (
-    <div className='relative rounded-xl bg-white w-full px-4 py-3 border-y-2 border-y-gray-200 flex flex-col justify-between'>
+    <div className={`relative  ${disabled ? 'flex-col md:flex-row justify-start items-center' : 'flex-col  justify-start items-center text-start'} rounded-xl bg-white w-[100%] px-4 py-3 flex`}>
       {!disabled && error && (
         <p className='text-sm text-red-400'>
           {error && error.message}
         </p>
       )}
-      <label htmlFor={labelFor} className='text-sm mb-2'>{labelName}</label>
-      <div className="relative">
+      <label htmlFor={labelFor} className={`text-xs md:text-sm ${disabled ? 'text-start w-full md:w-[30%] text-[#708292]' : 'w-full text-start  text-[#706464] mb-1'} `}>{labelName}</label>
+      <div className={`relative ${disabled ? ' w-full md:w-[50%]' : 'w-full text-start'} text-start`}>
         <input
           { ...registerValidated }
           id={inputId}
@@ -41,7 +41,7 @@ export const InputProfile = ({ inputId, inputType, value, disabled = false, labe
           value={value}
           disabled={disabled}
           placeholder={placeholder}
-          className={`w-full ${disabled ? 'bg-transparent' : 'bg-gray-200'} text-lg rounded py-1 px-2`}
+          className={` ${disabled ? 'w-full bg-transparent  font-semibold  py-1 px-0 md:px-2' : 'w-[80%] bg-white border-2 border-[#DFDFDF] rounded-lg text-black-h  py-1 px-2'} text-sm md:text-lg rounded`}
           {...props}
         />
         {isAPasswordInput && (

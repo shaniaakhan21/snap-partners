@@ -75,9 +75,7 @@ const ErcReport = ({ userId }) => {
       setTeamClientsLoading(true)
       const token = getLocalStorage('accessToken')
       const res = await fetch(
-        `/api/erc/getTableClients?month=${
-          monthSelected + 1
-        }&year=${yearSelected}&userId=${userId}`,
+        `/api/erc/getTableClients?month=${monthSelected + 1}&year=${yearSelected}&userId=${userId}`,
         {
           method: 'GET',
           headers: { Authorization: `Bearer ${token}` }

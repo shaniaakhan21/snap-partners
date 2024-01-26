@@ -10,24 +10,30 @@ const useStyles = makeStyles({
   root: {
     position: 'relative',
     display: 'inline-block',
-    backgroundColor: '#8E8E93',
-    borderRadius: '50px'
+    borderRadius: '50%',
+    backgroundColor: 'white',
+    boxShadow: '0 1px 17px -1px rgba(0, 0, 0, 0.2)!important'
   },
   img: {
     maxWidth: '100%',
-    borderRadius: '40px',
-    width: '80px',
-    height: '80px',
-    display: 'flex'
+    borderRadius: '50%',
+    width: '140px',
+    height: '140px',
+    display: 'flex',
+    border: '2px solid white'
   },
   editButton: {
     position: 'absolute',
-    top: '20%',
-    left: '90%',
-    height: '5px',
-    width: '5px',
+    top: '85%',
+    left: '81%',
+    height: '10px',
+    width: '10px',
+    background: 'white',
+    padding: '15px',
+    color: '#E74426',
     transform: 'translate(-50%, -50%)',
-    backgroundColor: 'white',
+    backgroundColor: 'white!important',
+    boxShadow: '0 1px 17px -1px rgba(0, 0, 0, 0.2)!important',
     '&:hover': {
       backgroundColor: '#f2f2f2'
     }
@@ -77,7 +83,7 @@ export const PhotoAccount = ({ photoURL, auth, setAuth }: IPhotoAccountProps) =>
         className={classes.editButton}
         onClick={() => document.getElementById('profileImageInput').click()}
       >
-        <BorderColorIcon style={{ width: '15px', height: '15px' }}/>
+        <BorderColorIcon style={{ width: '20px', height: '20px' }}/>
       </IconButton>
       <input
         type="file"
