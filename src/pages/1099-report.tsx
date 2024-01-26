@@ -176,12 +176,18 @@ const Report: Page = () => {
       headerName: 'Documents',
       flex: windowWidth <= 400 ? 0.5 : 1,
       renderCell: (params) => (
-        <a href = {params.value ? `${params.value}` : '#'} target='_blank'><Button
-          variant="contained"
-          className='bg-[#FA4616] hoverit'
-        >
-          View Document
-        </Button></a>)
+        params.value
+          ? (
+            <a href={params.value} target='_blank'>
+              <Button variant="contained" className='bg-[#FA4616] hoverit'>
+              View Document
+              </Button>
+            </a>
+          )
+          : (
+            <span className='font-semibold'>No Document uploaded</span>
+          )
+      )
     }
   ]
 
