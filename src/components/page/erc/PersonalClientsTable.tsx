@@ -20,6 +20,7 @@ const StyledDataGrid = styled.div`
 
     .InovuaReactDataGrid__cell {
       background-color: white;
+      padding-left: 8px!important;
     }
 
     .InovuaReactDataGrid__header {
@@ -54,10 +55,10 @@ const PersonalClientsTable: React.FC<ClientTableProps> = ({
           <div
             className={`${
               phase === 1
-                ? 'bg-[#E12D2D] text-white text-center p-2 text-sm mx-3 my-1 rounded-full'
+                ? 'bg-[#E12D2D] text-white text-center p-2 text-sm mr-3 my-1 rounded-full'
                 : phase === 2
-                  ? 'bg-[#FFC700] text-white text-center p-2 text-sm mx-3 my-1 rounded-full'
-                  : 'bg-[#55D65B] text-white text-center p-2 text-sm mx-3 my-1 rounded-full'
+                  ? 'bg-[#FFC700] text-white text-center p-2 text-sm mr-3 my-1 rounded-full'
+                  : 'bg-[#55D65B] text-white text-center p-2 text-sm mr-3 my-1 rounded-full'
             }`}
           >
             {phase}
