@@ -64,6 +64,7 @@ const rows = [
 
 const TicketsPage: Page = () => {
   const [windowWidth, setWindowWidth] = useState(0)
+  const [allTickets, setAllTickets] = useState([])
   const [tickets, setTickets] = useState([])
   const [singleTicket, setSingleTicket] = useState()
   const [ticketFlag, setTicketFlag] = useState(false)
@@ -152,6 +153,7 @@ const TicketsPage: Page = () => {
   const [zendeskTicketModal, setZendeskTicketModal] = useState(false)
   const [zendeskChatOpen, setZendeskChatOpen] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [ticketSearchString, setTicketSearchString] = useState('')
 
   // Example: Fetch all tickets
   const getZendeskData = () => {
@@ -163,7 +165,7 @@ const TicketsPage: Page = () => {
     })
       .then(async (response) => {
         console.log('Tickets:', response.data)
-        setTickets(await Promise.all(response.data.response.tickets.map(async (ticket) => {
+        const ticketArray = await Promise.all(response.data.response.tickets.map(async (ticket) => {
           const requesterData = await axios.get('/api/zendesk/requester', { params: { requester_id: ticket.requester_id } })
           const requesterName = await requesterData.data.response.user.name
           const dayCreated = new Date(ticket.created_at)
@@ -179,7 +181,8 @@ const TicketsPage: Page = () => {
             id: ticket.id
           }
         }))
-        )
+        setTickets(ticketArray)
+        setAllTickets(ticketArray)
         setLoading(false)
       })
       .catch((error) => {
@@ -216,6 +219,24 @@ const TicketsPage: Page = () => {
     setSingleTicket(params.row)
     setZendeskChatOpen(true)
   }
+
+  const handleInputSearchString = (event) => {
+    setTicketSearchString(event.target.value)
+  }
+
+  const handleTicketSearch = (event) => {
+    event.preventDefault()
+    console.log('the ticket search string is', ticketSearchString)
+    if (Number(ticketSearchString)) {
+      setTickets(allTickets && allTickets.filter((ticket) => ticket.id === Number(ticketSearchString)))
+    } else {
+      if (ticketSearchString === 'solved' || ticketSearchString === 'closed' || ticketSearchString === 'open' || ticketSearchString === 'new') {
+        setTickets(allTickets && allTickets.filter((ticket) => ticket.status === ticketSearchString))
+      } else {
+        console.log('search by name')
+      }
+    }
+  }
   return (
     <div>
       <div className='flex flex-row justify-between'>
@@ -229,10 +250,10 @@ const TicketsPage: Page = () => {
       </div>
       <div className='flex flex-row justify-evenly mt-10 gap-3'>
         <div className='searchForm-inputContainer'>
-          <InputComponent label={'search ticket'} placeholder={'ID, Name, Status'} />
+          <InputComponent label={'search ticket'} placeholder={'ID, Name, Status'} value={ticketSearchString} onChangeFunction={handleInputSearchString} />
         </div>
         <div className='searchForm-ButtonContainer'>
-          <ButtonComponent title={'search'} />
+          <ButtonComponent title={'search'} onClickFunction={handleTicketSearch} />
         </div>
       </div>
       <div>

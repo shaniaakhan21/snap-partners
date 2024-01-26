@@ -18,8 +18,8 @@ const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag
     width: 1000,
     bgcolor: 'background.paper',
     // border: '2px solid #000',
-    boxShadow: 24,
-    p: 4
+    boxShadow: 24
+    // p: 4
   }
   const { auth, setAuth } = useAuthStore()
   const [comments, setComments] = useState([])
@@ -103,9 +103,9 @@ const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag
     <Modal open={ zendeskChatModal } onClose={closeChatModal} >
       <Box sx={style}>
         <div>
-          <h2 style={{ marginTop: 16, height: 10 }}>Ticket #{ticket?.id} abc</h2>
+          <h2 className='ticket_heading'>Ticket #{ticket?.id}</h2>
         </div>
-        <div style={{ maxHeight: 600, overflowX: 'hidden', overflowY: 'auto' }}>
+        <div className='ticket_chatbox_mainbox'>
           {
             comments?.map((comment) =>
               <div style={ {
@@ -131,18 +131,27 @@ const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag
                     {comment.body}
                   </p>
                   {
-                    comment.attachments.length > 0 ? <a style={{ color: 'blue' }} href={`${comment.attachments[0].content_url}`} target='_blank'>file Attachment</a> : <></>
+                    comment.attachments.length > 0
+                      ? <div>
+                        <div className='ticket_commentbox_attachment_logo'>
+                          <img src='/images/icons/file.svg' />
+                        </div>
+                        <a style={{ color: 'blue' }} href={`${comment.attachments[0].content_url}`} target='_blank'>file Attachment</a>
+                      </div>
+                      : <></>
                   }
                 </div>
               </div>
             )}
         </div>
         {/* <InputComponent label='Subject' placeholder='Subject of your Issue' value={ticketBody.subject} param={'subject'} onChangeFunction={handleEditProfileUpdate} /> */}
-        <TextArea label='Write Comment' placeholder='Type your comment here' param={'description'} value={commentBody.comment_body} onChangeFunction={handleCommentValue}/>
-        <label>File Attachment(optional)</label> <br/>
-        <input type='file' name='zendeskCommentAttachment' onChange={(e) => { setCommentBody({ ...commentBody, attachment: e.target.files[0] }) }} />
-        <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
-          <ButtonComponent title={'Send'} onClickFunction={handlePostComment} />
+        <div className='ticket_commentbox_footer'>
+          <TextArea label='Write Comment' placeholder='Type your comment here' param={'description'} value={commentBody.comment_body} onChangeFunction={handleCommentValue}/>
+          <label>File Attachment(optional)</label> <br/>
+          <input type='file' name='zendeskCommentAttachment' onChange={(e) => { setCommentBody({ ...commentBody, attachment: e.target.files[0] }) }} />
+          <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
+            <ButtonComponent title={'Send'} onClickFunction={handlePostComment} />
+          </div>
         </div>
       </Box>
     </Modal>
