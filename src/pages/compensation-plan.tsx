@@ -16,7 +16,7 @@ const PDFViewer = dynamic(
   () => import('../components/page/compensation-plan/PDFViewer'),
   {
     loading: () => (
-      <div className='flex flex-col justify-center items-center'>
+      <div className='flex flex-col justify-center items-center w-full'>
         <Spinner />
         <span>Loading Compensation Plan...</span>
       </div>
@@ -66,7 +66,7 @@ const CompensationPlanPage: Page = () => {
         </div>
       </div>
 
-      <div className='mt-2 md:mt-4 shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)] rounded-2xl bg-white px-6 py-4'>
+      <div className='w-10/12 mt-2 md:mt-4 shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)] rounded-2xl bg-white px-6 py-4'>
         <PDFViewer fileData={fileData} setFileData={setFileData} />
       </div>
     </div>
