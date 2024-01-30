@@ -6,21 +6,24 @@ interface IProps {
   categorySelected: string
   categoryId : number
   children: ReactNode
+  className?: string
+  isLastItem?: boolean
 }
 
-export const CategoryChip = ({ id, onClick, categorySelected, children, categoryId }: IProps) => {
-  const selected = id === categorySelected
+export const CategoryChip = ({ id, onClick, categorySelected, children, categoryId, className, isLastItem }: IProps) => {
+  const selected = categoryId.toString() === categorySelected
 
   return (
     <li>
       <button
         id={id}
         className={`
-          border rounded-3xl m-2 px-5 py-1 transition-colors
-          ${selected ? 'border-primary-500 ' : 'border-gray-600 bg-opacity-10'} 
-          ${selected ? 'bg-primary-500' : 'bg-gray-600'}
-          ${selected ? 'text-white' : 'text-gray-600'}
-        `}
+          px-6 py-2 transition-colors w-full md:w-fit
+          ${selected ? 'bg-primary-500' : 'bg-white'}
+          ${selected ? 'text-white' : 'text-[#515151]'}
+          ${isLastItem ? 'rounded-r-3xl' : ''} 
+          ${className || ''}`
+        }
         onClick={onClick}
       >
         {children}
