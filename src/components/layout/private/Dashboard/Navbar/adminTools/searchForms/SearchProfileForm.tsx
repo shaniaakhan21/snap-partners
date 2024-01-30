@@ -21,9 +21,9 @@ function SearchProfileForm () {
         if (val.length === 5) {
           console.log('in this')
           setProfileSearchForm({ ...profileSearchForm, profileSearchString: val.replace(/(\+\d{1})(\d{3})/, '$1($2)') })
-        }else if (val.length === 11) {
+        } else if (val.length === 10) {
           console.log('in that')
-          setProfileSearchForm({ ...profileSearchForm, profileSearchString: val.replace(/(.{7})(\d{4})/, '$1-$2-') })
+          setProfileSearchForm({ ...profileSearchForm, profileSearchString: val.replace(/(.{7})(\d{3})/, '$1$2-') })
         } else {
           setProfileSearchForm({ ...profileSearchForm, profileSearchString: event.target.value })
         }
