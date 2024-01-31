@@ -38,11 +38,17 @@ interface IProps extends IUserData {
 
 export const ReferralsUserDetailModal = ({ id, name, lastname, createdAt, email, phone, sponsor, rank, onClick, openNewUserInfo, levels, auth, roles, closeModalManually }: IProps) => {
   const { copy } = useCopyToClipboard()
+  const getLevelColor = (level: number) => {
+    const baseColor1 = '#EDF5FD'
+    const baseColor2 = '#A1D0FD'
+
+    return level % 2 === 0 ? baseColor2 : baseColor1
+  }
 
   return (
-    <div className='p-1 text-xs sm:text-sm lg:text-base'>
+    <div className='text-xs sm:text-sm lg:text-base rounded-2xl'>
       <div>
-        <div className='mb-4 flex items-center justify-between'>
+        <div className='mb-4 p-8 flex items-center justify-between rounded-t-2xl bg-[#F5F9FD]'>
           <div>
             {auth.roles.admin && (
               <UpdateUserRank
@@ -66,9 +72,7 @@ export const ReferralsUserDetailModal = ({ id, name, lastname, createdAt, email,
           </div>
         </div>
 
-        <hr className='my-4 bordet-t border-gray-300' />
-
-        <div className='w-full'>
+        <div className='w-full px-8'>
           <div className='flex justify-between items-start'>
             <p className='mb-4 block text-primary-500 font-bold'>{name.toUpperCase()} {lastname?.toUpperCase()}</p>
             <ul className='flex justify-end gap-x-2'>
@@ -85,25 +89,25 @@ export const ReferralsUserDetailModal = ({ id, name, lastname, createdAt, email,
           </div>
         </div>
 
-        <div className='mb-8 flex flex-col sm:flex-row justify-center sm:items-center sm:justify-between'>
+        <div className='mb-8 px-8 flex flex-col sm:flex-row justify-center sm:items-center sm:justify-between'>
           <div className='inline-flex items-center'>
             <EmailIcon classes='w-5 h-5' />
-            <span className='ml-1 text-blue-600'>{email}</span>
+            <span className='ml-1 text-primary-500'>{email}</span>
           </div>
 
           <div className='items-center hidden sm:inline-flex'>
             <PhoneIcon classes='w-5 h-5' />
-            <span className='ml-1 text-blue-600'>{phone}</span>
+            <span className='ml-1 text-primary-500'>{phone}</span>
           </div>
         </div>
-
-        <div className='flex justify-between items-center'>
+        <hr className='my-4 border-t border-[#CFDFEC]' />
+        <div className='px-8 flex justify-between items-center'>
           {
             sponsor
               ? (
                 <p className='inline-block'>
                 Sponsored by {' '}
-                  <span className='inline-block text-primary-500'>
+                  <span className='inline-block text-primary-500 font-semibold'>
                     {`${sponsor.name} ${sponsor.lastname ? sponsor.lastname : ''}`}
                   </span>
                 </p>
@@ -121,8 +125,6 @@ export const ReferralsUserDetailModal = ({ id, name, lastname, createdAt, email,
         </div>
       </div>
 
-      <hr className='my-4 bordet-t border-gray-300' />
-
       <ul className='flex flex-col items-center justify-center mt-4'>
         {
           levels.length === 0 && <EmptyData label='No referrals yet' imgClasses='w-32 h-32' />
@@ -130,23 +132,23 @@ export const ReferralsUserDetailModal = ({ id, name, lastname, createdAt, email,
         {
           levels && levels.length > 0 &&
             levels.map(level => level.users.map((user: ILevelUser) => (
-              <li className='w-full mb-4 last:mb-0'>
+              <li key={user.id} className='w-[96%] mb-4 last:mb-0 border border-[#CFDFEC] mx-2 rounded-lg hover:border-[#000000]' style={{ backgroundColor: getLevelColor(level.level) }}>
                 <button
-                  className='w-full h-16 text-xs sm:text-sm flex gap-x-2 items-center justify-between transition-colors hover:bg-gray-200 md:px-2'
+                  className='w-full h-16 text-xs sm:text-sm flex gap-x-2 items-center justify-between md:px-2'
                   onClick={() => openNewUserInfo(user.id)}
                 >
-                  <div className='relative w-12 h-9 sm:w-16 sm:h-12 border-4 border-solid border-black mr-2'>
+                  <div className='relative w-12 h-12 sm:w-16 sm:h-13 border border-solid rounded-full bg-white border-[#CFDFEC] mr-2'>
                     <div className='font-bold text-lg absolute inset-0.5 sm:inset-1 sm:mt-0.5' style={{ letterSpacing: '-0.10em' }}>L {String(level.level)}</div>
                   </div>
 
                   <span className='font-bold text-gray-800 w-2/6 text-left truncate uppercase'>{user.name}</span>
-                  <span className='hidden sm:inline-block font-bold text-gray-800 w-2/6 text-left truncate uppercase'>{user.phoneNumber}</span>
+                  <span className='hidden sm:inline-block font-bold text-black w-2/6 text-left truncate uppercase'>{user.phoneNumber}</span>
 
-                  <span className='text-primary-500 w-1/6 text-center truncate'>ID: {user.id}</span>
+                  <span className='text-[#9A9A9A] w-1/6 text-center truncate font-bold'>ID: <span className='text-black'>{user.id}</span></span>
 
                   <span
                     style={{ maxWidth: 120 }}
-                    className='w-2/6 h-10 bg-primary-500 rounded-3xl font-bold text-white cursor-pointer flex items-center justify-center transition-colors hover:bg-hoverPrimary'
+                    className='w-2/6 h-10 bg-white border border-primary-500 rounded-3xl font-bold text-primary-500 cursor-pointer flex items-center justify-center transition-colors hover:bg-primary-500 hover:text-white'
                   >
                     VIEW MORE
                   </span>
