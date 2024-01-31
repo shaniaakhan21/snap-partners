@@ -3,6 +3,41 @@ import React from 'react'
 import ReactDataGrid from '@inovua/reactdatagrid-community'
 import { LevelledSetcClient, SetcClient } from 'lib/types/setc'
 import { IUserData } from 'lib/types'
+import styled from '@emotion/styled'
+
+const StyledDataGrid = styled.div`
+  && {
+    .InovuaReactDataGrid__column-header__resize-wrapper{
+      font-weight: 700;
+      font-size: 1.2em;
+      color: #000000;
+      padding-left: 8px;
+    }
+
+    .InovuaReactDataGrid__header{
+      background-color: #F0F4F8;
+      border-radius: 18px 18px 0px 0px;
+    }
+
+    .InovuaReactDataGrid__cell {
+      background-color: white;
+      padding-left: 8px!important;
+      text-aligh: start!important;
+    }
+
+    .InovuaReactDataGrid__header {
+      border-color:rgba(224, 224, 224, 0.5) !important;
+    }
+
+  .InovuaReactDataGrid__row-cell-wrap, .InovuaReactDataGrid__body {
+      border: 1px solid  rgba(224, 224, 224, 0.5) !important;
+    }
+
+    .InovuaReactDataGrid__body {
+      border-radius: 18px!important;
+    }
+  }
+`
 
 type SetcLevelClientsTableProps = {
   levelledClient: LevelledSetcClient
@@ -76,7 +111,7 @@ const SetcLevelClientsTable: React.FC<SetcLevelClientsTableProps> = ({
     }
   ]
   return (
-    <div>
+    <StyledDataGrid>
       <ReactDataGrid
         idProperty="id"
         columns={teamLevelReport}
@@ -86,7 +121,7 @@ const SetcLevelClientsTable: React.FC<SetcLevelClientsTableProps> = ({
         defaultLimit={10}
         pagination
       />
-    </div>
+    </StyledDataGrid>
   )
 }
 

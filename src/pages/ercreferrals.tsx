@@ -100,67 +100,72 @@ const ErcreferralsPage: Page = () => {
 
   return (
     <>
-      <div id="cro-erc-process">
-        <div className="">
-          <h1>The ERC Process has 3 Phases that trigger payout</h1>
+      <div className='bg-white rounded-2xl shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)] px-4 md:px-14 py-2'>
+        <div id="cro-erc-process" className='w-full'>
           <div>
-            <ul>
-              <li>Phase 1</li>
-              <li>New Client</li>
-            </ul>
-            <ul>
-              <li>Phase 2</li>
-              <li> Jorns Filling Work</li>
-            </ul>
-            <ul>
-              <li>Phase 3</li>
-              <li>IRS Payment</li>
-            </ul>
+            <h1 className='text-sm md:text-2xl mb-1 md:mb-3 font-semibold'>The ERC Process has 3 Phases that trigger payout</h1>
+            <div>
+              <ul>
+                <li>x</li>
+                <li>Phase 1</li>
+                <li className='text-[#32475B]'>New Client</li>
+              </ul>
+              <ul>
+                <li>x</li>
+                <li>Phase 2</li>
+                <li className='text-[#32475B]'> Jorns Filling Work</li>
+              </ul>
+              <ul>
+                <li>x</li>
+                <li>Phase 3</li>
+                <li className='text-[#32475B]'>IRS Payment</li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
-      <ErcModal client={selectedClient} isOpen={Boolean(selectedClient)} onClose={() => setSelectedClient(null)} />
-      <div id="table1erc" className="">
-        <div className="flex flex-row justify-between pb-2 text-lg font-sans font-semibold text-gray-800">
+        <ErcModal client={selectedClient} isOpen={Boolean(selectedClient)} onClose={() => setSelectedClient(null)} />
+        <div id="table1erc" className="mt-6">
+          <div className="flex flex-row justify-between pb-4 text-xl font-sans font-semibold text-black">
           Your Personal Clients
-          {
-            personalClientsLoading && <Spinner />
-          }
-        </div>
-        <PersonalClientsTable
-          clients={personalClients}
-          totalClientCount={totalClientCount}
-          toggleModal={setSelectedClient}
-        />
-        <TableHeader
-          loading={teamClientsLoading}
-          tableName="Your Team Clients"
-          setMonthSelected={setMonthSelected}
-          setYearSelected={setYearSelected}
-        />
-        <div className="text-center">
-          <TeamClientsTable
-            clients={teamClients}
-            onSelectLevel={setSelectedLevel}
+            {
+              personalClientsLoading && <Spinner />
+            }
+          </div>
+          <PersonalClientsTable
+            clients={personalClients}
+            totalClientCount={totalClientCount}
+            toggleModal={setSelectedClient}
           />
+          <TableHeader
+            loading={teamClientsLoading}
+            tableName="Your Team Clients"
+            setMonthSelected={setMonthSelected}
+            setYearSelected={setYearSelected}
+          />
+          <div className="text-center">
+            <TeamClientsTable
+              clients={teamClients}
+              onSelectLevel={setSelectedLevel}
+            />
+          </div>
         </div>
+        {selectedLevel > -1 && (
+          <div id="table1erc">
+            <TableHeader
+              tableName={'Team Level Report' + (selectedLevel > 0 ? ` (level-${selectedLevel === 6 ? '6+' : selectedLevel})` : '')}
+            />
+            <ShowDetailedTables onSelectIBO={setSelectedIBO} levelledClient={teamClients[selectedLevel - 1]} />
+          </div>
+        )}
+        {selectedIBO && (
+          <div id="table1erc">
+            <TableHeader
+              tableName={`${selectedIBO?.name} ${selectedIBO?.lastname}`}
+            />
+            <PersonListTable ibo={selectedIBO} />
+          </div>
+        )}
       </div>
-      {selectedLevel > -1 && (
-        <div id="table1erc">
-          <TableHeader
-            tableName={'Team Level Report' + (selectedLevel > 0 ? ` (level-${selectedLevel === 6 ? '6+' : selectedLevel})` : '')}
-          />
-          <ShowDetailedTables onSelectIBO={setSelectedIBO} levelledClient={teamClients[selectedLevel - 1]} />
-        </div>
-      )}
-      {selectedIBO && (
-        <div id="table1erc">
-          <TableHeader
-            tableName={`${selectedIBO?.name} ${selectedIBO?.lastname}`}
-          />
-          <PersonListTable ibo={selectedIBO} />
-        </div>
-      )}
     </>
   )
 }
