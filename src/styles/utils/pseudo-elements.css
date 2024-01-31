@@ -21,7 +21,7 @@
 .toggle-bg:after {
   content: '';
   top: 1.8px;
-  @apply absolute left-0.5 bg-white border border-gray-300 rounded-full h-5 w-5 transition shadow-sm;
+  @apply absolute bg-white border border-gray-300 rounded-full h-5 w-5 transition shadow-sm;
 }
 
 input:checked + .toggle-bg:after {
