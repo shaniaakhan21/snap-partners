@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-document-import-in-page */
 /* eslint-disable no-use-before-define */
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ZendeskTicketCreation from 'components/page/search/individualProfile/modalPopups/zendesk/ZendeskTicketCreation'
 import ZendeskChatModal from 'components/page/search/individualProfile/modalPopups/zendesk/ZendeskChatModal'
 import { ButtonComponent, InputComponent, SelectComponent } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/Components'
@@ -68,6 +68,8 @@ const TicketsPage: Page = () => {
   const [tickets, setTickets] = useState([])
   const [singleTicket, setSingleTicket] = useState()
   const [ticketFlag, setTicketFlag] = useState(false)
+  const scrollRef = useRef(null)
+  const [ticketSelectFlag, setTicketSelectFlag] = useState(false)
   const { auth } = useAuthStore()
 
   console.log('auth is', auth)
@@ -218,6 +220,7 @@ const TicketsPage: Page = () => {
     console.log('selection params', params)
     setSingleTicket(params.row)
     setZendeskChatOpen(true)
+    setTicketSelectFlag(!ticketSelectFlag)
   }
 
   const handleInputSearchString = (event) => {
@@ -276,7 +279,7 @@ const TicketsPage: Page = () => {
       </div> */}
 
       <ZendeskTicketCreation zendeskTicketModal={zendeskTicketModal} closeModal = {onZendeskTicketModalClose} ticketFlag={ticketFlag} setTicketFlag={setTicketFlag} zendesk_id={auth.zendesk_id} name= {auth.name} email= {auth.email} />
-      <ZendeskChatModal zendeskChatModal={zendeskChatOpen} closeChatModal = {onZendeskChatModalClose} ticket={singleTicket} ticketFlag={ticketFlag} setTicketFlag={setTicketFlag}/>
+      <ZendeskChatModal zendeskChatModal={zendeskChatOpen} closeChatModal = {onZendeskChatModalClose} ticket={singleTicket} ticketFlag={ticketFlag} setTicketFlag={setTicketFlag} scrollRef={scrollRef} ticketSelectFlag={ticketSelectFlag} />
     </div>
   )
 }

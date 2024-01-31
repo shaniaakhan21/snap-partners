@@ -11,7 +11,7 @@
     color: #ffffff;
 }
 .ticket_chatbox_mainbox{
-    max-height: 600px; 
+    height: 600px;
     overflow-x: hidden; 
     overflow-y: auto;
     padding: 10px; 

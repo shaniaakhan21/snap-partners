@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable array-callback-return */
 
 /* eslint-disable eqeqeq */
@@ -5,11 +6,11 @@
 import { Box, Modal } from '@mui/material'
 import axios from 'axios'
 import { ButtonComponent, InputComponent, TextArea } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/Components'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef, useLayoutEffect } from 'react'
 import { useAuthStore } from 'lib/stores'
 import { textAlign } from 'html2canvas/dist/types/css/property-descriptors/text-align'
 
-const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag, setTicketFlag }) => {
+const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag, setTicketFlag, scrollRef, ticketSelectFlag }) => {
   const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -65,12 +66,16 @@ const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag
     if (ticket && ticket.id) {
       getComments(ticket.id)
     }
-  }, [ticket, commentFlag])
+  }, [commentFlag, ticketSelectFlag])
   useEffect(() => {
     if (comments.length > 0) {
       getCommentUsers(comments)
     }
   }, [comments, commentFlag])
+  useEffect(() => {
+    scrollRef.current ? scrollRef.current.scrollTop = scrollRef?.current?.scrollHeight : () => {}
+    // scrollRef.current && scrollRef.current.scrollIntoView({ behavior: "smooth", block: "end" })
+  }, [comments, ticketSelectFlag])
 
   const handleCommentValue = (event) => {
     setCommentBody({ ...commentBody, comment_body: event.target.value })
@@ -80,6 +85,7 @@ const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag
     console.log('comment body is', commentBody)
     const zendeskCommentData = new FormData()
     zendeskCommentData.append('ticket_id', ticket?.id)
+    zendeskCommentData.append('ticketStatus', ticket?.status)
 
     Object.entries(commentBody).forEach(([key, value]) => {
       zendeskCommentData.append(key, value)
@@ -93,6 +99,9 @@ const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag
         if (res.data?.response?.ticket) {
           setCommentBody({ ...commentBody, comment_body: '', attachment: null })
           setCommentFlag(!commentFlag)
+          if (ticket?.status === 'solved') {
+            setTicketFlag(!ticketFlag)
+          }
         } else {
           alert('adding comment failed')
         }
@@ -105,7 +114,7 @@ const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag
         <div>
           <h2 className='ticket_heading'>Ticket #{ticket?.id}</h2>
         </div>
-        <div className='ticket_chatbox_mainbox'>
+        <div className='ticket_chatbox_mainbox' ref={scrollRef}>
           {
             comments?.map((comment) =>
               <div style={ {
@@ -146,7 +155,13 @@ const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag
         </div>
         {/* <InputComponent label='Subject' placeholder='Subject of your Issue' value={ticketBody.subject} param={'subject'} onChangeFunction={handleEditProfileUpdate} /> */}
         <div className='ticket_commentbox_footer'>
-          <TextArea label='Write Comment' placeholder='Type your comment here' param={'description'} value={commentBody.comment_body} onChangeFunction={handleCommentValue}/>
+          <TextArea
+            label='Write Comment'
+            placeholder='Type your comment here'
+            param={'description'}
+            value={commentBody.comment_body}
+            onChangeFunction={handleCommentValue}
+            disabled={(ticket?.status && ticket?.status === 'closed')}/>
           <label>File Attachment(optional)</label> <br/>
           <input type='file' name='zendeskCommentAttachment' onChange={(e) => { setCommentBody({ ...commentBody, attachment: e.target.files[0] }) }} />
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
