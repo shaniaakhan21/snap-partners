@@ -8,32 +8,36 @@
 
 /* #table1erc div:nth-child(1) > .InovuaReactDataGrid__column-header--unlockable,  */
 #cro-erc-process > div > div > ul:nth-child(1) > li:nth-child(1) {
-  color: white;
-  background-color: #dd4c37 !important;
+  color: #E12D2D;
+  background-color: #E12D2D !important;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  line-height: 10px;
+  font-size: 1px;
 }
 /* #table1erc div:nth-child(10) > .InovuaReactDataGrid__column-header--unlockable, */
 #cro-erc-process > div > div > ul:nth-child(2) > li:nth-child(1) {
-  color: white;
-  background-color: #f4b400;
+  color: #FFC700;
+  background-color: #FFC700;
+  line-height: 10px;
+  font-size: 1px;
 }
 
 /* #table1erc div:nth-child(15) > .InovuaReactDataGrid__column-header--unlockable,*/
 #cro-erc-process > div > div > ul:nth-child(3) > li:nth-child(1) {
-  color: white;
-  background-color: #0f9d58;
+  color: #55D65B;
+  background-color: #55D65B;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  line-height: 10px;
+  font-size: 1px;
 }
 
 #table1erc {
   background-color: white;
-  padding: 0.5rem 1.25rem;
-  margin-bottom: 1rem;
-  margin-left: 4rem;
-  margin-right: 4rem;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  border-radius: 0.5rem;
 }
 
 #table1erc .InovuaReactDataGrid {
@@ -83,17 +87,9 @@
 }
 
 #cro-erc-process {
-  background-color: white;
-  padding: 1rem;
-  margin-top: 10px;
-  margin-bottom: 1rem;
-  margin-left: 4rem;
-  margin-right: 4rem;
-  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   flex-direction: column;
-  border-radius: 0.5rem;
 }
 
 #cro-erc-process > div > h1 {
@@ -109,15 +105,72 @@
   width: 33.33%;
 }
 
-#cro-erc-process > div > div > ul > li:nth-child(2) {
+#cro-erc-process > div > div > ul > li:nth-child(2) ,#cro-erc-process > div > div > ul > li:nth-child(3) {
   text-align: center;
   font-size: 0.7rem;
   padding: 0.5rem 0rem 0rem 0rem;
   font-weight: 600;
 }
 
+#cro-erc-process > div > div > ul:nth-child(1) > li:nth-child(2) {
+  color: white!important;
+  background-color: #E12D2D !important;
+  padding: 6px;
+  margin: 2.5% 35% 0% 35%;
+  border-radius: 5px;
+}
+
+#cro-erc-process > div > div > ul:nth-child(1) > li:nth-child(2)::before {
+  content: '';
+  position: relative;
+  top: -39px;
+  left: 28%;
+  margin-left: -10px;
+  border-width: 0 10px 10px 10px;
+  border-style: solid;
+  border-color: transparent transparent #E12D2D transparent;
+}
+
+#cro-erc-process > div > div > ul:nth-child(2) > li:nth-child(2) {
+  color: white!important;
+  background-color: #FFC700 !important;
+  padding: 6px;
+  margin: 2.5% 35% 0% 35%;
+  border-radius: 5px;
+}
+
+#cro-erc-process > div > div > ul:nth-child(2) > li:nth-child(2)::before {
+  content: '';
+  position: relative;
+  top: -39px;
+  left: 28%;
+  margin-left: -10px;
+  border-width: 0 10px 10px 10px;
+  border-style: solid;
+  border-color: transparent transparent #FFC700 transparent;
+}
+
+#cro-erc-process > div > div > ul:nth-child(3) > li:nth-child(2) {
+  color: white!important;
+  background-color: #55D65B !important;
+  padding: 6px;
+  margin: 2.5% 35% 0% 35%;
+  border-radius: 5px;
+}
+
+#cro-erc-process > div > div > ul:nth-child(3) > li:nth-child(2)::before {
+  content: '';
+  position: relative;
+  top: -39px;
+  left: 28%;
+  margin-left: -10px;
+  border-width: 0 10px 10px 10px;
+  border-style: solid;
+  border-color: transparent transparent #55D65B transparent;
+}
+
 @media only screen and (min-width: 700px) {
-  #cro-erc-process > div > div > ul > li:nth-child(2) {
+  #cro-erc-process > div > div > ul > li:nth-child(2), #cro-erc-process > div > div > ul > li:nth-child(3) {
     font-size: 1rem;
   }
 
@@ -131,6 +184,20 @@
   }
 
   #cro-erc-process > div {
-    width: 80%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 700px) {
+  #cro-erc-process > div > div > ul:nth-child(1) > li:nth-child(2), 
+  #cro-erc-process > div > div > ul:nth-child(2) > li:nth-child(2), 
+  #cro-erc-process > div > div > ul:nth-child(3) > li:nth-child(2) {
+    margin: 14% 4%!important;
+  }
+  #cro-erc-process > div > div > ul:nth-child(1) > li:nth-child(2)::before, 
+  #cro-erc-process > div > div > ul:nth-child(2) > li:nth-child(2)::before, 
+  #cro-erc-process > div > div > ul:nth-child(3) > li:nth-child(2)::before {
+    top: -30px!important;
+    left: 43%!important;
   }
 }
