@@ -54,7 +54,7 @@ export const ReferralCards = ({ title, ilustration, link, newUser = false, class
           {ilustration}
         </div>
         <div className='flex flex-col w-3/4 ml-0'>
-          <h3 className={`w-full text-lg sm:text-2xl font-semibold text-start ${newUser ? 'my-4' : 'mb-4'}`}>{title}</h3>
+          <h3 className={`w-full text-lg sm:text-2xl font-semibold ml-2 text-start ${newUser ? 'my-4' : 'mb-4'}`}>{title}</h3>
         </div>
       </div>
       <div>

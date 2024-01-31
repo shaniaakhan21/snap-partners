@@ -14,11 +14,13 @@ import { ROLES } from 'config/roles'
 
 import DashboardLayout from 'layouts/private/Dashboard'
 import { Unilevel as OldGenealogy } from '../../components/page/genealogy/OldGenealogy/UniLevel'
-import { CustomerIcon, DriverIcon, MerchantIcon } from 'components/common/icons'
+import { MerchantIcon } from 'components/common/icons'
 import { SpinnerPageContent } from 'components/common/loaders/PageContent'
 import { NewGenealogy } from 'components/page/genealogy/NewGenealogy'
 import { ReferralCards } from 'components/page/referrals/Cards'
 import { EmptyData } from 'components/common/empty/EmptyData'
+import { CustomerRefIcon } from 'components/common/icons/CustomerRefIcon'
+import { DriverRefIcon } from 'components/common/icons/DriverRefIcon'
 
 const { SEO } = APP_INFO
 
@@ -133,20 +135,20 @@ const GenealogyPage: Page = () => {
         <div className='w-full grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 items-center justify-center justify-items-center gap-4 mt-8'>
           <ReferralCards
             title='Refer Customers'
-            ilustration={<CustomerIcon />}
+            ilustration={<CustomerRefIcon />}
             link={`${auth.referralLink}&role=${ROLES.CUSTOMER}` || 'With Out Link'}
             newUser={false}
             classes='col-span-1'
           />
           <ReferralCards
-            title='Driver'
-            ilustration={<DriverIcon />}
+            title='Refer Driver'
+            ilustration={<DriverRefIcon />}
             link={`${auth.referralLink}&role=${ROLES.DRIVER}` || 'With Out Link'}
             newUser={false}
             classes='col-span-1'
           />
           <ReferralCards
-            title='Merchant Customers'
+            title='Refer Merchant Customers'
             ilustration={<MerchantIcon />}
             link={`${auth.referralLink}&role=${ROLES.MERCHANT}` || 'With Out Link'}
             newUser={false}

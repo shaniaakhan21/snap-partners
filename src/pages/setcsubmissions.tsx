@@ -82,29 +82,32 @@ const SetcClientsPage: Page = () => {
   }, [monthSelected, yearSelected])
 
   return (
-    <div>
-      <div id="cro-setc-process">
-        <div className="">
-          <h1>The SETC Process triggers commission upon completion of Phase 2</h1>
+    <div className='bg-white rounded-2xl shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)] px-4 md:px-14 py-2'>
+      <div id="cro-setc-process" className='w-full'>
+        <div>
+          <h1 className='text-sm md:text-2xl mb-1 md:mb-3 font-semibold'>The SETC Process triggers commission upon completion of Phase 2</h1>
           <div>
             <ul>
+              <li>x</li>
               <li>Phase 1</li>
-              <li>Client Engagement</li>
+              <li className='text-[#32475B]'>Client Engagement</li>
             </ul>
             <ul>
+              <li>x</li>
               <li>Phase 2</li>
-              <li> Qualification & Invoice</li>
+              <li className='text-[#32475B]'> Qualification & Invoice</li>
             </ul>
             <ul>
+              <li>x</li>
               <li>Phase 3</li>
-              <li>Filed With IRS</li>
+              <li className='text-[#32475B]'>Filed With IRS</li>
             </ul>
           </div>
         </div>
       </div>
-      <div id="table1setc">
+      <div id="table1setc" className="mt-6">
         <div className='flex flex-row justify-between items-center'>
-          <p className='text-lg font-sans font-semibold text-gray-800'>Your Personal SETC Client Submissions</p>
+          <p className="flex flex-row justify-between pb-4 text-xl font-sans font-semibold text-black">Your Personal SETC Client Submissions</p>
           {
             personalClientsLoading && (
               <Spinner />
@@ -129,7 +132,7 @@ const SetcClientsPage: Page = () => {
         </div>
       </div>
       {selectedLevel > -1 && (
-        <div id="table1setc">
+        <div id="table1setc" className='my-4'>
           <TableHeader
             tableName={'Team Level Report' + (selectedLevel > 0 ? ` (level-${selectedLevel === 6 ? '6+' : selectedLevel})` : '')}
           />
@@ -147,15 +150,15 @@ const SetcClientsPage: Page = () => {
           <SingleIboSetcs ibo={selectedIBO} />
         </div>
       )}
-      <div id="table1setc">
-        <div className='mt-4'>
-          <p>Key: <br />
-        Paid Clients: Reflects those clients that have paid the invoice amount with a value of "1" if paid a ”0” if not paid yet
+      <div className='flex flex-row w-full border border-[#DCE5ED] rounded-lg my-6'>
+        <div className='w-1/2 border-r border-[#DCE5ED] px-4 py-3 '>
+          <p className='text-sm'><span className='font-bold text-black text-base'>Key: </span><br />
+            <b>Paid Clients:</b> Reflects those clients that have paid the invoice amount with a value of "1" if paid a ”0” if not paid yet
           </p>
         </div>
-        <div className='mt-4'>
-          <p>Note: <br />
-        Commissions are only earned on clients that have paid their invoice which is determined in Phase 2 of the filing process.
+        <div className='w-1/2 px-4 py-3 bg-[#F0F4F8]'>
+          <p className='text-sm'><span className='font-bold text-black text-base'>Note: </span><br />
+        Commissions are only earned on clients that have paid their invoice which is determined in <b>Phase 2</b> of the filing process.
           </p>
         </div>
       </div>

@@ -58,14 +58,14 @@ export const NewGenealogy = ({
               id='search'
               name='search'
               type='text'
-              className='rounded-md border-2 border-gray-500 px-4 py-2 mr-4 focus:outline-none focus:ring focus:ring-primary-500'
+              className='rounded-l-xl border-2 border-[#E1E8EB] w-fit px-4 py-2 focus:outline-none focus:ring focus:ring-primary-500'
               placeholder='ID / NAME / PHONE / LASTNAME'
               {...register('search')}
             />
 
             <button
               disabled={searchIsLoading}
-              className={`${searchIsLoading ? 'bg-gray-600 border-gray-600' : 'bg-primary-500 border-primary-500'} text-white font-semibold rounded-md px-4 py-2 hover:bg-opacity-80 focus:outline-none focus:ring focus:ring-primary-500 mt-2 sm:mt-0`}
+              className={`${searchIsLoading ? 'bg-gray-600 border-gray-600' : 'bg-primary-500 border-primary-500'} text-white font-semibold rounded-r-xl px-4 py-2 hover:bg-opacity-80 focus:outline-none focus:ring focus:ring-primary-500 mt-2 sm:mt-0`}
             >
             Search
             </button>
@@ -73,6 +73,13 @@ export const NewGenealogy = ({
 
           <div>
             <label htmlFor='toggle-example-checked' className='flex items-center cursor-pointer relative mt-4 sm:mt-0 hover:text-primary-500'>
+              <span className='mr-3 text-sm font-medium'>
+                {
+                  genealogyLayoutConfig.isNewGenealogy
+                    ? 'New Genealogy Layout'
+                    : 'Legacy Genealogy Layout'
+                }
+              </span>
               <input
                 type='checkbox'
                 id='toggle-example-checked'
@@ -81,20 +88,14 @@ export const NewGenealogy = ({
                 onChange={handleToggleGenealogy}
               />
               <div className='toggle-bg bg-gray-400 border-2 border-gray-200 h-6 w-11 rounded-full'></div>
-              <span className='ml-3 text-sm font-medium'>
-                {
-                  genealogyLayoutConfig.isNewGenealogy
-                    ? 'New Genealogy Layout'
-                    : 'Legacy Genealogy Layout'
-                }
-              </span>
+
             </label>
           </div>
         </div>
 
         <br />
 
-        <ul className={`${usersSearched && !searchIsLoading ? 'bg-white' : ''} p-4 max-h-[40vh] overflow-auto scroll-primary`}>
+        <ul className={`${usersSearched && !searchIsLoading ? 'bg-white' : ''} p-2 max-h-[40vh] overflow-auto scroll-primary`}>
           {searchIsLoading && (
             <div className='flex items-center justify-center'>
               <Spinner />
@@ -121,8 +122,8 @@ export const NewGenealogy = ({
         </ul>
       </div>
 
-      <div className='grid grid-cols-1 lg:grid-cols-3 justify-center justify-items-center gap-4 mt-4'>
-        <ReferralTabList classes='col-span-1'>
+      <div className='grid grid-cols-1 lg:grid-cols-3 justify-center justify-items-center gap-0 rounded-2xl bg-white shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)]'>
+        <ReferralTabList classes='col-span-1 border-r border-[#DCE5ED]'>
           {levels.map((level) => (
             <ReferralTabListItem
               key={level.level}
