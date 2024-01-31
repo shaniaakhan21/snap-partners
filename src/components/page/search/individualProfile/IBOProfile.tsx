@@ -126,6 +126,9 @@ function IBOProfile ({ profileData, userLevel }) {
                 <img src='/static/badges/binary.png' style={{ width: '70px' }} />
                 }
                 {
+                  profileData[0]?.business_approved && <img className='w-10 cursor-pointer' src='/images/b_cert.png' alt='Business Approved Certificate' title='Business Approved Certificate'/>
+                }
+                {
                   profileData[0]?.isCertified && <img className='w-10 cursor-pointer' src='/static/wellness/weight-care-certified.png' alt='WeightCare Certificate' title='WeightCare Certificate'/>
                 }
                 <img src='/images/icons/deliveryMan.png' />

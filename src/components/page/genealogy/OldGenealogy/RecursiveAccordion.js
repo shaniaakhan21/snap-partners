@@ -16,9 +16,16 @@ import { API } from 'config/api'
 
 const useStyles = makeStyles(theme => ({
   Btn: {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.text.white,
-    height: 22
+    height: 22,
+    color: '#E74426!important',
+    border: '1px solid #E74426',
+    borderRadius: '10px',
+    padding: '10px',
+    '&:hover': {
+      color: '#FFFFFF!important',
+      backgroundColor: '#E74426',
+      cursor: 'pointer'
+    }
   },
   wrappingViewOptions: {
     '& > div': {
@@ -108,10 +115,10 @@ export const RecursiveAccordion = ({ openUser, user, master = false }) => {
       }
       {
         !loading && levels.length === 0 && (
-          <Accordion style={{ width: '100%', border: '1px solid grey' }}>
+          <Accordion style={{ width: '100%', border: '1px solid #CFDFEC', backgroundColor: '#F5F9FD', margin: '10px 0', boxShadow: 'none', borderRadius: '8px' }}>
             <AccordionSummary className={classes.wrappingViewOptions} aria-controls="panel1a-content" id="panel1a-header">
-              <Chip style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} size="small" label={`${user.name} [${user.id}]`} />
-              <Chip style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} size="small" label={'Users : 0'} variant="outlined" />
+              <Chip style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} className='bg-[#E8F2FA] py-4 px-2' size="small" label={`${user.name} [${user.id}]`} />
+              <Chip style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} size="small" label={'Users : 0'} className='bg-[#F5F9FD] text-base font-bold text-[#7194AF]' />
               <Button style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} onClick={(e) => { e.stopPropagation(); openUser(user.id, user.name) }} className={classes.Btn} color={'primary'} size={'small'} variant="contained">View user</Button>
             </AccordionSummary>
           </Accordion>
@@ -119,11 +126,11 @@ export const RecursiveAccordion = ({ openUser, user, master = false }) => {
       }
       {mapper.map((level, key) => {
         return (
-          <Accordion style={{ width: '100%', border: '1px solid grey' }} key={key}>
+          <Accordion style={{ width: '100%', border: '1px solid #CFDFEC', backgroundColor: '#F5F9FD', margin: '10px 0', boxShadow: 'none', borderRadius: '8px' }} key={key}>
             <AccordionSummary style={{ display: 'flex', flexWrap: 'wrap' }} onClick={() => { getUsers(key) }} expandIcon={<ExpandMoreIcon/>} aria-controls="panel1a-content" id="panel1a-header">
-              {master === true ? (<Typography style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }}>Level {level.level}</Typography>) : <Chip style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} size="small" label={`${user.name} [${user.id}]`} />}
-              <Chip style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} size="small" label={`Users : ${level.usersLength}`} variant="outlined" />
-              {master === false && <Button onClick={(e) => { e.stopPropagation(); openUser(user.id, user.name) }} className={classes.Btn} color={'primary'} size={'small'} variant="contained" style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }}>View user</Button>}
+              {master === true ? (<Typography style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }}>Level {level.level}</Typography>) : <Chip style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} size="small" className='bg-[#E8F2FA] py-4 px-2' label={`${user.name} [${user.id}]`} />}
+              <Chip style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }} size="small" label={`Users : ${level.usersLength}`} className='bg-[#F5F9FD] text-base font-bold text-[#7194AF]' />
+              {master === false && <Button onClick={(e) => { e.stopPropagation(); openUser(user.id, user.name) }} className={classes.Btn} size={'small'} variant="contained" style={{ marginLeft: 5, marginRight: 5, marginTop: 4, marginBottom: 4 }}>View user</Button>}
             </AccordionSummary>
             <AccordionDetails>
               {showLevels[key] && (
@@ -146,7 +153,7 @@ export const RecursiveAccordion = ({ openUser, user, master = false }) => {
             <Typography style={{ marginLeft: 20, marginBottom: 10 }}>
                        Currently Showing {(limits[level.level] || 5) > level.usersLength ? level.usersLength : (limits[level.level] || 5)}
               {level.usersLength > (limits[level.level] || 5) && (
-                <Button style={{ marginLeft: 10 }} size={'small'} variant={'contained'} color={'primary'} onClick={() => { setLimitsLevels(level.level, (limits[level.level] || 5) + 5) }}>Load 5 more</Button>
+                <Button style={{ marginLeft: 10 }} size={'small'} variant={'contained'} className={classes.Btn} onClick={() => { setLimitsLevels(level.level, (limits[level.level] || 5) + 5) }}>Load 5 more</Button>
               )}
             </Typography>
 
