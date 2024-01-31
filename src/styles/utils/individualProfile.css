@@ -1,7 +1,6 @@
 .profilePage-individualProfile-conatiner
 {
     padding: 25px;
-    margin: 20px 50px 20px 50px;
 }
 
 .profilePage-individualProfile-header-list
@@ -95,7 +94,7 @@ text-transform: uppercase;
 }
 .profilePage-IBOProfile-midSection-mainInfo{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     /* gap: 2%; */
     color: var(--info-600, #139ECF);
@@ -109,10 +108,10 @@ line-height: 24px;
 }
 .profilePage-IBOProfile-midSection-mainInfo-name
 {
-    color: var(--text-color-accent-link, #E35C49);
+    color: #000;
 
 /* Text Font / LABEL */
-font-size: 12px;
+font-size: 16px;
 font-family: Open Sans;
 font-style: normal;
 font-weight: 700;
@@ -171,6 +170,7 @@ line-height: 24px;
 {
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 .profilePage-IBOProfile-midSection-mainInfo-text:hover{
     cursor: pointer;

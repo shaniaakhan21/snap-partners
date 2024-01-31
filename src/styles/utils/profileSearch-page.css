@@ -1,6 +1,8 @@
 .profilePage-searchForm-container{
     padding: 25px;
-    margin: 20px 50px 20px 50px;
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 1px 17px -1px rgba(0, 0, 0, 0.2);
 }
 .profilePage-searchForm{
     display: flex;
@@ -17,7 +19,7 @@
         display: flex;
         flex-direction: row;
         gap: 10px;
-        color:#404040;
+        color:#000;
     
         /* Text Font/H6 Headline */
         font-size: 18px;
@@ -28,10 +30,10 @@
 }
 .profilePage-searchResult-container
 {
-    padding: 25px;
-    margin: 20px 50px 20px 50px;
     max-height: 500px;
     overflow-y: scroll;
+    border-radius: 20px;
+    box-shadow: 0 1px 17px -1px rgba(0, 0, 0, 0.2);
 }
 .profilePage-searchResult-row
 {

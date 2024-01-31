@@ -60,10 +60,12 @@ function InfoBanner ({ profileData, userLevel }) {
   return (
     <>
       <div className={`${cname}-midSection-mainInfo`}>
-        <div style={{ display: 'flex', flexDirection: 'row', gap: '10px' }}>
-          <Avatar src={profileData[0]?.profileImage ? profileData[0]?.profileImage : userProfilePictureMapping[profileData[0]?.ranks?.type]} style={{ width: '78px', height: '78px' }} />
-          <div style={{ marginTop: '-15px' }}><p className={`${cname}-midSection-mainInfo-name`}>{`${profileData[0]?.name} ${profileData[0]?.lastname}`}</p>
-            <p className={`${cname}-midSection-mainInfo-text`}><img src='/images/icons/email.svg'/>{`${profileData[0]?.email}`}</p></div>
+        <div className='w-full flex justify-center'>
+          <Avatar src={profileData[0]?.profileImage ? profileData[0]?.profileImage : userProfilePictureMapping[profileData[0]?.ranks?.type]} style={{ width: '120px', height: '120px' }} />
+        </div>
+        <div>
+          <div className='text-center my-2'><p className={`${cname}-midSection-mainInfo-name`}>{`${profileData[0]?.name} ${profileData[0]?.lastname}`}</p>
+            <p className={`${cname}-midSection-mainInfo-text text-[#E74426]`}><img src='/images/icons/email.svg'/>{`${profileData[0]?.email}`}</p></div>
         </div>
         { mapping[userLevel] >= 600 &&
         <React.Fragment>
@@ -82,7 +84,7 @@ function InfoBanner ({ profileData, userLevel }) {
         <p className={`${cname}-midSection-mainInfo-text`}><span className={`${cname}-midSection-mainInfo-title`}>Snap Type -</span>{snapType(profileData[0]?.roles)}</p>
         <p className={`${cname}-midSection-mainInfo-text`}><span className={`${cname}-midSection-mainInfo-title`}>User Role -</span>{profileData[0]?.level}</p>
         { mapping[userLevel] >= 700 &&
-        <p className={`${cname}-midSection-mainInfo-text`}><span className={`${cname}-midSection-mainInfo-title`}>GrandfatherRank -</span>{profileData[0]?.gRanks[0]?.status ? <span>{profileData[0]?.gRanks[0]?.gRank} {profileData[0]?.gRanks[0].gRank ? <span>(until: {profileData[0]?.gRanks[0]?.to.split(" ")[0]})</span> : <></>}</span> : <></>}</p>
+        <p className={`${cname}-midSection-mainInfo-text`}><span className={`${cname}-midSection-mainInfo-title`}>GrandfatherRank -</span>{profileData[0]?.gRanks[0]?.status ? <span>{profileData[0]?.gRanks[0]?.gRank} {profileData[0]?.gRanks[0].gRank ? <span>(until: {profileData[0]?.gRanks[0]?.to.split(' ')[0]})</span> : <></>}</span> : <></>}</p>
         }
       </div>
     </>

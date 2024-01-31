@@ -1,5 +1,6 @@
 /* eslint-disable no-use-before-define */
 import React from 'react'
+import SearchIcon from '@mui/icons-material/Search'
 
 interface IButtonComponent{
     title:string,
@@ -95,7 +96,7 @@ export const ButtonComponent = (props:IButtonComponent) => {
   const { title, onClickFunction, param, type } = props
   return (
     <div>
-      {onClickFunction ? <button style={{ backgroundColor: '#DD4C37' }} type='submit' className='search-form-button button-label' onClick={(e) => { onClickFunction(e, param) }}>{title}</button> : <button style={{ backgroundColor: '#DD4C37' }} type='submit' className='search-form-button button-label'>{title}</button>}
+      {onClickFunction ? <button style={{ color: '#E74426' }} type='submit' className='search-form-button button-label' onClick={(e) => { onClickFunction(e, param) }}>{title}</button> : <button style={{ backgroundColor: '#E74426' }} type='submit' className='search-form-button button-label flex flex-row w-full items-center justify-evenly mx-2'><SearchIcon/>{title}</button>}
     </div>
   )
 }
