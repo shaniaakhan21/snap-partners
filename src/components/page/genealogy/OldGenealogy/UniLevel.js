@@ -15,7 +15,14 @@ const useStyles = makeStyles(theme => ({
   },
   Btn: {
     backgroundColor: '#DD4C37',
-    color: '#fff'
+    color: '#fff!important',
+    padding: '8px 13px!important',
+    borderRadius: '0px!important'
+  },
+  FieldIt: {
+    '& .MuiOutlinedInput-root': {
+      borderRadius: '0px!important'
+    }
   }
 }))
 
@@ -103,40 +110,41 @@ export const Unilevel = () => {
   return (
     <>
       <ModalUninivelUser id={id} name={name} openUser={openUser} open={showModal} close={setshowModal} />
+      <Grid container className={classes.title}>
+        <Grid container item xs={12} md={12} justifyContent={'space-between'} alignItems='center' style={{ marginBottom: 20 }} >
+          <Grid justifyContent='flex-end' alignItems='center' style={{ display: 'flex' }}>
+            <TextField className={classes.FieldIt} value={searchId} onChange={(e) => { setsearchId(e.target.value) }} size={'small'} variant="outlined" placeholder="Search by ID/Name/Phone" />
+            <Button disabled={(searchId.length === 0)} onClick={() => { search() }} variant="contained" className={classes.Btn}><SearchIcon fontSize="small" />Search</Button>
+          </Grid>
+
+          <Grid md={6} justifyContent='flex-end' alignItems='center' style={{ display: 'flex' }}>
+            <label htmlFor='toggle-example-checked' className='flex items-center cursor-pointer relative mt-4 sm:mt-0 hover:text-primary-500'>
+              <span className='ml-3 text-sm font-medium'>
+                {
+                  genealogyLayoutConfig.isNewGenealogy
+                    ? 'New Genealogy Layout'
+                    : 'Legacy Genealogy Layout'
+                }
+              </span>
+              <input
+                type='checkbox'
+                id='toggle-example-checked'
+                className='sr-only'
+                onChange={handleToggleGenealogy}
+                checked={genealogyLayoutConfig.isNewGenealogy}
+              />
+              <div className='toggle-bg bg-gray-400 border-2 border-gray-200 h-6 w-11 rounded-full'></div>
+
+            </label>
+          </Grid>
+        </Grid>
+      </Grid>
       <Card style={{ width: '100%' }}>
         <Grid className={classes.container} container>
-          <Grid container className={classes.title} >
-            <Grid container item xs={12} md={12} justifyContent={'space-between'} alignItems='center' style={{ marginBottom: 20 }} >
-              <Grid justifyContent='flex-end' alignItems='center' style={{ display: 'flex' }}>
-                <TextField value={searchId} onChange={(e) => { setsearchId(e.target.value) }} size={'small'} variant="outlined" placeholder="Search by ID/Name/Phone" InputProps={{ startAdornment: <SearchIcon fontSize="small" /> }} />
-                <Button disabled={(searchId.length === 0)} onClick={() => { search() }} variant="contained" className={classes.Btn}>Search</Button>
-              </Grid>
-
-              <Grid md={6} justifyContent='flex-end' alignItems='center' style={{ display: 'flex' }}>
-                <label htmlFor='toggle-example-checked' className='flex items-center cursor-pointer relative mt-4 sm:mt-0 hover:text-primary-500'>
-                  <input
-                    type='checkbox'
-                    id='toggle-example-checked'
-                    className='sr-only'
-                    onChange={handleToggleGenealogy}
-                    checked={genealogyLayoutConfig.isNewGenealogy}
-                  />
-                  <div className='toggle-bg bg-gray-400 border-2 border-gray-200 h-6 w-11 rounded-full'></div>
-                  <span className='ml-3 text-sm font-medium'>
-                    {
-                      genealogyLayoutConfig.isNewGenealogy
-                        ? 'New Genealogy Layout'
-                        : 'Legacy Genealogy Layout'
-                    }
-                  </span>
-                </label>
-              </Grid>
-            </Grid>
-          </Grid>
           <Grid item container style={{ marginBottom: 30 }}>
             <Table columns={columns} rows={rows} />
           </Grid>
-          <Grid item container>
+          <Grid item container >
             <RecursiveAccordion openUser={openUser} master={true} user={user} />
           </Grid>
         </Grid>
