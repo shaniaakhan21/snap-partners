@@ -142,7 +142,6 @@ const Tickets = ({ zendesk_id, name, email }) => {
   const getZendeskData = () => {
     axios.get('/api/zendesk/ticket')
       .then(async (response) => {
-        console.log('Tickets:', response.data)
         setTickets(await Promise.all(response.data.response.tickets.map(async (ticket) => {
           const requesterData = await axios.get('/api/zendesk/requester', { params: { requester_id: ticket.requester_id } })
           const requesterName = await requesterData.data.response.user.name
@@ -183,7 +182,6 @@ const Tickets = ({ zendesk_id, name, email }) => {
       ]
     }
   }
-  console.log('all tickets are', tickets)
   return (
     <div>
       <div className='flex flex-row justify-between'>

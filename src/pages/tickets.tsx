@@ -72,7 +72,6 @@ const TicketsPage: Page = () => {
   const [ticketSelectFlag, setTicketSelectFlag] = useState(false)
   const { auth } = useAuthStore()
 
-  console.log('auth is', auth)
 
   useEffect(() => {
     const handleResize = () => {
@@ -166,7 +165,6 @@ const TicketsPage: Page = () => {
       }
     })
       .then(async (response) => {
-        console.log('Tickets:', response.data)
         const ticketArray = await Promise.all(response.data.response.tickets.map(async (ticket) => {
           const requesterData = await axios.get('/api/zendesk/requester', { params: { requester_id: ticket.requester_id } })
           const requesterName = await requesterData.data.response.user.name
@@ -217,7 +215,6 @@ const TicketsPage: Page = () => {
   }
 
   const handleTicketSelect = (params) => {
-    console.log('selection params', params)
     setSingleTicket(params.row)
     setZendeskChatOpen(true)
     setTicketSelectFlag(!ticketSelectFlag)
@@ -229,7 +226,6 @@ const TicketsPage: Page = () => {
 
   const handleTicketSearch = (event) => {
     event.preventDefault()
-    console.log('the ticket search string is', ticketSearchString)
     if (Number(ticketSearchString)) {
       setTickets(allTickets && allTickets.filter((ticket) => ticket.id === Number(ticketSearchString)))
     } else {

@@ -17,7 +17,6 @@ function IndividualProfile ({ profileData }) {
   const cname = 'profilePage-individualProfile'
   const [body, setBody] = useState<'iboProfile' | 'order' | 'downline' | 'comissions' | 'upline' | 'tickets' |'dashboard' | 'reports'>('iboProfile')
   const { auth } = useAuthStore()
-  console.log('body is ', body)
   return (
     <Container>
       <Paper className={`${cname}-conatiner`}>

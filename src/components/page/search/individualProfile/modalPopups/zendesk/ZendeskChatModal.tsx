@@ -60,7 +60,6 @@ const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag
           userObj[data.id] = data
         })
         setUser(userObj)
-        console.log('comment users we got', res.data?.response)
       })
   }
   useEffect(() => {
@@ -83,7 +82,6 @@ const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag
   }
 
   const handlePostComment = async () => {
-    console.log('comment body is', commentBody)
     const zendeskCommentData = new FormData()
     zendeskCommentData.append('ticket_id', ticket?.id)
     zendeskCommentData.append('ticketStatus', ticket?.status)
@@ -108,7 +106,6 @@ const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag
         }
       })
   }
-  console.log('comments are', comments, user)
   return (
     <Modal open={ zendeskChatModal } onClose={closeChatModal} >
       <Box sx={style}>

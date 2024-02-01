@@ -22,7 +22,6 @@ function SponsorUpdateModal ({ sponsorUpdateModal, onCloseSponsorUpdateModal, us
   const [sponsor, setSponsor] = useState('')
   const [sponserSearchResult, setSponsorSearchResult] = useState([])
   const [selectedSponsor, setSelectedSponsor] = useState(null)
-  console.log('coming to this update sponsor modal')
   const handleUpdateSponsor = async (e) => {
     if (confirm('Are you sure you want to edit sponsor for this user')) {
       if (selectedSponsor) {

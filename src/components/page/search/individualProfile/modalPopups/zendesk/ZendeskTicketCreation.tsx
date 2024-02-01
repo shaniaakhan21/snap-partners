@@ -33,7 +33,6 @@ const ZendeskTicketCreation = ({ zendeskTicketModal, closeModal, setTicketFlag, 
     if (param === 'description') { setTicketBody({ ...ticketBody, description: event.target.value }) }
   }
   const createTicketFunc = async () => {
-    console.log('coming to this ZendeskIntegration TICKETTS', ticketBody)
     const zendeskFormData = new FormData()
 
     Object.entries(ticketBody).forEach(([key, value]) => {
