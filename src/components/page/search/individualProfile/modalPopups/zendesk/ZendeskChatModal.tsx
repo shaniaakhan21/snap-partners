@@ -9,6 +9,7 @@ import { ButtonComponent, InputComponent, TextArea } from 'components/layout/pri
 import React, { useEffect, useState, useRef, useLayoutEffect } from 'react'
 import { useAuthStore } from 'lib/stores'
 import { textAlign } from 'html2canvas/dist/types/css/property-descriptors/text-align'
+import parse from 'html-react-parser'
 
 const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag, setTicketFlag, scrollRef, ticketSelectFlag }) => {
   const style = {
@@ -137,7 +138,7 @@ const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag
                     backgroundColor: comment?.author_id == auth?.zendesk_id ? '#ECECEC' : '#FF998B',
                     borderRadius: 4
                   }}>
-                    {comment.body}
+                    {parse(comment.html_body)}
                   </p>
                   {
                     comment.attachments.length > 0
