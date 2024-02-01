@@ -23,7 +23,7 @@ function SearchProfileForm () {
           setProfileSearchForm({ ...profileSearchForm, profileSearchString: val.replace(/(\+\d{1})(\d{3})/, '$1($2)') })
         } else if (val.length === 10) {
           console.log('in that')
-          setProfileSearchForm({ ...profileSearchForm, profileSearchString: val.replace(/(.{7})(\d{3})/, '$1$2-') })
+          setProfileSearchForm({ ...profileSearchForm, profileSearchString: val.replace(/(.{7})(\d{3})/, '$1 $2-') })
         } else {
           setProfileSearchForm({ ...profileSearchForm, profileSearchString: event.target.value })
         }
@@ -39,8 +39,12 @@ function SearchProfileForm () {
     e.preventDefault()
     if (value.profileSearchString !== '' && value.userLevel === '') {
       console.log('clkd')
-      const plainSearchString = value.profileSearchString.replace(/[()-]/g, '')
-      window.location.href = `/search/${plainSearchString}/noLevel`
+      if (value.profileSearchString.match(/\+.+/)) {
+        const plainSearchString = value.profileSearchString.replace(/[\s()-]+/g, '')
+        window.location.href = `/search/${plainSearchString}/noLevel`
+      } else {
+        window.location.href = `/search/${value.profileSearchString}/noLevel`
+      }
       // router.push()
     } else if (value.userLevel !== '' && value.profileSearchString === '') {
       window.location.href = `/search/noName/${value.userLevel}`

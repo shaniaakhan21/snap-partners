@@ -29,7 +29,7 @@ function ProfileSearchForm ({ children }) {
           setProfileSearchForm({ ...profileSearchForm, profileSearchString: val.replace(/(\+\d{1})(\d{3})/, '$1($2)') })
         } else if (val.length === 10) {
           console.log('in that')
-          setProfileSearchForm({ ...profileSearchForm, profileSearchString: val.replace(/(.{7})(\d{3})/, '$1$2-') })
+          setProfileSearchForm({ ...profileSearchForm, profileSearchString: val.replace(/(.{7})(\d{3})/, '$1 $2-') })
         } else {
           setProfileSearchForm({ ...profileSearchForm, profileSearchString: event.target.value })
         }
@@ -45,8 +45,12 @@ function ProfileSearchForm ({ children }) {
     e.preventDefault()
     if (value.profileSearchString !== '' && value.userLevel === '') {
       console.log('clkd')
-      const plainSearchString = value.profileSearchString.replace(/[()-]/g, '')
-      window.location.href = `/search/${plainSearchString}/noLevel`
+      if (value.profileSearchString.match(/\+.+/)) {
+        const plainSearchString = value.profileSearchString.replace(/[\s()-]+/g, '')
+        window.location.href = `/search/${plainSearchString}/noLevel`
+      } else {
+        window.location.href = `/search/${value.profileSearchString}/noLevel`
+      }
     } else if (value.userLevel !== '' && value.profileSearchString === '') {
       window.location.href = `/search/noName/${value.userLevel}`
     } else if (value.userLevel === '' && value.profileSearchString === '') {
@@ -57,7 +61,13 @@ function ProfileSearchForm ({ children }) {
   }
   useEffect(() => {
     console.log('router query is ', router.query)
-    setProfileSearchForm({ ...profileSearchForm, profileSearchString: typeof router.query.searchString === 'string' && router.query.searchString !== 'noName' ? router.query.searchString : '', userLevel: typeof router.query.userLevel === 'string' && router.query.userLevel !== 'noLevel' ? router.query.userLevel : '' })
+    let searchString = router.query.searchString as string
+    if ((router.query.searchString as string).match(/\+\d+/)) {
+      console.log('innnn herrree')
+      searchString = (router.query.searchString as string).replace(/(\+\d{1})(\d{3})(\d{3})(\d{4})/, '$1($2) $3-$4')
+      console.log('sstringg', searchString)
+    }
+    setProfileSearchForm({ ...profileSearchForm, profileSearchString: typeof router.query.searchString === 'string' && router.query.searchString !== 'noName' ? searchString : '', userLevel: typeof router.query.userLevel === 'string' && router.query.userLevel !== 'noLevel' ? router.query.userLevel : '' })
   }, [router.query])
   return (
     <div>
