@@ -19,10 +19,8 @@ function SearchProfileForm () {
       const val = event.target.value as string
       if (val.match(/\+\d+/)) {
         if (val.length === 5) {
-          console.log('in this')
           setProfileSearchForm({ ...profileSearchForm, profileSearchString: val.replace(/(\+\d{1})(\d{3})/, '$1($2)') })
         } else if (val.length === 10) {
-          console.log('in that')
           setProfileSearchForm({ ...profileSearchForm, profileSearchString: val.replace(/(.{7})(\d{3})/, '$1 $2-') })
         } else {
           setProfileSearchForm({ ...profileSearchForm, profileSearchString: event.target.value })
@@ -38,7 +36,6 @@ function SearchProfileForm () {
   const handleSubmit = (e, value) => {
     e.preventDefault()
     if (value.profileSearchString !== '' && value.userLevel === '') {
-      console.log('clkd')
       if (value.profileSearchString.match(/\+.+/)) {
         const plainSearchString = value.profileSearchString.replace(/[\s()-]+/g, '')
         window.location.href = `/search/${plainSearchString}/noLevel`

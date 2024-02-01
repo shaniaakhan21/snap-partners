@@ -25,10 +25,8 @@ function ProfileSearchForm ({ children }) {
       const val = event.target.value as string
       if (val.match(/\+\d+/)) {
         if (val.length === 5) {
-          console.log('in this')
           setProfileSearchForm({ ...profileSearchForm, profileSearchString: val.replace(/(\+\d{1})(\d{3})/, '$1($2)') })
         } else if (val.length === 10) {
-          console.log('in that')
           setProfileSearchForm({ ...profileSearchForm, profileSearchString: val.replace(/(.{7})(\d{3})/, '$1 $2-') })
         } else {
           setProfileSearchForm({ ...profileSearchForm, profileSearchString: event.target.value })
@@ -44,7 +42,6 @@ function ProfileSearchForm ({ children }) {
   const handleSubmit = (e, value) => {
     e.preventDefault()
     if (value.profileSearchString !== '' && value.userLevel === '') {
-      console.log('clkd')
       if (value.profileSearchString.match(/\+.+/)) {
         const plainSearchString = value.profileSearchString.replace(/[\s()-]+/g, '')
         window.location.href = `/search/${plainSearchString}/noLevel`
@@ -60,12 +57,9 @@ function ProfileSearchForm ({ children }) {
     }
   }
   useEffect(() => {
-    console.log('router query is ', router.query)
     let searchString = router.query.searchString as string
     if ((router.query.searchString as string).match(/\+\d+/)) {
-      console.log('innnn herrree')
       searchString = (router.query.searchString as string).replace(/(\+\d{1})(\d{3})(\d{3})(\d{4})/, '$1($2) $3-$4')
-      console.log('sstringg', searchString)
     }
     setProfileSearchForm({ ...profileSearchForm, profileSearchString: typeof router.query.searchString === 'string' && router.query.searchString !== 'noName' ? searchString : '', userLevel: typeof router.query.userLevel === 'string' && router.query.userLevel !== 'noLevel' ? router.query.userLevel : '' })
   }, [router.query])
