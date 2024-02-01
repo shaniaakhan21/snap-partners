@@ -1,6 +1,6 @@
 .profilePage-individualProfile-conatiner
 {
-    padding: 25px;
+    padding: 5px;
 }
 
 .profilePage-individualProfile-header-list
@@ -12,14 +12,13 @@
 }
 .profilePage-individualProfile-header-listItems
 {
-    color:#E35C49;
+    color:black;
     text-align: center;
-
 /* Button Font AA/ Tiny */
-    font-size: 10px;
+    font-size: 11px;
     font-family: Open Sans;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 12px;
     text-transform: uppercase;
     padding: 10px;
@@ -29,18 +28,16 @@
 {
     border-top: 2px;
     border-bottom: 2px;
-    border-right: 2px;
-    border-color: black;
+    border-color: #DCE5ED;
     border-style: solid;
-}
-.listItems-firstItem
+} 
+ .listItems-firstItem
 {
     border-top: 2px;
     border-bottom: 2px;
-    border-right: 2px;
     border-left: 2px;
-    border-radius: 10px 0px 0px 10px;
-    border-color: black;
+    border-radius: 20px 0px 0px 20px;
+    border-color: #DCE5ED;
     border-style: solid;
 }
 .listItems-lastItem
@@ -48,13 +45,14 @@
     border-top: 2px;
     border-bottom: 2px;
     border-right: 2px;
-    border-radius: 0px 10px 10px 0px;
-    border-color: black;
+    border-radius: 0px 20px 20px 0px;
+    border-color: #DCE5ED;
     border-style: solid;
-}
+} 
 .profilePage-individualProfile-header-listItems:hover{
     cursor: pointer;
-    background-color: #E35C49;
+    background-color: #E74426;
+    border-color: #E74426;
     /* padding: 10px 5px 10px 5px; */
     /* margin-top: -20px; */
     color: #FFFFFF;
@@ -63,7 +61,8 @@
     /* padding: 10px 5px 10px 5px; */
     color: #FFFFFF;
     /* margin-top: -20px; */
-    background-color: #E35C49;
+    background-color: #E74426;
+    border-color: #E74426;
 }
 .profilePage-IBOProfile-container
 {
@@ -177,7 +176,7 @@ line-height: 24px;
 }
 .profilePage-IBOProfile-midSection-mainInfo-title
 {
-    color: #E35C49;
+    color: #9A9A9A;
 }
 
 .profilePage-order-container
@@ -260,7 +259,7 @@ flex-direction: row;
 }
 .profilePage-IBOProfile-activityLog-table-container
 {
-    max-height: 200px;
+    max-height: 50vh;
     overflow-y: scroll;
 }
 

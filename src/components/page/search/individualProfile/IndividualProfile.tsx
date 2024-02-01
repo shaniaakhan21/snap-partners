@@ -18,17 +18,17 @@ function IndividualProfile ({ profileData }) {
   const { auth } = useAuthStore()
   console.log('body is ', body)
   return (
-    <Container className='border-2 border-red-500 m-0 p-0 max-w-full flex flex-row'>
-      <Container className='max-w-full w-[30%] p-0'>
-        <Paper className={`${cname}-conatiner my-2`}>
+    <Container className='m-0 p-0 max-w-full flex flex-row'>
+      <Container className='max-w-full w-[20%] p-0 my-4'>
+        <Paper className={`${cname}-conatiner my-2 rounded-2xl shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)]`}>
           <InfoBanner profileData={profileData} userLevel={auth?.level} />
         </Paper>
       </Container>
-      <Container className='max-w-full w-[70%]'>
-        <Paper className={`${cname}-conatiner my-4`}>
+      <Container className='max-w-full w-[80%] bg-white ml-4 my-6 rounded-2xl shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)]'>
+        <Paper className={`${cname}-conatiner my-4 shadow-none`}>
           <IndividualProfileHeader body={body} setBody={setBody} profileData={profileData} userLevel={auth?.level} />
         </Paper>
-        <Paper className={`${cname}-conatiner`}>
+        <Paper className={`${cname}-conatiner shadow-none`}>
           {
             body === 'iboProfile'
               ? <IBOProfile profileData={profileData} userLevel={auth?.level} />
