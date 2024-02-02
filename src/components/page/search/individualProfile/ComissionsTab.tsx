@@ -228,7 +228,6 @@ const ComissionsTab = ({ userId }) => {
     })()
   }, [])
 
-
   const withdraw = async () => {
     setloadingButton(true)
     const res = await fetch('/api/user/withdraw-balance', {
@@ -249,7 +248,7 @@ const ComissionsTab = ({ userId }) => {
   }
 
   return (
-    <div className='max-w-4xl w-full mx-auto'>
+    <div className='max-w-full w-full mx-auto pb-12 pt-2'>
       <div className={`relative w-full sm:rounded-lg ${!loading && 'overflow-x-auto'}`}> {/* Can be better */}
         {
           loading &&
@@ -260,14 +259,13 @@ const ComissionsTab = ({ userId }) => {
             )
         }
         <>
-          <div className='max-w-xl mx-auto w-full text-center mb-2'>
+          <div className='max-w-full mx-auto w-full flex flex-row justify-around items-center text-center mb-6 bg-[#F9FBFE] rounded-xl border border-[#DCE5ED] py-4'>
             {/* <Button disabled={!enableWithdraw} onClick={() => { fnOpenModalConfirmation() }} type='submit' classes=' mr-1 text-sm bg-primary-500'>
                       Withdraw Available Balance
             </Button> */}
+            <span className='font-semibold text-lg'>Current Balance: <br/><span className='text-[#E74426] text-xl font-bold'>${balance}</span></span>
             <br/>
-            <span className='font-semibold text-lg'>Current Balance: ${balance}</span>
-            <br/>
-            <span className='font-semibold text-sm'>minimum balance to withdraw is $5.00</span>
+            <span className='font-semibold text-sm text-[#757575]'>minimum balance to withdraw is <br/><span className='text-[#E74426] text-lg font-bold'>$5.00</span></span>
           </div>
           {modalConfirmationIsOpen && (
             <Overlay onClick={fnCloseModalConfirmation}>

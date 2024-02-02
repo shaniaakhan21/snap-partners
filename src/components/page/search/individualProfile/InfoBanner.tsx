@@ -146,6 +146,11 @@ function InfoBanner ({ profileData, userLevel }) {
         <div>
           <div className='text-center my-2'>
             <p className={`${cname}-midSection-mainInfo-name  mb-2`}>{`${profileData[0]?.name} ${profileData[0]?.lastname}`}</p>
+            {profileData[0]?.businessName && (
+              <p className={`${cname}-midSection-mainInfo-name mb-2 text-[#E74426] text-sm`}>
+                {profileData[0]?.businessName}
+              </p>
+            )}
             <p className='text-[#E74426] font-semibold text-sm'><span className='text-black'>User ID </span>{`${profileData[0]?.id}`}</p>
             <p className={`${cname}-midSection-mainInfo-text text-[#E74426] font-semibold `}>{`${profileData[0]?.email}`}</p>
             <p className='text-black font-semibold text-base'>{`${profileData[0]?.phoneNumber}`}</p>

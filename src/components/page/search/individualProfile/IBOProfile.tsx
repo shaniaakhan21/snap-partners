@@ -149,7 +149,19 @@ function IBOProfile ({ profileData, userLevel }) {
             <div className='flex flex-row bg-[#F9FBFE] py-2 px-6 rounded-xl border-[#DCE5ED] border my-4'>
               <div className='w-7/12'>
                 <h2 className={`${cname}-footer-heading text-black`}>Address</h2>
-                <p className={`${cname}-footer-text flex items-center`}><PlaceIcon className='text-[#909EAA] text-lg mr-[1px]'/>{profileData[0]?.street}, {profileData[0]?.city}, {profileData[0]?.state}, {profileData[0]?.zip}</p>
+                {profileData[0]?.street || profileData[0]?.city || profileData[0]?.state || profileData[0]?.zip
+                  ? (
+                    <p className={`${cname}-footer-text flex items-center`}>
+                      <PlaceIcon className='text-[#909EAA] text-lg mr-[1px]' />
+                      {profileData[0]?.street}, {profileData[0]?.city}, {profileData[0]?.state}, {profileData[0]?.zip}
+                    </p>
+                  )
+                  : (
+                    <p className={`${cname}-footer-text flex items-center`}>
+                      <PlaceIcon className='text-[#909EAA] text-lg mr-[1px]' />
+                      Not Available
+                    </p>
+                  )}
               </div>
 
               <div className='w-5/12'>
