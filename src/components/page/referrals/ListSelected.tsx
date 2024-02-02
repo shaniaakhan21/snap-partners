@@ -17,8 +17,6 @@ export const ReferralListSelected = ({ id, newUsers, numUsers, classes = '', chi
     >
       <ReferralTabListItem id={id} isSelect newUsers={newUsers} numUsers={numUsers} noCursor />
 
-      <hr className='border-t border-gray-300' />
-
       <ul>
         {children}
       </ul>

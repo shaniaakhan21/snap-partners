@@ -10,7 +10,7 @@ const STEP_SIGNUP_LABELS = {
 
 export const GTM_ID = {
   PRE: 'GTM-PRJVWRJ',
-  PRO: 'GTM-NNQS9S8'
+  PRO: 'GTM-NHR3XN2'
 }
 
 const userInfo = (info?: Partial<IAuth>) => {
