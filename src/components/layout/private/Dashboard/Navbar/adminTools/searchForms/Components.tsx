@@ -41,7 +41,7 @@ export const InputComponent = (props:IInputComponent) => {
   return (
     <div>
       <label className='search-form-label'>{label}</label>
-      <div>
+      <div className='mr-4'>
         <input type={type || 'text'} className='search-form-input search-form-box' placeholder={`${placeholder}`} onChange={(event) => { onChangeFunction(event, param) }} value={value} />
       </div>
     </div>
@@ -55,8 +55,8 @@ export const SelectComponent = (props:ISelectComponent) => {
       <div>
         <label className='search-form-label'>{label}</label>
       </div>
-      <div>
-        <select name={`${name}`} className='search-form-select search-form-box' value={value} onChange={(event) => { onChangeFunction(event, param) }}>
+      <div className='mr-4'>
+        <select name={`${name}`} className='search-form-select search-form-box mr-4' value={value} onChange={(event) => { onChangeFunction(event, param) }}>
           <option value={''}>Select</option>
           {
             options

@@ -24,7 +24,7 @@ function IndividualProfile ({ profileData }) {
           <InfoBanner profileData={profileData} userLevel={auth?.level} />
         </Paper>
       </Container>
-      <Container className='max-w-full w-[80%] bg-white ml-4 my-6 rounded-2xl shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)]'>
+      <Container className='max-w-full w-[80%] bg-white ml-4 my-6 rounded-2xl shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)] h-fit pb-6'>
         <Paper className={`${cname}-conatiner my-4 shadow-none`}>
           <IndividualProfileHeader body={body} setBody={setBody} profileData={profileData} userLevel={auth?.level} />
         </Paper>

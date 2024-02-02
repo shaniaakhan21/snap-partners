@@ -121,7 +121,7 @@ function IBOProfile ({ profileData, userLevel }) {
 
           <div className={`${cname}-midSection-AdditionalInfo flex justify-between items-center`}>
             <div className='w-[30%]'>
-              <p className='text-[#E74426] font-semibold text-base flex items-center'><span className='text-black'>User ID </span>{`${profileData[0]?.id}`}<ContentCopyIcon className='text-base ml-1 text-[#909EAA]' onClick={handleCopyClick}/>{isCopied && <span className='ml-1 text-[#E74426] text-xs'>Copied!</span>}</p>
+              <p className='text-[#E74426] font-semibold text-base flex items-center'><span className='text-black pr-1'>User ID </span> {`${profileData[0]?.id}`}<ContentCopyIcon className='text-base ml-1 text-[#909EAA] cursor-pointer' onClick={handleCopyClick}/>{isCopied && <span className='ml-1 text-[#E74426] text-xs'>Copied!</span>}</p>
             </div>
             <div className='w-[70%] flex justify-end items-center'>
               <div className='flex items-center'>

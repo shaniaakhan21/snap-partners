@@ -25,36 +25,31 @@ const Reports = ({ userId }) => {
     textTransform: 'none',
     width: '20%'
   }
+
   return (
     <div>
-      <Select
-        value={reportBody}
-        onChange={handleCategoryChange}
-        className='w-full text-white bg-primary-500 border-primary-500 my-custom-select'
-        sx={{
-          ...tabStyle,
-          '& .MuiSelect-select': {
-            paddingTop: '10px',
-            paddingBottom: '10px',
-            borderRadius: '8px',
-            backgroundColor: '#DD4C37!important',
-            color: 'white',
-            borderColor: '#DD4C37!important'
-          },
-          '& .MuiSvgIcon-root': {
-            color: 'white',
-            borderLeft: '1px solid white'
-          },
-          '& .MuiButtonBase-root': {
-            minHeight: 'none!important'
-          }
-        }}
-      >
-        <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={'erc'}>ERC</MenuItem>
-        <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={'wellness'}>Wellness</MenuItem>
-        <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={'vidgo'}>Vidgo</MenuItem>
-        <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={'setc'}>SETC</MenuItem>
-      </Select>
+      <div className='flex justify-between items-center'>
+        <div className="flex flex-row justify-between pb-2 text-xl font-sans font-semibold text-black">
+          <h1>
+        Available Reports
+          </h1>
+        </div>
+        <Select
+          value={reportBody}
+          onChange={handleCategoryChange}
+          className="cursor-pointer font-semibold relative xs:mr-2 pr-8 p-0 bg-[rgba(255,255,255,.13)] outline-none appearance-none rounded-full"
+          sx={{
+            '&.MuiInputBase-root .MuiSelect-select': {
+              padding: '7.5px 14px!important'
+            }
+          }}
+        >
+          <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={'erc'}>ERC</MenuItem>
+          <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={'wellness'}>Wellness</MenuItem>
+          <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={'vidgo'}>Vidgo</MenuItem>
+          <MenuItem className='flex flex-col lg:flex-row text-sm lg:text-base' value={'setc'}>SETC</MenuItem>
+        </Select>
+      </div>
       <div className='reportBodyContainer'>
         {
           reportBody === 'erc'

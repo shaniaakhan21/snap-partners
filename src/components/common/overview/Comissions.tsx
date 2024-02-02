@@ -86,7 +86,7 @@ export default function Commissions (props: CommissionsProps) {
   }, [])
 
   return (
-    <div className="bg-white rounded-lg px-2.5 py-3">
+    <div className="bg-white px-2.5 py-3 shadow-[0_1px_12px_-1px_rgba(0,0,0,0.2)] rounded-3xl">
       <div className='flex flex-row justify-between'>
         <span className='text-lg text-semibold'>Commissions</span>
         <Button classes='bg-white  focus:ring-0'>

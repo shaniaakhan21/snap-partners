@@ -174,7 +174,7 @@ export default function GrowthSummary ({ userId }) {
   }, [selectedTab, growthSummaryData])
 
   return (
-    <div className="w-fit lg:w-full bg-white rounded-3xl p-6 shadow-lg">
+    <div className="w-fit lg:w-full bg-white rounded-3xl p-6 shadow-[0_1px_12px_-1px_rgba(0,0,0,0.2)]">
       <div className='flex flex-col lg:flex-row justify-between items-center'>
         <span className='text-sm lg:text-xl text-black-h font-bold'>Growth Summary</span>
         <div className='flex flex-row items-center'>

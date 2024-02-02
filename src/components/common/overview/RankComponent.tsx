@@ -149,17 +149,17 @@ export default function RankComponent (props: RankComponentProps) {
       <Box sx={{ '& .Mui-selected': { color: 'black', bgcolor: 'white' }, '& .MuiTabs-indicator': { backgroundColor: 'transparent' } }}>
         <div className='grid grid-cols-1 md:grid-cols-4 gap-2 md:gap-4 '>
           {currentRank && (
-            <div className='bg-white rounded-3xl flex flex-col justify-between shadow-xl' >
+            <div className='bg-white rounded-3xl flex flex-col justify-between shadow-[0_1px_12px_-1px_rgba(0,0,0,0.2)]' >
               <div className='bg-[#fff] rounded-t-3xl py-8  h-full w-full flex flex-col justify-center'>
                 <div className='flex justify-between'>
                   <div className='flex flex-col justify-center ml-[10%]'>
                     <h1 className="text-sm lg:text-xl font-bold">Your current </h1><span className='text-xs lg:text-base font-normal text-gray-500 '>Pay Rank is:</span>
                   </div>
-                  <div className="flex items-center flex-col p-[5%] rounded-full border-2 border-[#EFEFEF] w-4/12 lg:w-3/12  mr-[6%]">
+                  <div className="flex items-center flex-col p-[3%] rounded-full border-2 border-[#EFEFEF] w-4/12 lg:w-3/12  mr-[6%]">
                     <StyledBox backgroundColor={'white'}>
                       <StarTrophyIcon/>
                     </StyledBox>
-                    <h1 className="text-xs lg:text-base text-black-h font-semibold">{convertName(data.realRank)}</h1>
+                    <h1 className="text-xs text-black-h font-semibold">{convertName(data.realRank)}</h1>
                   </div>
                 </div>
               </div>
@@ -168,17 +168,17 @@ export default function RankComponent (props: RankComponentProps) {
                   <div className='flex flex-col justify-center ml-[10%]'>
                     <h1 className="text-sm lg:text-xl text-white font-bold">Highest </h1><span className='text-xs lg:text-base font-normal text-gray-500'>Achieved Rank:</span>
                   </div>
-                  <div className="flex items-center flex-col p-[5%] rounded-full border-2 border-[#EFEFEF] w-4/12 lg:w-3/12 mr-[6%] bg-[#fff]">
+                  <div className="flex items-center flex-col p-[3%] rounded-full border-2 border-[#EFEFEF] w-4/12 lg:w-3/12 mr-[6%] bg-[#fff]">
                     <StyledBox backgroundColor={'white'}>
                       <StarSuccessIcon/>
                     </StyledBox>
-                    <h1 className="text-xs lg:text-base text-black-h font-semibold ">{convertName(data.highestRank)}</h1>
+                    <h1 className="text-xs text-black-h font-semibold ">{convertName(data.highestRank)}</h1>
                   </div>
                 </div>
               </div>
             </div>
           )}
-          <div className='bg-white rounded-3xl col-span-2 p-4 shadow-xl'>
+          <div className='bg-white rounded-3xl col-span-2 p-4 shadow-[0_1px_12px_-1px_rgba(0,0,0,0.2)]'>
             <h1 className='text-xl font-bold'>Rank Progress</h1>
             <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
               <Select

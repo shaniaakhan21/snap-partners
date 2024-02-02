@@ -31,7 +31,7 @@ export const DashReferralCards = ({ title, ilustration, link, newUser = false, c
   }
 
   return (
-    <div className='bg-white w-full rounded-3xl shadow-lg mb-1'>
+    <div className='bg-white w-full rounded-3xl shadow-[0_1px_12px_-1px_rgba(0,0,0,0.2)] mb-1'>
       <div className={`w-full pl-2 p-1 flex flex-row items-center justify-center ${classes}`}>
         {newUser
           ? (
