@@ -12,6 +12,7 @@ import UpdateGrandfatherModal from './modalPopups/UpdateGrandfatherModal'
 import SponsorUpdateModal from './modalPopups/SponsorUpdateModal'
 import UpdateSnapTypeModal from './modalPopups/UpdateSnapType'
 import InfoBanner from './InfoBanner'
+import moment from 'moment-timezone'
 
 function IBOProfile ({ profileData, userLevel }) {
   const [passwordResetModal, setPasswordResetModal] = useState<boolean>(false)
@@ -83,17 +84,6 @@ function IBOProfile ({ profileData, userLevel }) {
       }
     }
   }
-  const formatDate = (dateString) => {
-    console.log('date from format date ', dateString)
-    if (dateString) {
-      const [date, time, meridiem] = dateString?.split(' ')
-      const [day, month, year] = date?.split('/')
-      const formattedDatestring = `${month}/${day}/${year}`
-      const currentDate = new Date(formattedDatestring)
-      console.log('date from format date ', currentDate)
-      return `${currentDate.getMonth() + 1}/${(currentDate.getDate())}/${currentDate.getFullYear()} ${time} ${meridiem}`
-    }
-  }
 
   return (
     <>
@@ -159,7 +149,7 @@ function IBOProfile ({ profileData, userLevel }) {
 
             <div>
               <h2 className={`${cname}-footer-heading`}>Last Login:</h2>
-              <p className={`${cname}-footer-text`}>{`${profileData[0]?.lastLogin}`}</p>
+              <p className={`${cname}-footer-text`}>{`${moment(profileData[0]?.lastLogin).tz('America/New_York').format('MM/DD/YYYY hh:mm A')}`}</p>
             </div>
 
             <div>
