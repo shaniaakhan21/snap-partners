@@ -15,15 +15,33 @@ function SearchProfileForm () {
   })
   const router = useRouter()
   const setProfileSearchInput = (event, param) => {
-    if (param === 'profileSearchString') { setProfileSearchForm({ ...profileSearchForm, profileSearchString: event.target.value }) }
+    if (param === 'profileSearchString') {
+      const val = event.target.value as string
+      if (val.match(/\+\d+/)) {
+        if (val.length === 5) {
+          setProfileSearchForm({ ...profileSearchForm, profileSearchString: val.replace(/(\+\d{1})(\d{3})/, '$1($2)') })
+        } else if (val.length === 10) {
+          setProfileSearchForm({ ...profileSearchForm, profileSearchString: val.replace(/(.{7})(\d{3})/, '$1 $2-') })
+        } else {
+          setProfileSearchForm({ ...profileSearchForm, profileSearchString: event.target.value })
+        }
+        // setProfileSearchForm({ ...profileSearchForm, profileSearchString: val.replace(/(\d{3})(\d{4})(\d{3})/, '($1)-$2-$3') })
+      } else {
+        setProfileSearchForm({ ...profileSearchForm, profileSearchString: event.target.value })
+      }
+    }
     if (param === 'userLevel') { setProfileSearchForm({ ...profileSearchForm, userLevel: event.target.value }) }
   }
 
   const handleSubmit = (e, value) => {
     e.preventDefault()
     if (value.profileSearchString !== '' && value.userLevel === '') {
-      console.log('clkd')
-      window.location.href = `/search/${value.profileSearchString}/noLevel`
+      if (value.profileSearchString.match(/\+.+/)) {
+        const plainSearchString = value.profileSearchString.replace(/[\s()-]+/g, '')
+        window.location.href = `/search/${plainSearchString}/noLevel`
+      } else {
+        window.location.href = `/search/${value.profileSearchString}/noLevel`
+      }
       // router.push()
     } else if (value.userLevel !== '' && value.profileSearchString === '') {
       window.location.href = `/search/noName/${value.userLevel}`
@@ -36,7 +54,7 @@ function SearchProfileForm () {
 
   return (
     <form onSubmit={(e) => handleSubmit(e, profileSearchForm)}>
-      <InputComponent label={'Profile Search'} placeholder={'RepID, Name or Email '} value={profileSearchForm.profileSearchString} onChangeFunction={setProfileSearchInput} param={'profileSearchString'}/>
+      <InputComponent label={'Profile Search'} placeholder={'PhoneNum(use +),ID,Name,Email'} value={profileSearchForm.profileSearchString} onChangeFunction={setProfileSearchInput} param={'profileSearchString'}/>
       <SelectComponent label={'User Level'} name={'userLevel'} options={userLevelOptions} onChangeFunction={setProfileSearchInput} param={'userLevel'} />
       <ButtonComponent title={'submit'} />
     </form>

@@ -17,6 +17,7 @@ function ProfileSearch () {
   const getProfileData = async () => {
     let emailString = []
     let idString = []
+    let phoneNum = []
     let userLevelString = ''
     if (userLevel !== 'noLevel' && typeof userLevel === 'string')
     {
@@ -27,6 +28,7 @@ function ProfileSearch () {
       if (typeof searchString === 'string') {
         emailString = searchString.match(/^[\w.-]+@[a-zA-Z_-]+?\.[a-zA-Z]{2,6}$/)
         idString = searchString.match(/^\d+$/)
+        phoneNum = searchString.match(/\+\d+/)
       }
       console.log('in useEffect', emailString, idString)
       if (emailString)
@@ -71,6 +73,25 @@ function ProfileSearch () {
             else {
               setSearchResult([])
             }
+          })
+          .catch((e) => {
+            console.log('error while getting profile', e)
+          })
+      }
+      else if(phoneNum)
+      {
+        await axios.get('/api/user/getUserByPhoneNumber', {
+          params: {
+            phoneNumber: searchString,
+            userLevelString: userLevelString || ''
+          },
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+          .then((result) => {
+            const newArr = result?.data?.result?.filter((res) => mapping[res.level] <= mapping[auth.level])
+            setSearchResult(newArr)
           })
           .catch((e) => {
             console.log('error while getting profile', e)
