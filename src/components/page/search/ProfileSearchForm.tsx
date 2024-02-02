@@ -58,7 +58,7 @@ function ProfileSearchForm ({ children }) {
   }
   useEffect(() => {
     let searchString = router.query.searchString as string
-    if ((router.query.searchString as string).match(/\+\d+/)) {
+    if (searchString && searchString?.match(/\+\d+/)) {
       searchString = (router.query.searchString as string).replace(/(\+\d{1})(\d{3})(\d{3})(\d{4})/, '$1($2) $3-$4')
     }
     setProfileSearchForm({ ...profileSearchForm, profileSearchString: typeof router.query.searchString === 'string' && router.query.searchString !== 'noName' ? searchString : '', userLevel: typeof router.query.userLevel === 'string' && router.query.userLevel !== 'noLevel' ? router.query.userLevel : '' })
