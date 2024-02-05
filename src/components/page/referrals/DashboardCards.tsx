@@ -53,8 +53,8 @@ export const DashReferralCards = ({ title, ilustration, link, newUser = false, c
         <div className='w-1/4 h-fit '>
           {ilustration}
         </div>
-        <div className='flex flex-col w-3/4 ml-0'>
-          <h3 className={`w-full text-lg font-semibold text-start ml-4 ${newUser ? 'my-4' : 'mb-0'}`}>{title}</h3>
+        <div className='flex flex-col w-3/4 ml-1'>
+          <h3 className={`w-full text-sm 3xl:text-lg font-semibold text-start ml-4 ${newUser ? 'my-4' : 'mb-0'}`}>{title}</h3>
         </div>
       </div>
       <div>

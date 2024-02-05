@@ -251,7 +251,7 @@ flex-direction: row;
 .user-upline-card-container a
 {
     text-decoration: underline;
-    color: #139ECF;
+    color: #E74426;
 }
 .user-upline-card-container a:hover
 {
@@ -278,6 +278,10 @@ flex-direction: row;
 .resetPasswordModal-error-message
 {
     color: red;
+}
+
+.cardpadding:last-child{
+    padding-bottom: 0!important;
 }
 
 .switch {
