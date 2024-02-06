@@ -149,7 +149,7 @@ function IBOProfile ({ profileData, userLevel }) {
 
             <div>
               <h2 className={`${cname}-footer-heading`}>Last Login:</h2>
-              <p className={`${cname}-footer-text`}>{`${moment(profileData[0]?.lastLogin).tz('America/New_York').format('MM/DD/YYYY hh:mm A')}`}</p>
+              <p className={`${cname}-footer-text`}>{`${profileData[0]?.lastLoginStatus === 'Invalid date' ? '' : profileData[0]?.lastLoginStatus}`}</p>
             </div>
 
             <div>
