@@ -12,7 +12,6 @@ import UpdateGrandfatherModal from './modalPopups/UpdateGrandfatherModal'
 import SponsorUpdateModal from './modalPopups/SponsorUpdateModal'
 import UpdateSnapTypeModal from './modalPopups/UpdateSnapType'
 import InfoBanner from './InfoBanner'
-import moment from 'moment-timezone'
 
 function IBOProfile ({ profileData, userLevel }) {
   const [passwordResetModal, setPasswordResetModal] = useState<boolean>(false)
