@@ -161,7 +161,8 @@ const TicketsPage: Page = () => {
     setLoading(true)
     axios.get('/api/zendesk/ticket', {
       params: {
-        zendesk_id: auth?.zendesk_id
+        zendesk_id: auth?.zendesk_id,
+        IsPublic: true
       }
     })
       .then(async (response) => {
@@ -275,7 +276,7 @@ const TicketsPage: Page = () => {
       </div> */}
 
       <ZendeskTicketCreation zendeskTicketModal={zendeskTicketModal} closeModal = {onZendeskTicketModalClose} ticketFlag={ticketFlag} setTicketFlag={setTicketFlag} zendesk_id={auth.zendesk_id} name= {auth.name} email= {auth.email} />
-      <ZendeskChatModal zendeskChatModal={zendeskChatOpen} closeChatModal = {onZendeskChatModalClose} ticket={singleTicket} ticketFlag={ticketFlag} setTicketFlag={setTicketFlag} scrollRef={scrollRef} ticketSelectFlag={ticketSelectFlag} />
+      <ZendeskChatModal zendeskChatModal={zendeskChatOpen} closeChatModal = {onZendeskChatModalClose} ticket={singleTicket} ticketFlag={ticketFlag} setTicketFlag={setTicketFlag} scrollRef={scrollRef} ticketSelectFlag={ticketSelectFlag} IsPublic={true} />
     </div>
   )
 }

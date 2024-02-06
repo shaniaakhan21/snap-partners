@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import axios from 'axios'
 import React, { useEffect, useRef, useState } from 'react'
 import ZendeskTicketCreation from 'components/page/search/individualProfile/modalPopups/zendesk/ZendeskTicketCreation'
@@ -5,10 +6,6 @@ import ZendeskChatModal from 'components/page/search/individualProfile/modalPopu
 import { ButtonComponent, InputComponent, SelectComponent } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/Components'
 import { DataGrid as MUIDataGrid } from '@mui/x-data-grid'
 import { styled } from '@mui/system'
-import DashboardLayout from 'layouts/private/Dashboard'
-import { Head } from 'next/document'
-import type { Page, ReactNode } from 'lib/types'
-import { APP_INFO } from 'config/appInfo'
 import { useAuthStore } from 'lib/stores'
 import { Spinner } from 'components/common/loaders'
 // import Zendesk from 'react-zendesk'
@@ -125,7 +122,8 @@ const Tickets = ({ zendesk_id, name, email }) => {
     setLoading(true)
     axios.get('/api/zendesk/ticket', {
       params: {
-        zendesk_id: zendesk_id
+        zendesk_id: zendesk_id,
+        IsPublic: false
       }
     })
       .then(async (response) => {
@@ -239,7 +237,7 @@ const Tickets = ({ zendesk_id, name, email }) => {
       </div> */}
 
       <ZendeskTicketCreation zendeskTicketModal={zendeskTicketModal} closeModal = {onZendeskTicketModalClose} ticketFlag={ticketFlag} setTicketFlag={setTicketFlag} zendesk_id={auth.zendesk_id} name= {auth.name} email= {auth.email} />
-      <ZendeskChatModal zendeskChatModal={zendeskChatOpen} closeChatModal = {onZendeskChatModalClose} ticket={singleTicket} ticketFlag={ticketFlag} setTicketFlag={setTicketFlag} scrollRef={scrollRef} ticketSelectFlag={ticketSelectFlag} />
+      <ZendeskChatModal zendeskChatModal={zendeskChatOpen} closeChatModal = {onZendeskChatModalClose} ticket={singleTicket} ticketFlag={ticketFlag} setTicketFlag={setTicketFlag} scrollRef={scrollRef} ticketSelectFlag={ticketSelectFlag} IsPublic={false} />
     </div>
   )
 }
