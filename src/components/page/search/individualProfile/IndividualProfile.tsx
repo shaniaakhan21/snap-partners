@@ -11,12 +11,12 @@ import IndividualDashboard from './IndividualDashboard'
 import InfoBanner from './InfoBanner'
 import Reports from './reports/Reports'
 import { useAuthStore } from 'lib/stores'
+import Tickets from './Tickets'
 
 function IndividualProfile ({ profileData }) {
   const cname = 'profilePage-individualProfile'
-  const [body, setBody] = useState<'iboProfile' | 'order' | 'downline' | 'comissions' | 'upline' | 'dashboard' | 'reports'>('iboProfile')
+  const [body, setBody] = useState<'iboProfile' | 'order' | 'downline' | 'comissions' | 'upline' | 'tickets' |'dashboard' | 'reports'>('iboProfile')
   const { auth } = useAuthStore()
-  console.log('body is ', body)
   return (
     <Container className='m-0 p-0 max-w-full flex flex-row'>
       <Container className='max-w-full w-[20%] p-0 my-4'>
@@ -60,7 +60,14 @@ function IndividualProfile ({ profileData }) {
               : <></>
           }
           {
-            body === 'reports'
+            body === 'tickets'
+            ? <Tickets zendesk_id = {profileData[0]?.zendesk_id} name = {profileData[0]?.name} email = {profileData[0].email} />
+            : <></>
+        }
+
+        {
+
+          body === 'reports'
               ? <Reports userId={profileData[0]?.id}/>
               : <></>
           }
