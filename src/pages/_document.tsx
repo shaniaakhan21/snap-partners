@@ -56,6 +56,7 @@ export default class MyDocument extends Document {
           <link rel='preconnect' href='https://fonts.gstatic.com' crossOrigin='*' />
           <link href='https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Ubuntu:ital,wght@0,300;0,400;1,300;1,400;1,500;1,700&display=swap' rel='stylesheet' />
           <link rel='icon' href='/static/favicon.ico' />
+          {/* Add the script tag for the Zendesk app */}
         </Head>
         <body>
           <noscript>
@@ -72,6 +73,7 @@ export default class MyDocument extends Document {
           </noscript>
           <Main />
           <NextScript />
+          <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=324987dc-ca53-451c-b524-096403f15e91"> </script>
         </body>
       </Html>
     )

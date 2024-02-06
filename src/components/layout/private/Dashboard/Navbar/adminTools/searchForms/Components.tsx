@@ -16,6 +16,7 @@ interface IInputComponent
     param?:any,
     value?:any,
     type?:any
+    disabled?:boolean
 }
 
 interface ISelectComponent {
@@ -36,12 +37,24 @@ interface ICheckboxComponent {
 }
 
 export const InputComponent = (props:IInputComponent) => {
-  const { label, placeholder, onChangeFunction, param, value, type } = props
+  const { label, placeholder, onChangeFunction, param, value, type, disabled } = props
   return (
     <div>
       <label className='search-form-label'>{label}</label>
       <div>
-        <input type={type || 'text'} className='search-form-input search-form-box' placeholder={`${placeholder}`} onChange={(event) => { onChangeFunction(event, param) }} value={value} />
+        <input type={type || 'text'} className='search-form-input search-form-box' placeholder={`${placeholder}`} onChange={(event) => { onChangeFunction(event, param) }} value={value} disabled={disabled}/>
+      </div>
+    </div>
+  )
+}
+
+export const TextArea = (props:IInputComponent) => {
+  const { label, placeholder, onChangeFunction, param, value, type, disabled } = props
+  return (
+    <div>
+      <label className='search-form-label'>{label}</label>
+      <div>
+        <textarea className='search-form-input search-form-box' placeholder={placeholder} onChange={(event) => { onChangeFunction(event, param) } } value={value} disabled={disabled}></textarea>
       </div>
     </div>
   )

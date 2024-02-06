@@ -21,7 +21,6 @@ export interface IAuth extends IUserMe, INsurAccount {
   deleted: boolean
   blocked: boolean
   level?:string
-  isCertified?: boolean
   isValidated?: boolean
   socialSecurityNumber: string
   SSNDocURL?: string
@@ -29,6 +28,8 @@ export interface IAuth extends IUserMe, INsurAccount {
   doc_b_structure?: string
   TINstatus?: string
   newSSN?: string
+  isCertified?: boolean
+  zendesk_id?: string
   business_approved?: boolean
 }
 
@@ -72,6 +73,7 @@ export type TSetAuth = ({
   businessName,
   business_type,
   b_start_date,
+  zendesk_id,
   business_approved
 }: IAuth) => void
 
@@ -104,6 +106,7 @@ interface IAuthAtom {
     level,
     isCertified,
     isValidated,
+    zendesk_id,
     facebook_url,
     twitter_url,
     linkedin_url,
@@ -176,6 +179,7 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
     businessName,
     business_type,
     b_start_date,
+    zendesk_id,
     business_approved
   }) => {
     set({
@@ -210,6 +214,7 @@ export const useAuthStore = createAtom<IAuthAtom>(set => ({
         level,
         isCertified,
         isValidated,
+        zendesk_id,
         facebook_url,
         twitter_url,
         linkedin_url,
