@@ -237,7 +237,7 @@ const Tickets = ({ zendesk_id, name, email }) => {
       </div> */}
 
       <ZendeskTicketCreation zendeskTicketModal={zendeskTicketModal} closeModal = {onZendeskTicketModalClose} ticketFlag={ticketFlag} setTicketFlag={setTicketFlag} zendesk_id={auth.zendesk_id} name= {auth.name} email= {auth.email} />
-      <ZendeskChatModal zendeskChatModal={zendeskChatOpen} closeChatModal = {onZendeskChatModalClose} ticket={singleTicket} ticketFlag={ticketFlag} setTicketFlag={setTicketFlag} scrollRef={scrollRef} ticketSelectFlag={ticketSelectFlag} IsPublic={false} />
+      <ZendeskChatModal zendeskChatModal={zendeskChatOpen} closeChatModal = {onZendeskChatModalClose} ticket={singleTicket} ticketFlag={ticketFlag} setTicketFlag={setTicketFlag} scrollRef={scrollRef} ticketSelectFlag={ticketSelectFlag} IsPublic={false} zendeskId= {zendesk_id as string}/>
     </div>
   )
 }

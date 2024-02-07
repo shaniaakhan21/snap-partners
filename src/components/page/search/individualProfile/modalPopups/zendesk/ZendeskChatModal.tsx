@@ -11,7 +11,19 @@ import { useAuthStore } from 'lib/stores'
 import { textAlign } from 'html2canvas/dist/types/css/property-descriptors/text-align'
 import parse from 'html-react-parser'
 
-const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag, setTicketFlag, scrollRef, ticketSelectFlag, IsPublic }) => {
+interface propsInterface{
+  zendeskChatModal: any,
+  closeChatModal: any,
+  ticket: any,
+  ticketFlag: boolean,
+  setTicketFlag: any,
+  scrollRef: any,
+  ticketSelectFlag: boolean,
+  IsPublic: boolean
+  zendeskId?: string
+}
+
+const ZendeskChatModal = (props: propsInterface) => {
   const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -23,6 +35,16 @@ const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag
     boxShadow: 24
     // p: 4
   }
+  const zendeskChatModal = props.zendeskChatModal
+  const closeChatModal = props.closeChatModal
+  const ticket = props.ticket
+  const ticketFlag = props.ticketFlag
+  const setTicketFlag = props.setTicketFlag
+  const scrollRef = props.scrollRef
+  const ticketSelectFlag = props.ticketSelectFlag
+  const IsPublic = props.IsPublic
+  const zendeskId = props.zendeskId || '0'
+
   const { auth, setAuth } = useAuthStore()
   const [comments, setComments] = useState([])
   const [commentType, setCommnetType] = useState('public')
@@ -127,20 +149,20 @@ const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'end',
-                marginTop: 20,
-                marginLeft: comment.author_id == auth?.zendesk_id ? '50%' : 0,
-                marginRight: comment.author_id != auth?.zendesk_id ? '50%' : 0
+                marginTop: 20
+                // marginLeft: comment.author_id == auth?.zendesk_id ? '50%' : 0,
+                // marginRight: comment.author_id != auth?.zendesk_id ? '50%' : 0
               } }>
-                <div style={{ marginLeft: comment.author_id == auth?.zendesk_id ? 'auto' : 0, marginRight: comment.author_id != auth?.zendesk_id ? 'auto' : 0 }}>
-                  <h2 style={{ marginBottom: 10, textAlign: comment?.author_id == auth?.zendesk_id ? 'right' : 'left' }}>
-                    <strong>{user && user[comment.author_id]?.name }</strong>
+                <div style={{ marginLeft: comment.public === false ? '40%' : (comment.author_id == auth?.zendesk_id || comment.author_id == zendeskId) ? 'auto' : 0, marginRight: comment.public === false ? 'auto' : (comment.author_id == auth?.zendesk_id || comment.author_id == zendeskId) ? 0 : 'auto' }}>
+                  <h2 style={{ marginBottom: 10, textAlign: comment.public === false ? 'left' : (comment.author_id == auth?.zendesk_id || comment.author_id == zendeskId) ? 'right' : 'left' }}>
+                    <strong>{user && user[comment.author_id]?.name } {comment.public === false ? '(Private)' : ''}</strong>
                   </h2>
                   <p className='zendesk_chatbox_comment' style={{
                     paddingTop: 16,
                     paddingLeft: 16,
                     paddingRight: 16,
                     paddingBottom: 16,
-                    backgroundColor: comment.public == false ? '#FFF4E5' : comment?.author_id == auth?.zendesk_id ? '#ECECEC' : '#FF998B',
+                    backgroundColor: comment.public == false ? '#FFF4E5' : (comment.author_id == auth?.zendesk_id || comment.author_id == zendeskId) ? '#ECECEC' : '#FF998B',
                     borderRadius: 4
                   }}>
                     {parse(comment.html_body)}
