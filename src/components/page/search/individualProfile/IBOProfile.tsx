@@ -12,6 +12,10 @@ import UpdateGrandfatherModal from './modalPopups/UpdateGrandfatherModal'
 import SponsorUpdateModal from './modalPopups/SponsorUpdateModal'
 import UpdateSnapTypeModal from './modalPopups/UpdateSnapType'
 import InfoBanner from './InfoBanner'
+import EditIcon from '@material-ui/icons/Edit'
+import PlaceIcon from '@mui/icons-material/Place'
+import CalendarTodayIcon from '@mui/icons-material/CalendarToday'
+import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 
 function IBOProfile ({ profileData, userLevel }) {
   const [passwordResetModal, setPasswordResetModal] = useState<boolean>(false)
@@ -23,6 +27,21 @@ function IBOProfile ({ profileData, userLevel }) {
   const [newPassword, setNewPassword] = useState({
     password: ''
   })
+  const [isCopied, setIsCopied] = useState(false)
+
+  const handleCopyClick = () => {
+    const userId = profileData[0]?.id
+    navigator.clipboard.writeText(userId)
+      .then(() => {
+        setIsCopied(true)
+        setTimeout(() => {
+          setIsCopied(false)
+        }, 1000)
+      })
+      .catch((error) => {
+        console.error('Error copying sponsor ID:', error)
+      })
+  }
   const { auth, setAuth, removeAuth } = useAuthStore()
   const cname = 'profilePage-IBOProfile'
   console.log('data from ibo', profileData)
@@ -86,64 +105,58 @@ function IBOProfile ({ profileData, userLevel }) {
 
   return (
     <>
-      <div className={`${cname}-container`}>
-        <div className={`${cname}-header`}>
-          <p className={`${cname}-header-text`}>User ID - {`${profileData[0]?.id}`}</p>
-          { mapping[userLevel] >= 600 &&
-          <p className={`${cname}-header-text ${cname}-midSection-mainInfo-text`} onClick={() => { setSnapTypeModal(true) }}>Edit Snap Type</p>
-          }
-          { mapping[userLevel] >= 700 &&
-          <p className={`${cname}-header-text ${cname}-midSection-mainInfo-text`} onClick={() => { setGrandfatherModal(true) }}>Edit Grandfather Rank</p>
-          }
-          { mapping[userLevel] >= 600 &&
-          <p className={`${cname}-header-text ${cname}-midSection-mainInfo-text`} onClick={() => { setEditProfileModal(true) }}>Edit Profile<img src='/images/icons/edit.svg' style={{ width: '18px', height: '24px' }}/></p>
-          }
-        </div>
-
+      <div className={`${cname}-container mb-8`}>
         <div className={`${cname}-midSection`}>
 
-          <div className={`${cname}-midSection-AdditionalInfo`}>
-            <div>
-              <p className={`${cname}-midSection-mainInfo-name adInfoText`}>Sponsered by <a href={`/search/profile/${profileData[0]?.sponsor?.id}`}>{profileData[0]?.sponsor?.name} {profileData[0]?.sponsor?.lastname}</a></p>
-              { mapping[userLevel] >= 700 &&
-                <p className={`${cname}-header-text ${cname}-midSection-mainInfo-text`} onClick={() => { setSponsorUpdateModal(true) }}>Edit Sponser</p>
-              }
+          <div className={`${cname}-midSection-AdditionalInfo flex justify-between items-center`}>
+            <div className='w-[30%]'>
+              <p className='text-[#E74426] font-semibold text-base flex items-center'><span className='text-black pr-1'>User ID </span> {`${profileData[0]?.id}`}<ContentCopyIcon className='text-base ml-1 text-[#909EAA] cursor-pointer' onClick={handleCopyClick}/>{isCopied && <span className='ml-1 text-[#E74426] text-xs'>Copied!</span>}</p>
             </div>
-            <div>
-              <div className={`${cname}-midSection-AdditionalInfo-icons`}>
-                { (profileData[0]?.roles?.integrousAssociate || profileData[0]?.roles?.integrousCustomer) &&
-                <img src='/static/badges/binary.png' style={{ width: '70px' }} />
-                }
-                {
-                  profileData[0]?.business_approved && <img className='w-10 cursor-pointer' src='/images/b_cert.png' alt='Business Approved Certificate' title='Business Approved Certificate'/>
-                }
-                {
-                  profileData[0]?.isCertified && <img className='w-10 cursor-pointer' src='/static/wellness/weight-care-certified.png' alt='WeightCare Certificate' title='WeightCare Certificate'/>
-                }
-                <img src='/images/icons/deliveryMan.png' />
-                <img src='/images/icons/Shopper.png' />
-                <img src='/images/icons/tray.png' />
+            <div className='w-[70%] flex justify-end items-center'>
+              <div className='flex items-center'>
+                <p className={`${cname}-midSection-mainInfo-name mt-1 capitalize text-[#7C7C7C] font-semibold`}>Sponsered by <a href={`/search/profile/${profileData[0]?.sponsor?.id}`} className='text-[#E74426]'>{profileData[0]?.sponsor?.name} {profileData[0]?.sponsor?.lastname}</a><EditIcon className='text-white bg-[#E74426] p-1 rounded-full ml-1 mr-4  mb-1 cursor-pointer' onClick={() => { setSponsorUpdateModal(true) }}/></p>
               </div>
-              { mapping[userLevel] >= 600 &&
-              <p style={{ textAlign: 'right' }} className={`${cname}-midSection-mainInfo-name adInfoText resetPasswordText`} onClick={() => { setPasswordResetModal(true) }}>reset Password </p>
-              }
-
-              { mapping[userLevel] === 1100 &&
-              <p style={{ textAlign: 'right' }} className={`${cname}-midSection-mainInfo-name adInfoText resetPasswordText`} onClick={() => { setUserLevelModal(true) }}>Edit User Role </p>
-              }
+              <div>
+                <div className={`${cname}-midSection-AdditionalInfo-icons`}>
+                  { (profileData[0]?.roles?.integrousAssociate || profileData[0]?.roles?.integrousCustomer) &&
+                <img src='/static/badges/binary.png' style={{ width: '70px' }} />
+                  }
+                  {
+                    profileData[0]?.business_approved && <img className='w-[54px] cursor-pointer pr-1' src='/images/b_cert.png' alt='Business Approved Certificate' title='Business Approved Certificate'/>
+                  }
+                  {
+                    profileData[0]?.isCertified && <img className='w-[52px] h-[51px] cursor-pointer pr-1' src='/static/wellness/weight-care-certified.png' alt='WeightCare Certificate' title='WeightCare Certificate'/>
+                  }
+                  <img src='/images/icons/deliveryMan.png' className='pr-1' />
+                  <img src='/images/icons/Shopper.png' className='pr-1' />
+                  <img src='/images/icons/tray.png' className='pr-1' />
+                </div>
+              </div>
             </div>
           </div>
-
-          <hr style={{ margin: '30px auto 10px auto' }} />
           <div className={`${cname}-footer`}>
-            <div>
-              <h2 className={`${cname}-footer-heading`}>Address :</h2>
-              <p className={`${cname}-footer-text`}>{profileData[0]?.street}, {profileData[0]?.city}, {profileData[0]?.state}, {profileData[0]?.zip}</p>
-            </div>
+            <div className='flex flex-row bg-[#F9FBFE] py-2 px-6 rounded-xl border-[#DCE5ED] border my-4'>
+              <div className='w-7/12'>
+                <h2 className={`${cname}-footer-heading text-black`}>Address</h2>
+                {profileData[0]?.street || profileData[0]?.city || profileData[0]?.state || profileData[0]?.zip
+                  ? (
+                    <p className={`${cname}-footer-text flex items-center`}>
+                      <PlaceIcon className='text-[#909EAA] text-lg mr-[1px]' />
+                      {profileData[0]?.street}, {profileData[0]?.city}, {profileData[0]?.state}, {profileData[0]?.zip}
+                    </p>
+                  )
+                  : (
+                    <p className={`${cname}-footer-text flex items-center`}>
+                      <PlaceIcon className='text-[#909EAA] text-lg mr-[1px]' />
+                      Not Available
+                    </p>
+                  )}
+              </div>
 
-            <div>
-              <h2 className={`${cname}-footer-heading`}>Start Date:</h2>
-              <p className={`${cname}-footer-text`}>{`${profileData[0]?.createdAtUs}`}</p>
+              <div className='w-5/12'>
+                <h2 className={`${cname}-footer-heading text-black`}>Start Date</h2>
+                <p className={`${cname}-footer-text flex items-center`}><CalendarTodayIcon className='text-[#909EAA] text-lg mr-[1px]'/> {`${profileData[0]?.createdAtUs}`}</p>
+              </div>
             </div>
 
             <div>
@@ -152,27 +165,27 @@ function IBOProfile ({ profileData, userLevel }) {
             </div>
 
             <div>
-              <h2 className={`${cname}-footer-heading`}>Activity Log :</h2>
+              <h2 className={`${cname}-footer-heading text-black pt-4`}>Activity Log</h2>
               { profileData[0]?.activityLog?.length > 0
                 ? <div className={`${cname}-activityLog-table-container`}>
-                  <TableContainer>
+                  <TableContainer className='rounded-2xl mt-4 border'>
                     <Table>
                       <TableHead>
-                        <TableRow>
-                          <TableCell><strong>Date & Time</strong></TableCell>
-                          <TableCell><strong>Description</strong></TableCell>
-                          <TableCell><strong>Type</strong></TableCell>
-                          <TableCell><strong>User</strong></TableCell>
+                        <TableRow className='bg-[#F0F4F8] border-b-2 border-[#DCE5ED]'>
+                          <TableCell className='text-black font-medium'><strong>Date & Time</strong></TableCell>
+                          <TableCell className='text-black font-medium'><strong>Description</strong></TableCell>
+                          <TableCell className='text-black font-medium'><strong>Type</strong></TableCell>
+                          <TableCell className='text-black font-medium'><strong>User</strong></TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
                         {
                           profileData[0]?.activityLog?.map((activity) => (
                             <TableRow>
-                              <TableCell>{activity?.createdAt}</TableCell>
-                              <TableCell>{activity?.description}</TableCell>
-                              <TableCell>{activity?.type}</TableCell>
-                              <TableCell>{activity?.byUser}</TableCell>
+                              <TableCell className='border-b border-[#EFF3F8] text-black font-medium'>{activity?.createdAt}</TableCell>
+                              <TableCell className='border-b border-[#EFF3F8] text-black font-medium'>{activity?.description}</TableCell>
+                              <TableCell className='border-b border-[#EFF3F8] text-black font-medium'>{activity?.type}</TableCell>
+                              <TableCell className='border-b border-[#EFF3F8] text-black font-medium'>{activity?.byUser}</TableCell>
                             </TableRow>
                             // <p className={`${cname}-footer-text`}>{activity?.description}</p>
                           ))

@@ -65,7 +65,7 @@ export const NewGenealogy = ({
 
             <button
               disabled={searchIsLoading}
-              className={`${searchIsLoading ? 'bg-gray-600 border-gray-600' : 'bg-primary-500 border-primary-500'} text-white font-semibold rounded-r-xl px-4 py-2 hover:bg-opacity-80 focus:outline-none focus:ring focus:ring-primary-500 mt-2 sm:mt-0`}
+              className={`${searchIsLoading ? 'bg-gray-600 border-gray-600' : 'bg-primary-500 border-[#E74426]'} text-white font-semibold rounded-r-xl px-4 py-2 hover:bg-opacity-80 focus:outline-none focus:ring focus:ring-primary-500 mt-2 sm:mt-0`}
             >
             Search
             </button>

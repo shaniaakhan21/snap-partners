@@ -48,19 +48,19 @@ const IndividualDashboard = ({ userId }) => {
     </div><div className="grid grid-cols-1 lg:grid-cols-2">
       <div>
 
-        <div className='mt-4'>
+        <div className='m-4 ml-0'>
           <GrowthSummary userId={userId} />
         </div>
-        <div className='mt-4'>
+        <div className='m-4 ml-0'>
           <RewardsProgram />
         </div>
       </div>
       <div>
-        <div className='mt-4'>
+        <div className='m-4 ml-0'>
           <Commissions currentRank={(rankData?.currentRank || 'Free Member') as Rank} userId={userId} />
         </div>
 
-        <div className='mt-4 bg-white rounded-lg'>
+        <div className='m-4 ml-0 bg-white rounded-lg'>
           <MonthlyProduction userId={userId} />
         </div>
       </div>
