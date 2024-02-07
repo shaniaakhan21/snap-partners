@@ -15,21 +15,21 @@ function SearchResult ({ resultData }) {
   }
   console.log('result from search is', resultData)
   return (
-    <Container>
-      <p>Result</p>
-      <Paper elevation={2} className={`${cname}-container`}>
+    <Container className='m-0 p-0 w-full max-w-full '>
+      <p className='text-black font-semibold mt-4'>Result</p>
+      <Paper elevation={2} className={`${cname}-container mt-4`}>
         <TableContainer component={Paper}>
           <Table>
             <TableHead>
-              <TableRow>
-                <TableCell> </TableCell>
-                <TableCell>Full Name</TableCell>
-                <TableCell>ID</TableCell>
-                <TableCell>Rank</TableCell>
-                <TableCell>User Level</TableCell>
-                <TableCell>Phone num</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell> </TableCell>
+              <TableRow className='bg-[#F0F4F8] border-b-2 border-[#DCE5ED]'>
+                <TableCell className='text-black font-medium'> </TableCell>
+                <TableCell className='text-black font-medium'>Full Name</TableCell>
+                <TableCell className='text-black font-medium'>ID</TableCell>
+                <TableCell className='text-black font-medium'>Rank</TableCell>
+                <TableCell className='text-black font-medium'>User Level</TableCell>
+                <TableCell className='text-black font-medium'>Phone num</TableCell>
+                <TableCell className='text-black font-medium'>Email</TableCell>
+                <TableCell className='text-black font-medium'> </TableCell>
               </TableRow>
             </TableHead>
 
@@ -37,16 +37,16 @@ function SearchResult ({ resultData }) {
               {
                 resultData && resultData?.map((result) => (
                   <TableRow>
-                    <TableCell><Avatar src={result?.profileImage ? result?.profileImage : userProfilePictureMapping[result?.ranks?.type]} style={{ width: '40px', height: '40px' }} /></TableCell>
-                    <TableCell><p>{`${result?.name} ${result?.lastname}`}</p></TableCell>
-                    <TableCell><p>{result?.id}</p></TableCell>
-                    <TableCell><p>{result?.ranks?.type}</p></TableCell>
-                    <TableCell><p>{result?.level}</p></TableCell>
-                    <TableCell><p>{result.phoneNumber}</p></TableCell>
-                    <TableCell><p>{result.email}</p></TableCell>
-                    <TableCell>
+                    <TableCell className='border-b border-[#EFF3F8] text-black font-medium'><Avatar src={result?.profileImage ? result?.profileImage : userProfilePictureMapping[result?.ranks?.type]} style={{ width: '40px', height: '40px' }} className='border-2 border-[#DCE5ED]' /></TableCell>
+                    <TableCell className='border-b border-[#EFF3F8] text-black font-medium'><p>{`${result?.name} ${result?.lastname}`}</p></TableCell>
+                    <TableCell className='border-b border-[#EFF3F8] text-black font-medium'><p>{result?.id}</p></TableCell>
+                    <TableCell className='border-b border-[#EFF3F8] text-black font-medium'><p>{result?.ranks?.type}</p></TableCell>
+                    <TableCell className='border-b border-[#EFF3F8] text-black font-medium'><p>{result?.level}</p></TableCell>
+                    <TableCell className='border-b border-[#EFF3F8] text-black font-medium'><p>{result.phoneNumber}</p></TableCell>
+                    <TableCell className='border-b border-[#EFF3F8] text-black font-medium'><p>{result.email}</p></TableCell>
+                    <TableCell className='border-b border-[#EFF3F8] text-black font-medium'>
                       <div className={`${cname}-row-button`}>
-                      <ButtonComponent title={'view more'} onClickFunction={handleViewMore} param={result.id} />
+                        <ButtonComponent title={'view more'} onClickFunction={handleViewMore} param={result.id} />
                       </div>
                     </TableCell>
                   </TableRow>
