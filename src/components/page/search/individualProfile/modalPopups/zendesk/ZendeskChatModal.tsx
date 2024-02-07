@@ -11,7 +11,19 @@ import { useAuthStore } from 'lib/stores'
 import { textAlign } from 'html2canvas/dist/types/css/property-descriptors/text-align'
 import parse from 'html-react-parser'
 
-const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag, setTicketFlag, scrollRef, ticketSelectFlag }) => {
+interface propsInterface{
+  zendeskChatModal: any,
+  closeChatModal: any,
+  ticket: any,
+  ticketFlag: boolean,
+  setTicketFlag: any,
+  scrollRef: any,
+  ticketSelectFlag: boolean,
+  IsPublic: boolean
+  zendeskId?: string
+}
+
+const ZendeskChatModal = (props: propsInterface) => {
   const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -23,8 +35,19 @@ const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag
     boxShadow: 24
     // p: 4
   }
+  const zendeskChatModal = props.zendeskChatModal
+  const closeChatModal = props.closeChatModal
+  const ticket = props.ticket
+  const ticketFlag = props.ticketFlag
+  const setTicketFlag = props.setTicketFlag
+  const scrollRef = props.scrollRef
+  const ticketSelectFlag = props.ticketSelectFlag
+  const IsPublic = props.IsPublic
+  const zendeskId = props.zendeskId || '0'
+
   const { auth, setAuth } = useAuthStore()
   const [comments, setComments] = useState([])
+  const [commentType, setCommnetType] = useState('public')
   const [commentBody, setCommentBody] = useState({
     author_id: auth?.zendesk_id,
     comment_body: '',
@@ -37,11 +60,12 @@ const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag
   const getComments = async (ticketId: number) => {
     await axios.get('/api/zendesk/comments', {
       params: {
-        ticket_id: ticketId
+        ticket_id: ticketId,
+        IsPublic
       }
     })
       .then((res) => {
-        setComments(res.data.response?.comments)
+        setComments(res.data.response)
       })
   }
 
@@ -85,6 +109,8 @@ const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag
     const zendeskCommentData = new FormData()
     zendeskCommentData.append('ticket_id', ticket?.id)
     zendeskCommentData.append('ticketStatus', ticket?.status)
+    const typeFlag = commentType === 'private' ? 'false' : 'true'
+    zendeskCommentData.append('IsPublic', typeFlag)
 
     Object.entries(commentBody).forEach(([key, value]) => {
       zendeskCommentData.append(key, value)
@@ -106,6 +132,9 @@ const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag
         }
       })
   }
+  const handleSelectChange = (event) => {
+    setCommnetType(event.target.value)
+  }
   return (
     <Modal open={ zendeskChatModal } onClose={closeChatModal} >
       <Box sx={style}>
@@ -119,20 +148,18 @@ const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'end',
-                marginTop: 20,
-                marginLeft: comment.author_id == auth?.zendesk_id ? '50%' : 0,
-                marginRight: comment.author_id != auth?.zendesk_id ? '50%' : 0
+                marginTop: 20
               } }>
-                <div style={{ marginLeft: comment.author_id == auth?.zendesk_id ? 'auto' : 0, marginRight: comment.author_id != auth?.zendesk_id ? 'auto' : 0 }}>
-                  <h2 style={{ marginBottom: 10, textAlign: comment?.author_id == auth?.zendesk_id ? 'right' : 'left' }}>
-                    <strong>{user && user[comment.author_id]?.name }</strong>
+                <div style={{ marginLeft: comment.public === false ? '40%' : (comment.author_id == auth?.zendesk_id || comment.author_id == zendeskId) ? 'auto' : 0, marginRight: comment.public === false ? 'auto' : (comment.author_id == auth?.zendesk_id || comment.author_id == zendeskId) ? 0 : 'auto' }}>
+                  <h2 style={{ marginBottom: 10, textAlign: comment.public === false ? 'left' : (comment.author_id == auth?.zendesk_id || comment.author_id == zendeskId) ? 'right' : 'left' }}>
+                    <strong>{user && user[comment.author_id]?.name } {comment.public === false ? '(Private)' : ''}</strong>
                   </h2>
                   <p className='zendesk_chatbox_comment' style={{
                     paddingTop: 16,
                     paddingLeft: 16,
                     paddingRight: 16,
                     paddingBottom: 16,
-                    backgroundColor: comment?.author_id == auth?.zendesk_id ? '#ECECEC' : '#FF998B',
+                    backgroundColor: comment.public == false ? '#FFF4E5' : (comment.author_id == auth?.zendesk_id || comment.author_id == zendeskId) ? '#ECECEC' : '#FF998B',
                     borderRadius: 4
                   }}>
                     {parse(comment.html_body)}
@@ -162,6 +189,16 @@ const ZendeskChatModal = ({ zendeskChatModal, closeChatModal, ticket, ticketFlag
             disabled={(ticket?.status && ticket?.status === 'closed')}/>
           <label>File Attachment(optional)</label> <br/>
           <input type='file' name='zendeskCommentAttachment' onChange={(e) => { setCommentBody({ ...commentBody, attachment: e.target.files[0] }) }} />
+          {!IsPublic
+            ? <div>
+              <select value={commentType} onChange={handleSelectChange}>
+                <option value="">Select...</option>
+                <option value="public">Public</option>
+                <option value="private">Private</option>
+              </select>
+            </div>
+            : <></>
+          }
           <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'flex-end' }}>
             <ButtonComponent title={'Send'} onClickFunction={handlePostComment} />
           </div>
