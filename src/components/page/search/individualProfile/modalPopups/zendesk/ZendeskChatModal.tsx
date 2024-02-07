@@ -135,7 +135,6 @@ const ZendeskChatModal = (props: propsInterface) => {
   const handleSelectChange = (event) => {
     setCommnetType(event.target.value)
   }
-  console.log('comments of a ticket', comments)
   return (
     <Modal open={ zendeskChatModal } onClose={closeChatModal} >
       <Box sx={style}>
@@ -150,8 +149,6 @@ const ZendeskChatModal = (props: propsInterface) => {
                 flexDirection: 'row',
                 alignItems: 'end',
                 marginTop: 20
-                // marginLeft: comment.author_id == auth?.zendesk_id ? '50%' : 0,
-                // marginRight: comment.author_id != auth?.zendesk_id ? '50%' : 0
               } }>
                 <div style={{ marginLeft: comment.public === false ? '40%' : (comment.author_id == auth?.zendesk_id || comment.author_id == zendeskId) ? 'auto' : 0, marginRight: comment.public === false ? 'auto' : (comment.author_id == auth?.zendesk_id || comment.author_id == zendeskId) ? 0 : 'auto' }}>
                   <h2 style={{ marginBottom: 10, textAlign: comment.public === false ? 'left' : (comment.author_id == auth?.zendesk_id || comment.author_id == zendeskId) ? 'right' : 'left' }}>
