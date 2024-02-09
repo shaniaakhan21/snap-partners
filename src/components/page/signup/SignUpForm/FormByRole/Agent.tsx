@@ -1,8 +1,9 @@
 import { useState } from 'react'
 
 import { IReferralLink } from 'lib/types'
-import { STEPS, RegisterBasicInfo, VerifyCode, SuccessCode, UpgradeToManager } from './utils/Steps'
+import { STEPS, VerifyCode, SuccessCode, UpgradeToManager } from './utils/Steps'
 import { IHandleStep, IUserTrack, IHandleUserInfo } from './utils/types'
+import { RegisterBasicIboAgentInfo } from './utils/Steps/RegisterBasicIboAgentInfo'
 
 export const SignUpAgentForm = ({ referralLink }: { referralLink: IReferralLink }) => {
   const [userTrack, setUserTrack] = useState<IUserTrack>({ step: 'STEP_1', userInfo: null })
@@ -24,7 +25,7 @@ export const SignUpAgentForm = ({ referralLink }: { referralLink: IReferralLink 
   return (
     <div className='w-full'>
       {userTrack.step === STEPS.REGISTER_BASIC_INFO && (
-        <RegisterBasicInfo
+        <RegisterBasicIboAgentInfo
           referralLink={referralLink}
           handleUserInfo={handleUserInfo}
           handleStep={handleStep}

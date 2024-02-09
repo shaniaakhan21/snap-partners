@@ -29,7 +29,7 @@ export const DatePickerForm = ({
   }
   return (
     <div>
-      <label htmlFor={id} className='font-bold text-gray-700 uppercase text-sm'>
+      <label htmlFor={id} className='font-semibold text-gray-600 text-md'>
         {label} {isRequired && <span className='text-red-500'>*</span>}
       </label>
       {errors && <p className='text-sm text-red-400'>{errors.message}</p>}

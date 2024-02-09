@@ -122,7 +122,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
           code,
           sponsorReferralCode: userTrack.userInfo.sponsorReferralCode,
           level: userTrack.userInfo.level,
-          ein: userTrack.userInfo.socialSecurityNumber,
+          ein: userTrack.userInfo.ein,
           business_type: userTrack.userInfo.business_type,
           b_start_date: userTrack.userInfo.b_start_date,
           businessName: userTrack.userInfo.businessName
@@ -145,7 +145,7 @@ export const VerifyCode = ({ userTrack, handleStep, referralLink, handleUserInfo
           zip: userTrack.userInfo.zip,
           insuranceImage: userTrack.userInfo.insuranceImage,
           socialSecurityNumber: userTrack.userInfo.socialSecurityNumber,
-          ein: userTrack.userInfo.socialSecurityNumber,
+          ein: userTrack.userInfo.ein,
           business_type: userTrack.userInfo.business_type,
           b_start_date: userTrack.userInfo.b_start_date,
           businessName: userTrack.userInfo.businessName,
