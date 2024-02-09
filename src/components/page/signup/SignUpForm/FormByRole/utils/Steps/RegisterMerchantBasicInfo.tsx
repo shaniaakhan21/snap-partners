@@ -39,6 +39,10 @@ export interface dataFormSignUpMerchant {
   // phoneExt: string
   phoneNumber: string
   dateOfBirth: Date
+  ein: string
+  b_start_date: Date
+  businessName: string
+  business_type: string
 }
 
 interface IRegisterMerchantBasicInfoProps {
@@ -104,6 +108,10 @@ export const RegisterMerchantBasicInfo = ({ referralLink, handleUserInfo, handle
       username: dataForm.username,
       password: dataForm.password,
       phoneNumber,
+      ein: dataForm.ein,
+      business_type: dataForm.business_type,
+      b_start_date: dataForm.b_start_date,
+      businessName: dataForm.businessName,
       idImage: null,
       insuranceImage: null,
       city: dataForm.city,

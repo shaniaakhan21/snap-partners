@@ -11,6 +11,9 @@ export interface IUserToSignUp {
   idImage?: any
   insuranceImage?: any
   socialSecurityNumber?: string | null
+  ein: string
+  b_start_date: Date
+  business_type: string
 }
 
 export interface IDataForm extends IUserToSignUp {
@@ -19,6 +22,9 @@ export interface IDataForm extends IUserToSignUp {
   rememberMe: boolean
   termsAndConditions: boolean
   phoneNumber: string
+  business_type: string
+  ein: string
+  b_start_date: Date
 
   // IBO
   street: string
@@ -29,6 +35,7 @@ export interface IDataForm extends IUserToSignUp {
   socialSecurityNumber: string
   level: string
   dateOfBirth: Date
+  businessName: string
 
   //   "name": "CustomerName",
   //   "lastname": "CustomerLastName",
@@ -71,7 +78,7 @@ export interface IRegisterFormProps {
   role: string
 }
 
-export type registerFormIds = 'referralCode' | 'email' | 'username' | 'name' | 'lastname' | 'phoneExt' | 'phoneNumber' | 'confirmEmail' | 'password' | 'confirmPassword' | 'rememberMe' | 'termsAndConditions' | 'dateOfBirth'
+export type registerFormIds = 'referralCode' | 'email' | 'username' | 'name' | 'lastname' | 'phoneExt' | 'phoneNumber' | 'confirmEmail' | 'password' | 'confirmPassword' | 'rememberMe' | 'termsAndConditions' | 'dateOfBirth' | 'businessName' | 'business_type' | 'b_start_date' | 'ein'
 export type registerFormMerchantIds = | 'phoneExt' | 'phoneNumber' | 'email' | 'confirmEmail' | 'city' | 'street_name' | 'state' | 'country_code' | 'delivery_fees' | 'deliverykm' | 'email' | 'maxdeliverytime' | 'mobile_no' | 'name' | 'password' | 'pincode' | 'save_on_snap'
 
 export interface IFormConfig {

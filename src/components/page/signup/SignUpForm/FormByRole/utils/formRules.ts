@@ -92,8 +92,18 @@ export const registerRulesConfig = {
     pattern: { value: /^(?!666|000|9\d{2})\d{3}(?!00)\d{2}(?!0{4})\d{4}$/i, message: 'Invalid Social Security Number' }
   },
 
+  ein: {
+    pattern: { value: /^(?!666|000|9\d{2})\d{3}(?!00)\d{2}(?!0{4})\d{4}$/i, message: 'Invalid EIN' }
+  },
+
   businessName: {
     maxLength: { value: 500, message: 'Max 500 Characters *' }
+  },
+
+  business_type: {
+    required: {
+      value: true, message: 'Business Type Required *'
+    }
   },
 
   idImage: {

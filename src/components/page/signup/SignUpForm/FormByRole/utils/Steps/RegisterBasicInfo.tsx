@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useRef, useState } from 'react'
+import { ChangeEvent, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button } from 'components/common/Button'
 import { Spinner } from 'components/common/loaders'
@@ -23,6 +23,8 @@ import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers-pro'
 import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs'
 import { DatePickerForm } from '../DatePicker'
 import states from 'data/states'
+import { FormControlLabel, Radio } from '@mui/material'
+import axios from 'axios'
 
 interface IStepOpeProps {
   referralLink: IReferralLink,
@@ -74,6 +76,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
   const { handleSubmit, register, reset, formState: { errors }, setError, control } = useForm<IDataForm>()
   const [isLoading, setLoading] = useState(false)
   const role = useRoleFromUrl()
+  const [selectedOption, setSelectedOption] = useState('Individual')
 
   // const { current: Apps } = useRef([
   //   { to: '/download-app?device=APPLE', icon: <img src='/images/app-store.png' className='inline-block mb-4 sm:mb-0 w-40' /> },
@@ -157,6 +160,9 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
       dateOfBirth: dataForm.dateOfBirth,
       password: dataForm.password,
       businessName: dataForm.businessName,
+      business_type: dataForm.business_type,
+      b_start_date: dataForm.b_start_date,
+      ein: dataForm.ein,
       street: dataForm.street,
       city: dataForm.city,
       state: dataForm.state,
@@ -231,6 +237,12 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
         : '/auth/login'
   const maxWClass = router.pathname === '/auth/signup-wellness' ? 'max-w-2xl' : 'max-w-md'
 
+  const handleOptionChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSelectedOption((prevOption) => {
+      return event.target.value as 'Individual' | 'Business'
+    })
+  }
+
   return (
     <>
       <div className={`mx-auto w-full ${maxWClass}`}>
@@ -239,6 +251,41 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
         </p>
         <p className='text-[#18203F] font-bold text-md mb-2'>{subtext}</p>
         <p className='font-medium text-gray-600'>Welcome! register to continue.</p>
+        <div className='bg-[#F0F4F8] border border-[#DCE5ED] rounded-lg pl-2 pt-2 mt-2'>
+          <p className='font-medium text-[#E74426]'>Register as a:</p>
+          <FormControlLabel
+            value="Individual"
+            control={<Radio checked={selectedOption === 'Individual'} onChange={handleOptionChange}/>}
+            label="Individual"
+            sx={{
+              '@media (max-width:600px)': {
+                '.MuiFormControlLabel-label': {
+                  fontSize: '0.8rem'
+                },
+                '.MuiSvgIcon-root': {
+                  width: '16px',
+                  height: '16px'
+                }
+              }
+            }}
+          />
+          <FormControlLabel
+            value="Business"
+            control={<Radio checked={selectedOption === 'Business'} onChange={handleOptionChange} />}
+            label="Business"
+            sx={{
+              '@media (max-width:600px)': {
+                '.MuiFormControlLabel-label': {
+                  fontSize: '0.8rem'
+                },
+                '.MuiSvgIcon-root': {
+                  width: '16px',
+                  height: '16px'
+                }
+              }
+            }}
+          />
+        </div>
 
         <form className='mt-6 w-full' onSubmit={handleSubmit(onSubmit)}>
           <InputForm
@@ -281,32 +328,116 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             rulesForm={registerRulesConfig.username}
             isRequired
           />
+          {selectedOption === 'Business' && (
+            <>
+              <InputForm
+                id='businessName'
+                name='businessName'
+                type='text'
+                label={'Business Name'}
+                registerId='businessName'
+                placeholder='Enter Business Name'
+                errors={errors.businessName}
+                register={register}
+                rulesForm={registerRulesConfig.businessName}
+                isRequired />
 
-          <InputForm
-            id='name'
-            name='name'
-            type='text'
-            label={'First Name'}
-            registerId='name'
-            placeholder='Enter Name'
-            errors={errors.name}
-            register={register}
-            rulesForm={registerRulesConfig.name}
-            isRequired
-          />
+              <label className='font-semibold text-gray-600 text-md'>
+              Business Type {' '}
+                <span className='text-red-500'>*</span>
+              </label>
+              <select
+                className='w-full px-3 py-1 my-2 text-base text-black border-2 border-gray-200 rounded-lg outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-10 transition-colors duration-200 ease-in-out placeholder:text-black'
+                id='business_type'
+                name='business_type'
+                style={{ backgroundImage: 'none' }}
+                {...register('business_type', { required: 'Business Type is required *' })}
+              >
+                <option value=''>Select Business Type</option>
+                <option value="Individual/sole proprietor or LLC">Individual/sole proprietor or LLC</option>
+                <option value="C Corporation">C Corporation</option>
+                <option value="S Corporation">S Corporation</option>
+                <option value="Partnership">Partnership</option>
+                <option value="Trust/estate">Trust/estate</option>
 
-          <InputForm
-            id='lastname'
-            name='lastname'
-            type='text'
-            label='Last Name'
-            registerId='lastname'
-            placeholder='Enter Last Name'
-            errors={errors.lastname}
-            register={register}
-            rulesForm={registerRulesConfig.lastname}
-            isRequired
-          />
+              </select>
+
+              <InputForm
+                id='ein'
+                name='ein'
+                type='text'
+                label={'EIN'}
+                registerId='ein'
+                placeholder='Enter EIN'
+                errors={errors.ein}
+                register={register}
+                rulesForm={registerRulesConfig.ein}
+                isRequired />
+
+              <DatePickerForm
+                id='b_start_date'
+                name='b_start_date'
+                label='Start of business'
+                register={register}
+                registerId='b_start_date'
+                errors={errors.b_start_date}
+                isRequired
+              />
+
+              <InputForm
+                id='name'
+                name='name'
+                type='text'
+                label={'Owner First Name'}
+                registerId='name'
+                placeholder='Enter Name'
+                errors={errors.name}
+                register={register}
+                rulesForm={registerRulesConfig.name}
+                isRequired
+              />
+
+              <InputForm
+                id='lastname'
+                name='lastname'
+                type='text'
+                label='Owner Last Name'
+                registerId='lastname'
+                placeholder='Enter Last Name'
+                errors={errors.lastname}
+                register={register}
+                rulesForm={registerRulesConfig.lastname}
+                isRequired
+              />
+            </>
+
+          )}
+          {selectedOption === 'Individual' && (
+            <>
+              <InputForm
+                id='name'
+                name='name'
+                type='text'
+                label={'First Name'}
+                registerId='name'
+                placeholder='Enter Name'
+                errors={errors.name}
+                register={register}
+                rulesForm={registerRulesConfig.name}
+                isRequired />
+
+              <InputForm
+                id='lastname'
+                name='lastname'
+                type='text'
+                label='Last Name'
+                registerId='lastname'
+                placeholder='Enter Last Name'
+                errors={errors.lastname}
+                register={register}
+                rulesForm={registerRulesConfig.lastname}
+                isRequired /></>
+          )}
 
           <DatePickerForm
             id='dateOfBirth'
@@ -316,19 +447,6 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             registerId='dateOfBirth'
             errors={errors.dateOfBirth}
             isRequired
-          />
-
-          <InputForm
-            id='businessName'
-            name='businessName'
-            type='text'
-            label='Business Name (Optional)'
-            registerId='businessName'
-            placeholder='Enter Business Name'
-            errors={errors.businessName}
-            register={register}
-            rulesForm={registerRulesConfig.businessName}
-            isRequired={false}
           />
 
           <InputForm
@@ -356,12 +474,12 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             rulesForm={registerRulesConfig.city}
             isRequired
           />
-          <label className='font-bold text-gray-700 uppercase text-sm'>
-          STATE / PROVINCE {' '}
+          <label className='font-semibold text-gray-600 text-md'>
+          State / Province {' '}
             <span className='text-red-500'>*</span>
           </label>
           <select
-            className='w-full px-3 py-1 my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
+            className='w-full px-3 py-1 my-2 text-base text-gray-600 bg-white border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
             id='state'
             name='state'
             style={{ backgroundImage: 'none' }}
@@ -388,7 +506,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
             isRequired
           />
 
-          {showSSNField && (
+          {showSSNField && selectedOption === 'Individual' && (
             <InputForm
               id='socialSecurityNumber'
               name='socialSecurityNumber'
@@ -399,8 +517,7 @@ export const RegisterBasicInfo = ({ referralLink, handleStep, handleUserInfo }: 
               errors={errors.socialSecurityNumber}
               register={register}
               rulesForm={registerRulesConfig.socialSecurityNumber}
-              isRequired={false}
-              helpText='You are not required to enter your social security number today. Please note that Snap Partners will require your social security number once you earn a total of $600 in commissions'
+              isRequired={true}
               style = {ssnHelptextDesign}
             />
           )}

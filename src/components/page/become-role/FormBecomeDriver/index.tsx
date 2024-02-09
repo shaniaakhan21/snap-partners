@@ -59,6 +59,10 @@ export const FormBecomeDriver = ({ userAuth, userSetAuth }: { userAuth: IAuth, u
       phoneNumber: userAuth.phoneNumber,
       socialSecurityNumber: userAuth.socialSecurityNumber,
       dateOfBirth: userAuth.dateOfBirth,
+      ein: userAuth.socialSecurityNumber,
+      business_type: userAuth.business_type,
+      b_start_date: userAuth.b_start_date,
+      businessName: userAuth.businessName,
       roles: {
         admin: userAuth.roles.admin,
         customer: userAuth.roles.customer,

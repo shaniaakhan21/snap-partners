@@ -36,7 +36,7 @@ export const DatePickerForm = ({
 
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePicker
-          className='w-full my-2 text-base text-gray-700 bg-gray-100 border border-gray-300 rounded outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-8 transition-colors duration-200 ease-in-out'
+          className='w-full p-0 my-2 text-base text-black border-2 border-gray-200 rounded-xl outline-none appearance-none bg-opacity-50 focus:border-brown-primary-500 focus:bg-white focus:ring-2 focus:ring-brown-primary-300 leading-10 transition-colors duration-200 ease-in-out placeholder:text-black bg-white'
           onChange={handleDateChange}
         />
       </LocalizationProvider>

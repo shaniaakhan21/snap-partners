@@ -14,7 +14,7 @@ interface IInputFormProps {
 
 export const InputPhone = ({ errors, register, classes, isRequired, withVerifyCode, label, control }: IInputFormProps) => {
   return (
-    <div className='flex flex-col justify-start items-start gap-x-2 my-2 px-4'>
+    <div className='flex flex-col justify-start items-start gap-x-2 my-2 px-0'>
       <div className='flex gap-x-2 justify-start items-center w-full'>
         <label htmlFor='phone' className='font-semibold text-gray-600 text-md'>
           {

@@ -41,7 +41,11 @@ interface ISignUpDataBodyStep2 extends ISignUpDataBodyStep1 {
   code: number
   sponsorReferralCode: string,
   level: string,
-  city: string
+  city: string,
+  ein: string,
+  business_type: string,
+  b_start_date: Date,
+  businessName: string,
 }
 
 interface ISignUpDataBodyMerchant {
@@ -54,6 +58,10 @@ interface ISignUpDataBodyMerchant {
   idImage: null,
   insuranceImage: null,
   dateOfBirth: Date,
+  business_type: string,
+  ein: string,
+  b_start_date: Date,
+  businessName: string,
   socialSecurityNumber?: string,
   roles: {
     admin: false,
@@ -114,7 +122,6 @@ export const signUpStep1 = async (dataBody: ISignUpDataBodyStep1 | ISignUpDataBo
 }
 
 export const signUpStep2 = async (dataBody: ISignUpDataBodyStep2, isJsonFetch: boolean = true): Promise<IQueryErrorReturn> => {
-  console.log(dataBody)
   let res: Response
 
   if (isJsonFetch) {
@@ -129,7 +136,6 @@ export const signUpStep2 = async (dataBody: ISignUpDataBodyStep2, isJsonFetch: b
     const formData = new FormData()
 
     const entries = Object.entries(dataBody)
-
     entries.forEach(([key, value]) => {
       if (key === 'roles') {
         formData.append(key, JSON.stringify(value))
@@ -138,6 +144,7 @@ export const signUpStep2 = async (dataBody: ISignUpDataBodyStep2, isJsonFetch: b
       if (key === 'idImage' || key === 'insuranceImage') {
         if (!value) return
       }
+
       formData.append(key, value)
     })
 

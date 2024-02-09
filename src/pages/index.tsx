@@ -121,7 +121,11 @@ const HomePage: Page = () => {
         zip,
         dateOfBirth,
         isValidated,
-        business_approved
+        business_approved,
+        businessName,
+        business_type,
+        ein,
+        b_start_date
       } = auth
 
       GTMTrack.userInfo({
@@ -150,7 +154,11 @@ const HomePage: Page = () => {
         zip,
         dateOfBirth,
         isValidated,
-        business_approved
+        business_approved,
+        businessName,
+        business_type,
+        ein,
+        b_start_date
       })
     } else {
       GTMTrack.userInfo()
