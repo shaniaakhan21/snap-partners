@@ -366,12 +366,12 @@ export const RegisterBasicIboAgentInfo = ({ referralLink, handleStep, handleUser
                 id='ein'
                 name='ein'
                 type='text'
-                label={'EIN'}
+                label={'Business EIN'}
                 registerId='ein'
                 placeholder='Enter EIN'
                 errors={errors.ein}
                 register={register}
-                rulesForm={registerRulesConfig.ein} isRequired={false} />
+                rulesForm={registerRulesConfig.ein} isRequired />
 
               <DatePickerForm
                 id='b_start_date'
