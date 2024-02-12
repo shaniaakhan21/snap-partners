@@ -131,6 +131,13 @@
   border-color: transparent transparent #E12D2D transparent;
 }
 
+.cro-erc-process-tab > div > div > ul:nth-child(1) > li:nth-child(2)::before,
+.cro-erc-process-tab > div > div > ul:nth-child(2) > li:nth-child(2)::before, 
+.cro-erc-process-tab > div > div > ul:nth-child(3) > li:nth-child(2)::before
+{
+  left: 36%!important;
+}
+
 #cro-erc-process > div > div > ul:nth-child(2) > li:nth-child(2) {
   color: white!important;
   background-color: #FFC700 !important;

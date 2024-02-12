@@ -88,9 +88,9 @@ export const drawerRoutes = [
     label: 'Training'
   },
   {
-    icon: <RelojTempIcon />,
-    to: 'https://snapdelivered.ourproshop.com/',
-    label: 'Tools'
+    icon: <PromotionIcon />,
+    to: '/tickets',
+    label: 'Help Team'
   },
   {
     icon: <PersonIcon />,
@@ -131,9 +131,9 @@ export const drawerRoutes = [
     label: 'Documents'
   },
   {
-    icon: <PromotionIcon />,
-    to: '/tickets',
-    label: 'Help Team'
+    icon: <RelojTempIcon />,
+    to: 'https://snapdelivered.ourproshop.com/',
+    label: 'Tools'
   },
   {
     icon: <PromotionIcon />,

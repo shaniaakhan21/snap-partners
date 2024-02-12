@@ -22,7 +22,7 @@ const { SEO } = APP_INFO
 const CLIENT_PAGE_LIMIT = 10
 
 const ErcReport = ({ userId }) => {
-    const [personalClients, setPersonalClients] = useState<Client[]>([])
+  const [personalClients, setPersonalClients] = useState<Client[]>([])
   const [totalClientCount, setTotalClientCount] = useState(0)
   const [personalClientsLoading, setPersonalClientsLoading] = useState(false)
   const [teamClients, setTeamClients] = useState<LevelledClient[]>([])
@@ -102,19 +102,22 @@ const ErcReport = ({ userId }) => {
 
   return (
     <>
-      <div id="cro-erc-process" style={{ marginLeft: 0, marginRight: 0 }}>
+      <div id="cro-erc-process" className='cro-erc-process-tab' style={{ marginLeft: 0, marginRight: 0 }}>
         <div className="">
           <h1>The ERC Process has 3 Phases that trigger payout</h1>
           <div>
             <ul>
+              <li>x</li>
               <li>Phase 1</li>
               <li>New Client</li>
             </ul>
             <ul>
+              <li>x</li>
               <li>Phase 2</li>
-              <li> Jorns Filling Work</li>
+              <li>Jorns Filling Work</li>
             </ul>
             <ul>
+              <li>x</li>
               <li>Phase 3</li>
               <li>IRS Payment</li>
             </ul>
@@ -123,7 +126,7 @@ const ErcReport = ({ userId }) => {
       </div>
       <ErcModal client={selectedClient} isOpen={Boolean(selectedClient)} onClose={() => setSelectedClient(null)} />
       <div id="table1erc" className="" style={{ marginLeft: 0, marginRight: 0 }}>
-        <div className="flex flex-row justify-between pb-2 text-lg font-sans font-semibold text-gray-800">
+        <div className="flex flex-row justify-between pb-2 text-lg font-sans font-semibold text-black">
           Your Personal Clients
           {
             personalClientsLoading && <Spinner />

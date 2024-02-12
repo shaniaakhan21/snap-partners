@@ -88,7 +88,7 @@ export default function RewardsProgram () {
   }
 
   return (
-    <div className="w-fit lg:w-full bg-white rounded-3xl shadow-lg p-6">
+    <div className="w-fit lg:w-full bg-white rounded-3xl shadow-[0_1px_12px_-1px_rgba(0,0,0,0.2)] p-6">
       <div>
         <span className='text-sm lg:text-xl font-bold'>Rewards Program</span>
       </div>

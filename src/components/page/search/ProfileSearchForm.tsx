@@ -64,11 +64,10 @@ function ProfileSearchForm ({ children }) {
     setProfileSearchForm({ ...profileSearchForm, profileSearchString: typeof router.query.searchString === 'string' && router.query.searchString !== 'noName' ? searchString : '', userLevel: typeof router.query.userLevel === 'string' && router.query.userLevel !== 'noLevel' ? router.query.userLevel : '' })
   }, [router.query])
   return (
-    <div>
-      <Container>
+    <div className='w-full  rounded-2xl'>
+      <Container className='m-0 p-0 w-full max-w-full '>
         <Paper elevation={2} className={`${cname}-container`}>
           <div className={`${cname}-label`}>
-            <Person />
             <p>Search Profile</p>
           </div>
           <form className={`${cname}`} onSubmit={(e) => handleSubmit(e, profileSearchForm)}>

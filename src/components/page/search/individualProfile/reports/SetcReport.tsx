@@ -83,19 +83,22 @@ const SetcReport = ({ userId }) => {
 
   return (
     <div style={{ marginLeft: 0, marginRight: 0 }}>
-      <div id="cro-setc-process" style={{ marginLeft: 0, marginRight: 0 }}>
+      <div id="cro-setc-process" className='cro-erc-process-tab' style={{ marginLeft: 0, marginRight: 0 }}>
         <div className="">
           <h1>The SETC Process triggers commission upon completion of Phase 2</h1>
           <div>
             <ul>
+              <li>x</li>
               <li>Phase 1</li>
               <li>Client Engagement</li>
             </ul>
             <ul>
+              <li>x</li>
               <li>Phase 2</li>
               <li> Qualification & Invoice</li>
             </ul>
             <ul>
+              <li>x</li>
               <li>Phase 3</li>
               <li>Filed With IRS</li>
             </ul>
@@ -104,7 +107,7 @@ const SetcReport = ({ userId }) => {
       </div>
       <div id="table1setc" style={{ marginLeft: 0, marginRight: 0 }}>
         <div className='flex flex-row justify-between items-center'>
-          <p className='text-lg font-sans font-semibold text-gray-800'>Your Personal SETC Client Submissions</p>
+          <p className='text-lg font-sans font-semibold text-black'>Your Personal SETC Client Submissions</p>
           {
             personalClientsLoading && (
               <Spinner />
@@ -147,15 +150,15 @@ const SetcReport = ({ userId }) => {
           <SingleIboSetcs ibo={selectedIBO} />
         </div>
       )}
-      <div id="table1setc" style={{ marginLeft: 0, marginRight: 0 }}>
-        <div className='mt-4'>
-          <p>Key: <br />
-        Paid Clients: Reflects those clients that have paid the invoice amount with a value of "1" if paid a ”0” if not paid yet
+      <div className='flex flex-row w-full border border-[#DCE5ED] rounded-lg my-6'>
+        <div className='w-1/2 border-r border-[#DCE5ED] px-4 py-3 '>
+          <p className='text-sm'><span className='font-bold text-black text-base'>Key: </span><br />
+            <b>Paid Clients:</b> Reflects those clients that have paid the invoice amount with a value of "1" if paid a ”0” if not paid yet
           </p>
         </div>
-        <div className='mt-4'>
-          <p>Note: <br />
-        Commissions are only earned on clients that have paid their invoice which is determined in Phase 2 of the filing process.
+        <div className='w-1/2 px-4 py-3 bg-[#F0F4F8]'>
+          <p className='text-sm'><span className='font-bold text-black text-base'>Note: </span><br />
+        Commissions are only earned on clients that have paid their invoice which is determined in <b>Phase 2</b> of the filing process.
           </p>
         </div>
       </div>
@@ -163,5 +166,4 @@ const SetcReport = ({ userId }) => {
   )
 }
 
-
-export default SetcReport;
+export default SetcReport

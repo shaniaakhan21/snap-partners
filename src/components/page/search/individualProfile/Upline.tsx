@@ -10,6 +10,7 @@ import { ButtonComponent } from 'components/layout/private/Dashboard/Navbar/admi
 import { PhoneIcon } from 'components/common/icons'
 import { useRouter } from 'next/router'
 import { userLevelReverseMapping } from 'components/layout/private/Dashboard/Navbar/adminTools/searchForms/formOptionData'
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
 
 function Upline ({ id, currentUserLevel }) {
   const cname = 'user-upline'
@@ -50,24 +51,24 @@ function Upline ({ id, currentUserLevel }) {
     <div className={`${cname}-container`}>
       {UplineData && !isLoading
         ? UplineData?.map((data) => (
-          <Card variant='outlined' className={`${cname}-card`}>
-            <CardContent>
-              <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }} className={`${cname}-card-container`}>
-                <p className={`${cname}-card-heading`}>{data?.name} {data?.lastname}</p>
+          <Card variant='outlined' className={`${cname}-card border border-[#DCE5ED] rounded-3xl`}>
+            <CardContent className='p-0 cardpadding'>
+              <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }} className={`${cname}-card-container pt-4 px-3`}>
+                <p className={`${cname}-card-heading text-black`}>{data?.name} {data?.lastname}</p>
                 {/* <div style={{ fontSize: '12px' }}> */}
-                  <a href={`/search/profile/${data?.id}`} style={{ fontSize: '12px' }}>View Profile</a>
-                  {/* <ButtonComponent title='See Profile' onClickFunction={viewProfileFunction} param={data?.id} /> */}
+                <a href={`/search/profile/${data?.id}`} className='text-[#E74426]' style={{ fontSize: '12px' }}>View Profile</a>
+                {/* <ButtonComponent title='See Profile' onClickFunction={viewProfileFunction} param={data?.id} /> */}
                 {/* </div> */}
               </div>
 
-              <div className={`${cname}-card-info`}>
-                <p><span className={`${cname}-card-info-title`}>id</span>-<span className={`${cname}-card-info-content`}>{data?.id}</span></p>
-                <p><span className={`${cname}-card-info-title`}>Rank</span>-<span className={`${cname}-card-info-content`}>{data?.ranks?.type}</span></p>
+              <div className={`${cname}-card-info px-3`}>
+                <p><span className={`${cname}-card-info-title text-[#9A9A9A]`}>id</span>-<span className={`${cname}-card-info-content text-black`}>{data?.id}</span></p>
+                <p><span className={`${cname}-card-info-title  text-[#9A9A9A]`}>Rank</span> - <span className={`${cname}-card-info-content text-black capitalize font-semibold`}>{data?.ranks?.type}</span></p>
               </div>
 
-              <div className={`${cname}-card-info`}>
-                <div style={{ display: 'flex', flexDirection: 'row' }}><img src='/images/icons/email.svg'/><p><span className={`${cname}-card-info-content`}>{data?.email}</span></p></div>
-                <div style={{ display: 'flex', flexDirection: 'row' }}><PhoneIcon classes='w-4 h-4' /><p><span className={`${cname}-card-info-content`}>{data?.phoneNumber}</span></p></div>
+              <div className={`${cname}-card-info bg-[#F0F4F8] py-4 px-3`}>
+                <div className='items-center' style={{ display: 'flex', flexDirection: 'row' }}><MailOutlineIcon/><p><span className={`${cname}-card-info-content text-[#E74426] ml-2`}>{data?.email}</span></p></div>
+                <div className='items-center' style={{ display: 'flex', flexDirection: 'row' }}><PhoneIcon /><p><span className={`${cname}-card-info-content text-[#5F7081]`}>{data?.phoneNumber}</span></p></div>
               </div>
             </CardContent>
           </Card>
