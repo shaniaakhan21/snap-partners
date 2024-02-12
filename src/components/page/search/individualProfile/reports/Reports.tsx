@@ -37,10 +37,14 @@ const Reports = ({ userId }) => {
         <Select
           value={reportBody}
           onChange={handleCategoryChange}
-          className="cursor-pointer font-semibold relative xs:mr-2 pr-8 p-0 bg-[rgba(255,255,255,.13)] outline-none appearance-none rounded-full"
+          displayEmpty={false}
+          className="cursor-pointer font-semibold relative xs:mr-2 bg-[rgba(255,255,255,.13)] outline-none appearance-none rounded-full"
           sx={{
             '&.MuiInputBase-root .MuiSelect-select': {
               padding: '7.5px 14px!important'
+            },
+            '&.MuiInputBase-root': {
+              width: '10%!important'
             }
           }}
         >
