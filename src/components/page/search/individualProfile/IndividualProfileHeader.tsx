@@ -74,6 +74,7 @@ function IndividualProfileHeader ({ body, setBody, profileData, userLevel }) {
       zip: data.zip,
       dateOfBirth: data.dateOfBirth,
       TINstatus: data.TINstatus,
+      zendesk_id: data.zendesk_id,
       ...(builderWebsiteFields.reduce((acc, field) => ({ ...acc, [field]: data[field] }), {}) as any)
     })
     window.location.href = '/overview'
@@ -92,11 +93,12 @@ function IndividualProfileHeader ({ body, setBody, profileData, userLevel }) {
 
         <li className={body === 'order' ? `${cname}-header-listItems listItems-active listItems-midItem` : `${cname}-header-listItems listItems-midItem`}
           onClick={() => setBody('order')}>Order</li>
+        <li className={`${cname}-header-listItems listItems-midItem`}>subscription</li>
+        <li className={body === 'tickets' ? `${cname}-header-listItems listItems-active listItems-midItem` : `${cname}-header-listItems listItems-midItem`}
+          onClick={() => setBody('tickets')}>Tickets</li>
 
         <li className={body === 'dashboard' ? `${cname}-header-listItems listItems-active listItems-midItem` : `${cname}-header-listItems listItems-midItem`}
           onClick={() => setBody('dashboard')}>Dashboard</li>
-
-        <li className={`${cname}-header-listItems listItems-midItem`}>tickets</li>
 
         <li className={body === 'upline' ? `${cname}-header-listItems listItems-active listItems-midItem` : `${cname}-header-listItems listItems-midItem`}
           onClick={() => setBody('upline')}>upline</li>

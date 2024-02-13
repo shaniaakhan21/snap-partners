@@ -31,7 +31,7 @@ export const DashReferralCards = ({ title, ilustration, link, newUser = false, c
   }
 
   return (
-    <div className='bg-white w-full rounded-3xl shadow-lg mb-1'>
+    <div className='bg-white w-full rounded-3xl shadow-[0_1px_12px_-1px_rgba(0,0,0,0.2)] mb-1'>
       <div className={`w-full pl-2 p-1 flex flex-row items-center justify-center ${classes}`}>
         {newUser
           ? (
@@ -53,8 +53,8 @@ export const DashReferralCards = ({ title, ilustration, link, newUser = false, c
         <div className='w-1/4 h-fit '>
           {ilustration}
         </div>
-        <div className='flex flex-col w-3/4 ml-0'>
-          <h3 className={`w-full text-lg font-semibold text-start ml-4 ${newUser ? 'my-4' : 'mb-0'}`}>{title}</h3>
+        <div className='flex flex-col w-3/4 ml-1'>
+          <h3 className={`w-full text-sm 3xl:text-lg font-semibold text-start ml-4 ${newUser ? 'my-4' : 'mb-0'}`}>{title}</h3>
         </div>
       </div>
       <div>

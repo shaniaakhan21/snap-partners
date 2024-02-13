@@ -291,6 +291,12 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
               reviewSSN(socialSecurity)
               setShowFailedPopup(true)
             } else if (lastTwoDigitsInAuthSSN === lastTwoDigitsInSSN) {
+              await axios.post('/api/user/IndividualSSNVerified', {}, {
+                headers: {
+                  'Content-Type': 'application/json',
+                  Authorization: `Bearer ${auth.accessToken}`
+                }
+              })
               setShowSuccessPopup(true)
             }
             await validateUser()
@@ -309,7 +315,7 @@ const TINPopup = ({ open, onClose }: TINPopupProps) => {
             }
           })
 
-          await validateUser()
+          // await validateUser()
           setCity(city)
           setState(state)
           setStreet(street)

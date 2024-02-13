@@ -7,9 +7,9 @@ function Order () {
   const cname = 'profilePage-order'
   return (
     <div className={`${cname}-container`}>
-      <div className={`${cname}-heading`}><img src='' /><OrderIcon /><p>Search Order</p></div>
+      <div className={`${cname}-heading text-black mb-4`}><p>Search Order</p></div>
       <div className={`${cname}-form-container`}>
-        <div className={`${cname}-input`}>
+        <div className={`${cname}-input mb-6`}>
           <InputComponent label={'order ID'} placeholder={'Item ID or Customer ID'} />
         </div>
 
@@ -37,7 +37,7 @@ function Order () {
         </div>
       </div>
 
-      <div className={`${cname}-button-container`}>
+      <div className={`${cname}-button-container mr-2`}>
         <ButtonComponent title={'Search'} />
       </div>
     </div>

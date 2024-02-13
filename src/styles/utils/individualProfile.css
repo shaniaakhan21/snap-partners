@@ -1,7 +1,6 @@
 .profilePage-individualProfile-conatiner
 {
-    padding: 25px;
-    margin: 20px 50px 20px 50px;
+    padding: 5px;
 }
 
 .profilePage-individualProfile-header-list
@@ -13,14 +12,13 @@
 }
 .profilePage-individualProfile-header-listItems
 {
-    color:#E35C49;
+    color:black;
     text-align: center;
-
 /* Button Font AA/ Tiny */
-    font-size: 10px;
+    font-size: 11px;
     font-family: Open Sans;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 12px;
     text-transform: uppercase;
     padding: 10px;
@@ -30,18 +28,16 @@
 {
     border-top: 2px;
     border-bottom: 2px;
-    border-right: 2px;
-    border-color: black;
+    border-color: #DCE5ED;
     border-style: solid;
-}
-.listItems-firstItem
+} 
+ .listItems-firstItem
 {
     border-top: 2px;
     border-bottom: 2px;
-    border-right: 2px;
     border-left: 2px;
-    border-radius: 10px 0px 0px 10px;
-    border-color: black;
+    border-radius: 20px 0px 0px 20px;
+    border-color: #DCE5ED;
     border-style: solid;
 }
 .listItems-lastItem
@@ -49,13 +45,14 @@
     border-top: 2px;
     border-bottom: 2px;
     border-right: 2px;
-    border-radius: 0px 10px 10px 0px;
-    border-color: black;
+    border-radius: 0px 20px 20px 0px;
+    border-color: #DCE5ED;
     border-style: solid;
-}
+} 
 .profilePage-individualProfile-header-listItems:hover{
     cursor: pointer;
-    background-color: #E35C49;
+    background-color: #E74426;
+    border-color: #E74426;
     /* padding: 10px 5px 10px 5px; */
     /* margin-top: -20px; */
     color: #FFFFFF;
@@ -64,7 +61,8 @@
     /* padding: 10px 5px 10px 5px; */
     color: #FFFFFF;
     /* margin-top: -20px; */
-    background-color: #E35C49;
+    background-color: #E74426;
+    border-color: #E74426;
 }
 .profilePage-IBOProfile-container
 {
@@ -95,7 +93,7 @@ text-transform: uppercase;
 }
 .profilePage-IBOProfile-midSection-mainInfo{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     /* gap: 2%; */
     color: var(--info-600, #139ECF);
@@ -109,10 +107,10 @@ line-height: 24px;
 }
 .profilePage-IBOProfile-midSection-mainInfo-name
 {
-    color: var(--text-color-accent-link, #E35C49);
+    color: #000;
 
 /* Text Font / LABEL */
-font-size: 12px;
+font-size: 16px;
 font-family: Open Sans;
 font-style: normal;
 font-weight: 700;
@@ -171,13 +169,14 @@ line-height: 24px;
 {
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 .profilePage-IBOProfile-midSection-mainInfo-text:hover{
     cursor: pointer;
 }
 .profilePage-IBOProfile-midSection-mainInfo-title
 {
-    color: #E35C49;
+    color: #9A9A9A;
 }
 
 .profilePage-order-container
@@ -252,7 +251,7 @@ flex-direction: row;
 .user-upline-card-container a
 {
     text-decoration: underline;
-    color: #139ECF;
+    color: #E74426;
 }
 .user-upline-card-container a:hover
 {
@@ -260,7 +259,7 @@ flex-direction: row;
 }
 .profilePage-IBOProfile-activityLog-table-container
 {
-    max-height: 200px;
+    max-height: 50vh;
     overflow-y: scroll;
 }
 
@@ -279,6 +278,10 @@ flex-direction: row;
 .resetPasswordModal-error-message
 {
     color: red;
+}
+
+.cardpadding:last-child{
+    padding-bottom: 0!important;
 }
 
 .switch {

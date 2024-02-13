@@ -1,5 +1,6 @@
 /* eslint-disable no-use-before-define */
 import React from 'react'
+import SearchIcon from '@mui/icons-material/Search'
 
 interface IButtonComponent{
     title:string,
@@ -16,6 +17,7 @@ interface IInputComponent
     param?:any,
     value?:any,
     type?:any
+    disabled?:boolean
 }
 
 interface ISelectComponent {
@@ -36,12 +38,24 @@ interface ICheckboxComponent {
 }
 
 export const InputComponent = (props:IInputComponent) => {
-  const { label, placeholder, onChangeFunction, param, value, type } = props
+  const { label, placeholder, onChangeFunction, param, value, type, disabled } = props
   return (
     <div>
       <label className='search-form-label'>{label}</label>
-      <div>
-        <input type={type || 'text'} className='search-form-input search-form-box' placeholder={`${placeholder}`} onChange={(event) => { onChangeFunction(event, param) }} value={value} />
+      <div className='mr-4'>
+        <input type={type || 'text'} className='search-form-input search-form-box' placeholder={`${placeholder}`} onChange={(event) => { onChangeFunction(event, param) }} value={value} disabled={disabled}/>
+      </div>
+    </div>
+  )
+}
+
+export const TextArea = (props:IInputComponent) => {
+  const { label, placeholder, onChangeFunction, param, value, type, disabled } = props
+  return (
+    <div>
+      <label className='search-form-label'>{label}</label>
+      <div className='mr-4'>
+        <textarea className='search-form-input search-form-box' placeholder={placeholder} onChange={(event) => { onChangeFunction(event, param) } } value={value} disabled={disabled}></textarea>
       </div>
     </div>
   )
@@ -54,8 +68,8 @@ export const SelectComponent = (props:ISelectComponent) => {
       <div>
         <label className='search-form-label'>{label}</label>
       </div>
-      <div>
-        <select name={`${name}`} className='search-form-select search-form-box' value={value} onChange={(event) => { onChangeFunction(event, param) }}>
+      <div className='mr-4'>
+        <select name={`${name}`} className='search-form-select search-form-box mr-4' value={value} onChange={(event) => { onChangeFunction(event, param) }}>
           <option value={''}>Select</option>
           {
             options
@@ -95,7 +109,7 @@ export const ButtonComponent = (props:IButtonComponent) => {
   const { title, onClickFunction, param, type } = props
   return (
     <div>
-      {onClickFunction ? <button style={{ backgroundColor: '#DD4C37' }} type='submit' className='search-form-button button-label' onClick={(e) => { onClickFunction(e, param) }}>{title}</button> : <button style={{ backgroundColor: '#DD4C37' }} type='submit' className='search-form-button button-label'>{title}</button>}
+      {onClickFunction ? <button style={{ color: '#E74426' }} type='submit' className='search-form-button button-label' onClick={(e) => { onClickFunction(e, param) }}>{title}</button> : <button style={{ backgroundColor: '#E74426' }} type='submit' className='search-form-button button-label flex flex-row items-end justify-evenly mx-2'>{title}</button>}
     </div>
   )
 }

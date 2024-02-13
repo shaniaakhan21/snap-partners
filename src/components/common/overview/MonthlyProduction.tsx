@@ -38,7 +38,7 @@ const MonthlyProduction = ({ userId }) => {
     <>
       {
         data &&
-              <div className='grid gap-4 py-6'>
+              <div className='grid gap-4 py-6  shadow-[0_1px_12px_-1px_rgba(0,0,0,0.2)] rounded-3xl'>
                 <div className='pl-5 pr-5'>
                   <div className="flex pt-2">
                     <h1 className="text-2xl text-black font-bold pb-2">Monthly Production</h1>

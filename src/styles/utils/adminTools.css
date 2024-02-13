@@ -94,7 +94,7 @@
 
 .search-form-box
 {
-    border: 1px solid #B3B3B3;
+    border: 1px solid #DFDFDF;
     width: 100%;
     padding: 5px;
     border-radius: 5px;
@@ -104,13 +104,13 @@
 
 .search-form-label
 {
-    color:#777777;
+    color:#706464;
 
 /* Text Font / LABEL */
 font-size: 12px;
 font-family: Open Sans;
 font-style: normal;
-font-weight: 700;
+font-weight: 500;
 line-height: 16px;
 text-transform: uppercase;
 }
