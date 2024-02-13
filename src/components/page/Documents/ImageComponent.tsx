@@ -7,7 +7,7 @@ interface file {
 function ImageComponent (props:file) {
   const { fileId } = props
   const [imgUrl, setImgUrl] = useState('')
-  const[thumbnailData, setThumbnailData] = useState(null)
+  const [thumbnailData, setThumbnailData] = useState(null)
   const fetchThumbnailUrl = async (fileId) => {
     console.log('in fetch function')
     await axios.get(`/api/document/thumbnail/${fileId}`)
@@ -28,10 +28,10 @@ function ImageComponent (props:file) {
 
   return (
     <div><img src={thumbnailData && thumbnailData.thumbnailUrl ? thumbnailData.thumbnailUrl : `https://snap-delivered.nyc3.digitaloceanspaces.com/documentsThumbnail/${encodeURIComponent(thumbnailData?.thumbnailName)}`} style={{
-        width: '100%',
-        height: '150px',
-        objectFit: 'contain'
-      }} /></div>
+      width: '100%',
+      height: '294px',
+      objectFit: 'contain'
+    }} className='rounded-t-2xl' /></div>
   )
 }
 

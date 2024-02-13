@@ -24,8 +24,10 @@ const Documents = () => {
   const handleCategory = async (e) => {
     if (e.target.id == 0) {
       setCategoryFiles(totalFiles)
+      setCategory('0')
     } else {
       setCategoryFiles(totalFiles.filter((file) => file.categoryId == parseInt(e.target.id)))
+      setCategory(e.target.id)
     }
     // fetchFile(parseInt(e.target.id))
   }
@@ -61,7 +63,6 @@ const Documents = () => {
   }, [])
   return (
     <>
-      <div>Documents</div>
       <div>
         <CategoryChipList>
           <CategoryChip
@@ -69,16 +70,18 @@ const Documents = () => {
             categoryId = {0}
             categorySelected={Category}
             onClick={handleCategory}
+            className='md:rounded-l-3xl'
           >
           All
           </CategoryChip>
           {categoryData
-            ? categoryData.map((cat) => (
+            ? categoryData.map((cat: { categoryId: number, categoryName: string }, index: number) => (
               <CategoryChip
                 id={`${cat?.categoryId}`}
                 categoryId = {cat?.categoryId}
                 categorySelected={Category}
                 onClick={handleCategory}
+                isLastItem={index === categoryData.length - 1}
               >
                 {cat?.categoryName}
               </CategoryChip>
@@ -87,7 +90,7 @@ const Documents = () => {
         </CategoryChipList>
       </div>
       { !loading
-        ? <div className='document-cards'>
+        ? <div className='document-cards mt-8'>
           <Grid container spacing={2}>
             { categoryFiles
               ? categoryFiles.map((file) => (

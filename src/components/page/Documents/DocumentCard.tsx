@@ -16,11 +16,12 @@ const DocumentCard = (props:cardData) => {
   pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
   return (
     <>
-      <Grid item xs={6} md={2} lg={2}>
-        <div style={{
-          borderRadius: '10px',
-          backgroundColor: '#FFFFFF'
-        }}>
+      <Grid item xs={12} md={2} lg={3}>
+        <div
+          className='shadow-[0_1px_17px_-1px_rgba(0,0,0,0.2)] rounded-2xl'
+          style={{
+            backgroundColor: '#FFFFFF'
+          }}>
           { !loading
             ? <>
               <a
@@ -32,15 +33,12 @@ const DocumentCard = (props:cardData) => {
                   <ImageComponent fileId={file?.fileId} />
                 </div>
               </a>
-              <div style={{ padding: '8px 11px 15px 18px' }}>
-                <p style={{
-                  fontWeight: '600',
-                  fontSize: '12px'
-                }}>{file?.title}</p>
-                <p style={{
-                  fontWeight: '400',
-                  fontSize: '12px'
-                }}>{file?.description}</p>
+              <div style={{ padding: '8px 11px 15px 18px' }} className='bg-[#F0F4F8] rounded-b-2xl border border-[#DCE5ED]'>
+                <p
+                  className='text-xl font-semibold'
+                >{file?.title}</p>
+                <p className='text-xs font-medium'
+                >{file?.description}</p>
               </div>
             </>
             : <><Spinner /></>
