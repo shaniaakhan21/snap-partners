@@ -18,6 +18,7 @@ import { ERCClient } from '../icons/ERCClient'
 import { useAuthStore } from 'lib/stores'
 import { SnapPartnersRefIcon } from '../icons/SnapPartnersRef'
 import { DashReferralCards } from 'components/page/referrals/DashboardCards'
+import { useTranslation } from 'next-i18next'
 
 interface TabPanelProps {
   children?: ReactNode;
@@ -65,6 +66,7 @@ interface RankComponentProps{
 }
 
 export default function RankComponent (props: RankComponentProps) {
+  const { t } = useTranslation('Overview')
   const { auth } = useAuthStore()
   const { data } = props
   const [value, setValue] = useState(0)
@@ -153,7 +155,7 @@ export default function RankComponent (props: RankComponentProps) {
               <div className='bg-[#fff] rounded-t-3xl py-8  h-full w-full flex flex-col justify-center'>
                 <div className='flex justify-between'>
                   <div className='flex flex-col justify-center ml-[10%]'>
-                    <h1 className="text-sm lg:text-base 3xl:text-xl font-bold">Your current </h1><span className='text-xs lg:text-base font-normal text-gray-500 '>Pay Rank is:</span>
+                    <h1 className="text-sm lg:text-base 3xl:text-xl font-bold">{t('RankComponent.your-current-h1')}</h1><span className='text-xs lg:text-base font-normal text-gray-500 '>{t('RankComponent.your-current-h1_span')}</span>
                   </div>
                   <div className="flex items-center flex-col p-[6%] rounded-full border-2 border-[#EFEFEF] w-4/12 3xl:w-3/12  mr-[6%]">
                     <StyledBox backgroundColor={'white'}>

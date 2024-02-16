@@ -1,5 +1,5 @@
 import { AppContext, AppInitialProps, AppLayoutProps } from 'next/app'
-import { LicenseInfo } from '@mui/x-license-pro';
+import { LicenseInfo } from '@mui/x-license-pro'
 import { ThemeProvider } from '@material-ui/core/styles'
 import { Fragment, ReactNode, useEffect } from 'react'
 import { ToastContainer } from 'react-toastify'
@@ -22,10 +22,13 @@ import 'react-phone-input-2/lib/style.css'
 import 'tippy.js/dist/tippy.css'
 import 'styles/tailwind.css'
 import { APP_INFO } from '../config/appInfo'
+import { appWithTranslation } from 'next-i18next'
+import Backend from 'i18next-http-backend'
+import { initReactI18next } from 'react-i18next'
 
 const { SEO } = APP_INFO
 
-LicenseInfo.setLicenseKey('fd071382740945dd691689004ef10226Tz02MzY2NixFPTE3MTIzMTEwODQ0MjYsUz1wcm8sTE09c3Vic2NyaXB0aW9uLEtWPTI=');
+LicenseInfo.setLicenseKey('fd071382740945dd691689004ef10226Tz02MzY2NixFPTE3MTIzMTEwODQ0MjYsUz1wcm8sTE09c3Vic2NyaXB0aW9uLEtWPTI=')
 
 const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({ Component, pageProps }: AppLayoutProps) => {
   const getLayout = Component.getLayout || ((page: ReactNode) => page)
@@ -135,4 +138,20 @@ const MyApp: NextComponentType<AppContext, AppInitialProps, AppLayoutProps> = ({
   )
 }
 
-export default MyApp
+const apiKey = 'hqhosFIwG57sXJYfMV591g'
+const loadPath = `https://api.i18nexus.com/project_resources/translations/{{lng}}/{{ns}}.json?api_key=${apiKey}`
+export default appWithTranslation(MyApp, {
+  i18n: {
+    defaultLocale: 'en',
+    locales: ['en']
+  },
+  backend: {
+    loadPath: loadPath,
+    allowMultiLoading: false
+  },
+  ns: ['Overview'],
+  fallbackLng: 'en',
+  reloadOnPrerender: process.env.NODE_ENV === 'development',
+  react: { useSuspense: false },
+  use: [Backend, initReactI18next]
+})
