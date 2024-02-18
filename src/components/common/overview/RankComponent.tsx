@@ -168,7 +168,7 @@ export default function RankComponent (props: RankComponentProps) {
               <div className='bg-[#000000] rounded-b-3xl py-8 h-full w-full flex flex-col justify-center'>
                 <div className='flex flex-row justify-between' >
                   <div className='flex flex-col justify-center ml-[10%]'>
-                    <h1 className="text-sm lg:text-base 3xl:text-xl text-white font-bold">Highest </h1><span className='text-xs lg:text-base font-normal text-gray-500'>Achieved Rank:</span>
+                    <h1 className="text-sm lg:text-base 3xl:text-xl text-white font-bold">{t('RankComponent.highest-rank-h1')}</h1><span className='text-xs lg:text-base font-normal text-gray-500'>{t('RankComponent.highest-rank-span')}</span>
                   </div>
                   <div className="flex items-center flex-col p-[6%] rounded-full border-2 border-[#EFEFEF] w-4/12 3xl:w-3/12 mr-[6%] bg-[#fff]">
                     <StyledBox backgroundColor={'white'}>
@@ -181,13 +181,13 @@ export default function RankComponent (props: RankComponentProps) {
             </div>
           )}
           <div className='bg-white rounded-3xl col-span-2 p-4 shadow-[0_1px_12px_-1px_rgba(0,0,0,0.2)]'>
-            <h1 className='text-xl font-bold'>Rank Progress</h1>
+            <h1 className='text-xl font-bold'>{t('RankComponent.progress-h1')}</h1>
             <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
               <Select
                 value={month}
                 onChange={(e) => changeData(e.target.value)}
               >
-                <MenuItem value="Current Month">Current Month</MenuItem>
+                <MenuItem value="Current Month">{t('RankComponent.month-item')}</MenuItem>
                 {
                   months.map((item, index) => (
                     <MenuItem value={dates[index]}>{item}</MenuItem>
@@ -197,7 +197,7 @@ export default function RankComponent (props: RankComponentProps) {
             </FormControl>
             {norank && (
               <div className='flex flex-col justify-center items-center'>
-                <h2>No rank achieved in this month</h2>
+                <h2>{t('RankComponent.month-no-item')}</h2>
               </div>)}
             {!norank && (
               <>
@@ -211,7 +211,7 @@ export default function RankComponent (props: RankComponentProps) {
                           <StarSuccessIcon/>
                         </StyledBox>
                       </div>
-                      <h1 className="text-xl lg:text-2xl text-black-h font-semibold pl-2">IBO</h1>
+                      <h1 className="text-xl lg:text-2xl text-black-h font-semibold pl-2">{t('RankComponent.ibo-rank')}</h1>
                     </div>
                     </>
                   }
@@ -221,16 +221,16 @@ export default function RankComponent (props: RankComponentProps) {
                   <div className='flex flex-row'>
                     {
                       rankData && <><div className="w-5/12  flex flex-col items-start justify-between border-r-2 border-[#D1D1D1]">
-                        <h1 className="text-lg lg:text-2xl text-black-h font-semibold">Manager</h1>
+                        <h1 className="text-lg lg:text-2xl text-black-h font-semibold">{t('RankComponent.manager-rank')}</h1>
                         <div className='pt-2'>
-                          <span className="text-[9px] lg:text-14">To be a <strong>Manager</strong> you'll need</span>
+                          <span className="text-[9px] lg:text-14">{t('RankComponent.needed-rank-span-1')}<strong>{t('RankComponent.manager-rank')}</strong>{t('RankComponent.needed-rank-span-2')}</span>
                         </div>
                       </div>
 
                       <div className='w-7/12 text-xs pt-0 lg:pt-4 pl-8'>
                         <div className='flex flex-row justify-between'>
                           <strong className='text-10'>
-                    You have {formatNumberToLocale(rankData.mng.commissionVol, 0)} PVC
+                            {t('RankComponent.pvc-strong-1')}{formatNumberToLocale(rankData.mng.commissionVol, 0)}{t('RankComponent.pvc-strong-2')}
                           </strong>
                           <strong className='text-10'>
                     You need 100 PVC
@@ -251,7 +251,7 @@ export default function RankComponent (props: RankComponentProps) {
                         <div className="w-5/12  flex flex-col items-start justify-between border-r-2 border-[#D1D1D1]">
                           <h1 className="text-lg lg:text-2xl text-black-h font-semibold">Supervisor</h1>
                           <div className='pt-2'>
-                            <span className="text-[9px] lg:text-14">To be <strong>Supervisor</strong> you'll need</span>
+                            <span className="text-[9px] lg:text-14">{t('RankComponent.needed-rank-span-1')}<strong>Supervisor</strong>{t('RankComponent.needed-rank-span-2')}</span>
 
                           </div>
                         </div>
@@ -259,7 +259,7 @@ export default function RankComponent (props: RankComponentProps) {
                         <div className='w-7/12  text-xs pt-0 lg:pt-5 pl-4'>
                           <div className='flex flex-row justify-between'>
                             <strong className='text-10'>
-                    You have {formatNumberToLocale(rankData.sv.commissionVol, 0)} PVC
+                              {t('RankComponent.pvc-strong-1')}{formatNumberToLocale(rankData.sv.commissionVol, 0)}{t('RankComponent.pvc-strong-2')}
                             </strong>
                             <strong className='text-10'>
                     You need 100 PVC
@@ -306,7 +306,7 @@ export default function RankComponent (props: RankComponentProps) {
                       <div className="w-5/12  flex flex-col items-start justify-between border-r-2 border-[#D1D1D1]">
                         <h1 className="text-lg lg:text-2xl text-black-h font-semibold">Director</h1>
                         <div className='pt-2 lg:pt-5'>
-                          <span className="text-[9px] lg:text-14">To be a <strong>Director</strong> you'll need</span>
+                          <span className="text-[9px] lg:text-14">{t('RankComponent.needed-rank-span-1')}<strong>Director</strong>{t('RankComponent.needed-rank-span-2')}</span>
 
                         </div>
                       </div>
@@ -314,7 +314,7 @@ export default function RankComponent (props: RankComponentProps) {
                       <div className='w-7/12  text-xs pt-0 lg:pt-5 pl-4'>
                         <div className='flex flex-row justify-between'>
                           <strong className='text-10'>
-                    You have {formatNumberToLocale(rankData.dct.commissionVol, 0)} PVC
+                            {t('RankComponent.pvc-strong-1')}{formatNumberToLocale(rankData.dct.commissionVol, 0)}{t('RankComponent.pvc-strong-2')}
                           </strong>
                           <strong className='text-10'>
                     You need 100 PVC
@@ -362,7 +362,7 @@ export default function RankComponent (props: RankComponentProps) {
                         <div className="w-5/12  flex flex-col items-start justify-between border-r-2 border-[#D1D1D1]">
                           <h1 className="text-lg lg:text-2xltext-black-h font-semibold">Executive</h1>
                           <div className='col-span-3 text-xs pt-2 lg:pt-5'>
-                            <span className="text-[9px] lg:text-14">To be a <strong>Executive</strong> you need</span>
+                            <span className="text-[9px] lg:text-14">{t('RankComponent.needed-rank-span-1')}<strong>Executive</strong> you need</span>
 
                           </div>
                         </div>
@@ -370,7 +370,7 @@ export default function RankComponent (props: RankComponentProps) {
                         <div className='w-7/12  text-xs pt-0 lg:pt-5 pl-4'>
                           <div className='flex flex-row justify-between'>
                             <strong className='text-10'>
-                    You have {formatNumberToLocale(rankData.exec.commissionVol, 0)} PVC
+                              {t('RankComponent.pvc-strong-1')}{formatNumberToLocale(rankData.exec.commissionVol, 0)}{t('RankComponent.pvc-strong-2')}
                             </strong>
                             <strong className='text-10'>
                     You need 100 PVC
